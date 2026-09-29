@@ -70,34 +70,40 @@ function run(cmd, cmdArgs, { input } = {}) {
   })
 }
 
-async function openPage() {
+/**
+ * Ouvre `count` onglets sur la pub. Chaque image ne dépend que de son instant :
+ * plusieurs onglets peuvent donc rendre des images différentes en parallèle.
+ */
+async function openPages(count = 1) {
   const server = await serve()
   const browser = await chromium.launch()
-  const page = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 1 })
   const errors = []
-  page.on('pageerror', (e) => errors.push(e.message))
-  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
-  await page.goto(`http://127.0.0.1:${server.address().port}/promo/index.html?render`)
-  try {
-    await page.waitForFunction(() => window.__promo, null, { timeout: 15000 })
-    await page.evaluate(() => window.__promo.ready)
-  } catch (error) {
-    errors.push(error.message)
-  }
-  if (errors.length) {
-    await browser.close()
-    server.close()
-    throw new Error(`Erreurs dans la page :\n${errors.join('\n')}`)
-  }
-  const shot = async (t) => {
-    await page.evaluate((time) => window.__promo.seek(time), t)
-    return page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT } })
-  }
   const close = async () => {
     await browser.close()
     server.close()
   }
-  return { shot, close, errors }
+  const shots = []
+  for (let k = 0; k < count; k++) {
+    const page = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 1 })
+    page.on('pageerror', (e) => errors.push(e.message))
+    page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
+    await page.goto(`http://127.0.0.1:${server.address().port}/promo/index.html?render`)
+    try {
+      await page.waitForFunction(() => window.__promo, null, { timeout: 15000 })
+      await page.evaluate(() => window.__promo.ready)
+    } catch (error) {
+      errors.push(error.message)
+    }
+    shots.push(async (t) => {
+      await page.evaluate((time) => window.__promo.seek(time), t)
+      return page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT } })
+    })
+  }
+  if (errors.length) {
+    await close()
+    throw new Error(`Erreurs dans la page :\n${errors.join('\n')}`)
+  }
+  return { shots, shot: shots[0], close }
 }
 
 // -------------------------------------------------------------------- modes
@@ -105,7 +111,7 @@ async function openPage() {
 async function stills(times) {
   const dir = path.join(build, 'stills')
   fs.mkdirSync(dir, { recursive: true })
-  const { shot, close } = await openPage()
+  const { shot, close } = await openPages()
   for (const t of times) {
     const file = path.join(dir, `t${t.toFixed(3).padStart(6, '0')}.png`)
     fs.writeFileSync(file, await shot(t))
@@ -118,7 +124,7 @@ async function sheet() {
   const dir = path.join(build, 'sheet')
   fs.rmSync(dir, { recursive: true, force: true })
   fs.mkdirSync(dir, { recursive: true })
-  const { shot, close } = await openPage()
+  const { shot, close } = await openPages()
   const step = Number(args.step ?? 0.25)
   let i = 0
   for (let t = 0; t < DURATION; t += step) fs.writeFileSync(path.join(dir, `${String(i++).padStart(3, '0')}.png`), await shot(t))
@@ -143,7 +149,8 @@ async function video() {
   const loudnorm = `loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=${stats.input_i}:measured_TP=${stats.input_tp}:measured_LRA=${stats.input_lra}:measured_thresh=${stats.input_thresh}:offset=${stats.target_offset}:linear=true`
 
   const out = path.join(build, args.out ?? 'plutot-que-scroller-15s.mp4')
-  const { shot, close } = await openPage()
+  const workers = Number(args.workers ?? 3)
+  const { shots, close } = await openPages(workers)
   const frames = Math.round(DURATION * fps)
   const started = Date.now()
   await run(
@@ -161,11 +168,32 @@ async function video() {
     ],
     {
       input: async (stdin) => {
-        for (let i = 0; i < frames; i++) {
-          const png = await shot(i / fps)
-          if (!stdin.write(png)) await new Promise((r) => stdin.once('drain', r))
-          if (i % 60 === 0) process.stdout.write(`\rImage ${i}/${frames}`)
+        // Les onglets rendent en parallèle ; les images partent vers ffmpeg dans l'ordre.
+        const ready = new Map()
+        let next = 0
+        let written = 0
+        let writing = Promise.resolve()
+        const pump = () =>
+          (writing = writing.then(async () => {
+            while (ready.has(written)) {
+              const png = ready.get(written)
+              ready.delete(written)
+              if (!stdin.write(png)) await new Promise((r) => stdin.once('drain', r))
+              written++
+              if (written % 60 === 0) process.stdout.write(`\rImage ${written}/${frames}`)
+            }
+          }))
+        const worker = async (shot) => {
+          for (;;) {
+            const i = next++
+            if (i >= frames) return
+            while (i - written > workers * 4) await new Promise((r) => setTimeout(r, 10))
+            ready.set(i, await shot(i / fps))
+            pump()
+          }
         }
+        await Promise.all(shots.map(worker))
+        await pump()
         stdin.end()
       },
     },

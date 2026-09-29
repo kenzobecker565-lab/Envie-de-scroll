@@ -1,5 +1,7 @@
 # Pub de 15 secondes (motion design)
 
+▶️ **[Voir la vidéo](plutot-que-scroller-15s.mp4)** (MP4, 15 s, avec le son)
+
 Une pub verticale (1080 × 1920, 60 images/s, format Reels / TikTok / Shorts) pour présenter Plutôt Que Scroller. Tout est fait en code, image et son :
 
 - l'animation est une page web (`index.html`, `main.js`, `style.css`) pilotée par un petit moteur déterministe (`engine.js`) ;
@@ -32,7 +34,7 @@ npm run render                    # → build/plutot-que-scroller-15s.mp4
 
 | Commande | Rôle |
 | --- | --- |
-| `npm run render` | Rendu complet : bande-son, 900 images, encodage H.264 + AAC (sonie −14 LUFS) |
+| `npm run render` | Rendu complet : bande-son, 900 images, encodage H.264 + AAC (sonie −14 LUFS). Environ 3 minutes ; `-- --workers=N` règle le nombre d'onglets qui rendent en parallèle (3 par défaut) |
 | `npm run stills` | Quelques images clés en PNG dans `build/stills/` |
 | `npm run sheet` | Planche contact (une image toutes les 0,25 s) dans `build/planche.png` |
 | `node audio.mjs` | Seulement la bande-son, dans `build/audio.wav` |

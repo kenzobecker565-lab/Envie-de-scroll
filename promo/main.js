@@ -801,7 +801,6 @@ function illusJoue(il, S, E) {
     <g class="root">
       <circle class="ring" r="200" fill="none" stroke="#FFFDF9" stroke-width="12"/>
       <circle class="ring" r="200" fill="none" stroke="#FFFDF9" stroke-width="12"/>
-      <rect x="-372" y="232" width="744" height="16" rx="8" fill="#0B6E66" opacity="0.45"/>
       ${barX.map((x) => `<rect class="eqbar" x="${x}" width="64" rx="32" fill="#FFFDF9"/>`).join('')}
       ${Array.from({ length: 8 }, (_, i) => `<g class="note">${note(i % 3 === 1, i % 2 ? '#2A1F1A' : '#FFFDF9')}</g>`).join('')}
     </g>`)
@@ -1238,7 +1237,7 @@ function buildBigPencil() {
   const DRAW = 0.26
   set(strike, 0, { d1: 0 })
   tw(strike, T.strike, DRAW, { d1: [0, 1] }, ease.out2)
-  tw(strike, T.shrink - 0.12, 0.15, { opacity: [1, 0] })
+  tw(strike, T.shrink - 0.08, 0.2, { opacity: [1, 0] }) // en même temps que le mot barré
 
   const start = strike.getPointAtLength(0)
   const K1 = 10.5

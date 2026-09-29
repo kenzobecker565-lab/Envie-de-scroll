@@ -4,6 +4,7 @@
  *   node render.mjs                     → build/plutot-que-scroller-15s.mp4
  *   node render.mjs --stills=0.5,4.2    → build/stills/*.png (vérifications)
  *   node render.mjs --sheet             → build/planche.png (planche contact)
+ *   node render.mjs --audio             → refait seulement la bande-son de la vidéo
  *
  * Il faut Chromium via Playwright (`npx playwright install chromium`) et
  * ffmpeg (dans le PATH, ou désigné par la variable d'environnement FFMPEG).
@@ -135,19 +136,34 @@ async function sheet() {
   console.log(path.join(build, 'planche.png'))
 }
 
-async function video() {
+/** Bande-son (musique, bruitages, voix off) + filtre de sonie visant −14 LUFS. */
+async function makeAudio() {
   fs.mkdirSync(build, { recursive: true })
-  const fps = Number(args.fps ?? FPS)
   const wav = path.join(build, 'audio.wav')
   const { writeAudio } = await import('./audio.mjs')
   writeAudio(wav)
   console.log(`Bande-son : ${wav}`)
-
   // Mesure de la sonie, pour viser −14 LUFS (standard des réseaux sociaux).
   const measure = await run(FFMPEG, ['-hide_banner', '-i', wav, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'])
   const stats = JSON.parse(measure.slice(measure.lastIndexOf('{'), measure.lastIndexOf('}') + 1))
   const loudnorm = `loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=${stats.input_i}:measured_TP=${stats.input_tp}:measured_LRA=${stats.input_lra}:measured_thresh=${stats.input_thresh}:offset=${stats.target_offset}:linear=true`
+  return { wav, audioArgs: ['-af', `${loudnorm},aresample=48000`, '-c:a', 'aac', '-b:a', '192k'] }
+}
 
+/** Remplace seulement la piste son d'une vidéo déjà rendue (sans refaire les images). */
+async function remux() {
+  const video = path.join(build, args.out ?? 'plutot-que-scroller-15s.mp4')
+  if (!fs.existsSync(video)) throw new Error(`Aucune vidéo à ${video} : lance d'abord « npm run render ».`)
+  const { wav, audioArgs } = await makeAudio()
+  const tmp = `${video}.tmp.mp4`
+  await run(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-i', video, '-i', wav, '-map', '0:v:0', '-map', '1:a:0', '-c:v', 'copy', ...audioArgs, '-movflags', '+faststart', '-shortest', tmp])
+  fs.renameSync(tmp, video)
+  console.log(`Nouvelle bande-son → ${video}`)
+}
+
+async function video() {
+  const fps = Number(args.fps ?? FPS)
+  const { wav, audioArgs } = await makeAudio()
   const out = path.join(build, args.out ?? 'plutot-que-scroller-15s.mp4')
   const workers = Number(args.workers ?? 3)
   const { shots, close } = await openPages(workers)
@@ -162,8 +178,7 @@ async function video() {
       '-vf', 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p',
       '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-profile:v', 'high', '-tune', 'animation',
       '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
-      '-af', `${loudnorm},aresample=48000`,
-      '-c:a', 'aac', '-b:a', '192k',
+      ...audioArgs,
       '-movflags', '+faststart', '-shortest', out,
     ],
     {
@@ -204,4 +219,5 @@ async function video() {
 
 if (args.stills) await stills(args.stills.split(',').map(Number))
 else if (args.sheet) await sheet()
+else if (args.audio) await remux()
 else await video()

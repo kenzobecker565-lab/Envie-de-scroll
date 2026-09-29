@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
+    "audio": "node render.mjs --audio",
     "sheet": "node render.mjs --sheet",
     "stills": "node render.mjs --stills=0.5,2.6,4.4,6.2,8.9,10.6,12.4,14.9"
   },

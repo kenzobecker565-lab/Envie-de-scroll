@@ -62,6 +62,9 @@ class Biquad {
       case 'bandpass':
         b0 = alpha; b1 = 0; b2 = -alpha; a0 = 1 + alpha; a1 = -2 * cos; a2 = 1 - alpha
         break
+      case 'peaking':
+        b0 = 1 + alpha * A; b1 = -2 * cos; b2 = 1 - alpha * A; a0 = 1 + alpha / A; a1 = -2 * cos; a2 = 1 - alpha / A
+        break
       case 'highshelf': {
         const s = 2 * Math.sqrt(A) * alpha
         b0 = A * (A + 1 + (A - 1) * cos + s); b1 = -2 * A * (A - 1 + (A + 1) * cos); b2 = A * (A + 1 + (A - 1) * cos - s)
@@ -123,6 +126,7 @@ const B = {
   pads: newBus(), // idem
   music: newBus(), // arpèges, accords piqués, cloches
   sfx: newBus(),
+  voice: newBus(), // voix off (voir voiceOver())
   verb: newBus(), // envoi vers la réverbération
 }
 const kicks = [] // instants des grosses caisses du groove (pour le sidechain)
@@ -476,8 +480,8 @@ function score() {
     pop(s, 0.2, 900, 260, i === 1 ? 0.5 : -0.5)
     bell(s + 0.02, [84, 88, 91][i], 0.06, { decay: 0.7, pan: i === 1 ? 0.5 : -0.5 })
   })
-  for (let i = 0; i < 18; i++) tick(T.dashboard + 0.35 + i * 0.045, 0.035, 1400 + i * 70, (i % 2 ? 0.3 : -0.3))
-  scribble(T.stickers[0] + 0.25, 0.3, 0.06)
+  for (let i = 0; i < 18; i++) tick(T.dashboard + 0.35 + i * 0.045, 0.022, 1400 + i * 70, (i % 2 ? 0.3 : -0.3))
+  scribble(T.stickers[0] + 0.25, 0.3, 0.025)
   sweep(T.wipe - 0.1, T.slogan - T.wipe + 0.1, { f0: 200, f1: 5000, shape: 'rise', gain: 0.3, q: 0.8 })
 
   // ------------------------------------------------ mesure 7 : le slogan
@@ -616,15 +620,134 @@ function limit(L, R, ceiling) {
   }
 }
 
+// ================================================================= voix off
+
+const HERE = path.dirname(fileURLToPath(import.meta.url))
+
+/** Lit un WAV PCM 16 bits (premier canal) : { sr, x }. */
+function readWav(file) {
+  const b = fs.readFileSync(file)
+  const channels = b.readUInt16LE(22)
+  const sr = b.readUInt32LE(24)
+  let off = 12
+  while (b.toString('ascii', off, off + 4) !== 'data') off += 8 + b.readUInt32LE(off + 4)
+  const n = b.readUInt32LE(off + 4) / (2 * channels)
+  const x = new Float32Array(n)
+  for (let i = 0; i < n; i++) x[i] = b.readInt16LE(off + 8 + i * 2 * channels) / 32768
+  return { sr, x }
+}
+
+/** Ne garde que la parole : silences de début et de fin retirés (petites marges, fondus). */
+function trimSilence(x, sr) {
+  const peak = x.reduce((m, v) => Math.max(m, Math.abs(v)), 0)
+  const th = peak * 10 ** (-40 / 20)
+  let a = 0
+  while (a < x.length && Math.abs(x[a]) < th) a++
+  let z = x.length - 1
+  while (z > a && Math.abs(x[z]) < th) z--
+  const pre = Math.round(0.012 * sr)
+  const post = Math.round(0.08 * sr)
+  const out = x.slice(Math.max(0, a - pre), Math.min(x.length, z + post))
+  const fade = Math.round(0.006 * sr)
+  for (let i = 0; i < fade && i < out.length; i++) {
+    out[i] *= i / fade
+    out[out.length - 1 - i] *= i / fade
+  }
+  return { x: out, onset: Math.min(pre, a) / sr }
+}
+
+/** Rééchantillonnage par interpolation cubique (Catmull-Rom). */
+function resample(x, from, to) {
+  const n = Math.floor((x.length * to) / from)
+  const y = new Float32Array(n)
+  const at = (i) => x[Math.min(x.length - 1, Math.max(0, i))]
+  for (let j = 0; j < n; j++) {
+    const pos = (j * from) / to
+    const i = Math.floor(pos)
+    const f = pos - i
+    const p0 = at(i - 1)
+    const p1 = at(i)
+    const p2 = at(i + 1)
+    const p3 = at(i + 2)
+    y[j] = p1 + 0.5 * f * (p2 - p0 + f * (2 * p0 - 5 * p1 + 4 * p2 - p3 + f * (3 * (p1 - p2) + p3 - p0)))
+  }
+  return y
+}
+
+/**
+ * Place chaque réplique de voiceover.json (fichiers voice/<id>.wav, voir
+ * voiceover.py) au temps musical prévu : le début de la parole tombe pile
+ * sur le repère.
+ */
+function voiceOver() {
+  const script = JSON.parse(fs.readFileSync(path.join(HERE, 'voiceover.json'), 'utf8'))
+  for (const line of script.lines) {
+    const file = path.join(HERE, 'voice', `${line.id}.wav`)
+    if (!fs.existsSync(file)) continue
+    const { sr, x } = readWav(file)
+    const { x: speech, onset } = trimSilence(x, sr)
+    const y = resample(speech, sr, SR)
+    const s0 = Math.round((beat(line.beat) - onset) * SR)
+    for (let i = 0; i < y.length; i++) {
+      const j = s0 + i
+      if (j < 0 || j >= N) continue
+      B.voice[0][j] += y[i]
+      B.voice[1][j] += y[i]
+    }
+  }
+}
+
+/** Compresseur simple (détection de crête), pour une voix régulière et présente. */
+function compress(ch, { threshold = -22, ratio = 3.2, attack = 0.003, release = 0.09, makeup = 0 } = {}) {
+  const aA = Math.exp(-1 / (attack * SR))
+  const aR = Math.exp(-1 / (release * SR))
+  let env = 0
+  for (let j = 0; j < N; j++) {
+    const level = Math.abs(ch[j])
+    env = level > env ? aA * env + (1 - aA) * level : aR * env + (1 - aR) * level
+    const over = 20 * Math.log10(env + 1e-9) - threshold
+    ch[j] *= 10 ** (((over > 0 ? -over * (1 - 1 / ratio) : 0) + makeup) / 20)
+  }
+}
+
+/** Enveloppe 0 → 1 de présence de la voix (avec anticipation), pour baisser la musique. */
+function voiceEnvelope(ch) {
+  const aA = Math.exp(-1 / (0.012 * SR))
+  const aR = Math.exp(-1 / (0.28 * SR))
+  const look = Math.round(0.04 * SR)
+  const env = new Float32Array(N)
+  let e = 0
+  for (let j = N - 1; j >= 0; j--) env[j] = Math.abs(ch[j]) // copie
+  const out = new Float32Array(N)
+  for (let j = 0; j < N; j++) {
+    const level = Math.min(1, (j + look < N ? env[j + look] : 0) / 0.08)
+    e = level > e ? aA * e + (1 - aA) * level : aR * e + (1 - aR) * level
+    out[j] = e
+  }
+  return out
+}
+
 export function renderAudio() {
   seed = 0x2f6b1d
   kicks.length = 0
   for (const bus of Object.values(B)) for (const ch of bus) ch.fill(0)
   score()
+  voiceOver()
 
   // Intro « à travers le haut-parleur d'un téléphone », puis arrêt de bande.
   filterBus(B.intro, [['highpass', 220, 0.7], ['lowpass', 1500, 0.9]])
   tapeStop(B.intro, T.stop, 0.34)
+
+  // Voix : coupe-bas, présence, filtre anti-images du rééchantillonnage, compression.
+  filterBus(B.voice, [['highpass', 95, 0.7], ['peaking', 250, 1, -2], ['peaking', 3200, 0.9, 3.5], ['lowpass', 10500, 0.7]])
+  for (const ch of B.voice) compress(ch, { makeup: 6 })
+  const voicePeak = B.voice[0].reduce((m, v) => Math.max(m, Math.abs(v)), 0) || 1
+  for (const ch of B.voice) for (let j = 0; j < N; j++) ch[j] *= 0.7 / voicePeak
+  for (let j = 0; j < N; j++) {
+    B.verb[0][j] += B.voice[0][j] * 0.05
+    B.verb[1][j] += B.voice[1][j] * 0.05
+  }
+  const talk = voiceEnvelope(B.voice[0])
 
   // Sidechain : basse et nappes s'effacent à chaque grosse caisse.
   const duck = new Float32Array(N).fill(1)
@@ -639,18 +762,20 @@ export function renderAudio() {
   const verb = reverb(B.verb)
   const L = new Float32Array(N)
   const R = new Float32Array(N)
+  // [bus, gain, pompé par la grosse caisse, baisse sous la voix (0 à 1)]
   const mix = [
-    [B.intro, 2.0, false],
-    [B.drums, 0.85, false],
-    [B.bass, 0.8, true],
-    [B.pads, 0.7, true],
-    [B.music, 0.9, false],
-    [B.sfx, 0.85, false],
-    [verb, 0.55, true],
+    [B.intro, 2.0, false, 0.65],
+    [B.drums, 0.85, false, 0.4],
+    [B.bass, 0.8, true, 0.45],
+    [B.pads, 0.7, true, 0.6],
+    [B.music, 0.9, false, 0.6],
+    [B.sfx, 1.0, false, 0.75],
+    [verb, 0.55, true, 0.5],
+    [B.voice, 1.2, false, 0],
   ]
-  for (const [bus, g, ducked] of mix) {
+  for (const [bus, g, ducked, underVoice] of mix) {
     for (let j = 0; j < N; j++) {
-      const d = ducked ? duck[j] : 1
+      const d = (ducked ? duck[j] : 1) * (1 - underVoice * talk[j])
       L[j] += bus[0][j] * g * d
       R[j] += bus[1][j] * g * d
     }

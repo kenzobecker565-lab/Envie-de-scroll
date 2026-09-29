@@ -189,6 +189,12 @@ L'architecture prépare la migration :
 
 ---
 
+## Pub de 15 secondes
+
+Le dossier [`promo/`](promo/) contient une pub verticale de 15 s en motion design (format Reels / TikTok / Shorts), entièrement générée par du code : animation, musique et bruitages. Elle reprend l'identité de l'app et six vraies activités de la bibliothèque. Son [README](promo/README.md) explique comment la refaire ou la modifier.
+
+---
+
 ## Limites connues du prototype
 
 - Les données restent **sur un seul appareil et un seul navigateur**. Vider les données du site efface tout (il n'y a pas encore d'export ni de synchronisation).

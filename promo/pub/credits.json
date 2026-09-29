@@ -1,0 +1,13 @@
+{
+  "_doc": "Médias externes de la pub. Clips : Pexels (licence Pexels : usage libre, attribution appréciée). Voix off et musique : générées avec vidIQ (voix ElevenLabs « Liam », musique originale libre de droits).",
+  "clips": {
+    "hook-fille": { "titre": "Side view of a girl scrolling on her phone", "auteur": "Ron Lach", "page": "https://www.pexels.com/video/side-view-of-a-girl-scrolling-on-her-phone-9785298/" },
+    "hook-lit": { "titre": "A woman lying in bed using her phone", "auteur": "Marcus Aurelius", "page": "https://www.pexels.com/video/a-woman-lying-in-bed-using-her-phone-9787494/" },
+    "dessin": { "titre": "A person sketching designs", "auteur": "Michael Burrows", "page": "https://www.pexels.com/video/a-person-sketching-designs-7140117/" },
+    "musique": { "titre": "Guy playing acoustic guitar", "auteur": "Tima Miroshnichenko", "page": "https://www.pexels.com/video/guy-playing-acoustic-guitar-5058653/" },
+    "cuisine": { "titre": "Flipping a pancake from the pan using fork", "auteur": "cottonbro studio", "page": "https://www.pexels.com/video/flipping-a-pancake-from-the-pan-using-fork-3704774/" },
+    "sport": { "titre": "A man running in the park", "auteur": "MART PRODUCTION", "page": "https://www.pexels.com/video/a-man-running-in-the-park-7877146/" }
+  },
+  "voix": { "outil": "vidIQ (ElevenLabs)", "voix": "Liam – Energetic, Social Media Creator", "fichier": "media/voix-off.mp3" },
+  "musique": { "outil": "vidIQ (génération de musique, libre de droits)", "fichier": "media/musique.mp3" }
+}

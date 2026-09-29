@@ -1,5 +1,7 @@
 # Pub de 15 secondes (motion design)
 
+> 🎬 **Voir aussi la pub de 28 s** (voix off, vraies vidéos, démo de l'app, codes des pubs Reels et TikTok) : [dossier `pub/`](pub/README.md).
+
 ▶️ **[Voir la vidéo](plutot-que-scroller-15s.mp4)** (MP4, 15 s, avec musique, bruitages et voix off)
 
 Une pub verticale (1080 × 1920, 60 images/s, format Reels / TikTok / Shorts) pour présenter Plutôt Que Scroller. Tout est fait en code, image et son :
@@ -65,4 +67,5 @@ Pour regarder l'animation dans le navigateur (avec une barre de lecture), sers l
 - **Les textes et les passions** : le tableau `SCENES` en haut de `main.js` (verbe, humeur, couleur, activité). Chaque scène a son illustration animée (`illusDessine`, `illusFilme`…).
 - **La musique** : la fonction `score()` de `audio.mjs` (accords, rythmes, bruitages, dans l'ordre du déroulé).
 - **La voix off** : texte et temps de départ dans `voiceover.json`. Pour régénérer les fichiers : `pip install piper-tts faster-whisper`, `python -m piper.download_voices fr_FR-siwis-medium`, puis `python voiceover.py --takes 6` (ou `--voice fr_FR-tom-medium` pour une voix masculine), puis `npm run audio`.
+- **Les outils de son** (filtres, réverbération, compression, sonie, limiteur, fichiers WAV) sont dans `dsp.mjs`, partagé avec la pub de 28 s.
 - **Le moteur** : `tw(élément, début, durée, { propriété: [départ, arrivée] }, courbe)` anime une propriété ; `onFrame((t) => …)` ajoute une animation calculée à chaque image. Tout est une fonction du temps : on peut afficher n'importe quelle image dans n'importe quel ordre.

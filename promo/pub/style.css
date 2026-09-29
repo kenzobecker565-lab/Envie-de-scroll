@@ -1,0 +1,569 @@
+/* Pub « Plutôt Que Scroller » (≈ 28 s, 1080 × 1920). Couleurs de l'app. */
+
+:root {
+  --paper: #fbf5ec;
+  --card: #fffdf9;
+  --ink: #2a1f1a;
+  --ink-soft: #6e5d52;
+  --line: #eadfd0;
+  --primary: #c4401c;
+  --saffron: #f2b632;
+  --hot: #ff5a36;
+  --display: 'Fraunces Variable', Georgia, serif;
+  /* Emojis en couleur avant les polices système (DejaVu en a en noir et blanc). */
+  --sans: 'Figtree Variable', 'Noto Color Emoji', system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  background: #000;
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #0d0a14;
+  font-family: var(--sans);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.abs {
+  position: absolute;
+}
+
+.display {
+  font-family: var(--display);
+  font-variation-settings: 'SOFT' 100, 'WONK' 0;
+}
+
+.ch,
+.w {
+  display: inline-block;
+  white-space: pre;
+}
+
+.dots {
+  background-color: var(--paper);
+  background-image: radial-gradient(rgb(42 31 26 / 0.12) 2.2px, transparent 2.6px);
+  background-size: 40px 40px;
+}
+
+.full-img {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------- fil d'actualité */
+
+#feedStack {
+  filter: url(#vblur);
+}
+
+.feedItem {
+  position: absolute;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+.feedUI {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 0.5);
+}
+
+.feedUI .side {
+  position: absolute;
+  right: 34px;
+  bottom: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.feedUI .side .ico {
+  width: 88px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+}
+
+.feedUI .side span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.feedUI .avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+}
+
+.feedUI .bottom {
+  position: absolute;
+  left: 40px;
+  right: 180px;
+  bottom: 250px;
+  font-size: 36px;
+  line-height: 1.35;
+}
+
+.feedUI .bottom b {
+  font-size: 40px;
+}
+
+.feedShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.25) 0%, transparent 18%, transparent 62%, rgb(0 0 0 / 0.55) 100%);
+}
+
+.notif {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  width: 940px;
+  box-sizing: border-box;
+  padding: 26px 32px;
+  border-radius: 44px;
+  background: rgb(38 36 44 / 0.88);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.45);
+  color: #fff;
+}
+
+.notif .appico {
+  flex: none;
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #7b61ff, #4f52a8);
+  display: grid;
+  place-items: center;
+  font-size: 52px;
+}
+
+.notif .t1 {
+  font-size: 30px;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.notif .t2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.notif .t2 b {
+  color: #ff8a66;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------------- bouton */
+
+.bigbtn {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+}
+
+.bigbtn .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgb(255 122 80 / 0.4);
+}
+
+.bigbtn .disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 40px 100px -30px rgb(196 64 28 / 0.95);
+}
+
+.bigbtn .label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #fff7ee;
+  text-align: center;
+  font-family: var(--display);
+  font-variation-settings: 'SOFT' 100;
+  font-size: 70px;
+  font-weight: 600;
+  line-height: 1.04;
+}
+
+.touch {
+  position: absolute;
+  left: -60px;
+  top: -60px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.3);
+  border: 5px solid rgb(255 255 255 / 0.9);
+  box-sizing: border-box;
+  box-shadow: 0 0 0 3px rgb(0 0 0 / 0.15), 0 10px 30px rgb(0 0 0 / 0.3);
+}
+
+.tapring {
+  position: absolute;
+  left: -60px;
+  top: -60px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------- logo */
+
+.logo-line {
+  font-size: 150px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  text-align: center;
+  left: 0;
+  width: 1080px;
+}
+
+/* -------------------------------------------------------------- téléphone */
+
+.phone {
+  position: absolute;
+  left: 250px;
+  top: 410px;
+  width: 580px;
+  height: 1325px;
+  transform-origin: 50% 40%;
+}
+
+.phone .bezel {
+  position: absolute;
+  inset: -22px;
+  border-radius: 92px;
+  background: #1b1512;
+  box-shadow:
+    0 0 0 3px #3a2e27,
+    0 80px 140px -40px rgb(42 31 26 / 0.7);
+}
+
+.phone .screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 72px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+/* Les captures (390 × 844 pt) sous une barre d'état de 70 px. */
+.phone .screen img {
+  position: absolute;
+  left: 0;
+  top: 70px;
+  width: 580px;
+}
+
+.phone .status {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 580px;
+  height: 70px;
+  box-sizing: border-box;
+  padding: 6px 42px 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.phone .status .icons {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.phone .island {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  width: 150px;
+  height: 42px;
+  margin-left: -75px;
+  border-radius: 21px;
+  background: #0d0a09;
+}
+
+.hl {
+  position: absolute;
+  border: 7px solid var(--hot);
+  border-radius: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 6px rgb(255 90 54 / 0.25);
+}
+
+/* ------------------------------------------------------------------ montage */
+
+.label-big {
+  position: absolute;
+  left: 0;
+  width: 1080px;
+  text-align: center;
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: 150px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  -webkit-text-stroke: 16px #111;
+  paint-order: stroke fill;
+  text-shadow: 0 12px 30px rgb(0 0 0 / 0.45);
+}
+
+.minicard {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 34px 22px 22px;
+  border-radius: 40px;
+  background: var(--card);
+  box-shadow: 0 24px 60px -20px rgb(0 0 0 / 0.55);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.minicard .bubble {
+  width: 84px;
+  height: 84px;
+  border-radius: 26px;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+}
+
+.minicard .sub {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.tile {
+  position: absolute;
+  width: 540px;
+  height: 960px;
+  overflow: hidden;
+}
+
+.tile img {
+  position: absolute;
+  left: -270px;
+  top: -480px;
+  width: 1080px;
+  height: 1920px;
+  transform: scale(0.62);
+  transform-origin: 50% 50%;
+}
+
+.bignum {
+  position: absolute;
+  left: 0;
+  width: 1080px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 330px;
+  line-height: 1;
+  color: #fff;
+  -webkit-text-stroke: 22px #111;
+  paint-order: stroke fill;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- stickers */
+
+.sticker {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 38px 24px 28px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 4px solid var(--ink);
+  box-shadow: 10px 12px 0 var(--ink);
+  font-size: 48px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.sticker .emoji {
+  font-size: 58px;
+  line-height: 1;
+}
+
+.sticker .num {
+  font-family: var(--display);
+  font-variation-settings: 'SOFT' 100;
+  font-size: 64px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------ sous-titres */
+
+.cap {
+  position: absolute;
+  left: 40px;
+  width: 1000px;
+  text-align: center;
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: 112px;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: #fff;
+  -webkit-text-stroke: 14px #111;
+  paint-order: stroke fill;
+  text-shadow: 0 10px 28px rgb(0 0 0 / 0.4);
+}
+
+.cap .w {
+  margin: 0 0.18em;
+}
+
+/* Sur la fin, plus petits : ils restent à gauche des boutons de TikTok. */
+.cap.end {
+  font-size: 96px;
+}
+
+.cap .w.hi {
+  color: var(--saffron);
+}
+
+/* ------------------------------------------------------------------- fin */
+
+.cta {
+  position: absolute;
+  left: 190px;
+  top: 1350px;
+  width: 700px;
+  height: 150px;
+}
+
+.cta .pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 30px 70px -26px rgb(196 64 28 / 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: #fff7ee;
+  font-size: 60px;
+  font-weight: 800;
+}
+
+.cta .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 6px solid var(--primary);
+  box-sizing: border-box;
+}
+
+.bubble-float {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--line);
+  box-shadow: 0 22px 40px -24px rgb(42 31 26 / 0.55);
+  display: grid;
+  place-items: center;
+  font-size: 74px;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------- aperçu interactif */
+
+body.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  color: #eee;
+  font: 14px system-ui, sans-serif;
+}
+
+body.preview #frame {
+  width: 405px;
+  height: 720px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+body.preview #stage {
+  transform: scale(0.375);
+  transform-origin: 0 0;
+}
+
+#controls {
+  display: none;
+}
+
+body.preview #controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 405px;
+}
+
+#controls input {
+  flex: 1;
+}
+
+#controls button {
+  font: inherit;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 0;
+  background: #c4401c;
+  color: #fff;
+}

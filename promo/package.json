@@ -2,13 +2,19 @@
   "name": "plutot-que-scroller-promo",
   "private": true,
   "version": "1.0.0",
-  "description": "Pub de 15 s en motion design pour Plutôt Que Scroller (rendu image par image).",
+  "description": "Pubs en motion design pour Plutôt Que Scroller (rendu image par image) : 15 s, et la pub de 28 s (pub/).",
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
     "audio": "node render.mjs --audio",
     "sheet": "node render.mjs --sheet",
-    "stills": "node render.mjs --stills=0.5,2.6,4.4,6.2,8.9,10.6,12.4,14.9"
+    "stills": "node render.mjs --stills=0.5,2.6,4.4,6.2,8.9,10.6,12.4,14.9",
+    "pub:capture": "node pub/capture-app.mjs",
+    "pub:prepare": "node pub/prepare.mjs",
+    "pub:render": "node render.mjs --ad=pub",
+    "pub:audio": "node render.mjs --ad=pub --audio",
+    "pub:sheet": "node render.mjs --ad=pub --sheet --step=0.5",
+    "pub:stills": "node render.mjs --ad=pub --stills=0.5,3.9,7.6,9.5,13.8,15.5,18.5,21.5,24.5,27.5"
   },
   "devDependencies": {
     "playwright": "1.56.1"

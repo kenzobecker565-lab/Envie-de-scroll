@@ -1,9 +1,10 @@
 /**
- * Rendu de la pub, image par image, puis encodage MP4 (H.264 + AAC).
+ * Rendu des pubs, image par image, puis encodage MP4 (H.264 + AAC).
  *
  *   node render.mjs                     → build/plutot-que-scroller-15s.mp4
- *   node render.mjs --stills=0.5,4.2    → build/stills/*.png (vérifications)
- *   node render.mjs --sheet             → build/planche.png (planche contact)
+ *   node render.mjs --ad=pub            → build/pub/plutot-que-scroller-pub.mp4 (pub de 28 s)
+ *   node render.mjs --stills=0.5,4.2    → <build>/stills/*.png (vérifications)
+ *   node render.mjs --sheet             → <build>/planche.png (planche contact)
  *   node render.mjs --audio             → refait seulement la bande-son de la vidéo
  *
  * Il faut Chromium via Playwright (`npx playwright install chromium`) et
@@ -16,11 +17,11 @@ import http from 'node:http'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
-import { DURATION, FPS, HEIGHT, WIDTH } from './cues.js'
 
+const WIDTH = 1080
+const HEIGHT = 1920
 const here = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(here, '..')
-const build = path.join(here, 'build')
 const FFMPEG = process.env.FFMPEG || 'ffmpeg'
 
 const args = Object.fromEntries(
@@ -29,6 +30,15 @@ const args = Object.fromEntries(
     return [key, value]
   }),
 )
+
+/** Les pubs : page à photographier, module de bande-son, dossier et fichier de sortie. */
+const ADS = {
+  '15s': { page: 'promo/index.html', audio: './audio.mjs', build: 'build', out: 'plutot-que-scroller-15s.mp4' },
+  pub: { page: 'promo/pub/index.html', audio: './pub/audio.mjs', build: 'build/pub', out: 'plutot-que-scroller-pub.mp4' },
+}
+const AD = ADS[args.ad ?? '15s']
+if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)
+const build = path.join(here, AD.build)
 
 // ------------------------------------------------ petit serveur de fichiers
 
@@ -40,6 +50,8 @@ const TYPES = {
   '.woff2': 'font/woff2',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.json': 'application/json',
   '.wav': 'audio/wav',
 }
 
@@ -74,6 +86,7 @@ function run(cmd, cmdArgs, { input } = {}) {
 /**
  * Ouvre `count` onglets sur la pub. Chaque image ne dépend que de son instant :
  * plusieurs onglets peuvent donc rendre des images différentes en parallèle.
+ * La page donne sa durée et sa cadence (window.__promo).
  */
 async function openPages(count = 1) {
   const server = await serve()
@@ -84,14 +97,16 @@ async function openPages(count = 1) {
     server.close()
   }
   const shots = []
+  let meta = {}
   for (let k = 0; k < count; k++) {
     const page = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 1 })
     page.on('pageerror', (e) => errors.push(e.message))
     page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
-    await page.goto(`http://127.0.0.1:${server.address().port}/promo/index.html?render`)
+    await page.goto(`http://127.0.0.1:${server.address().port}/${AD.page}?render`)
     try {
       await page.waitForFunction(() => window.__promo, null, { timeout: 15000 })
       await page.evaluate(() => window.__promo.ready)
+      meta = await page.evaluate(() => ({ duration: window.__promo.duration, fps: window.__promo.fps }))
     } catch (error) {
       errors.push(error.message)
     }
@@ -104,7 +119,7 @@ async function openPages(count = 1) {
     await close()
     throw new Error(`Erreurs dans la page :\n${errors.join('\n')}`)
   }
-  return { shots, shot: shots[0], close }
+  return { shots, shot: shots[0], close, ...meta }
 }
 
 // -------------------------------------------------------------------- modes
@@ -125,10 +140,10 @@ async function sheet() {
   const dir = path.join(build, 'sheet')
   fs.rmSync(dir, { recursive: true, force: true })
   fs.mkdirSync(dir, { recursive: true })
-  const { shot, close } = await openPages()
+  const { shot, close, duration } = await openPages()
   const step = Number(args.step ?? 0.25)
   let i = 0
-  for (let t = 0; t < DURATION; t += step) fs.writeFileSync(path.join(dir, `${String(i++).padStart(3, '0')}.png`), await shot(t))
+  for (let t = 0; t < duration; t += step) fs.writeFileSync(path.join(dir, `${String(i++).padStart(3, '0')}.png`), await shot(t))
   await close()
   const cols = 10
   const rows = Math.ceil(i / cols)
@@ -140,7 +155,7 @@ async function sheet() {
 async function makeAudio() {
   fs.mkdirSync(build, { recursive: true })
   const wav = path.join(build, 'audio.wav')
-  const { writeAudio } = await import('./audio.mjs')
+  const { writeAudio } = await import(AD.audio)
   writeAudio(wav)
   console.log(`Bande-son : ${wav}`)
   // Mesure de la sonie, pour viser −14 LUFS (standard des réseaux sociaux).
@@ -152,7 +167,7 @@ async function makeAudio() {
 
 /** Remplace seulement la piste son d'une vidéo déjà rendue (sans refaire les images). */
 async function remux() {
-  const video = path.join(build, args.out ?? 'plutot-que-scroller-15s.mp4')
+  const video = path.join(build, args.out ?? AD.out)
   if (!fs.existsSync(video)) throw new Error(`Aucune vidéo à ${video} : lance d'abord « npm run render ».`)
   const { wav, audioArgs } = await makeAudio()
   const tmp = `${video}.tmp.mp4`
@@ -162,12 +177,12 @@ async function remux() {
 }
 
 async function video() {
-  const fps = Number(args.fps ?? FPS)
   const { wav, audioArgs } = await makeAudio()
-  const out = path.join(build, args.out ?? 'plutot-que-scroller-15s.mp4')
+  const out = path.join(build, args.out ?? AD.out)
   const workers = Number(args.workers ?? 3)
-  const { shots, close } = await openPages(workers)
-  const frames = Math.round(DURATION * fps)
+  const { shots, close, duration, fps: pageFps } = await openPages(workers)
+  const fps = Number(args.fps ?? pageFps)
+  const frames = Math.round(duration * fps)
   const started = Date.now()
   await run(
     FFMPEG,

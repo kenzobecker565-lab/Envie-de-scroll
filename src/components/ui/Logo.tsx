@@ -28,7 +28,7 @@ export function AppMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" aria-hidden className={className}>
       <rect width="64" height="64" rx="18" fill="var(--color-primary)" />
-      <g transform="rotate(-45 32 32)">
+      <g transform="rotate(-45 32 32) translate(2.5 0)">
         <rect x="17" y="27" width="27" height="10" rx="2" fill="#FFF7EE" />
         <rect x="44" y="27" width="7" height="10" rx="2" fill="#F2B632" />
         <path d="M17 27 L8 32 L17 37 Z" fill="#F3D9C2" />

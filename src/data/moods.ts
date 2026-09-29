@@ -35,7 +35,7 @@ export function getMood(id: MoodId): Mood {
 
 /** Garde de type : vérifie qu'une chaîne (ex. lue en base) est un mood connu. */
 export function isMoodId(value: string): value is MoodId {
-  return value in MOODS_BY_ID
+  return Object.hasOwn(MOODS_BY_ID, value)
 }
 
 export function moodsByEnergy(energy: EnergyLevel): Mood[] {

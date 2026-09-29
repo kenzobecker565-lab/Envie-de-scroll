@@ -69,6 +69,11 @@ const INTERESTS_BY_ID = Object.fromEntries(
   LIFE_INTERESTS.map((interest) => [interest.id, interest]),
 ) as Record<LifeInterestId, LifeInterest>
 
+/** Garde de type : vérifie qu'une chaîne (ex. lue en base) est une réponse connue. */
+export function isLifeInterestId(value: string): value is LifeInterestId {
+  return Object.hasOwn(INTERESTS_BY_ID, value)
+}
+
 /**
  * Traduit les réponses de l'utilisateur en familles et passions suggérées
  * (sans doublons, dans l'ordre des réponses).

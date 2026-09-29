@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Camera, Check, Flame, RefreshCw } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getPassion } from '../../data/passions'
 import { usePhotoUrl, useStats } from '../../hooks/useData'
 import { navigate, type RouteName } from '../../hooks/useRoute'
@@ -13,10 +13,30 @@ import { StarRating } from '../ui/StarRating'
 import { BottomBar, StepHeading } from '../ui/StepHeading'
 import { useToast } from '../ui/Toast'
 
+interface Draft {
+  note: string
+  filmTitle: string
+  rating: FilmLog['rating']
+}
+
+/** Enregistre la note et le film saisis, s'il y a quelque chose à enregistrer. */
+async function saveDraft(entryId: number, draft: Draft, isFilm: boolean): Promise<void> {
+  const hasFilm = isFilm && draft.filmTitle.trim() !== ''
+  if (!draft.note.trim() && !hasFilm) return
+  await updateEntryDetails(entryId, {
+    note: draft.note,
+    ...(hasFilm ? { film: { title: draft.filmTitle, rating: draft.rating } } : {}),
+  })
+}
+
 /**
  * Après « C'est fait » : l'activité est DÉJÀ enregistrée. On célèbre, puis on
  * propose d'enrichir l'entrée selon la passion : une photo (galerie), un film
  * et sa note (cinéma), ou simplement une petite note.
+ *
+ * Ce qui a été saisi n'est jamais perdu : si l'on quitte l'écran autrement
+ * que par « Terminer » (croix, bouton retour du navigateur…), la saisie est
+ * enregistrée quand même.
  */
 export function DoneStep({ entryId, activity }: { entryId: number; activity: Activity }) {
   const entry = useLiveQuery(() => getEntry(entryId), [entryId])
@@ -30,6 +50,20 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
   const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
   const photoUrl = usePhotoUrl(entry?.photoId)
+  const isFilm = passion.progressView === 'films'
+
+  // Sauvegarde de secours au départ de l'écran (voir plus haut).
+  const draftRef = useRef<Draft>({ note: '', filmTitle: '', rating: 0 })
+  const savedRef = useRef(false)
+  useEffect(() => {
+    draftRef.current = { note, filmTitle, rating }
+  }, [note, filmTitle, rating])
+  useEffect(
+    () => () => {
+      if (!savedRef.current) void saveDraft(entryId, draftRef.current, isFilm)
+    },
+    [entryId, isFilm],
+  )
 
   const addPhoto = async (file: File) => {
     setUploading(true)
@@ -46,13 +80,8 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
   const finish = async (route: RouteName) => {
     setSaving(true)
     try {
-      const hasFilm = passion.progressView === 'films' && filmTitle.trim() !== ''
-      if (note.trim() || hasFilm) {
-        await updateEntryDetails(entryId, {
-          note,
-          ...(hasFilm ? { film: { title: filmTitle, rating } } : {}),
-        })
-      }
+      await saveDraft(entryId, { note, filmTitle, rating }, isFilm)
+      savedRef.current = true
       navigate(route)
     } catch {
       toast('Impossible d’enregistrer ces détails')
@@ -126,7 +155,7 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
           </div>
         )}
 
-        {passion.progressView === 'films' && (
+        {isFilm && (
           <div>
             <label htmlFor="film-title" className="mb-2 block font-display text-lg font-semibold">
               Quel film as-tu regardé&nbsp;?

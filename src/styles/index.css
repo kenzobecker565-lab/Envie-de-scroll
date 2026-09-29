@@ -24,12 +24,12 @@
   --color-card: #fffdf9;
   --color-ink: #2a1f1a;
   --color-ink-soft: #6e5d52;
-  --color-ink-faint: #a39286;
+  --color-ink-faint: #8c7b6f;
   --color-line: #eadfd0;
 
   /* Action principale */
-  --color-primary: #cf4520;
-  --color-primary-strong: #b63b1a;
+  --color-primary: #c4401c;
+  --color-primary-strong: #a83616;
   --color-primary-soft: #fce6db;
   --color-on-primary: #ffffff;
 
@@ -108,7 +108,7 @@
   --color-card: #221a16;
   --color-ink: #f5ebe0;
   --color-ink-soft: #bcaa9c;
-  --color-ink-faint: #7f6f63;
+  --color-ink-faint: #8f7e71;
   --color-line: #3a2e27;
 
   --color-primary: #ff7a50;
@@ -159,7 +159,7 @@
 }
 
 @utility text-accent {
-  color: color-mix(in oklab, var(--accent) 70%, var(--color-ink));
+  color: color-mix(in oklab, var(--accent) 55%, var(--color-ink));
 }
 
 @utility bg-accent {

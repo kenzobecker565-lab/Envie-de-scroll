@@ -5,6 +5,7 @@ import { db } from '../db/database'
 import { countDemoEntries, removeDemoData, resetAllData, restoreDemoData, seedDemoDataOnce } from './demoData'
 import { attachPhoto, deleteEntry, listHistory, recordActivity, updateEntryDetails } from './historyService'
 import { createProfile, getProfile, updateProfile } from './profileService'
+import type { HistoryEntry, UserProfile } from '../types'
 
 /**
  * Tests de la couche de persistance, sur une base IndexedDB simulée en
@@ -85,6 +86,28 @@ describe('historique', () => {
     await deleteEntry(id)
     expect(await db.history.count()).toBe(0)
     expect(await db.photos.count()).toBe(0)
+  })
+})
+
+describe('données abîmées en base', () => {
+  it('sont corrigées ou ignorées à la lecture, sans planter', async () => {
+    const now = new Date().toISOString()
+    const raw = (value: object) => db.history.add(value as HistoryEntry)
+    await raw({ activityId: 'a', passionId: 'dessin', mood: 'ennui', duration: 7, title: 42, description: 'ok', completedAt: now, dateKey: 'n’importe quoi', note: { oups: true }, film: { title: 12 } })
+    await raw({ activityId: 'b', passionId: 'passion-disparue', mood: 'ennui', duration: 5, title: 't', description: 'd', completedAt: now, dateKey: '2026-09-29' })
+    await raw({ activityId: 'e', passionId: 'constructor', mood: 'toString', duration: 5, title: 't', description: 'd', completedAt: now, dateKey: '2026-09-29' })
+    await raw({ activityId: 'c', passionId: 'cinema', mood: 'mood-inconnu', duration: 5, title: 't', description: 'd', completedAt: now, dateKey: '2026-09-29' })
+    await raw({ activityId: 'd', passionId: 'cinema', mood: 'calme', duration: 15, title: 't', description: 'd', completedAt: 'pas une date', dateKey: '2026-09-29' })
+
+    const entries = await listHistory()
+    expect(entries).toHaveLength(1)
+    expect(entries[0]).toMatchObject({ passionId: 'dessin', duration: 5, title: 'Activité', note: undefined, film: undefined })
+    expect(entries[0]?.dateKey).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
+  it('corrigent un profil abîmé', async () => {
+    await db.profile.put({ id: 'me', firstName: 42, passionIds: ['dessin', 'disparue', 3, 'dessin'], beginnerMode: 'oui' } as unknown as UserProfile)
+    expect(await getProfile()).toMatchObject({ firstName: '', passionIds: ['dessin'], beginnerMode: false, lifeInterestIds: [] })
   })
 })
 

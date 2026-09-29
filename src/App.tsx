@@ -48,7 +48,8 @@ function Screens() {
   }, [route])
 
   if (profile === undefined) return <Splash />
-  if (profile === null) return <Onboarding />
+  // Sans profil (ou si toutes ses passions ont disparu du catalogue) : onboarding.
+  if (profile === null || profile.passionIds.length === 0) return <Onboarding />
 
   switch (route) {
     case 'envie':

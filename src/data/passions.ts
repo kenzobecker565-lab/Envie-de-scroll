@@ -151,5 +151,6 @@ export function getPassionFamily(passionId: PassionId): PassionFamily {
 
 /** Garde de type : vérifie qu'une chaîne (ex. lue en base) est une passion connue. */
 export function isPassionId(value: string): value is PassionId {
-  return value in PASSIONS
+  // `Object.hasOwn` et non `in` : « constructor » ou « toString » ne sont pas des passions.
+  return Object.hasOwn(PASSIONS, value)
 }

@@ -72,8 +72,12 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
   }
 
   const toggleBeginner = async (beginnerMode: boolean) => {
-    await updateProfile({ beginnerMode })
-    toast(beginnerMode ? 'Mode débutant activé' : 'Mode débutant désactivé')
+    try {
+      await updateProfile({ beginnerMode })
+      toast(beginnerMode ? 'Mode débutant activé' : 'Mode débutant désactivé')
+    } catch {
+      toast('Impossible d’enregistrer ce réglage')
+    }
   }
 
   const toggleDemo = async () => {
@@ -86,6 +90,8 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
         await restoreDemoData()
         toast('Données de démonstration ajoutées')
       }
+    } catch {
+      toast('Impossible de modifier les données de démonstration')
     } finally {
       setDemoBusy(false)
     }
@@ -202,7 +208,7 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
           </Button>
         </Card>
 
-        <p className="pt-2 text-center text-xs text-ink-faint">Plutôt Que Scroller · prototype 0.1</p>
+        <p className="pt-2 text-center text-xs text-ink-soft">Plutôt Que Scroller · prototype 0.1</p>
       </div>
 
       <Modal
@@ -233,8 +239,13 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
         tone="danger"
         onCancel={() => setConfirmReset(false)}
         onConfirm={async () => {
-          await resetAllData()
-          navigate('accueil', { replace: true })
+          try {
+            await resetAllData()
+            navigate('accueil', { replace: true })
+          } catch {
+            toast('La réinitialisation a échoué. Réessaie dans un instant.')
+            setConfirmReset(false)
+          }
         }}
       />
     </AppShell>

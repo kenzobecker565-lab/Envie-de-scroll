@@ -6,11 +6,12 @@ import { Card, SectionTitle } from '../layout/AppShell'
 const WEEKDAYS = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 const dayFormat = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })
 
+/** Couleur de chaque case selon le nombre d'activités (contrastes vérifiés en clair et en sombre). */
 function cellClass(day: DayCell): string {
-  if (day.isFuture) return 'border border-dashed border-line text-ink-faint'
+  if (day.isFuture) return 'border border-dashed border-line text-ink-soft'
   if (day.count === 0) return 'bg-line/70 text-ink-soft'
-  if (day.count === 1) return 'bg-primary/35 text-ink'
-  if (day.count === 2) return 'bg-primary/65 text-on-primary'
+  if (day.count === 1) return 'bg-primary/30 text-ink'
+  if (day.count === 2) return 'bg-primary/55 text-ink'
   return 'bg-primary text-on-primary'
 }
 
@@ -53,8 +54,8 @@ export function WeeksCalendar({ days }: { days: DayCell[] }) {
       <div className="mt-3 flex items-center justify-end gap-1.5 text-xs text-ink-soft" aria-hidden>
         Moins
         <span className="size-3 rounded-[0.25rem] bg-line/70" />
-        <span className="size-3 rounded-[0.25rem] bg-primary/35" />
-        <span className="size-3 rounded-[0.25rem] bg-primary/65" />
+        <span className="size-3 rounded-[0.25rem] bg-primary/30" />
+        <span className="size-3 rounded-[0.25rem] bg-primary/55" />
         <span className="size-3 rounded-[0.25rem] bg-primary" />
         Plus
       </div>

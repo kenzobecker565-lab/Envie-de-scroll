@@ -5,11 +5,13 @@ import { updateEntryDetails } from '../../services/historyService'
 import type { HistoryEntry } from '../../types'
 import { Button, IconButton } from '../ui/Button'
 import { StarRating } from '../ui/StarRating'
+import { useToast } from '../ui/Toast'
 import { EntryEditModal } from './EntryEditModal'
 
 /** Cinéma : la liste des films regardés, avec une note sur 5 modifiable. */
 export function FilmsView({ entries }: { entries: HistoryEntry[] }) {
   const [editingId, setEditingId] = useState<number>()
+  const toast = useToast()
   const films = entries.filter((entry) => entry.film)
   const withoutFilm = entries.filter((entry) => !entry.film)
   const rated = films.filter((entry) => (entry.film?.rating ?? 0) > 0)
@@ -46,7 +48,8 @@ export function FilmsView({ entries }: { entries: HistoryEntry[] }) {
                   value={entry.film?.rating ?? 0}
                   label={`Ta note pour « ${entry.film?.title} »`}
                   onChange={(rating) => {
-                    if (entry.id !== undefined && entry.film) void updateEntryDetails(entry.id, { film: { ...entry.film, rating } })
+                    if (entry.id === undefined || !entry.film) return
+                    updateEntryDetails(entry.id, { film: { ...entry.film, rating } }).catch(() => toast('Impossible d’enregistrer la note'))
                   }}
                 />
               </div>

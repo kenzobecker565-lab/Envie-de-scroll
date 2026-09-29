@@ -4,6 +4,7 @@ import { countDemoEntries } from '../services/demoData'
 import { getPhoto, listHistory } from '../services/historyService'
 import { getProfile } from '../services/profileService'
 import { computeStats } from '../services/stats'
+import { useToday } from './useToday'
 import type { HistoryEntry, Stats, UserProfile } from '../types'
 
 /**
@@ -28,7 +29,9 @@ export function useHistory(): HistoryEntry[] | undefined {
 /** Historique + statistiques calculées à partir de lui. */
 export function useStats(): { history: HistoryEntry[] | undefined; stats: Stats | undefined } {
   const history = useHistory()
-  const stats = useMemo(() => (history ? computeStats(history) : undefined), [history])
+  const today = useToday()
+  // `today` force le recalcul au changement de jour (la série dépend de la date).
+  const stats = useMemo(() => (history && today ? computeStats(history) : undefined), [history, today])
   return { history, stats }
 }
 

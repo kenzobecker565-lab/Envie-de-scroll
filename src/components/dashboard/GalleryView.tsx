@@ -143,10 +143,15 @@ function PhotoViewer({
         tone="danger"
         onCancel={() => setConfirming(false)}
         onConfirm={async () => {
-          if (entry?.id !== undefined) await removePhoto(entry.id)
-          toast('Photo retirée')
-          setConfirming(false)
-          onClose()
+          try {
+            if (entry?.id !== undefined) await removePhoto(entry.id)
+            toast('Photo retirée')
+            onClose()
+          } catch {
+            toast('Impossible de retirer cette photo')
+          } finally {
+            setConfirming(false)
+          }
         }}
       />
     </>

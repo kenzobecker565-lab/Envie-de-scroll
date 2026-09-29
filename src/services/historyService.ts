@@ -1,6 +1,5 @@
-import { isMoodId } from '../data/moods'
-import { isPassionId } from '../data/passions'
 import { db } from '../db/database'
+import { sanitizeEntry } from '../db/sanitize'
 import { toDateKey } from '../lib/dates'
 import { prepareImage } from '../lib/image'
 import type { Activity, FilmLog, HistoryEntry, MoodId, PhotoRecord } from '../types'
@@ -12,17 +11,17 @@ import type { Activity, FilmLog, HistoryEntry, MoodId, PhotoRecord } from '../ty
 
 /**
  * Tout l'historique, du plus récent au plus ancien.
- * Les entrées dont la passion ou le mood n'existe plus dans le catalogue
- * (identifiant renommé ou supprimé dans le code) sont ignorées plutôt que de
+ * Chaque entrée est vérifiée à la lecture (voir src/db/sanitize.ts) : une
+ * entrée abîmée ou dont la passion n'existe plus est ignorée plutôt que de
  * faire planter l'affichage.
  */
 export async function listHistory(): Promise<HistoryEntry[]> {
   const entries = await db.history.orderBy('completedAt').reverse().toArray()
-  return entries.filter((entry) => isPassionId(entry.passionId) && isMoodId(entry.mood))
+  return entries.flatMap((entry) => sanitizeEntry(entry) ?? [])
 }
 
 export async function getEntry(id: number): Promise<HistoryEntry | undefined> {
-  return db.history.get(id)
+  return sanitizeEntry(await db.history.get(id)) ?? undefined
 }
 
 export async function getPhoto(id: number): Promise<PhotoRecord | undefined> {

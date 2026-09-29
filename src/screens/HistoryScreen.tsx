@@ -141,10 +141,15 @@ export function HistoryScreen() {
         tone="danger"
         onCancel={() => setDeletingId(undefined)}
         onConfirm={async () => {
-          if (deletingId !== undefined) await deleteEntry(deletingId)
-          setDeletingId(undefined)
-          setExpandedId(undefined)
-          toast('Activité supprimée')
+          try {
+            if (deletingId !== undefined) await deleteEntry(deletingId)
+            setExpandedId(undefined)
+            toast('Activité supprimée')
+          } catch {
+            toast('Impossible de supprimer cette activité')
+          } finally {
+            setDeletingId(undefined)
+          }
         }}
       />
     </AppShell>

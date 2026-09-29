@@ -4,6 +4,8 @@ Transformer chaque envie de scroller en un petit moment créatif lié à une pas
 
 Ce dépôt contient le prototype web de l'application : une vraie application React qui tourne entièrement dans le navigateur, avec une vraie logique métier et des données sauvegardées localement (IndexedDB). Elle est pensée comme une app mobile et pourra devenir une Telegram Mini App sans tout réécrire (voir [Vers une Telegram Mini App](#vers-une-telegram-mini-app)).
 
+![Aperçu de l'application : accueil, choix du mood, carte d'activité et tableau de bord en mode sombre](docs/apercu.png)
+
 ---
 
 ## Lancer le projet
@@ -18,7 +20,7 @@ npm run dev
 Ouvre ensuite l'adresse affichée dans le terminal (en général http://localhost:5173).
 
 - **Voir l'app « comme sur un téléphone »** : sur ordinateur, l'app s'affiche dans une colonne centrée. Tu peux aussi ouvrir les outils de développement (F12) et activer le mode appareil mobile.
-- **La tester sur ton vrai téléphone** (même réseau Wi-Fi) : `npm run dev -- --host`, puis ouvre sur le téléphone l'adresse « Network » affichée.
+- **La tester sur ton vrai téléphone** (même réseau Wi-Fi) : `npm run dev -- --host`, puis ouvre sur le téléphone l'adresse « Network » affichée. Tu peux ensuite l'**ajouter à l'écran d'accueil** (menu Partager → « Sur l'écran d'accueil » sur iPhone, menu ⋮ → « Ajouter à l'écran d'accueil » sur Android) : elle s'ouvre alors en plein écran, avec sa propre icône, comme une vraie app. Les données enregistrées sont propres à chaque navigateur et à chaque adresse : celles de ton ordinateur ne sont pas copiées sur ton téléphone.
 
 | Commande | Rôle |
 | --- | --- |
@@ -27,6 +29,8 @@ Ouvre ensuite l'adresse affichée dans le terminal (en général http://localhos
 | `npm run typecheck` | Vérifie les types TypeScript |
 | `npm run build` | Construit la version finale dans `dist/` |
 | `npm run preview` | Sert la version construite, pour la tester |
+
+Sur GitHub, ces vérifications (tests + build) se lancent **automatiquement** à chaque pull request et à chaque mise à jour de `main` (fichier `.github/workflows/ci.yml`) : si une modification de la bibliothèque d'activités casse quelque chose, GitHub l'indique par une croix rouge.
 
 ---
 
@@ -151,6 +155,7 @@ src/
 ├── hooks/                  Données « en direct », routage, thème
 ├── platform/index.ts       Adaptateur navigateur / Telegram
 ├── components/             Composants d'interface (ui, layout, onboarding, trigger, dashboard)
+│   └── ErrorBoundary.tsx   Écran de secours en cas d'erreur inattendue
 ├── screens/                Les écrans : accueil, progrès, historique, profil
 ├── styles/index.css        Identité visuelle : couleurs, typographies, animations
 ├── App.tsx                 Choix de l'écran à afficher
@@ -179,7 +184,8 @@ L'architecture prépare la migration :
 - Mode clair et mode sombre (automatique selon le système, ou forcé dans le profil).
 - Les couleurs sont des variables dans `src/styles/index.css` : modifier une couleur à cet endroit la change partout, en clair comme en sombre.
 - Animations légères entre les étapes, désactivées si le système demande de réduire les animations.
-- Accessibilité : navigation au clavier, fenêtres modales qui gardent le focus, libellés pour les lecteurs d'écran.
+- Accessibilité : navigation au clavier, fenêtres modales qui gardent le focus, libellés pour les lecteurs d'écran, contrastes suffisants. Les 19 écrans ont été audités en clair et en sombre avec [axe-core](https://github.com/dequelabs/axe-core) (règles WCAG 2.1 AA) : aucun problème relevé.
+- Robustesse : si un écran plante, un message propose de revenir à l'accueil (les données restent intactes) ; une note saisie après une activité est enregistrée même si l'on quitte l'écran sans appuyer sur « Terminer » ; la série se met à jour au passage de minuit, même si l'app est restée ouverte.
 
 ---
 

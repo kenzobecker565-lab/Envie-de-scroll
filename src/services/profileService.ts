@@ -1,4 +1,5 @@
 import { db } from '../db/database'
+import { sanitizeProfile } from '../db/sanitize'
 import { isPassionId } from '../data/passions'
 import type { LifeInterestId, PassionId, UserProfile } from '../types'
 
@@ -11,10 +12,8 @@ const PROFILE_ID = 'me'
 
 /** Renvoie le profil, ou `null` si l'onboarding n'a pas encore été fait. */
 export async function getProfile(): Promise<UserProfile | null> {
-  const profile = await db.profile.get(PROFILE_ID)
-  if (!profile) return null
-  // Même garde-fou que pour l'historique : on ignore une passion disparue du catalogue.
-  return { ...profile, passionIds: cleanPassions(profile.passionIds) }
+  // Vérifié à la lecture (voir src/db/sanitize.ts), ex. une passion disparue du catalogue est ignorée.
+  return sanitizeProfile(await db.profile.get(PROFILE_ID))
 }
 
 /** Nettoie une liste de passions : identifiants connus uniquement, sans doublon. */

@@ -179,23 +179,32 @@
   }
 }
 
+/*
+ * Styles de page, volontairement HORS des couches (@layer) de Tailwind : quand
+ * l'app est intégrée dans une page hôte qui a son propre style de base (par
+ * exemple un aperçu sur claude.ai), ce sont bien le fond, la police et la
+ * taille de texte de l'app qui s'appliquent.
+ */
+html {
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--color-paper-deep);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  /* Axe « SOFT » de Fraunces : des empattements plus ronds, plus chaleureux. */
+  font-variation-settings: 'SOFT' 100;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @layer base {
-  html {
-    -webkit-tap-highlight-color: transparent;
-    text-size-adjust: 100%;
-  }
-
-  body {
-    min-height: 100dvh;
-    background-color: var(--color-paper-deep);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    /* Axe « SOFT » de Fraunces : des empattements plus ronds, plus chaleureux. */
-    font-variation-settings: 'SOFT' 100;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   ::selection {
     background: color-mix(in oklab, var(--color-primary) 28%, transparent);
   }

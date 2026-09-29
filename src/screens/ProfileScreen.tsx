@@ -13,6 +13,8 @@ import { useTheme } from '../hooks/useTheme'
 import { passionAccent } from '../lib/accent'
 import { cn } from '../lib/cn'
 import { pluralize } from '../lib/dates'
+import { fr } from '../lib/typography'
+import { isStorageTemporary } from '../services/appInit'
 import { removeDemoData, resetAllData, restoreDemoData } from '../services/demoData'
 import type { ThemePreference } from '../services/preferences'
 import { updateProfile } from '../services/profileService'
@@ -188,7 +190,11 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
         <Card>
           <SectionTitle>Tes données</SectionTitle>
           <p className="text-sm leading-relaxed text-ink-soft">
-            Tout est enregistré sur cet appareil, dans ton navigateur. Rien n’est envoyé sur internet.
+            {fr(
+              isStorageTemporary()
+                ? 'Ton navigateur bloque le stockage : tes données restent en mémoire le temps de la session. Rien n’est envoyé sur internet.'
+                : 'Tout est enregistré sur cet appareil, dans ton navigateur. Rien n’est envoyé sur internet.',
+            )}
           </p>
 
           <div className="mt-4 flex items-center gap-3 rounded-2xl bg-paper p-3">

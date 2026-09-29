@@ -7,6 +7,7 @@ import { suggestActivity, type Suggestion } from '../../services/activityEngine'
 import { recordActivity } from '../../services/historyService'
 import type { Duration, MoodId, PassionId, UserProfile } from '../../types'
 import { AppShell } from '../layout/AppShell'
+import { AppLink } from '../ui/AppLink'
 import { IconButton } from '../ui/Button'
 import { PassionChip } from '../ui/Passion'
 import { StepHeading } from '../ui/StepHeading'
@@ -151,9 +152,9 @@ export function TriggerFlow({ profile }: { profile: UserProfile }) {
             </div>
             <p className="mt-6 text-sm text-ink-soft">
               Envie d’en ajouter une&nbsp;?{' '}
-              <a href="#/profil" className="font-semibold text-primary underline-offset-4 hover:underline">
+              <AppLink to="profil" className="font-semibold text-primary underline-offset-4 hover:underline">
                 Modifie tes passions dans ton profil
-              </a>
+              </AppLink>
               .
             </p>
           </>

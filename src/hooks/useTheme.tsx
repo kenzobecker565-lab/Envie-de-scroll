@@ -14,11 +14,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     applyTheme(preference)
-    if (preference !== 'system' || !window.matchMedia) return
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
+    if (preference !== 'system') return
+    // En mode « Auto » : suivre le système… et la page hôte si elle change de thème.
     const onChange = () => applyTheme('system')
-    media.addEventListener('change', onChange)
-    return () => media.removeEventListener('change', onChange)
+    const media = window.matchMedia?.('(prefers-color-scheme: dark)')
+    media?.addEventListener('change', onChange)
+    const observer = new MutationObserver(onChange)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => {
+      media?.removeEventListener('change', onChange)
+      observer.disconnect()
+    }
   }, [preference])
 
   const setPreference = useCallback((next: ThemePreference) => {

@@ -33,9 +33,22 @@ export function systemPrefersDark(): boolean {
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
 }
 
-/** Applique le thème à la page (classe `dark` sur <html>). */
+/**
+ * Thème imposé par une page hôte, quand l'app est intégrée ailleurs (par
+ * exemple claude.ai pose `data-theme="dark"` ou `"light"` sur <html>).
+ */
+export function hostTheme(): 'light' | 'dark' | null {
+  const value = document.documentElement.getAttribute('data-theme')
+  return value === 'light' || value === 'dark' ? value : null
+}
+
+/**
+ * Applique le thème à la page (classe `dark` sur <html>). En mode « Auto »,
+ * on suit la page hôte si elle impose un thème, sinon le réglage du système.
+ */
 export function applyTheme(preference: ThemePreference): void {
-  const dark = preference === 'dark' || (preference === 'system' && systemPrefersDark())
+  const automatic = hostTheme() ? hostTheme() === 'dark' : systemPrefersDark()
+  const dark = preference === 'dark' || (preference === 'system' && automatic)
   const root = document.documentElement
   root.classList.toggle('dark', dark)
   root.style.colorScheme = dark ? 'dark' : 'light'

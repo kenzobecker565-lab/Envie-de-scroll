@@ -33,7 +33,12 @@ const webAdapter: PlatformAdapter = {
   suggestedFirstName: () => undefined,
   haptic(kind) {
     // Les navigateurs mobiles Android savent vibrer ; ailleurs, rien ne se passe.
-    if (kind === 'success') navigator.vibrate?.(12)
+    if (kind !== 'success') return
+    try {
+      navigator.vibrate?.(12)
+    } catch {
+      // Vibration refusée (page intégrée, réglages) : sans importance.
+    }
   },
 }
 

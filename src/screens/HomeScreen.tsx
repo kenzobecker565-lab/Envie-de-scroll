@@ -1,12 +1,13 @@
 import { ChevronRight, Sparkles } from 'lucide-react'
 import { AppShell, Card, SectionTitle } from '../components/layout/AppShell'
+import { AppLink } from '../components/ui/AppLink'
 import { AppMark, Logo } from '../components/ui/Logo'
 import { PassionEmoji } from '../components/ui/Passion'
 import { StarRating } from '../components/ui/StarRating'
 import { getMood } from '../data/moods'
 import { getPassion } from '../data/passions'
 import { useStats } from '../hooks/useData'
-import { hrefFor, navigate } from '../hooks/useRoute'
+import { navigate } from '../hooks/useRoute'
 import { formatMinutes, formatRelativeDay, formatToday, pluralize } from '../lib/dates'
 import { fr } from '../lib/typography'
 import type { Stats, UserProfile } from '../types'
@@ -60,9 +61,9 @@ export function HomeScreen({ profile }: { profile: UserProfile }) {
         <SectionTitle
           action={
             stats?.lastEntry && (
-              <a href={hrefFor('historique')} className="flex items-center text-sm font-semibold text-primary">
+              <AppLink to="historique" className="flex items-center text-sm font-semibold text-primary">
                 Historique <ChevronRight className="size-4" aria-hidden />
-              </a>
+              </AppLink>
             )
           }
         >
@@ -118,7 +119,7 @@ function LastActivityCard({ stats }: { stats: Stats }) {
   const passion = getPassion(entry.passionId)
   const mood = getMood(entry.mood)
   return (
-    <a href={hrefFor('progres')} className="block rounded-[1.6rem] border border-line bg-card p-4 shadow-soft transition hover:border-ink-faint">
+    <AppLink to="progres" className="block rounded-[1.6rem] border border-line bg-card p-4 shadow-soft transition hover:border-ink-faint">
       <div className="flex gap-3">
         <PassionEmoji passionId={entry.passionId} />
         <div className="min-w-0 flex-1">
@@ -138,6 +139,6 @@ function LastActivityCard({ stats }: { stats: Stats }) {
         </p>
       )}
       {entry.note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-[0.95rem] italic leading-relaxed text-ink-soft">{fr(entry.note)}</p>}
-    </a>
+    </AppLink>
   )
 }

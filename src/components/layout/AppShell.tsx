@@ -1,8 +1,10 @@
 import { ChartColumn, House, UserRound } from 'lucide-react'
 import type { ReactNode } from 'react'
-import { hrefFor, type RouteName } from '../../hooks/useRoute'
+import type { RouteName } from '../../hooks/useRoute'
 import { cn } from '../../lib/cn'
+import { isStorageTemporary } from '../../services/appInit'
 import { fr } from '../../lib/typography'
+import { AppLink } from '../ui/AppLink'
 
 /**
  * Cadre « application mobile » : pleine largeur sur téléphone, colonne
@@ -12,7 +14,15 @@ export function AppShell({ children, activeTab, hideNav }: { children: ReactNode
   return (
     <div className="min-h-dvh bg-paper-deep bg-dots sm:px-6 sm:py-6">
       <div className="relative mx-auto flex min-h-dvh w-full max-w-[440px] flex-col bg-paper sm:min-h-[calc(100dvh-3rem)] sm:overflow-clip sm:rounded-[2.25rem] sm:border sm:border-line sm:shadow-lift">
-        <main className={cn('flex flex-1 flex-col px-4 pt-[max(1rem,env(safe-area-inset-top))]', hideNav ? 'pb-0' : 'pb-8')}>{children}</main>
+        <main className={cn('flex flex-1 flex-col px-4 pt-[max(1rem,env(safe-area-inset-top))]', hideNav ? 'pb-0' : 'pb-8')}>
+          {isStorageTemporary() && (
+            <p role="status" className="mb-3 rounded-2xl bg-saffron-soft px-3.5 py-2.5 text-sm leading-snug">
+              Ton navigateur bloque le stockage&nbsp;: l’app fonctionne, mais tes activités ne seront pas gardées après la fermeture
+              de la page.
+            </p>
+          )}
+          {children}
+        </main>
         {!hideNav && <BottomNav active={activeTab} />}
       </div>
     </div>
@@ -36,8 +46,8 @@ function BottomNav({ active }: { active?: RouteName }) {
           const isActive = active === route || (route === 'progres' && active === 'historique')
           return (
             <li key={route}>
-              <a
-                href={hrefFor(route)}
+              <AppLink
+                to={route}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
                   'flex flex-col items-center gap-0.5 rounded-2xl py-1.5 text-xs font-semibold transition',
@@ -48,7 +58,7 @@ function BottomNav({ active }: { active?: RouteName }) {
                   <Icon className="size-5" strokeWidth={isActive ? 2.4 : 2} aria-hidden />
                 </span>
                 {label}
-              </a>
+              </AppLink>
             </li>
           )
         })}

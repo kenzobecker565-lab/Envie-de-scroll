@@ -1,0 +1,127 @@
+/**
+ * État de l'app : l'utilisateur (renvoyé par /api/me), la pile d'écrans et
+ * les choix du parcours en cours (mood, temps, passion, activité proposée).
+ */
+
+import { createContext, useCallback, useContext, useMemo, useReducer, type ReactNode } from 'react'
+import type { CompleteResponse, Duration, MeResponse, MoodId, PassionId, ProposalDTO, StatsDTO, UserDTO } from '@pqs/shared'
+
+export type Route =
+  | { name: 'welcome' }
+  | { name: 'passions'; mode: 'onboarding' | 'edit' }
+  | { name: 'home' }
+  | { name: 'signal' }
+  | { name: 'mood' }
+  | { name: 'time' }
+  | { name: 'passion' }
+  | { name: 'activity' }
+  | { name: 'proof' }
+  | { name: 'done' }
+  | { name: 'gallery' }
+
+export interface Flow {
+  mood?: MoodId
+  duration?: Duration
+  passion?: PassionId
+  proposal?: ProposalDTO
+  /** Écart entre l'horloge du serveur et celle du téléphone (ms). */
+  clockOffset: number
+}
+
+export interface DoneResult {
+  response: CompleteResponse
+  previousTotal: number
+  /** Dessin enregistré sans photo : on rappelle qu'on peut l'envoyer au bot. */
+  photoPending: boolean
+}
+
+interface State {
+  me: MeResponse
+  stack: Route[]
+  /** 1 : on avance (l'écran arrive de la droite), -1 : on revient. */
+  direction: 1 | -1
+  flow: Flow
+  done?: DoneResult
+}
+
+type Action =
+  | { type: 'push'; route: Route }
+  | { type: 'back' }
+  | { type: 'replace'; route: Route }
+  | { type: 'reset'; stack: Route[]; direction?: 1 | -1 }
+  | { type: 'flow'; flow: Partial<Flow> }
+  | { type: 'newFlow'; flow?: Partial<Flow> }
+  | { type: 'user'; user: UserDTO }
+  | { type: 'stats'; stats: StatsDTO }
+  | { type: 'openProposal'; proposal: ProposalDTO | null }
+  | { type: 'done'; done: DoneResult }
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'push':
+      return { ...state, stack: [...state.stack, action.route], direction: 1 }
+    case 'back':
+      return state.stack.length > 1 ? { ...state, stack: state.stack.slice(0, -1), direction: -1 } : state
+    case 'replace':
+      return { ...state, stack: [...state.stack.slice(0, -1), action.route], direction: 1 }
+    case 'reset':
+      return { ...state, stack: action.stack, direction: action.direction ?? 1 }
+    case 'flow':
+      return { ...state, flow: { ...state.flow, ...action.flow } }
+    case 'newFlow':
+      return { ...state, flow: { clockOffset: state.flow.clockOffset, ...action.flow } }
+    case 'user':
+      return { ...state, me: { ...state.me, user: action.user } }
+    case 'stats':
+      return { ...state, me: { ...state.me, stats: action.stats } }
+    case 'openProposal':
+      return { ...state, me: { ...state.me, openProposal: action.proposal } }
+    case 'done':
+      return { ...state, done: action.done }
+  }
+}
+
+interface AppContextValue {
+  state: State
+  dispatch: React.Dispatch<Action>
+}
+
+const AppContext = createContext<AppContextValue | null>(null)
+
+export function initialStack(me: MeResponse): Route[] {
+  return me.user.onboarded ? [{ name: 'home' }] : [{ name: 'welcome' }]
+}
+
+export function AppStateProvider({ me, children }: { me: MeResponse; children: ReactNode }) {
+  const [state, dispatch] = useReducer(reducer, undefined, () => ({
+    me,
+    stack: initialStack(me),
+    direction: 1 as const,
+    flow: { clockOffset: Date.parse(me.serverTime) - Date.now() },
+  }))
+  const value = useMemo(() => ({ state, dispatch }), [state])
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
+}
+
+export function useAppState(): AppContextValue {
+  const context = useContext(AppContext)
+  if (!context) throw new Error('useAppState hors de AppStateProvider')
+  return context
+}
+
+export function useNavigation() {
+  const { state, dispatch } = useAppState()
+  const push = useCallback((route: Route) => dispatch({ type: 'push', route }), [dispatch])
+  const back = useCallback(() => dispatch({ type: 'back' }), [dispatch])
+  const replace = useCallback((route: Route) => dispatch({ type: 'replace', route }), [dispatch])
+  const reset = useCallback((stack: Route[], direction?: 1 | -1) => dispatch({ type: 'reset', stack, direction }), [dispatch])
+  return {
+    route: state.stack.at(-1) ?? { name: 'home' },
+    canGoBack: state.stack.length > 1,
+    direction: state.direction,
+    push,
+    back,
+    replace,
+    reset,
+  }
+}

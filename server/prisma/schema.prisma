@@ -1,0 +1,92 @@
+// Modèle de données de Plutôt Que Scroller (V1 test).
+// Après une modification : `npm run db:migrate` (crée une migration et
+// régénère le client Prisma).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+/// Un utilisateur Telegram (identifié par son id Telegram, via initData).
+model User {
+  id                  BigInt   @id
+  firstName           String   @default("")
+  username            String?
+  languageCode        String?
+  /// Passions choisies, en JSON : ["dessin","musique"]
+  passions            String   @default("[]")
+  /// Fuseau horaire envoyé par la Mini App (pour « ce mois-ci » et les relances)
+  timezone            String   @default("Europe/Paris")
+  /// Le bot peut écrire à l'utilisateur (/start, ou autorisation dans la Mini App)
+  canMessage          Boolean  @default(false)
+  remindersEnabled    Boolean  @default(true)
+  /// Nombre de relances envoyées (pour alterner les deux messages)
+  reminderCount       Int      @default(0)
+  /// Relances envoyées depuis la dernière ouverture de l'app
+  unansweredReminders Int      @default(0)
+  /// Date locale (AAAA-MM-JJ) de la dernière relance
+  lastReminderDate    String?
+  lastSeenAt          DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  proposals   Proposal[]
+  completions Completion[]
+}
+
+/// Une activité proposée (tirée au sort) à un utilisateur.
+model Proposal {
+  id         String   @id @default(cuid())
+  userId     BigInt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activityId String
+  passion    String
+  mood       String
+  duration   Int
+  intro      String
+  /// Tirage de l'appli (mots, film…), en JSON
+  extra      String?
+  /// open | replaced (« Une autre idée ») | abandoned | completed
+  status     String   @default("open")
+  createdAt  DateTime @default(now())
+
+  completion Completion?
+
+  @@index([userId, createdAt])
+}
+
+/// Une activité réalisée : une carte de la galerie.
+model Completion {
+  id            String   @id @default(cuid())
+  userId        BigInt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  proposalId    String   @unique
+  proposal      Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  activityId    String
+  passion       String
+  mood          String
+  duration      Int
+  /// Copie du texte de l'activité au moment de la validation
+  activityText  String
+  extra         String?
+  /// Pièces d'or gagnées (1 minute = 1 pièce)
+  coins         Int
+  /// Écriture : le texte produit
+  text          String?
+  /// Musique, Cinéma : ce qui a été exploré
+  exploredTitle String?
+  /// Dessin : « tg:<file_id> » (photo relayée vers le chat de stockage) ou « local:<fichier> » (développement)
+  photoRef      String?
+  /// Dessin enregistré sans photo : la prochaine photo envoyée au bot s'y range
+  photoPending  Boolean  @default(false)
+  /// Date locale de l'utilisateur (AAAA-MM-JJ)
+  localDate     String
+  createdAt     DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([userId, localDate])
+}

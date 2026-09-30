@@ -17,3 +17,8 @@ npm-debug.log*
 .DS_Store
 *.suo
 *.sw?
+
+# Serveur : base SQLite locale, photos de développement, client Prisma généré
+server/data/
+server/src/generated/
+.env

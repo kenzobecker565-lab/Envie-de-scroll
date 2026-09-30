@@ -1,0 +1,219 @@
+/*
+ * ============================================================================
+ *  DESIGN SYSTEM — Plutôt Que Scroller
+ * ============================================================================
+ *
+ * Toutes les couleurs de l'app viennent d'ici (valeur claire / valeur sombre).
+ * Les couleurs par défaut de Tailwind sont désactivées : impossible d'utiliser
+ * une couleur hors de cette palette par erreur.
+ *
+ * Le thème (clair / sombre) suit Telegram (colorScheme), ou le système hors
+ * de Telegram : la classe `dark` est posée sur <html> par src/telegram/theme.ts.
+ */
+
+@import 'tailwindcss';
+
+:root {
+  --canvas: #d8d3c4;
+  --surface-100: #efece4;
+  --surface-200: #fffdf8;
+  --surface-300: #f4f1e8;
+  --ink: #21241d;
+  --ink-soft: #63665a;
+  --ink-faint: #93968a;
+  --line: #ddd8c8;
+  --accent: #4a4d95;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4e3f2;
+  --warm: #c97f2b;
+  --warm-soft: #f5e6cd;
+  --warm-ink: #7a4a10;
+  --good: #4c7a5a;
+  --good-soft: #dfe9df;
+  --good-ink: #2f5240;
+  color-scheme: light;
+}
+
+:root.dark {
+  --canvas: #0f1013;
+  --surface-100: #16171c;
+  --surface-200: #1e2026;
+  --surface-300: #24262d;
+  --ink: #edece6;
+  --ink-soft: #a5a79c;
+  --ink-faint: #6e7066;
+  --line: #33353c;
+  --accent: #8f92e0;
+  --accent-ink: #16171c;
+  --accent-soft: #2a2b45;
+  --warm: #e3ab5e;
+  --warm-soft: #3a301f;
+  --warm-ink: #f0c98a;
+  --good: #7fb692;
+  --good-soft: #223027;
+  --good-ink: #c9e6d2;
+  color-scheme: dark;
+}
+
+@theme {
+  /* On repart de zéro : seules les valeurs du design system existent. */
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
+  /* Typographies */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+
+  /* Tailles — Manrope (interface) : 11 à 15 px */
+  --text-11: 11px;
+  --text-11--line-height: 1.4;
+  --text-12: 12px;
+  --text-12--line-height: 1.45;
+  --text-13: 13px;
+  --text-13--line-height: 1.5;
+  --text-14: 14px;
+  --text-14--line-height: 1.5;
+  --text-15: 15px;
+  --text-15--line-height: 1.55;
+  /* Space Mono (chiffres, compteurs) : 10,5 à 21 px */
+  --text-mono-xs: 10.5px;
+  --text-mono-xs--line-height: 1.3;
+  --text-17: 17px;
+  --text-17--line-height: 1.2;
+  --text-21: 21px;
+  --text-21--line-height: 1.1;
+  /* Fraunces (titres) : 22 à 34 px */
+  --text-22: 22px;
+  --text-22--line-height: 1.25;
+  --text-26: 26px;
+  --text-26--line-height: 1.2;
+  --text-28: 28px;
+  --text-28--line-height: 1.2;
+  --text-34: 34px;
+  --text-34--line-height: 1.1;
+
+  /* Rayons */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Ombres (encre du thème, très diluée) */
+  --shadow-card: 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent), 0 10px 28px -18px color-mix(in srgb, var(--ink) 45%, transparent);
+  --shadow-pop: 0 14px 36px -16px color-mix(in srgb, var(--accent) 70%, transparent);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Couleurs : des alias vers les variables ci-dessus (elles changent avec le thème). */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
+  --color-surface-300: var(--surface-300);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-warm: var(--warm);
+  --color-warm-soft: var(--warm-soft);
+  --color-warm-ink: var(--warm-ink);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-good-ink: var(--good-ink);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+}
+
+@layer base {
+  html {
+    background: var(--canvas);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    min-height: var(--tg-viewport-stable-height, 100dvh);
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  button:disabled {
+    cursor: default;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  /* Squelettes de chargement : un reflet doux qui passe. */
+  .skeleton {
+    background: linear-gradient(100deg, var(--surface-300) 30%, var(--surface-200) 50%, var(--surface-300) 70%);
+    background-size: 300% 100%;
+    animation: skeleton-shine 1.6s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-shine {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  /* Illustrations unDraw injectées en SVG. */
+  .illustration svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}

@@ -1,208 +1,150 @@
-# Plutôt Que Scroller — prototype web
+# Plutôt Que Scroller — V1 test (Telegram Mini App)
 
-Transformer chaque envie de scroller en un petit moment créatif lié à une passion, et rendre la progression visible pour que ce soit elle qui donne envie de continuer (plutôt que la contrainte).
+Une app qui intercepte l'envie de scroller et propose à la place une activité créative courte, liée à une passion : dessin, écriture, musique, cinéma / animation. Elle garde une trace de tout ce qui a été fait (une galerie et un compteur de pièces d'or) plutôt que de compter des jours d'abstinence. Le ton reste chaleureux, jamais punitif.
 
-Ce dépôt contient le prototype web de l'application : une vraie application React qui tourne entièrement dans le navigateur, avec une vraie logique métier et des données sauvegardées localement (IndexedDB). Elle est pensée comme une app mobile et pourra devenir une Telegram Mini App sans tout réécrire (voir [Vers une Telegram Mini App](#vers-une-telegram-mini-app)).
+Cette V1 de test est volontairement resserrée : 4 passions, 60 activités validées, 3 temps (5, 15 et 30 min). Pas de premium, pas de paiement, pas d'IA, pas d'API externe.
 
-![Aperçu de l'application : accueil, choix du mood, carte d'activité et tableau de bord en mode sombre](docs/apercu.png)
+![Aperçu de la Mini App : accueil, mood, activité, confirmation et galerie](docs/apercu-v1.png)
+
+> Le premier prototype web (747 activités, données dans le navigateur) est conservé dans [`prototype/`](prototype/). La pub du dossier [`promo/`](promo/) en est tirée.
 
 ---
 
-## Lancer le projet
+## Organisation du dépôt
 
-Prérequis : [Node.js](https://nodejs.org) **20.19 ou plus récent** (la version LTS actuelle convient), avec npm.
+```
+shared/     Types, contenus et règles partagés par l'app et le serveur
+  src/activities.ts   ← les 60 activités (texte validé, recopié tel quel)
+  src/prompts.ts      ← ce que l'appli « tire au hasard » (mots, films, genres…)
+  src/intros.ts       ← introductions selon le mood
+  src/reminders.ts    ← messages de relance du bot
+  src/selection.ts    ← choix d'une activité
+  src/rules.ts        ← pièces d'or, garde-fou temporel
+server/     API REST (Express) + bot Telegram (Telegraf) + base SQLite (Prisma)
+app/        La Mini App (React, Vite, TypeScript, Tailwind CSS, Motion)
+prototype/  Le prototype web précédent (archive)
+promo/      Les pubs en motion design
+```
+
+C'est un espace de travail npm (*workspaces*) : un seul `npm install` à la racine installe tout.
+
+---
+
+## Lancer le projet en local (sans Telegram)
+
+Prérequis : [Node.js](https://nodejs.org) **22.13 ou plus récent**, avec npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Ouvre ensuite l'adresse affichée dans le terminal (en général http://localhost:5173).
+Ouvre ensuite http://localhost:5173. Le serveur (port 3000) et l'app (port 5173) démarrent ensemble ; la base SQLite est créée toute seule dans `server/data/`.
 
-- **Voir l'app « comme sur un téléphone »** : sur ordinateur, l'app s'affiche dans une colonne centrée. Tu peux aussi ouvrir les outils de développement (F12) et activer le mode appareil mobile.
-- **La tester sur ton vrai téléphone** (même réseau Wi-Fi) : `npm run dev -- --host`, puis ouvre sur le téléphone l'adresse « Network » affichée. Tu peux ensuite l'**ajouter à l'écran d'accueil** (menu Partager → « Sur l'écran d'accueil » sur iPhone, menu ⋮ → « Ajouter à l'écran d'accueil » sur Android) : elle s'ouvre alors en plein écran, avec sa propre icône, comme une vraie app. Les données enregistrées sont propres à chaque navigateur et à chaque adresse : celles de ton ordinateur ne sont pas copiées sur ton téléphone.
+Sans token de bot, le serveur accepte une **identité de développement** : l'app fonctionne dans un navigateur normal, comme si tu l'avais ouverte depuis Telegram. Ajoute `?dev_user=2` à l'adresse pour jouer un autre utilisateur. Les photos de dessins sont alors écrites sur le disque (`server/data/photos/`).
 
-| Commande | Rôle |
+| Commande (à la racine) | Rôle |
 | --- | --- |
-| `npm run dev` | Lance l'app en développement (rechargement automatique à chaque modification) |
-| `npm test` | Lance les tests automatiques (bibliothèque, moteur, statistiques, base de données) |
+| `npm run dev` | Serveur + Mini App, avec rechargement automatique |
+| `npm test` | Tests automatiques (activités, règles, API, bot, relances) |
 | `npm run typecheck` | Vérifie les types TypeScript |
-| `npm run build` | Construit la version finale dans `dist/` |
-| `npm run preview` | Sert la version construite, pour la tester |
+| `npm run build` | Construit la Mini App dans `app/dist/` |
+| `npm start` | Production : applique les migrations, lance le serveur, qui sert aussi la Mini App |
+| `npm run db:migrate` | Après une modification de `server/prisma/schema.prisma` : crée la migration |
+| `npm run db:studio` | Ouvre Prisma Studio pour explorer la base |
 
-Sur GitHub, ces vérifications (tests + build) se lancent **automatiquement** à chaque pull request et à chaque mise à jour de `main` (fichier `.github/workflows/ci.yml`) : si une modification de la bibliothèque d'activités casse quelque chose, GitHub l'indique par une croix rouge.
-
----
-
-## Ce que fait le prototype
-
-1. **Onboarding** (première visite) : prénom (facultatif), puis choix des passions dans un catalogue organisé en 8 familles. Si aucune passion n'est cochée, le bouton « Je ne sais pas trop » ouvre un chemin alternatif : *« Qu'est-ce qui te plaît dans la vie ? »* (8 réponses), qui redirige vers les familles correspondantes avec des passions faciles pré-cochées et le **mode débutant** activé.
-2. **Accueil** : le bouton « J'ai envie de scroller » (une grande carte où défile un faux fil de vidéos, que le crayon du logo vient barrer de temps en temps), la série (streak), le nombre d'envies transformées, le temps récupéré et la dernière activité.
-3. **Parcours** : mood (9 moods en deux familles d'énergie, affichées différemment) → passion du moment (parmi celles du profil) → temps disponible (5 / 15 / 30 min) → une activité précise. « Une autre idée » relance le tirage sans refaire les étapes ; « C'est fait, je l'enregistre » l'ajoute à l'historique. On peut ensuite ajouter une photo (dessin), un film et sa note (cinéma) ou une petite note.
-   *Si le profil ne compte qu'une passion, l'étape « passion » est sautée.*
-4. **Progrès (tableau de bord)** : statistiques, calendrier des 5 dernières semaines, et une vue par passion — **galerie de photos** pour le dessin, **films notés sur 5** pour le cinéma, **frise chronologique** pour les autres. Lien vers l'**historique complet**, filtrable par passion et par humeur (avec modification de la note et suppression).
-5. **Profil** : prénom, passions, mode débutant, thème (auto / clair / sombre), données de démo, et **réinitialisation** avec une fenêtre de confirmation maison.
-
-Au premier lancement, une douzaine d'**activités de démonstration** sont ajoutées pour que le tableau de bord ne soit pas vide (série de 4 jours, 3 dessins en galerie, 4 films notés…). Elles portent l'étiquette « démo » dans l'historique et se retirent (ou se remettent) depuis le profil.
+Sur GitHub, typage, tests et build se lancent à chaque pull request (`.github/workflows/ci.yml`).
 
 ---
 
-## La bibliothèque d'activités : où elle est, comment l'enrichir
+## La tester dans Telegram
 
-Elle se trouve dans **`src/data/activities/`**, un fichier par famille de passions :
+1. **Crée le bot** : dans Telegram, écris à [@BotFather](https://t.me/BotFather), `/newbot`, et garde le token.
+2. **Donne une adresse HTTPS à l'app.** Telegram n'ouvre les Mini Apps qu'en HTTPS.
+   - *En développement* : un tunnel vers ton ordinateur, par exemple `cloudflared tunnel --url http://localhost:5173` ou `ngrok http 5173`. Vite relaie `/api` vers le serveur, une seule adresse suffit.
+   - *En production* : l'adresse de ton serveur (voir plus bas).
+3. **Configure le serveur** : copie `server/.env.example` en `server/.env` et remplis au moins `BOT_TOKEN` et `WEBAPP_URL` (l'adresse HTTPS de l'étape 2). Toutes les variables y sont commentées. Avec un token, l'identité de développement est coupée : ajoute `DEV_AUTH=true` si tu veux continuer à tester aussi dans un navigateur.
+4. **Chat de stockage des photos** : crée un groupe (ou un canal) privé, ajoutes-y le bot, puis mets son identifiant dans `STORAGE_CHAT_ID` (il commence par `-100…` ; pour le trouver, envoie un message dans le groupe puis ouvre `https://api.telegram.org/bot<TOKEN>/getUpdates`).
+5. Relance `npm run dev`, puis envoie `/start` au bot : il répond avec un bouton qui ouvre la Mini App. Au démarrage, le serveur déclare aussi les commandes du bot et le bouton de menu « Ouvrir ».
 
-| Fichier | Passions |
-| --- | --- |
-| `artsVisuels.ts` | dessin, peinture, photographie, illustration numérique, mode / stylisme |
-| `audiovisuel.ts` | cinéma, animation, montage vidéo |
-| `mots.ts` | écriture (fiction), poésie, journal intime, critique / blogging |
-| `son.ts` | musique (instrument), chant, composition, podcast / audio |
-| `corps.ts` | danse, sport, théâtre, arts martiaux |
-| `fabrication.ts` | bricolage / DIY, cuisine, couture, jardinage |
-| `esprit.ts` | jeux vidéo créatifs, programmation créative, jeux de société, échecs |
-| `nature.ts` | randonnée, observation de la nature, voyage / découverte de lieux |
+Facultatif : dans BotFather, `/newapp` crée un lien direct vers la Mini App (`t.me/<bot>/<app>`).
 
-Elle contient aujourd'hui **747 activités** : 5 par mood pour le dessin, le cinéma, l'animation, l'écriture, la musique, le sport et la cuisine (couvrant 5, 15 et 30 min), et 2 par mood pour toutes les autres passions.
+### Mise en production
 
-### Ajouter une activité
+Il faut un hébergeur Node.js avec un **disque persistant** (la base SQLite est un fichier) : un petit VPS, Railway ou Fly.io avec un volume, par exemple.
 
-Dans le fichier de la famille, repère la passion, puis le mood, et ajoute une ligne sur le modèle des autres :
-
-```ts
-export const dessin = definePassionActivities('dessin', {
-  ennui: [
-    { duration: 5, level: 'debutant', title: 'Croquis express', description: 'Choisis un objet à côté de toi et dessine-le en une minute, sans lever le crayon.' },
-    // ↓ ta nouvelle activité
-    { duration: 15, title: 'Mon titre', description: 'Une ou deux phrases concrètes : quoi faire, exactement.' },
-  ],
-  // …
-})
+```bash
+npm ci
+npm run build          # construit app/dist
+npm start              # migrations + serveur (API, bot, Mini App) sur $PORT
 ```
 
-| Champ | Obligatoire | Valeurs |
+Variables à définir : `NODE_ENV=production`, `BOT_TOKEN`, `WEBAPP_URL` (l'adresse publique du serveur), `STORAGE_CHAT_ID`, et `DATABASE_URL` pointant vers le volume (ex. `file:/data/pqs.db`). Par défaut, le bot reçoit les messages en *long polling* (rien à configurer) ; `BOT_MODE=webhook` passe en webhook, sur `https://<ton-domaine>/telegram/webhook`.
+
+> Pour passer plus tard à Postgres (Neon, Supabase…), il suffit de changer le `provider` dans `server/prisma/schema.prisma`, l'adaptateur dans `server/src/db.ts`, et de régénérer les migrations.
+
+---
+
+## Le parcours
+
+1. **Onboarding** : une bienvenue courte (illustration unDraw), puis le choix de 1 à 3 passions sur des cartes illustrées.
+2. **Accueil** : le gros bouton « J'ai envie de scroller ». En dessous, un aperçu discret du mois (activités, pièces d'or), et « Tu étais en train de… » si une activité attend d'être validée.
+3. **Déclenchement** : « On a reçu ton signal de détresse pré-scroll. On s'occupe de toi. », puis enchaînement automatique (un toucher pour aller plus vite).
+4. **Mood** : 8 moods en deux familles, un tap.
+5. **Temps** : 5, 15 ou 30 min.
+6. **Passion du moment** : seulement si le profil en compte plusieurs.
+7. **Activité** : en grand, avec « Une autre idée » (discret) et « Valider ».
+8. **Après « Valider »** : une photo du dessin, le texte écrit, ou, pour Musique et Cinéma, le titre exploré (facultatif).
+9. **Confirmation** : « Activité enregistrée. +X minutes ajoutées à ton total. », avec le compteur qui roule, des confettis discrets et une vibration.
+10. **Galerie** : le total de pièces d'or en grand, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier.
+
+## Les règles
+
+- **Choix de l'activité** (`shared/src/selection.ts`) : tirage parmi les 5 activités de la passion × du temps, en écartant les 3 dernières proposées pour cette combinaison. « Une autre idée » écarte toujours l'activité affichée : en enchaînant, une activité ne revient jamais dans 4 propositions d'affilée. Le mood ne change que le ton de l'introduction.
+- **Pièces d'or** : 1 minute d'activité = 1 pièce. Cumulatif, rien à dépenser.
+- **Garde-fou temporel** (`shared/src/rules.ts`) : pour Musique et Cinéma, « Valider » reste grisé jusqu'à la fin de la durée choisie. Le bouton se remplit doucement, sans compte à rebours. Pour Dessin et Écriture, on valide tout de suite avec une photo ou un texte, ou « sans » une fois la durée écoulée. Le serveur applique les mêmes règles : l'horloge du téléphone ne suffit pas à tricher.
+- **Reprise** : une activité proposée reste « à reprendre » 12 h. Pratique quand on quitte Telegram pour écouter un album : en revenant, le minuteur a continué.
+- **Photos** : envoyées depuis l'app, réduites à 1600 px, puis relayées par le bot vers le chat privé de stockage. Seul le `file_id` Telegram est gardé en base, et le serveur relaie l'image à l'affichage (le token ne quitte jamais le serveur). Une photo envoyée **directement au bot** rejoint le dernier dessin enregistré sans photo.
+- **Relances** (`server/src/bot/reminders.ts`) : au plus une par jour, à 19 h dans le fuseau de chacun (`REMINDER_HOUR`), jamais un jour où une activité a été faite. Les deux messages alternent. Après 5 relances sans ouverture de l'app, elles se mettent en pause. `/stop` les coupe, `/relances` les réactive.
+- **Authentification** : les `initData` transmises par Telegram sont vérifiées avec le token du bot (signature HMAC, validité 24 h). Aucun compte à créer.
+
+---
+
+## Modifier les contenus
+
+- **Les 60 activités** : `shared/src/activities.ts`, rangées par passion puis par temps. Le texte est stocké tel qu'il a été validé ; l'affichage ajoute seulement la typographie française (apostrophes courbes, guillemets « », espaces insécables). Les tests vérifient qu'il y a bien 5 activités par passion et par temps.
+- **Ce que l'appli tire au hasard** : `shared/src/prompts.ts`. Huit activités demandent que l'appli propose quelque chose (« 3 mots que l'appli tire au hasard », « un film que l'appli te propose »…). Sans API externe, ces tirages se font dans des listes écrites à la main : mots, premières phrases, traits de caractère, genres musicaux, films, séries animées, courts-métrages. **Ces listes ne faisaient pas partie du contenu validé** : relis-les et enrichis-les librement (une ligne = un élément).
+- **Introductions selon le mood** : `shared/src/intros.ts` (deux par mood).
+- **Messages du bot** : `shared/src/reminders.ts` (relances) et `server/src/bot/bot.ts` (accueil, photos).
+
+Lance `npm test` après une modification.
+
+---
+
+## API
+
+| Méthode | Route | Rôle |
 | --- | --- | --- |
-| `duration` | oui | `5`, `15` ou `30` (minutes) |
-| `title` | oui | titre court, affiché en gros sur la carte |
-| `description` | oui | une consigne concrète et actionnable |
-| `level` | non | `'debutant'` (accessible sans expérience) ou `'intermediaire'` (écartée en mode débutant). Sans niveau = convient à tous |
+| `GET` | `/api/me` | Profil, statistiques, activité à reprendre (crée l'utilisateur à la première ouverture) |
+| `PUT` | `/api/me/passions` | Choix des passions (1 à 3) |
+| `POST` | `/api/proposals` | Tirer une activité ; avec `replacing` : « Une autre idée » |
+| `POST` | `/api/completions` | Valider une activité (JSON, ou multipart avec une photo) |
+| `GET` | `/api/completions` | La galerie, page par page |
+| `GET` | `/api/photos/:id` | Une photo (adresse signée, valable quelques heures) |
 
-Les moods sont rangés sous ces clés : `ennui`, `fatigue`, `'coup-de-mou'`, `'manque-inspiration'`, `calme` (énergie basse) et `stress`, `defouler`, `procrastination`, `curiosite` (énergie haute).
-
-Quelques conseils :
-
-- Écris des consignes qu'on peut suivre tout de suite, sans lien à ouvrir obligatoirement ni matériel rare. Évite le générique (« dessine quelque chose »).
-- Utilise l'apostrophe typographique `’` dans le texte (sinon, entoure le texte de guillemets doubles `"…"`). Tu peux mettre des espaces normales avant `?`, `!` et `:` : l'app les rend insécables à l'affichage.
-- L'identifiant d'une activité est calculé à partir de la passion, du mood et du titre. Changer un titre ne casse rien (l'historique garde une copie du texte).
-- Lance **`npm test`** après tes modifications : les tests vérifient qu'il n'y a pas de doublon et que chaque passion garde assez d'activités par mood.
-
-### Ajouter une passion
-
-1. Ajoute son identifiant au type `PassionId` dans `src/types/index.ts`.
-2. Ajoute-la dans `src/data/passions.ts` (dans `PASSIONS` et dans la liste de sa famille). Le champ `progressView` choisit sa vue dans le tableau de bord : `'gallery'`, `'films'` ou `'timeline'`.
-3. Écris ses activités dans le fichier de sa famille et référence-la dans `src/data/activities/index.ts`.
-
-TypeScript (`npm run typecheck`) signale tout oubli.
-
----
-
-## Comment le moteur choisit une activité
-
-Le code est dans **`src/services/activityEngine.ts`** (commenté pas à pas, et testé dans `activityEngine.test.ts`).
-
-1. Il ne pioche **que dans la passion choisie**.
-2. Il cherche d'abord la combinaison **exacte** passion + mood + durée.
-3. Si elle n'existe pas, ou si tout a déjà été vu avec « une autre idée », il élargit par paliers, en restant toujours dans le temps disponible : même mood mais plus court → mood de la même famille d'énergie → n'importe quel mood. Un petit message explique pourquoi quand ce n'est pas une correspondance exacte.
-4. Dans un palier, il tire au sort en **évitant les 15 dernières activités réalisées**, pour garder de la variété.
-5. En **mode débutant**, les activités « intermédiaire » sont écartées.
-6. Quand toutes les idées ont été vues, il recommence un tour.
-
----
-
-## Données et persistance
-
-- Tout est enregistré **dans le navigateur**, dans une base IndexedDB nommée `plutot-que-scroller` (via la bibliothèque [Dexie](https://dexie.org)). Les données survivent aux rechargements et aux redémarrages, et ne quittent jamais l'appareil.
-- Le schéma est décrit dans **`src/db/database.ts`** : tables `profile`, `history` (une ligne par envie transformée), `photos` (images de la galerie, réduites à 1400 px) et `meta`.
-- Seuls `src/db/` et `src/services/` touchent à la base. Les écrans lisent les données via les hooks de `src/hooks/useData.ts`, qui se mettent à jour tout seuls quand la base change.
-- Les statistiques ne sont pas stockées : elles sont recalculées à partir de l'historique (`src/services/stats.ts`).
-  - **Série** : jours consécutifs avec au moins une envie transformée. Tant que la journée n'est pas finie, la série d'hier reste « en jeu ».
-  - **Temps récupéré** : la somme des durées des activités réalisées. Pour changer la formule, modifie `minutesReclaimedFor` dans `stats.ts`.
-- Les données de démo sont définies dans `src/services/demoData.ts`.
-- Pour voir la base : outils de développement (F12) → onglet *Application* (Chrome) ou *Stockage* (Firefox) → *IndexedDB* → `plutot-que-scroller`.
-- Seule la préférence de thème est gardée dans le `localStorage` (pour éviter un flash blanc au chargement en mode sombre).
-
----
-
-## Organisation du code
-
-```
-src/
-├── types/index.ts          Modèle de données : Passion, Mood, Activity, UserProfile, HistoryEntry…
-├── data/                   Contenus (pas de logique)
-│   ├── passions.ts         Catalogue des passions par famille
-│   ├── moods.ts            Les 9 moods et leurs deux familles d'énergie
-│   ├── lifeInterests.ts    Chemin « Qu'est-ce qui te plaît dans la vie ? »
-│   ├── activities/         ← LA BIBLIOTHÈQUE D'ACTIVITÉS
-│   └── demoSketches.ts     Dessins SVG des données de démo
-├── db/database.ts          Schéma de la base locale (Dexie / IndexedDB)
-├── services/               Logique métier, indépendante de l'interface
-│   ├── activityEngine.ts   Moteur de sélection d'activité
-│   ├── stats.ts            Série, temps récupéré, calendrier…
-│   ├── historyService.ts   Enregistrer, modifier, supprimer une activité, photos
-│   ├── profileService.ts   Profil
-│   ├── demoData.ts         Données de démo et réinitialisation
-│   ├── preferences.ts      Thème clair / sombre
-│   └── appInit.ts          Démarrage de l'app
-├── hooks/                  Données « en direct », routage, thème
-├── lib/pictos.ts           Les pictogrammes de l'app (à la place des emojis)
-├── platform/index.ts       Adaptateur navigateur / Telegram
-├── components/             Composants d'interface (ui, layout, onboarding, trigger, dashboard)
-│   └── ErrorBoundary.tsx   Écran de secours en cas d'erreur inattendue
-├── screens/                Les écrans : accueil, progrès, historique, profil
-├── styles/index.css        Identité visuelle : couleurs, typographies, animations
-├── App.tsx                 Choix de l'écran à afficher
-└── main.tsx                Point d'entrée
-```
-
-**Technos** : React 19, TypeScript (mode strict), Vite, Tailwind CSS 4, Dexie (IndexedDB), Vitest pour les tests, icônes Lucide, polices Figtree et Fraunces (embarquées, l'app fonctionne hors ligne).
-
----
-
-## Vers une Telegram Mini App
-
-L'architecture prépare la migration :
-
-- **Adaptateur de plateforme** (`src/platform/index.ts`) : tout ce qui dépend de l'hôte (prénom de l'utilisateur, vibrations, démarrage) passe par lui. Une version Telegram minimale y est déjà écrite : il suffira d'ajouter le script `https://telegram.org/js/telegram-web-app.js` dans `index.html` pour qu'elle s'active quand l'app est ouverte depuis Telegram (le prénom du compte pré-remplira l'onboarding). Il restera à y brancher le bouton retour natif et les couleurs du thème Telegram.
-- **Navigation par hash** (`#/progres`, `#/profil`…) : fonctionne dans la webview Telegram sans configuration serveur. Le bot pourra ouvrir directement le parcours via un bouton qui pointe vers `#/envie`.
-- **Persistance isolée** dans `src/db/` et `src/services/` : pour synchroniser entre appareils (Telegram CloudStorage ou un petit backend), c'est cette couche qu'on remplacera, sans toucher aux écrans.
-- **Moteur et statistiques sans dépendance à React** : réutilisables tels quels côté bot ou serveur.
-- **Build statique relatif** (`base: './'`) : le dossier `dist/` peut être hébergé n'importe où et déclaré comme Mini App auprès de BotFather.
+Chaque requête porte `Authorization: tma <initData>`. Les types des requêtes et réponses sont dans `shared/src/api.ts`.
 
 ---
 
 ## Design
 
-- Identité « encre et papier » : papier neutre, cartes blanches, encre presque noire, accent tomate vif. Titres et texte en Figtree (titres très gras) ; Fraunces est réservée au logo.
-- Aucun emoji dans l'interface : passions, humeurs et statistiques ont des pictogrammes au trait, posés sur une petite tache de couleur, comme une impression légèrement décalée (`src/lib/pictos.ts`, d'après [Lucide](https://lucide.dev)). La pub de 28 s utilise les mêmes.
-- Le bouton principal montre l'envie telle qu'elle est : un fil de vidéos stylisé défile sans fin dans une carte tomate, et le trait de crayon du logo vient le barrer de temps en temps. Appuyer fige le fil. Si le système demande de réduire les animations, le fil reste immobile et le trait reste affiché (`src/components/ui/UrgeButton.tsx`).
-- Mode clair et mode sombre (automatique selon le système, ou forcé dans le profil).
-- Les couleurs sont des variables dans `src/styles/index.css` : modifier une couleur à cet endroit la change partout, en clair comme en sombre.
-- Animations légères entre les étapes, désactivées si le système demande de réduire les animations.
-- Accessibilité : navigation au clavier, fenêtres modales qui gardent le focus, libellés pour les lecteurs d'écran, contrastes suffisants. Les 19 écrans ont été audités en clair et en sombre avec [axe-core](https://github.com/dequelabs/axe-core) (règles WCAG 2.1 AA) : aucun problème relevé.
-- Robustesse : si un écran plante, un message propose de revenir à l'accueil (les données restent intactes) ; une note saisie après une activité est enregistrée même si l'on quitte l'écran sans appuyer sur « Terminer » ; la série se met à jour au passage de minuit, même si l'app est restée ouverte.
+- **Palette et typographies** : `app/src/styles/index.css`. Chaque couleur y a sa valeur claire et sa valeur sombre. Les couleurs par défaut de Tailwind sont désactivées : impossible d'utiliser une couleur hors palette par erreur. Idem pour les tailles de texte (Fraunces 22-34 px, Manrope 11-15 px, Space Mono 10,5-21 px) et les rayons (8, 14, 20 px, pilule).
+- **Thème** : suit `Telegram.WebApp.colorScheme` (et l'événement `themeChanged`), ou le réglage du système hors de Telegram. L'en-tête et le fond de Telegram prennent la couleur *canvas* de l'app.
+- **SDK Telegram** (`app/src/telegram/`) : bouton retour natif, bouton principal natif (onboarding, envoi de la photo ou du texte : il reste au-dessus du clavier), vibrations (sélection, validation, erreur), glissement vertical désactivé pour ne pas fermer l'app en faisant défiler la galerie. Hors de Telegram, l'app affiche ses propres boutons.
+- **Animations** : transitions entre écrans, retour visuel au toucher, compteur « à rouleaux », confettis. Tout est coupé ou adouci si le système demande de réduire les animations.
+- **Illustrations** : [unDraw](https://undraw.co) (licence libre), recolorées avec les variables du thème par `app/scripts/recolor-undraw.mjs`.
+- **Accessibilité** : `ink-faint` sert aux textes désactivés et aux indications de saisie ; les textes informatifs utilisent `ink-soft` ou `ink`, pour un contraste suffisant.
 
----
+## Hors périmètre de cette V1
 
-## Pub de 15 secondes
-
-▶️ **[Voir la vidéo](promo/plutot-que-scroller-15s.mp4)**
-
-Le dossier [`promo/`](promo/) contient une pub verticale de 15 s en motion design (format Reels / TikTok / Shorts), entièrement générée par du code : animation, musique, bruitages et voix off. Elle reprend l'identité de l'app et six vraies activités de la bibliothèque. Son [README](promo/README.md) explique comment la refaire ou la modifier.
-
----
-
-## Limites connues du prototype
-
-- Les données restent **sur un seul appareil et un seul navigateur**. Vider les données du site efface tout (il n'y a pas encore d'export ni de synchronisation).
-- Un seul profil par navigateur.
-- Pas de « mode travail » ni de blocage des réseaux sociaux (hors périmètre de cette V1).
-- Les liens mentionnés dans certaines activités (Lichess, Chrome Music Lab…) ne sont pas cliquables : ce sont des consignes à suivre.
+Créneaux de 1 h et plus, personnalisation premium, paiement, boutique de badges, TMDB / Jikan, fonctions sociales, autres langues que le français.

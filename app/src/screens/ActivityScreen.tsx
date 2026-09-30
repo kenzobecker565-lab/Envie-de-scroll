@@ -80,17 +80,18 @@ export function ActivityScreen() {
           <span className="font-numbers">{duration} min</span>
         </Badge>
       </div>
+      {/* Sur les petits écrans (ou avec un tirage à afficher), la scène se fait plus discrète. */}
       <Card
-        className="mt-6 items-center justify-center py-6 shadow-pop"
+        className={cn('mt-5 items-center justify-center py-6 shadow-pop [@media(max-height:780px)]:py-3', proposal?.extra && 'py-3')}
         initial={{ opacity: 0, y: 12, scale: 0.97, rotate: -2 }}
         animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 18 }}
       >
         <span aria-hidden="true" className={cn('absolute -right-8 -bottom-10 h-32 w-32 rounded-pill border-[2.5px] border-outline', PASSION_COLORS[passionId].bg)} />
-        <PassionScene passion={passionId} className="relative h-28 w-auto" />
+        <PassionScene passion={passionId} className={cn('relative h-28 w-auto [@media(max-height:780px)]:h-20', proposal?.extra && 'h-20')} />
       </Card>
 
-      <div className="mt-6 flex-1" aria-live="polite" aria-busy={loading}>
+      <div className="mt-5 flex-1" aria-live="polite" aria-busy={loading}>
         <AnimatePresence mode="wait" initial={false}>
           {proposal && !loading ? (
             <motion.div
@@ -102,7 +103,7 @@ export function ActivityScreen() {
             >
               <p className="text-16 text-ink-soft">{proposal.intro}</p>
               <h1
-                className={cn('mt-2 font-display font-extrabold tracking-tight text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-30')}
+                className={cn('mt-2 font-display font-extrabold tracking-tight text-pretty text-ink', proposal.text.length > 95 || proposal.extra ? 'text-26' : 'text-30')}
                 aria-label={proposal.text}
               >
                 <RevealWords text={proposal.text} />
@@ -130,7 +131,7 @@ export function ActivityScreen() {
         </AnimatePresence>
       </div>
 
-      <div className="sticky bottom-0 -mx-4 mt-8 flex flex-col gap-2 bg-gradient-to-t from-canvas/80 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
+      <div className="sticky bottom-0 -mx-4 mt-6 flex flex-col gap-2 bg-gradient-to-t from-canvas from-60% to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
         {proposal ? (
           <ValidateButton
             key={proposal.id}
@@ -178,7 +179,7 @@ function RevealWords({ text }: { text: string }) {
 function ExtraCard({ extra }: { extra: ActivityExtra }) {
   const asChips = extra.kind === 'trois-mots' || extra.kind === 'un-mot'
   return (
-    <Card tone="lilac" className="mt-6 gap-3" initial={{ opacity: 0, scale: 0.97, rotate: 0 }} animate={{ opacity: 1, scale: 1, rotate: 1 }} transition={{ delay: 0.25, duration: 0.35 }}>
+    <Card tone="lilac" className="mt-5 gap-3" initial={{ opacity: 0, scale: 0.97, rotate: 0 }} animate={{ opacity: 1, scale: 1, rotate: 1 }} transition={{ delay: 0.25, duration: 0.35 }}>
       <Sparkle size={40} color="var(--warm)" className="motion-loop anim-spin-slow absolute -top-3 -right-3" style={{ '--spin-duration': '14s' } as React.CSSProperties} />
       <CardEyebrow>
         <Sparkles aria-hidden="true" className="motion-loop anim-twinkle" />

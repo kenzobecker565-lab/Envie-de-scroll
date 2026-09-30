@@ -8,6 +8,17 @@ import { ScrollPhone } from './decor/Ornaments.tsx'
 
 const LABEL = 'J’ai envie de scroller'
 
+/** Le texte du gros bouton, sur deux lignes, à une taille qui tient sur les petits écrans (360 px). */
+function Label({ className }: { className?: string }) {
+  return (
+    <span className={cn('cta-label block font-display font-extrabold tracking-tight', className)}>
+      J’ai envie
+      <br />
+      de scroller
+    </span>
+  )
+}
+
 /** Les stickers des passions, collés autour du gros bouton (Pop, Pop Nuit). */
 const STICKERS = [
   { id: 'dessin', className: '-top-5 right-6 h-14 w-14', icon: 24, rotate: 12, delay: '0s' },
@@ -38,20 +49,21 @@ function StickerCta({ onStart }: { onStart: () => void }) {
       <motion.button
         type="button"
         onClick={onStart}
+        aria-label={LABEL}
         {...ENTER}
         animate={{ opacity: 1, scale: 1, rotate: -1.5 }}
         whileTap={PRESSED}
-        className="relative flex h-72 w-full flex-col items-start justify-between rounded-[28px] border-[3px] border-outline bg-accent p-6 text-left text-on-color shadow-pop transition-shadow duration-150 active:shadow-press"
+        className="relative flex h-64 w-full flex-col items-start justify-between rounded-[28px] border-[3px] border-outline bg-accent p-6 text-left text-on-color shadow-pop transition-shadow duration-150 active:shadow-press min-[400px]:h-72"
       >
-        <span className="flex h-14 w-14 -rotate-6 items-center justify-center rounded-md border-[2.5px] border-on-color bg-paper">
-          <ScrollPhone />
-        </span>
-        <span className="flex w-full items-end justify-between gap-4">
-          <span className="max-w-[230px] font-display text-46 font-extrabold tracking-tight">{LABEL}</span>
-          <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color">
+        <span className="flex w-full items-start justify-between">
+          <span className="flex h-14 w-14 -rotate-6 items-center justify-center rounded-md border-[2.5px] border-on-color bg-paper">
+            <ScrollPhone />
+          </span>
+          <span aria-hidden="true" className="mt-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color">
             <ArrowRight size={26} strokeWidth={2.8} />
           </span>
         </span>
+        <Label />
       </motion.button>
       {STICKERS.map((sticker, index) => {
         const Icon = PASSION_ICONS[sticker.id]
@@ -103,9 +115,10 @@ function BubbleCta({ onStart }: { onStart: () => void }) {
         {...ENTER}
         animate={{ opacity: 1, scale: 1, rotate: -2 }}
         whileTap={PRESSED}
-        className="relative flex h-64 w-full flex-col items-center justify-center gap-4 rounded-[50%] border-[3px] border-outline bg-surface-200 px-10 text-center text-ink shadow-pop transition-shadow duration-150 active:shadow-press"
+        aria-label={LABEL}
+        className="relative flex h-60 w-full flex-col items-center justify-center gap-4 rounded-[50%] border-[3px] border-outline bg-surface-200 px-10 text-center text-ink shadow-pop transition-shadow duration-150 active:shadow-press min-[400px]:h-64"
       >
-        <span className="max-w-[250px] font-display text-46 leading-[0.92]">{LABEL}</span>
+        <Label className="leading-[0.92]" />
         <span aria-hidden="true" className="flex h-13 w-13 items-center justify-center rounded-pill border-[3px] border-outline bg-accent text-on-color">
           <ArrowRight size={24} strokeWidth={3} />
         </span>
@@ -137,9 +150,10 @@ function MemphisCta({ onStart }: { onStart: () => void }) {
         animate={{ opacity: 1, scale: 1 }}
         whileTap={{ x: 6, y: 6 }}
         transition={{ type: 'spring', stiffness: 320, damping: 18 }}
-        className="relative flex h-68 w-full flex-col items-start justify-end rounded-sm border-[2.5px] border-outline bg-accent p-6 text-left text-on-color"
+        aria-label={LABEL}
+        className="relative flex h-60 w-full flex-col items-start justify-end rounded-sm border-[2.5px] border-outline bg-accent p-6 text-left text-on-color min-[400px]:h-68"
       >
-        <span className="max-w-[230px] font-display text-46 font-extrabold">{LABEL}</span>
+        <Label />
       </motion.button>
       <span aria-hidden="true" className="pointer-events-none absolute -top-8 -right-3 flex h-24 w-24 items-center justify-center rounded-pill border-[2.5px] border-outline bg-warm">
         <ScrollPhone />

@@ -2,7 +2,7 @@
   "name": "plutot-que-scroller-promo",
   "private": true,
   "version": "1.0.0",
-  "description": "Pubs en motion design pour Plutôt Que Scroller (rendu image par image) : 15 s, et la pub de 28 s (pub/).",
+  "description": "Pubs en motion design (rendu image par image) : Scroll-up 30 s (scrollup/), et les pubs de 15 s et 28 s de Plutôt Que Scroller.",
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
@@ -14,9 +14,21 @@
     "pub:render": "node render.mjs --ad=pub",
     "pub:audio": "node render.mjs --ad=pub --audio",
     "pub:sheet": "node render.mjs --ad=pub --sheet --step=0.5",
-    "pub:stills": "node render.mjs --ad=pub --stills=0.5,3.9,7.6,9.5,13.8,15.5,18.5,21.5,24.5,27.5"
+    "pub:stills": "node render.mjs --ad=pub --stills=0.5,3.9,7.6,9.5,13.8,15.5,18.5,21.5,24.5,27.5",
+    "scrollup:render": "node render.mjs --ad=scrollup",
+    "scrollup:audio": "node render.mjs --ad=scrollup --audio",
+    "scrollup:sheet": "node render.mjs --ad=scrollup --sheet --step=0.5",
+    "scrollup:stills": "node render.mjs --ad=scrollup --stills=0.5,3.1,4.6,6.5,8.9,11.1,15,17.4,20.2,23.3,24.3,25.3,27.5,29.5",
+    "scrollup:icons": "node scrollup/make-icons.mjs"
   },
   "devDependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/nunito": "^5.3.0",
+    "@fontsource-variable/outfit": "^5.3.0",
+    "@fontsource-variable/rethink-sans": "^5.3.0",
+    "@fontsource-variable/rubik": "^5.3.0",
+    "@fontsource-variable/syne": "^5.3.0",
+    "@fontsource/bangers": "^5.3.0",
     "playwright": "1.56.1"
   }
 }

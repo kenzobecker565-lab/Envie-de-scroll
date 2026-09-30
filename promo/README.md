@@ -1,5 +1,7 @@
 # Pub de 15 secondes (motion design)
 
+> 🆕 **La pub Scroll-up (30 s, style Pop, musique et bruitages sans voix off)** : [dossier `scrollup/`](scrollup/README.md).
+>
 > 🎬 **Voir aussi la pub de 28 s** (voix off, vraies vidéos, démo de l'app, codes des pubs Reels et TikTok) : [dossier `pub/`](pub/README.md).
 
 ▶️ **[Voir la vidéo](plutot-que-scroller-15s.mp4)** (MP4, 15 s, avec musique, bruitages et voix off)

@@ -101,21 +101,52 @@ export function HomeScreen() {
           </motion.button>
         )}
 
-        <motion.div {...fadeUp(0.3, 8)} className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4')}>
-          <span className="flex min-w-0 flex-1 flex-col gap-1">
-            <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ce mois-ci</span>
-            <MonthSummary monthActivities={stats.monthActivities} monthCoins={stats.monthCoins} totalActivities={stats.totalActivities} />
-          </span>
-          <Button variant="sky" size="sm" onClick={openGallery} haptic={false}>
-            Galerie
-            <ArrowRight aria-hidden="true" />
-          </Button>
-        </motion.div>
+        {stats.totalActivities === 0 && !openProposal ? (
+          <HowItWorks />
+        ) : (
+          <motion.div {...fadeUp(0.3, 8)} className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4')}>
+            <span className="flex min-w-0 flex-1 flex-col gap-1">
+              <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ce mois-ci</span>
+              <MonthSummary monthActivities={stats.monthActivities} monthCoins={stats.monthCoins} totalActivities={stats.totalActivities} />
+            </span>
+            <Button variant="sky" size="sm" onClick={openGallery} haptic={false}>
+              Galerie
+              <ArrowRight aria-hidden="true" />
+            </Button>
+          </motion.div>
+        )}
 
         {/* Pendant le test : un avis, en un geste. */}
         <FeedbackButton context="accueil" className="self-center" />
       </div>
     </Screen>
+  )
+}
+
+/** Tant que la galerie est vide : le principe de l'app, en trois temps. */
+const STEPS = [
+  { text: 'Ton pouce te démange\u00A0? Appuie sur le gros bouton.' },
+  { text: 'Ton humeur, ton temps, ta passion\u00A0: trois taps.' },
+  { text: 'Une petite activité créative. Chaque minute = une pièce d’or.' },
+] as const
+
+function HowItWorks() {
+  return (
+    <motion.section {...fadeUp(0.3, 8)} className={cn(cardVariants({ tone: 'muted' }), 'gap-3 py-4')} aria-labelledby="how-it-works">
+      <h2 id="how-it-works" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
+        Comment ça marche
+      </h2>
+      <ol className="flex flex-col gap-3">
+        {STEPS.map((step, index) => (
+          <li key={index} className="flex items-center gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-warm font-numbers text-15 font-extrabold text-on-color">
+              {index + 1}
+            </span>
+            <span className="text-14 font-semibold text-ink">{step.text}</span>
+          </li>
+        ))}
+      </ol>
+    </motion.section>
   )
 }
 

@@ -184,7 +184,17 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 7. **Activité** : en grand, avec « Une autre idée » (discret) et « Valider ».
 8. **Après « Valider »** : une photo du dessin, le texte écrit, ou, pour Musique et Cinéma, le titre exploré (facultatif).
 9. **Confirmation** : « Activité enregistrée. +X minutes ajoutées à ton total. », avec le compteur qui roule, des confettis discrets et une vibration.
-10. **Galerie** : le total de pièces d'or en grand, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier.
+10. **Galerie** : le total de pièces d'or en grand, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier. Chaque création se partage à un ami.
+11. **Paliers** : 5 min, 30 min, 1 h, 2 h, 5 h, 10 h, 20 h de création. Le palier franchi est célébré à la confirmation ; la galerie montre la jauge du prochain (« plus que 25 min »). Du temps gagné, jamais du temps manqué.
+12. **Réglages** (bouton à côté des pièces, sur l'accueil) : le style en grille, les passions, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
+
+## Pendant le test : avis, notes et chiffres
+
+- **Avis écrits** : « Un avis, une idée ? » sur l'accueil, « Donner mon avis » dans les réglages, ou « Un mot à ajouter ? » après une activité. Un testeur peut aussi simplement écrire au bot. Chaque avis arrive **en direct dans Telegram, chez les admins**.
+- **Note de chaque activité**, juste après « Activité enregistrée. » : j'ai adoré, sympa, pas pour moi. De quoi trier les 60 activités.
+- **Suivi d'usage** (sans aucun texte libre) : ouvertures, appuis sur le gros bouton, humeur, temps et passion choisis, partages, invitations. On voit où le parcours se perd.
+- **Devenir admin** : envoie `/admin` au bot **avant de partager le lien** : la première personne qui le fait devient admin. On peut aussi fixer la variable `ADMIN_IDS` (identifiants Telegram séparés par des virgules), qui prend alors le dessus.
+- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées et avis). Pour un testeur, `/stats` donne ses propres chiffres.
 
 ## Les règles
 
@@ -193,7 +203,7 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Garde-fou temporel** (`shared/src/rules.ts`) : pour Musique et Cinéma, « Valider » reste grisé jusqu'à la fin de la durée choisie. Le bouton se remplit doucement, sans compte à rebours. Pour Dessin et Écriture, on valide tout de suite avec une photo ou un texte, ou « sans » une fois la durée écoulée. Le serveur applique les mêmes règles : l'horloge du téléphone ne suffit pas à tricher.
 - **Reprise** : une activité proposée reste « à reprendre » 12 h. Pratique quand on quitte Telegram pour écouter un album : en revenant, le minuteur a continué.
 - **Photos** : envoyées depuis l'app, réduites à 1600 px, puis relayées par le bot vers le chat privé de stockage. Seul le `file_id` Telegram est gardé en base, et le serveur relaie l'image à l'affichage (le token ne quitte jamais le serveur). Une photo envoyée **directement au bot** rejoint le dernier dessin enregistré sans photo.
-- **Relances** (`server/src/bot/reminders.ts`) : au plus une par jour, à 19 h dans le fuseau de chacun (`REMINDER_HOUR`), jamais un jour où une activité a été faite. Les deux messages alternent. Après 5 relances sans ouverture de l'app, elles se mettent en pause. `/stop` les coupe, `/relances` les réactive.
+- **Relances** (`server/src/bot/reminders.ts`) : au plus une par jour, à 19 h dans le fuseau de chacun (`REMINDER_HOUR`), jamais un jour où une activité a été faite. Les deux messages alternent. Après 5 relances sans ouverture de l'app, elles se mettent en pause. `/stop` les coupe, `/relances` les réactive, tout comme l'interrupteur des réglages de l'app.
 - **Authentification** : les `initData` transmises par Telegram sont vérifiées avec le token du bot (signature HMAC, validité 24 h). Aucun compte à créer.
 
 ---
@@ -203,7 +213,8 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Les 60 activités** : `shared/src/activities.ts`, rangées par passion puis par temps. Le texte est stocké tel qu'il a été validé ; l'affichage ajoute seulement la typographie française (apostrophes courbes, guillemets « », espaces insécables). Les tests vérifient qu'il y a bien 5 activités par passion et par temps.
 - **Ce que l'appli tire au hasard** : `shared/src/prompts.ts`. Huit activités demandent que l'appli propose quelque chose (« 3 mots que l'appli tire au hasard », « un film que l'appli te propose »…). Sans API externe, ces tirages se font dans des listes écrites à la main : mots, premières phrases, traits de caractère, genres musicaux, films, séries animées, courts-métrages. **Ces listes ne faisaient pas partie du contenu validé** : relis-les et enrichis-les librement (une ligne = un élément).
 - **Introductions selon le mood** : `shared/src/intros.ts` (deux par mood).
-- **Messages du bot** : `shared/src/reminders.ts` (relances) et `server/src/bot/bot.ts` (accueil, photos).
+- **Messages du bot** : `shared/src/reminders.ts` (relances) et `server/src/bot/bot.ts` (accueil, photos, avis, commandes d'admin).
+- **Paliers de création** : `shared/src/feedback.ts` (`MILESTONES` : minutes à atteindre, titre, phrase de célébration).
 
 Lance `npm test` après une modification.
 
@@ -219,7 +230,11 @@ Lance `npm test` après une modification.
 | `POST` | `/api/proposals` | Tirer une activité ; avec `replacing` : « Une autre idée » |
 | `POST` | `/api/completions` | Valider une activité (JSON, ou multipart avec une photo) |
 | `GET` | `/api/completions` | La galerie, page par page |
+| `PUT` | `/api/completions/:id/rating` | Noter une activité validée (3 j'ai adoré, 2 sympa, 1 pas pour moi) |
 | `GET` | `/api/photos/:id` | Une photo (adresse signée, valable quelques heures) |
+| `PUT` | `/api/me/settings` | Réglages (relances du bot) |
+| `POST` | `/api/feedback` | Un avis écrit, transmis aux admins dans Telegram |
+| `POST` | `/api/events` | Un événement d'usage (liste fermée, sans texte libre) |
 
 Chaque requête porte `Authorization: tma <initData>`. Les types des requêtes et réponses sont dans `shared/src/api.ts`.
 

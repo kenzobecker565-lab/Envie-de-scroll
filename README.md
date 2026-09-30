@@ -122,24 +122,38 @@ Dans Telegram, écris à [@BotFather](https://t.me/BotFather), envoie `/newbot`,
 ### 2. Créer le projet sur Railway
 
 1. Va sur [railway.com](https://railway.com) et connecte-toi avec ton compte **GitHub**.
-2. **New Project**, puis **Deploy from GitHub repo**. Choisis `Envie-de-scroll`. S'il n'apparaît pas, clique sur **Configure GitHub App** et donne à Railway l'accès à ce dépôt.
-3. Railway crée un service et lance une première construction. Clique sur le service, onglet **Settings** : dans la partie **Source**, choisis la branche `claude/charming-curie-pg6vs5` (tant que la V1 n'est pas fusionnée dans la branche principale).
+2. Ouvre [railway.com/verify](https://railway.com/verify) pour **vérifier ton compte**. Sans vérification, l'essai limite les connexions sortantes, et le bot risque de ne pas joindre Telegram.
+3. **New Project**, puis **Deploy from GitHub repo**. Choisis `Envie-de-scroll`. S'il n'apparaît pas, clique sur **Configure GitHub App** et donne à Railway l'accès à ce dépôt.
+4. Railway crée un service et lance tout de suite une première construction, depuis la branche principale du dépôt. **Elle peut échouer, c'est normal** : on change de branche juste après.
 
 ### 3. Régler le service
 
-Toujours dans le service :
+Clique sur le service (le rectangle au milieu de l'écran) pour ouvrir son panneau.
 
-1. Onglet **Variables**, bouton **New Variable**, ajoute :
+1. Onglet **Settings**, partie **Source** : choisis la branche `claude/charming-curie-pg6vs5` (tant que la V1 n'est pas fusionnée dans la branche principale).
+2. Onglet **Variables**, bouton **New Variable**, ajoute :
    - `BOT_TOKEN` : le token de BotFather ;
    - `PORT` : `8080`.
-2. Ajoute un **volume** : c'est le disque qui garde la base de données entre deux mises à jour. Fais un clic droit sur le fond du projet (ou `Ctrl+K` / `⌘K`), choisis **Volume**, sélectionne le service, puis indique le chemin de montage **`/data`**.
-3. Onglet **Settings**, partie **Networking** : clique sur **Generate Domain**. Si Railway demande un port, indique `8080`. Tu obtiens une adresse du type `https://scroll-up-production.up.railway.app`.
-4. Relance un déploiement pour que tout soit pris en compte : onglet **Deployments**, menu **⋮** du dernier déploiement, **Redeploy**.
+3. Ajoute un **volume**, le disque qui garde la base de données entre deux mises à jour. Fais un clic droit sur le fond du projet (ou `Ctrl+K` / `⌘K`, puis tape « volume »), choisis **Volume**, sélectionne le service, puis indique le chemin de montage **`/data`**.
+4. Onglet **Settings**, partie **Networking** : clique sur **Generate Domain** et indique le port `8080`. Tu obtiens une adresse du type `https://scroll-up-production.up.railway.app`.
+5. **Applique tout** : Railway met les réglages en attente. Un bandeau en haut du projet indique le nombre de modifications : clique sur son bouton **Deploy**. Attention, le bouton « Redeploy » d'un ancien déploiement n'applique **pas** ces modifications.
 
-La construction prend quelques minutes. Quand le déploiement est vert (**Active**) :
+La construction prend quelques minutes (onglet **Deployments**). Quand le déploiement est vert (**Active**) :
 
 - ouvre `https://<ton-adresse>.up.railway.app/api/health` : la page doit afficher `{"ok":true}` ;
-- dans les journaux du déploiement (**View logs**), tu dois voir `[bot] Connecté : @ton_bot`. Si tu vois `Telegram refuse BOT_TOKEN`, le token a été mal copié : corrige la variable.
+- dans les journaux (**View logs**), tu dois voir `[bot] Connecté : @ton_bot` puis `[bot] À l’écoute des messages`.
+
+### En cas de souci
+
+| Ce que tu vois | Ce qu'il faut faire |
+| --- | --- |
+| La construction échoue (croix rouge) sur la branche `claude/charming-curie-pg6vs5` | Copie les dernières lignes du journal de construction et envoie-les pour qu'on regarde. |
+| L'adresse affiche « Application failed to respond » | Le port ne correspond pas : vérifie la variable `PORT` = `8080` et le port du domaine (Settings → Networking) = `8080`. |
+| Journaux : `Telegram refuse BOT_TOKEN (401)` | Le token est mal copié : corrige la variable `BOT_TOKEN`, puis **Deploy** dans le bandeau. |
+| Journaux : `Telegram injoignable` | Compte non vérifié : passe par [railway.com/verify](https://railway.com/verify), puis relance le déploiement. |
+| Journaux : `WEBAPP_URL absente`, ou le bot répond sans bouton « Ouvrir Scroll-up » | Ajoute la variable `WEBAPP_URL` avec ton adresse complète (`https://…up.railway.app`), puis **Deploy**. |
+| Journaux : `409: Conflict` | Le même token est utilisé ailleurs en même temps (par exemple l'app lancée sur ton ordinateur) : arrête l'autre. |
+| Dans un navigateur, l'adresse affiche « Ouvre l'app depuis Telegram » | C'est normal : l'app ne fonctionne que dans Telegram. |
 
 ### 4. Tester
 

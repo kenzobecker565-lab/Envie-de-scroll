@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { BrandMark } from './components/Brand.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
 import { EmptyState } from './components/Illustration.tsx'
+import { suppressAmbient } from './lib/ambient.ts'
 import { setAppTheme } from './lib/appTheme.ts'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
@@ -126,6 +127,9 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { state } = useAppState()
   const tone = toneFor(route, state.flow)
   useEffect(() => onTone(tone), [tone, onTone])
+  // Pendant une activité Musique ou Cinéma, on écoute ou on regarde autre chose : la musique d'ambiance se retire.
+  const elsewhere = (route.name === 'activity' || route.name === 'proof') && (state.flow.passion === 'musique' || state.flow.passion === 'cinema')
+  useEffect(() => (elsewhere ? suppressAmbient('activité') : undefined), [elsewhere])
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 

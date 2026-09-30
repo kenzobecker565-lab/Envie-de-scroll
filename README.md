@@ -186,7 +186,8 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 9. **Confirmation** : « Activité enregistrée. +X minutes ajoutées à ton total. », avec le compteur qui roule, des confettis discrets et une vibration.
 10. **Galerie** : le total de pièces d'or en grand, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier. Chaque création se partage à un ami.
 11. **Paliers** : 5 min, 30 min, 1 h, 2 h, 5 h, 10 h, 20 h de création. Le palier franchi est célébré à la confirmation ; la galerie montre la jauge du prochain (« plus que 25 min »). Du temps gagné, jamais du temps manqué.
-12. **Réglages** (bouton à côté des pièces, sur l'accueil) : le style en grille, les passions, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
+12. **Réglages** (bouton à côté des pièces, sur l'accueil) : le style en grille, les passions, la musique d'ambiance, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
+13. **Musique d'ambiance** : un jazz noir tout doux (`app/public/music/jazz-noir.mp3`, morceau original libre de droits généré avec vidIQ, bouclé sans coupure). Elle démarre au premier toucher, se coupe d'un geste (bouton note de musique de l'accueil, ou réglages ; le choix est gardé sur le téléphone), se retire quand l'app passe en arrière-plan, et pendant les activités Musique et Cinéma. Le volume passe par Web Audio, pour être réglable aussi sur iPhone (`src/lib/ambient.ts`).
 
 ## Pendant le test : avis, notes et chiffres
 

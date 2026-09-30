@@ -1,4 +1,4 @@
-import { BellRing, ChevronRight, MessageCircleHeart, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
+import { BellRing, ChevronRight, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useState, type ReactNode } from 'react'
 import { Button, PRESSED } from '@/components/ui/button'
@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { api, track } from '../api/client.ts'
+import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics, supports, telegram } from '../telegram/webApp.ts'
@@ -54,6 +55,7 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
   const { state, dispatch } = useAppState()
   const { user } = state.me
   const [saving, setSaving] = useState(false)
+  const music = useAmbientEnabled()
 
   const toggleReminders = () => {
     const next = !user.remindersEnabled
@@ -98,6 +100,18 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
 
       <div className="flex flex-col gap-3">
         <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''} sur 4`} onClick={onEditPassions} />
+        <Row
+          icon={<Music2 aria-hidden="true" />}
+          title="Musique d’ambiance"
+          description="Du jazz noir, tout doux. Elle se tait pendant les activités Musique et Cinéma."
+          onClick={() => {
+            haptics.selection()
+            setAmbientEnabled(!music)
+          }}
+          trailing={<Switch on={music} busy={false} />}
+          role="switch"
+          checked={music}
+        />
         <Row
           icon={<BellRing aria-hidden="true" />}
           title="Petites relances"

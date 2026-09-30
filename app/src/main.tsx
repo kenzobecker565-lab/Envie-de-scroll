@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './App.tsx'
+import { initAmbient } from './lib/ambient.ts'
 import { initAppTheme } from './lib/appTheme.ts'
 // Polices servies par l'app elle-même (pas de Google Fonts) : affichage plus
 // rapide dans Telegram, et rien ne dépend d'un service extérieur.
@@ -17,6 +18,8 @@ import './styles/index.css'
 
 // Le dernier thème choisi sur ce téléphone, avant le premier affichage.
 initAppTheme()
+// La musique d'ambiance attend le premier toucher.
+initAmbient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

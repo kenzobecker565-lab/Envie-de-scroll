@@ -130,6 +130,30 @@
   --color-good-ink: var(--good-ink);
   --color-transparent: transparent;
   --color-current: currentColor;
+
+  /*
+   * Noms des composants shadcn/ui (src/components/ui), branchés sur la palette.
+   * Exception : chez shadcn, `accent` désigne un fond de survol discret ; ici,
+   * c'est la couleur de marque. Les composants utilisent `muted` ou
+   * `accent-soft` pour ces fonds.
+   */
+  --color-background: var(--canvas);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface-200);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface-200);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-ink);
+  --color-secondary: var(--surface-200);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-300);
+  --color-muted-foreground: var(--ink-soft);
+  --color-destructive: var(--warm);
+  --color-destructive-foreground: var(--warm-ink);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--accent);
 }
 
 @layer base {

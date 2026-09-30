@@ -32,10 +32,12 @@ const PALETTE = {
   '#ed9da0': 'var(--warm)',
   '#ffb6b6': 'var(--warm)',
   '#ffb8b8': 'var(--warm)',
+  '#ffb9b9': 'var(--warm)',
   '#9e616a': 'var(--warm)',
   '#a0616a': 'var(--warm)',
   // Gris clairs, fonds
   '#ccc': 'var(--ink-faint)',
+  '#cbcbcb': 'var(--ink-faint)',
   '#e6e6e6': 'var(--line)',
   '#e4e4e4': 'var(--line)',
   '#f2f2f2': 'var(--surface-300)',

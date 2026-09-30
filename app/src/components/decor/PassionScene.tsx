@@ -14,7 +14,7 @@
 import { useReducedMotion } from 'motion/react'
 import { useId } from 'react'
 import type { PassionId } from '@scroll-up/shared'
-import { cn } from '../../lib/cn.ts'
+import { cn } from '@/lib/utils'
 
 const DRAW_PATH = 'M14 62 C 30 22, 52 20, 62 48 S 88 82, 102 50 S 128 16, 146 38'
 

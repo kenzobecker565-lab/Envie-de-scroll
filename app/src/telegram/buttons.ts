@@ -11,6 +11,9 @@ import { supports, telegram } from './webApp.ts'
 export const hasNativeBackButton = Boolean(telegram && supports.backButton)
 export const hasNativeMainButton = Boolean(telegram && supports.mainButton)
 
+/** Fenêtres ouvertes par-dessus l'écran : le bouton retour les ferme d'abord. */
+const overlays: (() => void)[] = []
+
 /** Affiche le bouton retour de Telegram tant que `onBack` est défini. */
 export function useBackButton(onBack: (() => void) | undefined): void {
   const handler = useRef(onBack)
@@ -24,11 +27,27 @@ export function useBackButton(onBack: (() => void) | undefined): void {
       button.hide()
       return
     }
-    const click = () => handler.current?.()
+    const click = () => (overlays.at(-1) ?? handler.current)?.()
     button.onClick(click)
     button.show()
     return () => button.offClick(click)
   }, [visible])
+}
+
+/** Tant que `onClose` est défini, le bouton retour de Telegram appelle `onClose` au lieu de changer d'écran. */
+export function useBackButtonOverlay(onClose: (() => void) | undefined): void {
+  const handler = useRef(onClose)
+  handler.current = onClose
+  const active = onClose !== undefined
+
+  useEffect(() => {
+    if (!active) return
+    const close = () => handler.current?.()
+    overlays.push(close)
+    return () => {
+      overlays.splice(overlays.indexOf(close), 1)
+    }
+  }, [active])
 }
 
 export interface MainButtonOptions {

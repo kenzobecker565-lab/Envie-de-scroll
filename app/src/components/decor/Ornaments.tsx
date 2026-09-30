@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react'
-import { cn } from '../../lib/cn.ts'
+import { cn } from '@/lib/utils'
 import { Sparkle } from './Sparkle.tsx'
 
 /* ---------------------------------- Ciel ----------------------------------- */

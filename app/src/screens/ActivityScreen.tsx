@@ -1,14 +1,17 @@
-import { Shuffle, Sparkles } from 'lucide-react'
+import { Check, Clock3, Hourglass, Info, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, type ActivityExtra, type ProposalDTO } from '@scroll-up/shared'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardEyebrow } from '@/components/ui/card'
+import { Skeleton, SkeletonText } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
-import { Button } from '../components/Button.tsx'
 import { PassionScene } from '../components/decor/PassionScene.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Screen } from '../components/Screen.tsx'
-import { Skeleton, SkeletonText } from '../components/Skeleton.tsx'
-import { cn } from '../lib/cn.ts'
 import { PASSION_ICONS } from '../lib/icons.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -67,22 +70,26 @@ export function ActivityScreen() {
   return (
     <Screen>
       {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
-      <motion.div
-        className={cn('relative overflow-hidden rounded-lg p-4 shadow-card', passion.tone === 'warm' ? 'bg-warm-soft' : 'bg-accent-soft')}
+      <Card
+        tone={passion.tone === 'warm' ? 'warm' : 'accent'}
+        className="rounded-lg shadow-card"
         initial={{ opacity: 0, y: 12, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 20 }}
       >
         <span aria-hidden="true" className="absolute -top-10 -left-10 h-32 w-32 rounded-pill bg-surface-200 opacity-40" />
         <div className="relative flex flex-wrap items-center gap-2">
-          <span className="inline-flex h-8 items-center gap-2 rounded-pill bg-surface-200 px-4 text-12 font-bold text-ink-soft">
-            <Icon size={16} className="text-accent" aria-hidden="true" />
+          <Badge variant="secondary">
+            <Icon aria-hidden="true" />
             {passion.label}
-          </span>
-          <span className="inline-flex h-8 items-center rounded-pill bg-surface-200 px-4 font-mono text-12 font-bold text-ink-soft">{duration} min</span>
+          </Badge>
+          <Badge variant="secondary" className="font-mono">
+            <Clock3 aria-hidden="true" />
+            {duration} min
+          </Badge>
         </div>
-        <PassionScene passion={passionId} className="relative mx-auto -mb-2 h-24 w-auto" />
-      </motion.div>
+        <PassionScene passion={passionId} className="relative mx-auto -mt-2 -mb-2 h-24 w-auto" />
+      </Card>
 
       <div className="mt-6 flex-1" aria-live="polite" aria-busy={loading}>
         <AnimatePresence mode="wait" initial={false}>
@@ -96,7 +103,7 @@ export function ActivityScreen() {
             >
               <p className="text-15 text-ink-soft">{proposal.intro}</p>
               <h1
-                className={cn('mt-4 font-display font-semibold text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-28')}
+                className={cn('mt-2 font-display font-semibold text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-28')}
                 aria-label={proposal.text}
               >
                 <RevealWords text={proposal.text} />
@@ -104,23 +111,27 @@ export function ActivityScreen() {
               {proposal.extra && <ExtraCard extra={proposal.extra} />}
             </motion.div>
           ) : error ? (
-            <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="rounded-md bg-warm-soft p-4">
-              <p className="text-14 text-warm-ink">{error}</p>
-              <Button variant="secondary" className="mt-4" onClick={() => void load()}>
-                Réessayer
-              </Button>
-            </motion.div>
+            <Alert key="error" variant="warning" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <Info aria-hidden="true" />
+              <AlertDescription>
+                <p className="text-14">{error}</p>
+                <Button variant="secondary" size="sm" className="mt-2" onClick={() => void load()}>
+                  <RotateCcw aria-hidden="true" />
+                  Réessayer
+                </Button>
+              </AlertDescription>
+            </Alert>
           ) : (
             <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <Skeleton className="h-5 w-4/5" />
-              <SkeletonText lines={3} className="mt-6 [&>div]:h-8" />
+              <SkeletonText lines={3} className="mt-4 [&>div]:h-8" />
               <span className="sr-only">On cherche une idée pour toi…</span>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      <div className="sticky bottom-0 -mx-4 mt-8 bg-gradient-to-t from-canvas/70 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
+      <div className="sticky bottom-0 -mx-4 mt-8 flex flex-col gap-2 bg-gradient-to-t from-canvas/80 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
         {proposal ? (
           <ValidateButton
             key={proposal.id}
@@ -133,13 +144,8 @@ export function ActivityScreen() {
         ) : (
           <Skeleton className="h-14 w-full rounded-pill" />
         )}
-        <Button
-          variant="ghost"
-          className="mt-2 w-full"
-          icon={<Shuffle size={18} aria-hidden="true" />}
-          disabled={loading || !proposal}
-          onClick={() => proposal && void load(proposal.id)}
-        >
+        <Button variant="ghost" size="md" className="w-full" disabled={loading || !proposal} onClick={() => proposal && void load(proposal.id)}>
+          <Shuffle aria-hidden="true" />
           Une autre idée
         </Button>
       </div>
@@ -173,33 +179,24 @@ function RevealWords({ text }: { text: string }) {
 function ExtraCard({ extra }: { extra: ActivityExtra }) {
   const asChips = extra.kind === 'trois-mots' || extra.kind === 'un-mot'
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.25, duration: 0.35 }}
-      className="relative mt-6 overflow-hidden rounded-md bg-warm-soft p-4"
-    >
+    <Card tone="warm" className="mt-6 gap-2" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.25, duration: 0.35 }}>
       <Sparkle size={40} color="var(--surface-200)" className="motion-loop anim-spin-slow absolute -top-3 -right-3 opacity-60" style={{ '--spin-duration': '14s' } as React.CSSProperties} />
-      <p className="inline-flex items-center gap-2 text-11 font-bold tracking-wide text-warm-ink uppercase">
-        <Sparkles size={14} aria-hidden="true" className="motion-loop anim-twinkle" />
+      <CardEyebrow className="text-warm-ink">
+        <Sparkles aria-hidden="true" className="motion-loop anim-twinkle" />
         L’appli a tiré pour toi · {extra.label}
-      </p>
+      </CardEyebrow>
       {asChips ? (
-        <ul className="mt-2 flex flex-wrap gap-2">
+        <ul className="flex flex-wrap gap-2">
           {extra.items.map((item, index) => (
-            <motion.li
-              key={item}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 + index * 0.12 }}
-              className="rounded-pill bg-surface-200 px-4 py-1 text-15 font-bold text-ink"
-            >
-              {item}
+            <motion.li key={item} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 + index * 0.12 }}>
+              <Badge variant="secondary" size="lg" className="text-ink">
+                {item}
+              </Badge>
             </motion.li>
           ))}
         </ul>
       ) : (
-        <ul className="mt-2 space-y-1">
+        <ul className="flex flex-col gap-1">
           {extra.items.map((item) => (
             <li key={item} className="text-15 font-bold text-ink">
               {item}
@@ -207,7 +204,7 @@ function ExtraCard({ extra }: { extra: ActivityExtra }) {
           ))}
         </ul>
       )}
-    </motion.div>
+    </Card>
   )
 }
 
@@ -240,25 +237,18 @@ function ValidateButton({
   if (!timeGuard) {
     return (
       <Button className="anim-shine motion-loop w-full" onClick={onValidate} disabled={disabled}>
+        <Check aria-hidden="true" />
         Valider
       </Button>
     )
   }
 
   return (
-    <div>
-      <motion.button
-        type="button"
+    <div className="flex flex-col gap-2">
+      <Button
         disabled={locked || disabled}
-        onClick={() => {
-          haptics.impact('medium')
-          onValidate()
-        }}
-        whileTap={locked ? undefined : { scale: 0.96 }}
-        className={cn(
-          'relative flex h-14 w-full items-center justify-center overflow-hidden rounded-pill text-15 font-bold transition-colors duration-500',
-          locked ? 'bg-surface-300 text-ink-faint' : 'anim-shine motion-loop bg-accent text-accent-ink shadow-pop',
-        )}
+        onClick={onValidate}
+        className={cn('w-full duration-500', !locked && 'anim-shine motion-loop')}
         aria-describedby="validate-hint"
       >
         {locked && (
@@ -268,9 +258,10 @@ function ValidateButton({
             style={{ width: `${Math.round(progress * 100)}%` }}
           />
         )}
+        {locked ? <Hourglass className="relative" aria-hidden="true" /> : <Check aria-hidden="true" />}
         <span className="relative">Valider</span>
-      </motion.button>
-      <p id="validate-hint" className="mt-2 text-center text-12 text-ink-soft">
+      </Button>
+      <p id="validate-hint" className="text-center text-12 text-ink-soft">
         {locked
           ? `Prends ton temps\u00A0: tu pourras valider à la fin des ${proposal.duration} minutes.`
           : 'C’est bon, tu peux valider quand tu veux.'}

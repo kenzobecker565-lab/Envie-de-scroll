@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { cn } from '../lib/cn.ts'
+import { cn } from '@/lib/utils'
 import { formatNumber } from '../lib/format.ts'
 
 /** Une pièce d'or (couleurs « warm » du design system). */

@@ -1,7 +1,10 @@
-import { Send } from 'lucide-react'
+import { House, Images, Send } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { Button } from '../components/Button.tsx'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
@@ -66,8 +69,9 @@ export function DoneScreen() {
         <span className="font-bold text-good-ink">+{earned} minutes</span> ajoutées à ton total.
       </motion.p>
 
-      <motion.div
-        className="relative mt-8 flex flex-col items-center gap-2 rounded-lg bg-surface-200 px-6 py-6 shadow-card"
+      <Card
+        padding="lg"
+        className="mt-8 items-center gap-2 overflow-visible rounded-lg"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, duration: 0.4 }}
@@ -89,26 +93,24 @@ export function DoneScreen() {
           ))}
         <CoinCounter value={shown} tone="good" />
         <span className="inline-flex items-center gap-2 text-12 text-ink-soft">
-          <span className="rounded-pill bg-good-soft px-2 font-mono text-mono-xs font-bold text-good-ink">+{earned}</span>
+          <Badge variant="good" size="sm" className="font-mono text-mono-xs">
+            +{earned}
+          </Badge>
           pièces d’or au total
         </span>
-      </motion.div>
+      </Card>
 
       {done.photoPending && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-6 inline-flex items-start gap-2 rounded-md bg-accent-soft p-4 text-left text-13 text-ink"
-        >
-          <Send size={16} className="mt-1 shrink-0 text-accent" aria-hidden="true" />
-          Envoie la photo de ton dessin au bot quand tu veux&nbsp;: elle rejoindra ta galerie.
-        </motion.p>
+        <Alert variant="info" role="status" className="mt-6" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+          <Send aria-hidden="true" />
+          <AlertDescription>Envoie la photo de ton dessin au bot quand tu veux&nbsp;: elle rejoindra ta galerie.</AlertDescription>
+        </Alert>
       )}
 
       <div className="mt-auto flex w-full flex-col">
-        <PrimaryAction text="Voir ma galerie" onClick={() => reset([{ name: 'home' }, { name: 'gallery' }])}>
-          <Button variant="ghost" className="mt-2 w-full" onClick={() => reset([{ name: 'home' }], -1)}>
+        <PrimaryAction text="Voir ma galerie" icon={<Images aria-hidden="true" />} onClick={() => reset([{ name: 'home' }, { name: 'gallery' }])}>
+          <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
+            <House aria-hidden="true" />
             Retour à l’accueil
           </Button>
         </PrimaryAction>

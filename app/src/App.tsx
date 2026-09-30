@@ -2,10 +2,13 @@ import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/rea
 import { useCallback, useEffect, useState } from 'react'
 import { getMood, getPassion, type MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
+import { RotateCcw, Send } from 'lucide-react'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
 import { BrandMark } from './components/Brand.tsx'
-import { Button } from './components/Button.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
-import { Skeleton } from './components/Skeleton.tsx'
+import { EmptyState } from './components/Illustration.tsx'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
@@ -143,7 +146,7 @@ function BootSkeleton() {
       </div>
       <Skeleton className="mt-8 h-8 w-48" />
       <Skeleton className="mt-2 h-4 w-64" />
-      <div className="flex flex-1 items-center">
+      <div className="flex flex-1 items-center py-8">
         <Skeleton className="h-24 w-full rounded-pill" />
       </div>
       <Skeleton className="h-20 w-full rounded-md" />
@@ -155,28 +158,36 @@ function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
   const outsideTelegram = (error instanceof ApiError && error.code === 'unauthorized') || !canAuthenticate()
   const botUsername = import.meta.env.VITE_BOT_USERNAME as string | undefined
   return (
-    <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col items-center justify-center px-6 text-center">
-      <BrandMark size={48} />
-      <h1 className="mt-6 font-display text-26 font-semibold text-ink">{outsideTelegram ? 'Ouvre l’app depuis Telegram' : 'Petit souci de connexion'}</h1>
-      <p className="mt-2 max-w-xs text-15 text-ink-soft">
-        {outsideTelegram
-          ? 'Scroll-up vit dans Telegram\u00A0: lance-la depuis le bot, avec le bouton « Ouvrir ».'
-          : 'On n’arrive pas à joindre le serveur. Vérifie ta connexion, puis réessaie.'}
-      </p>
-      {outsideTelegram && botUsername ? (
-        <a
-          href={`https://t.me/${botUsername}`}
-          className="mt-8 inline-flex h-14 items-center justify-center rounded-pill bg-accent px-6 text-15 font-bold text-accent-ink"
-        >
-          Ouvrir le bot
-        </a>
-      ) : (
-        !outsideTelegram && (
-          <Button className="mt-8" onClick={onRetry}>
-            Réessayer
-          </Button>
-        )
-      )}
+    <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col items-center justify-center gap-8 px-6">
+      <span className="inline-flex items-center gap-2 text-13 font-bold text-ink-soft">
+        <BrandMark />
+        Scroll-up
+      </span>
+      <EmptyState
+        illustration={outsideTelegram ? 'open-telegram' : 'offline'}
+        illustrationClassName={outsideTelegram ? 'w-56' : 'w-32'}
+        title={outsideTelegram ? 'Ouvre l’app depuis Telegram' : 'Petit souci de connexion'}
+        description={
+          outsideTelegram
+            ? 'Scroll-up vit dans Telegram\u00A0: lance-la depuis le bot, avec le bouton « Ouvrir ».'
+            : 'On n’arrive pas à joindre le serveur. Vérifie ta connexion, puis réessaie.'
+        }
+        action={
+          outsideTelegram ? (
+            botUsername && (
+              <motion.a href={`https://t.me/${botUsername}`} className={cn(buttonVariants())} whileTap={{ scale: 0.96 }}>
+                <Send aria-hidden="true" />
+                Ouvrir le bot
+              </motion.a>
+            )
+          ) : (
+            <Button onClick={onRetry}>
+              <RotateCcw aria-hidden="true" />
+              Réessayer
+            </Button>
+          )
+        }
+      />
     </div>
   )
 }

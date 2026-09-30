@@ -1,11 +1,13 @@
-import { motion } from 'motion/react'
+import { Check } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
 import { useRef, useState } from 'react'
 import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { EnergyLine, TimeDial } from '../components/decor/Ornaments.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
-import { Screen, ScreenTitle } from '../components/Screen.tsx'
-import { cn } from '../lib/cn.ts'
+import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
 import { MOOD_ICONS } from '../lib/icons.ts'
+import { popIn } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
@@ -19,11 +21,30 @@ function useAdvance() {
   }
 }
 
-const enter = (index: number) => ({
-  initial: { opacity: 0, y: 16, scale: 0.94 },
-  animate: { opacity: 1, y: 0, scale: 1 },
-  transition: { delay: 0.05 * index, type: 'spring' as const, stiffness: 260, damping: 22 },
-})
+/** Étapes du parcours : humeur, temps, puis passion si l'on en a plusieurs. */
+function useFlowSteps() {
+  const { state } = useAppState()
+  return state.me.user.passions.length > 1 ? 3 : 2
+}
+
+/** Pastille « choisi » qui apparaît sur la carte sélectionnée. */
+function SelectedMark({ visible }: { visible: boolean }) {
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.span
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 26 }}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill bg-accent text-accent-ink"
+        >
+          <Check size={16} strokeWidth={3} aria-hidden="true" />
+        </motion.span>
+      )}
+    </AnimatePresence>
+  )
+}
 
 /* ---------------------------------- Mood ---------------------------------- */
 
@@ -31,6 +52,7 @@ export function MoodScreen() {
   const { state, dispatch } = useAppState()
   const { push } = useNavigation()
   const advance = useAdvance()
+  const steps = useFlowSteps()
   const [selected, setSelected] = useState<MoodId | undefined>(state.flow.mood)
 
   const choose = (mood: MoodId) => {
@@ -43,41 +65,33 @@ export function MoodScreen() {
   let index = 0
   return (
     <Screen>
-      <ScreenTitle subtitle="Pas de mauvaise réponse. Un tap, et on continue.">Comment tu te sens, là&nbsp;?</ScreenTitle>
-      <div className="space-y-6">
+      <ScreenTitle eyebrow={<StepProgress current={1} total={steps} label="Ton humeur" />} subtitle="Pas de mauvaise réponse. Un tap, et on continue.">
+        Comment tu te sens, là&nbsp;?
+      </ScreenTitle>
+      <div className="flex flex-col gap-6">
         {ENERGY_FAMILIES.map((family) => (
-          <section key={family.energy} aria-label={family.label}>
-            <h2 className="mb-2 flex items-center gap-2 text-11 font-bold tracking-wide text-ink-soft uppercase">
+          <section key={family.energy} aria-labelledby={`family-${family.energy}`} className="flex flex-col gap-2">
+            <h2 id={`family-${family.energy}`} className="flex items-center gap-2 text-11 font-bold tracking-wide text-ink-soft uppercase">
               {family.label}
               <EnergyLine energy={family.energy} />
             </h2>
-            <div className="flex flex-wrap gap-2">
+            <ToggleGroup
+              type="single"
+              variant="chip"
+              value={selected ?? ''}
+              onValueChange={(value) => choose((value || selected) as MoodId)}
+              aria-labelledby={`family-${family.energy}`}
+            >
               {MOODS.filter((mood) => mood.energy === family.energy).map((mood) => {
                 const Icon = MOOD_ICONS[mood.id]
-                const active = selected === mood.id
                 return (
-                  <motion.button
-                    key={mood.id}
-                    type="button"
-                    {...enter(index++)}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => choose(mood.id)}
-                    aria-pressed={active}
-                    className={cn(
-                      'inline-flex min-h-12 items-center gap-2 rounded-pill border px-4 py-2 text-left text-14 font-bold transition-colors duration-200',
-                      active ? 'border-accent bg-accent-soft text-ink' : 'border-line bg-surface-200 text-ink',
-                    )}
-                  >
-                    <Icon
-                      size={18}
-                      className={cn('shrink-0 transition-colors duration-200', active ? 'anim-wiggle text-accent' : 'text-ink-soft')}
-                      aria-hidden="true"
-                    />
+                  <ToggleGroupItem key={mood.id} value={mood.id} {...popIn(index++)} whileTap={{ scale: 0.95 }}>
+                    <Icon className={selected === mood.id ? 'anim-wiggle' : undefined} aria-hidden="true" />
                     {mood.label}
-                  </motion.button>
+                  </ToggleGroupItem>
                 )
               })}
-            </div>
+            </ToggleGroup>
           </section>
         ))}
       </div>
@@ -97,6 +111,7 @@ export function TimeScreen() {
   const { state, dispatch } = useAppState()
   const { push } = useNavigation()
   const advance = useAdvance()
+  const steps = useFlowSteps()
   const [selected, setSelected] = useState<Duration | undefined>(state.flow.duration)
   const passions = state.me.user.passions
 
@@ -110,32 +125,28 @@ export function TimeScreen() {
 
   return (
     <Screen>
-      <ScreenTitle subtitle="On adapte l’activité à ton créneau.">Tu as combien de temps&nbsp;?</ScreenTitle>
-      <div className="flex flex-col gap-4">
-        {DURATIONS.map((duration, index) => {
-          const active = selected === duration
-          return (
-            <motion.button
-              key={duration}
-              type="button"
-              {...enter(index)}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => choose(duration)}
-              aria-pressed={active}
-              className={cn(
-                'flex min-h-28 items-center gap-4 rounded-md border-2 bg-surface-200 p-4 text-left shadow-card transition-colors duration-200',
-                active ? 'border-accent' : 'border-transparent',
-              )}
-            >
-              <TimeDial minutes={duration} active={active} delay={index * 0.12} />
-              <span>
-                <span className="block text-15 font-bold text-ink">{TIME_COPY[duration].title}</span>
-                <span className="mt-1 block text-13 text-ink-soft">{TIME_COPY[duration].hint}</span>
-              </span>
-            </motion.button>
-          )
-        })}
-      </div>
+      <ScreenTitle eyebrow={<StepProgress current={2} total={steps} label="Ton temps" />} subtitle="On adapte l’activité à ton créneau.">
+        Tu as combien de temps&nbsp;?
+      </ScreenTitle>
+      <ToggleGroup
+        type="single"
+        variant="card"
+        value={selected ? String(selected) : ''}
+        onValueChange={(value) => choose(Number(value || selected) as Duration)}
+        className="flex-col flex-nowrap gap-4"
+        aria-label="Ton temps disponible"
+      >
+        {DURATIONS.map((duration, index) => (
+          <ToggleGroupItem key={duration} value={String(duration)} className="min-h-28 gap-4" {...popIn(index)} whileTap={{ scale: 0.97 }}>
+            <TimeDial minutes={duration} active={selected === duration} delay={index * 0.12} />
+            <span className="flex flex-1 flex-col gap-1">
+              <span className="text-15 font-bold text-ink">{TIME_COPY[duration].title}</span>
+              <span className="text-13 font-normal text-ink-soft">{TIME_COPY[duration].hint}</span>
+            </span>
+            <SelectedMark visible={selected === duration} />
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
     </Screen>
   )
 }
@@ -157,14 +168,21 @@ export function PassionPickScreen() {
 
   return (
     <Screen>
-      <ScreenTitle subtitle={'Parmi tes passions, laquelle te tente maintenant\u00A0?'}>Et tu as envie de…&nbsp;?</ScreenTitle>
-      <div className="grid grid-cols-2 gap-4">
+      <ScreenTitle eyebrow={<StepProgress current={3} total={3} label="Ta passion" />} subtitle={'Parmi tes passions, laquelle te tente maintenant ?'}>
+        Et tu as envie de…&nbsp;?
+      </ScreenTitle>
+      <ToggleGroup
+        type="single"
+        variant="card"
+        value={selected ?? ''}
+        onValueChange={(value) => choose((value || selected) as PassionId)}
+        className="grid grid-cols-2 gap-4"
+        aria-label="Ta passion du moment"
+      >
         {state.me.user.passions.map((id, index) => (
-          <motion.div key={id} {...enter(index)}>
-            <PassionCard passion={getPassion(id)} selected={selected === id} onSelect={() => choose(id)} role="button" />
-          </motion.div>
+          <PassionCard key={id} passion={getPassion(id)} index={index} selected={selected === id} />
         ))}
-      </div>
+      </ToggleGroup>
     </Screen>
   )
 }

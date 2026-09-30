@@ -1,6 +1,7 @@
+import { LoaderCircle } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { Button } from '@/components/ui/button'
 import { useMainButton } from '../telegram/buttons.ts'
-import { Button } from './Button.tsx'
 
 /**
  * Action principale d'un écran : le bouton natif de Telegram (MainButton,
@@ -9,12 +10,15 @@ import { Button } from './Button.tsx'
  */
 export function PrimaryAction({
   text,
+  icon,
   onClick,
   enabled = true,
   loading = false,
   children,
 }: {
   text: string
+  /** Icône Lucide du bouton de l'app (le bouton natif de Telegram n'en a pas). */
+  icon?: ReactNode
   onClick: () => void
   enabled?: boolean
   loading?: boolean
@@ -23,9 +27,10 @@ export function PrimaryAction({
 }) {
   const native = useMainButton({ text, onClick, enabled, loading })
   return (
-    <div className="sticky bottom-0 z-10 -mx-4 mt-auto bg-gradient-to-t from-canvas/70 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
+    <div className="sticky bottom-0 z-10 -mx-4 mt-auto flex flex-col gap-2 bg-gradient-to-t from-canvas/80 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
       {!native && (
         <Button className="w-full" onClick={onClick} disabled={!enabled || loading} aria-busy={loading}>
+          {loading ? <LoaderCircle className="motion-safe:animate-spin" aria-hidden="true" /> : icon}
           {loading ? 'Un instant…' : text}
         </Button>
       )}

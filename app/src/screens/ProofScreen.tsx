@@ -1,11 +1,18 @@
-import { Camera, RefreshCw } from 'lucide-react'
+import { Camera, Clock3, FileCheck2, ImageOff, Info, RefreshCw, Save, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { getPassion, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, type ProposalDTO } from '@scroll-up/shared'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, cardVariants } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
-import { Button } from '../components/Button.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
+import { PASSION_ICONS } from '../lib/icons.ts'
 import { prepareImage } from '../lib/image.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -55,9 +62,10 @@ export function ProofScreen() {
   }
 
   const errorNote = error && (
-    <p className="mt-2 text-center text-13 text-warm-ink" role="alert">
-      {error}
-    </p>
+    <Alert variant="warning" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+      <Info aria-hidden="true" />
+      <AlertDescription>{error}</AlertDescription>
+    </Alert>
   )
 
   if (passion.proof === 'photo') return <PhotoProof proposal={proposal} clockOffset={state.flow.clockOffset} saving={saving} onSubmit={submit} footer={errorNote} />
@@ -72,15 +80,49 @@ interface ProofProps {
   footer: React.ReactNode
 }
 
+/** Rappel de l'activité en cours : passion et durée, au-dessus du titre. */
+function ProofContext({ proposal }: { proposal: ProposalDTO }) {
+  const Icon: LucideIcon = PASSION_ICONS[proposal.passion]
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="soft">
+        <Icon aria-hidden="true" />
+        {getPassion(proposal.passion).label}
+      </Badge>
+      <Badge variant="soft" className="font-mono">
+        <Clock3 aria-hidden="true" />
+        {proposal.duration} min
+      </Badge>
+    </div>
+  )
+}
+
 /** « Enregistrer sans » : disponible à la fin de la durée choisie. */
-function SkipProof({ proposal, clockOffset, label, hint, saving, onSkip }: { proposal: ProposalDTO; clockOffset: number; label: string; hint: string; saving: boolean; onSkip: () => void }) {
+function SkipProof({
+  proposal,
+  clockOffset,
+  label,
+  icon,
+  hint,
+  saving,
+  onSkip,
+}: {
+  proposal: ProposalDTO
+  clockOffset: number
+  label: string
+  icon: React.ReactNode
+  hint: string
+  saving: boolean
+  onSkip: () => void
+}) {
   const { unlocked } = useUnlock(proposal.createdAt, proposal.unlockAt, clockOffset)
   return (
-    <div className="mt-2 text-center">
-      <Button variant="ghost" className="w-full" disabled={!unlocked || saving} onClick={onSkip}>
+    <div className="flex flex-col items-center">
+      <Button variant="ghost" size="md" className="w-full" disabled={!unlocked || saving} onClick={onSkip}>
+        {icon}
         {label}
       </Button>
-      <p className="text-12 text-ink-soft">{unlocked ? hint : `Possible à la fin des ${proposal.duration} minutes.`}</p>
+      <p className="text-center text-12 text-ink-soft">{unlocked ? hint : `Possible à la fin des ${proposal.duration} minutes.`}</p>
     </div>
   )
 }
@@ -110,7 +152,9 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
 
   return (
     <Screen>
-      <ScreenTitle subtitle={'Une photo, même rapide\u00A0: elle rejoindra ta galerie.'}>Montre-nous ton dessin</ScreenTitle>
+      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={'Une photo, même rapide\u00A0: elle rejoindra ta galerie.'}>
+        Montre-nous ton dessin
+      </ScreenTitle>
       <input
         ref={input}
         id={inputId}
@@ -124,21 +168,22 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
       />
       <AnimatePresence mode="wait" initial={false}>
         {preview ? (
-          <motion.div
+          <Card
             key="preview"
+            className="p-2"
             initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
             animate={{ opacity: 1, scale: 1, rotate: -1 }}
             exit={{ opacity: 0 }}
             transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-            className="relative rounded-md bg-surface-200 p-2 shadow-card"
           >
-            <img src={preview} alt="Aperçu de ton dessin" className="max-h-[55vh] w-full rounded-md bg-surface-300 object-contain shadow-card" />
-            <div className="absolute right-2 bottom-2">
-              <Button variant="secondary" className="h-10 text-13" icon={<RefreshCw size={16} aria-hidden="true" />} onClick={() => input.current?.click()}>
+            <img src={preview} alt="Aperçu de ton dessin" className="max-h-[55vh] w-full rounded-sm bg-surface-300 object-contain" />
+            <div className="absolute right-4 bottom-4">
+              <Button variant="secondary" size="sm" onClick={() => input.current?.click()}>
+                <RefreshCw aria-hidden="true" />
                 Changer
               </Button>
             </div>
-          </motion.div>
+          </Card>
         ) : (
           <motion.label
             key="pick"
@@ -147,7 +192,7 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             whileTap={{ scale: 0.98 }}
-            className="relative flex aspect-[4/3] w-full cursor-pointer flex-col items-center justify-center gap-4 rounded-md bg-surface-200 p-6 text-center shadow-card"
+            className={cn(cardVariants({ padding: 'lg' }), 'aspect-[4/3] w-full cursor-pointer items-center justify-center text-center')}
           >
             {/* Pointillés qui avancent tout autour de la zone. */}
             <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
@@ -169,20 +214,21 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
                 <Camera size={30} className="text-accent" aria-hidden="true" />
               </span>
             )}
-            <span>
-              <span className="block text-15 font-bold text-ink">Prendre ou choisir une photo</span>
-              <span className="mt-1 block text-13 text-ink-soft">Ton dessin tel qu’il est, pas besoin qu’il soit parfait.</span>
+            <span className="flex flex-col gap-1">
+              <span className="text-15 font-bold text-ink">Prendre ou choisir une photo</span>
+              <span className="text-13 text-ink-soft">Ton dessin tel qu’il est, pas besoin qu’il soit parfait.</span>
             </span>
           </motion.label>
         )}
       </AnimatePresence>
 
-      <PrimaryAction text="Enregistrer mon dessin" onClick={() => photo && onSubmit({ photo })} enabled={Boolean(photo)} loading={saving}>
+      <PrimaryAction text="Enregistrer mon dessin" icon={<Save aria-hidden="true" />} onClick={() => photo && onSubmit({ photo })} enabled={Boolean(photo)} loading={saving}>
         {footer}
         <SkipProof
           proposal={proposal}
           clockOffset={clockOffset}
           label="Enregistrer sans photo"
+          icon={<ImageOff aria-hidden="true" />}
           hint="Tu pourras aussi envoyer ta photo au bot plus tard."
           saving={saving}
           onSkip={() => onSubmit({})}
@@ -199,29 +245,24 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
   const words = text.trim() ? text.trim().split(/\s+/).length : 0
   return (
     <Screen>
-      <ScreenTitle subtitle={'Colle ou écris ici ce que tu as produit\u00A0: il rejoindra ta galerie.'}>Et ce texte, alors&nbsp;?</ScreenTitle>
+      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={'Colle ou écris ici ce que tu as produit\u00A0: il rejoindra ta galerie.'}>
+        Et ce texte, alors&nbsp;?
+      </ScreenTitle>
       <label className="sr-only" htmlFor="proof-text">
         Ton texte
       </label>
-      <textarea
-        id="proof-text"
-        value={text}
-        onChange={(event) => setText(event.target.value)}
-        maxLength={MAX_TEXT_LENGTH}
-        rows={9}
-        placeholder="Ton texte…"
-        className="w-full resize-none rounded-sm border border-line bg-surface-200 p-4 text-15 text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none"
-      />
+      <Textarea id="proof-text" value={text} onChange={(event) => setText(event.target.value)} maxLength={MAX_TEXT_LENGTH} rows={9} placeholder="Ton texte…" />
       <p className="mt-2 text-right font-mono text-mono-xs font-bold text-ink-soft" aria-live="polite">
         {words} {words > 1 ? 'mots' : 'mot'}
       </p>
 
-      <PrimaryAction text="Enregistrer mon texte" onClick={() => onSubmit({ text })} enabled={text.trim().length > 0} loading={saving}>
+      <PrimaryAction text="Enregistrer mon texte" icon={<Save aria-hidden="true" />} onClick={() => onSubmit({ text })} enabled={text.trim().length > 0} loading={saving}>
         {footer}
         <SkipProof
           proposal={proposal}
           clockOffset={clockOffset}
           label="Enregistrer sans le texte"
+          icon={<FileCheck2 aria-hidden="true" />}
           hint="Ton activité comptera quand même."
           saving={saving}
           onSkip={() => onSubmit({})}
@@ -236,24 +277,29 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
 function TitleProof({ proposal, saving, onSubmit, footer }: ProofProps) {
   const [title, setTitle] = useState(() => suggestedTitle(proposal.extra) ?? '')
   const placeholder = proposal.passion === 'musique' ? 'Un titre, un album, un artiste…' : 'Un film, un anime, un court…'
+  const Icon = PASSION_ICONS[proposal.passion]
   return (
     <Screen>
-      <ScreenTitle subtitle="C’est facultatif, mais ta galerie s’en souviendra.">Qu’as-tu exploré&nbsp;?</ScreenTitle>
+      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle="C’est facultatif, mais ta galerie s’en souviendra.">
+        Qu’as-tu exploré&nbsp;?
+      </ScreenTitle>
       <label className="sr-only" htmlFor="proof-title">
         Ce que tu as exploré
       </label>
-      <input
-        id="proof-title"
-        type="text"
-        value={title}
-        onChange={(event) => setTitle(event.target.value)}
-        maxLength={MAX_TITLE_LENGTH}
-        placeholder={placeholder}
-        autoComplete="off"
-        enterKeyHint="done"
-        className="h-14 w-full rounded-sm border border-line bg-surface-200 px-4 text-15 text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none"
-      />
-      <PrimaryAction text="Enregistrer" onClick={() => onSubmit({ exploredTitle: title })} loading={saving}>
+      <div className="relative">
+        <Icon size={18} className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-ink-soft" aria-hidden="true" />
+        <Input
+          id="proof-title"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          maxLength={MAX_TITLE_LENGTH}
+          placeholder={placeholder}
+          autoComplete="off"
+          enterKeyHint="done"
+          className="pl-12"
+        />
+      </div>
+      <PrimaryAction text="Enregistrer" icon={<Save aria-hidden="true" />} onClick={() => onSubmit({ exploredTitle: title })} loading={saving}>
         {footer}
       </PrimaryAction>
     </Screen>

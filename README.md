@@ -23,7 +23,7 @@ shared/     Types, contenus et règles partagés par l'app et le serveur
   src/selection.ts    ← choix d'une activité
   src/rules.ts        ← pièces d'or, garde-fou temporel
 server/     API REST (Express) + bot Telegram (Telegraf) + base SQLite (Prisma)
-app/        La Mini App (React, Vite, TypeScript, Tailwind CSS, Motion)
+app/        La Mini App (React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Motion)
 prototype/  Le prototype web précédent (archive)
 promo/      Les pubs en motion design
 ```
@@ -227,11 +227,13 @@ Chaque requête porte `Authorization: tma <initData>`. Les types des requêtes e
 ## Design
 
 - **Palette et typographies** : `app/src/styles/index.css`. Chaque couleur y a sa valeur claire et sa valeur sombre. Les couleurs par défaut de Tailwind sont désactivées : impossible d'utiliser une couleur hors palette par erreur. Idem pour les tailles de texte (Fraunces 22-34 px, Manrope 11-15 px, Space Mono 10,5-21 px) et les rayons (8, 14, 20 px, pilule).
+- **Composants** : [shadcn/ui](https://ui.shadcn.com) (`app/src/components/ui/` : boutons, cartes, fenêtre modale, choix, pastilles, messages, champs de saisie, squelettes de chargement), sur la base de Radix UI. Leurs couleurs sont branchées sur la palette (`primary` = accent, `card` = surface, `muted`, `border`, `ring`… dans `index.css`), leurs tailles et marges sur les tokens (texte 11-15 px, espacements 4 / 8 / 16 / 24 / 32 px, rayons 8 / 14 / 20 px). Pour en ajouter un : `npx shadcn@latest add <nom>` dans `app/`, puis l'adapter de la même façon. Seule différence avec shadcn : `accent` y est la couleur de marque, pas un fond de survol.
 - **Thème** : suit `Telegram.WebApp.colorScheme` (et l'événement `themeChanged`), ou le réglage du système hors de Telegram. L'en-tête et le fond de Telegram prennent la couleur *canvas* de l'app.
 - **SDK Telegram** (`app/src/telegram/`) : bouton retour natif, bouton principal natif (onboarding, envoi de la photo ou du texte : il reste au-dessus du clavier), vibrations (sélection, validation, erreur), glissement vertical désactivé pour ne pas fermer l'app en faisant défiler la galerie. Hors de Telegram, l'app affiche ses propres boutons.
 - **Décor vivant** (`app/src/components/decor/`) : derrière chaque écran, de grandes taches de couleur qui dérivent lentement, de petites formes qui flottent et un grain de papier. Leur teinte suit le parcours : calme ou chaude selon le mood, couleur de la passion pendant l'activité, dorée dans la galerie. Chaque passion a sa scène animée : un crayon qui dessine, une plume qui écrit, un égaliseur qui danse, une pellicule qui défile. L'accueil a un ciel qui suit l'heure (soleil le jour, lune et étoiles la nuit).
-- **Animations** : transitions entre écrans, texte des activités qui apparaît mot à mot, cadrans de durée, compteur « à rouleaux », célébration à la validation (rayons, pièce qui tournoie, pièces qui tombent dans le compteur, confettis). Les boucles n'animent que la position et l'opacité, pour rester fluides sur les petits téléphones. Si le système demande de réduire les animations, tout s'arrête et chaque décor reste sur une image fixe.
-- **Illustrations** : [unDraw](https://undraw.co) (licence libre), recolorées avec les variables du thème par `app/scripts/recolor-undraw.mjs`.
+- **Animations** (Motion, ex-Framer Motion) : transitions entre écrans, chaque bouton, choix et carte qui s'enfonce légèrement au toucher, fenêtre de détail de la galerie qui monte du bas (on la ferme en la glissant vers le bas, ou avec le bouton retour de Telegram), étapes du parcours qui se remplissent, texte des activités qui apparaît mot à mot, cadrans de durée, compteur « à rouleaux », célébration à la validation (rayons, pièce qui tournoie, pièces qui tombent dans le compteur, confettis). Les boucles n'animent que la position et l'opacité, pour rester fluides sur les petits téléphones. Si le système demande de réduire les animations, tout s'arrête et chaque décor reste sur une image fixe.
+- **Icônes** : [Lucide](https://lucide.dev), en `ink-soft` au repos et en accent une fois sélectionnées.
+- **Illustrations** : [unDraw](https://undraw.co) (licence libre), recolorées avec les variables du thème par `app/scripts/recolor-undraw.mjs` : bienvenue, choix des passions, galerie vide, erreur de connexion, ouverture hors de Telegram.
 - **Accessibilité** : `ink-faint` sert aux textes désactivés et aux indications de saisie ; les textes informatifs utilisent `ink-soft` ou `ink`, pour un contraste suffisant.
 
 ## Hors périmètre de cette V1

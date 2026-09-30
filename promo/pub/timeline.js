@@ -62,13 +62,17 @@ export const T = {
   sting: beatAt(41), // dernier coup, juste après la voix
 }
 
-/** Les balayages du fil : instant, durée, numéro de la vidéo d'arrivée. */
+/**
+ * Les balayages du fil, de plus en plus rapides. Le doigt se pose et tire la
+ * vidéo (`pull` px, pendant `drag` s), puis lâche sur le temps de la musique
+ * (`t`) : la vidéo suivante se cale en décélérant (`snap` s).
+ */
 export const SWIPES = [
-  { t: beatAt(-12), d: 0.26, to: 1 },
-  { t: beatAt(-10), d: 0.17, to: 2 },
-  { t: beatAt(-9.5), d: 0.15, to: 3 },
-  { t: beatAt(-9), d: 0.13, to: 4 },
-  { t: beatAt(-8.5), d: 0.12, to: 5 },
+  { t: beatAt(-12), drag: 0.24, pull: 210, snap: 0.32 },
+  { t: beatAt(-10), drag: 0.12, pull: 140, snap: 0.21 },
+  { t: beatAt(-9.5), drag: 0.085, pull: 110, snap: 0.17 },
+  { t: beatAt(-9), drag: 0.075, pull: 95, snap: 0.15 },
+  { t: beatAt(-8.5), drag: 0.065, pull: 85, snap: 0.14 },
 ]
 
 /**
@@ -94,7 +98,7 @@ export const CAPTIONS = [
   { words: [['ET', 20.17], ['CHAQUE', 20.28], ['ENVIE', 20.52]], at: 'high' },
   { words: [['TRANSFORMÉE', 20.76]], at: 'high', hi: ['TRANSFORMÉE'] },
   { words: [['FAIT', 21.61], ['GRIMPER', 21.74]], at: 'high' },
-  { words: [['TA', 22.16], ['SÉRIE 🔥', 22.28]], at: 'high', hi: ['SÉRIE 🔥'], until: 23.0 },
+  { words: [['TA', 22.16], ['SÉRIE.', 22.28]], at: 'high', hi: ['SÉRIE.'], until: 23.0 },
   { words: [['TA', 24.62], ['PROCHAINE', 24.7], ['ENVIE,', 24.98]], at: 'end' },
   { words: [['FAIS-EN', 25.78], ['QUELQUE', 26.0], ['CHOSE.', 26.14]], at: 'end', hi: ['QUELQUE', 'CHOSE.'], until: DURATION - VO_START },
 ]

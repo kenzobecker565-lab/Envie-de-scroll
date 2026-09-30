@@ -26,6 +26,7 @@ const zones = {}
 
 const settle = (ms = 700) => page.waitForTimeout(ms)
 async function shot(name, { full = false } = {}) {
+  await page.mouse.move(0, 0) // pas d'état de survol sur les captures
   await page.screenshot({ path: path.join(out, `${name}.png`), fullPage: full })
   console.log(name)
 }

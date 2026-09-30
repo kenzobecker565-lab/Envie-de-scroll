@@ -46,6 +46,8 @@ const TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
+  // src/lib/pictos.ts, partagé avec l'app, est écrit sans annotation de type
+  '.ts': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.woff2': 'font/woff2',
   '.svg': 'image/svg+xml',

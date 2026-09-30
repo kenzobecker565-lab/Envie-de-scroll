@@ -1,17 +1,17 @@
-/* Pub « Plutôt Que Scroller » (≈ 28 s, 1080 × 1920). Couleurs de l'app. */
+/* Pub « Plutôt Que Scroller » (≈ 28 s, 1080 × 1920). Couleurs de l'app (src/styles/index.css). */
 
 :root {
-  --paper: #fbf5ec;
-  --card: #fffdf9;
-  --ink: #2a1f1a;
-  --ink-soft: #6e5d52;
-  --line: #eadfd0;
-  --primary: #c4401c;
+  --paper: #f5f4f1;
+  --card: #ffffff;
+  --ink: #191613;
+  --ink-soft: #5d5853;
+  --line: #e4e1dc;
+  --primary: #cc3615;
+  --primary-strong: #ab2c0f;
   --saffron: #f2b632;
   --hot: #ff5a36;
   --display: 'Fraunces Variable', Georgia, serif;
-  /* Emojis en couleur avant les polices système (DejaVu en a en noir et blanc). */
-  --sans: 'Figtree Variable', 'Noto Color Emoji', system-ui, sans-serif;
+  --sans: 'Figtree Variable', system-ui, sans-serif;
 }
 
 html,
@@ -65,117 +65,344 @@ body {
   object-fit: cover;
 }
 
-/* --------------------------------------------------------- fil d'actualité */
-
-#feedStack {
-  filter: url(#vblur);
-}
+/* ------------------------------------------ fil de vidéos courtes (accroche) */
 
 .feedItem {
   position: absolute;
   left: 0;
   width: 1080px;
-  height: 1920px;
   overflow: hidden;
+  background: #000;
 }
 
-.feedUI {
+.feedItem .full-img {
+  height: 100%;
+}
+
+.feedShade {
   position: absolute;
   inset: 0;
-  color: #fff;
-  text-shadow: 0 2px 8px rgb(0 0 0 / 0.5);
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.32) 0%, transparent 17%, transparent 58%, rgb(0 0 0 / 0.5) 100%);
 }
 
-.feedUI .side {
+.feedTop {
   position: absolute;
-  right: 34px;
-  bottom: 420px;
+  left: 0;
+  top: 0;
+  width: 1080px;
+  height: 260px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+
+.statusbar {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 44px;
-  font-size: 30px;
+  justify-content: space-between;
+  height: 112px;
+  padding: 14px 64px 0 96px;
+  box-sizing: border-box;
+  font-size: 44px;
   font-weight: 700;
 }
 
-.feedUI .side .ico {
-  width: 88px;
-  height: 88px;
-  display: grid;
-  place-items: center;
+.statusbar .icons,
+.phone .status .icons {
+  display: flex;
+  align-items: center;
+  gap: 9px;
 }
 
-.feedUI .side span {
+.statusbar .icons {
+  gap: 14px;
+}
+
+.statusbar .icons svg {
+  height: 34px;
+  width: auto;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.3));
+}
+
+.tabs {
+  position: absolute;
+  left: 0;
+  top: 128px;
+  width: 1080px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  font-size: 45px;
+  font-weight: 600;
+  color: rgb(255 255 255 / 0.68);
+}
+
+.tabs .tab.on {
+  position: relative;
+  color: #fff;
+  font-weight: 800;
+}
+
+.tabs .tab.on::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  width: 62px;
+  height: 7px;
+  margin-left: -31px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.tabs .live {
+  position: absolute;
+  left: 40px;
+  padding: 1px 10px;
+  border: 4px solid #fff;
+  border-radius: 12px;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.tabs .search {
+  position: absolute;
+  right: 40px;
+  top: -8px;
+}
+
+.rail {
+  position: absolute;
+  right: 18px;
+  bottom: 70px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  color: #fff;
+  font-size: 33px;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
+}
+
+.rail span {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
 }
 
-.feedUI .avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  border: 4px solid #fff;
+.rail svg {
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.28));
 }
 
-.feedUI .bottom {
+.rail .avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 24px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  font-size: 52px;
+  font-weight: 800;
+}
+
+.rail .avatar i {
+  position: absolute;
+  left: 50%;
+  bottom: -26px;
+  width: 50px;
+  height: 50px;
+  margin-left: -25px;
+  border-radius: 50%;
+  background: #fe2c55;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 48px;
+  text-align: center;
+  text-shadow: none;
+}
+
+.rail .disc {
+  width: 110px;
+  height: 110px;
+  margin-top: 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
+}
+
+.caption {
   position: absolute;
   left: 40px;
-  right: 180px;
-  bottom: 250px;
-  font-size: 36px;
-  line-height: 1.35;
+  right: 190px;
+  bottom: 44px;
+  color: #fff;
+  font-size: 39px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
 }
 
-.feedUI .bottom b {
-  font-size: 40px;
+.caption b {
+  font-size: 44px;
+  font-weight: 800;
 }
 
-.feedShade {
+.caption p {
+  margin: 8px 0 18px;
+}
+
+.caption em {
+  font-style: normal;
+  font-weight: 700;
+}
+
+.caption .music {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.caption .music .mq {
+  width: 460px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.caption .music .mq span {
+  display: inline-block;
+}
+
+.progress {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.25) 0%, transparent 18%, transparent 62%, rgb(0 0 0 / 0.55) 100%);
+  left: 0;
+  bottom: 0;
+  width: 1080px;
+  height: 5px;
+  background: rgb(255 255 255 / 0.22);
 }
 
+.progress i {
+  display: block;
+  height: 100%;
+  background: rgb(255 255 255 / 0.85);
+}
+
+.feedNav {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1080px;
+  height: 150px;
+  box-sizing: border-box;
+  padding: 14px 10px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  background: #000;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.feedNav span {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.feedNav span svg {
+  opacity: 0.8;
+}
+
+.feedNav .on {
+  color: #fff;
+}
+
+.feedNav .on svg {
+  opacity: 1;
+}
+
+.feedNav .plus i {
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 68px;
+  margin-top: 12px;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.feedNav .plus svg {
+  stroke: #111;
+  opacity: 1;
+}
+
+/* Notification iOS, sombre et givrée */
 .notif {
   display: flex;
   align-items: center;
-  gap: 26px;
-  width: 940px;
+  gap: 28px;
+  width: 1008px;
   box-sizing: border-box;
-  padding: 26px 32px;
-  border-radius: 44px;
-  background: rgb(38 36 44 / 0.88);
-  box-shadow: 0 20px 60px rgb(0 0 0 / 0.45);
+  padding: 30px 36px 30px 30px;
+  border-radius: 58px;
+  background: rgb(38 38 42 / 0.72);
+  backdrop-filter: blur(40px) saturate(1.6);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
   color: #fff;
 }
 
 .notif .appico {
   flex: none;
-  width: 88px;
-  height: 88px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, #7b61ff, #4f52a8);
   display: grid;
   place-items: center;
-  font-size: 52px;
+  width: 104px;
+  height: 104px;
+  border-radius: 25px;
+  background: linear-gradient(160deg, #7b61ff, #4a3fd1);
+}
+
+.notif .txt {
+  flex: 1;
+  min-width: 0;
 }
 
 .notif .t1 {
-  font-size: 30px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 40px;
   font-weight: 700;
-  opacity: 0.75;
+}
+
+.notif .t1 span {
+  font-size: 33px;
+  font-weight: 500;
+  opacity: 0.6;
 }
 
 .notif .t2 {
-  font-size: 40px;
-  font-weight: 700;
   margin-top: 4px;
+  font-size: 39px;
+  line-height: 1.25;
 }
 
 .notif .t2 b {
-  color: #ff8a66;
+  color: #ffa182;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
@@ -191,7 +418,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: rgb(255 122 80 / 0.4);
+  background: rgb(230 80 40 / 0.38);
 }
 
 .bigbtn .disc {
@@ -199,7 +426,11 @@ body {
   inset: 0;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: 0 40px 100px -30px rgb(196 64 28 / 0.95);
+  box-shadow:
+    inset 0 6px 0 rgb(255 255 255 / 0.22),
+    inset 0 -24px 40px rgb(0 0 0 / 0.14),
+    0 14px 0 var(--primary-strong),
+    0 60px 100px -30px rgb(204 54 21 / 0.9);
 }
 
 .bigbtn .label {
@@ -210,13 +441,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  color: #fff7ee;
+  color: #fff;
   text-align: center;
-  font-family: var(--display);
-  font-variation-settings: 'SOFT' 100;
-  font-size: 70px;
-  font-weight: 600;
+  font-family: var(--sans);
+  font-size: 68px;
+  font-weight: 800;
   line-height: 1.04;
+  letter-spacing: -0.02em;
 }
 
 .touch {
@@ -267,14 +498,41 @@ body {
   transform-origin: 50% 40%;
 }
 
+/* Le téléphone : bord noir, cadre en titane (anneaux d'ombre), boutons sur les côtés, reflet sur la vitre. */
 .phone .bezel {
   position: absolute;
-  inset: -22px;
-  border-radius: 92px;
-  background: #1b1512;
+  inset: -24px;
+  border-radius: 94px;
+  background: #0a0a0b;
   box-shadow:
-    0 0 0 3px #3a2e27,
-    0 80px 140px -40px rgb(42 31 26 / 0.7);
+    0 0 0 4px #2b2b2d,
+    0 0 0 7px #9d9a93,
+    0 0 0 9px #57554f,
+    0 90px 150px -40px rgb(25 22 19 / 0.55),
+    0 34px 60px -30px rgb(25 22 19 / 0.45);
+}
+
+.phone::before,
+.phone::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  border-radius: 5px;
+}
+
+/* Côté gauche : les deux boutons de volume ; côté droit : le bouton latéral. */
+.phone::before {
+  left: -42px;
+  top: 250px;
+  height: 250px;
+  background: linear-gradient(180deg, #8f8c85 0 42%, transparent 42% 58%, #8f8c85 58% 100%);
+}
+
+.phone::after {
+  right: -42px;
+  top: 330px;
+  height: 150px;
+  background: #8f8c85;
 }
 
 .phone .screen {
@@ -283,6 +541,21 @@ body {
   border-radius: 72px;
   overflow: hidden;
   background: var(--paper);
+}
+
+.phone .screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(118deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.05) 26%, transparent 42%, transparent 80%, rgb(255 255 255 / 0.05) 100%);
+}
+
+.phone .screen > .hl,
+.phone .screen > .touch,
+.phone .screen > .tapring {
+  z-index: 6;
 }
 
 /* Les captures (390 × 844 pt) sous une barre d'état de 70 px. */
@@ -368,12 +641,10 @@ body {
 }
 
 .minicard .bubble {
-  width: 84px;
-  height: 84px;
-  border-radius: 26px;
   display: grid;
   place-items: center;
-  font-size: 48px;
+  width: 84px;
+  height: 84px;
 }
 
 .minicard .sub {
@@ -431,8 +702,8 @@ body {
 }
 
 .sticker .emoji {
-  font-size: 58px;
-  line-height: 1;
+  display: grid;
+  place-items: center;
 }
 
 .sticker .num {
@@ -489,12 +760,15 @@ body {
   inset: 0;
   border-radius: 999px;
   background: var(--primary);
-  box-shadow: 0 30px 70px -26px rgb(196 64 28 / 0.95);
+  box-shadow:
+    inset 0 3px 0 rgb(255 255 255 / 0.2),
+    0 8px 0 var(--primary-strong),
+    0 30px 70px -26px rgb(204 54 21 / 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 18px;
-  color: #fff7ee;
+  color: #fff;
   font-size: 60px;
   font-weight: 800;
 }
@@ -516,8 +790,7 @@ body {
   box-shadow: 0 22px 40px -24px rgb(42 31 26 / 0.55);
   display: grid;
   place-items: center;
-  font-size: 74px;
-  line-height: 1;
+  color: var(--ink);
 }
 
 /* ------------------------------------------------------- aperçu interactif */
@@ -564,6 +837,6 @@ body.preview #controls {
   padding: 6px 14px;
   border-radius: 999px;
   border: 0;
-  background: #c4401c;
+  background: #cc3615;
   color: #fff;
 }

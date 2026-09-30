@@ -3,8 +3,9 @@
  *  « Plutôt Que Scroller » — la pub (≈ 28 s, 1080 × 1920, 60 i/s)
  * ============================================================================
  *
- *  1. 0 → 3,5 s     Accroche : la pub se déguise en vidéo du fil. « Si tu vois
- *                   cette vidéo… c'est que tu scrolles encore. » Swipes de plus
+ *  1. 0 → 3,6 s     Accroche : la pub se déguise en enregistrement d'écran d'une
+ *                   app de vidéos courtes. « Si tu vois cette vidéo… c'est que tu
+ *                   scrolles encore. » Six vraies vidéos, swipes au doigt de plus
  *                   en plus rapides, notification de temps d'écran, arrêt net.
  *  2. 3,5 → 7,3 s   « Et si cette envie devenait un truc que t'aimes vraiment ? »
  *                   Le bouton de l'app apparaît ; un doigt appuie.
@@ -23,7 +24,8 @@
 
 import { clamp, ease, finalize, lerp, onFrame, prog, rng, seek as seekEngine, set, stagger, tw } from '../engine.js'
 import { CLIPS } from './clips.js'
-import { BEAT, CAPTIONS, DROP, DURATION, FPS, SWIPES, T, vo } from './timeline.js'
+import { PICTOS, spotFor } from '../../src/lib/pictos.ts'
+import { BEAT, CAPTIONS, DROP, DURATION, FPS, HEIGHT, SWIPES, T, WIDTH, vo } from './timeline.js'
 
 // --------------------------------------------------------------- utilitaires
 
@@ -91,17 +93,19 @@ function playClip(img, clip, t0, t1, { from = 0, speed = 1 } = {}) {
 const svgIcon = (inner, stroke = 2) =>
   `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`
 
-const ICON = {
-  sparkles: svgIcon(
-    '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
-  ),
-  heart: `<svg viewBox="0 0 24 24" width="84" height="84" fill="#fff"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
-  comment: `<svg viewBox="0 0 24 24" width="80" height="80" fill="#fff"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>`,
-  share: `<svg viewBox="0 0 24 24" width="80" height="80" fill="#fff"><path d="M14 4v4C7 9 4 14 3 20c2.5-3.5 6-5.1 11-5.1V19l7-7.5z"/></svg>`,
+/**
+ * Un pictogramme de l'app (src/lib/pictos.ts) en SVG : trait, et tache de
+ * couleur facultative dessous, comme dans l'app.
+ */
+function picto(name, { size = 48, color = 'currentColor', spot = null, weight = 1.8 } = {}) {
+  const spotPath = spot ? `<path d="${spotFor(name)}" fill="${spot}" stroke="none"/>` : ''
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${color}" stroke-width="${weight}" stroke-linecap="round" stroke-linejoin="round" style="display:block">${spotPath}${PICTOS[name].map((d) => `<path d="${d}"/>`).join('')}</svg>`
 }
+/** Tache douce d'une couleur (mélangée au blanc). */
+const soft = (color, pct = 45) => `color-mix(in oklab, ${color} ${pct}%, #fff)`
 
 const APP_MARK = `<svg viewBox="0 0 64 64" width="100%" height="100%">
-  <rect width="64" height="64" rx="18" fill="#C4401C"/>
+  <rect width="64" height="64" rx="18" fill="#CC3615"/>
   <g transform="rotate(-45 32 32) translate(2.5 0)">
     <rect x="17" y="27" width="27" height="10" rx="2" fill="#FFF7EE"/>
     <rect x="44" y="27" width="7" height="10" rx="2" fill="#F2B632"/>
@@ -119,81 +123,145 @@ const COLORS = ['#E4572E', '#9B5DE5', '#3D7DD8', '#13A89E', '#F08A24', '#C9971A'
 // =============================================================================
 
 const FEED = [
-  { clip: 'hook-fille', user: '@juste.une.video', text: 'encore une dernière, promis 🙏', likes: '48,2 k' },
-  { clip: 'hook-lit', user: '@minuit.pile', text: 'POV : il est 1 h du mat', likes: '12,9 k', night: true },
-  { bg: 'linear-gradient(160deg,#ff4d8d,#7b61ff)', emoji: '😂', user: '@memes.du.jour', text: 'je suis mort 💀', likes: '301 k' },
-  { bg: 'linear-gradient(160deg,#22c3e6,#1b3f8c)', emoji: '🐱', user: '@chat.chelou', text: 'regarde jusqu’à la fin', likes: '88 k' },
-  { bg: 'linear-gradient(160deg,#ffd166,#ef476f)', emoji: '🍕', user: '@food.hacks', text: 'la recette que personne ne connaît', likes: '1,2 M' },
-  { bg: 'linear-gradient(160deg,#06d6a0,#118ab2)', emoji: '🎮', user: '@gaming.clips', text: 'attends la dernière seconde', likes: '540 k' },
+  { clip: 'hook-fille', user: 'juste.une.video', text: 'encore une dernière, promis', tags: '#pourtoi #scroll', likes: '48,2 k', comments: '1 204', saves: '5 310', shares: '892', from: 0 },
+  { clip: 'hook-lit', user: 'minuit.pile', text: 'POV : il est 1 h du mat et t’as cours demain', tags: '#insomnie', likes: '12,9 k', comments: '406', saves: '1 877', shares: '233', night: true, from: 0.4 },
+  { clip: 'feed-danse', user: 'lina.danse', text: 'nouvelle choré, vous validez ?', tags: '#danse #trend', likes: '301 k', comments: '4 518', saves: '22,1 k', shares: '9 870', from: 0.2 },
+  { clip: 'feed-chat', user: 'nuage.le.chat', text: 'il a aucune limite', tags: '#chat #drole', likes: '88,4 k', comments: '2 061', saves: '6 402', shares: '3 311', from: 0.3 },
+  { clip: 'feed-food', user: 'streetfood.paris', text: 'le meilleur snack de la ville', tags: '#food #streetfood', likes: '1,2 M', comments: '12,3 k', saves: '98,4 k', shares: '41,7 k', from: 0.2 },
+  { clip: 'feed-skate', user: 'skate.daily', text: 'attends la fin…', tags: '#skate #fyp', likes: '540 k', comments: '7 745', saves: '31,2 k', shares: '18,9 k', from: 0.1 },
 ]
+/** Barre d'onglets du bas de l'app de vidéos (fixe) ; les vidéos défilent au-dessus. */
+const NAV_H = 150
+const POST_H = HEIGHT - NAV_H
 
-function feedIndex(t) {
-  let idx = 0
+/** Décalage du fil (px) à l'instant t : le doigt tire la vidéo, lâche, elle se cale (SWIPES). */
+function feedOffset(t) {
+  let y = 0
   for (const s of SWIPES) {
-    if (t < s.t) break
-    idx = lerp(s.to - 1, s.to, ease.out3(clamp((t - s.t) / s.d)))
+    const t0 = s.t - s.drag
+    if (t <= t0) continue
+    if (t < s.t) y += s.pull * ease.in2((t - t0) / s.drag)
+    else y += s.pull + (POST_H - s.pull) * ease.out3(clamp((t - s.t) / s.snap))
   }
-  return idx
+  return y
 }
+
+/** Icônes pleines de l'interface du fil (grille 24). */
+const FEED_ICON = {
+  heart: '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>',
+  comment: '<path d="M12 3C6.48 3 2 6.58 2 11c0 2.42 1.34 4.59 3.46 6.05-.16 1.35-.86 2.62-1.9 3.45 2.24.1 4.36-.66 5.86-2 .83.18 1.7.28 2.58.28 5.52 0 10-3.58 10-8S17.52 3 12 3z"/><circle cx="7.6" cy="11" r="1.25" fill="#1b1b1b" fill-opacity=".75"/><circle cx="12" cy="11" r="1.25" fill="#1b1b1b" fill-opacity=".75"/><circle cx="16.4" cy="11" r="1.25" fill="#1b1b1b" fill-opacity=".75"/>',
+  save: '<path d="M6.2 2.5h11.6c.66 0 1.2.54 1.2 1.2v17.4c0 .5-.57.78-.97.48L12 17.1l-6.03 4.48a.6.6 0 0 1-.97-.48V3.7c0-.66.54-1.2 1.2-1.2z"/>',
+  share: '<path d="M13.6 4.2v4.1C7.7 8.9 4.1 12.9 3 19.3c2.5-3.6 5.8-5.2 10.6-5.2v4.2L21.4 11z"/>',
+}
+const fillIcon = (name, size) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="#fff">${FEED_ICON[name]}</svg>`
+const lineIcon = (inner, size, weight = 2.2) =>
+  `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="#fff" stroke-width="${weight}" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`
 
 function buildS1() {
   const s1 = $('#s1')
   s1.innerHTML = `
-    <div id="feedStack" class="layer"><div id="feedInner" class="layer"></div></div>
-    <div id="notifWrap" class="abs" style="left:70px;top:90px"></div>
+    <div id="feedScreen" class="layer">
+      <div id="feedStack" class="abs" style="left:0;top:0;width:${WIDTH}px;height:${POST_H}px;overflow:hidden"><div id="feedInner" class="layer"></div></div>
+      <div class="feedTop">
+        <div class="statusbar"><span>01:12</span><span class="sb-icons">${statusIcons('#fff')}</span></div>
+        <div class="tabs">
+          <span class="live">LIVE</span>
+          <span class="tab">Explorer</span><span class="tab">Abonnements</span><span class="tab on">Pour toi</span>
+          <span class="search">${lineIcon(PICTOS.search.map((d) => `<path d="${d}"/>`).join(''), 60, 2.4)}</span>
+        </div>
+      </div>
+      <div class="feedNav">
+        <span class="on">${lineIcon('<path d="M3 10.2 12 3l9 7.2V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z" fill="#fff"/>', 58, 1.8)}Accueil</span>
+        <span>${lineIcon('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>', 58)}Amis</span>
+        <span class="plus"><i>${lineIcon('<path d="M12 6v12M6 12h12"/>', 44, 3)}</i></span>
+        <span>${lineIcon('<path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/>', 58)}Boîte de réception</span>
+        <span>${lineIcon('<circle cx="12" cy="8" r="4.2"/><path d="M4 21c0-4 3.6-6.6 8-6.6s8 2.6 8 6.6"/>', 58)}Profil</span>
+      </div>
+      <div id="feedTouch" class="touch"></div>
+    </div>
+    <div id="notifWrap" class="abs" style="left:36px;top:150px"></div>
     <div id="s1flash" class="layer" style="background:#fff"></div>`
   const inner = $('#feedInner')
   FEED.forEach((item, k) => {
-    const el = add(inner, `<div class="feedItem" style="top:${k * 1920}px;background:${item.bg ?? '#111'}"></div>`)
-    if (item.clip) {
-      const img = add(el, '<img class="full-img" alt="">')
-      const t0 = k === 0 ? 0 : SWIPES[k - 1].t
-      const t1 = k + 1 < FEED.length ? SWIPES[k].t + SWIPES[k].d : T.freeze + 4
-      playClip(img, item.clip, t0, t1, { from: k === 0 ? 0 : 0.4 })
-      if (item.night) add(el, '<div class="layer" style="background:linear-gradient(180deg,rgb(20 30 90 / .45),rgb(10 10 40 / .35));mix-blend-mode:multiply"></div>')
-    } else {
-      add(el, `<div class="layer" style="display:grid;place-items:center;font-size:360px">${item.emoji}</div>`)
-    }
+    const el = add(inner, `<div class="feedItem" style="top:${k * POST_H}px;height:${POST_H}px"></div>`)
+    const img = add(el, '<img class="full-img" alt="">')
+    // Visible dès que le doigt tire la vidéo précédente ; la dernière se fige à l'arrêt.
+    const t0 = k === 0 ? 0 : SWIPES[k - 1].t - SWIPES[k - 1].drag
+    const t1 = k + 1 < FEED.length ? SWIPES[k].t + SWIPES[k].snap : T.freeze
+    playClip(img, item.clip, t0, t1, { from: item.from })
+    if (item.night) add(el, '<div class="layer" style="background:linear-gradient(180deg,rgb(20 30 90 / .42),rgb(10 10 40 / .3));mix-blend-mode:multiply"></div>')
     add(
       el,
-      `<div class="feedShade"></div><div class="feedUI">
-        <div class="side">
-          <div class="avatar" style="background:linear-gradient(135deg,${COLORS[k]},${COLORS[k + 2]})"></div>
-          <span><div class="ico">${ICON.heart}</div>${item.likes}</span>
-          <span><div class="ico">${ICON.comment}</div>${(k + 3) * 217}</span>
-          <span><div class="ico">${ICON.share}</div>Partager</span>
-        </div>
-        <div class="bottom"><b>${item.user}</b><br>${item.text}<br>♫ son original</div>
-      </div>`,
+      `<div class="feedShade"></div>
+      <div class="rail">
+        <div class="avatar" style="background:linear-gradient(135deg,${COLORS[k]},${COLORS[(k + 3) % COLORS.length]})"><b>${item.user[0].toUpperCase()}</b><i>+</i></div>
+        <span>${fillIcon('heart', 92)}${item.likes}</span>
+        <span>${fillIcon('comment', 88)}${item.comments}</span>
+        <span>${fillIcon('save', 82)}${item.saves}</span>
+        <span>${fillIcon('share', 88)}${item.shares}</span>
+        <div class="disc" data-disc style="background:radial-gradient(circle at 50% 50%,${COLORS[(k + 1) % COLORS.length]} 0 29%,#111 30% 33%,#2a2a2a 34% 48%,#161616 49% 100%)"></div>
+      </div>
+      <div class="caption"><b>${item.user}</b><p>${item.text} <em>${item.tags}</em></p><div class="music">${lineIcon('<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#fff"/><circle cx="18" cy="16" r="3" fill="#fff"/>', 34, 2.4)}<span class="mq"><span data-marquee>son original - ${item.user} · son original - ${item.user} · </span></span></div></div>
+      <div class="progress"><i data-progress></i></div>`,
     )
   })
+  // Disques qui tournent, légendes musicales qui défilent, barres de progression
+  const discs = $$('[data-disc]', inner)
+  const marquees = $$('[data-marquee]', inner)
+  const bars = $$('[data-progress]', inner)
+  onFrame((t) => {
+    const tt = Math.min(t, T.freeze)
+    discs.forEach((d, k) => (d.style.transform = `rotate(${(tt * 70 + k * 40).toFixed(1)}deg)`))
+    marquees.forEach((m) => (m.style.transform = `translateX(${(-((tt * 70) % 520)).toFixed(1)}px)`))
+    bars.forEach((b, k) => (b.style.width = `${Math.min(100, 8 + ((tt * 9 + k * 23) % 90)).toFixed(1)}%`))
+  })
 
-  // Le fil défile (flou de mouvement proportionnel à la vitesse), puis se fige.
-  const blur = $('#vblurNode')
+  // Le fil défile au doigt, puis se fige (léger flou quand ça va très vite).
+  const blurNode = $('#vblurNode')
+  const stack = $('#feedStack')
   onFrame((t) => {
     if (t > T.freeze + 4.5) return
-    const idx = feedIndex(Math.min(t, T.freeze))
-    const v = t < T.freeze ? (feedIndex(t) - feedIndex(t - 0.004)) / 0.004 : 0
-    inner.style.transform = `translateY(${(-idx * 1920).toFixed(1)}px)`
-    blur.setAttribute('stdDeviation', `0 ${Math.min(60, Math.abs(v) * 1920 * 0.0028).toFixed(2)}`)
+    const tt = Math.min(t, T.freeze)
+    const y = feedOffset(tt)
+    const v = t < T.freeze ? (feedOffset(t) - feedOffset(t - 1 / 120)) * 120 : 0
+    inner.style.transform = `translateY(${(-y).toFixed(1)}px)`
+    const b = Math.min(7, Math.max(0, Math.abs(v) - 2500) * 0.0009)
+    stack.style.filter = b > 0.3 ? 'url(#vblur)' : 'none'
+    blurNode.setAttribute('stdDeviation', `0 ${b.toFixed(2)}`)
   })
-  tw('#feedInner', T.freeze, 0.3, { gray: [0, 1], bright: [1, 0.5] }, ease.out2)
+  // Le doigt : se pose, tire, lâche en continuant sa course.
+  const touch = $('#feedTouch')
+  onFrame((t) => {
+    let shown = false
+    SWIPES.forEach((s, k) => {
+      const t0 = s.t - s.drag
+      if (t < t0 - 0.04 || t > s.t + 0.14 || shown) return
+      shown = true
+      const drag = t < s.t ? s.pull * ease.in2(clamp((t - t0) / s.drag)) : s.pull + 320 * ease.out2(clamp((t - s.t) / 0.14))
+      const alpha = t < t0 ? (t - t0 + 0.04) / 0.04 : t > s.t ? 1 - (t - s.t) / 0.14 : 1
+      touch.style.opacity = (0.85 * clamp(alpha)).toFixed(3)
+      touch.style.transform = `translate(${(600 - k * 12).toFixed(1)}px, ${(1330 - drag).toFixed(1)}px) scale(${t < t0 ? 1.25 - (t - t0 + 0.04) * 6 : 1})`
+    })
+    if (!shown) touch.style.opacity = '0'
+  })
+  tw('#feedScreen', T.freeze, 0.3, { gray: [0, 1], bright: [1, 0.5] }, ease.out2)
   tw('#s1', T.freeze, DROP - T.freeze, { scale: [1, 1.08] }, ease.linear)
   set('#s1flash', 0, { opacity: 0 })
   tw('#s1flash', T.freeze, 0.28, { opacity: [0.55, 0] }, ease.out2)
 
-  // Notification : le temps d'écran s'emballe.
+  // Notification iOS : le temps d'écran s'emballe.
   const notif = add(
     $('#notifWrap'),
-    `<div class="notif"><div class="appico">⏳</div><div><div class="t1">TEMPS D’ÉCRAN · maintenant</div><div class="t2">Aujourd’hui : <b id="stTime"></b> sur ton téléphone</div></div></div>`,
+    `<div class="notif"><div class="appico">${picto('hourglass', { size: 58, color: '#fff', weight: 2.2 })}</div>
+      <div class="txt"><div class="t1"><b>Temps d’écran</b><span>maintenant</span></div><div class="t2">Tu as passé <b id="stTime"></b> sur ton téléphone aujourd’hui.</div></div></div>`,
   )
   const st = $('#stTime')
   st.__fmt = (m) => `${Math.floor(m / 60)}${NNBSP}h${NNBSP}${String(Math.floor(m % 60)).padStart(2, '0')}`
   tw(st, 0, 0.01, { text: [192, 192] })
   tw(st, T.counter, T.freeze - T.counter, { text: [192, 287] }, ease.in2)
-  set(notif, 0, { y: -320 })
-  tw(notif, T.notif, 0.45, { y: [-320, 0] }, ease.back(1.4))
-  tw(notif, T.freeze + 0.05, 0.3, { y: -320 }, ease.in3)
+  set(notif, 0, { y: -380, scale: 0.96 })
+  tw(notif, T.notif, 0.5, { y: [-380, 0], scale: [0.96, 1] }, ease.back(1.2))
+  tw(notif, T.freeze + 0.05, 0.3, { y: -380 }, ease.in3)
   set(s1, DROP + 0.5, { opacity: 0 })
 }
 
@@ -207,7 +275,7 @@ function buildS2() {
     <div id="s2dim" class="layer" style="background:#0d0a14"></div>
     <div id="btnShake" class="layer"><div id="btn" class="bigbtn" style="left:300px;top:640px">
       <div class="ring"></div><div class="ring"></div><div class="disc"></div>
-      <div class="label"><span id="btnSpark" style="display:block;width:74px;height:74px">${ICON.sparkles}</span><div>J’ai envie<br>de scroller</div></div>
+      <div class="label"><span id="btnSpark" style="display:block;width:78px;height:78px">${picto('pencil', { size: 78, color: '#fff', weight: 2.2 })}</span><div>J’ai envie<br>de scroller</div></div>
     </div></div>
     <div id="s2touch" class="touch"></div><div id="s2tap" class="tapring"></div>`
   const btn = $('#btn')
@@ -248,7 +316,9 @@ function buildS2() {
     const a = t > T.tapBtn + 0.2 && t < DROP ? 14 * prog(t, T.tapBtn + 0.2, DROP - T.tapBtn - 0.2, ease.in2) : 0
     const beat = pulses.reduce((sum, [t0, k]) => sum + (t >= t0 && t < t0 + 0.5 ? k * Math.exp(-(t - t0) / 0.09) : 0), 0)
     shaker.style.transform = `translate(${(a * Math.sin(t * 120)).toFixed(2)}px, ${(a * Math.cos(t * 150)).toFixed(2)}px) scale(${(1 + 0.045 * beat).toFixed(4)})`
-    sparkIcon.style.transform = `rotate(${(t * 40 + (t > T.tapBtn ? (t - T.tapBtn) ** 2 * 2400 : 0)).toFixed(1)}deg)`
+    // Le crayon se balance doucement, puis frétille quand le bouton se charge.
+    const wiggle = t > T.tapBtn ? 26 * prog(t, T.tapBtn, DROP - T.tapBtn, ease.in2) * Math.sin(t * 70) : 0
+    sparkIcon.style.transform = `rotate(${(9 * Math.sin(t * 3.1) + wiggle).toFixed(2)}deg)`
   })
   set(s2, DROP + 0.6, { opacity: 0 })
 }
@@ -263,7 +333,7 @@ function buildS3() {
     <div id="s3bg" class="layer dots"></div>
     <svg class="layer" width="1080" height="1920" viewBox="0 0 1080 1920" style="overflow:visible"><g id="s3burst"></g></svg>
     <div id="s3logo" class="layer">
-      <div id="s3icon" class="abs" style="left:410px;top:470px;width:260px;height:260px;filter:drop-shadow(0 30px 40px rgb(196 64 28 / .35))">${APP_MARK}</div>
+      <div id="s3icon" class="abs" style="left:410px;top:470px;width:260px;height:260px;filter:drop-shadow(0 30px 40px rgb(204 54 21 / .35))">${APP_MARK}</div>
       <div id="s3l1" class="abs display logo-line" style="top:790px">plutôt que</div>
       <div id="s3l2" class="abs display logo-line" style="top:940px"><span id="s3word" style="position:relative;display:inline-block">scroller</span></div>
     </div>`
@@ -281,7 +351,7 @@ function buildS3() {
   const c2 = splitChars(word)
   word.insertAdjacentHTML(
     'beforeend',
-    `<svg viewBox="0 0 100 12" preserveAspectRatio="none" style="position:absolute;left:-4%;top:52%;width:108%;height:0.45em;transform:translateY(-50%);overflow:visible"><path id="s3strike" d="M2 7 Q 14 1 26 6 T 50 6 T 74 6 T 98 4" fill="none" stroke="#C4401C" stroke-width="3.4" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 100 12" preserveAspectRatio="none" style="position:absolute;left:-4%;top:52%;width:108%;height:0.45em;transform:translateY(-50%);overflow:visible"><path id="s3strike" d="M2 7 Q 14 1 26 6 T 50 6 T 74 6 T 98 4" fill="none" stroke="#CC3615" stroke-width="3.4" stroke-linecap="round"/></svg>`,
   )
   stagger([...c1, ...c2], 0, 0, 0, { opacity: 0 })
   stagger(c1, DROP + 0.08, 0.02, 0.4, { y: [90, 0], rot: [10, 0], opacity: [0, 1] }, ease.back(1.8))
@@ -309,7 +379,8 @@ function buildS3() {
 
 let zones = {}
 
-const STATUS_ICONS = `<span class="icons">
+/** Icônes de la barre d'état (réseau, wifi, batterie). */
+const statusIcons = (color = 'currentColor') => `<span class="icons" style="color:${color}">
   <svg width="34" height="22" viewBox="0 0 34 22" fill="currentColor"><rect y="14" width="6" height="8" rx="1.5"/><rect x="9" y="10" width="6" height="12" rx="1.5"/><rect x="18" y="5" width="6" height="17" rx="1.5"/><rect x="27" width="6" height="22" rx="1.5"/></svg>
   <svg width="30" height="22" viewBox="0 0 30 22" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M15 20.5 L10.6 16.1 A6.3 6.3 0 0 1 19.4 16.1 Z" fill="currentColor" stroke="none"/><path d="M5.8 11.6 A13 13 0 0 1 24.2 11.6"/><path d="M1.8 7 A19 19 0 0 1 28.2 7"/></svg>
   <svg width="50" height="24" viewBox="0 0 50 24" fill="currentColor"><rect x="1" y="1" width="42" height="22" rx="7" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/><rect x="4.5" y="4.5" width="31" height="15" rx="4"/><path d="M46 8.5 v7 a3.5 3.5 0 0 0 0 -7z" fill-opacity=".45"/></svg>
@@ -318,7 +389,7 @@ const STATUS_ICONS = `<span class="icons">
 function phoneMarkup(id, screens) {
   return `<div class="phone" id="${id}"><div class="bezel"></div><div class="screen">
     ${screens.map((s, i) => `<img id="${id}-sc${i}" src="${APP}/${s}.png" alt="">`).join('')}
-    <div class="status"><span>9:41</span>${STATUS_ICONS}</div>
+    <div class="status"><span>9:41</span>${statusIcons()}</div>
     <div class="hl" id="${id}-hl"></div><div class="touch" id="${id}-touch"></div><div class="tapring" id="${id}-tap"></div>
   </div><div class="island"></div></div>`
 }
@@ -333,7 +404,7 @@ function buildS4() {
   const s4 = $('#s4')
   s4.innerHTML = `${phoneMarkup('ph', ['01-accueil', '02-humeur', '03-passion', '04-duree', '05-activite'])}
     <div id="cardPop" class="abs"></div>
-    <div id="chipPop" class="abs sticker" style="left:630px;top:1285px"><span class="emoji">✏️</span>Dessin</div>`
+    <div id="chipPop" class="abs sticker" style="left:630px;top:1285px"><span class="emoji">${picto('pencil', { size: 60, spot: soft('#E4572E'), weight: 2 })}</span>Dessin</div>`
   const phone = $('#ph')
   // Entrée, léger flottement 3D, poussées de caméra
   set(phone, 0, { y: 1500, opacity: 0 })
@@ -418,10 +489,10 @@ function buildS4() {
 // =============================================================================
 
 const MONTAGE = [
-  { clip: 'dessin', word: 'DESSIN', emoji: '✏️', color: '#E4572E', title: 'Croquis express', sub: 'Dessin · 5 min' },
-  { clip: 'musique', word: 'MUSIQUE', emoji: '🎸', color: '#13A89E', title: 'Body percussion', sub: 'Musique · 5 min' },
-  { clip: 'cuisine', word: 'CUISINE', emoji: '🍳', color: '#C9971A', title: 'Galettes à la poêle', sub: 'Cuisine · 15 min' },
-  { clip: 'sport', word: 'SPORT', emoji: '🏃', color: '#F08A24', title: 'Secouer le stress', sub: 'Sport · 5 min' },
+  { clip: 'dessin', word: 'DESSIN', picto: 'pencil', color: '#E4572E', title: 'Croquis express', sub: 'Dessin · 5 min' },
+  { clip: 'musique', word: 'MUSIQUE', picto: 'guitar', color: '#13A89E', title: 'Body percussion', sub: 'Musique · 5 min' },
+  { clip: 'cuisine', word: 'CUISINE', picto: 'chef-hat', color: '#C9971A', title: 'Galettes à la poêle', sub: 'Cuisine · 15 min' },
+  { clip: 'sport', word: 'SPORT', picto: 'dumbbell', color: '#F08A24', title: 'Secouer le stress', sub: 'Sport · 5 min' },
 ]
 
 function buildS5() {
@@ -430,7 +501,7 @@ function buildS5() {
   const layers = MONTAGE.map((m, i) => {
     const el = add(s5, `<div class="layer" id="m${i}" style="overflow:hidden"><img class="full-img" alt=""><div class="layer" style="background:linear-gradient(180deg,transparent 55%,rgb(0 0 0 / .45))"></div>
       <div class="label-big" style="top:1150px"></div>
-      <div class="abs" style="left:0;width:1080px;top:1360px;display:flex;justify-content:center"><div class="minicard"><div class="bubble" style="background:color-mix(in oklab, ${m.color} 20%, #fffdf9)">${m.emoji}</div><div>${m.title}<div class="sub">${m.sub}</div></div></div></div></div>`)
+      <div class="abs" style="left:0;width:1080px;top:1360px;display:flex;justify-content:center"><div class="minicard"><div class="bubble">${picto(m.picto, { size: 70, spot: soft(m.color, 50) })}</div><div>${m.title}<div class="sub">${m.sub}</div></div></div></div></div>`)
     const label = $('.label-big', el)
     label.textContent = m.word
     return el
@@ -487,13 +558,13 @@ function buildS5() {
     s5,
     `<div class="abs" id="timer" style="left:290px;top:710px;width:500px;height:500px">
       <svg viewBox="0 0 500 500" width="500" height="500" style="position:absolute;inset:0;overflow:visible">
-        <circle cx="250" cy="250" r="230" fill="#fffdf9" stroke="#111" stroke-width="14"/>
-        <circle id="timerArc" cx="250" cy="250" r="190" fill="none" stroke="#C4401C" stroke-width="36" stroke-linecap="round" transform="rotate(-90 250 250)"/>
+        <circle cx="250" cy="250" r="230" fill="#ffffff" stroke="#111" stroke-width="14"/>
+        <circle id="timerArc" cx="250" cy="250" r="190" fill="none" stroke="#CC3615" stroke-width="36" stroke-linecap="round" transform="rotate(-90 250 250)"/>
       </svg>
-      <div class="abs" style="left:0;top:95px;width:500px;text-align:center;font-weight:900;font-size:230px;line-height:1;color:#2a1f1a;font-variant-numeric:tabular-nums"><span id="tn0">5</span></div>
-      <div class="abs" style="left:0;top:95px;width:500px;text-align:center;font-weight:900;font-size:230px;line-height:1;color:#2a1f1a"><span id="tn1">15</span></div>
-      <div class="abs" style="left:0;top:95px;width:500px;text-align:center;font-weight:900;font-size:230px;line-height:1;color:#C4401C"><span id="tn2">30</span></div>
-      <div class="abs" id="tmin" style="left:0;top:330px;width:500px;text-align:center;font-weight:900;font-size:70px;letter-spacing:.06em;color:#6e5d52">MIN</div>
+      <div class="abs" style="left:0;top:95px;width:500px;text-align:center;font-weight:900;font-size:230px;line-height:1;color:#191613;font-variant-numeric:tabular-nums"><span id="tn0">5</span></div>
+      <div class="abs" style="left:0;top:95px;width:500px;text-align:center;font-weight:900;font-size:230px;line-height:1;color:#191613"><span id="tn1">15</span></div>
+      <div class="abs" style="left:0;top:95px;width:500px;text-align:center;font-weight:900;font-size:230px;line-height:1;color:#CC3615"><span id="tn2">30</span></div>
+      <div class="abs" id="tmin" style="left:0;top:330px;width:500px;text-align:center;font-weight:900;font-size:70px;letter-spacing:.06em;color:#5d5853">MIN</div>
     </div>`,
   )
   set(timer, 0, { scale: 0 })
@@ -524,8 +595,8 @@ function buildS5() {
 function buildS6() {
   const s6 = $('#s6')
   s6.innerHTML = `<div id="s6bg" class="layer dots"></div>${phoneMarkup('ph2', ['06-bravo', '08-progres-complet'])}
-    <div id="st1wrap" class="abs" style="left:40px;top:560px"><div class="sticker" id="st1"><span class="emoji">✨</span><span class="num">13</span> envies transformées</div></div>
-    <div id="st2wrap" class="abs" style="left:430px;top:1090px"><div class="sticker" id="st2"><span class="emoji">🔥</span><span class="num" id="st2n">1</span> jours de série</div></div>`
+    <div id="st1wrap" class="abs" style="left:40px;top:560px"><div class="sticker" id="st1"><span class="emoji">${picto('shapes', { size: 62, spot: soft('#F2B632', 60), weight: 2 })}</span><span class="num">13</span> envies transformées</div></div>
+    <div id="st2wrap" class="abs" style="left:430px;top:1090px"><div class="sticker" id="st2"><span class="emoji">${picto('flame', { size: 62, spot: soft('#cc3615', 45), weight: 2 })}</span><span class="num" id="st2n">1</span> jours de série</div></div>`
   const phone = $('#ph2')
   set(s6, 0, { opacity: 0 })
   set(s6, T.progress - 0.12, { opacity: 1 })
@@ -566,14 +637,14 @@ function buildS7() {
   const s7 = $('#s7')
   s7.innerHTML = `
     <div id="endCard" class="layer dots">
-      <div id="endIcon" class="abs" style="left:420px;top:330px;width:240px;height:240px;filter:drop-shadow(0 30px 40px rgb(196 64 28 / .35))">${APP_MARK}</div>
+      <div id="endIcon" class="abs" style="left:420px;top:330px;width:240px;height:240px;filter:drop-shadow(0 30px 40px rgb(204 54 21 / .35))">${APP_MARK}</div>
       <div id="e1" class="abs display logo-line" style="top:620px">plutôt que</div>
       <div id="e2" class="abs display logo-line" style="top:770px"><span id="eword" style="position:relative;display:inline-block">scroller</span></div>
-      <div class="cta" id="cta"><div class="ring"></div><div class="ring"></div><div class="pill">Essaie l’appli <span style="font-size:64px">👉</span></div></div>
-      <div id="bio" class="abs" style="left:0;width:1080px;top:1525px;text-align:center;font-size:40px;font-weight:700;color:#6e5d52">Lien en bio</div>
+      <div class="cta" id="cta"><div class="ring"></div><div class="ring"></div><div class="pill">Essaie l’appli ${lineIcon('<path d="M5 12h14M13 6l6 6-6 6"/>', 58, 3)}</div></div>
+      <div id="bio" class="abs" style="left:0;width:1080px;top:1525px;text-align:center;font-size:40px;font-weight:700;color:#5d5853">Lien en bio</div>
       <div id="endBubbles" class="layer"></div>
     </div>
-    <div id="band" class="layer" style="background:#C4401C"></div>`
+    <div id="band" class="layer" style="background:#CC3615"></div>`
   // Bande tomate qui traverse l'écran et dévoile la fin
   const band = $('#band')
   const card = $('#endCard')
@@ -590,7 +661,7 @@ function buildS7() {
   const c2 = splitChars(word)
   word.insertAdjacentHTML(
     'beforeend',
-    `<svg viewBox="0 0 100 12" preserveAspectRatio="none" style="position:absolute;left:-4%;top:52%;width:108%;height:0.45em;transform:translateY(-50%);overflow:visible"><path id="estrike" d="M2 7 Q 14 1 26 6 T 50 6 T 74 6 T 98 4" fill="none" stroke="#C4401C" stroke-width="3.4" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 100 12" preserveAspectRatio="none" style="position:absolute;left:-4%;top:52%;width:108%;height:0.45em;transform:translateY(-50%);overflow:visible"><path id="estrike" d="M2 7 Q 14 1 26 6 T 50 6 T 74 6 T 98 4" fill="none" stroke="#CC3615" stroke-width="3.4" stroke-linecap="round"/></svg>`,
   )
   stagger([...c1, ...c2], 0, 0, 0, { opacity: 0 })
   stagger(c1, T.endLogo, 0.02, 0.4, { y: [90, 0], rot: [10, 0], opacity: [0, 1] }, ease.back(1.8))
@@ -607,13 +678,14 @@ function buildS7() {
   })
   set('#bio', 0, { opacity: 0 })
   tw('#bio', T.cta + 0.2, 0.4, { opacity: [0, 1], y: [20, 0] })
+  // Les passions autour du logo : pictogrammes de l'app, chacun sur la couleur de sa famille
   const bubbles = [
-    ['🎨', 150, 250], ['🎬', 930, 270], ['✍️', 100, 1480], ['🎧', 980, 1460],
-    ['🤸', 120, 1720], ['🛠️', 960, 1740], ['🧩', 110, 700], ['🌿', 970, 640],
+    ['palette', '#E4572E', 150, 250], ['clapperboard', '#9B5DE5', 930, 270], ['notebook-pen', '#3D7DD8', 100, 1480], ['headphones', '#13A89E', 980, 1460],
+    ['footprints', '#F08A24', 120, 1720], ['hammer', '#C9971A', 960, 1740], ['puzzle', '#D6457A', 110, 700], ['sprout', '#4F9D69', 970, 640],
   ]
   const layer = $('#endBubbles')
-  bubbles.forEach(([emoji, x, y], i) => {
-    const wrap = add(layer, `<div class="abs" style="left:${x - 70}px;top:${y - 70}px"><div class="bubble-float">${emoji}</div></div>`)
+  bubbles.forEach(([name, color, x, y], i) => {
+    const wrap = add(layer, `<div class="abs" style="left:${x - 70}px;top:${y - 70}px"><div class="bubble-float">${picto(name, { size: 84, spot: soft(color, 50) })}</div></div>`)
     const b = wrap.firstElementChild
     set(b, 0, { scale: 0 })
     tw(b, T.end + 0.14 + i * 0.04, 0.5, { scale: [0, 1], rot: [i % 2 ? 30 : -30, 0] }, ease.back(2.2))

@@ -212,8 +212,9 @@ function pad(t0, dur, midis, gain = 0.1, { attack = 0.25, release = 0.5, cutoff 
 
 function score() {
   // ------------------------------------------------ 1 · l'accroche
-  // Le pouce balaie le fil, de plus en plus vite.
-  SWIPES.forEach((s, k) => sweep(s.t - 0.03, s.d + 0.14, { f0: 500, fmid: 3800, f1: 1400, gain: 0.1 + 0.025 * k, q: 1.1, pan: 0.15 }))
+  // Le pouce balaie le fil, de plus en plus vite : le souffle monte pendant qu'il
+  // tire la vidéo et culmine quand il lâche (voir SWIPES).
+  SWIPES.forEach((s, k) => sweep(s.t - s.drag * 0.6, s.drag * 0.6 + s.snap + 0.05, { f0: 500, fmid: 3800, f1: 1200, gain: 0.1 + 0.025 * k, q: 1.1, pan: 0.15 }))
   // La notification « temps d'écran » glisse et tinte.
   sweep(T.notif - 0.02, 0.3, { f0: 2500, f1: 600, shape: 'fall', gain: 0.05, q: 1, pan: -0.2 })
   bell(T.notif + 0.1, BB6, 0.06, { decay: 0.35, ratio: 2, index: 1.2, send: 0.25, pan: -0.2 })

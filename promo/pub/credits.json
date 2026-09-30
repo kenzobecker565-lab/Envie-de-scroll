@@ -6,7 +6,11 @@
     "dessin": { "titre": "A person sketching designs", "auteur": "Michael Burrows", "page": "https://www.pexels.com/video/a-person-sketching-designs-7140117/" },
     "musique": { "titre": "Guy playing acoustic guitar", "auteur": "Tima Miroshnichenko", "page": "https://www.pexels.com/video/guy-playing-acoustic-guitar-5058653/" },
     "cuisine": { "titre": "Flipping a pancake from the pan using fork", "auteur": "cottonbro studio", "page": "https://www.pexels.com/video/flipping-a-pancake-from-the-pan-using-fork-3704774/" },
-    "sport": { "titre": "A man running in the park", "auteur": "MART PRODUCTION", "page": "https://www.pexels.com/video/a-man-running-in-the-park-7877146/" }
+    "sport": { "titre": "A man running in the park", "auteur": "MART PRODUCTION", "page": "https://www.pexels.com/video/a-man-running-in-the-park-7877146/" },
+    "feed-danse": { "titre": "A dancing woman with colorful hair while wearing a headphone", "auteur": "olia danilevich", "page": "https://www.pexels.com/video/a-dancing-woman-with-colorful-hair-while-wearing-a-headphone-6868353/" },
+    "feed-chat": { "titre": "Playing bait with a cat", "auteur": "cottonbro studio", "page": "https://www.pexels.com/video/playing-bait-with-a-cat-6864989/" },
+    "feed-food": { "titre": "Close up on man cooking nuts", "auteur": "Deepa Godiawala", "page": "https://www.pexels.com/video/close-up-on-man-cooking-nuts-10649674/" },
+    "feed-skate": { "titre": "A young man skateboarding", "auteur": "Antoni Shkraba", "page": "https://www.pexels.com/video/a-young-man-skateboarding-4863220/" }
   },
   "voix": { "outil": "vidIQ (ElevenLabs)", "voix": "Liam – Energetic, Social Media Creator", "fichier": "media/voix-off.mp3" },
   "musique": { "outil": "vidIQ (génération de musique, libre de droits)", "fichier": "media/musique.mp3" }

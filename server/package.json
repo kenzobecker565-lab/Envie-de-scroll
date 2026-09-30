@@ -6,7 +6,7 @@
   "description": "API REST et bot Telegram de Scroll-up.",
   "scripts": {
     "dev": "prisma migrate deploy && tsx watch --clear-screen=false src/index.ts",
-    "start": "prisma migrate deploy && tsx src/index.ts",
+    "start": "prisma migrate deploy && node --import tsx src/index.ts",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",

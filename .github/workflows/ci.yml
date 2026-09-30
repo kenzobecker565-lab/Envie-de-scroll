@@ -33,3 +33,20 @@ jobs:
         run: |
           npm test -w prototype
           npm run build -w prototype
+
+  image:
+    name: Image Docker (déploiement)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Construction de l'image
+        run: docker build -t scroll-up .
+      - name: Démarrage et santé
+        run: |
+          docker run -d --name scroll-up -p 8080:8080 -e PORT=8080 -v scroll-up-data:/data scroll-up
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8080/api/health; then exit 0; fi
+            sleep 2
+          done
+          docker logs scroll-up
+          exit 1

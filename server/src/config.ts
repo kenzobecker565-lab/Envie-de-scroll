@@ -18,7 +18,7 @@ export interface Config {
   botToken: string | undefined
   /** Chat privé (groupe ou canal) où le bot range les photos. */
   storageChatId: string | undefined
-  /** Adresse HTTPS publique de la Mini App (boutons du bot). */
+  /** Adresse HTTPS publique de la Mini App (boutons du bot). Sur Railway : déduite de RAILWAY_PUBLIC_DOMAIN. */
   webAppUrl: string | undefined
   /** `polling` (par défaut), `webhook` (production derrière HTTPS) ou `off`. */
   botMode: 'polling' | 'webhook' | 'off'
@@ -85,7 +85,8 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     databaseFile: resolveDatabaseFile(env.DATABASE_URL ?? 'file:./data/scroll-up.db'),
     botToken,
     storageChatId: env.STORAGE_CHAT_ID?.trim() || undefined,
-    webAppUrl: env.WEBAPP_URL?.trim() || undefined,
+    // Sur Railway, l'adresse publique du service est fournie automatiquement.
+    webAppUrl: env.WEBAPP_URL?.trim() || (env.RAILWAY_PUBLIC_DOMAIN ? `https://${env.RAILWAY_PUBLIC_DOMAIN}` : undefined),
     botMode: botToken ? botMode : 'off',
     webhookSecret: createHash('sha256').update(`scroll-up-webhook:${botToken ?? ''}`).digest('hex').slice(0, 48),
     devAuth,

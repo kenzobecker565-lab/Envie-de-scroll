@@ -34,6 +34,8 @@ C'est un espace de travail npm (*workspaces*) : un seul `npm install` à la raci
 
 ## Tester l'application
 
+> Pas envie d'installer quoi que ce soit ? Passe directement à [Mettre l'app en ligne](#mettre-lapp-en-ligne-sans-rien-installer) : tout se fait dans le navigateur, et tu testes ensuite depuis Telegram.
+
 Prérequis : [Node.js](https://nodejs.org) **22.13 ou plus récent** (la version LTS actuelle convient) et [Git](https://git-scm.com).
 
 ### 1. Récupérer le code
@@ -107,17 +109,51 @@ Sur GitHub, typage, tests et build se lancent à chaque pull request (`.github/w
 
 ---
 
-## Mise en production
+## Mettre l'app en ligne (sans rien installer)
 
-Il faut un hébergeur Node.js avec un **disque persistant** (la base SQLite est un fichier) : un petit VPS, Railway ou Fly.io avec un volume, par exemple.
+Le plus simple : [Railway](https://railway.com). Tout se fait dans le navigateur. Railway construit l'app depuis GitHub, la garde allumée (le bot doit tourner en continu) et lui donne une adresse HTTPS. Le dépôt contient déjà tout ce qu'il lui faut : le `Dockerfile` et `railway.json`.
 
-```bash
-npm ci
-npm run build          # construit app/dist
-npm start              # migrations + serveur (API, bot, Mini App) sur $PORT
-```
+**Prix** : l'essai offre 5 $ de crédit pendant 30 jours, largement assez pour tester. Ensuite, le plan Hobby coûte 5 $ par mois, crédit d'usage inclus ([tarifs](https://docs.railway.com/pricing/plans)).
 
-Variables à définir : `NODE_ENV=production`, `BOT_TOKEN`, `WEBAPP_URL` (l'adresse publique du serveur), `STORAGE_CHAT_ID`, et `DATABASE_URL` pointant vers le volume (ex. `file:/data/scroll-up.db`). Par défaut, le bot reçoit les messages en *long polling* (rien à configurer) ; `BOT_MODE=webhook` passe en webhook, sur `https://<ton-domaine>/telegram/webhook`.
+### 1. Créer le bot
+
+Dans Telegram, écris à [@BotFather](https://t.me/BotFather), envoie `/newbot`, appelle-le `Scroll-up` et choisis un identifiant qui finit par `bot`. Garde le **token** qu'il te donne (une ligne du type `123456789:AAH…`).
+
+### 2. Créer le projet sur Railway
+
+1. Va sur [railway.com](https://railway.com) et connecte-toi avec ton compte **GitHub**.
+2. **New Project**, puis **Deploy from GitHub repo**. Choisis `Envie-de-scroll`. S'il n'apparaît pas, clique sur **Configure GitHub App** et donne à Railway l'accès à ce dépôt.
+3. Railway crée un service et lance une première construction. Clique sur le service, onglet **Settings** : dans la partie **Source**, choisis la branche `claude/charming-curie-pg6vs5` (tant que la V1 n'est pas fusionnée dans la branche principale).
+
+### 3. Régler le service
+
+Toujours dans le service :
+
+1. Onglet **Variables**, bouton **New Variable**, ajoute :
+   - `BOT_TOKEN` : le token de BotFather ;
+   - `PORT` : `8080`.
+2. Ajoute un **volume** : c'est le disque qui garde la base de données entre deux mises à jour. Fais un clic droit sur le fond du projet (ou `Ctrl+K` / `⌘K`), choisis **Volume**, sélectionne le service, puis indique le chemin de montage **`/data`**.
+3. Onglet **Settings**, partie **Networking** : clique sur **Generate Domain**. Si Railway demande un port, indique `8080`. Tu obtiens une adresse du type `https://scroll-up-production.up.railway.app`.
+4. Relance un déploiement pour que tout soit pris en compte : onglet **Deployments**, menu **⋮** du dernier déploiement, **Redeploy**.
+
+La construction prend quelques minutes. Quand le déploiement est vert (**Active**) :
+
+- ouvre `https://<ton-adresse>.up.railway.app/api/health` : la page doit afficher `{"ok":true}` ;
+- dans les journaux du déploiement (**View logs**), tu dois voir `[bot] Connecté : @ton_bot`. Si tu vois `Telegram refuse BOT_TOKEN`, le token a été mal copié : corrige la variable.
+
+### 4. Tester
+
+Sur ton téléphone, ouvre la conversation avec ton bot et envoie `/start`. Touche **« Ouvrir Scroll-up »** : c'est parti. Le bouton **Ouvrir**, à gauche du champ de saisie, lance aussi l'app.
+
+Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot (`t.me/ton_bot`). Dans BotFather, `/newapp` crée aussi un lien direct vers l'app (`t.me/ton_bot/app`).
+
+### À savoir
+
+- **Mises à jour** : chaque nouveau commit sur la branche redéploie l'app tout seul. Pendant quelques secondes, l'app est indisponible : Railway arrête l'ancienne version avant de lancer la nouvelle, pour protéger la base de données.
+- **Photos** : sans réglage, elles sont gardées sur le volume. Pour les ranger dans Telegram comme prévu, crée un groupe privé, ajoutes-y le bot, puis ajoute la variable `STORAGE_CHAT_ID` avec l'identifiant du groupe (voir plus haut).
+- **Adresse** : l'app utilise automatiquement le domaine Railway. Avec un nom de domaine à toi, ajoute la variable `WEBAPP_URL` (ex. `https://app.scroll-up.fr`).
+- **Autres hébergeurs** : le `Dockerfile` marche partout (Fly.io, Render, un VPS…). Il faut un disque persistant monté sur `/data`, la variable `BOT_TOKEN`, et `WEBAPP_URL` avec l'adresse publique. Sans Docker : `npm ci`, `npm run build`, puis `npm start` avec `NODE_ENV=production` et `DATABASE_URL=file:/chemin/vers/scroll-up.db`.
+- **Webhook** : par défaut, le bot va chercher ses messages chez Telegram (*long polling*), rien à configurer. `BOT_MODE=webhook` le fait passer en webhook, sur `https://<ton-domaine>/telegram/webhook`.
 
 > Pour passer plus tard à Postgres (Neon, Supabase…), il suffit de changer le `provider` dans `server/prisma/schema.prisma`, l'adaptateur dans `server/src/db.ts`, et de régénérer les migrations.
 

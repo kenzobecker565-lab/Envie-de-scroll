@@ -38,6 +38,17 @@ async function startBot() {
     console.log(bot ? '[bot] BOT_MODE=off : bot désactivé (le token sert à vérifier les initData)' : '[bot] BOT_TOKEN absent : bot désactivé')
     return
   }
+  // Vérifie le token une fois pour toutes : sans lui, inutile d'aller plus loin.
+  try {
+    bot.botInfo = await bot.telegram.getMe()
+    console.log(`[bot] Connecté : @${bot.botInfo.username}`)
+  } catch (error) {
+    if (isUnauthorized(error)) {
+      console.error('[bot] Telegram refuse BOT_TOKEN (401) : vérifie le token donné par @BotFather. Bot et relances arrêtés.')
+      return
+    }
+    console.error('[bot] Telegram injoignable pour le moment, on continue quand même', error)
+  }
   if (!config.webAppUrl?.startsWith('https://')) {
     console.warn('[bot] WEBAPP_URL absente ou non HTTPS : le bot ne pourra pas afficher le bouton qui ouvre la Mini App')
   }
@@ -49,9 +60,7 @@ async function startBot() {
     await bot.telegram.setWebhook(url, { secret_token: config.webhookSecret })
     console.log(`[bot] Webhook : ${url}`)
   } else if (config.botMode === 'polling') {
-    bot.launch({ dropPendingUpdates: false }, () => console.log('[bot] Démarré (long polling)')).catch((error) => {
-      console.error('[bot] Arrêt inattendu', error)
-    })
+    launchPolling(bot)
   }
 
   if (config.remindersEnabled) {
@@ -60,10 +69,41 @@ async function startBot() {
   }
 }
 
+let stopping = false
+
+function isUnauthorized(error: unknown): boolean {
+  return (error as { response?: { error_code?: number } }).response?.error_code === 401
+}
+
+/**
+ * Long polling, relancé tout seul s'il s'interrompt (coupure réseau, ancienne
+ * instance encore active pendant un redéploiement…), avec une attente
+ * croissante. Un token refusé par Telegram (401) arrête tout : inutile
+ * d'insister, il faut corriger BOT_TOKEN.
+ */
+function launchPolling(target: NonNullable<typeof bot>, attempt = 0): void {
+  target
+    .launch({ dropPendingUpdates: false }, () => {
+      attempt = 0
+      console.log('[bot] À l’écoute des messages (long polling)')
+    })
+    .catch((error: unknown) => {
+      if (stopping) return
+      if (isUnauthorized(error)) {
+        console.error('[bot] Telegram refuse BOT_TOKEN (401) : vérifie le token donné par @BotFather. Le bot reste arrêté.')
+        return
+      }
+      const delay = Math.min(60_000, 5_000 * 2 ** attempt)
+      console.error(`[bot] Polling interrompu, nouvel essai dans ${delay / 1000} s`, error)
+      setTimeout(() => launchPolling(target, attempt + 1), delay).unref()
+    })
+}
+
 startBot().catch((error) => console.error('[bot]', error))
 
 function shutdown(signal: string) {
   console.log(`[serveur] ${signal} : arrêt`)
+  stopping = true
   stopReminders?.()
   try {
     if (config.botMode === 'polling') bot?.stop(signal)

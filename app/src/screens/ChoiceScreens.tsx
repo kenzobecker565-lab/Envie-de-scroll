@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
 import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { track } from '../api/client.ts'
 import { TimeDial } from '../components/decor/Ornaments.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
@@ -58,6 +59,7 @@ export function MoodScreen() {
 
   const choose = (mood: MoodId) => {
     haptics.selection()
+    track('mood', { mood })
     setSelected(mood)
     dispatch({ type: 'flow', flow: { mood } })
     advance(() => push({ name: 'time' }))
@@ -120,6 +122,7 @@ export function TimeScreen() {
 
   const choose = (duration: Duration) => {
     haptics.selection()
+    track('time', { duration })
     setSelected(duration)
     const onlyPassion = passions.length === 1 ? passions[0] : undefined
     dispatch({ type: 'flow', flow: { duration, ...(onlyPassion ? { passion: onlyPassion } : {}) } })
@@ -164,6 +167,7 @@ export function PassionPickScreen() {
 
   const choose = (passion: PassionId) => {
     haptics.selection()
+    track('passion', { passion })
     setSelected(passion)
     dispatch({ type: 'flow', flow: { passion } })
     advance(() => push({ name: 'activity' }))

@@ -1,6 +1,7 @@
 import { House, Images, Send } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
+import { milestoneCrossed } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,6 +10,8 @@ import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
+import { MilestoneBanner } from '../components/Milestones.tsx'
+import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -33,6 +36,7 @@ export function DoneScreen() {
 
   if (!done) return null
   const earned = done.response.coinsEarned
+  const milestone = milestoneCrossed(done.previousTotal, done.response.stats.totalCoins)
 
   return (
     <Screen className="items-center text-center">
@@ -97,6 +101,16 @@ export function DoneScreen() {
         <CoinCounter value={shown} tone="good" />
         <span className="text-14 font-bold">pièces d’or au total</span>
       </Card>
+
+      {milestone && (
+        <div className="mt-6 w-full">
+          <MilestoneBanner milestone={milestone} />
+        </div>
+      )}
+
+      <div className="mt-6 w-full">
+        <RateActivity completionId={done.response.completion.id} initial={done.response.completion.rating} />
+      </div>
 
       {done.photoPending && (
         <Alert variant="info" role="status" className="mt-6" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>

@@ -6,6 +6,11 @@ import {
   drawExtra,
   frenchTypography,
   getActivity,
+  isActivityRating,
+  isAppEventName,
+  lastMilestone,
+  milestoneCrossed,
+  nextMilestone,
   INTROS,
   MOODS,
   normalizePassions,
@@ -189,5 +194,29 @@ describe('règles', () => {
     expect(reminderMessage(0)).toBe('Un scroll de plus et TikTok va commencer à me demander une commission.')
     expect(reminderMessage(1)).toBe('On me signale une activité suspecte sur ton téléphone. Ça sent le scroll à plein nez.')
     expect(reminderMessage(2)).toBe(reminderMessage(0))
+  })
+})
+
+describe('paliers de création', () => {
+  it('repère le palier franchi (le plus haut s’il y en a plusieurs)', () => {
+    expect(milestoneCrossed(0, 5)?.title).toBe('Première création')
+    expect(milestoneCrossed(5, 20)).toBeNull()
+    expect(milestoneCrossed(25, 65)?.coins).toBe(60)
+    expect(milestoneCrossed(60, 60)).toBeNull()
+  })
+
+  it('donne le prochain palier et le dernier atteint', () => {
+    expect(nextMilestone(0)?.coins).toBe(5)
+    expect(nextMilestone(59)?.coins).toBe(60)
+    expect(nextMilestone(5000)).toBeNull()
+    expect(lastMilestone(3)).toBeNull()
+    expect(lastMilestone(130)?.coins).toBe(120)
+  })
+
+  it('reconnaît les notes et les événements', () => {
+    expect(isActivityRating(3)).toBe(true)
+    expect(isActivityRating(0)).toBe(false)
+    expect(isAppEventName('cta')).toBe(true)
+    expect(isAppEventName('open')).toBe(false)
   })
 })

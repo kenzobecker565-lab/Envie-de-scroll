@@ -65,7 +65,7 @@ describe('authentification', () => {
     const initData = makeInitData({ id: 5150, first_name: 'Sam', allows_write_to_pm: true })
     const response = await request(app).get('/api/me').set('Authorization', `tma ${initData}`).expect(200)
     const body = response.body as MeResponse
-    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false, theme: 'pop' })
+    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false, theme: 'pop', remindersEnabled: true })
     const user = await prisma.user.findUnique({ where: { id: 5150n } })
     expect(user?.canMessage).toBe(true)
   })

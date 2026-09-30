@@ -6,6 +6,7 @@
  * que le serveur vérifie avec le token du bot.
  */
 
+import type { ActivityRating, AppEventName } from './feedback.ts'
 import type { AppTheme } from './themes.ts'
 import type { ActivityExtra, Duration, MoodId, PassionId } from './types.ts'
 
@@ -17,6 +18,8 @@ export interface UserDTO {
   onboarded: boolean
   /** Thème choisi dans l'app. */
   theme: AppTheme
+  /** Relances du bot (vers 19 h, au plus une par jour). */
+  remindersEnabled: boolean
 }
 
 export interface StatsDTO {
@@ -60,6 +63,8 @@ export interface CompletionDTO {
   photoUrl: string | null
   /** Dessin enregistré sans photo : une photo envoyée au bot viendra s'y ranger. */
   photoPending: boolean
+  /** Ce que l'utilisateur a pensé de l'activité, s'il l'a noté. */
+  rating: ActivityRating | null
   createdAt: string
 }
 
@@ -67,6 +72,27 @@ export interface CompletionDTO {
 
 export interface UpdateThemeRequest {
   theme: AppTheme
+}
+
+export interface UpdateSettingsRequest {
+  remindersEnabled?: boolean
+}
+
+/** Un avis écrit, envoyé depuis l'app. */
+export interface FeedbackRequest {
+  message: string
+  /** D'où vient l'avis (écran, activité…), pour le relire dans son contexte. */
+  context?: string
+}
+
+export interface RateCompletionRequest {
+  rating: ActivityRating
+}
+
+export interface EventRequest {
+  name: AppEventName
+  /** Détails sans texte libre (identifiants, nombres). */
+  data?: Record<string, string | number | boolean>
 }
 
 export interface UpdatePassionsRequest {
@@ -99,6 +125,8 @@ export interface MeResponse {
   /** Activité proposée mais pas encore validée, à reprendre. */
   openProposal: ProposalDTO | null
   serverTime: string
+  /** Identifiant du bot (pour les liens d'invitation), s'il est connu. */
+  botUsername: string | null
 }
 
 export interface UserResponse {
@@ -114,6 +142,10 @@ export interface CompleteResponse {
   completion: CompletionDTO
   coinsEarned: number
   stats: StatsDTO
+}
+
+export interface CompletionResponse {
+  completion: CompletionDTO
 }
 
 export interface CompletionsPage {

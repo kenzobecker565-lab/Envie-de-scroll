@@ -37,6 +37,8 @@ export interface Config {
   localPhotoDir: string
   /** Build de la Mini App à servir (même origine que l'API), s'il existe. */
   appDistDir: string | undefined
+  /** Admins du test (identifiants Telegram) : /stats, /avis, /export, avis transmis. Sinon : le premier /admin. */
+  adminIds: string[]
 }
 
 function loadEnvFile(): void {
@@ -96,5 +98,9 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     remindersEnabled: bool(env.REMINDERS_ENABLED, true),
     localPhotoDir: path.resolve(SERVER_ROOT, env.LOCAL_PHOTO_DIR ?? 'data/photos'),
     appDistDir: fs.existsSync(path.join(appDist, 'index.html')) ? appDist : undefined,
+    adminIds: (env.ADMIN_IDS ?? '')
+      .split(/[\s,;]+/)
+      .map((id) => id.trim())
+      .filter((id) => /^\d{1,15}$/.test(id)),
   }
 }

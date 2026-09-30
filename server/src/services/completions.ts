@@ -2,6 +2,7 @@ import {
   coinsFor,
   getActivity,
   getPassion,
+  isActivityRating,
   MAX_TEXT_LENGTH,
   MAX_TITLE_LENGTH,
   UNLOCK_TOLERANCE_MS,
@@ -135,6 +136,7 @@ export function toCompletionDTO(completion: Completion, photoUrl: (completion: C
     exploredTitle: completion.exploredTitle,
     photoUrl: completion.photoRef ? photoUrl(completion) : null,
     photoPending: completion.photoPending,
+    rating: isActivityRating(completion.rating) ? completion.rating : null,
     createdAt: completion.createdAt.toISOString(),
   }
 }

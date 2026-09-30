@@ -50,12 +50,12 @@ const PREVIEW_TYPE: Record<AppTheme, React.CSSProperties> = {
 }
 
 /** Vignette d'un thème, dessinée avec ses propres couleurs, polices et formes. */
-function ThemePreview({ theme }: { theme: AppTheme }) {
+export function ThemePreview({ theme, className }: { theme: AppTheme; className?: string }) {
   return (
     <span
       data-theme={theme}
       aria-hidden="true"
-      className="relative flex h-20 w-24 shrink-0 flex-col justify-between overflow-hidden rounded-md border-[2.5px] border-outline bg-canvas p-2 text-ink"
+      className={cn('relative flex h-20 w-24 shrink-0 flex-col justify-between overflow-hidden rounded-md border-[2.5px] border-outline bg-canvas p-2 text-ink', className)}
       style={{ backgroundImage: 'var(--page-pattern)', backgroundSize: 'var(--page-pattern-size)' }}
     >
       <span className="flex gap-1">
@@ -73,8 +73,8 @@ function ThemePreview({ theme }: { theme: AppTheme }) {
   )
 }
 
-/** Le choix du thème : il s'applique tout de suite, et s'enregistre dans le profil. */
-function ThemePicker() {
+/** Choisir un thème : il s'applique tout de suite, et s'enregistre dans le profil. */
+export function useThemeChooser() {
   const theme = useAppTheme()
   const { state, dispatch } = useAppState()
   const [error, setError] = useState<string>()
@@ -89,6 +89,51 @@ function ThemePicker() {
       .then(({ user }) => dispatch({ type: 'user', user }))
       .catch(() => setError('Ton choix n’a pas pu rejoindre ton profil : il reste gardé sur ce téléphone.'))
   }
+  return { theme, choose, error }
+}
+
+/** Les quatre thèmes en grille compacte (feuille des réglages). */
+export function ThemeGrid() {
+  const { theme, choose, error } = useThemeChooser()
+  return (
+    <>
+      <ToggleGroup
+        type="single"
+        value={theme}
+        onValueChange={(value) => isAppTheme(value) && choose(value)}
+        className="grid grid-cols-2 gap-3"
+        aria-label="Thème de l’app"
+      >
+        {APP_THEMES.map((id) => (
+          <ToggleGroupItem
+            key={id}
+            value={id}
+            variant="card"
+            className="flex-col items-stretch gap-2 p-2 text-center"
+            whileTap={{ scale: 0.96 }}
+            aria-label={`${THEME_INFO[id].label}${id === 'pop' ? ' (par défaut)' : ''}`}
+          >
+            <ThemePreview theme={id} className="h-16 w-full" />
+            <span className="flex items-center justify-center gap-1 font-display text-15 font-extrabold tracking-tight">
+              {theme === id && <Check size={16} strokeWidth={3.2} aria-hidden="true" />}
+              {THEME_INFO[id].label}
+            </span>
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
+      {error && (
+        <Alert variant="warning" role="status">
+          <Info aria-hidden="true" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+    </>
+  )
+}
+
+/** Le choix du thème, en liste détaillée. */
+function ThemePicker() {
+  const { theme, choose, error } = useThemeChooser()
 
   return (
     <>

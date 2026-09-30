@@ -3,7 +3,7 @@
  * Lancement : `npm run dev` (à la racine du dépôt) ou `npm start` en production.
  */
 
-import { configureBotProfile, createBot } from './bot/bot.ts'
+import { adminNotifier, configureBotProfile, createBot } from './bot/bot.ts'
 import { startReminderLoop } from './bot/reminders.ts'
 import { loadConfig } from './config.ts'
 import { createPrisma } from './db.ts'
@@ -22,7 +22,8 @@ const webhook =
     ? { path: webhookPath, handler: bot.webhookCallback(webhookPath, { secretToken: config.webhookSecret }) }
     : undefined
 
-const app = createApp({ prisma, config, photos, webhook })
+const notify = bot ? adminNotifier(bot, prisma, config.adminIds) : undefined
+const app = createApp({ prisma, config, photos, webhook, notify, botUsername: () => bot?.botInfo?.username })
 
 const server = app.listen(config.port, () => {
   console.log(`[serveur] API prête sur http://localhost:${config.port}/api`)

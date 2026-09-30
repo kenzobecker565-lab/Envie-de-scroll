@@ -38,6 +38,8 @@ model User {
 
   proposals   Proposal[]
   completions Completion[]
+  feedbacks   Feedback[]
+  events      AppEvent[]
 }
 
 /// Une activité proposée (tirée au sort) à un utilisateur.
@@ -85,10 +87,48 @@ model Completion {
   photoRef      String?
   /// Dessin enregistré sans photo : la prochaine photo envoyée au bot s'y range
   photoPending  Boolean  @default(false)
+  /// Note donnée après coup : 3 j'ai adoré, 2 sympa, 1 pas pour moi
+  rating        Int?
   /// Date locale de l'utilisateur (AAAA-MM-JJ)
   localDate     String
   createdAt     DateTime @default(now())
 
   @@index([userId, createdAt])
   @@index([userId, localDate])
+}
+
+/// Un avis écrit par un testeur (dans l'app, ou en écrivant au bot).
+model Feedback {
+  id        String   @id @default(cuid())
+  userId    BigInt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message   String
+  /// app (formulaire de l'app) ou bot (message écrit au bot)
+  source    String   @default("app")
+  /// D'où vient l'avis (écran, activité…)
+  context   String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+/// Un événement d'usage (appui sur le gros bouton, humeur choisie…), sans texte libre.
+model AppEvent {
+  id        String   @id @default(cuid())
+  userId    BigInt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  /// Détails en JSON (identifiants, nombres)
+  data      String?
+  createdAt DateTime @default(now())
+
+  @@index([name, createdAt])
+  @@index([userId, createdAt])
+}
+
+/// Réglages du serveur modifiables sans redéploiement (ex. : les admins revendiqués par /admin).
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
 }

@@ -4,10 +4,13 @@
  */
 
 import type {
+  ActivityRating,
   ApiErrorBody,
+  AppEventName,
   AppTheme,
   ApiErrorCode,
   CompleteResponse,
+  CompletionResponse,
   CompletionsPage,
   CreateProposalRequest,
   MeResponse,
@@ -95,4 +98,20 @@ export const api = {
 
   completions: (cursor?: string) =>
     call<CompletionsPage>(`/completions?limit=12${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
+
+  rate: (completionId: string, rating: ActivityRating) =>
+    call<CompletionResponse>(`/completions/${encodeURIComponent(completionId)}/rating`, { method: 'PUT', body: JSON.stringify({ rating }) }),
+
+  updateSettings: (settings: { remindersEnabled: boolean }) => call<UserResponse>('/me/settings', { method: 'PUT', body: JSON.stringify(settings) }),
+
+  feedback: (message: string, context?: string) => call<{ ok: true }>('/feedback', { method: 'POST', body: JSON.stringify({ message, context }) }),
+}
+
+/**
+ * Suivi d'usage pendant la phase de test : où le parcours se perd. Aucun
+ * texte libre n'est envoyé, et un échec ne gêne jamais l'utilisateur.
+ */
+export function track(name: AppEventName, data?: Record<string, string | number | boolean>): void {
+  if (!canAuthenticate()) return
+  void call<unknown>('/events', { method: 'POST', body: JSON.stringify({ name, data }) }).catch(() => {})
 }

@@ -1,0 +1,168 @@
+import { BellRing, ChevronRight, MessageCircleHeart, Settings2, SlidersHorizontal, UserPlus } from 'lucide-react'
+import { motion } from 'motion/react'
+import { useState, type ReactNode } from 'react'
+import { Button, PRESSED } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
+import { api, track } from '../api/client.ts'
+import { invite } from '../lib/share.ts'
+import { useAppState, useNavigation } from '../state/AppState.tsx'
+import { haptics } from '../telegram/webApp.ts'
+import { FeedbackDialog } from './FeedbackDialog.tsx'
+import { ThemeGrid } from './ThemePicker.tsx'
+
+/**
+ * Le bouton « Réglages » de l'accueil, et sa feuille : le style de l'app,
+ * les passions, les relances du bot, inviter un ami, donner son avis.
+ */
+export function SettingsButton() {
+  const [open, setOpen] = useState(false)
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
+  const { push } = useNavigation()
+
+  const openSheet = () => {
+    track('settings_open')
+    setOpen(true)
+  }
+
+  return (
+    <>
+      <Button variant="secondary" size="icon" onClick={openSheet} aria-haspopup="dialog" aria-label="Réglages : thème, passions, relances">
+        <Settings2 aria-hidden="true" />
+      </Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <SettingsContent
+            onEditPassions={() => {
+              setOpen(false)
+              push({ name: 'passions', mode: 'edit' })
+            }}
+            onFeedback={() => {
+              setOpen(false)
+              setFeedbackOpen(true)
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+      <FeedbackDialog open={feedbackOpen} onOpenChange={setFeedbackOpen} context="réglages" />
+    </>
+  )
+}
+
+function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () => void; onFeedback: () => void }) {
+  const { state, dispatch } = useAppState()
+  const { user } = state.me
+  const [saving, setSaving] = useState(false)
+
+  const toggleReminders = () => {
+    const next = !user.remindersEnabled
+    haptics.selection()
+    setSaving(true)
+    dispatch({ type: 'user', user: { ...user, remindersEnabled: next } })
+    api
+      .updateSettings({ remindersEnabled: next })
+      .then(({ user: updated }) => dispatch({ type: 'user', user: updated }))
+      .catch(() => dispatch({ type: 'user', user: { ...user, remindersEnabled: !next } }))
+      .finally(() => setSaving(false))
+  }
+
+  const sendInvite = () => {
+    haptics.impact('light')
+    track('invite')
+    invite(state.me.botUsername)
+  }
+
+  return (
+    <>
+      <DialogHeader>
+        <DialogTitle>Réglages</DialogTitle>
+        <DialogDescription>Tout s’applique tout de suite.</DialogDescription>
+      </DialogHeader>
+
+      <section className="flex flex-col gap-3" aria-labelledby="settings-style">
+        <h2 id="settings-style" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
+          Ton style
+        </h2>
+        <ThemeGrid />
+      </section>
+
+      <Separator />
+
+      <div className="flex flex-col gap-3">
+        <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''} sur 4`} onClick={onEditPassions} />
+        <Row
+          icon={<BellRing aria-hidden="true" />}
+          title="Petites relances"
+          description="Un message du bot vers 19 h, seulement les jours sans activité."
+          onClick={toggleReminders}
+          trailing={<Switch on={user.remindersEnabled} busy={saving} />}
+          role="switch"
+          checked={user.remindersEnabled}
+        />
+        <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
+        <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" />
+      </div>
+
+      <p className="text-center text-12 text-ink-soft">Scroll-up · version de test. Merci de faire partie des premiers&nbsp;!</p>
+    </>
+  )
+}
+
+/** Une ligne de réglage, en petit sticker cliquable. */
+function Row({
+  icon,
+  title,
+  description,
+  onClick,
+  trailing,
+  tone,
+  role,
+  checked,
+}: {
+  icon: ReactNode
+  title: string
+  description: string
+  onClick: () => void
+  trailing?: ReactNode
+  tone?: 'accent'
+  role?: 'switch'
+  checked?: boolean
+}) {
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={PRESSED}
+      role={role}
+      aria-checked={role === 'switch' ? checked : undefined}
+      className={cn(
+        'flex w-full items-center gap-3 rounded-md border-[2.5px] border-outline bg-card p-3 text-left shadow-chip transition-shadow duration-150 active:shadow-press',
+        tone === 'accent' && 'bg-accent-soft',
+      )}
+    >
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-surface-100 text-ink [&>svg]:size-5">{icon}</span>
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="font-display text-17 font-extrabold tracking-tight text-ink">{title}</span>
+        <span className="text-13 text-ink-soft">{description}</span>
+      </span>
+      {trailing ?? <ChevronRight className="size-5 shrink-0 text-ink-soft" aria-hidden="true" />}
+    </motion.button>
+  )
+}
+
+/** Interrupteur en sticker : tomate quand il est allumé. */
+function Switch({ on, busy }: { on: boolean; busy: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn('relative h-8 w-14 shrink-0 rounded-pill border-2 border-outline transition-colors duration-200', on ? 'bg-good' : 'bg-surface-300', busy && 'opacity-70')}
+    >
+      <motion.span
+        className="absolute top-0.5 left-0.5 h-6 w-6 rounded-pill border-2 border-outline bg-paper"
+        animate={{ x: on ? 24 : 0 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+      />
+    </span>
+  )
+}

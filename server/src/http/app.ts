@@ -10,7 +10,11 @@
  *   POST /api/proposals          tirer une activité (ou « Une autre idée »)
  *   POST /api/completions        valider une activité (JSON, ou multipart avec une photo)
  *   GET  /api/completions        la galerie, de la plus récente à la plus ancienne
+ *   PUT  /api/completions/:id/rating  la note d'une activité (après coup)
  *   GET  /api/photos/:id         une photo de dessin (adresse signée)
+ *   PUT  /api/me/settings        réglages (relances du bot)
+ *   POST /api/feedback           un avis écrit (transmis aux admins dans Telegram)
+ *   POST /api/events             un événement d'usage (suivi du test, sans texte libre)
  *
  * Authentification : en-tête `Authorization: tma <initData>` (voir auth/).
  */
@@ -21,6 +25,7 @@ import express, { type ErrorRequestHandler, type NextFunction, type Request, typ
 import multer from 'multer'
 import {
   DURATIONS,
+  isAppEventName,
   isAppTheme,
   isMoodId,
   isPassionId,
@@ -28,6 +33,7 @@ import {
   normalizePassions,
   type ApiErrorBody,
   type CompleteResponse,
+  type CompletionResponse,
   type CompletionsPage,
   type Duration,
   type MeResponse,
@@ -40,6 +46,7 @@ import { type TelegramUser, InitDataError, validateInitData } from '../auth/init
 import { signedPhotoUrl, verifyPhotoSignature, type PhotoService } from '../photos/photos.ts'
 import { completeProposal, listCompletions, toCompletionDTO } from '../services/completions.ts'
 import { createProposal, findOpenProposal, toProposalDTO } from '../services/proposals.ts'
+import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
 import { ApiError, badRequest } from './errors.ts'
 
@@ -49,6 +56,10 @@ export interface AppDeps {
   photos: PhotoService
   /** Middleware du webhook Telegram, monté avant l'API (mode webhook). */
   webhook?: { path: string; handler: RequestHandler }
+  /** Transmet un message aux admins dans Telegram (avis écrits). */
+  notify?: Notify
+  /** Identifiant du bot, une fois connu (liens d'invitation). */
+  botUsername?: () => string | undefined
   /** Horloge et hasard injectables (tests). */
   now?: () => Date
   random?: () => number
@@ -69,7 +80,10 @@ const asyncRoute =
     handler(req, res).catch(next)
   }
 
-export function createApp({ prisma, config, photos, webhook, now = () => new Date(), random = Math.random }: AppDeps) {
+/** Une nouvelle « séance » commence après une demi-heure sans ouvrir l'app. */
+const SESSION_GAP_MS = 30 * 60_000
+
+export function createApp({ prisma, config, photos, webhook, notify, botUsername, now = () => new Date(), random = Math.random }: AppDeps) {
   const app = express()
   app.disable('x-powered-by')
   app.set('trust proxy', true)
@@ -136,13 +150,16 @@ export function createApp({ prisma, config, photos, webhook, now = () => new Dat
   api.get(
     '/me',
     asyncRoute(async (req, res) => {
+      const before = await prisma.user.findUnique({ where: { id: BigInt(telegramUserOf(res).id) }, select: { lastSeenAt: true } })
       const user = await currentUser(req, res)
+      if (!before || now().getTime() - before.lastSeenAt.getTime() > SESSION_GAP_MS) await recordEvent(prisma, user, 'open', undefined, now())
       const [stats, open] = await Promise.all([getStats(prisma, user, now()), findOpenProposal(prisma, user, now())])
       const body: MeResponse = {
         user: toUserDTO(user),
         stats,
         openProposal: open ? toProposalDTO(open) : null,
         serverTime: now().toISOString(),
+        botUsername: botUsername?.() ?? null,
       }
       res.json(body)
     }),
@@ -169,6 +186,44 @@ export function createApp({ prisma, config, photos, webhook, now = () => new Dat
       const updated = await prisma.user.update({ where: { id: user.id }, data: { theme } })
       const body: UserResponse = { user: toUserDTO(updated) }
       res.json(body)
+    }),
+  )
+
+  api.put(
+    '/me/settings',
+    asyncRoute(async (req, res) => {
+      const { remindersEnabled } = (req.body ?? {}) as Record<string, unknown>
+      if (typeof remindersEnabled !== 'boolean') throw badRequest('Réglage inconnu.')
+      const user = await currentUser(req, res)
+      const updated = await prisma.user.update({
+        where: { id: user.id },
+        data: { remindersEnabled, ...(remindersEnabled ? { unansweredReminders: 0 } : {}) },
+      })
+      const body: UserResponse = { user: toUserDTO(updated) }
+      res.json(body)
+    }),
+  )
+
+  /* --------------------------- Avis et suivi du test ---------------------------- */
+
+  api.post(
+    '/feedback',
+    asyncRoute(async (req, res) => {
+      const { message, context } = (req.body ?? {}) as Record<string, unknown>
+      const user = await currentUser(req, res)
+      await saveFeedback(prisma, user, { message, context, source: 'app' }, notify)
+      res.status(201).json({ ok: true })
+    }),
+  )
+
+  api.post(
+    '/events',
+    asyncRoute(async (req, res) => {
+      const { name, data } = (req.body ?? {}) as Record<string, unknown>
+      if (!isAppEventName(name)) throw badRequest('Événement inconnu.')
+      const user = await currentUser(req, res)
+      await recordEvent(prisma, user, name, cleanEventData(data), now())
+      res.status(204).end()
     }),
   )
 
@@ -237,6 +292,16 @@ export function createApp({ prisma, config, photos, webhook, now = () => new Dat
       const cursor = typeof req.query.cursor === 'string' && req.query.cursor ? req.query.cursor : undefined
       const page = await listCompletions(prisma, user, { cursor, limit })
       const body: CompletionsPage = { items: page.items.map((item) => toCompletionDTO(item, photoUrl)), nextCursor: page.nextCursor }
+      res.json(body)
+    }),
+  )
+
+  api.put(
+    '/completions/:id/rating',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      const completion = await rateCompletion(prisma, user, String(req.params.id), (req.body as { rating?: unknown } | undefined)?.rating)
+      const body: CompletionResponse = { completion: toCompletionDTO(completion, photoUrl) }
       res.json(body)
     }),
   )

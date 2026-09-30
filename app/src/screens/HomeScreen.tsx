@@ -7,8 +7,10 @@ import { Wordmark } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
 import { HomeCta } from '../components/HomeCta.tsx'
+import { track } from '../api/client.ts'
+import { FeedbackButton } from '../components/FeedbackDialog.tsx'
 import { Screen } from '../components/Screen.tsx'
-import { ThemeButton } from '../components/ThemePicker.tsx'
+import { SettingsButton } from '../components/SettingsSheet.tsx'
 import { formatNumber, plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { fadeUp } from '../lib/motion.ts'
@@ -27,6 +29,7 @@ export function HomeScreen() {
 
   const start = () => {
     haptics.impact('heavy')
+    track('cta')
     dispatch({ type: 'newFlow' })
     push({ name: 'signal' })
   }
@@ -55,7 +58,7 @@ export function HomeScreen() {
       <header className="flex items-center justify-between">
         <Wordmark />
         <div className="flex items-center gap-3">
-          <ThemeButton />
+          <SettingsButton />
           <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openGallery} aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} pièces d’or`}>
           <CoinIcon size={26} className="motion-loop anim-coin" />
           <span className="font-numbers text-17 font-extrabold">{formatNumber(stats.totalCoins)}</span>
@@ -108,6 +111,9 @@ export function HomeScreen() {
             <ArrowRight aria-hidden="true" />
           </Button>
         </motion.div>
+
+        {/* Pendant le test : un avis, en un geste. */}
+        <FeedbackButton context="accueil" className="self-center" />
       </div>
     </Screen>
   )

@@ -50,6 +50,8 @@ export interface TelegramWebApp {
   setBottomBarColor?(color: string): void
   disableVerticalSwipes?(): void
   requestWriteAccess?(callback?: (granted: boolean) => void): void
+  openTelegramLink?(url: string): void
+  openLink?(url: string): void
   onEvent(event: string, handler: () => void): void
   offEvent(event: string, handler: () => void): void
   BackButton: {

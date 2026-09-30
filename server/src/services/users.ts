@@ -15,7 +15,7 @@ export function parsePassions(user: Pick<User, 'passions'>): PassionId[] {
 export function toUserDTO(user: User): UserDTO {
   const passions = parsePassions(user)
   const theme = isAppTheme(user.theme) ? user.theme : DEFAULT_THEME
-  return { id: user.id.toString(), firstName: user.firstName, passions, onboarded: passions.length > 0, theme }
+  return { id: user.id.toString(), firstName: user.firstName, passions, onboarded: passions.length > 0, theme, remindersEnabled: user.remindersEnabled }
 }
 
 /**

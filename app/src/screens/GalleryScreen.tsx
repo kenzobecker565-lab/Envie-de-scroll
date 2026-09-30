@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronDown, Clock3, Maximize2, RotateCcw, Send, SlidersHorizontal, Timer } from 'lucide-react'
+import { ArrowRight, ChevronDown, Clock3, Maximize2, RotateCcw, Send, Share2, SlidersHorizontal, Timer } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, type CompletionDTO } from '@scroll-up/shared'
@@ -10,14 +10,16 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import { api, ApiError } from '../api/client.ts'
+import { api, ApiError, track } from '../api/client.ts'
 import { CoinIcon } from '../components/Coins.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
+import { MilestoneProgress } from '../components/Milestones.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { ThemeButton } from '../components/ThemePicker.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
+import { shareCreation } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
@@ -126,6 +128,11 @@ export function GalleryScreen() {
         </span>
         <Sparkle size={20} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-3 right-20" />
       </Card>
+      {stats.totalCoins > 0 && (
+        <motion.div className="mt-4 px-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+          <MilestoneProgress total={stats.totalCoins} />
+        </motion.div>
+      )}
 
       <div className="mt-8 flex flex-1 flex-col">
         <AnimatePresence mode="wait" initial={false}>
@@ -325,6 +332,7 @@ function PhotoPendingNote() {
 
 /** Une création en grand, dans la feuille modale. */
 function GalleryDetail({ item }: { item: CompletionDTO }) {
+  const { state } = useAppState()
   const passion = getPassion(item.passion)
   const Icon = PASSION_ICONS[item.passion]
   const title = item.exploredTitle ?? (item.passion === 'musique' || item.passion === 'cinema' ? item.extra?.items[0] : undefined)
@@ -386,6 +394,17 @@ function GalleryDetail({ item }: { item: CompletionDTO }) {
           <span className="font-numbers font-extrabold">+{item.coins}</span> pièces d’or gagnées
         </p>
       </Card>
+      <Button
+        variant="secondary"
+        className="w-full"
+        onClick={() => {
+          track('share', { passion: item.passion })
+          shareCreation(item, state.me.botUsername)
+        }}
+      >
+        <Share2 aria-hidden="true" />
+        Partager à un ami
+      </Button>
     </>
   )
 }

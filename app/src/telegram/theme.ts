@@ -7,6 +7,7 @@
  * avec le « canvas » de l'app, pour que tout se fonde.
  */
 
+import { getAppTheme, subscribeAppTheme, THEME_SCHEME } from '../lib/appTheme.ts'
 import { supports, telegram } from './webApp.ts'
 
 export type Scheme = 'light' | 'dark'
@@ -15,8 +16,9 @@ function systemScheme(): Scheme {
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
+/** Le mode du thème choisi s'il en impose un (Pop Nuit, BD, Memphis), sinon celui de Telegram ou du système. */
 export function currentScheme(): Scheme {
-  return telegram ? telegram.colorScheme : systemScheme()
+  return THEME_SCHEME[getAppTheme()] ?? (telegram ? telegram.colorScheme : systemScheme())
 }
 
 function cssColor(name: string): string {
@@ -38,7 +40,10 @@ function apply(scheme: Scheme): void {
   }
 }
 
-/** Applique le thème et le suit ; renvoie une fonction pour arrêter de suivre. */
+/**
+ * Applique le thème et le suit (mode de Telegram ou du système, thème choisi
+ * dans l'app) ; renvoie une fonction pour arrêter de suivre.
+ */
 export function syncTheme(onChange?: (scheme: Scheme) => void): () => void {
   const update = () => {
     const scheme = currentScheme()
@@ -46,15 +51,22 @@ export function syncTheme(onChange?: (scheme: Scheme) => void): () => void {
     onChange?.(scheme)
   }
   update()
+  const stopAppTheme = subscribeAppTheme(update)
 
   const webApp = telegram
   if (webApp) {
     webApp.onEvent('themeChanged', update)
-    return () => webApp.offEvent('themeChanged', update)
+    return () => {
+      stopAppTheme()
+      webApp.offEvent('themeChanged', update)
+    }
   }
   const media = window.matchMedia?.('(prefers-color-scheme: dark)')
   media?.addEventListener('change', update)
-  return () => media?.removeEventListener('change', update)
+  return () => {
+    stopAppTheme()
+    media?.removeEventListener('change', update)
+  }
 }
 
 /** Lit la valeur d'une couleur du design system (pour les boutons natifs). */

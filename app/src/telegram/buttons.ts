@@ -5,6 +5,7 @@
  */
 
 import { useEffect, useRef } from 'react'
+import { useAppTheme } from '../lib/appTheme.ts'
 import { themeColor } from './theme.ts'
 import { supports, telegram } from './webApp.ts'
 
@@ -68,6 +69,8 @@ export function useMainButton(options: MainButtonOptions | null): boolean {
   const text = options?.text ?? ''
   const enabled = options?.enabled ?? true
   const loading = options?.loading ?? false
+  // Les couleurs du bouton natif suivent le thème de l'app.
+  const appTheme = useAppTheme()
 
   useEffect(() => {
     if (!telegram || !hasNativeMainButton || !active) return
@@ -96,7 +99,7 @@ export function useMainButton(options: MainButtonOptions | null): boolean {
       is_visible: true,
       ...(supports.shine ? { has_shine_effect: false } : {}),
     })
-  }, [active, text, enabled, loading])
+  }, [active, text, enabled, loading, appTheme])
 
   return hasNativeMainButton && active
 }

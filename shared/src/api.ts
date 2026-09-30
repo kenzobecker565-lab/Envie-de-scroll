@@ -6,6 +6,7 @@
  * que le serveur vérifie avec le token du bot.
  */
 
+import type { AppTheme } from './themes.ts'
 import type { ActivityExtra, Duration, MoodId, PassionId } from './types.ts'
 
 export interface UserDTO {
@@ -14,6 +15,8 @@ export interface UserDTO {
   passions: PassionId[]
   /** Vrai une fois les passions choisies. */
   onboarded: boolean
+  /** Thème choisi dans l'app. */
+  theme: AppTheme
 }
 
 export interface StatsDTO {
@@ -61,6 +64,10 @@ export interface CompletionDTO {
 }
 
 /* ------------------------------- Requêtes -------------------------------- */
+
+export interface UpdateThemeRequest {
+  theme: AppTheme
+}
 
 export interface UpdatePassionsRequest {
   passions: PassionId[]

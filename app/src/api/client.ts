@@ -5,6 +5,7 @@
 
 import type {
   ApiErrorBody,
+  AppTheme,
   ApiErrorCode,
   CompleteResponse,
   CompletionsPage,
@@ -77,6 +78,7 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 export const api = {
   me: () => call<MeResponse>('/me'),
 
+  updateTheme: (theme: AppTheme) => call<UserResponse>('/me/theme', { method: 'PUT', body: JSON.stringify({ theme }) }),
   updatePassions: (passions: PassionId[]) => call<UserResponse>('/me/passions', { method: 'PUT', body: JSON.stringify({ passions }) }),
 
   propose: (request: CreateProposalRequest) => call<ProposalResponse>('/proposals', { method: 'POST', body: JSON.stringify(request) }),

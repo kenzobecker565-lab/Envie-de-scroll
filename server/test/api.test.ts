@@ -43,6 +43,18 @@ async function propose(body: object, id = 42) {
   return (response.body as ProposalResponse).proposal
 }
 
+describe('thème', () => {
+  it('garde le thème choisi, et refuse un thème inconnu', async () => {
+    const saved = await request(app).put('/api/me/theme').set(as()).send({ theme: 'memphis' }).expect(200)
+    expect(saved.body.user.theme).toBe('memphis')
+    const me = await request(app).get('/api/me').set(as()).expect(200)
+    expect((me.body as MeResponse).user.theme).toBe('memphis')
+    const refused = await request(app).put('/api/me/theme').set(as()).send({ theme: 'fluo' }).expect(400)
+    expect(refused.body.error.message).toBe('Thème inconnu.')
+    await request(app).put('/api/me/theme').set(as()).send({}).expect(400)
+  })
+})
+
 describe('authentification', () => {
   it('refuse une requête sans initData', async () => {
     const response = await request(app).get('/api/me').expect(401)
@@ -53,7 +65,7 @@ describe('authentification', () => {
     const initData = makeInitData({ id: 5150, first_name: 'Sam', allows_write_to_pm: true })
     const response = await request(app).get('/api/me').set('Authorization', `tma ${initData}`).expect(200)
     const body = response.body as MeResponse
-    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false })
+    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false, theme: 'pop' })
     const user = await prisma.user.findUnique({ where: { id: 5150n } })
     expect(user?.canMessage).toBe(true)
   })

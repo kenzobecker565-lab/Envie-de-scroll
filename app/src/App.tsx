@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { BrandMark } from './components/Brand.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
 import { EmptyState } from './components/Illustration.tsx'
+import { setAppTheme } from './lib/appTheme.ts'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
@@ -31,7 +32,10 @@ export function App() {
   const load = useCallback(async () => {
     setBoot({ status: 'loading' })
     try {
-      setBoot({ status: 'ready', me: await api.me() })
+      const me = await api.me()
+      // Le thème du profil l'emporte sur celui gardé sur ce téléphone.
+      setAppTheme(me.user.theme)
+      setBoot({ status: 'ready', me })
     } catch (error) {
       setBoot({ status: 'error', error: error as Error })
     }

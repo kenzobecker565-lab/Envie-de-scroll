@@ -19,6 +19,8 @@ model User {
   languageCode        String?
   /// Passions choisies, en JSON : ["dessin","musique"]
   passions            String   @default("[]")
+  /// Thème de l'app : pop (par défaut), nuit, bd ou memphis
+  theme               String   @default("pop")
   /// Fuseau horaire envoyé par la Mini App (pour « ce mois-ci » et les relances)
   timezone            String   @default("Europe/Paris")
   /// Le bot peut écrire à l'utilisateur (/start, ou autorisation dans la Mini App)

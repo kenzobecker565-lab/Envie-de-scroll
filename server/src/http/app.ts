@@ -6,6 +6,7 @@
  *   GET  /api/health             état du serveur (sans authentification)
  *   GET  /api/me                 profil, statistiques, activité à reprendre
  *   PUT  /api/me/passions        choix des passions (1 à 3)
+ *   PUT  /api/me/theme           choix du thème de l'app
  *   POST /api/proposals          tirer une activité (ou « Une autre idée »)
  *   POST /api/completions        valider une activité (JSON, ou multipart avec une photo)
  *   GET  /api/completions        la galerie, de la plus récente à la plus ancienne
@@ -20,6 +21,7 @@ import express, { type ErrorRequestHandler, type NextFunction, type Request, typ
 import multer from 'multer'
 import {
   DURATIONS,
+  isAppTheme,
   isMoodId,
   isPassionId,
   MAX_PHOTO_BYTES,
@@ -153,6 +155,18 @@ export function createApp({ prisma, config, photos, webhook, now = () => new Dat
       if (!passions) throw badRequest('Choisis entre 1 et 3 passions.')
       const user = await currentUser(req, res)
       const updated = await prisma.user.update({ where: { id: user.id }, data: { passions: JSON.stringify(passions) } })
+      const body: UserResponse = { user: toUserDTO(updated) }
+      res.json(body)
+    }),
+  )
+
+  api.put(
+    '/me/theme',
+    asyncRoute(async (req, res) => {
+      const theme = (req.body as { theme?: unknown } | undefined)?.theme
+      if (!isAppTheme(theme)) throw badRequest('Thème inconnu.')
+      const user = await currentUser(req, res)
+      const updated = await prisma.user.update({ where: { id: user.id }, data: { theme } })
       const body: UserResponse = { user: toUserDTO(updated) }
       res.json(body)
     }),

@@ -22,7 +22,8 @@
 
 @import 'tailwindcss';
 
-:root {
+:root,
+[data-theme='pop'] {
   --canvas: #fff3d1;
   --surface-100: #fff8e3;
   --surface-200: #fffdf7;
@@ -48,10 +49,21 @@
   --sky-soft: #dbeeff;
   --lilac: #cdb8ff;
   --lilac-soft: #ece4ff;
+  --shadow-ink: #151515;
+  --page-pattern: none;
+  --page-pattern-size: auto;
+  /* Polices et rayons de Pop (mêmes valeurs que @theme) : redits ici pour les aperçus. */
+  --font-display: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --font-sans: 'Rethink Sans', system-ui, -apple-system, sans-serif;
+  --font-numbers: 'Bricolage Grotesque', system-ui, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
   color-scheme: light;
 }
 
-:root.dark {
+:root.dark,
+:root.dark [data-theme='pop'] {
   --canvas: #17140f;
   --surface-100: #1f1b15;
   --surface-200: #29241c;
@@ -77,7 +89,167 @@
   --sky-soft: #1d3346;
   --lilac: #cdb8ff;
   --lilac-soft: #2e2645;
+  --shadow-ink: #f2e6c8;
+  --page-pattern: none;
+  --page-pattern-size: auto;
   color-scheme: dark;
+}
+
+/*
+ * Thèmes au choix (réglage « Thème » dans l'app). Chacun redéfinit toute la
+ * palette, les polices, les rayons et le motif du fond ; il s'applique à
+ * <html data-theme="…">, ou à un seul élément (aperçus du choix de thème).
+ * Pop Nuit est toujours sombre, BD et Memphis toujours clairs.
+ */
+
+/* Pop Nuit : fond noir, contours crème, ombres violettes, titres en italique. */
+:root[data-theme='nuit'],
+[data-theme='nuit'] {
+  --canvas: #121019;
+  --surface-100: #18151f;
+  --surface-200: #1e1a29;
+  --surface-300: #2a2538;
+  --ink: #fff6e9;
+  --ink-soft: #c3b9d4;
+  --ink-faint: #857b96;
+  --line: #2c2640;
+  --outline: #fff6e9;
+  --on-color: #121019;
+  --paper: #fff6e9;
+  --accent: #ff5e5b;
+  --accent-strong: #ff8a87;
+  --accent-ink: #121019;
+  --accent-soft: #3d1f2a;
+  --warm: #ffd60a;
+  --warm-soft: #3a3212;
+  --warm-ink: #ffe36b;
+  --good: #00f5a0;
+  --good-soft: #0e3a2c;
+  --good-ink: #7dffc9;
+  --sky: #00d1ff;
+  --sky-soft: #0b3140;
+  --lilac: #b388ff;
+  --lilac-soft: #2c2244;
+  --shadow-ink: #b388ff;
+  --page-pattern: radial-gradient(#2c2640 1.3px, transparent 1.6px);
+  --page-pattern-size: 20px 20px;
+  --font-display: 'Rubik', system-ui, sans-serif;
+  --font-sans: 'Rubik', system-ui, sans-serif;
+  --font-numbers: 'Rubik', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+/* BD : cases cernées, trame de points, lettrage de bande dessinée. */
+:root[data-theme='bd'],
+[data-theme='bd'] {
+  --canvas: #ffffff;
+  --surface-100: #f6fbfd;
+  --surface-200: #ffffff;
+  --surface-300: #e9eef0;
+  --ink: #111111;
+  --ink-soft: #3a3a3a;
+  --ink-faint: #8a8a8a;
+  --line: #d9dee0;
+  --outline: #111111;
+  --on-color: #111111;
+  --paper: #ffffff;
+  --accent: #e63946;
+  --accent-strong: #c1121f;
+  --accent-ink: #111111;
+  --accent-soft: #fcd9dc;
+  --warm: #ffd23f;
+  --warm-soft: #fff3c4;
+  --warm-ink: #6b4e00;
+  --good: #52d17c;
+  --good-soft: #ddf7e6;
+  --good-ink: #1b6b3a;
+  --sky: #4cc9f0;
+  --sky-soft: #ddf4fc;
+  --lilac: #ff7eb6;
+  --lilac-soft: #ffe3ef;
+  --shadow-ink: #111111;
+  --page-pattern: radial-gradient(#cdeffb 2.2px, transparent 2.7px);
+  --page-pattern-size: 12px 12px;
+  --font-display: 'Bangers', Impact, sans-serif;
+  --font-sans: 'Nunito', system-ui, sans-serif;
+  --font-numbers: 'Bangers', Impact, sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  color-scheme: light;
+}
+
+/* Memphis : formes géométriques années 80, rose, turquoise, jaune. */
+:root[data-theme='memphis'],
+[data-theme='memphis'] {
+  --canvas: #fff8ee;
+  --surface-100: #fffbf4;
+  --surface-200: #ffffff;
+  --surface-300: #f1e8d8;
+  --ink: #161616;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #8c8577;
+  --line: #e9ddc8;
+  --outline: #161616;
+  --on-color: #161616;
+  --paper: #ffffff;
+  --accent: #ff6fb5;
+  --accent-strong: #c2185b;
+  --accent-ink: #161616;
+  --accent-soft: #ffe0f0;
+  --warm: #ffc300;
+  --warm-soft: #fff0c2;
+  --warm-ink: #6b4e00;
+  --good: #1fc8b3;
+  --good-soft: #d5f5f1;
+  --good-ink: #0b6b5f;
+  --sky: #7b9bff;
+  --sky-soft: #e3e9ff;
+  --lilac: #ff7a3d;
+  --lilac-soft: #ffe4d6;
+  --shadow-ink: #161616;
+  --page-pattern: radial-gradient(#e9ddc8 1.6px, transparent 1.9px);
+  --page-pattern-size: 26px 26px;
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-numbers: 'Syne', system-ui, sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 6px;
+  /* Syne est très large : les titres descendent d'un cran. */
+  --text-46: 38px;
+  --text-40: 33px;
+  --text-34: 29px;
+  --text-30: 25px;
+  --text-26: 22px;
+  color-scheme: light;
+}
+
+/*
+ * Réglages de police propres au thème de l'app (hors couches : ils passent
+ * devant les utilitaires). Les aperçus du choix de thème règlent les leurs.
+ */
+:root[data-theme='nuit'] .font-display {
+  font-style: italic;
+  font-weight: 900;
+}
+:root[data-theme='bd'] .font-display,
+:root[data-theme='bd'] .font-numbers {
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+/* Syne s'élargit avec la graisse : un cran plus maigre, et plus serré. */
+:root[data-theme='memphis'] .font-display,
+:root[data-theme='memphis'] .font-numbers {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+/* En BD, les textes longs (citations) restent dans la police de lecture. */
+:root[data-theme='bd'] blockquote.font-display {
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 @theme {
@@ -138,11 +310,11 @@
   --radius-lg: 24px;
   --radius-pill: 999px;
 
-  /* Ombres pleines, décalées, de la couleur des contours */
-  --shadow-press: 1px 1px 0 var(--outline);
-  --shadow-chip: 3px 3px 0 var(--outline);
-  --shadow-card: 4px 4px 0 var(--outline);
-  --shadow-pop: 6px 6px 0 var(--outline);
+  /* Ombres pleines, décalées (encre, crème ou violet selon le thème) */
+  --shadow-press: 1px 1px 0 var(--shadow-ink);
+  --shadow-chip: 3px 3px 0 var(--shadow-ink);
+  --shadow-card: 4px 4px 0 var(--shadow-ink);
+  --shadow-pop: 6px 6px 0 var(--shadow-ink);
 
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -204,7 +376,9 @@
 
 @layer base {
   html {
-    background: var(--canvas);
+    background-color: var(--canvas);
+    background-image: var(--page-pattern);
+    background-size: var(--page-pattern-size);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
   }

@@ -15,6 +15,7 @@ import { CoinIcon } from '../components/Coins.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
 import { Screen } from '../components/Screen.tsx'
+import { ThemeButton } from '../components/ThemePicker.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -84,10 +85,13 @@ export function GalleryScreen() {
   return (
     <Screen>
       <header className="flex flex-col gap-4">
-        <Button variant="secondary" size="sm" className="self-end" onClick={() => push({ name: 'passions', mode: 'edit' })}>
-          <SlidersHorizontal aria-hidden="true" />
-          Mes passions
-        </Button>
+        <div className="flex justify-end gap-2">
+          <ThemeButton withLabel />
+          <Button variant="secondary" size="sm" onClick={() => push({ name: 'passions', mode: 'edit' })}>
+            <SlidersHorizontal aria-hidden="true" />
+            Mes passions
+          </Button>
+        </div>
         <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Ta galerie</h1>
       </header>
 

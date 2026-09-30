@@ -1,4 +1,4 @@
-import { isPassionId, type PassionId, type StatsDTO, type UserDTO } from '@scroll-up/shared'
+import { DEFAULT_THEME, isAppTheme, isPassionId, type PassionId, type StatsDTO, type UserDTO } from '@scroll-up/shared'
 import type { PrismaClient, User } from '../db.ts'
 import type { TelegramUser } from '../auth/initData.ts'
 import { isValidTimeZone, localMonth } from '../lib/time.ts'
@@ -14,7 +14,8 @@ export function parsePassions(user: Pick<User, 'passions'>): PassionId[] {
 
 export function toUserDTO(user: User): UserDTO {
   const passions = parsePassions(user)
-  return { id: user.id.toString(), firstName: user.firstName, passions, onboarded: passions.length > 0 }
+  const theme = isAppTheme(user.theme) ? user.theme : DEFAULT_THEME
+  return { id: user.id.toString(), firstName: user.firstName, passions, onboarded: passions.length > 0, theme }
 }
 
 /**

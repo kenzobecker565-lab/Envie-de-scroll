@@ -37,7 +37,7 @@ Sur GitHub, ces vérifications (tests + build) se lancent **automatiquement** à
 ## Ce que fait le prototype
 
 1. **Onboarding** (première visite) : prénom (facultatif), puis choix des passions dans un catalogue organisé en 8 familles. Si aucune passion n'est cochée, le bouton « Je ne sais pas trop » ouvre un chemin alternatif : *« Qu'est-ce qui te plaît dans la vie ? »* (8 réponses), qui redirige vers les familles correspondantes avec des passions faciles pré-cochées et le **mode débutant** activé.
-2. **Accueil** : le gros bouton « J'ai envie de scroller », la série (streak), le nombre d'envies transformées, le temps récupéré et la dernière activité.
+2. **Accueil** : le bouton « J'ai envie de scroller » (une grande carte où défile un faux fil de vidéos, que le crayon du logo vient barrer de temps en temps), la série (streak), le nombre d'envies transformées, le temps récupéré et la dernière activité.
 3. **Parcours** : mood (9 moods en deux familles d'énergie, affichées différemment) → passion du moment (parmi celles du profil) → temps disponible (5 / 15 / 30 min) → une activité précise. « Une autre idée » relance le tirage sans refaire les étapes ; « C'est fait, je l'enregistre » l'ajoute à l'historique. On peut ensuite ajouter une photo (dessin), un film et sa note (cinéma) ou une petite note.
    *Si le profil ne compte qu'une passion, l'étape « passion » est sautée.*
 4. **Progrès (tableau de bord)** : statistiques, calendrier des 5 dernières semaines, et une vue par passion — **galerie de photos** pour le dessin, **films notés sur 5** pour le cinéma, **frise chronologique** pour les autres. Lien vers l'**historique complet**, filtrable par passion et par humeur (avec modification de la note et suppression).
@@ -183,6 +183,7 @@ L'architecture prépare la migration :
 
 - Identité « encre et papier » : papier neutre, cartes blanches, encre presque noire, accent tomate vif. Titres et texte en Figtree (titres très gras) ; Fraunces est réservée au logo.
 - Aucun emoji dans l'interface : passions, humeurs et statistiques ont des pictogrammes au trait, posés sur une petite tache de couleur, comme une impression légèrement décalée (`src/lib/pictos.ts`, d'après [Lucide](https://lucide.dev)). La pub de 28 s utilise les mêmes.
+- Le bouton principal montre l'envie telle qu'elle est : un fil de vidéos stylisé défile sans fin dans une carte tomate, et le trait de crayon du logo vient le barrer de temps en temps. Appuyer fige le fil. Si le système demande de réduire les animations, le fil reste immobile et le trait reste affiché (`src/components/ui/UrgeButton.tsx`).
 - Mode clair et mode sombre (automatique selon le système, ou forcé dans le profil).
 - Les couleurs sont des variables dans `src/styles/index.css` : modifier une couleur à cet endroit la change partout, en clair comme en sombre.
 - Animations légères entre les étapes, désactivées si le système demande de réduire les animations.

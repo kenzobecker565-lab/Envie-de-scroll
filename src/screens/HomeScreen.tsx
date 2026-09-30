@@ -5,6 +5,7 @@ import { AppMark, Logo } from '../components/ui/Logo'
 import { PassionPicto } from '../components/ui/Passion'
 import { Picto } from '../components/ui/Picto'
 import { StarRating } from '../components/ui/StarRating'
+import { UrgeButton } from '../components/ui/UrgeButton'
 import { getMood } from '../data/moods'
 import { getPassion } from '../data/passions'
 import { MOOD_SPOT, accentStyle } from '../lib/accent'
@@ -33,26 +34,8 @@ export function HomeScreen({ profile }: { profile: UserProfile }) {
       </div>
 
       {/* Le bouton central : c'est LA porte d'entrée de l'app. */}
-      <div className="flex flex-col items-center py-9">
-        <div className="relative isolate grid place-items-center">
-          <span aria-hidden className="absolute inset-0 -z-10 animate-ripple rounded-full bg-primary/35" />
-          <span aria-hidden className="absolute inset-0 -z-10 animate-ripple rounded-full bg-primary/35 [animation-delay:1.6s]" />
-          <button
-            type="button"
-            onClick={() => navigate('envie')}
-            className="group grid size-56 place-items-center rounded-full bg-primary text-on-primary shadow-button transition duration-200 hover:bg-primary-strong active:translate-y-0.5 active:scale-[0.97] active:shadow-button-pressed"
-          >
-            <span className="flex flex-col items-center gap-2.5">
-              <Picto name="pencil" className="size-8 transition-transform duration-300 group-hover:-rotate-12" weight={2.2} />
-              <span className="font-display text-[1.6rem] font-extrabold leading-[1.05] tracking-tight">
-                J’ai envie
-                <br />
-                de scroller
-              </span>
-            </span>
-          </button>
-        </div>
-        <p className="mt-6 max-w-64 text-center leading-snug text-ink-soft">On transforme cette envie en quelque chose qui compte.</p>
+      <div className="py-7">
+        <UrgeButton onClick={() => navigate('envie')} />
       </div>
 
       {stats && <HomeStats stats={stats} />}

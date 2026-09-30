@@ -56,7 +56,9 @@
   --animate-fade-down: fade-down 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   --animate-sheet-up: sheet-up 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   --animate-pop: pop 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  --animate-ripple: ripple 3.2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  --animate-feed-up: feed-up 15s linear infinite;
+  --animate-urge-strike: urge-strike 6.5s cubic-bezier(0.55, 0, 0.3, 1) infinite;
+  --animate-nudge: nudge 2.4s ease-in-out infinite;
   --animate-float: float 5s ease-in-out infinite;
 
   @keyframes step-forward {
@@ -87,9 +89,20 @@
     0% { opacity: 0; transform: scale(0.5) rotate(-8deg); }
     100% { opacity: 1; transform: none; }
   }
-  @keyframes ripple {
-    0% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.38); }
+  /* Le bouton de l'accueil : le fil qui défile, le trait qui le barre, la flèche. */
+  @keyframes feed-up {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+  @keyframes urge-strike {
+    0%, 52% { stroke-dashoffset: 1; opacity: 0; }
+    52.5% { stroke-dashoffset: 1; opacity: 1; }
+    64%, 86% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
   }
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
@@ -142,23 +155,34 @@
 }
 
 /*
- * Le gros bouton de l'accueil : un vrai bouton qu'on a envie d'enfoncer
- * (reflet en haut, rebord plus foncé dessous, qui s'écrase à l'appui).
+ * Le bouton de l'accueil (UrgeButton) : une carte tomate, les mêmes couleurs
+ * en clair et en sombre, avec un léger grain d'impression.
  */
-@utility shadow-button {
+@utility urge-card {
+  background: linear-gradient(158deg, #e2461f 0%, #cf3a18 48%, #a82b0f 100%);
   box-shadow:
-    inset 0 2px 0 rgb(255 255 255 / 0.22),
-    inset 0 -10px 18px rgb(0 0 0 / 0.14),
-    0 6px 0 var(--color-primary-strong),
-    0 26px 40px -18px color-mix(in oklab, var(--color-primary) 75%, transparent);
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    inset 0 -18px 40px rgb(0 0 0 / 0.12),
+    0 26px 44px -22px rgb(204 54 21 / 0.75),
+    0 2px 6px rgb(25 22 19 / 0.08);
 }
 
-@utility shadow-button-pressed {
-  box-shadow:
-    inset 0 2px 0 rgb(255 255 255 / 0.18),
-    inset 0 -6px 14px rgb(0 0 0 / 0.16),
-    0 2px 0 var(--color-primary-strong),
-    0 14px 26px -16px color-mix(in oklab, var(--color-primary) 75%, transparent);
+/* Le mini-fil : en perspective, et qui s'efface en haut et en bas. */
+@utility urge-feed {
+  perspective: 700px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 45%, transparent 76%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 45%, transparent 76%);
+}
+
+@utility urge-plane {
+  transform: rotateX(24deg) rotateZ(-9deg);
+  transform-origin: 50% 0%;
+}
+
+/* Grain de papier (bruit SVG), à poser par-dessus une couleur. */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /*

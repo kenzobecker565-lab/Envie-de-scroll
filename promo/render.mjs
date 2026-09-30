@@ -37,6 +37,7 @@ const ADS = {
   '15s': { page: 'promo/index.html', audio: './audio.mjs', build: 'build', out: 'plutot-que-scroller-15s.mp4' },
   pub: { page: 'promo/pub/index.html', audio: './pub/audio.mjs', build: 'build/pub', out: 'plutot-que-scroller-pub.mp4' },
   scrollup: { page: 'promo/scrollup/index.html', audio: './scrollup/audio.mjs', build: 'build/scrollup', out: 'scroll-up-pub-30s.mp4' },
+  viral: { page: 'promo/viral/index.html', audio: './viral/audio.mjs', build: 'build/viral', out: 'scroll-up-viral.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)

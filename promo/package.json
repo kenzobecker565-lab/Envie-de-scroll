@@ -2,7 +2,7 @@
   "name": "plutot-que-scroller-promo",
   "private": true,
   "version": "1.0.0",
-  "description": "Pubs en motion design (rendu image par image) : Scroll-up 30 s (scrollup/), et les pubs de 15 s et 28 s de Plutôt Que Scroller.",
+  "description": "Pubs en motion design (rendu image par image) : vidéo virale Scroll-up (viral/), pub Scroll-up 30 s (scrollup/), et les pubs de Plutôt Que Scroller.",
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
@@ -19,7 +19,11 @@
     "scrollup:audio": "node render.mjs --ad=scrollup --audio",
     "scrollup:sheet": "node render.mjs --ad=scrollup --sheet --step=0.5",
     "scrollup:stills": "node render.mjs --ad=scrollup --stills=0.5,3.1,4.6,6.5,8.9,11.1,15,17.4,20.2,23.3,24.3,25.3,27.5,29.5",
-    "scrollup:icons": "node scrollup/make-icons.mjs"
+    "scrollup:icons": "node scrollup/make-icons.mjs",
+    "viral:capture": "node viral/capture-take.mjs",
+    "viral:render": "node render.mjs --ad=viral",
+    "viral:audio": "node render.mjs --ad=viral --audio",
+    "viral:stills": "node render.mjs --ad=viral --stills=0.5,2,4.5,6.9,8.9,10.3,12.2,13.8,16,18,19.8,22.4,24.9"
   },
   "devDependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",

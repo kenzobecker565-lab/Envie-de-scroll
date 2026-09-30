@@ -1,6 +1,6 @@
-import { BellRing, ChevronRight, MessageCircleHeart, Settings2, SlidersHorizontal, UserPlus } from 'lucide-react'
+import { BellRing, ChevronRight, MessageCircleHeart, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { api, track } from '../api/client.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
-import { haptics } from '../telegram/webApp.ts'
+import { haptics, supports, telegram } from '../telegram/webApp.ts'
 import { FeedbackDialog } from './FeedbackDialog.tsx'
 import { ThemeGrid } from './ThemePicker.tsx'
 
@@ -67,6 +67,13 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
       .finally(() => setSaving(false))
   }
 
+  // Telegram 8 : l'app peut avoir son icône sur l'écran d'accueil du téléphone.
+  const [homeScreen, setHomeScreen] = useState<'hidden' | 'available' | 'added'>('hidden')
+  useEffect(() => {
+    if (!supports.homeScreen || !telegram?.checkHomeScreenStatus) return
+    telegram.checkHomeScreenStatus((status) => setHomeScreen(status === 'added' ? 'added' : status === 'missed' || status === 'unknown' ? 'available' : 'hidden'))
+  }, [])
+
   const sendInvite = () => {
     haptics.impact('light')
     track('invite')
@@ -100,6 +107,14 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
           role="switch"
           checked={user.remindersEnabled}
         />
+        {homeScreen !== 'hidden' && (
+          <Row
+            icon={<Smartphone aria-hidden="true" />}
+            title={homeScreen === 'added' ? 'Sur ton écran d’accueil' : 'Ajouter à l’écran d’accueil'}
+            description={homeScreen === 'added' ? 'Scroll-up est à portée de pouce. Bien joué !' : 'Une icône juste à côté de tes autres apps : là où ton pouce a ses habitudes.'}
+            onClick={() => homeScreen === 'available' && telegram?.addToHomeScreen?.()}
+          />
+        )}
         <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
         <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" />
       </div>

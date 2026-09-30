@@ -52,6 +52,8 @@ export interface TelegramWebApp {
   requestWriteAccess?(callback?: (granted: boolean) => void): void
   openTelegramLink?(url: string): void
   openLink?(url: string): void
+  addToHomeScreen?(): void
+  checkHomeScreenStatus?(callback: (status: 'unsupported' | 'unknown' | 'added' | 'missed') => void): void
   onEvent(event: string, handler: () => void): void
   offEvent(event: string, handler: () => void): void
   BackButton: {
@@ -98,6 +100,7 @@ export const supports = {
   verticalSwipes: atLeast('7.7'),
   shine: atLeast('7.10'),
   writeAccess: atLeast('6.9'),
+  homeScreen: atLeast('8.0'),
 }
 
 /** À appeler au démarrage : l'app est prête, en plein écran vertical. */

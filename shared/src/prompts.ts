@@ -20,7 +20,11 @@ export const WORDS = [
   'chapeau', 'sirène', 'tramway', 'épouvantail', 'lune', 'bicyclette', 'cerise', 'labyrinthe',
   'hibou', 'sablier', 'fanfare', 'iceberg', 'magicien', 'grenouille', 'carrousel', 'pingouin',
   'château', 'bougie', 'tortue', 'nuage', 'cordonnier', 'comète', 'perroquet', 'loupe',
-  'jungle', 'chaussette', 'orage', 'accordéon',
+  'jungle', 'chaussette', 'orage', 'accordéon', 'girafe', 'fusée', 'théière', 'funambule',
+  'igloo', 'kiosque', 'licorne', 'éventail', 'pieuvre', 'cabane', 'toboggan', 'scaphandre',
+  'éolienne', 'manège', 'hérisson', 'pastèque', 'dirigeable', 'balançoire', 'fourmi', 'ascenseur',
+  'jongleur', 'canapé', 'ruche', 'coquillage', 'chevalier', 'lampadaire', 'goéland', 'montgolfière',
+  'marmotte', 'radio', 'cerisier', 'taupe', 'tipi', 'sous-bois', 'moulin', 'bonhomme de neige',
 ] as const
 
 /** Premières phrases d'histoires à continuer (écriture, 15 min). */
@@ -37,6 +41,16 @@ export const FIRST_SENTENCES = [
   'Quand j’ai rouvert les yeux, la ville entière avait changé de couleur.',
   'On m’avait prévenu : il ne fallait jamais répondre au téléphone de la cabine abandonnée.',
   'Le marché de nuit n’ouvrait qu’une fois par an, et cette année, j’avais une invitation.',
+  'Ce matin, mon ombre est partie sans moi.',
+  'Tout le monde dans l’immeuble a reçu le même colis, sauf moi.',
+  'Le GPS a dit « Tournez à gauche », mais à gauche, il n’y avait que la mer.',
+  'À minuit pile, la statue du square a cligné des yeux.',
+  'Mon voisin arrose ses plantes tous les soirs à trois heures du matin.',
+  'La bibliothécaire m’a tendu un livre signé de mon nom, alors que je ne l’avais jamais écrit.',
+  'Il neigeait en plein mois d’août, et personne n’avait l’air étonné, sauf moi.',
+  'La dernière page du carnet disait simplement : « Retourne-toi. »',
+  'Le distributeur m’a rendu un vieux billet de 1987, avec un mot plié en quatre.',
+  'Dans ce restaurant, on ne payait pas en euros, mais avec un souvenir.',
 ] as const
 
 /** Traits de caractère (écriture, 30 min : un pour chaque personnage). */
@@ -45,6 +59,8 @@ export const CHARACTER_TRAITS = [
   'maladroit·e', 'arrogant·e', 'généreux·se', 'anxieux·se', 'têtu·e', 'rêveur·se',
   'jaloux·se', 'loyal·e', 'impatient·e', 'sarcastique', 'naïf·ve', 'perfectionniste',
   'distrait·e', 'courageux·se', 'superstitieux·se', 'radin·e', 'enthousiaste', 'mystérieux·se',
+  'gourmand·e', 'colérique', 'prudent·e', 'farceur·se', 'nostalgique', 'téméraire',
+  'solitaire', 'paresseux·se', 'ambitieux·se', 'tendre', 'grincheux·se', 'insomniaque',
 ] as const
 
 /** Genres musicaux à découvrir (musique, 5 min). */
@@ -53,7 +69,9 @@ export const MUSIC_GENRES = [
   'Highlife', 'Cumbia', 'Musique carnatique', 'Dub', 'Zouk', 'Krautrock',
   'Gnawa', 'Bluegrass', 'Synthwave', 'Rebetiko', 'Éthio-jazz', 'Trip-hop',
   'Musique baroque', 'Mbalax', 'Raï', 'Math rock', 'Tango nuevo', 'Gospel',
-  'Maloya', 'Qawwali',
+  'Maloya', 'Qawwali', 'Samba', 'Flamenco', 'Reggae roots', 'Northern soul',
+  'Chiptune', 'Musique mandingue', 'Lo-fi hip-hop', 'Amapiano', 'Yé-yé', 'Neo-soul',
+  'Gamelan', 'Post-rock', 'Nu jazz', 'Coupé-décalé', 'Chaâbi', 'Bachata',
 ] as const
 
 /** Films (cinéma, 5 min : bande-annonce). */
@@ -68,6 +86,10 @@ export const FILMS = [
   'Les Demoiselles de Rochefort (1967)', 'Moonlight (2016)', 'Là-haut (2009)', 'WALL-E (2008)',
   'Ma vie de Courgette (2016)', 'J’ai perdu mon corps (2019)', 'Le Garçon et le Héron (2023)',
   'Past Lives (2023)', 'Anatomie d’une chute (2023)', 'Flow (2024)',
+  'Ernest et Célestine (2012)', 'Le Tableau (2011)', 'Klaus (2019)', 'Princesse Mononoké (1997)',
+  'Mon voisin Totoro (1988)', 'Soul (2020)', 'Le Géant de fer (1999)', 'Fantastic Mr. Fox (2009)',
+  'Drive My Car (2021)', 'Aftersun (2022)', 'Le Grand Bain (2018)', 'Retour vers le futur (1985)',
+  'Robot Dreams (2023)', 'Linda veut du poulet ! (2023)', 'Le Grand Méchant Renard et autres contes (2017)',
 ] as const
 
 /** Séries animées (cinéma, 5 min : « un film ou anime au hasard »). */
@@ -76,6 +98,8 @@ export const ANIME_SERIES = [
   'Violet Evergarden (série, 2018)', 'Fullmetal Alchemist : Brotherhood (série, 2009)',
   'Neon Genesis Evangelion (série, 1995)', 'Ping Pong the Animation (série, 2014)', 'Odd Taxi (série, 2021)',
   'Vinland Saga (série, 2019)', 'Samurai Champloo (série, 2004)', 'Haikyu!! (série, 2014)', 'Mononoke (série, 2007)',
+  'Spy × Family (série, 2022)', 'Mushishi (série, 2005)', 'Made in Abyss (série, 2017)', 'Carole & Tuesday (série, 2019)',
+  'Sonny Boy (série, 2021)', 'Arcane (série, 2021)', 'Blue Eye Samurai (série, 2023)', 'Pluto (série, 2023)',
 ] as const
 
 /** Courts-métrages et premiers épisodes d'anime (cinéma, 15 min). */
@@ -83,7 +107,10 @@ export const SHORTS_AND_EPISODES = [
   'Paperman (court-métrage, 2012)', 'La Petite Casserole d’Anatole (court-métrage, 2014)', 'Piper (court-métrage, 2016)',
   'Hair Love (court-métrage, 2019)', 'Bao (court-métrage, 2018)', 'Le Moine et le Poisson (court-métrage, 1994)',
   'Father and Daughter (court-métrage, 2000)', 'Logorama (court-métrage, 2009)', 'Kitbull (court-métrage, 2019)',
-  'The Present (court-métrage, 2014)', 'Alike (court-métrage, 2015)',
+  'The Present (court-métrage, 2014)', 'Alike (court-métrage, 2015)', 'La Luna (court-métrage, 2011)',
+  'Lou (court-métrage, 2017)', 'Feast (court-métrage, 2014)', 'Partly Cloudy (court-métrage, 2009)',
+  'Peripheria (court-métrage, 2015)', 'Garden Party (court-métrage, 2016)', 'Negative Space (court-métrage, 2017)',
+  'Pépé le Morse (court-métrage, 2017)', 'Le Voyage dans la Lune (court-métrage, 1902)',
   'Le premier épisode de Cowboy Bebop', 'Le premier épisode de Frieren', 'Le premier épisode de Mob Psycho 100',
   'Le premier épisode de Violet Evergarden', 'Le premier épisode d’Odd Taxi', 'Le premier épisode de Samurai Champloo',
 ] as const

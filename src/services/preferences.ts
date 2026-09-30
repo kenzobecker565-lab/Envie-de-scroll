@@ -52,5 +52,5 @@ export function applyTheme(preference: ThemePreference): void {
   const root = document.documentElement
   root.classList.toggle('dark', dark)
   root.style.colorScheme = dark ? 'dark' : 'light'
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#17120F' : '#FBF5EC')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#141311' : '#F5F4F1')
 }

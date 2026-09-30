@@ -1,4 +1,4 @@
-// Modèle de données de Plutôt Que Scroller (V1 test).
+// Modèle de données de Scroll-up (V1 test).
 // Après une modification : `npm run db:migrate` (crée une migration et
 // régénère le client Prisma).
 

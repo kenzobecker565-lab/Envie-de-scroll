@@ -42,7 +42,7 @@ export function HomeScreen() {
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center gap-2 text-13 font-bold text-ink-soft">
           <BrandMark />
-          Plutôt Que Scroller
+          Scroll-up
         </span>
         <motion.button
           type="button"

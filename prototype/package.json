@@ -1,9 +1,9 @@
 {
-  "name": "@pqs/prototype",
+  "name": "@scroll-up/prototype",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Prototype web de « Plutôt Que Scroller » : transformer chaque envie de scroller en activité créative.",
+  "description": "Prototype web de « Scroll-up » : transformer chaque envie de scroller en activité créative.",
   "engines": {
     "node": ">=20.19"
   },

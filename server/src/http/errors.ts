@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from '@pqs/shared'
+import type { ApiErrorCode } from '@scroll-up/shared'
 
 /** Erreur « métier » renvoyée telle quelle au client, avec un message lisible. */
 export class ApiError extends Error {

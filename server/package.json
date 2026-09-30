@@ -1,9 +1,9 @@
 {
-  "name": "@pqs/server",
+  "name": "@scroll-up/server",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "API REST et bot Telegram de Plutôt Que Scroller.",
+  "description": "API REST et bot Telegram de Scroll-up.",
   "scripts": {
     "dev": "prisma migrate deploy && tsx watch --clear-screen=false src/index.ts",
     "start": "prisma migrate deploy && tsx src/index.ts",
@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@pqs/shared": "*",
+    "@scroll-up/shared": "*",
     "@prisma/adapter-better-sqlite3": "^7.10.0",
     "@prisma/client": "^7.10.0",
     "express": "^5.2.1",

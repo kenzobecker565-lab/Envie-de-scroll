@@ -75,19 +75,19 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
   // redémarrages), sinon aléatoire (développement sans bot).
   const signingSecret =
     env.SIGNING_SECRET?.trim() ||
-    (botToken ? createHash('sha256').update(`pqs-signing:${botToken}`).digest('hex') : randomBytes(32).toString('hex'))
+    (botToken ? createHash('sha256').update(`scroll-up-signing:${botToken}`).digest('hex') : randomBytes(32).toString('hex'))
 
   const appDist = path.resolve(SERVER_ROOT, env.APP_DIST_DIR ?? '../app/dist')
 
   return {
     port: int(env.PORT, 3000),
     production,
-    databaseFile: resolveDatabaseFile(env.DATABASE_URL ?? 'file:./data/pqs.db'),
+    databaseFile: resolveDatabaseFile(env.DATABASE_URL ?? 'file:./data/scroll-up.db'),
     botToken,
     storageChatId: env.STORAGE_CHAT_ID?.trim() || undefined,
     webAppUrl: env.WEBAPP_URL?.trim() || undefined,
     botMode: botToken ? botMode : 'off',
-    webhookSecret: createHash('sha256').update(`pqs-webhook:${botToken ?? ''}`).digest('hex').slice(0, 48),
+    webhookSecret: createHash('sha256').update(`scroll-up-webhook:${botToken ?? ''}`).digest('hex').slice(0, 48),
     devAuth,
     initDataMaxAge: int(env.INIT_DATA_MAX_AGE, 24 * 3600),
     signingSecret,

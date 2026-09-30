@@ -13,7 +13,7 @@
  * compteur repart de zéro dès que l'app est ouverte), /stop pour arrêter.
  */
 
-import { reminderMessage } from '@pqs/shared'
+import { reminderMessage } from '@scroll-up/shared'
 import type { Telegram } from 'telegraf'
 import type { PrismaClient } from '../db.ts'
 import { localDate, localHour } from '../lib/time.ts'

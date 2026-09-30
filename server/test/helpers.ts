@@ -9,7 +9,7 @@ const MIGRATIONS = path.resolve(import.meta.dirname, '../prisma/migrations')
 
 /** Base SQLite neuve, dans un dossier temporaire, avec toutes les migrations appliquées. */
 export function createTestDatabase(): { prisma: PrismaClient; dir: string; cleanup: () => Promise<void> } {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pqs-test-'))
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'scroll-up-test-'))
   const file = path.join(dir, 'test.db')
   const sqlite = new Database(file)
   for (const migration of fs.readdirSync(MIGRATIONS).filter((name) => !name.endsWith('.toml')).sort()) {

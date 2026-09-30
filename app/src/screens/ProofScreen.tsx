@@ -1,7 +1,7 @@
 import { Camera, RefreshCw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
-import { getPassion, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, type ProposalDTO } from '@pqs/shared'
+import { getPassion, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, type ProposalDTO } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'

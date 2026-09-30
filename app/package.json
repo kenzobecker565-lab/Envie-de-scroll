@@ -1,9 +1,9 @@
 {
-  "name": "@pqs/app",
+  "name": "@scroll-up/app",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Telegram Mini App de Plutôt Que Scroller.",
+  "description": "Telegram Mini App de Scroll-up.",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@pqs/shared": "*",
+    "@scroll-up/shared": "*",
     "lucide-react": "^1.48.0",
     "motion": "^13.4.6",
     "react": "^19.3.0",

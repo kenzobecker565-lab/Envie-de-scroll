@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
-import type { MeResponse } from '@pqs/shared'
+import type { MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
 import { BrandMark } from './components/Brand.tsx'
 import { Button } from './components/Button.tsx'
@@ -132,7 +132,7 @@ function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
       <h1 className="mt-6 font-display text-26 font-semibold text-ink">{outsideTelegram ? 'Ouvre l’app depuis Telegram' : 'Petit souci de connexion'}</h1>
       <p className="mt-2 max-w-xs text-15 text-ink-soft">
         {outsideTelegram
-          ? 'Plutôt Que Scroller vit dans Telegram\u00A0: lance-la depuis le bot, avec le bouton « Ouvrir ».'
+          ? 'Scroll-up vit dans Telegram\u00A0: lance-la depuis le bot, avec le bouton « Ouvrir ».'
           : 'On n’arrive pas à joindre le serveur. Vérifie ta connexion, puis réessaie.'}
       </p>
       {outsideTelegram && botUsername ? (

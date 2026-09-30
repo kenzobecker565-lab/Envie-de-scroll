@@ -1,6 +1,6 @@
 # Plutôt Que Scroller — prototype web (archive)
 
-> Ce dossier contient le **premier prototype web** (données dans le navigateur, 747 activités). Il est conservé tel quel : la pub du dossier [`promo/`](../promo/) en est tirée. La version en cours de développement est la **V1 test en Telegram Mini App**, décrite dans le [README principal](../README.md).
+> Ce dossier contient le **premier prototype web** (données dans le navigateur, 747 activités). Il est conservé tel quel : la pub du dossier [`promo/`](../promo/) en est tirée. La version en cours de développement est **Scroll-up**, la V1 test en Telegram Mini App,, décrite dans le [README principal](../README.md).
 >
 > Pour lancer ce prototype depuis la racine du dépôt : `npm install`, puis `npm run dev -w prototype`.
 

@@ -1,7 +1,7 @@
 import { Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getPassion, type ActivityExtra, type ProposalDTO } from '@pqs/shared'
+import { getPassion, type ActivityExtra, type ProposalDTO } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
 import { Screen } from '../components/Screen.tsx'

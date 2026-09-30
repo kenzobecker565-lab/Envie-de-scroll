@@ -4,7 +4,7 @@
  */
 
 import { createContext, useCallback, useContext, useMemo, useReducer, type ReactNode } from 'react'
-import type { CompleteResponse, Duration, MeResponse, MoodId, PassionId, ProposalDTO, StatsDTO, UserDTO } from '@pqs/shared'
+import type { CompleteResponse, Duration, MeResponse, MoodId, PassionId, ProposalDTO, StatsDTO, UserDTO } from '@scroll-up/shared'
 
 export type Route =
   | { name: 'welcome' }

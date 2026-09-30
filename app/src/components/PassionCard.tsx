@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
-import type { Passion } from '@pqs/shared'
+import type { Passion } from '@scroll-up/shared'
 import { cn } from '../lib/cn.ts'
 import { PASSION_ICONS } from '../lib/icons.ts'
 

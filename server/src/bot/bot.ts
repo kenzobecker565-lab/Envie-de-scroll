@@ -18,7 +18,7 @@ import type { Config } from '../config.ts'
 import type { PrismaClient } from '../db.ts'
 import { attachBotPhoto } from '../services/completions.ts'
 
-export const APP_BUTTON_LABEL = 'Ouvrir Plutôt Que Scroller'
+export const APP_BUTTON_LABEL = 'Ouvrir Scroll-up'
 
 /** Bouton « ouvrir la Mini App » (uniquement avec une adresse HTTPS). */
 export function openAppKeyboard(webAppUrl: string | undefined, label = APP_BUTTON_LABEL) {

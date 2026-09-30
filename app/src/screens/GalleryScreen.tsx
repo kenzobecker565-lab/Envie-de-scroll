@@ -1,7 +1,7 @@
 import { Send, SlidersHorizontal } from 'lucide-react'
 import { motion } from 'motion/react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { getPassion, type CompletionDTO } from '@pqs/shared'
+import { getPassion, type CompletionDTO } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
 import { CoinCounter, CoinIcon } from '../components/Coins.tsx'

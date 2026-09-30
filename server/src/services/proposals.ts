@@ -10,7 +10,7 @@ import {
   type MoodId,
   type PassionId,
   type ProposalDTO,
-} from '@pqs/shared'
+} from '@scroll-up/shared'
 import type { PrismaClient, Proposal, User } from '../db.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
 import { parsePassions } from './users.ts'

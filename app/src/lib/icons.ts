@@ -15,7 +15,7 @@ import {
   Wind,
   type LucideIcon,
 } from 'lucide-react'
-import type { MoodId, PassionId } from '@pqs/shared'
+import type { MoodId, PassionId } from '@scroll-up/shared'
 
 export const PASSION_ICONS: Record<PassionId, LucideIcon> = {
   dessin: Pencil,

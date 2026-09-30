@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import request from 'supertest'
-import type { CompleteResponse, CompletionsPage, MeResponse, ProposalResponse } from '@pqs/shared'
+import type { CompleteResponse, CompletionsPage, MeResponse, ProposalResponse } from '@scroll-up/shared'
 import type { PrismaClient } from '../src/db.ts'
 import { createApp } from '../src/http/app.ts'
 import { createPhotoService } from '../src/photos/photos.ts'

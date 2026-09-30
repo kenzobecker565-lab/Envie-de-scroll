@@ -1,4 +1,4 @@
-import { isPassionId, type PassionId, type StatsDTO, type UserDTO } from '@pqs/shared'
+import { isPassionId, type PassionId, type StatsDTO, type UserDTO } from '@scroll-up/shared'
 import type { PrismaClient, User } from '../db.ts'
 import type { TelegramUser } from '../auth/initData.ts'
 import { isValidTimeZone, localMonth } from '../lib/time.ts'

@@ -31,7 +31,7 @@ import {
   type MeResponse,
   type ProposalResponse,
   type UserResponse,
-} from '@pqs/shared'
+} from '@scroll-up/shared'
 import type { Config } from '../config.ts'
 import type { PrismaClient, User } from '../db.ts'
 import { type TelegramUser, InitDataError, validateInitData } from '../auth/initData.ts'

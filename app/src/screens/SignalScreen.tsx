@@ -1,7 +1,7 @@
 import { LifeBuoy } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect } from 'react'
-import { SIGNAL_MESSAGE } from '@pqs/shared'
+import { SIGNAL_MESSAGE } from '@scroll-up/shared'
 import { useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 

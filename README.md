@@ -1,4 +1,6 @@
-# Plutôt Que Scroller — V1 test (Telegram Mini App)
+# Scroll-up — V1 test (Telegram Mini App)
+
+*Anciennement « Plutôt Que Scroller ».*
 
 Une app qui intercepte l'envie de scroller et propose à la place une activité créative courte, liée à une passion : dessin, écriture, musique, cinéma / animation. Elle garde une trace de tout ce qui a été fait (une galerie et un compteur de pièces d'or) plutôt que de compter des jours d'abstinence. Le ton reste chaleureux, jamais punitif.
 
@@ -30,18 +32,66 @@ C'est un espace de travail npm (*workspaces*) : un seul `npm install` à la raci
 
 ---
 
-## Lancer le projet en local (sans Telegram)
+## Tester l'application
 
-Prérequis : [Node.js](https://nodejs.org) **22.13 ou plus récent**, avec npm.
+Prérequis : [Node.js](https://nodejs.org) **22.13 ou plus récent** (la version LTS actuelle convient) et [Git](https://git-scm.com).
+
+### 1. Récupérer le code
 
 ```bash
+git clone https://github.com/kenzobecker565-lab/Envie-de-scroll.git
+cd Envie-de-scroll
+git checkout claude/charming-curie-pg6vs5   # tant que la V1 n'est pas fusionnée
 npm install
+```
+
+### 2. Dans le navigateur (le plus rapide, sans Telegram)
+
+```bash
 npm run dev
 ```
 
-Ouvre ensuite http://localhost:5173. Le serveur (port 3000) et l'app (port 5173) démarrent ensemble ; la base SQLite est créée toute seule dans `server/data/`.
+Ouvre http://localhost:5173. Le serveur (port 3000) et l'app (port 5173) démarrent ensemble, et la base de données se crée toute seule dans `server/data/`.
 
-Sans token de bot, le serveur accepte une **identité de développement** : l'app fonctionne dans un navigateur normal, comme si tu l'avais ouverte depuis Telegram. Ajoute `?dev_user=2` à l'adresse pour jouer un autre utilisateur. Les photos de dessins sont alors écrites sur le disque (`server/data/photos/`).
+Sans token de bot, le serveur accepte une **identité de test** : l'app marche dans un navigateur normal, comme si elle était ouverte depuis Telegram.
+
+- **Voir l'app au format téléphone** : dans Chrome, touche F12, puis l'icône « téléphone » (mode appareil).
+- **Sur ton téléphone** (même Wi-Fi que l'ordinateur) : ouvre l'adresse « Network » affichée dans le terminal (du type `http://192.168.1.12:5173`).
+- **Jouer un autre utilisateur** : ajoute `?dev_user=2` à l'adresse (ou 3, 4…). Chaque numéro a son propre profil et sa propre galerie.
+- **Tout remettre à zéro** : arrête le serveur (Ctrl+C), supprime le dossier `server/data/`, relance `npm run dev`.
+- **Musique et Cinéma** : « Valider » attend vraiment la fin de la durée choisie. Pour tester vite, choisis 5 min.
+
+Hors de Telegram, l'app affiche ses propres boutons (« Retour », boutons du bas) à la place des boutons natifs. Les vibrations ne se déclenchent que dans Telegram.
+
+### 3. Dans Telegram (le vrai test)
+
+1. **Crée le bot** : dans Telegram, écris à [@BotFather](https://t.me/BotFather), envoie `/newbot`, donne-lui le nom `Scroll-up` et un identifiant qui finit par `bot` (par exemple `scrollup_app_bot`). Garde le **token** qu'il te donne.
+2. **Donne une adresse HTTPS à ton ordinateur.** Telegram n'ouvre les Mini Apps qu'en HTTPS. Le plus simple : [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/), gratuit et sans compte. Dans un **deuxième terminal** :
+
+   ```bash
+   cloudflared tunnel --url http://localhost:5173
+   ```
+
+   Il affiche une adresse du type `https://quelque-chose.trycloudflare.com`. Laisse ce terminal ouvert.
+3. **Configure le serveur** : copie `server/.env.example` en `server/.env`, puis remplis :
+
+   ```bash
+   BOT_TOKEN=le-token-de-botfather
+   WEBAPP_URL=https://quelque-chose.trycloudflare.com
+   ```
+
+   Toutes les variables sont commentées dans le fichier. Avec un token, l'identité de test du navigateur est coupée : ajoute `DEV_AUTH=true` pour continuer à tester aussi dans le navigateur.
+4. **Relance** `npm run dev` (Ctrl+C puis `npm run dev`).
+5. **Sur ton téléphone**, ouvre la conversation avec ton bot et envoie `/start` : il répond avec le bouton « Ouvrir Scroll-up ». Le bouton « Ouvrir », à gauche du champ de saisie, lance aussi l'app.
+
+À savoir :
+
+- L'adresse `trycloudflare.com` change à chaque lancement de cloudflared. Mets alors à jour `WEBAPP_URL` et relance `npm run dev`.
+- **Photos** : sans réglage, les photos envoyées depuis l'app sont gardées sur ton ordinateur (`server/data/photos/`). Pour les ranger dans Telegram comme prévu, crée un groupe privé, ajoutes-y le bot, puis mets son identifiant dans `STORAGE_CHAT_ID` (il commence par `-100…` ; pour le trouver, envoie un message dans le groupe puis ouvre `https://api.telegram.org/bot<TOKEN>/getUpdates`).
+- **Relances** : elles partent vers 19 h (heure de chacun) si rien n'a été fait dans la journée. Pour en recevoir une tout de suite, mets `REMINDER_HOUR` à l'heure en cours et relance le serveur.
+- Facultatif : dans BotFather, `/newapp` crée un lien direct vers l'app (`t.me/<bot>/<app>`), pratique à partager avec des testeurs.
+
+### Commandes
 
 | Commande (à la racine) | Rôle |
 | --- | --- |
@@ -57,19 +107,7 @@ Sur GitHub, typage, tests et build se lancent à chaque pull request (`.github/w
 
 ---
 
-## La tester dans Telegram
-
-1. **Crée le bot** : dans Telegram, écris à [@BotFather](https://t.me/BotFather), `/newbot`, et garde le token.
-2. **Donne une adresse HTTPS à l'app.** Telegram n'ouvre les Mini Apps qu'en HTTPS.
-   - *En développement* : un tunnel vers ton ordinateur, par exemple `cloudflared tunnel --url http://localhost:5173` ou `ngrok http 5173`. Vite relaie `/api` vers le serveur, une seule adresse suffit.
-   - *En production* : l'adresse de ton serveur (voir plus bas).
-3. **Configure le serveur** : copie `server/.env.example` en `server/.env` et remplis au moins `BOT_TOKEN` et `WEBAPP_URL` (l'adresse HTTPS de l'étape 2). Toutes les variables y sont commentées. Avec un token, l'identité de développement est coupée : ajoute `DEV_AUTH=true` si tu veux continuer à tester aussi dans un navigateur.
-4. **Chat de stockage des photos** : crée un groupe (ou un canal) privé, ajoutes-y le bot, puis mets son identifiant dans `STORAGE_CHAT_ID` (il commence par `-100…` ; pour le trouver, envoie un message dans le groupe puis ouvre `https://api.telegram.org/bot<TOKEN>/getUpdates`).
-5. Relance `npm run dev`, puis envoie `/start` au bot : il répond avec un bouton qui ouvre la Mini App. Au démarrage, le serveur déclare aussi les commandes du bot et le bouton de menu « Ouvrir ».
-
-Facultatif : dans BotFather, `/newapp` crée un lien direct vers la Mini App (`t.me/<bot>/<app>`).
-
-### Mise en production
+## Mise en production
 
 Il faut un hébergeur Node.js avec un **disque persistant** (la base SQLite est un fichier) : un petit VPS, Railway ou Fly.io avec un volume, par exemple.
 
@@ -79,7 +117,7 @@ npm run build          # construit app/dist
 npm start              # migrations + serveur (API, bot, Mini App) sur $PORT
 ```
 
-Variables à définir : `NODE_ENV=production`, `BOT_TOKEN`, `WEBAPP_URL` (l'adresse publique du serveur), `STORAGE_CHAT_ID`, et `DATABASE_URL` pointant vers le volume (ex. `file:/data/pqs.db`). Par défaut, le bot reçoit les messages en *long polling* (rien à configurer) ; `BOT_MODE=webhook` passe en webhook, sur `https://<ton-domaine>/telegram/webhook`.
+Variables à définir : `NODE_ENV=production`, `BOT_TOKEN`, `WEBAPP_URL` (l'adresse publique du serveur), `STORAGE_CHAT_ID`, et `DATABASE_URL` pointant vers le volume (ex. `file:/data/scroll-up.db`). Par défaut, le bot reçoit les messages en *long polling* (rien à configurer) ; `BOT_MODE=webhook` passe en webhook, sur `https://<ton-domaine>/telegram/webhook`.
 
 > Pour passer plus tard à Postgres (Neon, Supabase…), il suffit de changer le `provider` dans `server/prisma/schema.prisma`, l'adaptateur dans `server/src/db.ts`, et de régénérer les migrations.
 

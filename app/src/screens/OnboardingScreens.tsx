@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
-import { MAX_PASSIONS, PASSIONS, type PassionId } from '@pqs/shared'
+import { MAX_PASSIONS, PASSIONS, type PassionId } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
 import { Illustration } from '../components/Illustration.tsx'

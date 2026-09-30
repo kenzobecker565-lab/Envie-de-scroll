@@ -13,7 +13,7 @@ import type {
   PassionId,
   ProposalResponse,
   UserResponse,
-} from '@pqs/shared'
+} from '@scroll-up/shared'
 import { telegram } from '../telegram/webApp.ts'
 
 export class ApiError extends Error {

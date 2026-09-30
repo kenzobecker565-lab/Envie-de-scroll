@@ -1,9 +1,9 @@
 {
-  "name": "plutot-que-scroller",
+  "name": "scroll-up",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Plutôt Que Scroller — V1 test en Telegram Mini App : transformer l'envie de scroller en activité créative.",
+  "description": "Scroll-up — V1 test en Telegram Mini App : transformer l'envie de scroller en activité créative.",
   "engines": {
     "node": ">=22.13"
   },

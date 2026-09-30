@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { useRef, useState } from 'react'
-import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@pqs/shared'
+import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
 import { cn } from '../lib/cn.ts'

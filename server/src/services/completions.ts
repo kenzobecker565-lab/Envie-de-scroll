@@ -10,7 +10,7 @@ import {
   type Duration,
   type MoodId,
   type PassionId,
-} from '@pqs/shared'
+} from '@scroll-up/shared'
 import type { Completion, PrismaClient, User } from '../db.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
 import { localDate } from '../lib/time.ts'

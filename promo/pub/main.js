@@ -269,45 +269,86 @@ function buildS1() {
 //  2 · « ET SI CETTE ENVIE DEVENAIT… » : LE BOUTON
 // =============================================================================
 
+/** Le mini-fil dessiné dans le bouton de l'app (même dessin que UrgeButton, à l'échelle de la pub). */
+const URGE_ICON = {
+  play: '<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" fill="currentColor"/>',
+  heart: '<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" fill="currentColor"/>',
+  camera: '<path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><path d="M9 13a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>',
+  comment: '<path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/>',
+  music: '<path d="M4 18a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M12 18V2l7 4"/>',
+}
+/** Colonnes du mini-fil : vitesse (px/s), décalage, posts [hauteur, icône, plus visible]. */
+const URGE_COLUMNS = [
+  { speed: 195, offset: 0, posts: [[298, 'play', true], [206, 'heart'], [360, 'play'], [250, null], [317, 'music', true]] },
+  { speed: 260, offset: -106, posts: [[235, 'heart'], [341, 'play', true], [216, 'comment'], [374, 'play'], [269, 'camera']] },
+  { speed: 163, offset: -38, posts: [[350, 'play'], [245, null, true], [288, 'camera'], [211, 'heart', true], [331, 'play']] },
+]
+const URGE_GAP = 24
+
 function buildS2() {
   const s2 = $('#s2')
+  const posts = (column) =>
+    [...column.posts, ...column.posts]
+      .map(
+        ([h, icon, bright]) =>
+          `<div class="urge-post${bright ? ' bright' : ''}" style="height:${h}px"><i class="dot"></i>${icon ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${URGE_ICON[icon]}</svg>` : ''}<i class="bar"></i></div>`,
+      )
+      .join('')
   s2.innerHTML = `
     <div id="s2dim" class="layer" style="background:#0d0a14"></div>
-    <div id="btnShake" class="layer"><div id="btn" class="bigbtn" style="left:300px;top:640px">
-      <div class="ring"></div><div class="ring"></div><div class="disc"></div>
-      <div class="label"><span id="btnSpark" style="display:block;width:78px;height:78px">${picto('pencil', { size: 78, color: '#fff', weight: 2.2 })}</span><div>J’ai envie<br>de scroller</div></div>
+    <div id="btnShake" class="layer"><div id="btn" class="urge" style="left:110px;top:544px;width:860px;height:672px">
+      <div class="urge-bg"></div>
+      <div class="urge-clip">
+        <div class="urge-feed"><div class="urge-plane">${URGE_COLUMNS.map((c, k) => `<div class="urge-col" style="margin-top:${c.offset}px"><div class="urge-stack" data-urge-col="${k}">${posts(c)}</div></div>`).join('')}</div></div>
+        <div class="urge-grain"></div>
+      </div>
+      <svg class="urge-strike" viewBox="0 0 300 60" preserveAspectRatio="none"><path id="urgeStrike" d="M4 38 C 40 18, 70 44, 108 30 S 170 14, 204 32 S 262 42, 296 20" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>
+      <div class="urge-text"><div class="urge-title">J’ai envie<br>de scroller</div><div class="urge-sub">Appuie : on la transforme en idée.</div></div>
+      <div class="urge-arrow" id="urgeArrow"><svg viewBox="0 0 24 24" width="62" height="62" fill="none" stroke="#c4381a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
     </div></div>
     <div id="s2touch" class="touch"></div><div id="s2tap" class="tapring"></div>`
   const btn = $('#btn')
   set('#s2dim', 0, { opacity: 0 })
   tw('#s2dim', T.freeze, 0.35, { opacity: [0, 0.62] })
   set(btn, 0, { scale: 0 })
-  tw(btn, T.freeze + 0.02, 0.55, { scale: [0, 1], rot: [-14, 0] }, ease.back(2.2))
-  tw(btn, T.tapBtn, 0.07, { scale: 0.88 }, ease.out2)
-  tw(btn, T.tapBtn + 0.07, 0.3, { scale: 1.06 }, ease.back(3))
-  tw(btn, T.tapBtn + 0.3, DROP - T.tapBtn - 0.3, { scale: 1.14 }, ease.in2)
-  $$('.ring', btn).forEach((ring, i) => {
-    set(ring, 0, { opacity: 0 })
-    for (let t0 = T.freeze + 0.3 + i * BEAT; t0 < T.tapBtn - 0.4; t0 += 2 * BEAT) tw(ring, t0, 0.9, { scale: [1, 1.6], opacity: [0.6, 0] }, ease.out2)
-    tw(ring, T.tapBtn + 0.1 + i * 0.12, 0.3, { scale: [1.9, 1], opacity: [0, 0.7] }, ease.in2)
-    set(ring, DROP, { opacity: 0 })
-  })
-  tw($('.disc', btn), DROP, 0.5, { scale: [1, 6.5] }, ease.expoOut)
-  tw($('.label', btn), DROP, 0.14, { scale: [1, 2.2], opacity: [1, 0] }, ease.out2)
+  tw(btn, T.freeze + 0.02, 0.55, { scale: [0, 1], rot: [-10, 0] }, ease.back(1.8))
+  tw(btn, T.tapBtn, 0.07, { scale: 0.95 }, ease.out2)
+  tw(btn, T.tapBtn + 0.07, 0.3, { scale: 1.03 }, ease.back(3))
+  tw(btn, T.tapBtn + 0.3, DROP - T.tapBtn - 0.3, { scale: 1.08 }, ease.in2)
 
-  // Le doigt
+  // Le fil défile jusqu'à l'appui, puis se fige ; le crayon le barre aussitôt.
+  const stacks = $$('[data-urge-col]', btn)
+  const halves = URGE_COLUMNS.map((c) => c.posts.reduce((sum, [h]) => sum + h + URGE_GAP, 0))
+  onFrame((t) => {
+    const run = Math.max(0, Math.min(t, T.tapBtn) - T.freeze)
+    stacks.forEach((stack, k) => (stack.style.transform = `translateY(${(-((run * URGE_COLUMNS[k].speed) % halves[k])).toFixed(1)}px)`))
+  })
+  set('#urgeStrike', 0, { d1: 0 })
+  tw('#urgeStrike', T.tapBtn + 0.06, 0.32, { d1: [0, 1] }, ease.out2)
+
+  // Au drop, le fond du bouton envahit l'écran et le contenu s'efface.
+  tw($('.urge-bg', btn), DROP, 0.5, { scale: [1, 4.2] }, ease.expoOut)
+  tw([$('.urge-clip', btn), $('.urge-strike', btn), $('.urge-text', btn), $('.urge-arrow', btn)], DROP, 0.14, { opacity: [1, 0] }, ease.out2)
+  tw($('.urge-text', btn), DROP, 0.14, { scale: [1, 1.5] }, ease.out2)
+
+  // Le doigt appuie sur la flèche
+  const [fx, fy] = [855, 1101]
   const touch = $('#s2touch')
-  set(touch, 0, { opacity: 0, x: 900, y: 1650 })
+  set(touch, 0, { opacity: 0, x: 980, y: 1700 })
   tw(touch, T.tapBtn - 0.5, 0.1, { opacity: [0, 0.95] })
-  tw(touch, T.tapBtn - 0.5, 0.46, { x: [900, 560], y: [1650, 900] }, ease.out3)
+  tw(touch, T.tapBtn - 0.5, 0.46, { x: [980, fx], y: [1700, fy] }, ease.out3)
   tw(touch, T.tapBtn, 0.07, { scale: 0.75 }, ease.out2)
   tw(touch, T.tapBtn + 0.07, 0.14, { scale: 1 }, ease.out2)
-  tw(touch, T.tapBtn + 0.22, 0.18, { opacity: 0, y: 960 }, ease.in2)
-  set('#s2tap', 0, { x: 560, y: 900, opacity: 0 })
+  tw(touch, T.tapBtn + 0.22, 0.18, { opacity: 0, y: fy + 60 }, ease.in2)
+  set('#s2tap', 0, { x: fx, y: fy, opacity: 0 })
   tw('#s2tap', T.tapBtn, 0.45, { scale: [0.6, 3.4], opacity: [0.95, 0] }, ease.out2)
+  tw('#urgeArrow', T.tapBtn, 0.08, { scale: 0.86 }, ease.out2)
+  tw('#urgeArrow', T.tapBtn + 0.08, 0.3, { scale: 1 }, ease.back(3))
 
+  // Le bouton bat : deux battements de cœur pendant le silence, puis les temps de la musique ;
+  // il tremble quand il se charge avant le drop.
   const shaker = $('#btnShake')
-  const sparkIcon = $('#btnSpark')
+  const arrow = $('#urgeArrow svg')
   shaker.style.transformOrigin = '540px 880px'
   const pulses = []
   for (let t0 = T.freeze + 0.3; t0 < T.musicBack - 0.2; t0 += 2 * BEAT) pulses.push([t0, 1], [t0 + 0.17, 0.6])
@@ -315,10 +356,8 @@ function buildS2() {
   onFrame((t) => {
     const a = t > T.tapBtn + 0.2 && t < DROP ? 14 * prog(t, T.tapBtn + 0.2, DROP - T.tapBtn - 0.2, ease.in2) : 0
     const beat = pulses.reduce((sum, [t0, k]) => sum + (t >= t0 && t < t0 + 0.5 ? k * Math.exp(-(t - t0) / 0.09) : 0), 0)
-    shaker.style.transform = `translate(${(a * Math.sin(t * 120)).toFixed(2)}px, ${(a * Math.cos(t * 150)).toFixed(2)}px) scale(${(1 + 0.045 * beat).toFixed(4)})`
-    // Le crayon se balance doucement, puis frétille quand le bouton se charge.
-    const wiggle = t > T.tapBtn ? 26 * prog(t, T.tapBtn, DROP - T.tapBtn, ease.in2) * Math.sin(t * 70) : 0
-    sparkIcon.style.transform = `rotate(${(9 * Math.sin(t * 3.1) + wiggle).toFixed(2)}deg)`
+    shaker.style.transform = `translate(${(a * Math.sin(t * 120)).toFixed(2)}px, ${(a * Math.cos(t * 150)).toFixed(2)}px) scale(${(1 + 0.03 * beat).toFixed(4)})`
+    arrow.style.transform = `translateX(${(t < T.tapBtn ? 7 * (0.5 - 0.5 * Math.cos(t * 2.6)) : 0).toFixed(2)}px)`
   })
   set(s2, DROP + 0.6, { opacity: 0 })
 }
@@ -436,9 +475,11 @@ function buildS4() {
   set(touch, 0, { opacity: 0 })
   set(ring, 0, { opacity: 0 })
   set(hl, 0, { opacity: 0 })
+  // Le doigt appuie au centre de l'élément, sauf sur le bouton : sur sa flèche, comme dans la scène 2.
+  const TAP_ON = { bouton: 'fleche' }
   ;['bouton', 'ennui', 'dessin', 'cinqMinutes'].forEach((name, i) => {
     const t0 = T.taps[i]
-    const [x, y] = zc(name)
+    const [x, y] = zc(TAP_ON[name] ?? name)
     const z = zones[name]
     set(touch, t0 - 0.2, { x: x + 90, y: y + 160, scale: 1 })
     tw(touch, t0 - 0.2, 0.08, { opacity: [0, 0.95] })
@@ -448,7 +489,7 @@ function buildS4() {
     tw(touch, t0 + 0.2, 0.12, { opacity: 0 }, ease.in2)
     set(ring, t0, { x, y })
     tw(ring, t0, 0.4, { scale: [0.6, 2.8], opacity: [0.95, 0] }, ease.out2)
-    set(hl, t0, { left: z.x * SS - 8, top: z.y * SS + SB - 8, w: z.w * SS + 16, h: z.h * SS + 16, radius: name === 'bouton' ? 999 : 28 })
+    set(hl, t0, { left: z.x * SS - 8, top: z.y * SS + SB - 8, w: z.w * SS + 16, h: z.h * SS + 16, radius: name === 'bouton' ? 52 : 28 })
     tw(hl, t0, 0.2, { opacity: [0, 1], scale: [1.15, 1] }, ease.back(2))
     tw(hl, (T.screens[i] ?? t0 + 0.5) - 0.05, 0.1, { opacity: 0 })
   })

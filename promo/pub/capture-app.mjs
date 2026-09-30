@@ -52,6 +52,7 @@ const bigButton = page.getByRole('button', { name: /J’ai envie\s*de scroller/ 
 await bigButton.waitFor()
 await settle(900)
 await zone('bouton', bigButton)
+await zone('fleche', bigButton.locator('.lucide-arrow-right'))
 await shot('01-accueil')
 
 // Humeur

@@ -246,6 +246,7 @@ function score() {
   sweep(T.tapBtn - 0.5, 0.35, { f0: 300, f1: 1600, gain: 0.06 })
   tick(T.tapBtn, 0.2, 1800)
   pop(T.tapBtn + 0.01, 0.28, 500, 150)
+  scribble(T.tapBtn + 0.06, 0.32, 0.11, 0.1) // le crayon barre le fil du bouton
 
   // ------------------------------------------------ 3 · le drop, le logo
   boom(DROP, 0.75, 70, 30, 1.1)

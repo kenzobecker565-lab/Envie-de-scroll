@@ -453,8 +453,9 @@ function buildDevice(stage) {
     [T.tapValidate, T.tapValidate + 0.42, 'main', mT(4), m.proof + 10],
     [T.tapValidate + 0.42, T.photo, 'main', m.photo - 20, m.photo],
     [T.photo, T.tapSave, 'main', m.photo, mT(5)],
-    [T.tapSave, T.done, 'main', mT(5), m.done],
-    [T.done, T.tapGallery - 0.3, 'main', m.done, mT(6) - 8],
+    // (l'app enregistre : « Un instant… », puis un écran vide qu'on saute)
+    [T.tapSave, T.done, 'main', mT(5), mT(5) + 5],
+    [T.done, T.tapGallery - 0.3, 'main', m.done + 2, mT(6) - 8],
     // La galerie, puis le détail d'une création.
     [T.tapGallery - 0.3, T.tapGallery, 'main', mT(7) - 8, mT(7)],
     [T.tapGallery, T.tapGallery + 0.4, 'main', mT(7), m.gallery],
@@ -735,8 +736,8 @@ function buildCaptions() {
 
   // 4 · un seul bouton
   caption(L, T.then, T.itch, [['Ensuite…', 'plain']], { top: 200, size: 110 })
-  caption(L, T.itch, T.oneButton, [['quand ton pouce', 'plain'], ['te démange', 'warm', vo(17.3)]], { top: 170, size: 104, rot: 3 })
-  caption(L, T.oneButton - 0.5, T.mood, [['tu appuies sur', 'plain'], ['1 seul bouton.', 'accent', T.oneButton]], { top: 170, size: 104 })
+  caption(L, T.itch, vo(18.38), [['quand ton pouce', 'plain'], ['te démange', 'warm', vo(17.3)]], { top: 170, size: 104, rot: 3 })
+  caption(L, vo(18.38), T.mood, [['tu appuies sur', 'plain'], ['1 seul bouton.', 'accent', T.oneButton]], { top: 170, size: 104 })
 
   // 5 · trois petits taps (ils s'empilent)
   caption(L, T.mood, T.threeTaps, [['Ton humeur,', 'sky']], { top: 110, size: 92, rot: -2 })
@@ -750,8 +751,8 @@ function buildCaptions() {
 
   // 7 · créer, valider
   const VERBS = [['Tu dessines.', 'accent'], ['Tu écris.', 'lilac'], ['Tu écoutes.', 'good'], ['Tu regardes.', 'warm']]
-  T.verbs.forEach((t, i) => caption(L, t, i < 3 ? T.verbs[i + 1] : T.backToTake, [VERBS[i]], { top: 220, size: 130, rot: i % 2 ? 3 : -3 }))
-  caption(L, T.backToTake, T.photo, [['Tu valides,', 'good', vo(33.2)]], { top: 220, size: 130 })
+  T.verbs.forEach((t, i) => caption(L, t, i < 3 ? T.verbs[i + 1] : vo(33.2), [VERBS[i]], { top: 220, size: 130, rot: i % 2 ? 3 : -3 }))
+  caption(L, vo(33.2), T.photo, [['Tu valides,', 'good']], { top: 220, size: 130 })
   caption(L, T.photo, T.tapSave, [['avec une photo', 'sky']], { top: 170, size: 104 })
   caption(L, T.words, T.tapSave, [['ou quelques mots.', 'plain']], { top: 330, size: 92 })
 

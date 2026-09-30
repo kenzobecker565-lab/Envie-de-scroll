@@ -1,6 +1,8 @@
 # Pub de 15 secondes (motion design)
 
-> 🆕 **La vidéo virale Scroll-up (25 s, vraie app filmée, sous-titres, musique vidIQ)** : [dossier `viral/`](viral/README.md).
+> 🆕 **La vidéo de présentation Scroll-up (61 s, toute l'app, voix off, musique, jazz noir)** : [dossier `presentation/`](presentation/README.md).
+>
+> **La vidéo virale Scroll-up (25 s, vraie app filmée, sous-titres, musique vidIQ)** : [dossier `viral/`](viral/README.md).
 >
 > **La pub Scroll-up (30 s, style Pop, musique et bruitages sans voix off)** : [dossier `scrollup/`](scrollup/README.md).
 >

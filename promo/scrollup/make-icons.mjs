@@ -15,6 +15,7 @@ const dir = path.resolve(here, '../../node_modules/lucide-react/dist/esm/icons')
 const NAMES = [
   'arrow-right', 'check', 'clapperboard', 'cloud-lightning', 'feather', 'headphones', 'heart', 'hourglass',
   'images', 'life-buoy', 'message-circle', 'music', 'palette', 'pencil', 'send', 'snail', 'wind', 'bookmark',
+  'calendar-x', 'camera', 'clock', 'coins', 'music-2', 'pen-line', 'shuffle', 'sparkles', 'volume-x',
 ]
 
 const toMarkup = (node) =>

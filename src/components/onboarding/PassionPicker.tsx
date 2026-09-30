@@ -2,6 +2,7 @@ import { PASSION_FAMILIES } from '../../data/passions'
 import { accentStyle } from '../../lib/accent'
 import type { PassionFamilyId, PassionId } from '../../types'
 import { PassionChip } from '../ui/Passion'
+import { Picto } from '../ui/Picto'
 
 interface PassionPickerProps {
   selected: PassionId[]
@@ -28,10 +29,10 @@ export function PassionPicker({ selected, onChange, familyIds }: PassionPickerPr
         return (
           <fieldset key={family.id}>
             <legend className="mb-2.5 flex w-full items-center gap-2.5">
-              <span aria-hidden style={accentStyle(family.color)} className="grid size-8 place-items-center rounded-xl tint-accent-strong text-base">
-                {family.emoji}
+              <span style={accentStyle(family.color)} className="grid size-8 place-items-center">
+                <Picto name={family.picto} spot className="size-7" />
               </span>
-              <span className="font-display text-[1.05rem] font-semibold">{family.label}</span>
+              <span className="font-display text-[1.05rem] font-extrabold tracking-tight">{family.label}</span>
               {count > 0 && (
                 <span style={accentStyle(family.color)} className="ml-auto rounded-full tint-accent px-2 py-0.5 text-xs font-bold text-accent">
                   {count} choisie{count > 1 ? 's' : ''}

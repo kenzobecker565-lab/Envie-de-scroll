@@ -1,4 +1,4 @@
-import { Pencil } from 'lucide-react'
+import { Clapperboard, Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { formatRelativeDay, pluralize } from '../../lib/dates'
 import { updateEntryDetails } from '../../services/historyService'
@@ -30,11 +30,11 @@ export function FilmsView({ entries }: { entries: HistoryEntry[] }) {
           {films.map((entry) => (
             <li key={entry.id} className="rounded-2xl border border-line bg-card p-3 shadow-soft">
               <div className="flex items-start gap-3">
-                <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary-soft text-xl">
-                  🎬
+                <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-xl bg-paper text-ink">
+                  <Clapperboard className="size-5" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-display text-[1.05rem] font-semibold leading-snug">{entry.film?.title}</p>
+                  <p className="font-display text-[1.05rem] font-extrabold tracking-tight leading-snug">{entry.film?.title}</p>
                   <p className="text-xs text-ink-soft">
                     {formatRelativeDay(entry.dateKey)} · {entry.title}
                   </p>

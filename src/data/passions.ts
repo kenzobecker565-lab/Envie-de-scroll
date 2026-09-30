@@ -17,58 +17,58 @@ import type {
  */
 export const PASSIONS: Record<PassionId, Passion> = {
   // Arts visuels
-  dessin: { id: 'dessin', familyId: 'arts-visuels', label: 'Dessin', emoji: '✏️', progressView: 'gallery' },
-  peinture: { id: 'peinture', familyId: 'arts-visuels', label: 'Peinture', emoji: '🎨', progressView: 'timeline' },
-  photographie: { id: 'photographie', familyId: 'arts-visuels', label: 'Photographie', emoji: '📷', progressView: 'timeline' },
-  'illustration-numerique': { id: 'illustration-numerique', familyId: 'arts-visuels', label: 'Illustration numérique', emoji: '🖌️', progressView: 'timeline' },
-  'mode-stylisme': { id: 'mode-stylisme', familyId: 'arts-visuels', label: 'Mode / stylisme', emoji: '👗', progressView: 'timeline' },
+  dessin: { id: 'dessin', familyId: 'arts-visuels', label: 'Dessin', picto: 'pencil', progressView: 'gallery' },
+  peinture: { id: 'peinture', familyId: 'arts-visuels', label: 'Peinture', picto: 'palette', progressView: 'timeline' },
+  photographie: { id: 'photographie', familyId: 'arts-visuels', label: 'Photographie', picto: 'camera', progressView: 'timeline' },
+  'illustration-numerique': { id: 'illustration-numerique', familyId: 'arts-visuels', label: 'Illustration numérique', picto: 'pen-tool', progressView: 'timeline' },
+  'mode-stylisme': { id: 'mode-stylisme', familyId: 'arts-visuels', label: 'Mode / stylisme', picto: 'shirt', progressView: 'timeline' },
 
   // Audiovisuel
-  cinema: { id: 'cinema', familyId: 'audiovisuel', label: 'Cinéma', emoji: '🎬', progressView: 'films' },
-  animation: { id: 'animation', familyId: 'audiovisuel', label: 'Animation', emoji: '🎞️', progressView: 'timeline' },
-  'montage-video': { id: 'montage-video', familyId: 'audiovisuel', label: 'Montage vidéo', emoji: '✂️', progressView: 'timeline' },
+  cinema: { id: 'cinema', familyId: 'audiovisuel', label: 'Cinéma', picto: 'clapperboard', progressView: 'films' },
+  animation: { id: 'animation', familyId: 'audiovisuel', label: 'Animation', picto: 'film', progressView: 'timeline' },
+  'montage-video': { id: 'montage-video', familyId: 'audiovisuel', label: 'Montage vidéo', picto: 'scissors', progressView: 'timeline' },
 
   // Mots
-  ecriture: { id: 'ecriture', familyId: 'mots', label: 'Écriture (fiction)', emoji: '✍️', progressView: 'timeline' },
-  poesie: { id: 'poesie', familyId: 'mots', label: 'Poésie', emoji: '🪶', progressView: 'timeline' },
-  'journal-intime': { id: 'journal-intime', familyId: 'mots', label: 'Journal intime', emoji: '📓', progressView: 'timeline' },
-  'critique-blogging': { id: 'critique-blogging', familyId: 'mots', label: 'Critique / blogging', emoji: '📰', progressView: 'timeline' },
+  ecriture: { id: 'ecriture', familyId: 'mots', label: 'Écriture (fiction)', picto: 'notebook-pen', progressView: 'timeline' },
+  poesie: { id: 'poesie', familyId: 'mots', label: 'Poésie', picto: 'feather', progressView: 'timeline' },
+  'journal-intime': { id: 'journal-intime', familyId: 'mots', label: 'Journal intime', picto: 'book-heart', progressView: 'timeline' },
+  'critique-blogging': { id: 'critique-blogging', familyId: 'mots', label: 'Critique / blogging', picto: 'newspaper', progressView: 'timeline' },
 
   // Son
-  musique: { id: 'musique', familyId: 'son', label: 'Musique (instrument)', emoji: '🎸', progressView: 'timeline' },
-  chant: { id: 'chant', familyId: 'son', label: 'Chant', emoji: '🎤', progressView: 'timeline' },
-  composition: { id: 'composition', familyId: 'son', label: 'Composition', emoji: '🎹', progressView: 'timeline' },
-  podcast: { id: 'podcast', familyId: 'son', label: 'Podcast / audio', emoji: '🎙️', progressView: 'timeline' },
+  musique: { id: 'musique', familyId: 'son', label: 'Musique (instrument)', picto: 'guitar', progressView: 'timeline' },
+  chant: { id: 'chant', familyId: 'son', label: 'Chant', picto: 'mic-vocal', progressView: 'timeline' },
+  composition: { id: 'composition', familyId: 'son', label: 'Composition', picto: 'piano', progressView: 'timeline' },
+  podcast: { id: 'podcast', familyId: 'son', label: 'Podcast / audio', picto: 'podcast', progressView: 'timeline' },
 
   // Corps & mouvement
-  danse: { id: 'danse', familyId: 'corps-mouvement', label: 'Danse', emoji: '💃', progressView: 'timeline' },
-  sport: { id: 'sport', familyId: 'corps-mouvement', label: 'Sport', emoji: '🏃', progressView: 'timeline' },
-  theatre: { id: 'theatre', familyId: 'corps-mouvement', label: 'Théâtre', emoji: '🎭', progressView: 'timeline' },
-  'arts-martiaux': { id: 'arts-martiaux', familyId: 'corps-mouvement', label: 'Arts martiaux', emoji: '🥋', progressView: 'timeline' },
+  danse: { id: 'danse', familyId: 'corps-mouvement', label: 'Danse', picto: 'footprints', progressView: 'timeline' },
+  sport: { id: 'sport', familyId: 'corps-mouvement', label: 'Sport', picto: 'dumbbell', progressView: 'timeline' },
+  theatre: { id: 'theatre', familyId: 'corps-mouvement', label: 'Théâtre', picto: 'drama', progressView: 'timeline' },
+  'arts-martiaux': { id: 'arts-martiaux', familyId: 'corps-mouvement', label: 'Arts martiaux', picto: 'hand-fist', progressView: 'timeline' },
 
   // Fabrication
-  bricolage: { id: 'bricolage', familyId: 'fabrication', label: 'Bricolage / DIY', emoji: '🔨', progressView: 'timeline' },
-  cuisine: { id: 'cuisine', familyId: 'fabrication', label: 'Cuisine', emoji: '🍳', progressView: 'timeline' },
-  couture: { id: 'couture', familyId: 'fabrication', label: 'Couture', emoji: '🧵', progressView: 'timeline' },
-  jardinage: { id: 'jardinage', familyId: 'fabrication', label: 'Jardinage', emoji: '🌱', progressView: 'timeline' },
+  bricolage: { id: 'bricolage', familyId: 'fabrication', label: 'Bricolage / DIY', picto: 'hammer', progressView: 'timeline' },
+  cuisine: { id: 'cuisine', familyId: 'fabrication', label: 'Cuisine', picto: 'chef-hat', progressView: 'timeline' },
+  couture: { id: 'couture', familyId: 'fabrication', label: 'Couture', picto: 'spool', progressView: 'timeline' },
+  jardinage: { id: 'jardinage', familyId: 'fabrication', label: 'Jardinage', picto: 'sprout', progressView: 'timeline' },
 
   // Esprit & stratégie
-  'jeux-video-creatifs': { id: 'jeux-video-creatifs', familyId: 'esprit-strategie', label: 'Jeux vidéo créatifs', emoji: '🎮', progressView: 'timeline' },
-  'programmation-creative': { id: 'programmation-creative', familyId: 'esprit-strategie', label: 'Programmation créative', emoji: '💻', progressView: 'timeline' },
-  'jeux-de-societe': { id: 'jeux-de-societe', familyId: 'esprit-strategie', label: 'Jeux de société', emoji: '🎲', progressView: 'timeline' },
-  echecs: { id: 'echecs', familyId: 'esprit-strategie', label: 'Échecs', emoji: '♟️', progressView: 'timeline' },
+  'jeux-video-creatifs': { id: 'jeux-video-creatifs', familyId: 'esprit-strategie', label: 'Jeux vidéo créatifs', picto: 'gamepad-2', progressView: 'timeline' },
+  'programmation-creative': { id: 'programmation-creative', familyId: 'esprit-strategie', label: 'Programmation créative', picto: 'code-xml', progressView: 'timeline' },
+  'jeux-de-societe': { id: 'jeux-de-societe', familyId: 'esprit-strategie', label: 'Jeux de société', picto: 'dice-5', progressView: 'timeline' },
+  echecs: { id: 'echecs', familyId: 'esprit-strategie', label: 'Échecs', picto: 'chess-knight', progressView: 'timeline' },
 
   // Nature & exploration
-  randonnee: { id: 'randonnee', familyId: 'nature-exploration', label: 'Randonnée', emoji: '🥾', progressView: 'timeline' },
-  'observation-nature': { id: 'observation-nature', familyId: 'nature-exploration', label: 'Observation de la nature', emoji: '🐦', progressView: 'timeline' },
-  voyage: { id: 'voyage', familyId: 'nature-exploration', label: 'Voyage / découverte de lieux', emoji: '🧭', progressView: 'timeline' },
+  randonnee: { id: 'randonnee', familyId: 'nature-exploration', label: 'Randonnée', picto: 'mountain', progressView: 'timeline' },
+  'observation-nature': { id: 'observation-nature', familyId: 'nature-exploration', label: 'Observation de la nature', picto: 'binoculars', progressView: 'timeline' },
+  voyage: { id: 'voyage', familyId: 'nature-exploration', label: 'Voyage / découverte de lieux', picto: 'compass', progressView: 'timeline' },
 }
 
 export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'arts-visuels',
     label: 'Arts visuels',
-    emoji: '🎨',
+    picto: 'frame',
     color: '#E4572E',
     passionIds: ['dessin', 'peinture', 'photographie', 'illustration-numerique', 'mode-stylisme'],
     starterPassionIds: ['dessin', 'photographie'],
@@ -76,7 +76,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'audiovisuel',
     label: 'Audiovisuel',
-    emoji: '🎬',
+    picto: 'video',
     color: '#9B5DE5',
     passionIds: ['cinema', 'animation', 'montage-video'],
     starterPassionIds: ['cinema', 'animation'],
@@ -84,7 +84,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'mots',
     label: 'Mots',
-    emoji: '✍️',
+    picto: 'quote',
     color: '#3D7DD8',
     passionIds: ['ecriture', 'poesie', 'journal-intime', 'critique-blogging'],
     starterPassionIds: ['journal-intime', 'ecriture'],
@@ -92,7 +92,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'son',
     label: 'Son',
-    emoji: '🎧',
+    picto: 'audio-lines',
     color: '#13A89E',
     passionIds: ['musique', 'chant', 'composition', 'podcast'],
     starterPassionIds: ['chant', 'musique'],
@@ -100,7 +100,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'corps-mouvement',
     label: 'Corps & mouvement',
-    emoji: '🤸',
+    picto: 'activity',
     color: '#F08A24',
     passionIds: ['danse', 'sport', 'theatre', 'arts-martiaux'],
     starterPassionIds: ['sport', 'danse'],
@@ -108,7 +108,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'fabrication',
     label: 'Fabrication',
-    emoji: '🛠️',
+    picto: 'hand',
     color: '#C9971A',
     passionIds: ['bricolage', 'cuisine', 'couture', 'jardinage'],
     starterPassionIds: ['cuisine', 'bricolage'],
@@ -116,7 +116,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'esprit-strategie',
     label: 'Esprit & stratégie',
-    emoji: '🧩',
+    picto: 'brain',
     color: '#D6457A',
     passionIds: ['jeux-video-creatifs', 'programmation-creative', 'jeux-de-societe', 'echecs'],
     starterPassionIds: ['echecs', 'jeux-de-societe'],
@@ -124,7 +124,7 @@ export const PASSION_FAMILIES: PassionFamily[] = [
   {
     id: 'nature-exploration',
     label: 'Nature & exploration',
-    emoji: '🌿',
+    picto: 'tent',
     color: '#4F9D69',
     passionIds: ['randonnee', 'observation-nature', 'voyage'],
     starterPassionIds: ['observation-nature', 'randonnee'],

@@ -72,7 +72,7 @@ export function ScreenTitle({ title, subtitle, children }: { title: string; subt
   return (
     <header className="mb-5 mt-2 flex items-end justify-between gap-3">
       <div>
-        <h1 className="font-display text-[2rem] font-semibold leading-tight tracking-tight">{fr(title)}</h1>
+        <h1 className="font-display text-[2rem] font-extrabold leading-tight tracking-tight">{fr(title)}</h1>
         {subtitle && <p className="mt-1 text-ink-soft">{fr(subtitle)}</p>}
       </div>
       {children}
@@ -88,7 +88,7 @@ export function Card({ children, className }: { children: ReactNode; className?:
 export function SectionTitle({ children, action }: { children: ReactNode; action?: ReactNode }) {
   return (
     <div className="mb-3 flex items-center justify-between gap-3">
-      <h2 className="font-display text-lg font-semibold">{children}</h2>
+      <h2 className="font-display text-lg font-extrabold tracking-tight">{children}</h2>
       {action}
     </div>
   )

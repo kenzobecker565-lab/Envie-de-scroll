@@ -7,17 +7,17 @@ import type { EnergyLevel, Mood, MoodId } from '../types'
  */
 export const MOODS: Mood[] = [
   // Énergie basse / retrait
-  { id: 'ennui', label: 'Ennui', shortLabel: 'Ennui', emoji: '🥱', energy: 'basse', hint: 'Rien ne me tente' },
-  { id: 'fatigue', label: 'Fatigue', shortLabel: 'Fatigue', emoji: '😴', energy: 'basse', hint: 'Batterie à plat' },
-  { id: 'coup-de-mou', label: 'Coup de mou / tristesse', shortLabel: 'Coup de mou', emoji: '🌧️', energy: 'basse', hint: 'Un peu lourd aujourd’hui' },
-  { id: 'manque-inspiration', label: 'Manque d’inspiration', shortLabel: 'Manque d’inspi', emoji: '🫥', energy: 'basse', hint: 'Page blanche' },
-  { id: 'calme', label: 'Envie de calme', shortLabel: 'Calme', emoji: '🍃', energy: 'basse', hint: 'Besoin de souffler' },
+  { id: 'ennui', label: 'Ennui', shortLabel: 'Ennui', picto: 'hourglass', energy: 'basse', hint: 'Rien ne me tente' },
+  { id: 'fatigue', label: 'Fatigue', shortLabel: 'Fatigue', picto: 'battery-low', energy: 'basse', hint: 'Batterie à plat' },
+  { id: 'coup-de-mou', label: 'Coup de mou / tristesse', shortLabel: 'Coup de mou', picto: 'cloud-drizzle', energy: 'basse', hint: 'Un peu lourd aujourd’hui' },
+  { id: 'manque-inspiration', label: 'Manque d’inspiration', shortLabel: 'Manque d’inspi', picto: 'lightbulb-off', energy: 'basse', hint: 'Page blanche' },
+  { id: 'calme', label: 'Envie de calme', shortLabel: 'Calme', picto: 'leaf', energy: 'basse', hint: 'Besoin de souffler' },
 
   // Énergie haute / tension
-  { id: 'stress', label: 'Stress / anxiété', shortLabel: 'Stress', emoji: '😬', energy: 'haute', hint: 'Ça tourne dans ma tête' },
-  { id: 'defouler', label: 'Envie de me défouler', shortLabel: 'Défoulement', emoji: '💥', energy: 'haute', hint: 'Trop d’énergie' },
-  { id: 'procrastination', label: 'Procrastination', shortLabel: 'Procrastination', emoji: '🙈', energy: 'haute', hint: 'Je fuis un truc précis' },
-  { id: 'curiosite', label: 'Curiosité / envie de découvrir', shortLabel: 'Curiosité', emoji: '👀', energy: 'haute', hint: 'J’ai envie d’apprendre un truc' },
+  { id: 'stress', label: 'Stress / anxiété', shortLabel: 'Stress', picto: 'tornado', energy: 'haute', hint: 'Ça tourne dans ma tête' },
+  { id: 'defouler', label: 'Envie de me défouler', shortLabel: 'Défoulement', picto: 'zap', energy: 'haute', hint: 'Trop d’énergie' },
+  { id: 'procrastination', label: 'Procrastination', shortLabel: 'Procrastination', picto: 'snail', energy: 'haute', hint: 'Je fuis un truc précis' },
+  { id: 'curiosite', label: 'Curiosité / envie de découvrir', shortLabel: 'Curiosité', picto: 'telescope', energy: 'haute', hint: 'J’ai envie d’apprendre un truc' },
 ]
 
 export const MOOD_IDS = MOODS.map((mood) => mood.id)

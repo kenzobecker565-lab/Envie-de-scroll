@@ -153,6 +153,7 @@ src/
 │   ├── preferences.ts      Thème clair / sombre
 │   └── appInit.ts          Démarrage de l'app
 ├── hooks/                  Données « en direct », routage, thème
+├── lib/pictos.ts           Les pictogrammes de l'app (à la place des emojis)
 ├── platform/index.ts       Adaptateur navigateur / Telegram
 ├── components/             Composants d'interface (ui, layout, onboarding, trigger, dashboard)
 │   └── ErrorBoundary.tsx   Écran de secours en cas d'erreur inattendue
@@ -162,7 +163,7 @@ src/
 └── main.tsx                Point d'entrée
 ```
 
-**Technos** : React 19, TypeScript (mode strict), Vite, Tailwind CSS 4, Dexie (IndexedDB), Vitest pour les tests, icônes Lucide, polices Fraunces et Figtree (embarquées, l'app fonctionne hors ligne).
+**Technos** : React 19, TypeScript (mode strict), Vite, Tailwind CSS 4, Dexie (IndexedDB), Vitest pour les tests, icônes Lucide, polices Figtree et Fraunces (embarquées, l'app fonctionne hors ligne).
 
 ---
 
@@ -180,7 +181,8 @@ L'architecture prépare la migration :
 
 ## Design
 
-- Identité « carnet de création » : papier crème, encre brun foncé, accent tomate brûlée, titres en Fraunces (sérif doux), texte en Figtree.
+- Identité « encre et papier » : papier neutre, cartes blanches, encre presque noire, accent tomate vif. Titres et texte en Figtree (titres très gras) ; Fraunces est réservée au logo.
+- Aucun emoji dans l'interface : passions, humeurs et statistiques ont des pictogrammes au trait, posés sur une petite tache de couleur, comme une impression légèrement décalée (`src/lib/pictos.ts`, d'après [Lucide](https://lucide.dev)). La pub de 28 s utilise les mêmes.
 - Mode clair et mode sombre (automatique selon le système, ou forcé dans le profil).
 - Les couleurs sont des variables dans `src/styles/index.css` : modifier une couleur à cet endroit la change partout, en clair comme en sombre.
 - Animations légères entre les étapes, désactivées si le système demande de réduire les animations.

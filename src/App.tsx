@@ -78,7 +78,7 @@ function StorageError() {
     <div className="grid min-h-dvh place-items-center bg-paper p-6">
       <div role="alert" className="max-w-sm text-center">
         <AppMark className="mx-auto size-14" />
-        <h1 className="mt-5 font-display text-2xl font-semibold">Stockage indisponible</h1>
+        <h1 className="mt-5 font-display text-2xl font-extrabold tracking-tight">Stockage indisponible</h1>
         <p className="mt-2 leading-relaxed text-ink-soft">
           L’application enregistre tes données dans ton navigateur, mais il refuse l’accès. Vérifie que tu n’es pas en navigation
           privée et que les données de site ne sont pas bloquées, puis recharge la page.

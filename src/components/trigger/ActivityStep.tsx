@@ -6,6 +6,7 @@ import { fr } from '../../lib/typography'
 import { describeMatch, type Suggestion } from '../../services/activityEngine'
 import type { Duration, MoodId } from '../../types'
 import { Button } from '../ui/Button'
+import { Picto } from '../ui/Picto'
 import { BottomBar, StepHeading } from '../ui/StepHeading'
 
 interface ActivityStepProps {
@@ -30,11 +31,11 @@ export function ActivityStep({ suggestion, mood, availableTime, saving, onAnothe
       <StepHeading title="Ton idée du moment" className="mb-3" />
 
       <div className="mb-4 flex flex-wrap items-center gap-1.5 text-sm">
-        <span className="rounded-full border border-line bg-card px-2.5 py-1">
-          <span aria-hidden>{moodInfo.emoji}</span> {moodInfo.shortLabel}
+        <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-2.5 py-1">
+          <Picto name={moodInfo.picto} className="size-4" weight={2} /> {moodInfo.shortLabel}
         </span>
-        <span className="rounded-full border border-line bg-card px-2.5 py-1">
-          <span aria-hidden>{passion.emoji}</span> {passion.label}
+        <span className="flex items-center gap-1.5 rounded-full border border-line bg-card px-2.5 py-1">
+          <Picto name={passion.picto} className="size-4" weight={2} /> {passion.label}
         </span>
         <span className="rounded-full border border-line bg-card px-2.5 py-1">{availableTime} min dispo</span>
         <button type="button" onClick={onChangeChoices} className="ml-auto rounded-lg px-1 py-1 font-semibold text-primary underline-offset-4 hover:underline">
@@ -52,7 +53,7 @@ export function ActivityStep({ suggestion, mood, availableTime, saving, onAnothe
           <div className="p-5 pt-4">
             <div className="mb-4 flex flex-wrap items-center gap-2 text-sm font-semibold">
               <span className="flex items-center gap-1.5 rounded-full tint-accent px-2.5 py-1">
-                <span aria-hidden>{passion.emoji}</span>
+                <Picto name={passion.picto} className="size-4" weight={2} />
                 {passion.label}
               </span>
               <span className="flex items-center gap-1 rounded-full bg-paper px-2.5 py-1 text-ink-soft">
@@ -65,7 +66,7 @@ export function ActivityStep({ suggestion, mood, availableTime, saving, onAnothe
                 </span>
               )}
             </div>
-            <h2 className="font-display text-[1.8rem] font-semibold leading-[1.1] tracking-tight">{fr(activity.title)}</h2>
+            <h2 className="font-display text-[1.8rem] font-extrabold leading-[1.1] tracking-tight">{fr(activity.title)}</h2>
             <p className="mt-3 text-[1.08rem] leading-relaxed">{fr(activity.description)}</p>
           </div>
         </article>

@@ -24,7 +24,7 @@ export function StepHeading({
 
   return (
     <div className={cn('mb-6', className)}>
-      <h1 ref={ref} tabIndex={-1} className="font-display text-[1.9rem] font-semibold leading-[1.12] tracking-tight outline-none">
+      <h1 ref={ref} tabIndex={-1} className="font-display text-[1.9rem] font-extrabold leading-[1.12] tracking-tight outline-none">
         {typeof title === 'string' ? fr(title) : title}
       </h1>
       {subtitle && (

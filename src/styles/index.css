@@ -2,11 +2,12 @@
 
 /*
  * ============================================================================
- *  IDENTITÉ VISUELLE — « carnet de création »
+ *  IDENTITÉ VISUELLE — « encre et papier »
  * ============================================================================
- * Une page de carnet chaude (papier crème, encre brun foncé) et un accent
- * « tomate brûlée » pour l'action principale. Les titres utilisent Fraunces
- * (sérif doux et expressif), le texte Figtree (lisible et rond).
+ * Un papier neutre, des cartes blanches, une encre presque noire et un accent
+ * tomate vif pour l'action principale. Pas d'emoji : des pictogrammes au
+ * trait posés sur une tache de couleur (src/lib/pictos.ts). Titres et texte
+ * en Figtree (titres très gras et serrés) ; Fraunces est réservée au logo.
  *
  * Toutes les couleurs sont des variables : le mode sombre les redéfinit
  * simplement dans la classe `.dark` (posée sur <html>).
@@ -15,22 +16,22 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme static {
-  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-display: 'Figtree Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Surfaces et texte */
-  --color-paper: #fbf5ec;
-  --color-paper-deep: #f1e6d6;
-  --color-card: #fffdf9;
-  --color-ink: #2a1f1a;
-  --color-ink-soft: #6e5d52;
-  --color-ink-faint: #8c7b6f;
-  --color-line: #eadfd0;
+  --color-paper: #f5f4f1;
+  --color-paper-deep: #e8e6e1;
+  --color-card: #ffffff;
+  --color-ink: #191613;
+  --color-ink-soft: #5d5853;
+  --color-ink-faint: #7d7872;
+  --color-line: #e4e1dc;
 
   /* Action principale */
-  --color-primary: #c4401c;
-  --color-primary-strong: #a83616;
-  --color-primary-soft: #fce6db;
+  --color-primary: #cc3615;
+  --color-primary-strong: #ab2c0f;
+  --color-primary-soft: #fde5dc;
   --color-on-primary: #ffffff;
 
   /* Accents */
@@ -98,23 +99,23 @@
 
 /* Ombres : définies hors de @theme pour pouvoir changer en mode sombre. */
 :root {
-  --shadow-soft: 0 1px 2px rgb(42 31 26 / 0.05), 0 10px 24px -14px rgb(42 31 26 / 0.22);
-  --shadow-lift: 0 2px 6px rgb(42 31 26 / 0.07), 0 22px 44px -20px rgb(42 31 26 / 0.4);
+  --shadow-soft: 0 1px 2px rgb(25 22 19 / 0.05), 0 8px 20px -12px rgb(25 22 19 / 0.16);
+  --shadow-lift: 0 2px 6px rgb(25 22 19 / 0.07), 0 20px 40px -18px rgb(25 22 19 / 0.34);
 }
 
 .dark {
-  --color-paper: #17120f;
-  --color-paper-deep: #0e0a08;
-  --color-card: #221a16;
-  --color-ink: #f5ebe0;
-  --color-ink-soft: #bcaa9c;
-  --color-ink-faint: #8f7e71;
-  --color-line: #3a2e27;
+  --color-paper: #141311;
+  --color-paper-deep: #0b0a09;
+  --color-card: #1e1c1a;
+  --color-ink: #f4f2ee;
+  --color-ink-soft: #b5aea6;
+  --color-ink-faint: #8d867f;
+  --color-line: #34312d;
 
-  --color-primary: #ff7a50;
-  --color-primary-strong: #ff9470;
-  --color-primary-soft: #3d2219;
-  --color-on-primary: #1a100c;
+  --color-primary: #ff6b47;
+  --color-primary-strong: #ff8a6b;
+  --color-primary-soft: #3d1f16;
+  --color-on-primary: #1a0d08;
 
   --color-saffron: #f6c75c;
   --color-saffron-soft: #3a3018;
@@ -138,6 +139,26 @@
 
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
+}
+
+/*
+ * Le gros bouton de l'accueil : un vrai bouton qu'on a envie d'enfoncer
+ * (reflet en haut, rebord plus foncé dessous, qui s'écrase à l'appui).
+ */
+@utility shadow-button {
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.22),
+    inset 0 -10px 18px rgb(0 0 0 / 0.14),
+    0 6px 0 var(--color-primary-strong),
+    0 26px 40px -18px color-mix(in oklab, var(--color-primary) 75%, transparent);
+}
+
+@utility shadow-button-pressed {
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.18),
+    inset 0 -6px 14px rgb(0 0 0 / 0.16),
+    0 2px 0 var(--color-primary-strong),
+    0 14px 26px -16px color-mix(in oklab, var(--color-primary) 75%, transparent);
 }
 
 /*
@@ -172,6 +193,20 @@
   background-size: 22px 22px;
 }
 
+/* Le logo seulement : Fraunces, avec son axe « SOFT » (empattements arrondis). */
+@utility font-brand {
+  font-family: 'Fraunces Variable', ui-serif, Georgia, serif;
+  font-variation-settings: 'SOFT' 100;
+}
+
+/*
+ * Tache de couleur derrière un pictogramme (voir <Picto spot>) : l'accent de
+ * l'élément (--accent), mélangé au fond de carte pour rester doux.
+ */
+@utility spot-accent {
+  fill: color-mix(in oklab, var(--accent) 48%, var(--color-card));
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -198,8 +233,6 @@ body {
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.5;
-  /* Axe « SOFT » de Fraunces : des empattements plus ronds, plus chaleureux. */
-  font-variation-settings: 'SOFT' 100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

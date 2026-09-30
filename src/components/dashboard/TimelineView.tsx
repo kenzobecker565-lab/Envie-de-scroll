@@ -3,6 +3,7 @@ import { passionAccent } from '../../lib/accent'
 import { formatDayLabel, formatTime } from '../../lib/dates'
 import { fr } from '../../lib/typography'
 import type { HistoryEntry } from '../../types'
+import { Picto } from '../ui/Picto'
 
 /** Frise chronologique des activités d'une passion, avec leur date. */
 export function TimelineView({ entries }: { entries: HistoryEntry[] }) {
@@ -22,11 +23,11 @@ export function TimelineView({ entries }: { entries: HistoryEntry[] }) {
                 {formatDayLabel(entry.dateKey)} · {formatTime(entry.completedAt)}
               </time>
             </p>
-            <p className="mt-0.5 font-display text-lg font-semibold leading-snug">{fr(entry.title)}</p>
+            <p className="mt-0.5 font-display text-lg font-extrabold tracking-tight leading-snug">{fr(entry.title)}</p>
             <p className="mt-0.5 line-clamp-2 text-sm leading-relaxed text-ink-soft">{fr(entry.description)}</p>
             <p className="mt-1.5 flex flex-wrap gap-x-2 text-xs font-medium text-ink-soft">
-              <span>
-                <span aria-hidden>{mood.emoji}</span> {mood.label}
+              <span className="flex items-center gap-1">
+                <Picto name={mood.picto} className="size-3.5" weight={2.2} /> {mood.label}
               </span>
               <span aria-hidden>·</span>
               <span>{entry.duration} min</span>

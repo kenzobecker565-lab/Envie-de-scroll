@@ -1,13 +1,15 @@
 import { Moon, Zap } from 'lucide-react'
 import { ENERGY_LABELS, moodsByEnergy } from '../../data/moods'
+import { MOOD_SPOT } from '../../lib/accent'
 import { cn } from '../../lib/cn'
 import type { MoodId } from '../../types'
+import { Picto } from '../ui/Picto'
 import { StepHeading } from '../ui/StepHeading'
 
 /**
  * Étape A — le mood. Deux familles bien distinctes visuellement :
- * - énergie basse : cartes douces et arrondies, teinte « crépuscule » ;
- * - énergie haute : cartes plus anguleuses, bordure marquée, teinte « braise »,
+ * - énergie basse : cartes douces et arrondies, taches « crépuscule » ;
+ * - énergie haute : cartes plus anguleuses, bordure marquée, taches « braise »,
  *   légèrement de travers, comme si elles ne tenaient pas en place.
  */
 export function MoodStep({ selected, onSelect }: { selected?: MoodId; onSelect: (mood: MoodId) => void }) {
@@ -34,14 +36,12 @@ export function MoodStep({ selected, onSelect }: { selected?: MoodId; onSelect: 
                 aria-pressed={selected === mood.id}
                 onClick={() => onSelect(mood.id)}
                 className={cn(
-                  'flex gap-2 rounded-[1.5rem] bg-dusk-soft p-3.5 text-left transition duration-200 hover:-translate-y-0.5 active:scale-[0.98]',
+                  'flex gap-2.5 rounded-[1.5rem] border border-line bg-card p-3.5 text-left shadow-soft transition duration-200 hover:-translate-y-0.5 active:scale-[0.98]',
                   isLastAlone ? 'col-span-2 flex-row items-center' : 'flex-col items-start',
-                  selected === mood.id && 'ring-2 ring-dusk ring-offset-2 ring-offset-paper',
+                  selected === mood.id && 'border-dusk ring-2 ring-dusk ring-offset-2 ring-offset-paper',
                 )}
               >
-                <span aria-hidden className="text-[1.7rem] leading-none">
-                  {mood.emoji}
-                </span>
+                <Picto name={mood.picto} spot={MOOD_SPOT.basse} className="size-9" />
                 <span className="flex flex-col">
                   <span className="font-semibold leading-tight">{mood.label}</span>
                   <span className="mt-0.5 text-sm leading-snug text-ink-soft">{mood.hint}</span>
@@ -66,14 +66,12 @@ export function MoodStep({ selected, onSelect }: { selected?: MoodId; onSelect: 
               aria-pressed={selected === mood.id}
               onClick={() => onSelect(mood.id)}
               className={cn(
-                'flex flex-col items-start gap-2 rounded-lg border-2 bg-ember-soft p-3.5 text-left transition duration-200 hover:rotate-0 active:scale-[0.98]',
+                'flex flex-col items-start gap-2.5 rounded-lg border-2 bg-card p-3.5 text-left transition duration-200 hover:rotate-0 active:scale-[0.98]',
                 index % 2 === 0 ? '-rotate-[0.8deg]' : 'rotate-[0.8deg]',
-                selected === mood.id ? 'border-ember' : 'border-ember/30 hover:border-ember/60',
+                selected === mood.id ? 'border-ember' : 'border-ember/25 hover:border-ember/60',
               )}
             >
-              <span aria-hidden className="text-[1.7rem] leading-none">
-                {mood.emoji}
-              </span>
+              <Picto name={mood.picto} spot={MOOD_SPOT.haute} className="size-9" />
               <span className="flex flex-col">
                 <span className="font-bold leading-tight">{mood.label}</span>
                 <span className="mt-0.5 text-sm leading-snug text-ink-soft">{mood.hint}</span>

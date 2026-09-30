@@ -28,7 +28,7 @@ export function TimeStep({ selected, onSelect }: { selected?: Duration; onSelect
           >
             <ClockPie minutes={duration} />
             <span className="flex-1">
-              <span className="block font-display text-2xl font-semibold">{duration} minutes</span>
+              <span className="block font-display text-2xl font-extrabold tracking-tight">{duration} minutes</span>
               <span className="text-ink-soft">{caption}</span>
             </span>
             <ChevronRight className="size-5 text-ink-faint" aria-hidden />

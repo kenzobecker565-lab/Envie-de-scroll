@@ -6,7 +6,7 @@ import { cn } from '../../lib/cn'
  */
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={cn('inline-flex items-baseline gap-[0.3em] font-display font-semibold tracking-tight text-ink', className)}>
+    <span className={cn('inline-flex items-baseline gap-[0.3em] font-brand font-semibold tracking-tight text-ink', className)}>
       <span>plutôt que</span>
       <span className="relative">
         scroller

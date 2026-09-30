@@ -1,16 +1,16 @@
-import { Monitor, Moon, RotateCcw, Sun } from 'lucide-react'
+import { Monitor, Moon, RotateCcw, Sun, User } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { AppShell, Card, ScreenTitle, SectionTitle } from '../components/layout/AppShell'
 import { PassionPicker } from '../components/onboarding/PassionPicker'
 import { Button } from '../components/ui/Button'
 import { ConfirmDialog, Modal } from '../components/ui/Modal'
+import { Picto } from '../components/ui/Picto'
 import { Switch } from '../components/ui/Switch'
 import { useToast } from '../components/ui/Toast'
 import { getPassion } from '../data/passions'
 import { useDemoCount } from '../hooks/useData'
 import { navigate } from '../hooks/useRoute'
 import { useTheme } from '../hooks/useTheme'
-import { passionAccent } from '../lib/accent'
 import { cn } from '../lib/cn'
 import { pluralize } from '../lib/dates'
 import { fr } from '../lib/typography'
@@ -104,15 +104,15 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
   return (
     <AppShell activeTab="profil">
       <ScreenTitle title="Ton profil" subtitle="Tes passions et tes réglages.">
-        <span aria-hidden className="grid size-14 shrink-0 place-items-center rounded-full bg-primary font-display text-2xl font-semibold text-on-primary shadow-soft">
-          {initial || '🙂'}
+        <span aria-hidden className="grid size-14 shrink-0 place-items-center rounded-full bg-primary font-display text-2xl font-extrabold tracking-tight text-on-primary shadow-soft">
+          {initial || <User className="size-7" />}
         </span>
       </ScreenTitle>
 
       <div className="space-y-4">
         <Card>
           <form onSubmit={saveName}>
-            <label htmlFor="profile-name" className="mb-2 block font-display text-lg font-semibold">
+            <label htmlFor="profile-name" className="mb-2 block font-display text-lg font-extrabold tracking-tight">
               Ton prénom
             </label>
             <div className="flex gap-2">
@@ -136,12 +136,8 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
           <SectionTitle action={<span className="text-sm text-ink-soft">{profile.passionIds.length}</span>}>Tes passions</SectionTitle>
           <ul className="flex flex-wrap gap-2">
             {profile.passionIds.map((passionId) => (
-              <li
-                key={passionId}
-                style={passionAccent(passionId)}
-                className="flex items-center gap-1.5 rounded-full tint-accent-strong px-3 py-1.5 text-sm font-medium"
-              >
-                <span aria-hidden>{getPassion(passionId).emoji}</span>
+              <li key={passionId} className="flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5 text-sm font-semibold">
+                <Picto name={getPassion(passionId).picto} className="size-4" weight={2} />
                 {getPassion(passionId).label}
               </li>
             ))}
@@ -154,7 +150,7 @@ export function ProfileScreen({ profile }: { profile: UserProfile }) {
         <Card>
           <div className="flex items-start gap-4">
             <div className="flex-1">
-              <label htmlFor="beginner-mode" className="font-display text-lg font-semibold">
+              <label htmlFor="beginner-mode" className="font-display text-lg font-extrabold tracking-tight">
                 Mode débutant
               </label>
               <p className="mt-1 text-sm leading-relaxed text-ink-soft">

@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, State> {
       <div className="grid min-h-dvh place-items-center bg-paper p-6 text-ink">
         <div role="alert" className="max-w-sm text-center">
           <AppMark className="mx-auto size-14" />
-          <h1 className="mt-5 font-display text-2xl font-semibold">Oups, un souci d’affichage</h1>
+          <h1 className="mt-5 font-display text-2xl font-extrabold tracking-tight">Oups, un souci d’affichage</h1>
           <p className="mt-2 leading-relaxed text-ink-soft">
             Quelque chose s’est mal passé sur cet écran. Pas d’inquiétude&nbsp;: tes données sont en sécurité sur ton appareil.
           </p>

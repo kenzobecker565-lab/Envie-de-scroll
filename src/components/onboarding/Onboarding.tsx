@@ -4,7 +4,6 @@ import { LIFE_INTERESTS, resolveLifeInterests } from '../../data/lifeInterests'
 import { getPassion } from '../../data/passions'
 import { useDemoCount } from '../../hooks/useData'
 import { navigate } from '../../hooks/useRoute'
-import { passionAccent } from '../../lib/accent'
 import { cn } from '../../lib/cn'
 import { fr } from '../../lib/typography'
 import { platform } from '../../platform'
@@ -14,9 +13,14 @@ import type { LifeInterestId, PassionFamilyId, PassionId } from '../../types'
 import { AppShell } from '../layout/AppShell'
 import { Button, IconButton } from '../ui/Button'
 import { AppMark, Logo } from '../ui/Logo'
+import { PassionPicto } from '../ui/Passion'
+import { Picto } from '../ui/Picto'
 import { BottomBar, StepHeading } from '../ui/StepHeading'
 import { StepTransition, type StepDirection } from '../ui/StepTransition'
 import { PassionPicker } from './PassionPicker'
+
+/** Tache des pictogrammes du chemin « Qu'est-ce qui te plaît dans la vie ? ». */
+const INTEREST_SPOT = 'color-mix(in oklab, var(--color-sage) 40%, var(--color-card))'
 
 type Step = 'welcome' | 'name' | 'passions' | 'interests' | 'suggestions' | 'ready'
 
@@ -204,8 +208,8 @@ export function Onboarding() {
                         selected ? 'border-sage bg-sage-soft shadow-soft' : 'border-line bg-card hover:border-ink-faint',
                       )}
                     >
-                      <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-xl bg-paper text-2xl">
-                        {interest.emoji}
+                      <span className="grid size-11 shrink-0 place-items-center">
+                        <Picto name={interest.picto} spot={INTEREST_SPOT} className="size-9" />
                       </span>
                       <span className="flex-1 font-medium leading-snug">{interest.label}</span>
                       <span
@@ -237,7 +241,7 @@ export function Onboarding() {
               subtitle="D’après tes réponses, ces familles pourraient te plaire. On a coché des passions faciles à démarrer : ajuste comme tu veux."
             />
             <p className="mb-6 flex gap-3 rounded-2xl bg-sage-soft p-3.5 text-[0.95rem] leading-relaxed">
-              <span aria-hidden className="text-xl leading-none">🌱</span>
+              <Picto name="sprout" className="size-6 text-sage" weight={2} />
               <span>
                 <strong className="font-semibold">Mode débutant activé&nbsp;:</strong> on te proposera surtout des activités simples, sans
                 matériel ni expérience. Tu pourras le désactiver dans ton profil.
@@ -259,8 +263,8 @@ export function Onboarding() {
 
         {step === 'ready' && (
           <>
-            <div aria-hidden className="mb-5 grid size-16 animate-pop place-items-center rounded-3xl bg-saffron-soft text-4xl">
-              🎉
+            <div className="mb-5 grid size-16 animate-pop place-items-center text-ink">
+              <Picto name="party-popper" spot="color-mix(in oklab, var(--color-saffron) 45%, var(--color-card))" className="size-14" />
             </div>
             <StepHeading
               title={firstName.trim() ? `Tout est prêt, ${firstName.trim()} !` : 'Tout est prêt !'}
@@ -274,7 +278,7 @@ export function Onboarding() {
                 'Fais l’activité proposée, enregistre-la… et regarde ta progression grandir.',
               ].map((text, index) => (
                 <li key={text} className="flex gap-3 rounded-2xl border border-line bg-card p-3.5 shadow-soft">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary font-display font-semibold text-on-primary">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary font-display font-extrabold tracking-tight text-on-primary">
                     {index + 1}
                   </span>
                   <span className="pt-1 leading-snug">{fr(text)}</span>
@@ -282,11 +286,11 @@ export function Onboarding() {
               ))}
             </ol>
 
-            <h2 className="mb-2.5 mt-6 font-display text-lg font-semibold">Tes passions</h2>
+            <h2 className="mb-2.5 mt-6 font-display text-lg font-extrabold tracking-tight">Tes passions</h2>
             <ul className="flex flex-wrap gap-2">
               {passionIds.map((passionId) => (
-                <li key={passionId} style={passionAccent(passionId)} className="flex items-center gap-1.5 rounded-full tint-accent-strong px-3 py-1.5 text-sm font-medium">
-                  <span aria-hidden>{getPassion(passionId).emoji}</span>
+                <li key={passionId} className="flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5 text-sm font-semibold">
+                  <Picto name={getPassion(passionId).picto} className="size-4" weight={2} />
                   {getPassion(passionId).label}
                 </li>
               ))}
@@ -325,12 +329,12 @@ function WelcomeStep({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="relative my-8 h-56" aria-hidden>
-        <IdeaCard className="left-0 top-0 [--tilt:-4deg]" emoji="✏️" title="Croquis express" meta="Dessin · 5 min" delay="0s" />
-        <IdeaCard className="right-0 top-[4.7rem] [--tilt:3deg]" emoji="🎬" title="Court-métrage" meta="Cinéma · 15 min" delay="-1.6s" />
-        <IdeaCard className="bottom-0 left-[9%] [--tilt:-1.5deg]" emoji="🍳" title="Mug cake" meta="Cuisine · 15 min" delay="-3.2s" />
+        <IdeaCard className="left-0 top-0 [--tilt:-4deg]" passionId="dessin" title="Croquis express" meta="Dessin · 5 min" delay="0s" />
+        <IdeaCard className="right-0 top-[4.7rem] [--tilt:3deg]" passionId="cinema" title="Court-métrage" meta="Cinéma · 15 min" delay="-1.6s" />
+        <IdeaCard className="bottom-0 left-[9%] [--tilt:-1.5deg]" passionId="cuisine" title="Mug cake" meta="Cuisine · 15 min" delay="-3.2s" />
       </div>
 
-      <h1 className="font-display text-[2.15rem] font-semibold leading-[1.08] tracking-tight">
+      <h1 className="font-display text-[2.15rem] font-extrabold leading-[1.08] tracking-tight">
         Et si chaque envie de scroller devenait un petit moment créatif&nbsp;?
       </h1>
       <p className="mt-4 text-lg leading-relaxed text-ink-soft">
@@ -347,16 +351,16 @@ function WelcomeStep({ onNext }: { onNext: () => void }) {
   )
 }
 
-function IdeaCard({ className, emoji, title, meta, delay }: { className: string; emoji: string; title: string; meta: string; delay: string }) {
+function IdeaCard({ className, passionId, title, meta, delay }: { className: string; passionId: PassionId; title: string; meta: string; delay: string }) {
   return (
     <div
       className={cn('absolute w-[64%] animate-float rounded-2xl border border-line bg-card p-3 shadow-lift', className)}
       style={{ animationDelay: delay, transform: 'rotate(var(--tilt))' }}
     >
       <div className="flex items-center gap-2.5">
-        <span className="grid size-10 place-items-center rounded-xl bg-primary-soft text-xl">{emoji}</span>
+        <PassionPicto passionId={passionId} />
         <div className="min-w-0">
-          <p className="truncate font-display font-semibold">{title}</p>
+          <p className="truncate font-display font-extrabold tracking-tight">{title}</p>
           <p className="text-xs text-ink-soft">{meta}</p>
         </div>
       </div>

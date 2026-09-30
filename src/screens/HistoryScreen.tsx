@@ -1,10 +1,11 @@
-import { ArrowLeft, ChevronDown, Pencil, Trash2 } from 'lucide-react'
+import { ArrowLeft, ChevronDown, Clapperboard, Pencil, Search, Trash2 } from 'lucide-react'
 import { useMemo, useState, type ReactNode } from 'react'
 import { EntryEditModal } from '../components/dashboard/EntryEditModal'
 import { AppShell, ScreenTitle } from '../components/layout/AppShell'
 import { Button, IconButton } from '../components/ui/Button'
 import { ConfirmDialog } from '../components/ui/Modal'
-import { PassionEmoji } from '../components/ui/Passion'
+import { PassionPicto } from '../components/ui/Passion'
+import { Picto } from '../components/ui/Picto'
 import { StarRating } from '../components/ui/StarRating'
 import { useToast } from '../components/ui/Toast'
 import { MOODS, getMood } from '../data/moods'
@@ -67,7 +68,7 @@ export function HistoryScreen() {
           </FilterChip>
           {passions.map((id) => (
             <FilterChip key={id} selected={passionFilter === id} onClick={() => setPassionFilter(id)}>
-              <span aria-hidden>{getPassion(id).emoji}</span> {getPassion(id).label}
+              <Picto name={getPassion(id).picto} className="size-4" weight={2} /> {getPassion(id).label}
             </FilterChip>
           ))}
         </FilterRow>
@@ -77,7 +78,7 @@ export function HistoryScreen() {
           </FilterChip>
           {MOODS.map((mood) => (
             <FilterChip key={mood.id} selected={moodFilter === mood.id} onClick={() => setMoodFilter(mood.id)}>
-              <span aria-hidden>{mood.emoji}</span> {mood.shortLabel}
+              <Picto name={mood.picto} className="size-4" weight={2} /> {mood.shortLabel}
             </FilterChip>
           ))}
         </FilterRow>
@@ -102,10 +103,8 @@ export function HistoryScreen() {
       {history === undefined ? (
         <p className="text-ink-soft">Chargement…</p>
       ) : filtered.length === 0 ? (
-        <div className="rounded-[1.4rem] border border-dashed border-line p-6 text-center text-ink-soft">
-          <p className="text-2xl" aria-hidden>
-            🔍
-          </p>
+        <div className="flex flex-col items-center rounded-[1.4rem] border border-dashed border-line p-6 text-center text-ink-soft">
+          <Search className="size-7" aria-hidden />
           <p className="mt-1">{hasFilters ? 'Aucune activité ne correspond à ces filtres.' : 'Ton historique est encore vide.'}</p>
         </div>
       ) : (
@@ -207,7 +206,7 @@ function HistoryItem({
         onClick={onToggle}
         className="flex w-full items-start gap-3 p-3 text-left"
       >
-        <PassionEmoji passionId={entry.passionId} size="sm" />
+        <PassionPicto passionId={entry.passionId} size="sm" />
         <span className="min-w-0 flex-1">
           <span className="block font-semibold leading-snug">
             {entry.title}
@@ -218,7 +217,7 @@ function HistoryItem({
             )}
           </span>
           <span className="mt-0.5 block text-xs text-ink-soft">
-            {passion.label} · <span aria-hidden>{mood.emoji}</span> {mood.shortLabel} · {entry.duration} min · {formatTime(entry.completedAt)}
+            {passion.label} · {mood.shortLabel} · {entry.duration} min · {formatTime(entry.completedAt)}
           </span>
         </span>
         <ChevronDown className={cn('mt-1 size-5 shrink-0 text-ink-faint transition-transform', expanded && 'rotate-180')} aria-hidden />
@@ -230,7 +229,9 @@ function HistoryItem({
           {entry.photoId !== undefined && <EntryPhoto photoId={entry.photoId} alt={entry.title} />}
           {entry.film && (
             <p className="flex flex-wrap items-center gap-2 text-sm">
-              <span className="font-semibold">🎬 {entry.film.title}</span>
+              <span className="flex items-center gap-1.5 font-semibold">
+                <Clapperboard className="size-4" aria-hidden /> {entry.film.title}
+              </span>
               <StarRating value={entry.film.rating} size="sm" />
             </p>
           )}

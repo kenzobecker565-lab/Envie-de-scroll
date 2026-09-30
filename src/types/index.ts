@@ -8,6 +8,11 @@
  * publiés (on peut en revanche changer librement les libellés affichés).
  */
 
+import type { PICTOS } from '../lib/pictos'
+
+/** Nom d'un pictogramme de l'app (voir src/lib/pictos.ts). */
+export type PictoName = keyof typeof PICTOS
+
 /* -------------------------------------------------------------------------- */
 /*  Catalogue de passions                                                     */
 /* -------------------------------------------------------------------------- */
@@ -75,14 +80,14 @@ export interface Passion {
   id: PassionId
   familyId: PassionFamilyId
   label: string
-  emoji: string
+  picto: PictoName
   progressView: ProgressView
 }
 
 export interface PassionFamily {
   id: PassionFamilyId
   label: string
-  emoji: string
+  picto: PictoName
   /** Couleur d'accent (hex), utilisée en teinte légère dans l'interface. */
   color: string
   passionIds: PassionId[]
@@ -117,7 +122,7 @@ export interface Mood {
   label: string
   /** Libellé court, pour les filtres et les petites étiquettes. */
   shortLabel: string
-  emoji: string
+  picto: PictoName
   energy: EnergyLevel
   /** Petite phrase d'accompagnement affichée sous le libellé. */
   hint: string
@@ -140,7 +145,7 @@ export type LifeInterestId =
 export interface LifeInterest {
   id: LifeInterestId
   label: string
-  emoji: string
+  picto: PictoName
   /** Familles de passions vers lesquelles cette réponse redirige. */
   familyIds: PassionFamilyId[]
   /** Passions pré-cochées quand on choisit cette réponse. */

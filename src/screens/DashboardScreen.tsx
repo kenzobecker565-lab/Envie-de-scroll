@@ -1,4 +1,4 @@
-import { Flame, History, Sparkles, Timer, Trophy } from 'lucide-react'
+import { Flame, History, Shapes, Timer, Trophy } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { FilmsView } from '../components/dashboard/FilmsView'
 import { GalleryView } from '../components/dashboard/GalleryView'
@@ -6,7 +6,7 @@ import { TimelineView } from '../components/dashboard/TimelineView'
 import { WeeksCalendar } from '../components/dashboard/WeeksCalendar'
 import { AppShell, ScreenTitle, SectionTitle } from '../components/layout/AppShell'
 import { Button } from '../components/ui/Button'
-import { PassionChip } from '../components/ui/Passion'
+import { PassionChip, PassionPicto } from '../components/ui/Passion'
 import { getPassion } from '../data/passions'
 import { useStats } from '../hooks/useData'
 import { navigate } from '../hooks/useRoute'
@@ -43,12 +43,12 @@ function StatsGrid({ stats }: { stats: Stats }) {
   return (
     <ul className="grid grid-cols-2 gap-3" aria-label="Statistiques globales">
       <StatTile icon={<Flame className="size-4" aria-hidden />} label="Série actuelle" value={pluralize(stats.currentStreak, 'jour')} sub={`Record : ${pluralize(stats.bestStreak, 'jour')}`} />
-      <StatTile icon={<Sparkles className="size-4" aria-hidden />} label="Envies transformées" value={String(stats.totalTransformed)} sub={`dont ${stats.thisWeek} cette semaine`} />
+      <StatTile icon={<Shapes className="size-4" aria-hidden />} label="Envies transformées" value={String(stats.totalTransformed)} sub={`dont ${stats.thisWeek} cette semaine`} />
       <StatTile icon={<Timer className="size-4" aria-hidden />} label="Temps récupéré" value={formatMinutes(stats.minutesReclaimed)} sub="estimé, passé à créer" />
       <StatTile
         icon={<Trophy className="size-4" aria-hidden />}
         label="Passion n° 1"
-        value={topPassion ? `${topPassion.emoji} ${topPassion.label}` : '—'}
+        value={topPassion ? topPassion.label : '—'}
         sub={topCount ? pluralize(topCount, 'activité') : 'à découvrir'}
         compact
       />
@@ -63,7 +63,7 @@ function StatTile({ icon, label, value, sub, compact }: { icon: ReactNode; label
         <span className="text-primary">{icon}</span>
         {label}
       </p>
-      <p className={compact ? 'mt-1.5 truncate font-display text-lg font-semibold leading-tight' : 'mt-1 font-display text-[1.7rem] font-semibold leading-tight tabular-nums'}>
+      <p className={compact ? 'mt-1.5 truncate font-display text-lg font-extrabold tracking-tight leading-tight' : 'mt-1 font-display text-[1.7rem] font-extrabold tracking-tight leading-tight tabular-nums'}>
         {value}
       </p>
       <p className="mt-0.5 text-xs text-ink-soft">{fr(sub)}</p>
@@ -96,10 +96,8 @@ function PassionProgress({ profile, history, stats }: { profile: UserProfile; hi
 
       <div role="tabpanel" aria-label={passion.label} className="mt-3">
         {entries.length === 0 ? (
-          <div className="rounded-[1.4rem] border border-dashed border-line p-5 text-center text-ink-soft">
-            <p className="text-2xl" aria-hidden>
-              {passion.emoji}
-            </p>
+          <div className="flex flex-col items-center rounded-[1.4rem] border border-dashed border-line p-5 text-center text-ink-soft">
+            <PassionPicto passionId={current} />
             <p className="mt-1">
               Pas encore d’activité en {passion.label.toLowerCase()}. La prochaine envie de scroller sera peut-être la bonne&nbsp;!
             </p>

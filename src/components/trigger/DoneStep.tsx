@@ -8,6 +8,7 @@ import { pluralize } from '../../lib/dates'
 import { attachPhoto, getEntry, updateEntryDetails } from '../../services/historyService'
 import type { Activity, FilmLog } from '../../types'
 import { Button } from '../ui/Button'
+import { PassionPicto } from '../ui/Passion'
 import { PhotoButton } from '../ui/PhotoButton'
 import { StarRating } from '../ui/StarRating'
 import { BottomBar, StepHeading } from '../ui/StepHeading'
@@ -98,15 +99,14 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
           <div className="grid size-24 animate-pop place-items-center rounded-full bg-sage text-card shadow-lift">
             <Check className="size-12" strokeWidth={3} aria-hidden />
           </div>
-          <span aria-hidden className="absolute -left-7 top-1 animate-fade-up text-2xl [animation-delay:250ms]">
-            ✨
-          </span>
-          <span aria-hidden className="absolute -right-8 top-8 animate-fade-up text-2xl [animation-delay:400ms]">
-            {passion.emoji}
-          </span>
-          <span aria-hidden className="absolute -bottom-1 -left-5 animate-fade-up text-xl [animation-delay:550ms]">
-            🎉
-          </span>
+          {/* Petits traits d'emphase et gribouillis, comme au feutre sur un carnet */}
+          <svg aria-hidden viewBox="0 0 28 28" className="absolute -left-8 -top-2 size-8 animate-fade-up text-primary [animation-delay:250ms]">
+            <path d="M14 3v7M4.5 9.5l5.5 4M23.5 9.5l-5.5 4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+          </svg>
+          <PassionPicto passionId={activity.passionId} className="absolute -right-11 top-7 animate-fade-up [animation-delay:400ms]" />
+          <svg aria-hidden viewBox="0 0 40 16" className="absolute -bottom-2 -left-9 h-4 w-10 animate-fade-up text-saffron [animation-delay:550ms]">
+            <path d="M2 10c4-7 7-7 9 0s5 7 9 0 5-7 9 0 5 5 9-2" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+          </svg>
         </div>
         <StepHeading
           title="Envie transformée !"
@@ -124,14 +124,16 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
       <section className="mt-7 space-y-5 rounded-[1.6rem] border border-line bg-card p-4 shadow-soft" aria-label="Détails facultatifs">
         {passion.progressView === 'gallery' && (
           <div>
-            <h2 className="mb-2 font-display text-lg font-semibold">
+            <h2 className="mb-2 font-display text-lg font-extrabold tracking-tight">
               {passion.id === 'dessin' ? 'Garde une trace de ton dessin' : 'Garde une trace de ta création'}
             </h2>
             {photoUrl ? (
               <div className="flex items-center gap-3">
                 <img src={photoUrl} alt="Ta photo" className="size-20 rounded-2xl border border-line object-cover" />
                 <div className="space-y-1.5">
-                  <p className="text-sm font-semibold text-sage">Ajoutée à ta galerie ✓</p>
+                  <p className="flex items-center gap-1 text-sm font-semibold text-sage">
+                    Ajoutée à ta galerie <Check className="size-4" strokeWidth={3} aria-hidden />
+                  </p>
                   <PhotoButton
                     onFile={addPhoto}
                     disabled={uploading}
@@ -157,7 +159,7 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
 
         {isFilm && (
           <div>
-            <label htmlFor="film-title" className="mb-2 block font-display text-lg font-semibold">
+            <label htmlFor="film-title" className="mb-2 block font-display text-lg font-extrabold tracking-tight">
               Quel film as-tu regardé&nbsp;?
             </label>
             <input
@@ -176,7 +178,7 @@ export function DoneStep({ entryId, activity }: { entryId: number; activity: Act
         )}
 
         <div>
-          <label htmlFor="entry-note" className="mb-2 block font-display text-lg font-semibold">
+          <label htmlFor="entry-note" className="mb-2 block font-display text-lg font-extrabold tracking-tight">
             Un mot sur ce que tu as fait&nbsp;? <span className="font-sans text-sm font-normal text-ink-soft">(facultatif)</span>
           </label>
           <textarea

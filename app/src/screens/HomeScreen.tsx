@@ -1,18 +1,24 @@
-import { ArrowRight, ChevronRight, Images, Sparkles } from 'lucide-react'
-import { motion, useReducedMotion } from 'motion/react'
-import { Button } from '@/components/ui/button'
-import { CardEyebrow, cardVariants } from '@/components/ui/card'
+import { ArrowRight } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Button, PRESSED } from '@/components/ui/button'
+import { cardVariants } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { BrandMark } from '../components/Brand.tsx'
+import { Wordmark } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
-import { dayPeriod, ScrollPhone, Sky } from '../components/decor/Ornaments.tsx'
-import { Sparkle } from '../components/decor/Sparkle.tsx'
+import { dayPeriod, ScrollPhone } from '../components/decor/Ornaments.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatNumber, plural } from '../lib/format.ts'
-import { PASSION_ICONS } from '../lib/icons.ts'
+import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { fadeUp } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
+
+/** Les stickers des passions, collés autour du gros bouton. */
+const STICKERS = [
+  { id: 'dessin', className: '-top-5 right-6 h-14 w-14', icon: 24, rotate: 12, delay: '0s' },
+  { id: 'musique', className: 'top-24 -right-3 h-12 w-12', icon: 22, rotate: -10, delay: '-1.6s' },
+  { id: 'ecriture', className: '-top-4 left-28 h-11 w-11', icon: 20, rotate: 8, delay: '-0.8s' },
+] as const
 
 /**
  * Accueil : le gros bouton « J'ai envie de scroller » domine l'écran.
@@ -23,7 +29,6 @@ export function HomeScreen() {
   const { state, dispatch } = useAppState()
   const { push, reset } = useNavigation()
   const { user, stats, openProposal } = state.me
-  const reduced = useReducedMotion()
 
   const start = () => {
     haptics.impact('heavy')
@@ -51,135 +56,115 @@ export function HomeScreen() {
   const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
 
   return (
-    <div className="relative">
-      <Sky period={period} />
-      <div className="relative z-10">
-        <Screen className="pt-4">
-          <header className="flex items-center justify-between">
-            <span className="inline-flex items-center gap-2 text-13 font-bold text-ink-soft">
-              <BrandMark />
-              Scroll-up
-            </span>
-            <Button variant="secondary" size="sm" className="pl-2" haptic={false} onClick={openGallery} aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} pièces d’or`}>
-              <CoinIcon size={24} className="motion-loop anim-coin" />
-              <span className="font-mono text-14 text-ink">{formatNumber(stats.totalCoins)}</span>
-            </Button>
-          </header>
+    <Screen className="pt-4">
+      <header className="flex items-center justify-between">
+        <Wordmark />
+        <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openGallery} aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} pièces d’or`}>
+          <CoinIcon size={26} className="motion-loop anim-coin" />
+          <span className="font-numbers text-17 font-extrabold">{formatNumber(stats.totalCoins)}</span>
+        </Button>
+      </header>
 
-          <div className="mt-8 flex flex-col gap-2">
-            <motion.h1 className="font-display text-28 font-semibold text-ink" {...fadeUp(0)}>
-              {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
-            </motion.h1>
-            <motion.p className="max-w-[80%] text-15 text-ink-soft" {...fadeUp(0.1)}>
-              Ton pouce te démange&nbsp;? Appuie ici, on s’occupe du reste.
-            </motion.p>
-          </div>
-
-          {/* Le bouton principal, entouré d'un halo qui respire doucement. */}
-          <div className="relative flex flex-1 items-center justify-center py-8">
-            {!reduced &&
-              [0, 1].map((ring) => (
-                <motion.span
-                  key={ring}
-                  aria-hidden="true"
-                  className="absolute inset-x-0 h-24 rounded-pill bg-accent-soft"
-                  initial={{ opacity: 0.7, scale: 1 }}
-                  animate={{ opacity: 0, scale: 1.14 }}
-                  transition={{ duration: 2.8, repeat: Infinity, delay: ring * 1.4, ease: 'easeOut' }}
-                />
-              ))}
-            {/* Petits éclats qui scintillent autour du bouton. */}
-            {[
-              { className: 'top-0 left-4', size: 14, delay: '0s', color: 'var(--warm)' },
-              { className: 'top-4 right-2', size: 10, delay: '-1.1s', color: 'var(--accent)' },
-              { className: 'bottom-2 left-12', size: 9, delay: '-0.5s', color: 'var(--accent)' },
-              { className: 'bottom-0 right-10', size: 13, delay: '-1.8s', color: 'var(--warm)' },
-            ].map((spark, index) => (
-              <Sparkle
-                key={index}
-                size={spark.size}
-                color={spark.color}
-                className={`motion-loop anim-twinkle absolute ${spark.className}`}
-                style={{ '--twinkle-delay': spark.delay } as React.CSSProperties}
-              />
-            ))}
-            <Button
-              onClick={start}
-              haptic={false}
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 22 }}
-              className="anim-shine motion-loop h-24 w-full gap-4 px-6 font-display text-26 leading-tight font-semibold whitespace-normal"
-              style={{ '--shine-duration': '4.5s' } as React.CSSProperties}
-            >
-              <ScrollPhone className="shrink-0" />
-              <span className="relative">J’ai envie de scroller</span>
-            </Button>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {openProposal && ResumeIcon && (
-              <motion.button
-                type="button"
-                onClick={resume}
-                {...fadeUp(0.2, 8)}
-                whileTap={{ scale: 0.98 }}
-                className={cn(cardVariants(), 'flex-row items-center text-left')}
-              >
-                <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-pill bg-accent-soft">
-                  <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute inset-0 rounded-pill border-2 border-accent opacity-40" />
-                  <ResumeIcon size={20} className="text-accent" aria-hidden="true" />
-                </span>
-                <span className="flex min-w-0 flex-1 flex-col gap-1">
-                  <span className="text-12 text-ink-soft">Tu étais en train de…</span>
-                  <span className="line-clamp-2 text-14 font-bold text-ink">{openProposal.text}</span>
-                  <span className="inline-flex items-center gap-1 text-13 font-bold text-accent">
-                    Reprendre
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </span>
-                </span>
-              </motion.button>
-            )}
-
-            <motion.button
-              type="button"
-              onClick={openGallery}
-              {...fadeUp(0.3, 8)}
-              whileTap={{ scale: 0.98 }}
-              className={cn(cardVariants({ tone: 'muted' }), 'flex-row items-center text-left')}
-            >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-pill bg-surface-200 text-accent">
-                <Images size={20} aria-hidden="true" />
-              </span>
-              <span className="flex min-w-0 flex-1 flex-col gap-1">
-                <CardEyebrow>
-                  <Sparkles aria-hidden="true" className="text-warm" />
-                  Ce mois-ci
-                </CardEyebrow>
-                <MonthSummary monthActivities={stats.monthActivities} monthCoins={stats.monthCoins} totalActivities={stats.totalActivities} />
-              </span>
-              <ChevronRight size={20} className="shrink-0 text-ink-soft" aria-hidden="true" />
-              <span className="sr-only">Ouvrir ma galerie</span>
-            </motion.button>
-          </div>
-        </Screen>
+      <div className="mt-8 flex flex-col gap-2">
+        <motion.h1 className="font-display text-46 font-extrabold tracking-tight text-ink" {...fadeUp(0)}>
+          {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
+        </motion.h1>
+        <motion.p className="max-w-[300px] text-16 text-ink-soft" {...fadeUp(0.1)}>
+          Ton pouce te démange&nbsp;? Appuie ici, on s’occupe du reste.
+        </motion.p>
       </div>
-    </div>
+
+      {/* Le gros bouton : un bloc tomate penché, entouré de stickers qui flottent. */}
+      <div className="relative mt-8 mb-6">
+        <motion.button
+          type="button"
+          onClick={start}
+          initial={{ opacity: 0, scale: 0.9, rotate: -6 }}
+          animate={{ opacity: 1, scale: 1, rotate: -1.5 }}
+          whileTap={PRESSED}
+          transition={{ type: 'spring', stiffness: 320, damping: 18 }}
+          className="relative flex h-72 w-full flex-col items-start justify-between rounded-[28px] border-[3px] border-outline bg-accent p-6 text-left text-on-color shadow-pop transition-shadow duration-150 active:shadow-press"
+        >
+          <span className="flex h-14 w-14 -rotate-6 items-center justify-center rounded-md border-[2.5px] border-on-color bg-paper">
+            <ScrollPhone />
+          </span>
+          <span className="flex w-full items-end justify-between gap-4">
+            <span className="max-w-[230px] font-display text-46 font-extrabold tracking-tight">J’ai envie de scroller</span>
+            <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color">
+              <ArrowRight size={26} strokeWidth={2.8} />
+            </span>
+          </span>
+        </motion.button>
+        {STICKERS.map((sticker, index) => {
+          const Icon = PASSION_ICONS[sticker.id]
+          return (
+            <motion.span
+              key={sticker.id}
+              aria-hidden="true"
+              className={cn('pointer-events-none absolute', sticker.className)}
+              initial={{ scale: 0, rotate: 0 }}
+              animate={{ scale: 1, rotate: sticker.rotate }}
+              transition={{ delay: 0.35 + index * 0.12, type: 'spring', stiffness: 380, damping: 14 }}
+            >
+              <span
+                className={cn('motion-loop anim-float flex h-full w-full items-center justify-center rounded-pill border-[2.5px] border-outline', PASSION_COLORS[sticker.id].bg)}
+                style={{ '--float-duration': `${3.5 + index}s`, '--float-delay': sticker.delay } as React.CSSProperties}
+              >
+                <Icon size={sticker.icon} strokeWidth={2.3} className="text-on-color" />
+              </span>
+            </motion.span>
+          )
+        })}
+      </div>
+
+      <div className="mt-auto flex flex-col gap-4">
+        {openProposal && ResumeIcon && (
+          <motion.button
+            type="button"
+            onClick={resume}
+            {...fadeUp(0.2, 8)}
+            whileTap={PRESSED}
+            className={cn(cardVariants(), 'flex-row items-center text-left transition-shadow duration-150 active:shadow-press')}
+          >
+            <span className={cn('relative flex h-12 w-12 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline', PASSION_COLORS[openProposal.passion].bg)}>
+              <ResumeIcon size={22} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
+            </span>
+            <span className="flex min-w-0 flex-1 flex-col gap-1">
+              <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Tu étais en train de…</span>
+              <span className="line-clamp-2 text-15 font-bold text-ink">{openProposal.text}</span>
+              <span className="inline-flex items-center gap-1 text-14 font-bold text-accent-strong">
+                Reprendre
+                <ArrowRight size={16} strokeWidth={2.6} aria-hidden="true" />
+              </span>
+            </span>
+          </motion.button>
+        )}
+
+        <motion.div {...fadeUp(0.3, 8)} className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4')}>
+          <span className="flex min-w-0 flex-1 flex-col gap-1">
+            <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ce mois-ci</span>
+            <MonthSummary monthActivities={stats.monthActivities} monthCoins={stats.monthCoins} totalActivities={stats.totalActivities} />
+          </span>
+          <Button variant="sky" size="sm" onClick={openGallery} haptic={false}>
+            Galerie
+            <ArrowRight aria-hidden="true" />
+          </Button>
+        </motion.div>
+      </div>
+    </Screen>
   )
 }
 
 function MonthSummary({ monthActivities, monthCoins, totalActivities }: { monthActivities: number; monthCoins: number; totalActivities: number }) {
   if (monthActivities > 0) {
     return (
-      <span className="text-14 text-ink">
-        <span className="font-mono font-bold">{formatNumber(monthActivities)}</span> {monthActivities > 1 ? 'activités réalisées' : 'activité réalisée'} ·{' '}
-        <span className="font-mono font-bold">{formatNumber(monthCoins)}</span> pièces d’or
+      <span className="font-display text-20 font-extrabold tracking-tight text-ink">
+        {plural(monthActivities, 'activité')} · {formatNumber(monthCoins)} pièces
       </span>
     )
   }
   if (totalActivities > 0) {
-    return <span className="text-14 text-ink">Nouveau mois, nouvelle page. Ta galerie compte déjà {plural(totalActivities, 'création')}.</span>
+    return <span className="text-15 font-semibold text-ink">Nouveau mois, nouvelle page. Ta galerie compte déjà {plural(totalActivities, 'création')}.</span>
   }
-  return <span className="text-14 text-ink">Ta galerie se remplira au fil de tes envies.</span>
+  return <span className="text-15 font-semibold text-ink">Ta galerie se remplira au fil de tes envies.</span>
 }

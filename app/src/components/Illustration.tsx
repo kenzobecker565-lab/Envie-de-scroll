@@ -28,13 +28,14 @@ export function Illustration({ name, className }: { name: IllustrationName; clas
 }
 
 /**
- * État vide ou d'erreur : une illustration qui flotte, un titre, une phrase
- * et une action. 24 px entre l'illustration et le texte, 8 px entre le titre
- * et la phrase, 24 px avant l'action.
+ * État vide ou d'erreur : une illustration collée comme un sticker sur une
+ * carte penchée, qui flotte ; puis un titre, une phrase et une action.
+ * 24 px entre l'illustration et le texte, 8 px entre le titre et la phrase,
+ * 24 px avant l'action.
  */
 export function EmptyState({
   illustration,
-  illustrationClassName = 'w-48',
+  illustrationClassName = 'w-40',
   title,
   description,
   action,
@@ -56,13 +57,15 @@ export function EmptyState({
     >
       <div className="relative">
         <div className="motion-loop anim-float" style={{ '--float-duration': '6s' } as React.CSSProperties}>
-          <Illustration name={illustration} className={illustrationClassName} />
+          <div className="-rotate-2 rounded-lg border-[2.5px] border-outline bg-surface-200 p-4 shadow-card">
+            <Illustration name={illustration} className={illustrationClassName} />
+          </div>
         </div>
-        <Sparkle size={16} className="motion-loop anim-twinkle absolute top-4 -right-4" />
-        <Sparkle size={10} color="var(--accent)" className="motion-loop anim-twinkle absolute top-1/2 -left-6" style={{ '--twinkle-delay': '-1s' } as React.CSSProperties} />
+        <Sparkle size={22} className="motion-loop anim-twinkle absolute -top-3 -right-3" />
+        <Sparkle size={16} color="var(--sky)" className="motion-loop anim-twinkle absolute top-1/2 -left-5" style={{ '--twinkle-delay': '-1s' } as React.CSSProperties} />
       </div>
-      <h2 className="mt-6 font-display text-22 font-semibold text-balance text-ink">{title}</h2>
-      <p className="mt-2 max-w-xs text-14 text-ink-soft">{description}</p>
+      <h2 className="mt-6 font-display text-30 font-extrabold tracking-tight text-balance text-ink">{title}</h2>
+      <p className="mt-2 max-w-xs text-15 text-ink-soft">{description}</p>
       {action && <div className="mt-6">{action}</div>}
     </motion.div>
   )

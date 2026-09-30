@@ -7,8 +7,8 @@ function Textarea({ className, ...props }: ComponentProps<'textarea'>) {
     <textarea
       data-slot="textarea"
       className={cn(
-        'field-sizing-content flex min-h-56 w-full resize-none rounded-sm border border-input bg-card p-4 text-15 text-foreground shadow-card transition-[border-color,box-shadow] duration-200 outline-none placeholder:text-ink-faint',
-        'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25',
+        'field-sizing-content flex min-h-56 w-full resize-none rounded-md border-[2.5px] border-input bg-card p-4 text-16 text-foreground transition-[box-shadow] duration-150 outline-none placeholder:text-ink-faint',
+        'focus-visible:shadow-card',
         'disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive',
         className,
       )}

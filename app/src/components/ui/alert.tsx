@@ -4,17 +4,17 @@ import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 
 /**
- * Message shadcn/ui (information, limite atteinte, erreur). Jamais de rouge :
- * les erreurs restent dans les tons chauds, sans dramatiser.
+ * Message shadcn/ui (information, limite atteinte, erreur), en sticker à
+ * contour. Jamais d'alarme : les erreurs restent jaune soleil, sans dramatiser.
  */
 const alertVariants = cva(
-  'relative grid w-full grid-cols-[0_1fr] items-start gap-y-1 rounded-md p-4 text-left text-13 has-[>svg]:grid-cols-[16px_1fr] has-[>svg]:gap-x-2 [&>svg]:size-4 [&>svg]:translate-y-[2px]',
+  'relative grid w-full grid-cols-[0_1fr] items-start gap-y-1 rounded-md border-2 border-outline p-4 text-left text-14 font-medium has-[>svg]:grid-cols-[18px_1fr] has-[>svg]:gap-x-2 [&>svg]:size-[18px] [&>svg]:translate-y-[1px] [&>svg]:stroke-[2.4]',
   {
     variants: {
       variant: {
-        default: 'bg-card text-card-foreground shadow-card [&>svg]:text-primary',
-        info: 'bg-accent-soft text-foreground [&>svg]:text-primary',
-        warning: 'bg-warm-soft text-warm-ink [&>svg]:text-warm',
+        default: 'bg-card text-card-foreground shadow-chip',
+        info: 'bg-sky-soft text-ink',
+        warning: 'bg-warm-soft text-ink',
       },
     },
     defaultVariants: { variant: 'default' },
@@ -26,7 +26,7 @@ function Alert({ className, variant, ...props }: HTMLMotionProps<'div'> & Varian
 }
 
 function AlertTitle({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="alert-title" className={cn('col-start-2 text-14 font-bold', className)} {...props} />
+  return <div data-slot="alert-title" className={cn('col-start-2 font-display text-16 font-extrabold', className)} {...props} />
 }
 
 function AlertDescription({ className, ...props }: ComponentProps<'div'>) {

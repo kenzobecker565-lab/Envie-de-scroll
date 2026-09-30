@@ -1,11 +1,20 @@
 /*
  * ============================================================================
- *  DESIGN SYSTEM — Scroll-up
+ *  DESIGN SYSTEM — Scroll-up, direction « Pop »
  * ============================================================================
  *
- * Toutes les couleurs de l'app viennent d'ici (valeur claire / valeur sombre).
- * Les couleurs par défaut de Tailwind sont désactivées : impossible d'utiliser
+ * Stickers, gros contours, ombres pleines et couleurs franches. Toutes les
+ * couleurs de l'app viennent d'ici (valeur claire / valeur sombre). Les
+ * couleurs par défaut de Tailwind sont désactivées : impossible d'utiliser
  * une couleur hors de cette palette par erreur.
+ *
+ * - `ink` : le texte sur le fond ; `on-color` : le texte posé sur un aplat
+ *   de couleur (tomate, ciel, menthe…), toujours sombre, dans les deux thèmes ;
+ *   `paper` : le blanc des pastilles posées sur ces aplats (lui aussi fixe).
+ * - `outline` : les contours et les ombres pleines (encre en clair, crème en
+ *   sombre, pour que les formes restent découpées).
+ * - `accent` (tomate) sert de fond ; pour du texte ou une icône sur le fond
+ *   de l'app, on prend `accent-strong`, assez contrasté.
  *
  * Le thème (clair / sombre) suit Telegram (colorScheme), ou le système hors
  * de Telegram : la classe `dark` est posée sur <html> par src/telegram/theme.ts.
@@ -14,44 +23,60 @@
 @import 'tailwindcss';
 
 :root {
-  --canvas: #d8d3c4;
-  --surface-100: #efece4;
-  --surface-200: #fffdf8;
-  --surface-300: #f4f1e8;
-  --ink: #21241d;
-  --ink-soft: #63665a;
-  --ink-faint: #93968a;
-  --line: #ddd8c8;
-  --accent: #4a4d95;
-  --accent-ink: #ffffff;
-  --accent-soft: #e4e3f2;
-  --warm: #c97f2b;
-  --warm-soft: #f5e6cd;
-  --warm-ink: #7a4a10;
-  --good: #4c7a5a;
-  --good-soft: #dfe9df;
-  --good-ink: #2f5240;
+  --canvas: #fff3d1;
+  --surface-100: #fff8e3;
+  --surface-200: #fffdf7;
+  --surface-300: #f5e4b3;
+  --ink: #151515;
+  --ink-soft: #4d4636;
+  --ink-faint: #8a7f63;
+  --line: #e6d4a2;
+  --outline: #151515;
+  --on-color: #151515;
+  --paper: #fffdf7;
+  --accent: #ff6a4d;
+  --accent-strong: #c73a1e;
+  --accent-ink: #151515;
+  --accent-soft: #ffd9cf;
+  --warm: #ffd23f;
+  --warm-soft: #fff0b3;
+  --warm-ink: #6b4e00;
+  --good: #93e5b8;
+  --good-soft: #d9f6e6;
+  --good-ink: #1f6b45;
+  --sky: #86c8ff;
+  --sky-soft: #dbeeff;
+  --lilac: #cdb8ff;
+  --lilac-soft: #ece4ff;
   color-scheme: light;
 }
 
 :root.dark {
-  --canvas: #0f1013;
-  --surface-100: #16171c;
-  --surface-200: #1e2026;
-  --surface-300: #24262d;
-  --ink: #edece6;
-  --ink-soft: #a5a79c;
-  --ink-faint: #6e7066;
-  --line: #33353c;
-  --accent: #8f92e0;
-  --accent-ink: #16171c;
-  --accent-soft: #2a2b45;
-  --warm: #e3ab5e;
-  --warm-soft: #3a301f;
-  --warm-ink: #f0c98a;
-  --good: #7fb692;
-  --good-soft: #223027;
-  --good-ink: #c9e6d2;
+  --canvas: #17140f;
+  --surface-100: #1f1b15;
+  --surface-200: #29241c;
+  --surface-300: #363026;
+  --ink: #fff3d1;
+  --ink-soft: #cbbf9f;
+  --ink-faint: #8c8168;
+  --line: #3d362b;
+  --outline: #f2e6c8;
+  --on-color: #151515;
+  --paper: #fffdf7;
+  --accent: #ff7a5e;
+  --accent-strong: #ff9a82;
+  --accent-ink: #151515;
+  --accent-soft: #4a2a22;
+  --warm: #ffd23f;
+  --warm-soft: #3d3317;
+  --warm-ink: #ffe08a;
+  --good: #93e5b8;
+  --good-soft: #1f3a2b;
+  --good-ink: #a9f0c8;
+  --sky: #86c8ff;
+  --sky-soft: #1d3346;
+  --lilac: #cdb8ff;
+  --lilac-soft: #2e2645;
   color-scheme: dark;
 }
 
@@ -64,11 +89,12 @@
   --shadow-*: initial;
 
   /* Typographies */
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-display: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --font-sans: 'Rethink Sans', system-ui, -apple-system, sans-serif;
+  /* Chiffres (compteurs, durées) : la grotesque des titres, en chiffres tabulaires. */
+  --font-numbers: 'Bricolage Grotesque', system-ui, sans-serif;
 
-  /* Tailles — Manrope (interface) : 11 à 15 px */
+  /* Tailles — Rethink Sans (interface) : 11 à 16 px */
   --text-11: 11px;
   --text-11--line-height: 1.4;
   --text-12: 12px;
@@ -78,33 +104,45 @@
   --text-14: 14px;
   --text-14--line-height: 1.5;
   --text-15: 15px;
-  --text-15--line-height: 1.55;
-  /* Space Mono (chiffres, compteurs) : 10,5 à 21 px */
+  --text-15--line-height: 1.5;
+  --text-16: 16px;
+  --text-16--line-height: 1.45;
+  /* Chiffres : 10,5 à 21 px (et 80 px pour le grand total) */
   --text-mono-xs: 10.5px;
   --text-mono-xs--line-height: 1.3;
   --text-17: 17px;
   --text-17--line-height: 1.2;
   --text-21: 21px;
   --text-21--line-height: 1.1;
-  /* Fraunces (titres) : 22 à 34 px */
+  --text-80: 80px;
+  --text-80--line-height: 0.85;
+  /* Bricolage Grotesque 800 (titres) : 20 à 46 px, interlignage serré */
+  --text-20: 20px;
+  --text-20--line-height: 1.1;
   --text-22: 22px;
-  --text-22--line-height: 1.25;
+  --text-22--line-height: 1.1;
   --text-26: 26px;
-  --text-26--line-height: 1.2;
-  --text-28: 28px;
-  --text-28--line-height: 1.2;
+  --text-26--line-height: 1.05;
+  --text-30: 30px;
+  --text-30--line-height: 1.02;
   --text-34: 34px;
-  --text-34--line-height: 1.1;
+  --text-34--line-height: 1;
+  --text-40: 40px;
+  --text-40--line-height: 0.98;
+  --text-46: 46px;
+  --text-46--line-height: 0.95;
 
   /* Rayons */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
   --radius-pill: 999px;
 
-  /* Ombres (encre du thème, très diluée) */
-  --shadow-card: 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent), 0 10px 28px -18px color-mix(in srgb, var(--ink) 45%, transparent);
-  --shadow-pop: 0 14px 36px -16px color-mix(in srgb, var(--accent) 70%, transparent);
+  /* Ombres pleines, décalées, de la couleur des contours */
+  --shadow-press: 1px 1px 0 var(--outline);
+  --shadow-chip: 3px 3px 0 var(--outline);
+  --shadow-card: 4px 4px 0 var(--outline);
+  --shadow-pop: 6px 6px 0 var(--outline);
 
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -119,7 +157,11 @@
   --color-ink-soft: var(--ink-soft);
   --color-ink-faint: var(--ink-faint);
   --color-line: var(--line);
+  --color-outline: var(--outline);
+  --color-on-color: var(--on-color);
+  --color-paper: var(--paper);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
   --color-warm: var(--warm);
@@ -128,6 +170,10 @@
   --color-good: var(--good);
   --color-good-soft: var(--good-soft);
   --color-good-ink: var(--good-ink);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
+  --color-lilac: var(--lilac);
+  --color-lilac-soft: var(--lilac-soft);
   --color-transparent: transparent;
   --color-current: currentColor;
 
@@ -151,8 +197,8 @@
   --color-muted-foreground: var(--ink-soft);
   --color-destructive: var(--warm);
   --color-destructive-foreground: var(--warm-ink);
-  --color-border: var(--line);
-  --color-input: var(--line);
+  --color-border: var(--outline);
+  --color-input: var(--outline);
   --color-ring: var(--accent);
 }
 
@@ -171,7 +217,7 @@
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: 15px;
-    line-height: 1.55;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     overscroll-behavior-y: none;
@@ -196,7 +242,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 3px solid var(--accent);
     outline-offset: 2px;
   }
 

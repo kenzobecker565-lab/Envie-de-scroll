@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { useMemo } from 'react'
 
-const COLORS = ['var(--accent)', 'var(--warm)', 'var(--good)', 'var(--accent-soft)', 'var(--warm-soft)']
+const COLORS = ['var(--accent)', 'var(--warm)', 'var(--good)', 'var(--sky)', 'var(--lilac)']
 
 /** Petite gerbe de confettis, discrète (rien si les animations sont réduites). */
 export function Confetti({ count = 26 }: { count?: number }) {
@@ -29,7 +29,7 @@ export function Confetti({ count = 26 }: { count?: number }) {
       {pieces.map((piece, index) => (
         <motion.span
           key={index}
-          className={piece.round ? 'absolute h-2 w-2 rounded-pill' : 'absolute h-2.5 w-1.5 rounded-[2px]'}
+          className={piece.round ? 'absolute h-2.5 w-2.5 rounded-pill border-[1.5px] border-outline' : 'absolute h-3.5 w-2 rounded-[2px] border-[1.5px] border-outline'}
           style={{ backgroundColor: piece.color }}
           initial={{ x: 0, y: 0, opacity: 1, rotate: 0, scale: 0.6 }}
           animate={{ x: piece.x, y: [0, piece.y, piece.y + 90], opacity: [1, 1, 0], rotate: piece.rotate, scale: 1 }}

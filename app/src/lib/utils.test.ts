@@ -11,6 +11,8 @@ describe('cn', () => {
     expect(cn('rounded-md', 'rounded-pill')).toBe('rounded-pill')
     expect(cn('shadow-card', 'shadow-none')).toBe('shadow-none')
     expect(cn('font-display font-bold', 'font-sans')).toBe('font-bold font-sans')
+    expect(cn('shadow-card', 'shadow-chip')).toBe('shadow-chip')
+    expect(cn('text-46 text-on-color', 'text-40')).toBe('text-on-color text-40')
   })
 
   it('garde la dernière couleur en cas de conflit', () => {

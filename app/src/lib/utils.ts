@@ -8,10 +8,10 @@ import { extendTailwindMerge } from 'tailwind-merge'
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ['11', '12', '13', '14', '15', '17', '21', '22', '26', '28', '34', 'mono-xs'],
+      text: ['11', '12', '13', '14', '15', '16', '17', '20', '21', '22', '26', '30', '34', '40', '46', '80', 'mono-xs'],
       radius: ['pill'],
-      shadow: ['card', 'pop'],
-      font: ['display', 'sans', 'mono'],
+      shadow: ['press', 'chip', 'card', 'pop'],
+      font: ['display', 'sans', 'numbers'],
     },
   },
 })

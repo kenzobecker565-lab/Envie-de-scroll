@@ -33,7 +33,7 @@ export function SignalScreen() {
           [0, 1, 2].map((ring) => (
             <motion.span
               key={ring}
-              className="absolute inset-0 rounded-pill border-2 border-accent"
+              className="absolute inset-0 rounded-pill border-[3px] border-outline"
               initial={{ scale: 0.35, opacity: 0.8 }}
               animate={{ scale: 1.15, opacity: 0 }}
               transition={{ duration: 2.2, repeat: Infinity, delay: ring * 0.7, ease: 'easeOut' }}
@@ -51,22 +51,22 @@ export function SignalScreen() {
                 animate={{ x: [Math.cos(angle) * 150, 0], y: [Math.sin(angle) * 150, 0], opacity: [0, 1, 0], scale: [0.6, 1, 0.3] }}
                 transition={{ duration: 1.6, repeat: Infinity, delay: index * 0.16, ease: 'easeIn' }}
               >
-                <Sparkle size={index % 3 === 0 ? 12 : 8} color={index % 2 ? 'var(--warm)' : 'var(--accent)'} />
+                <Sparkle size={index % 3 === 0 ? 16 : 11} color={['var(--warm)', 'var(--sky)', 'var(--good)', 'var(--lilac)'][index % 4]} />
               </motion.span>
             )
           })}
         <motion.span
-          className="relative flex h-20 w-20 items-center justify-center rounded-pill bg-accent-soft shadow-pop"
-          initial={{ scale: 0.6, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+          className="relative flex h-24 w-24 items-center justify-center rounded-pill border-[3px] border-outline bg-accent shadow-pop"
+          initial={{ scale: 0.6, opacity: 0, rotate: -30 }}
+          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 16 }}
         >
-          <LifeBuoy size={36} strokeWidth={1.75} className="motion-loop anim-spin-slow text-accent" style={{ '--spin-duration': '8s' } as React.CSSProperties} />
+          <LifeBuoy size={46} strokeWidth={2.2} className="motion-loop anim-spin-slow text-on-color" style={{ '--spin-duration': '8s' } as React.CSSProperties} />
         </motion.span>
       </span>
 
       <motion.span
-        className="mt-8 block font-display text-28 font-semibold text-balance text-ink"
+        className="mt-8 block font-display text-34 font-extrabold tracking-tight text-balance text-ink"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -74,14 +74,14 @@ export function SignalScreen() {
         {SIGNAL_MESSAGE.first}
       </motion.span>
       <motion.span
-        className="mt-2 block font-display text-28 font-semibold text-accent"
+        className="mt-4 inline-block -rotate-2 rounded-md border-[2.5px] border-outline bg-warm px-4 py-1 font-display text-30 font-extrabold tracking-tight text-on-color shadow-card"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         {SIGNAL_MESSAGE.second}
       </motion.span>
-      <motion.span className="mt-8 block text-12 text-ink-soft" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>
+      <motion.span className="mt-8 block text-13 font-semibold text-ink-soft" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>
         Touche l’écran pour continuer
       </motion.span>
     </button>

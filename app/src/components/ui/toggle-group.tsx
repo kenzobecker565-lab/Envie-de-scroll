@@ -29,7 +29,7 @@ function ToggleGroupItem({
   initial,
   animate,
   transition,
-  whileTap = { scale: 0.96 },
+  whileTap = { scale: 0.95 },
   ...props
 }: Omit<ComponentProps<typeof ToggleGroupPrimitive.Item>, 'asChild'> & VariantProps<typeof toggleVariants> & MotionOptions) {
   const context = useContext(ToggleGroupContext)

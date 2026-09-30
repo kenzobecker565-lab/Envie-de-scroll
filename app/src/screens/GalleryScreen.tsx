@@ -1,22 +1,22 @@
-import { ArrowRight, ChevronDown, Clock3, Coins, Maximize2, RotateCcw, Send, SlidersHorizontal, Timer } from 'lucide-react'
+import { ArrowRight, ChevronDown, Clock3, Maximize2, RotateCcw, Send, SlidersHorizontal, Timer } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, type CompletionDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { Button, PRESSED } from '@/components/ui/button'
 import { Card, CardEyebrow, cardVariants } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
-import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
+import { CoinIcon } from '../components/Coins.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
-import { PASSION_ICONS } from '../lib/icons.ts'
+import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
@@ -83,55 +83,44 @@ export function GalleryScreen() {
 
   return (
     <Screen>
-      <header className="flex items-center justify-between gap-4">
-        <h1 className="font-display text-28 font-semibold text-ink">Ta galerie</h1>
-        <Button variant="secondary" size="sm" onClick={() => push({ name: 'passions', mode: 'edit' })}>
+      <header className="flex flex-col gap-4">
+        <Button variant="secondary" size="sm" className="self-end" onClick={() => push({ name: 'passions', mode: 'edit' })}>
           <SlidersHorizontal aria-hidden="true" />
           Mes passions
         </Button>
+        <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Ta galerie</h1>
       </header>
 
-      {/* Le compteur de pièces d'or, en grand. */}
+      {/* Les pièces d'or, en grand, sur un sticker soleil. */}
       <Card
-        padding="lg"
-        className="anim-shine motion-loop mt-6 rounded-lg bg-gradient-to-br from-surface-200 from-40% to-warm-soft"
-        style={{ '--shine-duration': '6s' } as React.CSSProperties}
+        tone="warm"
+        className="mt-6 flex-row items-center gap-3 px-5 shadow-pop"
         aria-label="Tes pièces d’or"
         role="region"
-        initial={{ opacity: 0, y: 16, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        initial={{ opacity: 0, y: 16, scale: 0.97, rotate: 2 }}
+        animate={{ opacity: 1, y: 0, scale: 1, rotate: -1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 16 }}
       >
-        {/* Une petite pile de pièces qui flotte dans le coin. */}
-        <span aria-hidden="true" className="absolute top-6 right-6 flex flex-col items-center">
-          <span className="motion-loop anim-float" style={{ '--float-duration': '4s' } as React.CSSProperties}>
-            <CoinIcon size={30} className="motion-loop anim-coin" />
-          </span>
-          <span className="-mt-2 flex">
-            <CoinIcon size={26} />
-            <CoinIcon size={26} className="-ml-2" />
-          </span>
-        </span>
-        <Sparkle size={12} className="motion-loop anim-twinkle absolute top-6 right-16" />
-        <Sparkle size={8} color="var(--accent)" className="motion-loop anim-twinkle absolute top-16 right-4" style={{ '--twinkle-delay': '-1.2s' } as React.CSSProperties} />
-
-        <div className="flex flex-col gap-2">
-          <CardEyebrow>
-            <Coins aria-hidden="true" className="text-warm" />
-            Tes pièces d’or
-          </CardEyebrow>
-          <CoinCounter value={stats.totalCoins} />
-        </div>
-        <Separator />
-        <div className="flex flex-col items-start gap-2">
-          <p className="text-13 font-bold text-ink">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <p className="flex items-baseline gap-2">
+            <span className="font-numbers text-80 font-extrabold tracking-tight tabular-nums">{formatNumber(stats.totalCoins)}</span>
+            <span className="text-16 font-bold">pièces d’or</span>
+          </p>
+          <p className="text-13 font-semibold">
             {plural(stats.totalActivities, 'activité réalisée', 'activités réalisées')}
-            {stats.monthActivities > 0 && <span className="font-normal text-ink-soft"> · {formatNumber(stats.monthActivities)} ce mois-ci</span>}
+            {stats.monthActivities > 0 && ` · ${formatNumber(stats.monthActivities)} ce mois-ci`}
           </p>
           <Badge variant="secondary" size="sm">
             <Timer aria-hidden="true" />1 min = 1 pièce
           </Badge>
         </div>
+        {/* Une grosse pièce en sticker, qui flotte et fait un tour de temps en temps. */}
+        <span aria-hidden="true" className="motion-loop anim-float shrink-0" style={{ '--float-duration': '4s' } as React.CSSProperties}>
+          <span className="flex h-20 w-20 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper">
+            <CoinIcon size={52} className="motion-loop anim-coin" />
+          </span>
+        </span>
+        <Sparkle size={20} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-3 right-20" />
       </Card>
 
       <div className="mt-8 flex flex-1 flex-col">
@@ -163,7 +152,7 @@ export function GalleryScreen() {
               title="Ta galerie t’attend."
               description={'Chaque envie de scroller transformée viendra s’afficher ici : tes dessins, tes textes, tes découvertes.'}
               action={
-                <Button className="anim-shine motion-loop" onClick={startFlow} haptic={false}>
+                <Button onClick={startFlow} haptic={false}>
                   J’ai envie de scroller
                   <ArrowRight aria-hidden="true" />
                 </Button>
@@ -178,19 +167,20 @@ export function GalleryScreen() {
                 return (
                   <Fragment key={item.id}>
                     {newMonth && (
-                      <h2 className={cn('flex items-center gap-2 text-12 font-bold tracking-wide text-ink-soft uppercase', index > 0 && 'pt-4')}>
-                        {formatMonth(item.createdAt)}
-                        <span aria-hidden="true" className="h-px flex-1 bg-line" />
+                      <h2 className={cn('flex', index > 0 && 'pt-4')}>
+                        <Badge variant="secondary" tilt="left" className="capitalize">
+                          {formatMonth(item.createdAt)}
+                        </Badge>
                       </h2>
                     )}
                     <motion.button
                       type="button"
                       onClick={() => open(item)}
                       aria-haspopup="dialog"
-                      className={cn(cardVariants({ padding: 'none' }), 'block w-full text-left')}
+                      className={cn(cardVariants({ padding: 'none', tone: CARD_TONES[item.passion] }), 'block w-full text-left transition-shadow duration-150 active:shadow-press')}
                       initial={{ opacity: 0, y: 28, rotate: 0 }}
-                      animate={{ opacity: 1, y: 0, rotate: item.passion === 'dessin' ? (index % 2 ? 1 : -1) : 0 }}
-                      whileTap={{ scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, rotate: index % 2 ? 1.2 : -1.2 }}
+                      whileTap={PRESSED}
                       transition={{ delay: Math.min(index % 12, 6) * 0.06, type: 'spring', stiffness: 180, damping: 20 }}
                     >
                       <GalleryCard item={item} />
@@ -220,21 +210,24 @@ export function GalleryScreen() {
 
 /* --------------------------------- Cartes --------------------------------- */
 
+/** Fond de chaque carte : le texte en lilas, les découvertes à la couleur de leur passion, les dessins en polaroïd blanc. */
+const CARD_TONES = { dessin: 'default', ecriture: 'lilac', musique: 'good', cinema: 'warm' } as const
+
 /** Pied de carte commun : passion, activité, date, pièces gagnées. */
 function CardFooter({ item }: { item: CompletionDTO }) {
   const Icon = PASSION_ICONS[item.passion]
   return (
     <div className="flex items-start gap-2">
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill bg-accent-soft">
-        <Icon size={16} className="text-accent" aria-hidden="true" />
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border-2 border-on-color bg-paper">
+        <Icon size={17} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
       </span>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <p className="line-clamp-2 text-13 text-ink">{item.activityText}</p>
-        <p className="text-12 text-ink-soft">
+        <p className="line-clamp-2 text-13 font-semibold">{item.activityText}</p>
+        <p className="text-12 opacity-75">
           {getPassion(item.passion).label} · {formatDay(item.createdAt)}
         </p>
       </div>
-      <Badge variant="good" size="sm" className="font-mono text-mono-xs">
+      <Badge variant="good" size="sm" className="font-numbers">
         +{item.coins}
       </Badge>
     </div>
@@ -271,18 +264,18 @@ function QuoteCard({ item, text }: { item: CompletionDTO; text: string }) {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div>
-        <span aria-hidden="true" className="block h-6 font-display text-34 leading-none font-semibold text-warm">
+        <span aria-hidden="true" className="block h-6 font-display text-46 leading-none font-extrabold">
           “
         </span>
-        <blockquote className={cn('mt-2 text-15 whitespace-pre-line text-ink', long && 'line-clamp-6')}>{text}</blockquote>
+        <blockquote className={cn('mt-2 font-display text-17 leading-snug font-semibold whitespace-pre-line', long && 'line-clamp-6')}>{text}</blockquote>
         {long && (
-          <span className="mt-2 inline-flex items-center gap-1 text-13 font-bold text-accent">
+          <span className="mt-2 inline-flex items-center gap-1 text-13 font-bold underline decoration-2 underline-offset-4">
             <Maximize2 size={14} aria-hidden="true" />
             Lire la suite
           </span>
         )}
       </div>
-      <Separator />
+      <Separator className="bg-outline/20" />
       <CardFooter item={item} />
     </div>
   )
@@ -293,7 +286,7 @@ function ExploredCard({ item }: { item: CompletionDTO }) {
   const title = item.exploredTitle ?? item.extra?.items[0]
   return (
     <div className="flex flex-col gap-4 p-4">
-      {title && <p className="font-display text-22 font-semibold text-ink">{title}</p>}
+      {title && <p className="font-display text-26 font-extrabold tracking-tight">{title}</p>}
       <CardFooter item={item} />
     </div>
   )
@@ -303,7 +296,7 @@ function ExploredCard({ item }: { item: CompletionDTO }) {
 function Photo({ src, alt, className }: { src: string; alt: string; className?: string }) {
   const [loaded, setLoaded] = useState(false)
   return (
-    <div className={cn('relative overflow-hidden rounded-sm bg-surface-300', !loaded && 'skeleton min-h-60')}>
+    <div className={cn('relative overflow-hidden rounded-md border-2 border-outline bg-surface-300', !loaded && 'skeleton min-h-60')}>
       <img
         src={src}
         alt={alt}
@@ -317,8 +310,8 @@ function Photo({ src, alt, className }: { src: string; alt: string; className?: 
 
 function PhotoPendingNote() {
   return (
-    <p className="flex items-center gap-2 bg-accent-soft px-4 py-2 text-12 text-ink">
-      <Send size={14} className="shrink-0 text-accent" aria-hidden="true" />
+    <p className="m-2 mb-0 flex items-center gap-2 rounded-sm border-2 border-outline bg-sky-soft px-3 py-2 text-12 font-semibold text-ink">
+      <Send size={14} strokeWidth={2.4} className="shrink-0" aria-hidden="true" />
       Envoie la photo au bot&nbsp;: elle viendra se ranger ici.
     </p>
   )
@@ -336,13 +329,13 @@ function GalleryDetail({ item }: { item: CompletionDTO }) {
     <>
       <DialogHeader>
         <div className="flex flex-wrap gap-2">
-          <Badge variant="soft">
+          <Badge variant={PASSION_COLORS[item.passion].badge} tilt="left">
             <Icon aria-hidden="true" />
             {passion.label}
           </Badge>
-          <Badge variant="soft" className="font-mono">
+          <Badge variant="warm" tilt="right">
             <Clock3 aria-hidden="true" />
-            {item.duration} min
+            <span className="font-numbers">{item.duration} min</span>
           </Badge>
         </div>
         <DialogTitle>{title ?? fallbackTitle}</DialogTitle>
@@ -361,32 +354,32 @@ function GalleryDetail({ item }: { item: CompletionDTO }) {
         </Alert>
       )}
       {item.text && (
-        <Card tone="muted" className="gap-2">
-          <span aria-hidden="true" className="block h-6 font-display text-34 leading-none font-semibold text-warm">
+        <Card tone="lilac" className="gap-2 shadow-chip">
+          <span aria-hidden="true" className="block h-6 font-display text-46 leading-none font-extrabold">
             “
           </span>
-          <blockquote className="text-15 whitespace-pre-line text-ink">{item.text}</blockquote>
+          <blockquote className="font-display text-17 leading-snug font-semibold whitespace-pre-line">{item.text}</blockquote>
         </Card>
       )}
 
       <Separator />
       <div className="flex flex-col gap-2">
         <CardEyebrow>L’activité</CardEyebrow>
-        <p className="text-14 text-ink">{item.activityText}</p>
+        <p className="text-15 font-semibold text-ink">{item.activityText}</p>
         {item.extra && !title && (
           <div className="flex flex-wrap gap-2">
             {item.extra.items.map((extra) => (
-              <Badge key={extra} variant="warm">
+              <Badge key={extra} variant="secondary" size="sm">
                 {extra}
               </Badge>
             ))}
           </div>
         )}
       </div>
-      <Card tone="good" className="flex-row items-center gap-2">
-        <CoinIcon size={24} />
-        <p className="flex-1 text-13 text-good-ink">
-          <span className="font-mono font-bold">+{item.coins}</span> pièces d’or gagnées
+      <Card tone="good" className="flex-row items-center gap-3 shadow-chip">
+        <CoinIcon size={28} />
+        <p className="flex-1 text-15 font-semibold">
+          <span className="font-numbers font-extrabold">+{item.coins}</span> pièces d’or gagnées
         </p>
       </Card>
     </>

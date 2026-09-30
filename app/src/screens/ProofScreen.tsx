@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
-import { PASSION_ICONS } from '../lib/icons.ts'
+import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { prepareImage } from '../lib/image.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -84,14 +84,14 @@ interface ProofProps {
 function ProofContext({ proposal }: { proposal: ProposalDTO }) {
   const Icon: LucideIcon = PASSION_ICONS[proposal.passion]
   return (
-    <div className="flex flex-wrap gap-2">
-      <Badge variant="soft">
+    <div className="flex flex-wrap gap-3">
+      <Badge variant={PASSION_COLORS[proposal.passion].badge} tilt="left">
         <Icon aria-hidden="true" />
         {getPassion(proposal.passion).label}
       </Badge>
-      <Badge variant="soft" className="font-mono">
+      <Badge variant="warm" tilt="right">
         <Clock3 aria-hidden="true" />
-        {proposal.duration} min
+        <span className="font-numbers">{proposal.duration} min</span>
       </Badge>
     </div>
   )
@@ -197,25 +197,22 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
             {/* Pointillés qui avancent tout autour de la zone. */}
             <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
               <rect
-                x="1.5"
-                y="1.5"
-                width="99%"
-                height="99%"
-                rx="13"
+                x="10"
+                y="10"
+                rx="14"
                 className="motion-loop anim-march"
-                style={{ width: 'calc(100% - 3px)', height: 'calc(100% - 3px)', fill: 'none', stroke: 'var(--accent)', strokeWidth: 2, strokeDasharray: '8 6', opacity: 0.6 }}
+                style={{ width: 'calc(100% - 20px)', height: 'calc(100% - 20px)', fill: 'none', stroke: 'var(--outline)', strokeWidth: 2.5, strokeDasharray: '10 8', strokeLinecap: 'round', opacity: 0.55 }}
               />
             </svg>
             {preparing ? (
               <span className="skeleton h-16 w-16 rounded-pill" aria-label="Préparation de la photo" />
             ) : (
-              <span className="motion-loop anim-float relative flex h-16 w-16 items-center justify-center rounded-pill bg-accent-soft" style={{ '--float-duration': '3.5s' } as React.CSSProperties}>
-                <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute inset-0 rounded-pill border-2 border-accent opacity-30" />
-                <Camera size={30} className="text-accent" aria-hidden="true" />
+              <span className="motion-loop anim-float relative flex h-18 w-18 -rotate-6 items-center justify-center rounded-pill border-[2.5px] border-outline bg-sky shadow-chip" style={{ '--float-duration': '3.5s' } as React.CSSProperties}>
+                <Camera size={32} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
               </span>
             )}
             <span className="flex flex-col gap-1">
-              <span className="text-15 font-bold text-ink">Prendre ou choisir une photo</span>
+              <span className="font-display text-20 font-extrabold tracking-tight text-ink">Prendre ou choisir une photo</span>
               <span className="text-13 text-ink-soft">Ton dessin tel qu’il est, pas besoin qu’il soit parfait.</span>
             </span>
           </motion.label>
@@ -252,7 +249,7 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
         Ton texte
       </label>
       <Textarea id="proof-text" value={text} onChange={(event) => setText(event.target.value)} maxLength={MAX_TEXT_LENGTH} rows={9} placeholder="Ton texte…" />
-      <p className="mt-2 text-right font-mono text-mono-xs font-bold text-ink-soft" aria-live="polite">
+      <p className="mt-2 text-right font-numbers text-14 font-extrabold text-ink-soft" aria-live="polite">
         {words} {words > 1 ? 'mots' : 'mot'}
       </p>
 

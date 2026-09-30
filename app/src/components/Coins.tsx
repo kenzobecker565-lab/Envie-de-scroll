@@ -2,13 +2,12 @@ import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { formatNumber } from '../lib/format.ts'
 
-/** Une pièce d'or (couleurs « warm » du design system). */
+/** Une pièce d'or : pastille soleil cernée d'encre, avec un reflet. */
 export function CoinIcon({ size = 20, className }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" className={cn('shrink-0', className)}>
-      <circle cx="12" cy="12" r="11" style={{ fill: 'var(--warm)' }} />
-      <circle cx="12" cy="12" r="7.5" style={{ fill: 'none', stroke: 'var(--warm-ink)', strokeWidth: 1.5, opacity: 0.55 }} />
-      <path d="M8.2 10.4a4.2 4.2 0 0 1 3.3-2.9" style={{ fill: 'none', stroke: 'var(--warm-soft)', strokeWidth: 1.6, strokeLinecap: 'round' }} />
+      <circle cx="12" cy="12" r="10" style={{ fill: 'var(--warm)', stroke: 'var(--on-color)', strokeWidth: 2 }} />
+      <path d="M8.6 10a4 4 0 0 1 3.2-2.6" style={{ fill: 'none', stroke: 'var(--on-color)', strokeWidth: 1.8, strokeLinecap: 'round' }} />
     </svg>
   )
 }
@@ -20,8 +19,8 @@ function Digit({ digit, dim, tone }: { digit: number; dim: boolean; tone: 'ink' 
   return (
     <span
       className={cn(
-        'relative inline-block h-10 w-7 overflow-hidden rounded-sm bg-surface-300 text-center font-mono text-21 font-bold',
-        dim ? 'text-ink-faint' : tone === 'good' ? 'text-good' : 'text-ink',
+        'relative inline-block h-11 w-8 overflow-hidden rounded-[8px] border-2 border-outline bg-surface-200 text-center font-numbers text-21 font-extrabold tabular-nums',
+        dim ? 'text-ink-faint' : tone === 'good' ? 'text-good-ink' : 'text-ink',
         'transition-colors duration-500',
       )}
     >

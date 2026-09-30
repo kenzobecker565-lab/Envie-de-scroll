@@ -12,7 +12,7 @@ import { api, ApiError } from '../api/client.ts'
 import { PassionScene } from '../components/decor/PassionScene.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Screen } from '../components/Screen.tsx'
-import { PASSION_ICONS } from '../lib/icons.ts'
+import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -70,25 +70,24 @@ export function ActivityScreen() {
   return (
     <Screen>
       {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
+      <div className="flex flex-wrap items-center gap-3">
+        <Badge variant={PASSION_COLORS[passionId].badge} tilt="left">
+          <Icon aria-hidden="true" />
+          {passion.label}
+        </Badge>
+        <Badge variant="warm" tilt="right">
+          <Clock3 aria-hidden="true" />
+          <span className="font-numbers">{duration} min</span>
+        </Badge>
+      </div>
       <Card
-        tone={passion.tone === 'warm' ? 'warm' : 'accent'}
-        className="rounded-lg shadow-card"
-        initial={{ opacity: 0, y: 12, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        className="mt-6 items-center justify-center py-6 shadow-pop"
+        initial={{ opacity: 0, y: 12, scale: 0.97, rotate: -2 }}
+        animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 18 }}
       >
-        <span aria-hidden="true" className="absolute -top-10 -left-10 h-32 w-32 rounded-pill bg-surface-200 opacity-40" />
-        <div className="relative flex flex-wrap items-center gap-2">
-          <Badge variant="secondary">
-            <Icon aria-hidden="true" />
-            {passion.label}
-          </Badge>
-          <Badge variant="secondary" className="font-mono">
-            <Clock3 aria-hidden="true" />
-            {duration} min
-          </Badge>
-        </div>
-        <PassionScene passion={passionId} className="relative mx-auto -mt-2 -mb-2 h-24 w-auto" />
+        <span aria-hidden="true" className={cn('absolute -right-8 -bottom-10 h-32 w-32 rounded-pill border-[2.5px] border-outline', PASSION_COLORS[passionId].bg)} />
+        <PassionScene passion={passionId} className="relative h-28 w-auto" />
       </Card>
 
       <div className="mt-6 flex-1" aria-live="polite" aria-busy={loading}>
@@ -101,9 +100,9 @@ export function ActivityScreen() {
               exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="text-15 text-ink-soft">{proposal.intro}</p>
+              <p className="text-16 text-ink-soft">{proposal.intro}</p>
               <h1
-                className={cn('mt-2 font-display font-semibold text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-28')}
+                className={cn('mt-2 font-display font-extrabold tracking-tight text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-30')}
                 aria-label={proposal.text}
               >
                 <RevealWords text={proposal.text} />
@@ -144,7 +143,7 @@ export function ActivityScreen() {
         ) : (
           <Skeleton className="h-14 w-full rounded-pill" />
         )}
-        <Button variant="ghost" size="md" className="w-full" disabled={loading || !proposal} onClick={() => proposal && void load(proposal.id)}>
+        <Button variant="secondary" size="md" className="w-full" disabled={loading || !proposal} onClick={() => proposal && void load(proposal.id)}>
           <Shuffle aria-hidden="true" />
           Une autre idée
         </Button>
@@ -179,9 +178,9 @@ function RevealWords({ text }: { text: string }) {
 function ExtraCard({ extra }: { extra: ActivityExtra }) {
   const asChips = extra.kind === 'trois-mots' || extra.kind === 'un-mot'
   return (
-    <Card tone="warm" className="mt-6 gap-2" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.25, duration: 0.35 }}>
-      <Sparkle size={40} color="var(--surface-200)" className="motion-loop anim-spin-slow absolute -top-3 -right-3 opacity-60" style={{ '--spin-duration': '14s' } as React.CSSProperties} />
-      <CardEyebrow className="text-warm-ink">
+    <Card tone="lilac" className="mt-6 gap-3" initial={{ opacity: 0, scale: 0.97, rotate: 0 }} animate={{ opacity: 1, scale: 1, rotate: 1 }} transition={{ delay: 0.25, duration: 0.35 }}>
+      <Sparkle size={40} color="var(--warm)" className="motion-loop anim-spin-slow absolute -top-3 -right-3" style={{ '--spin-duration': '14s' } as React.CSSProperties} />
+      <CardEyebrow>
         <Sparkles aria-hidden="true" className="motion-loop anim-twinkle" />
         L’appli a tiré pour toi · {extra.label}
       </CardEyebrow>
@@ -189,7 +188,7 @@ function ExtraCard({ extra }: { extra: ActivityExtra }) {
         <ul className="flex flex-wrap gap-2">
           {extra.items.map((item, index) => (
             <motion.li key={item} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 + index * 0.12 }}>
-              <Badge variant="secondary" size="lg" className="text-ink">
+              <Badge variant="secondary" size="lg">
                 {item}
               </Badge>
             </motion.li>
@@ -198,7 +197,7 @@ function ExtraCard({ extra }: { extra: ActivityExtra }) {
       ) : (
         <ul className="flex flex-col gap-1">
           {extra.items.map((item) => (
-            <li key={item} className="text-15 font-bold text-ink">
+            <li key={item} className="font-display text-17 font-extrabold">
               {item}
             </li>
           ))}
@@ -236,7 +235,7 @@ function ValidateButton({
 
   if (!timeGuard) {
     return (
-      <Button className="anim-shine motion-loop w-full" onClick={onValidate} disabled={disabled}>
+      <Button variant="good" className="w-full" onClick={onValidate} disabled={disabled}>
         <Check aria-hidden="true" />
         Valider
       </Button>
@@ -246,15 +245,16 @@ function ValidateButton({
   return (
     <div className="flex flex-col gap-2">
       <Button
+        variant="good"
         disabled={locked || disabled}
         onClick={onValidate}
-        className={cn('w-full duration-500', !locked && 'anim-shine motion-loop')}
+        className="w-full duration-500"
         aria-describedby="validate-hint"
       >
         {locked && (
           <span
             aria-hidden="true"
-            className="motion-loop anim-stripes absolute inset-y-0 left-0 bg-accent-soft transition-[width] duration-1000 ease-linear"
+            className="motion-loop anim-stripes absolute inset-y-0 left-0 bg-good-soft transition-[width] duration-1000 ease-linear"
             style={{ width: `${Math.round(progress * 100)}%` }}
           />
         )}

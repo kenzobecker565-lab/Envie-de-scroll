@@ -34,3 +34,14 @@ export const MOOD_ICONS: Record<MoodId, LucideIcon> = {
   procrastination: Snail,
   'trop-energie': Rocket,
 }
+
+/**
+ * Couleur de sticker de chaque passion (classes Tailwind écrites en entier,
+ * pour que Tailwind les trouve) : fond, fond une fois choisie, fond doux, pastille.
+ */
+export const PASSION_COLORS: Record<PassionId, { bg: string; on: string; soft: string; badge: 'sky' | 'lilac' | 'good' | 'warm' }> = {
+  dessin: { bg: 'bg-sky', on: 'data-[state=on]:bg-sky', soft: 'bg-sky-soft', badge: 'sky' },
+  ecriture: { bg: 'bg-lilac', on: 'data-[state=on]:bg-lilac', soft: 'bg-lilac-soft', badge: 'lilac' },
+  musique: { bg: 'bg-good', on: 'data-[state=on]:bg-good', soft: 'bg-good-soft', badge: 'good' },
+  cinema: { bg: 'bg-warm', on: 'data-[state=on]:bg-warm', soft: 'bg-warm-soft', badge: 'warm' },
+}

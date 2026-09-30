@@ -17,9 +17,8 @@ export function Screen({ children, className, footer }: { children: ReactNode; c
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col">
       {!hasNativeBackButton && canGoBack && (
         <div className="px-4 pt-4">
-          <Button variant="ghost" size="sm" className="-ml-2 pr-4 pl-2" onClick={back}>
-            <ChevronLeft className="size-5" aria-hidden="true" />
-            Retour
+          <Button variant="secondary" size="icon" onClick={back} aria-label="Retour">
+            <ChevronLeft className="size-6" aria-hidden="true" />
           </Button>
         </div>
       )}
@@ -31,55 +30,50 @@ export function Screen({ children, className, footer }: { children: ReactNode; c
 
 /**
  * En-tête d'écran : un repère facultatif (étape, contexte), le titre en
- * Fraunces 28, puis le sous-titre. 8 px entre chaque, 24 px avant le contenu.
+ * Bricolage Grotesque 40, puis le sous-titre. 8 px entre chaque, 24 px avant
+ * le contenu.
  */
 export function ScreenTitle({ children, subtitle, eyebrow, aside, className }: { children: ReactNode; subtitle?: ReactNode; eyebrow?: ReactNode; aside?: ReactNode; className?: string }) {
   return (
     <header className={cn('mb-6 flex flex-col gap-2', className)}>
       {(eyebrow || aside) && (
-        <div className="mb-2 flex items-end justify-between gap-4">
+        <div className="mb-4 flex items-center justify-between gap-4">
           {eyebrow}
           {aside}
         </div>
       )}
-      <h1 className="font-display text-28 font-semibold text-balance text-ink">{children}</h1>
-      {subtitle && <p className="text-15 text-ink-soft">{subtitle}</p>}
+      <h1 className="font-display text-40 font-extrabold tracking-tight text-balance text-ink">{children}</h1>
+      {subtitle && <p className="text-16 text-ink-soft">{subtitle}</p>}
     </header>
   )
 }
 
 /**
- * Où on en est dans un parcours : « Étape 2 sur 3 » et des segments qui se
- * remplissent (le segment de l'étape en cours se remplit à l'arrivée).
+ * Où on en est dans un parcours : « 1/3 » en sticker soleil, puis une jauge
+ * cernée d'encre qui se remplit de tomate à l'arrivée sur l'écran.
  */
 export function StepProgress({ current, total, label }: { current: number; total: number; label?: string }) {
+  const from = (current - 1) / total
   return (
     <div
-      className="flex w-fit min-w-40 flex-col gap-2"
+      className="flex flex-1 items-center gap-3"
       role="progressbar"
       aria-valuemin={1}
       aria-valuemax={total}
       aria-valuenow={current}
       aria-valuetext={`Étape ${current} sur ${total}${label ? ` : ${label}` : ''}`}
     >
-      <p className="text-11 font-bold tracking-wide whitespace-nowrap text-ink-soft uppercase" aria-hidden="true">
-        Étape <span className="font-mono text-mono-xs">{current}</span> sur <span className="font-mono text-mono-xs">{total}</span>
-        {label && <span className="text-accent"> · {label}</span>}
-      </p>
-      <div className="flex gap-1" aria-hidden="true">
-        {Array.from({ length: total }, (_, index) => (
-          <span key={index} className="h-1 flex-1 overflow-hidden rounded-pill bg-line">
-            {index < current && (
-              <motion.span
-                className="block h-full origin-left rounded-pill bg-accent"
-                initial={{ scaleX: index === current - 1 ? 0 : 1 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              />
-            )}
-          </span>
-        ))}
-      </div>
+      <span aria-hidden="true" className="-rotate-4 rounded-[8px] border-[2.5px] border-outline bg-warm px-2 py-0.5 font-numbers text-15 font-extrabold text-on-color">
+        {current}/{total}
+      </span>
+      <span aria-hidden="true" className="h-3.5 flex-1 overflow-hidden rounded-pill border-[2.5px] border-outline bg-surface-200">
+        <motion.span
+          className="block h-full origin-left bg-accent"
+          initial={{ scaleX: from }}
+          animate={{ scaleX: current / total }}
+          transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        />
+      </span>
     </div>
   )
 }

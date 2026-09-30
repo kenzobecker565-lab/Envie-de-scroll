@@ -55,7 +55,7 @@ function DialogContent({
           <DialogPrimitive.Overlay asChild forceMount>
             <motion.div
               data-slot="dialog-overlay"
-              className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-[2px]"
+              className="fixed inset-0 z-50 bg-on-color/55"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -66,7 +66,7 @@ function DialogContent({
             <motion.div
               data-slot="dialog-content"
               className={cn(
-                'fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[88dvh] w-full max-w-[480px] flex-col rounded-t-lg bg-popover text-popover-foreground shadow-card outline-none',
+                'fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[88dvh] w-full max-w-[480px] flex-col rounded-t-lg border-[2.5px] border-b-0 border-outline bg-popover text-popover-foreground outline-none',
                 className,
               )}
               initial={{ y: '100%' }}
@@ -87,15 +87,15 @@ function DialogContent({
             >
               {/* Poignée : on attrape la feuille ici pour la glisser vers le bas. */}
               <div className="flex h-8 shrink-0 touch-none items-center justify-center" onPointerDown={(event) => drag.start(event)} aria-hidden="true">
-                <span className="h-1 w-10 rounded-pill bg-line" />
+                <span className="h-1.5 w-12 rounded-pill bg-outline" />
               </div>
               <div className="flex flex-col gap-4 overflow-y-auto px-4 pb-[max(24px,env(safe-area-inset-bottom))]">{children}</div>
               {showCloseButton && (
                 <DialogPrimitive.Close
                   data-slot="dialog-close"
-                  className="absolute top-4 right-4 flex size-10 items-center justify-center rounded-pill bg-muted text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/40"
+                  className="absolute top-4 right-4 flex size-11 items-center justify-center rounded-sm border-2 border-outline bg-surface-200 text-ink shadow-chip transition-shadow outline-none active:shadow-press focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
-                  <XIcon size={18} aria-hidden="true" />
+                  <XIcon size={20} strokeWidth={2.6} aria-hidden="true" />
                   <span className="sr-only">Fermer</span>
                 </DialogPrimitive.Close>
               )}
@@ -116,7 +116,7 @@ function DialogFooter({ className, ...props }: ComponentProps<'div'>) {
 }
 
 function DialogTitle({ className, ...props }: ComponentProps<typeof DialogPrimitive.Title>) {
-  return <DialogPrimitive.Title data-slot="dialog-title" className={cn('font-display text-22 font-semibold text-foreground', className)} {...props} />
+  return <DialogPrimitive.Title data-slot="dialog-title" className={cn('font-display text-30 font-extrabold tracking-tight text-foreground', className)} {...props} />
 }
 
 function DialogDescription({ className, ...props }: ComponentProps<typeof DialogPrimitive.Description>) {

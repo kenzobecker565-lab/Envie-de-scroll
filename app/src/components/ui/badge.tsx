@@ -3,32 +3,41 @@ import { Slot } from 'radix-ui'
 import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 
-/** Pastille shadcn/ui (passion, durée, pièces gagnées…), en pilule. */
+/**
+ * Pastille shadcn/ui, en « sticker » : contour, aplat de couleur, texte
+ * sombre. `tilt` la penche un peu, comme collée à la main.
+ */
 const badgeVariants = cva(
-  'inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-pill font-bold whitespace-nowrap [&>svg]:pointer-events-none [&>svg]:shrink-0',
+  'inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden border-2 border-outline font-bold whitespace-nowrap [&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg]:stroke-[2.4]',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground',
-        secondary: 'bg-card text-muted-foreground [&>svg]:text-primary',
-        outline: 'border border-border text-foreground',
-        soft: 'bg-accent-soft text-foreground [&>svg]:text-primary',
-        warm: 'bg-warm-soft text-warm-ink',
-        good: 'bg-good-soft text-good-ink',
+        default: 'bg-accent text-on-color',
+        secondary: 'bg-surface-200 text-ink',
+        sky: 'bg-sky text-on-color',
+        lilac: 'bg-lilac text-on-color',
+        warm: 'bg-warm text-on-color',
+        good: 'bg-good text-on-color',
+        outline: 'text-ink',
       },
       size: {
-        default: 'h-8 gap-2 px-4 text-12 [&>svg]:size-4',
-        sm: 'h-6 px-2 text-11 [&>svg]:size-3',
-        lg: 'min-h-10 gap-2 px-4 py-1 text-15 [&>svg]:size-4',
+        default: 'h-8 gap-2 rounded-sm px-3 text-13 shadow-chip [&>svg]:size-4',
+        sm: 'h-6 rounded-pill px-2 text-12 font-extrabold [&>svg]:size-3',
+        lg: 'min-h-10 gap-2 rounded-sm px-4 py-1 text-15 shadow-chip [&>svg]:size-4',
+      },
+      tilt: {
+        none: '',
+        left: '-rotate-3',
+        right: 'rotate-2',
       },
     },
-    defaultVariants: { variant: 'default', size: 'default' },
+    defaultVariants: { variant: 'default', size: 'default', tilt: 'none' },
   },
 )
 
-function Badge({ className, variant, size, asChild = false, ...props }: ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+function Badge({ className, variant, size, tilt, asChild = false, ...props }: ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
   const Comp = asChild ? Slot.Root : 'span'
-  return <Comp data-slot="badge" data-variant={variant} className={cn(badgeVariants({ variant, size }), className)} {...props} />
+  return <Comp data-slot="badge" data-variant={variant} className={cn(badgeVariants({ variant, size, tilt }), className)} {...props} />
 }
 
 export { Badge, badgeVariants }

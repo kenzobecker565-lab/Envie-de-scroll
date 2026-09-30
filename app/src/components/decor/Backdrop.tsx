@@ -3,43 +3,32 @@
  *  LE DÉCOR VIVANT
  * ============================================================================
  *
- * Derrière tous les écrans : trois grandes taches de couleur douces qui
- * dérivent lentement, de petites formes qui montent en ondulant, et un grain
- * de papier très léger. La couleur des taches change avec l'écran (calme,
- * chaud, doré…) et glisse d'une teinte à l'autre au lieu de sauter.
+ * Derrière tous les écrans, sur le fond uni : de petits stickers (pastilles,
+ * étoiles, gribouillis) cernés d'encre, qui montent lentement en se
+ * balançant, et un grain d'impression très léger. Leurs couleurs suivent
+ * l'écran : calme (ciel, lilas), chaud (tomate, soleil), fête (menthe).
  *
  * Toutes les couleurs viennent du design system. Si le système demande de
  * réduire les animations, le décor reste immobile.
  */
 
 import { useMemo } from 'react'
-import { Sparkle } from './Sparkle.tsx'
 
 export type DecorTone = 'calm' | 'warm' | 'good' | 'mixed'
 
-const TONES: Record<DecorTone, [string, string, string]> = {
-  calm: ['var(--accent-soft)', 'var(--surface-100)', 'var(--accent-soft)'],
-  warm: ['var(--warm-soft)', 'var(--surface-100)', 'var(--warm-soft)'],
-  good: ['var(--good-soft)', 'var(--warm-soft)', 'var(--surface-100)'],
-  mixed: ['var(--accent-soft)', 'var(--warm-soft)', 'var(--good-soft)'],
+const TONES: Record<DecorTone, string[]> = {
+  calm: ['var(--sky)', 'var(--lilac)', 'var(--good)'],
+  warm: ['var(--accent)', 'var(--warm)', 'var(--lilac)'],
+  good: ['var(--good)', 'var(--warm)', 'var(--sky)'],
+  mixed: ['var(--accent)', 'var(--sky)', 'var(--warm)', 'var(--good)', 'var(--lilac)'],
 }
 
-const BLOBS = [
-  { className: 'anim-drift-a', style: { top: '-30vmax', left: '-30vmax', width: '85vmax', height: '85vmax' } },
-  { className: 'anim-drift-b', style: { top: '18vh', right: '-40vmax', width: '80vmax', height: '80vmax' } },
-  { className: 'anim-drift-c', style: { bottom: '-40vmax', left: '-15vmax', width: '90vmax', height: '90vmax' } },
-] as const
-
-/** Tache floue sans filtre coûteux : une couleur pleine, adoucie par un masque radial. */
-const BLOB_MASK = 'radial-gradient(closest-side, #000 0%, rgba(0,0,0,0.55) 50%, transparent 100%)'
-
-/** Grain de papier : du bruit SVG, utilisé comme masque sur une couche d'encre. */
+/** Grain d'impression : du bruit SVG, utilisé comme masque sur une couche d'encre. */
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
-type ParticleKind = 'dot' | 'ring' | 'plus' | 'spark'
-const KINDS: ParticleKind[] = ['dot', 'ring', 'spark', 'plus', 'dot', 'spark', 'ring']
-const COLORS = ['var(--accent)', 'var(--warm)', 'var(--good)']
+type ShapeKind = 'dot' | 'star' | 'squiggle' | 'plus'
+const KINDS: ShapeKind[] = ['dot', 'star', 'squiggle', 'dot', 'plus', 'star']
 
 /** Générateur déterministe : le décor est le même d'un écran à l'autre. */
 function seeded(seed: number) {
@@ -50,74 +39,78 @@ function seeded(seed: number) {
   }
 }
 
-function Particle({ kind, color, size }: { kind: ParticleKind; color: string; size: number }) {
-  if (kind === 'dot') return <span className="block rounded-pill" style={{ width: size * 0.6, height: size * 0.6, background: color }} />
-  if (kind === 'ring') return <span className="block rounded-pill border-2" style={{ width: size, height: size, borderColor: color }} />
-  if (kind === 'spark') return <Sparkle size={size * 1.3} color={color} />
+const OUTLINE = { stroke: 'var(--outline)', strokeWidth: 2, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+
+function Shape({ kind, color, size }: { kind: ShapeKind; color: string; size: number }) {
+  if (kind === 'dot')
+    return (
+      <svg width={size} height={size} viewBox="0 0 20 20" aria-hidden="true">
+        <circle cx="10" cy="10" r="8" style={{ fill: color, transition: 'fill 1.2s ease', ...OUTLINE }} />
+      </svg>
+    )
+  if (kind === 'star')
+    return (
+      <svg width={size * 1.3} height={size * 1.3} viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2 C13 8 16 11 22 12 C16 13 13 16 12 22 C11 16 8 13 2 12 C8 11 11 8 12 2 Z" style={{ fill: color, transition: 'fill 1.2s ease', ...OUTLINE }} />
+      </svg>
+    )
+  if (kind === 'squiggle')
+    return (
+      <svg width={size * 1.8} height={size} viewBox="0 0 36 20" aria-hidden="true">
+        <path d="M3 12 C 8 2, 12 2, 14 10 S 22 18, 25 10 S 31 2, 33 8" style={{ fill: 'none', ...OUTLINE, strokeWidth: 3 }} />
+      </svg>
+    )
   return (
-    <svg width={size} height={size} viewBox="0 0 10 10" aria-hidden="true">
-      <path d="M5 1v8M1 5h8" style={{ stroke: color, strokeWidth: 2, strokeLinecap: 'round' }} />
+    <svg width={size} height={size} viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M10 3v14M3 10h14" style={{ fill: 'none', ...OUTLINE, strokeWidth: 3 }} />
     </svg>
   )
 }
 
 export function Backdrop({ tone }: { tone: DecorTone }) {
   const colors = TONES[tone]
-  const particles = useMemo(() => {
+  const shapes = useMemo(() => {
     const random = seeded(7)
-    return Array.from({ length: 12 }, (_, index) => ({
-      kind: KINDS[index % KINDS.length] as ParticleKind,
-      color: COLORS[index % COLORS.length] as string,
-      size: 6 + Math.round(random() * 6),
-      left: `${Math.round(random() * 96)}%`,
-      y: `${Math.round(random() * 92)}vh`,
-      duration: `${26 + Math.round(random() * 22)}s`,
-      delay: `${-Math.round(random() * 40)}s`,
-      sway: `${4 + Math.round(random() * 4)}s`,
-      opacity: 0.25 + random() * 0.2,
-    }))
+    return Array.from({ length: 8 }, (_, index) => {
+      // À cheval sur le bord de l'écran, pour ne pas passer sous le texte.
+      const offset = Math.round(random() * 8)
+      return {
+        kind: KINDS[index % KINDS.length] as ShapeKind,
+        size: 10 + Math.round(random() * 8),
+        left: index % 2 === 0 ? `${offset - 10}px` : `calc(100% - ${offset + 12}px)`,
+        y: `${Math.round(random() * 92)}vh`,
+        duration: `${34 + Math.round(random() * 24)}s`,
+        delay: `${-Math.round(random() * 50)}s`,
+        sway: `${5 + Math.round(random() * 4)}s`,
+      }
+    })
   }, [])
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {BLOBS.map((blob, index) => (
-        <div
-          key={index}
-          className={`motion-loop absolute rounded-pill ${blob.className}`}
-          style={{
-            ...blob.style,
-            backgroundColor: colors[index],
-            transition: 'background-color 1.4s ease',
-            WebkitMaskImage: BLOB_MASK,
-            maskImage: BLOB_MASK,
-          }}
-        />
-      ))}
-
-      {particles.map((particle, index) => (
+      {shapes.map((shape, index) => (
         <div
           key={index}
           className="motion-loop anim-rise absolute"
           style={
             {
-              left: particle.left,
-              top: particle.y,
-              opacity: particle.opacity,
-              '--y': particle.y,
-              '--rise-duration': particle.duration,
-              '--rise-delay': particle.delay,
+              left: shape.left,
+              top: shape.y,
+              '--y': shape.y,
+              '--rise-duration': shape.duration,
+              '--rise-delay': shape.delay,
             } as React.CSSProperties
           }
         >
-          <div className="motion-loop anim-sway" style={{ '--sway-duration': particle.sway } as React.CSSProperties}>
-            <Particle kind={particle.kind} color={particle.color} size={particle.size} />
+          <div className="motion-loop anim-sway" style={{ '--sway-duration': shape.sway } as React.CSSProperties}>
+            <Shape kind={shape.kind} color={colors[index % colors.length] as string} size={shape.size} />
           </div>
         </div>
       ))}
 
-      {/* Grain de papier, très léger. */}
+      {/* Grain d'impression, très léger. */}
       <div
-        className="absolute inset-0 bg-ink opacity-[0.045]"
+        className="absolute inset-0 bg-ink opacity-[0.04]"
         style={{ WebkitMaskImage: GRAIN, maskImage: GRAIN, WebkitMaskSize: '180px', maskSize: '180px' }}
       />
     </div>

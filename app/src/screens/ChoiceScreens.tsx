@@ -1,9 +1,10 @@
-import { Check } from 'lucide-react'
+import { Check, Flame, MoonStar } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRef, useState } from 'react'
 import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
+import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { EnergyLine, TimeDial } from '../components/decor/Ornaments.tsx'
+import { TimeDial } from '../components/decor/Ornaments.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
 import { MOOD_ICONS } from '../lib/icons.ts'
@@ -37,9 +38,9 @@ function SelectedMark({ visible }: { visible: boolean }) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 500, damping: 26 }}
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill bg-accent text-accent-ink"
+          className="flex h-9 w-9 shrink-0 -rotate-6 items-center justify-center rounded-pill border-[2.5px] border-outline bg-accent text-on-color"
         >
-          <Check size={16} strokeWidth={3} aria-hidden="true" />
+          <Check size={18} strokeWidth={3.2} aria-hidden="true" />
         </motion.span>
       )}
     </AnimatePresence>
@@ -70,10 +71,12 @@ export function MoodScreen() {
       </ScreenTitle>
       <div className="flex flex-col gap-6">
         {ENERGY_FAMILIES.map((family) => (
-          <section key={family.energy} aria-labelledby={`family-${family.energy}`} className="flex flex-col gap-2">
-            <h2 id={`family-${family.energy}`} className="flex items-center gap-2 text-11 font-bold tracking-wide text-ink-soft uppercase">
-              {family.label}
-              <EnergyLine energy={family.energy} />
+          <section key={family.energy} aria-labelledby={`family-${family.energy}`} className="flex flex-col items-start gap-4">
+            <h2 id={`family-${family.energy}`}>
+              <Badge variant={family.energy === 'basse' ? 'sky' : 'warm'} tilt={family.energy === 'basse' ? 'left' : 'right'}>
+                {family.energy === 'basse' ? <MoonStar aria-hidden="true" /> : <Flame aria-hidden="true" />}
+                {family.label}
+              </Badge>
             </h2>
             <ToggleGroup
               type="single"

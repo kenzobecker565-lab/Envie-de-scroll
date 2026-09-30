@@ -42,36 +42,39 @@ export function DoneScreen() {
           <Rays className="h-full w-full" />
         </motion.div>
         <Confetti count={34} />
-        <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute h-28 w-28 rounded-pill border-2 border-warm opacity-40" />
+        <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute h-32 w-32 rounded-pill border-[3px] border-dashed border-outline opacity-40" />
         <motion.span
-          className="relative flex h-24 w-24 items-center justify-center rounded-pill bg-warm-soft shadow-card"
+          className="relative flex h-28 w-28 items-center justify-center rounded-pill border-[3px] border-outline bg-surface-200 shadow-pop"
           initial={{ scale: 0.3, opacity: 0, rotateY: 0 }}
           animate={{ scale: 1, opacity: 1, rotateY: 720 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="motion-loop anim-float" style={{ '--float-duration': '3s' } as React.CSSProperties}>
-            <CoinIcon size={56} />
+            <CoinIcon size={68} />
           </span>
         </motion.span>
-        <Sparkle size={16} className="motion-loop anim-twinkle absolute -top-2 right-0" />
-        <Sparkle size={11} color="var(--good)" className="motion-loop anim-twinkle absolute bottom-2 -left-3" style={{ '--twinkle-delay': '-1s' } as React.CSSProperties} />
+        <Sparkle size={24} color="var(--accent)" className="motion-loop anim-twinkle absolute -top-3 -right-2" />
+        <Sparkle size={18} color="var(--good)" className="motion-loop anim-twinkle absolute bottom-0 -left-5" style={{ '--twinkle-delay': '-1s' } as React.CSSProperties} />
       </div>
 
       <motion.h1
-        className="mt-6 font-display text-28 font-semibold text-ink"
+        className="mt-8 font-display text-40 font-extrabold tracking-tight text-ink"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.4 }}
       >
         Activité enregistrée.
       </motion.h1>
-      <motion.p className="mt-2 text-15 text-ink-soft" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.4 }}>
-        <span className="font-bold text-good-ink">+{earned} minutes</span> ajoutées à ton total.
+      <motion.p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-16 text-ink-soft" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.4 }}>
+        <Badge variant="good" tilt="left" className="text-15">
+          +{earned} minutes
+        </Badge>
+        ajoutées à ton total.
       </motion.p>
 
       <Card
         padding="lg"
-        className="mt-8 items-center gap-2 overflow-visible rounded-lg"
+        className="mt-8 items-center gap-3 overflow-visible bg-warm text-on-color"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, duration: 0.4 }}
@@ -92,12 +95,7 @@ export function DoneScreen() {
             </motion.span>
           ))}
         <CoinCounter value={shown} tone="good" />
-        <span className="inline-flex items-center gap-2 text-12 text-ink-soft">
-          <Badge variant="good" size="sm" className="font-mono text-mono-xs">
-            +{earned}
-          </Badge>
-          pièces d’or au total
-        </span>
+        <span className="text-14 font-bold">pièces d’or au total</span>
       </Card>
 
       {done.photoPending && (

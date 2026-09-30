@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import type { Passion } from '@scroll-up/shared'
 import { cn } from '../lib/cn.ts'
 import { PASSION_ICONS } from '../lib/icons.ts'
+import { PassionScene } from './decor/PassionScene.tsx'
 
 /**
  * Carte illustrée d'une passion : grande icône sur fond doux (accent ou
@@ -37,10 +38,17 @@ export function PassionCard({
       )}
     >
       {/* Motif décoratif : un grand cercle en fond, comme une tache de couleur. */}
+      <span aria-hidden="true" className="absolute -right-10 -bottom-12 h-32 w-32 rounded-pill bg-surface-200 opacity-40" />
+      {/* La petite scène animée de la passion. */}
       <span
         aria-hidden="true"
-        className="absolute -right-8 -bottom-10 h-32 w-32 rounded-pill bg-surface-200 opacity-50"
-      />
+        className={cn(
+          'absolute top-10 right-2 w-24 transition-[opacity,transform] duration-300',
+          selected ? 'scale-110 opacity-100' : 'opacity-80',
+        )}
+      >
+        <PassionScene passion={passion.id} className="w-full" />
+      </span>
       <span className="relative flex h-14 w-14 items-center justify-center rounded-pill bg-surface-200">
         <Icon size={28} strokeWidth={1.75} className={cn('transition-colors duration-200', selected ? 'text-accent' : 'text-ink-soft')} aria-hidden="true" />
       </span>

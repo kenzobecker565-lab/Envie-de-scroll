@@ -5,6 +5,7 @@ import { getPassion, type CompletionDTO } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
 import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
+import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Illustration } from '../components/Illustration.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { Skeleton } from '../components/Skeleton.tsx'
@@ -79,10 +80,28 @@ export function GalleryScreen() {
       </div>
 
       {/* Le compteur de pièces d'or, en grand. */}
-      <section className="mt-6 rounded-lg bg-surface-200 p-6 shadow-card" aria-label="Tes pièces d’or">
+      <motion.section
+        className="anim-shine motion-loop relative mt-6 overflow-hidden rounded-lg bg-gradient-to-br from-surface-200 from-40% to-warm-soft p-6 shadow-card"
+        style={{ '--shine-duration': '6s' } as React.CSSProperties}
+        aria-label="Tes pièces d’or"
+        initial={{ opacity: 0, y: 16, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      >
+        {/* Une petite pile de pièces qui flotte dans le coin. */}
+        <span aria-hidden="true" className="absolute right-6 bottom-6 flex flex-col items-center">
+          <span className="motion-loop anim-float" style={{ '--float-duration': '4s' } as React.CSSProperties}>
+            <CoinIcon size={30} className="motion-loop anim-coin" />
+          </span>
+          <span className="-mt-2 flex">
+            <CoinIcon size={26} />
+            <CoinIcon size={26} className="-ml-2" />
+          </span>
+        </span>
+        <Sparkle size={12} className="motion-loop anim-twinkle absolute top-6 right-16" />
+        <Sparkle size={8} color="var(--accent)" className="motion-loop anim-twinkle absolute right-4 top-14" style={{ '--twinkle-delay': '-1.2s' } as React.CSSProperties} />
         <div className="flex items-center justify-between">
           <span className="text-11 font-bold tracking-wide text-ink-soft uppercase">Tes pièces d’or</span>
-          <CoinIcon size={28} />
         </div>
         <CoinCounter value={stats.totalCoins} className="mt-4" />
         <p className="mt-4 text-12 text-ink-soft">
@@ -90,7 +109,7 @@ export function GalleryScreen() {
           {stats.monthActivities > 0 && ` · ${formatNumber(stats.monthActivities)} ce mois-ci`}
         </p>
         <p className="mt-1 text-11 text-ink-soft">1 minute d’activité = 1 pièce d’or</p>
-      </section>
+      </motion.section>
 
       <div className="mt-8 flex-1">
         {status === 'loading' ? (
@@ -113,9 +132,10 @@ export function GalleryScreen() {
                 <Fragment key={item.id}>
                   {newMonth && <h2 className="pt-2 text-12 font-bold tracking-wide text-ink-soft uppercase">{formatMonth(item.createdAt)}</h2>}
                   <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: Math.min(index % 12, 6) * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, y: 28, rotate: 0 }}
+                    animate={{ opacity: 1, y: 0, rotate: item.passion === 'dessin' ? (index % 2 ? 1 : -1) : 0 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ delay: Math.min(index % 12, 6) * 0.06, type: 'spring', stiffness: 180, damping: 20 }}
                   >
                     <GalleryCard item={item} />
                   </motion.div>
@@ -139,7 +159,13 @@ export function GalleryScreen() {
 function EmptyGallery({ onStart }: { onStart: () => void }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <Illustration name="empty-gallery" className="aspect-[550/568] w-48" />
+      <div className="relative">
+        <div className="motion-loop anim-float" style={{ '--float-duration': '6s' } as React.CSSProperties}>
+          <Illustration name="empty-gallery" className="aspect-[550/568] w-48" />
+        </div>
+        <Sparkle size={16} className="motion-loop anim-twinkle absolute top-4 -right-4" />
+        <Sparkle size={10} color="var(--accent)" className="motion-loop anim-twinkle absolute top-1/2 -left-6" style={{ '--twinkle-delay': '-1s' } as React.CSSProperties} />
+      </div>
       <h2 className="mt-6 font-display text-22 font-semibold text-ink">Ta galerie t’attend.</h2>
       <p className="mt-2 max-w-xs text-14 text-ink-soft">Chaque envie de scroller transformée viendra s’afficher ici&nbsp;: tes dessins, tes textes, tes découvertes.</p>
       <Button className="mt-6" onClick={onStart} haptic={false}>
@@ -180,7 +206,7 @@ function DrawingCard({ item }: { item: CompletionDTO }) {
   return (
     <article className="overflow-hidden rounded-md bg-surface-200 shadow-card">
       {item.photoUrl ? (
-        <div className={cn('relative bg-surface-300', !loaded && 'skeleton min-h-60')}>
+        <div className={cn('relative m-2 mb-0 overflow-hidden rounded-sm bg-surface-300', !loaded && 'skeleton min-h-60')}>
           <img
             src={item.photoUrl}
             alt={`Dessin : ${item.activityText}`}

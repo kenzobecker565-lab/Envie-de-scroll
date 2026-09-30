@@ -3,6 +3,8 @@ import { motion, useReducedMotion } from 'motion/react'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { BrandMark } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
+import { dayPeriod, ScrollPhone, Sky } from '../components/decor/Ornaments.tsx'
+import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatNumber, plural } from '../lib/format.ts'
 import { PASSION_ICONS } from '../lib/icons.ts'
@@ -36,8 +38,13 @@ export function HomeScreen() {
   }
 
   const ResumeIcon = openProposal ? PASSION_ICONS[openProposal.passion] : null
+  const period = dayPeriod(new Date().getHours())
+  const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
 
   return (
+    <div className="relative">
+      <Sky period={period} />
+      <div className="relative z-10">
     <Screen className="pt-4">
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center gap-2 text-13 font-bold text-ink-soft">
@@ -54,14 +61,28 @@ export function HomeScreen() {
           className="inline-flex h-10 items-center gap-2 rounded-pill bg-surface-200 pr-4 pl-2 shadow-card"
           aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} pièces d’or`}
         >
-          <CoinIcon size={24} />
+          <CoinIcon size={24} className="motion-loop anim-coin" />
           <span className="font-mono text-14 font-bold text-ink">{formatNumber(stats.totalCoins)}</span>
         </motion.button>
       </div>
 
       <div className="mt-8">
-        <h1 className="font-display text-28 font-semibold text-ink">{user.firstName ? `Salut ${user.firstName}.` : 'Salut.'}</h1>
-        <p className="mt-2 text-15 text-ink-soft">Ton pouce te démange&nbsp;? Appuie ici, on s’occupe du reste.</p>
+        <motion.h1
+          className="font-display text-28 font-semibold text-ink"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
+        </motion.h1>
+        <motion.p
+          className="mt-2 max-w-[80%] text-15 text-ink-soft"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Ton pouce te démange&nbsp;? Appuie ici, on s’occupe du reste.
+        </motion.p>
       </div>
 
       {/* Le bouton principal, entouré d'un halo qui respire doucement. */}
@@ -77,15 +98,34 @@ export function HomeScreen() {
               transition={{ duration: 2.8, repeat: Infinity, delay: ring * 1.4, ease: 'easeOut' }}
             />
           ))}
+        {/* Petits éclats qui scintillent autour du bouton. */}
+        {[
+          { className: '-top-0 left-4', size: 14, delay: '0s', color: 'var(--warm)' },
+          { className: 'top-4 right-2', size: 10, delay: '-1.1s', color: 'var(--accent)' },
+          { className: 'bottom-2 left-12', size: 9, delay: '-0.5s', color: 'var(--accent)' },
+          { className: 'bottom-0 right-10', size: 13, delay: '-1.8s', color: 'var(--warm)' },
+        ].map((spark, index) => (
+          <Sparkle
+            key={index}
+            size={spark.size}
+            color={spark.color}
+            className={`motion-loop anim-twinkle absolute ${spark.className}`}
+            style={{ '--twinkle-delay': spark.delay } as React.CSSProperties}
+          />
+        ))}
         <motion.button
           type="button"
           onClick={start}
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
           whileTap={{ scale: 0.95 }}
           whileHover={{ scale: 1.01 }}
-          transition={{ type: 'spring', stiffness: 420, damping: 24 }}
-          className="relative flex h-24 w-full items-center justify-center gap-2 rounded-pill bg-accent px-6 text-accent-ink shadow-pop"
+          transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+          className="anim-shine motion-loop relative flex h-24 w-full items-center justify-center gap-4 rounded-pill bg-accent px-6 text-accent-ink shadow-pop"
+          style={{ '--shine-duration': '4.5s' } as React.CSSProperties}
         >
-          <span className="font-display text-26 font-semibold">J’ai envie de scroller</span>
+          <ScrollPhone className="shrink-0" />
+          <span className="font-display text-26 leading-tight font-semibold">J’ai envie de scroller</span>
         </motion.button>
       </div>
 
@@ -98,7 +138,8 @@ export function HomeScreen() {
           whileTap={{ scale: 0.98 }}
           className="mb-4 flex w-full items-center gap-4 rounded-md bg-surface-200 p-4 text-left shadow-card"
         >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-accent-soft">
+          <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-accent-soft">
+            <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute inset-0 rounded-pill border-2 border-accent opacity-40" />
             <ResumeIcon size={20} className="text-accent" aria-hidden="true" />
           </span>
           <span className="min-w-0 flex-1">
@@ -131,6 +172,8 @@ export function HomeScreen() {
         </span>
       </motion.button>
     </Screen>
+      </div>
+    </div>
   )
 }
 

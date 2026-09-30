@@ -124,7 +124,14 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
       />
       <AnimatePresence mode="wait" initial={false}>
         {preview ? (
-          <motion.div key="preview" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="relative">
+          <motion.div
+            key="preview"
+            initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
+            animate={{ opacity: 1, scale: 1, rotate: -1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+            className="relative rounded-md bg-surface-200 p-2 shadow-card"
+          >
             <img src={preview} alt="Aperçu de ton dessin" className="max-h-[55vh] w-full rounded-md bg-surface-300 object-contain shadow-card" />
             <div className="absolute right-2 bottom-2">
               <Button variant="secondary" className="h-10 text-13" icon={<RefreshCw size={16} aria-hidden="true" />} onClick={() => input.current?.click()}>
@@ -140,12 +147,25 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             whileTap={{ scale: 0.98 }}
-            className="flex aspect-[4/3] w-full cursor-pointer flex-col items-center justify-center gap-4 rounded-md border-2 border-dashed border-line bg-surface-200 p-6 text-center"
+            className="relative flex aspect-[4/3] w-full cursor-pointer flex-col items-center justify-center gap-4 rounded-md bg-surface-200 p-6 text-center shadow-card"
           >
+            {/* Pointillés qui avancent tout autour de la zone. */}
+            <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
+              <rect
+                x="1.5"
+                y="1.5"
+                width="99%"
+                height="99%"
+                rx="13"
+                className="motion-loop anim-march"
+                style={{ width: 'calc(100% - 3px)', height: 'calc(100% - 3px)', fill: 'none', stroke: 'var(--accent)', strokeWidth: 2, strokeDasharray: '8 6', opacity: 0.6 }}
+              />
+            </svg>
             {preparing ? (
               <span className="skeleton h-16 w-16 rounded-pill" aria-label="Préparation de la photo" />
             ) : (
-              <span className="flex h-16 w-16 items-center justify-center rounded-pill bg-accent-soft">
+              <span className="motion-loop anim-float relative flex h-16 w-16 items-center justify-center rounded-pill bg-accent-soft" style={{ '--float-duration': '3.5s' } as React.CSSProperties}>
+                <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute inset-0 rounded-pill border-2 border-accent opacity-30" />
                 <Camera size={30} className="text-accent" aria-hidden="true" />
               </span>
             )}

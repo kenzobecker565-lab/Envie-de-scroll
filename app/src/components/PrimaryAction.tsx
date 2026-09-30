@@ -23,7 +23,7 @@ export function PrimaryAction({
 }) {
   const native = useMainButton({ text, onClick, enabled, loading })
   return (
-    <div className="sticky bottom-0 z-10 -mx-4 mt-auto bg-gradient-to-t from-canvas from-70% to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
+    <div className="sticky bottom-0 z-10 -mx-4 mt-auto bg-gradient-to-t from-canvas/70 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
       {!native && (
         <Button className="w-full" onClick={onClick} disabled={!enabled || loading} aria-busy={loading}>
           {loading ? 'Un instant…' : text}

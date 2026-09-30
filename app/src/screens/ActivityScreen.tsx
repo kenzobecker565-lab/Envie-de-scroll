@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, type ActivityExtra, type ProposalDTO } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
+import { PassionScene } from '../components/decor/PassionScene.tsx'
+import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { Skeleton, SkeletonText } from '../components/Skeleton.tsx'
 import { cn } from '../lib/cn.ts'
@@ -64,15 +66,25 @@ export function ActivityScreen() {
 
   return (
     <Screen>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="inline-flex h-8 items-center gap-2 rounded-pill bg-surface-200 px-4 text-12 font-bold text-ink-soft">
-          <Icon size={16} className="text-accent" aria-hidden="true" />
-          {passion.label}
-        </span>
-        <span className="inline-flex h-8 items-center rounded-pill bg-surface-200 px-4 font-mono text-12 font-bold text-ink-soft">{duration} min</span>
-      </div>
+      {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
+      <motion.div
+        className={cn('relative overflow-hidden rounded-lg p-4 shadow-card', passion.tone === 'warm' ? 'bg-warm-soft' : 'bg-accent-soft')}
+        initial={{ opacity: 0, y: 12, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      >
+        <span aria-hidden="true" className="absolute -top-10 -left-10 h-32 w-32 rounded-pill bg-surface-200 opacity-40" />
+        <div className="relative flex flex-wrap items-center gap-2">
+          <span className="inline-flex h-8 items-center gap-2 rounded-pill bg-surface-200 px-4 text-12 font-bold text-ink-soft">
+            <Icon size={16} className="text-accent" aria-hidden="true" />
+            {passion.label}
+          </span>
+          <span className="inline-flex h-8 items-center rounded-pill bg-surface-200 px-4 font-mono text-12 font-bold text-ink-soft">{duration} min</span>
+        </div>
+        <PassionScene passion={passionId} className="relative mx-auto -mb-2 h-24 w-auto" />
+      </motion.div>
 
-      <div className="mt-8 flex-1" aria-live="polite" aria-busy={loading}>
+      <div className="mt-6 flex-1" aria-live="polite" aria-busy={loading}>
         <AnimatePresence mode="wait" initial={false}>
           {proposal && !loading ? (
             <motion.div
@@ -83,8 +95,11 @@ export function ActivityScreen() {
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
             >
               <p className="text-15 text-ink-soft">{proposal.intro}</p>
-              <h1 className={cn('mt-4 font-display font-semibold text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-28')}>
-                {proposal.text}
+              <h1
+                className={cn('mt-4 font-display font-semibold text-pretty text-ink', proposal.text.length > 95 ? 'text-26' : 'text-28')}
+                aria-label={proposal.text}
+              >
+                <RevealWords text={proposal.text} />
               </h1>
               {proposal.extra && <ExtraCard extra={proposal.extra} />}
             </motion.div>
@@ -105,7 +120,7 @@ export function ActivityScreen() {
         </AnimatePresence>
       </div>
 
-      <div className="sticky bottom-0 -mx-4 mt-8 bg-gradient-to-t from-canvas from-75% to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
+      <div className="sticky bottom-0 -mx-4 mt-8 bg-gradient-to-t from-canvas/70 to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
         {proposal ? (
           <ValidateButton
             key={proposal.id}
@@ -132,6 +147,28 @@ export function ActivityScreen() {
   )
 }
 
+/** Le texte apparaît mot après mot, comme s'il s'écrivait. */
+function RevealWords({ text }: { text: string }) {
+  const words = text.split(' ')
+  return (
+    <span aria-hidden="true">
+      {words.map((word, index) => (
+        <span key={index}>
+          <motion.span
+            className="inline-block"
+            initial={{ opacity: 0, y: 12, rotate: 2 }}
+            animate={{ opacity: 1, y: 0, rotate: 0 }}
+            transition={{ delay: 0.15 + index * 0.045, type: 'spring', stiffness: 300, damping: 24 }}
+          >
+            {word}
+          </motion.span>
+          {index < words.length - 1 ? ' ' : null}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 /** Ce que l'appli a tiré au hasard pour l'activité (mots, film, traits…). */
 function ExtraCard({ extra }: { extra: ActivityExtra }) {
   const asChips = extra.kind === 'trois-mots' || extra.kind === 'un-mot'
@@ -140,10 +177,11 @@ function ExtraCard({ extra }: { extra: ActivityExtra }) {
       initial={{ opacity: 0, scale: 0.97 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.25, duration: 0.35 }}
-      className="mt-6 rounded-md bg-warm-soft p-4"
+      className="relative mt-6 overflow-hidden rounded-md bg-warm-soft p-4"
     >
+      <Sparkle size={40} color="var(--surface-200)" className="motion-loop anim-spin-slow absolute -top-3 -right-3 opacity-60" style={{ '--spin-duration': '14s' } as React.CSSProperties} />
       <p className="inline-flex items-center gap-2 text-11 font-bold tracking-wide text-warm-ink uppercase">
-        <Sparkles size={14} aria-hidden="true" />
+        <Sparkles size={14} aria-hidden="true" className="motion-loop anim-twinkle" />
         L’appli a tiré pour toi · {extra.label}
       </p>
       {asChips ? (
@@ -201,7 +239,7 @@ function ValidateButton({
 
   if (!timeGuard) {
     return (
-      <Button className="w-full" onClick={onValidate} disabled={disabled}>
+      <Button className="anim-shine motion-loop w-full" onClick={onValidate} disabled={disabled}>
         Valider
       </Button>
     )
@@ -219,14 +257,14 @@ function ValidateButton({
         whileTap={locked ? undefined : { scale: 0.96 }}
         className={cn(
           'relative flex h-14 w-full items-center justify-center overflow-hidden rounded-pill text-15 font-bold transition-colors duration-500',
-          locked ? 'bg-surface-300 text-ink-faint' : 'bg-accent text-accent-ink shadow-pop',
+          locked ? 'bg-surface-300 text-ink-faint' : 'anim-shine motion-loop bg-accent text-accent-ink shadow-pop',
         )}
         aria-describedby="validate-hint"
       >
         {locked && (
           <span
             aria-hidden="true"
-            className="absolute inset-y-0 left-0 bg-accent-soft transition-[width] duration-1000 ease-linear"
+            className="motion-loop anim-stripes absolute inset-y-0 left-0 bg-accent-soft transition-[width] duration-1000 ease-linear"
             style={{ width: `${Math.round(progress * 100)}%` }}
           />
         )}

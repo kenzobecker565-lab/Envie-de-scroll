@@ -142,7 +142,8 @@
   body {
     margin: 0;
     min-height: var(--tg-viewport-stable-height, 100dvh);
-    background: var(--canvas);
+    /* Transparent : le décor vivant (Backdrop) se glisse entre le fond et le contenu. */
+    background: transparent;
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: 15px;
@@ -205,9 +206,222 @@
   }
 }
 
+/*
+ * ============================================================================
+ *  ANIMATIONS DU DÉCOR
+ * ============================================================================
+ * Boucles douces, jouées par le navigateur (transform et opacity seulement,
+ * pour rester fluides sur les petits téléphones). Tout élément qui boucle
+ * porte la classe `motion-loop` : elle s'arrête si le système demande de
+ * réduire les animations, et l'élément garde alors un état fixe agréable.
+ */
+
+@layer components {
+  .motion-loop {
+    will-change: transform, opacity;
+  }
+
+  /* Taches de couleur du fond : dérive lente. */
+  .anim-drift-a {
+    animation: drift-a 26s ease-in-out infinite alternate;
+  }
+  .anim-drift-b {
+    animation: drift-b 32s ease-in-out infinite alternate;
+  }
+  .anim-drift-c {
+    animation: drift-c 38s ease-in-out infinite alternate;
+  }
+
+  /* Petites formes qui montent en ondulant. */
+  .anim-rise {
+    animation: rise var(--rise-duration, 30s) linear infinite;
+    animation-delay: var(--rise-delay, 0s);
+  }
+  .anim-sway {
+    animation: sway var(--sway-duration, 6s) ease-in-out infinite alternate;
+  }
+
+  /* Flottement léger (illustrations, pièces). */
+  .anim-float {
+    animation: float var(--float-duration, 5s) ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s);
+  }
+
+  /* Scintillement (étoiles, éclats). */
+  .anim-twinkle {
+    animation: twinkle var(--twinkle-duration, 2.8s) ease-in-out infinite;
+    animation-delay: var(--twinkle-delay, 0s);
+  }
+
+  /* Rotation lente (rayons, soleil, bouée). */
+  .anim-spin-slow {
+    animation: spin var(--spin-duration, 40s) linear infinite;
+  }
+
+  /* Nuages qui traversent le ciel. */
+  .anim-cloud {
+    animation: cloud var(--cloud-duration, 70s) linear infinite;
+    animation-delay: var(--cloud-delay, 0s);
+  }
+
+  /* Reflet qui passe sur un bouton ou une carte. */
+  .anim-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .anim-shine::after {
+    content: '';
+    position: absolute;
+    inset: -20% auto -20% -60%;
+    width: 45%;
+    background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--surface-200) 45%, transparent), transparent);
+    transform: skewX(-18deg);
+    animation: shine var(--shine-duration, 5s) ease-in-out infinite;
+    animation-delay: var(--shine-delay, 1.2s);
+    pointer-events: none;
+  }
+
+  /* Fil d'écran qui défile (glyphe du gros bouton). */
+  .anim-feed {
+    animation: feed 2.4s linear infinite;
+  }
+
+  /* Barres d'égaliseur. */
+  .anim-bar {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: bar var(--bar-duration, 1s) ease-in-out infinite alternate;
+    animation-delay: var(--bar-delay, 0s);
+  }
+
+  /* Notes qui s'envolent. */
+  .anim-note {
+    transform-box: fill-box;
+    animation: note var(--note-duration, 3.2s) ease-out infinite;
+    animation-delay: var(--note-delay, 0s);
+  }
+
+  /* Pellicule qui défile. */
+  .anim-film {
+    animation: film 2.2s linear infinite;
+  }
+
+  /* Pointillés qui avancent (zone de dépôt de la photo). */
+  .anim-march {
+    animation: march 1.2s linear infinite;
+  }
+
+  /* Pulsation douce. */
+  .anim-pulse-soft {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse-soft 2.4s ease-in-out infinite;
+  }
+
+  /* Petite ondulation (icône du mood choisi). */
+  .anim-wiggle {
+    animation: wiggle 0.6s ease-in-out;
+  }
+
+  /* Ligne qui ondule en continu (vagues, zigzags). */
+  .anim-wave {
+    animation: wave var(--wave-duration, 3s) linear infinite;
+  }
+
+  /* Rayures qui glissent dans le bouton « Valider » en attente. */
+  .anim-stripes {
+    background-image: repeating-linear-gradient(-45deg, transparent 0 10px, color-mix(in srgb, var(--surface-200) 35%, transparent) 10px 20px);
+    background-size: 28px 28px;
+    animation: stripes 1.6s linear infinite;
+  }
+}
+
+@keyframes drift-a {
+  from { transform: translate3d(-6vmax, -4vmax, 0) scale(1); }
+  to { transform: translate3d(8vmax, 6vmax, 0) scale(1.18); }
+}
+@keyframes drift-b {
+  from { transform: translate3d(6vmax, 0, 0) scale(1.1); }
+  to { transform: translate3d(-8vmax, -8vmax, 0) scale(0.92); }
+}
+@keyframes drift-c {
+  from { transform: translate3d(0, 6vmax, 0) scale(0.95); }
+  to { transform: translate3d(7vmax, -5vmax, 0) scale(1.15); }
+}
+/* Chaque forme est placée à `top: var(--y)` : immobile, elle reste là où elle
+   est ; animée, elle traverse tout l'écran du bas vers le haut. */
+@keyframes rise {
+  from { transform: translate3d(0, calc(105vh - var(--y, 0vh)), 0); opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  to { transform: translate3d(0, calc(-12vh - var(--y, 0vh)), 0); opacity: 0; }
+}
+@keyframes sway {
+  from { transform: translate3d(-12px, 0, 0) rotate(-12deg); }
+  to { transform: translate3d(12px, 0, 0) rotate(12deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes cloud {
+  from { transform: translate3d(-40vw, 0, 0); }
+  to { transform: translate3d(140vw, 0, 0); }
+}
+@keyframes shine {
+  0%, 70% { transform: translateX(0) skewX(-18deg); }
+  100% { transform: translateX(420%) skewX(-18deg); }
+}
+@keyframes feed {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -12px, 0); }
+}
+@keyframes bar {
+  from { transform: scaleY(0.25); }
+  to { transform: scaleY(1); }
+}
+@keyframes note {
+  0% { transform: translate(0, 6px) rotate(-8deg); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(10px, -26px) rotate(10deg); opacity: 0; }
+}
+@keyframes film {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-40px, 0, 0); }
+}
+@keyframes march {
+  to { stroke-dashoffset: -24; }
+}
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-14deg) scale(1.15); }
+  60% { transform: rotate(10deg) scale(1.1); }
+}
+@keyframes wave {
+  to { transform: translate3d(var(--wave-shift, -24px), 0, 0); }
+}
+@keyframes stripes {
+  to { background-position: 28px 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .skeleton {
-    animation: none;
+  .skeleton,
+  .motion-loop,
+  .motion-loop::after,
+  .anim-shine::after,
+  .anim-wiggle {
+    animation: none !important;
   }
 
   *,
@@ -216,4 +430,16 @@
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
   }
+}
+
+/* Pièce d'or qui fait un tour sur elle-même de temps en temps. */
+@layer components {
+  .anim-coin {
+    animation: coin-turn 6s ease-in-out infinite;
+    animation-delay: var(--coin-delay, 2s);
+  }
+}
+@keyframes coin-turn {
+  0%, 80% { transform: rotateY(0); }
+  100% { transform: rotateY(360deg); }
 }

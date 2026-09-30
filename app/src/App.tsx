@@ -1,9 +1,10 @@
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
-import type { MeResponse } from '@scroll-up/shared'
+import { getMood, getPassion, type MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
 import { BrandMark } from './components/Brand.tsx'
 import { Button } from './components/Button.tsx'
+import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
 import { Skeleton } from './components/Skeleton.tsx'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
@@ -13,7 +14,7 @@ import { HomeScreen } from './screens/HomeScreen.tsx'
 import { PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
 import { SignalScreen } from './screens/SignalScreen.tsx'
-import { AppStateProvider, useNavigation, type Route } from './state/AppState.tsx'
+import { AppStateProvider, useAppState, useNavigation, type Flow, type Route } from './state/AppState.tsx'
 import { useBackButton } from './telegram/buttons.ts'
 import { syncTheme } from './telegram/theme.ts'
 import { initTelegram } from './telegram/webApp.ts'
@@ -22,6 +23,7 @@ type Boot = { status: 'loading' } | { status: 'ready'; me: MeResponse } | { stat
 
 export function App() {
   const [boot, setBoot] = useState<Boot>({ status: 'loading' })
+  const [tone, setTone] = useState<DecorTone>('mixed')
 
   const load = useCallback(async () => {
     setBoot({ status: 'loading' })
@@ -41,12 +43,13 @@ export function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="mx-auto w-full max-w-[480px]">
+      <Backdrop tone={tone} />
+      <div className="relative z-10 mx-auto w-full max-w-[480px]">
         {boot.status === 'loading' && <BootSkeleton />}
         {boot.status === 'error' && <BootError error={boot.error} onRetry={load} />}
         {boot.status === 'ready' && (
           <AppStateProvider me={boot.me}>
-            <Router />
+            <Router onTone={setTone} />
           </AppStateProvider>
         )}
       </div>
@@ -57,9 +60,31 @@ export function App() {
 /* ----------------------------- Transitions -------------------------------- */
 
 const screenVariants: Variants = {
-  enter: (direction: 1 | -1) => ({ opacity: 0, x: direction * 28 }),
-  center: { opacity: 1, x: 0, transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] } },
-  exit: (direction: 1 | -1) => ({ opacity: 0, x: direction * -20, transition: { duration: 0.16, ease: 'easeIn' } }),
+  enter: (direction: 1 | -1) => ({ opacity: 0, x: direction * 32, y: 10, scale: 0.985 }),
+  center: { opacity: 1, x: 0, y: 0, scale: 1, transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] } },
+  exit: (direction: 1 | -1) => ({ opacity: 0, x: direction * -24, scale: 0.99, transition: { duration: 0.16, ease: 'easeIn' } }),
+}
+
+/** Couleur du décor selon l'écran et les choix du parcours. */
+function toneFor(route: Route, flow: Flow): DecorTone {
+  const moodTone: DecorTone = flow.mood ? (getMood(flow.mood).energy === 'basse' ? 'calm' : 'warm') : 'mixed'
+  switch (route.name) {
+    case 'signal':
+      return 'calm'
+    case 'mood':
+    case 'time':
+    case 'passion':
+      return moodTone
+    case 'activity':
+    case 'proof':
+      return flow.passion ? (getPassion(flow.passion).tone === 'warm' ? 'warm' : 'calm') : moodTone
+    case 'done':
+      return 'good'
+    case 'gallery':
+      return 'warm'
+    default:
+      return 'mixed'
+  }
 }
 
 function screenFor(route: Route) {
@@ -89,8 +114,11 @@ function screenFor(route: Route) {
   }
 }
 
-function Router() {
+function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { route, direction, canGoBack, back } = useNavigation()
+  const { state } = useAppState()
+  const tone = toneFor(route, state.flow)
+  useEffect(() => onTone(tone), [tone, onTone])
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 

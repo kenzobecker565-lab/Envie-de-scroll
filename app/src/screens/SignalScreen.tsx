@@ -2,6 +2,7 @@ import { LifeBuoy } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect } from 'react'
 import { SIGNAL_MESSAGE } from '@scroll-up/shared'
+import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
@@ -38,13 +39,29 @@ export function SignalScreen() {
               transition={{ duration: 2.2, repeat: Infinity, delay: ring * 0.7, ease: 'easeOut' }}
             />
           ))}
+        {/* Des éclats venus de partout convergent vers la bouée : le signal arrive. */}
+        {!reduced &&
+          Array.from({ length: 10 }, (_, index) => {
+            const angle = (index / 10) * Math.PI * 2
+            return (
+              <motion.span
+                key={`spark-${index}`}
+                className="absolute"
+                initial={{ x: Math.cos(angle) * 150, y: Math.sin(angle) * 150, opacity: 0, scale: 0.6 }}
+                animate={{ x: [Math.cos(angle) * 150, 0], y: [Math.sin(angle) * 150, 0], opacity: [0, 1, 0], scale: [0.6, 1, 0.3] }}
+                transition={{ duration: 1.6, repeat: Infinity, delay: index * 0.16, ease: 'easeIn' }}
+              >
+                <Sparkle size={index % 3 === 0 ? 12 : 8} color={index % 2 ? 'var(--warm)' : 'var(--accent)'} />
+              </motion.span>
+            )
+          })}
         <motion.span
-          className="relative flex h-20 w-20 items-center justify-center rounded-pill bg-accent-soft"
+          className="relative flex h-20 w-20 items-center justify-center rounded-pill bg-accent-soft shadow-pop"
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 260, damping: 18 }}
         >
-          <LifeBuoy size={36} strokeWidth={1.75} className="text-accent" />
+          <LifeBuoy size={36} strokeWidth={1.75} className="motion-loop anim-spin-slow text-accent" style={{ '--spin-duration': '8s' } as React.CSSProperties} />
         </motion.span>
       </span>
 

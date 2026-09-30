@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { useRef, useState } from 'react'
 import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
+import { EnergyLine, TimeDial } from '../components/decor/Ornaments.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
 import { cn } from '../lib/cn.ts'
@@ -19,9 +20,9 @@ function useAdvance() {
 }
 
 const enter = (index: number) => ({
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay: 0.04 * index, duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
+  initial: { opacity: 0, y: 16, scale: 0.94 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  transition: { delay: 0.05 * index, type: 'spring' as const, stiffness: 260, damping: 22 },
 })
 
 /* ---------------------------------- Mood ---------------------------------- */
@@ -46,7 +47,10 @@ export function MoodScreen() {
       <div className="space-y-6">
         {ENERGY_FAMILIES.map((family) => (
           <section key={family.energy} aria-label={family.label}>
-            <h2 className="mb-2 text-11 font-bold tracking-wide text-ink-soft uppercase">{family.label}</h2>
+            <h2 className="mb-2 flex items-center gap-2 text-11 font-bold tracking-wide text-ink-soft uppercase">
+              {family.label}
+              <EnergyLine energy={family.energy} />
+            </h2>
             <div className="flex flex-wrap gap-2">
               {MOODS.filter((mood) => mood.energy === family.energy).map((mood) => {
                 const Icon = MOOD_ICONS[mood.id]
@@ -64,7 +68,11 @@ export function MoodScreen() {
                       active ? 'border-accent bg-accent-soft text-ink' : 'border-line bg-surface-200 text-ink',
                     )}
                   >
-                    <Icon size={18} className={cn('shrink-0 transition-colors duration-200', active ? 'text-accent' : 'text-ink-soft')} aria-hidden="true" />
+                    <Icon
+                      size={18}
+                      className={cn('shrink-0 transition-colors duration-200', active ? 'anim-wiggle text-accent' : 'text-ink-soft')}
+                      aria-hidden="true"
+                    />
                     {mood.label}
                   </motion.button>
                 )
@@ -119,15 +127,7 @@ export function TimeScreen() {
                 active ? 'border-accent' : 'border-transparent',
               )}
             >
-              <span
-                className={cn(
-                  'flex h-20 w-20 shrink-0 flex-col items-center justify-center rounded-md transition-colors duration-200',
-                  active ? 'bg-accent text-accent-ink' : 'bg-accent-soft text-accent',
-                )}
-              >
-                <span className="font-mono text-21 font-bold">{duration}</span>
-                <span className="font-mono text-mono-xs font-bold">min</span>
-              </span>
+              <TimeDial minutes={duration} active={active} delay={index * 0.12} />
               <span>
                 <span className="block text-15 font-bold text-ink">{TIME_COPY[duration].title}</span>
                 <span className="mt-1 block text-13 text-ink-soft">{TIME_COPY[duration].hint}</span>

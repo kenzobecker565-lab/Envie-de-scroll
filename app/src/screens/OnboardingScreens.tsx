@@ -3,12 +3,29 @@ import { useState } from 'react'
 import { MAX_PASSIONS, PASSIONS, type PassionId } from '@scroll-up/shared'
 import { api, ApiError } from '../api/client.ts'
 import { Button } from '../components/Button.tsx'
+import { Underline } from '../components/decor/Ornaments.tsx'
+import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Illustration } from '../components/Illustration.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
+import { PASSION_ICONS } from '../lib/icons.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics, requestWriteAccessIfNeeded } from '../telegram/webApp.ts'
+
+/** Les quatre passions, en bulles qui flottent autour de l'illustration. */
+const ORBIT = [
+  { id: 'dessin', className: 'top-2 left-0', tone: 'bg-accent-soft', delay: '0s' },
+  { id: 'musique', className: 'top-0 right-2', tone: 'bg-warm-soft', delay: '-1.4s' },
+  { id: 'ecriture', className: 'bottom-4 left-4', tone: 'bg-warm-soft', delay: '-2.6s' },
+  { id: 'cinema', className: '-bottom-2 right-8', tone: 'bg-accent-soft', delay: '-0.8s' },
+] as const
+
+const enter = (delay: number) => ({
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay, duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+})
 
 /** Onboarding, étape 1 : une bienvenue courte. */
 export function WelcomeScreen() {
@@ -17,20 +34,60 @@ export function WelcomeScreen() {
   const name = state.me.user.firstName
   return (
     <Screen className="justify-between">
-      <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
-        <Illustration name="welcome" className="mx-auto mt-4 aspect-[782/458] w-full max-w-sm" />
+      <motion.div
+        className="relative mx-auto mt-4 w-full max-w-sm"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 120, damping: 16 }}
+      >
+        <div className="motion-loop anim-float" style={{ '--float-duration': '6s' } as React.CSSProperties}>
+          <Illustration name="welcome" className="aspect-[782/458] w-full" />
+        </div>
+        {ORBIT.map((bubble, index) => {
+          const Icon = PASSION_ICONS[bubble.id]
+          return (
+            <motion.span
+              key={bubble.id}
+              aria-hidden="true"
+              className={`absolute ${bubble.className}`}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 + index * 0.12, type: 'spring', stiffness: 300, damping: 16 }}
+            >
+              <span
+                className={`motion-loop anim-float flex h-11 w-11 items-center justify-center rounded-pill shadow-card ${bubble.tone}`}
+                style={{ '--float-duration': `${4 + index}s`, '--float-delay': bubble.delay } as React.CSSProperties}
+              >
+                <Icon size={20} strokeWidth={1.9} className="text-accent" />
+              </span>
+            </motion.span>
+          )
+        })}
+        <Sparkle size={14} className="motion-loop anim-twinkle absolute top-1/2 -left-1" style={{ '--twinkle-delay': '-0.4s' } as React.CSSProperties} />
+        <Sparkle size={10} color="var(--accent)" className="motion-loop anim-twinkle absolute top-6 left-1/2" style={{ '--twinkle-delay': '-1.3s' } as React.CSSProperties} />
       </motion.div>
       <div className="mt-8">
-        <p className="text-13 font-bold text-accent">{name ? `Bienvenue, ${name}` : 'Bienvenue'}</p>
-        <h1 className="mt-2 font-display text-34 font-semibold text-balance text-ink">Et si ton envie de scroller devenait autre chose&nbsp;?</h1>
-        <p className="mt-4 text-15 text-ink-soft">
+        <motion.p className="text-13 font-bold text-accent" {...enter(0.15)}>
+          {name ? `Bienvenue, ${name}` : 'Bienvenue'}
+        </motion.p>
+        <motion.h1 className="mt-2 font-display text-34 font-semibold text-balance text-ink" {...enter(0.25)}>
+          Et si ton envie de scroller devenait{' '}
+          <span className="relative inline-block whitespace-nowrap">
+            autre chose
+            <Underline className="-bottom-2 left-0 h-3 w-full" delay={0.9} />
+          </span>
+          &nbsp;?
+        </motion.h1>
+        <motion.p className="mt-4 text-15 text-ink-soft" {...enter(0.4)}>
           Quand ton pouce te démange, appuie sur un bouton&nbsp;: on te propose une petite activité créative, liée à ce que tu aimes. Tout ce que tu fais
           rejoint ta galerie.
-        </p>
+        </motion.p>
       </div>
-      <Button className="mt-8 w-full" onClick={() => push({ name: 'passions', mode: 'onboarding' })}>
-        C’est parti
-      </Button>
+      <motion.div {...enter(0.55)}>
+        <Button className="anim-shine motion-loop mt-8 w-full" onClick={() => push({ name: 'passions', mode: 'onboarding' })}>
+          C’est parti
+        </Button>
+      </motion.div>
     </Screen>
   )
 }
@@ -94,9 +151,9 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
         {PASSIONS.map((passion, index) => (
           <motion.div
             key={passion.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 * index, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 24, rotate: index % 2 ? 3 : -3 }}
+            animate={{ opacity: 1, y: 0, rotate: 0 }}
+            transition={{ delay: 0.08 * index, type: 'spring', stiffness: 220, damping: 20 }}
           >
             <PassionCard passion={passion} selected={selected.includes(passion.id)} onSelect={() => toggle(passion.id)} />
           </motion.div>

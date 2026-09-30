@@ -793,7 +793,7 @@ export function renderAudio() {
     [B.bass, 0.7, true],
     [B.pads, 0.85, true],
     [B.music, 1.25, true],
-    [B.lead, 1.3, false],
+    [B.lead, 1.0, false],
     [B.sfx, 1.1, false],
     [verb, 0.5, true],
   ]

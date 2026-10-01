@@ -132,15 +132,21 @@ describe('admins et statistiques', () => {
     const completion = await writeSomething()
     await request(app).put(`/api/completions/${completion.id}/rating`).set(as()).send({ rating: 3 }).expect(200)
     await request(app).post('/api/feedback').set(as()).send({ message: 'Super idée.' }).expect(201)
+    // Musique : deux personnes ; seul le dernier choix de chacune compte.
+    await request(app).post('/api/events').set(as()).send({ name: 'music', data: { ambiance: 'piano' } }).expect(204)
+    await request(app).post('/api/events').set(as()).send({ name: 'music', data: { ambiance: 'lofi' } }).expect(204)
+    await request(app).post('/api/events').set(as(7)).send({ name: 'music', data: { ambiance: 'lofi' } }).expect(204)
+    await request(app).post('/api/events').set(as(7)).send({ name: 'music_off' }).expect(204)
 
     const stats = await globalStats(prisma, clock.now())
-    expect(stats).toContain('Testeurs : 1')
+    expect(stats).toContain('Testeurs : 2')
     expect(stats).toContain('« J’ai envie de scroller » : 1 appui')
     expect(stats).toContain('activités validées : 1 (100 %')
     expect(stats).toContain('Écriture 1')
     expect(stats).toContain('j’ai adoré 1')
     expect(stats).toContain('Avis écrits : 1')
     expect(stats).toContain('Les activités les mieux notées')
+    expect(stats).toContain('Musique d’ambiance : styles choisis (dernier choix de chacun) Lo-fi 2 · coupée 1 fois')
 
     const user = await prisma.user.findUniqueOrThrow({ where: { id: 42n } })
     const mine = await personalStats(prisma, user)
@@ -157,6 +163,7 @@ describe('admins et statistiques', () => {
   it('reste lisible sans aucune donnée', async () => {
     const stats = await globalStats(prisma, clock.now())
     expect(stats).toContain('Testeurs : 0')
+    expect(stats).toContain('Musique d’ambiance : aucun style choisi · coupée 0 fois')
     expect(await recentFeedback(prisma)).toContain('Pas encore d’avis')
   })
 })

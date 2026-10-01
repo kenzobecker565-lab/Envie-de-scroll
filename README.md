@@ -187,15 +187,18 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 10. **Galerie** : le total de pièces d'or en grand, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier. Chaque création se partage à un ami.
 11. **Paliers** : 5 min, 30 min, 1 h, 2 h, 5 h, 10 h, 20 h de création. Le palier franchi est célébré à la confirmation ; la galerie montre la jauge du prochain (« plus que 25 min »). Du temps gagné, jamais du temps manqué.
 12. **Réglages** (bouton à côté des pièces, sur l'accueil) : le style en grille, les passions, la musique d'ambiance, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
-13. **Musique d'ambiance** : un jazz noir tout doux (`app/public/music/jazz-noir.mp3`, morceau original libre de droits généré avec vidIQ, bouclé sans coupure). Elle démarre au premier toucher, se coupe d'un geste (bouton note de musique de l'accueil, ou réglages ; le choix est gardé sur le téléphone), se retire quand l'app passe en arrière-plan, et pendant les activités Musique et Cinéma. Le volume passe par Web Audio, pour être réglable aussi sur iPhone (`src/lib/ambient.ts`).
+13. **Musique d'ambiance**, tout doux, en fond. **Dix styles** au choix dans les réglages (« Ta musique ») : jazz noir (par défaut), lo-fi, piano, bossa nova, acoustique, synthwave, 8-bit, ambient, tropical, et la pluie pour ceux qui ne veulent pas de musique. « Au hasard » joue un style différent à chaque ouverture. Un tap sur un style le fait entendre tout de suite, avec un fondu, et remet la musique si elle était coupée.
+    - **Le reste du comportement** : la musique démarre au premier toucher. On la coupe d'un geste (bouton note de musique de l'accueil, ou interrupteur des réglages). Le style et le choix on/off sont gardés sur le téléphone. Elle se retire quand l'app passe en arrière-plan, et pendant les activités Musique et Cinéma.
+    - **Le volume** passe par Web Audio, pour être réglable aussi sur iPhone (`src/lib/ambient.ts`). Tous les morceaux sont au même volume (−16 LUFS), en MP3 de 3 minutes au plus (2 Mo).
+    - **Les morceaux** : le jazz noir a été généré avec vidIQ et la pluie synthétisée pour Scroll-up. Les huit autres sont de Kevin MacLeod ([incompetech.com](https://incompetech.com)), sous licence Creative Commons BY 4.0. Ils sont crédités en bas des réglages. La liste est dans `shared/src/ambiances.ts`, les fichiers sont préparés par `promo/ambiances/build.mjs`.
 
 ## Pendant le test : avis, notes et chiffres
 
 - **Avis écrits** : « Un avis, une idée ? » sur l'accueil, « Donner mon avis » dans les réglages, ou « Un mot à ajouter ? » après une activité. Un testeur peut aussi simplement écrire au bot. Chaque avis arrive **en direct dans Telegram, chez les admins**.
 - **Note de chaque activité**, juste après « Activité enregistrée. » : j'ai adoré, sympa, pas pour moi. De quoi trier les 60 activités.
-- **Suivi d'usage** (sans aucun texte libre) : ouvertures, appuis sur le gros bouton, humeur, temps et passion choisis, partages, invitations. On voit où le parcours se perd.
+- **Suivi d'usage** (sans aucun texte libre) : ouvertures, appuis sur le gros bouton, humeur, temps et passion choisis, partages, invitations, style de musique choisi, musique coupée. On voit où le parcours se perd, et quels styles plaisent.
 - **Devenir admin** : envoie `/admin` au bot **avant de partager le lien** : la première personne qui le fait devient admin. On peut aussi fixer la variable `ADMIN_IDS` (identifiants Telegram séparés par des virgules), qui prend alors le dessus.
-- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées et avis). Pour un testeur, `/stats` donne ses propres chiffres.
+- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, styles de musique choisis, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées et avis). Pour un testeur, `/stats` donne ses propres chiffres.
 
 ## Les règles
 
@@ -216,6 +219,7 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Introductions selon le mood** : `shared/src/intros.ts` (deux par mood).
 - **Messages du bot** : `shared/src/reminders.ts` (relances) et `server/src/bot/bot.ts` (accueil, photos, avis, commandes d'admin).
 - **Paliers de création** : `shared/src/feedback.ts` (`MILESTONES` : minutes à atteindre, titre, phrase de célébration).
+- **Musiques d'ambiance** : `shared/src/ambiances.ts` (nom, phrase, couleur, crédit) et `promo/ambiances/build.mjs`. Pour changer un morceau : modifie la liste `TRACKS` du script (titre et fichier chez incompetech.com), lance `node ambiances/build.mjs <id>` depuis `promo/`, puis mets à jour le crédit dans `ambiances.ts`.
 
 Lance `npm test` après une modification.
 

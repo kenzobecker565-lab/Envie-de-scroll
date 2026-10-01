@@ -1,6 +1,7 @@
 import { BellRing, ChevronRight, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useState, type ReactNode } from 'react'
+import { ambianceCredits } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
@@ -10,12 +11,14 @@ import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics, supports, telegram } from '../telegram/webApp.ts'
+import { AmbiancePicker } from './AmbiancePicker.tsx'
 import { FeedbackDialog } from './FeedbackDialog.tsx'
 import { ThemeGrid } from './ThemePicker.tsx'
 
 /**
  * Le bouton « Réglages » de l'accueil, et sa feuille : le style de l'app,
- * les passions, les relances du bot, inviter un ami, donner son avis.
+ * la musique d'ambiance, les passions, les relances du bot, inviter un ami,
+ * donner son avis.
  */
 export function SettingsButton() {
   const [open, setOpen] = useState(false)
@@ -98,20 +101,30 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
 
       <Separator />
 
-      <div className="flex flex-col gap-3">
-        <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''} sur 4`} onClick={onEditPassions} />
+      <section className="flex flex-col gap-3" aria-labelledby="settings-music">
+        <h2 id="settings-music" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
+          Ta musique
+        </h2>
         <Row
           icon={<Music2 aria-hidden="true" />}
           title="Musique d’ambiance"
-          description="Du jazz noir, tout doux. Elle se tait pendant les activités Musique et Cinéma."
+          description="Tout doux, en fond. Elle se tait pendant les activités Musique et Cinéma."
           onClick={() => {
             haptics.selection()
+            if (music) track('music_off')
             setAmbientEnabled(!music)
           }}
           trailing={<Switch on={music} busy={false} />}
           role="switch"
           checked={music}
         />
+        <AmbiancePicker />
+      </section>
+
+      <Separator />
+
+      <div className="flex flex-col gap-3">
+        <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''} sur 4`} onClick={onEditPassions} />
         <Row
           icon={<BellRing aria-hidden="true" />}
           title="Petites relances"
@@ -134,6 +147,7 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
       </div>
 
       <p className="text-center text-12 text-ink-soft">Scroll-up · version de test. Merci de faire partie des premiers&nbsp;!</p>
+      <p className="text-center text-11 text-ink-faint">Musiques&nbsp;: {ambianceCredits()}</p>
     </>
   )
 }

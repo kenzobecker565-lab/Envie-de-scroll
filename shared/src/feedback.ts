@@ -37,6 +37,8 @@ export const APP_EVENTS = [
   'invite', // invitation envoyée à un ami
   'feedback_open', // ouverture du formulaire d'avis
   'settings_open', // ouverture des réglages
+  'music', // style de musique d'ambiance choisi (data.ambiance)
+  'music_off', // musique d'ambiance coupée
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

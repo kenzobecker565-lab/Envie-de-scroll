@@ -1,6 +1,8 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import request from 'supertest'
-import type { CompleteResponse, CompletionsPage, MeResponse, ProposalResponse } from '@scroll-up/shared'
+import { AMBIANCES, type CompleteResponse, type CompletionsPage, type MeResponse, type ProposalResponse } from '@scroll-up/shared'
 import type { PrismaClient } from '../src/db.ts'
 import { createApp } from '../src/http/app.ts'
 import { createPhotoService } from '../src/photos/photos.ts'
@@ -230,5 +232,14 @@ describe('galerie', () => {
     expect(other.items).toEqual([])
     await onboard(['musique'], 2)
     await request(app).post('/api/proposals').set(as(2)).send({ passion: 'musique', mood: 'ennui', duration: 5, replacing: proposal.id }).expect(404)
+  })
+})
+
+describe('fichiers servis avec l’app', () => {
+  it('a le morceau de chaque ambiance sonore', () => {
+    for (const ambiance of AMBIANCES) {
+      const file = path.resolve(import.meta.dirname, '../../app/public', ambiance.src.slice(1))
+      expect(fs.existsSync(file), ambiance.src).toBe(true)
+    }
   })
 })

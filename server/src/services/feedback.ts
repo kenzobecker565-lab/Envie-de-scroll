@@ -6,7 +6,8 @@
  * - Avis écrits : depuis l'app (formulaire) ou en écrivant au bot. Chaque
  *   avis est transmis aux admins dans Telegram.
  * - Notes : après « Activité enregistrée. », 3 j'ai adoré, 2 sympa, 1 pas pour moi.
- * - Événements : appui sur le gros bouton, humeur, temps, passion… (sans texte).
+ * - Événements : appui sur le gros bouton, humeur, temps, passion, style de
+ *   musique… (sans texte).
  * - Statistiques : /stats dans le bot. Pour un admin, le tableau de bord du
  *   test (entonnoir, passions, notes, activités préférées) ; pour les autres,
  *   leurs propres chiffres.
@@ -17,9 +18,11 @@
 
 import {
   getActivity,
+  getAmbiance,
   getMood,
   getPassion,
   isActivityRating,
+  isAmbianceId,
   lastMilestone,
   MAX_FEEDBACK_LENGTH,
   nextMilestone,
@@ -176,6 +179,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     shares,
     invites,
     doers,
+    musicOff,
+    musicChoices,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -199,6 +204,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.appEvent.count({ where: { name: 'share' } }),
     prisma.appEvent.count({ where: { name: 'invite' } }),
     prisma.completion.groupBy({ by: ['userId'], _count: true }),
+    prisma.appEvent.count({ where: { name: 'music_off' } }),
+    prisma.appEvent.findMany({ where: { name: 'music' }, orderBy: { createdAt: 'asc' }, select: { userId: true, data: true } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
@@ -226,6 +233,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Notes des activités : ${RATING_LABELS[3].toLowerCase()} ${ratingCount(3)} · ${RATING_LABELS[2].toLowerCase()} ${ratingCount(2)} · ${RATING_LABELS[1].toLowerCase()} ${ratingCount(1)}`,
     `Avis écrits : ${feedbackCount} (/avis pour les lire)`,
     `Partages : ${shares} · invitations : ${invites}`,
+    `Musique d’ambiance : ${musicLine(musicChoices)} · coupée ${plural(musicOff, 'fois', 'fois')}`,
   ]
 
   const top = await activityRanking(prisma)
@@ -248,6 +256,24 @@ async function activityRanking(prisma: PrismaClient) {
   const best = scored.slice(0, 3)
   const worst = scored.length > 3 ? scored.slice(-3).reverse().filter((row) => row.score < 2.5) : []
   return { best, worst }
+}
+
+/** Les styles de musique choisis dans les réglages (le dernier choix de chacun). */
+function musicLine(events: { userId: bigint; data: string | null }[]): string {
+  const latest = new Map<bigint, string>()
+  for (const event of events) {
+    try {
+      const { ambiance } = JSON.parse(event.data ?? '{}') as { ambiance?: unknown }
+      if (ambiance === 'hasard' || isAmbianceId(ambiance)) latest.set(event.userId, ambiance)
+    } catch {
+      // Donnée illisible : ignorée.
+    }
+  }
+  const counts = new Map<string, number>()
+  for (const choice of latest.values()) counts.set(choice, (counts.get(choice) ?? 0) + 1)
+  const label = (choice: string) => (isAmbianceId(choice) ? getAmbiance(choice).label : 'Au hasard')
+  const styles = [...counts].sort((a, b) => b[1] - a[1]).map(([choice, count]) => `${label(choice)} ${count}`)
+  return styles.length ? `styles choisis (dernier choix de chacun) ${styles.join(' · ')}` : 'aucun style choisi'
 }
 
 function shorten(text: string, max: number): string {

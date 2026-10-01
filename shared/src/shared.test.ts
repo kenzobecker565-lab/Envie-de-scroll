@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import {
   ACTIVITIES,
+  AMBIANCE_IDS,
+  AMBIANCES,
+  ambianceCredits,
+  DEFAULT_AMBIANCE,
+  isAmbianceChoice,
+  resolveAmbiance,
   activitiesFor,
   DURATIONS,
   drawExtra,
@@ -218,5 +224,32 @@ describe('paliers de création', () => {
     expect(isActivityRating(0)).toBe(false)
     expect(isAppEventName('cta')).toBe(true)
     expect(isAppEventName('open')).toBe(false)
+  })
+})
+
+describe('ambiances sonores', () => {
+  it('a un style par identifiant, chacun avec son fichier', () => {
+    expect(AMBIANCES.map((ambiance) => ambiance.id)).toEqual([...AMBIANCE_IDS])
+    expect(AMBIANCE_IDS).toContain(DEFAULT_AMBIANCE)
+    for (const ambiance of AMBIANCES) expect(ambiance.src).toMatch(/^\/music\/[a-z0-9-]+\.mp3$/)
+  })
+
+  it('joue le style choisi, ou un autre au hasard', () => {
+    expect(resolveAmbiance('piano', 'jazz')).toBe('piano')
+    for (const random of [0, 0.3, 0.6, 0.9999]) {
+      const picked = resolveAmbiance('hasard', 'lofi', random)
+      expect(picked).not.toBe('lofi')
+      expect(AMBIANCE_IDS).toContain(picked)
+    }
+    expect(isAmbianceChoice('hasard')).toBe(true)
+    expect(isAmbianceChoice('8bit')).toBe(true)
+    expect(isAmbianceChoice('disco')).toBe(false)
+  })
+
+  it('crédite chaque morceau sous licence', () => {
+    const credits = ambianceCredits()
+    for (const ambiance of AMBIANCES) if (ambiance.credit) expect(credits).toContain(ambiance.credit.title)
+    expect(credits).toContain('CC BY 4.0')
+    expect(credits).toContain('incompetech.com')
   })
 })

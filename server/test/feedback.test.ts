@@ -137,6 +137,10 @@ describe('admins et statistiques', () => {
     await request(app).post('/api/events').set(as()).send({ name: 'music', data: { ambiance: 'lofi' } }).expect(204)
     await request(app).post('/api/events').set(as(7)).send({ name: 'music', data: { ambiance: 'lofi' } }).expect(204)
     await request(app).post('/api/events').set(as(7)).send({ name: 'music_off' }).expect(204)
+    // Raccourci sur l'écran d'accueil : deux demandes, une icône confirmée.
+    await request(app).post('/api/events').set(as()).send({ name: 'home_screen' }).expect(204)
+    await request(app).post('/api/events').set(as(7)).send({ name: 'home_screen' }).expect(204)
+    await request(app).post('/api/events').set(as(7)).send({ name: 'home_screen_added' }).expect(204)
 
     const stats = await globalStats(prisma, clock.now())
     expect(stats).toContain('Testeurs : 2')
@@ -147,6 +151,7 @@ describe('admins et statistiques', () => {
     expect(stats).toContain('Avis écrits : 1')
     expect(stats).toContain('Les activités les mieux notées')
     expect(stats).toContain('Musique d’ambiance : styles choisis (dernier choix de chacun) Lo-fi 2 · coupée 1 fois')
+    expect(stats).toContain('Écran d’accueil : 1 icône ajoutée (2 demandes)')
 
     const user = await prisma.user.findUniqueOrThrow({ where: { id: 42n } })
     const mine = await personalStats(prisma, user)

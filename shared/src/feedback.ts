@@ -47,6 +47,8 @@ export const APP_EVENTS = [
   'idea_link', // lien d'écoute ou de visionnage ouvert (data.link)
   'challenge', // « Un défi en plus » tiré
   'challenge_open', // ouverture du mot du jour
+  'home_screen', // demande d'ajout de Scroll-up à l'écran d'accueil
+  'home_screen_added', // icône ajoutée (confirmé par Telegram)
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

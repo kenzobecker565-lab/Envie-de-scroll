@@ -1,6 +1,6 @@
-import { BellRing, ChevronRight, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
+import { BellRing, Check, ChevronRight, LoaderCircle, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ambianceCredits } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -8,9 +8,10 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { api, track } from '../api/client.ts'
 import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
+import { homeScreenView, type HomeScreenState } from '../lib/homeScreen.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
-import { haptics, supports, telegram } from '../telegram/webApp.ts'
+import { checkHomeScreen, haptics, requestHomeScreen, supports, telegram } from '../telegram/webApp.ts'
 import { AmbiancePicker } from './AmbiancePicker.tsx'
 import { FeedbackDialog } from './FeedbackDialog.tsx'
 import { ThemeGrid } from './ThemePicker.tsx'
@@ -72,13 +73,6 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
       .finally(() => setSaving(false))
   }
 
-  // Telegram 8 : l'app peut avoir son icône sur l'écran d'accueil du téléphone.
-  const [homeScreen, setHomeScreen] = useState<'hidden' | 'available' | 'added'>('hidden')
-  useEffect(() => {
-    if (!supports.homeScreen || !telegram?.checkHomeScreenStatus) return
-    telegram.checkHomeScreenStatus((status) => setHomeScreen(status === 'added' ? 'added' : status === 'missed' || status === 'unknown' ? 'available' : 'hidden'))
-  }, [])
-
   const sendInvite = () => {
     haptics.impact('light')
     track('invite')
@@ -134,14 +128,7 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
           role="switch"
           checked={user.remindersEnabled}
         />
-        {homeScreen !== 'hidden' && (
-          <Row
-            icon={<Smartphone aria-hidden="true" />}
-            title={homeScreen === 'added' ? 'Sur ton écran d’accueil' : 'Ajouter à l’écran d’accueil'}
-            description={homeScreen === 'added' ? 'Scroll-up est à portée de pouce. Bien joué !' : 'Une icône juste à côté de tes autres apps : là où ton pouce a ses habitudes.'}
-            onClick={() => homeScreen === 'available' && telegram?.addToHomeScreen?.()}
-          />
-        )}
+        {telegram && <HomeScreenRow />}
         <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
         <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" />
       </div>
@@ -152,7 +139,81 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
   )
 }
 
-/** Une ligne de réglage, en petit sticker cliquable. */
+/**
+ * Le raccourci sur l'écran d'accueil (Telegram 8+). Toucher la ligne ouvre la
+ * fenêtre de Telegram ; elle passe à « Sur ton écran d'accueil » quand Telegram
+ * confirme, et dit quoi faire quand l'ajout est impossible ici.
+ */
+function HomeScreenRow() {
+  const [state, setState] = useState<HomeScreenState>('checking')
+  const stopListening = useRef<() => void>(undefined)
+  const recheck = useRef<number>(undefined)
+
+  useEffect(() => {
+    let alive = true
+    void checkHomeScreen().then((status) => {
+      if (alive) setState((current) => (current === 'checking' ? status : current))
+    })
+    return () => {
+      alive = false
+      stopListening.current?.()
+      window.clearTimeout(recheck.current)
+    }
+  }, [])
+
+  const markAdded = () => {
+    haptics.success()
+    track('home_screen_added')
+    setState('added')
+  }
+
+  const add = () => {
+    haptics.impact('medium')
+    track('home_screen')
+    setState('adding')
+    stopListening.current?.()
+    stopListening.current = requestHomeScreen((result) => {
+      window.clearTimeout(recheck.current)
+      if (result === 'added') markAdded()
+      else {
+        haptics.warning()
+        setState('failed')
+      }
+    })
+    // Certains téléphones ne confirment jamais : on revérifie au bout de quelques secondes.
+    window.clearTimeout(recheck.current)
+    recheck.current = window.setTimeout(() => {
+      void checkHomeScreen().then((status) => {
+        if (status === 'added') {
+          stopListening.current?.()
+          markAdded()
+        } else setState((current) => (current === 'adding' ? (status === 'unsupported' ? 'failed' : status) : current))
+      })
+    }, 6000)
+  }
+
+  const view = homeScreenView(state, { supported: supports.homeScreen, platform: telegram?.platform ?? '' })
+  return (
+    <Row
+      icon={<Smartphone aria-hidden="true" />}
+      title={view.title}
+      description={view.description}
+      onClick={view.action ? add : undefined}
+      live
+      trailing={
+        view.done ? (
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-good text-on-color">
+            <Check className="size-4" strokeWidth={3} aria-hidden="true" />
+          </span>
+        ) : state === 'adding' ? (
+          <LoaderCircle className="size-5 shrink-0 text-ink-soft motion-safe:animate-spin" aria-hidden="true" />
+        ) : undefined
+      }
+    />
+  )
+}
+
+/** Une ligne de réglage, en petit sticker cliquable (ou une simple information, sans `onClick`). */
 function Row({
   icon,
   title,
@@ -162,16 +223,33 @@ function Row({
   tone,
   role,
   checked,
+  live,
 }: {
   icon: ReactNode
   title: string
   description: string
-  onClick: () => void
+  onClick?: () => void
   trailing?: ReactNode
   tone?: 'accent'
   role?: 'switch'
   checked?: boolean
+  /** La description change selon l'état : les lecteurs d'écran l'annoncent. */
+  live?: boolean
 }) {
+  const className = cn('flex w-full items-center gap-3 rounded-md border-[2.5px] border-outline bg-card p-3 text-left shadow-chip', tone === 'accent' && 'bg-accent-soft')
+  const content = (
+    <>
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-surface-100 text-ink [&>svg]:size-5">{icon}</span>
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="font-display text-17 font-extrabold tracking-tight text-ink">{title}</span>
+        <span className="text-13 text-ink-soft" aria-live={live ? 'polite' : undefined}>
+          {description}
+        </span>
+      </span>
+      {trailing ?? (onClick && <ChevronRight className="size-5 shrink-0 text-ink-soft" aria-hidden="true" />)}
+    </>
+  )
+  if (!onClick) return <div className={className}>{content}</div>
   return (
     <motion.button
       type="button"
@@ -179,17 +257,9 @@ function Row({
       whileTap={PRESSED}
       role={role}
       aria-checked={role === 'switch' ? checked : undefined}
-      className={cn(
-        'flex w-full items-center gap-3 rounded-md border-[2.5px] border-outline bg-card p-3 text-left shadow-chip transition-shadow duration-150 active:shadow-press',
-        tone === 'accent' && 'bg-accent-soft',
-      )}
+      className={cn(className, 'transition-shadow duration-150 active:shadow-press')}
     >
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-surface-100 text-ink [&>svg]:size-5">{icon}</span>
-      <span className="flex min-w-0 flex-1 flex-col">
-        <span className="font-display text-17 font-extrabold tracking-tight text-ink">{title}</span>
-        <span className="text-13 text-ink-soft">{description}</span>
-      </span>
-      {trailing ?? <ChevronRight className="size-5 shrink-0 text-ink-soft" aria-hidden="true" />}
+      {content}
     </motion.button>
   )
 }

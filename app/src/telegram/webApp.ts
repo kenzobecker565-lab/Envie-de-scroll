@@ -71,9 +71,16 @@ export interface TelegramWebApp {
   }
 }
 
+/** Les événements bruts de Telegram, pour ceux que WebApp ne relaie pas (home_screen_failed). */
+type RawEventHandler = (eventType: string, eventData: unknown) => void
+interface TelegramWebView {
+  onEvent(eventType: string, callback: RawEventHandler): void
+  offEvent(eventType: string, callback: RawEventHandler): void
+}
+
 declare global {
   interface Window {
-    Telegram?: { WebApp?: TelegramWebApp }
+    Telegram?: { WebApp?: TelegramWebApp; WebView?: TelegramWebView }
   }
 }
 
@@ -110,6 +117,67 @@ export function initTelegram(): void {
   telegram.expand()
   // Évite que le glissement vers le bas (défilement de la galerie) ferme l'app.
   if (supports.verticalSwipes) telegram.disableVerticalSwipes?.()
+}
+
+/* ------------------------- Raccourci sur l'écran d'accueil ------------------------- */
+
+export type HomeScreenStatus = 'unsupported' | 'unknown' | 'added' | 'missed'
+
+/**
+ * Où en est l'icône de Scroll-up sur l'écran d'accueil (Telegram 8+). Certains
+ * téléphones ne répondent jamais : au bout de `timeoutMs`, on considère l'état
+ * inconnu (l'ajout reste proposé).
+ */
+export function checkHomeScreen(timeoutMs = 1500): Promise<HomeScreenStatus> {
+  return new Promise((resolve) => {
+    if (!telegram?.checkHomeScreenStatus || !supports.homeScreen) return resolve('unsupported')
+    const timer = window.setTimeout(() => resolve('unknown'), timeoutMs)
+    try {
+      telegram.checkHomeScreenStatus((status) => {
+        window.clearTimeout(timer)
+        resolve(status)
+      })
+    } catch {
+      window.clearTimeout(timer)
+      resolve('unsupported')
+    }
+  })
+}
+
+/**
+ * Demande à Telegram de poser l'icône sur l'écran d'accueil. `onDone` reçoit
+ * « added » quand Telegram confirme, « failed » si l'appareil refuse. Certains
+ * téléphones ne confirment jamais : rien n'arrive alors (revérifier avec
+ * checkHomeScreen). Renvoie de quoi arrêter d'écouter.
+ */
+export function requestHomeScreen(onDone: (result: 'added' | 'failed') => void): () => void {
+  const app = telegram
+  if (!app?.addToHomeScreen || !supports.homeScreen) {
+    onDone('failed')
+    return () => {}
+  }
+  const webView = window.Telegram?.WebView
+  let finished = false
+  const added = () => finish('added')
+  const failed = () => finish('failed')
+  const stop = () => {
+    app.offEvent('homeScreenAdded', added)
+    webView?.offEvent('home_screen_failed', failed)
+  }
+  function finish(result: 'added' | 'failed') {
+    if (finished) return
+    finished = true
+    stop()
+    onDone(result)
+  }
+  app.onEvent('homeScreenAdded', added)
+  webView?.onEvent('home_screen_failed', failed)
+  try {
+    app.addToHomeScreen()
+  } catch {
+    finish('failed')
+  }
+  return stop
 }
 
 /** Ouvre une page externe (YouTube, Spotify…) : dans le navigateur de Telegram, ou un nouvel onglet. */

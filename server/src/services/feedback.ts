@@ -194,6 +194,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     projects,
     projectsDone,
     challengeRows,
+    homeScreenAsks,
+    homeScreenAdded,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -223,6 +225,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.project.count(),
     prisma.project.count({ where: { finishedAt: { not: null } } }),
     prisma.completion.findMany({ where: { activityId: { startsWith: 'defi-' } }, select: { userId: true, activityId: true } }),
+    prisma.appEvent.count({ where: { name: 'home_screen' } }),
+    prisma.appEvent.count({ where: { name: 'home_screen_added' } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
@@ -250,6 +254,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Notes des activités : ${RATING_LABELS[3].toLowerCase()} ${ratingCount(3)} · ${RATING_LABELS[2].toLowerCase()} ${ratingCount(2)} · ${RATING_LABELS[1].toLowerCase()} ${ratingCount(1)}`,
     `Avis écrits : ${feedbackCount} (/avis pour les lire)`,
     `Partages : ${shares} · invitations : ${invites}`,
+    `Écran d’accueil : ${plural(homeScreenAdded, 'icône ajoutée', 'icônes ajoutées')} (${plural(homeScreenAsks, 'demande')})`,
     `Musique d’ambiance : ${musicLine(musicChoices)} · coupée ${plural(musicOff, 'fois', 'fois')}`,
     `Parcours : ${plural(stepRows.length, 'étape réussie', 'étapes réussies')}, ${plural(finishedPaths(stepRows), 'parcours terminé', 'parcours terminés')}`,
     `Projets : ${plural(projects, 'créé', 'créés')}, ${plural(projectsDone, 'terminé', 'terminés')}`,

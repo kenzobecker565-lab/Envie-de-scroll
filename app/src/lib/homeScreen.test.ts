@@ -16,6 +16,12 @@ describe('raccourci sur l’écran d’accueil', () => {
     expect(homeScreenView('added', phone)).toMatchObject({ title: 'Sur ton écran d’accueil', action: false, done: true })
   })
 
+  it('explique quoi régler quand le téléphone ne demande rien, et laisse réessayer', () => {
+    const view = homeScreenView('silent', phone)
+    expect(view.description).toContain('Autorise Telegram à créer des raccourcis')
+    expect(view.action).toBe(true)
+  })
+
   it('passe par une fenêtre de Telegram aux textes assez courts', () => {
     for (const platform of ['android', 'ios']) {
       const confirm = homeScreenConfirm(platform)

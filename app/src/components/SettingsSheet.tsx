@@ -185,7 +185,13 @@ function HomeScreenRow() {
             if (status === 'added') {
               stopListening.current?.()
               markAdded()
-            } else setState((current) => (current === 'adding' ? (status === 'unsupported' ? 'failed' : status) : current))
+              return
+            }
+            // Android sait dire si l'icône est là : « missed » après la demande veut dire que
+            // le téléphone l'a bloquée sans rien afficher (autorisation manquante).
+            const next: HomeScreenState = status === 'unsupported' ? 'failed' : status === 'missed' ? 'silent' : status
+            if (next === 'silent') track('home_screen_silent')
+            setState((current) => (current === 'adding' ? next : current))
           })
         }, 8000)
       },

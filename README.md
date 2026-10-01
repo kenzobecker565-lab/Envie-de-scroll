@@ -167,7 +167,7 @@ Sur ton téléphone, ouvre la conversation avec ton bot et envoie `/start`. Touc
 
 Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot (`t.me/ton_bot`). Dans BotFather, `/newapp` crée aussi un lien direct vers l'app (`t.me/ton_bot/app`).
 
-**Raccourci sur l'écran d'accueil (iPhone)** : déclare l'app comme « app principale » du bot. Dans BotFather : `/mybots`, ton bot, **Bot Settings**, **Configure Mini App**, **Enable Mini App**, puis l'adresse publique de l'app (celle de Railway). Sur iPhone, l'icône créée depuis les réglages de l'app ouvre `t.me/ton_bot?startapp`, qui lance cette app principale ; sans elle, l'icône n'ouvre que la conversation. Sur Android, l'icône ouvre l'app du bouton **Ouvrir**, avec ou sans ce réglage.
+**Raccourci sur l'écran d'accueil (iPhone)** : déclare l'app comme « app principale » du bot. Dans BotFather : `/mybots`, ton bot, **Bot Settings**, **Configure Mini App**, **Enable Mini App**, puis l'adresse publique de l'app (celle de Railway). Sur iPhone, l'icône créée depuis les réglages de l'app ouvre `t.me/ton_bot?startapp`, qui lance cette app principale ; sans elle, l'icône n'ouvre que la conversation. Sur Android, l'icône ouvre l'app du bouton **Ouvrir**, avec ou sans ce réglage. Si le téléphone ne demande rien après « Ajouter » (fréquent chez Xiaomi, Huawei, Oppo…), il faut autoriser Telegram à créer des raccourcis : Paramètres du téléphone, Applications, Telegram, Autorisations, « Raccourcis sur l'écran d'accueil ». L'app le dit elle-même au bout de quelques secondes.
 
 ### À savoir
 

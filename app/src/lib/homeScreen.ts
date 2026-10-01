@@ -5,7 +5,8 @@
  * quand l'ajout est impossible ici, elle dit pourquoi et quoi faire.
  */
 
-export type HomeScreenState = 'checking' | 'missed' | 'unknown' | 'adding' | 'added' | 'unsupported' | 'failed'
+/** `silent` : la demande est partie, mais le téléphone n'a rien affiché ni ajouté. */
+export type HomeScreenState = 'checking' | 'missed' | 'unknown' | 'adding' | 'added' | 'unsupported' | 'failed' | 'silent'
 
 export interface HomeScreenView {
   title: string
@@ -50,6 +51,17 @@ export function homeScreenView(state: HomeScreenState, { supported, platform }: 
       title: ADD,
       description: 'Ton téléphone ne l’accepte pas depuis Telegram. Astuce : épingle la conversation avec le bot en haut de tes discussions.',
       action: false,
+      done: false,
+    }
+  }
+  if (state === 'silent') {
+    // Telegram transmet la demande au téléphone, qui la bloque sans rien dire tant que
+    // Telegram n'a pas le droit de créer des raccourcis (fréquent chez Xiaomi, Huawei, Oppo…).
+    return {
+      title: ADD,
+      description:
+        'Rien ne s’est affiché ? Autorise Telegram à créer des raccourcis : Paramètres du téléphone › Applications › Telegram › Autorisations (« Raccourcis sur l’écran d’accueil »). Puis touche ici pour réessayer.',
+      action: true,
       done: false,
     }
   }

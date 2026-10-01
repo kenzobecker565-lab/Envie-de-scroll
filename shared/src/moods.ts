@@ -2,8 +2,9 @@ import type { Energy, Mood, MoodId } from './types.ts'
 
 /**
  * Les 8 moods, répartis en deux familles d'énergie.
- * Le mood ne filtre pas les activités : il n'adapte que le ton de
- * l'introduction affichée au-dessus de l'activité (voir intros.ts).
+ * Le mood donne le ton de l'introduction (voir intros.ts), et fait pencher le
+ * tirage vers des activités calmes ou vives, sans jamais en écarter aucune
+ * (voir selection.ts).
  */
 export const MOODS: readonly Mood[] = [
   // Énergie basse / retrait

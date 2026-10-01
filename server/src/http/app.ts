@@ -242,14 +242,15 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.post(
     '/proposals',
     asyncRoute(async (req, res) => {
-      const { passion, mood, duration, replacing, step } = (req.body ?? {}) as Record<string, unknown>
+      const { passion, mood, duration, replacing, step, quiet } = (req.body ?? {}) as Record<string, unknown>
       if (!isPassionId(passion) || !isMoodId(mood) || !DURATIONS.includes(duration as Duration)) {
         throw badRequest('Passion, mood ou temps invalide.')
       }
       if (replacing !== undefined && typeof replacing !== 'string') throw badRequest('Proposition à remplacer invalide.')
       if (step !== undefined && typeof step !== 'string') throw badRequest('Étape de parcours invalide.')
       const user = await currentUser(req, res)
-      const proposal = await createProposal(prisma, user, { passion, mood, duration: duration as Duration, replacing, step }, { random, now: now() })
+      if (quiet !== undefined && typeof quiet !== 'boolean') throw badRequest('Option « sans son » invalide.')
+      const proposal = await createProposal(prisma, user, { passion, mood, duration: duration as Duration, replacing, step, quiet }, { random, now: now() })
       const body: ProposalResponse = { proposal: toProposalDTO(proposal), serverTime: now().toISOString() }
       res.status(201).json(body)
     }),

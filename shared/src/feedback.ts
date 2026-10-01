@@ -43,6 +43,10 @@ export const APP_EVENTS = [
   'path_open', // ouverture d'un parcours
   'project_create', // projet créé
   'project_finish', // projet terminé
+  'tips_open', // « Si tu bloques » ouvert
+  'idea_link', // lien d'écoute ou de visionnage ouvert (data.link)
+  'challenge', // « Un défi en plus » tiré
+  'challenge_open', // ouverture du mot du jour
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

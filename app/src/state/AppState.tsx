@@ -19,6 +19,7 @@ export type Route =
   | { name: 'done' }
   | { name: 'gallery' }
   | { name: 'path'; pathId: string }
+  | { name: 'challenge' }
 
 export interface Flow {
   mood?: MoodId
@@ -31,6 +32,12 @@ export interface Flow {
   /** Projet où ranger la création (lancée depuis le projet). */
   projectId?: string
   proposal?: ProposalDTO
+  /** Dessin : « Pas de papier ? » ouvre la feuille à dessiner au doigt plutôt que la photo. */
+  pad?: boolean
+  /** Musique, Cinéma : « Pas de son autour de toi ? », seulement des activités sans écoute. */
+  quiet?: boolean
+  /** L'idée choisie sous l'activité (un album, un film…) : elle pré-remplit « Qu'as-tu exploré ? ». */
+  idea?: { proposalId: string; text: string }
   /** Écart entre l'horloge du serveur et celle du téléphone (ms). */
   clockOffset: number
 }

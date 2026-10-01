@@ -112,6 +112,12 @@ export function initTelegram(): void {
   if (supports.verticalSwipes) telegram.disableVerticalSwipes?.()
 }
 
+/** Ouvre une page externe (YouTube, Spotify…) : dans le navigateur de Telegram, ou un nouvel onglet. */
+export function openExternal(url: string): void {
+  if (telegram?.openLink) telegram.openLink(url)
+  else window.open(url, '_blank', 'noopener,noreferrer')
+}
+
 /* ------------------------------- Vibrations ------------------------------- */
 
 export const haptics = {

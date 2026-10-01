@@ -1,15 +1,23 @@
 import {
+  canPlayChallenge,
   canPlayStep,
   drawExtra,
   getActivity,
+  getChallengeActivity,
+  getMood,
+  getPassion,
   getPathStep,
+  isActivityRating,
+  isChallengeId,
   isPathStepId,
   passionLevel,
   pickActivity,
   pickIntro,
+  quietActivitiesFor,
   unlockTime,
   type Activity,
   type ActivityExtra,
+  type ActivityRating,
   type CreateProposalRequest,
   type Duration,
   type MoodId,
@@ -18,6 +26,7 @@ import {
 } from '@scroll-up/shared'
 import type { PrismaClient, Proposal, User } from '../db.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
+import { localDate, localHour } from '../lib/time.ts'
 import { parsePassions } from './users.ts'
 
 /** Une activité proposée reste « à reprendre » pendant 12 h. */
@@ -75,7 +84,14 @@ export async function createProposal(
   }
 
   let activity: Activity
-  if (request.step !== undefined) {
+  if (request.step !== undefined && isChallengeId(request.step)) {
+    // Le mot du jour : celui d'aujourd'hui, ou un mot passé du mois (on rattrape quand on veut).
+    const challenge = getChallengeActivity(request.step)
+    if (!challenge || challenge.passion !== passion || challenge.duration !== duration) throw badRequest('Mot du jour invalide.')
+    if (request.replacing) throw badRequest('Le mot du jour ne se remplace pas.')
+    if (!canPlayChallenge(challenge.id, localDate(now, user.timezone))) throw new ApiError(409, 'locked', 'Ce mot n’est pas encore là\u00A0: reviens le jour venu.')
+    activity = challenge
+  } else if (request.step !== undefined) {
     const step = getPathStep(request.step)
     if (!step || step.passion !== passion || step.duration !== duration) throw badRequest('Étape de parcours invalide.')
     if (request.replacing) throw badRequest('Une étape de parcours ne se remplace pas.')
@@ -92,7 +108,19 @@ export async function createProposal(
       take: 12,
       select: { activityId: true },
     })
-    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, random })
+    // Les notes données (la plus récente par activité) font pencher le tirage, comme l'humeur.
+    const rated = await prisma.completion.findMany({
+      where: { userId: user.id, passion, duration, rating: { not: null } },
+      orderBy: { createdAt: 'asc' },
+      select: { activityId: true, rating: true },
+    })
+    const ratings = Object.fromEntries(rated.filter((row) => isActivityRating(row.rating)).map((row) => [row.activityId, row.rating as ActivityRating]))
+    // « Pas de son autour de toi » : seulement des activités qui se font sans écouter.
+    const allowedIds = request.quiet ? quietActivitiesFor(passion, duration).map((quiet) => quiet.id) : undefined
+    if (allowedIds?.length === 0) {
+      throw new ApiError(409, 'no_quiet', `Toutes les activités ${getPassion(passion).label} de ${duration}\u00A0min s’écoutent. Essaie un autre temps, ou une autre passion.`)
+    }
+    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, ratings, energy: getMood(mood).energy, allowedIds, random })
   }
   const extra = activity.extra ? drawExtra(activity.extra, random) : null
 
@@ -108,7 +136,7 @@ export async function createProposal(
         passion,
         mood,
         duration,
-        intro: pickIntro(mood, random),
+        intro: pickIntro(mood, random, localHour(now, user.timezone)),
         extra: extra ? JSON.stringify(extra) : null,
         createdAt: now,
       },

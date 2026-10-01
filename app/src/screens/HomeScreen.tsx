@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'motion/react'
-import { getPathStep, passionLevel } from '@scroll-up/shared'
+import { dayMoment, homeLine, isFixedActivityId, passionLevel, seededRandom } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { cardVariants } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -8,6 +8,7 @@ import { Wordmark } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
 import { HomeCta } from '../components/HomeCta.tsx'
+import { ChallengeCard, challengePassions } from '../components/Challenge.tsx'
 import { ActivePathCard, featuredPath } from '../components/Paths.tsx'
 import { statsFor } from '../components/Progression.tsx'
 import { track } from '../api/client.ts'
@@ -46,10 +47,10 @@ export function HomeScreen() {
   const resume = () => {
     if (!openProposal) return
     haptics.impact('light')
-    const step = getPathStep(openProposal.activityId)
+    const fixed = isFixedActivityId(openProposal.activityId)
     dispatch({
       type: 'newFlow',
-      flow: { mood: openProposal.mood, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(step ? { fixedStep: step.id } : {}) },
+      flow: { mood: openProposal.mood, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(fixed ? { fixedStep: openProposal.activityId } : {}) },
     })
     reset([{ name: 'home' }, { name: 'activity' }])
   }
@@ -64,7 +65,10 @@ export function HomeScreen() {
           (passion) => passionLevel(passion, statsFor(stats.byPassion, passion).minutes).level,
         )
       : null
-  const period = dayPeriod(new Date().getHours())
+  const hour = new Date().getHours()
+  const period = dayPeriod(hour)
+  // La phrase d'accueil suit l'heure ; elle ne change pas à chaque retour sur l'accueil.
+  const line = homeLine(dayMoment(hour), seededRandom(`home:${user.id}:${new Date().toDateString()}:${dayMoment(hour)}`))
   const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
 
   return (
@@ -86,7 +90,7 @@ export function HomeScreen() {
           {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
         </motion.h1>
         <motion.p className="max-w-[300px] text-16 text-ink-soft" {...fadeUp(0.1)}>
-          Ton pouce te démange&nbsp;? Appuie ici, on s’occupe du reste.
+          {line}
         </motion.p>
       </div>
 
@@ -114,6 +118,16 @@ export function HomeScreen() {
               </span>
             </span>
           </motion.button>
+        )}
+
+        {challengePassions(user.passions).length > 0 && (
+          <ChallengeCard
+            done={stats.challenge ?? []}
+            onOpen={() => {
+              haptics.impact('light')
+              push({ name: 'challenge' })
+            }}
+          />
         )}
 
         {featured && (

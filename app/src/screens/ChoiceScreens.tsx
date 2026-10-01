@@ -1,7 +1,7 @@
 import { Check, Flame, MoonStar } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRef, useState } from 'react'
-import { DURATIONS, ENERGY_FAMILIES, getPassion, getPathStep, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
+import { DURATIONS, ENERGY_FAMILIES, getActivity, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
 import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { track } from '../api/client.ts'
@@ -63,7 +63,7 @@ export function MoodScreen() {
     haptics.selection()
     track('mood', { mood })
     setSelected(mood)
-    const step = state.flow.fixedStep ? getPathStep(state.flow.fixedStep) : undefined
+    const step = state.flow.fixedStep ? getActivity(state.flow.fixedStep) : undefined
     dispatch({ type: 'flow', flow: { mood, ...(step ? { duration: step.duration, passion: step.passion } : {}) } })
     advance(() => push({ name: step ? 'activity' : 'time' }))
   }

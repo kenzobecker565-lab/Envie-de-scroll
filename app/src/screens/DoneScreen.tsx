@@ -1,11 +1,12 @@
-import { House, Images, Send } from 'lucide-react'
+import { House, Images, Lightbulb, Send } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { collectionSize, getPassion, getPathStep, isBaseActivity, levelCrossed, milestoneCrossed, passionLevel, pathProgress } from '@scroll-up/shared'
+import { cheerFor, collectionSize, countWords, factFor, getChallengeActivity, getPassion, getPathStep, isBaseActivity, levelCrossed, milestoneCrossed, passionLevel, pathProgress, seededRandom } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardEyebrow } from '@/components/ui/card'
+import { ChallengeBanner } from '../components/Challenge.tsx'
 import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
@@ -48,7 +49,12 @@ export function DoneScreen() {
   const discovered = isBaseActivity(activityId) && !before.tried.includes(activityId)
   // Une étape de parcours : la marche franchie, la suivante qui s'ouvre (ou le badge).
   const step = getPathStep(activityId)
+  const challenge = getChallengeActivity(activityId)
   const stepProgress = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level).find((entry) => entry.path.id === step.pathId) : undefined
+  // Une félicitation et une anecdote, toujours les mêmes pour cette création.
+  const { id: completionId, duration, text } = done.response.completion
+  const cheer = cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
+  const fact = factFor(passion, seededRandom(`fact:${completionId}`))
 
   return (
     <Screen className="items-center text-center">
@@ -86,6 +92,9 @@ export function DoneScreen() {
           +{earned} minutons
         </Badge>
         ajoutés à ton total.
+      </motion.p>
+      <motion.p className="mt-3 max-w-[320px] text-15 font-semibold text-ink" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }}>
+        {cheer}
       </motion.p>
       {discovered && (
         <motion.p
@@ -131,6 +140,12 @@ export function DoneScreen() {
         </div>
       )}
 
+      {challenge && (
+        <div className="mt-6 w-full">
+          <ChallengeBanner word={challenge.word} count={new Set((done.response.stats.challenge ?? []).map((id) => id.slice(-10))).size} onOpen={() => reset([{ name: 'home' }, { name: 'challenge' }])} />
+        </div>
+      )}
+
       {level && (
         <div className="mt-6 w-full">
           <LevelUpBanner passion={passion} step={level} />
@@ -142,6 +157,14 @@ export function DoneScreen() {
           <MilestoneBanner milestone={milestone} />
         </div>
       )}
+
+      <Card tone="muted" className="mt-6 w-full gap-2 text-left" initial={{ opacity: 0, y: 12, rotate: 0 }} animate={{ opacity: 1, y: 0, rotate: -0.6 }} transition={{ delay: 0.7, duration: 0.4 }}>
+        <CardEyebrow>
+          <Lightbulb aria-hidden="true" />
+          Le savais-tu&nbsp;?
+        </CardEyebrow>
+        <p className="text-15 font-semibold text-ink">{fact}</p>
+      </Card>
 
       <Card className="mt-6 w-full text-left" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.4 }}>
         <ProjectPicker completion={done.response.completion} />

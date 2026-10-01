@@ -1,6 +1,24 @@
 import { describe, expect, it } from 'vitest'
 import {
   ACTIVITIES,
+  ACTIVITY_PACE,
+  activityWeight,
+  canPlayChallenge,
+  cheerFor,
+  countFor,
+  dailyWord,
+  dayMoment,
+  drawChallenge,
+  FACTS,
+  factFor,
+  getChallengeActivity,
+  GUIDES,
+  guideFor,
+  homeLine,
+  isFixedActivityId,
+  monthDaysUntil,
+  quietActivitiesFor,
+  seededRandom,
   canPlayStep,
   countWords,
   DIFFICULTIES,
@@ -344,5 +362,132 @@ describe('parcours', () => {
     expect(countWords('  Il pleuvait   sur la ville. ')).toBe(5)
     expect(countWords('')).toBe(0)
     expect(countWords(null)).toBe(0)
+  })
+})
+
+describe('aides sous les activités', () => {
+  it('donne 2 ou 3 pistes à chacune des 60 activités, et des idées là où il faut trouver soi-même', () => {
+    for (const activity of ACTIVITIES) {
+      const guide = guideFor(activity.id)
+      expect(guide, activity.id).toBeDefined()
+      expect(guide!.tips.length).toBeGreaterThanOrEqual(2)
+      expect(guide!.tips.length).toBeLessThanOrEqual(3)
+      for (const tip of guide!.tips) expect(tip).not.toMatch(/'|"/)
+      if (guide!.ideas) {
+        expect(guide!.ideas.items.length).toBeGreaterThanOrEqual(guide!.ideas.show ?? 3)
+        expect(new Set(guide!.ideas.items).size).toBe(guide!.ideas.items.length)
+      }
+    }
+    expect(Object.keys(GUIDES)).toHaveLength(60)
+    // Étapes de parcours et mots du jour : les pistes générales de leur passion.
+    expect(guideFor('parcours-visages-2')?.tips.length).toBeGreaterThan(0)
+    expect(guideFor('defi-dessin-2026-10-01')?.tips.length).toBeGreaterThan(0)
+  })
+
+  it('fixe un objectif au carnet d’écriture, et le compte', () => {
+    expect(guideFor('ecriture-15-6')?.goal).toMatchObject({ count: 100, unit: 'mots', label: '100 mots' })
+    expect(guideFor('ecriture-5-1')?.goal?.label).toBe('3 phrases')
+    expect(countFor('mots', ' un deux  trois ')).toBe(3)
+    expect(countFor('lignes', 'une\n\n deux \ntrois')).toBe(3)
+    expect(countFor('phrases', 'Il pleut. Le chat dort ! Et moi')).toBe(3)
+    expect(countFor('phrases', 'Il pleut. Le chat dort !')).toBe(2)
+    expect(countFor('phrases', '')).toBe(0)
+  })
+
+  it('tire un défi en plus pour le dessin et l’écriture seulement', () => {
+    const random = seeded(11)
+    for (let i = 0; i < 40; i++) {
+      const drawing = drawChallenge('dessin', random)!
+      expect(drawing.text.length).toBeGreaterThan(5)
+      if (drawing.palette) expect(drawing.palette.colors).toHaveLength(3)
+      expect(drawChallenge('ecriture', random)?.text).toBeTruthy()
+    }
+    expect(drawChallenge('musique')).toBeNull()
+  })
+
+  it('a un hasard reproductible', () => {
+    const first = seededRandom('abc')
+    const second = seededRandom('abc')
+    expect([first(), first(), first()]).toEqual([second(), second(), second()])
+    expect(seededRandom('abd')()).not.toBe(seededRandom('abc')())
+  })
+
+  it('a des anecdotes et des félicitations pour chaque passion', () => {
+    for (const passion of PASSION_IDS) {
+      expect(FACTS[passion].length).toBeGreaterThanOrEqual(10)
+      for (const fact of FACTS[passion]) expect(fact).not.toMatch(/'|"/)
+      expect(factFor(passion, seeded(1))).toBeTruthy()
+      expect(cheerFor(passion, { duration: 15 }, seeded(2))).not.toMatch(/\{[dn]\}/)
+    }
+    expect(cheerFor('ecriture', { duration: 15, words: 42 }, () => 0)).toContain('42 mots')
+  })
+
+  it('adapte l’introduction à l’heure, une fois sur deux, tard le soir et tôt le matin', () => {
+    expect(INTROS.ennui).toContain(pickIntro('ennui', () => 0.9, 14).replace(/ /g, ' ').replace(/ /g, ' ').replace(/’/g, '’'))
+    const night = pickIntro('ennui', () => 0.1, 23)
+    expect(INTROS.ennui.map(frenchTypography)).not.toContain(night)
+    expect(dayMoment(7)).toBe('matin')
+    expect(dayMoment(23)).toBe('nuit')
+    expect(homeLine('nuit', () => 0)).toMatch(/dormir/)
+  })
+})
+
+describe('tirage pondéré', () => {
+  it('penche vers « J’ai adoré » et loin de « Pas pour moi », sans rien interdire', () => {
+    const random = seeded(21)
+    const counts: Record<string, number> = {}
+    const ratings = { 'dessin-5-1': 3, 'dessin-5-2': 1 } as const
+    for (let i = 0; i < 4000; i++) {
+      const id = pickActivity({ passion: 'dessin', duration: 5, ratings, random }).id
+      counts[id] = (counts[id] ?? 0) + 1
+    }
+    expect(counts['dessin-5-1']!).toBeGreaterThan(counts['dessin-5-3']!)
+    expect(counts['dessin-5-2']!).toBeLessThan(counts['dessin-5-3']! / 2)
+    expect(counts['dessin-5-2']!).toBeGreaterThan(0)
+  })
+
+  it('fait pencher l’humeur vers des activités calmes ou vives', () => {
+    expect(activityWeight(getActivity('musique-5-2')!, { energy: 'basse' })).toBeGreaterThan(1)
+    expect(activityWeight(getActivity('musique-5-2')!, { energy: 'haute' })).toBeLessThan(1)
+    expect(activityWeight(getActivity('musique-5-3')!, { energy: 'haute' })).toBe(1)
+    for (const id of Object.keys(ACTIVITY_PACE)) expect(isBaseActivity(id), id).toBe(true)
+  })
+
+  it('trouve des activités sans son en Cinéma pour chaque temps, et seulement parmi elles', () => {
+    for (const duration of DURATIONS) expect(quietActivitiesFor('cinema', duration).length).toBeGreaterThan(0)
+    expect(quietActivitiesFor('musique', 5)).toEqual([])
+    const allowedIds = quietActivitiesFor('cinema', 5).map((activity) => activity.id)
+    const random = seeded(5)
+    for (let i = 0; i < 30; i++) expect(allowedIds).toContain(pickActivity({ passion: 'cinema', duration: 5, allowedIds, random }).id)
+  })
+})
+
+describe('le mot du jour', () => {
+  it('a un mot par jour pour octobre, novembre et décembre, et un mot tiré les autres mois', () => {
+    const days = (month: string, count: number) => Array.from({ length: count }, (_, index) => `2026-${month}-${String(index + 1).padStart(2, '0')}`)
+    for (const [month, count] of [['10', 31], ['11', 30], ['12', 31]] as const) {
+      const words = days(month, count).map((day) => dailyWord(day).word)
+      expect(new Set(words).size, month).toBe(count)
+    }
+    expect(dailyWord('2026-10-01')).toMatchObject({ word: 'lanterne', theme: 'Octobre des frissons doux' })
+    expect(dailyWord('2027-03-14').word).toBe(dailyWord('2027-03-14').word)
+    expect(dailyWord('2027-03-14').theme).toMatch(/mars/)
+  })
+
+  it('se joue comme une activité de 15 min, à rattraper dans le mois, jamais à l’avance', () => {
+    const challenge = getChallengeActivity('defi-ecriture-2026-10-03')
+    expect(challenge).toMatchObject({ passion: 'ecriture', duration: 15, word: 'brume', day: '2026-10-03' })
+    expect(getActivity('defi-ecriture-2026-10-03')?.text).toContain('brume')
+    expect(getActivity('defi-musique-2026-10-03')).toBeUndefined()
+    expect(getChallengeActivity('defi-dessin-2026-02-30')).toBeUndefined()
+    expect(isFixedActivityId('defi-dessin-2026-10-01')).toBe(true)
+    expect(isFixedActivityId('parcours-visages-1')).toBe(true)
+    expect(isFixedActivityId('dessin-5-1')).toBe(false)
+    expect(isBaseActivity('defi-dessin-2026-10-01')).toBe(false)
+    expect(canPlayChallenge('defi-dessin-2026-10-07', '2026-10-07')).toBe(true)
+    expect(canPlayChallenge('defi-dessin-2026-10-01', '2026-10-07')).toBe(true)
+    expect(canPlayChallenge('defi-dessin-2026-10-08', '2026-10-07')).toBe(false)
+    expect(canPlayChallenge('defi-dessin-2026-09-30', '2026-10-07')).toBe(false)
+    expect(monthDaysUntil('2026-10-03')).toEqual(['2026-10-03', '2026-10-02', '2026-10-01'])
   })
 })

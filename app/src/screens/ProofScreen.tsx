@@ -1,4 +1,4 @@
-import { Camera, Clock3, FileCheck2, ImageOff, Info, RefreshCw, Save, type LucideIcon } from 'lucide-react'
+import { Camera, Clock3, FileCheck2, ImageOff, Info, PenLine, RefreshCw, Save, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { getPassion, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, type ProposalDTO } from '@scroll-up/shared'
@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
+import { DrawingPad, type DrawingPadHandle } from '../components/DrawingPad.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
@@ -68,9 +69,10 @@ export function ProofScreen() {
     </Alert>
   )
 
-  if (passion.proof === 'photo') return <PhotoProof proposal={proposal} clockOffset={state.flow.clockOffset} saving={saving} onSubmit={submit} footer={errorNote} />
+  if (passion.proof === 'photo') return <PhotoProof proposal={proposal} clockOffset={state.flow.clockOffset} pad={Boolean(state.flow.pad)} saving={saving} onSubmit={submit} footer={errorNote} />
   if (passion.proof === 'texte') return <TextProof proposal={proposal} clockOffset={state.flow.clockOffset} saving={saving} onSubmit={submit} footer={errorNote} />
-  return <TitleProof proposal={proposal} saving={saving} onSubmit={submit} footer={errorNote} />
+  const idea = state.flow.idea?.proposalId === proposal.id ? state.flow.idea.text : undefined
+  return <TitleProof proposal={proposal} idea={idea} saving={saving} onSubmit={submit} footer={errorNote} />
 }
 
 interface ProofProps {
@@ -129,12 +131,16 @@ function SkipProof({
 
 /* ---------------------------------- Dessin --------------------------------- */
 
-function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofProps & { clockOffset: number }) {
+function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit, footer }: ProofProps & { clockOffset: number; pad: boolean }) {
   const inputId = useId()
   const input = useRef<HTMLInputElement>(null)
   const [photo, setPhoto] = useState<Blob>()
   const [preview, setPreview] = useState<string>()
   const [preparing, setPreparing] = useState(false)
+  // Pas de papier : on dessine au doigt, dans l'app.
+  const [pad, setPad] = useState(startWithPad)
+  const [hasInk, setHasInk] = useState(false)
+  const drawing = useRef<DrawingPadHandle>(null)
 
   useEffect(() => () => {
     if (preview) URL.revokeObjectURL(preview)
@@ -148,6 +154,30 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
     setPreview(URL.createObjectURL(prepared))
     setPreparing(false)
     haptics.selection()
+  }
+
+  if (pad) {
+    return (
+      <Screen>
+        <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={proposal.text}>
+          Dessine ici, au doigt
+        </ScreenTitle>
+        <DrawingPad ref={drawing} onInkChange={setHasInk} />
+        <button type="button" onClick={() => setPad(false)} className="mt-4 inline-flex items-center gap-2 self-center text-14 font-bold text-ink-soft underline decoration-2 underline-offset-4">
+          <Camera size={16} aria-hidden="true" />
+          Plutôt une photo d’un dessin sur papier&nbsp;?
+        </button>
+        <PrimaryAction
+          text="Enregistrer mon dessin"
+          icon={<Save aria-hidden="true" />}
+          onClick={() => void drawing.current?.toBlob().then((blob) => blob && onSubmit({ photo: blob }))}
+          enabled={hasInk}
+          loading={saving}
+        >
+          {footer}
+        </PrimaryAction>
+      </Screen>
+    )
   }
 
   return (
@@ -218,6 +248,12 @@ function PhotoProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPr
           </motion.label>
         )}
       </AnimatePresence>
+      {!preview && (
+        <button type="button" onClick={() => setPad(true)} className="mt-4 inline-flex items-center gap-2 self-center text-14 font-bold text-ink-soft underline decoration-2 underline-offset-4">
+          <PenLine size={16} aria-hidden="true" />
+          Pas de papier&nbsp;? Dessine au doigt, ici.
+        </button>
+      )}
 
       <PrimaryAction text="Enregistrer mon dessin" icon={<Save aria-hidden="true" />} onClick={() => photo && onSubmit({ photo })} enabled={Boolean(photo)} loading={saving}>
         {footer}
@@ -271,8 +307,9 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
 
 /* ------------------------------ Musique, Cinéma ---------------------------- */
 
-function TitleProof({ proposal, saving, onSubmit, footer }: ProofProps) {
-  const [title, setTitle] = useState(() => suggestedTitle(proposal.extra) ?? '')
+function TitleProof({ proposal, idea, saving, onSubmit, footer }: ProofProps & { idea?: string }) {
+  // L'idée choisie sous l'activité, sinon ce que l'appli avait tiré.
+  const [title, setTitle] = useState(() => (idea ?? suggestedTitle(proposal.extra) ?? '').slice(0, MAX_TITLE_LENGTH))
   const placeholder = proposal.passion === 'musique' ? 'Un titre, un album, un artiste…' : 'Un film, un anime, un court…'
   const Icon = PASSION_ICONS[proposal.passion]
   return (

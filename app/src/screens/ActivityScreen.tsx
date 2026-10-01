@@ -1,7 +1,7 @@
-import { Check, Clock3, Hourglass, Info, Mountain, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
+import { CalendarHeart, Check, Clock3, Hourglass, Info, Mountain, PenLine, RotateCcw, Shuffle, Sparkles, Volume2, VolumeX } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getPassion, getPath, getPathStep, STEPS_PER_PATH, type ActivityExtra, type PathStep, type ProposalDTO } from '@scroll-up/shared'
+import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PathStep, type ProposalDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,6 +9,7 @@ import { Card, CardEyebrow } from '@/components/ui/card'
 import { Skeleton, SkeletonText } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
+import { ActivityHelp } from '../components/ActivityHelp.tsx'
 import { PassionScene } from '../components/decor/PassionScene.tsx'
 import { DifficultyMeter } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
@@ -38,7 +39,7 @@ export function ActivityScreen() {
         proposal.passion === passionId &&
         proposal.mood === mood &&
         proposal.duration === duration &&
-        (fixedStep ? proposal.activityId === fixedStep : !getPathStep(proposal.activityId)),
+        (fixedStep ? proposal.activityId === fixedStep : !isFixedActivityId(proposal.activityId)),
     )
 
   const proposal = matches(flow.proposal) ? flow.proposal : undefined
@@ -46,23 +47,34 @@ export function ActivityScreen() {
   const [error, setError] = useState<string>()
   const requested = useRef(false)
 
+  const [quietNote, setQuietNote] = useState<string>()
   const load = useCallback(
-    async (replacing?: string) => {
+    async (replacing?: string, quiet = flow.quiet) => {
       if (!passionId || !mood || !duration) return
       setLoading(true)
       setError(undefined)
+      setQuietNote(undefined)
       try {
-        const response = await api.propose({ passion: passionId, mood, duration, ...(fixedStep ? { step: fixedStep } : {}), ...(replacing ? { replacing } : {}) })
-        dispatch({ type: 'flow', flow: { proposal: response.proposal, clockOffset: Date.parse(response.serverTime) - Date.now() } })
+        const response = await api.propose({
+          passion: passionId,
+          mood,
+          duration,
+          ...(fixedStep ? { step: fixedStep } : {}),
+          ...(replacing ? { replacing } : {}),
+          ...(quiet && !fixedStep ? { quiet: true } : {}),
+        })
+        dispatch({ type: 'flow', flow: { proposal: response.proposal, quiet, clockOffset: Date.parse(response.serverTime) - Date.now() } })
         dispatch({ type: 'openProposal', proposal: response.proposal })
       } catch (caught) {
         haptics.error()
-        setError(caught instanceof ApiError ? caught.message : 'Oups, impossible de trouver une idée. Réessaie\u00A0?')
+        // Rien de silencieux pour ce temps : on le dit, et on garde l'activité affichée.
+        if (caught instanceof ApiError && caught.code === 'no_quiet') setQuietNote(caught.message)
+        else setError(caught instanceof ApiError ? caught.message : 'Oups, impossible de trouver une idée. Réessaie\u00A0?')
       } finally {
         setLoading(false)
       }
     },
-    [passionId, mood, duration, fixedStep, dispatch],
+    [passionId, mood, duration, fixedStep, flow.quiet, dispatch],
   )
 
   useEffect(() => {
@@ -76,6 +88,7 @@ export function ActivityScreen() {
   const passion = getPassion(passionId)
   const Icon = PASSION_ICONS[passionId]
   const step = getPathStep(fixedStep ?? proposal?.activityId ?? '')
+  const challenge = getChallengeActivity(fixedStep ?? proposal?.activityId ?? '')
 
   return (
     <Screen>
@@ -91,6 +104,7 @@ export function ActivityScreen() {
         </Badge>
       </div>
       {step && <StepHeader step={step} />}
+      {challenge && <ChallengeHeader challenge={challenge} />}
       {/* Sur les petits écrans (ou avec un tirage à afficher), la scène se fait plus discrète. */}
       <Card
         className={cn('mt-5 items-center justify-center py-6 shadow-pop [@media(max-height:780px)]:py-3', proposal?.extra && 'py-3')}
@@ -126,6 +140,7 @@ export function ActivityScreen() {
                   Tu travailles&nbsp;: {step.focus.charAt(0).toLowerCase() + step.focus.slice(1)}
                 </p>
               )}
+              <ActivityHelp proposal={proposal} />
             </motion.div>
           ) : error ? (
             <Alert key="error" variant="warning" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
@@ -156,19 +171,66 @@ export function ActivityScreen() {
             timeGuard={passion.timeGuard}
             clockOffset={flow.clockOffset}
             disabled={loading}
-            onValidate={() => push({ name: 'proof' })}
+            onValidate={() => {
+              dispatch({ type: 'flow', flow: { pad: false } })
+              push({ name: 'proof' })
+            }}
           />
         ) : (
           <Skeleton className="h-14 w-full rounded-pill" />
         )}
-        {!step && (
+        {!fixedStep && (
           <Button variant="secondary" size="md" className="w-full" disabled={loading || !proposal} onClick={() => proposal && void load(proposal.id)}>
             <Shuffle aria-hidden="true" />
             Une autre idée
           </Button>
         )}
+        {/* Pas de papier : on dessine au doigt. Pas de son : une activité qui se fait sans écouter. */}
+        {proposal && passionId === 'dessin' && (
+          <SmallLink
+            onClick={() => {
+              dispatch({ type: 'flow', flow: { pad: true } })
+              push({ name: 'proof' })
+            }}
+          >
+            <PenLine aria-hidden="true" />
+            Pas de papier&nbsp;? Dessine au doigt, ici.
+          </SmallLink>
+        )}
+        {proposal && !fixedStep && (passionId === 'musique' || passionId === 'cinema') && (
+          flow.quiet ? (
+            <SmallLink onClick={() => dispatch({ type: 'flow', flow: { quiet: false } })}>
+              <Volume2 aria-hidden="true" />
+              Sans son&nbsp;✓ · Remettre le son
+            </SmallLink>
+          ) : (
+            <SmallLink disabled={loading} onClick={() => void load(proposal.id, true)}>
+              <VolumeX aria-hidden="true" />
+              Pas de son autour de toi&nbsp;?
+            </SmallLink>
+          )
+        )}
+        {quietNote && (
+          <p role="status" className="text-center text-13 font-semibold text-ink">
+            {quietNote}
+          </p>
+        )}
       </div>
     </Screen>
+  )
+}
+
+/** Petit lien discret sous les boutons (« Pas de papier ? », « Pas de son ? »). */
+function SmallLink({ onClick, disabled, children }: { onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className="inline-flex min-h-10 items-center justify-center gap-2 self-center text-14 font-bold text-ink-soft underline decoration-2 underline-offset-4 disabled:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0"
+    >
+      {children}
+    </button>
   )
 }
 
@@ -181,6 +243,16 @@ function StepHeader({ step }: { step: PathStep }) {
       {path?.title} · étape {step.index}/{STEPS_PER_PATH}
       <span className={cn('rounded-pill border-2 border-outline px-2 text-12 font-extrabold', step.index === STEPS_PER_PATH ? 'bg-accent text-on-color' : 'bg-surface-200')}>{step.difficulty}</span>
       <DifficultyMeter level={step.index} tone={PASSION_COLORS[step.passion].bg} />
+    </p>
+  )
+}
+
+/** Le mot du jour : le thème du mois. */
+function ChallengeHeader({ challenge }: { challenge: ChallengeActivity }) {
+  return (
+    <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-13 font-bold text-ink">
+      <CalendarHeart size={16} strokeWidth={2.4} aria-hidden="true" />
+      Le mot du jour · {challenge.theme}
     </p>
   )
 }

@@ -15,6 +15,7 @@ import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
+import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { PathScreen } from './screens/PathScreen.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
 import { PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
@@ -91,6 +92,7 @@ function toneFor(route: Route, flow: Flow): DecorTone {
       return 'good'
     case 'gallery':
     case 'path':
+    case 'challenge':
       return 'warm'
     default:
       return 'mixed'
@@ -123,6 +125,8 @@ function screenFor(route: Route) {
       return <GalleryScreen />
     case 'path':
       return <PathScreen pathId={route.pathId} />
+    case 'challenge':
+      return <ChallengeScreen />
   }
 }
 

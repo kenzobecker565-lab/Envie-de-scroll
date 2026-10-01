@@ -140,6 +140,7 @@ describe('parcours complet', () => {
       monthActivities: 1,
       monthCoins: 15,
       byPassion: [{ passion: 'musique', minutes: 15, activities: 1, tried: [proposal.activityId], steps: [], drawings: 0, words: 0, explored: 1 }],
+      challenge: [],
     })
 
     // Pas deux fois.

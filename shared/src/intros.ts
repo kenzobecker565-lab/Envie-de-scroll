@@ -1,10 +1,11 @@
 /**
- * Introductions affichées au-dessus de l'activité. C'est le seul endroit où
- * le mood compte : ton doux pour l'énergie basse, dynamique pour l'énergie
- * haute. Il ne change jamais l'activité proposée.
+ * Introductions affichées au-dessus de l'activité : ton doux pour l'énergie
+ * basse, dynamique pour l'énergie haute. Tard le soir et tôt le matin, elles
+ * tiennent aussi compte de l'heure.
  */
 
-import type { MoodId } from './types.ts'
+import { getMood } from './moods.ts'
+import type { Energy, MoodId } from './types.ts'
 import { frenchTypography } from './typography.ts'
 
 export const INTROS: Record<MoodId, readonly string[]> = {
@@ -60,7 +61,31 @@ export const INTROS: Record<MoodId, readonly string[]> = {
   ],
 }
 
-export function pickIntro(mood: MoodId, random: () => number = Math.random): string {
-  const list = INTROS[mood]
+/**
+ * Tard le soir ou tôt le matin, une introduction sur deux parle du moment
+ * plutôt que du mood (toujours dans le ton de sa famille d'énergie).
+ */
+export const MOMENT_INTROS: Record<'nuit' | 'matin', Record<Energy, readonly string[]>> = {
+  nuit: {
+    basse: [
+      'Il est tard : on fait doux, et après, au lit. Voici :',
+      'Plutôt qu’un dernier scroll, un dernier petit plaisir :',
+      'La nuit, les idées sont plus libres. Tranquillement :',
+    ],
+    haute: [
+      'Il est tard et ça bouillonne ? On vide la tête avant de dormir :',
+      'Même à cette heure-ci, cette énergie mérite mieux qu’un écran. Tiens :',
+    ],
+  },
+  matin: {
+    basse: ['Le café n’est pas fini ? Parfait pour ça :', 'Un début de journée tout en douceur :'],
+    haute: ['La journée démarre fort ? On canalise tout de suite :', 'Bien réveillé·e ? On commence par créer :'],
+  },
+}
+
+/** `hour` : l'heure locale de l'utilisateur (0-23), si on la connaît. */
+export function pickIntro(mood: MoodId, random: () => number = Math.random, hour?: number): string {
+  const moment = hour === undefined ? null : hour >= 22 || hour < 5 ? 'nuit' : hour >= 5 && hour < 9 ? 'matin' : null
+  const list = moment && random() < 0.5 ? MOMENT_INTROS[moment][getMood(mood).energy] : INTROS[mood]
   return frenchTypography(list[Math.floor(random() * list.length)] ?? list[0] ?? '')
 }

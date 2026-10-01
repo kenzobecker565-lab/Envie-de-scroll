@@ -1,4 +1,17 @@
-import { countWords, DEFAULT_THEME, isAppTheme, isBaseActivity, isPassionId, isPathStepId, PASSION_IDS, type PassionId, type PassionStatsDTO, type StatsDTO, type UserDTO } from '@scroll-up/shared'
+import {
+  countWords,
+  DEFAULT_THEME,
+  isAppTheme,
+  isBaseActivity,
+  isChallengeId,
+  isPassionId,
+  isPathStepId,
+  PASSION_IDS,
+  type PassionId,
+  type PassionStatsDTO,
+  type StatsDTO,
+  type UserDTO,
+} from '@scroll-up/shared'
 import type { PrismaClient, User } from '../db.ts'
 import type { TelegramUser } from '../auth/initData.ts'
 import { isValidTimeZone, localMonth } from '../lib/time.ts'
@@ -60,6 +73,7 @@ export async function getStats(prisma: PrismaClient, user: User, now = new Date(
     monthActivities: thisMonth.length,
     monthCoins: thisMonth.reduce((sum, row) => sum + row.coins, 0),
     byPassion: passionStats(rows),
+    challenge: [...new Set(thisMonth.map((row) => row.activityId).filter(isChallengeId))].sort(),
   }
 }
 

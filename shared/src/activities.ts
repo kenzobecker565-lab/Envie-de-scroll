@@ -12,7 +12,8 @@
  * de la proposition, parmi les listes de prompts.ts.
  */
 
-import { getPathStep } from './paths.ts'
+import { getChallengeActivity, isChallengeId } from './monthly.ts'
+import { getPathStep, isPathStepId } from './paths.ts'
 import { frenchTypography } from './typography.ts'
 import type { Activity, Duration, ExtraKind, PassionId } from './types.ts'
 
@@ -141,9 +142,14 @@ export const ACTIVITIES: readonly Activity[] = build()
 
 const BY_ID = new Map(ACTIVITIES.map((activity) => [activity.id, activity]))
 
-/** Une des 60 activités, ou une étape de parcours (voir paths.ts). */
+/** Une des 60 activités, une étape de parcours (voir paths.ts) ou un mot du jour (voir monthly.ts). */
 export function getActivity(id: string): Activity | undefined {
-  return BY_ID.get(id) ?? getPathStep(id)
+  return BY_ID.get(id) ?? getPathStep(id) ?? getChallengeActivity(id)
+}
+
+/** Une étape de parcours ou un mot du jour : une activité fixée d'avance, sans « Une autre idée ». */
+export function isFixedActivityId(id: string): boolean {
+  return isPathStepId(id) || isChallengeId(id)
 }
 
 /** Vrai pour les 60 activités de base (pas les étapes de parcours) : celles de la collection. */

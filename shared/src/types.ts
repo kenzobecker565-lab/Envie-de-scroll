@@ -25,7 +25,7 @@ export const MOOD_IDS = [
 ] as const
 export type MoodId = (typeof MOOD_IDS)[number]
 
-/** Les deux familles de moods : elles ne changent que le ton de l'introduction. */
+/** Les deux familles de moods : le ton de l'introduction, et un tirage plutôt calme ou plutôt vif. */
 export type Energy = 'basse' | 'haute'
 
 /**

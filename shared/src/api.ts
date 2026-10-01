@@ -50,6 +50,8 @@ export interface StatsDTO {
   monthCoins: number
   /** Par passion, seulement celles où une activité a été validée. */
   byPassion: PassionStatsDTO[]
+  /** Les mots du jour faits ce mois-ci (identifiants `defi-<passion>-<jour>`, voir monthly.ts). */
+  challenge: string[]
 }
 
 export interface ProposalDTO {
@@ -149,6 +151,8 @@ export interface CreateProposalRequest {
   replacing?: string
   /** Une étape de parcours à jouer (sa passion et sa durée doivent correspondre). */
   step?: string
+  /** « Pas de son autour de toi » : seulement des activités qui se font sans écouter. */
+  quiet?: boolean
 }
 
 /**
@@ -249,6 +253,7 @@ export interface CompletionsPage {
 export type ApiErrorCode =
   | 'unauthorized'
   | 'locked'
+  | 'no_quiet'
   | 'invalid_request'
   | 'not_found'
   | 'already_completed'

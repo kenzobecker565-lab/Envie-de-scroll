@@ -19,6 +19,7 @@
 import {
   collectionSize,
   getActivity,
+  getChallengeActivity,
   getPathStep,
   isPathStepId,
   pathProgress,
@@ -27,6 +28,7 @@ import {
   getMood,
   getPassion,
   isActivityRating,
+  isChallengeId,
   isAmbianceId,
   lastMilestone,
   MAX_FEEDBACK_LENGTH,
@@ -40,6 +42,7 @@ import {
 } from '@scroll-up/shared'
 import type { Completion, PrismaClient, User } from '../db.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
+import { localMonth } from '../lib/time.ts'
 
 /** Envoie un message aux admins (Telegram). Absent sans bot. */
 export type Notify = (text: string) => Promise<void>
@@ -190,6 +193,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     stepRows,
     projects,
     projectsDone,
+    challengeRows,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -218,6 +222,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.completion.findMany({ where: { activityId: { startsWith: 'parcours-' } }, select: { userId: true, activityId: true } }),
     prisma.project.count(),
     prisma.project.count({ where: { finishedAt: { not: null } } }),
+    prisma.completion.findMany({ where: { activityId: { startsWith: 'defi-' } }, select: { userId: true, activityId: true } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
@@ -248,6 +253,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Musique d’ambiance : ${musicLine(musicChoices)} · coupée ${plural(musicOff, 'fois', 'fois')}`,
     `Parcours : ${plural(stepRows.length, 'étape réussie', 'étapes réussies')}, ${plural(finishedPaths(stepRows), 'parcours terminé', 'parcours terminés')}`,
     `Projets : ${plural(projects, 'créé', 'créés')}, ${plural(projectsDone, 'terminé', 'terminés')}`,
+    `Mot du jour : ${plural(challengeRows.length, 'mot', 'mots')} (dessin ${challengeRows.filter((row) => row.activityId.startsWith('defi-dessin')).length}, écriture ${challengeRows.filter((row) => row.activityId.startsWith('defi-ecriture')).length}), par ${plural(new Set(challengeRows.map((row) => row.userId)).size, 'personne')}`,
   ]
 
   const top = await activityRanking(prisma)
@@ -337,6 +343,8 @@ export async function personalStats(prisma: PrismaClient, user: User): Promise<s
       else if (entry.done > 0) lines.push(`  Parcours « ${entry.path.title} » : étape ${entry.done}/${entry.path.steps.length}`)
     }
   }
+  const challenges = tried.filter((entry) => isChallengeId(entry.activityId) && entry.activityId.slice(-10, -3) === localMonth(new Date(), user.timezone)).length
+  if (challenges) lines.push('', `Mots du jour ce mois-ci : ${challenges}`)
   if (projects.length) {
     const done = projects.filter((project) => project.finishedAt).length
     lines.push('', `Tes projets : ${plural(projects.length - done, 'en cours', 'en cours')}, ${plural(done, 'terminé', 'terminés')}`)
@@ -357,10 +365,12 @@ export async function recentFeedback(prisma: PrismaClient, limit = 10): Promise<
 
 /* ---------------------------------- Export ---------------------------------- */
 
-/** « Visages, étape 3 (Moyen) » pour une étape de parcours, sinon rien. */
+/** « Visages, étape 3 (Moyen) » pour une étape de parcours, le mot pour un mot du jour, sinon rien. */
 function stepLabel(activityId: string): string {
   const step = getPathStep(activityId)
-  return step ? `${step.pathId}, étape ${step.index} (${step.difficulty})` : ''
+  if (step) return `${step.pathId}, étape ${step.index} (${step.difficulty})`
+  const challenge = getChallengeActivity(activityId)
+  return challenge ? `mot du jour du ${challenge.day} : ${challenge.word}` : ''
 }
 
 const csvCell = (value: unknown) => {

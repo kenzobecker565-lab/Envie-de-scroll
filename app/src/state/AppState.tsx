@@ -23,6 +23,8 @@ export interface Flow {
   mood?: MoodId
   duration?: Duration
   passion?: PassionId
+  /** Passion imposée d'avance (« Une activité Dessin » depuis la progression) : pas d'écran de choix. */
+  fixedPassion?: PassionId
   proposal?: ProposalDTO
   /** Écart entre l'horloge du serveur et celle du téléphone (ms). */
   clockOffset: number
@@ -30,7 +32,8 @@ export interface Flow {
 
 export interface DoneResult {
   response: CompleteResponse
-  previousTotal: number
+  /** Les chiffres d'avant la validation : pour faire rouler le compteur, repérer palier et niveau. */
+  previousStats: StatsDTO
   /** Dessin enregistré sans photo : on rappelle qu'on peut l'envoyer au bot. */
   photoPending: boolean
 }

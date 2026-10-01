@@ -115,7 +115,7 @@ export function ScrollPhone({ className }: { className?: string }) {
 
 /* ---------------------------- Rayons de fête ------------------------------ */
 
-/** Rayons qui tournent derrière la pièce, à la confirmation. */
+/** Rayons qui tournent derrière le minuton, à la confirmation. */
 export function Rays({ className }: { className?: string }) {
   const mask = 'radial-gradient(closest-side, #000 25%, transparent 100%)'
   return (

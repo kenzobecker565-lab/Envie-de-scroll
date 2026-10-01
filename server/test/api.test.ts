@@ -134,7 +134,13 @@ describe('parcours complet', () => {
     const body = done.body as CompleteResponse
     expect(body.coinsEarned).toBe(15)
     expect(body.completion.exploredTitle).toBe('Blonde — Frank Ocean')
-    expect(body.stats).toEqual({ totalCoins: 15, totalActivities: 1, monthActivities: 1, monthCoins: 15 })
+    expect(body.stats).toEqual({
+      totalCoins: 15,
+      totalActivities: 1,
+      monthActivities: 1,
+      monthCoins: 15,
+      byPassion: [{ passion: 'musique', minutes: 15, activities: 1, tried: [proposal.activityId] }],
+    })
 
     // Pas deux fois.
     const again = await request(app).post('/api/completions').set(as()).send({ proposalId: proposal.id }).expect(409)
@@ -220,7 +226,11 @@ describe('galerie', () => {
     // Le mois suivant (heure de Paris), le compteur du mois repart de zéro, pas le total.
     clock.set('2026-10-01T00:30:00+02:00')
     const me = (await request(app).get('/api/me').set(as()).expect(200)).body as MeResponse
-    expect(me.stats).toEqual({ totalCoins: 15, totalActivities: 3, monthActivities: 0, monthCoins: 0 })
+    expect(me.stats).toMatchObject({ totalCoins: 15, totalActivities: 3, monthActivities: 0, monthCoins: 0 })
+    // La progression de la passion : 15 minutons, 3 activités différentes dans la collection.
+    expect(me.stats.byPassion).toHaveLength(1)
+    expect(me.stats.byPassion[0]).toMatchObject({ passion: 'musique', minutes: 15, activities: 3 })
+    expect(new Set(me.stats.byPassion[0]?.tried).size).toBe(3)
   })
 
   it('ne montre jamais la galerie d’un autre utilisateur', async () => {

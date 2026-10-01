@@ -2,7 +2,7 @@
 
 *Anciennement « Plutôt Que Scroller ».*
 
-Une app qui intercepte l'envie de scroller et propose à la place une activité créative courte, liée à une passion : dessin, écriture, musique, cinéma / animation. Elle garde une trace de tout ce qui a été fait (une galerie et un compteur de pièces d'or) plutôt que de compter des jours d'abstinence. Le ton reste chaleureux, jamais punitif.
+Une app qui intercepte l'envie de scroller et propose à la place une activité créative courte, liée à une passion : dessin, écriture, musique, cinéma / animation. Elle garde une trace de tout ce qui a été fait (une galerie, un compteur de minutons et un niveau par passion) plutôt que de compter des jours d'abstinence. Le ton reste chaleureux, jamais punitif.
 
 Cette V1 de test est volontairement resserrée : 4 passions, 60 activités validées, 3 temps (5, 15 et 30 min). Pas de premium, pas de paiement, pas d'IA, pas d'API externe.
 
@@ -21,7 +21,7 @@ shared/     Types, contenus et règles partagés par l'app et le serveur
   src/intros.ts       ← introductions selon le mood
   src/reminders.ts    ← messages de relance du bot
   src/selection.ts    ← choix d'une activité
-  src/rules.ts        ← pièces d'or, garde-fou temporel
+  src/rules.ts        ← minutons, garde-fou temporel
 server/     API REST (Express) + bot Telegram (Telegraf) + base SQLite (Prisma)
 app/        La Mini App (React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Motion)
 prototype/  Le prototype web précédent (archive)
@@ -176,17 +176,24 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 ## Le parcours
 
 1. **Onboarding** : une bienvenue courte (illustration unDraw), puis le choix de 1 à 3 passions sur des cartes illustrées.
-2. **Accueil** : le gros bouton « J'ai envie de scroller ». En dessous, un aperçu discret du mois (activités, pièces d'or), et « Tu étais en train de… » si une activité attend d'être validée.
+2. **Accueil** : le gros bouton « J'ai envie de scroller ». En dessous, un aperçu discret du mois (activités, minutons), et « Tu étais en train de… » si une activité attend d'être validée.
 3. **Déclenchement** : « On a reçu ton signal de détresse pré-scroll. On s'occupe de toi. », puis enchaînement automatique (un toucher pour aller plus vite).
 4. **Mood** : 8 moods en deux familles, un tap.
 5. **Temps** : 5, 15 ou 30 min.
 6. **Passion du moment** : seulement si le profil en compte plusieurs.
 7. **Activité** : en grand, avec « Une autre idée » (discret) et « Valider ».
 8. **Après « Valider »** : une photo du dessin, le texte écrit, ou, pour Musique et Cinéma, le titre exploré (facultatif).
-9. **Confirmation** : « Activité enregistrée. +X minutes ajoutées à ton total. », avec le compteur qui roule, des confettis discrets et une vibration.
-10. **Galerie** : le total de pièces d'or en grand, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier. Chaque création se partage à un ami.
+9. **Confirmation** : « Activité enregistrée. +X minutons ajoutés à ton total. », avec le compteur qui roule, des confettis discrets et une vibration. S'y ajoutent, quand c'est le cas, « Nouvelle activité dans ta collection » et le niveau franchi dans la passion.
+10. **Galerie** : le total de minutons en grand, la progression par passion, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier. Chaque création se partage à un ami.
+    - **Minutons** : la monnaie de l'app. 1 minute d'activité = 1 minuton (jeton en forme de petit chrono).
+    - **Ta progression**, une carte par passion. Elle donne :
+      - **le niveau**, qui monte avec les minutons gagnés dans la passion : niveau 1 à la 1re activité, puis 30 min, 2 h, 5 h et 10 h ;
+      - **le titre**, de « Gribouilleur·euse » à « Virtuose du trait » en Dessin, de « Griffonneur·euse » à « Romancier·ère » en Écriture, de « Curieux·euse » à « Encyclopédie sonore » en Musique, de « Spectateur·rice » à « Cinémathèque ambulante » en Cinéma ;
+      - **la jauge** vers le niveau suivant ;
+      - **la collection** : les 15 activités de la passion (5 par temps), dont celles déjà faites, à découvrir une à une.
+    - **Le détail d'une passion** : on touche une carte pour voir les cinq niveaux, la collection (les activités faites se dévoilent, les autres restent cachées) et le bouton « Une activité Dessin », qui lance le parcours sans repasser par le choix de la passion. La logique est dans `shared/src/progress.ts`.
 11. **Paliers** : 5 min, 30 min, 1 h, 2 h, 5 h, 10 h, 20 h de création. Le palier franchi est célébré à la confirmation ; la galerie montre la jauge du prochain (« plus que 25 min »). Du temps gagné, jamais du temps manqué.
-12. **Réglages** (bouton à côté des pièces, sur l'accueil) : le style en grille, les passions, la musique d'ambiance, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
+12. **Réglages** (bouton à côté des minutons, sur l'accueil) : le style en grille, les passions, la musique d'ambiance, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
 13. **Musique d'ambiance**, tout doux, en fond. **Dix styles** au choix dans les réglages (« Ta musique ») : jazz noir (par défaut), lo-fi, piano, bossa nova, acoustique, synthwave, 8-bit, ambient, tropical, et la pluie pour ceux qui ne veulent pas de musique. « Au hasard » joue un style différent à chaque ouverture. Un tap sur un style le fait entendre tout de suite, avec un fondu, et remet la musique si elle était coupée.
     - **Le reste du comportement** : la musique démarre au premier toucher. On la coupe d'un geste (bouton note de musique de l'accueil, ou interrupteur des réglages). Le style et le choix on/off sont gardés sur le téléphone. Elle se retire quand l'app passe en arrière-plan, et pendant les activités Musique et Cinéma.
     - **Le volume** passe par Web Audio, pour être réglable aussi sur iPhone (`src/lib/ambient.ts`). Tous les morceaux sont au même volume (−16 LUFS), en MP3 de 3 minutes au plus (2 Mo).
@@ -198,12 +205,12 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Note de chaque activité**, juste après « Activité enregistrée. » : j'ai adoré, sympa, pas pour moi. De quoi trier les 60 activités.
 - **Suivi d'usage** (sans aucun texte libre) : ouvertures, appuis sur le gros bouton, humeur, temps et passion choisis, partages, invitations, style de musique choisi, musique coupée. On voit où le parcours se perd, et quels styles plaisent.
 - **Devenir admin** : envoie `/admin` au bot **avant de partager le lien** : la première personne qui le fait devient admin. On peut aussi fixer la variable `ADMIN_IDS` (identifiants Telegram séparés par des virgules), qui prend alors le dessus.
-- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, styles de musique choisis, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées et avis). Pour un testeur, `/stats` donne ses propres chiffres.
+- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, styles de musique choisis, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées et avis). Pour un testeur, `/stats` donne ses propres chiffres : minutons, paliers, et niveau et collection par passion.
 
 ## Les règles
 
 - **Choix de l'activité** (`shared/src/selection.ts`) : tirage parmi les 5 activités de la passion × du temps, en écartant les 3 dernières proposées pour cette combinaison. « Une autre idée » écarte toujours l'activité affichée : en enchaînant, une activité ne revient jamais dans 4 propositions d'affilée. Le mood ne change que le ton de l'introduction.
-- **Pièces d'or** : 1 minute d'activité = 1 pièce. Cumulatif, rien à dépenser.
+- **Minutons** : 1 minute d'activité = 1 minuton. Cumulatif, rien à dépenser. Les niveaux par passion comptent les minutons gagnés dans la passion ; ils ne redescendent jamais.
 - **Garde-fou temporel** (`shared/src/rules.ts`) : pour Musique et Cinéma, « Valider » reste grisé jusqu'à la fin de la durée choisie. Le bouton se remplit doucement, sans compte à rebours. Pour Dessin et Écriture, on valide tout de suite avec une photo ou un texte, ou « sans » une fois la durée écoulée. Le serveur applique les mêmes règles : l'horloge du téléphone ne suffit pas à tricher.
 - **Reprise** : une activité proposée reste « à reprendre » 12 h. Pratique quand on quitte Telegram pour écouter un album : en revenant, le minuteur a continué.
 - **Photos** : envoyées depuis l'app, réduites à 1600 px, puis relayées par le bot vers le chat privé de stockage. Seul le `file_id` Telegram est gardé en base, et le serveur relaie l'image à l'affichage (le token ne quitte jamais le serveur). Une photo envoyée **directement au bot** rejoint le dernier dessin enregistré sans photo.
@@ -219,6 +226,7 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Introductions selon le mood** : `shared/src/intros.ts` (deux par mood).
 - **Messages du bot** : `shared/src/reminders.ts` (relances) et `server/src/bot/bot.ts` (accueil, photos, avis, commandes d'admin).
 - **Paliers de création** : `shared/src/feedback.ts` (`MILESTONES` : minutes à atteindre, titre, phrase de célébration).
+- **Niveaux par passion** : `shared/src/progress.ts` (`LEVEL_MINUTES` : seuils ; `LEVEL_TITLES` : les cinq titres de chaque passion).
 - **Musiques d'ambiance** : `shared/src/ambiances.ts` (nom, phrase, couleur, crédit) et `promo/ambiances/build.mjs`. Pour changer un morceau : modifie la liste `TRACKS` du script (titre et fichier chez incompetech.com), lance `node ambiances/build.mjs <id>` depuis `promo/`, puis mets à jour le crédit dans `ambiances.ts`.
 
 Lance `npm test` après une modification.
@@ -254,7 +262,7 @@ Chaque requête porte `Authorization: tma <initData>`. Les types des requêtes e
 - **Thème** : suit `Telegram.WebApp.colorScheme` (et l'événement `themeChanged`), ou le réglage du système hors de Telegram. L'en-tête et le fond de Telegram prennent la couleur *canvas* de l'app.
 - **SDK Telegram** (`app/src/telegram/`) : bouton retour natif, bouton principal natif (onboarding, envoi de la photo ou du texte : il reste au-dessus du clavier), vibrations (sélection, validation, erreur), glissement vertical désactivé pour ne pas fermer l'app en faisant défiler la galerie. Hors de Telegram, l'app affiche ses propres boutons.
 - **Décor vivant** (`app/src/components/decor/`) : sur les bords de chaque écran, de petits stickers cernés d'encre (pastilles, étoiles, gribouillis) qui montent lentement, et un grain d'impression léger. Leurs couleurs suivent le parcours : calmes ou chaudes selon le mood, menthe à la validation. Chaque passion a sa scène animée : un crayon qui dessine, une plume qui écrit, un égaliseur qui danse, une pellicule qui défile. Sur l'accueil, les stickers des passions flottent autour du gros bouton.
-- **Animations** (Motion, ex-Framer Motion) : transitions entre écrans, chaque bouton et chaque carte qui s'enfonce dans son ombre au toucher, choix qui se colorent et se penchent, fenêtre de détail de la galerie qui monte du bas (on la ferme en la glissant vers le bas, ou avec le bouton retour de Telegram), étapes du parcours qui se remplissent, texte des activités qui apparaît mot à mot, cadrans de durée, compteur « à rouleaux », célébration à la validation (rayons, pièce qui tournoie, pièces qui tombent dans le compteur, confettis). Les boucles n'animent que la position et l'opacité, pour rester fluides sur les petits téléphones. Si le système demande de réduire les animations, tout s'arrête et chaque décor reste sur une image fixe.
+- **Animations** (Motion, ex-Framer Motion) : transitions entre écrans, chaque bouton et chaque carte qui s'enfonce dans son ombre au toucher, choix qui se colorent et se penchent, fenêtre de détail de la galerie qui monte du bas (on la ferme en la glissant vers le bas, ou avec le bouton retour de Telegram), étapes du parcours qui se remplissent, texte des activités qui apparaît mot à mot, cadrans de durée, compteur « à rouleaux », célébration à la validation (rayons, minuton qui tournoie, minutons qui tombent dans le compteur, confettis). Les boucles n'animent que la position et l'opacité, pour rester fluides sur les petits téléphones. Si le système demande de réduire les animations, tout s'arrête et chaque décor reste sur une image fixe.
 - **Icônes** : [Lucide](https://lucide.dev), trait épais, en `ink-soft` au repos et sombres sur la couleur une fois sélectionnées.
 - **Illustrations** : [unDraw](https://undraw.co) (licence libre), recolorées avec les variables du thème par `app/scripts/recolor-undraw.mjs` et collées sur une carte comme un sticker : bienvenue, choix des passions, galerie vide, erreur de connexion, ouverture hors de Telegram.
 - **Accessibilité** : `ink-faint` sert aux textes désactivés et aux indications de saisie ; les textes informatifs utilisent `ink-soft` ou `ink`. La tomate sert de fond, jamais de couleur de texte sur le fond clair (contraste trop faible) : pour un lien, on prend `accent-strong`.

@@ -5,7 +5,7 @@
 import { getPassion } from './passions.ts'
 import type { Duration, PassionId } from './types.ts'
 
-/** 1 minute d'activité complétée = 1 pièce d'or. */
+/** 1 minute d'activité complétée = 1 minuton (la monnaie de l'app). */
 export const COINS_PER_MINUTE = 1
 
 export function coinsFor(duration: Duration): number {

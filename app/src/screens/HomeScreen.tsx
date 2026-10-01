@@ -61,7 +61,7 @@ export function HomeScreen() {
         <div className="flex items-center gap-2 min-[380px]:gap-3">
           <AmbientButton />
           <SettingsButton />
-          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openGallery} aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} pièces d’or`}>
+          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openGallery} aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} minutons`}>
           <CoinIcon size={26} className="motion-loop anim-coin" />
           <span className="font-numbers text-17 font-extrabold">{formatNumber(stats.totalCoins)}</span>
           </Button>
@@ -129,7 +129,7 @@ export function HomeScreen() {
 const STEPS = [
   { text: 'Ton pouce te démange\u00A0? Appuie sur le gros bouton.' },
   { text: 'Ton humeur, ton temps, ta passion\u00A0: trois taps.' },
-  { text: 'Une petite activité créative. Chaque minute = une pièce d’or.' },
+  { text: 'Une petite activité créative. Chaque minute = un minuton.' },
 ] as const
 
 function HowItWorks() {
@@ -156,7 +156,7 @@ function MonthSummary({ monthActivities, monthCoins, totalActivities }: { monthA
   if (monthActivities > 0) {
     return (
       <span className="font-display text-20 font-extrabold tracking-tight text-ink">
-        {plural(monthActivities, 'activité')} · {formatNumber(monthCoins)} pièces
+        {plural(monthActivities, 'activité')} · {formatNumber(monthCoins)} minutons
       </span>
     )
   }

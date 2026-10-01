@@ -77,7 +77,7 @@ model Completion {
   /// Copie du texte de l'activité au moment de la validation
   activityText  String
   extra         String?
-  /// Pièces d'or gagnées (1 minute = 1 pièce)
+  /// Minutons gagnés (1 minute = 1 minuton, la monnaie de l'app)
   coins         Int
   /// Écriture : le texte produit
   text          String?

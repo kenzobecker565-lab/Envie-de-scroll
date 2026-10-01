@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, isAppTheme, isPassionId, type PassionId, type StatsDTO, type UserDTO } from '@scroll-up/shared'
+import { DEFAULT_THEME, isAppTheme, isPassionId, PASSION_IDS, type PassionId, type PassionStatsDTO, type StatsDTO, type UserDTO } from '@scroll-up/shared'
 import type { PrismaClient, User } from '../db.ts'
 import type { TelegramUser } from '../auth/initData.ts'
 import { isValidTimeZone, localMonth } from '../lib/time.ts'
@@ -49,14 +49,32 @@ export async function upsertFromTelegram(
 
 export async function getStats(prisma: PrismaClient, user: User, now = new Date()): Promise<StatsDTO> {
   const month = localMonth(now, user.timezone)
-  const [total, thisMonth] = await Promise.all([
+  const [total, thisMonth, byActivity] = await Promise.all([
     prisma.completion.aggregate({ where: { userId: user.id }, _sum: { coins: true }, _count: true }),
     prisma.completion.aggregate({ where: { userId: user.id, localDate: { startsWith: `${month}-` } }, _sum: { coins: true }, _count: true }),
+    prisma.completion.groupBy({ by: ['passion', 'activityId'], where: { userId: user.id }, _sum: { coins: true }, _count: true }),
   ])
   return {
     totalCoins: total._sum.coins ?? 0,
     totalActivities: total._count,
     monthActivities: thisMonth._count,
     monthCoins: thisMonth._sum.coins ?? 0,
+    byPassion: passionStats(byActivity),
   }
+}
+
+/** Minutons, activités et collection par passion, à partir des activités validées regroupées. */
+function passionStats(rows: { passion: string; activityId: string; _sum: { coins: number | null }; _count: number }[]): PassionStatsDTO[] {
+  return PASSION_IDS.flatMap((passion) => {
+    const mine = rows.filter((row) => row.passion === passion)
+    if (!mine.length) return []
+    return [
+      {
+        passion,
+        minutes: mine.reduce((sum, row) => sum + (row._sum.coins ?? 0), 0),
+        activities: mine.reduce((sum, row) => sum + row._count, 0),
+        tried: mine.map((row) => row.activityId).sort(),
+      },
+    ]
+  })
 }

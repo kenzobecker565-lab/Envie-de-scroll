@@ -22,12 +22,26 @@ export interface UserDTO {
   remindersEnabled: boolean
 }
 
+/** Ce qu'une personne a fait dans une passion : de quoi calculer son niveau et sa collection. */
+export interface PassionStatsDTO {
+  passion: PassionId
+  /** Minutons gagnés dans la passion (1 minute = 1 minuton). */
+  minutes: number
+  /** Activités validées dans la passion. */
+  activities: number
+  /** Identifiants des activités déjà faites au moins une fois (la collection). */
+  tried: string[]
+}
+
 export interface StatsDTO {
+  /** Minutons gagnés en tout (1 minute = 1 minuton). */
   totalCoins: number
   totalActivities: number
-  /** Activités et pièces du mois en cours (fuseau horaire de l'utilisateur). */
+  /** Activités et minutons du mois en cours (fuseau horaire de l'utilisateur). */
   monthActivities: number
   monthCoins: number
+  /** Par passion, seulement celles où une activité a été validée. */
+  byPassion: PassionStatsDTO[]
 }
 
 export interface ProposalDTO {

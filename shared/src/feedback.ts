@@ -39,6 +39,7 @@ export const APP_EVENTS = [
   'settings_open', // ouverture des réglages
   'music', // style de musique d'ambiance choisi (data.ambiance)
   'music_off', // musique d'ambiance coupée
+  'progress_open', // ouverture du détail d'une passion (progression)
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 
@@ -49,7 +50,7 @@ export function isAppEventName(value: unknown): value is AppEventName {
 /* ------------------------------ Les paliers ------------------------------ */
 
 export interface Milestone {
-  /** Pièces d'or (minutes de création) à atteindre. */
+  /** Minutons (minutes de création) à atteindre. */
   coins: number
   /** Titre court, en sticker. */
   title: string
@@ -67,7 +68,7 @@ export const MILESTONES: readonly Milestone[] = [
   { coins: 1200, title: '20 heures', message: 'Vingt heures\u00A0: on dit qu’il en faut autant pour apprendre les bases de presque tout.' },
 ]
 
-/** Le palier franchi en passant de `before` à `after` pièces (le plus haut), ou null. */
+/** Le palier franchi en passant de `before` à `after` minutons (le plus haut), ou null. */
 export function milestoneCrossed(before: number, after: number): Milestone | null {
   let crossed: Milestone | null = null
   for (const milestone of MILESTONES) if (before < milestone.coins && after >= milestone.coins) crossed = milestone

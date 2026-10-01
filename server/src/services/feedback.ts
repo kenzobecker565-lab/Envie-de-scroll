@@ -17,6 +17,7 @@
  */
 
 import {
+  collectionSize,
   getActivity,
   getAmbiance,
   getMood,
@@ -26,6 +27,7 @@ import {
   lastMilestone,
   MAX_FEEDBACK_LENGTH,
   nextMilestone,
+  passionLevel,
   RATING_LABELS,
   type ActivityRating,
   type AppEventName,
@@ -282,9 +284,10 @@ function shorten(text: string, max: number): string {
 
 /** Les chiffres d'une personne (/stats pour tout le monde). */
 export async function personalStats(prisma: PrismaClient, user: User): Promise<string> {
-  const [total, byPassion] = await Promise.all([
+  const [total, byPassion, tried] = await Promise.all([
     prisma.completion.aggregate({ where: { userId: user.id }, _sum: { coins: true }, _count: true }),
-    prisma.completion.groupBy({ by: ['passion'], where: { userId: user.id }, _count: true, orderBy: { _count: { passion: 'desc' } } }),
+    prisma.completion.groupBy({ by: ['passion'], where: { userId: user.id }, _count: true, _sum: { coins: true }, orderBy: { _count: { passion: 'desc' } } }),
+    prisma.completion.groupBy({ by: ['passion', 'activityId'], where: { userId: user.id } }),
   ])
   const coins = total._sum.coins ?? 0
   if (total._count === 0) {
@@ -293,11 +296,18 @@ export async function personalStats(prisma: PrismaClient, user: User): Promise<s
   const reached = lastMilestone(coins)
   const next = nextMilestone(coins)
   const lines = [
-    `Ta galerie compte ${plural(total._count, 'création')} : ${hoursLabel(coins)} de création, soit ${plural(coins, 'pièce')} d’or.`,
+    `Ta galerie compte ${plural(total._count, 'création')} : ${hoursLabel(coins)} de création, soit ${plural(coins, 'minuton')}.`,
     `Ta passion la plus jouée : ${getPassion(byPassion[0]!.passion as PassionId).label.toLowerCase()}.`,
   ]
   if (reached) lines.push(`Dernier palier atteint : ${reached.title}.`)
   if (next) lines.push(`Prochain palier : ${next.title}, plus que ${plural(next.coins - coins, 'minute')}.`)
+  lines.push('', 'Tes passions')
+  for (const row of byPassion) {
+    const passion = row.passion as PassionId
+    const level = passionLevel(passion, row._sum.coins ?? 0)
+    const collected = tried.filter((entry) => entry.passion === passion).length
+    lines.push(`${getPassion(passion).label} : niveau ${level.level}${level.title ? ` (${level.title})` : ''}, ${collected}/${collectionSize(passion)} activités découvertes`)
+  }
   return lines.join('\n')
 }
 

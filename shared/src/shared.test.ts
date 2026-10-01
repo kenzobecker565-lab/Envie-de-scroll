@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import {
   ACTIVITIES,
+  collection,
+  collectionSize,
+  LEVEL_TITLES,
+  levelCrossed,
+  passionLevel,
   AMBIANCE_IDS,
   AMBIANCES,
   ambianceCredits,
@@ -251,5 +256,29 @@ describe('ambiances sonores', () => {
     for (const ambiance of AMBIANCES) if (ambiance.credit) expect(credits).toContain(ambiance.credit.title)
     expect(credits).toContain('CC BY 4.0')
     expect(credits).toContain('incompetech.com')
+  })
+})
+
+describe('progression par passion', () => {
+  it('monte de niveau avec les minutons de la passion', () => {
+    expect(passionLevel('dessin', 0)).toMatchObject({ level: 0, title: null, next: { level: 1, minutes: 5 }, progress: 0 })
+    expect(passionLevel('dessin', 5)).toMatchObject({ level: 1, title: 'Gribouilleur·euse', next: { level: 2, minutes: 30 } })
+    expect(passionLevel('ecriture', 75).level).toBe(2)
+    expect(passionLevel('ecriture', 75).progress).toBeCloseTo((75 - 30) / (120 - 30))
+    expect(passionLevel('cinema', 5000)).toMatchObject({ level: 5, title: 'Cinémathèque ambulante', next: null, progress: 1 })
+  })
+
+  it('repère le niveau franchi (le plus haut s’il y en a plusieurs)', () => {
+    expect(levelCrossed('musique', 0, 15)?.level).toBe(1)
+    expect(levelCrossed('musique', 15, 20)).toBeNull()
+    expect(levelCrossed('musique', 25, 130)?.title).toBe('Mélomane')
+  })
+
+  it('a cinq titres par passion et une collection de 15 activités, 5 par temps', () => {
+    for (const passion of PASSION_IDS) {
+      expect(LEVEL_TITLES[passion]).toHaveLength(5)
+      expect(collectionSize(passion)).toBe(15)
+      expect(collection(passion).map((group) => group.activities.length)).toEqual([5, 5, 5])
+    }
   })
 })

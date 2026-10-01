@@ -2,12 +2,19 @@ import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { formatNumber } from '../lib/format.ts'
 
-/** Une pièce d'or : pastille soleil cernée d'encre, avec un reflet. */
+/**
+ * Un minuton, la monnaie de l'app (1 minute = 1 minuton) : un petit chrono
+ * soleil cerné d'encre, aiguilles sur la minute.
+ */
 export function CoinIcon({ size = 20, className }: { size?: number; className?: string }) {
+  const ink = { stroke: 'var(--on-color)', strokeLinecap: 'round' as const }
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" className={cn('shrink-0', className)}>
-      <circle cx="12" cy="12" r="10" style={{ fill: 'var(--warm)', stroke: 'var(--on-color)', strokeWidth: 2 }} />
-      <path d="M8.6 10a4 4 0 0 1 3.2-2.6" style={{ fill: 'none', stroke: 'var(--on-color)', strokeWidth: 1.8, strokeLinecap: 'round' }} />
+      <rect x="9.6" y="0.6" width="4.8" height="3" rx="1.2" style={{ fill: 'var(--on-color)' }} />
+      <circle cx="12" cy="13.4" r="9.6" style={{ fill: 'var(--warm)', stroke: 'var(--on-color)', strokeWidth: 2 }} />
+      <path d="M12 13.4V8.2" style={{ ...ink, strokeWidth: 2.2 }} />
+      <path d="M12 13.4l3.4 2.1" style={{ ...ink, strokeWidth: 2.2 }} />
+      <path d="M7.4 10.6a5.4 5.4 0 0 1 2.4-2.4" style={{ ...ink, fill: 'none', strokeWidth: 1.5 }} />
     </svg>
   )
 }
@@ -41,14 +48,14 @@ function Digit({ digit, dim, tone }: { digit: number; dim: boolean; tone: 'ink' 
 }
 
 /**
- * Compteur de pièces d'or « à rouleaux ». Les zéros de tête sont estompés :
+ * Compteur de minutons « à rouleaux ». Les zéros de tête sont estompés :
  * le compteur a l'air d'un vrai compteur, sans jamais afficher un gros zéro.
  */
 export function CoinCounter({ value, tone = 'ink', minDigits = 4, className }: { value: number; tone?: 'ink' | 'good'; minDigits?: number; className?: string }) {
   const text = String(Math.max(0, Math.floor(value))).padStart(minDigits, '0')
   const significant = text.length - String(Math.max(0, Math.floor(value))).length
   return (
-    <span className={cn('inline-flex items-center gap-1', className)} role="img" aria-label={`${formatNumber(value)} pièces d’or`}>
+    <span className={cn('inline-flex items-center gap-1', className)} role="img" aria-label={`${formatNumber(value)} minutons`}>
       {text.split('').map((char, index) => (
         <Digit key={text.length - index} digit={Number(char)} dim={index < significant} tone={tone} />
       ))}

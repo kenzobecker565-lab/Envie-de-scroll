@@ -38,3 +38,11 @@ export function monthKey(iso: string): string {
   const date = new Date(iso)
   return `${date.getFullYear()}-${date.getMonth()}`
 }
+
+/** « 45 min », « 2 h », « 1 h 30 ». */
+export function formatMinutes(minutes: number): string {
+  if (minutes < 60) return `${formatNumber(minutes)}\u00A0min`
+  const hours = Math.floor(minutes / 60)
+  const rest = minutes % 60
+  return rest ? `${hours}\u00A0h\u00A0${String(rest).padStart(2, '0')}` : `${formatNumber(hours)}\u00A0h`
+}

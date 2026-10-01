@@ -15,6 +15,7 @@ import { CoinIcon } from '../components/Coins.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
 import { MilestoneProgress } from '../components/Milestones.tsx'
+import { PassionProgressGrid } from '../components/Progression.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { ThemeButton } from '../components/ThemePicker.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
@@ -24,8 +25,8 @@ import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
 /**
- * Tableau de bord : le total de pièces d'or en haut, puis la galerie, une
- * carte par activité réalisée, de la plus récente à la plus ancienne.
+ * Tableau de bord : le total de minutons en haut, la progression par passion,
+ * puis la galerie, une carte par activité réalisée, de la plus récente à la plus ancienne.
  * Toucher une carte l'ouvre en grand. Jamais de calendrier de jours cochés
  * ou manqués.
  */
@@ -97,11 +98,11 @@ export function GalleryScreen() {
         <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Ta galerie</h1>
       </header>
 
-      {/* Les pièces d'or, en grand, sur un sticker soleil. */}
+      {/* Les minutons, en grand, sur un sticker soleil. */}
       <Card
         tone="warm"
         className="mt-6 flex-row items-center gap-3 px-5 shadow-pop"
-        aria-label="Tes pièces d’or"
+        aria-label="Tes minutons"
         role="region"
         initial={{ opacity: 0, y: 16, scale: 0.97, rotate: 2 }}
         animate={{ opacity: 1, y: 0, scale: 1, rotate: -1 }}
@@ -110,17 +111,17 @@ export function GalleryScreen() {
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <p className="flex items-baseline gap-2">
             <span className="font-numbers text-80 font-extrabold tracking-tight tabular-nums">{formatNumber(stats.totalCoins)}</span>
-            <span className="text-16 font-bold">pièces d’or</span>
+            <span className="text-16 font-bold">minutons</span>
           </p>
           <p className="text-13 font-semibold">
             {plural(stats.totalActivities, 'activité réalisée', 'activités réalisées')}
-            {stats.monthActivities > 0 && ` · ${formatNumber(stats.monthActivities)} ce mois-ci`}
+            {stats.monthActivities > 0 && <span className="whitespace-nowrap"> · {formatNumber(stats.monthActivities)} ce mois-ci</span>}
           </p>
           <Badge variant="secondary" size="sm">
-            <Timer aria-hidden="true" />1 min = 1 pièce
+            <Timer aria-hidden="true" />1 min = 1 minuton
           </Badge>
         </div>
-        {/* Une grosse pièce en sticker, qui flotte et fait un tour de temps en temps. */}
+        {/* Un gros minuton en sticker, qui flotte et fait un tour de temps en temps. */}
         <span aria-hidden="true" className="motion-loop anim-float shrink-0" style={{ '--float-duration': '4s' } as React.CSSProperties}>
           <span className="flex h-20 w-20 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper">
             <CoinIcon size={52} className="motion-loop anim-coin" />
@@ -134,7 +135,10 @@ export function GalleryScreen() {
         </motion.div>
       )}
 
-      <div className="mt-8 flex flex-1 flex-col">
+      <PassionProgressGrid />
+
+      {(view === 'list' || view === 'loading') && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
+      <div className={cn('flex flex-1 flex-col', view === 'list' || view === 'loading' ? 'mt-3' : 'mt-8')}>
         <AnimatePresence mode="wait" initial={false}>
           {view === 'loading' && (
             <motion.div key="loading" exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
@@ -224,7 +228,7 @@ export function GalleryScreen() {
 /** Fond de chaque carte : le texte en lilas, les découvertes à la couleur de leur passion, les dessins en polaroïd blanc. */
 const CARD_TONES = { dessin: 'default', ecriture: 'lilac', musique: 'good', cinema: 'warm' } as const
 
-/** Pied de carte commun : passion, activité, date, pièces gagnées. */
+/** Pied de carte commun : passion, activité, date, minutons gagnés. */
 function CardFooter({ item }: { item: CompletionDTO }) {
   const Icon = PASSION_ICONS[item.passion]
   return (
@@ -391,7 +395,7 @@ function GalleryDetail({ item }: { item: CompletionDTO }) {
       <Card tone="good" className="flex-row items-center gap-3 shadow-chip">
         <CoinIcon size={28} />
         <p className="flex-1 text-15 font-semibold">
-          <span className="font-numbers font-extrabold">+{item.coins}</span> pièces d’or gagnées
+          <span className="font-numbers font-extrabold">+{item.coins}</span> minutons gagnés
         </p>
       </Card>
       <Button

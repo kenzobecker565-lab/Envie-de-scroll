@@ -26,7 +26,7 @@ function useAdvance() {
 /** Étapes du parcours : humeur, temps, puis passion si l'on en a plusieurs. */
 function useFlowSteps() {
   const { state } = useAppState()
-  return state.me.user.passions.length > 1 ? 3 : 2
+  return state.me.user.passions.length > 1 && !state.flow.fixedPassion ? 3 : 2
 }
 
 /** Pastille « choisi » qui apparaît sur la carte sélectionnée. */
@@ -124,7 +124,7 @@ export function TimeScreen() {
     haptics.selection()
     track('time', { duration })
     setSelected(duration)
-    const onlyPassion = passions.length === 1 ? passions[0] : undefined
+    const onlyPassion = state.flow.fixedPassion ?? (passions.length === 1 ? passions[0] : undefined)
     dispatch({ type: 'flow', flow: { duration, ...(onlyPassion ? { passion: onlyPassion } : {}) } })
     advance(() => push({ name: onlyPassion ? 'activity' : 'passion' }))
   }

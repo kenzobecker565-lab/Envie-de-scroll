@@ -33,7 +33,7 @@ function clean(value: string | undefined, max: number): string | null {
 }
 
 /**
- * Valide une activité proposée et crédite les pièces d'or.
+ * Valide une activité proposée et crédite les minutons (1 minute = 1 minuton).
  *
  * - Dessin : avec une photo, ou sans photo une fois la durée écoulée.
  * - Écriture : avec le texte produit, ou sans texte une fois la durée écoulée.

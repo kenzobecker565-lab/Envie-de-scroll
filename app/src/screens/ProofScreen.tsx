@@ -47,11 +47,11 @@ export function ProofScreen() {
     setSaving(true)
     setError(undefined)
     try {
-      const previousTotal = state.me.stats.totalCoins
+      const previousStats = state.me.stats
       const response = await api.complete({ proposalId: proposal.id, ...submission })
       dispatch({ type: 'stats', stats: response.stats })
       dispatch({ type: 'openProposal', proposal: null })
-      dispatch({ type: 'done', done: { response, previousTotal, photoPending: response.completion.photoPending } })
+      dispatch({ type: 'done', done: { response, previousStats, photoPending: response.completion.photoPending } })
       dispatch({ type: 'newFlow' })
       reset([{ name: 'home' }, { name: 'done' }])
     } catch (caught) {

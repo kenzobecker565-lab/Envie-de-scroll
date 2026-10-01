@@ -151,7 +151,9 @@ describe('admins et statistiques', () => {
     const user = await prisma.user.findUniqueOrThrow({ where: { id: 42n } })
     const mine = await personalStats(prisma, user)
     expect(mine).toContain('1 création')
+    expect(mine).toContain('soit 5 minutons')
     expect(mine).toContain('Première création')
+    expect(mine).toContain('Écriture : niveau 1 (Griffonneur·euse), 1/15 activités découvertes')
 
     expect(await recentFeedback(prisma)).toContain('« Super idée. »')
     const files = await exportCsv(prisma)

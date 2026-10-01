@@ -1,7 +1,7 @@
 import { House, Images, Send } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { milestoneCrossed } from '@scroll-up/shared'
+import { collectionSize, getPassion, levelCrossed, milestoneCrossed } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,37 +11,44 @@ import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { MilestoneBanner } from '../components/Milestones.tsx'
+import { LevelUpBanner, statsFor } from '../components/Progression.tsx'
 import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
-/** Confirmation : « Activité enregistrée. +X minutes ajoutées à ton total. » */
+/** Confirmation : « Activité enregistrée. +X minutons ajoutés à ton total. », niveau et collection. */
 export function DoneScreen() {
   const { state } = useAppState()
   const { reset } = useNavigation()
   const done = state.done
-  const [shown, setShown] = useState(done?.previousTotal ?? 0)
+  const [shown, setShown] = useState(done?.previousStats.totalCoins ?? 0)
   const reduced = useReducedMotion()
 
   useEffect(() => {
     if (!done) return
     haptics.success()
     // Le compteur part de l'ancien total, puis roule jusqu'au nouveau, une fois
-    // que les pièces sont tombées dedans.
+    // que les minutons sont tombés dedans.
     const timer = window.setTimeout(() => setShown(done.response.stats.totalCoins), reduced ? 300 : 1250)
     return () => window.clearTimeout(timer)
   }, [done, reduced])
 
   if (!done) return null
   const earned = done.response.coinsEarned
-  const milestone = milestoneCrossed(done.previousTotal, done.response.stats.totalCoins)
+  const milestone = milestoneCrossed(done.previousStats.totalCoins, done.response.stats.totalCoins)
+  // La progression de la passion : niveau franchi, nouvelle activité dans la collection.
+  const { passion, activityId } = done.response.completion
+  const before = statsFor(done.previousStats.byPassion, passion)
+  const after = statsFor(done.response.stats.byPassion, passion)
+  const level = levelCrossed(passion, before.minutes, after.minutes)
+  const discovered = !before.tried.includes(activityId)
 
   return (
     <Screen className="items-center text-center">
       <div className="relative mt-8 flex h-32 w-32 items-center justify-center" style={{ perspective: 600 }}>
-        {/* Rayons qui tournent, puis la pièce qui arrive en tournoyant. */}
+        {/* Rayons qui tournent, puis le minuton qui arrive en tournoyant. */}
         <motion.div className="absolute -inset-20" initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
           <Rays className="h-full w-full" />
         </motion.div>
@@ -71,10 +78,21 @@ export function DoneScreen() {
       </motion.h1>
       <motion.p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-16 text-ink-soft" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.4 }}>
         <Badge variant="good" tilt="left" className="text-15">
-          +{earned} minutes
+          +{earned} minutons
         </Badge>
-        ajoutées à ton total.
+        ajoutés à ton total.
       </motion.p>
+      {discovered && (
+        <motion.p
+          className="mt-3 inline-flex items-center gap-2 text-14 font-bold text-ink"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9, type: 'spring', stiffness: 300, damping: 16 }}
+        >
+          <Sparkle size={16} color="var(--accent)" />
+          Nouvelle activité dans ta collection {getPassion(passion).label}&nbsp;: {after.tried.length}/{collectionSize(passion)}
+        </motion.p>
+      )}
 
       <Card
         padding="lg"
@@ -83,7 +101,7 @@ export function DoneScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, duration: 0.4 }}
       >
-        {/* Les pièces gagnées tombent dans le compteur. */}
+        {/* Les minutons gagnés tombent dans le compteur. */}
         {!reduced &&
           Array.from({ length: 6 }, (_, index) => (
             <motion.span
@@ -99,8 +117,14 @@ export function DoneScreen() {
             </motion.span>
           ))}
         <CoinCounter value={shown} tone="good" />
-        <span className="text-14 font-bold">pièces d’or au total</span>
+        <span className="text-14 font-bold">minutons au total</span>
       </Card>
+
+      {level && (
+        <div className="mt-6 w-full">
+          <LevelUpBanner passion={passion} step={level} />
+        </div>
+      )}
 
       {milestone && (
         <div className="mt-6 w-full">

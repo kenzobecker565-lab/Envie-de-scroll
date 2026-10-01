@@ -1,12 +1,12 @@
 import { CalendarHeart, Check, Clock3, Hourglass, Info, Mountain, PenLine, RotateCcw, Shuffle, Sparkles, Volume2, VolumeX } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PathStep, type ProposalDTO } from '@scroll-up/shared'
+import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PassionId, type PathStep, type ProposalDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardEyebrow } from '@/components/ui/card'
-import { Skeleton, SkeletonText } from '@/components/ui/skeleton'
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
 import { ActivityHelp } from '../components/ActivityHelp.tsx'
@@ -48,6 +48,7 @@ export function ActivityScreen() {
   const requested = useRef(false)
 
   const [quietNote, setQuietNote] = useState<string>()
+  const reduced = useReducedMotion()
   const load = useCallback(
     async (replacing?: string, quiet = flow.quiet) => {
       if (!passionId || !mood || !duration) return
@@ -55,6 +56,8 @@ export function ActivityScreen() {
       setError(undefined)
       setQuietNote(undefined)
       try {
+        // Le dos de la carte reste visible un instant : on voit la carte se tirer.
+        const shuffle = new Promise((resolve) => window.setTimeout(resolve, reduced ? 0 : 550))
         const response = await api.propose({
           passion: passionId,
           mood,
@@ -63,6 +66,7 @@ export function ActivityScreen() {
           ...(replacing ? { replacing } : {}),
           ...(quiet && !fixedStep ? { quiet: true } : {}),
         })
+        await shuffle
         dispatch({ type: 'flow', flow: { proposal: response.proposal, quiet, clockOffset: Date.parse(response.serverTime) - Date.now() } })
         dispatch({ type: 'openProposal', proposal: response.proposal })
       } catch (caught) {
@@ -74,7 +78,7 @@ export function ActivityScreen() {
         setLoading(false)
       }
     },
-    [passionId, mood, duration, fixedStep, flow.quiet, dispatch],
+    [passionId, mood, duration, fixedStep, flow.quiet, reduced, dispatch],
   )
 
   useEffect(() => {
@@ -105,34 +109,34 @@ export function ActivityScreen() {
       </div>
       {step && <StepHeader step={step} />}
       {challenge && <ChallengeHeader challenge={challenge} />}
-      {/* Sur les petits écrans (ou avec un tirage à afficher), la scène se fait plus discrète. */}
-      <Card
-        className={cn('mt-5 items-center justify-center py-6 shadow-pop [@media(max-height:780px)]:py-3', proposal?.extra && 'py-3')}
-        initial={{ opacity: 0, y: 12, scale: 0.97, rotate: -2 }}
-        animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-      >
-        <span aria-hidden="true" className={cn('absolute -right-8 -bottom-10 h-32 w-32 rounded-pill border-[2.5px] border-outline', PASSION_COLORS[passionId].bg)} />
-        <PassionScene passion={passionId} className={cn('relative h-28 w-auto [@media(max-height:780px)]:h-20', proposal?.extra && 'h-20')} />
-      </Card>
-
-      <div className="mt-5 flex-1" aria-live="polite" aria-busy={loading}>
+      {/* L'activité est une carte qu'on retourne ; « Une autre idée » en tire une nouvelle. */}
+      <div className="mt-5 flex-1" aria-live="polite" aria-busy={loading} style={{ perspective: 1200 }}>
         <AnimatePresence mode="wait" initial={false}>
           {proposal && !loading ? (
             <motion.div
               key={proposal.id}
-              initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
-              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, rotateY: 95, scale: 0.94 }}
+              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+              exit={{ opacity: 0, rotateY: -95, scale: 0.94 }}
+              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformOrigin: 'center' }}
             >
-              <p className="text-16 text-ink-soft">{proposal.intro}</p>
-              <h1
-                className={cn('mt-2 font-display font-extrabold tracking-tight text-pretty text-ink', proposal.text.length > 95 || proposal.extra ? 'text-26' : 'text-30')}
-                aria-label={proposal.text}
-              >
-                <RevealWords text={proposal.text} />
-              </h1>
+              <Card padding="none" className="gap-0 shadow-pop">
+                {/* Le haut de la carte : la scène de la passion. */}
+                <div className={cn('relative flex items-center justify-center overflow-hidden border-b-[2.5px] border-outline py-3', PASSION_COLORS[passionId].soft)}>
+                  <span aria-hidden="true" className={cn('absolute -right-8 -bottom-12 h-28 w-28 rounded-pill border-[2.5px] border-outline', PASSION_COLORS[passionId].bg)} />
+                  <PassionScene passion={passionId} className={cn('relative h-24 w-auto [@media(max-height:780px)]:h-18', proposal.extra && 'h-18')} />
+                </div>
+                <div className="flex flex-col gap-2 p-4">
+                  <p className="text-15 text-ink-soft">{proposal.intro}</p>
+                  <h1
+                    className={cn('font-display font-extrabold tracking-tight text-pretty text-ink', proposal.text.length > 95 || proposal.extra ? 'text-22' : 'text-26')}
+                    aria-label={proposal.text}
+                  >
+                    <RevealWords text={proposal.text} />
+                  </h1>
+                </div>
+              </Card>
               {proposal.extra && <ExtraCard extra={proposal.extra} />}
               {step && (
                 <p className="mt-4 inline-flex items-center gap-2 text-14 font-semibold text-ink-soft">
@@ -154,11 +158,7 @@ export function ActivityScreen() {
               </AlertDescription>
             </Alert>
           ) : (
-            <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <Skeleton className="h-5 w-4/5" />
-              <SkeletonText lines={3} className="mt-4 [&>div]:h-8" />
-              <span className="sr-only">On cherche une idée pour toi…</span>
-            </motion.div>
+            <CardBack key="loading" passion={passionId} />
           )}
         </AnimatePresence>
       </div>
@@ -220,6 +220,33 @@ export function ActivityScreen() {
   )
 }
 
+/** Le dos de la carte, pendant qu'on en tire une : la couleur de la passion, des motifs, un point d'interrogation. */
+function CardBack({ passion }: { passion: PassionId }) {
+  const Icon = PASSION_ICONS[passion]
+  return (
+    <motion.div
+      initial={{ opacity: 0, rotateY: 95, scale: 0.94 }}
+      animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+      exit={{ opacity: 0, rotateY: -95, scale: 0.94 }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      className={cn('relative flex h-64 flex-col items-center justify-center gap-3 overflow-hidden rounded-lg border-[2.5px] border-outline shadow-pop', PASSION_COLORS[passion].bg)}
+    >
+      {/* Motif du dos de carte. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-3 rounded-md border-2 border-dashed border-outline/50"
+        style={{ backgroundImage: 'radial-gradient(color-mix(in srgb, var(--paper) 55%, transparent) 2px, transparent 2.5px)', backgroundSize: '18px 18px' }}
+      />
+      <span className="relative flex h-20 w-20 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper font-display text-46 font-extrabold text-on-color shadow-chip">?</span>
+      <span className="relative inline-flex items-center gap-2 rounded-pill border-2 border-outline bg-paper px-3 py-1 text-14 font-bold text-on-color">
+        <Icon size={16} strokeWidth={2.4} aria-hidden="true" />
+        On tire une carte pour toi…
+      </span>
+      <Sparkle size={30} color="var(--paper)" className="motion-loop anim-spin-slow absolute top-6 right-6" style={{ '--spin-duration': '6s' } as React.CSSProperties} />
+    </motion.div>
+  )
+}
+
 /** Petit lien discret sous les boutons (« Pas de papier ? », « Pas de son ? »). */
 function SmallLink({ onClick, disabled, children }: { onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
   return (
@@ -268,7 +295,7 @@ function RevealWords({ text }: { text: string }) {
             className="inline-block"
             initial={{ opacity: 0, y: 12, rotate: 2 }}
             animate={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{ delay: 0.15 + index * 0.045, type: 'spring', stiffness: 300, damping: 24 }}
+            transition={{ delay: 0.3 + index * 0.04, type: 'spring', stiffness: 300, damping: 24 }}
           >
             {word}
           </motion.span>

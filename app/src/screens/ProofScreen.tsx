@@ -1,7 +1,7 @@
 import { Camera, Clock3, FileCheck2, ImageOff, Info, PenLine, RefreshCw, Save, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
-import { getPassion, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, type ProposalDTO } from '@scroll-up/shared'
+import { countFor, countWords, getPassion, guideFor, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, unitLabel, type ProposalDTO, type WritingGoal } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -274,22 +274,58 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
 /* --------------------------------- Écriture -------------------------------- */
 
 function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofProps & { clockOffset: number }) {
-  const [text, setText] = useState('')
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0
+  // Le brouillon est gardé sur le téléphone : on peut quitter l'app et revenir.
+  const draftKey = `scroll-up:brouillon:${proposal.id}`
+  const [text, setText] = useState(() => readDraft(draftKey))
+  const goal = guideFor(proposal.activityId)?.goal
+  const words = countWords(text)
+  const reached = goal ? countFor(goal.unit, text) >= goal.count : false
+  const wasReached = useRef(reached)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => writeDraft(draftKey, text), 400)
+    return () => window.clearTimeout(timer)
+  }, [draftKey, text])
+
+  useEffect(() => {
+    if (reached && !wasReached.current) haptics.success()
+    wasReached.current = reached
+  }, [reached])
+
+  const submit = (submission: Submission) => {
+    writeDraft(draftKey, '')
+    onSubmit(submission)
+  }
+
   return (
     <Screen>
-      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={'Colle ou écris ici ce que tu as produit\u00A0: il rejoindra ta galerie.'}>
-        Et ce texte, alors&nbsp;?
+      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={'Écris ici, ou colle ce que tu as écrit ailleurs\u00A0: ton texte rejoindra ta galerie.'}>
+        Ton carnet
       </ScreenTitle>
       <label className="sr-only" htmlFor="proof-text">
         Ton texte
       </label>
-      <Textarea id="proof-text" value={text} onChange={(event) => setText(event.target.value)} maxLength={MAX_TEXT_LENGTH} rows={9} placeholder="Ton texte…" />
-      <p className="mt-2 text-right font-numbers text-14 font-extrabold text-ink-soft" aria-live="polite">
-        {words} {words > 1 ? 'mots' : 'mot'}
-      </p>
+      {/* Une page de carnet : spirale, lignes, marge. */}
+      <div className="overflow-hidden rounded-md border-[2.5px] border-outline bg-paper shadow-card">
+        <div aria-hidden="true" className="flex justify-around border-b-2 border-outline bg-lilac px-4 py-2">
+          {Array.from({ length: 9 }, (_, index) => (
+            <span key={index} className="h-3 w-3 rounded-pill border-2 border-outline bg-canvas" />
+          ))}
+        </div>
+        <Textarea
+          id="proof-text"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+          maxLength={MAX_TEXT_LENGTH}
+          rows={9}
+          placeholder="Il était une fois…"
+          className="min-h-[268px] rounded-none border-0 bg-transparent pt-[10px] pr-4 pl-12 text-17 leading-[28px] font-semibold text-on-color focus-visible:shadow-none"
+          style={NOTEBOOK_PAPER}
+        />
+      </div>
+      <WritingGauge goal={goal} text={text} words={words} reached={reached} />
 
-      <PrimaryAction text="Enregistrer mon texte" icon={<Save aria-hidden="true" />} onClick={() => onSubmit({ text })} enabled={text.trim().length > 0} loading={saving}>
+      <PrimaryAction text="Enregistrer mon texte" icon={<Save aria-hidden="true" />} onClick={() => submit({ text })} enabled={text.trim().length > 0} loading={saving}>
         {footer}
         <SkipProof
           proposal={proposal}
@@ -298,11 +334,64 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
           icon={<FileCheck2 aria-hidden="true" />}
           hint="Ton activité comptera quand même."
           saving={saving}
-          onSkip={() => onSubmit({})}
+          onSkip={() => submit({})}
         />
       </PrimaryAction>
     </Screen>
   )
+}
+
+/** Lignes du carnet (une tous les 28 px, qui défilent avec le texte) et marge rouge. */
+const NOTEBOOK_PAPER: React.CSSProperties = {
+  backgroundImage:
+    'linear-gradient(to right, transparent 34px, color-mix(in srgb, var(--accent) 60%, transparent) 34px, color-mix(in srgb, var(--accent) 60%, transparent) 36px, transparent 36px), linear-gradient(to bottom, transparent 27px, color-mix(in srgb, var(--lilac) 80%, transparent) 27px)',
+  backgroundSize: '100% 100%, 100% 28px',
+  backgroundPosition: '0 0, 0 10px',
+  backgroundAttachment: 'local, local',
+  color: '#151515',
+}
+
+/** Le compteur : l'objectif de l'activité (« 63 / 100 mots »), sinon le nombre de mots. */
+function WritingGauge({ goal, text, words, reached }: { goal?: WritingGoal; text: string; words: number; reached: boolean }) {
+  if (!goal) {
+    return (
+      <p className="mt-2 text-right font-numbers text-14 font-extrabold text-ink-soft" aria-live="polite">
+        {words} {words > 1 ? 'mots' : 'mot'}
+      </p>
+    )
+  }
+  const count = countFor(goal.unit, text)
+  const ratio = Math.min(1, count / goal.count)
+  return (
+    <div className="mt-3 flex flex-col gap-1.5" aria-live="polite">
+      <div className="flex items-center justify-between gap-2 text-13 font-bold">
+        <span className="text-ink-soft">Objectif&nbsp;: {goal.label}</span>
+        <span className={cn('font-numbers text-14 font-extrabold', reached ? 'text-good-ink' : 'text-ink')}>
+          {reached ? 'Objectif atteint\u00A0✓' : `${count} / ${goal.count} ${unitLabel(goal.unit, goal.count)}`}
+        </span>
+      </div>
+      <span aria-hidden="true" className="block h-3 overflow-hidden rounded-pill border-2 border-outline bg-surface-200">
+        <motion.span className={cn('block h-full origin-left', reached ? 'bg-good' : 'bg-lilac')} animate={{ scaleX: ratio }} transition={{ type: 'spring', stiffness: 160, damping: 22 }} />
+      </span>
+    </div>
+  )
+}
+
+function readDraft(key: string): string {
+  try {
+    return localStorage.getItem(key) ?? ''
+  } catch {
+    return ''
+  }
+}
+
+function writeDraft(key: string, text: string): void {
+  try {
+    if (text.trim()) localStorage.setItem(key, text)
+    else localStorage.removeItem(key)
+  } catch {
+    // Stockage indisponible (navigation privée) : tant pis pour le brouillon.
+  }
 }
 
 /* ------------------------------ Musique, Cinéma ---------------------------- */

@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import {
   CONFIRMED_PATH_LEVEL,
   getPassion,
+  passionLevel,
   PATH_TIERS,
   pathProgress,
   pathsFor,
@@ -15,6 +16,7 @@ import { PRESSED } from '@/components/ui/button'
 import { Card, cardVariants } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
+import { BadgePin } from './BadgePin.tsx'
 import { Sparkle } from './decor/Sparkle.tsx'
 
 /**
@@ -130,9 +132,13 @@ export function StepBanner({ step, progress, onOpenPath }: { step: PathStep; pro
       role="status"
     >
       <span className="flex items-center gap-3">
-        <span className="relative flex h-14 w-14 shrink-0 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color [&>svg]:size-6">
-          {finished ? <Award aria-hidden="true" /> : <Icon aria-hidden="true" />}
-        </span>
+        {finished ? (
+          <BadgePin pathId={path.id} earned size={60} animate className="rotate-6" />
+        ) : (
+          <span className="relative flex h-14 w-14 shrink-0 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color [&>svg]:size-6">
+            <Icon aria-hidden="true" />
+          </span>
+        )}
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="text-12 font-bold tracking-wider uppercase">
             {passion.label} · {path.title}
@@ -211,3 +217,8 @@ export function featuredPath(passions: readonly PassionId[], stepsByPassion: (pa
   return fresh ? { progress: fresh, started: false } : null
 }
 
+
+/** Les parcours terminés, toutes passions confondues (pour la vitrine des badges). */
+export function finishedPathIds(byPassion: readonly { passion: PassionId; steps: readonly string[]; minutes: number }[]): string[] {
+  return byPassion.flatMap((row) => pathProgress(row.passion, row.steps, passionLevel(row.passion, row.minutes).level).filter((entry) => entry.finished).map((entry) => entry.path.id))
+}

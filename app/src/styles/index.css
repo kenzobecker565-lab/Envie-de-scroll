@@ -595,6 +595,25 @@
     animation: wave var(--wave-duration, 3s) linear infinite;
   }
 
+  /* Minuton cligne des yeux, et agite les bras quand il fait la fête. */
+  .anim-blink {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: blink 4.2s ease-in-out infinite;
+  }
+  .anim-mascot-wave {
+    animation: mascot-wave 0.7s ease-in-out infinite alternate;
+  }
+  .anim-mascot-wave-right {
+    animation: mascot-wave-right 0.7s ease-in-out infinite alternate;
+    animation-delay: -0.35s;
+  }
+
+  /* Le vinyle qui tourne (galerie, Musique). */
+  .anim-vinyl {
+    animation: spin var(--spin-duration, 6s) linear infinite;
+  }
+
   /* Rayures qui glissent dans le bouton « Valider » en attente. */
   .anim-stripes {
     background-image: repeating-linear-gradient(-45deg, transparent 0 10px, color-mix(in srgb, var(--surface-200) 35%, transparent) 10px 20px);
@@ -680,6 +699,18 @@
 }
 @keyframes stripes {
   to { background-position: 28px 0; }
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes mascot-wave {
+  from { transform: rotate(-10deg); }
+  to { transform: rotate(12deg); }
+}
+@keyframes mascot-wave-right {
+  from { transform: rotate(10deg); }
+  to { transform: rotate(-12deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

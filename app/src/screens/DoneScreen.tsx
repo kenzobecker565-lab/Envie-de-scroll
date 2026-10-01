@@ -11,6 +11,7 @@ import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
+import { Mascot } from '../components/Mascot.tsx'
 import { MilestoneBanner } from '../components/Milestones.tsx'
 import { StepBanner } from '../components/Paths.tsx'
 import { LevelUpBanner, statsFor } from '../components/Progression.tsx'
@@ -71,8 +72,9 @@ export function DoneScreen() {
           animate={{ scale: 1, opacity: 1, rotateY: 720 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Minuton fait la fête. */}
           <span className="motion-loop anim-float" style={{ '--float-duration': '3s' } as React.CSSProperties}>
-            <CoinIcon size={68} />
+            <Mascot mood="cheer" size={74} className="mt-1" />
           </span>
         </motion.span>
         <Sparkle size={24} color="var(--accent)" className="motion-loop anim-twinkle absolute -top-3 -right-2" />

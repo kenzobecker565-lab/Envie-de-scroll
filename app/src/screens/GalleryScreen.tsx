@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronDown, Clock3, Maximize2, RotateCcw, Send, Share2, SlidersHorizontal, Timer } from 'lucide-react'
+import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2, SlidersHorizontal, Timer } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, type CompletionDTO } from '@scroll-up/shared'
@@ -11,7 +11,9 @@ import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
+import { BadgeShelf } from '../components/BadgePin.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
+import { finishedPathIds } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
 import { MilestoneProgress } from '../components/Milestones.tsx'
@@ -137,6 +139,7 @@ export function GalleryScreen() {
       )}
 
       <PassionProgressGrid />
+      {stats.byPassion.some((row) => row.steps.length > 0) && <BadgeShelf finished={finishedPathIds(stats.byPassion)} />}
       <ProjectsSection />
 
       {(view === 'list' || view === 'loading') && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
@@ -237,15 +240,18 @@ export function GalleryScreen() {
 
 /* --------------------------------- Cartes --------------------------------- */
 
-/** Fond de chaque carte : le texte en lilas, les découvertes à la couleur de leur passion, les dessins en polaroïd blanc. */
-const CARD_TONES = { dessin: 'default', ecriture: 'lilac', musique: 'good', cinema: 'warm' } as const
+/**
+ * Chaque passion a son objet : le dessin en polaroïd scotché, le texte sur une
+ * page de carnet, la musique en vinyle, le cinéma en ticket de séance.
+ */
+const CARD_TONES = { dessin: 'default', ecriture: 'default', musique: 'good', cinema: 'warm' } as const
 
 /** Pied de carte commun : passion, activité, date, minutons gagnés. */
 function CardFooter({ item }: { item: CompletionDTO }) {
   const Icon = PASSION_ICONS[item.passion]
   return (
     <div className="flex items-start gap-2">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border-2 border-on-color bg-paper">
+      <span className={cn('flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border-2 border-on-color', item.passion === 'dessin' || item.passion === 'ecriture' ? PASSION_COLORS[item.passion].bg : 'bg-paper')}>
         <Icon size={17} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
       </span>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
@@ -262,59 +268,139 @@ function CardFooter({ item }: { item: CompletionDTO }) {
 }
 
 function GalleryCard({ item }: { item: CompletionDTO }) {
-  if (item.passion === 'dessin') return <DrawingCard item={item} />
-  if (item.passion === 'ecriture' && item.text) return <QuoteCard item={item} text={item.text} />
-  return <ExploredCard item={item} />
+  if (item.passion === 'dessin') return <PolaroidCard item={item} />
+  if (item.passion === 'ecriture') return <NotebookCard item={item} />
+  if (item.passion === 'musique') return <VinylCard item={item} />
+  return <TicketCard item={item} />
 }
 
-/** Dessin : la photo envoyée, en polaroïd. */
-function DrawingCard({ item }: { item: CompletionDTO }) {
+/** Un morceau de scotch, en haut d'un polaroïd. */
+function Tape({ className }: { className?: string }) {
+  return <span aria-hidden="true" className={cn('absolute top-1 left-1/2 z-10 h-6 w-24 -translate-x-1/2 -rotate-3 border-x-2 border-dashed border-outline/25 bg-warm/70', className)} />
+}
+
+/** Dessin : la photo en polaroïd scotché, la légende en dessous. */
+function PolaroidCard({ item }: { item: CompletionDTO }) {
   return (
-    <>
+    <div className="relative flex flex-col gap-3 p-3 pt-5">
+      <Tape />
       {item.photoUrl ? (
-        <div className="p-2 pb-0">
-          <Photo src={item.photoUrl} alt={`Dessin : ${item.activityText}`} className="max-h-[480px]" />
-        </div>
+        <Photo src={item.photoUrl} alt={`Dessin : ${item.activityText}`} className="max-h-[480px]" />
+      ) : item.photoPending ? (
+        <PhotoPendingNote />
       ) : (
-        item.photoPending && <PhotoPendingNote />
+        <div className="flex aspect-[4/3] items-center justify-center rounded-md border-2 border-dashed border-ink-faint text-14 font-semibold text-ink-soft">Dessin sans photo</div>
       )}
-      <div className="p-4">
+      <div className="px-1">
         <CardFooter item={item} />
       </div>
-    </>
+    </div>
   )
 }
 
-/** Écriture : le texte, présenté comme une citation. */
-function QuoteCard({ item, text }: { item: CompletionDTO; text: string }) {
-  const long = text.length > 320
+/** Écriture : le texte sur une page de carnet à spirale, lignée, avec sa marge. */
+function NotebookCard({ item }: { item: CompletionDTO }) {
+  const text = item.text
+  const long = Boolean(text && text.length > 320)
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <div>
-        <span aria-hidden="true" className="block h-6 font-display text-46 leading-none font-extrabold">
-          “
-        </span>
-        <blockquote className={cn('mt-2 font-display text-17 leading-snug font-semibold whitespace-pre-line', long && 'line-clamp-6')}>{text}</blockquote>
-        {long && (
-          <span className="mt-2 inline-flex items-center gap-1 text-13 font-bold underline decoration-2 underline-offset-4">
-            <Maximize2 size={14} aria-hidden="true" />
-            Lire la suite
-          </span>
+    <div className="flex flex-col">
+      <div aria-hidden="true" className="flex justify-around border-b-2 border-outline bg-lilac px-4 py-2">
+        {Array.from({ length: 9 }, (_, index) => (
+          <span key={index} className="h-3 w-3 rounded-pill border-2 border-outline bg-canvas" />
+        ))}
+      </div>
+      <div className="relative py-3 pr-4 pl-11" style={NOTEBOOK_LINES}>
+        <span aria-hidden="true" className="absolute inset-y-0 left-7 border-l-2 border-accent/60" />
+        {text ? (
+          <>
+            <blockquote className={cn('font-display text-17 leading-[28px] font-semibold whitespace-pre-line text-ink', long && 'line-clamp-6')}>{text}</blockquote>
+            {long && (
+              <span className="inline-flex items-center gap-1 text-13 leading-[28px] font-bold text-ink underline decoration-2 underline-offset-4">
+                <Maximize2 size={14} aria-hidden="true" />
+                Lire la suite
+              </span>
+            )}
+          </>
+        ) : (
+          <p className="text-15 leading-[28px] font-semibold text-ink-soft">Écrit sur papier, gardé pour toi.</p>
         )}
       </div>
-      <Separator className="bg-outline/20" />
+      <div className="border-t-2 border-outline/15 p-4">
+        <CardFooter item={item} />
+      </div>
+    </div>
+  )
+}
+
+/** Les lignes du carnet : une tous les 28 px, alignées sur le texte. */
+const NOTEBOOK_LINES: React.CSSProperties = {
+  backgroundImage: 'linear-gradient(to bottom, transparent 27px, color-mix(in srgb, var(--lilac) 75%, transparent) 27px)',
+  backgroundSize: '100% 28px',
+  backgroundPosition: '0 12px',
+}
+
+/** Musique : un vinyle qui dépasse de sa pochette, et le titre écouté. */
+function VinylCard({ item }: { item: CompletionDTO }) {
+  const title = item.exploredTitle ?? item.extra?.items[0]
+  return (
+    <div className="flex flex-col gap-4 p-4">
+      <div className="flex items-center gap-4">
+        <span aria-hidden="true" className="relative h-24 w-28 shrink-0">
+          {/* La pochette, puis le disque qui en sort. */}
+          <span className="absolute top-0 left-0 z-10 flex h-24 w-20 -rotate-3 items-end overflow-hidden rounded-sm border-[2.5px] border-outline bg-paper p-1.5 shadow-chip">
+            <span className="h-full w-full rounded-[6px] bg-good-soft" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent 0 8px, color-mix(in srgb, var(--good) 60%, transparent) 8px 12px)' }} />
+          </span>
+          <Vinyl className="motion-loop anim-vinyl absolute top-1 right-0 h-22 w-22" />
+        </span>
+        <span className="flex min-w-0 flex-col gap-1">
+          <span className="text-12 font-bold tracking-wider uppercase opacity-80">Dans tes oreilles</span>
+          <span className="font-display text-22 leading-tight font-extrabold tracking-tight">{title ?? 'Une écoute rien qu’à toi'}</span>
+        </span>
+      </div>
       <CardFooter item={item} />
     </div>
   )
 }
 
-/** Musique, Cinéma (et écriture sans texte) : une carte avec le titre exploré. */
-function ExploredCard({ item }: { item: CompletionDTO }) {
+/** Un disque vinyle (sillons, étiquette, trou central). */
+function Vinyl({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} style={{ '--spin-duration': '7s' } as React.CSSProperties}>
+      <circle cx="50" cy="50" r="47" style={{ fill: '#1d1a17', stroke: 'var(--outline)', strokeWidth: 3 }} />
+      {[40, 34, 28].map((radius) => (
+        <circle key={radius} cx="50" cy="50" r={radius} style={{ fill: 'none', stroke: '#3a352f', strokeWidth: 1.5 }} />
+      ))}
+      <path d="M22 30 A34 34 0 0 1 40 18" style={{ fill: 'none', stroke: '#ffffff', strokeWidth: 3, strokeLinecap: 'round', opacity: 0.35 }} />
+      <circle cx="50" cy="50" r="16" style={{ fill: 'var(--accent)', stroke: '#1d1a17', strokeWidth: 2 }} />
+      <circle cx="50" cy="50" r="3" style={{ fill: 'var(--paper)' }} />
+    </svg>
+  )
+}
+
+/** Cinéma : un ticket de séance, avec son talon perforé. */
+function TicketCard({ item }: { item: CompletionDTO }) {
   const title = item.exploredTitle ?? item.extra?.items[0]
   return (
-    <div className="flex flex-col gap-4 p-4">
-      {title && <p className="font-display text-26 font-extrabold tracking-tight">{title}</p>}
-      <CardFooter item={item} />
+    <div className="relative flex flex-col">
+      <div className="relative flex">
+        <div className="flex min-w-0 flex-1 flex-col gap-1 p-4 pr-3">
+          <span className="text-12 font-bold tracking-wider uppercase opacity-80">Séance · {formatDay(item.createdAt)}</span>
+          <span className="font-display text-22 leading-tight font-extrabold tracking-tight">{title ?? 'Une séance rien qu’à toi'}</span>
+        </div>
+        {/* Le talon : perforations et numéro de place. */}
+        <div className="flex w-20 shrink-0 flex-col items-center justify-center gap-1 border-l-[2.5px] border-dashed border-outline/60 px-2 text-center">
+          <Clapperboard size={22} strokeWidth={2.3} aria-hidden="true" />
+          <span className="text-11 font-extrabold tracking-wider uppercase">Entrée</span>
+          <span className="font-numbers text-15 font-extrabold">{item.duration}&nbsp;min</span>
+        </div>
+        {/* Les encoches du ticket, en haut et en bas du talon. */}
+        <span aria-hidden="true" className="absolute -top-3 right-[68px] h-6 w-6 rounded-pill border-[2.5px] border-outline bg-canvas" />
+      </div>
+      <div className="relative border-t-[2.5px] border-dashed border-outline/60 p-4">
+        <span aria-hidden="true" className="absolute top-1/2 -left-3 h-6 w-6 -translate-y-1/2 rounded-pill border-[2.5px] border-outline bg-canvas" />
+        <span aria-hidden="true" className="absolute top-1/2 -right-3 h-6 w-6 -translate-y-1/2 rounded-pill border-[2.5px] border-outline bg-canvas" />
+        <CardFooter item={item} />
+      </div>
     </div>
   )
 }

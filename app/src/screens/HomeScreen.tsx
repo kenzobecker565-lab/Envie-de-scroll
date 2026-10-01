@@ -9,6 +9,7 @@ import { CoinIcon } from '../components/Coins.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
 import { HomeCta } from '../components/HomeCta.tsx'
 import { ChallengeCard, challengePassions } from '../components/Challenge.tsx'
+import { MascotSays } from '../components/Mascot.tsx'
 import { ActivePathCard, featuredPath } from '../components/Paths.tsx'
 import { statsFor } from '../components/Progression.tsx'
 import { track } from '../api/client.ts'
@@ -89,9 +90,10 @@ export function HomeScreen() {
         <motion.h1 className="font-display text-46 font-extrabold tracking-tight text-ink" {...fadeUp(0)}>
           {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
         </motion.h1>
-        <motion.p className="max-w-[300px] text-16 text-ink-soft" {...fadeUp(0.1)}>
+        {/* Minuton, la mascotte, dit la phrase du moment. */}
+        <MascotSays mood={dayMoment(hour) === 'nuit' ? 'sleepy' : dayMoment(hour) === 'matin' ? 'happy' : 'wink'} size={52} className="mt-1">
           {line}
-        </motion.p>
+        </MascotSays>
       </div>
 
       {/* Le gros bouton, dans la forme du thème choisi. */}

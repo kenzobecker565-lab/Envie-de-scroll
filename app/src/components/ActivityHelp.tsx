@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
 import { linksFor, type ExternalLink } from '../lib/links.ts'
 import { PASSION_COLORS } from '../lib/icons.ts'
+import { Mascot } from './Mascot.tsx'
 import { useAppState } from '../state/AppState.tsx'
 import { haptics, openExternal } from '../telegram/webApp.ts'
 
@@ -77,6 +78,10 @@ export function ActivityHelp({ proposal }: { proposal: ProposalDTO }) {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.2 }}
           >
+            <li className="flex items-center gap-2">
+              <Mascot mood="think" size={40} />
+              <span className="text-14 font-bold text-ink">Minuton a quelques pistes pour toi&nbsp;:</span>
+            </li>
             {guide.tips.map((tip, index) => (
               <motion.li
                 key={tip}

@@ -1,4 +1,4 @@
-import { ArrowRight, Award, Check, Clock3, Flag, Footprints, Lock, Mountain, Play, Trophy } from 'lucide-react'
+import { ArrowRight, Check, Clock3, Footprints, Lock, Mountain, Play, Trophy } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
 import { CONFIRMED_PATH_LEVEL, getPassion, getPath, PATH_TIERS, passionLevel, pathProgress, pathsFor, STEPS_PER_PATH, type PathStep } from '@scroll-up/shared'
@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
+import { BadgePin } from '../components/BadgePin.tsx'
 import { Confetti } from '../components/Confetti.tsx'
 import { DifficultyMeter } from '../components/Paths.tsx'
 import { statsFor } from '../components/Progression.tsx'
@@ -75,9 +76,7 @@ export function PathScreen({ pathId }: { pathId: string }) {
       {progress.finished && (
         <Card tone={PASSION_COLORS[path.passion].badge} className="mt-6 flex-row items-center gap-4 shadow-pop" initial={{ scale: 0.8, rotate: -4, opacity: 0 }} animate={{ scale: 1, rotate: -1, opacity: 1 }}>
           <Confetti count={20} />
-          <span className="flex h-14 w-14 shrink-0 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color">
-            <Award size={28} aria-hidden="true" />
-          </span>
+          <BadgePin pathId={path.id} earned size={64} animate className="rotate-6" />
           <span className="flex flex-col">
             <span className="text-12 font-bold tracking-wider uppercase">Badge gagné</span>
             <span className="font-display text-26 font-extrabold tracking-tight">{path.badge}</span>
@@ -119,8 +118,8 @@ export function PathScreen({ pathId }: { pathId: string }) {
       <ol className="relative mt-8 flex flex-col gap-4" aria-label={`Les ${STEPS_PER_PATH} étapes, du sommet au départ`}>
         <span aria-hidden="true" className="absolute top-6 bottom-6 left-[23px] border-l-[3px] border-dashed border-ink-faint" />
         <li className="relative flex items-center gap-3">
-          <span className="z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline bg-warm text-on-color shadow-chip">
-            <Flag size={22} strokeWidth={2.4} aria-hidden="true" />
+          <span className="z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-pill bg-canvas">
+            <BadgePin pathId={path.id} earned={progress.finished} size={48} />
           </span>
           <span className="font-display text-17 font-extrabold text-ink">
             Sommet · badge «&nbsp;{path.badge}&nbsp;»

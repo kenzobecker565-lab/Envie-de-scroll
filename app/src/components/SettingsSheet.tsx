@@ -1,14 +1,16 @@
 import { BellRing, Check, ChevronRight, LoaderCircle, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { ambianceCredits } from '@scroll-up/shared'
+import { ambianceCredits, formatClock, isScrollMoment, SCROLL_MOMENT_INFO, SCROLL_MOMENTS } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api, track } from '../api/client.ts'
 import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
 import { homeScreenConfirm, homeScreenView, type HomeScreenState } from '../lib/homeScreen.ts'
+import { MOMENT_STYLE } from '../lib/icons.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { checkHomeScreen, haptics, requestHomeScreen, supports, telegram } from '../telegram/webApp.ts'
@@ -122,12 +124,18 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
         <Row
           icon={<BellRing aria-hidden="true" />}
           title="Petites relances"
-          description="Un message du bot vers 19 h, seulement les jours sans activité."
+          description={
+            user.scrollMoment
+              ? `Un message du bot vers ${formatClock(SCROLL_MOMENT_INFO[user.scrollMoment].remindAt)}, juste avant ton moment de scroll. Seulement les jours sans activité.`
+              : 'Un message du bot vers 19 h, seulement les jours sans activité.'
+          }
           onClick={toggleReminders}
           trailing={<Switch on={user.remindersEnabled} busy={saving} />}
           role="switch"
           checked={user.remindersEnabled}
+          live
         />
+        {user.remindersEnabled && <MomentPicker />}
         {telegram && <HomeScreenRow />}
         <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
         <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" />
@@ -225,6 +233,41 @@ function HomeScreenRow() {
         ) : undefined
       }
     />
+  )
+}
+
+/** Le moment où l'on scrolle le plus : la relance du bot arrive juste avant. */
+function MomentPicker() {
+  const { state, dispatch } = useAppState()
+  const { user } = state.me
+
+  const choose = (value: string) => {
+    if (!isScrollMoment(value) || value === user.scrollMoment) return
+    haptics.selection()
+    dispatch({ type: 'user', user: { ...user, scrollMoment: value } })
+    api
+      .updateSettings({ scrollMoment: value })
+      .then(({ user: updated }) => dispatch({ type: 'user', user: updated }))
+      .catch(() => dispatch({ type: 'user', user }))
+  }
+
+  return (
+    <div className="flex flex-col gap-2 pl-1">
+      <span id="settings-moment" className="text-13 font-bold text-ink-soft">
+        Tu scrolles surtout…
+      </span>
+      <ToggleGroup type="single" variant="chip" value={user.scrollMoment ?? ''} onValueChange={choose} className="grid grid-cols-4 gap-2" aria-labelledby="settings-moment">
+        {SCROLL_MOMENTS.map((id) => {
+          const { icon: Icon, on } = MOMENT_STYLE[id]
+          return (
+            <ToggleGroupItem key={id} value={id} className={cn('min-h-16 flex-col justify-center gap-1 rounded-md px-1 text-13', on)} whileTap={{ scale: 0.94 }}>
+              <Icon aria-hidden="true" />
+              {SCROLL_MOMENT_INFO[id].short}
+            </ToggleGroupItem>
+          )
+        })}
+      </ToggleGroup>
+    </div>
   )
 }
 

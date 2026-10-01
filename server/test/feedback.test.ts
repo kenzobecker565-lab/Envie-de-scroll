@@ -110,6 +110,18 @@ describe('réglages', () => {
     expect(on.body.user.remindersEnabled).toBe(true)
     await request(app).put('/api/me/settings').set(as()).send({ remindersEnabled: 'oui' }).expect(400)
   })
+
+  it('enregistre le moment où l’on scrolle le plus', async () => {
+    const first = await request(app).get('/api/me').set(as()).expect(200)
+    expect((first.body as MeResponse).user.scrollMoment).toBeNull()
+    const chosen = await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'nuit', remindersEnabled: true }).expect(200)
+    expect(chosen.body.user).toMatchObject({ scrollMoment: 'nuit', remindersEnabled: true })
+    // Changer de moment ne touche pas à l'interrupteur des relances.
+    const changed = await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'midi' }).expect(200)
+    expect(changed.body.user).toMatchObject({ scrollMoment: 'midi', remindersEnabled: true })
+    await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'apero' }).expect(400)
+    await request(app).put('/api/me/settings').set(as()).send({}).expect(400)
+  })
 })
 
 describe('admins et statistiques', () => {
@@ -142,8 +154,10 @@ describe('admins et statistiques', () => {
     await request(app).post('/api/events').set(as(7)).send({ name: 'home_screen' }).expect(204)
     await request(app).post('/api/events').set(as(7)).send({ name: 'home_screen_added' }).expect(204)
     await request(app).post('/api/events').set(as()).send({ name: 'home_screen_silent' }).expect(204)
+    await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'nuit' }).expect(200)
 
     const stats = await globalStats(prisma, clock.now())
+    expect(stats).toContain('Moments de scroll : matin 0 · midi 0 · soir 0 · nuit 1 · pas dit 0 · relances coupées 0')
     expect(stats).toContain('Testeurs : 2')
     expect(stats).toContain('« J’ai envie de scroller » : 1 appui')
     expect(stats).toContain('activités validées : 1 (100 %')

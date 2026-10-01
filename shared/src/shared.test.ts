@@ -58,6 +58,10 @@ import {
   RAW_ACTIVITIES,
   RECENT_EXCLUSION,
   reminderMessage,
+  formatClock,
+  isScrollMoment,
+  reminderMinutes,
+  SCROLL_MOMENTS,
   sample,
   suggestedTitle,
   unlockTime,
@@ -232,6 +236,15 @@ describe('règles', () => {
     expect(reminderMessage(0)).toBe('Un scroll de plus et TikTok va commencer à me demander une commission.')
     expect(reminderMessage(1)).toBe('On me signale une activité suspecte sur ton téléphone. Ça sent le scroll à plein nez.')
     expect(reminderMessage(2)).toBe(reminderMessage(0))
+  })
+
+  it('relance juste avant le moment où l’on scrolle, sinon à l’heure par défaut', () => {
+    for (const moment of SCROLL_MOMENTS) expect(isScrollMoment(moment)).toBe(true)
+    expect(isScrollMoment('apero')).toBe(false)
+    expect(reminderMinutes('nuit', 19)).toBe(21 * 60 + 45)
+    expect(reminderMinutes(null, 19)).toBe(19 * 60)
+    expect(formatClock(reminderMinutes('matin', 19))).toBe('7 h 30')
+    expect(formatClock(reminderMinutes('midi', 19))).toBe('12 h')
   })
 })
 

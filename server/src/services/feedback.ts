@@ -35,6 +35,7 @@ import {
   nextMilestone,
   passionLevel,
   RATING_LABELS,
+  SCROLL_MOMENTS,
   type ActivityRating,
   type AppEventName,
   type MoodId,
@@ -197,6 +198,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     homeScreenAsks,
     homeScreenAdded,
     homeScreenSilent,
+    moments,
+    remindersOff,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -229,16 +232,20 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.appEvent.count({ where: { name: 'home_screen' } }),
     prisma.appEvent.count({ where: { name: 'home_screen_added' } }),
     prisma.appEvent.count({ where: { name: 'home_screen_silent' } }),
+    prisma.user.groupBy({ by: ['scrollMoment'], _count: true, where: { NOT: { passions: '[]' } } }),
+    prisma.user.count({ where: { remindersEnabled: false, NOT: { passions: '[]' } } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
   const returning = doers.filter((row) => row._count >= 2).length
+  const momentCount = (moment: string | null) => moments.find((row) => row.scrollMoment === moment)?._count ?? 0
   const lines = [
     'Scroll-up · le test en chiffres',
     '',
     `Testeurs : ${users} (${newDay} nouveaux en 24 h)`,
     `Actifs : ${activeDay} en 24 h, ${activeWeek} sur 7 jours`,
     `Passions choisies : ${onboarded} sur ${users} (${percent(onboarded, users)})`,
+    `Moments de scroll : ${SCROLL_MOMENTS.map((moment) => `${moment} ${momentCount(moment)}`).join(' · ')} · pas dit ${momentCount(null)} · relances coupées ${remindersOff}`,
     '',
     'Le parcours',
     `« J’ai envie de scroller » : ${plural(ctaTotal, 'appui')} (${ctaDay} en 24 h)`,

@@ -18,7 +18,7 @@ import { GalleryScreen } from './screens/GalleryScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { PathScreen } from './screens/PathScreen.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
-import { PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
+import { MomentScreen, PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
 import { SignalScreen } from './screens/SignalScreen.tsx'
 import { AppStateProvider, useAppState, useNavigation, type Flow, type Route } from './state/AppState.tsx'
@@ -105,6 +105,8 @@ function screenFor(route: Route) {
       return <WelcomeScreen />
     case 'passions':
       return <PassionsScreen mode={route.mode} />
+    case 'moment':
+      return <MomentScreen />
     case 'home':
       return <HomeScreen />
     case 'signal':

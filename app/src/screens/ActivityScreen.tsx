@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
 import { ActivityHelp } from '../components/ActivityHelp.tsx'
+import { FloatingConsigne, useScrolledPast } from '../components/Consigne.tsx'
 import { PassionScene } from '../components/decor/PassionScene.tsx'
 import { DifficultyMeter } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
@@ -44,6 +45,8 @@ export function ActivityScreen() {
 
   const proposal = matches(flow.proposal) ? flow.proposal : undefined
   const [loading, setLoading] = useState(!proposal)
+  // Quand la carte sort du champ (on lit les aides plus bas), la consigne se colle en haut.
+  const [consigneRef, consignePassed] = useScrolledPast<HTMLHeadingElement>()
   const [error, setError] = useState<string>()
   const requested = useRef(false)
 
@@ -96,6 +99,7 @@ export function ActivityScreen() {
 
   return (
     <Screen>
+      <FloatingConsigne proposal={proposal} show={!loading && consignePassed} />
       {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant={PASSION_COLORS[passionId].badge} tilt="left">
@@ -130,6 +134,7 @@ export function ActivityScreen() {
                 <div className="flex flex-col gap-2 p-4">
                   <p className="text-15 text-ink-soft">{proposal.intro}</p>
                   <h1
+                    ref={consigneRef}
                     className={cn('font-display font-extrabold tracking-tight text-pretty text-ink', proposal.text.length > 95 || proposal.extra ? 'text-22' : 'text-26')}
                     aria-label={proposal.text}
                   >

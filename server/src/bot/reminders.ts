@@ -3,24 +3,27 @@
  *  RELANCES
  * ============================================================================
  *
- * Une fois par jour au plus, à l'heure choisie (REMINDER_HOUR, 19 h par
- * défaut, dans le fuseau de chacun), le bot envoie un petit message aux
- * personnes qui n'ont encore rien fait dans la journée. Les deux messages
- * alternent.
+ * Une fois par jour au plus, le bot envoie un petit message aux personnes qui
+ * n'ont encore rien fait dans la journée, juste avant le moment où elles
+ * scrollent le plus (choisi à l'inscription : 7 h 30, 12 h, 18 h 30 ou
+ * 21 h 45, dans le fuseau de chacun). Sans moment choisi : REMINDER_HOUR
+ * (19 h par défaut). Les deux messages alternent.
  *
  * Pour ne jamais devenir pesant : aucune relance les jours où une activité a
  * été faite, pause automatique après 5 relances restées sans réponse (le
  * compteur repart de zéro dès que l'app est ouverte), /stop pour arrêter.
  */
 
-import { reminderMessage } from '@scroll-up/shared'
+import { isScrollMoment, reminderMinutes, reminderMessage } from '@scroll-up/shared'
 import type { Telegram } from 'telegraf'
 import type { PrismaClient } from '../db.ts'
-import { localDate, localHour } from '../lib/time.ts'
+import { localDate, localMinutes } from '../lib/time.ts'
 import { openAppKeyboard } from './bot.ts'
 
 export const MAX_UNANSWERED_REMINDERS = 5
 const CHECK_INTERVAL_MS = 5 * 60_000
+/** Une relance part dans l'heure qui suit son horaire (le serveur vérifie toutes les 5 minutes). */
+const SEND_WINDOW_MINUTES = 60
 
 export interface ReminderDeps {
   prisma: PrismaClient
@@ -36,7 +39,9 @@ export async function sendDueReminders({ prisma, send, reminderHour, webAppUrl }
   })
   let sent = 0
   for (const user of candidates) {
-    if (localHour(now, user.timezone) !== reminderHour) continue
+    const due = reminderMinutes(isScrollMoment(user.scrollMoment) ? user.scrollMoment : null, reminderHour)
+    const minutes = localMinutes(now, user.timezone)
+    if (minutes < due || minutes >= due + SEND_WINDOW_MINUTES) continue
     const today = localDate(now, user.timezone)
     if (user.lastReminderDate === today) continue
     const doneToday = await prisma.completion.count({ where: { userId: user.id, localDate: today } })

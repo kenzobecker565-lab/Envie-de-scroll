@@ -7,6 +7,7 @@
  */
 
 import type { ActivityRating, AppEventName } from './feedback.ts'
+import type { ScrollMoment } from './reminders.ts'
 import type { AppTheme } from './themes.ts'
 import type { ActivityExtra, Duration, MoodId, PassionId } from './types.ts'
 
@@ -18,8 +19,10 @@ export interface UserDTO {
   onboarded: boolean
   /** Thème choisi dans l'app. */
   theme: AppTheme
-  /** Relances du bot (vers 19 h, au plus une par jour). */
+  /** Relances du bot (au plus une par jour). */
   remindersEnabled: boolean
+  /** Le moment où la personne scrolle le plus : la relance arrive juste avant (sinon vers 19 h). */
+  scrollMoment: ScrollMoment | null
 }
 
 /** Ce qu'une personne a fait dans une passion : de quoi calculer son niveau et sa collection. */
@@ -120,6 +123,7 @@ export interface UpdateThemeRequest {
 
 export interface UpdateSettingsRequest {
   remindersEnabled?: boolean
+  scrollMoment?: ScrollMoment
 }
 
 /** Un avis écrit, envoyé depuis l'app. */

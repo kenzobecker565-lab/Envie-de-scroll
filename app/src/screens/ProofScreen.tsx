@@ -1,19 +1,19 @@
-import { Camera, Clock3, FileCheck2, ImageOff, Info, PenLine, RefreshCw, Save, type LucideIcon } from 'lucide-react'
+import { Camera, FileCheck2, ImageOff, Info, PenLine, RefreshCw, Save } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { countFor, countWords, getPassion, guideFor, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, unitLabel, type ProposalDTO, type WritingGoal } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, cardVariants } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
+import { ConsigneBar } from '../components/Consigne.tsx'
 import { DrawingPad, type DrawingPadHandle } from '../components/DrawingPad.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
-import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
+import { PASSION_ICONS } from '../lib/icons.ts'
 import { prepareImage } from '../lib/image.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -82,23 +82,6 @@ interface ProofProps {
   footer: React.ReactNode
 }
 
-/** Rappel de l'activité en cours : passion et durée, au-dessus du titre. */
-function ProofContext({ proposal }: { proposal: ProposalDTO }) {
-  const Icon: LucideIcon = PASSION_ICONS[proposal.passion]
-  return (
-    <div className="flex flex-wrap gap-3">
-      <Badge variant={PASSION_COLORS[proposal.passion].badge} tilt="left">
-        <Icon aria-hidden="true" />
-        {getPassion(proposal.passion).label}
-      </Badge>
-      <Badge variant="warm" tilt="right">
-        <Clock3 aria-hidden="true" />
-        <span className="font-numbers">{proposal.duration} min</span>
-      </Badge>
-    </div>
-  )
-}
-
 /** « Enregistrer sans » : disponible à la fin de la durée choisie. */
 function SkipProof({
   proposal,
@@ -158,10 +141,10 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
 
   if (pad) {
     return (
-      <Screen>
-        <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={proposal.text}>
-          Dessine ici, au doigt
-        </ScreenTitle>
+      <Screen className="pt-2">
+        <ConsigneBar proposal={proposal} />
+        {/* Titre court : la consigne est juste au-dessus, la feuille garde la place. */}
+        <h1 className="mb-4 font-display text-26 font-extrabold tracking-tight text-ink">Dessine ici, au doigt</h1>
         <DrawingPad ref={drawing} onInkChange={setHasInk} />
         <button type="button" onClick={() => setPad(false)} className="mt-4 inline-flex items-center gap-2 self-center text-14 font-bold text-ink-soft underline decoration-2 underline-offset-4">
           <Camera size={16} aria-hidden="true" />
@@ -181,8 +164,9 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
   }
 
   return (
-    <Screen>
-      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={'Une photo, même rapide\u00A0: elle rejoindra ta galerie.'}>
+    <Screen className="pt-2">
+      <ConsigneBar proposal={proposal} />
+      <ScreenTitle subtitle={'Une photo, même rapide\u00A0: elle rejoindra ta galerie.'}>
         Montre-nous ton dessin
       </ScreenTitle>
       <input
@@ -298,8 +282,9 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
   }
 
   return (
-    <Screen>
-      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle={'Écris ici, ou colle ce que tu as écrit ailleurs\u00A0: ton texte rejoindra ta galerie.'}>
+    <Screen className="pt-2">
+      <ConsigneBar proposal={proposal} />
+      <ScreenTitle subtitle={'Écris ici, ou colle ce que tu as écrit ailleurs\u00A0: ton texte rejoindra ta galerie.'}>
         Ton carnet
       </ScreenTitle>
       <label className="sr-only" htmlFor="proof-text">
@@ -402,8 +387,9 @@ function TitleProof({ proposal, idea, saving, onSubmit, footer }: ProofProps & {
   const placeholder = proposal.passion === 'musique' ? 'Un titre, un album, un artiste…' : 'Un film, un anime, un court…'
   const Icon = PASSION_ICONS[proposal.passion]
   return (
-    <Screen>
-      <ScreenTitle eyebrow={<ProofContext proposal={proposal} />} subtitle="C’est facultatif, mais ta galerie s’en souviendra.">
+    <Screen className="pt-2">
+      <ConsigneBar proposal={proposal} />
+      <ScreenTitle subtitle="C’est facultatif, mais ta galerie s’en souviendra.">
         Qu’as-tu exploré&nbsp;?
       </ScreenTitle>
       <label className="sr-only" htmlFor="proof-title">

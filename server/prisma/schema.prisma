@@ -26,6 +26,8 @@ model User {
   /// Le bot peut écrire à l'utilisateur (/start, ou autorisation dans la Mini App)
   canMessage          Boolean  @default(false)
   remindersEnabled    Boolean  @default(true)
+  /// Moment où la personne scrolle le plus (matin, midi, soir, nuit) : la relance arrive juste avant
+  scrollMoment        String?
   /// Nombre de relances envoyées (pour alterner les deux messages)
   reminderCount       Int      @default(0)
   /// Relances envoyées depuis la dernière ouverture de l'app

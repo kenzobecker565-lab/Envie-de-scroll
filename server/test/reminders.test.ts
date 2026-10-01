@@ -44,6 +44,22 @@ describe('relances', () => {
     ])
   })
 
+  it('écrit juste avant le moment où la personne scrolle le plus', async () => {
+    await prisma.user.update({ where: { id: 1n }, data: { scrollMoment: 'nuit' } })
+    // 19 h 05 à Paris : plus l'heure par défaut pour elle.
+    expect(await sendDueReminders(deps(), new Date('2026-09-30T17:05:00Z'))).toBe(0)
+    // 21 h 40 : pas encore.
+    expect(await sendDueReminders(deps(), new Date('2026-09-30T19:40:00Z'))).toBe(0)
+    // 21 h 50 : juste avant d'aller scroller au lit.
+    expect(await sendDueReminders(deps(), new Date('2026-09-30T19:50:00Z'))).toBe(1)
+
+    // Le matin : 7 h 30 à Paris, mais pas après 8 h 30 (serveur arrêté entre-temps, par exemple).
+    await prisma.user.update({ where: { id: 1n }, data: { scrollMoment: 'matin' } })
+    expect(await sendDueReminders(deps(), new Date('2026-10-01T05:20:00Z'))).toBe(0)
+    expect(await sendDueReminders(deps(), new Date('2026-10-01T06:35:00Z'))).toBe(0)
+    expect(await sendDueReminders(deps(), new Date('2026-10-02T05:35:00Z'))).toBe(1)
+  })
+
   it('n’écrit pas quand une activité a déjà été faite dans la journée', async () => {
     const proposal = await prisma.proposal.create({ data: { userId: 1n, activityId: 'dessin-5-1', passion: 'dessin', mood: 'ennui', duration: 5, intro: '' } })
     await prisma.completion.create({

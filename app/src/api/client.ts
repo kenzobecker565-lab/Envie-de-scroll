@@ -22,6 +22,7 @@ import type {
   MeResponse,
   PassionId,
   ProposalResponse,
+  UpdateSettingsRequest,
   UserResponse,
 } from '@scroll-up/shared'
 import { telegram } from '../telegram/webApp.ts'
@@ -122,7 +123,7 @@ export const api = {
     call<ProjectDetailResponse>(`/projects/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(request) }),
   deleteProject: (id: string) => call<null>(`/projects/${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
-  updateSettings: (settings: { remindersEnabled: boolean }) => call<UserResponse>('/me/settings', { method: 'PUT', body: JSON.stringify(settings) }),
+  updateSettings: (settings: UpdateSettingsRequest) => call<UserResponse>('/me/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 
   feedback: (message: string, context?: string) => call<{ ok: true }>('/feedback', { method: 'POST', body: JSON.stringify({ message, context }) }),
 }

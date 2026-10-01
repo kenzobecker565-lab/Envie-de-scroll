@@ -9,6 +9,7 @@ import type { CompleteResponse, Duration, MeResponse, MoodId, PassionId, Project
 export type Route =
   | { name: 'welcome' }
   | { name: 'passions'; mode: 'onboarding' | 'edit' }
+  | { name: 'moment' }
   | { name: 'home' }
   | { name: 'signal' }
   | { name: 'mood' }

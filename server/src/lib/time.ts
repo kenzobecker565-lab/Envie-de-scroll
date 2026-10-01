@@ -26,6 +26,13 @@ export function localMonth(date: Date, timeZone: string): string {
   return localDate(date, timeZone).slice(0, 7)
 }
 
+/** Minutes écoulées depuis minuit (0-1439) dans le fuseau donné. */
+export function localMinutes(date: Date, timeZone: string): number {
+  const parts = new Intl.DateTimeFormat('en-GB', { timeZone: safeZone(timeZone), hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(date)
+  const value = (type: 'hour' | 'minute') => Number.parseInt(parts.find((part) => part.type === type)?.value ?? '0', 10)
+  return value('hour') * 60 + value('minute')
+}
+
 /** Heure (0-23) dans le fuseau donné. */
 export function localHour(date: Date, timeZone: string): number {
   const hour = new Intl.DateTimeFormat('en-GB', { timeZone: safeZone(timeZone), hour: '2-digit', hourCycle: 'h23' }).format(date)

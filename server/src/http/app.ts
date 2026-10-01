@@ -33,6 +33,7 @@ import {
   isAppTheme,
   isMoodId,
   isPassionId,
+  isScrollMoment,
   MAX_PHOTO_BYTES,
   normalizePassions,
   type ApiErrorBody,
@@ -202,12 +203,17 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.put(
     '/me/settings',
     asyncRoute(async (req, res) => {
-      const { remindersEnabled } = (req.body ?? {}) as Record<string, unknown>
-      if (typeof remindersEnabled !== 'boolean') throw badRequest('Réglage inconnu.')
+      const { remindersEnabled, scrollMoment } = (req.body ?? {}) as Record<string, unknown>
+      if (remindersEnabled !== undefined && typeof remindersEnabled !== 'boolean') throw badRequest('Réglage inconnu.')
+      if (scrollMoment !== undefined && !isScrollMoment(scrollMoment)) throw badRequest('Moment inconnu.')
+      if (remindersEnabled === undefined && scrollMoment === undefined) throw badRequest('Réglage inconnu.')
       const user = await currentUser(req, res)
       const updated = await prisma.user.update({
         where: { id: user.id },
-        data: { remindersEnabled, ...(remindersEnabled ? { unansweredReminders: 0 } : {}) },
+        data: {
+          ...(remindersEnabled !== undefined ? { remindersEnabled, ...(remindersEnabled ? { unansweredReminders: 0 } : {}) } : {}),
+          ...(scrollMoment !== undefined ? { scrollMoment } : {}),
+        },
       })
       const body: UserResponse = { user: toUserDTO(updated) }
       res.json(body)

@@ -1,7 +1,7 @@
-import { Check, Clock3, Hourglass, Info, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
+import { Check, Clock3, Hourglass, Info, Mountain, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getPassion, type ActivityExtra, type ProposalDTO } from '@scroll-up/shared'
+import { getPassion, getPath, getPathStep, STEPS_PER_PATH, type ActivityExtra, type PathStep, type ProposalDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -10,6 +10,7 @@ import { Skeleton, SkeletonText } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
 import { PassionScene } from '../components/decor/PassionScene.tsx'
+import { DifficultyMeter } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
@@ -29,8 +30,16 @@ export function ActivityScreen() {
   const { flow } = state
   const { passion: passionId, mood, duration } = flow
 
+  // Étape de parcours : l'étape elle-même, jamais un tirage.
+  const fixedStep = flow.fixedStep
   const matches = (proposal: ProposalDTO | undefined): proposal is ProposalDTO =>
-    Boolean(proposal && proposal.passion === passionId && proposal.mood === mood && proposal.duration === duration)
+    Boolean(
+      proposal &&
+        proposal.passion === passionId &&
+        proposal.mood === mood &&
+        proposal.duration === duration &&
+        (fixedStep ? proposal.activityId === fixedStep : !getPathStep(proposal.activityId)),
+    )
 
   const proposal = matches(flow.proposal) ? flow.proposal : undefined
   const [loading, setLoading] = useState(!proposal)
@@ -43,7 +52,7 @@ export function ActivityScreen() {
       setLoading(true)
       setError(undefined)
       try {
-        const response = await api.propose({ passion: passionId, mood, duration, ...(replacing ? { replacing } : {}) })
+        const response = await api.propose({ passion: passionId, mood, duration, ...(fixedStep ? { step: fixedStep } : {}), ...(replacing ? { replacing } : {}) })
         dispatch({ type: 'flow', flow: { proposal: response.proposal, clockOffset: Date.parse(response.serverTime) - Date.now() } })
         dispatch({ type: 'openProposal', proposal: response.proposal })
       } catch (caught) {
@@ -53,7 +62,7 @@ export function ActivityScreen() {
         setLoading(false)
       }
     },
-    [passionId, mood, duration, dispatch],
+    [passionId, mood, duration, fixedStep, dispatch],
   )
 
   useEffect(() => {
@@ -66,6 +75,7 @@ export function ActivityScreen() {
   if (!passionId || !mood || !duration) return null
   const passion = getPassion(passionId)
   const Icon = PASSION_ICONS[passionId]
+  const step = getPathStep(fixedStep ?? proposal?.activityId ?? '')
 
   return (
     <Screen>
@@ -80,6 +90,7 @@ export function ActivityScreen() {
           <span className="font-numbers">{duration} min</span>
         </Badge>
       </div>
+      {step && <StepHeader step={step} />}
       {/* Sur les petits écrans (ou avec un tirage à afficher), la scène se fait plus discrète. */}
       <Card
         className={cn('mt-5 items-center justify-center py-6 shadow-pop [@media(max-height:780px)]:py-3', proposal?.extra && 'py-3')}
@@ -109,6 +120,12 @@ export function ActivityScreen() {
                 <RevealWords text={proposal.text} />
               </h1>
               {proposal.extra && <ExtraCard extra={proposal.extra} />}
+              {step && (
+                <p className="mt-4 inline-flex items-center gap-2 text-14 font-semibold text-ink-soft">
+                  <Sparkles size={16} aria-hidden="true" />
+                  Tu travailles&nbsp;: {step.focus.charAt(0).toLowerCase() + step.focus.slice(1)}
+                </p>
+              )}
             </motion.div>
           ) : error ? (
             <Alert key="error" variant="warning" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
@@ -144,12 +161,27 @@ export function ActivityScreen() {
         ) : (
           <Skeleton className="h-14 w-full rounded-pill" />
         )}
-        <Button variant="secondary" size="md" className="w-full" disabled={loading || !proposal} onClick={() => proposal && void load(proposal.id)}>
-          <Shuffle aria-hidden="true" />
-          Une autre idée
-        </Button>
+        {!step && (
+          <Button variant="secondary" size="md" className="w-full" disabled={loading || !proposal} onClick={() => proposal && void load(proposal.id)}>
+            <Shuffle aria-hidden="true" />
+            Une autre idée
+          </Button>
+        )}
       </div>
     </Screen>
+  )
+}
+
+/** Étape de parcours : le parcours, la marche (difficulté) et sa place dans l'ascension. */
+function StepHeader({ step }: { step: PathStep }) {
+  const path = getPath(step.pathId)
+  return (
+    <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-13 font-bold text-ink">
+      <Mountain size={16} strokeWidth={2.4} aria-hidden="true" />
+      {path?.title} · étape {step.index}/{STEPS_PER_PATH}
+      <span className={cn('rounded-pill border-2 border-outline px-2 text-12 font-extrabold', step.index === STEPS_PER_PATH ? 'bg-accent text-on-color' : 'bg-surface-200')}>{step.difficulty}</span>
+      <DifficultyMeter level={step.index} tone={PASSION_COLORS[step.passion].bg} />
+    </p>
   )
 }
 

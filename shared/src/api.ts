@@ -29,8 +29,16 @@ export interface PassionStatsDTO {
   minutes: number
   /** Activités validées dans la passion. */
   activities: number
-  /** Identifiants des activités déjà faites au moins une fois (la collection). */
+  /** Identifiants des activités déjà faites au moins une fois (la collection, sans les étapes de parcours). */
   tried: string[]
+  /** Étapes de parcours réussies (voir paths.ts). */
+  steps: string[]
+  /** Dessin : créations avec une photo. */
+  drawings: number
+  /** Écriture : mots écrits en tout. */
+  words: number
+  /** Musique, Cinéma : titres explorés notés. */
+  explored: number
 }
 
 export interface StatsDTO {
@@ -79,7 +87,27 @@ export interface CompletionDTO {
   photoPending: boolean
   /** Ce que l'utilisateur a pensé de l'activité, s'il l'a noté. */
   rating: ActivityRating | null
+  /** Le projet où la création est rangée, s'il y en a un. */
+  projectId: string | null
   createdAt: string
+}
+
+/** Un projet : des créations d'une passion rangées ensemble, avec un objectif si on veut. */
+export interface ProjectDTO {
+  id: string
+  passion: PassionId
+  name: string
+  /** Objectif : nombre de créations (null : sans objectif). */
+  goal: number | null
+  creations: number
+  /** Minutons gagnés avec les créations du projet. */
+  minutes: number
+  /** Écriture : mots écrits dans le projet. */
+  words: number
+  /** Dessin : la dernière photo du projet, en couverture. */
+  coverUrl: string | null
+  createdAt: string
+  finishedAt: string | null
 }
 
 /* ------------------------------- Requêtes -------------------------------- */
@@ -119,6 +147,8 @@ export interface CreateProposalRequest {
   duration: Duration
   /** « Une autre idée » : la proposition affichée, à remplacer. */
   replacing?: string
+  /** Une étape de parcours à jouer (sa passion et sa durée doivent correspondre). */
+  step?: string
 }
 
 /**
@@ -129,6 +159,26 @@ export interface CompleteRequest {
   proposalId: string
   text?: string
   exploredTitle?: string
+  /** Ranger tout de suite la création dans ce projet. */
+  projectId?: string
+}
+
+export interface CreateProjectRequest {
+  passion: PassionId
+  name: string
+  goal?: number | null
+}
+
+export interface UpdateProjectRequest {
+  name?: string
+  goal?: number | null
+  /** Terminer (true) ou rouvrir (false) le projet. */
+  finished?: boolean
+}
+
+/** Ranger une création dans un projet (null : la sortir de son projet). */
+export interface AssignProjectRequest {
+  projectId: string | null
 }
 
 /* ------------------------------- Réponses -------------------------------- */
@@ -141,6 +191,7 @@ export interface MeResponse {
   serverTime: string
   /** Identifiant du bot (pour les liens d'invitation), s'il est connu. */
   botUsername: string | null
+  projects: ProjectDTO[]
 }
 
 export interface UserResponse {
@@ -162,6 +213,34 @@ export interface CompletionResponse {
   completion: CompletionDTO
 }
 
+export interface ProjectsResponse {
+  projects: ProjectDTO[]
+}
+
+export interface ProjectDetailResponse {
+  project: ProjectDTO
+  /** Les créations du projet, de la plus ancienne à la plus récente. */
+  items: CompletionDTO[]
+}
+
+/** Ranger une création renvoie la création et la liste des projets à jour. */
+export interface AssignProjectResponse {
+  completion: CompletionDTO
+  projects: ProjectDTO[]
+}
+
+/** Ce qui fait la signature d'une passion (détail de la progression). */
+export interface PassionDetailResponse {
+  passion: PassionId
+  /** Dessin : le premier et le dernier dessin en photo (avant / après). */
+  firstDrawing: CompletionDTO | null
+  lastDrawing: CompletionDTO | null
+  /** Écriture : le texte le plus long (en mots). */
+  longestText: { words: number; completion: CompletionDTO } | null
+  /** Musique, Cinéma : les titres explorés, du plus récent au plus ancien. */
+  titles: { title: string; createdAt: string }[]
+}
+
 export interface CompletionsPage {
   items: CompletionDTO[]
   nextCursor: string | null
@@ -169,6 +248,7 @@ export interface CompletionsPage {
 
 export type ApiErrorCode =
   | 'unauthorized'
+  | 'locked'
   | 'invalid_request'
   | 'not_found'
   | 'already_completed'

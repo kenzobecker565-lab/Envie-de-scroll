@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, isAppTheme, isPassionId, PASSION_IDS, type PassionId, type PassionStatsDTO, type StatsDTO, type UserDTO } from '@scroll-up/shared'
+import { countWords, DEFAULT_THEME, isAppTheme, isBaseActivity, isPassionId, isPathStepId, PASSION_IDS, type PassionId, type PassionStatsDTO, type StatsDTO, type UserDTO } from '@scroll-up/shared'
 import type { PrismaClient, User } from '../db.ts'
 import type { TelegramUser } from '../auth/initData.ts'
 import { isValidTimeZone, localMonth } from '../lib/time.ts'
@@ -48,32 +48,39 @@ export async function upsertFromTelegram(
 }
 
 export async function getStats(prisma: PrismaClient, user: User, now = new Date()): Promise<StatsDTO> {
-  const month = localMonth(now, user.timezone)
-  const [total, thisMonth, byActivity] = await Promise.all([
-    prisma.completion.aggregate({ where: { userId: user.id }, _sum: { coins: true }, _count: true }),
-    prisma.completion.aggregate({ where: { userId: user.id, localDate: { startsWith: `${month}-` } }, _sum: { coins: true }, _count: true }),
-    prisma.completion.groupBy({ by: ['passion', 'activityId'], where: { userId: user.id }, _sum: { coins: true }, _count: true }),
-  ])
+  const month = `${localMonth(now, user.timezone)}-`
+  const rows = await prisma.completion.findMany({
+    where: { userId: user.id },
+    select: { passion: true, activityId: true, coins: true, text: true, photoRef: true, exploredTitle: true, localDate: true },
+  })
+  const thisMonth = rows.filter((row) => row.localDate.startsWith(month))
   return {
-    totalCoins: total._sum.coins ?? 0,
-    totalActivities: total._count,
-    monthActivities: thisMonth._count,
-    monthCoins: thisMonth._sum.coins ?? 0,
-    byPassion: passionStats(byActivity),
+    totalCoins: rows.reduce((sum, row) => sum + row.coins, 0),
+    totalActivities: rows.length,
+    monthActivities: thisMonth.length,
+    monthCoins: thisMonth.reduce((sum, row) => sum + row.coins, 0),
+    byPassion: passionStats(rows),
   }
 }
 
-/** Minutons, activités et collection par passion, à partir des activités validées regroupées. */
-function passionStats(rows: { passion: string; activityId: string; _sum: { coins: number | null }; _count: number }[]): PassionStatsDTO[] {
+type StatsRow = { passion: string; activityId: string; coins: number; text: string | null; photoRef: string | null; exploredTitle: string | null }
+
+/** Minutons, activités, collection, étapes de parcours et signature, par passion. */
+function passionStats(rows: StatsRow[]): PassionStatsDTO[] {
   return PASSION_IDS.flatMap((passion) => {
     const mine = rows.filter((row) => row.passion === passion)
     if (!mine.length) return []
+    const ids = [...new Set(mine.map((row) => row.activityId))].sort()
     return [
       {
         passion,
-        minutes: mine.reduce((sum, row) => sum + (row._sum.coins ?? 0), 0),
-        activities: mine.reduce((sum, row) => sum + row._count, 0),
-        tried: mine.map((row) => row.activityId).sort(),
+        minutes: mine.reduce((sum, row) => sum + row.coins, 0),
+        activities: mine.length,
+        tried: ids.filter(isBaseActivity),
+        steps: ids.filter(isPathStepId),
+        drawings: mine.filter((row) => row.photoRef).length,
+        words: mine.reduce((sum, row) => sum + countWords(row.text), 0),
+        explored: mine.filter((row) => row.exploredTitle).length,
       },
     ]
   })

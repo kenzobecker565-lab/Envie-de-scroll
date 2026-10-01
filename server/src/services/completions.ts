@@ -16,6 +16,7 @@ import type { Completion, PrismaClient, User } from '../db.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
 import { localDate } from '../lib/time.ts'
 import type { IncomingPhoto, PhotoService } from '../photos/photos.ts'
+import { projectForPassion } from './projects.ts'
 import { parseExtra } from './proposals.ts'
 
 export interface CompleteInput {
@@ -23,6 +24,8 @@ export interface CompleteInput {
   text?: string
   exploredTitle?: string
   photo?: IncomingPhoto
+  /** Ranger tout de suite la création dans ce projet. */
+  projectId?: string
 }
 
 function clean(value: string | undefined, max: number): string | null {
@@ -57,6 +60,8 @@ export async function completeProposal(
   const text = passion.proof === 'texte' ? clean(input.text, MAX_TEXT_LENGTH) : null
   const exploredTitle = passion.proof === 'titre' ? clean(input.exploredTitle, MAX_TITLE_LENGTH) : null
   const photo = passion.proof === 'photo' ? input.photo : undefined
+
+  const project = input.projectId ? await projectForPassion(prisma, user, input.projectId, proposal.passion) : null
 
   const hasProof = Boolean(text || photo)
   const unlocked = now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
@@ -94,6 +99,7 @@ export async function completeProposal(
           photoRef,
           photoPending: passion.proof === 'photo' && !photoRef,
           localDate: localDate(now, user.timezone),
+          projectId: project?.id ?? null,
           createdAt: now,
         },
       }),
@@ -137,6 +143,7 @@ export function toCompletionDTO(completion: Completion, photoUrl: (completion: C
     photoUrl: completion.photoRef ? photoUrl(completion) : null,
     photoPending: completion.photoPending,
     rating: isActivityRating(completion.rating) ? completion.rating : null,
+    projectId: completion.projectId,
     createdAt: completion.createdAt.toISOString(),
   }
 }

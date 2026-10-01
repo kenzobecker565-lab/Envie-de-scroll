@@ -1,7 +1,7 @@
 import { Check, Flame, MoonStar } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRef, useState } from 'react'
-import { DURATIONS, ENERGY_FAMILIES, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
+import { DURATIONS, ENERGY_FAMILIES, getPassion, getPathStep, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
 import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { track } from '../api/client.ts'
@@ -26,6 +26,8 @@ function useAdvance() {
 /** Étapes du parcours : humeur, temps, puis passion si l'on en a plusieurs. */
 function useFlowSteps() {
   const { state } = useAppState()
+  // Étape de parcours : seulement l'humeur (le temps et la passion sont fixés).
+  if (state.flow.fixedStep) return 1
   return state.me.user.passions.length > 1 && !state.flow.fixedPassion ? 3 : 2
 }
 
@@ -61,8 +63,9 @@ export function MoodScreen() {
     haptics.selection()
     track('mood', { mood })
     setSelected(mood)
-    dispatch({ type: 'flow', flow: { mood } })
-    advance(() => push({ name: 'time' }))
+    const step = state.flow.fixedStep ? getPathStep(state.flow.fixedStep) : undefined
+    dispatch({ type: 'flow', flow: { mood, ...(step ? { duration: step.duration, passion: step.passion } : {}) } })
+    advance(() => push({ name: step ? 'activity' : 'time' }))
   }
 
   let index = 0

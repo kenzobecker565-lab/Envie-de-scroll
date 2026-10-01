@@ -4,7 +4,7 @@
  */
 
 import { createContext, useCallback, useContext, useMemo, useReducer, type ReactNode } from 'react'
-import type { CompleteResponse, Duration, MeResponse, MoodId, PassionId, ProposalDTO, StatsDTO, UserDTO } from '@scroll-up/shared'
+import type { CompleteResponse, Duration, MeResponse, MoodId, PassionId, ProjectDTO, ProposalDTO, StatsDTO, UserDTO } from '@scroll-up/shared'
 
 export type Route =
   | { name: 'welcome' }
@@ -18,6 +18,7 @@ export type Route =
   | { name: 'proof' }
   | { name: 'done' }
   | { name: 'gallery' }
+  | { name: 'path'; pathId: string }
 
 export interface Flow {
   mood?: MoodId
@@ -25,6 +26,10 @@ export interface Flow {
   passion?: PassionId
   /** Passion imposée d'avance (« Une activité Dessin » depuis la progression) : pas d'écran de choix. */
   fixedPassion?: PassionId
+  /** Étape de parcours à jouer : sa passion et sa durée sont fixées, pas de « Une autre idée ». */
+  fixedStep?: string
+  /** Projet où ranger la création (lancée depuis le projet). */
+  projectId?: string
   proposal?: ProposalDTO
   /** Écart entre l'horloge du serveur et celle du téléphone (ms). */
   clockOffset: number
@@ -56,6 +61,7 @@ type Action =
   | { type: 'newFlow'; flow?: Partial<Flow> }
   | { type: 'user'; user: UserDTO }
   | { type: 'stats'; stats: StatsDTO }
+  | { type: 'projects'; projects: ProjectDTO[] }
   | { type: 'openProposal'; proposal: ProposalDTO | null }
   | { type: 'done'; done: DoneResult }
 
@@ -77,6 +83,8 @@ function reducer(state: State, action: Action): State {
       return { ...state, me: { ...state.me, user: action.user } }
     case 'stats':
       return { ...state, me: { ...state.me, stats: action.stats } }
+    case 'projects':
+      return { ...state, me: { ...state.me, projects: action.projects } }
     case 'openProposal':
       return { ...state, me: { ...state.me, openProposal: action.proposal } }
     case 'done':

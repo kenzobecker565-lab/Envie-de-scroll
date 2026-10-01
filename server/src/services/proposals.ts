@@ -1,9 +1,14 @@
 import {
+  canPlayStep,
   drawExtra,
   getActivity,
+  getPathStep,
+  isPathStepId,
+  passionLevel,
   pickActivity,
   pickIntro,
   unlockTime,
+  type Activity,
   type ActivityExtra,
   type CreateProposalRequest,
   type Duration,
@@ -49,6 +54,8 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
  * - Nouveau parcours : les propositions encore ouvertes sont abandonnées.
  * - « Une autre idée » (`replacing`) : la proposition affichée est remplacée,
  *   et son activité écartée du tirage.
+ * - Étape de parcours (`step`) : pas de tirage, l'étape elle-même, si elle est
+ *   débloquée (étape précédente réussie, parcours ouvert).
  */
 export async function createProposal(
   prisma: PrismaClient,
@@ -67,15 +74,26 @@ export async function createProposal(
     currentId = current.activityId
   }
 
-  // Dernières activités proposées pour cette passion et ce temps.
-  const recent = await prisma.proposal.findMany({
-    where: { userId: user.id, passion, duration },
-    orderBy: { createdAt: 'desc' },
-    take: 12,
-    select: { activityId: true },
-  })
-
-  const activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, random })
+  let activity: Activity
+  if (request.step !== undefined) {
+    const step = getPathStep(request.step)
+    if (!step || step.passion !== passion || step.duration !== duration) throw badRequest('Étape de parcours invalide.')
+    if (request.replacing) throw badRequest('Une étape de parcours ne se remplace pas.')
+    const done = await prisma.completion.findMany({ where: { userId: user.id, passion }, select: { activityId: true, coins: true } })
+    const level = passionLevel(passion, done.reduce((sum, row) => sum + row.coins, 0)).level
+    const steps = done.map((row) => row.activityId).filter(isPathStepId)
+    if (!canPlayStep(step, steps, level)) throw new ApiError(409, 'locked', 'Cette étape n’est pas encore débloquée\u00A0: réussis d’abord la précédente.')
+    activity = step
+  } else {
+    // Dernières activités proposées pour cette passion et ce temps.
+    const recent = await prisma.proposal.findMany({
+      where: { userId: user.id, passion, duration },
+      orderBy: { createdAt: 'desc' },
+      take: 12,
+      select: { activityId: true },
+    })
+    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, random })
+  }
   const extra = activity.extra ? drawExtra(activity.extra, random) : null
 
   const [, proposal] = await prisma.$transaction([

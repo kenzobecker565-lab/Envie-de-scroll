@@ -4,7 +4,8 @@
  * le partage du système (ou un nouvel onglet).
  */
 
-import { getPassion, type CompletionDTO } from '@scroll-up/shared'
+import { getPassion, type CompletionDTO, type ProjectDTO } from '@scroll-up/shared'
+import { formatMinutes } from './format.ts'
 import { telegram } from '../telegram/webApp.ts'
 
 /** Lien vers le bot (ou, faute de mieux, vers l'app). */
@@ -41,4 +42,14 @@ export function creationText(item: Pick<CompletionDTO, 'duration' | 'passion'>):
 
 export function shareCreation(item: Pick<CompletionDTO, 'duration' | 'passion'>, botUsername: string | null): void {
   shareLink(creationText(item), appLink(botUsername))
+}
+
+/** « J'ai terminé mon projet « Ma nouvelle » sur Scroll-up : 6 créations, 2 h 15 de création. » */
+export function projectText(project: Pick<ProjectDTO, 'name' | 'creations' | 'minutes'>): string {
+  const creations = `${project.creations} création${project.creations > 1 ? 's' : ''}`
+  return `J’ai terminé mon projet «\u00A0${project.name}\u00A0» sur Scroll-up\u00A0: ${creations}, ${formatMinutes(project.minutes)} de création. Et toi ?`
+}
+
+export function shareProject(project: Pick<ProjectDTO, 'name' | 'creations' | 'minutes'>, botUsername: string | null): void {
+  shareLink(projectText(project), appLink(botUsername))
 }

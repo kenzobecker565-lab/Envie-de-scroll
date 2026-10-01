@@ -6,6 +6,12 @@
 import type {
   ActivityRating,
   ApiErrorBody,
+  AssignProjectResponse,
+  CreateProjectRequest,
+  PassionDetailResponse,
+  ProjectDetailResponse,
+  ProjectsResponse,
+  UpdateProjectRequest,
   AppEventName,
   AppTheme,
   ApiErrorCode,
@@ -86,14 +92,15 @@ export const api = {
 
   propose: (request: CreateProposalRequest) => call<ProposalResponse>('/proposals', { method: 'POST', body: JSON.stringify(request) }),
 
-  complete: ({ proposalId, text, exploredTitle, photo }: { proposalId: string; text?: string; exploredTitle?: string; photo?: Blob }) => {
+  complete: ({ proposalId, text, exploredTitle, photo, projectId }: { proposalId: string; text?: string; exploredTitle?: string; photo?: Blob; projectId?: string }) => {
     if (photo) {
       const form = new FormData()
       form.set('proposalId', proposalId)
+      if (projectId) form.set('projectId', projectId)
       form.set('photo', photo, 'dessin.jpg')
       return call<CompleteResponse>('/completions', { method: 'POST', body: form })
     }
-    return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle }) })
+    return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle, projectId }) })
   },
 
   completions: (cursor?: string) =>
@@ -101,6 +108,19 @@ export const api = {
 
   rate: (completionId: string, rating: ActivityRating) =>
     call<CompletionResponse>(`/completions/${encodeURIComponent(completionId)}/rating`, { method: 'PUT', body: JSON.stringify({ rating }) }),
+
+  assignProject: (completionId: string, projectId: string | null) =>
+    call<AssignProjectResponse>(`/completions/${encodeURIComponent(completionId)}/project`, { method: 'PUT', body: JSON.stringify({ projectId }) }),
+
+  /** La signature d'une passion : avant / après, texte le plus long, titres explorés. */
+  passion: (passion: PassionId) => call<PassionDetailResponse>(`/passions/${passion}`),
+
+  projects: () => call<ProjectsResponse>('/projects'),
+  project: (id: string) => call<ProjectDetailResponse>(`/projects/${encodeURIComponent(id)}`),
+  createProject: (request: CreateProjectRequest) => call<ProjectDetailResponse>('/projects', { method: 'POST', body: JSON.stringify(request) }),
+  updateProject: (id: string, request: UpdateProjectRequest) =>
+    call<ProjectDetailResponse>(`/projects/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(request) }),
+  deleteProject: (id: string) => call<null>(`/projects/${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
   updateSettings: (settings: { remindersEnabled: boolean }) => call<UserResponse>('/me/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 

@@ -40,6 +40,7 @@ model User {
   completions Completion[]
   feedbacks   Feedback[]
   events      AppEvent[]
+  projects    Project[]
 }
 
 /// Une activité proposée (tirée au sort) à un utilisateur.
@@ -91,10 +92,30 @@ model Completion {
   rating        Int?
   /// Date locale de l'utilisateur (AAAA-MM-JJ)
   localDate     String
+  /// Le projet où la création est rangée (facultatif)
+  projectId     String?
+  project       Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
   createdAt     DateTime @default(now())
 
   @@index([userId, createdAt])
   @@index([userId, localDate])
+  @@index([projectId])
+}
+
+/// Un projet : des créations d'une même passion rangées ensemble (« Mon carnet de chats »).
+model Project {
+  id          String       @id @default(cuid())
+  userId      BigInt
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  passion     String
+  name        String
+  /// Objectif facultatif : nombre de créations à atteindre
+  goal        Int?
+  finishedAt  DateTime?
+  createdAt   DateTime     @default(now())
+  completions Completion[]
+
+  @@index([userId, createdAt])
 }
 
 /// Un avis écrit par un testeur (dans l'app, ou en écrivant au bot).

@@ -48,7 +48,7 @@ export function ProofScreen() {
     setError(undefined)
     try {
       const previousStats = state.me.stats
-      const response = await api.complete({ proposalId: proposal.id, ...submission })
+      const response = await api.complete({ proposalId: proposal.id, ...submission, ...(state.flow.projectId ? { projectId: state.flow.projectId } : {}) })
       dispatch({ type: 'stats', stats: response.stats })
       dispatch({ type: 'openProposal', proposal: null })
       dispatch({ type: 'done', done: { response, previousStats, photoPending: response.completion.photoPending } })

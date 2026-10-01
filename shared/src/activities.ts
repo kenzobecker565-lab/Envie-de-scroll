@@ -12,6 +12,7 @@
  * de la proposition, parmi les listes de prompts.ts.
  */
 
+import { getPathStep } from './paths.ts'
 import { frenchTypography } from './typography.ts'
 import type { Activity, Duration, ExtraKind, PassionId } from './types.ts'
 
@@ -140,8 +141,14 @@ export const ACTIVITIES: readonly Activity[] = build()
 
 const BY_ID = new Map(ACTIVITIES.map((activity) => [activity.id, activity]))
 
+/** Une des 60 activités, ou une étape de parcours (voir paths.ts). */
 export function getActivity(id: string): Activity | undefined {
-  return BY_ID.get(id)
+  return BY_ID.get(id) ?? getPathStep(id)
+}
+
+/** Vrai pour les 60 activités de base (pas les étapes de parcours) : celles de la collection. */
+export function isBaseActivity(id: string): boolean {
+  return BY_ID.has(id)
 }
 
 /** Les 5 activités d'une passion pour un temps donné. */

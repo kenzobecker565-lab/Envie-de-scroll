@@ -19,6 +19,10 @@
 import {
   collectionSize,
   getActivity,
+  getPathStep,
+  isPathStepId,
+  pathProgress,
+  PASSION_IDS,
   getAmbiance,
   getMood,
   getPassion,
@@ -183,6 +187,9 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     doers,
     musicOff,
     musicChoices,
+    stepRows,
+    projects,
+    projectsDone,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -208,6 +215,9 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.completion.groupBy({ by: ['userId'], _count: true }),
     prisma.appEvent.count({ where: { name: 'music_off' } }),
     prisma.appEvent.findMany({ where: { name: 'music' }, orderBy: { createdAt: 'asc' }, select: { userId: true, data: true } }),
+    prisma.completion.findMany({ where: { activityId: { startsWith: 'parcours-' } }, select: { userId: true, activityId: true } }),
+    prisma.project.count(),
+    prisma.project.count({ where: { finishedAt: { not: null } } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
@@ -236,6 +246,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Avis écrits : ${feedbackCount} (/avis pour les lire)`,
     `Partages : ${shares} · invitations : ${invites}`,
     `Musique d’ambiance : ${musicLine(musicChoices)} · coupée ${plural(musicOff, 'fois', 'fois')}`,
+    `Parcours : ${plural(stepRows.length, 'étape réussie', 'étapes réussies')}, ${plural(finishedPaths(stepRows), 'parcours terminé', 'parcours terminés')}`,
+    `Projets : ${plural(projects, 'créé', 'créés')}, ${plural(projectsDone, 'terminé', 'terminés')}`,
   ]
 
   const top = await activityRanking(prisma)
@@ -258,6 +270,17 @@ async function activityRanking(prisma: PrismaClient) {
   const best = scored.slice(0, 3)
   const worst = scored.length > 3 ? scored.slice(-3).reverse().filter((row) => row.score < 2.5) : []
   return { best, worst }
+}
+
+/** Parcours terminés, toutes personnes confondues. */
+function finishedPaths(rows: { userId: bigint; activityId: string }[]): number {
+  const byUser = new Map<bigint, string[]>()
+  for (const row of rows) byUser.set(row.userId, [...(byUser.get(row.userId) ?? []), row.activityId])
+  let count = 0
+  for (const steps of byUser.values()) {
+    for (const passion of PASSION_IDS) count += pathProgress(passion, steps, 0).filter((entry) => entry.finished).length
+  }
+  return count
 }
 
 /** Les styles de musique choisis dans les réglages (le dernier choix de chacun). */
@@ -284,10 +307,11 @@ function shorten(text: string, max: number): string {
 
 /** Les chiffres d'une personne (/stats pour tout le monde). */
 export async function personalStats(prisma: PrismaClient, user: User): Promise<string> {
-  const [total, byPassion, tried] = await Promise.all([
+  const [total, byPassion, tried, projects] = await Promise.all([
     prisma.completion.aggregate({ where: { userId: user.id }, _sum: { coins: true }, _count: true }),
     prisma.completion.groupBy({ by: ['passion'], where: { userId: user.id }, _count: true, _sum: { coins: true }, orderBy: { _count: { passion: 'desc' } } }),
     prisma.completion.groupBy({ by: ['passion', 'activityId'], where: { userId: user.id } }),
+    prisma.project.findMany({ where: { userId: user.id }, select: { finishedAt: true } }),
   ])
   const coins = total._sum.coins ?? 0
   if (total._count === 0) {
@@ -305,8 +329,17 @@ export async function personalStats(prisma: PrismaClient, user: User): Promise<s
   for (const row of byPassion) {
     const passion = row.passion as PassionId
     const level = passionLevel(passion, row._sum.coins ?? 0)
-    const collected = tried.filter((entry) => entry.passion === passion).length
+    const ids = tried.filter((entry) => entry.passion === passion).map((entry) => entry.activityId)
+    const collected = ids.filter((id) => !isPathStepId(id)).length
     lines.push(`${getPassion(passion).label} : niveau ${level.level}${level.title ? ` (${level.title})` : ''}, ${collected}/${collectionSize(passion)} activités découvertes`)
+    for (const entry of pathProgress(passion, ids.filter(isPathStepId), level.level)) {
+      if (entry.finished) lines.push(`  Parcours « ${entry.path.title} » terminé : badge ${entry.path.badge}`)
+      else if (entry.done > 0) lines.push(`  Parcours « ${entry.path.title} » : étape ${entry.done}/${entry.path.steps.length}`)
+    }
+  }
+  if (projects.length) {
+    const done = projects.filter((project) => project.finishedAt).length
+    lines.push('', `Tes projets : ${plural(projects.length - done, 'en cours', 'en cours')}, ${plural(done, 'terminé', 'terminés')}`)
   }
   return lines.join('\n')
 }
@@ -324,6 +357,12 @@ export async function recentFeedback(prisma: PrismaClient, limit = 10): Promise<
 
 /* ---------------------------------- Export ---------------------------------- */
 
+/** « Visages, étape 3 (Moyen) » pour une étape de parcours, sinon rien. */
+function stepLabel(activityId: string): string {
+  const step = getPathStep(activityId)
+  return step ? `${step.pathId}, étape ${step.index} (${step.difficulty})` : ''
+}
+
 const csvCell = (value: unknown) => {
   const text = value === null || value === undefined ? '' : String(value)
   return /[",;\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text
@@ -333,12 +372,12 @@ const csv = (rows: unknown[][]) => rows.map((row) => row.map(csvCell).join(';'))
 /** Deux fichiers CSV (séparateur « ; », pour Excel en français) : activités validées et avis. */
 export async function exportCsv(prisma: PrismaClient): Promise<{ completions: string; feedback: string }> {
   const [completions, feedback] = await Promise.all([
-    prisma.completion.findMany({ orderBy: { createdAt: 'asc' }, include: { user: true } }),
+    prisma.completion.findMany({ orderBy: { createdAt: 'asc' }, include: { user: true, project: true } }),
     prisma.feedback.findMany({ orderBy: { createdAt: 'asc' }, include: { user: true } }),
   ])
   return {
     completions: csv([
-      ['date', 'testeur', 'passion', 'humeur', 'duree_min', 'activite', 'note', 'texte', 'titre_explore', 'photo'],
+      ['date', 'testeur', 'passion', 'humeur', 'duree_min', 'activite', 'parcours', 'projet', 'note', 'texte', 'titre_explore', 'photo'],
       ...completions.map((c) => [
         c.createdAt.toISOString(),
         describeUser(c.user),
@@ -346,6 +385,8 @@ export async function exportCsv(prisma: PrismaClient): Promise<{ completions: st
         c.mood,
         c.duration,
         c.activityText,
+        stepLabel(c.activityId),
+        c.project?.name ?? '',
         isActivityRating(c.rating) ? RATING_LABELS[c.rating] : '',
         c.text ?? '',
         c.exploredTitle ?? '',

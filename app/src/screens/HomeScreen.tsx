@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'motion/react'
+import { getPathStep, passionLevel } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { cardVariants } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -7,6 +8,8 @@ import { Wordmark } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
 import { HomeCta } from '../components/HomeCta.tsx'
+import { ActivePathCard, featuredPath } from '../components/Paths.tsx'
+import { statsFor } from '../components/Progression.tsx'
 import { track } from '../api/client.ts'
 import { FeedbackButton } from '../components/FeedbackDialog.tsx'
 import { Screen } from '../components/Screen.tsx'
@@ -43,14 +46,24 @@ export function HomeScreen() {
   const resume = () => {
     if (!openProposal) return
     haptics.impact('light')
+    const step = getPathStep(openProposal.activityId)
     dispatch({
       type: 'newFlow',
-      flow: { mood: openProposal.mood, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal },
+      flow: { mood: openProposal.mood, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(step ? { fixedStep: step.id } : {}) },
     })
     reset([{ name: 'home' }, { name: 'activity' }])
   }
 
   const ResumeIcon = openProposal ? PASSION_ICONS[openProposal.passion] : null
+  // Le parcours à mettre en avant (en cours, sinon à commencer), une fois la première activité faite.
+  const featured =
+    !openProposal && stats.totalActivities > 0
+      ? featuredPath(
+          user.passions,
+          (passion) => statsFor(stats.byPassion, passion).steps,
+          (passion) => passionLevel(passion, statsFor(stats.byPassion, passion).minutes).level,
+        )
+      : null
   const period = dayPeriod(new Date().getHours())
   const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
 
@@ -101,6 +114,17 @@ export function HomeScreen() {
               </span>
             </span>
           </motion.button>
+        )}
+
+        {featured && (
+          <ActivePathCard
+            progress={featured.progress}
+            started={featured.started}
+            onOpen={() => {
+              haptics.impact('light')
+              push({ name: 'path', pathId: featured.progress.path.id })
+            }}
+          />
         )}
 
         {stats.totalActivities === 0 && !openProposal ? (

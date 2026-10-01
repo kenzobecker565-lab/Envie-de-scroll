@@ -2,7 +2,7 @@
 
 *Anciennement « Plutôt Que Scroller ».*
 
-Une app qui intercepte l'envie de scroller et propose à la place une activité créative courte, liée à une passion : dessin, écriture, musique, cinéma / animation. Elle garde une trace de tout ce qui a été fait (une galerie, un compteur de minutons et un niveau par passion) plutôt que de compter des jours d'abstinence. Le ton reste chaleureux, jamais punitif.
+Une app qui intercepte l'envie de scroller et propose à la place une activité créative courte, liée à une passion : dessin, écriture, musique, cinéma / animation. Elle garde une trace de tout ce qui a été fait (une galerie, un compteur de minutons, un niveau par passion, des parcours de plus en plus exigeants et des projets) plutôt que de compter des jours d'abstinence. Le ton reste chaleureux, jamais punitif.
 
 Cette V1 de test est volontairement resserrée : 4 passions, 60 activités validées, 3 temps (5, 15 et 30 min). Pas de premium, pas de paiement, pas d'IA, pas d'API externe.
 
@@ -22,6 +22,8 @@ shared/     Types, contenus et règles partagés par l'app et le serveur
   src/reminders.ts    ← messages de relance du bot
   src/selection.ts    ← choix d'une activité
   src/rules.ts        ← minutons, garde-fou temporel
+  src/progress.ts     ← niveaux et collection par passion
+  src/paths.ts        ← les 8 parcours progressifs (textes à relire)
 server/     API REST (Express) + bot Telegram (Telegraf) + base SQLite (Prisma)
 app/        La Mini App (React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Motion)
 prototype/  Le prototype web précédent (archive)
@@ -176,14 +178,14 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 ## Le parcours
 
 1. **Onboarding** : une bienvenue courte (illustration unDraw), puis le choix de 1 à 3 passions sur des cartes illustrées.
-2. **Accueil** : le gros bouton « J'ai envie de scroller ». En dessous, un aperçu discret du mois (activités, minutons), et « Tu étais en train de… » si une activité attend d'être validée.
+2. **Accueil** : le gros bouton « J'ai envie de scroller ». En dessous, un aperçu discret du mois (activités, minutons), « Tu étais en train de… » si une activité attend d'être validée, et le parcours en cours (« Ton parcours · 2/6 », l'étape suivante et sa difficulté).
 3. **Déclenchement** : « On a reçu ton signal de détresse pré-scroll. On s'occupe de toi. », puis enchaînement automatique (un toucher pour aller plus vite).
 4. **Mood** : 8 moods en deux familles, un tap.
 5. **Temps** : 5, 15 ou 30 min.
 6. **Passion du moment** : seulement si le profil en compte plusieurs.
 7. **Activité** : en grand, avec « Une autre idée » (discret) et « Valider ».
 8. **Après « Valider »** : une photo du dessin, le texte écrit, ou, pour Musique et Cinéma, le titre exploré (facultatif).
-9. **Confirmation** : « Activité enregistrée. +X minutons ajoutés à ton total. », avec le compteur qui roule, des confettis discrets et une vibration. S'y ajoutent, quand c'est le cas, « Nouvelle activité dans ta collection » et le niveau franchi dans la passion.
+9. **Confirmation** : « Activité enregistrée. +X minutons ajoutés à ton total. », avec le compteur qui roule, des confettis discrets et une vibration. S'y ajoutent, quand c'est le cas, l'étape de parcours réussie (« Étape 3/6 réussie ! », puis la prochaine marche, « un cran plus exigeant ») ou le badge du parcours terminé, « Nouvelle activité dans ta collection », le niveau franchi dans la passion, et « Ranger dans un projet ».
 10. **Galerie** : le total de minutons en grand, la progression par passion, puis une carte par activité (photo, citation, ou titre exploré), groupées par mois. Jamais de calendrier. Chaque création se partage à un ami.
     - **Minutons** : la monnaie de l'app. 1 minute d'activité = 1 minuton (jeton en forme de petit chrono).
     - **Ta progression**, une carte par passion. Elle donne :
@@ -191,10 +193,22 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
       - **le titre**, de « Gribouilleur·euse » à « Virtuose du trait » en Dessin, de « Griffonneur·euse » à « Romancier·ère » en Écriture, de « Curieux·euse » à « Encyclopédie sonore » en Musique, de « Spectateur·rice » à « Cinémathèque ambulante » en Cinéma ;
       - **la jauge** vers le niveau suivant ;
       - **la collection** : les 15 activités de la passion (5 par temps), dont celles déjà faites, à découvrir une à une.
-    - **Le détail d'une passion** : on touche une carte pour voir les cinq niveaux, la collection (les activités faites se dévoilent, les autres restent cachées) et le bouton « Une activité Dessin », qui lance le parcours sans repasser par le choix de la passion. La logique est dans `shared/src/progress.ts`.
-11. **Paliers** : 5 min, 30 min, 1 h, 2 h, 5 h, 10 h, 20 h de création. Le palier franchi est célébré à la confirmation ; la galerie montre la jauge du prochain (« plus que 25 min »). Du temps gagné, jamais du temps manqué.
-12. **Réglages** (bouton à côté des minutons, sur l'accueil) : le style en grille, les passions, la musique d'ambiance, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
-13. **Musique d'ambiance**, tout doux, en fond. **Dix styles** au choix dans les réglages (« Ta musique ») : jazz noir (par défaut), lo-fi, piano, bossa nova, acoustique, synthwave, 8-bit, ambient, tropical, et la pluie pour ceux qui ne veulent pas de musique. « Au hasard » joue un style différent à chaque ouverture. Un tap sur un style le fait entendre tout de suite, avec un fondu, et remet la musique si elle était coupée.
+    - **Le détail d'une passion** : on touche une carte pour voir ses parcours, sa signature, les cinq niveaux, la collection (les activités faites se dévoilent, les autres restent cachées) et le bouton « Une activité Dessin », qui lance le parcours sans repasser par le choix de la passion. La logique est dans `shared/src/progress.ts`.
+    - **La signature de la passion**, ce qui montre le mieux le chemin parcouru : en Dessin, le premier et le dernier dessin côte à côte (« Avant → Maintenant ») ; en Écriture, les mots écrits (et l'équivalent en pages) et le texte le plus long ; en Musique et en Cinéma, la discothèque et la filmothèque (les titres explorés).
+    - **Tes projets** : on rassemble ses créations autour d'une idée (« Ma nouvelle », « Carnet de croquis », « Le tour du jazz »…), avec un objectif facultatif (5, 10 ou 20 créations). Une création se range dans un projet à la confirmation ou depuis la galerie ; « Continuer ce projet » lance une activité de la passion qui s'y range d'elle-même. La fiche du projet montre les créations, les minutes, les mots, la jauge de l'objectif et, en Dessin, le premier et le dernier dessin. « Terminer le projet » le fête (confettis, « Le partager ») ; on peut le rouvrir. Supprimer un projet ne supprime pas ses créations.
+11. **Les parcours** : pour sentir sa progression, marche après marche. Deux parcours par passion, un **débutant** puis un **confirmé** :
+    - Dessin : « Premiers traits » (badge « Œil affûté »), puis « Visages » (« Portraitiste ») ;
+    - Écriture : « Premières pages » (« Première plume »), puis « Une nouvelle en six temps » (« Nouvelliste ») ;
+    - Musique : « Oreille curieuse » (« Oreille fine »), puis « Voyage musical » (« Oreille du monde ») ;
+    - Cinéma : « Regard curieux » (« Œil curieux »), puis « Œil de cinéaste » (« Œil de cinéaste »).
+
+    Chaque parcours compte **six étapes de plus en plus exigeantes** : Échauffement et Facile (5 min), Moyen et Corsé (15 min), Difficile et Défi final (30 min). Chaque étape dit ce qu'elle fait travailler (« Tu travailles : les ombres ») et s'appuie sur la précédente. Une jauge en escalier montre la difficulté.
+    - **Déblocage** : une étape s'ouvre en réussissant la précédente ; le parcours confirmé, en finissant le débutant ou au niveau 3 de la passion. Une étape réussie peut se rejouer.
+    - **L'écran d'un parcours** se lit comme une ascension : le départ en bas, le sommet et son badge en haut. Seule l'étape à jouer est détaillée, avec « Commencer l'étape 3 » ; les suivantes, cadenassées, montrent seulement ce qu'elles feront travailler. Parcours terminé : le badge, et le palier suivant.
+    - **Une étape se joue comme une activité** : même humeur, même preuve, même garde-fou temporel, mêmes minutons ; le temps et la passion sont fixés par l'étape, et il n'y a pas d'« Une autre idée ». Les étapes comptent pour les niveaux, pas pour la collection (qui reste celle des 60 activités).
+12. **Paliers** : 5 min, 30 min, 1 h, 2 h, 5 h, 10 h, 20 h de création. Le palier franchi est célébré à la confirmation ; la galerie montre la jauge du prochain (« plus que 25 min »). Du temps gagné, jamais du temps manqué.
+13. **Réglages** (bouton à côté des minutons, sur l'accueil) : le style en grille, les passions, la musique d'ambiance, les relances du bot, « Ajouter à l'écran d'accueil » (Telegram 8 et plus), inviter un ami, donner son avis.
+14. **Musique d'ambiance**, tout doux, en fond. **Dix styles** au choix dans les réglages (« Ta musique ») : jazz noir (par défaut), lo-fi, piano, bossa nova, acoustique, synthwave, 8-bit, ambient, tropical, et la pluie pour ceux qui ne veulent pas de musique. « Au hasard » joue un style différent à chaque ouverture. Un tap sur un style le fait entendre tout de suite, avec un fondu, et remet la musique si elle était coupée.
     - **Le reste du comportement** : la musique démarre au premier toucher. On la coupe d'un geste (bouton note de musique de l'accueil, ou interrupteur des réglages). Le style et le choix on/off sont gardés sur le téléphone. Elle se retire quand l'app passe en arrière-plan, et pendant les activités Musique et Cinéma.
     - **Le volume** passe par Web Audio, pour être réglable aussi sur iPhone (`src/lib/ambient.ts`). Tous les morceaux sont au même volume (−16 LUFS), en MP3 de 3 minutes au plus (2 Mo).
     - **Les morceaux** : le jazz noir a été généré avec vidIQ et la pluie synthétisée pour Scroll-up. Les huit autres sont de Kevin MacLeod ([incompetech.com](https://incompetech.com)), sous licence Creative Commons BY 4.0. Ils sont crédités en bas des réglages. La liste est dans `shared/src/ambiances.ts`, les fichiers sont préparés par `promo/ambiances/build.mjs`.
@@ -205,12 +219,14 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Note de chaque activité**, juste après « Activité enregistrée. » : j'ai adoré, sympa, pas pour moi. De quoi trier les 60 activités.
 - **Suivi d'usage** (sans aucun texte libre) : ouvertures, appuis sur le gros bouton, humeur, temps et passion choisis, partages, invitations, style de musique choisi, musique coupée. On voit où le parcours se perd, et quels styles plaisent.
 - **Devenir admin** : envoie `/admin` au bot **avant de partager le lien** : la première personne qui le fait devient admin. On peut aussi fixer la variable `ADMIN_IDS` (identifiants Telegram séparés par des virgules), qui prend alors le dessus.
-- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, styles de musique choisis, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées et avis). Pour un testeur, `/stats` donne ses propres chiffres : minutons, paliers, et niveau et collection par passion.
+- **Commandes d'admin** : `/stats` (le test en chiffres : testeurs, entonnoir du parcours, passions, durées, humeurs, notes, styles de musique choisis, étapes de parcours réussies et parcours terminés, projets créés et terminés, activités les mieux et les moins bien notées), `/avis` (les derniers avis), `/export` (deux fichiers CSV à ouvrir dans Excel : activités validées, avec l'étape de parcours et le projet, et avis). Pour un testeur, `/stats` donne ses propres chiffres : minutons, paliers, niveau et collection par passion, parcours en cours et projets.
 
 ## Les règles
 
 - **Choix de l'activité** (`shared/src/selection.ts`) : tirage parmi les 5 activités de la passion × du temps, en écartant les 3 dernières proposées pour cette combinaison. « Une autre idée » écarte toujours l'activité affichée : en enchaînant, une activité ne revient jamais dans 4 propositions d'affilée. Le mood ne change que le ton de l'introduction.
 - **Minutons** : 1 minute d'activité = 1 minuton. Cumulatif, rien à dépenser. Les niveaux par passion comptent les minutons gagnés dans la passion ; ils ne redescendent jamais.
+- **Parcours** (`shared/src/paths.ts`) : le serveur vérifie qu'une étape est débloquée avant de la proposer (sinon `409 locked`), et que le temps et la passion sont ceux de l'étape. Une étape réussie l'est pour de bon.
+- **Projets** : 30 par personne au plus, un nom de 40 caractères, un objectif de 1 à 100 créations. Une création ne se range que dans un projet de sa passion, et pas dans un projet terminé.
 - **Garde-fou temporel** (`shared/src/rules.ts`) : pour Musique et Cinéma, « Valider » reste grisé jusqu'à la fin de la durée choisie. Le bouton se remplit doucement, sans compte à rebours. Pour Dessin et Écriture, on valide tout de suite avec une photo ou un texte, ou « sans » une fois la durée écoulée. Le serveur applique les mêmes règles : l'horloge du téléphone ne suffit pas à tricher.
 - **Reprise** : une activité proposée reste « à reprendre » 12 h. Pratique quand on quitte Telegram pour écouter un album : en revenant, le minuteur a continué.
 - **Photos** : envoyées depuis l'app, réduites à 1600 px, puis relayées par le bot vers le chat privé de stockage. Seul le `file_id` Telegram est gardé en base, et le serveur relaie l'image à l'affichage (le token ne quitte jamais le serveur). Une photo envoyée **directement au bot** rejoint le dernier dessin enregistré sans photo.
@@ -226,7 +242,9 @@ Pour faire tester d'autres personnes, envoie-leur simplement le lien de ton bot 
 - **Introductions selon le mood** : `shared/src/intros.ts` (deux par mood).
 - **Messages du bot** : `shared/src/reminders.ts` (relances) et `server/src/bot/bot.ts` (accueil, photos, avis, commandes d'admin).
 - **Paliers de création** : `shared/src/feedback.ts` (`MILESTONES` : minutes à atteindre, titre, phrase de célébration).
-- **Niveaux par passion** : `shared/src/progress.ts` (`LEVEL_MINUTES` : seuils ; `LEVEL_TITLES` : les cinq titres de chaque passion).
+- **Niveaux par passion** : `shared/src/progress.ts` (`LEVEL_MINUTES` : seuils ; `LEVEL_TITLES` : les cinq titres de chaque passion ; `CONFIRMED_PATH_LEVEL` est dans `paths.ts`).
+- **Les parcours** : `shared/src/paths.ts`. Chaque parcours a un titre, une phrase, un badge et six étapes `[titre, consigne, ce qu'elle fait travailler]`, de la plus facile à la plus exigeante. **Ces textes ne font pas partie des 60 activités validées** : relis-les et ajuste-les librement (sans changer l'ordre des étapes ni l'identifiant d'un parcours déjà joué, qui sert à retrouver les étapes réussies).
+- **Idées de noms de projet** : `app/src/components/Projects.tsx` (`IDEAS`).
 - **Musiques d'ambiance** : `shared/src/ambiances.ts` (nom, phrase, couleur, crédit) et `promo/ambiances/build.mjs`. Pour changer un morceau : modifie la liste `TRACKS` du script (titre et fichier chez incompetech.com), lance `node ambiances/build.mjs <id>` depuis `promo/`, puis mets à jour le crédit dans `ambiances.ts`.
 
 Lance `npm test` après une modification.
@@ -240,10 +258,14 @@ Lance `npm test` après une modification.
 | `GET` | `/api/me` | Profil, statistiques, activité à reprendre (crée l'utilisateur à la première ouverture) |
 | `PUT` | `/api/me/passions` | Choix des passions (1 à 3) |
 | `PUT` | `/api/me/theme` | Choix du thème de l'app (`pop`, `nuit`, `bd`, `memphis`) |
-| `POST` | `/api/proposals` | Tirer une activité ; avec `replacing` : « Une autre idée » |
-| `POST` | `/api/completions` | Valider une activité (JSON, ou multipart avec une photo) |
+| `POST` | `/api/proposals` | Tirer une activité ; avec `replacing` : « Une autre idée » ; avec `step` : une étape de parcours |
+| `POST` | `/api/completions` | Valider une activité (JSON, ou multipart avec une photo) ; `projectId` la range dans un projet |
 | `GET` | `/api/completions` | La galerie, page par page |
 | `PUT` | `/api/completions/:id/rating` | Noter une activité validée (3 j'ai adoré, 2 sympa, 1 pas pour moi) |
+| `PUT` | `/api/completions/:id/project` | Ranger une création dans un projet (ou l'en sortir avec `null`) |
+| `GET` | `/api/passions/:passion` | La signature d'une passion : premier et dernier dessin, texte le plus long, titres explorés |
+| `GET` / `POST` | `/api/projects` | Les projets ; en créer un (passion, nom, objectif facultatif) |
+| `GET` / `PATCH` / `DELETE` | `/api/projects/:id` | Un projet et ses créations ; le renommer, changer l'objectif, le terminer ou le rouvrir ; le supprimer |
 | `GET` | `/api/photos/:id` | Une photo (adresse signée, valable quelques heures) |
 | `PUT` | `/api/me/settings` | Réglages (relances du bot) |
 | `POST` | `/api/feedback` | Un avis écrit, transmis aux admins dans Telegram |

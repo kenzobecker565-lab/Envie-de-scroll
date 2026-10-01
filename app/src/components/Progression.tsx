@@ -7,6 +7,7 @@ import {
   getPassion,
   levelSteps,
   passionLevel,
+  pathProgress,
   PASSION_IDS,
   type LevelStep,
   type PassionId,
@@ -22,15 +23,18 @@ import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 import { Sparkle } from './decor/Sparkle.tsx'
+import { PathCard } from './Paths.tsx'
+import { SignatureSection, signatureLabel } from './Signature.tsx'
 
 /**
  * La progression par passion (galerie) : un niveau qui monte avec les minutons
  * gagnés dans la passion, et la collection de ses 15 activités. Toucher une
- * carte ouvre le détail : les cinq niveaux, la collection, et de quoi lancer
- * une activité dans cette passion.
+ * carte ouvre le détail : les parcours (six étapes de plus en plus
+ * exigeantes), la signature de la passion (avant / maintenant, mots, titres
+ * explorés), les cinq niveaux, la collection, et de quoi lancer une activité.
  */
 
-const EMPTY: Omit<PassionStatsDTO, 'passion'> = { minutes: 0, activities: 0, tried: [] }
+const EMPTY: Omit<PassionStatsDTO, 'passion'> = { minutes: 0, activities: 0, tried: [], steps: [], drawings: 0, words: 0, explored: 0 }
 
 /** Les chiffres d'une passion (zéro si rien n'a encore été fait). */
 export function statsFor(byPassion: readonly PassionStatsDTO[] | undefined, passion: PassionId): PassionStatsDTO {
@@ -48,6 +52,7 @@ const LEVEL_MESSAGES = [
 
 export function PassionProgressGrid() {
   const { state } = useAppState()
+  const { push } = useNavigation()
   const { user, stats } = state.me
   const [opened, setOpened] = useState<PassionId>()
   const [open, setOpen] = useState(false)
@@ -77,7 +82,20 @@ export function PassionProgressGrid() {
         ))}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>{opened && <PassionDetail passion={opened} stats={statsFor(stats.byPassion, opened)} canStart={user.passions.includes(opened)} />}</DialogContent>
+        <DialogContent>
+          {opened && (
+            <PassionDetail
+              passion={opened}
+              stats={statsFor(stats.byPassion, opened)}
+              canStart={user.passions.includes(opened)}
+              onOpenPath={(pathId) => {
+                haptics.impact('light')
+                setOpen(false)
+                push({ name: 'path', pathId })
+              }}
+            />
+          )}
+        </DialogContent>
       </Dialog>
     </section>
   )
@@ -97,7 +115,7 @@ function PassionCard({ passion, stats, index, onOpen }: { passion: PassionId; st
       animate={{ opacity: 1, y: 0, rotate: index % 2 ? 0.6 : -0.6 }}
       transition={{ delay: 0.15 + index * 0.06, type: 'spring', stiffness: 260, damping: 20 }}
       aria-haspopup="dialog"
-      aria-label={`${info.label} : ${level.title ? `niveau ${level.level}, ${level.title}` : 'à découvrir'}. ${stats.tried.length} activités découvertes sur ${size}.`}
+      aria-label={`${info.label} : ${level.title ? `niveau ${level.level}, ${level.title}` : 'à découvrir'}. ${plural(stats.tried.length, 'activité découverte', 'activités découvertes')} sur ${size}.`}
       className={cn('flex w-full items-start gap-3 rounded-md border-[2.5px] border-outline p-3 text-left shadow-chip transition-shadow duration-150 active:shadow-press', PASSION_COLORS[passion].soft)}
     >
       <span className={cn('flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-2 border-outline text-on-color [&>svg]:size-5', PASSION_COLORS[passion].bg)}>
@@ -106,7 +124,10 @@ function PassionCard({ passion, stats, index, onOpen }: { passion: PassionId; st
       <span className="flex min-w-0 flex-1 flex-col gap-2">
         <span className="flex items-start justify-between gap-2">
           <span className="flex min-w-0 flex-col">
-            <span className="text-12 font-bold text-ink-soft">{info.label}</span>
+            <span className="text-12 font-bold text-ink-soft">
+              {info.label}
+              {signatureLabel(passion, stats) && ` · ${signatureLabel(passion, stats)}`}
+            </span>
             <span className="font-display text-20 leading-tight font-extrabold tracking-tight text-ink">{level.title ?? 'À découvrir'}</span>
           </span>
           <LevelChip level={level.level} className="shrink-0" />
@@ -180,7 +201,7 @@ function CollectionDots({ passion, tried }: { passion: PassionId; tried: readonl
 
 /* ------------------------------------------------------- le détail d'une passion */
 
-function PassionDetail({ passion, stats, canStart }: { passion: PassionId; stats: PassionStatsDTO; canStart: boolean }) {
+function PassionDetail({ passion, stats, canStart, onOpenPath }: { passion: PassionId; stats: PassionStatsDTO; canStart: boolean; onOpenPath: (pathId: string) => void }) {
   const info = getPassion(passion)
   const Icon = PASSION_ICONS[passion]
   const level = passionLevel(passion, stats.minutes)
@@ -225,6 +246,19 @@ function PassionDetail({ passion, stats, canStart }: { passion: PassionId; stats
         </span>
         <Sparkle size={22} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-2 right-3" />
       </Card>
+
+      {/* Les parcours : progresser étape par étape, de plus en plus exigeant. */}
+      <section className="flex shrink-0 flex-col gap-2" aria-labelledby="paths-title">
+        <h3 id="paths-title" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
+          Tes parcours
+        </h3>
+        <p className="text-13 text-ink-soft">Six étapes, de l’échauffement au défi final&nbsp;: chacune un cran plus exigeante que la précédente.</p>
+        {pathProgress(passion, stats.steps, level.level).map((progress, index) => (
+          <PathCard key={progress.path.id} progress={progress} index={index} onOpen={() => onOpenPath(progress.path.id)} />
+        ))}
+      </section>
+
+      <SignatureSection passion={passion} stats={stats} />
 
       {/* Les cinq niveaux. */}
       <section className="flex shrink-0 flex-col gap-2" aria-labelledby="levels-title">

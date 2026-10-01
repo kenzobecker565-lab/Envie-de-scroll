@@ -16,6 +16,7 @@ import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
 import { MilestoneProgress } from '../components/Milestones.tsx'
 import { PassionProgressGrid } from '../components/Progression.tsx'
+import { ProjectPicker, ProjectsSection } from '../components/Projects.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { ThemeButton } from '../components/ThemePicker.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
@@ -136,6 +137,7 @@ export function GalleryScreen() {
       )}
 
       <PassionProgressGrid />
+      <ProjectsSection />
 
       {(view === 'list' || view === 'loading') && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
       <div className={cn('flex flex-1 flex-col', view === 'list' || view === 'loading' ? 'mt-3' : 'mt-8')}>
@@ -217,7 +219,17 @@ export function GalleryScreen() {
       </div>
 
       <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
-        <DialogContent>{opened && <GalleryDetail item={opened} />}</DialogContent>
+        <DialogContent>
+          {opened && (
+            <GalleryDetail
+              item={opened}
+              onChange={(updated) => {
+                setOpened(updated)
+                setItems((previous) => previous.map((item) => (item.id === updated.id ? updated : item)))
+              }}
+            />
+          )}
+        </DialogContent>
       </Dialog>
     </Screen>
   )
@@ -335,7 +347,7 @@ function PhotoPendingNote() {
 /* ------------------------------ Vue détaillée ------------------------------ */
 
 /** Une création en grand, dans la feuille modale. */
-function GalleryDetail({ item }: { item: CompletionDTO }) {
+function GalleryDetail({ item, onChange }: { item: CompletionDTO; onChange: (item: CompletionDTO) => void }) {
   const { state } = useAppState()
   const passion = getPassion(item.passion)
   const Icon = PASSION_ICONS[item.passion]
@@ -392,6 +404,7 @@ function GalleryDetail({ item }: { item: CompletionDTO }) {
           </div>
         )}
       </div>
+      <ProjectPicker completion={item} onChange={onChange} className="shrink-0" />
       <Card tone="good" className="flex-row items-center gap-3 shadow-chip">
         <CoinIcon size={28} />
         <p className="flex-1 text-15 font-semibold">

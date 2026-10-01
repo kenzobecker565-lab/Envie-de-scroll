@@ -15,6 +15,7 @@ import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
+import { PathScreen } from './screens/PathScreen.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
 import { PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
@@ -89,6 +90,7 @@ function toneFor(route: Route, flow: Flow): DecorTone {
     case 'done':
       return 'good'
     case 'gallery':
+    case 'path':
       return 'warm'
     default:
       return 'mixed'
@@ -119,6 +121,8 @@ function screenFor(route: Route) {
       return <DoneScreen />
     case 'gallery':
       return <GalleryScreen />
+    case 'path':
+      return <PathScreen pathId={route.pathId} />
   }
 }
 
@@ -133,7 +137,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 
-  const key = route.name === 'passions' ? `passions-${route.mode}` : route.name
+  const key = route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name
   return (
     <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
       <motion.div key={key} custom={direction} variants={screenVariants} initial="enter" animate="center" exit="exit">

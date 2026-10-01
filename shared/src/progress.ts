@@ -76,3 +76,8 @@ export function collection(passion: PassionId): { duration: Duration; activities
 export function collectionSize(passion: PassionId): number {
   return ACTIVITIES.filter((activity) => activity.passion === passion).length
 }
+
+/** Nombre de mots d'un texte (écriture). */
+export function countWords(text: string | null | undefined): number {
+  return text?.trim() ? text.trim().split(/\s+/).length : 0
+}

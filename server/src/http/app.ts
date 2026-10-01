@@ -7,10 +7,14 @@
  *   GET  /api/me                 profil, statistiques, activité à reprendre
  *   PUT  /api/me/passions        choix des passions (1 à 3)
  *   PUT  /api/me/theme           choix du thème de l'app
- *   POST /api/proposals          tirer une activité (ou « Une autre idée »)
+ *   POST /api/proposals          tirer une activité (ou « Une autre idée »), ou jouer une étape de parcours
  *   POST /api/completions        valider une activité (JSON, ou multipart avec une photo)
  *   GET  /api/completions        la galerie, de la plus récente à la plus ancienne
  *   PUT  /api/completions/:id/rating  la note d'une activité (après coup)
+ *   PUT  /api/completions/:id/project ranger une création dans un projet (ou l'en sortir)
+ *   GET  /api/passions/:passion  la signature d'une passion (avant / après, titres explorés…)
+ *   GET  /api/projects           les projets ; POST : en créer un
+ *   GET  /api/projects/:id       un projet et ses créations ; PATCH : le modifier ou le terminer ; DELETE
  *   GET  /api/photos/:id         une photo de dessin (adresse signée)
  *   PUT  /api/me/settings        réglages (relances du bot)
  *   POST /api/feedback           un avis écrit (transmis aux admins dans Telegram)
@@ -32,11 +36,15 @@ import {
   MAX_PHOTO_BYTES,
   normalizePassions,
   type ApiErrorBody,
+  type AssignProjectResponse,
   type CompleteResponse,
   type CompletionResponse,
   type CompletionsPage,
   type Duration,
   type MeResponse,
+  type PassionDetailResponse,
+  type ProjectDetailResponse,
+  type ProjectsResponse,
   type ProposalResponse,
   type UserResponse,
 } from '@scroll-up/shared'
@@ -47,6 +55,7 @@ import { signedPhotoUrl, verifyPhotoSignature, type PhotoService } from '../phot
 import { completeProposal, listCompletions, toCompletionDTO } from '../services/completions.ts'
 import { createProposal, findOpenProposal, toProposalDTO } from '../services/proposals.ts'
 import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
+import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
 import { getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
 import { ApiError, badRequest } from './errors.ts'
 
@@ -153,13 +162,14 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       const before = await prisma.user.findUnique({ where: { id: BigInt(telegramUserOf(res).id) }, select: { lastSeenAt: true } })
       const user = await currentUser(req, res)
       if (!before || now().getTime() - before.lastSeenAt.getTime() > SESSION_GAP_MS) await recordEvent(prisma, user, 'open', undefined, now())
-      const [stats, open] = await Promise.all([getStats(prisma, user, now()), findOpenProposal(prisma, user, now())])
+      const [stats, open, projects] = await Promise.all([getStats(prisma, user, now()), findOpenProposal(prisma, user, now()), listProjects(prisma, user, photoUrl)])
       const body: MeResponse = {
         user: toUserDTO(user),
         stats,
         openProposal: open ? toProposalDTO(open) : null,
         serverTime: now().toISOString(),
         botUsername: botUsername?.() ?? null,
+        projects,
       }
       res.json(body)
     }),
@@ -232,13 +242,14 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.post(
     '/proposals',
     asyncRoute(async (req, res) => {
-      const { passion, mood, duration, replacing } = (req.body ?? {}) as Record<string, unknown>
+      const { passion, mood, duration, replacing, step } = (req.body ?? {}) as Record<string, unknown>
       if (!isPassionId(passion) || !isMoodId(mood) || !DURATIONS.includes(duration as Duration)) {
         throw badRequest('Passion, mood ou temps invalide.')
       }
       if (replacing !== undefined && typeof replacing !== 'string') throw badRequest('Proposition à remplacer invalide.')
+      if (step !== undefined && typeof step !== 'string') throw badRequest('Étape de parcours invalide.')
       const user = await currentUser(req, res)
-      const proposal = await createProposal(prisma, user, { passion, mood, duration: duration as Duration, replacing }, { random, now: now() })
+      const proposal = await createProposal(prisma, user, { passion, mood, duration: duration as Duration, replacing, step }, { random, now: now() })
       const body: ProposalResponse = { proposal: toProposalDTO(proposal), serverTime: now().toISOString() }
       res.status(201).json(body)
     }),
@@ -272,6 +283,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
           text: typeof fields.text === 'string' ? fields.text : undefined,
           exploredTitle: typeof fields.exploredTitle === 'string' ? fields.exploredTitle : undefined,
           photo: req.file ? { buffer: req.file.buffer, mimetype: req.file.mimetype } : undefined,
+          projectId: typeof fields.projectId === 'string' && fields.projectId ? fields.projectId : undefined,
         },
         now(),
       )
@@ -303,6 +315,76 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       const completion = await rateCompletion(prisma, user, String(req.params.id), (req.body as { rating?: unknown } | undefined)?.rating)
       const body: CompletionResponse = { completion: toCompletionDTO(completion, photoUrl) }
       res.json(body)
+    }),
+  )
+
+  api.put(
+    '/completions/:id/project',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      const completion = await assignProject(prisma, user, String(req.params.id), (req.body as { projectId?: unknown } | undefined)?.projectId ?? null)
+      const body: AssignProjectResponse = { completion: toCompletionDTO(completion, photoUrl), projects: await listProjects(prisma, user, photoUrl) }
+      res.json(body)
+    }),
+  )
+
+  /* ------------------------- Progression et projets ------------------------- */
+
+  api.get(
+    '/passions/:passion',
+    asyncRoute(async (req, res) => {
+      const passion = req.params.passion
+      if (!isPassionId(passion)) throw badRequest('Passion inconnue.')
+      const user = await currentUser(req, res)
+      const body: PassionDetailResponse = await passionDetail(prisma, user, passion, photoUrl)
+      res.json(body)
+    }),
+  )
+
+  api.get(
+    '/projects',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      const body: ProjectsResponse = { projects: await listProjects(prisma, user, photoUrl) }
+      res.json(body)
+    }),
+  )
+
+  api.post(
+    '/projects',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      const project = await createProject(prisma, user, (req.body ?? {}) as Record<string, unknown>, now())
+      const body: ProjectDetailResponse = await projectDetail(prisma, user, project.id, photoUrl)
+      res.status(201).json(body)
+    }),
+  )
+
+  api.get(
+    '/projects/:id',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      const body: ProjectDetailResponse = await projectDetail(prisma, user, String(req.params.id), photoUrl)
+      res.json(body)
+    }),
+  )
+
+  api.patch(
+    '/projects/:id',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      const project = await updateProject(prisma, user, String(req.params.id), (req.body ?? {}) as Record<string, unknown>, now())
+      const body: ProjectDetailResponse = await projectDetail(prisma, user, project.id, photoUrl)
+      res.json(body)
+    }),
+  )
+
+  api.delete(
+    '/projects/:id',
+    asyncRoute(async (req, res) => {
+      const user = await currentUser(req, res)
+      await deleteProject(prisma, user, String(req.params.id))
+      res.status(204).end()
     }),
   )
 

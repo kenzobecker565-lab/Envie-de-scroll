@@ -40,6 +40,9 @@ export const APP_EVENTS = [
   'music', // style de musique d'ambiance choisi (data.ambiance)
   'music_off', // musique d'ambiance coupée
   'progress_open', // ouverture du détail d'une passion (progression)
+  'path_open', // ouverture d'un parcours
+  'project_create', // projet créé
+  'project_finish', // projet terminé
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

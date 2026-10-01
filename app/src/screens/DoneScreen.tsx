@@ -1,7 +1,7 @@
 import { House, Images, Send } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { collectionSize, getPassion, levelCrossed, milestoneCrossed } from '@scroll-up/shared'
+import { collectionSize, getPassion, getPathStep, isBaseActivity, levelCrossed, milestoneCrossed, passionLevel, pathProgress } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,9 @@ import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { MilestoneBanner } from '../components/Milestones.tsx'
+import { StepBanner } from '../components/Paths.tsx'
 import { LevelUpBanner, statsFor } from '../components/Progression.tsx'
+import { ProjectPicker } from '../components/Projects.tsx'
 import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen } from '../components/Screen.tsx'
@@ -43,7 +45,10 @@ export function DoneScreen() {
   const before = statsFor(done.previousStats.byPassion, passion)
   const after = statsFor(done.response.stats.byPassion, passion)
   const level = levelCrossed(passion, before.minutes, after.minutes)
-  const discovered = !before.tried.includes(activityId)
+  const discovered = isBaseActivity(activityId) && !before.tried.includes(activityId)
+  // Une étape de parcours : la marche franchie, la suivante qui s'ouvre (ou le badge).
+  const step = getPathStep(activityId)
+  const stepProgress = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level).find((entry) => entry.path.id === step.pathId) : undefined
 
   return (
     <Screen className="items-center text-center">
@@ -120,6 +125,12 @@ export function DoneScreen() {
         <span className="text-14 font-bold">minutons au total</span>
       </Card>
 
+      {step && stepProgress && (
+        <div className="mt-6 w-full">
+          <StepBanner step={step} progress={stepProgress} onOpenPath={() => reset([{ name: 'home' }, { name: 'path', pathId: step.pathId }])} />
+        </div>
+      )}
+
       {level && (
         <div className="mt-6 w-full">
           <LevelUpBanner passion={passion} step={level} />
@@ -131,6 +142,10 @@ export function DoneScreen() {
           <MilestoneBanner milestone={milestone} />
         </div>
       )}
+
+      <Card className="mt-6 w-full text-left" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.4 }}>
+        <ProjectPicker completion={done.response.completion} />
+      </Card>
 
       <div className="mt-6 w-full">
         <RateActivity completionId={done.response.completion.id} initial={done.response.completion.rating} />

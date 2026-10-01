@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import {
   ACTIVITIES,
+  canPlayStep,
+  countWords,
+  DIFFICULTIES,
+  getActivity,
+  getPathStep,
+  isBaseActivity,
+  PATHS,
+  pathProgress,
+  pathsFor,
+  STEP_DURATIONS,
   collection,
   collectionSize,
   LEVEL_TITLES,
@@ -16,7 +26,6 @@ import {
   DURATIONS,
   drawExtra,
   frenchTypography,
-  getActivity,
   isActivityRating,
   isAppEventName,
   lastMilestone,
@@ -280,5 +289,60 @@ describe('progression par passion', () => {
       expect(collectionSize(passion)).toBe(15)
       expect(collection(passion).map((group) => group.activities.length)).toEqual([5, 5, 5])
     }
+  })
+})
+
+describe('parcours', () => {
+  it('a deux parcours par passion (débutant, confirmé), de six étapes de plus en plus longues', () => {
+    expect(PATHS).toHaveLength(8)
+    for (const passion of PASSION_IDS) {
+      expect(pathsFor(passion).map((path) => path.tier)).toEqual([1, 2])
+      for (const path of pathsFor(passion)) {
+        expect(path.steps.map((step) => step.duration)).toEqual([...STEP_DURATIONS])
+        expect(path.steps.map((step) => step.difficulty)).toEqual([...DIFFICULTIES])
+        for (const step of path.steps) {
+          expect(step.passion).toBe(passion)
+          expect(step.text.length).toBeGreaterThan(20)
+          expect(step.text).not.toMatch(/'/)
+        }
+      }
+    }
+    const ids = PATHS.flatMap((path) => path.steps.map((step) => step.id))
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('retrouve une étape comme une activité, hors de la collection', () => {
+    const step = getPathStep('parcours-visages-3')
+    expect(step).toMatchObject({ pathId: 'visages', index: 3, duration: 15, difficulty: 'Moyen' })
+    expect(getActivity('parcours-visages-3')?.text).toBe(step?.text)
+    expect(isBaseActivity('parcours-visages-3')).toBe(false)
+    expect(isBaseActivity(ACTIVITIES[0]!.id)).toBe(true)
+  })
+
+  it('débloque les étapes une à une, et le parcours confirmé après le premier ou au niveau 3', () => {
+    const start = pathProgress('dessin', [], 0)
+    expect(start.map((entry) => [entry.path.id, entry.done, entry.unlocked, entry.next?.index])).toEqual([
+      ['premiers-traits', 0, true, 1],
+      ['visages', 0, false, 1],
+    ])
+    const step2 = getPathStep('parcours-premiers-traits-2')!
+    expect(canPlayStep(step2, [], 1)).toBe(false)
+    expect(canPlayStep(step2, ['parcours-premiers-traits-1'], 1)).toBe(true)
+    // Les étapes comptent dans l'ordre : une étape isolée plus loin n'avance pas le parcours.
+    expect(pathProgress('dessin', ['parcours-premiers-traits-3'], 1)[0]?.done).toBe(0)
+
+    const all = pathsFor('dessin')[0]!.steps.map((step) => step.id)
+    const finished = pathProgress('dessin', all, 2)
+    expect(finished[0]).toMatchObject({ done: 6, finished: true, next: null })
+    expect(finished[1]?.unlocked).toBe(true)
+    expect(pathProgress('dessin', [], 3)[1]?.unlocked).toBe(true)
+    expect(canPlayStep(getPathStep('parcours-visages-1')!, [], 2)).toBe(false)
+    expect(canPlayStep(getPathStep('parcours-visages-1')!, [], 3)).toBe(true)
+  })
+
+  it('compte les mots', () => {
+    expect(countWords('  Il pleuvait   sur la ville. ')).toBe(5)
+    expect(countWords('')).toBe(0)
+    expect(countWords(null)).toBe(0)
   })
 })

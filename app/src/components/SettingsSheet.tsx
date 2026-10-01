@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { api, track } from '../api/client.ts'
 import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
-import { homeScreenView, type HomeScreenState } from '../lib/homeScreen.ts'
+import { homeScreenConfirm, homeScreenView, type HomeScreenState } from '../lib/homeScreen.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { checkHomeScreen, haptics, requestHomeScreen, supports, telegram } from '../telegram/webApp.ts'
@@ -140,9 +140,10 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
 }
 
 /**
- * Le raccourci sur l'écran d'accueil (Telegram 8+). Toucher la ligne ouvre la
- * fenêtre de Telegram ; elle passe à « Sur ton écran d'accueil » quand Telegram
- * confirme, et dit quoi faire quand l'ajout est impossible ici.
+ * Le raccourci sur l'écran d'accueil (Telegram 8+). Toucher la ligne ouvre une
+ * fenêtre de Telegram (« Ajouter »), puis celle du téléphone ; la ligne passe à
+ * « Sur ton écran d'accueil » quand Telegram confirme, et dit quoi faire quand
+ * l'ajout est impossible ici.
  */
 function HomeScreenRow() {
   const [state, setState] = useState<HomeScreenState>('checking')
@@ -167,32 +168,40 @@ function HomeScreenRow() {
     setState('added')
   }
 
+  const platform = telegram?.platform ?? ''
   const add = () => {
     haptics.impact('medium')
     track('home_screen')
-    setState('adding')
     stopListening.current?.()
-    stopListening.current = requestHomeScreen((result) => {
-      window.clearTimeout(recheck.current)
-      if (result === 'added') markAdded()
-      else {
-        haptics.warning()
-        setState('failed')
-      }
-    })
-    // Certains téléphones ne confirment jamais : on revérifie au bout de quelques secondes.
     window.clearTimeout(recheck.current)
-    recheck.current = window.setTimeout(() => {
-      void checkHomeScreen().then((status) => {
-        if (status === 'added') {
-          stopListening.current?.()
-          markAdded()
-        } else setState((current) => (current === 'adding' ? (status === 'unsupported' ? 'failed' : status) : current))
-      })
-    }, 6000)
+    stopListening.current = requestHomeScreen({
+      // La fenêtre native de Telegram : sans elle, Telegram Android ignore la demande.
+      confirm: homeScreenConfirm(platform),
+      onSent: () => {
+        setState('adding')
+        // Certains téléphones ne confirment jamais : on revérifie au bout de quelques secondes.
+        recheck.current = window.setTimeout(() => {
+          void checkHomeScreen().then((status) => {
+            if (status === 'added') {
+              stopListening.current?.()
+              markAdded()
+            } else setState((current) => (current === 'adding' ? (status === 'unsupported' ? 'failed' : status) : current))
+          })
+        }, 8000)
+      },
+      onDone: (result) => {
+        window.clearTimeout(recheck.current)
+        if (result === 'added') markAdded()
+        else if (result === 'failed') {
+          haptics.warning()
+          setState('failed')
+        }
+        // « cancelled » : on a renoncé dans la fenêtre, la ligne reste telle quelle.
+      },
+    })
   }
 
-  const view = homeScreenView(state, { supported: supports.homeScreen, platform: telegram?.platform ?? '' })
+  const view = homeScreenView(state, { supported: supports.homeScreen, platform })
   return (
     <Row
       icon={<Smartphone aria-hidden="true" />}

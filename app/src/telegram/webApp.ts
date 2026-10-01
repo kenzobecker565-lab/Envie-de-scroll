@@ -54,6 +54,10 @@ export interface TelegramWebApp {
   openLink?(url: string): void
   addToHomeScreen?(): void
   checkHomeScreenStatus?(callback: (status: 'unsupported' | 'unknown' | 'added' | 'missed') => void): void
+  showPopup?(
+    params: { title?: string; message: string; buttons?: { id?: string; type?: 'default' | 'ok' | 'close' | 'cancel' | 'destructive'; text?: string }[] },
+    callback?: (buttonId: string) => void,
+  ): void
   onEvent(event: string, handler: () => void): void
   offEvent(event: string, handler: () => void): void
   BackButton: {
@@ -107,6 +111,7 @@ export const supports = {
   verticalSwipes: atLeast('7.7'),
   shine: atLeast('7.10'),
   writeAccess: atLeast('6.9'),
+  popup: atLeast('6.2'),
   homeScreen: atLeast('8.0'),
 }
 
@@ -144,13 +149,30 @@ export function checkHomeScreen(timeoutMs = 1500): Promise<HomeScreenStatus> {
   })
 }
 
+export type HomeScreenResult = 'added' | 'failed' | 'cancelled'
+
 /**
- * Demande à Telegram de poser l'icône sur l'écran d'accueil. `onDone` reçoit
- * « added » quand Telegram confirme, « failed » si l'appareil refuse. Certains
- * téléphones ne confirment jamais : rien n'arrive alors (revérifier avec
- * checkHomeScreen). Renvoie de quoi arrêter d'écouter.
+ * Demande à Telegram de poser l'icône sur l'écran d'accueil.
+ *
+ * Telegram Android ignore la demande si elle ne suit pas de près un toucher
+ * sur un élément de Telegram lui-même (un bouton dans la page ne compte pas) :
+ * on passe donc d'abord par une fenêtre de confirmation native (`confirm`),
+ * dont le bouton « Ajouter » ouvre ensuite la fenêtre du téléphone.
+ *
+ * `onSent` : la demande part (après « Ajouter »). `onDone` : « added » quand
+ * Telegram confirme, « failed » si l'appareil refuse, « cancelled » si on
+ * renonce dans la fenêtre. Certains téléphones ne confirment jamais : rien
+ * n'arrive alors (revérifier avec checkHomeScreen). Renvoie de quoi tout arrêter.
  */
-export function requestHomeScreen(onDone: (result: 'added' | 'failed') => void): () => void {
+export function requestHomeScreen({
+  confirm,
+  onSent,
+  onDone,
+}: {
+  confirm?: { title: string; message: string; button: string }
+  onSent?: () => void
+  onDone: (result: HomeScreenResult) => void
+}): () => void {
   const app = telegram
   if (!app?.addToHomeScreen || !supports.homeScreen) {
     onDone('failed')
@@ -160,23 +182,44 @@ export function requestHomeScreen(onDone: (result: 'added' | 'failed') => void):
   let finished = false
   const added = () => finish('added')
   const failed = () => finish('failed')
-  const stop = () => {
+  const stopListening = () => {
     app.offEvent('homeScreenAdded', added)
     webView?.offEvent('home_screen_failed', failed)
   }
-  function finish(result: 'added' | 'failed') {
+  function finish(result: HomeScreenResult) {
     if (finished) return
     finished = true
-    stop()
+    stopListening()
     onDone(result)
   }
-  app.onEvent('homeScreenAdded', added)
-  webView?.onEvent('home_screen_failed', failed)
-  try {
-    app.addToHomeScreen()
-  } catch {
-    finish('failed')
+  const send = () => {
+    if (finished) return
+    app.onEvent('homeScreenAdded', added)
+    webView?.onEvent('home_screen_failed', failed)
+    onSent?.()
+    try {
+      app.addToHomeScreen?.()
+    } catch {
+      finish('failed')
+    }
   }
+  const stop = () => {
+    finished = true
+    stopListening()
+  }
+
+  if (confirm && supports.popup && app.showPopup) {
+    try {
+      app.showPopup(
+        { title: confirm.title, message: confirm.message, buttons: [{ id: 'add', type: 'default', text: confirm.button }, { type: 'cancel' }] },
+        (buttonId) => (buttonId === 'add' ? send() : finish('cancelled')),
+      )
+      return stop
+    } catch {
+      // Une autre fenêtre est déjà ouverte : on tente la demande directement.
+    }
+  }
+  send()
   return stop
 }
 

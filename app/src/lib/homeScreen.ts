@@ -21,6 +21,22 @@ const DESKTOP_PLATFORMS = new Set(['tdesktop', 'macos', 'web', 'weba', 'webk', '
 
 const ADD = 'Ajouter à l’écran d’accueil'
 
+/**
+ * La fenêtre de confirmation native de Telegram (titre de 64 caractères au
+ * plus, message de 256). Son bouton « Ajouter » compte comme un toucher sur
+ * Telegram lui-même : sans lui, Telegram Android ignore la demande.
+ */
+export function homeScreenConfirm(platform: string): { title: string; message: string; button: string } {
+  return {
+    title: 'Scroll-up sur ton écran d’accueil',
+    message:
+      platform === 'ios'
+        ? 'Telegram va ouvrir une page dans Safari pour poser l’icône de Scroll-up à côté de tes autres apps.'
+        : 'Une icône à côté de tes autres apps, pour ouvrir Scroll-up d’un geste. Ton téléphone va te demander de confirmer.',
+    button: 'Ajouter',
+  }
+}
+
 export function homeScreenView(state: HomeScreenState, { supported, platform }: { supported: boolean; platform: string }): HomeScreenView {
   if (state === 'added') return { title: 'Sur ton écran d’accueil', description: 'Scroll-up est à portée de pouce. Bien joué !', action: false, done: true }
   if (DESKTOP_PLATFORMS.has(platform)) {
@@ -37,6 +53,10 @@ export function homeScreenView(state: HomeScreenState, { supported, platform }: 
       done: false,
     }
   }
-  if (state === 'adding') return { title: ADD, description: 'Confirme dans la fenêtre qui vient de s’ouvrir.', action: false, done: false }
+  if (state === 'adding') {
+    // Sur iPhone, Telegram ouvre une page dans Safari ; ailleurs, le téléphone demande de confirmer.
+    const description = platform === 'ios' ? 'Termine dans la page ouverte par Telegram pour poser l’icône.' : 'Confirme dans la fenêtre de ton téléphone.'
+    return { title: ADD, description, action: false, done: false }
+  }
   return { title: ADD, description: 'Une icône juste à côté de tes autres apps : là où ton pouce a ses habitudes.', action: true, done: false }
 }

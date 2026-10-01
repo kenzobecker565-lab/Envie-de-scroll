@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { homeScreenView } from './homeScreen.ts'
+import { homeScreenConfirm, homeScreenView } from './homeScreen.ts'
 
 const phone = { supported: true, platform: 'android' }
 
@@ -11,8 +11,19 @@ describe('raccourci sur l’écran d’accueil', () => {
   })
 
   it('attend la confirmation, puis fête l’icône ajoutée', () => {
-    expect(homeScreenView('adding', phone)).toMatchObject({ action: false, description: 'Confirme dans la fenêtre qui vient de s’ouvrir.' })
+    expect(homeScreenView('adding', phone)).toMatchObject({ action: false, description: 'Confirme dans la fenêtre de ton téléphone.' })
+    expect(homeScreenView('adding', { supported: true, platform: 'ios' }).description).toContain('page ouverte par Telegram')
     expect(homeScreenView('added', phone)).toMatchObject({ title: 'Sur ton écran d’accueil', action: false, done: true })
+  })
+
+  it('passe par une fenêtre de Telegram aux textes assez courts', () => {
+    for (const platform of ['android', 'ios']) {
+      const confirm = homeScreenConfirm(platform)
+      expect(confirm.title.length).toBeLessThanOrEqual(64)
+      expect(confirm.message.length).toBeLessThanOrEqual(256)
+      expect(confirm.button).toBe('Ajouter')
+    }
+    expect(homeScreenConfirm('ios').message).toContain('Safari')
   })
 
   it('explique pourquoi quand ce n’est pas possible ici', () => {

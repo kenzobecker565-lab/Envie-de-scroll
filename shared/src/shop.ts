@@ -13,12 +13,20 @@ export interface ShopItem {
   available: boolean
   difficulty?: string
   audio?: string
+  composer?: string
+  edition?: string
 }
 export const SHOP_ITEMS: readonly ShopItem[] = [
   { id: 'ambiance-aube', category: 'ambiance', title: 'Aube tranquille', description: 'Une composition originale aux notes douces, pour créer au calme.', price: 40, symbol: '🌅', colors: ['#FFC78A','#FFE6BA'], available: true, audio: '/music/shop-aube.mp3' },
   { id: 'ambiance-orbite', category: 'ambiance', title: 'Orbite', description: 'Une composition originale aux nappes spatiales et légères.', price: 60, symbol: '🪐', colors: ['#C1B3FF','#8CB8FF'], available: true, audio: '/music/shop-orbite.mp3' },
   { id: 'piano-lanterne', category: 'piano', title: 'La lanterne', description: 'Une petite mélodie originale à jouer note après note sur le clavier.', price: 50, symbol: '🎹', colors: ['#FFE6A7','#FFCC80'], available: true, difficulty: 'Débutant', audio: '/music/shop-lanterne.mp3' },
   { id: 'piano-constellation', category: 'piano', title: 'Constellation', description: 'Une mélodie originale en plusieurs phrases, pour travailler les déplacements.', price: 90, symbol: '✨', colors: ['#B6CDFF','#D8C8FF'], available: true, difficulty: 'Intermédiaire', audio: '/music/shop-constellation.mp3' },
+  { id: 'piano-elise', category: 'piano', title: 'Lettre à Élise', composer: 'Beethoven', edition: 'Extrait guidé · adaptation à une main', description: 'Beethoven · un thème célèbre du domaine public, adapté note après note pour le clavier Scroll-up.', price: 160, symbol: '🌹', colors: ['#B6CDFF','#FFE6A7'], available: true, difficulty: 'Intermédiaire', audio: '/music/shop-elise.mp3' },
+  { id: 'piano-joie', category: 'piano', title: 'Ode à la joie', composer: 'Beethoven', edition: 'Extrait guidé · adaptation à une main', description: 'Beethoven · un thème célèbre du domaine public, adapté note après note pour le clavier Scroll-up.', price: 100, symbol: '☀️', colors: ['#B6CDFF','#FFE6A7'], available: true, difficulty: 'Débutant', audio: '/music/shop-joie.mp3' },
+  { id: 'piano-moonlight', category: 'piano', title: 'Sonate au clair de lune', composer: 'Beethoven', edition: 'Extrait guidé · adaptation à une main', description: 'Beethoven · un thème célèbre du domaine public, adapté note après note pour le clavier Scroll-up.', price: 180, symbol: '🌙', colors: ['#B6CDFF','#FFE6A7'], available: true, difficulty: 'Intermédiaire', audio: '/music/shop-moonlight.mp3' },
+  { id: 'piano-canon', category: 'piano', title: 'Canon de Pachelbel', composer: 'Pachelbel', edition: 'Extrait guidé · adaptation à une main', description: 'Pachelbel · un thème célèbre du domaine public, adapté note après note pour le clavier Scroll-up.', price: 140, symbol: '🎼', colors: ['#B6CDFF','#FFE6A7'], available: true, difficulty: 'Débutant', audio: '/music/shop-canon.mp3' },
+  { id: 'piano-bach-prelude', category: 'piano', title: 'Prélude en do majeur', composer: 'Bach', edition: 'Extrait guidé · adaptation à une main', description: 'Bach · un thème célèbre du domaine public, adapté note après note pour le clavier Scroll-up.', price: 160, symbol: '🎹', colors: ['#B6CDFF','#FFE6A7'], available: true, difficulty: 'Intermédiaire', audio: '/music/shop-bach-prelude.mp3' },
+  { id: 'piano-gymnopedie', category: 'piano', title: 'Gymnopédie nº 1', composer: 'Satie', edition: 'Extrait guidé · adaptation à une main', description: 'Satie · un thème célèbre du domaine public, adapté note après note pour le clavier Scroll-up.', price: 140, symbol: '☁️', colors: ['#B6CDFF','#FFE6A7'], available: true, difficulty: 'Débutant', audio: '/music/shop-gymnopedie.mp3' },
   { id: 'piano-davy-jones', category: 'piano', title: 'Davy Jones', description: 'Retrouve la partition officielle de Hans Zimmer et entraîne-toi sur le clavier libre. Les notes guidées ne sont pas encore disponibles.', price: 0, symbol: '🏴‍☠️', colors: ['#BDD6D5','#D3E3DE'], available: false, difficulty: 'Clavier libre · partition externe' },
   { id: 'theme-crepuscule', category: 'theme', title: 'Crépuscule', description: 'Une palette pêche et prune qui habille toute l’application.', price: 120, symbol: '🌇', colors: ['#FFF0E6','#E68778','#A390CA'], available: true },
   { id: 'theme-jardin', category: 'theme', title: 'Jardin', description: 'Un fond crème et des accents verts pour une ambiance végétale.', price: 120, symbol: '🌿', colors: ['#EDF5E8','#77C5A1','#DCEAA7'], available: true },
@@ -33,6 +41,9 @@ export const SHOP_ITEMS: readonly ShopItem[] = [
 ]
 export function getShopItem(id: string): ShopItem | undefined { return SHOP_ITEMS.find((item) => item.id === id) }
 export interface ShopState {
+  /** Crédit de test distinct des minutons gagnés avec les activités. */
+  bonus?: number
+  canClaimTestCredit?: boolean
   earned: number
   spent: number
   balance: number

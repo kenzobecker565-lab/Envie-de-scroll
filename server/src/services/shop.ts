@@ -1,8 +1,9 @@
-import { getShopItem, melody, SHOP_CATEGORIES, type ShopCategory, type ShopState } from '@scroll-up/shared'
+import { CLASSIC_MELODIES, getShopItem, melody, SHOP_CATEGORIES, type ShopCategory, type ShopState } from '@scroll-up/shared'
 import type { PrismaClient } from '../db.ts'
+import { isAdmin } from './feedback.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
 
-export async function getShop(prisma: PrismaClient, userId: bigint): Promise<ShopState> {
+export async function getShop(prisma: PrismaClient, userId: bigint, admins: readonly string[] = []): Promise<ShopState> {
   const [user, coins, purchases] = await Promise.all([
     prisma.user.findUniqueOrThrow({ where: { id: userId } }),
     prisma.completion.aggregate({ where: { userId }, _sum: { coins: true } }),
@@ -18,10 +19,10 @@ export async function getShop(prisma: PrismaClient, userId: bigint): Promise<Sho
       return typeof id === 'string' && owned.includes(id) && getShopItem(id)?.category === category ? [[category, id]] : []
     }))
   } catch { /* Un ancien profil sans équipement conserve les réglages gratuits. */ }
-  return { earned, spent: user.coinsSpent, balance: Math.max(0, earned - user.coinsSpent), owned, equipped }
+  return { earned, bonus: user.shopBonus, canClaimTestCredit: !user.shopTestCreditClaimed && await isAdmin(prisma, admins, userId), spent: user.coinsSpent, balance: Math.max(0, earned + user.shopBonus - user.coinsSpent), owned, equipped }
 }
 
-export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown): Promise<ShopState> {
+export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown, admins: readonly string[] = []): Promise<ShopState> {
   const item = typeof id === 'string' ? getShopItem(id) : undefined
   if (!item) throw badRequest('Objet inconnu.')
   if (!item.available) throw badRequest('Ce morceau attend encore son autorisation. Aucun achat possible.')
@@ -29,8 +30,9 @@ export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown)
     await prisma.$transaction(async (tx) => {
       if (await tx.shopPurchase.findUnique({ where: { userId_itemId: { userId, itemId: item.id } } })) return
       const earned = (await tx.completion.aggregate({ where: { userId }, _sum: { coins: true } }))._sum.coins ?? 0
+      const user = await tx.user.findUniqueOrThrow({ where: { id: userId } })
       // Débit conditionnel, prix choisi côté serveur et achat dans la même transaction.
-      const debit = await tx.user.updateMany({ where: { id: userId, coinsSpent: { lte: earned - item.price } }, data: { coinsSpent: { increment: item.price } } })
+      const debit = await tx.user.updateMany({ where: { id: userId, coinsSpent: { lte: earned + user.shopBonus - item.price } }, data: { coinsSpent: { increment: item.price } } })
       if (debit.count !== 1) throw new ApiError(409, 'invalid_request', 'Tu n’as pas encore assez de minutons disponibles.')
       await tx.shopPurchase.create({ data: { userId, itemId: item.id, price: item.price } })
       if (item.category === 'theme') {
@@ -44,10 +46,10 @@ export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown)
     // Deux requêtes pour le même objet : la contrainte unique annule le second débit.
     if (!(typeof error === 'object' && error !== null && 'code' in error && error.code === 'P2002')) throw error
   }
-  return getShop(prisma, userId)
+  return getShop(prisma, userId, admins)
 }
 
-export async function equipItem(prisma: PrismaClient, userId: bigint, category: unknown, id: unknown): Promise<ShopState> {
+export async function equipItem(prisma: PrismaClient, userId: bigint, category: unknown, id: unknown, admins: readonly string[] = []): Promise<ShopState> {
   if (!SHOP_CATEGORIES.includes(category as ShopCategory)) throw badRequest('Catégorie inconnue.')
   if (category === 'piano') throw badRequest('Un morceau se joue depuis la bibliothèque.')
   if (id !== null && typeof id !== 'string') throw badRequest('Objet inconnu.')
@@ -62,11 +64,12 @@ export async function equipItem(prisma: PrismaClient, userId: bigint, category: 
     else equipped[category as string] = id as string
     await tx.user.update({ where: { id: userId }, data: { shopEquipment: JSON.stringify(equipped) } })
   })
-  return getShop(prisma, userId)
+  return getShop(prisma, userId, admins)
 }
 
-// Compositions originales Scroll-up, distinctes des leçons gratuites.
+// Compositions originales et adaptations classiques Scroll-up, distinctes des leçons gratuites.
 const BONUS_MELODIES = {
+  ...CLASSIC_MELODIES,
   'piano-lanterne': melody('La lanterne', 'C4 E4 G4 E4 | D4 F4 A4 F4 | E4 G4 C5 B4 | A4 G4 E4 C4 || C4 D4 E4 G4 | A4 G4 F4 E4 | D4 E4 G4 D4 | E4 D4 C4'),
   'piano-constellation': melody('Constellation', 'A3 E4 A4 B4 | C5 B4 A4 E4 | F4 A4 C5 A4 | G4 B4 D5 B4 || E4 G4 B4 E5 | D5 B4 A4 G4 | F4 E4 D4 E4 | A4 E4 C4 A3 || A4 C5 E5 C5 | G4 B4 D5 B4 | F4 A4 C5 E4 | B3 E4 A4 A3'),
 }
@@ -74,4 +77,11 @@ export async function bonusMelody(prisma: PrismaClient, userId: bigint, id: stri
   if (!(id in BONUS_MELODIES)) throw badRequest('Morceau indisponible.')
   if (!(await prisma.shopPurchase.findUnique({ where: { userId_itemId: { userId, itemId: id } } }))) throw new ApiError(403, 'unauthorized', 'Débloque ce morceau avant de le jouer.')
   return BONUS_MELODIES[id as keyof typeof BONUS_MELODIES]
+}
+
+/** Un seul crédit de 10 000 pour le compte admin authentifié, montant imposé côté serveur. */
+export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, admins: readonly string[] = []): Promise<ShopState> {
+  if (!(await isAdmin(prisma, admins, userId))) throw new ApiError(403, 'unauthorized', 'Ce crédit de test est réservé au compte administrateur.')
+  await prisma.user.updateMany({ where: { id: userId, shopTestCreditClaimed: false }, data: { shopTestCreditClaimed: true, shopBonus: { increment: 10_000 } } })
+  return getShop(prisma, userId, admins)
 }

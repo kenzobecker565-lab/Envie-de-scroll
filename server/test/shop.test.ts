@@ -99,3 +99,46 @@ it('active un nouveau thème dès l’achat, le restaure et permet de changer sa
   expect(selected.body.equipped.theme).toBe('theme-jardin')
   expect(selected.body.balance).toBe(180)
 })
+
+it('réserve le crédit au compte admin, et crédite une seule fois sans modifier la progression', async () => {
+  await fund(50)
+  await fund(25, 2)
+  await prisma.setting.create({ data: { key: 'admins', value: '["1"]' } })
+  const admin = await request(app).get('/api/shop').set(as()).expect(200)
+  expect(admin.body.canClaimTestCredit).toBe(true)
+  const other = await request(app).get('/api/shop').set(as(2)).expect(200)
+  expect(other.body.canClaimTestCredit).toBe(false)
+  await request(app).post('/api/shop/test-credit').set(as(2)).send({ amount: 999999, userId: '1' }).expect(403)
+  const responses = await Promise.all([1,2].map(() => request(app).post('/api/shop/test-credit').set(as()).send({ amount: 999999, userId: '2' })))
+  for (const result of responses) expect(result.body).toMatchObject({ earned: 50, bonus: 10000, balance: 10050, canClaimTestCredit: false })
+  const me = await request(app).get('/api/me').set(as()).expect(200)
+  expect(me.body.stats.totalCoins).toBe(50)
+  expect(me.body.stats.totalActivities).toBe(1)
+  expect(await prisma.completion.count({ where: { userId: 1n } })).toBe(1)
+  const bought = await request(app).post('/api/shop/purchases').set(as()).send({ itemId: 'piano-elise' }).expect(200)
+  expect(bought.body.balance).toBe(9890)
+  await request(app).post('/api/shop/test-credit').set(as()).expect(200)
+  expect((await request(app).get('/api/shop').set(as())).body.balance).toBe(9890)
+  expect((await request(app).get('/api/shop').set(as(2))).body.balance).toBe(25)
+})
+
+it('respecte les admins configurés et refuse un faux rôle envoyé par le client', async () => {
+  await fund(0)
+  await prisma.setting.create({ data: { key: 'admins', value: '["1"]' } })
+  const configured = createApp({ prisma, config: { botToken: undefined, devAuth: true, initDataMaxAge: 0, signingSecret: 'test', appDistDir: undefined, adminIds: ['2'] }, photos: createPhotoService({ telegram: undefined, storageChatId: undefined, localDir: '/tmp/test-photos' }) })
+  await request(configured).post('/api/shop/test-credit').set(as()).send({ admin: true }).expect(403)
+  expect((await request(configured).get('/api/shop').set(as())).body.canClaimTestCredit).toBe(false)
+  const credited = await request(configured).post('/api/shop/test-credit').set(as(2)).expect(200)
+  expect(credited.body.balance).toBe(10000)
+})
+
+it('permet d’acheter et de jouer chacun des six classiques, en conservant le verrou avant achat', async () => {
+  await fund(2000)
+  for (const id of ['piano-elise','piano-joie','piano-moonlight','piano-canon','piano-bach-prelude','piano-gymnopedie']) {
+    await request(app).get(`/api/shop/piano/${id}`).set(as()).expect(403)
+    await request(app).post('/api/shop/purchases').set(as()).send({ itemId: id }).expect(200)
+    const played = await request(app).get(`/api/shop/piano/${id}`).set(as()).expect(200)
+    expect(played.body.melody.notes.length).toBeGreaterThan(25)
+    expect(played.body.melody.phrases.flat()).toEqual(played.body.melody.notes)
+  }
+})

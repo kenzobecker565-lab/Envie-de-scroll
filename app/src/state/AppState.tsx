@@ -21,6 +21,8 @@ export type Route =
   | { name: 'done' }
   | { name: 'progress' }
   | { name: 'gallery'; passion?: PassionId }
+  | { name: 'learn' }
+  | { name: 'learnPassion'; passion: PassionId }
   | { name: 'passionHub' }
   | { name: 'passionSpace'; passion: PassionId }
   | { name: 'profile' }

@@ -4,9 +4,9 @@ import { tabStack } from '../components/TabBar.tsx'
 import { useAppState, useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
-/** La pile d'une leçon : Progresser, le parcours, puis l'écran donné (la leçon, sa réussite). */
+/** La pile d'une leçon : Apprendre, la passion, le parcours, puis l'écran donné (la leçon, sa réussite). */
 export function lessonStack(step: PathStep, screen: Route): Route[] {
-  return [...tabStack('passionHub'), { name: 'passionSpace', passion: step.passion }, { name: 'path', pathId: step.pathId }, screen]
+  return [...tabStack('learn'), { name: 'learnPassion', passion: step.passion }, { name: 'path', pathId: step.pathId }, screen]
 }
 
 /**

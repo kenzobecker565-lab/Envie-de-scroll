@@ -1,7 +1,7 @@
 /**
  * Le son du clavier de l'appli : une note de piano synthétisée avec Web Audio
  * (une onde triangle et deux harmoniques douces, une attaque nette puis une
- * longue extinction), sans fichier à télécharger. Le contexte audio naît au
+ * extinction courte), sans fichier à télécharger. Le contexte audio naît au
  * premier toucher, comme l'exigent les navigateurs (iPhone compris).
  *
  * Comme sur un vrai piano : la note sonne tant que la touche est tenue (elle
@@ -33,12 +33,12 @@ export interface NoteHandle {
 }
 
 const SILENT: NoteHandle = { release: () => {} }
-/** Durée d'une note qu'on laisse résonner (touche tenue ou pédale) : environ 7 secondes. */
-const RING_SECONDS = 7
-/** Constante de temps de l'extinction naturelle : la note décroît lentement. */
-const RING_DECAY = 1.9
-/** Constante de temps de l'étouffoir quand on lâche la touche : une queue d'un peu plus d'une seconde. */
-const DAMPER = 0.4
+/** Résonance maximale avec une touche tenue ou la pédale : 3 secondes. */
+const RING_SECONDS = 3
+/** Extinction naturelle plus courte pour éviter que les notes se superposent trop longtemps. */
+const RING_DECAY = 0.65
+/** Relâchement doux mais bref : les oscillateurs s'arrêtent après 360 ms. */
+const DAMPER = 0.06
 
 /** Joue une note (« C4 ») tout de suite. */
 export function playNote(note: string): NoteHandle {
@@ -87,7 +87,15 @@ export function playNote(note: string): NoteHandle {
       if (released) return
       released = true
       const at = context.currentTime
-      // L'étouffoir : la note part du niveau où elle en est, et s'éteint en un peu plus d'une seconde.
+      // Annule aussi les étapes encore prévues si la touche est lâchée pendant l'attaque.
+      // On garde le niveau courant pour éviter un clic, puis on étouffe rapidement la note.
+      if (typeof envelope.gain.cancelAndHoldAtTime === 'function') {
+        envelope.gain.cancelAndHoldAtTime(at)
+      } else {
+        const level = envelope.gain.value
+        envelope.gain.cancelScheduledValues(at)
+        envelope.gain.setValueAtTime(level, at)
+      }
       envelope.gain.setTargetAtTime(0.0001, at, DAMPER)
       for (const oscillator of oscillators) {
         try {

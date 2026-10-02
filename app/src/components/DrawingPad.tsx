@@ -1,6 +1,7 @@
 import { Eraser, Trash2, Undo2 } from 'lucide-react'
 import { motion } from 'motion/react'
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { useEquipped } from '../lib/shop.ts'
 import { cn } from '@/lib/utils'
 import { haptics } from '../telegram/webApp.ts'
 
@@ -41,10 +42,13 @@ export interface DrawingPadHandle {
 }
 
 export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: boolean) => void; className?: string }>(function DrawingPad({ onInkChange, className }, ref) {
+  const palette = useEquipped('palette')
+  const colors = palette ? palette.colors.map((value, index) => ({ name: `${palette.title} ${index + 1}`, value })) : COLORS
   const canvas = useRef<HTMLCanvasElement>(null)
   const strokes = useRef<Stroke[]>([])
   const current = useRef<Stroke | null>(null)
   const [color, setColor] = useState<string>(COLORS[0].value)
+  useEffect(() => { setColor(colors[0].value) }, [palette?.id])
   const [width, setWidth] = useState<number>(WIDTHS[1].value)
   const [erasing, setErasing] = useState(false)
   const [count, setCount] = useState(0)
@@ -151,7 +155,7 @@ export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: 
       {/* Couleurs et gomme. */}
       <div className="flex items-center justify-between gap-2" role="toolbar" aria-label="Outils de dessin">
         <div className="flex flex-wrap items-center gap-1.5">
-          {COLORS.map((option) => {
+          {colors.map((option) => {
             const active = !erasing && color === option.value
             return (
               <button

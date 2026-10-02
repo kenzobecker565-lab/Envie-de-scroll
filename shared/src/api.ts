@@ -205,6 +205,7 @@ export interface AssignProjectRequest {
 /* ------------------------------- Réponses -------------------------------- */
 
 export interface MeResponse {
+  shop?: import('./shop.ts').ShopState
   user: UserDTO
   stats: StatsDTO
   /** Activité proposée mais pas encore validée, à reprendre. */

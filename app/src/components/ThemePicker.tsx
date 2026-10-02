@@ -50,6 +50,9 @@ export function useThemeChooser() {
   const choose = (next: AppTheme) => {
     haptics.selection()
     setError(undefined)
+    if (state.me.shop?.equipped.theme) {
+      api.equipItem('theme', null).then((shop) => dispatch({ type: 'shop', shop })).catch(() => setError('Le thème de la boutique n’a pas pu être désactivé. Réessaie.'))
+    }
     setAppTheme(next)
     dispatch({ type: 'user', user: { ...state.me.user, theme: next } })
     api

@@ -7,7 +7,7 @@
  * promo/ambiances/build.mjs) : 3 minutes au plus, tous au même volume.
  */
 
-export const AMBIANCE_IDS = ['jazz', 'lofi', 'piano', 'bossa', 'acoustique', 'synthwave', '8bit', 'ambient', 'tropical', 'pluie'] as const
+export const AMBIANCE_IDS = ['jazz', 'lofi', 'piano', 'bossa', 'acoustique', 'synthwave', '8bit', 'ambient', 'tropical', 'pluie', 'aube', 'orbite'] as const
 export type AmbianceId = (typeof AMBIANCE_IDS)[number]
 
 /** Le choix dans les réglages : un style, ou « au hasard ». */
@@ -28,6 +28,7 @@ export interface Ambiance {
 
 const MACLEOD = 'Kevin MacLeod'
 
+export const PREMIUM_AMBIANCES = { aube: 'ambiance-aube', orbite: 'ambiance-orbite' } as const
 export const AMBIANCES: readonly Ambiance[] = [
   { id: 'jazz', label: 'Jazz noir', mood: 'Un club enfumé, tard le soir', src: '/music/jazz-noir.mp3', tone: 'lilac', credit: null },
   { id: 'lofi', label: 'Lo-fi', mood: 'Un beat tranquille pour se poser', src: '/music/lofi.mp3', tone: 'sky', credit: { title: 'Study and Relax', author: MACLEOD } },
@@ -39,6 +40,8 @@ export const AMBIANCES: readonly Ambiance[] = [
   { id: 'ambient', label: 'Ambient', mood: 'Des nappes pour flotter', src: '/music/ambient.mp3', tone: 'lilac', credit: { title: 'Equatorial Complex', author: MACLEOD } },
   { id: 'tropical', label: 'Tropical', mood: 'Steel drum et marimba', src: '/music/tropical.mp3', tone: 'accent', credit: { title: 'Moonlight Beach', author: MACLEOD } },
   { id: 'pluie', label: 'Pluie', mood: 'Juste la pluie, sans musique', src: '/music/pluie.mp3', tone: 'sky', credit: null },
+  { id: 'aube', label: 'Aube tranquille', mood: 'Composition originale Scroll-up', src: '/music/shop-aube.mp3', tone: 'warm', credit: null },
+  { id: 'orbite', label: 'Orbite', mood: 'Composition originale Scroll-up', src: '/music/shop-orbite.mp3', tone: 'lilac', credit: null },
 ]
 
 export const DEFAULT_AMBIANCE: AmbianceId = 'jazz'
@@ -65,12 +68,12 @@ export function getAmbiance(id: AmbianceId): Ambiance {
  */
 export function resolveAmbiance(choice: AmbianceChoice, current: AmbianceId | null = null, random: number = Math.random()): AmbianceId {
   if (choice !== 'hasard') return choice
-  const pool = AMBIANCE_IDS.filter((id) => id !== current)
+  const pool = AMBIANCE_IDS.filter((id) => id !== current && !(id in PREMIUM_AMBIANCES))
   return pool[Math.min(pool.length - 1, Math.floor(random * pool.length))] ?? DEFAULT_AMBIANCE
 }
 
 /** La ligne de crédits des morceaux sous licence (titres, auteur, source, licence). */
 export function ambianceCredits(): string {
   const titles = AMBIANCES.filter((ambiance) => ambiance.credit).map((ambiance) => `«\u00A0${ambiance.credit?.title}\u00A0»`)
-  return `${titles.join(', ')}\u00A0: ${MACLEOD} (incompetech.com), licence CC BY 4.0, extraits raccourcis et mis au même volume. Jazz noir et pluie\u00A0: créés pour Scroll-up.`
+  return `${titles.join(', ')}\u00A0: ${MACLEOD} (incompetech.com), licence CC BY 4.0, extraits raccourcis et mis au même volume. Jazz noir, pluie, Aube tranquille et Orbite\u00A0: créés pour Scroll-up.`
 }

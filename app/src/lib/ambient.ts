@@ -15,7 +15,7 @@
  */
 
 import { useSyncExternalStore } from 'react'
-import { DEFAULT_AMBIANCE, getAmbiance, isAmbianceChoice, resolveAmbiance, type AmbianceChoice, type AmbianceId } from '@scroll-up/shared'
+import { PREMIUM_AMBIANCES, DEFAULT_AMBIANCE, getAmbiance, isAmbianceChoice, resolveAmbiance, type AmbianceChoice, type AmbianceId } from '@scroll-up/shared'
 
 const STORAGE_KEY = 'scroll-up:music'
 const STYLE_KEY = 'scroll-up:music-style'
@@ -25,10 +25,11 @@ const FADE_SECONDS = 1.2
 /** Fondu de sortie quand on change de style. */
 const SWITCH_SECONDS = 0.35
 
+let premiumOwned: readonly string[] = []
 let enabled = readEnabled()
 let choice: AmbianceChoice = readChoice()
 /** Le style joué (pour « au hasard », tiré à l'ouverture). */
-let current: AmbianceId = resolveAmbiance(choice)
+let current: AmbianceId = resolveAmbiance(choice === 'aube' || choice === 'orbite' ? DEFAULT_AMBIANCE : choice)
 let unlocked = false
 const suppressed = new Set<string>()
 const listeners = new Set<() => void>()
@@ -177,6 +178,7 @@ export function setAmbientEnabled(next: boolean): void {
  * entendre tout de suite, et s'en souvient sur ce téléphone.
  */
 export function setAmbiance(next: AmbianceChoice): void {
+  if (next in PREMIUM_AMBIANCES && !premiumOwned.includes(PREMIUM_AMBIANCES[next as keyof typeof PREMIUM_AMBIANCES])) return
   choice = next
   store(STYLE_KEY, next)
   enabled = true
@@ -213,4 +215,15 @@ export function useAmbientEnabled(): boolean {
 /** Musique voulue ou non, style choisi et style joué. */
 export function useAmbiance(): { enabled: boolean; choice: AmbianceChoice; current: AmbianceId } {
   return useSyncExternalStore(subscribe, () => snapshot)
+}
+
+/** Synchronise les achats au démarrage et après chaque changement de profil. */
+export function syncShopAmbiance(owned: readonly string[], equipped?: string): void {
+  premiumOwned = owned
+  const bonus = equipped === 'ambiance-aube' ? 'aube' : equipped === 'ambiance-orbite' ? 'orbite' : null
+  if (bonus && owned.includes(equipped!) && choice !== bonus) {
+    choice = bonus; store(STYLE_KEY, bonus); load(bonus)
+  } else if (!bonus && (choice === 'aube' || choice === 'orbite')) {
+    choice = DEFAULT_AMBIANCE; store(STYLE_KEY, choice); load(choice)
+  }
 }

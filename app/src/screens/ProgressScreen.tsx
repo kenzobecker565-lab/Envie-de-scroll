@@ -10,6 +10,7 @@ import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { MilestoneProgress } from '../components/Milestones.tsx'
 import { finishedPathIds } from '../components/Paths.tsx'
 import { Screen } from '../components/Screen.tsx'
+import { useShop } from '../lib/shop.ts'
 import { formatNumber, plural } from '../lib/format.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -23,6 +24,7 @@ import { haptics } from '../telegram/webApp.ts'
 export function ProgressScreen() {
   const { state } = useAppState()
   const { push } = useNavigation()
+  const shop = useShop()
   const { user, stats } = state.me
 
   return (
@@ -60,6 +62,7 @@ export function ProgressScreen() {
         </span>
         <Sparkle size={20} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-3 right-20" />
       </Card>
+      <Button className="mt-4" variant="secondary" onClick={() => push({ name: 'shop' })}>Boutique · {shop.balance} minutons disponibles</Button>
       {stats.totalCoins > 0 && (
         <motion.div className="mt-4 px-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           <MilestoneProgress total={stats.totalCoins} />

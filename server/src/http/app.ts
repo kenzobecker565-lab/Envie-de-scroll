@@ -63,6 +63,7 @@ import { createProposal, findOpenProposal, toProposalDTO } from '../services/pro
 import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
 import { deleteUserData, getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
+import { getShop, buyItem, equipItem, bonusMelody } from '../services/shop.ts'
 import { ApiError, badRequest } from './errors.ts'
 
 export interface AppDeps {
@@ -176,10 +177,28 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
         serverTime: now().toISOString(),
         botUsername: botUsername?.() ?? null,
         projects,
+        shop: await getShop(prisma, user.id),
       }
       res.json(body)
     }),
   )
+
+  api.get('/shop', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    res.json(await getShop(prisma, user.id))
+  }))
+  api.post('/shop/purchases', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    res.json(await buyItem(prisma, user.id, req.body?.itemId))
+  }))
+  api.put('/shop/equipment', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    res.json(await equipItem(prisma, user.id, req.body?.category, req.body?.itemId))
+  }))
+  api.get('/shop/piano/:id', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    res.json({ melody: await bonusMelody(prisma, user.id, String(req.params.id)) })
+  }))
 
   api.put(
     '/me/passions',

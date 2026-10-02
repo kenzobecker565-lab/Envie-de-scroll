@@ -15,8 +15,8 @@ import { track } from '../api/client.ts'
 import { Screen } from '../components/Screen.tsx'
 import { AmbientButton } from '../components/AmbientButton.tsx'
 import { SettingsButton } from '../components/SettingsSheet.tsx'
-import { tabStack } from '../components/TabBar.tsx'
 import { Tirette } from '../components/Tirette.tsx'
+import { useShop } from '../lib/shop.ts'
 import { formatNumber, plural } from '../lib/format.ts'
 import { lessonStack } from '../lib/useLesson.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
@@ -33,6 +33,7 @@ import { haptics } from '../telegram/webApp.ts'
 export function HomeScreen() {
   const { state, dispatch } = useAppState()
   const { push, reset } = useNavigation()
+  const shop = useShop()
   const { user, stats, openProposal } = state.me
 
   const start = (how: 'pull' | 'tap') => {
@@ -43,9 +44,9 @@ export function HomeScreen() {
     push({ name: 'signal' })
   }
 
-  const openProgress = () => {
+  const openShop = () => {
     haptics.impact('light')
-    reset(tabStack('progress'))
+    push({ name: 'shop' })
   }
 
   const resume = () => {
@@ -89,9 +90,9 @@ export function HomeScreen() {
         <div className="flex items-center gap-2 min-[380px]:gap-3">
           <AmbientButton />
           <SettingsButton />
-          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openProgress} aria-label={`Progresser : ${formatNumber(stats.totalCoins)} minutons`}>
+          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openShop} aria-label={`Boutique : ${formatNumber(shop.balance)} minutons disponibles`}>
           <CoinIcon size={26} className="motion-loop anim-coin" />
-          <span className="font-numbers text-17 font-extrabold">{formatNumber(stats.totalCoins)}</span>
+          <span className="font-numbers text-17 font-extrabold">{formatNumber(shop.balance)}</span>
           </Button>
         </div>
       </header>
@@ -155,7 +156,7 @@ export function HomeScreen() {
         {card === 'month' && (
           <motion.button
             type="button"
-            onClick={openProgress}
+            onClick={openShop}
             {...fadeUp(0.2, 8)}
             whileTap={PRESSED}
             className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4 text-left transition-shadow duration-150 active:shadow-press')}

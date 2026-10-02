@@ -1,12 +1,17 @@
 import { CloudRain, Gamepad2, Guitar, Headphones, Martini, Piano, Shuffle, Sparkles, Sun, Sunset, TreePalm, type LucideIcon } from 'lucide-react'
+import { useState } from 'react'
 import { motion } from 'motion/react'
-import { AMBIANCES, getAmbiance, type AmbianceChoice } from '@scroll-up/shared'
+import { AMBIANCES, PREMIUM_AMBIANCES, getAmbiance, type AmbianceChoice } from '@scroll-up/shared'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { track } from '../api/client.ts'
+import { api, track } from '../api/client.ts'
 import { setAmbiance, useAmbiance } from '../lib/ambient.ts'
+import { useAppState } from '../state/AppState.tsx'
+import { useShop } from '../lib/shop.ts'
 import { haptics } from '../telegram/webApp.ts'
 
 const ICONS: Record<AmbianceChoice, LucideIcon> = {
+  aube: Sun,
+  orbite: Sparkles,
   jazz: Martini,
   lofi: Headphones,
   piano: Piano,
@@ -42,18 +47,28 @@ const OPTIONS: readonly { id: AmbianceChoice; label: string; tone: keyof typeof 
 export function AmbiancePicker() {
   const { enabled, choice, current } = useAmbiance()
   const playing = getAmbiance(current)
+  const shop = useShop()
+  const { dispatch } = useAppState()
+  const [error, setError] = useState<string>()
 
   const choose = (value: string) => {
     if (!value || value === choice) return
     haptics.selection()
-    setAmbiance(value as AmbianceChoice)
+    setError(undefined)
+    const bonus = PREMIUM_AMBIANCES[value as keyof typeof PREMIUM_AMBIANCES]
+    if (bonus || shop.equipped.ambiance) {
+      api.equipItem('ambiance', bonus ?? null).then((next) => {
+        dispatch({ type: 'shop', shop: next })
+        setAmbiance(value as AmbianceChoice)
+      }).catch((caught: Error) => setError(caught.message))
+    } else setAmbiance(value as AmbianceChoice)
     track('music', { ambiance: value })
   }
 
   return (
     <div className="flex flex-col gap-3">
       <ToggleGroup type="single" variant="chip" value={enabled ? choice : ''} onValueChange={choose} className="gap-2" aria-label="Style de la musique d’ambiance">
-        {OPTIONS.map((option) => {
+        {OPTIONS.filter((option) => !(option.id in PREMIUM_AMBIANCES) || shop.owned.includes(PREMIUM_AMBIANCES[option.id as keyof typeof PREMIUM_AMBIANCES])).map((option) => {
           const Icon = ICONS[option.id]
           const on = enabled && option.id === choice
           return (
@@ -64,6 +79,7 @@ export function AmbiancePicker() {
           )
         })}
       </ToggleGroup>
+      {error && <p role="alert" className="text-13 text-accent-strong">{error}</p>}
       <p className="text-13 text-ink-soft" aria-live="polite">
         {enabled ? (
           <>

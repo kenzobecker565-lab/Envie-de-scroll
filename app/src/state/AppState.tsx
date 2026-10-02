@@ -21,6 +21,8 @@ export type Route =
   | { name: 'done' }
   | { name: 'progress' }
   | { name: 'gallery'; passion?: PassionId }
+  | { name: 'shop'; category?: import('@scroll-up/shared').ShopCategory; library?: boolean }
+  | { name: 'bonusPiano'; itemId: string }
   | { name: 'learn' }
   | { name: 'learnPassion'; passion: PassionId }
   | { name: 'passionHub' }
@@ -77,6 +79,7 @@ type Action =
   | { type: 'flow'; flow: Partial<Flow> }
   | { type: 'newFlow'; flow?: Partial<Flow> }
   | { type: 'user'; user: UserDTO }
+  | { type: 'shop'; shop: import('@scroll-up/shared').ShopState }
   | { type: 'stats'; stats: StatsDTO }
   | { type: 'projects'; projects: ProjectDTO[] }
   | { type: 'openProposal'; proposal: ProposalDTO | null }
@@ -98,6 +101,8 @@ function reducer(state: State, action: Action): State {
       return { ...state, flow: { clockOffset: state.flow.clockOffset, ...action.flow } }
     case 'user':
       return { ...state, me: { ...state.me, user: action.user } }
+    case 'shop':
+      return { ...state, me: { ...state.me, shop: action.shop } }
     case 'stats':
       return { ...state, me: { ...state.me, stats: action.stats } }
     case 'projects':

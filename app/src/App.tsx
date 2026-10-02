@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils'
 import { Wordmark } from './components/Brand.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
 import { EmptyState } from './components/Illustration.tsx'
+import { ShopScreen, BonusPianoScreen } from './screens/ShopScreen.tsx'
+import { syncShopAmbiance } from './lib/ambient.ts'
 import { suppressAmbient } from './lib/ambient.ts'
 import { setAppTheme } from './lib/appTheme.ts'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
@@ -114,6 +116,8 @@ function screenFor(route: Route) {
       return <SkillScreen passion={route.passion} mode={route.mode} />
     case 'home':
       return <HomeScreen />
+    case 'shop': return <ShopScreen category={route.category} library={route.library} />
+    case 'bonusPiano': return <BonusPianoScreen itemId={route.itemId} />
     case 'learn': return <LearnScreen />
     case 'learnPassion': return <LearnPassionScreen passion={route.passion} />
     case 'passionHub': return <PassionHubScreen />
@@ -145,6 +149,11 @@ function screenFor(route: Route) {
 function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { route, direction, canGoBack, back } = useNavigation()
   const { state } = useAppState()
+  useEffect(() => {
+    const shop = state.me.shop
+    document.documentElement.dataset.shopTheme = shop?.equipped.theme ?? ''
+    syncShopAmbiance(shop?.owned ?? [], shop?.equipped.ambiance)
+  }, [state.me.shop])
   const tone = toneFor(route, state.flow)
   useEffect(() => onTone(tone), [tone, onTone])
   // Pendant une activité Musique, Cinéma ou Piano, on écoute, regarde ou joue autre chose : la musique d'ambiance se retire.
@@ -153,7 +162,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 
-  const key = route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
+  const key = route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>
       <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>

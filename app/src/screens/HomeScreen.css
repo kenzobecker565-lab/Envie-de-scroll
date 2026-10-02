@@ -95,3 +95,10 @@
 @keyframes club-drift{to{translate:15vw 8vh;rotate:15deg}}@keyframes club-float{50%{transform:translateY(-7px) rotate(-4deg)}}
 @media(max-width:359px){.club-hero-copy{min-height:174px}.club-minuton{right:5px;top:52px}.club-minuton>svg{width:123px;height:136px}.club-hero h1{font-size:34px}.club-hero{padding:18px 14px 15px}.club-home .pulse-start{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.club-atmosphere>span,.club-minuton>svg{animation:none}.club-home,.club-atmosphere,.club-atmosphere>span{transition:none}}
+
+/* Le titre doit rester lisible à côté du personnage, même à 320 px. */
+.club-hero-copy{width:calc(100% - 142px);min-width:0;min-height:184px}
+.club-hero h1{font-family:'Nunito Variable',var(--font-display);font-size:clamp(27px,7.3vw,35px);font-weight:1000;line-height:1.12;letter-spacing:-1.2px;overflow-wrap:normal}
+.club-hello{display:block;white-space:nowrap}.club-name{display:block;overflow-wrap:anywhere}.club-dot{display:inline;color:var(--club-button)}
+.club-minuton{right:8px;top:46px}.club-minuton>svg{width:132px;height:145px}
+@media(max-width:359px){.club-hero-copy{width:calc(100% - 112px);min-height:170px}.club-hero h1{font-size:27px;letter-spacing:-1px}.club-minuton{right:3px;top:50px}.club-minuton>svg{width:108px;height:119px}.club-daily{font-size:10px;padding:6px 7px}}

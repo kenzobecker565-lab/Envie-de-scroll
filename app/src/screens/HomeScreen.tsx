@@ -87,7 +87,7 @@ export function HomeScreen() {
       </header>
 
       <section className="pulse-hero club-hero" aria-labelledby="pulse-start-title">
-        <div className="club-hero-copy"><p className="pulse-eyebrow">{sceneLabel}</p><h1 id="pulse-start-title">{hello}<br />{user.firstName || 'à toi'}<span className="club-dot">.</span></h1><span className="club-daily">{openProposal ? 'Une création t’attend' : 'Ta prochaine pause commence ici'}</span></div>
+        <div className="club-hero-copy"><p className="pulse-eyebrow">{sceneLabel}</p><h1 id="pulse-start-title"><span className="club-hello">{hello}</span><span className="club-name">{user.firstName || 'à toi'}<span className="club-dot">.</span></span></h1><span className="club-daily">{openProposal ? 'Une création t’attend' : 'Ta prochaine pause commence ici'}</span></div>
         <button type="button" className="club-minuton" onClick={() => open({ name: 'shop', category: 'mascot' })} aria-label="Personnaliser la tenue de Minuton"><span className="club-orbit" /><Mascot mood="wink" size={152} /><span className="club-mascot-tag">Ton Minuton ↗</span></button>
         <motion.button type="button" className="pulse-start" whileTap={PRESSED} onClick={openProposal ? resume : start}>
           <span>{openProposal ? 'Reprendre mon activité' : 'J’ai envie de scroller'}</span><ArrowUpRight size={22} aria-hidden="true" />

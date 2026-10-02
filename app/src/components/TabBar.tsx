@@ -1,4 +1,4 @@
-import { ShoppingBag, GraduationCap, Heart, Mountain, PenLine, UserRound, type LucideIcon } from 'lucide-react'
+import { ShoppingBag, GraduationCap, Heart, Home, UserRound, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
@@ -10,10 +10,9 @@ import { haptics } from '../telegram/webApp.ts'
 export type Tab = 'home' | 'learn' | 'passionHub' | 'progress' | 'profile' | 'shop'
 
 const TABS: readonly { id: Tab; label: string; icon: LucideIcon }[] = [
-  { id: 'home', label: 'Accueil', icon: PenLine },
-  { id: 'passionHub', label: 'Mes passions', icon: Heart },
+  { id: 'home', label: 'Accueil', icon: Home },
+  { id: 'passionHub', label: 'Passions', icon: Heart },
   { id: 'learn', label: 'Apprendre', icon: GraduationCap },
-  { id: 'progress', label: 'Progression', icon: Mountain },
   { id: 'shop', label: 'Boutique', icon: ShoppingBag },
   { id: 'profile', label: 'Profil', icon: UserRound },
 ]
@@ -25,15 +24,15 @@ export function tabStack(tab: Tab | 'gallery'): Route[] {
 }
 
 export function isTab(name: string): name is Tab {
-  return TABS.some((tab) => tab.id === name)
+  return name === 'progress' || TABS.some((tab) => tab.id === name)
 }
 
 /** Hauteur réservée en bas des écrans à onglets (barre + marge + zone sûre). */
-export const TAB_BAR_SPACE = 'pb-[calc(162px+env(safe-area-inset-bottom))] min-[360px]:pb-[calc(104px+env(safe-area-inset-bottom))]'
+export const TAB_BAR_SPACE = 'pb-[calc(104px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
   const { route, reset } = useNavigation()
-  const current = route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'progress') : isTab(route.name) ? route.name : null
+  const current = route.name === 'progress' ? 'profile' : route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'profile') : isTab(route.name) ? route.name : null
 
   const open = (tab: Tab) => {
     if (!current || tab === current) return
@@ -50,7 +49,7 @@ export function TabBar() {
         <motion.nav
           key="tabbar"
           aria-label="Navigation"
-          className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-3 min-[360px]:grid-cols-6 gap-1 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
+          className="da-tabbar fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-5 gap-1 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
           initial={{ y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}

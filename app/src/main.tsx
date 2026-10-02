@@ -15,6 +15,7 @@ import '@fontsource-variable/nunito/wght-italic.css'
 import '@fontsource-variable/syne'
 import '@fontsource-variable/outfit'
 import './styles/index.css'
+import './styles/art-direction.css'
 
 // Le dernier thème choisi sur ce téléphone, avant le premier affichage.
 initAppTheme()

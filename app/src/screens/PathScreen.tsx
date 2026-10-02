@@ -1,3 +1,4 @@
+import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { ArrowRight, Check, Clock3, Footprints, Lock, Mountain, Piano, Play, Trophy } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
@@ -53,6 +54,7 @@ export function PathScreen({ pathId }: { pathId: string }) {
 
   return (
     <Screen>
+      <PassionArtwork passion={path.passion} className="da-passion-banner" />
       <header className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant={PASSION_COLORS[path.passion].badge} tilt="left">

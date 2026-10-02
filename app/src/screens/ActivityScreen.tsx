@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
 import { ActivityHelp } from '../components/ActivityHelp.tsx'
 import { FloatingConsigne, useScrolledPast } from '../components/Consigne.tsx'
-import { PassionScene } from '../components/decor/PassionScene.tsx'
+import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { PianoKeyboard } from '../components/PianoKeyboard.tsx'
 import { DifficultyMeter } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
@@ -170,10 +170,7 @@ export function ActivityScreen() {
             >
               <Card padding="none" className="gap-0 shadow-pop">
                 {/* Le haut de la carte : la scène de la passion. */}
-                <div className={cn('relative flex items-center justify-center overflow-hidden border-b-[2.5px] border-outline py-3', PASSION_COLORS[passionId].soft)}>
-                  <span aria-hidden="true" className={cn('absolute -right-8 -bottom-12 h-28 w-28 rounded-pill border-[2.5px] border-outline', PASSION_COLORS[passionId].bg)} />
-                  <PassionScene passion={passionId} className={cn('relative h-24 w-auto [@media(max-height:780px)]:h-18', proposal.extra && 'h-18')} />
-                </div>
+                <PassionArtwork passion={passionId} className="da-activity-art" />
                 <div className="flex flex-col gap-2 p-4">
                   <p className="text-15 text-ink-soft">{proposal.intro}</p>
                   <h1

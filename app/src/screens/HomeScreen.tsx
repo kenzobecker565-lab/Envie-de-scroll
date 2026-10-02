@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ArrowRight, ArrowUpRight, ShoppingBag } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { getPassion, getPathStep, isFixedActivityId, passionLevel, PASSION_IDS, STEPS_PER_PATH, type PassionId } from '@scroll-up/shared'
@@ -22,6 +22,9 @@ import { PASSION_ICONS } from '../lib/icons.ts'
 import { useAppState, useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 import './HomeScreen.css'
+import { useAppearance } from '../lib/appearance.ts'
+import { AppearancePicker } from '../components/AppearancePicker.tsx'
+import { PassionArtwork as IllustratedPassion } from '../components/PassionArtwork.tsx'
 
 /** Pulse : une action principale, puis apprentissage, mois et projet par passion. */
 export function HomeScreen() {
@@ -29,19 +32,8 @@ export function HomeScreen() {
   const { push, reset } = useNavigation()
   const shop = useShop()
   const cover = useEquipped('cover')
-  const [clock, setClock] = useState(() => new Date())
-  const [lightMode, setLightMode] = useState<'auto' | 'light' | 'dark'>(() => {
-    try { const saved = localStorage.getItem('swipe-home-light'); return saved === 'light' || saved === 'dark' ? saved : 'auto' } catch { return 'auto' }
-  })
-  useEffect(() => {
-    const update = () => setClock(new Date())
-    const timer = window.setInterval(update, 30_000)
-    document.addEventListener('visibilitychange', update)
-    return () => { window.clearInterval(timer); document.removeEventListener('visibilitychange', update) }
-  }, [])
-  const chooseLight = (mode: typeof lightMode) => { setLightMode(mode); try { localStorage.setItem('swipe-home-light', mode) } catch { /* Le choix reste actif pour la session. */ } }
-  const actualPeriod = dayPeriod(clock.getHours())
-  const scene = lightMode === 'dark' ? 'night' : lightMode === 'light' ? 'day' : actualPeriod
+  const { scene } = useAppearance()
+  const actualPeriod = dayPeriod(new Date().getHours())
   const sceneLabel = { morning: 'Lumière du matin', day: 'Énergie du jour', dusk: 'Heure dorée', night: 'Sous les aurores' }[scene]
 
   const { user, stats, openProposal, projects } = state.me
@@ -75,7 +67,7 @@ export function HomeScreen() {
 
   return (
     <Screen tabs className={`pulse-home club-home scene-${scene}`}>
-      <div className="club-atmosphere" aria-hidden="true"><span /><span /><span /></div>
+
       <header className="pulse-header">
         <Logo height={30} />
         <div className="pulse-tools">
@@ -111,7 +103,7 @@ export function HomeScreen() {
             const selected = passion === id
             return <motion.button key={id} type="button" className="pulse-passion" data-passion={id} aria-pressed={selected} aria-controls="pulse-learning pulse-project" whileTap={{ scale: .96 }} onClick={() => { haptics.selection(); setSelection(id) }}>
               {selected && <motion.span className="pulse-passion-active" layoutId="pulse-passion-active" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
-              <span className="club-passion-art" aria-hidden="true"><PassionArtwork passion={id} /></span><motion.span className="pulse-passion-icon" aria-hidden="true" animate={{ rotate: selected ? -8 : 0, scale: selected ? 1.08 : 1 }} transition={{ type: 'spring', stiffness: 350, damping: 18 }}><PassionIcon size={18} strokeWidth={2.2} /></motion.span>
+              <span className="club-passion-art" aria-hidden="true"><IllustratedPassion passion={id} /></span><motion.span className="pulse-passion-icon" aria-hidden="true" animate={{ rotate: selected ? -8 : 0, scale: selected ? 1.08 : 1 }} transition={{ type: 'spring', stiffness: 350, damping: 18 }}><PassionIcon size={18} strokeWidth={2.2} /></motion.span>
               <span className="pulse-passion-label">{getPassion(id).label}<span className="club-passion-count">{statsFor(stats.byPassion, id).activities} activités · niv. {passionLevel(id, statsFor(stats.byPassion, id).minutes).level}</span></span>
             </motion.button>
           })}
@@ -152,7 +144,7 @@ export function HomeScreen() {
           <span className="pulse-project-copy"><span className="pulse-eyebrow">{passion ? getPassion(passion).label : 'Mes passions'} · {project ? project.finishedAt ? 'projet terminé' : 'projet en cours' : 'mes créations'}</span><strong>{project?.name ?? 'Ta galerie'}</strong><span className="pulse-link">{project ? 'Ouvrir le projet' : passionStats?.activities ? 'Retrouver mes créations' : 'Découvrir ma galerie'} <ArrowRight size={14} aria-hidden="true" /></span></span>
         </motion.button>
       </section>
-      <div className="club-light-controls" role="group" aria-label="Ambiance de l’accueil"><span>Ambiance</span>{([['auto', 'Automatique'], ['light', 'Clair'], ['dark', 'Sombre']] as const).map(([mode, label]) => <button key={mode} type="button" aria-pressed={lightMode === mode} onClick={() => chooseLight(mode)}>{label}</button>)}</div>
+      <AppearancePicker />
       <div className="pulse-summary"><span>{formatNumber(stats.totalCoins)} Minutons gagnés au total</span>{wordToday && <button type="button" className="pulse-text-button" onClick={() => open({ name: 'challenge' })}>Mot du jour <ArrowUpRight size={14} aria-hidden="true" /></button>}</div>
       <Dialog open={Boolean(projectId)} onOpenChange={(isOpen) => { if (!isOpen) setProjectId(undefined) }}><DialogContent>{projectId && <ProjectSheet key={projectId} id={projectId} onClose={() => setProjectId(undefined)} />}</DialogContent></Dialog>
     </Screen>

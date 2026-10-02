@@ -14,43 +14,49 @@ import { cn } from '@/lib/utils'
  */
 export type MascotMood = 'happy' | 'cheer' | 'wink' | 'think' | 'sleepy'
 
-const INK = { stroke: 'var(--on-color)', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' }
+const INK = { stroke: '#2D1951', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' }
 
 export function Mascot({ mood = 'happy', size = 64, className, animated = true, accessory }: { accessory?: string; mood?: MascotMood; size?: number; className?: string; animated?: boolean }) {
   const equipped = useEquipped('mascot')
   const outfit = accessory ?? equipped?.id
+  return <MinutonFigure mood={mood} size={size} className={className} animated={animated} outfit={outfit} />
+}
+
+export function MinutonFigure({ mood = 'happy', size = 64, className, animated = true, outfit }: { outfit?: string; mood?: MascotMood; size?: number; className?: string; animated?: boolean }) {
   const arms = ARMS[mood]
   return (
-    <svg width={size} height={size * 1.1} viewBox="0 0 100 110" aria-hidden="true" className={cn('shrink-0 overflow-visible', className)}>
+    <svg width={size} height={size * 1.1} viewBox="-8 -5 116 126" aria-hidden="true" className={cn('shrink-0 overflow-visible', className)}>
       {/* Jambes. */}
-      <path d="M40 92 L37 104 M60 92 L63 104" style={{ ...INK, strokeWidth: 5 }} />
-      <path d="M31 104 h9 M60 104 h9" style={{ ...INK, strokeWidth: 6 }} />
+      <path d="M38 88 L33 100 Q20 100 20 108 Q32 113 44 107 L47 92 M58 91 L61 104 Q75 104 78 111 Q64 116 53 110 L52 94" fill="#FFCC39" stroke="#2D1951" strokeWidth="3.5" strokeLinejoin="round" />
       {/* Bras (derrière le corps). */}
       <g className={cn(animated && mood === 'cheer' && 'motion-loop anim-mascot-wave')} style={{ transformOrigin: '22px 60px' }}>
-        <path d={arms.left} style={{ ...INK, strokeWidth: 5 }} />
+        <path d={arms.left} style={{ ...INK, strokeWidth: 15 }} /><path d={arms.left} style={{ ...INK, stroke: '#FFCC39', strokeWidth: 9 }} />
       </g>
       <g className={cn(animated && mood === 'cheer' && 'motion-loop anim-mascot-wave-right')} style={{ transformOrigin: '78px 60px' }}>
-        <path d={arms.right} style={{ ...INK, strokeWidth: 5 }} />
+        <path d={arms.right} style={{ ...INK, strokeWidth: 15 }} /><path d={arms.right} style={{ ...INK, stroke: '#FFCC39', strokeWidth: 9 }} />
       </g>
       {/* Le remontoir et le petit bouton du chrono. */}
-      <rect x="42" y="4" width="16" height="9" rx="3" style={{ fill: 'var(--on-color)' }} />
-      <rect x="47" y="11" width="6" height="6" style={{ fill: 'var(--on-color)' }} />
-      <path d="M76 22 l6 -6" style={{ ...INK, strokeWidth: 5 }} />
+      <rect x="38" y="0" width="24" height="13" rx="3" fill="#FFC33A" stroke="#2D1951" strokeWidth="3.5" transform="rotate(8 50 7)" /><path d="M44 2 V10 M50 3 V11 M56 4 V12" stroke="#D58926" strokeWidth="2" />
+      <rect x="47" y="11" width="6" height="6" style={{ fill: '#2D1951' }} />
+      <path d="M77 23 L83 16" style={{ ...INK, strokeWidth: 5 }} /><rect x="80" y="10" width="12" height="13" rx="2" transform="rotate(40 86 16)" fill="#FFC33A" stroke="#2D1951" strokeWidth="3" />
       {/* Le corps-cadran. */}
-      <circle cx="50" cy="56" r="37" style={{ fill: 'var(--warm)', stroke: 'var(--on-color)', strokeWidth: 4 }} />
+      <circle cx="50" cy="56" r="37" style={{ fill: '#FFC83D', stroke: '#2D1951', strokeWidth: 4.5 }} />
+      <path d="M22 66 Q36 97 64 86 Q81 76 84 58 Q84 89 55 93 Q28 94 18 72Z" fill="#EFA526" />
+      <circle cx="50" cy="56" r="31" fill="#FFE167" stroke="#DB9A28" strokeWidth="1.5" />
       {/* Reflet. */}
-      <path d="M26 42 a28 28 0 0 1 14 -14" style={{ ...INK, stroke: 'var(--paper)', strokeWidth: 4, opacity: 0.8 }} />
+      <path d="M26 42 a28 28 0 0 1 14 -14" style={{ ...INK, stroke: '#FFF6CA', strokeWidth: 4, opacity: 0.8 }} />
       {/* Graduations : midi, 3 h, 6 h, 9 h. */}
       <path d="M50 22 v5 M84 56 h-5 M50 90 v-5 M16 56 h5" style={{ ...INK, strokeWidth: 3 }} />
       {/* Joues. */}
-      <ellipse cx="31" cy="66" rx="6" ry="4" style={{ fill: 'var(--accent)', opacity: 0.55 }} />
-      <ellipse cx="69" cy="66" rx="6" ry="4" style={{ fill: 'var(--accent)', opacity: 0.55 }} />
+      <ellipse cx="31" cy="66" rx="6" ry="4" style={{ fill: '#FFAB7C', opacity: 0.55 }} />
+      <ellipse cx="69" cy="66" rx="6" ry="4" style={{ fill: '#FFAB7C', opacity: 0.55 }} />
       <SportOutfit outfit={outfit} />
+      <path d="M30 37 Q36 31 43 36 M57 35 Q63 31 69 37" fill="none" stroke="#2D1951" strokeWidth="3.5" strokeLinecap="round" />
       <Face mood={mood} animated={animated} />
-      {outfit === 'mascot-beret' && <g><ellipse cx="47" cy="20" rx="31" ry="11" transform="rotate(-12 47 20)" fill="#6B4585" stroke="var(--on-color)" strokeWidth="3" /><path d="M45 12 l3 -7" stroke="var(--on-color)" strokeWidth="4" /></g>}
-      {outfit === 'mascot-casque' && <g fill="#8BB7EF" stroke="var(--on-color)" strokeWidth="3"><path d="M14 55 C10 2 90 2 86 55" fill="none" strokeWidth="6" /><rect x="8" y="45" width="13" height="23" rx="5" /><rect x="79" y="45" width="13" height="23" rx="5" /></g>}
+      {outfit === 'mascot-beret' && <g><ellipse cx="47" cy="20" rx="31" ry="11" transform="rotate(-12 47 20)" fill="#6B4585" stroke="#2D1951" strokeWidth="3" /><path d="M45 12 l3 -7" stroke="#2D1951" strokeWidth="4" /></g>}
+      {outfit === 'mascot-casque' && <g fill="#8BB7EF" stroke="#2D1951" strokeWidth="3"><path d="M14 55 C10 2 90 2 86 55" fill="none" strokeWidth="6" /><rect x="8" y="45" width="13" height="23" rx="5" /><rect x="79" y="45" width="13" height="23" rx="5" /></g>}
       {mood === 'sleepy' && (
-        <g className={cn(animated && 'motion-loop anim-twinkle')} style={{ fill: 'var(--on-color)', fontFamily: 'var(--font-display)', fontWeight: 800 }}>
+        <g className={cn(animated && 'motion-loop anim-twinkle')} style={{ fill: '#2D1951', fontFamily: 'var(--font-display)', fontWeight: 800 }}>
           <text x="84" y="20" fontSize="14">
             z
           </text>
@@ -72,21 +78,21 @@ const ARMS: Record<MascotMood, { left: string; right: string }> = {
 }
 
 function Face({ mood, animated }: { mood: MascotMood; animated: boolean }) {
-  const ink = { fill: 'var(--on-color)' }
+  const ink = { fill: '#2D1951' }
   const blink = cn(animated && 'motion-loop anim-blink')
   switch (mood) {
     case 'cheer':
       return (
         <>
           <path d="M33 52 q5 -7 10 0 M57 52 q5 -7 10 0" style={{ ...INK, strokeWidth: 4 }} />
-          <path d="M38 62 h24 q0 14 -12 14 q-12 0 -12 -14 z" style={{ ...ink, stroke: 'var(--on-color)', strokeWidth: 3, strokeLinejoin: 'round' }} />
-          <path d="M44 71 q6 4 12 0" style={{ fill: 'var(--accent)' }} />
+          <path d="M38 62 h24 q0 14 -12 14 q-12 0 -12 -14 z" style={{ ...ink, stroke: '#2D1951', strokeWidth: 3, strokeLinejoin: 'round' }} />
+          <path d="M44 71 q6 4 12 0" style={{ fill: '#FFAB7C' }} />
         </>
       )
     case 'wink':
       return (
         <>
-          <ellipse cx="38" cy="52" rx="4.5" ry="6" style={ink} className={blink} />
+          <ellipse cx="38" cy="52" rx="6" ry="9" style={ink} className={blink} />
           <path d="M57 53 q5 -5 10 0" style={{ ...INK, strokeWidth: 4 }} />
           <path d="M39 66 q11 10 22 0" style={{ ...INK, strokeWidth: 4 }} />
         </>
@@ -94,10 +100,10 @@ function Face({ mood, animated }: { mood: MascotMood; animated: boolean }) {
     case 'think':
       return (
         <>
-          <ellipse cx="40" cy="50" rx="4.5" ry="6" style={ink} />
-          <ellipse cx="62" cy="50" rx="4.5" ry="6" style={ink} />
-          <circle cx="41.5" cy="47" r="1.6" style={{ fill: 'var(--paper)' }} />
-          <circle cx="63.5" cy="47" r="1.6" style={{ fill: 'var(--paper)' }} />
+          <ellipse cx="40" cy="50" rx="6" ry="9" style={ink} />
+          <ellipse cx="62" cy="50" rx="6" ry="9" style={ink} />
+          <circle cx="41.5" cy="47" r="1.6" style={{ fill: '#FFF6CA' }} />
+          <circle cx="63.5" cy="47" r="1.6" style={{ fill: '#FFF6CA' }} />
           <path d="M43 69 q7 -3 14 0" style={{ ...INK, strokeWidth: 4 }} />
         </>
       )
@@ -112,12 +118,12 @@ function Face({ mood, animated }: { mood: MascotMood; animated: boolean }) {
       return (
         <>
           <g className={blink} style={{ transformOrigin: '50px 52px' }}>
-            <ellipse cx="38" cy="52" rx="4.5" ry="6" style={ink} />
-            <ellipse cx="62" cy="52" rx="4.5" ry="6" style={ink} />
-            <circle cx="39.5" cy="49.5" r="1.6" style={{ fill: 'var(--paper)' }} />
-            <circle cx="63.5" cy="49.5" r="1.6" style={{ fill: 'var(--paper)' }} />
+            <ellipse cx="38" cy="52" rx="6" ry="9" style={ink} />
+            <ellipse cx="62" cy="52" rx="6" ry="9" style={ink} />
+            <circle cx="39.5" cy="49.5" r="1.6" style={{ fill: '#FFF6CA' }} />
+            <circle cx="63.5" cy="49.5" r="1.6" style={{ fill: '#FFF6CA' }} />
           </g>
-          <path d="M39 65 q11 10 22 0" style={{ ...INK, strokeWidth: 4 }} />
+          <path d="M37 65 Q50 70 64 64 Q62 83 50 81 Q39 80 37 65Z" fill="#2D1951" /><path d="M41 67 Q51 71 60 67" fill="none" stroke="#FFF6CA" strokeWidth="3" /><path d="M44 77 Q51 71 58 78 Q51 83 44 77Z" fill="#FFAB7C" />
         </>
       )
   }
@@ -152,7 +158,7 @@ export function MascotSays({ mood = 'happy', children, size = 56, className, del
 
 /** Accessoires sportifs dessinés dans le même repère que Minuton. */
 function SportOutfit({ outfit }: { outfit?: string }) {
-  const stroke = { stroke: '#292329', strokeWidth: 2.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+  const stroke = { stroke: '#2D1951', strokeWidth: 2.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
   const jersey = (color: string, number?: string) => <g {...stroke}><path d="M22 74 Q50 88 78 74 L73 85 Q50 103 27 85Z" fill={color} />{number && <text x="50" y="89" fill="#fffdf7" stroke="none" textAnchor="middle" fontSize="12" fontWeight="900">{number}</text>}</g>
   const band = (color: string) => <path d="M19 35 Q50 20 81 35 L78 42 Q50 29 22 42Z" fill={color} {...stroke} />
   const cap = (color: string) => <g {...stroke}><path d="M24 28 Q24 0 54 7 Q77 9 78 29Z" fill={color} /><path d="M48 28 H90 Q89 36 67 36Z" fill={color} /></g>

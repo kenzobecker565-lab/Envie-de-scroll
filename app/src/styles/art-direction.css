@@ -1,0 +1,71 @@
+/* Swipe Up — atelier illustré, palette pilotée par l'heure locale. */
+:root[data-scene]:not([data-shop-theme]) {
+ --canvas:#fff7ed;--surface-100:#fff9f0;--surface-200:#fffdf8;--surface-300:#f3e8e3;
+ --ink:#302349;--ink-soft:#6b5c79;--ink-faint:#877a92;--line:#e5d9ea;--outline:#dfd3e6;
+ --accent:#7852df;--accent-strong:#6841c7;--accent-soft:#eae0ff;--accent-ink:#fff;--on-color:#302349;
+ --lilac:#d5bcff;--lilac-soft:#eee5ff;--good:#a9e2c7;--good-soft:#e2f3e9;--good-ink:#236344;
+ --warm:#ffd76b;--warm-soft:#fff0ce;--warm-ink:#74511b;--sky:#a9d7f1;--sky-soft:#e2f0fc;
+ --shadow-ink:#38205718;--page-pattern:none;color-scheme:light;
+ --scene-position:0% 0%;--scene-opacity:.2;
+}
+:root[data-scene='day'] {--scene-position:100% 0%}
+:root[data-scene='dusk']:not([data-shop-theme]) {--canvas:#fff0e6;--surface-100:#fff3ed;--surface-200:#fff8f2;--accent:#8250d9;--scene-position:0% 100%;--scene-opacity:.28}
+:root[data-scene='night']:not([data-shop-theme]) {
+ --canvas:#10162f;--surface-100:#19203d;--surface-200:#222944;--surface-300:#303651;
+ --ink:#fff4e6;--ink-soft:#c4bddc;--ink-faint:#a49bbd;--line:#3d4262;--outline:#444566;
+ --accent:#b49aff;--accent-strong:#c9b5ff;--accent-soft:#373057;--accent-ink:#21163c;
+ --lilac-soft:#342b50;--good-soft:#203f41;--good-ink:#b8efdb;--sky-soft:#233653;--warm-soft:#473b32;--warm-ink:#ffe1a0;
+ --scene-position:100% 100%;--scene-opacity:.55;color-scheme:dark;
+}
+:root[data-scene] {--shadow-card:0 8px 24px #23133c12;--shadow-chip:0 3px 10px #23133c0c;--shadow-press:0 2px 8px #23133c12}
+.da-backdrop-scene {position:absolute;inset:0;background-image:url('/art/scenes.webp');background-size:200% 200%;background-position:var(--scene-position);opacity:var(--scene-opacity);transition:opacity 1s}
+.da-backdrop-light {position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--canvas) 68%)}
+.da-backdrop>svg,.da-backdrop>span {opacity:.12}
+html[data-scene] main {position:relative}
+html[data-scene] h1 {line-height:1.12;font-size:clamp(30px,8.5vw,40px)}
+html[data-scene] [data-slot='button'] {border-radius:18px;border-width:1px;box-shadow:var(--shadow-chip)}
+html[data-scene] [data-slot='button'][data-variant='default'] {color:var(--accent-ink);border-color:transparent}
+html[data-scene] [data-slot='card'] {border-width:1px;border-radius:24px;box-shadow:var(--shadow-card)}
+.da-tabbar {border-width:1px!important;background:var(--surface-200);box-shadow:0 8px 35px #17112e25;padding:7px 4px;backdrop-filter:blur(16px)}
+.da-tabbar button {border:none;font-size:9px;min-height:55px;color:var(--ink-soft)}
+.da-tabbar button[aria-current] {color:var(--accent-ink)}
+.da-appearance {display:flex;align-items:center;gap:4px;padding:4px;background:var(--surface-200);border:1px solid var(--line);border-radius:999px;width:fit-content}
+.da-appearance button {display:flex;align-items:center;gap:5px;padding:7px 10px;border-radius:999px;font-size:11px;color:var(--ink-soft)}
+.da-appearance button[aria-pressed='true'] {background:var(--accent-soft);color:var(--accent-strong)}
+.da-passion-art {background-image:url('/art/passions.webp');background-size:500% 100%;border-radius:18px;min-height:120px;width:100%}
+.da-passion-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.da-passion-grid>[data-slot='button'] {grid-column:1/-1}
+.da-passion-poster {text-align:left;overflow:hidden;background:var(--surface-200);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-card);transition:transform .2s}
+.da-passion-poster:active {transform:scale(.97)}
+.da-passion-poster .da-passion-art {border-radius:0;aspect-ratio:1.15;min-height:130px}
+.da-passion-caption {padding:12px}
+.da-passion-caption h2 {font-family:var(--font-display);font-size:19px;font-weight:800;color:var(--ink)}
+.da-passion-caption span {display:block;margin-top:4px;font-size:10px;color:var(--ink-soft)}
+.da-gauge {height:5px;margin-top:10px;border-radius:9px;background:var(--surface-300);overflow:hidden}
+.da-gauge i {display:block;height:100%;background:var(--accent);border-radius:9px}
+.da-passion-banner {margin-top:16px;height:175px;min-height:175px;box-shadow:var(--shadow-card)}
+.da-profile-hero {display:flex;align-items:center;gap:16px;padding:18px 10px}
+.da-profile-stats {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}
+.da-profile-stats>div {display:flex;flex-direction:column;padding:20px;border:1px solid var(--line);border-radius:22px;background:var(--surface-200)}
+.da-profile-stats strong {font-size:28px;color:var(--accent-strong)}
+.da-profile-stats span {font-size:12px;color:var(--ink-soft)}
+html[data-scene] .club-home {--club-card:var(--surface-200);--club-button:var(--accent);--club-button-ink:var(--accent-ink);color:var(--ink);background:transparent}
+html[data-scene] .club-hero {background:linear-gradient(0deg,var(--surface-200) 0%,transparent 90%),url('/art/scenes.webp');background-size:100% 100%,200% 200%;background-position:center,var(--scene-position);border:1px solid var(--line);box-shadow:var(--shadow-card);overflow:hidden}
+html[data-scene] .club-hero-copy {padding-top:8px}
+html[data-scene] .club-hero h1 {font-family:var(--font-display);font-size:clamp(27px,7.3vw,35px);color:var(--ink)}
+html[data-scene] .club-home .pulse-start {border-radius:999px;background:var(--accent);color:var(--accent-ink);border:0;box-shadow:0 6px 16px #6841c730}
+html[data-scene] .club-home .pulse-passion {padding:0;overflow:hidden}
+html[data-scene] .club-home .pulse-passion .da-passion-art {height:118px;border-radius:0;min-height:118px;margin-bottom:10px}
+html[data-scene] .club-home .pulse-passion-label,html[data-scene] .club-home .club-passion-count {padding:0 12px 8px}
+html[data-scene] .club-home .pulse-section-head h2 {font-family:var(--font-display)}
+@media(prefers-reduced-motion:reduce){.da-backdrop-scene,.da-passion-poster {transition:none}}
+
+html[data-scene] .club-home {--ink:inherit;--ink-soft:inherit;--line:inherit;--paper:inherit;--surface-200:inherit;--on-color:inherit;--warm:inherit;--accent:inherit;--lilac-soft:inherit;--good-soft:inherit;--club-card-ink:var(--ink)}
+html[data-scene] .shop-hero {background:linear-gradient(120deg,var(--lilac-soft),var(--good-soft));color:var(--ink);border-width:1px;border-radius:26px}
+html[data-scene] .shadow-pop {box-shadow:var(--shadow-card)}
+html[data-scene] .da-activity-art {height:145px;min-height:145px;border-radius:0}
+
+html[data-scene] .club-home .club-passion-art {display:block;height:118px;border-radius:0;margin:0 0 10px;background:none;width:100%}
+html[data-scene] .club-home .club-passion-count {padding:0;margin-top:5px}
+html[data-scene] main h1.text-22 {font-size:22px}
+html[data-scene] main h1.text-26 {font-size:26px}

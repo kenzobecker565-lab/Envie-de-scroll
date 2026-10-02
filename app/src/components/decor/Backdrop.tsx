@@ -87,7 +87,8 @@ export function Backdrop({ tone }: { tone: DecorTone }) {
   }, [])
 
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div aria-hidden="true" className="da-backdrop pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <div className="da-backdrop-scene" /><div className="da-backdrop-light" />
       {shapes.map((shape, index) => (
         <div
           key={index}

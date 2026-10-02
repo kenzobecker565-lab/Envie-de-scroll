@@ -29,6 +29,7 @@ import { SignalScreen } from './screens/SignalScreen.tsx'
 import { AppStateProvider, useAppState, useNavigation, type Flow, type Route } from './state/AppState.tsx'
 import { useBackButton } from './telegram/buttons.ts'
 import { syncTheme } from './telegram/theme.ts'
+import { startAppearance } from './lib/appearance.ts'
 import { initTelegram } from './telegram/webApp.ts'
 
 type Boot = { status: 'loading' } | { status: 'ready'; me: MeResponse } | { status: 'error'; error: ApiError | Error }
@@ -53,8 +54,9 @@ export function App() {
   useEffect(() => {
     initTelegram()
     const stopTheme = syncTheme()
+    const stopAppearance = startAppearance()
     void load()
-    return stopTheme
+    return () => { stopTheme(); stopAppearance() }
   }, [load])
 
   return (

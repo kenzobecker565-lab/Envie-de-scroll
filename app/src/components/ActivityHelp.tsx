@@ -1,4 +1,4 @@
-import { Dices, Headphones, Images, Lightbulb, Play, RefreshCw, Shuffle, Tv } from 'lucide-react'
+import { Dices, Headphones, Images, LifeBuoy, Lightbulb, PenLine, Play, RefreshCw, Shuffle, Tv, Volume2, VolumeX } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useMemo, useState } from 'react'
 import { drawChallenge, EXTRA_LINKS, guideFor, sample, seededRandom, type Challenge, type IdeaList, type LinkKind, type ProposalDTO } from '@scroll-up/shared'
@@ -13,21 +13,35 @@ import { useAppState } from '../state/AppState.tsx'
 import { haptics, openExternal } from '../telegram/webApp.ts'
 
 /**
- * Sous l'activité, de quoi se lancer sans jamais bloquer :
- * - « Une idée ? » : des suggestions concrètes (un album, un style, un lieu),
+ * Sous l'activité, « Un coup de pouce ? » : une rangée de pastilles, et l'aide
+ * choisie s'ouvre juste en dessous (un autre toucher la referme).
+ * - « Une idée » : des suggestions concrètes (un album, un style, un lieu),
  *   avec les liens pour écouter ou regarder celle qu'on choisit ;
  * - « Si tu bloques » : 2 ou 3 pistes pour démarrer ;
- * - « Un défi en plus ? » (Dessin, Écriture) : une contrainte pour pimenter.
+ * - « Un défi en plus » (Dessin, Écriture) : une contrainte pour pimenter ;
+ * - « Sans papier » (Dessin) : dessiner au doigt, dans l'app ;
+ * - « Sans son » (Musique, Cinéma) : une activité qui se fait sans écouter.
  */
-export function ActivityHelp({ proposal }: { proposal: ProposalDTO }) {
+export function ActivityHelp({
+  proposal,
+  onPad,
+  quiet,
+}: {
+  proposal: ProposalDTO
+  /** Dessin : ouvrir la feuille à dessiner au doigt. */
+  onPad?: () => void
+  /** Musique, Cinéma : basculer vers une activité sans son. */
+  quiet?: { on: boolean; busy: boolean; toggle: () => void; note?: string }
+}) {
   const guide = guideFor(proposal.activityId)
   const canChallenge = proposal.passion === 'dessin' || proposal.passion === 'ecriture'
-  const [open, setOpen] = useState<'tips' | 'challenge' | null>(null)
+  const [open, setOpen] = useState<'ideas' | 'tips' | 'challenge' | null>(null)
   const [challenge, setChallenge] = useState<Challenge | null>(null)
 
-  if (!guide && !canChallenge) return null
+  const hasPanels = Boolean(guide?.ideas || guide || canChallenge)
+  if (!hasPanels && !onPad && !quiet && !proposal.extra) return null
 
-  const toggle = (panel: 'tips' | 'challenge') => {
+  const toggle = (panel: 'ideas' | 'tips' | 'challenge') => {
     haptics.selection()
     if (open === panel) return setOpen(null)
     setOpen(panel)
@@ -49,25 +63,59 @@ export function ActivityHelp({ proposal }: { proposal: ProposalDTO }) {
 
   return (
     <div className="mt-5 flex flex-col gap-3">
-      {guide?.ideas && <IdeasCard ideas={guide.ideas} proposal={proposal} />}
       {proposal.extra && <ExtraLinks proposal={proposal} />}
 
-      <div className="flex flex-wrap gap-2">
-        {guide && (
-          <HelpToggle open={open === 'tips'} onClick={() => toggle('tips')} controls="help-tips">
-            <Lightbulb aria-hidden="true" />
-            Si tu bloques
-          </HelpToggle>
-        )}
-        {canChallenge && (
-          <HelpToggle open={open === 'challenge'} onClick={() => toggle('challenge')} controls="help-challenge">
-            <Dices aria-hidden="true" />
-            Un défi en plus&nbsp;?
-          </HelpToggle>
-        )}
-      </div>
+      {(hasPanels || onPad || quiet) && (
+        <section className="flex flex-col gap-2" aria-labelledby="help-title">
+          <h2 id="help-title" className="text-13 font-extrabold text-ink-soft">
+            Un coup de pouce&nbsp;?
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {guide?.ideas && (
+              <HelpToggle open={open === 'ideas'} onClick={() => toggle('ideas')} controls="help-ideas">
+                <Lightbulb aria-hidden="true" />
+                Une idée
+              </HelpToggle>
+            )}
+            {guide && (
+              <HelpToggle open={open === 'tips'} onClick={() => toggle('tips')} controls="help-tips">
+                <LifeBuoy aria-hidden="true" />
+                Si tu bloques
+              </HelpToggle>
+            )}
+            {canChallenge && (
+              <HelpToggle open={open === 'challenge'} onClick={() => toggle('challenge')} controls="help-challenge">
+                <Dices aria-hidden="true" />
+                Un défi en plus
+              </HelpToggle>
+            )}
+            {onPad && (
+              <HelpAction onClick={onPad}>
+                <PenLine aria-hidden="true" />
+                Sans papier
+              </HelpAction>
+            )}
+            {quiet && (
+              <HelpAction onClick={quiet.toggle} pressed={quiet.on} disabled={quiet.busy}>
+                {quiet.on ? <Volume2 aria-hidden="true" /> : <VolumeX aria-hidden="true" />}
+                {quiet.on ? 'Sans son\u00A0✓' : 'Sans son'}
+              </HelpAction>
+            )}
+          </div>
+          {quiet?.note && (
+            <p role="status" className="text-13 font-semibold text-ink">
+              {quiet.note}
+            </p>
+          )}
+        </section>
+      )}
 
       <AnimatePresence mode="wait" initial={false}>
+        {open === 'ideas' && guide?.ideas && (
+          <motion.div key="ideas" id="help-ideas" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
+            <IdeasCard ideas={guide.ideas} proposal={proposal} />
+          </motion.div>
+        )}
         {open === 'tips' && guide && (
           <motion.ol
             key="tips"
@@ -165,6 +213,25 @@ function HelpToggle({ open, onClick, controls, children }: { open: boolean; onCl
   )
 }
 
+/** Une pastille qui agit tout de suite (dessiner au doigt, passer sans son). */
+function HelpAction({ onClick, pressed, disabled, children }: { onClick: () => void; pressed?: boolean; disabled?: boolean; children: React.ReactNode }) {
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-pressed={pressed}
+      whileTap={{ scale: 0.95 }}
+      className={cn(
+        'inline-flex h-10 items-center gap-2 rounded-pill border-2 border-outline px-4 text-14 font-bold text-ink transition-[background-color,box-shadow] duration-150 disabled:opacity-50 [&>svg]:size-4 [&>svg]:stroke-[2.4]',
+        pressed ? 'bg-good shadow-chip' : 'bg-card',
+      )}
+    >
+      {children}
+    </motion.button>
+  )
+}
+
 /** « Une idée ? » : quelques suggestions (toujours les mêmes pour une proposition), et d'autres sur demande. */
 function IdeasCard({ ideas, proposal }: { ideas: IdeaList; proposal: ProposalDTO }) {
   const { state, dispatch } = useAppState()
@@ -180,7 +247,7 @@ function IdeasCard({ ideas, proposal }: { ideas: IdeaList; proposal: ProposalDTO
   }
 
   return (
-    <Card tone="muted" className="gap-3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+    <Card tone="muted" className="gap-3">
       <div className="flex items-center justify-between gap-2">
         <CardEyebrow className="min-w-0">
           <Lightbulb aria-hidden="true" />

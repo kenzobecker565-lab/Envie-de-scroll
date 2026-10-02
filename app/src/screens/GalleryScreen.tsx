@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2, SlidersHorizontal, Timer } from 'lucide-react'
+import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, type CompletionDTO } from '@scroll-up/shared'
@@ -11,16 +11,10 @@ import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
-import { BadgeShelf } from '../components/BadgePin.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
-import { finishedPathIds } from '../components/Paths.tsx'
-import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
-import { MilestoneProgress } from '../components/Milestones.tsx'
-import { PassionProgressGrid } from '../components/Progression.tsx'
 import { ProjectPicker, ProjectsSection } from '../components/Projects.tsx'
 import { Screen } from '../components/Screen.tsx'
-import { ThemeButton } from '../components/ThemePicker.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { shareCreation } from '../lib/share.ts'
@@ -28,14 +22,14 @@ import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
 /**
- * Tableau de bord : le total de minutons en haut, la progression par passion,
- * puis la galerie, une carte par activité réalisée, de la plus récente à la plus ancienne.
- * Toucher une carte l'ouvre en grand. Jamais de calendrier de jours cochés
- * ou manqués.
+ * L'onglet « Galerie » : les projets, puis une carte par activité réalisée,
+ * de la plus récente à la plus ancienne, groupées par mois. Toucher une carte
+ * l'ouvre en grand. Les minutons, parcours et badges vivent dans l'onglet
+ * « Progresser ». Jamais de calendrier de jours cochés ou manqués.
  */
 export function GalleryScreen() {
   const { state, dispatch } = useAppState()
-  const { push, reset } = useNavigation()
+  const { reset } = useNavigation()
   const { stats } = state.me
 
   const [items, setItems] = useState<CompletionDTO[]>([])
@@ -89,57 +83,15 @@ export function GalleryScreen() {
   const view = status === 'loading' ? 'loading' : status === 'error' && items.length === 0 ? 'error' : items.length === 0 ? 'empty' : 'list'
 
   return (
-    <Screen>
-      <header className="flex flex-col gap-4">
-        <div className="flex justify-end gap-2">
-          <ThemeButton withLabel />
-          <Button variant="secondary" size="sm" onClick={() => push({ name: 'passions', mode: 'edit' })}>
-            <SlidersHorizontal aria-hidden="true" />
-            Mes passions
-          </Button>
-        </div>
+    <Screen tabs>
+      <header className="flex flex-col gap-2">
         <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Ta galerie</h1>
+        <p className="text-15 font-semibold text-ink-soft">
+          {plural(stats.totalActivities, 'création')} · {formatNumber(stats.totalCoins)} minutons
+          {state.me.projects.length > 0 && <> · {plural(state.me.projects.length, 'projet')}</>}
+        </p>
       </header>
 
-      {/* Les minutons, en grand, sur un sticker soleil. */}
-      <Card
-        tone="warm"
-        className="mt-6 flex-row items-center gap-3 px-5 shadow-pop"
-        aria-label="Tes minutons"
-        role="region"
-        initial={{ opacity: 0, y: 16, scale: 0.97, rotate: 2 }}
-        animate={{ opacity: 1, y: 0, scale: 1, rotate: -1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 16 }}
-      >
-        <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <p className="flex items-baseline gap-2">
-            <span className="font-numbers text-80 font-extrabold tracking-tight tabular-nums">{formatNumber(stats.totalCoins)}</span>
-            <span className="text-16 font-bold">minutons</span>
-          </p>
-          <p className="text-13 font-semibold">
-            {plural(stats.totalActivities, 'activité réalisée', 'activités réalisées')}
-            {stats.monthActivities > 0 && <span className="whitespace-nowrap"> · {formatNumber(stats.monthActivities)} ce mois-ci</span>}
-          </p>
-          <Badge variant="secondary" size="sm">
-            <Timer aria-hidden="true" />1 min = 1 minuton
-          </Badge>
-        </div>
-        {/* Un gros minuton en sticker, qui flotte et fait un tour de temps en temps. */}
-        <span aria-hidden="true" className="motion-loop anim-float shrink-0" style={{ '--float-duration': '4s' } as React.CSSProperties}>
-          <span className="flex h-20 w-20 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper">
-            <CoinIcon size={52} className="motion-loop anim-coin" />
-          </span>
-        </span>
-        <Sparkle size={20} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-3 right-20" />
-      </Card>
-      {stats.totalCoins > 0 && (
-        <motion.div className="mt-4 px-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-          <MilestoneProgress total={stats.totalCoins} />
-        </motion.div>
-      )}
-
-      <PassionProgressGrid />
-      {stats.byPassion.some((row) => row.steps.length > 0) && <BadgeShelf finished={finishedPathIds(stats.byPassion)} />}
       <ProjectsSection />
 
       {(view === 'list' || view === 'loading') && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}

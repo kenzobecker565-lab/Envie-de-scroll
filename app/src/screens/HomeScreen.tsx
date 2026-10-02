@@ -7,16 +7,16 @@ import { cn } from '@/lib/utils'
 import { Wordmark } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
-import { HomeCta } from '../components/HomeCta.tsx'
-import { ChallengeCard, challengePassions } from '../components/Challenge.tsx'
+import { ChallengeCard, challengePassions, todayKey, wordDone } from '../components/Challenge.tsx'
 import { MascotSays } from '../components/Mascot.tsx'
 import { ActivePathCard, featuredPath } from '../components/Paths.tsx'
 import { statsFor } from '../components/Progression.tsx'
 import { track } from '../api/client.ts'
-import { FeedbackButton } from '../components/FeedbackDialog.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { AmbientButton } from '../components/AmbientButton.tsx'
 import { SettingsButton } from '../components/SettingsSheet.tsx'
+import { tabStack } from '../components/TabBar.tsx'
+import { Tirette } from '../components/Tirette.tsx'
 import { formatNumber, plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { fadeUp } from '../lib/motion.ts'
@@ -24,25 +24,27 @@ import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
 /**
- * Accueil : le gros bouton « J'ai envie de scroller » domine l'écran.
- * En dessous, un aperçu discret de ce qui a été fait ce mois-ci : jamais de
- * compteur de jours, jamais de reproche.
+ * L'onglet « Créer » (l'accueil) : bonjour, une seule carte (l'activité en
+ * cours, sinon le mode d'emploi, le mot du jour, le parcours ou le mois), et
+ * tout le bas de l'écran pour la tirette « J'ai envie de scroller ». Jamais
+ * de compteur de jours, jamais de reproche.
  */
 export function HomeScreen() {
   const { state, dispatch } = useAppState()
   const { push, reset } = useNavigation()
   const { user, stats, openProposal } = state.me
 
-  const start = () => {
+  const start = (how: 'pull' | 'tap') => {
     haptics.impact('heavy')
     track('cta')
+    if (how === 'pull') track('pull')
     dispatch({ type: 'newFlow' })
     push({ name: 'signal' })
   }
 
-  const openGallery = () => {
+  const openProgress = () => {
     haptics.impact('light')
-    push({ name: 'gallery' })
+    reset(tabStack('progress'))
   }
 
   const resume = () => {
@@ -57,15 +59,19 @@ export function HomeScreen() {
   }
 
   const ResumeIcon = openProposal ? PASSION_ICONS[openProposal.passion] : null
-  // Le parcours à mettre en avant (en cours, sinon à commencer), une fois la première activité faite.
+  // Une seule carte sous le bonjour, la plus utile maintenant : l'activité en cours,
+  // le mode d'emploi (première fois), le mot du jour (pas encore fait), le parcours, sinon le mois.
+  const playsWord = challengePassions(user.passions).length > 0
+  const wordToday = playsWord && !wordDone(todayKey(), stats.challenge ?? [])
   const featured =
-    !openProposal && stats.totalActivities > 0
+    !openProposal && stats.totalActivities > 0 && !wordToday
       ? featuredPath(
           user.passions,
           (passion) => statsFor(stats.byPassion, passion).steps,
           (passion) => passionLevel(passion, statsFor(stats.byPassion, passion).minutes).level,
         )
       : null
+  const card = openProposal && ResumeIcon ? 'resume' : stats.totalActivities === 0 ? 'how' : wordToday ? 'word' : featured ? 'path' : 'month'
   const hour = new Date().getHours()
   const period = dayPeriod(hour)
   // La phrase d'accueil suit l'heure ; elle ne change pas à chaque retour sur l'accueil.
@@ -73,21 +79,21 @@ export function HomeScreen() {
   const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
 
   return (
-    <Screen className="pt-4">
+    <Screen tabs className="pt-4 pb-0">
       <header className="flex items-center justify-between">
         <Wordmark />
         <div className="flex items-center gap-2 min-[380px]:gap-3">
           <AmbientButton />
           <SettingsButton />
-          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openGallery} aria-label={`Ma galerie : ${formatNumber(stats.totalCoins)} minutons`}>
+          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openProgress} aria-label={`Progresser : ${formatNumber(stats.totalCoins)} minutons`}>
           <CoinIcon size={26} className="motion-loop anim-coin" />
           <span className="font-numbers text-17 font-extrabold">{formatNumber(stats.totalCoins)}</span>
           </Button>
         </div>
       </header>
 
-      <div className="mt-8 flex flex-col gap-2">
-        <motion.h1 className="font-display text-46 font-extrabold tracking-tight text-ink" {...fadeUp(0)}>
+      <div className="mt-6 flex flex-col gap-2">
+        <motion.h1 className="home-hello font-display font-extrabold tracking-tight text-ink" {...fadeUp(0)}>
           {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
         </motion.h1>
         {/* Minuton, la mascotte, dit la phrase du moment. */}
@@ -96,11 +102,8 @@ export function HomeScreen() {
         </MascotSays>
       </div>
 
-      {/* Le gros bouton, dans la forme du thème choisi. */}
-      <HomeCta onStart={start} />
-
-      <div className="mt-auto flex flex-col gap-4">
-        {openProposal && ResumeIcon && (
+      <div className="mt-5 flex flex-col">
+        {card === 'resume' && openProposal && ResumeIcon && (
           <motion.button
             type="button"
             onClick={resume}
@@ -122,7 +125,9 @@ export function HomeScreen() {
           </motion.button>
         )}
 
-        {challengePassions(user.passions).length > 0 && (
+        {card === 'how' && <HowItWorks />}
+
+        {card === 'word' && (
           <ChallengeCard
             done={stats.challenge ?? []}
             onOpen={() => {
@@ -132,7 +137,7 @@ export function HomeScreen() {
           />
         )}
 
-        {featured && (
+        {card === 'path' && featured && (
           <ActivePathCard
             progress={featured.progress}
             started={featured.started}
@@ -143,48 +148,49 @@ export function HomeScreen() {
           />
         )}
 
-        {stats.totalActivities === 0 && !openProposal ? (
-          <HowItWorks />
-        ) : (
-          <motion.div {...fadeUp(0.3, 8)} className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4')}>
+        {card === 'month' && (
+          <motion.button
+            type="button"
+            onClick={openProgress}
+            {...fadeUp(0.2, 8)}
+            whileTap={PRESSED}
+            className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4 text-left transition-shadow duration-150 active:shadow-press')}
+          >
             <span className="flex min-w-0 flex-1 flex-col gap-1">
               <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ce mois-ci</span>
               <MonthSummary monthActivities={stats.monthActivities} monthCoins={stats.monthCoins} totalActivities={stats.totalActivities} />
             </span>
-            <Button variant="sky" size="sm" onClick={openGallery} haptic={false}>
-              Galerie
-              <ArrowRight aria-hidden="true" />
-            </Button>
-          </motion.div>
+            <ArrowRight size={20} strokeWidth={2.6} className="shrink-0 text-ink" aria-hidden="true" />
+          </motion.button>
         )}
-
-        {/* Pendant le test : un avis, en un geste. */}
-        <FeedbackButton context="accueil" className="self-center" />
       </div>
+
+      {/* Tout le bas de l'écran : la tirette, à tirer vers le haut (ou à toucher). */}
+      <Tirette onStart={start} />
     </Screen>
   )
 }
 
 /** Tant que la galerie est vide : le principe de l'app, en trois temps. */
 const STEPS = [
-  { text: 'Ton pouce te démange\u00A0? Appuie sur le gros bouton.' },
+  { text: 'Ton pouce te démange\u00A0? Tire la languette du bas.' },
   { text: 'Ton humeur, ton temps, ta passion\u00A0: trois taps.' },
   { text: 'Une petite activité créative. Chaque minute = un minuton.' },
 ] as const
 
 function HowItWorks() {
   return (
-    <motion.section {...fadeUp(0.3, 8)} className={cn(cardVariants({ tone: 'muted' }), 'gap-3 py-4')} aria-labelledby="how-it-works">
+    <motion.section {...fadeUp(0.3, 8)} className={cn(cardVariants({ tone: 'muted' }), 'gap-2 py-3')} aria-labelledby="how-it-works">
       <h2 id="how-it-works" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
         Comment ça marche
       </h2>
-      <ol className="flex flex-col gap-3">
+      <ol className="flex flex-col gap-2">
         {STEPS.map((step, index) => (
           <li key={index} className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-warm font-numbers text-15 font-extrabold text-on-color">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-warm font-numbers text-13 font-extrabold text-on-color">
               {index + 1}
             </span>
-            <span className="text-14 font-semibold text-ink">{step.text}</span>
+            <span className="text-13 leading-snug font-semibold text-ink">{step.text}</span>
           </li>
         ))}
       </ol>

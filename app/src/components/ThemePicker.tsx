@@ -1,45 +1,13 @@
-import { Check, Info, Palette } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
+import { Check, Info } from 'lucide-react'
 import { useState } from 'react'
 import { APP_THEMES, isAppTheme, type AppTheme } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api } from '../api/client.ts'
 import { setAppTheme, THEME_INFO, useAppTheme } from '../lib/appTheme.ts'
-import { popIn } from '../lib/motion.ts'
 import { useAppState } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
-
-/**
- * Bouton « Thème » (avec ou sans texte) qui ouvre le choix du thème dans une
- * feuille : Pop (par défaut), Pop Nuit, BD, Memphis.
- */
-export function ThemeButton({ withLabel = false }: { withLabel?: boolean }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <>
-      <Button
-        variant="secondary"
-        size={withLabel ? 'sm' : 'icon'}
-        onClick={() => setOpen(true)}
-        aria-haspopup="dialog"
-        aria-label={withLabel ? undefined : 'Changer de thème'}
-      >
-        <Palette aria-hidden="true" />
-        {withLabel && 'Thème'}
-      </Button>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <ThemePicker />
-        </DialogContent>
-      </Dialog>
-    </>
-  )
-}
 
 /** Graisse et style du « Aa » de chaque vignette (ceux du thème de l'app ne s'y appliquent pas). */
 const PREVIEW_TYPE: Record<AppTheme, React.CSSProperties> = {
@@ -123,64 +91,6 @@ export function ThemeGrid() {
       </ToggleGroup>
       {error && (
         <Alert variant="warning" role="status">
-          <Info aria-hidden="true" />
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-    </>
-  )
-}
-
-/** Le choix du thème, en liste détaillée. */
-function ThemePicker() {
-  const { theme, choose, error } = useThemeChooser()
-
-  return (
-    <>
-      <DialogHeader>
-        <DialogTitle>Choisis ton style</DialogTitle>
-        <DialogDescription>Le changement s’applique tout de suite. Tu peux revenir au style par défaut quand tu veux.</DialogDescription>
-      </DialogHeader>
-      <ToggleGroup
-        type="single"
-        variant="card"
-        value={theme}
-        onValueChange={(value) => isAppTheme(value) && choose(value)}
-        className="flex-col flex-nowrap gap-3"
-        aria-label="Thème de l’app"
-      >
-        {APP_THEMES.map((id, index) => (
-          <ToggleGroupItem key={id} value={id} className="items-center gap-4 p-3" {...popIn(index)} whileTap={{ scale: 0.97 }}>
-            <ThemePreview theme={id} />
-            <span className="flex min-w-0 flex-1 flex-col gap-1">
-              <span className="flex flex-wrap items-center gap-2 font-display text-20 font-extrabold tracking-tight">
-                {THEME_INFO[id].label}
-                {id === 'pop' && (
-                  <Badge variant="secondary" size="sm" className="font-sans">
-                    Par défaut
-                  </Badge>
-                )}
-              </span>
-              <span className="text-13 font-normal text-ink-soft">{THEME_INFO[id].description}</span>
-            </span>
-            <AnimatePresence>
-              {theme === id && (
-                <motion.span
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 26 }}
-                  className="flex h-9 w-9 shrink-0 -rotate-6 items-center justify-center rounded-pill border-[2.5px] border-outline bg-accent text-on-color"
-                >
-                  <Check size={18} strokeWidth={3.2} aria-hidden="true" />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
-      {error && (
-        <Alert variant="warning" role="status" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
           <Info aria-hidden="true" />
           <AlertDescription>{error}</AlertDescription>
         </Alert>

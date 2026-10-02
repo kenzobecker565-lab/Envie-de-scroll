@@ -101,7 +101,7 @@ export function BadgeShelf({ finished }: { finished: readonly string[] }) {
           )
         })}
       </div>
-      <p className="text-13 text-ink-soft">Un badge par parcours terminé. Les parcours sont dans le détail de chaque passion.</p>
+      <p className="text-13 text-ink-soft">Un badge par parcours terminé. Tous les parcours sont dans le détail de chaque passion.</p>
     </section>
   )
 }

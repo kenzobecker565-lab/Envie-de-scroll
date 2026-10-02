@@ -246,6 +246,31 @@
 :root[data-theme='memphis'] .cta-label {
   font-size: clamp(28px, 9.6vw, 38px);
 }
+/* « Bonjour Camille. » : sur une ligne dès 360 px, pour laisser la place à la carte et à la tirette. */
+.home-hello {
+  font-size: clamp(36px, 11vw, 46px);
+  line-height: 0.95;
+}
+:root[data-theme='nuit'] .home-hello {
+  font-size: clamp(32px, 9.4vw, 42px);
+}
+:root[data-theme='memphis'] .home-hello {
+  font-size: clamp(30px, 9vw, 40px);
+}
+/* La même phrase sur la tirette, un cran plus petite : elle doit tenir au-dessus des onglets. */
+.tirette-label {
+  font-size: clamp(32px, 10.4vw, 42px);
+  line-height: 0.95;
+}
+:root[data-theme='nuit'] .tirette-label {
+  font-size: clamp(29px, 9.4vw, 38px);
+}
+:root[data-theme='bd'] .tirette-label {
+  font-size: clamp(35px, 11.4vw, 46px);
+}
+:root[data-theme='memphis'] .tirette-label {
+  font-size: clamp(26px, 8.6vw, 34px);
+}
 
 :root[data-theme='nuit'] .font-display {
   font-style: italic;
@@ -548,6 +573,12 @@
     pointer-events: none;
   }
 
+  /* Chevrons de la tirette : ils montent et s'effacent, pour inviter à tirer. */
+  .anim-nudge-up {
+    animation: nudge-up 1.6s ease-in-out infinite;
+    animation-delay: var(--nudge-delay, 0s);
+  }
+
   /* Fil d'écran qui défile (glyphe du gros bouton). */
   .anim-feed {
     animation: feed 2.4s linear infinite;
@@ -664,6 +695,10 @@
 @keyframes shine {
   0%, 70% { transform: translateX(0) skewX(-18deg); }
   100% { transform: translateX(420%) skewX(-18deg); }
+}
+@keyframes nudge-up {
+  0%, 100% { transform: translate3d(0, 4px, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
 }
 @keyframes feed {
   from { transform: translate3d(0, 0, 0); }

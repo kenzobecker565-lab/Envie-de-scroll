@@ -50,7 +50,7 @@ const LEVEL_MESSAGES = [
   'Le sommet. Chapeau bas, vraiment.',
 ]
 
-export function PassionProgressGrid() {
+export function PassionProgressGrid({ title = 'Ta progression' }: { title?: string }) {
   const { state } = useAppState()
   const { push } = useNavigation()
   const { user, stats } = state.me
@@ -63,7 +63,7 @@ export function PassionProgressGrid() {
   return (
     <section className="mt-8 flex flex-col gap-3" aria-labelledby="progression-title">
       <h2 id="progression-title" className="font-display text-26 font-extrabold tracking-tight text-ink">
-        Ta progression
+        {title}
       </h2>
       <div className="flex flex-col gap-3">
         {shown.map((passion, index) => (

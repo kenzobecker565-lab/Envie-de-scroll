@@ -155,9 +155,16 @@ describe('admins et statistiques', () => {
     await request(app).post('/api/events').set(as(7)).send({ name: 'home_screen_added' }).expect(204)
     await request(app).post('/api/events').set(as()).send({ name: 'home_screen_silent' }).expect(204)
     await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'nuit' }).expect(200)
+    // La tirette tirée (plutôt que touchée), et les onglets.
+    await request(app).post('/api/events').set(as()).send({ name: 'pull' }).expect(204)
+    await request(app).post('/api/events').set(as()).send({ name: 'tab', data: { tab: 'progress' } }).expect(204)
+    await request(app).post('/api/events').set(as(7)).send({ name: 'tab', data: { tab: 'progress' } }).expect(204)
+    await request(app).post('/api/events').set(as()).send({ name: 'tab', data: { tab: 'gallery' } }).expect(204)
 
     const stats = await globalStats(prisma, clock.now())
     expect(stats).toContain('Moments de scroll : matin 0 · midi 0 · soir 0 · nuit 1 · pas dit 0 · relances coupées 0')
+    expect(stats).toContain('→ dont tirette tirée vers le haut : 1 (100 %), le reste d’un toucher')
+    expect(stats).toContain('Onglets ouverts : Progresser 2 · Galerie 1 · Créer 0')
     expect(stats).toContain('Testeurs : 2')
     expect(stats).toContain('« J’ai envie de scroller » : 1 appui')
     expect(stats).toContain('activités validées : 1 (100 %')

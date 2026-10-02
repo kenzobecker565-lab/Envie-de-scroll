@@ -5,24 +5,26 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useNavigation } from '../state/AppState.tsx'
 import { hasNativeBackButton } from '../telegram/buttons.ts'
+import { TAB_BAR_SPACE } from './TabBar.tsx'
 
 /**
  * Cadre d'un écran : marges (16 px sur les côtés, 24 px en haut, 32 px en
  * bas), zones sûres, et bouton retour dans l'app quand celui de Telegram
  * n'est pas disponible (navigateur de développement).
  */
-export function Screen({ children, className, footer }: { children: ReactNode; className?: string; footer?: ReactNode }) {
+export function Screen({ children, className, footer, tabs = false }: { children: ReactNode; className?: string; footer?: ReactNode; tabs?: boolean }) {
   const { canGoBack, back } = useNavigation()
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col">
-      {!hasNativeBackButton && canGoBack && (
+      {/* Les onglets s'atteignent par la barre du bas : pas de bouton retour dans l'app pour eux. */}
+      {!hasNativeBackButton && canGoBack && !tabs && (
         <div className="px-4 pt-4">
           <Button variant="secondary" size="icon" onClick={back} aria-label="Retour">
             <ChevronLeft className="size-6" aria-hidden="true" />
           </Button>
         </div>
       )}
-      <main className={cn('flex flex-1 flex-col px-4 pt-6 pb-8', className)}>{children}</main>
+      <main className={cn('flex flex-1 flex-col px-4 pt-6 pb-8', tabs && TAB_BAR_SPACE, className)}>{children}</main>
       {footer}
     </div>
   )

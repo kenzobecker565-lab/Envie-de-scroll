@@ -218,6 +218,17 @@ export function featuredPath(passions: readonly PassionId[], stepsByPassion: (pa
 }
 
 
+/** Le parcours du moment dans une passion : celui en cours, sinon le prochain ouvert, sinon le dernier terminé. */
+export function currentPath(passion: PassionId, steps: readonly string[], level: number): PathProgress | null {
+  const all = pathProgress(passion, steps, level)
+  return (
+    all.find((entry) => entry.unlocked && !entry.finished && entry.done > 0) ??
+    all.find((entry) => entry.unlocked && !entry.finished) ??
+    all.filter((entry) => entry.finished).at(-1) ??
+    null
+  )
+}
+
 /** Les parcours terminés, toutes passions confondues (pour la vitrine des badges). */
 export function finishedPathIds(byPassion: readonly { passion: PassionId; steps: readonly string[]; minutes: number }[]): string[] {
   return byPassion.flatMap((row) => pathProgress(row.passion, row.steps, passionLevel(row.passion, row.minutes).level).filter((entry) => entry.finished).map((entry) => entry.path.id))

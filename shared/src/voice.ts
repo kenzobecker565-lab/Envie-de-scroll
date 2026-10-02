@@ -62,10 +62,10 @@ export function dayMoment(hour: number): DayMoment {
 
 /** Sous « Bonjour Camille. » sur l'accueil. */
 const RAW_HOME_LINES: Record<DayMoment, string[]> = {
-  matin: ['Ton pouce te démange ? Appuie ici, on s\'occupe du reste.', 'Avant de scroller, un petit café créatif ? Appuie ici.'],
-  journee: ['Ton pouce te démange ? Appuie ici, on s\'occupe du reste.', 'Une pause qui fait du bien, c\'est juste là. Appuie ici.'],
-  soir: ['Ton pouce te démange ? Appuie ici, on s\'occupe du reste.', 'La journée est finie ? Offre-toi mieux que le fil. Appuie ici.'],
-  nuit: ['Un dernier scroll avant de dormir ? On a plus doux. Appuie ici.', 'Encore debout ? Appuie ici, on fait calme.'],
+  matin: ['Ton pouce te démange ? Tire vers le haut, on s\'occupe du reste.', 'Avant de scroller, un petit café créatif ? C\'est juste en bas.'],
+  journee: ['Ton pouce te démange ? Tire vers le haut, on s\'occupe du reste.', 'Une pause qui fait du bien, c\'est juste en bas.'],
+  soir: ['Ton pouce te démange ? Tire vers le haut, on s\'occupe du reste.', 'La journée est finie ? Offre-toi mieux que le fil, juste en bas.'],
+  nuit: ['Un dernier scroll avant de dormir ? On a plus doux, juste en bas.', 'Encore debout ? Tire vers le haut, on fait calme.'],
 }
 
 export function homeLine(moment: DayMoment, random: () => number = Math.random): string {

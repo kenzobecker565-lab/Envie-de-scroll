@@ -139,17 +139,3 @@ export function FeedbackDialog({ open, onOpenChange, context }: { open: boolean;
     </Dialog>
   )
 }
-
-/** Bouton discret qui ouvre la feuille d'avis. */
-export function FeedbackButton({ context, className, label = 'Un avis, une idée ?' }: { context?: string; className?: string; label?: string }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <>
-      <Button variant="ghost" size="md" className={className} onClick={() => setOpen(true)} aria-haspopup="dialog">
-        <MessageCircleHeart aria-hidden="true" />
-        {label}
-      </Button>
-      <FeedbackDialog open={open} onOpenChange={setOpen} context={context} />
-    </>
-  )
-}

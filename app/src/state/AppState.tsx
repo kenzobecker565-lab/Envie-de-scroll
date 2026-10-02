@@ -18,6 +18,7 @@ export type Route =
   | { name: 'activity' }
   | { name: 'proof' }
   | { name: 'done' }
+  | { name: 'progress' }
   | { name: 'gallery' }
   | { name: 'path'; pathId: string }
   | { name: 'challenge' }

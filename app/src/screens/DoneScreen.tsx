@@ -1,11 +1,11 @@
-import { House, Images, Lightbulb, Send } from 'lucide-react'
-import { motion, useReducedMotion } from 'motion/react'
+import { ChevronDown, FolderPlus, House, Images, Lightbulb, Send } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { cheerFor, collectionSize, countWords, factFor, getChallengeActivity, getPassion, getPathStep, isBaseActivity, levelCrossed, milestoneCrossed, passionLevel, pathProgress, seededRandom } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardEyebrow } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import { ChallengeBanner } from '../components/Challenge.tsx'
 import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
@@ -19,10 +19,15 @@ import { ProjectPicker } from '../components/Projects.tsx'
 import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen } from '../components/Screen.tsx'
+import { tabStack } from '../components/TabBar.tsx'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
-/** Confirmation : « Activité enregistrée. +X minutons ajoutés à ton total. », niveau et collection. */
+/**
+ * Confirmation : « Activité enregistrée. +X minutons ajoutés à ton total. »,
+ * la fête, le compteur, UNE seule grande nouvelle (la plus importante), puis
+ * la note. « Le savais-tu ? » et « Ranger dans un projet » sont repliés.
+ */
 export function DoneScreen() {
   const { state } = useAppState()
   const { reset } = useNavigation()
@@ -52,6 +57,8 @@ export function DoneScreen() {
   const step = getPathStep(activityId)
   const challenge = getChallengeActivity(activityId)
   const stepProgress = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level).find((entry) => entry.path.id === step.pathId) : undefined
+  // Une seule grande nouvelle à la fois : l'étape de parcours, sinon le niveau, le palier, le mot du jour, la collection.
+  const news = step && stepProgress ? 'step' : level ? 'level' : milestone ? 'milestone' : challenge ? 'challenge' : discovered ? 'discovered' : null
   // Une félicitation et une anecdote, toujours les mêmes pour cette création.
   const { id: completionId, duration, text } = done.response.completion
   const cheer = cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
@@ -98,18 +105,6 @@ export function DoneScreen() {
       <motion.p className="mt-3 max-w-[320px] text-15 font-semibold text-ink" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }}>
         {cheer}
       </motion.p>
-      {discovered && (
-        <motion.p
-          className="mt-3 inline-flex items-center gap-2 text-14 font-bold text-ink"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, type: 'spring', stiffness: 300, damping: 16 }}
-        >
-          <Sparkle size={16} color="var(--accent)" />
-          Nouvelle activité dans ta collection {getPassion(passion).label}&nbsp;: {after.tried.length}/{collectionSize(passion)}
-        </motion.p>
-      )}
-
       <Card
         padding="lg"
         className="mt-8 items-center gap-3 overflow-visible bg-warm text-on-color"
@@ -136,41 +131,38 @@ export function DoneScreen() {
         <span className="text-14 font-bold">minutons au total</span>
       </Card>
 
-      {step && stepProgress && (
+      {/* Une seule grande nouvelle : la plus importante. Le reste se retrouve dans « Progresser ». */}
+      {news === 'step' && step && stepProgress && (
         <div className="mt-6 w-full">
-          <StepBanner step={step} progress={stepProgress} onOpenPath={() => reset([{ name: 'home' }, { name: 'path', pathId: step.pathId }])} />
+          <StepBanner step={step} progress={stepProgress} onOpenPath={() => reset([...tabStack('progress'), { name: 'path', pathId: step.pathId }])} />
         </div>
       )}
-
-      {challenge && (
-        <div className="mt-6 w-full">
-          <ChallengeBanner word={challenge.word} count={new Set((done.response.stats.challenge ?? []).map((id) => id.slice(-10))).size} onOpen={() => reset([{ name: 'home' }, { name: 'challenge' }])} />
-        </div>
-      )}
-
-      {level && (
+      {news === 'level' && level && (
         <div className="mt-6 w-full">
           <LevelUpBanner passion={passion} step={level} />
         </div>
       )}
-
-      {milestone && (
+      {news === 'milestone' && milestone && (
         <div className="mt-6 w-full">
           <MilestoneBanner milestone={milestone} />
         </div>
       )}
-
-      <Card tone="muted" className="mt-6 w-full gap-2 text-left" initial={{ opacity: 0, y: 12, rotate: 0 }} animate={{ opacity: 1, y: 0, rotate: -0.6 }} transition={{ delay: 0.7, duration: 0.4 }}>
-        <CardEyebrow>
-          <Lightbulb aria-hidden="true" />
-          Le savais-tu&nbsp;?
-        </CardEyebrow>
-        <p className="text-15 font-semibold text-ink">{fact}</p>
-      </Card>
-
-      <Card className="mt-6 w-full text-left" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.4 }}>
-        <ProjectPicker completion={done.response.completion} />
-      </Card>
+      {news === 'challenge' && challenge && (
+        <div className="mt-6 w-full">
+          <ChallengeBanner word={challenge.word} count={new Set((done.response.stats.challenge ?? []).map((id) => id.slice(-10))).size} onOpen={() => reset([...tabStack('progress'), { name: 'challenge' }])} />
+        </div>
+      )}
+      {news === 'discovered' && (
+        <motion.p
+          className="mt-6 inline-flex items-center gap-2 text-14 font-bold text-ink"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9, type: 'spring', stiffness: 300, damping: 16 }}
+        >
+          <Sparkle size={16} color="var(--accent)" />
+          Nouvelle activité dans ta collection {getPassion(passion).label}&nbsp;: {after.tried.length}/{collectionSize(passion)}
+        </motion.p>
+      )}
 
       <div className="mt-6 w-full">
         <RateActivity completionId={done.response.completion.id} initial={done.response.completion.rating} />
@@ -183,8 +175,18 @@ export function DoneScreen() {
         </Alert>
       )}
 
+      {/* Repliés : à ouvrir si on en a envie. */}
+      <div className="mt-6 flex w-full flex-col gap-3 text-left">
+        <Fold icon={<Lightbulb aria-hidden="true" />} title={'Le savais-tu\u00A0?'}>
+          <p className="text-15 font-semibold text-ink">{fact}</p>
+        </Fold>
+        <Fold icon={<FolderPlus aria-hidden="true" />} title="Ranger dans un projet">
+          <ProjectPicker completion={done.response.completion} label={false} />
+        </Fold>
+      </div>
+
       <div className="mt-auto flex w-full flex-col">
-        <PrimaryAction text="Voir ma galerie" icon={<Images aria-hidden="true" />} onClick={() => reset([{ name: 'home' }, { name: 'gallery' }])}>
+        <PrimaryAction text="Voir ma galerie" icon={<Images aria-hidden="true" />} onClick={() => reset(tabStack('gallery'))}>
           <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
             <House aria-hidden="true" />
             Retour à l’accueil
@@ -192,5 +194,42 @@ export function DoneScreen() {
         </PrimaryAction>
       </div>
     </Screen>
+  )
+}
+
+/** Une ligne repliée (« Le savais-tu ? », « Ranger dans un projet ») : un toucher l'ouvre. */
+function Fold({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false)
+  const id = `fold-${title.replace(/[^a-z]/gi, '').toLowerCase()}`
+  return (
+    <div className="overflow-hidden rounded-md border-[2.5px] border-outline bg-card shadow-chip">
+      <button
+        type="button"
+        onClick={() => {
+          haptics.selection()
+          setOpen((value) => !value)
+        }}
+        aria-expanded={open}
+        aria-controls={id}
+        className="flex min-h-13 w-full items-center gap-3 px-4 py-2 text-left text-15 font-extrabold text-ink [&>svg]:size-5 [&>svg]:shrink-0"
+      >
+        {icon}
+        <span className="flex-1">{title}</span>
+        <ChevronDown className={open ? 'rotate-180 transition-transform duration-200' : 'transition-transform duration-200'} aria-hidden="true" />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id={id}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="border-t-2 border-outline/20 px-4 pt-3 pb-4">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }

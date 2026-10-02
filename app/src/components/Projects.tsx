@@ -502,7 +502,18 @@ export function NewProjectDialog({
  * Ranger une création dans un projet de sa passion (un tap), ou l'en sortir
  * (re-tap). « Nouveau projet » le crée et y range la création.
  */
-export function ProjectPicker({ completion, onChange, className }: { completion: CompletionDTO; onChange?: (completion: CompletionDTO) => void; className?: string }) {
+export function ProjectPicker({
+  completion,
+  onChange,
+  className,
+  label = true,
+}: {
+  completion: CompletionDTO
+  onChange?: (completion: CompletionDTO) => void
+  className?: string
+  /** Le titre « Ranger dans un projet » (masqué quand l'écran l'affiche déjà). */
+  label?: boolean
+}) {
   const { state, dispatch } = useAppState()
   const [current, setCurrent] = useState(completion)
   const [creating, setCreating] = useState(false)
@@ -529,7 +540,7 @@ export function ProjectPicker({ completion, onChange, className }: { completion:
 
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <p className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ranger dans un projet</p>
+      {label && <p className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ranger dans un projet</p>}
       <div className="flex flex-wrap gap-2">
         {projects.length > 0 && (
           <ToggleGroup type="single" variant="chip" value={current.projectId ?? ''} onValueChange={(value) => void assign(value || null)} aria-label="Projet">

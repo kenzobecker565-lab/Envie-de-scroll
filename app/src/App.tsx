@@ -17,6 +17,8 @@ import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { PathScreen } from './screens/PathScreen.tsx'
+import { ProgressScreen } from './screens/ProgressScreen.tsx'
+import { TabBar } from './components/TabBar.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
 import { MomentScreen, PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
@@ -90,6 +92,7 @@ function toneFor(route: Route, flow: Flow): DecorTone {
       return flow.passion ? (getPassion(flow.passion).tone === 'warm' ? 'warm' : 'calm') : moodTone
     case 'done':
       return 'good'
+    case 'progress':
     case 'gallery':
     case 'path':
     case 'challenge':
@@ -123,6 +126,8 @@ function screenFor(route: Route) {
       return <ProofScreen />
     case 'done':
       return <DoneScreen />
+    case 'progress':
+      return <ProgressScreen />
     case 'gallery':
       return <GalleryScreen />
     case 'path':
@@ -145,11 +150,15 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
 
   const key = route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name
   return (
-    <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
-      <motion.div key={key} custom={direction} variants={screenVariants} initial="enter" animate="center" exit="exit">
-        {screenFor(route)}
-      </motion.div>
-    </AnimatePresence>
+    <>
+      <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+        <motion.div key={key} custom={direction} variants={screenVariants} initial="enter" animate="center" exit="exit">
+          {screenFor(route)}
+        </motion.div>
+      </AnimatePresence>
+      {/* Créer · Progresser · Galerie, sur les trois écrans principaux seulement. */}
+      <TabBar />
+    </>
   )
 }
 

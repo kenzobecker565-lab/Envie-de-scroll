@@ -50,6 +50,8 @@ export const APP_EVENTS = [
   'home_screen', // demande d'ajout de Scroll-up à l'écran d'accueil
   'home_screen_added', // icône ajoutée (confirmé par Telegram)
   'home_screen_silent', // demande partie, mais le téléphone n'a rien affiché (autorisation manquante)
+  'tab', // onglet ouvert depuis la barre du bas (data.tab : home, progress, gallery)
+  'pull', // la tirette de l'accueil tirée vers le haut (plutôt que touchée)
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

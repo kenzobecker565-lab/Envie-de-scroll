@@ -200,6 +200,8 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     homeScreenSilent,
     moments,
     remindersOff,
+    pulls,
+    tabRows,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -234,11 +236,14 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.appEvent.count({ where: { name: 'home_screen_silent' } }),
     prisma.user.groupBy({ by: ['scrollMoment'], _count: true, where: { NOT: { passions: '[]' } } }),
     prisma.user.count({ where: { remindersEnabled: false, NOT: { passions: '[]' } } }),
+    prisma.appEvent.count({ where: { name: 'pull' } }),
+    prisma.appEvent.findMany({ where: { name: 'tab' }, select: { data: true } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
   const returning = doers.filter((row) => row._count >= 2).length
   const momentCount = (moment: string | null) => moments.find((row) => row.scrollMoment === moment)?._count ?? 0
+  const tabCount = (tab: string) => tabRows.filter((row) => (JSON.parse(row.data ?? '{}') as { tab?: unknown }).tab === tab).length
   const lines = [
     'Scroll-up · le test en chiffres',
     '',
@@ -249,6 +254,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     '',
     'Le parcours',
     `« J’ai envie de scroller » : ${plural(ctaTotal, 'appui')} (${ctaDay} en 24 h)`,
+    `→ dont tirette tirée vers le haut : ${pulls} (${percent(pulls, ctaTotal)}), le reste d’un toucher`,
     `→ humeur choisie : ${moodEvents} (${percent(moodEvents, ctaTotal)})`,
     `→ temps choisi : ${timeEvents} (${percent(timeEvents, ctaTotal)})`,
     `→ activités proposées : ${proposals - replaced}, plus ${plural(replaced, 'fois', 'fois')} « Une autre idée »`,
@@ -263,6 +269,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Notes des activités : ${RATING_LABELS[3].toLowerCase()} ${ratingCount(3)} · ${RATING_LABELS[2].toLowerCase()} ${ratingCount(2)} · ${RATING_LABELS[1].toLowerCase()} ${ratingCount(1)}`,
     `Avis écrits : ${feedbackCount} (/avis pour les lire)`,
     `Partages : ${shares} · invitations : ${invites}`,
+    `Onglets ouverts : Progresser ${tabCount('progress')} · Galerie ${tabCount('gallery')} · Créer ${tabCount('home')}`,
     `Écran d’accueil : ${plural(homeScreenAdded, 'icône ajoutée', 'icônes ajoutées')} (${plural(homeScreenAsks, 'demande')}, ${homeScreenSilent} bloquée${homeScreenSilent > 1 ? 's' : ''} par le téléphone)`,
     `Musique d’ambiance : ${musicLine(musicChoices)} · coupée ${plural(musicOff, 'fois', 'fois')}`,
     `Parcours : ${plural(stepRows.length, 'étape réussie', 'étapes réussies')}, ${plural(finishedPaths(stepRows), 'parcours terminé', 'parcours terminés')}`,

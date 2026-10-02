@@ -1,4 +1,4 @@
-import { CalendarHeart, Check, Clock3, Hourglass, Info, Mountain, PenLine, RotateCcw, Shuffle, Sparkles, Volume2, VolumeX } from 'lucide-react'
+import { CalendarHeart, Check, Clock3, Hourglass, Info, Mountain, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PassionId, type PathStep, type ProposalDTO } from '@scroll-up/shared'
@@ -149,7 +149,28 @@ export function ActivityScreen() {
                   Tu travailles&nbsp;: {step.focus.charAt(0).toLowerCase() + step.focus.slice(1)}
                 </p>
               )}
-              <ActivityHelp proposal={proposal} />
+              {/* Un coup de pouce : idées, pistes, défi, et pour Dessin « Sans papier », pour Musique et Cinéma « Sans son ». */}
+              <ActivityHelp
+                proposal={proposal}
+                onPad={
+                  passionId === 'dessin'
+                    ? () => {
+                        dispatch({ type: 'flow', flow: { pad: true } })
+                        push({ name: 'proof' })
+                      }
+                    : undefined
+                }
+                quiet={
+                  !fixedStep && (passionId === 'musique' || passionId === 'cinema')
+                    ? {
+                        on: Boolean(flow.quiet),
+                        busy: loading,
+                        note: quietNote,
+                        toggle: () => (flow.quiet ? dispatch({ type: 'flow', flow: { quiet: false } }) : void load(proposal.id, true)),
+                      }
+                    : undefined
+                }
+              />
             </motion.div>
           ) : error ? (
             <Alert key="error" variant="warning" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
@@ -190,36 +211,6 @@ export function ActivityScreen() {
             Une autre idée
           </Button>
         )}
-        {/* Pas de papier : on dessine au doigt. Pas de son : une activité qui se fait sans écouter. */}
-        {proposal && passionId === 'dessin' && (
-          <SmallLink
-            onClick={() => {
-              dispatch({ type: 'flow', flow: { pad: true } })
-              push({ name: 'proof' })
-            }}
-          >
-            <PenLine aria-hidden="true" />
-            Pas de papier&nbsp;? Dessine au doigt, ici.
-          </SmallLink>
-        )}
-        {proposal && !fixedStep && (passionId === 'musique' || passionId === 'cinema') && (
-          flow.quiet ? (
-            <SmallLink onClick={() => dispatch({ type: 'flow', flow: { quiet: false } })}>
-              <Volume2 aria-hidden="true" />
-              Sans son&nbsp;✓ · Remettre le son
-            </SmallLink>
-          ) : (
-            <SmallLink disabled={loading} onClick={() => void load(proposal.id, true)}>
-              <VolumeX aria-hidden="true" />
-              Pas de son autour de toi&nbsp;?
-            </SmallLink>
-          )
-        )}
-        {quietNote && (
-          <p role="status" className="text-center text-13 font-semibold text-ink">
-            {quietNote}
-          </p>
-        )}
       </div>
     </Screen>
   )
@@ -249,20 +240,6 @@ function CardBack({ passion }: { passion: PassionId }) {
       </span>
       <Sparkle size={30} color="var(--paper)" className="motion-loop anim-spin-slow absolute top-6 right-6" style={{ '--spin-duration': '6s' } as React.CSSProperties} />
     </motion.div>
-  )
-}
-
-/** Petit lien discret sous les boutons (« Pas de papier ? », « Pas de son ? »). */
-function SmallLink({ onClick, disabled, children }: { onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className="inline-flex min-h-10 items-center justify-center gap-2 self-center text-14 font-bold text-ink-soft underline decoration-2 underline-offset-4 disabled:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0"
-    >
-      {children}
-    </button>
   )
 }
 

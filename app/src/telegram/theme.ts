@@ -7,7 +7,7 @@
  * avec le « canvas » de l'app, pour que tout se fonde.
  */
 
-import { getAppTheme, subscribeAppTheme, THEME_SCHEME } from '../lib/appTheme.ts'
+import { getShopTheme, getAppTheme, subscribeAppTheme, THEME_SCHEME } from '../lib/appTheme.ts'
 import { supports, telegram } from './webApp.ts'
 
 export type Scheme = 'light' | 'dark'
@@ -18,6 +18,7 @@ function systemScheme(): Scheme {
 
 /** Le mode du thème choisi s'il en impose un (Pop Nuit, BD, Memphis), sinon celui de Telegram ou du système. */
 export function currentScheme(): Scheme {
+  if (getShopTheme()) return 'light'
   return THEME_SCHEME[getAppTheme()] ?? (telegram ? telegram.colorScheme : systemScheme())
 }
 

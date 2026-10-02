@@ -63,7 +63,7 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
     setBusy(true); setError(undefined)
     try {
       dispatch({ type: 'shop', shop: await api.buyItem(selected.id) })
-      setNotice(`${selected.title} est débloqué !`)
+      setNotice(selected.category === 'theme' ? `${selected.title} est débloqué et activé !` : `${selected.title} est débloqué !`)
       setSelected(undefined); stopPreview()
     } catch (caught) { setError((caught as Error).message) }
     finally { setBusy(false) }
@@ -158,7 +158,7 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
             : <>
               <div className="flex items-center justify-between gap-2 rounded-sm bg-surface-100 p-3"><span className="text-13 font-bold">Achat permanent</span><span className="text-22"><Price value={selected.price} size={28} /></span></div>
               {shop.balance >= selected.price ? <p className="flex items-center justify-between gap-2 text-13 text-ink-soft">Solde après l’achat <Price value={shop.balance - selected.price} size={20} /></p> : <p className="flex items-center justify-between gap-2 text-13 text-ink-soft">Il te manque <Price value={selected.price - shop.balance} size={20} /></p>}
-              <Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>Débloquer <Price value={selected.price} /></>}</Button>
+              <Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>{selected.category === 'theme' ? 'Débloquer et activer' : 'Débloquer'} <Price value={selected.price} /></>}</Button>
             </>}
           <Button variant="ghost" disabled={busy} onClick={() => { setSelected(undefined); stopPreview() }}>Fermer l’aperçu</Button>
         </>}

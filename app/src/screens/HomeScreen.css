@@ -1,0 +1,60 @@
+/* Pulse reste lié aux palettes du profil, y compris aux thèmes de la boutique. */
+.pulse-home{gap:0;padding-top:22px;color:var(--ink)}
+.pulse-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pulse-tools{display:flex;align-items:center;gap:8px}
+.pulse-tools>button{border:0;box-shadow:none}
+.pulse-wallet{display:flex;align-items:center;gap:6px;border:0;border-radius:30px;padding:9px 12px;background:var(--warm);color:var(--on-color);font-family:var(--font-numbers);font-weight:800;font-size:17px}
+.pulse-greeting{margin:26px 0 22px}
+.pulse-eyebrow{display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;line-height:1.4}
+.pulse-greeting>.pulse-eyebrow{color:var(--ink-soft)}
+.pulse-greeting h1{font-family:var(--font-display);font-size:clamp(28px,8.5vw,37px);font-weight:800;line-height:1.08;letter-spacing:-1px;margin-top:8px;overflow-wrap:anywhere}
+.pulse-hero{position:relative;padding:23px;border-radius:26px;background:var(--accent);color:var(--on-color);overflow:hidden}
+.pulse-hero>.pulse-eyebrow{max-width:calc(100% - 65px)}
+.pulse-hero h2{font-family:var(--font-display);font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1.08;margin-top:10px;max-width:calc(100% - 65px)}
+.pulse-minuton{position:absolute;right:12px;top:26px;transform:rotate(12deg)}
+.pulse-start{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;border:0;border-radius:18px;padding:15px 16px;margin-top:21px;background:var(--on-color);color:var(--paper);font-size:15px;font-weight:750;text-align:left}
+.pulse-start svg{flex-shrink:0}
+.pulse-first-time{font-size:12px;margin-top:14px;line-height:1.45}
+.pulse-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:25px 0 13px}
+.pulse-section-head h2{font-family:var(--font-display);font-size:21px;font-weight:750;line-height:1.2;letter-spacing:-.5px}
+.pulse-text-button{display:inline-flex;align-items:center;justify-content:center;gap:3px;padding:8px 0;border:0;background:transparent;font-size:12px;font-weight:650;color:var(--ink);flex-shrink:0}
+.pulse-passions{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.pulse-passions button{padding:9px 13px;border:1px solid var(--line);border-radius:24px;background:var(--surface-200);color:var(--ink);font-size:13px;font-weight:650;min-height:40px;transition:background .18s,color .18s}
+.pulse-passions button[aria-pressed=true]{background:var(--ink);color:var(--surface-200);border-color:var(--ink)}
+.pulse-bento{display:grid;grid-template-columns:1.12fr 1fr;gap:10px}
+.pulse-tile{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;min-width:0;border:0;border-radius:23px;padding:18px;text-align:left;overflow:hidden}
+.pulse-tile h3{font-family:var(--font-display);font-size:23px;font-weight:750;line-height:1.1;letter-spacing:-.6px;overflow-wrap:anywhere}
+.pulse-learning-slot{grid-row:span 2;display:flex;min-width:0}
+.pulse-learning{width:100%;min-height:245px;background:var(--lilac-soft);color:var(--ink)}
+.pulse-art{display:grid;align-items:center;min-height:85px;margin:12px 0 15px}
+.pulse-keys{display:flex;gap:4px;height:67px;transform:rotate(-9deg);margin:0 3px}
+.pulse-keys>span{flex:1;background:var(--paper);border-radius:0 0 7px 7px;position:relative;box-shadow:0 3px 0 color-mix(in srgb,var(--on-color) 15%,transparent)}
+.pulse-keys>span:nth-child(2)::after,.pulse-keys>span:nth-child(4)::after{content:'';position:absolute;width:70%;height:62%;background:var(--on-color);top:0;right:-40%;border-radius:0 0 4px 4px;z-index:1}
+.pulse-art-card{display:grid;place-items:center;width:68px;height:78px;margin:auto;border-radius:5px 14px 14px 5px;background:var(--surface-200);color:var(--ink);transform:rotate(-9deg);box-shadow:inset 5px 0 0 color-mix(in srgb,var(--ink) 12%,transparent)}
+.pulse-lesson-footer{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:15px;font-size:12px;line-height:1.4}
+.pulse-lesson-footer>svg{flex-shrink:0}
+.pulse-month{background:var(--good-soft);color:var(--ink)}
+.pulse-stat{display:block;font-family:var(--font-numbers);font-size:40px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin:8px 0;overflow-wrap:anywhere}
+.pulse-tile-caption{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;line-height:1.4}
+.pulse-shop{background:var(--warm);color:var(--on-color);gap:9px}
+.pulse-shop-icons{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pulse-shop h3{font-size:21px;margin-top:3px}
+.pulse-project{display:flex;width:100%;align-items:center;gap:16px;text-align:left;background:transparent;border:0;border-top:1px solid var(--line);padding:16px 0}
+.pulse-project-cover{display:grid;place-items:center;flex-shrink:0;width:63px;height:76px;background:var(--lilac-soft);color:var(--ink);border-radius:5px 13px 13px 5px;overflow:hidden;transform:rotate(-5deg);box-shadow:inset 5px 0 0 color-mix(in srgb,var(--ink) 12%,transparent)}
+.pulse-project-cover>img{width:100%;height:100%;object-fit:cover}
+.pulse-project-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+.pulse-project-copy>.pulse-eyebrow{color:var(--ink-soft);font-size:10px}
+.pulse-project-copy>strong{font-family:var(--font-display);font-size:19px;font-weight:750;letter-spacing:-.3px;line-height:1.2;overflow-wrap:anywhere}
+.pulse-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--ink)}
+.pulse-summary{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;margin-top:10px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
+.pulse-resume{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:20px;background:var(--surface-200);color:var(--ink);padding:15px;text-align:left;margin-top:16px}
+.pulse-resume>span{min-width:0;display:flex;flex-direction:column;gap:6px}
+.pulse-resume>.pulse-eyebrow{color:var(--ink-soft)}
+.pulse-resume>svg{flex-shrink:0}
+.pulse-resume-title{font-size:14px;font-weight:650;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.pulse-choose{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:18px;background:var(--surface-200);padding:12px;margin-bottom:14px;font-weight:700;font-size:14px;color:var(--ink)}
+@media(max-width:359px){.pulse-header{flex-wrap:wrap}.pulse-hero{padding:20px}.pulse-hero h2{font-size:26px}.pulse-minuton{right:9px;top:30px}.pulse-minuton>svg{width:62px;height:62px}.pulse-tile{padding:14px}.pulse-tile h3{font-size:21px}.pulse-section-head h2{font-size:19px}.pulse-start{padding:13px;font-size:14px}.pulse-tile-caption{font-size:11px}}
+@media(pointer:coarse){.pulse-text-button,.pulse-passions button{min-height:44px}}
+@media(prefers-reduced-motion:reduce){.pulse-passions button{transition:none}}
+/* Un fond calme sur l'accueil ; le décor reste visible dans les autres espaces. */
+.pulse-home{background:color-mix(in srgb,var(--canvas) 22%,var(--surface-200))}

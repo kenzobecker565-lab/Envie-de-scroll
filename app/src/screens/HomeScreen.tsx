@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, ArrowUpRight, ShoppingBag } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { getPassion, getPathStep, isFixedActivityId, passionLevel, PASSION_IDS, STEPS_PER_PATH, type PassionId } from '@scroll-up/shared'
@@ -29,7 +29,21 @@ export function HomeScreen() {
   const { push, reset } = useNavigation()
   const shop = useShop()
   const cover = useEquipped('cover')
-  const outfit = useEquipped('mascot')
+  const [clock, setClock] = useState(() => new Date())
+  const [lightMode, setLightMode] = useState<'auto' | 'light' | 'dark'>(() => {
+    try { const saved = localStorage.getItem('swipe-home-light'); return saved === 'light' || saved === 'dark' ? saved : 'auto' } catch { return 'auto' }
+  })
+  useEffect(() => {
+    const update = () => setClock(new Date())
+    const timer = window.setInterval(update, 30_000)
+    document.addEventListener('visibilitychange', update)
+    return () => { window.clearInterval(timer); document.removeEventListener('visibilitychange', update) }
+  }, [])
+  const chooseLight = (mode: typeof lightMode) => { setLightMode(mode); try { localStorage.setItem('swipe-home-light', mode) } catch { /* Le choix reste actif pour la session. */ } }
+  const actualPeriod = dayPeriod(clock.getHours())
+  const scene = lightMode === 'dark' ? 'night' : lightMode === 'light' ? 'day' : actualPeriod
+  const sceneLabel = { morning: 'Lumière du matin', day: 'Énergie du jour', dusk: 'Heure dorée', night: 'Sous les aurores' }[scene]
+
   const { user, stats, openProposal, projects } = state.me
   const passions = PASSION_IDS.filter((id) => user.passions.includes(id) || stats.byPassion.some((row) => row.passion === id) || projects.some((project) => project.passion === id))
   const recommended = featuredPath(user.passions, (id) => statsFor(stats.byPassion, id).steps, (id) => passionLevel(id, statsFor(stats.byPassion, id).minutes).level, user.skills)
@@ -40,7 +54,7 @@ export function HomeScreen() {
   const learning = passion && passionStats ? currentPath(passion, passionStats.steps, passionLevel(passion, passionStats.minutes).level, user.skills[passion]) : null
   const project = [...projects].filter((entry) => entry.passion === passion).sort((a, b) => Number(Boolean(a.finishedAt)) - Number(Boolean(b.finishedAt)) || b.createdAt.localeCompare(a.createdAt))[0]
   const Icon = passion ? PASSION_ICONS[passion] : null
-  const period = dayPeriod(new Date().getHours())
+  const period = actualPeriod
   const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
   const wordToday = challengePassions(user.passions).length > 0 && !wordDone(todayKey(), stats.challenge ?? [])
 
@@ -60,7 +74,8 @@ export function HomeScreen() {
   }
 
   return (
-    <Screen tabs className="pulse-home">
+    <Screen tabs className={`pulse-home club-home scene-${scene}`}>
+      <div className="club-atmosphere" aria-hidden="true"><span /><span /><span /></div>
       <header className="pulse-header">
         <Logo height={30} />
         <div className="pulse-tools">
@@ -71,19 +86,13 @@ export function HomeScreen() {
         </div>
       </header>
 
-      <div className="pulse-greeting">
-        <p className="pulse-eyebrow">Ton espace</p>
-        <h1>{user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}</h1>
-      </div>
-
-      <section className="pulse-hero" aria-labelledby="pulse-start-title">
-        <p className="pulse-eyebrow">Une activité pour maintenant</p>
-        <h2 id="pulse-start-title">Qu’as-tu envie<br />de faire&nbsp;?</h2>
-        <span className="pulse-minuton">{outfit ? <Mascot mood="wink" size={76} animated={false} /> : <BrandMark size={76} />}</span>
-        <motion.button type="button" className="pulse-start" whileTap={PRESSED} onClick={start}>
-          <span>J’ai envie de scroller</span><ArrowUpRight size={22} aria-hidden="true" />
+      <section className="pulse-hero club-hero" aria-labelledby="pulse-start-title">
+        <div className="club-hero-copy"><p className="pulse-eyebrow">{sceneLabel}</p><h1 id="pulse-start-title">{hello}<br />{user.firstName || 'à toi'}<span className="club-dot">.</span></h1><span className="club-daily">{openProposal ? 'Une création t’attend' : 'Ta prochaine pause commence ici'}</span></div>
+        <button type="button" className="club-minuton" onClick={() => open({ name: 'shop', category: 'mascot' })} aria-label="Personnaliser la tenue de Minuton"><span className="club-orbit" /><Mascot mood="wink" size={152} /><span className="club-mascot-tag">Ton Minuton ↗</span></button>
+        <motion.button type="button" className="pulse-start" whileTap={PRESSED} onClick={openProposal ? resume : start}>
+          <span>{openProposal ? 'Reprendre mon activité' : 'J’ai envie de scroller'}</span><ArrowUpRight size={22} aria-hidden="true" />
         </motion.button>
-        {stats.totalActivities === 0 && <p className="pulse-first-time">Choisis un temps et une passion, puis découvre ton activité.</p>}
+        {stats.totalActivities === 0 && <p className="pulse-first-time">Un temps, une passion, et une première création.</p>}
       </section>
 
       {openProposal && <motion.button type="button" className="pulse-resume" whileTap={PRESSED} onClick={resume}>
@@ -93,7 +102,7 @@ export function HomeScreen() {
 
       <section aria-labelledby="pulse-passions-title">
         <div className="pulse-section-head">
-          <h2 id="pulse-passions-title">Selon tes passions</h2>
+          <h2 id="pulse-passions-title">Tes passions</h2>
           <button type="button" className="pulse-text-button" onClick={() => open({ name: 'passionHub' })}>Tout voir <ArrowUpRight size={14} aria-hidden="true" /></button>
         </div>
         {passions.length > 0 ? <div className="pulse-passions" aria-label="Choisir une passion">
@@ -102,8 +111,8 @@ export function HomeScreen() {
             const selected = passion === id
             return <motion.button key={id} type="button" className="pulse-passion" data-passion={id} aria-pressed={selected} aria-controls="pulse-learning pulse-project" whileTap={{ scale: .96 }} onClick={() => { haptics.selection(); setSelection(id) }}>
               {selected && <motion.span className="pulse-passion-active" layoutId="pulse-passion-active" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
-              <motion.span className="pulse-passion-icon" aria-hidden="true" animate={{ rotate: selected ? -8 : 0, scale: selected ? 1.08 : 1 }} transition={{ type: 'spring', stiffness: 350, damping: 18 }}><PassionIcon size={18} strokeWidth={2.2} /></motion.span>
-              <span className="pulse-passion-label">{getPassion(id).label}</span>
+              <span className="club-passion-art" aria-hidden="true"><PassionArtwork passion={id} /></span><motion.span className="pulse-passion-icon" aria-hidden="true" animate={{ rotate: selected ? -8 : 0, scale: selected ? 1.08 : 1 }} transition={{ type: 'spring', stiffness: 350, damping: 18 }}><PassionIcon size={18} strokeWidth={2.2} /></motion.span>
+              <span className="pulse-passion-label">{getPassion(id).label}<span className="club-passion-count">{statsFor(stats.byPassion, id).activities} activités · niv. {passionLevel(id, statsFor(stats.byPassion, id).minutes).level}</span></span>
             </motion.button>
           })}
         </div> : <button type="button" className="pulse-choose" onClick={() => open({ name: 'passions', mode: 'edit' })}>Choisir mes passions <ArrowRight size={18} aria-hidden="true" /></button>}
@@ -143,6 +152,7 @@ export function HomeScreen() {
           <span className="pulse-project-copy"><span className="pulse-eyebrow">{passion ? getPassion(passion).label : 'Mes passions'} · {project ? project.finishedAt ? 'projet terminé' : 'projet en cours' : 'mes créations'}</span><strong>{project?.name ?? 'Ta galerie'}</strong><span className="pulse-link">{project ? 'Ouvrir le projet' : passionStats?.activities ? 'Retrouver mes créations' : 'Découvrir ma galerie'} <ArrowRight size={14} aria-hidden="true" /></span></span>
         </motion.button>
       </section>
+      <div className="club-light-controls" role="group" aria-label="Ambiance de l’accueil"><span>Ambiance</span>{([['auto', 'Automatique'], ['light', 'Clair'], ['dark', 'Sombre']] as const).map(([mode, label]) => <button key={mode} type="button" aria-pressed={lightMode === mode} onClick={() => chooseLight(mode)}>{label}</button>)}</div>
       <div className="pulse-summary"><span>{formatNumber(stats.totalCoins)} Minutons gagnés au total</span>{wordToday && <button type="button" className="pulse-text-button" onClick={() => open({ name: 'challenge' })}>Mot du jour <ArrowUpRight size={14} aria-hidden="true" /></button>}</div>
       <Dialog open={Boolean(projectId)} onOpenChange={(isOpen) => { if (!isOpen) setProjectId(undefined) }}><DialogContent>{projectId && <ProjectSheet key={projectId} id={projectId} onClose={() => setProjectId(undefined)} />}</DialogContent></Dialog>
     </Screen>

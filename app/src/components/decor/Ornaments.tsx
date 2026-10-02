@@ -12,8 +12,8 @@ export type DayPeriod = 'morning' | 'day' | 'dusk' | 'night'
 
 export function dayPeriod(hour: number): DayPeriod {
   if (hour >= 6 && hour < 11) return 'morning'
-  if (hour >= 11 && hour < 18) return 'day'
-  if (hour >= 18 && hour < 21) return 'dusk'
+  if (hour >= 11 && hour < 17) return 'day'
+  if (hour >= 17 && hour < 21) return 'dusk'
   return 'night'
 }
 

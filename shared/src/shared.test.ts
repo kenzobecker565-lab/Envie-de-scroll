@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import {
   ACTIVITIES,
+  keyboardMelody,
+  keyboardWindow,
+  melody,
+  melodyParts,
+  midiNumber,
+  pickLessonIntro,
   ACTIVITY_PACE,
   activityWeight,
   canPlayChallenge,
@@ -228,10 +234,10 @@ describe('moods et introductions', () => {
 })
 
 describe('règles', () => {
-  it('valide la sélection de passions (1 à 3)', () => {
+  it('valide la sélection de passions (au moins une, sans limite)', () => {
     expect(normalizePassions(['musique', 'dessin'])).toEqual(['dessin', 'musique'])
     expect(normalizePassions([])).toBeNull()
-    expect(normalizePassions(['dessin', 'ecriture', 'musique', 'cinema'])).toBeNull()
+    expect(normalizePassions(['piano', 'dessin', 'ecriture', 'musique', 'cinema'])).toEqual(['dessin', 'ecriture', 'musique', 'cinema', 'piano'])
     expect(normalizePassions(['dessin', 'dessin'])).toBeNull()
     expect(normalizePassions(['peinture'])).toBeNull()
     expect(normalizePassions('dessin')).toBeNull()
@@ -517,6 +523,48 @@ describe('le mot du jour', () => {
 })
 
 describe('piano : niveau, contenu ciblé, mélodies', () => {
+  it('chaque leçon de piano se valide au clavier : elle a sa mélodie, jouable sur le clavier de l’appli', () => {
+    const lessons = pathsFor('piano').flatMap((path) => path.steps)
+    expect(lessons).toHaveLength(18)
+    for (const lesson of lessons) {
+      const tune = keyboardMelody(lesson.id)
+      expect(tune, lesson.id).toBeDefined()
+      expect(tune!.notes.every((note) => midiNumber(note) >= midiNumber('C3') && midiNumber(note) <= midiNumber('C5')), lesson.id).toBe(true)
+    }
+    expect(keyboardMelody('parcours-premiers-traits-1')).toBeUndefined()
+    expect(pickLessonIntro(() => 0)).toBe('Nouvelle leçon, pas à pas\u00A0:')
+  })
+
+  it('« J’ai envie de scroller » au piano : que des tutos de chansons, chaque partie tient à l’écran et sur le clavier', () => {
+    const songs = ACTIVITIES.filter((activity) => activity.passion === 'piano')
+    expect(songs).toHaveLength(15)
+    for (const song of songs) {
+      expect(song.text, song.id).toMatch(/^Apprends /)
+      const tune = keyboardMelody(song.id)
+      expect(tune, song.id).toBeDefined()
+      const parts = melodyParts(tune!)
+      for (const part of parts) {
+        expect(part.notes.length, `${song.id} : une partie trop longue pour la voir d’un coup`).toBeLessThanOrEqual(28)
+        expect(keyboardWindow(part.notes), `${song.id} : une partie ne tient pas sur le clavier`).not.toBeNull()
+      }
+      expect(parts.flatMap((part) => part.notes)).toEqual(tune!.notes)
+    }
+    expect(keyboardMelody('musique-5-1')).toBeUndefined()
+  })
+
+  it('écrit les mélodies phrase par phrase, en parties, et choisit la portion de clavier', () => {
+    const tune = melody('Essai', 'C4 D4 | E4 || F4 G4')
+    expect(tune.phrases).toEqual([['C4', 'D4'], ['E4'], ['F4', 'G4']])
+    expect(melodyParts(tune).map((part) => part.notes)).toEqual([['C4', 'D4', 'E4'], ['F4', 'G4']])
+    // Sans parties fixées : des phrases regroupées, jamais coupées.
+    const long = melody('Long', Array.from({ length: 5 }, () => 'C4 D4 E4 F4 G4 A4 B4 C5').join(' | '))
+    expect(melodyParts(long).map((part) => part.notes.length)).toEqual([24, 16])
+    // Une octave au moins, centrée sur les notes ; une touche noire emmène sa voisine.
+    expect(keyboardWindow(['C4', 'E4'])).toEqual({ from: 'A3', to: 'A4' })
+    expect(keyboardWindow(['G3', 'F#4'])).toEqual({ from: 'G3', to: 'G4' })
+    expect(keyboardWindow(['C3', 'C5'])).toBeNull()
+  })
+
   it('demande le niveau au piano seulement, et relit les niveaux enregistrés', () => {
     expect(asksSkill('piano')).toBe(true)
     expect(asksSkill('dessin')).toBe(false)

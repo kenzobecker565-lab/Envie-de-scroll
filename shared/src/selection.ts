@@ -56,8 +56,8 @@ export const ACTIVITY_PACE: Readonly<Record<string, Pace>> = {
   'musique-5-1': 'vive', 'musique-15-6': 'vive', 'musique-15-7': 'vive', 'musique-15-10': 'vive', 'musique-30-11': 'vive',
   'cinema-5-5': 'calme', 'cinema-15-10': 'calme', 'cinema-30-12': 'calme',
   'cinema-5-1': 'vive', 'cinema-5-4': 'vive', 'cinema-15-9': 'vive',
-  'piano-5-2': 'calme', 'piano-15-6': 'calme', 'piano-30-15': 'calme',
-  'piano-5-3': 'vive', 'piano-15-9': 'vive', 'piano-30-13': 'vive',
+  'piano-5-3': 'calme', 'piano-15-8': 'calme', 'piano-15-9': 'calme', 'piano-30-13': 'calme', 'piano-30-15': 'calme',
+  'piano-5-4': 'vive', 'piano-15-7': 'vive', 'piano-15-10': 'vive', 'piano-30-14': 'vive',
 }
 
 /**
@@ -67,17 +67,20 @@ export const ACTIVITY_PACE: Readonly<Record<string, Pace>> = {
  */
 export const ACTIVITY_SKILLS: Readonly<Record<string, readonly SkillLevel[]>> = {
   'piano-5-1': ['debutant'],
-  'piano-5-2': ['debutant', 'bases'],
+  'piano-5-2': ['debutant'],
+  'piano-5-3': ['debutant', 'bases'],
   'piano-5-4': ['bases', 'confirme'],
-  'piano-5-5': ['confirme'],
-  'piano-15-6': ['debutant'],
-  'piano-15-7': ['debutant', 'bases'],
+  'piano-5-5': ['bases', 'confirme'],
+  'piano-15-6': ['debutant', 'bases'],
+  'piano-15-7': ['debutant'],
   'piano-15-8': ['bases', 'confirme'],
-  'piano-15-10': ['bases', 'confirme'],
-  'piano-30-11': ['debutant'],
-  'piano-30-12': ['bases', 'confirme'],
-  'piano-30-13': ['bases', 'confirme'],
+  'piano-15-9': ['bases', 'confirme'],
+  'piano-15-10': ['confirme'],
+  'piano-30-11': ['bases', 'confirme'],
+  'piano-30-12': ['confirme'],
+  'piano-30-13': ['debutant', 'bases'],
   'piano-30-14': ['confirme'],
+  'piano-30-15': ['debutant', 'bases'],
 }
 
 /** L'activité convient-elle à ce niveau ? (Sans niveau déclaré, tout convient.) */

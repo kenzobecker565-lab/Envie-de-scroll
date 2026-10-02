@@ -26,7 +26,7 @@ function useAdvance() {
 /** Étapes du parcours : humeur, temps, puis passion si l'on en a plusieurs. */
 function useFlowSteps() {
   const { state } = useAppState()
-  // Étape de parcours : seulement l'humeur (le temps et la passion sont fixés).
+  // Mot du jour : seulement l'humeur (le temps et la passion sont fixés). Les leçons de parcours, elles, ne passent pas par ici.
   if (state.flow.fixedStep) return 1
   return state.me.user.passions.length > 1 && !state.flow.fixedPassion ? 3 : 2
 }

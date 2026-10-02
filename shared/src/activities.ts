@@ -115,28 +115,31 @@ export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
     ],
   },
   // Nouvelle passion, avec niveau (voir ACTIVITY_SKILLS dans selection.ts).
+  // Ici, que des tutos de chansons : chacune se joue sur le clavier de l'appli,
+  // note après note, partie par partie (mélodies dans guides.ts). Uniquement
+  // des airs du domaine public (comptines, chants traditionnels, classique).
   // ⚠️ Ces 15 textes ne font pas partie de la liste validée de la V1 : à relire.
   piano: {
     5: [
-      "Trouve tous les Do du clavier : chacun est juste à gauche d'un groupe de 2 touches noires",
-      "Main droite : joue Do Ré Mi Fa Sol puis redescends, un doigt par touche. Cinq allers-retours, lentement",
-      "Invente une petite mélodie sur les touches noires seulement : impossible de sonner faux",
-      "Joue la gamme de Do majeur à la main droite, en gardant un tempo bien régulier",
-      "Échauffe tes doigts : alterne lentement deux touches voisines, avec chaque paire de doigts",
+      "Apprends « Au clair de la lune », la chanson parfaite pour débuter : cinq notes, deux parties",
+      "Apprends « Frère Jacques », phrase par phrase : chaque phrase se répète, c'est fait pour retenir",
+      "Apprends « Ah ! vous dirai-je, maman », l'air que Mozart a varié douze fois",
+      "Apprends le refrain de « Vive le vent » : trois Mi, trois Mi, et tout le monde reconnaît",
+      "Apprends « Joyeux anniversaire », pour le jouer au prochain gâteau",
     ],
     15: [
-      "Apprends le début d'« Au clair de la lune » à la main droite",
-      "Joue « Ode à la joie » à la main droite, puis à la main gauche une octave plus bas",
-      "Tiens un accord à la main gauche (Do, Fa ou Sol) et invente une mélodie par-dessus",
-      "Improvise sur les touches noires pendant que l'autre main répète deux notes graves, comme un tambour",
-      "Retrouve à l'oreille un air que tu connais par cœur : un générique, une comptine, « Joyeux anniversaire »",
+      "Apprends l'« Ode à la joie » de Beethoven en entier, partie par partie, puis enchaîne",
+      "Apprends « When the Saints Go Marching In », le grand classique de La Nouvelle-Orléans",
+      "Apprends « Amazing Grace », lentement : laisse respirer les notes longues",
+      "Apprends la « Berceuse » de Brahms, tout en douceur : l'air des boîtes à musique",
+      "Apprends le début d'« Une petite musique de nuit » de Mozart : des sauts nets, comme un signal",
     ],
     30: [
-      "Apprends en entier un morceau pour débutants, avec un tutoriel vidéo",
-      "Travaille un morceau en trois passes : lent mains séparées, lent mains ensemble, puis à ton tempo",
-      "Compose un petit morceau de 8 mesures sur les accords Do, Sol, La mineur et Fa",
-      "Déchiffre une partition que tu n'as jamais jouée, quatre mesures à la fois",
-      "Joue pendant 30 minutes tout ce que tu sais déjà, sans t'arrêter sur les fausses notes",
+      "Apprends le thème de la « Lettre à Élise » de Beethoven, partie par partie, puis joue-le d'une traite",
+      "Apprends le « Menuet en sol » attribué à Bach, le morceau de tous les débuts de conservatoire",
+      "Apprends « Au matin » de Grieg (Peer Gynt) : le lever du soleil en musique",
+      "Apprends le début de la « Marche turque » de Mozart : léger, rapide, sans jamais forcer",
+      "Apprends « Greensleeves », la vieille chanson anglaise, phrase par phrase",
     ],
   },
 }

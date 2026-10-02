@@ -9,11 +9,13 @@ import {
   getPathStep,
   isActivityRating,
   isChallengeId,
+  isMoodId,
   isPathStepId,
   passionLevel,
   pickActivity,
   parseSkills,
   pickIntro,
+  pickLessonIntro,
   quietActivitiesFor,
   skillActivitiesFor,
   unlockTime,
@@ -22,7 +24,6 @@ import {
   type ActivityRating,
   type CreateProposalRequest,
   type Duration,
-  type MoodId,
   type PassionId,
   type ProposalDTO,
 } from '@scroll-up/shared'
@@ -50,7 +51,7 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
     id: proposal.id,
     activityId: proposal.activityId,
     passion: proposal.passion as PassionId,
-    mood: proposal.mood as MoodId,
+    mood: isMoodId(proposal.mood) ? proposal.mood : null,
     duration,
     text: activity?.text ?? '',
     intro: proposal.intro,
@@ -69,6 +70,8 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
  *   débloquée (étape précédente réussie, parcours ouvert ou ouvert d'emblée
  *   par le niveau déclaré).
  * - Passion avec niveau (Piano) : seules les activités adaptées au niveau.
+ * - Sans humeur : seulement une étape de parcours (le mode progression ne la
+ *   demande pas) ; l'introduction est alors un mot pour se mettre à la leçon.
  */
 export async function createProposal(
   prisma: PrismaClient,
@@ -78,6 +81,7 @@ export async function createProposal(
 ): Promise<Proposal> {
   const { passion, mood, duration } = request
   if (!parsePassions(user).includes(passion)) throw badRequest('Cette passion ne fait pas partie de ton profil')
+  if (!mood && !(request.step !== undefined && isPathStepId(request.step))) throw badRequest('Humeur manquante.')
 
   let currentId: string | undefined
   if (request.replacing) {
@@ -129,7 +133,7 @@ export async function createProposal(
     if (allowedIds?.length === 0) {
       throw new ApiError(409, 'no_quiet', `Toutes les activités ${getPassion(passion).label} de ${duration}\u00A0min s’écoutent. Essaie un autre temps, ou une autre passion.`)
     }
-    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, ratings, energy: getMood(mood).energy, allowedIds, random })
+    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, ratings, energy: mood ? getMood(mood).energy : undefined, allowedIds, random })
   }
   const extra = activity.extra ? drawExtra(activity.extra, random) : null
 
@@ -143,9 +147,9 @@ export async function createProposal(
         userId: user.id,
         activityId: activity.id,
         passion,
-        mood,
+        mood: mood ?? null,
         duration,
-        intro: pickIntro(mood, random, localHour(now, user.timezone)),
+        intro: mood ? pickIntro(mood, random, localHour(now, user.timezone)) : pickLessonIntro(random),
         extra: extra ? JSON.stringify(extra) : null,
         createdAt: now,
       },

@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'motion/react'
-import { dayMoment, homeLine, isFixedActivityId, passionLevel, seededRandom } from '@scroll-up/shared'
+import { dayMoment, getPathStep, homeLine, isFixedActivityId, passionLevel, seededRandom } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { cardVariants } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -18,6 +18,7 @@ import { SettingsButton } from '../components/SettingsSheet.tsx'
 import { tabStack } from '../components/TabBar.tsx'
 import { Tirette } from '../components/Tirette.tsx'
 import { formatNumber, plural } from '../lib/format.ts'
+import { lessonStack } from '../lib/useLesson.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { fadeUp } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -53,9 +54,11 @@ export function HomeScreen() {
     const fixed = isFixedActivityId(openProposal.activityId)
     dispatch({
       type: 'newFlow',
-      flow: { mood: openProposal.mood, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(fixed ? { fixedStep: openProposal.activityId } : {}) },
+      flow: { mood: openProposal.mood ?? undefined, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(fixed ? { fixedStep: openProposal.activityId } : {}) },
     })
-    reset([{ name: 'home' }, { name: 'activity' }])
+    // Une leçon reprend dans son parcours (le retour y ramène).
+    const lesson = getPathStep(openProposal.activityId)
+    reset(lesson ? lessonStack(lesson, { name: 'activity' }) : [{ name: 'home' }, { name: 'activity' }])
   }
 
   const ResumeIcon = openProposal ? PASSION_ICONS[openProposal.passion] : null

@@ -5,7 +5,7 @@
  *
  *   GET  /api/health             état du serveur (sans authentification)
  *   GET  /api/me                 profil, statistiques, activité à reprendre
- *   PUT  /api/me/passions        choix des passions (1 à 3)
+ *   PUT  /api/me/passions        choix des passions (au moins une, sans limite)
  *   PUT  /api/me/theme           choix du thème de l'app
  *   POST /api/proposals          tirer une activité (ou « Une autre idée »), ou jouer une étape de parcours
  *   POST /api/completions        valider une activité (JSON, ou multipart avec une photo)
@@ -34,6 +34,7 @@ import {
   isAppEventName,
   isAppTheme,
   isMoodId,
+  isPathStepId,
   isPassionId,
   isScrollMoment,
   isSkillLevel,
@@ -185,7 +186,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     '/me/passions',
     asyncRoute(async (req, res) => {
       const passions = normalizePassions((req.body as { passions?: unknown } | undefined)?.passions)
-      if (!passions) throw badRequest('Choisis entre 1 et 3 passions.')
+      if (!passions) throw badRequest('Choisis au moins une passion.')
       const user = await currentUser(req, res)
       const updated = await prisma.user.update({ where: { id: user.id }, data: { passions: JSON.stringify(passions) } })
       const body: UserResponse = { user: toUserDTO(updated) }
@@ -279,14 +280,16 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     '/proposals',
     asyncRoute(async (req, res) => {
       const { passion, mood, duration, replacing, step, quiet } = (req.body ?? {}) as Record<string, unknown>
-      if (!isPassionId(passion) || !isMoodId(mood) || !DURATIONS.includes(duration as Duration)) {
+      // Une leçon de parcours (mode progression) se lance sans humeur.
+      const lesson = typeof step === 'string' && isPathStepId(step)
+      if (!isPassionId(passion) || (mood === undefined ? !lesson : !isMoodId(mood)) || !DURATIONS.includes(duration as Duration)) {
         throw badRequest('Passion, mood ou temps invalide.')
       }
       if (replacing !== undefined && typeof replacing !== 'string') throw badRequest('Proposition à remplacer invalide.')
       if (step !== undefined && typeof step !== 'string') throw badRequest('Étape de parcours invalide.')
       const user = await currentUser(req, res)
       if (quiet !== undefined && typeof quiet !== 'boolean') throw badRequest('Option « sans son » invalide.')
-      const proposal = await createProposal(prisma, user, { passion, mood, duration: duration as Duration, replacing, step, quiet }, { random, now: now() })
+      const proposal = await createProposal(prisma, user, { passion, mood: isMoodId(mood) ? mood : undefined, duration: duration as Duration, replacing, step, quiet }, { random, now: now() })
       const body: ProposalResponse = { proposal: toProposalDTO(proposal), serverTime: now().toISOString() }
       res.status(201).json(body)
     }),
@@ -319,6 +322,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
           proposalId: fields.proposalId,
           text: typeof fields.text === 'string' ? fields.text : undefined,
           exploredTitle: typeof fields.exploredTitle === 'string' ? fields.exploredTitle : undefined,
+          played: fields.played === true || fields.played === 'true',
           photo: req.file ? { buffer: req.file.buffer, mimetype: req.file.mimetype } : undefined,
           projectId: typeof fields.projectId === 'string' && fields.projectId ? fields.projectId : undefined,
         },

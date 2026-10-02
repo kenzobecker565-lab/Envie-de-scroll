@@ -130,7 +130,8 @@ function Writing({ detail }: { detail: PassionDetailResponse }) {
 function Titles({ detail, passion }: { detail: PassionDetailResponse; passion: PassionId }) {
   const shown = detail.titles.slice(0, 12)
   if (!shown.length) {
-    return <Hint>Note ce que tu explores à la fin d’une activité&nbsp;: {passion === 'musique' ? 'ta discothèque' : passion === 'piano' ? 'ton répertoire' : 'ta filmothèque'} se remplira ici.</Hint>
+    if (passion === 'piano') return <Hint>Joue un tuto de chanson jusqu’au bout&nbsp;: chaque morceau rejoindra ton répertoire, ici.</Hint>
+    return <Hint>Note ce que tu explores à la fin d’une activité&nbsp;: {passion === 'musique' ? 'ta discothèque' : 'ta filmothèque'} se remplira ici.</Hint>
   }
   return (
     <div className="flex flex-col gap-2">

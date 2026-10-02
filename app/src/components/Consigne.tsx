@@ -1,7 +1,7 @@
 import { ChevronDown, Clock3 } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { getPassion, type ProposalDTO } from '@scroll-up/shared'
+import { getPassion, getPathStep, keyboardMelody, STEPS_PER_PATH, type ProposalDTO } from '@scroll-up/shared'
 import { cn } from '@/lib/utils'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { haptics } from '../telegram/webApp.ts'
@@ -24,9 +24,10 @@ export function ConsigneBar({ proposal }: { proposal: ProposalDTO }) {
 /**
  * Sur l'écran de l'activité, la grande carte montre déjà la consigne : la
  * version collée en haut n'apparaît que lorsqu'on fait défiler l'écran
- * (aides, suggestions) et que la carte sort du champ.
+ * (aides, suggestions) et que la carte sort du champ. `compact` (piano) : une
+ * seule ligne, pour garder la partition et le clavier sous les yeux.
  */
-export function FloatingConsigne({ proposal, show }: { proposal: ProposalDTO | undefined; show: boolean }) {
+export function FloatingConsigne({ proposal, show, compact = false }: { proposal: ProposalDTO | undefined; show: boolean; compact?: boolean }) {
   return (
     <div className="sticky top-0 z-20 -mx-4 h-0">
       <AnimatePresence>
@@ -39,7 +40,7 @@ export function FloatingConsigne({ proposal, show }: { proposal: ProposalDTO | u
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            <ConsigneCard proposal={proposal} />
+            <ConsigneCard proposal={proposal} lines={compact ? 1 : 3} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -71,13 +72,14 @@ export function useScrolledPast<T extends Element>(): [(node: T | null) => void,
   return [setElement, passed]
 }
 
-function ConsigneCard({ proposal }: { proposal: ProposalDTO }) {
+function ConsigneCard({ proposal, lines = 3 }: { proposal: ProposalDTO; lines?: 1 | 3 }) {
   const [open, setOpen] = useState(false)
   const [clamped, setClamped] = useState(false)
   const text = useRef<HTMLSpanElement>(null)
   const Icon = PASSION_ICONS[proposal.passion]
+  const step = getPathStep(proposal.activityId)
 
-  // Le texte dépasse-t-il les trois lignes ? (On ne propose de déplier que dans ce cas.)
+  // Le texte dépasse-t-il les lignes montrées ? (On ne propose de déplier que dans ce cas.)
   useLayoutEffect(() => {
     const element = text.current
     if (!element || open) return
@@ -87,7 +89,7 @@ function ConsigneCard({ proposal }: { proposal: ProposalDTO }) {
     const observer = new ResizeObserver(measure)
     observer.observe(element)
     return () => observer.disconnect()
-  }, [proposal.text, open])
+  }, [proposal.text, open, lines])
 
   const toggle = () => {
     haptics.selection()
@@ -101,11 +103,16 @@ function ConsigneCard({ proposal }: { proposal: ProposalDTO }) {
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="flex items-center gap-1.5 text-11 font-extrabold tracking-wider text-ink-soft uppercase">
-          La consigne · {getPassion(proposal.passion).label}
-          <Clock3 size={12} strokeWidth={2.6} aria-hidden="true" />
-          <span className="font-numbers">{proposal.duration}&nbsp;min</span>
+          {step ? `Étape ${step.index}/${STEPS_PER_PATH}` : 'La consigne'} · {getPassion(proposal.passion).label}
+          {/* Au piano, pas de durée : le morceau se joue au clavier. */}
+          {!keyboardMelody(proposal.activityId) && (
+            <>
+              <Clock3 size={12} strokeWidth={2.6} aria-hidden="true" />
+              <span className="font-numbers">{proposal.duration}&nbsp;min</span>
+            </>
+          )}
         </span>
-        <span ref={text} className={cn('block text-15 leading-snug font-bold text-pretty text-ink', !open && 'line-clamp-3')}>
+        <span ref={text} className={cn('block text-15 leading-snug font-bold text-pretty text-ink', !open && (lines === 1 ? 'line-clamp-1' : 'line-clamp-3'))}>
           {proposal.text}
         </span>
         {proposal.extra && (

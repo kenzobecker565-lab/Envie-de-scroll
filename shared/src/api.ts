@@ -64,11 +64,12 @@ export interface ProposalDTO {
   id: string
   activityId: string
   passion: PassionId
-  mood: MoodId
+  /** L'humeur choisie ; null pour une leçon de parcours (on ne la demande pas). */
+  mood: MoodId | null
   duration: Duration
   /** Texte de l'activité (typographie française appliquée). */
   text: string
-  /** Introduction dont le ton dépend du mood. */
+  /** Introduction dont le ton dépend du mood (pour une leçon : une phrase d'encouragement). */
   intro: string
   extra: ActivityExtra | null
   createdAt: string
@@ -80,7 +81,7 @@ export interface CompletionDTO {
   id: string
   activityId: string
   passion: PassionId
-  mood: MoodId
+  mood: MoodId | null
   duration: Duration
   activityText: string
   extra: ActivityExtra | null
@@ -158,7 +159,8 @@ export interface UpdatePassionsRequest {
 
 export interface CreateProposalRequest {
   passion: PassionId
-  mood: MoodId
+  /** Facultatif pour une étape de parcours (le mode progression ne demande pas l'humeur). */
+  mood?: MoodId
   duration: Duration
   /** « Une autre idée » : la proposition affichée, à remplacer. */
   replacing?: string
@@ -176,6 +178,8 @@ export interface CompleteRequest {
   proposalId: string
   text?: string
   exploredTitle?: string
+  /** Leçon de piano : la mélodie a été jouée jusqu'au bout sur le clavier de l'appli (elle vaut preuve, sans attendre). */
+  played?: boolean
   /** Ranger tout de suite la création dans ce projet. */
   projectId?: string
 }

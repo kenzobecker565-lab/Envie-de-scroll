@@ -1,7 +1,7 @@
-import { ArrowRight, Check, Clock3, Footprints, Lock, Mountain, Play, Trophy } from 'lucide-react'
+import { ArrowRight, Check, Clock3, Footprints, Lock, Mountain, Piano, Play, Trophy } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
-import { CONFIRMED_PATH_LEVEL, getPassion, getPath, PATH_TIERS, passionLevel, pathProgress, pathsFor, STEPS_PER_PATH, type PathStep } from '@scroll-up/shared'
+import { CONFIRMED_PATH_LEVEL, getPassion, getPath, keyboardMelody, PATH_TIERS, passionLevel, pathProgress, pathsFor, STEPS_PER_PATH, type PathStep } from '@scroll-up/shared'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -13,8 +13,8 @@ import { DifficultyMeter } from '../components/Paths.tsx'
 import { statsFor } from '../components/Progression.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
+import { useStartLesson } from '../lib/useLesson.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
-import { haptics } from '../telegram/webApp.ts'
 
 /**
  * Un parcours, comme une ascension : le départ en bas, le défi final au
@@ -23,10 +23,11 @@ import { haptics } from '../telegram/webApp.ts'
  * les suivantes montrent seulement ce qu'elles feront travailler.
  */
 export function PathScreen({ pathId }: { pathId: string }) {
-  const { state, dispatch } = useAppState()
-  const { push, reset } = useNavigation()
+  const { state } = useAppState()
+  const { push } = useNavigation()
   const current = useRef<HTMLLIElement>(null)
   const path = getPath(pathId)
+  const startLesson = useStartLesson()
 
   useEffect(() => {
     track('path_open', { path: pathId })
@@ -47,12 +48,8 @@ export function PathScreen({ pathId }: { pathId: string }) {
   // Le palier suivant : une fois ce parcours terminé, le parcours plus exigeant s'ouvre.
   const nextPath = progress.finished ? pathsFor(path.passion).find((other) => other.tier === path.tier + 1) : undefined
 
-  const start = (step: PathStep) => {
-    haptics.impact('heavy')
-    track('cta', { from: 'parcours', step: step.id })
-    dispatch({ type: 'newFlow', flow: { fixedPassion: path.passion, fixedStep: step.id } })
-    reset([{ name: 'home' }, { name: 'signal' }])
-  }
+  // Le mode progression : la leçon s'ouvre tout de suite, sans signal ni humeur.
+  const start = (step: PathStep) => startLesson(step, 'parcours')
 
   return (
     <Screen>
@@ -69,7 +66,9 @@ export function PathScreen({ pathId }: { pathId: string }) {
         <h1 className="font-display text-40 font-extrabold tracking-tight text-ink">{path.title}</h1>
         <p className="text-16 text-ink-soft">{path.pitch}</p>
         <p className="text-14 font-semibold text-ink">
-          {STEPS_PER_PATH} étapes de plus en plus exigeantes&nbsp;: de l’échauffement (5&nbsp;min) au défi final (30&nbsp;min). Chacune se débloque en réussissant la précédente.
+          {path.passion === 'piano'
+            ? `${STEPS_PER_PATH} leçons de plus en plus exigeantes, chacune validée sur le clavier de l’appli\u00A0: dès la dernière note jouée, la suivante s’ouvre.`
+            : `${STEPS_PER_PATH} étapes de plus en plus exigeantes\u00A0: de l’échauffement (5\u00A0min) au défi final (30\u00A0min). Chacune se débloque en réussissant la précédente.`}
         </p>
       </header>
 
@@ -176,8 +175,17 @@ function StepRow({ step, done, current, canStart, onStart, ref }: { step: PathSt
           </span>
           <DifficultyMeter level={step.index} tone={done ? 'bg-ink' : current ? tone.bg : 'bg-ink-faint'} />
           <span className={cn('inline-flex items-center gap-1', current || done ? 'text-ink-soft' : 'text-ink-faint')}>
-            <Clock3 size={12} strokeWidth={2.6} aria-hidden="true" />
-            {step.duration}&nbsp;min
+            {keyboardMelody(step.id) ? (
+              <>
+                <Piano size={12} strokeWidth={2.6} aria-hidden="true" />
+                Au clavier
+              </>
+            ) : (
+              <>
+                <Clock3 size={12} strokeWidth={2.6} aria-hidden="true" />
+                {step.duration}&nbsp;min
+              </>
+            )}
           </span>
         </span>
         <span className={cn('font-display leading-tight font-extrabold tracking-tight', current ? 'text-22 text-ink' : done ? 'text-17 text-ink' : 'text-17 text-ink-soft')}>{step.title}</span>

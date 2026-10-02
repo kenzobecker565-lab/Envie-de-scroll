@@ -1,11 +1,33 @@
-import { ChevronDown, FolderPlus, House, Images, Lightbulb, Send } from 'lucide-react'
+import { ChevronDown, Clock3, FolderPlus, House, Images, Lightbulb, Mountain, Piano, Play, Send, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { cheerFor, collectionSize, countWords, factFor, getChallengeActivity, getPassion, getPathStep, isBaseActivity, levelCrossed, milestoneCrossed, passionLevel, pathProgress, seededRandom } from '@scroll-up/shared'
+import {
+  cheerFor,
+  collectionSize,
+  countWords,
+  factFor,
+  getChallengeActivity,
+  getPassion,
+  getPathStep,
+  isBaseActivity,
+  keyboardMelody,
+  levelCrossed,
+  milestoneCrossed,
+  passionLevel,
+  PATH_TIERS,
+  pathProgress,
+  seededRandom,
+  STEPS_PER_PATH,
+  type LevelStep,
+  type PathProgress,
+  type PathStep,
+} from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardEyebrow } from '@/components/ui/card'
+import { BadgePin } from '../components/BadgePin.tsx'
 import { ChallengeBanner } from '../components/Challenge.tsx'
 import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
@@ -20,7 +42,9 @@ import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { tabStack } from '../components/TabBar.tsx'
-import { useAppState, useNavigation } from '../state/AppState.tsx'
+import { PASSION_COLORS } from '../lib/icons.ts'
+import { useStartLesson } from '../lib/useLesson.ts'
+import { useAppState, useNavigation, type DoneResult } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
 /**
@@ -56,13 +80,17 @@ export function DoneScreen() {
   // Une étape de parcours : la marche franchie, la suivante qui s'ouvre (ou le badge).
   const step = getPathStep(activityId)
   const challenge = getChallengeActivity(activityId)
-  const stepProgress = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level, state.me.user.skills[passion]).find((entry) => entry.path.id === step.pathId) : undefined
+  const paths = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level, state.me.user.skills[passion]) : []
+  const stepProgress = step ? paths.find((entry) => entry.path.id === step.pathId) : undefined
   // Une seule grande nouvelle à la fois : l'étape de parcours, sinon le niveau, le palier, le mot du jour, la collection.
   const news = step && stepProgress ? 'step' : level ? 'level' : milestone ? 'milestone' : challenge ? 'challenge' : discovered ? 'discovered' : null
   // Une félicitation et une anecdote, toujours les mêmes pour cette création.
   const { id: completionId, duration, text } = done.response.completion
   const cheer = cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
   const fact = factFor(passion, seededRandom(`fact:${completionId}`))
+
+  // Le mode progression : une étape réussie propose aussitôt la suivante.
+  if (step && stepProgress) return <StepDone done={done} step={step} progress={stepProgress} paths={paths} level={level} cheer={cheer} />
 
   return (
     <Screen className="items-center text-center">
@@ -191,6 +219,140 @@ export function DoneScreen() {
             <House aria-hidden="true" />
             Retour à l’accueil
           </Button>
+        </PrimaryAction>
+      </div>
+    </Screen>
+  )
+}
+
+/**
+ * Une étape de parcours réussie : une fête courte, puis l'étape d'après,
+ * proposée tout de suite pour enchaîner d'un toucher, sans humeur ni attente.
+ * Au bout d'un parcours : le badge, puis la première leçon du palier suivant.
+ */
+function StepDone({
+  done,
+  step,
+  progress,
+  paths,
+  level,
+  cheer,
+}: {
+  done: DoneResult
+  step: PathStep
+  progress: PathProgress
+  paths: PathProgress[]
+  level: LevelStep | null
+  cheer: string
+}) {
+  const { state } = useAppState()
+  const { reset } = useNavigation()
+  const startLesson = useStartLesson()
+  const { passion } = step
+  const { path, finished } = progress
+  // La suite : l'étape d'après, ou au bout du parcours, le palier suivant s'il est ouvert.
+  const nextPath = finished ? paths.find((entry) => entry.path.tier === path.tier + 1 && entry.unlocked && !entry.finished) : undefined
+  const upNext = state.me.user.passions.includes(passion) ? (finished ? nextPath?.next : progress.next) ?? null : null
+  const openPath = () => reset([...tabStack('progress'), { name: 'path', pathId: (upNext ?? step).pathId }])
+
+  return (
+    <Screen className="items-center text-center">
+      <div className="relative mt-6 flex h-28 w-28 items-center justify-center">
+        <motion.div className="absolute -inset-16" initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
+          <Rays className="h-full w-full" />
+        </motion.div>
+        <Confetti count={finished ? 40 : 24} />
+        {finished ? (
+          <BadgePin pathId={path.id} earned size={104} animate />
+        ) : (
+          <motion.span
+            className="relative flex h-24 w-24 items-center justify-center rounded-pill border-[3px] border-outline bg-surface-200 shadow-pop"
+            initial={{ scale: 0.3, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 16 }}
+          >
+            <Mascot mood="cheer" size={64} className="mt-1" />
+          </motion.span>
+        )}
+      </div>
+
+      <motion.p className="mt-6 text-12 font-extrabold tracking-wider text-ink-soft uppercase" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
+        {getPassion(passion).label} · {path.title}
+      </motion.p>
+      <motion.h1
+        className="mt-1 font-display text-34 leading-tight font-extrabold tracking-tight text-ink"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15, duration: 0.4 }}
+      >
+        {finished ? `Parcours terminé\u00A0!` : `Étape ${step.index}/${STEPS_PER_PATH} réussie\u00A0!`}
+      </motion.h1>
+      <motion.p className="mt-3 flex flex-wrap items-center justify-center gap-2 text-15 text-ink-soft" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+        <Badge variant="good" tilt="left">
+          +{done.response.coinsEarned} minutons
+        </Badge>
+        {finished ? `Badge «\u00A0${path.badge}\u00A0» gagné.` : cheer}
+      </motion.p>
+      {level && (
+        <motion.p className="mt-3 inline-flex items-center gap-2 text-14 font-bold text-ink" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, type: 'spring', stiffness: 300, damping: 16 }}>
+          <Sparkle size={16} color="var(--accent)" />
+          Niveau {level.level} en {getPassion(passion).label}&nbsp;: {level.title}
+        </motion.p>
+      )}
+
+      {/* L'ascension : les marches franchies du parcours. */}
+      <div className="mt-6 flex w-full items-end gap-1.5 border-b-[2.5px] border-outline" aria-label={`${progress.done} étapes sur ${STEPS_PER_PATH}`} role="img">
+        {path.steps.map((other, index) => (
+          <motion.span
+            key={other.id}
+            className={cn('flex-1 rounded-t-[6px] border-[2.5px] border-b-0 border-outline', index < progress.done ? PASSION_COLORS[passion].bg : 'bg-card')}
+            style={{ height: `${14 + index * 7}px` }}
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ delay: 0.3 + index * 0.06, type: 'spring', stiffness: 300, damping: 20 }}
+          />
+        ))}
+      </div>
+
+      {/* La suite, tout de suite. */}
+      {upNext ? (
+        <Card
+          tone={PASSION_COLORS[passion].card}
+          className="mt-6 w-full gap-2 text-left shadow-pop"
+          initial={{ opacity: 0, x: 40, rotate: 2 }}
+          animate={{ opacity: 1, x: 0, rotate: -1 }}
+          transition={{ delay: 0.6, type: 'spring', stiffness: 240, damping: 20 }}
+        >
+          <CardEyebrow>
+            <Sparkles aria-hidden="true" />
+            {finished && nextPath ? `Palier suivant · parcours ${PATH_TIERS[nextPath.path.tier].toLowerCase()}` : `À suivre · étape ${upNext.index}/${STEPS_PER_PATH} · ${upNext.difficulty}`}
+          </CardEyebrow>
+          <span className="font-display text-22 leading-tight font-extrabold tracking-tight">{finished && nextPath ? `${nextPath.path.title} : ${upNext.title}` : upNext.title}</span>
+          <span className="text-14 font-semibold">Tu travailles&nbsp;: {upNext.focus.charAt(0).toLowerCase() + upNext.focus.slice(1)}</span>
+          <span className="inline-flex items-center gap-1.5 text-13 font-bold">
+            {keyboardMelody(upNext.id) ? <Piano size={14} strokeWidth={2.4} aria-hidden="true" /> : <Clock3 size={14} strokeWidth={2.4} aria-hidden="true" />}
+            {keyboardMelody(upNext.id) ? `Au clavier · «\u00A0${keyboardMelody(upNext.id)?.title}\u00A0»` : `${upNext.duration}\u00A0min`}
+          </span>
+        </Card>
+      ) : (
+        <motion.p className="mt-6 inline-flex items-center gap-2 text-15 font-semibold text-ink" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+          <Mountain size={18} aria-hidden="true" />
+          {finished ? 'Tu es au sommet de ce que l’appli propose ici. Chapeau.' : 'La suite t’attend dans le parcours.'}
+        </motion.p>
+      )}
+
+      <div className="mt-auto flex w-full flex-col pt-6">
+        <PrimaryAction
+          text={upNext ? (finished ? 'Commencer le palier suivant' : 'Étape suivante') : 'Voir le parcours'}
+          icon={upNext ? <Play aria-hidden="true" /> : <Mountain aria-hidden="true" />}
+          onClick={() => (upNext ? startLesson(upNext, 'enchainement') : openPath())}
+        >
+          {upNext && (
+            <Button variant="ghost" size="md" className="w-full" onClick={openPath}>
+              <Mountain aria-hidden="true" />
+              Revoir le parcours
+            </Button>
+          )}
         </PrimaryAction>
       </div>
     </Screen>

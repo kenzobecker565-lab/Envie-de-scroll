@@ -1,7 +1,7 @@
-import { CalendarHeart, Check, Clock3, Hourglass, Info, Mountain, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
+import { CalendarHeart, Check, Clock3, Hourglass, Info, LoaderCircle, Mountain, Piano, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PassionId, type PathStep, type ProposalDTO } from '@scroll-up/shared'
+import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, keyboardMelody, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PassionId, type PathStep, type ProposalDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -12,10 +12,12 @@ import { api, ApiError } from '../api/client.ts'
 import { ActivityHelp } from '../components/ActivityHelp.tsx'
 import { FloatingConsigne, useScrolledPast } from '../components/Consigne.tsx'
 import { PassionScene } from '../components/decor/PassionScene.tsx'
+import { PianoKeyboard } from '../components/PianoKeyboard.tsx'
 import { DifficultyMeter } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
+import { lessonStack } from '../lib/useLesson.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -25,20 +27,27 @@ import { haptics } from '../telegram/webApp.ts'
  * « Valider » mène à la preuve (photo, texte) ou au titre exploré.
  * Musique et Cinéma : « Valider » reste grisé jusqu'à la fin de la durée
  * choisie, avec un indicateur doux (pas de compte à rebours).
+ *
+ * Une leçon de parcours (le mode progression) arrive ici directement, sans
+ * humeur, et sa réussite propose aussitôt l'étape suivante.
+ *
+ * Piano (tuto de chanson ou leçon) : le clavier est dans l'activité, avec la
+ * partition. « Valider » s'active dès la dernière note jouée, sans attendre.
  */
 export function ActivityScreen() {
   const { state, dispatch } = useAppState()
-  const { push } = useNavigation()
+  const { push, reset } = useNavigation()
   const { flow } = state
   const { passion: passionId, mood, duration } = flow
 
-  // Étape de parcours : l'étape elle-même, jamais un tirage.
+  // Étape de parcours : l'étape elle-même, jamais un tirage. Une leçon se joue sans humeur.
   const fixedStep = flow.fixedStep
+  const lesson = fixedStep ? getPathStep(fixedStep) : undefined
   const matches = (proposal: ProposalDTO | undefined): proposal is ProposalDTO =>
     Boolean(
       proposal &&
         proposal.passion === passionId &&
-        proposal.mood === mood &&
+        (proposal.mood ?? undefined) === mood &&
         proposal.duration === duration &&
         (fixedStep ? proposal.activityId === fixedStep : !isFixedActivityId(proposal.activityId)),
     )
@@ -51,10 +60,14 @@ export function ActivityScreen() {
   const requested = useRef(false)
 
   const [quietNote, setQuietNote] = useState<string>()
+  // Piano : la mélodie jouée jusqu'au bout sur le clavier, puis l'enregistrement.
+  const [played, setPlayed] = useState<string>()
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string>()
   const reduced = useReducedMotion()
   const load = useCallback(
     async (replacing?: string, quiet = flow.quiet) => {
-      if (!passionId || !mood || !duration) return
+      if (!passionId || (!mood && !lesson) || !duration) return
       setLoading(true)
       setError(undefined)
       setQuietNote(undefined)
@@ -81,7 +94,7 @@ export function ActivityScreen() {
         setLoading(false)
       }
     },
-    [passionId, mood, duration, fixedStep, flow.quiet, reduced, dispatch],
+    [passionId, mood, lesson, duration, fixedStep, flow.quiet, reduced, dispatch],
   )
 
   useEffect(() => {
@@ -91,25 +104,55 @@ export function ActivityScreen() {
     }
   }, [proposal, load])
 
-  if (!passionId || !mood || !duration) return null
+  if (!passionId || (!mood && !lesson) || !duration) return null
   const passion = getPassion(passionId)
   const Icon = PASSION_ICONS[passionId]
   const step = getPathStep(fixedStep ?? proposal?.activityId ?? '')
   const challenge = getChallengeActivity(fixedStep ?? proposal?.activityId ?? '')
+  // Piano : le tuto ou la leçon se valide au clavier, sans durée à attendre.
+  const melody = proposal ? keyboardMelody(proposal.activityId) : undefined
+  // Jouée pour cette proposition-ci (« Une autre idée » tire une autre chanson).
+  const playedNow = Boolean(proposal && played === proposal.id)
+
+  const finishPlayed = async () => {
+    if (!proposal || !melody || !playedNow || saving) return
+    setSaving(true)
+    setSaveError(undefined)
+    try {
+      const previousStats = state.me.stats
+      const response = await api.complete({ proposalId: proposal.id, played: true, exploredTitle: melody.title, ...(flow.projectId ? { projectId: flow.projectId } : {}) })
+      dispatch({ type: 'stats', stats: response.stats })
+      dispatch({ type: 'openProposal', proposal: null })
+      dispatch({ type: 'done', done: { response, previousStats, photoPending: false } })
+      dispatch({ type: 'newFlow' })
+      reset(lesson ? lessonStack(lesson, { name: 'done' }) : [{ name: 'home' }, { name: 'done' }])
+    } catch (caught) {
+      haptics.error()
+      setSaveError(caught instanceof ApiError ? caught.message : 'Oups, l’enregistrement a échoué. Réessaie\u00A0?')
+      setSaving(false)
+    }
+  }
 
   return (
     <Screen>
-      <FloatingConsigne proposal={proposal} show={!loading && consignePassed} />
+      <FloatingConsigne proposal={proposal} show={!loading && consignePassed} compact={Boolean(proposal && keyboardMelody(proposal.activityId))} />
       {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant={PASSION_COLORS[passionId].badge} tilt="left">
           <Icon aria-hidden="true" />
           {passion.label}
         </Badge>
-        <Badge variant="warm" tilt="right">
-          <Clock3 aria-hidden="true" />
-          <span className="font-numbers">{duration} min</span>
-        </Badge>
+        {melody ? (
+          <Badge variant="warm" tilt="right">
+            <Piano aria-hidden="true" />
+            Au clavier
+          </Badge>
+        ) : (
+          <Badge variant="warm" tilt="right">
+            <Clock3 aria-hidden="true" />
+            <span className="font-numbers">{duration} min</span>
+          </Badge>
+        )}
       </div>
       {step && <StepHeader step={step} />}
       {challenge && <ChallengeHeader challenge={challenge} />}
@@ -149,7 +192,19 @@ export function ActivityScreen() {
                   Tu travailles&nbsp;: {step.focus.charAt(0).toLowerCase() + step.focus.slice(1)}
                 </p>
               )}
-              {/* Un coup de pouce : idées, pistes, défi, et pour Dessin « Sans papier », pour Musique et Cinéma « Sans son », pour Piano « Sans piano ». */}
+              {/* Piano : le tuto se joue ici même, partition sous les yeux, note après note. */}
+              {melody && (
+                <section className="mt-5 flex flex-col gap-2" aria-labelledby="lesson-keyboard">
+                  <h2 id="lesson-keyboard" className="inline-flex items-center gap-2 text-13 font-extrabold text-ink-soft">
+                    <Piano size={16} strokeWidth={2.4} aria-hidden="true" />
+                    À toi de jouer, au clavier
+                  </h2>
+                  <Card tone="muted" className="gap-3">
+                    <PianoKeyboard key={proposal.id} melody={melody} onComplete={() => setPlayed(proposal.id)} />
+                  </Card>
+                </section>
+              )}
+              {/* Un coup de pouce : idées, pistes, défi, et pour Dessin « Sans papier », pour Musique et Cinéma « Sans son ». */}
               <ActivityHelp
                 proposal={proposal}
                 onPad={
@@ -190,7 +245,9 @@ export function ActivityScreen() {
       </div>
 
       <div className="sticky bottom-0 -mx-4 mt-6 flex flex-col gap-2 bg-gradient-to-t from-canvas from-60% to-transparent px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))]">
-        {proposal ? (
+        {proposal && melody ? (
+          <PlayedValidate lesson={Boolean(lesson)} played={playedNow} saving={saving} error={saveError} disabled={loading} onValidate={() => void finishPlayed()} />
+        ) : proposal ? (
           <ValidateButton
             key={proposal.id}
             proposal={proposal}
@@ -318,6 +375,44 @@ function ExtraCard({ extra }: { extra: ActivityExtra }) {
         </ul>
       )}
     </Card>
+  )
+}
+
+/**
+ * Piano : « Valider » attend la mélodie, pas une durée. Dès la dernière note,
+ * il s'active (avec une vibration), et l'activité s'enregistre d'un toucher,
+ * sans écran de preuve (le titre du morceau rejoint la galerie).
+ */
+function PlayedValidate({
+  lesson,
+  played,
+  saving,
+  error,
+  disabled,
+  onValidate,
+}: {
+  lesson: boolean
+  played: boolean
+  saving: boolean
+  error?: string
+  disabled: boolean
+  onValidate: () => void
+}) {
+  const wasPlayed = useRef(played)
+  useEffect(() => {
+    if (!wasPlayed.current && played) haptics.success()
+    wasPlayed.current = played
+  }, [played])
+  return (
+    <div className="flex flex-col gap-2">
+      <Button variant="good" className="w-full" disabled={!played || saving || disabled} onClick={onValidate} aria-describedby="lesson-hint">
+        {saving ? <LoaderCircle className="motion-safe:animate-spin" aria-hidden="true" /> : played ? <Check aria-hidden="true" /> : <Piano aria-hidden="true" />}
+        {played ? (lesson ? 'Valider la leçon' : 'Valider') : 'Joue le morceau pour valider'}
+      </Button>
+      <p id="lesson-hint" role={error ? 'alert' : undefined} className={cn('text-center text-12', error ? 'font-bold text-ink' : 'text-ink-soft')}>
+        {error ?? (played ? (lesson ? 'Bravo\u00A0! Valide, et l’étape suivante t’attend.' : 'Bravo\u00A0! Il rejoint ton répertoire.') : 'Ça se valide au clavier, dès la dernière note.')}
+      </p>
+    </div>
   )
 }
 

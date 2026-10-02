@@ -80,6 +80,32 @@ describe('piano : niveau et contenu ciblé', () => {
     await request(app).put('/api/me/skills').set(as()).send({ passion: 'piano', level: 'confirme' }).expect(200)
     await request(app).post('/api/proposals').set(as()).send(advanced).expect(201)
   })
+
+  it('une leçon se lance sans humeur et se valide au clavier, sans attendre', async () => {
+    await onboard(['piano'])
+    // Le mode progression ne demande pas l'humeur ; un tirage au hasard, si.
+    await request(app).post('/api/proposals').set(as()).send({ passion: 'piano', duration: 5 }).expect(400)
+    const lesson = await propose({ passion: 'piano', duration: 5, step: 'parcours-premieres-touches-1' })
+    expect(lesson.mood).toBeNull()
+    expect(lesson.intro.length).toBeGreaterThan(0)
+    // Sans la mélodie jouée, la leçon attend comme avant.
+    const early = await request(app).post('/api/completions').set(as()).send({ proposalId: lesson.id }).expect(409)
+    expect(early.body.error.code).toBe('too_early')
+    const done = await request(app).post('/api/completions').set(as()).send({ proposalId: lesson.id, played: true }).expect(201)
+    expect(done.body.completion).toMatchObject({ mood: null, exploredTitle: 'Les trois Do du clavier' })
+    // La leçon suivante s'enchaîne aussitôt.
+    await propose({ passion: 'piano', duration: 5, step: 'parcours-premieres-touches-2' })
+  })
+
+  it('un tuto de chanson se valide aussi au clavier ; « joué » ne vaut que pour le piano', async () => {
+    await onboard(['piano', 'musique'])
+    const song = await propose({ passion: 'piano', mood: 'ennui', duration: 15 })
+    expect(song.text).toMatch(/^Apprends /)
+    const done = await request(app).post('/api/completions').set(as()).send({ proposalId: song.id, played: true }).expect(201)
+    expect(done.body.completion.exploredTitle).toBeTruthy()
+    const listening = await propose({ passion: 'musique', mood: 'ennui', duration: 15 })
+    await request(app).post('/api/completions').set(as()).send({ proposalId: listening.id, played: true }).expect(409)
+  })
 })
 
 describe('effacer ses données', () => {
@@ -134,11 +160,12 @@ describe('authentification', () => {
 })
 
 describe('profil', () => {
-  it('enregistre 1 à 3 passions', async () => {
+  it('enregistre autant de passions qu’on veut (au moins une)', async () => {
     const response = await request(app).put('/api/me/passions').set(as()).send({ passions: ['cinema', 'dessin'] }).expect(200)
     expect(response.body.user).toMatchObject({ passions: ['dessin', 'cinema'], onboarded: true })
     await request(app).put('/api/me/passions').set(as()).send({ passions: [] }).expect(400)
-    await request(app).put('/api/me/passions').set(as()).send({ passions: ['dessin', 'ecriture', 'musique', 'cinema'] }).expect(400)
+    const all = await request(app).put('/api/me/passions').set(as()).send({ passions: ['piano', 'dessin', 'ecriture', 'musique', 'cinema'] }).expect(200)
+    expect(all.body.user.passions).toEqual(['dessin', 'ecriture', 'musique', 'cinema', 'piano'])
   })
 })
 

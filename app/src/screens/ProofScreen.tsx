@@ -1,7 +1,7 @@
 import { Camera, FileCheck2, ImageOff, Info, PenLine, RefreshCw, Save } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
-import { countFor, countWords, getPassion, guideFor, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, unitLabel, type ProposalDTO, type WritingGoal } from '@scroll-up/shared'
+import { countFor, countWords, getPassion, getPathStep, guideFor, MAX_TEXT_LENGTH, MAX_TITLE_LENGTH, suggestedTitle, unitLabel, type ProposalDTO, type WritingGoal } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, cardVariants } from '@/components/ui/card'
@@ -15,6 +15,7 @@ import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle } from '../components/Screen.tsx'
 import { PASSION_ICONS } from '../lib/icons.ts'
 import { prepareImage } from '../lib/image.ts'
+import { lessonStack } from '../lib/useLesson.ts'
 import { useUnlock } from '../lib/useUnlock.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -54,7 +55,9 @@ export function ProofScreen() {
       dispatch({ type: 'openProposal', proposal: null })
       dispatch({ type: 'done', done: { response, previousStats, photoPending: response.completion.photoPending } })
       dispatch({ type: 'newFlow' })
-      reset([{ name: 'home' }, { name: 'done' }])
+      // Une étape de parcours se fête dans son parcours (le retour y ramène).
+      const lesson = getPathStep(proposal.activityId)
+      reset(lesson ? lessonStack(lesson, { name: 'done' }) : [{ name: 'home' }, { name: 'done' }])
     } catch (caught) {
       haptics.error()
       setError(caught instanceof ApiError ? caught.message : 'Oups, l’enregistrement a échoué. Réessaie\u00A0?')

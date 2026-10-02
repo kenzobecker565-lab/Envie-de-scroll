@@ -1,6 +1,6 @@
 import { ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   formatClock,
   getPassion,
@@ -125,30 +125,18 @@ export function WelcomeScreen() {
   )
 }
 
-/** Choix de 1 à 3 passions (onboarding, ou modification depuis la galerie). */
+/** Choix des passions, autant qu'on veut (onboarding, ou modification depuis les réglages). */
 export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
   const { state, dispatch } = useAppState()
   const { push, back, replace } = useNavigation()
   const [selected, setSelected] = useState<PassionId[]>(state.me.user.passions)
-  const [limitHit, setLimitHit] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string>()
-  const limitNote = useRef<HTMLDivElement>(null)
 
-  // Le message de limite apparaît sous les cartes : on le fait remonter à l'écran.
-  useEffect(() => {
-    if (limitHit) limitNote.current?.scrollIntoView({ block: 'center', behavior: 'smooth' })
-  }, [limitHit])
-
+  // Autant de passions qu'on veut (au moins une).
   const change = (next: PassionId[]) => {
     setError(undefined)
-    if (next.length > MAX_PASSIONS) {
-      haptics.warning()
-      setLimitHit(true)
-      return
-    }
     haptics.selection()
-    if (next.length < selected.length) setLimitHit(false)
     setSelected(next)
   }
 
@@ -191,7 +179,7 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
             </div>
           ) : undefined
         }
-        subtitle={`Choisis entre 1 et ${MAX_PASSIONS} passions. Tu pourras changer d’avis quand tu veux.`}
+        subtitle="Choisis-en autant que tu veux. Tu pourras changer d’avis quand tu veux."
       >
         Qu’est-ce qui te fait vibrer&nbsp;?
       </ScreenTitle>
@@ -211,26 +199,9 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
 
       <p className="mt-6 flex justify-center" aria-live="polite">
         <Badge variant={count > 0 ? 'good' : 'secondary'} size="sm" className="px-3">
-          {count}/{MAX_PASSIONS} {count > 1 ? 'choisies' : 'choisie'}
+          {count === MAX_PASSIONS ? 'Toutes choisies' : `${count} ${count > 1 ? 'choisies' : 'choisie'}`}
         </Badge>
       </p>
-
-      <AnimatePresence>
-        {limitHit && (
-          <Alert
-            ref={limitNote}
-            variant="warning"
-            role="status"
-            className="mt-4"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-          >
-            <Info aria-hidden="true" />
-            <AlertDescription>{MAX_PASSIONS} passions au maximum pour commencer&nbsp;: retire-en une pour en choisir une autre.</AlertDescription>
-          </Alert>
-        )}
-      </AnimatePresence>
 
       <PrimaryAction text={label} icon={count > 0 ? <Check aria-hidden="true" /> : undefined} onClick={save} enabled={count > 0} loading={saving}>
         {error && (

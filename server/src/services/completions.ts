@@ -3,13 +3,14 @@ import {
   getActivity,
   getPassion,
   isActivityRating,
+  isMoodId,
+  keyboardMelody,
   MAX_TEXT_LENGTH,
   MAX_TITLE_LENGTH,
   UNLOCK_TOLERANCE_MS,
   unlockTime,
   type CompletionDTO,
   type Duration,
-  type MoodId,
   type PassionId,
 } from '@scroll-up/shared'
 import type { Completion, PrismaClient, User } from '../db.ts'
@@ -24,6 +25,8 @@ export interface CompleteInput {
   text?: string
   exploredTitle?: string
   photo?: IncomingPhoto
+  /** Leçon de piano : la mélodie jouée jusqu'au bout sur le clavier de l'appli. */
+  played?: boolean
   /** Ranger tout de suite la création dans ce projet. */
   projectId?: string
 }
@@ -42,6 +45,8 @@ function clean(value: string | undefined, max: number): string | null {
  * - Écriture : avec le texte produit, ou sans texte une fois la durée écoulée.
  * - Musique, Cinéma, Piano : une fois la durée écoulée (garde-fou temporel léger),
  *   avec, si on veut, le titre exploré.
+ * - Leçon de piano (mode progression) : dès que la mélodie de la leçon a été
+ *   jouée sur le clavier de l'appli, sans attendre ; son titre est gardé.
  */
 export async function completeProposal(
   prisma: PrismaClient,
@@ -58,12 +63,13 @@ export async function completeProposal(
   const passion = getPassion(proposal.passion as PassionId)
   const duration = proposal.duration as Duration
   const text = passion.proof === 'texte' ? clean(input.text, MAX_TEXT_LENGTH) : null
-  const exploredTitle = passion.proof === 'titre' ? clean(input.exploredTitle, MAX_TITLE_LENGTH) : null
+  const melody = input.played ? keyboardMelody(proposal.activityId) : undefined
+  const exploredTitle = passion.proof === 'titre' ? (clean(input.exploredTitle, MAX_TITLE_LENGTH) ?? melody?.title ?? null) : null
   const photo = passion.proof === 'photo' ? input.photo : undefined
 
   const project = input.projectId ? await projectForPassion(prisma, user, input.projectId, proposal.passion) : null
 
-  const hasProof = Boolean(text || photo)
+  const hasProof = Boolean(text || photo || melody)
   const unlocked = now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
   if (!hasProof && !unlocked) {
     throw passion.timeGuard
@@ -133,7 +139,7 @@ export function toCompletionDTO(completion: Completion, photoUrl: (completion: C
     id: completion.id,
     activityId: completion.activityId,
     passion: completion.passion as PassionId,
-    mood: completion.mood as MoodId,
+    mood: isMoodId(completion.mood) ? completion.mood : null,
     duration: completion.duration as Duration,
     activityText: completion.activityText,
     extra: parseExtra(completion.extra),

@@ -84,6 +84,18 @@ export const MOMENT_INTROS: Record<'nuit' | 'matin', Record<Energy, readonly str
 }
 
 /** `hour` : l'heure locale de l'utilisateur (0-23), si on la connaît. */
+/** Pour une leçon de parcours : pas d'humeur demandée, juste un mot pour s'y mettre. */
+export const LESSON_INTROS: readonly string[] = [
+  'Nouvelle leçon, pas à pas :',
+  'On reprend là où tu t’étais arrêté·e :',
+  'Doigts prêts ? Voici la leçon :',
+  'Une marche de plus. Au programme :',
+]
+
+export function pickLessonIntro(random: () => number = Math.random): string {
+  return frenchTypography(LESSON_INTROS[Math.floor(random() * LESSON_INTROS.length)] ?? LESSON_INTROS[0] ?? '')
+}
+
 export function pickIntro(mood: MoodId, random: () => number = Math.random, hour?: number): string {
   const moment = hour === undefined ? null : hour >= 22 || hour < 5 ? 'nuit' : hour >= 5 && hour < 9 ? 'matin' : null
   const list = moment && random() < 0.5 ? MOMENT_INTROS[moment][getMood(mood).energy] : INTROS[mood]

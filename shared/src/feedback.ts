@@ -53,8 +53,9 @@ export const APP_EVENTS = [
   'tab', // onglet ouvert depuis la barre du bas (data.tab : home, progress, gallery)
   'pull', // la tirette de l'accueil tirée vers le haut (plutôt que touchée)
   'skill', // niveau déclaré dans une passion (data.passion, data.level)
-  'keyboard', // clavier de l'appli ouvert (« Sans piano »)
-  'melody_done', // mélodie guidée jouée jusqu'au bout sur le clavier de l'appli
+  'melody_done', // mélodie guidée jouée jusqu'au bout sur le clavier de l'appli (data.melody)
+  'melody_part', // une partie d'apprentissage réussie (data.melody, data.part)
+  'lesson', // leçon de parcours lancée (mode progression : ni signal ni humeur ; data.step, data.from : parcours ou enchaînement)
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

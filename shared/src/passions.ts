@@ -29,7 +29,8 @@ export const PASSIONS: readonly Passion[] = [
 ]
 
 export const MIN_PASSIONS = 1
-export const MAX_PASSIONS = 3
+/** Pas de limite : on peut choisir toutes les passions. */
+export const MAX_PASSIONS = PASSIONS.length
 
 const BY_ID = new Map(PASSIONS.map((passion) => [passion.id, passion]))
 
@@ -44,7 +45,7 @@ export function isPassionId(value: unknown): value is PassionId {
 }
 
 /**
- * Valide une sélection de passions (1 à 3, sans doublon, identifiants connus)
+ * Valide une sélection de passions (au moins une, sans doublon, identifiants connus)
  * et la renvoie dans l'ordre d'affichage. Renvoie `null` si elle est invalide.
  */
 export function normalizePassions(value: unknown): PassionId[] | null {

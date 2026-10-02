@@ -190,7 +190,7 @@ describe('statistiques', () => {
     await request(app).post('/api/projects').set(as()).send({ passion: 'ecriture', name: 'Carnet' }).expect(201)
 
     const stats = await globalStats(prisma, clock.now())
-    expect(stats).toContain('Parcours : 1 étape réussie, 0 parcours terminé')
+    expect(stats).toContain('Parcours : 0 leçon lancée, 1 étape réussie, 0 parcours terminé')
     expect(stats).toContain('Projets : 1 créé, 0 terminé')
     const user = await prisma.user.findUniqueOrThrow({ where: { id: 42n } })
     const mine = await personalStats(prisma, user)

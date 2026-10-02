@@ -204,6 +204,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     pulls,
     tabRows,
     pianists,
+    lessonStarts,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -221,7 +222,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.completion.aggregate({ _sum: { coins: true } }),
     prisma.completion.groupBy({ by: ['passion'], _count: true }),
     prisma.completion.groupBy({ by: ['duration'], _count: true }),
-    prisma.proposal.groupBy({ by: ['mood'], _count: true, orderBy: { _count: { mood: 'desc' } }, take: 3 }),
+    prisma.proposal.groupBy({ by: ['mood'], _count: true, where: { mood: { not: null } }, orderBy: { _count: { mood: 'desc' } }, take: 3 }),
     prisma.completion.groupBy({ by: ['rating'], _count: true, where: { rating: { not: null } } }),
     prisma.feedback.count(),
     prisma.appEvent.count({ where: { name: 'share' } }),
@@ -241,6 +242,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.appEvent.count({ where: { name: 'pull' } }),
     prisma.appEvent.findMany({ where: { name: 'tab' }, select: { data: true } }),
     prisma.user.findMany({ where: { passions: { contains: '"piano"' } }, select: { skills: true } }),
+    prisma.appEvent.count({ where: { name: 'lesson' } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
@@ -278,7 +280,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Onglets ouverts : Progresser ${tabCount('progress')} · Galerie ${tabCount('gallery')} · Créer ${tabCount('home')}`,
     `Écran d’accueil : ${plural(homeScreenAdded, 'icône ajoutée', 'icônes ajoutées')} (${plural(homeScreenAsks, 'demande')}, ${homeScreenSilent} bloquée${homeScreenSilent > 1 ? 's' : ''} par le téléphone)`,
     `Musique d’ambiance : ${musicLine(musicChoices)} · coupée ${plural(musicOff, 'fois', 'fois')}`,
-    `Parcours : ${plural(stepRows.length, 'étape réussie', 'étapes réussies')}, ${plural(finishedPaths(stepRows), 'parcours terminé', 'parcours terminés')}`,
+    `Parcours : ${plural(lessonStarts, 'leçon lancée', 'leçons lancées')}, ${plural(stepRows.length, 'étape réussie', 'étapes réussies')}, ${plural(finishedPaths(stepRows), 'parcours terminé', 'parcours terminés')}`,
     `Projets : ${plural(projects, 'créé', 'créés')}, ${plural(projectsDone, 'terminé', 'terminés')}`,
     `Mot du jour : ${plural(challengeRows.length, 'mot', 'mots')} (dessin ${challengeRows.filter((row) => row.activityId.startsWith('defi-dessin')).length}, écriture ${challengeRows.filter((row) => row.activityId.startsWith('defi-ecriture')).length}), par ${plural(new Set(challengeRows.map((row) => row.userId)).size, 'personne')}`,
   ]
@@ -419,7 +421,7 @@ export async function exportCsv(prisma: PrismaClient): Promise<{ completions: st
         c.createdAt.toISOString(),
         describeUser(c.user),
         c.passion,
-        c.mood,
+        c.mood ?? 'leçon',
         c.duration,
         c.activityText,
         stepLabel(c.activityId),

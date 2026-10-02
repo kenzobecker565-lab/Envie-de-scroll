@@ -1,4 +1,4 @@
-import { Dices, Headphones, Images, LifeBuoy, Lightbulb, PenLine, Piano, Play, RefreshCw, Shuffle, Tv, Volume2, VolumeX } from 'lucide-react'
+import { Dices, Headphones, Images, LifeBuoy, Lightbulb, PenLine, Play, RefreshCw, Shuffle, Tv, Volume2, VolumeX } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useMemo, useState } from 'react'
 import { drawChallenge, EXTRA_LINKS, guideFor, sample, seededRandom, type Challenge, type IdeaList, type LinkKind, type ProposalDTO } from '@scroll-up/shared'
@@ -9,7 +9,6 @@ import { track } from '../api/client.ts'
 import { linksFor, type ExternalLink } from '../lib/links.ts'
 import { PASSION_COLORS } from '../lib/icons.ts'
 import { Mascot } from './Mascot.tsx'
-import { PianoKeyboard } from './PianoKeyboard.tsx'
 import { useAppState } from '../state/AppState.tsx'
 import { haptics, openExternal } from '../telegram/webApp.ts'
 
@@ -21,8 +20,8 @@ import { haptics, openExternal } from '../telegram/webApp.ts'
  * - « Si tu bloques » : 2 ou 3 pistes pour démarrer ;
  * - « Un défi en plus » (Dessin, Écriture) : une contrainte pour pimenter ;
  * - « Sans papier » (Dessin) : dessiner au doigt, dans l'app ;
- * - « Sans son » (Musique, Cinéma) : une activité qui se fait sans écouter ;
- * - « Sans piano » (Piano) : le clavier de l'appli, avec la mélodie de l'activité.
+ * - « Sans son » (Musique, Cinéma) : une activité qui se fait sans écouter.
+ * (Au piano, le clavier est dans l'activité même : voir ActivityScreen.)
  */
 export function ActivityHelp({
   proposal,
@@ -37,11 +36,10 @@ export function ActivityHelp({
 }) {
   const guide = guideFor(proposal.activityId)
   const canChallenge = proposal.passion === 'dessin' || proposal.passion === 'ecriture'
-  const hasKeyboard = proposal.passion === 'piano'
   const [open, setOpen] = useState<Panel | null>(null)
   const [challenge, setChallenge] = useState<Challenge | null>(null)
 
-  const hasPanels = Boolean(guide?.ideas || guide || canChallenge || hasKeyboard)
+  const hasPanels = Boolean(guide?.ideas || guide || canChallenge)
   if (!hasPanels && !onPad && !quiet && !proposal.extra) return null
 
   const toggle = (panel: Panel) => {
@@ -49,11 +47,6 @@ export function ActivityHelp({
     if (open === panel) return setOpen(null)
     setOpen(panel)
     if (panel === 'tips') track('tips_open', { passion: proposal.passion })
-    if (panel === 'keyboard') {
-      track('keyboard', { passion: proposal.passion, melody: Boolean(guide?.melody) })
-      // Le clavier est la dernière chose de l'écran : on descend pour l'avoir en entier sous les doigts.
-      window.setTimeout(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }), 240)
-    }
     if (panel === 'challenge' && !challenge) newChallenge()
   }
 
@@ -95,12 +88,6 @@ export function ActivityHelp({
               <HelpToggle open={open === 'challenge'} onClick={() => toggle('challenge')} controls="help-challenge">
                 <Dices aria-hidden="true" />
                 Un défi en plus
-              </HelpToggle>
-            )}
-            {hasKeyboard && (
-              <HelpToggle open={open === 'keyboard'} onClick={() => toggle('keyboard')} controls="help-keyboard">
-                <Piano aria-hidden="true" />
-                Sans piano
               </HelpToggle>
             )}
             {onPad && (
@@ -160,17 +147,6 @@ export function ActivityHelp({
             ))}
           </motion.ol>
         )}
-        {open === 'keyboard' && (
-          <motion.div key="keyboard" id="help-keyboard" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
-            <Card tone="muted" className="gap-3">
-              <CardEyebrow>
-                <Piano aria-hidden="true" />
-                Le clavier de l’appli
-              </CardEyebrow>
-              <PianoKeyboard melody={guide?.melody} />
-            </Card>
-          </motion.div>
-        )}
         {open === 'challenge' && challenge && (
           <Card
             key={`challenge-${challenge.text}-${challenge.palette?.name ?? ''}`}
@@ -220,7 +196,7 @@ export function ActivityHelp({
   )
 }
 
-type Panel = 'ideas' | 'tips' | 'challenge' | 'keyboard'
+type Panel = 'ideas' | 'tips' | 'challenge'
 
 function HelpToggle({ open, onClick, controls, children }: { open: boolean; onClick: () => void; controls: string; children: React.ReactNode }) {
   return (

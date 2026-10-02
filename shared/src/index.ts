@@ -21,3 +21,5 @@ export type * from './api.ts'
 export * from './skills.ts'
 export * from './keyboard.ts'
 export * from './shop.ts'
+
+export * from './pianoClassics.ts'

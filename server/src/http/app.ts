@@ -63,12 +63,12 @@ import { createProposal, findOpenProposal, toProposalDTO } from '../services/pro
 import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
 import { deleteUserData, getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
-import { getShop, buyItem, equipItem, bonusMelody } from '../services/shop.ts'
+import { getShop, buyItem, equipItem, bonusMelody, claimShopTestCredit } from '../services/shop.ts'
 import { ApiError, badRequest } from './errors.ts'
 
 export interface AppDeps {
   prisma: PrismaClient
-  config: Pick<Config, 'botToken' | 'devAuth' | 'initDataMaxAge' | 'signingSecret' | 'appDistDir'>
+  config: Pick<Config, 'botToken' | 'devAuth' | 'initDataMaxAge' | 'signingSecret' | 'appDistDir'> & Partial<Pick<Config, 'adminIds'>>
   photos: PhotoService
   /** Middleware du webhook Telegram, monté avant l'API (mode webhook). */
   webhook?: { path: string; handler: RequestHandler }
@@ -177,7 +177,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
         serverTime: now().toISOString(),
         botUsername: botUsername?.() ?? null,
         projects,
-        shop: await getShop(prisma, user.id),
+        shop: await getShop(prisma, user.id, config.adminIds),
       }
       res.json(body)
     }),
@@ -185,15 +185,19 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
 
   api.get('/shop', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)
-    res.json(await getShop(prisma, user.id))
+    res.json(await getShop(prisma, user.id, config.adminIds))
+  }))
+  api.post('/shop/test-credit', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    res.json(await claimShopTestCredit(prisma, user.id, config.adminIds))
   }))
   api.post('/shop/purchases', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)
-    res.json(await buyItem(prisma, user.id, req.body?.itemId))
+    res.json(await buyItem(prisma, user.id, req.body?.itemId, config.adminIds))
   }))
   api.put('/shop/equipment', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)
-    res.json(await equipItem(prisma, user.id, req.body?.category, req.body?.itemId))
+    res.json(await equipItem(prisma, user.id, req.body?.category, req.body?.itemId, config.adminIds))
   }))
   api.get('/shop/piano/:id', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)

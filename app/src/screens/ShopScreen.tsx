@@ -58,6 +58,15 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
     catch (caught) { setError((caught as Error).message) }
     finally { setLoading(false) }
   }
+  const claimCredit = async () => {
+    if (busy) return
+    setBusy(true); setError(undefined)
+    try {
+      dispatch({ type: 'shop', shop: await api.claimShopTestCredit() })
+      setNotice('10 000 Minutons de test sont disponibles pour tes achats. Ta progression reste inchangée.')
+    } catch (caught) { setError((caught as Error).message) }
+    finally { setBusy(false) }
+  }
   const purchase = async () => {
     if (!selected || busy) return
     setBusy(true); setError(undefined)
@@ -104,6 +113,8 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
       <span className="rounded-pill border-[2.5px] border-outline bg-warm px-3 py-2 text-22 text-on-color shadow-chip" aria-label={`Solde disponible : ${shop.balance} minutons`}><Price value={shop.balance} size={30} /></span>
     </header>
     <p className="mt-3 text-14 text-ink-soft">Des petits plaisirs pour ta pause créative. À toi pour toujours.</p>
+    {shop.canClaimTestCredit && <Button className="mt-4" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
+    {shop.bonus > 0 && <p className="mt-2 text-12 text-ink-soft">Crédit de test inclus dans le solde · sans effet sur ta progression.</p>}
     <div className="mt-5 grid grid-cols-2 gap-2">
       <Button size="sm" variant={!mine ? 'default' : 'secondary'} onClick={() => setMine(false)} aria-pressed={!mine}>À découvrir</Button>
       <Button size="sm" variant={mine ? 'default' : 'secondary'} onClick={() => setMine(true)} aria-pressed={mine}>Mes achats</Button>
@@ -130,6 +141,8 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
           </button>
           <div className="flex flex-1 flex-col gap-2 p-3">
             <h3 className="font-display text-17 leading-tight font-extrabold">{item.title}</h3>
+            {item.composer && <p className="text-12 font-bold text-ink-soft">{item.composer}</p>}
+            {item.edition && <p className="text-11 text-ink-soft">{item.edition}</p>}
             {item.difficulty && <p className="text-11 font-semibold text-ink-soft">{item.id === 'piano-davy-jones' ? 'Partition externe' : item.difficulty}</p>}
             <button type="button" onClick={() => preview(item)} className="flex min-h-8 items-center gap-1.5 text-12 font-bold text-ink-soft" aria-label={`Voir l’aperçu de ${item.title}`}><Eye size={15} aria-hidden="true" />Voir l’aperçu</button>
             {item.audio && <button type="button" onClick={() => previewAudio(item)} className="flex min-h-8 items-center gap-1.5 text-12 font-bold text-ink-soft" aria-label={`Écouter l’aperçu de ${item.title}`}>{playing === item.id ? <Square size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}{playing === item.id ? 'Arrêter' : 'Écouter'}</button>}
@@ -148,7 +161,7 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
     <Dialog open={Boolean(selected)} onOpenChange={(open) => { if (!open && !busy) { setSelected(undefined); stopPreview() } }}>
       <DialogContent>
         {selected && <>
-          <DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.description}</DialogDescription></DialogHeader>
+          <DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.description}{selected.edition && ` ${selected.edition}.`}</DialogDescription></DialogHeader>
           <ShopPreview item={selected} detail />
           {selected.category === 'cover' && <p className="text-13 text-ink-soft">Voici son rendu sur une carte de projet sans photo. Les projets avec une photo conservent leur image.</p>}
           {selected.audio && <Button variant="secondary" size="sm" onClick={() => previewAudio(selected)}>{playing === selected.id ? <Square /> : <Play />}{playing === selected.id ? 'Arrêter l’aperçu' : 'Écouter l’aperçu'}</Button>}
@@ -184,7 +197,8 @@ export function BonusPianoScreen({ itemId }: { itemId: string }) {
   const retry = () => { setError(undefined); api.bonusMelody(itemId).then((data) => setMelody(data.melody)).catch((caught: Error) => setError(caught.message)) }
   return <Screen>
     <h1 className="font-display text-40 font-extrabold tracking-tight">{item?.title ?? 'Morceau bonus'}</h1>
+    {item?.edition && <p className="mt-2 text-13 text-ink-soft">{item.composer} · {item.edition}</p>}
     {freeDavy ? <><p className="mt-2 text-14 text-ink-soft">Clavier libre pour t’entraîner avec ta partition. Les notes du morceau ne sont pas intégrées ici.</p><Button variant="secondary" className="mt-4 whitespace-normal" onClick={() => openExternal(DAVY_PARTITION)}><ExternalLink />Ouvrir la partition officielle</Button><div className="mt-5"><PianoKeyboard /></div></>
-      : <><p className="mt-2 text-14 text-ink-soft">{item?.difficulty} · Répertoire bonus. Entraîne-toi librement, sans minutons supplémentaires.</p>{error ? <div role="alert" className="mt-5"><p>{error}</p><Button onClick={retry}>Réessayer</Button></div> : !melody ? <p className="mt-5" role="status">Chargement du morceau…</p> : <div className="mt-5"><PianoKeyboard melody={melody} onComplete={() => setComplete(true)} />{complete && <p role="status" className="mt-4 text-15 font-bold">Bravo, tu as joué le morceau ! Tu peux le reprendre autant que tu veux.</p>}</div>}</>}
+      : <><p className="mt-2 text-14 text-ink-soft">{item?.difficulty} · Répertoire bonus. Entraîne-toi librement, sans minutons supplémentaires.</p>{error ? <div role="alert" className="mt-5"><p>{error}</p><Button onClick={retry}>Réessayer</Button></div> : !melody ? <p className="mt-5" role="status">Chargement du morceau…</p> : <div className="mt-5"><PianoKeyboard melody={melody} onComplete={() => setComplete(true)} />{complete && <p role="status" className="mt-4 text-15 font-bold">{item?.edition ? 'Bravo, tu as joué cet extrait !' : 'Bravo, tu as joué le morceau !'} Tu peux le reprendre autant que tu veux.</p>}</div>}</>}
   </Screen>
 }

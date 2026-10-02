@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { getPassion, PASSION_IDS, type PassionId } from '@scroll-up/shared'
 import { useEquipped } from '../lib/shop.ts'
-import { ShopSymbol } from '../components/ShopArt.tsx'
-import { Mascot } from '../components/Mascot.tsx'
+import { ProfileDecoration } from '../components/ShopArt.tsx'
 import { Button } from '@/components/ui/button'
 import { Screen } from '../components/Screen.tsx'
 import { PassionCard, PassionDetail, statsFor } from '../components/Progression.tsx'
@@ -80,9 +79,7 @@ export function ProfileScreen() {
   const [erase, setErase] = useState(false)
   return <Screen tabs>
     <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Profil</h1>
-    <div className="mt-5 flex items-center justify-center gap-4 rounded-md border-[2.5px] border-outline p-4 shadow-chip" style={{ background: decoration ? `linear-gradient(135deg, ${decoration.colors[0]}, ${decoration.colors[1]})` : 'var(--card)' }}>
-      {decoration && <ShopSymbol item={decoration} size={32} />}<Mascot mood="wink" size={72} />{decoration && <ShopSymbol item={decoration} size={32} />}
-    </div>
+    <div className="mt-5"><ProfileDecoration item={decoration} /></div>
     <Button className="mt-4" variant="secondary" onClick={() => push({ name: 'shop', library: true })}>Mes achats et personnalisations</Button>
     <p className="mt-2 text-15 text-ink-soft">Tes préférences, tes relances et tes données.</p>
     <div className="mt-6 flex flex-col gap-5">

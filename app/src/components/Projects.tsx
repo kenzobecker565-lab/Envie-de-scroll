@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { ShopSymbol } from './ShopArt.tsx'
+import { ProjectCoverArtwork } from './ShopArt.tsx'
 import { useEquipped } from '../lib/shop.ts'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
@@ -105,7 +105,7 @@ function ProjectCard({ project, index, onOpen }: { project: ProjectDTO; index: n
       )}
     >
       <span className={cn('flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-sm border-[2.5px] border-outline text-on-color [&>svg]:size-7', PASSION_COLORS[project.passion].bg)}>
-        {!project.coverUrl && cover ? <span className="flex h-full w-full items-center justify-center text-26" style={{ background: cover.id === 'cover-carnet' ? `repeating-linear-gradient(135deg, ${cover.colors[0]} 0 10px, ${cover.colors[1]} 10px 20px, ${cover.colors[2]} 20px 30px)` : cover.colors[0] }} aria-label={cover.title}>{cover.id === 'cover-vinyle' ? <ShopSymbol item={cover} size={40} /> : <Icon aria-hidden="true" />}</span> : project.coverUrl ? <img src={project.coverUrl} alt="" className="h-full w-full object-cover" loading="lazy" /> : <Icon aria-hidden="true" />}
+        {!project.coverUrl && cover ? <ProjectCoverArtwork item={cover} icon={Icon} /> : project.coverUrl ? <img src={project.coverUrl} alt="" className="h-full w-full object-cover" loading="lazy" /> : <Icon aria-hidden="true" />}
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="text-12 font-bold text-ink-soft">

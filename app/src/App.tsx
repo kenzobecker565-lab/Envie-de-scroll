@@ -170,7 +170,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
           {screenFor(route)}
         </motion.div>
       </AnimatePresence>
-      {/* Navigation des cinq espaces, masquée pendant les activités. */}
+      {/* Navigation des six espaces, masquée pendant les activités. */}
       <TabBar />
     </>
   )

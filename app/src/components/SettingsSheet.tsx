@@ -15,7 +15,6 @@ import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { checkHomeScreen, haptics, requestHomeScreen, supports, telegram } from '../telegram/webApp.ts'
 import { AmbiancePicker } from './AmbiancePicker.tsx'
-import { FeedbackDialog } from './FeedbackDialog.tsx'
 import { ThemeGrid } from './ThemePicker.tsx'
 
 /**
@@ -24,46 +23,11 @@ import { ThemeGrid } from './ThemePicker.tsx'
  * donner son avis.
  */
 export function SettingsButton() {
-  const [open, setOpen] = useState(false)
-  const [feedbackOpen, setFeedbackOpen] = useState(false)
-  const [eraseOpen, setEraseOpen] = useState(false)
   const { push } = useNavigation()
-
-  const openSheet = () => {
-    track('settings_open')
-    setOpen(true)
-  }
-
-  return (
-    <>
-      <Button variant="secondary" size="icon" onClick={openSheet} aria-haspopup="dialog" aria-label="Réglages : thème, passions, relances">
-        <Settings2 aria-hidden="true" />
-      </Button>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <SettingsContent
-            onEditPassions={() => {
-              setOpen(false)
-              push({ name: 'passions', mode: 'edit' })
-            }}
-            onFeedback={() => {
-              setOpen(false)
-              setFeedbackOpen(true)
-            }}
-            onErase={() => {
-              setOpen(false)
-              setEraseOpen(true)
-            }}
-          />
-        </DialogContent>
-      </Dialog>
-      <FeedbackDialog open={feedbackOpen} onOpenChange={setFeedbackOpen} context="réglages" />
-      <EraseDialog open={eraseOpen} onOpenChange={setEraseOpen} />
-    </>
-  )
+  return <Button variant="secondary" size="icon" onClick={() => { track('settings_open'); push({ name: 'profile' }) }} aria-label="Mon profil et mes réglages"><Settings2 aria-hidden="true" /></Button>
 }
 
-function SettingsContent({ onEditPassions, onFeedback, onErase }: { onEditPassions: () => void; onFeedback: () => void; onErase: () => void }) {
+export function SettingsContent({ onEditPassions, onFeedback, onErase, embedded = false }: { embedded?: boolean; onEditPassions: () => void; onFeedback: () => void; onErase: () => void }) {
   const { state, dispatch } = useAppState()
   const { user } = state.me
   const [saving, setSaving] = useState(false)
@@ -89,21 +53,21 @@ function SettingsContent({ onEditPassions, onFeedback, onErase }: { onEditPassio
 
   return (
     <>
-      <DialogHeader>
+      {!embedded && <DialogHeader>
         <DialogTitle>Réglages</DialogTitle>
         <DialogDescription>Tout s’applique tout de suite.</DialogDescription>
-      </DialogHeader>
+      </DialogHeader>}
 
-      <section className="flex flex-col gap-3" aria-labelledby="settings-style">
+      <details className="flex flex-col gap-3"><summary className="font-display text-22 font-extrabold">Apparence</summary><section className="mt-3 flex flex-col gap-3" aria-labelledby="settings-style">
         <h2 id="settings-style" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
           Ton style
         </h2>
         <ThemeGrid />
-      </section>
+      </section></details>
 
       <Separator />
 
-      <section className="flex flex-col gap-3" aria-labelledby="settings-music">
+      <details><summary className="font-display text-22 font-extrabold">Musique</summary><section className="mt-3 flex flex-col gap-3" aria-labelledby="settings-music">
         <h2 id="settings-music" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
           Ta musique
         </h2>
@@ -121,13 +85,13 @@ function SettingsContent({ onEditPassions, onFeedback, onErase }: { onEditPassio
           checked={music}
         />
         <AmbiancePicker />
-      </section>
+      </section></details>
 
       <Separator />
 
       <div className="flex flex-col gap-3">
-        <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''} sur 4`} onClick={onEditPassions} />
-        <Row
+        <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''}`} onClick={onEditPassions} />
+        <details><summary className="font-display text-22 font-extrabold">Relances</summary><div className="mt-3 flex flex-col gap-3"><Row
           icon={<BellRing aria-hidden="true" />}
           title="Petites relances"
           description={
@@ -141,15 +105,15 @@ function SettingsContent({ onEditPassions, onFeedback, onErase }: { onEditPassio
           checked={user.remindersEnabled}
           live
         />
-        {user.remindersEnabled && <MomentPicker />}
-        {telegram && <HomeScreenRow />}
+        {user.remindersEnabled && <MomentPicker />}</div></details>
+        <details><summary className="font-display text-22 font-extrabold">Aide et partage</summary><div className="mt-3 flex flex-col gap-3">{telegram && <HomeScreenRow />}
         <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
-        <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" />
+        <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" /></div></details>
       </div>
 
       <Separator />
 
-      <Row icon={<Trash2 aria-hidden="true" />} title="Effacer mes données" description="Tout supprimer et refaire l’inscription depuis le début." onClick={onErase} />
+      <details><summary className="font-display text-22 font-extrabold">Mes données</summary><div className="mt-3"><Row icon={<Trash2 aria-hidden="true" />} title="Effacer mes données" description="Tout supprimer et refaire l’inscription depuis le début." onClick={onErase} /></div></details>
 
       <p className="text-center text-12 text-ink-soft">Scroll-up · version de test. Merci de faire partie des premiers&nbsp;!</p>
       <p className="text-center text-11 text-ink-faint">Musiques&nbsp;: {ambianceCredits()}</p>
@@ -286,7 +250,7 @@ function MomentPicker() {
  * minutons, parcours, projets, réglages, et ce qui est gardé sur le
  * téléphone). L'app redémarre sur l'inscription.
  */
-function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+export function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string>()
 

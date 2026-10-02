@@ -332,6 +332,24 @@ describe('galerie', () => {
     expect(new Set(me.stats.byPassion[0]?.tried).size).toBe(3)
   })
 
+  it('filtre une passion avant la pagination, même entre des activités d’autres passions', async () => {
+    await onboard(['musique', 'cinema'])
+    for (const passion of ['musique', 'cinema', 'musique', 'cinema']) {
+      const proposal = await propose({ passion, duration: 5 })
+      clock.advanceMinutes(6)
+      await request(app).post('/api/completions').set(as()).send({ proposalId: proposal.id, exploredTitle: passion }).expect(201)
+    }
+    const first = (await request(app).get('/api/completions?limit=1&passion=musique').set(as()).expect(200)).body as CompletionsPage
+    expect(first.items.map((item) => item.passion)).toEqual(['musique'])
+    expect(first.nextCursor).not.toBeNull()
+    const second = (await request(app).get(`/api/completions?limit=1&passion=musique&cursor=${first.nextCursor}`).set(as()).expect(200)).body as CompletionsPage
+    expect(second.items.map((item) => item.passion)).toEqual(['musique'])
+    expect(second.items[0]?.id).not.toBe(first.items[0]?.id)
+    expect(second.nextCursor).toBeNull()
+    const other = (await request(app).get('/api/completions?passion=musique').set(as(2)).expect(200)).body as CompletionsPage
+    expect(other.items).toEqual([])
+  })
+
   it('ne montre jamais la galerie d’un autre utilisateur', async () => {
     await onboard(['musique'], 1)
     const proposal = await propose({ passion: 'musique', mood: 'ennui', duration: 5 }, 1)

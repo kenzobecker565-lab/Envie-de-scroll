@@ -1,6 +1,6 @@
 import { Timer } from 'lucide-react'
 import { motion } from 'motion/react'
-import { passionLevel } from '@scroll-up/shared'
+import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { BadgeShelf } from '../components/BadgePin.tsx'
@@ -8,8 +8,7 @@ import { ChallengeCard, challengePassions } from '../components/Challenge.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { MilestoneProgress } from '../components/Milestones.tsx'
-import { currentPath, finishedPathIds, PathCard } from '../components/Paths.tsx'
-import { PassionProgressGrid, statsFor } from '../components/Progression.tsx'
+import { finishedPathIds } from '../components/Paths.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatNumber, plural } from '../lib/format.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
@@ -26,16 +25,9 @@ export function ProgressScreen() {
   const { push } = useNavigation()
   const { user, stats } = state.me
 
-  const paths = user.passions
-    .map((passion) => {
-      const row = statsFor(stats.byPassion, passion)
-      return currentPath(passion, row.steps, passionLevel(passion, row.minutes).level, user.skills[passion])
-    })
-    .filter((entry) => entry !== null)
-
   return (
     <Screen tabs>
-      <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Progresser</h1>
+      <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Progression</h1>
 
       {/* Les minutons, en grand, sur un sticker soleil. */}
       <Card
@@ -87,27 +79,10 @@ export function ProgressScreen() {
         </div>
       )}
 
-      {paths.length > 0 && (
-        <section className="mt-8 flex flex-col gap-3" aria-labelledby="paths-title">
-          <h2 id="paths-title" className="font-display text-26 font-extrabold tracking-tight text-ink">
-            Tes parcours
-          </h2>
-          <p className="-mt-1 text-14 text-ink-soft">Six étapes de plus en plus exigeantes, une passion à la fois.</p>
-          {paths.map((progress, index) => (
-            <PathCard
-              key={progress.path.id}
-              progress={progress}
-              index={index}
-              onOpen={() => {
-                haptics.impact('light')
-                push({ name: 'path', pathId: progress.path.id })
-              }}
-            />
-          ))}
-        </section>
-      )}
-
-      <PassionProgressGrid title="Tes passions" />
+      <div className="mt-8 flex flex-col gap-3">
+        <Button variant="secondary" onClick={() => push({ name: 'gallery' })}>Historique de mes activités</Button>
+        <Button variant="secondary" onClick={() => push({ name: 'passionHub' })}>Progresser dans une passion</Button>
+      </div>
       {stats.byPassion.some((row) => row.steps.length > 0) && <BadgeShelf finished={finishedPathIds(stats.byPassion)} />}
     </Screen>
   )

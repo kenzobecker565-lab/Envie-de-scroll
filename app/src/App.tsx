@@ -19,6 +19,7 @@ import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { PathScreen } from './screens/PathScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
 import { TabBar } from './components/TabBar.tsx'
+import { PassionHubScreen, PassionSpaceScreen, ProfileScreen } from './screens/NavigationScreens.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
 import { MomentScreen, PassionsScreen, SkillScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
@@ -113,6 +114,9 @@ function screenFor(route: Route) {
       return <SkillScreen passion={route.passion} mode={route.mode} />
     case 'home':
       return <HomeScreen />
+    case 'passionHub': return <PassionHubScreen />
+    case 'passionSpace': return <PassionSpaceScreen passion={route.passion} />
+    case 'profile': return <ProfileScreen />
     case 'signal':
       return <SignalScreen />
     case 'time':
@@ -128,7 +132,7 @@ function screenFor(route: Route) {
     case 'progress':
       return <ProgressScreen />
     case 'gallery':
-      return <GalleryScreen />
+      return <GalleryScreen passion={route.passion} />
     case 'path':
       return <PathScreen pathId={route.pathId} />
     case 'challenge':
@@ -147,7 +151,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 
-  const key = route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
+  const key = route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>
       <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
@@ -155,7 +159,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
           {screenFor(route)}
         </motion.div>
       </AnimatePresence>
-      {/* Créer · Progresser · Galerie, sur les trois écrans principaux seulement. */}
+      {/* Navigation des quatre espaces, masquée pendant les activités. */}
       <TabBar />
     </>
   )

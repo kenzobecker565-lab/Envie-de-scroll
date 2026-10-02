@@ -6,7 +6,7 @@ import { haptics } from '../telegram/webApp.ts'
 
 /** La pile d'une leçon : Progresser, le parcours, puis l'écran donné (la leçon, sa réussite). */
 export function lessonStack(step: PathStep, screen: Route): Route[] {
-  return [...tabStack('progress'), { name: 'path', pathId: step.pathId }, screen]
+  return [...tabStack('passionHub'), { name: 'passionSpace', passion: step.passion }, { name: 'path', pathId: step.pathId }, screen]
 }
 
 /**

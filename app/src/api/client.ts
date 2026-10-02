@@ -105,8 +105,8 @@ export const api = {
     return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle, played, projectId }) })
   },
 
-  completions: (cursor?: string) =>
-    call<CompletionsPage>(`/completions?limit=12${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
+  completions: (cursor?: string, passion?: PassionId) =>
+    call<CompletionsPage>(`/completions?limit=12${passion ? `&passion=${passion}` : ''}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
 
   rate: (completionId: string, rating: ActivityRating) =>
     call<CompletionResponse>(`/completions/${encodeURIComponent(completionId)}/rating`, { method: 'PUT', body: JSON.stringify({ rating }) }),

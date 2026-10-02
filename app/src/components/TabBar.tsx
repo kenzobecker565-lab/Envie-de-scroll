@@ -1,27 +1,24 @@
-import { Images, Mountain, PenLine, type LucideIcon } from 'lucide-react'
+import { Heart, Mountain, PenLine, UserRound, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
 import { useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
-/**
- * La barre d'onglets, en bas : Créer (l'accueil et sa tirette), Progresser
- * (minutons, mot du jour, parcours, niveaux, badges) et Galerie (projets et
- * créations). Elle n'apparaît que sur ces trois écrans : pendant une activité,
- * plus rien ne distrait.
- */
+/** Les quatre espaces principaux. La barre se retire pendant les activités. */
 
-export type Tab = 'home' | 'progress' | 'gallery'
+export type Tab = 'home' | 'passionHub' | 'progress' | 'profile'
 
 const TABS: readonly { id: Tab; label: string; icon: LucideIcon }[] = [
-  { id: 'home', label: 'Créer', icon: PenLine },
-  { id: 'progress', label: 'Progresser', icon: Mountain },
-  { id: 'gallery', label: 'Galerie', icon: Images },
+  { id: 'home', label: 'Accueil', icon: PenLine },
+  { id: 'passionHub', label: 'Mes passions', icon: Heart },
+  { id: 'progress', label: 'Progression', icon: Mountain },
+  { id: 'profile', label: 'Profil', icon: UserRound },
 ]
 
 /** La pile d'un onglet : l'accueil en dessous, pour que le bouton retour de Telegram y ramène. */
-export function tabStack(tab: Tab): Route[] {
+export function tabStack(tab: Tab | 'gallery'): Route[] {
+  if (tab === 'gallery') return [{ name: 'home' }, { name: 'progress' }, { name: 'gallery' }]
   return tab === 'home' ? [{ name: 'home' }] : [{ name: 'home' }, { name: tab }]
 }
 
@@ -34,7 +31,7 @@ export const TAB_BAR_SPACE = 'pb-[calc(104px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
   const { route, reset } = useNavigation()
-  const current = isTab(route.name) ? route.name : null
+  const current = route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'progress') : isTab(route.name) ? route.name : null
 
   const open = (tab: Tab) => {
     if (!current || tab === current) return
@@ -51,7 +48,7 @@ export function TabBar() {
         <motion.nav
           key="tabbar"
           aria-label="Navigation"
-          className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-3 gap-1.5 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
+          className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-4 gap-1.5 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
           initial={{ y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}

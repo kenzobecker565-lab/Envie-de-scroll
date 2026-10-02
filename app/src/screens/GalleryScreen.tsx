@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { getPassion, type CompletionDTO } from '@scroll-up/shared'
+import { getPassion, type PassionId, type CompletionDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button, PRESSED } from '@/components/ui/button'
@@ -14,6 +14,7 @@ import { api, ApiError, track } from '../api/client.ts'
 import { CoinIcon } from '../components/Coins.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
 import { ProjectPicker, ProjectsSection } from '../components/Projects.tsx'
+import { statsFor } from '../components/Progression.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
@@ -27,10 +28,11 @@ import { haptics } from '../telegram/webApp.ts'
  * l'ouvre en grand. Les minutons, parcours et badges vivent dans l'onglet
  * « Progresser ». Jamais de calendrier de jours cochés ou manqués.
  */
-export function GalleryScreen() {
+export function GalleryScreen({ passion }: { passion?: PassionId }) {
   const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
   const { stats } = state.me
+  const row = passion ? statsFor(stats.byPassion, passion) : null
 
   const [items, setItems] = useState<CompletionDTO[]>([])
   const [cursor, setCursor] = useState<string | null>(null)
@@ -43,7 +45,7 @@ export function GalleryScreen() {
   const load = useCallback(async (from?: string) => {
     setStatus(from ? 'more' : 'loading')
     try {
-      const page = await api.completions(from)
+      const page = await api.completions(from, passion)
       setItems((previous) => (from ? [...previous, ...page.items] : page.items))
       setCursor(page.nextCursor)
       setStatus('idle')
@@ -51,7 +53,7 @@ export function GalleryScreen() {
       setError(caught instanceof ApiError ? caught.message : 'Impossible de charger ta galerie.')
       setStatus('error')
     }
-  }, [])
+  }, [passion])
 
   useEffect(() => {
     void load()
@@ -70,7 +72,7 @@ export function GalleryScreen() {
 
   const startFlow = () => {
     haptics.impact('heavy')
-    dispatch({ type: 'newFlow' })
+    dispatch({ type: 'newFlow', flow: passion ? { fixedPassion: passion } : undefined })
     reset([{ name: 'home' }, { name: 'signal' }])
   }
 
@@ -85,14 +87,14 @@ export function GalleryScreen() {
   return (
     <Screen tabs>
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Ta galerie</h1>
+        <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">{passion ? `Créations · ${getPassion(passion).label}` : 'Historique'}</h1>
         <p className="text-15 font-semibold text-ink-soft">
-          {plural(stats.totalActivities, 'création')} · {formatNumber(stats.totalCoins)} minutons
-          {state.me.projects.length > 0 && <> · {plural(state.me.projects.length, 'projet')}</>}
+          {plural(row?.activities ?? stats.totalActivities, 'création')} · {formatNumber(row?.minutes ?? stats.totalCoins)} minutons
+          {!passion && state.me.projects.length > 0 && <> · {plural(state.me.projects.length, 'projet')}</>}
         </p>
       </header>
 
-      <ProjectsSection />
+      {!passion && <ProjectsSection />}
 
       {(view === 'list' || view === 'loading') && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
       <div className={cn('flex flex-1 flex-col', view === 'list' || view === 'loading' ? 'mt-3' : 'mt-8')}>

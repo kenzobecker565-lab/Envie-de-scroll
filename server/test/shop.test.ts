@@ -142,3 +142,14 @@ it('permet d’acheter et de jouer chacun des six classiques, en conservant le v
     expect(played.body.melody.phrases.flat()).toEqual(played.body.melody.notes)
   }
 })
+
+it('achète et restaure les nouvelles palettes et couvertures', async () => {
+  await fund(100)
+  for (const [category, itemId] of [['palette', 'palette-ocean'], ['cover', 'cover-sakura']] as const) {
+    await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(200)
+    const equipped = await request(app).put('/api/shop/equipment').set(as()).send({ category, itemId }).expect(200)
+    expect(equipped.body.equipped[category]).toBe(itemId)
+  }
+  const restored = await request(app).get('/api/me').set(as()).expect(200)
+  expect(restored.body.shop).toMatchObject({ balance: 10, spent: 90, equipped: { palette: 'palette-ocean', cover: 'cover-sakura' } })
+})

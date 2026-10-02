@@ -799,3 +799,11 @@
   --accent: #86c9aa; --accent-soft: #d1eddc; --accent-strong: #28664c;
   --line: #bfceb1; --warm: #e4d78d; --sky: #a4cad7; --good: #a5d195; --lilac: #c4b9da;
 }
+
+/* Boutique : lumière, relief et mouvement respectueux des préférences. */
+.shop-hero { background: linear-gradient(120deg, #d5c6ff, #ffc8aa 55%, #ffe9a5); }
+.shop-hero::before { content: ''; position: absolute; width: 200px; height: 200px; right: -30px; bottom: -110px; border-radius: 50%; border: 22px solid #fffdf750; }
+.shop-product { transition: transform .2s ease, box-shadow .2s ease; }
+.shop-art > div, .shop-art > span.relative { transition: transform .3s ease; }
+@media (hover: hover) { .shop-product:hover { transform: translateY(-4px); } .shop-product:hover .shop-art > div, .shop-product:hover .shop-art > span.relative { transform: rotate(3deg) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .shop-product, .shop-art > div, .shop-art > span.relative { transition: none; } .shop-product:hover, .shop-product:hover .shop-art > div, .shop-product:hover .shop-art > span.relative { transform: none; } }

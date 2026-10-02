@@ -153,3 +153,19 @@ it('achète et restaure les nouvelles palettes et couvertures', async () => {
   const restored = await request(app).get('/api/me').set(as()).expect(200)
   expect(restored.body.shop).toMatchObject({ balance: 10, spent: 90, equipped: { palette: 'palette-ocean', cover: 'cover-sakura' } })
 })
+
+it('achète les douze tenues sportives et restaure la dernière tenue équipée', async () => {
+  await fund(2000)
+  const sports = ['basket', 'judo', 'equitation', 'football', 'tennis', 'boxe', 'natation', 'cyclisme', 'rugby', 'baseball', 'ski', 'skate']
+  for (const sport of sports) {
+    const itemId = `mascot-${sport}`
+    await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
+    await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(200)
+    const equipped = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(200)
+    expect(equipped.body.equipped.mascot).toBe(itemId)
+  }
+  const restored = await request(app).get('/api/me').set(as()).expect(200)
+  expect(restored.body.shop.owned).toHaveLength(12)
+  expect(restored.body.shop.equipped.mascot).toBe('mascot-skate')
+  expect(restored.body.stats.totalCoins).toBe(2000)
+})

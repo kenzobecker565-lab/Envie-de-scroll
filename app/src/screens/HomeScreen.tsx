@@ -4,7 +4,7 @@ import { dayMoment, getPathStep, homeLine, isFixedActivityId, passionLevel, seed
 import { Button, PRESSED } from '@/components/ui/button'
 import { cardVariants } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { Wordmark } from '../components/Brand.tsx'
+import { Logo } from '../components/Brand.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
 import { ChallengeCard, challengePassions, todayKey, wordDone } from '../components/Challenge.tsx'
@@ -86,7 +86,7 @@ export function HomeScreen() {
   return (
     <Screen tabs className="pt-4 pb-0">
       <header className="flex flex-wrap items-center justify-between gap-x-2 gap-y-3">
-        <Wordmark />
+        <Logo height={30} />
         <div className="flex items-center gap-2 min-[380px]:gap-3">
           <AmbientButton />
           <SettingsButton />

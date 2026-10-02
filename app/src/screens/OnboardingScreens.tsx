@@ -25,7 +25,7 @@ import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
-import { Wordmark } from '../components/Brand.tsx'
+import { Logo } from '../components/Brand.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Illustration } from '../components/Illustration.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
@@ -56,7 +56,7 @@ export function WelcomeScreen() {
   return (
     <Screen>
       <div className="mb-5 flex justify-center">
-        <Wordmark size={48} />
+        <Logo height={34} />
       </div>
       <StepProgress current={1} total={ONBOARDING_STEPS} label="Bienvenue" />
       <motion.div

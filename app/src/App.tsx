@@ -6,7 +6,7 @@ import { RotateCcw, Send } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import { Wordmark } from './components/Brand.tsx'
+import { Logo } from './components/Brand.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
 import { EmptyState } from './components/Illustration.tsx'
 import { ShopScreen, BonusPianoScreen } from './screens/ShopScreen.tsx'
@@ -183,7 +183,7 @@ function BootSkeleton() {
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col px-4 pt-4 pb-8" aria-busy="true" aria-label="Chargement">
       <div className="flex items-center justify-between">
-        <Wordmark size={36} />
+        <Logo height={30} />
         <Skeleton className="h-10 w-24 rounded-pill" />
       </div>
       <Skeleton className="mt-8 h-8 w-48" />
@@ -201,9 +201,7 @@ function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
   const botUsername = import.meta.env.VITE_BOT_USERNAME as string | undefined
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col items-center justify-center gap-8 px-6">
-      <span className="inline-flex items-center gap-2 text-13 font-bold text-ink-soft">
-        <Wordmark size={40} />
-      </span>
+      <Logo height={40} />
       <EmptyState
         illustration={outsideTelegram ? 'open-telegram' : 'offline'}
         illustrationClassName={outsideTelegram ? 'w-56' : 'w-32'}

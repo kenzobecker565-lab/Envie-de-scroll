@@ -14,7 +14,6 @@ export type Route =
   | { name: 'skill'; passion: PassionId; mode: 'onboarding' | 'edit' }
   | { name: 'home' }
   | { name: 'signal' }
-  | { name: 'mood' }
   | { name: 'time' }
   | { name: 'passion' }
   | { name: 'activity' }
@@ -52,6 +51,8 @@ export interface DoneResult {
   previousStats: StatsDTO
   /** Dessin enregistré sans photo : on rappelle qu'on peut l'envoyer au bot. */
   photoPending: boolean
+  /** Options à conserver quand on continue dans la même passion. */
+  continuation?: Pick<Flow, 'quiet' | 'projectId'>
 }
 
 interface State {

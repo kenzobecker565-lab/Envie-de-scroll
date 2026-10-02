@@ -53,7 +53,7 @@ export function ProofScreen() {
       const response = await api.complete({ proposalId: proposal.id, ...submission, ...(state.flow.projectId ? { projectId: state.flow.projectId } : {}) })
       dispatch({ type: 'stats', stats: response.stats })
       dispatch({ type: 'openProposal', proposal: null })
-      dispatch({ type: 'done', done: { response, previousStats, photoPending: response.completion.photoPending } })
+      dispatch({ type: 'done', done: { response, previousStats, photoPending: response.completion.photoPending, continuation: { quiet: state.flow.quiet, projectId: state.flow.projectId } } })
       dispatch({ type: 'newFlow' })
       // Une étape de parcours se fête dans son parcours (le retour y ramène).
       const lesson = getPathStep(proposal.activityId)

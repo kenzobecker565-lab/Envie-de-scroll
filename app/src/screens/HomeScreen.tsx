@@ -178,7 +178,7 @@ export function HomeScreen() {
 /** Tant que la galerie est vide : le principe de l'app, en trois temps. */
 const STEPS = [
   { text: 'Ton pouce te démange\u00A0? Tire la languette du bas.' },
-  { text: 'Ton humeur, ton temps, ta passion\u00A0: trois taps.' },
+  { text: 'Ton temps, ta passion\u00A0: deux choix, et on crée.' },
   { text: 'Une petite activité créative. Chaque minute = un minuton.' },
 ] as const
 

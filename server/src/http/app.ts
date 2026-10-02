@@ -34,7 +34,6 @@ import {
   isAppEventName,
   isAppTheme,
   isMoodId,
-  isPathStepId,
   isPassionId,
   isScrollMoment,
   isSkillLevel,
@@ -280,9 +279,8 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     '/proposals',
     asyncRoute(async (req, res) => {
       const { passion, mood, duration, replacing, step, quiet } = (req.body ?? {}) as Record<string, unknown>
-      // Une leçon de parcours (mode progression) se lance sans humeur.
-      const lesson = typeof step === 'string' && isPathStepId(step)
-      if (!isPassionId(passion) || (mood === undefined ? !lesson : !isMoodId(mood)) || !DURATIONS.includes(duration as Duration)) {
+      // L’humeur est facultative, y compris pour le parcours envie de scroller.
+      if (!isPassionId(passion) || (mood !== undefined && !isMoodId(mood)) || !DURATIONS.includes(duration as Duration)) {
         throw badRequest('Passion, mood ou temps invalide.')
       }
       if (replacing !== undefined && typeof replacing !== 'string') throw badRequest('Proposition à remplacer invalide.')

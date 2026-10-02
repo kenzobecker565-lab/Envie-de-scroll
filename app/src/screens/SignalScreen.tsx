@@ -1,30 +1,39 @@
 import { LifeBuoy } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { useEffect } from 'react'
-import { SIGNAL_MESSAGE } from '@scroll-up/shared'
+import { getActivity, SIGNAL_MESSAGE } from '@scroll-up/shared'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
-import { useNavigation } from '../state/AppState.tsx'
+import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
 /**
  * Déclenchement : « On a reçu ton signal de détresse pré-scroll. On s'occupe
- * de toi. » puis on enchaîne tout seul sur le choix du mood (un toucher
+ * de toi. » puis on enchaîne tout seul sur le choix du temps (un toucher
  * permet de passer plus vite).
  */
 export function SignalScreen() {
   const { replace } = useNavigation()
+  const { state, dispatch } = useAppState()
+  const step = state.flow.fixedStep ? getActivity(state.flow.fixedStep) : undefined
+  const next = () => {
+    if (step) dispatch({ type: 'flow', flow: { passion: step.passion, duration: step.duration } })
+    replace({ name: step ? 'activity' : 'time' })
+  }
   const reduced = useReducedMotion()
 
   useEffect(() => {
     haptics.impact('medium')
-    const timer = window.setTimeout(() => replace({ name: 'mood' }), 2800)
+    const timer = window.setTimeout(() => {
+      if (step) dispatch({ type: 'flow', flow: { passion: step.passion, duration: step.duration } })
+      replace({ name: step ? 'activity' : 'time' })
+    }, 2800)
     return () => window.clearTimeout(timer)
-  }, [replace])
+  }, [replace, dispatch, step])
 
   return (
     <button
       type="button"
-      onClick={() => replace({ name: 'mood' })}
+      onClick={next}
       className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] w-full flex-col items-center justify-center px-6 text-center"
       aria-label={`${SIGNAL_MESSAGE.first} ${SIGNAL_MESSAGE.second} Toucher pour continuer.`}
     >

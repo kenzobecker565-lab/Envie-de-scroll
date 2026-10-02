@@ -83,8 +83,9 @@ describe('piano : niveau et contenu ciblé', () => {
 
   it('une leçon se lance sans humeur et se valide au clavier, sans attendre', async () => {
     await onboard(['piano'])
-    // Le mode progression ne demande pas l'humeur ; un tirage au hasard, si.
-    await request(app).post('/api/proposals').set(as()).send({ passion: 'piano', duration: 5 }).expect(400)
+    // Le parcours envie de scroller et les leçons se lancent sans humeur.
+    const random = await propose({ passion: 'piano', duration: 5 })
+    expect(random.mood).toBeNull()
     const lesson = await propose({ passion: 'piano', duration: 5, step: 'parcours-premieres-touches-1' })
     expect(lesson.mood).toBeNull()
     expect(lesson.intro.length).toBeGreaterThan(0)
@@ -170,6 +171,21 @@ describe('profil', () => {
 })
 
 describe('parcours complet', () => {
+  it('enchaîne deux activités sans humeur dans la même passion et durée', async () => {
+    await onboard(['ecriture', 'cinema'])
+    const first = await propose({ passion: 'ecriture', duration: 5 })
+    expect(first.mood).toBeNull()
+    expect(first.intro).not.toContain('leçon')
+    const completed = await request(app).post('/api/completions').set(as()).send({ proposalId: first.id, text: 'Une petite histoire écrite pour ce test.' }).expect(201)
+    expect(completed.body.completion.mood).toBeNull()
+    const next = await propose({ passion: 'ecriture', duration: 5 })
+    expect(next).toMatchObject({ passion: 'ecriture', duration: 5, mood: null })
+    expect(next.id).not.toBe(first.id)
+    expect(next.activityId).not.toBe(first.activityId)
+    expect((await prisma.proposal.findUniqueOrThrow({ where: { id: first.id } })).status).toBe('completed')
+    await request(app).post('/api/proposals').set(as()).send({ passion: 'ecriture', duration: 5, mood: 'inconnu' }).expect(400)
+  })
+
   it('propose une activité de la passion et du temps choisis, avec une intro selon le mood', async () => {
     await onboard(['dessin'])
     const proposal = await propose({ passion: 'dessin', mood: 'fatigue', duration: 15 })

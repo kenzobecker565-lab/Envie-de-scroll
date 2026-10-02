@@ -1,14 +1,12 @@
-import { Check, Flame, MoonStar } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useRef, useState } from 'react'
-import { DURATIONS, ENERGY_FAMILIES, getActivity, getPassion, MOODS, type Duration, type MoodId, type PassionId } from '@scroll-up/shared'
-import { Badge } from '@/components/ui/badge'
+import { DURATIONS, getPassion, type Duration, type PassionId } from '@scroll-up/shared'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { track } from '../api/client.ts'
 import { TimeDial } from '../components/decor/Ornaments.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
-import { MOOD_ICONS } from '../lib/icons.ts'
 import { popIn } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -23,12 +21,10 @@ function useAdvance() {
   }
 }
 
-/** Étapes du parcours : humeur, temps, puis passion si l'on en a plusieurs. */
+/** Étapes du parcours : temps, puis passion si l'on en a plusieurs. */
 function useFlowSteps() {
   const { state } = useAppState()
-  // Mot du jour : seulement l'humeur (le temps et la passion sont fixés). Les leçons de parcours, elles, ne passent pas par ici.
-  if (state.flow.fixedStep) return 1
-  return state.me.user.passions.length > 1 && !state.flow.fixedPassion ? 3 : 2
+  return state.me.user.passions.length > 1 && !state.flow.fixedPassion ? 2 : 1
 }
 
 /** Pastille « choisi » qui apparaît sur la carte sélectionnée. */
@@ -47,63 +43,6 @@ function SelectedMark({ visible }: { visible: boolean }) {
         </motion.span>
       )}
     </AnimatePresence>
-  )
-}
-
-/* ---------------------------------- Mood ---------------------------------- */
-
-export function MoodScreen() {
-  const { state, dispatch } = useAppState()
-  const { push } = useNavigation()
-  const advance = useAdvance()
-  const steps = useFlowSteps()
-  const [selected, setSelected] = useState<MoodId | undefined>(state.flow.mood)
-
-  const choose = (mood: MoodId) => {
-    haptics.selection()
-    track('mood', { mood })
-    setSelected(mood)
-    const step = state.flow.fixedStep ? getActivity(state.flow.fixedStep) : undefined
-    dispatch({ type: 'flow', flow: { mood, ...(step ? { duration: step.duration, passion: step.passion } : {}) } })
-    advance(() => push({ name: step ? 'activity' : 'time' }))
-  }
-
-  let index = 0
-  return (
-    <Screen>
-      <ScreenTitle eyebrow={<StepProgress current={1} total={steps} label="Ton humeur" />} subtitle="Pas de mauvaise réponse. Un tap, et on continue.">
-        Comment tu te sens, là&nbsp;?
-      </ScreenTitle>
-      <div className="flex flex-col gap-6">
-        {ENERGY_FAMILIES.map((family) => (
-          <section key={family.energy} aria-labelledby={`family-${family.energy}`} className="flex flex-col items-start gap-4">
-            <h2 id={`family-${family.energy}`}>
-              <Badge variant={family.energy === 'basse' ? 'sky' : 'warm'} tilt={family.energy === 'basse' ? 'left' : 'right'}>
-                {family.energy === 'basse' ? <MoonStar aria-hidden="true" /> : <Flame aria-hidden="true" />}
-                {family.label}
-              </Badge>
-            </h2>
-            <ToggleGroup
-              type="single"
-              variant="chip"
-              value={selected ?? ''}
-              onValueChange={(value) => choose((value || selected) as MoodId)}
-              aria-labelledby={`family-${family.energy}`}
-            >
-              {MOODS.filter((mood) => mood.energy === family.energy).map((mood) => {
-                const Icon = MOOD_ICONS[mood.id]
-                return (
-                  <ToggleGroupItem key={mood.id} value={mood.id} {...popIn(index++)} whileTap={{ scale: 0.95 }}>
-                    <Icon className={selected === mood.id ? 'anim-wiggle' : undefined} aria-hidden="true" />
-                    {mood.label}
-                  </ToggleGroupItem>
-                )
-              })}
-            </ToggleGroup>
-          </section>
-        ))}
-      </div>
-    </Screen>
   )
 }
 
@@ -134,7 +73,7 @@ export function TimeScreen() {
 
   return (
     <Screen>
-      <ScreenTitle eyebrow={<StepProgress current={2} total={steps} label="Ton temps" />} subtitle="On adapte l’activité à ton créneau.">
+      <ScreenTitle eyebrow={<StepProgress current={1} total={steps} label="Ton temps" />} subtitle="On adapte l’activité à ton créneau.">
         Tu as combien de temps&nbsp;?
       </ScreenTitle>
       <ToggleGroup
@@ -178,7 +117,7 @@ export function PassionPickScreen() {
 
   return (
     <Screen>
-      <ScreenTitle eyebrow={<StepProgress current={3} total={3} label="Ta passion" />} subtitle={'Parmi tes passions, laquelle te tente maintenant ?'}>
+      <ScreenTitle eyebrow={<StepProgress current={2} total={2} label="Ta passion" />} subtitle={'Parmi tes passions, laquelle te tente maintenant ?'}>
         Et tu as envie de…&nbsp;?
       </ScreenTitle>
       <ToggleGroup

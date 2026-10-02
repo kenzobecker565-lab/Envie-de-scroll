@@ -12,7 +12,7 @@ import { EmptyState } from './components/Illustration.tsx'
 import { suppressAmbient } from './lib/ambient.ts'
 import { setAppTheme } from './lib/appTheme.ts'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
-import { MoodScreen, PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
+import { PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
@@ -83,7 +83,6 @@ function toneFor(route: Route, flow: Flow): DecorTone {
   switch (route.name) {
     case 'signal':
       return 'calm'
-    case 'mood':
     case 'time':
     case 'passion':
       return moodTone
@@ -116,8 +115,6 @@ function screenFor(route: Route) {
       return <HomeScreen />
     case 'signal':
       return <SignalScreen />
-    case 'mood':
-      return <MoodScreen />
     case 'time':
       return <TimeScreen />
     case 'passion':

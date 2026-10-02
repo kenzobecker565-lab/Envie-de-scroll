@@ -67,7 +67,7 @@ export function ActivityScreen() {
   const reduced = useReducedMotion()
   const load = useCallback(
     async (replacing?: string, quiet = flow.quiet) => {
-      if (!passionId || (!mood && !lesson) || !duration) return
+      if (!passionId || !duration) return
       setLoading(true)
       setError(undefined)
       setQuietNote(undefined)
@@ -104,7 +104,7 @@ export function ActivityScreen() {
     }
   }, [proposal, load])
 
-  if (!passionId || (!mood && !lesson) || !duration) return null
+  if (!passionId || !duration) return null
   const passion = getPassion(passionId)
   const Icon = PASSION_ICONS[passionId]
   const step = getPathStep(fixedStep ?? proposal?.activityId ?? '')
@@ -123,7 +123,7 @@ export function ActivityScreen() {
       const response = await api.complete({ proposalId: proposal.id, played: true, exploredTitle: melody.title, ...(flow.projectId ? { projectId: flow.projectId } : {}) })
       dispatch({ type: 'stats', stats: response.stats })
       dispatch({ type: 'openProposal', proposal: null })
-      dispatch({ type: 'done', done: { response, previousStats, photoPending: false } })
+      dispatch({ type: 'done', done: { response, previousStats, photoPending: false, continuation: { quiet: flow.quiet, projectId: flow.projectId } } })
       dispatch({ type: 'newFlow' })
       reset(lesson ? lessonStack(lesson, { name: 'done' }) : [{ name: 'home' }, { name: 'done' }])
     } catch (caught) {

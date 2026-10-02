@@ -64,7 +64,7 @@ export interface ProposalDTO {
   id: string
   activityId: string
   passion: PassionId
-  /** L'humeur choisie ; null pour une leçon de parcours (on ne la demande pas). */
+  /** L’humeur éventuellement choisie ; null pour les parcours sans humeur. */
   mood: MoodId | null
   duration: Duration
   /** Texte de l'activité (typographie française appliquée). */
@@ -159,7 +159,7 @@ export interface UpdatePassionsRequest {
 
 export interface CreateProposalRequest {
   passion: PassionId
-  /** Facultatif pour une étape de parcours (le mode progression ne demande pas l'humeur). */
+  /** Facultatif : le parcours envie de scroller ne demande plus l’humeur. */
   mood?: MoodId
   duration: Duration
   /** « Une autre idée » : la proposition affichée, à remplacer. */

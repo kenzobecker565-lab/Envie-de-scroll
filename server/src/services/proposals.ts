@@ -70,8 +70,7 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
  *   débloquée (étape précédente réussie, parcours ouvert ou ouvert d'emblée
  *   par le niveau déclaré).
  * - Passion avec niveau (Piano) : seules les activités adaptées au niveau.
- * - Sans humeur : seulement une étape de parcours (le mode progression ne la
- *   demande pas) ; l'introduction est alors un mot pour se mettre à la leçon.
+ * - Sans humeur : tirage sans préférence d’énergie, avec une introduction neutre.
  */
 export async function createProposal(
   prisma: PrismaClient,
@@ -81,7 +80,6 @@ export async function createProposal(
 ): Promise<Proposal> {
   const { passion, mood, duration } = request
   if (!parsePassions(user).includes(passion)) throw badRequest('Cette passion ne fait pas partie de ton profil')
-  if (!mood && !(request.step !== undefined && isPathStepId(request.step))) throw badRequest('Humeur manquante.')
 
   let currentId: string | undefined
   if (request.replacing) {
@@ -133,7 +131,7 @@ export async function createProposal(
     if (allowedIds?.length === 0) {
       throw new ApiError(409, 'no_quiet', `Toutes les activités ${getPassion(passion).label} de ${duration}\u00A0min s’écoutent. Essaie un autre temps, ou une autre passion.`)
     }
-    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId, ratings, energy: mood ? getMood(mood).energy : undefined, allowedIds, random })
+    activity = pickActivity({ passion, duration, recentIds: recent.map((row) => row.activityId), currentId: currentId ?? recent[0]?.activityId, ratings, energy: mood ? getMood(mood).energy : undefined, allowedIds, random })
   }
   const extra = activity.extra ? drawExtra(activity.extra, random) : null
 
@@ -149,7 +147,7 @@ export async function createProposal(
         passion,
         mood: mood ?? null,
         duration,
-        intro: mood ? pickIntro(mood, random, localHour(now, user.timezone)) : pickLessonIntro(random),
+        intro: mood ? pickIntro(mood, random, localHour(now, user.timezone)) : isPathStepId(activity.id) ? pickLessonIntro(random) : 'Un moment pour ta passion. Voici ton activité :',
         extra: extra ? JSON.stringify(extra) : null,
         createdAt: now,
       },

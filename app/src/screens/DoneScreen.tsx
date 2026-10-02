@@ -1,4 +1,4 @@
-import { ChevronDown, Clock3, FolderPlus, House, Images, Lightbulb, Mountain, Piano, Play, Send, Sparkles } from 'lucide-react'
+import { ChevronDown, Clock3, FolderPlus, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import {
@@ -53,7 +53,7 @@ import { haptics } from '../telegram/webApp.ts'
  * la note. « Le savais-tu ? » et « Ranger dans un projet » sont repliés.
  */
 export function DoneScreen() {
-  const { state } = useAppState()
+  const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
   const done = state.done
   const [shown, setShown] = useState(done?.previousStats.totalCoins ?? 0)
@@ -88,6 +88,18 @@ export function DoneScreen() {
   const { id: completionId, duration, text } = done.response.completion
   const cheer = cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
   const fact = factFor(passion, seededRandom(`fact:${completionId}`))
+
+  const continuePassion = () => {
+    haptics.selection()
+    dispatch({ type: 'newFlow', flow: {
+      passion,
+      fixedPassion: passion,
+      duration,
+      quiet: done.continuation?.quiet,
+      projectId: done.continuation?.projectId,
+    } })
+    reset([{ name: 'home' }, { name: 'activity' }])
+  }
 
   // Le mode progression : une étape réussie propose aussitôt la suivante.
   if (step && stepProgress) return <StepDone done={done} step={step} progress={stepProgress} paths={paths} level={level} cheer={cheer} />
@@ -214,10 +226,15 @@ export function DoneScreen() {
       </div>
 
       <div className="mt-auto flex w-full flex-col">
-        <PrimaryAction text="Voir ma galerie" icon={<Images aria-hidden="true" />} onClick={() => reset(tabStack('gallery'))}>
+        <PrimaryAction text="Une nouvelle activité" icon={<Shuffle aria-hidden="true" />} onClick={continuePassion}>
+          <p className="mb-2 text-13 text-ink-soft">On continue en {getPassion(passion).label}, avec le même temps disponible.</p>
           <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
             <House aria-hidden="true" />
             Retour à l’accueil
+          </Button>
+          <Button variant="ghost" size="sm" className="w-full" onClick={() => reset(tabStack('gallery'))}>
+            <Images aria-hidden="true" />
+            Voir ma galerie
           </Button>
         </PrimaryAction>
       </div>

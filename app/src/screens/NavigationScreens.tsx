@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { getPassion, PASSION_IDS, type PassionId } from '@scroll-up/shared'
+import { useEquipped } from '../lib/shop.ts'
+import { ShopSymbol } from '../components/ShopArt.tsx'
+import { Mascot } from '../components/Mascot.tsx'
 import { Button } from '@/components/ui/button'
 import { Screen } from '../components/Screen.tsx'
 import { PassionCard, PassionDetail, statsFor } from '../components/Progression.tsx'
@@ -63,6 +66,7 @@ export function LearnPassionScreen({ passion }: { passion: PassionId }) {
     <Button variant="ghost" size="sm" onClick={() => reset([{ name: 'home' }, { name: 'learn' }])}>Toutes les passions à apprendre</Button>
     <h1 className="mt-3 font-display text-46 font-extrabold tracking-tight text-ink">{getPassion(passion).label}</h1>
     <p className="mt-2 text-15 text-ink-soft">Des leçons progressives, de l’échauffement au défi final.</p>
+    {passion === 'piano' && <Button className="mt-4" variant="secondary" onClick={() => push({ name: 'shop', category: 'piano', library: true })}>Mon répertoire bonus</Button>}
     <div className="mt-6 flex flex-col gap-5">
       <PassionDetail passion={passion} stats={statsFor(state.me.stats.byPassion, passion)} section="paths" canStart={false} onOpenPath={(pathId) => push({ name: 'path', pathId })} onChangeSkill={() => push({ name: 'skill', passion, mode: 'edit' })} />
     </div>
@@ -70,11 +74,16 @@ export function LearnPassionScreen({ passion }: { passion: PassionId }) {
 }
 
 export function ProfileScreen() {
+  const decoration = useEquipped('profile')
   const { push } = useNavigation()
   const [feedback, setFeedback] = useState(false)
   const [erase, setErase] = useState(false)
   return <Screen tabs>
     <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Profil</h1>
+    <div className="mt-5 flex items-center justify-center gap-4 rounded-md border-[2.5px] border-outline p-4 shadow-chip" style={{ background: decoration ? `linear-gradient(135deg, ${decoration.colors[0]}, ${decoration.colors[1]})` : 'var(--card)' }}>
+      {decoration && <ShopSymbol item={decoration} size={32} />}<Mascot mood="wink" size={72} />{decoration && <ShopSymbol item={decoration} size={32} />}
+    </div>
+    <Button className="mt-4" variant="secondary" onClick={() => push({ name: 'shop', library: true })}>Mes achats et personnalisations</Button>
     <p className="mt-2 text-15 text-ink-soft">Tes préférences, tes relances et tes données.</p>
     <div className="mt-6 flex flex-col gap-5">
       <SettingsContent embedded onEditPassions={() => push({ name: 'passions', mode: 'edit' })} onFeedback={() => setFeedback(true)} onErase={() => setErase(true)} />

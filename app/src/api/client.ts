@@ -87,6 +87,10 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  shop: () => call<import('@scroll-up/shared').ShopState>('/shop'),
+  buyItem: (itemId: string) => call<import('@scroll-up/shared').ShopState>('/shop/purchases', { method: 'POST', body: JSON.stringify({ itemId }) }),
+  equipItem: (category: import('@scroll-up/shared').ShopCategory, itemId: string | null) => call<import('@scroll-up/shared').ShopState>('/shop/equipment', { method: 'PUT', body: JSON.stringify({ category, itemId }) }),
+  bonusMelody: (id: string) => call<{ melody: import('@scroll-up/shared').Melody }>(`/shop/piano/${id}`),
   me: () => call<MeResponse>('/me'),
 
   updateTheme: (theme: AppTheme) => call<UserResponse>('/me/theme', { method: 'PUT', body: JSON.stringify({ theme }) }),

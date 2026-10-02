@@ -32,7 +32,7 @@ export const TAB_BAR_SPACE = 'pb-[calc(104px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
   const { route, reset } = useNavigation()
-  const current = route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'progress') : isTab(route.name) ? route.name : null
+  const current = route.name === 'shop' ? 'progress' : route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'progress') : isTab(route.name) ? route.name : null
 
   const open = (tab: Tab) => {
     if (!current || tab === current) return

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { useEquipped } from '../lib/shop.ts'
 import { cn } from '@/lib/utils'
 
 /**
@@ -15,7 +16,9 @@ export type MascotMood = 'happy' | 'cheer' | 'wink' | 'think' | 'sleepy'
 
 const INK = { stroke: 'var(--on-color)', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' }
 
-export function Mascot({ mood = 'happy', size = 64, className, animated = true }: { mood?: MascotMood; size?: number; className?: string; animated?: boolean }) {
+export function Mascot({ mood = 'happy', size = 64, className, animated = true, accessory }: { accessory?: string; mood?: MascotMood; size?: number; className?: string; animated?: boolean }) {
+  const equipped = useEquipped('mascot')
+  const outfit = accessory ?? equipped?.id
   const arms = ARMS[mood]
   return (
     <svg width={size} height={size * 1.1} viewBox="0 0 100 110" aria-hidden="true" className={cn('shrink-0 overflow-visible', className)}>
@@ -43,6 +46,8 @@ export function Mascot({ mood = 'happy', size = 64, className, animated = true }
       <ellipse cx="31" cy="66" rx="6" ry="4" style={{ fill: 'var(--accent)', opacity: 0.55 }} />
       <ellipse cx="69" cy="66" rx="6" ry="4" style={{ fill: 'var(--accent)', opacity: 0.55 }} />
       <Face mood={mood} animated={animated} />
+      {outfit === 'mascot-beret' && <g><ellipse cx="47" cy="20" rx="31" ry="11" transform="rotate(-12 47 20)" fill="#6B4585" stroke="var(--on-color)" strokeWidth="3" /><path d="M45 12 l3 -7" stroke="var(--on-color)" strokeWidth="4" /></g>}
+      {outfit === 'mascot-casque' && <g fill="#8BB7EF" stroke="var(--on-color)" strokeWidth="3"><path d="M14 55 C10 2 90 2 86 55" fill="none" strokeWidth="6" /><rect x="8" y="45" width="13" height="23" rx="5" /><rect x="79" y="45" width="13" height="23" rx="5" /></g>}
       {mood === 'sleepy' && (
         <g className={cn(animated && 'motion-loop anim-twinkle')} style={{ fill: 'var(--on-color)', fontFamily: 'var(--font-display)', fontWeight: 800 }}>
           <text x="84" y="20" fontSize="14">

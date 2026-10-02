@@ -40,6 +40,10 @@ model User {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 
+  coinsSpent Int @default(0)
+  shopEquipment String @default("{}")
+  purchases ShopPurchase[]
+
   proposals   Proposal[]
   completions Completion[]
   feedbacks   Feedback[]
@@ -157,4 +161,15 @@ model Setting {
   key       String   @id
   value     String
   updatedAt DateTime @updatedAt
+}
+
+/// Achats permanents. Un objet ne peut être acheté qu’une fois par utilisateur.
+model ShopPurchase {
+  id String @id @default(cuid())
+  userId BigInt
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemId String
+  price Int
+  createdAt DateTime @default(now())
+  @@unique([userId, itemId])
 }

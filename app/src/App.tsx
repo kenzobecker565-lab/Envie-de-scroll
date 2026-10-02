@@ -6,7 +6,7 @@ import { RotateCcw, Send } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import { BrandMark } from './components/Brand.tsx'
+import { Wordmark } from './components/Brand.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
 import { EmptyState } from './components/Illustration.tsx'
 import { suppressAmbient } from './lib/ambient.ts'
@@ -167,7 +167,7 @@ function BootSkeleton() {
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col px-4 pt-4 pb-8" aria-busy="true" aria-label="Chargement">
       <div className="flex items-center justify-between">
-        <Skeleton className="h-6 w-40 rounded-pill" />
+        <Wordmark size={36} />
         <Skeleton className="h-10 w-24 rounded-pill" />
       </div>
       <Skeleton className="mt-8 h-8 w-48" />
@@ -186,8 +186,7 @@ function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col items-center justify-center gap-8 px-6">
       <span className="inline-flex items-center gap-2 text-13 font-bold text-ink-soft">
-        <BrandMark />
-        Scroll-up
+        <Wordmark size={40} />
       </span>
       <EmptyState
         illustration={outsideTelegram ? 'open-telegram' : 'offline'}

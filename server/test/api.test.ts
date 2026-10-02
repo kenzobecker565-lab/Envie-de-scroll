@@ -13,6 +13,7 @@ let prisma: PrismaClient
 let cleanup: () => Promise<void>
 let clock: ReturnType<typeof testClock>
 let app: ReturnType<typeof createApp>
+let photoDir: string
 
 /** Petite image PNG (1 × 1 pixel). */
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64')
@@ -22,10 +23,11 @@ beforeEach(() => {
   prisma = database.prisma
   cleanup = database.cleanup
   clock = testClock()
+  photoDir = `${database.dir}/photos`
   app = createApp({
     prisma,
     config: { botToken: TEST_BOT_TOKEN, devAuth: true, initDataMaxAge: 0, signingSecret: 'secret-de-test', appDistDir: undefined },
-    photos: createPhotoService({ telegram: undefined, storageChatId: undefined, localDir: `${database.dir}/photos` }),
+    photos: createPhotoService({ telegram: undefined, storageChatId: undefined, localDir: photoDir }),
     now: clock.now,
   })
 })
@@ -54,6 +56,36 @@ describe('thème', () => {
     const refused = await request(app).put('/api/me/theme').set(as()).send({ theme: 'fluo' }).expect(400)
     expect(refused.body.error.message).toBe('Thème inconnu.')
     await request(app).put('/api/me/theme').set(as()).send({}).expect(400)
+  })
+})
+
+describe('effacer ses données', () => {
+  it('efface tout (photos comprises) et repart de l’inscription, sans toucher aux autres', async () => {
+    await onboard(['dessin', 'ecriture'])
+    await request(app).put('/api/me/theme').set(as()).send({ theme: 'bd' }).expect(200)
+    await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'nuit' }).expect(200)
+    const proposal = await propose({ passion: 'dessin', mood: 'souffler', duration: 5 })
+    await request(app).post('/api/completions').set(as()).field('proposalId', proposal.id).attach('photo', PNG, { filename: 'dessin.png', contentType: 'image/png' }).expect(201)
+    await request(app).post('/api/projects').set(as()).send({ passion: 'ecriture', name: 'Ma nouvelle' }).expect(201)
+    await request(app).post('/api/feedback').set(as()).send({ message: 'Top.' }).expect(201)
+    await request(app).post('/api/events').set(as()).send({ name: 'cta' }).expect(204)
+    expect(fs.readdirSync(photoDir)).toHaveLength(1)
+    // Une autre personne, qui ne doit rien perdre.
+    await onboard(['musique'], 7)
+    await propose({ passion: 'musique', mood: 'ennui', duration: 5 }, 7)
+
+    await request(app).delete('/api/me').set(as()).expect(204)
+
+    for (const count of [prisma.proposal.count({ where: { userId: 42n } }), prisma.completion.count({ where: { userId: 42n } }), prisma.project.count(), prisma.feedback.count(), prisma.appEvent.count({ where: { userId: 42n } })]) {
+      expect(await count).toBe(0)
+    }
+    expect(fs.readdirSync(photoDir)).toHaveLength(0)
+    expect(await prisma.proposal.count({ where: { userId: 7n } })).toBe(1)
+
+    // La prochaine ouverture : un compte tout neuf.
+    const me = (await request(app).get('/api/me').set(as()).expect(200)).body as MeResponse
+    expect(me.user).toMatchObject({ onboarded: false, passions: [], theme: 'pop', scrollMoment: null })
+    expect(me.stats.totalActivities).toBe(0)
   })
 })
 

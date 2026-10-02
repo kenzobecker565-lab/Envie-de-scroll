@@ -123,6 +123,9 @@ export const api = {
     call<ProjectDetailResponse>(`/projects/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(request) }),
   deleteProject: (id: string) => call<null>(`/projects/${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
+  /** Efface toutes les données du compte : la prochaine ouverture repart de l'inscription. */
+  deleteMe: () => call<null>('/me', { method: 'DELETE' }),
+
   updateSettings: (settings: UpdateSettingsRequest) => call<UserResponse>('/me/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 
   feedback: (message: string, context?: string) => call<{ ok: true }>('/feedback', { method: 'POST', body: JSON.stringify({ message, context }) }),

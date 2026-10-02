@@ -69,6 +69,20 @@ export async function upsertFromTelegram(
   })
 }
 
+/**
+ * « Effacer mes données » : l'utilisateur et tout ce qui le concerne
+ * (propositions, créations, projets, avis, suivi d'usage) disparaissent ; la
+ * prochaine ouverture repart de l'inscription. Le rôle d'admin, rangé dans
+ * les réglages du serveur, est gardé. Renvoie les références des photos à
+ * effacer.
+ */
+export async function deleteUserData(prisma: PrismaClient, userId: bigint): Promise<string[]> {
+  const photos = await prisma.completion.findMany({ where: { userId, photoRef: { not: null } }, select: { photoRef: true } })
+  // Les relations sont en cascade : supprimer l'utilisateur supprime le reste.
+  await prisma.user.deleteMany({ where: { id: userId } })
+  return photos.flatMap((row) => (row.photoRef ? [row.photoRef] : []))
+}
+
 export async function getStats(prisma: PrismaClient, user: User, now = new Date()): Promise<StatsDTO> {
   const month = `${localMonth(now, user.timezone)}-`
   const rows = await prisma.completion.findMany({

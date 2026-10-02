@@ -36,6 +36,13 @@ export interface PhotoService {
   save(photo: IncomingPhoto, caption: string): Promise<string>
   /** Relit une photo à partir de sa référence. */
   open(ref: string): Promise<PhotoContent | null>
+  /**
+   * Efface une photo (données effacées par son auteur). Seules les photos sur
+   * disque peuvent l'être : un message du chat de stockage Telegram ne se
+   * retrouve pas à partir de son `file_id` ; sans la référence en base, la
+   * photo n'est plus reliée à personne.
+   */
+  remove(ref: string): Promise<void>
 }
 
 const EXTENSIONS: Record<string, string> = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' }
@@ -94,6 +101,11 @@ export function createPhotoService({
         return { body: fs.createReadStream(file), contentType: CONTENT_TYPES[path.extname(name)] ?? 'image/jpeg' }
       }
       return null
+    },
+
+    async remove(ref) {
+      if (!ref.startsWith('local:')) return
+      await fs.promises.rm(path.join(localDir, path.basename(ref.slice(6))), { force: true })
     },
   }
 }

@@ -1,4 +1,4 @@
-import { BellRing, Check, ChevronRight, LoaderCircle, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, UserPlus } from 'lucide-react'
+import { BellRing, Check, ChevronRight, LoaderCircle, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, Trash2, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ambianceCredits, formatClock, isScrollMoment, SCROLL_MOMENT_INFO, SCROLL_MOMENTS } from '@scroll-up/shared'
@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Separator } from '@/components/ui/separator'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
-import { api, track } from '../api/client.ts'
+import { api, ApiError, track } from '../api/client.ts'
 import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
 import { homeScreenConfirm, homeScreenView, type HomeScreenState } from '../lib/homeScreen.ts'
 import { MOMENT_STYLE } from '../lib/icons.ts'
@@ -26,6 +26,7 @@ import { ThemeGrid } from './ThemePicker.tsx'
 export function SettingsButton() {
   const [open, setOpen] = useState(false)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
+  const [eraseOpen, setEraseOpen] = useState(false)
   const { push } = useNavigation()
 
   const openSheet = () => {
@@ -49,15 +50,20 @@ export function SettingsButton() {
               setOpen(false)
               setFeedbackOpen(true)
             }}
+            onErase={() => {
+              setOpen(false)
+              setEraseOpen(true)
+            }}
           />
         </DialogContent>
       </Dialog>
       <FeedbackDialog open={feedbackOpen} onOpenChange={setFeedbackOpen} context="réglages" />
+      <EraseDialog open={eraseOpen} onOpenChange={setEraseOpen} />
     </>
   )
 }
 
-function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () => void; onFeedback: () => void }) {
+function SettingsContent({ onEditPassions, onFeedback, onErase }: { onEditPassions: () => void; onFeedback: () => void; onErase: () => void }) {
   const { state, dispatch } = useAppState()
   const { user } = state.me
   const [saving, setSaving] = useState(false)
@@ -140,6 +146,10 @@ function SettingsContent({ onEditPassions, onFeedback }: { onEditPassions: () =>
         <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
         <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" />
       </div>
+
+      <Separator />
+
+      <Row icon={<Trash2 aria-hidden="true" />} title="Effacer mes données" description="Tout supprimer et refaire l’inscription depuis le début." onClick={onErase} />
 
       <p className="text-center text-12 text-ink-soft">Scroll-up · version de test. Merci de faire partie des premiers&nbsp;!</p>
       <p className="text-center text-11 text-ink-faint">Musiques&nbsp;: {ambianceCredits()}</p>
@@ -268,6 +278,63 @@ function MomentPicker() {
         })}
       </ToggleGroup>
     </div>
+  )
+}
+
+/**
+ * « Effacer mes données » : une confirmation, puis tout part (créations,
+ * minutons, parcours, projets, réglages, et ce qui est gardé sur le
+ * téléphone). L'app redémarre sur l'inscription.
+ */
+function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string>()
+
+  const erase = async () => {
+    setBusy(true)
+    setError(undefined)
+    haptics.impact('heavy')
+    try {
+      await api.deleteMe()
+      try {
+        for (const key of Object.keys(window.localStorage)) if (key.startsWith('scroll-up:')) window.localStorage.removeItem(key)
+      } catch {
+        // Stockage indisponible : rien à effacer sur le téléphone.
+      }
+      haptics.success()
+      window.location.reload()
+    } catch (caught) {
+      haptics.error()
+      setError(caught instanceof ApiError ? caught.message : 'Oups, l’effacement a échoué. Réessaie dans un instant.')
+      setBusy(false)
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(next) => !busy && onOpenChange(next)}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Tout effacer&nbsp;?</DialogTitle>
+          <DialogDescription>
+            Tes créations, tes minutons, tes parcours, tes projets et tes réglages seront supprimés. L’app repartira de l’inscription. C’est définitif.
+          </DialogDescription>
+        </DialogHeader>
+        {error && (
+          <p role="alert" className="text-14 font-semibold text-accent-strong">
+            {error}
+          </p>
+        )}
+        <div className="flex flex-col gap-2">
+          <Button className="w-full" onClick={() => void erase()} disabled={busy} aria-busy={busy}>
+            {busy ? <LoaderCircle className="motion-safe:animate-spin" aria-hidden="true" /> : <Trash2 aria-hidden="true" />}
+            {busy ? 'Effacement…' : 'Tout effacer'}
+          </Button>
+          <Button variant="ghost" size="md" className="w-full" onClick={() => onOpenChange(false)} disabled={busy}>
+            Annuler
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 

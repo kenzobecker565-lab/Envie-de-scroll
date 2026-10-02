@@ -16,7 +16,8 @@
  *   GET  /api/projects           les projets ; POST : en créer un
  *   GET  /api/projects/:id       un projet et ses créations ; PATCH : le modifier ou le terminer ; DELETE
  *   GET  /api/photos/:id         une photo de dessin (adresse signée)
- *   PUT  /api/me/settings        réglages (relances du bot)
+ *   PUT  /api/me/settings        réglages (relances du bot, moment de scroll)
+ *   DELETE /api/me               effacer toutes ses données (retour à l'inscription)
  *   POST /api/feedback           un avis écrit (transmis aux admins dans Telegram)
  *   POST /api/events             un événement d'usage (suivi du test, sans texte libre)
  *
@@ -57,7 +58,7 @@ import { completeProposal, listCompletions, toCompletionDTO } from '../services/
 import { createProposal, findOpenProposal, toProposalDTO } from '../services/proposals.ts'
 import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
-import { getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
+import { deleteUserData, getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
 import { ApiError, badRequest } from './errors.ts'
 
 export interface AppDeps {
@@ -217,6 +218,16 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       })
       const body: UserResponse = { user: toUserDTO(updated) }
       res.json(body)
+    }),
+  )
+
+  // « Effacer mes données » (réglages) : tout part, la prochaine ouverture repart de l'inscription.
+  api.delete(
+    '/me',
+    asyncRoute(async (_req, res) => {
+      const refs = await deleteUserData(prisma, BigInt(telegramUserOf(res).id))
+      await Promise.all(refs.map((ref) => photos.remove(ref).catch((error) => console.error('[photos]', error))))
+      res.status(204).end()
     }),
   )
 

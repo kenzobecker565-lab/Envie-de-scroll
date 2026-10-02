@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, ExternalLink, Eye, Play, RotateCcw, Square } from 'lucide-react'
+import { Check, ExternalLink, Eye, Play, RotateCcw, Square, Search, Sparkles } from 'lucide-react'
 import { getShopItem, SHOP_CATEGORIES, SHOP_CATEGORY_LABELS, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -27,6 +27,7 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
   const { push, replace } = useNavigation()
   const shop = useShop()
   const [category, setCategory] = useState(initial)
+  const [query, setQuery] = useState('')
   const [mine, setMine] = useState(library)
   const [selected, setSelected] = useState<ShopItem>()
   const [busy, setBusy] = useState(false)
@@ -103,7 +104,7 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
     player.play().catch(() => { stopPreview(); setError('L’aperçu audio n’a pas pu démarrer.') })
   }
   const preview = (item: ShopItem) => { stopPreview(); setError(undefined); setSelected(item) }
-  const items = SHOP_ITEMS.filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)))
+  const items = SHOP_ITEMS.filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)) && `${item.title} ${item.composer ?? ''} ${item.difficulty ?? ''}`.toLocaleLowerCase('fr').includes(query.toLocaleLowerCase('fr')))
   const owned = selected ? shop.owned.includes(selected.id) : false
   const active = selected ? shop.equipped[selected.category] === selected.id : false
 
@@ -112,15 +113,18 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
       <div><p className="text-12 font-bold tracking-wider text-ink-soft uppercase">Fais-toi plaisir</p><h1 className="font-display text-40 font-extrabold tracking-tight text-ink">Boutique</h1></div>
       <span className="rounded-pill border-[2.5px] border-outline bg-warm px-3 py-2 text-22 text-on-color shadow-chip" aria-label={`Solde disponible : ${shop.balance} minutons`}><Price value={shop.balance} size={30} /></span>
     </header>
-    <p className="mt-3 text-14 text-ink-soft">Des petits plaisirs pour ta pause créative. À toi pour toujours.</p>
+    <section className="shop-hero relative mt-4 overflow-hidden rounded-md border-[2.5px] border-outline p-5 text-on-color shadow-card">
+      <div className="relative z-10 max-w-[75%]"><p className="flex items-center gap-2 text-11 font-extrabold uppercase tracking-wider"><Sparkles size={16} />Le studio des envies</p><h2 className="mt-2 font-display text-28 font-extrabold leading-tight">Une pause.<br />Ton univers.</h2><p className="mt-3 text-13">Écoute, explore, personnalise. Tes trouvailles restent à toi.</p><p className="mt-3 text-11 font-bold">{SHOP_ITEMS.filter(item => item.available).length} créations · 7 collections</p></div><span className="absolute -right-4 top-7 rotate-12 opacity-70" aria-hidden="true"><BrandMark size={115} /></span>
+    </section>
     {shop.canClaimTestCredit && <Button className="mt-4" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
     {shop.bonus > 0 && <p className="mt-2 text-12 text-ink-soft">Crédit de test inclus dans le solde · sans effet sur ta progression.</p>}
     <div className="mt-5 grid grid-cols-2 gap-2">
       <Button size="sm" variant={!mine ? 'default' : 'secondary'} onClick={() => setMine(false)} aria-pressed={!mine}>À découvrir</Button>
       <Button size="sm" variant={mine ? 'default' : 'secondary'} onClick={() => setMine(true)} aria-pressed={mine}>Mes achats</Button>
     </div>
+    <label className="mt-4 flex items-center gap-2 rounded-md border-2 border-outline bg-surface-200 px-3 py-2"><Search size={18} aria-hidden="true" /><span className="sr-only">Rechercher dans cette collection</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Trouve ta prochaine envie…" className="min-w-0 flex-1 bg-transparent text-14 outline-none" type="search" /></label>
     <div className="mt-4 -mx-4 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Catégories de la boutique">
-      {SHOP_CATEGORIES.map((id) => <Button key={id} size="sm" variant={id === category ? 'default' : 'ghost'} aria-pressed={id === category} onClick={() => { stopPreview(); setCategory(id) }}>{SHOP_CATEGORY_LABELS[id]}</Button>)}
+      {SHOP_CATEGORIES.map((id) => <Button key={id} size="sm" variant={id === category ? 'default' : 'ghost'} aria-pressed={id === category} onClick={() => { stopPreview(); setQuery(''); setCategory(id) }}>{SHOP_CATEGORY_LABELS[id]} <span className="text-11 opacity-60">{SHOP_ITEMS.filter(item => item.category === id && (!mine || shop.owned.includes(item.id))).length}</span></Button>)}
     </div>
     <div className="mt-4 flex items-center justify-between gap-2">
       <h2 className="font-display text-22 font-extrabold">{SHOP_CATEGORY_LABELS[category]}</h2>
@@ -134,12 +138,13 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
     <div className="mt-4 grid grid-cols-1 min-[360px]:grid-cols-2 items-stretch gap-3">
       {items.map((item) => {
         const bought = shop.owned.includes(item.id), equipped = shop.equipped[item.category] === item.id
-        return <Card key={item.id} padding="none" className="min-w-0 gap-0">
+        return <Card key={item.id} padding="none" className="shop-product min-w-0 gap-0 overflow-hidden">
           <button type="button" onClick={() => preview(item)} aria-label={`Prévisualiser ${item.title}`} className="relative block w-full text-left focus-visible:outline-4 focus-visible:outline-accent">
             <ShopPreview item={item} />
             {bought && <span className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-pill border-2 border-outline bg-good text-on-color"><Check size={15} aria-hidden="true" /><span className="sr-only">Acheté</span></span>}
           </button>
           <div className="flex flex-1 flex-col gap-2 p-3">
+            <p className="text-11 font-bold uppercase tracking-wider text-ink-soft">{SHOP_CATEGORY_LABELS[item.category]}</p>
             <h3 className="font-display text-17 leading-tight font-extrabold">{item.title}</h3>
             {item.composer && <p className="text-12 font-bold text-ink-soft">{item.composer}</p>}
             {item.edition && <p className="text-11 text-ink-soft">{item.edition}</p>}
@@ -155,7 +160,7 @@ export function ShopScreen({ category: initial = 'ambiance', library = false }: 
         </Card>
       })}
     </div>
-    {!items.length && <p className="mt-4 rounded-md border-2 border-dashed border-ink-faint p-4 text-14 text-ink-soft">Aucun achat dans cette catégorie. Explore le catalogue pour trouver ton prochain plaisir.</p>}
+    {!items.length && <p className="mt-4 rounded-md border-2 border-dashed border-ink-faint p-4 text-14 text-ink-soft">{query ? 'Aucun résultat. Essaie un autre nom ou efface la recherche.' : 'Aucun achat dans cette catégorie. Explore le catalogue pour trouver ton prochain plaisir.'}</p>}
     <p className="mt-5 text-center text-12 text-ink-soft">Tes achats ne diminuent pas tes niveaux ni tes badges.</p>
 
     <Dialog open={Boolean(selected)} onOpenChange={(open) => { if (!open && !busy) { setSelected(undefined); stopPreview() } }}>

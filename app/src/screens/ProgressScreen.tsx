@@ -29,7 +29,7 @@ export function ProgressScreen() {
   const paths = user.passions
     .map((passion) => {
       const row = statsFor(stats.byPassion, passion)
-      return currentPath(passion, row.steps, passionLevel(passion, row.minutes).level)
+      return currentPath(passion, row.steps, passionLevel(passion, row.minutes).level, user.skills[passion])
     })
     .filter((entry) => entry !== null)
 

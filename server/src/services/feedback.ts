@@ -34,6 +34,7 @@ import {
   MAX_FEEDBACK_LENGTH,
   nextMilestone,
   passionLevel,
+  parseSkills,
   RATING_LABELS,
   SCROLL_MOMENTS,
   type ActivityRating,
@@ -202,6 +203,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     remindersOff,
     pulls,
     tabRows,
+    pianists,
   ] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { NOT: { passions: '[]' } } }),
@@ -238,11 +240,14 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     prisma.user.count({ where: { remindersEnabled: false, NOT: { passions: '[]' } } }),
     prisma.appEvent.count({ where: { name: 'pull' } }),
     prisma.appEvent.findMany({ where: { name: 'tab' }, select: { data: true } }),
+    prisma.user.findMany({ where: { passions: { contains: '"piano"' } }, select: { skills: true } }),
   ])
 
   const ratingCount = (value: ActivityRating) => ratings.find((row) => row.rating === value)?._count ?? 0
   const returning = doers.filter((row) => row._count >= 2).length
   const momentCount = (moment: string | null) => moments.find((row) => row.scrollMoment === moment)?._count ?? 0
+  const pianoLevels = pianists.map((row) => parseSkills(row.skills).piano)
+  const pianoCount = (level: string | undefined) => pianoLevels.filter((entry) => entry === level).length
   const tabCount = (tab: string) => tabRows.filter((row) => (JSON.parse(row.data ?? '{}') as { tab?: unknown }).tab === tab).length
   const lines = [
     'Scroll-up · le test en chiffres',
@@ -250,6 +255,7 @@ export async function globalStats(prisma: PrismaClient, now = new Date()): Promi
     `Testeurs : ${users} (${newDay} nouveaux en 24 h)`,
     `Actifs : ${activeDay} en 24 h, ${activeWeek} sur 7 jours`,
     `Passions choisies : ${onboarded} sur ${users} (${percent(onboarded, users)})`,
+    `Piano : ${plural(pianists.length, 'personne')} (jamais joué ${pianoCount('debutant')} · les bases ${pianoCount('bases')} · déjà à l’aise ${pianoCount('confirme')} · pas dit ${pianoCount(undefined)})`,
     `Moments de scroll : ${SCROLL_MOMENTS.map((moment) => `${moment} ${momentCount(moment)}`).join(' · ')} · pas dit ${momentCount(null)} · relances coupées ${remindersOff}`,
     '',
     'Le parcours',

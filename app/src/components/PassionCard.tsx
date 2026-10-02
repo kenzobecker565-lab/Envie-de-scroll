@@ -9,8 +9,9 @@ import { PassionScene } from './decor/PassionScene.tsx'
 
 /**
  * Carte d'une passion, à placer dans un ToggleGroup (shadcn/ui) : un grand
- * sticker de sa couleur (ciel, lilas, menthe, soleil), avec sa petite scène
- * animée. Une fois choisie, elle se soulève et reçoit une coche tomate.
+ * sticker de sa couleur (ciel, lilas, menthe, soleil, tomate), avec sa petite
+ * scène animée. Une fois choisie, elle se soulève et reçoit une coche tomate
+ * (crème sur la carte déjà tomate).
  */
 export function PassionCard({ passion, selected, index }: { passion: Passion; selected: boolean; index: number }) {
   const Icon = PASSION_ICONS[passion.id]
@@ -47,7 +48,10 @@ export function PassionCard({ passion, selected, index }: { passion: Passion; se
             animate={{ scale: 1, rotate: -8 }}
             exit={{ scale: 0 }}
             transition={{ type: 'spring', stiffness: 500, damping: 22 }}
-            className="absolute -top-3 -right-3 flex h-9 w-9 items-center justify-center rounded-pill border-[2.5px] border-outline bg-accent text-on-color"
+            className={cn(
+              'absolute -top-3 -right-3 flex h-9 w-9 items-center justify-center rounded-pill border-[2.5px] border-outline text-on-color',
+              colors.bg === 'bg-accent' ? 'bg-paper' : 'bg-accent',
+            )}
           >
             <Check size={18} strokeWidth={3.2} aria-hidden="true" />
           </motion.span>

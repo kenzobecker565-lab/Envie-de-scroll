@@ -8,8 +8,9 @@
 
 import type { ActivityRating, AppEventName } from './feedback.ts'
 import type { ScrollMoment } from './reminders.ts'
+import type { Skills } from './skills.ts'
 import type { AppTheme } from './themes.ts'
-import type { ActivityExtra, Duration, MoodId, PassionId } from './types.ts'
+import type { ActivityExtra, Duration, MoodId, PassionId, SkillLevel } from './types.ts'
 
 export interface UserDTO {
   id: string
@@ -23,6 +24,8 @@ export interface UserDTO {
   remindersEnabled: boolean
   /** Le moment où la personne scrolle le plus : la relance arrive juste avant (sinon vers 19 h). */
   scrollMoment: ScrollMoment | null
+  /** Le niveau déclaré dans les passions qui le demandent (Piano). */
+  skills: Skills
 }
 
 /** Ce qu'une personne a fait dans une passion : de quoi calculer son niveau et sa collection. */
@@ -119,6 +122,12 @@ export interface ProjectDTO {
 
 export interface UpdateThemeRequest {
   theme: AppTheme
+}
+
+/** Le niveau dans une passion qui le demande (page « Ton niveau »). */
+export interface UpdateSkillRequest {
+  passion: PassionId
+  level: SkillLevel
 }
 
 export interface UpdateSettingsRequest {

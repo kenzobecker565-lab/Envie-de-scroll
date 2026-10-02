@@ -9,7 +9,9 @@
  * 3. « Une autre idée » : l'activité affichée est toujours écartée, puis on
  *    retire au sort selon la même logique. Avec 5 activités et 3 exclusions,
  *    une activité ne revient jamais dans les 4 propositions qui se suivent.
- * 4. Le tirage penche (sans jamais rien interdire) :
+ * 4. Passions avec niveau (Piano) : seulement les activités adaptées au
+ *    niveau déclaré (voir ACTIVITY_SKILLS).
+ * 5. Le tirage penche (sans jamais rien interdire) :
  *    - vers les activités notées « J'ai adoré », et loin de « Pas pour moi » ;
  *    - selon l'humeur : plutôt calme quand on est en retrait, plutôt vive
  *      quand on est sous tension.
@@ -17,7 +19,7 @@
 
 import { activitiesFor } from './activities.ts'
 import type { ActivityRating } from './feedback.ts'
-import type { Activity, Duration, Energy, PassionId } from './types.ts'
+import type { Activity, Duration, Energy, PassionId, SkillLevel } from './types.ts'
 
 /** Nombre de propositions récentes écartées du tirage (« les 2-3 dernières »). */
 export const RECENT_EXCLUSION = 3
@@ -54,6 +56,39 @@ export const ACTIVITY_PACE: Readonly<Record<string, Pace>> = {
   'musique-5-1': 'vive', 'musique-15-6': 'vive', 'musique-15-7': 'vive', 'musique-15-10': 'vive', 'musique-30-11': 'vive',
   'cinema-5-5': 'calme', 'cinema-15-10': 'calme', 'cinema-30-12': 'calme',
   'cinema-5-1': 'vive', 'cinema-5-4': 'vive', 'cinema-15-9': 'vive',
+  'piano-5-2': 'calme', 'piano-15-6': 'calme', 'piano-30-15': 'calme',
+  'piano-5-3': 'vive', 'piano-15-9': 'vive', 'piano-30-13': 'vive',
+}
+
+/**
+ * Passions avec niveau (Piano) : les niveaux auxquels chaque activité
+ * convient. Chaque niveau garde au moins deux activités par temps. Une
+ * activité absente de la liste convient à tout le monde.
+ */
+export const ACTIVITY_SKILLS: Readonly<Record<string, readonly SkillLevel[]>> = {
+  'piano-5-1': ['debutant'],
+  'piano-5-2': ['debutant', 'bases'],
+  'piano-5-4': ['bases', 'confirme'],
+  'piano-5-5': ['confirme'],
+  'piano-15-6': ['debutant'],
+  'piano-15-7': ['debutant', 'bases'],
+  'piano-15-8': ['bases', 'confirme'],
+  'piano-15-10': ['bases', 'confirme'],
+  'piano-30-11': ['debutant'],
+  'piano-30-12': ['bases', 'confirme'],
+  'piano-30-13': ['bases', 'confirme'],
+  'piano-30-14': ['confirme'],
+}
+
+/** L'activité convient-elle à ce niveau ? (Sans niveau déclaré, tout convient.) */
+export function suitsSkill(activityId: string, skill: SkillLevel | undefined): boolean {
+  const levels = ACTIVITY_SKILLS[activityId]
+  return !skill || !levels || levels.includes(skill)
+}
+
+/** Les activités d'une passion et d'un temps adaptées au niveau déclaré. */
+export function skillActivitiesFor(passion: PassionId, duration: Duration, skill: SkillLevel | undefined): Activity[] {
+  return activitiesFor(passion, duration).filter((activity) => suitsSkill(activity.id, skill))
 }
 
 /**

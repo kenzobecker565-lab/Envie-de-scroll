@@ -3,12 +3,15 @@
  *  LES PARCOURS : progresser étape par étape
  * ============================================================================
  *
- * Deux parcours par passion : un pour débuter, un pour aller plus loin. Chaque
+ * Deux parcours par passion : un pour débuter, un pour aller plus loin (trois
+ * pour les passions avec niveau, comme le Piano : on y apprend pas à pas, et
+ * on commence au palier de son niveau). Chaque
  * parcours compte six étapes de plus en plus exigeantes : l'échauffement et
  * l'étape facile durent 5 minutes, les deux suivantes 15, les deux dernières
  * 30, jusqu'au défi final. Une étape se débloque en réussissant la précédente.
- * Le parcours « confirmé » s'ouvre une fois le premier terminé, ou au niveau 3
- * de la passion (voir progress.ts).
+ * Un palier s'ouvre une fois les précédents terminés ; le « confirmé » aussi au
+ * niveau 3 de la passion (voir progress.ts), et tout palier jusqu'à celui du
+ * niveau déclaré (voir skills.ts).
  *
  * ⚠️ Ces textes ne font pas partie des 60 activités validées : à relire.
  *
@@ -16,8 +19,9 @@
  * mêmes minutons) ; son identifiant est `parcours-<parcours>-<numéro>`.
  */
 
+import { SKILL_TIER } from './skills.ts'
 import { frenchTypography } from './typography.ts'
-import type { Activity, Duration, PassionId } from './types.ts'
+import type { Activity, Duration, PassionId, SkillLevel } from './types.ts'
 
 /** Six étapes, de l'échauffement au défi final. */
 export const DIFFICULTIES = ['Échauffement', 'Facile', 'Moyen', 'Corsé', 'Difficile', 'Défi final'] as const
@@ -25,8 +29,8 @@ export const DIFFICULTIES = ['Échauffement', 'Facile', 'Moyen', 'Corsé', 'Diff
 export const STEP_DURATIONS: readonly Duration[] = [5, 5, 15, 15, 30, 30]
 export const STEPS_PER_PATH = DIFFICULTIES.length
 
-/** Débutant, puis confirmé. */
-export const PATH_TIERS = { 1: 'Débutant', 2: 'Confirmé' } as const
+/** Débutant, puis confirmé ; les passions avec niveau (Piano) ont un troisième palier. */
+export const PATH_TIERS = { 1: 'Débutant', 2: 'Confirmé', 3: 'Avancé' } as const
 export type PathTier = keyof typeof PATH_TIERS
 
 type RawStep = [title: string, text: string, focus: string]
@@ -175,6 +179,58 @@ const RAW_PATHS: RawPath[] = [
       ['Un classique', 'Regarde un film muet ou en noir et blanc, et trouve ce qui le rend encore moderne.', "L'histoire du cinéma"],
     ],
   },
+
+  /* -------------------------------------------------------------- Piano */
+  // Apprendre pas à pas : trois paliers, du tout premier contact au premier
+  // vrai morceau. On commence au palier de son niveau (voir skills.ts).
+  {
+    id: 'premieres-touches',
+    passion: 'piano',
+    tier: 1,
+    title: 'Premières touches',
+    pitch: 'De la toute première touche à ton premier air, sans savoir lire une note.',
+    badge: 'Doigts en éveil',
+    steps: [
+      ['Le clavier, ta carte', "Repère les groupes de 2 et de 3 touches noires. Le Do est la touche blanche juste à gauche de chaque groupe de 2 : trouve tous les Do du clavier.", 'Se repérer sur le clavier'],
+      ['Cinq doigts, cinq notes', "Pose le pouce droit sur le Do du milieu, un doigt par touche jusqu'au Sol. Joue Do Ré Mi Fa Sol, puis redescends, lentement, avec le bout des doigts.", 'La position de la main'],
+      ['Au clair de la lune', "Dans la même position, joue « Au clair de la lune » : Do Do Do Ré Mi, Ré, Do Mi Ré Ré Do. Recommence jusqu'à ne plus regarder tes doigts.", 'Ton premier air'],
+      ['Garder le tempo', "Rejoue « Au clair de la lune » en comptant « 1, 2, 3, 4 » à voix haute : chaque note dure un temps, les notes longues deux. Tape du pied si ça aide.", 'Jouer en rythme'],
+      ['La main gauche', "Main gauche : auriculaire sur le Do grave, un doigt par touche jusqu'au Sol. Joue les cinq notes en montant et en descendant, puis « Au clair de la lune » à la main gauche.", 'La main gauche'],
+      ['Ode à la joie', "Apprends l'air de Beethoven à la main droite : Mi Mi Fa Sol, Sol Fa Mi Ré, Do Do Ré Mi, Mi Ré Ré. Puis joue-le d'une traite, du début à la fin.", 'Un morceau, du début à la fin'],
+    ],
+  },
+  {
+    id: 'premiers-morceaux',
+    passion: 'piano',
+    tier: 2,
+    title: 'Mes premiers morceaux',
+    pitch: 'Changer de position, ajouter la main gauche, accompagner une mélodie.',
+    badge: 'Deux mains',
+    steps: [
+      ['Frère Jacques', "Joue « Frère Jacques » à la main droite : Do Ré Mi Do, Do Ré Mi Do, Mi Fa Sol, Mi Fa Sol.", 'Enchaîner les phrases'],
+      ['Le passage du pouce', "Joue la gamme de Do sur une octave : Do Ré Mi avec les doigts 1, 2 et 3, puis le pouce passe dessous pour le Fa, et on continue jusqu'au Do aigu. Redescends.", 'Le passage du pouce'],
+      ['Trois accords magiques', "Main gauche : joue l'accord de Do (Do-Mi-Sol), puis de Fa (Fa-La-Do), puis de Sol (Sol-Si-Ré), quatre temps chacun. Ces trois accords accompagnent des centaines de chansons.", 'Les accords de base'],
+      ["Une main tient, l'autre chante", "Main gauche : tiens un Do grave. Main droite : joue « Au clair de la lune ». Passe à un Sol grave sur « mon ami Pierrot », puis reviens au Do.", "L'indépendance des mains"],
+      ['Accompagner Ode à la joie', "Main droite : « Ode à la joie ». Main gauche : un accord de Do au début de chaque mesure, et de Sol quand la mélodie passe sur Ré. Lentement d'abord.", 'Jouer à deux mains'],
+      ['Ton premier morceau à deux mains', "Joue « Ode à la joie » à deux mains du début à la fin, puis enregistre-toi avec ton téléphone et écoute-toi.", 'Un morceau entier à deux mains'],
+    ],
+  },
+  {
+    id: 'jouer-pour-de-vrai',
+    passion: 'piano',
+    tier: 3,
+    title: 'Jouer pour de vrai',
+    pitch: "Lire une partition, gammes et arpèges, jouer d'oreille, mettre des nuances.",
+    badge: 'Pianiste',
+    steps: [
+      ['Lire la clé de sol', "Sur une partition simple, repère les notes des lignes (Mi Sol Si Ré Fa) et des interlignes (Fa La Do Mi). Lis huit notes à voix haute, puis joue-les.", 'La lecture de notes'],
+      ['La gamme de Sol', "Joue la gamme de Sol majeur, avec son Fa dièse, mains séparées puis ensemble, sur une octave.", 'Les gammes'],
+      ['Les arpèges pop', "Main gauche : arpège Do, puis Sol, La mineur et Fa, une note après l'autre, en boucle. C'est la grille de centaines de chansons pop.", 'Les arpèges'],
+      ["Jouer d'oreille", "Retrouve « Joyeux anniversaire » sans partition, en partant de Sol. Cherche note par note, puis ajoute un accord à la main gauche.", "Jouer d'oreille"],
+      ['Les nuances', "Prends un morceau que tu connais : joue-le une fois tout doux (piano), une fois fort (forte), puis lié (legato) et détaché (staccato).", "L'expression"],
+      ['Ton morceau à toi', "Choisis un morceau qui te fait envie et apprends-le par sections de quatre mesures : chaque section lentement, puis tu les enchaînes.", 'Apprendre un morceau seul·e'],
+    ],
+  },
 ]
 
 /** Une étape : une activité, avec sa place dans le parcours. */
@@ -247,7 +303,7 @@ export interface PathProgress {
   /** Étapes réussies (0 à 6). */
   done: number
   finished: boolean
-  /** Le parcours est ouvert (le premier toujours ; le confirmé après le premier, ou au niveau 3). */
+  /** Le parcours est ouvert (le premier toujours ; les suivants après les précédents, au niveau 3, ou selon le niveau déclaré). */
   unlocked: boolean
   /** La prochaine étape à jouer, ou null si le parcours est fini. */
   next: PathStep | null
@@ -258,12 +314,15 @@ export const CONFIRMED_PATH_LEVEL = 3
 
 /**
  * Où en est-on dans chaque parcours d'une passion, à partir des étapes déjà
- * réussies (`doneSteps`) et du niveau atteint dans la passion.
+ * réussies (`doneSteps`), du niveau atteint dans la passion et, pour les
+ * passions qui le demandent, du niveau déclaré (`skill`).
  */
-export function pathProgress(passion: PassionId, doneSteps: readonly string[], level: number): PathProgress[] {
+export function pathProgress(passion: PassionId, doneSteps: readonly string[], level: number, skill?: SkillLevel): PathProgress[] {
   const done = new Set(doneSteps)
   const paths = pathsFor(passion)
-  const finishedTier1 = paths.filter((path) => path.tier === 1).every((path) => path.steps.every((step) => done.has(step.id)))
+  const finished = (path: Path) => path.steps.every((step) => done.has(step.id))
+  // Un palier s'ouvre quand tous les paliers d'avant sont terminés.
+  const lowerFinished = (tier: number) => paths.filter((path) => path.tier < tier).every(finished)
   return paths.map((path) => {
     // Les étapes se réussissent dans l'ordre : on compte jusqu'à la première manquante.
     const count = path.steps.findIndex((step) => !done.has(step.id))
@@ -272,15 +331,15 @@ export function pathProgress(passion: PassionId, doneSteps: readonly string[], l
       path,
       done: doneCount,
       finished: doneCount === path.steps.length,
-      unlocked: path.tier === 1 || finishedTier1 || level >= CONFIRMED_PATH_LEVEL,
+      unlocked: path.tier === 1 || lowerFinished(path.tier) || (path.tier === 2 && level >= CONFIRMED_PATH_LEVEL) || (skill !== undefined && path.tier <= SKILL_TIER[skill]),
       next: path.steps[doneCount] ?? null,
     }
   })
 }
 
 /** L'étape peut-elle être jouée ? (parcours ouvert, étapes précédentes réussies). */
-export function canPlayStep(step: PathStep, doneSteps: readonly string[], level: number): boolean {
-  const progress = pathProgress(step.passion, doneSteps, level).find((entry) => entry.path.id === step.pathId)
+export function canPlayStep(step: PathStep, doneSteps: readonly string[], level: number, skill?: SkillLevel): boolean {
+  const progress = pathProgress(step.passion, doneSteps, level, skill).find((entry) => entry.path.id === step.pathId)
   if (!progress?.unlocked) return false
   // On peut rejouer une étape réussie, ou jouer la suivante.
   return step.index <= progress.done + 1

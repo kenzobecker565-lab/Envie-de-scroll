@@ -27,7 +27,7 @@ function shareLink(text: string, url: string): void {
 }
 
 export const INVITE_TEXT =
-  'Quand ton pouce te démange, Scroll-up te propose une petite activité créative à la place (dessin, écriture, musique, cinéma). Je teste, essaie aussi :'
+  'Quand ton pouce te démange, Scroll-up te propose une petite activité créative à la place (dessin, écriture, musique, cinéma, piano). Je teste, essaie aussi :'
 
 export function invite(botUsername: string | null): void {
   shareLink(INVITE_TEXT, appLink(botUsername))

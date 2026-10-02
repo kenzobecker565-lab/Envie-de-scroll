@@ -17,6 +17,7 @@
  *   GET  /api/projects/:id       un projet et ses créations ; PATCH : le modifier ou le terminer ; DELETE
  *   GET  /api/photos/:id         une photo de dessin (adresse signée)
  *   PUT  /api/me/settings        réglages (relances du bot, moment de scroll)
+ *   PUT  /api/me/skills          niveau dans une passion qui le demande (Piano)
  *   DELETE /api/me               effacer toutes ses données (retour à l'inscription)
  *   POST /api/feedback           un avis écrit (transmis aux admins dans Telegram)
  *   POST /api/events             un événement d'usage (suivi du test, sans texte libre)
@@ -35,6 +36,9 @@ import {
   isMoodId,
   isPassionId,
   isScrollMoment,
+  isSkillLevel,
+  asksSkill,
+  parseSkills,
   MAX_PHOTO_BYTES,
   normalizePassions,
   type ApiErrorBody,
@@ -216,6 +220,21 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
           ...(scrollMoment !== undefined ? { scrollMoment } : {}),
         },
       })
+      const body: UserResponse = { user: toUserDTO(updated) }
+      res.json(body)
+    }),
+  )
+
+  // Page « Ton niveau » : le niveau dans une passion qui le demande (Piano).
+  api.put(
+    '/me/skills',
+    asyncRoute(async (req, res) => {
+      const { passion, level } = (req.body ?? {}) as Record<string, unknown>
+      if (!isPassionId(passion) || !asksSkill(passion)) throw badRequest('Cette passion ne demande pas de niveau.')
+      if (!isSkillLevel(level)) throw badRequest('Niveau inconnu.')
+      const user = await currentUser(req, res)
+      const skills = { ...parseSkills(user.skills), [passion]: level }
+      const updated = await prisma.user.update({ where: { id: user.id }, data: { skills: JSON.stringify(skills) } })
       const body: UserResponse = { user: toUserDTO(updated) }
       res.json(body)
     }),

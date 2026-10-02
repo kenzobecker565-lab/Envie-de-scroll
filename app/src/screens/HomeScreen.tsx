@@ -69,6 +69,7 @@ export function HomeScreen() {
           user.passions,
           (passion) => statsFor(stats.byPassion, passion).steps,
           (passion) => passionLevel(passion, statsFor(stats.byPassion, passion).minutes).level,
+          user.skills,
         )
       : null
   const card = openProposal && ResumeIcon ? 'resume' : stats.totalActivities === 0 ? 'how' : wordToday ? 'word' : featured ? 'path' : 'month'

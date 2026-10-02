@@ -65,13 +65,25 @@ const RAW_FACTS: Record<PassionId, string[]> = {
     'Le cinéma tourne à 24 images par seconde depuis l\'arrivée du parlant, à la fin des années 1920.',
     'Marjane Satrapi a adapté elle-même sa BD Persepolis au cinéma, avec Vincent Paronnaud. Le film a reçu le prix du jury à Cannes en 2007.',
   ],
+  piano: [
+    'Le piano s\'appelait d\'abord « pianoforte » : contrairement au clavecin, il joue doux (piano) ou fort (forte) selon la force du doigt.',
+    'Bartolomeo Cristofori a inventé le piano vers 1700, à Florence.',
+    'Un piano moderne compte 88 touches : 52 blanches et 36 noires.',
+    'Un piano à queue a environ 230 cordes. Ensemble, elles tirent sur le cadre avec une force de près de 20 tonnes.',
+    'Mozart composait déjà de petites pièces pour clavier à 5 ans.',
+    'La Lettre à Élise de Beethoven n\'a été publiée qu\'en 1867, quarante ans après sa mort.',
+    'Les cinq touches noires forment une gamme pentatonique, celle de nombreuses musiques traditionnelles : c\'est pour ça qu\'on ne sonne jamais faux en ne jouant qu\'elles.',
+    'Le do du milieu du clavier s\'appelle le do central : c\'est le point de repère des deux mains, et des partitions.',
+    'Érik Satie a écrit ses trois Gymnopédies en 1888. Il glissait dans ses partitions des indications farfelues pour le pianiste.',
+    'Le piano est un instrument à cordes frappées : chaque touche lance un petit marteau de feutre contre une, deux ou trois cordes.',
+  ],
 }
-
 export const FACTS: Readonly<Record<PassionId, readonly string[]>> = {
   dessin: RAW_FACTS.dessin.map(frenchTypography),
   ecriture: RAW_FACTS.ecriture.map(frenchTypography),
   musique: RAW_FACTS.musique.map(frenchTypography),
   cinema: RAW_FACTS.cinema.map(frenchTypography),
+  piano: RAW_FACTS.piano.map(frenchTypography),
 }
 
 /** Une anecdote de la passion, toujours la même pour une même graine. */

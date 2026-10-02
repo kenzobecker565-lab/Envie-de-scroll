@@ -20,7 +20,7 @@ import { PathScreen } from './screens/PathScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
 import { TabBar } from './components/TabBar.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
-import { MomentScreen, PassionsScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
+import { MomentScreen, PassionsScreen, SkillScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
 import { SignalScreen } from './screens/SignalScreen.tsx'
 import { AppStateProvider, useAppState, useNavigation, type Flow, type Route } from './state/AppState.tsx'
@@ -110,6 +110,8 @@ function screenFor(route: Route) {
       return <PassionsScreen mode={route.mode} />
     case 'moment':
       return <MomentScreen />
+    case 'skill':
+      return <SkillScreen passion={route.passion} mode={route.mode} />
     case 'home':
       return <HomeScreen />
     case 'signal':
@@ -142,13 +144,13 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { state } = useAppState()
   const tone = toneFor(route, state.flow)
   useEffect(() => onTone(tone), [tone, onTone])
-  // Pendant une activité Musique ou Cinéma, on écoute ou on regarde autre chose : la musique d'ambiance se retire.
-  const elsewhere = (route.name === 'activity' || route.name === 'proof') && (state.flow.passion === 'musique' || state.flow.passion === 'cinema')
+  // Pendant une activité Musique, Cinéma ou Piano, on écoute, regarde ou joue autre chose : la musique d'ambiance se retire.
+  const elsewhere = (route.name === 'activity' || route.name === 'proof') && (state.flow.passion === 'musique' || state.flow.passion === 'cinema' || state.flow.passion === 'piano')
   useEffect(() => (elsewhere ? suppressAmbient('activité') : undefined), [elsewhere])
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 
-  const key = route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name
+  const key = route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>
       <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>

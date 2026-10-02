@@ -19,6 +19,7 @@ export const LEVEL_TITLES: Record<PassionId, readonly [string, string, string, s
   ecriture: ['Griffonneur·euse', 'Plume', 'Conteur·euse', 'Auteur·rice', 'Romancier·ère'],
   musique: ['Curieux·euse', 'Auditeur·rice', 'Mélomane', 'Dénicheur·euse', 'Encyclopédie sonore'],
   cinema: ['Spectateur·rice', 'Cinéphile', 'Explorateur·rice', 'Critique', 'Cinémathèque ambulante'],
+  piano: ['Pianoteur·euse', 'Doigts agiles', 'Musicien·ne', 'Pianiste', 'Virtuose du clavier'],
 }
 
 export const MAX_LEVEL = LEVEL_MINUTES.length

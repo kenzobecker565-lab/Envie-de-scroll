@@ -59,6 +59,29 @@ describe('thème', () => {
   })
 })
 
+describe('piano : niveau et contenu ciblé', () => {
+  it('enregistre le niveau, et ne tire que des activités adaptées', async () => {
+    await onboard(['piano'])
+    await request(app).put('/api/me/skills').set(as()).send({ passion: 'dessin', level: 'debutant' }).expect(400)
+    await request(app).put('/api/me/skills').set(as()).send({ passion: 'piano', level: 'expert' }).expect(400)
+    const saved = await request(app).put('/api/me/skills').set(as()).send({ passion: 'piano', level: 'confirme' }).expect(200)
+    expect((saved.body as { user: MeResponse['user'] }).user.skills).toEqual({ piano: 'confirme' })
+    // « Trouve tous les Do » est pour les débutants : jamais proposé à quelqu'un qui joue déjà.
+    for (let i = 0; i < 12; i++) {
+      const proposal = await propose({ passion: 'piano', mood: 'ennui', duration: 5 })
+      expect(['piano-5-1', 'piano-5-2']).not.toContain(proposal.activityId)
+    }
+  })
+
+  it('ouvre directement le parcours de son niveau', async () => {
+    await onboard(['piano'])
+    const advanced = { passion: 'piano', mood: 'ennui', duration: 5, step: 'parcours-jouer-pour-de-vrai-1' }
+    await request(app).post('/api/proposals').set(as()).send(advanced).expect(409)
+    await request(app).put('/api/me/skills').set(as()).send({ passion: 'piano', level: 'confirme' }).expect(200)
+    await request(app).post('/api/proposals').set(as()).send(advanced).expect(201)
+  })
+})
+
 describe('effacer ses données', () => {
   it('efface tout (photos comprises) et repart de l’inscription, sans toucher aux autres', async () => {
     await onboard(['dessin', 'ecriture'])
@@ -99,7 +122,7 @@ describe('authentification', () => {
     const initData = makeInitData({ id: 5150, first_name: 'Sam', allows_write_to_pm: true })
     const response = await request(app).get('/api/me').set('Authorization', `tma ${initData}`).expect(200)
     const body = response.body as MeResponse
-    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false, theme: 'pop', remindersEnabled: true, scrollMoment: null })
+    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false, theme: 'pop', remindersEnabled: true, scrollMoment: null, skills: {} })
     const user = await prisma.user.findUnique({ where: { id: 5150n } })
     expect(user?.canMessage).toBe(true)
   })

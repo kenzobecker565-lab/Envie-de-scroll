@@ -1,4 +1,4 @@
-import { ArrowRight, Disc3, Film, NotebookPen, PenLine } from 'lucide-react'
+import { ArrowRight, Disc3, Film, NotebookPen, PenLine, Piano } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import type { CompletionDTO, PassionDetailResponse, PassionId, PassionStatsDTO } from '@scroll-up/shared'
@@ -12,7 +12,8 @@ import { PASSION_COLORS } from '../lib/icons.ts'
  * La signature d'une passion, ce qui se voit le mieux quand on progresse :
  * - Dessin : le premier et le dernier dessin côte à côte (avant / maintenant) ;
  * - Écriture : les mots écrits, et le texte le plus long ;
- * - Musique : la discothèque, Cinéma : la filmothèque (les titres explorés).
+ * - Musique : la discothèque, Cinéma : la filmothèque (les titres explorés) ;
+ * - Piano : le répertoire (les morceaux joués).
  */
 
 /** Une page de roman compte à peu près 250 mots. */
@@ -23,12 +24,14 @@ const TITLES: Record<PassionId, { title: string; icon: typeof Disc3 }> = {
   ecriture: { title: 'Ton carnet d’écriture', icon: PenLine },
   musique: { title: 'Ta discothèque', icon: Disc3 },
   cinema: { title: 'Ta filmothèque', icon: Film },
+  piano: { title: 'Ton répertoire', icon: Piano },
 }
 
 /** « 3 dessins », « 1 240 mots », « 8 découvertes » : le chiffre qui parle le plus, par passion. */
 export function signatureLabel(passion: PassionId, stats: PassionStatsDTO): string | null {
   if (passion === 'dessin') return stats.drawings ? plural(stats.drawings, 'dessin') : null
   if (passion === 'ecriture') return stats.words ? plural(stats.words, 'mot') : null
+  if (passion === 'piano') return stats.explored ? plural(stats.explored, 'morceau', 'morceaux') : null
   return stats.explored ? plural(stats.explored, 'découverte') : null
 }
 
@@ -127,7 +130,7 @@ function Writing({ detail }: { detail: PassionDetailResponse }) {
 function Titles({ detail, passion }: { detail: PassionDetailResponse; passion: PassionId }) {
   const shown = detail.titles.slice(0, 12)
   if (!shown.length) {
-    return <Hint>Note ce que tu explores à la fin d’une activité&nbsp;: {passion === 'musique' ? 'ta discothèque' : 'ta filmothèque'} se remplira ici.</Hint>
+    return <Hint>Note ce que tu explores à la fin d’une activité&nbsp;: {passion === 'musique' ? 'ta discothèque' : passion === 'piano' ? 'ton répertoire' : 'ta filmothèque'} se remplira ici.</Hint>
   }
   return (
     <div className="flex flex-col gap-2">

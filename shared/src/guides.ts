@@ -16,6 +16,7 @@
  * ⚠️ Ces textes ne font pas partie du contenu validé : à relire librement.
  */
 
+import { melody, type Melody } from './keyboard.ts'
 import { getChallengeActivity } from './monthly.ts'
 import { getPathStep } from './paths.ts'
 import { FILMS, MUSIC_GENRES, sample, WORDS } from './prompts.ts'
@@ -166,9 +167,11 @@ export interface ActivityGuide {
   tips: readonly string[]
   ideas?: IdeaList
   goal?: WritingGoal
+  /** Piano : l'air à jouer, note après note, sur le clavier de l'appli. */
+  melody?: Melody
 }
 
-type RawGuide = { tips: string[]; ideas?: IdeaList; goal?: Omit<WritingGoal, 'label'> & { label?: string } }
+type RawGuide = { tips: string[]; ideas?: IdeaList; goal?: Omit<WritingGoal, 'label'> & { label?: string }; melody?: Melody }
 
 const RAW_GUIDES: Record<string, RawGuide> = {
   /* Dessin, 5 min */
@@ -598,6 +601,220 @@ const RAW_GUIDES: Record<string, RawGuide> = {
   },
 }
 
+/* ----------------------------------------------------------------- Piano */
+
+const AU_CLAIR_DE_LA_LUNE = melody('Au clair de la lune', 'C4 C4 C4 D4 E4 D4 C4 E4 D4 D4 C4')
+const ODE_A_LA_JOIE = melody('Ode à la joie', 'E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 E4 D4 D4')
+const CINQ_DOIGTS = melody('Do Ré Mi Fa Sol, aller-retour', 'C4 D4 E4 F4 G4 F4 E4 D4 C4')
+const GAMME_DE_DO = melody('La gamme de Do', 'C4 D4 E4 F4 G4 A4 B4 C5 B4 A4 G4 F4 E4 D4 C4')
+
+/** Des airs connus de tous, à retrouver à l'oreille. */
+const TUNES_BY_EAR = [
+  'Joyeux anniversaire', 'Frère Jacques', 'Jingle Bells', 'Le générique de Pokémon', 'Le thème d\'Harry Potter',
+  'La Panthère rose', 'Le générique des Simpson', 'Une souris verte', 'Il était un petit navire',
+]
+
+/** Des morceaux pour débuter, avec un tutoriel à suivre. */
+const BEGINNER_PIECES = [
+  'Ah ! vous dirai-je, maman', 'Frère Jacques', 'Ode à la joie', 'Jingle Bells', 'La Lettre à Élise (version facile)',
+  'Le Canon de Pachelbel (version facile)', 'Comptine d\'un autre été (version facile)', 'Douce nuit',
+]
+
+/** Des partitions à déchiffrer quand on joue déjà. */
+const PIECES_TO_READ = [
+  'Menuet en sol (Petzold)', 'Prélude en do majeur (Bach)', 'Gymnopédie n° 1 (Satie)', 'Comptine d\'un autre été (Yann Tiersen)',
+  'River Flows in You (Yiruma)', 'Clair de lune (Debussy, le début)', 'Nuvole Bianche (Einaudi)', 'Arabesque n° 1 (Debussy)',
+]
+
+// ⚠️ Comme les activités Piano, ces textes sont nouveaux : à relire.
+const RAW_PIANO_GUIDES: Record<string, RawGuide> = {
+  /* Piano, 5 min */
+  'piano-5-1': {
+    tips: [
+      'Les touches noires vont par 2 et par 3, comme des petits îlots.',
+      'Le Do est toujours la touche blanche juste à gauche des 2 touches noires.',
+      'Une fois trouvés, ferme les yeux et retrouve-les au toucher.',
+    ],
+    melody: melody('Les trois Do du clavier', 'C3 C4 C5'),
+  },
+  'piano-5-2': {
+    tips: [
+      'Pouce = 1, index = 2… auriculaire = 5 : un doigt par touche.',
+      'Garde la main arrondie, comme si tu tenais une balle.',
+      'Lent et régulier vaut mieux que rapide et inégal.',
+    ],
+    melody: CINQ_DOIGTS,
+  },
+  'piano-5-3': {
+    tips: [
+      'Les 5 touches noires forment une gamme pentatonique : tout sonne bien ensemble.',
+      'Commence par 3 notes, répète-les, puis change-en une.',
+      'Termine sur une note grave : ça sonne comme une fin.',
+    ],
+  },
+  'piano-5-4': {
+    tips: [
+      'Doigté : 1, 2, 3, le pouce passe sous le 3 pour le Fa, puis 1, 2, 3, 4, 5.',
+      'Un métronome (gratuit, en ligne ou en appli) aide à rester régulier.',
+      'Très lentement d\'abord ; accélère seulement quand c\'est égal.',
+    ],
+    melody: GAMME_DE_DO,
+  },
+  'piano-5-5': {
+    tips: [
+      'Doigts 1-2, puis 2-3, 3-4 et 4-5 : quinze secondes chacun.',
+      'Le 4e doigt est le plus faible chez tout le monde : c\'est normal.',
+      'Poignet souple, épaules basses : la force vient du bout des doigts.',
+    ],
+  },
+  /* Piano, 15 min */
+  'piano-15-6': {
+    tips: [
+      'Pouce droit sur le Do du milieu, les autres doigts sur Ré, Mi, Fa, Sol.',
+      'Do Do Do Ré Mi, Ré, Do Mi Ré Ré Do.',
+      'Avec « Sans piano », la touche suivante s\'allume sur le clavier de l\'appli.',
+    ],
+    melody: AU_CLAIR_DE_LA_LUNE,
+  },
+  'piano-15-7': {
+    tips: [
+      'Pouce sur le Do, mais l\'air commence sur Mi, avec le 3e doigt.',
+      'Mi Mi Fa Sol, Sol Fa Mi Ré, Do Do Ré Mi, Mi Ré Ré.',
+      'À la main gauche, c\'est le même air : seul le doigté s\'inverse.',
+    ],
+    melody: ODE_A_LA_JOIE,
+  },
+  'piano-15-8': {
+    tips: [
+      'Do = Do-Mi-Sol, Fa = Fa-La-Do, Sol = Sol-Si-Ré.',
+      'Une mélodie faite des notes de l\'accord ne peut pas sonner faux.',
+      'Change d\'accord toutes les quatre notes de la mélodie.',
+    ],
+  },
+  'piano-15-9': {
+    tips: [
+      'Main gauche : alterne deux notes graves, Do♯ et Fa♯ par exemple, comme une pulsation.',
+      'Main droite : réponds-lui par de petites phrases.',
+      'Les silences comptent : une pause rend l\'improvisation plus musicale.',
+    ],
+  },
+  'piano-15-10': {
+    tips: [
+      'Chante l\'air dans ta tête, puis cherche la première note.',
+      'La note suivante monte ou descend ? De beaucoup ou de peu ?',
+      'Note sur un papier les notes trouvées, pour ne pas les perdre.',
+    ],
+    ideas: { label: 'Des airs connus de tous', items: TUNES_BY_EAR, links: 'video', suffix: 'piano facile' },
+  },
+  /* Piano, 30 min */
+  'piano-30-11': {
+    tips: [
+      'Apprends par petits bouts de quatre notes.',
+      'Ralentis la vidéo (vitesse 0,75) pour suivre les mains.',
+      'Joue chaque bout trois fois sans erreur avant de passer au suivant.',
+    ],
+    ideas: { label: 'Des morceaux pour débuter', items: BEGINNER_PIECES, links: 'video', suffix: 'piano tutoriel facile' },
+  },
+  'piano-30-12': {
+    tips: [
+      'Lent, c\'est vraiment lent : deux fois moins vite que le tempo final.',
+      'Repère les passages difficiles et travaille-les à part.',
+      'Termine toujours par une version entière, même imparfaite.',
+    ],
+  },
+  'piano-30-13': {
+    tips: [
+      'La grille : Do, Sol, La mineur (La-Do-Mi), Fa, quatre temps chacun.',
+      'Commence et termine ta mélodie sur un Do.',
+      'Enregistre-toi : tu viens de composer un morceau.',
+    ],
+  },
+  'piano-30-14': {
+    tips: [
+      'Repère d\'abord la clé, les dièses ou bémols et la mesure.',
+      'Mains séparées d\'abord, toujours.',
+      'Quatre mesures à la fois, pas plus.',
+    ],
+    ideas: { label: 'Des partitions à déchiffrer', items: PIECES_TO_READ, links: 'video', suffix: 'partition piano' },
+  },
+  'piano-30-15': {
+    tips: [
+      'Fais la liste de tout ce que tu sais jouer, même les bouts.',
+      'Une fausse note ? Continue : c\'est le secret des concerts.',
+      'Termine par ton morceau préféré.',
+    ],
+  },
+
+  /* Piano, les parcours : des pistes propres à chaque leçon */
+  'parcours-premieres-touches-1': {
+    tips: ['Les 2 touches noires, puis les 3, puis les 2… le motif se répète tout le long du clavier.', 'Le Do est juste à gauche des 2 noires.'],
+    melody: melody('Les trois Do du clavier', 'C3 C4 C5'),
+  },
+  'parcours-premieres-touches-2': {
+    tips: ['Doigts arrondis, comme posés sur une balle.', 'Chaque note aussi forte que la précédente : écoute-toi.'],
+    melody: CINQ_DOIGTS,
+  },
+  'parcours-premieres-touches-3': {
+    tips: ['Ne bouge pas la main : chaque doigt a sa touche.', 'Joue la première moitié jusqu\'à la savoir, puis la seconde.'],
+    melody: AU_CLAIR_DE_LA_LUNE,
+  },
+  'parcours-premieres-touches-4': {
+    tips: ['Compte à voix haute, même si ça paraît bizarre.', 'Mieux vaut un tempo lent tenu jusqu\'au bout qu\'un tempo rapide qui s\'effondre.'],
+    melody: AU_CLAIR_DE_LA_LUNE,
+  },
+  'parcours-premieres-touches-5': {
+    tips: ['À la main gauche, l\'auriculaire (5) est sur le Do et le pouce sur le Sol.', 'La main gauche est plus lente au début : c\'est normal, sois patient·e.'],
+    melody: melody('Main gauche : Do Ré Mi Fa Sol', 'C3 D3 E3 F3 G3 F3 E3 D3 C3'),
+  },
+  'parcours-premieres-touches-6': {
+    tips: ['Apprends la première ligne, puis la deuxième, puis enchaîne.', 'Le 3e doigt commence, sur le Mi.'],
+    melody: ODE_A_LA_JOIE,
+  },
+  'parcours-premiers-morceaux-1': {
+    tips: ['Deux fois la même phrase, puis deux fois la suivante : repère les répétitions.', 'Le Sol est un peu loin : prépare le 5e doigt à l\'avance.'],
+    melody: melody('Frère Jacques', 'C4 D4 E4 C4 C4 D4 E4 C4 E4 F4 G4 E4 F4 G4'),
+  },
+  'parcours-premiers-morceaux-2': {
+    tips: ['Le pouce glisse sous la main, sans que le poignet ne bouge.', 'En redescendant, c\'est le 3e doigt qui passe par-dessus le pouce.'],
+    melody: GAMME_DE_DO,
+  },
+  'parcours-premiers-morceaux-3': {
+    tips: ['Doigts 5, 3 et 1 de la main gauche pour chaque accord.', 'D\'abord note par note, puis les trois ensemble.'],
+    melody: melody('Do, Fa et Sol, note après note', 'C3 E3 G3 F3 A3 C4 G3 B3 D4'),
+  },
+  'parcours-premiers-morceaux-4': {
+    tips: ['La main gauche ne bouge presque pas : laisse-la tenir pendant que la droite joue.', 'Commence très lentement, une note de main droite à la fois.'],
+  },
+  'parcours-premiers-morceaux-5': {
+    tips: ['Main gauche : un accord sur le premier temps de chaque mesure, c\'est tout.', 'Joue d\'abord les mains séparées, puis ensemble à mi-vitesse.'],
+    melody: ODE_A_LA_JOIE,
+  },
+  'parcours-premiers-morceaux-6': {
+    tips: ['Une fausse note ? Continue jusqu\'au bout.', 'Écoute-toi une fois sans juger, juste pour entendre ton chemin.'],
+  },
+  'parcours-jouer-pour-de-vrai-1': {
+    tips: ['Lignes : « Mi Sol Si Ré Fa » ; interlignes : « Fa La Do Mi ».', 'Le Do central est sur une petite ligne en dessous de la portée.'],
+  },
+  'parcours-jouer-pour-de-vrai-2': {
+    tips: ['Le Fa est dièse : c\'est la touche noire juste à droite du Fa.', 'Même doigté que la gamme de Do, en partant de Sol.'],
+    melody: melody('La gamme de Sol', 'G3 A3 B3 C4 D4 E4 F#4 G4'),
+  },
+  'parcours-jouer-pour-de-vrai-3': {
+    tips: ['Do-Mi-Sol, Sol-Si-Ré, La-Do-Mi, Fa-La-Do : quatre accords, trois notes chacun.', 'Laisse sonner : la pédale de droite aide, si tu en as une.'],
+    melody: melody('Do, Sol, La mineur, Fa en arpèges', 'C3 E3 G3 G3 B3 D4 A3 C4 E4 F3 A3 C4'),
+  },
+  'parcours-jouer-pour-de-vrai-4': {
+    tips: ['« Joyeux anniversaire » commence par deux notes pareilles, puis monte.', 'Chante, cherche, rejoue : c\'est comme ça que tout le monde fait.'],
+  },
+  'parcours-jouer-pour-de-vrai-5': {
+    tips: ['Piano : les doigts près des touches. Forte : le poids du bras.', 'Legato : une note ne s\'arrête que quand la suivante commence.'],
+  },
+  'parcours-jouer-pour-de-vrai-6': {
+    tips: ['Choisis un morceau un peu en dessous de ce que tu crois pouvoir jouer.', 'Quatre mesures par séance, c\'est déjà beaucoup.'],
+    ideas: { label: 'Des morceaux qui font envie', items: PIECES_TO_READ, links: 'video', suffix: 'piano tutoriel' },
+  },
+}
+
 /** Pour les étapes de parcours : des pistes générales, par passion. */
 const RAW_PASSION_TIPS: Record<PassionId, string[]> = {
   dessin: [
@@ -620,6 +837,11 @@ const RAW_PASSION_TIPS: Record<PassionId, string[]> = {
     'Revois un passage en coupant le son : l\'image raconte tout.',
     'Note la scène qui t\'a le plus marqué.',
   ],
+  piano: [
+    'Lentement et juste vaut mieux que vite et faux.',
+    'Main arrondie, poignet souple, épaules basses.',
+    'Pas de piano sous la main ? Touche « Sans piano » : le clavier de l\'appli est là pour ça.',
+  ],
 }
 
 const UNIT_LABELS: Record<GoalUnit, [string, string]> = {
@@ -633,16 +855,20 @@ function buildGuide(raw: RawGuide): ActivityGuide {
     tips: raw.tips.map(frenchTypography),
     ...(raw.ideas ? { ideas: { ...raw.ideas, label: frenchTypography(raw.ideas.label), items: raw.ideas.items.map(frenchTypography) } } : {}),
     ...(raw.goal ? { goal: { ...raw.goal, label: frenchTypography(raw.goal.label ?? `${raw.goal.count} ${UNIT_LABELS[raw.goal.unit][raw.goal.count > 1 ? 1 : 0]}`) } } : {}),
+    ...(raw.melody ? { melody: { ...raw.melody, title: frenchTypography(raw.melody.title) } } : {}),
   }
 }
 
-export const GUIDES: Readonly<Record<string, ActivityGuide>> = Object.fromEntries(Object.entries(RAW_GUIDES).map(([id, raw]) => [id, buildGuide(raw)]))
+export const GUIDES: Readonly<Record<string, ActivityGuide>> = Object.fromEntries(
+  Object.entries({ ...RAW_GUIDES, ...RAW_PIANO_GUIDES }).map(([id, raw]) => [id, buildGuide(raw)]),
+)
 
 const PASSION_GUIDES: Record<PassionId, ActivityGuide> = {
   dessin: buildGuide({ tips: RAW_PASSION_TIPS.dessin }),
   ecriture: buildGuide({ tips: RAW_PASSION_TIPS.ecriture }),
   musique: buildGuide({ tips: RAW_PASSION_TIPS.musique }),
   cinema: buildGuide({ tips: RAW_PASSION_TIPS.cinema }),
+  piano: buildGuide({ tips: RAW_PASSION_TIPS.piano }),
 }
 
 /** Le guide d'une activité ; pour une étape de parcours ou un mot du jour, les pistes générales de sa passion. */

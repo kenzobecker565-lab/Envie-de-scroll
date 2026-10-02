@@ -35,6 +35,7 @@ const IDEAS: Record<PassionId, string[]> = {
   ecriture: ['Ma nouvelle', 'Mon journal de bord', 'Poèmes du quotidien'],
   musique: ['Le tour du jazz', 'Les années 80', 'Ma playlist idéale'],
   cinema: ['Les films de Miyazaki', 'Les grands classiques', 'Le cinéma coréen'],
+  piano: ['Mon répertoire', 'Les airs de mon enfance', 'Les musiques de films'],
 }
 
 /** Actifs d'abord (du plus récent au plus ancien), puis les terminés. */
@@ -245,7 +246,7 @@ function ProjectSheet({ id, onClose }: { id: string; onClose: () => void }) {
         </DialogDescription>
       </DialogHeader>
 
-      <Card tone={PASSION_COLORS[project.passion].badge} className="shrink-0 gap-3 shadow-pop">
+      <Card tone={PASSION_COLORS[project.passion].card} className="shrink-0 gap-3 shadow-pop">
         <div className="grid grid-cols-3 gap-2 text-center">
           <Stat value={String(project.creations)} label={project.creations > 1 ? 'créations' : 'création'} />
           <Stat value={formatMinutes(project.minutes)} label="de création" />

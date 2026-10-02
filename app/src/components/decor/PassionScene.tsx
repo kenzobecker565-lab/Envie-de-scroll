@@ -3,7 +3,8 @@
  * - Dessin : un crayon trace une ligne ;
  * - Écriture : une plume écrit trois lignes ;
  * - Musique : un égaliseur danse et des notes s'envolent ;
- * - Cinéma : une pellicule défile.
+ * - Cinéma : une pellicule défile ;
+ * - Piano : les touches s'enfoncent l'une après l'autre, des notes s'envolent.
  *
  * Le tracé du crayon et de la plume utilise les animations SVG natives
  * (le trait et l'outil restent parfaitement synchronisés). Si le système
@@ -160,6 +161,38 @@ function FilmScene() {
   )
 }
 
+/** Les touches blanches qui s'allument tour à tour : Do Mi Sol Mi, comme un petit arpège. */
+const PIANO_SEQUENCE = [0, 2, 4, 2, 0, 3, 5, 7]
+
+function PianoScene({ animate }: { animate: boolean }) {
+  const whites = Array.from({ length: 9 }, (_, index) => 8 + index * 16)
+  // Les touches noires : après Do, Ré, Fa, Sol, La (pas après Mi ni Si).
+  const blacks = [0, 1, 3, 4, 5, 7].map((index) => 8 + index * 16 + 11)
+  return (
+    <>
+      <rect x="4" y="30" width="152" height="52" rx="6" style={{ fill: 'var(--ink)' }} />
+      {whites.map((x, index) => {
+        const order = PIANO_SEQUENCE.indexOf(index)
+        return (
+          <g key={x}>
+            <rect x={x} y="34" width="15" height="44" rx="2.5" style={{ fill: 'var(--surface-200)' }} />
+            {order !== -1 && (
+              <rect x={x} y="34" width="15" height="44" rx="2.5" style={{ fill: 'var(--accent)', opacity: animate ? 0 : index === 4 ? 0.85 : 0 }}>
+                {animate && <animate attributeName="opacity" values="0;0.85;0;0" keyTimes="0;0.06;0.16;1" dur="3.2s" begin={`${order * 0.4}s`} repeatCount="indefinite" />}
+              </rect>
+            )}
+          </g>
+        )
+      })}
+      {blacks.map((x) => (
+        <rect key={x} x={x} y="34" width="9" height="26" rx="2" style={{ fill: 'var(--ink)' }} />
+      ))}
+      <Note x={34} y={20} delay="0s" color="var(--accent)" />
+      <Note x={118} y={14} delay="-1.6s" color="var(--ink-soft)" />
+    </>
+  )
+}
+
 /** Scène animée d'une passion. `className` fixe la taille (largeur ; hauteur auto). */
 export function PassionScene({ passion, className }: { passion: PassionId; className?: string }) {
   const reduced = useReducedMotion()
@@ -170,6 +203,7 @@ export function PassionScene({ passion, className }: { passion: PassionId; class
       {passion === 'ecriture' && <WritingScene animate={animate} />}
       {passion === 'musique' && <MusicScene />}
       {passion === 'cinema' && <FilmScene />}
+      {passion === 'piano' && <PianoScene animate={animate} />}
     </svg>
   )
 }

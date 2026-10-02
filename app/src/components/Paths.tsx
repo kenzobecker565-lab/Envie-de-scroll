@@ -7,7 +7,10 @@ import {
   PATH_TIERS,
   pathProgress,
   pathsFor,
+  SKILL_TIER,
   STEPS_PER_PATH,
+  type SkillLevel,
+  type Skills,
   type PassionId,
   type PathProgress,
   type PathStep,
@@ -124,7 +127,7 @@ export function StepBanner({ step, progress, onOpenPath }: { step: PathStep; pro
   const nextPath = finished ? pathsFor(step.passion).find((other) => other.tier === path.tier + 1) : undefined
   return (
     <Card
-      tone={PASSION_COLORS[step.passion].badge}
+      tone={PASSION_COLORS[step.passion].card}
       className="w-full gap-3 text-left shadow-pop"
       initial={{ opacity: 0, scale: 0.7, rotate: -6 }}
       animate={{ opacity: 1, scale: 1, rotate: -1 }}
@@ -208,21 +211,33 @@ export function ActivePathCard({ progress, started, onOpen, delay = 0.2 }: { pro
   )
 }
 
-/** Le meilleur parcours à montrer sur l'accueil : celui en cours le plus avancé, sinon le premier à commencer. */
-export function featuredPath(passions: readonly PassionId[], stepsByPassion: (passion: PassionId) => readonly string[], levelOf: (passion: PassionId) => number): { progress: PathProgress; started: boolean } | null {
-  const all = passions.flatMap((passion) => pathProgress(passion, stepsByPassion(passion), levelOf(passion)))
+/** Le meilleur parcours à montrer sur l'accueil : celui en cours le plus avancé, sinon le premier à commencer (au palier du niveau déclaré). */
+export function featuredPath(
+  passions: readonly PassionId[],
+  stepsByPassion: (passion: PassionId) => readonly string[],
+  levelOf: (passion: PassionId) => number,
+  skills: Skills = {},
+): { progress: PathProgress; started: boolean } | null {
+  const all = passions.flatMap((passion) => pathProgress(passion, stepsByPassion(passion), levelOf(passion), skills[passion]))
   const ongoing = all.filter((entry) => entry.unlocked && entry.done > 0 && !entry.finished).sort((a, b) => b.done - a.done)[0]
   if (ongoing) return { progress: ongoing, started: true }
-  const fresh = all.find((entry) => entry.unlocked && entry.done === 0)
+  const fresh = all.find((entry) => entry.unlocked && entry.done === 0 && entry.path.tier >= startTier(entry.path.passion, skills)) ?? all.find((entry) => entry.unlocked && entry.done === 0)
   return fresh ? { progress: fresh, started: false } : null
 }
 
+/** Le palier par lequel commencer : celui du niveau déclaré, sinon le premier. */
+function startTier(passion: PassionId, skills: Skills): number {
+  const skill = skills[passion]
+  return skill ? SKILL_TIER[skill] : 1
+}
 
-/** Le parcours du moment dans une passion : celui en cours, sinon le prochain ouvert, sinon le dernier terminé. */
-export function currentPath(passion: PassionId, steps: readonly string[], level: number): PathProgress | null {
-  const all = pathProgress(passion, steps, level)
+/** Le parcours du moment dans une passion : celui en cours, sinon le prochain ouvert (au palier du niveau déclaré), sinon le dernier terminé. */
+export function currentPath(passion: PassionId, steps: readonly string[], level: number, skill?: SkillLevel): PathProgress | null {
+  const all = pathProgress(passion, steps, level, skill)
+  const tier = skill ? SKILL_TIER[skill] : 1
   return (
     all.find((entry) => entry.unlocked && !entry.finished && entry.done > 0) ??
+    all.find((entry) => entry.unlocked && !entry.finished && entry.path.tier >= tier) ??
     all.find((entry) => entry.unlocked && !entry.finished) ??
     all.filter((entry) => entry.finished).at(-1) ??
     null

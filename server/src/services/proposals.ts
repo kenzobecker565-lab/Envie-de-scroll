@@ -12,8 +12,10 @@ import {
   isPathStepId,
   passionLevel,
   pickActivity,
+  parseSkills,
   pickIntro,
   quietActivitiesFor,
+  skillActivitiesFor,
   unlockTime,
   type Activity,
   type ActivityExtra,
@@ -64,7 +66,9 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
  * - « Une autre idée » (`replacing`) : la proposition affichée est remplacée,
  *   et son activité écartée du tirage.
  * - Étape de parcours (`step`) : pas de tirage, l'étape elle-même, si elle est
- *   débloquée (étape précédente réussie, parcours ouvert).
+ *   débloquée (étape précédente réussie, parcours ouvert ou ouvert d'emblée
+ *   par le niveau déclaré).
+ * - Passion avec niveau (Piano) : seules les activités adaptées au niveau.
  */
 export async function createProposal(
   prisma: PrismaClient,
@@ -98,7 +102,7 @@ export async function createProposal(
     const done = await prisma.completion.findMany({ where: { userId: user.id, passion }, select: { activityId: true, coins: true } })
     const level = passionLevel(passion, done.reduce((sum, row) => sum + row.coins, 0)).level
     const steps = done.map((row) => row.activityId).filter(isPathStepId)
-    if (!canPlayStep(step, steps, level)) throw new ApiError(409, 'locked', 'Cette étape n’est pas encore débloquée\u00A0: réussis d’abord la précédente.')
+    if (!canPlayStep(step, steps, level, parseSkills(user.skills)[passion])) throw new ApiError(409, 'locked', 'Cette étape n’est pas encore débloquée\u00A0: réussis d’abord la précédente.')
     activity = step
   } else {
     // Dernières activités proposées pour cette passion et ce temps.
@@ -116,7 +120,12 @@ export async function createProposal(
     })
     const ratings = Object.fromEntries(rated.filter((row) => isActivityRating(row.rating)).map((row) => [row.activityId, row.rating as ActivityRating]))
     // « Pas de son autour de toi » : seulement des activités qui se font sans écouter.
-    const allowedIds = request.quiet ? quietActivitiesFor(passion, duration).map((quiet) => quiet.id) : undefined
+    const quietIds = request.quiet ? quietActivitiesFor(passion, duration).map((quiet) => quiet.id) : undefined
+    // Passion avec niveau (Piano) : les activités adaptées au niveau déclaré. Le niveau resserre le tirage, sans jamais le vider.
+    const skill = parseSkills(user.skills)[passion]
+    const suited = skill ? skillActivitiesFor(passion, duration, skill).map((activity) => activity.id) : []
+    const narrowed = quietIds ? quietIds.filter((id) => suited.includes(id)) : suited
+    const allowedIds = narrowed.length ? narrowed : quietIds
     if (allowedIds?.length === 0) {
       throw new ApiError(409, 'no_quiet', `Toutes les activités ${getPassion(passion).label} de ${duration}\u00A0min s’écoutent. Essaie un autre temps, ou une autre passion.`)
     }

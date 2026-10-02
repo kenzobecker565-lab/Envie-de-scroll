@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Lock, Sparkles, Star } from 'lucide-react'
+import { ArrowRight, Check, Gauge as Gauge2, Lock, Sparkles, Star } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import {
@@ -92,6 +92,11 @@ export function PassionProgressGrid({ title = 'Ta progression' }: { title?: stri
                 haptics.impact('light')
                 setOpen(false)
                 push({ name: 'path', pathId })
+              }}
+              onChangeSkill={() => {
+                haptics.impact('light')
+                setOpen(false)
+                push({ name: 'skill', passion: opened, mode: 'edit' })
               }}
             />
           )}
@@ -201,11 +206,24 @@ function CollectionDots({ passion, tried }: { passion: PassionId; tried: readonl
 
 /* ------------------------------------------------------- le détail d'une passion */
 
-function PassionDetail({ passion, stats, canStart, onOpenPath }: { passion: PassionId; stats: PassionStatsDTO; canStart: boolean; onOpenPath: (pathId: string) => void }) {
+function PassionDetail({
+  passion,
+  stats,
+  canStart,
+  onOpenPath,
+  onChangeSkill,
+}: {
+  passion: PassionId
+  stats: PassionStatsDTO
+  canStart: boolean
+  onOpenPath: (pathId: string) => void
+  onChangeSkill: () => void
+}) {
   const info = getPassion(passion)
   const Icon = PASSION_ICONS[passion]
   const level = passionLevel(passion, stats.minutes)
-  const { dispatch } = useAppState()
+  const { state, dispatch } = useAppState()
+  const skill = state.me.user.skills[passion]
   const { reset } = useNavigation()
   const groups = collection(passion)
   const found = stats.tried.length
@@ -232,7 +250,7 @@ function PassionDetail({ passion, stats, canStart, onOpenPath }: { passion: Pass
       </DialogHeader>
 
       {/* Le niveau actuel, en grand. */}
-      <Card tone={PASSION_COLORS[passion].badge} className="shrink-0 flex-row items-center gap-4 shadow-pop" initial={{ rotate: -1.5, scale: 0.96 }} animate={{ rotate: -0.8, scale: 1 }}>
+      <Card tone={PASSION_COLORS[passion].card} className="shrink-0 flex-row items-center gap-4 shadow-pop" initial={{ rotate: -1.5, scale: 0.96 }} animate={{ rotate: -0.8, scale: 1 }}>
         <span className="flex h-16 w-16 shrink-0 rotate-6 flex-col items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color">
           <span className="text-11 font-bold tracking-wider uppercase">Niv.</span>
           <span className="font-numbers text-26 leading-none font-extrabold">{level.level}</span>
@@ -247,13 +265,29 @@ function PassionDetail({ passion, stats, canStart, onOpenPath }: { passion: Pass
         <Sparkle size={22} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-2 right-3" />
       </Card>
 
+      {/* Passion avec niveau (Piano) : d'où l'on part, et de quoi le changer. */}
+      {info.skill && (
+        <button
+          type="button"
+          onClick={onChangeSkill}
+          className="flex shrink-0 items-center gap-3 rounded-md border-[2.5px] border-outline bg-card p-3 text-left shadow-chip transition-shadow duration-150 active:shadow-press"
+        >
+          <Gauge2 className="size-5 shrink-0 text-ink" aria-hidden="true" />
+          <span className="flex min-w-0 flex-1 flex-col">
+            <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ton niveau</span>
+            <span className="text-15 font-extrabold text-ink">{skill ? info.skill.options[skill].label : 'Pas encore dit'}</span>
+          </span>
+          <span className="text-14 font-bold text-accent-strong">Changer</span>
+        </button>
+      )}
+
       {/* Les parcours : progresser étape par étape, de plus en plus exigeant. */}
       <section className="flex shrink-0 flex-col gap-2" aria-labelledby="paths-title">
         <h3 id="paths-title" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
           Tes parcours
         </h3>
         <p className="text-13 text-ink-soft">Six étapes, de l’échauffement au défi final&nbsp;: chacune un cran plus exigeante que la précédente.</p>
-        {pathProgress(passion, stats.steps, level.level).map((progress, index) => (
+        {pathProgress(passion, stats.steps, level.level, skill).map((progress, index) => (
           <PathCard key={progress.path.id} progress={progress} index={index} onOpen={() => onOpenPath(progress.path.id)} />
         ))}
       </section>
@@ -353,7 +387,7 @@ export function LevelUpBanner({ passion, step }: { passion: PassionId; step: Lev
   const Icon = PASSION_ICONS[passion]
   return (
     <Card
-      tone={PASSION_COLORS[passion].badge}
+      tone={PASSION_COLORS[passion].card}
       className="w-full flex-row items-center gap-4 text-left shadow-pop"
       initial={{ opacity: 0, scale: 0.6, rotate: 8 }}
       animate={{ opacity: 1, scale: 1, rotate: 1.5 }}

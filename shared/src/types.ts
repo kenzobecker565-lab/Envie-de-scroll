@@ -6,7 +6,7 @@
  * production, sinon l'historique des utilisateurs ne correspondrait plus.
  */
 
-export const PASSION_IDS = ['dessin', 'ecriture', 'musique', 'cinema'] as const
+export const PASSION_IDS = ['dessin', 'ecriture', 'musique', 'cinema', 'piano'] as const
 export type PassionId = (typeof PASSION_IDS)[number]
 
 /** Les trois temps proposés dans cette V1 (en minutes). */
@@ -64,6 +64,21 @@ export interface Passion {
   timeGuard: boolean
   /** Couleur de fond de la carte illustrée (tokens du design system). */
   tone: 'accent' | 'warm'
+  /**
+   * Passion où l'on part de plus ou moins loin (Piano) : une page demande le
+   * niveau, et les activités comme les parcours s'y adaptent (voir skills.ts).
+   */
+  skill?: SkillQuestion
+}
+
+/** Le niveau déclaré dans une passion : il cible le contenu. */
+export const SKILL_LEVELS = ['debutant', 'bases', 'confirme'] as const
+export type SkillLevel = (typeof SKILL_LEVELS)[number]
+
+/** La page « Ton niveau » d'une passion : la question, et une réponse par niveau. */
+export interface SkillQuestion {
+  question: string
+  options: Record<SkillLevel, { label: string; hint: string }>
 }
 
 export interface Mood {

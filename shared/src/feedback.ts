@@ -52,6 +52,9 @@ export const APP_EVENTS = [
   'home_screen_silent', // demande partie, mais le téléphone n'a rien affiché (autorisation manquante)
   'tab', // onglet ouvert depuis la barre du bas (data.tab : home, progress, gallery)
   'pull', // la tirette de l'accueil tirée vers le haut (plutôt que touchée)
+  'skill', // niveau déclaré dans une passion (data.passion, data.level)
+  'keyboard', // clavier de l'appli ouvert (« Sans piano »)
+  'melody_done', // mélodie guidée jouée jusqu'au bout sur le clavier de l'appli
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]
 

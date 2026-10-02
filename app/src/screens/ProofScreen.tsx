@@ -379,21 +379,25 @@ function writeDraft(key: string, text: string): void {
   }
 }
 
-/* ------------------------------ Musique, Cinéma ---------------------------- */
+/* --------------------------- Musique, Cinéma, Piano ------------------------ */
+
+const TITLE_PROOF: Partial<Record<ProposalDTO['passion'], { question: string; label: string; placeholder: string }>> = {
+  musique: { question: 'Qu’as-tu exploré\u00A0?', label: 'Ce que tu as exploré', placeholder: 'Un titre, un album, un artiste…' },
+  cinema: { question: 'Qu’as-tu exploré\u00A0?', label: 'Ce que tu as exploré', placeholder: 'Un film, un anime, un court…' },
+  piano: { question: 'Qu’as-tu joué\u00A0?', label: 'Ce que tu as joué', placeholder: 'Un morceau, un exercice, une gamme…' },
+}
 
 function TitleProof({ proposal, idea, saving, onSubmit, footer }: ProofProps & { idea?: string }) {
-  // L'idée choisie sous l'activité, sinon ce que l'appli avait tiré.
-  const [title, setTitle] = useState(() => (idea ?? suggestedTitle(proposal.extra) ?? '').slice(0, MAX_TITLE_LENGTH))
-  const placeholder = proposal.passion === 'musique' ? 'Un titre, un album, un artiste…' : 'Un film, un anime, un court…'
+  // L'idée choisie sous l'activité, sinon ce que l'appli avait tiré, sinon la mélodie du clavier.
+  const [title, setTitle] = useState(() => (idea ?? suggestedTitle(proposal.extra) ?? guideFor(proposal.activityId)?.melody?.title ?? '').slice(0, MAX_TITLE_LENGTH))
+  const copy = TITLE_PROOF[proposal.passion] ?? TITLE_PROOF.cinema!
   const Icon = PASSION_ICONS[proposal.passion]
   return (
     <Screen className="pt-2">
       <ConsigneBar proposal={proposal} />
-      <ScreenTitle subtitle="C’est facultatif, mais ta galerie s’en souviendra.">
-        Qu’as-tu exploré&nbsp;?
-      </ScreenTitle>
+      <ScreenTitle subtitle="C’est facultatif, mais ta galerie s’en souviendra.">{copy.question}</ScreenTitle>
       <label className="sr-only" htmlFor="proof-title">
-        Ce que tu as exploré
+        {copy.label}
       </label>
       <div className="relative">
         <Icon size={18} className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-ink-soft" aria-hidden="true" />
@@ -402,7 +406,7 @@ function TitleProof({ proposal, idea, saving, onSubmit, footer }: ProofProps & {
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           maxLength={MAX_TITLE_LENGTH}
-          placeholder={placeholder}
+          placeholder={copy.placeholder}
           autoComplete="off"
           enterKeyHint="done"
           className="pl-12"

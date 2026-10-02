@@ -56,7 +56,7 @@ export function DoneScreen() {
   // Une étape de parcours : la marche franchie, la suivante qui s'ouvre (ou le badge).
   const step = getPathStep(activityId)
   const challenge = getChallengeActivity(activityId)
-  const stepProgress = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level).find((entry) => entry.path.id === step.pathId) : undefined
+  const stepProgress = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level, state.me.user.skills[passion]).find((entry) => entry.path.id === step.pathId) : undefined
   // Une seule grande nouvelle à la fois : l'étape de parcours, sinon le niveau, le palier, le mot du jour, la collection.
   const news = step && stepProgress ? 'step' : level ? 'level' : milestone ? 'milestone' : challenge ? 'challenge' : discovered ? 'discovered' : null
   // Une félicitation et une anecdote, toujours les mêmes pour cette création.

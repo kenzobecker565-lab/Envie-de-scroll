@@ -1,15 +1,22 @@
-import { ArrowRight, BellOff, BellRing, Check, Info, Sparkles } from 'lucide-react'
+import { ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import {
   formatClock,
+  getPassion,
   isScrollMoment,
+  isSkillLevel,
   MAX_PASSIONS,
+  missingSkills,
   PASSIONS,
+  pathsFor,
+  SKILL_LEVELS,
+  SKILL_TIER,
   SCROLL_MOMENT_INFO,
   SCROLL_MOMENTS,
   type PassionId,
   type ScrollMoment,
+  type SkillLevel,
   type UpdateSettingsRequest,
 } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
@@ -17,7 +24,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
-import { api, ApiError } from '../api/client.ts'
+import { api, ApiError, track } from '../api/client.ts'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Illustration } from '../components/Illustration.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
@@ -31,10 +38,11 @@ import { haptics, requestWriteAccessIfNeeded } from '../telegram/webApp.ts'
 /** Bienvenue, passions, moment de scroll. */
 const ONBOARDING_STEPS = 3
 
-/** Les quatre passions, en bulles qui flottent autour de l'illustration. */
+/** Les passions, en bulles qui flottent autour de l'illustration. */
 const ORBIT = [
   { id: 'dessin', className: '-top-3 -left-2', rotate: -10, delay: '0s' },
   { id: 'musique', className: '-top-4 right-2', rotate: 8, delay: '-1.4s' },
+  { id: 'piano', className: 'top-[40%] -right-5', rotate: 10, delay: '-2s' },
   { id: 'ecriture', className: 'bottom-2 -left-3', rotate: 6, delay: '-2.6s' },
   { id: 'cinema', className: '-bottom-4 right-6', rotate: -6, delay: '-0.8s' },
 ] as const
@@ -120,7 +128,7 @@ export function WelcomeScreen() {
 /** Choix de 1 à 3 passions (onboarding, ou modification depuis la galerie). */
 export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
   const { state, dispatch } = useAppState()
-  const { push, back } = useNavigation()
+  const { push, back, replace } = useNavigation()
   const [selected, setSelected] = useState<PassionId[]>(state.me.user.passions)
   const [limitHit, setLimitHit] = useState(false)
   const [saving, setSaving] = useState(false)
@@ -151,8 +159,12 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
       const { user } = await api.updatePassions(selected)
       dispatch({ type: 'user', user })
       haptics.success()
+      // Une passion qui demande le niveau (Piano) : la page « Ton niveau » d'abord.
+      const missing = missingSkills(user.passions, user.skills)[0]
       if (mode === 'onboarding') {
-        push({ name: 'moment' })
+        push(missing ? { name: 'skill', passion: missing, mode: 'onboarding' } : { name: 'moment' })
+      } else if (missing) {
+        replace({ name: 'skill', passion: missing, mode: 'edit' })
       } else {
         back()
       }
@@ -221,6 +233,123 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
       </AnimatePresence>
 
       <PrimaryAction text={label} icon={count > 0 ? <Check aria-hidden="true" /> : undefined} onClick={save} enabled={count > 0} loading={saving}>
+        {error && (
+          <Alert variant="warning" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Info aria-hidden="true" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+      </PrimaryAction>
+    </Screen>
+  )
+}
+
+/** Une icône par niveau, du semis à l'étoile. */
+const SKILL_ICONS: Record<SkillLevel, LucideIcon> = { debutant: Sprout, bases: Footprints, confirme: Star }
+
+/**
+ * « Ton niveau au piano ? » : juste après le choix des passions (pour celles
+ * qui le demandent), ou plus tard depuis le détail de la passion. Le niveau
+ * cible le contenu : les activités tirées, et le parcours par lequel on
+ * commence (affiché sous chaque réponse).
+ */
+export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onboarding' | 'edit' }) {
+  const { state, dispatch } = useAppState()
+  const { push, back, replace } = useNavigation()
+  const info = getPassion(passion)
+  const [level, setLevel] = useState<SkillLevel | null>(state.me.user.skills[passion] ?? null)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string>()
+  const Icon = PASSION_ICONS[passion]
+  if (!info.skill) return null
+  const question = info.skill
+
+  const save = async () => {
+    if (!level || saving) return
+    setSaving(true)
+    setError(undefined)
+    try {
+      const { user } = await api.updateSkill({ passion, level })
+      dispatch({ type: 'user', user })
+      haptics.success()
+      track('skill', { passion, level })
+      if (mode === 'edit') return back()
+      const next = missingSkills(user.passions, user.skills)[0]
+      if (next) replace({ name: 'skill', passion: next, mode: 'onboarding' })
+      else push({ name: 'moment' })
+    } catch (caught) {
+      haptics.error()
+      setError(caught instanceof ApiError ? caught.message : 'Oups, réessaie dans un instant.')
+      setSaving(false)
+    }
+  }
+
+  return (
+    <Screen>
+      <ScreenTitle
+        eyebrow={mode === 'onboarding' ? <StepProgress current={2} total={ONBOARDING_STEPS} label="Ton niveau" /> : undefined}
+        aside={
+          <span className="motion-loop anim-float shrink-0" style={{ '--float-duration': '5s' } as React.CSSProperties}>
+            <span className={cn('flex h-14 w-14 -rotate-6 items-center justify-center rounded-pill border-[2.5px] border-outline shadow-chip', PASSION_COLORS[passion].bg)}>
+              <Icon size={26} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
+            </span>
+          </span>
+        }
+        subtitle="Pour te proposer des exercices à ta mesure, pas à pas. Tu pourras le changer quand tu veux."
+      >
+        {question.question}
+      </ScreenTitle>
+
+      <ToggleGroup
+        type="single"
+        variant="card"
+        value={level ?? ''}
+        onValueChange={(value) => {
+          if (!isSkillLevel(value)) return
+          haptics.selection()
+          setLevel(value)
+        }}
+        className="flex-col flex-nowrap gap-3"
+        aria-label={question.question}
+      >
+        {SKILL_LEVELS.map((id, index) => {
+          const option = question.options[id]
+          const LevelIcon = SKILL_ICONS[id]
+          const firstPath = pathsFor(passion).find((path) => path.tier === SKILL_TIER[id])
+          return (
+            <ToggleGroupItem key={id} value={id} className={cn('items-start gap-3 p-4 text-ink', PASSION_COLORS[passion].on, 'data-[state=on]:text-on-color')} {...popIn(index)} whileTap={{ scale: 0.98 }}>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper text-on-color">
+                <LevelIcon size={20} strokeWidth={2.3} aria-hidden="true" />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col gap-1">
+                <span className="font-display text-20 leading-tight font-extrabold tracking-tight">{option.label}</span>
+                <span className="text-13 font-medium opacity-85">{option.hint}</span>
+                {firstPath && (
+                  <span className="mt-1 inline-flex items-center gap-1.5 text-12 font-extrabold">
+                    <Mountain size={14} strokeWidth={2.4} aria-hidden="true" />
+                    Tu commences par «&nbsp;{firstPath.title}&nbsp;»
+                  </span>
+                )}
+              </span>
+              <AnimatePresence>
+                {level === id && (
+                  <motion.span
+                    initial={{ scale: 0, rotate: -40 }}
+                    animate={{ scale: 1, rotate: -8 }}
+                    exit={{ scale: 0 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper text-on-color"
+                  >
+                    <Check size={16} strokeWidth={3.2} aria-hidden="true" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </ToggleGroupItem>
+          )
+        })}
+      </ToggleGroup>
+
+      <PrimaryAction text={level ? (mode === 'edit' ? 'Enregistrer' : 'Continuer') : 'Choisis ton niveau'} icon={level ? <Check aria-hidden="true" /> : undefined} onClick={() => void save()} enabled={Boolean(level)} loading={saving}>
         {error && (
           <Alert variant="warning" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Info aria-hidden="true" />

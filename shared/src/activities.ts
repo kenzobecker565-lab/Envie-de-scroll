@@ -1,9 +1,10 @@
 /**
  * ============================================================================
- *  LES 60 ACTIVITÉS DE LA V1
+ *  LES ACTIVITÉS : 60 VALIDÉES POUR LA V1, PUIS LES NOUVELLES PASSIONS
  * ============================================================================
  *
- * 4 passions × 3 temps × 5 activités. Le texte est celui de la liste validée,
+ * 5 activités par passion et par temps (5, 15, 30 min). Pour les 4 passions
+ * de la V1 (60 activités), le texte est celui de la liste validée,
  * recopié tel quel (ne pas le reformuler). Seule la typographie est ajustée à
  * l'affichage : apostrophes courbes et espaces insécables (voir typography.ts).
  *
@@ -111,6 +112,31 @@ export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
       "Explore l'univers complet d'une saga ou franchise que tu aimes",
       "Regarde un documentaire ou une analyse sur un film ou anime que tu apprécies",
       "Découvre un nouveau film ou anime recommandé à partir de ceux que tu aimes déjà",
+    ],
+  },
+  // Nouvelle passion, avec niveau (voir ACTIVITY_SKILLS dans selection.ts).
+  // ⚠️ Ces 15 textes ne font pas partie de la liste validée de la V1 : à relire.
+  piano: {
+    5: [
+      "Trouve tous les Do du clavier : chacun est juste à gauche d'un groupe de 2 touches noires",
+      "Main droite : joue Do Ré Mi Fa Sol puis redescends, un doigt par touche. Cinq allers-retours, lentement",
+      "Invente une petite mélodie sur les touches noires seulement : impossible de sonner faux",
+      "Joue la gamme de Do majeur à la main droite, en gardant un tempo bien régulier",
+      "Échauffe tes doigts : alterne lentement deux touches voisines, avec chaque paire de doigts",
+    ],
+    15: [
+      "Apprends le début d'« Au clair de la lune » à la main droite",
+      "Joue « Ode à la joie » à la main droite, puis à la main gauche une octave plus bas",
+      "Tiens un accord à la main gauche (Do, Fa ou Sol) et invente une mélodie par-dessus",
+      "Improvise sur les touches noires pendant que l'autre main répète deux notes graves, comme un tambour",
+      "Retrouve à l'oreille un air que tu connais par cœur : un générique, une comptine, « Joyeux anniversaire »",
+    ],
+    30: [
+      "Apprends en entier un morceau pour débutants, avec un tutoriel vidéo",
+      "Travaille un morceau en trois passes : lent mains séparées, lent mains ensemble, puis à ton tempo",
+      "Compose un petit morceau de 8 mesures sur les accords Do, Sol, La mineur et Fa",
+      "Déchiffre une partition que tu n'as jamais jouée, quatre mesures à la fois",
+      "Joue pendant 30 minutes tout ce que tu sais déjà, sans t'arrêter sur les fausses notes",
     ],
   },
 }

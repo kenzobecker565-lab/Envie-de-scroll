@@ -58,6 +58,15 @@ import {
   RAW_ACTIVITIES,
   RECENT_EXCLUSION,
   reminderMessage,
+  asksSkill,
+  keyboardKeys,
+  missingSkills,
+  noteFrequency,
+  noteLabel,
+  parseSkills,
+  SKILL_LEVELS,
+  skillActivitiesFor,
+  suitsSkill,
   formatClock,
   isScrollMoment,
   reminderMinutes,
@@ -78,8 +87,9 @@ function seeded(seed: number): () => number {
 }
 
 describe('bibliothèque des 60 activités', () => {
-  it('contient 5 activités par passion et par temps, soit 60', () => {
-    expect(ACTIVITIES).toHaveLength(60)
+  it('contient 5 activités par passion et par temps : 60 pour la V1, 75 avec le Piano', () => {
+    expect(ACTIVITIES).toHaveLength(75)
+    expect(ACTIVITIES.filter((activity) => activity.passion !== 'piano')).toHaveLength(60)
     for (const passion of PASSION_IDS) {
       for (const duration of DURATIONS) expect(activitiesFor(passion, duration)).toHaveLength(5)
     }
@@ -90,7 +100,7 @@ describe('bibliothèque des 60 activités', () => {
     expect(getActivity('dessin-15-7')?.extra).toBe('trois-mots')
     expect(getActivity('ecriture-30-11')?.extra).toBe('deux-traits')
     expect(getActivity('cinema-30-15')?.text).toBe('Découvre un nouveau film ou anime recommandé à partir de ceux que tu aimes déjà')
-    expect(new Set(ACTIVITIES.map((activity) => activity.id)).size).toBe(60)
+    expect(new Set(ACTIVITIES.map((activity) => activity.id)).size).toBe(75)
   })
 
   it('garde le texte d’origine, seule la typographie change', () => {
@@ -324,10 +334,10 @@ describe('progression par passion', () => {
 })
 
 describe('parcours', () => {
-  it('a deux parcours par passion (débutant, confirmé), de six étapes de plus en plus longues', () => {
-    expect(PATHS).toHaveLength(8)
+  it('a deux parcours par passion (trois pour le Piano), de six étapes de plus en plus longues', () => {
+    expect(PATHS).toHaveLength(11)
     for (const passion of PASSION_IDS) {
-      expect(pathsFor(passion).map((path) => path.tier)).toEqual([1, 2])
+      expect(pathsFor(passion).map((path) => path.tier)).toEqual(passion === 'piano' ? [1, 2, 3] : [1, 2])
       for (const path of pathsFor(passion)) {
         expect(path.steps.map((step) => step.duration)).toEqual([...STEP_DURATIONS])
         expect(path.steps.map((step) => step.difficulty)).toEqual([...DIFFICULTIES])
@@ -379,7 +389,7 @@ describe('parcours', () => {
 })
 
 describe('aides sous les activités', () => {
-  it('donne 2 ou 3 pistes à chacune des 60 activités, et des idées là où il faut trouver soi-même', () => {
+  it('donne 2 ou 3 pistes à chacune des activités, et des idées là où il faut trouver soi-même', () => {
     for (const activity of ACTIVITIES) {
       const guide = guideFor(activity.id)
       expect(guide, activity.id).toBeDefined()
@@ -391,7 +401,8 @@ describe('aides sous les activités', () => {
         expect(new Set(guide!.ideas.items).size).toBe(guide!.ideas.items.length)
       }
     }
-    expect(Object.keys(GUIDES)).toHaveLength(60)
+    // Les 75 activités, plus les 18 leçons du Piano, qui ont leurs propres pistes.
+    expect(Object.keys(GUIDES)).toHaveLength(93)
     // Étapes de parcours et mots du jour : les pistes générales de leur passion.
     expect(guideFor('parcours-visages-2')?.tips.length).toBeGreaterThan(0)
     expect(guideFor('defi-dessin-2026-10-01')?.tips.length).toBeGreaterThan(0)
@@ -502,5 +513,69 @@ describe('le mot du jour', () => {
     expect(canPlayChallenge('defi-dessin-2026-10-08', '2026-10-07')).toBe(false)
     expect(canPlayChallenge('defi-dessin-2026-09-30', '2026-10-07')).toBe(false)
     expect(monthDaysUntil('2026-10-03')).toEqual(['2026-10-03', '2026-10-02', '2026-10-01'])
+  })
+})
+
+describe('piano : niveau, contenu ciblé, mélodies', () => {
+  it('demande le niveau au piano seulement, et relit les niveaux enregistrés', () => {
+    expect(asksSkill('piano')).toBe(true)
+    expect(asksSkill('dessin')).toBe(false)
+    expect(parseSkills('{"piano":"bases","dessin":"debutant","piano2":"x"}')).toEqual({ piano: 'bases' })
+    expect(parseSkills('pas du json')).toEqual({})
+    expect(missingSkills(['dessin', 'piano'], {})).toEqual(['piano'])
+    expect(missingSkills(['dessin', 'piano'], { piano: 'debutant' })).toEqual([])
+  })
+
+  it('ne tire que des activités adaptées au niveau, et chaque niveau en garde au moins deux par temps', () => {
+    for (const skill of SKILL_LEVELS) {
+      for (const duration of DURATIONS) {
+        const pool = skillActivitiesFor('piano', duration, skill)
+        expect(pool.length, `${skill} ${duration}`).toBeGreaterThanOrEqual(2)
+        const allowedIds = pool.map((activity) => activity.id)
+        const random = seeded(7)
+        for (let i = 0; i < 20; i++) expect(allowedIds).toContain(pickActivity({ passion: 'piano', duration, allowedIds, random }).id)
+      }
+    }
+    expect(suitsSkill('piano-5-1', 'confirme')).toBe(false)
+    expect(suitsSkill('piano-5-1', undefined)).toBe(true)
+    expect(skillActivitiesFor('dessin', 5, 'debutant')).toHaveLength(5)
+  })
+
+  it('ouvre directement le palier du niveau déclaré, sans fermer les précédents', () => {
+    const tiers = (skill?: 'debutant' | 'bases' | 'confirme') => pathProgress('piano', [], 0, skill).map((entry) => entry.unlocked)
+    expect(tiers()).toEqual([true, false, false])
+    expect(tiers('debutant')).toEqual([true, false, false])
+    expect(tiers('bases')).toEqual([true, true, false])
+    expect(tiers('confirme')).toEqual([true, true, true])
+    // Sans niveau déclaré : un palier s'ouvre quand les précédents sont finis.
+    const firstPath = pathsFor('piano')[0]!.steps.map((step) => step.id)
+    expect(pathProgress('piano', firstPath, 0).map((entry) => entry.unlocked)).toEqual([true, true, false])
+    const step = pathsFor('piano')[2]!.steps[0]!
+    expect(canPlayStep(step, [], 0)).toBe(false)
+    expect(canPlayStep(step, [], 0, 'confirme')).toBe(true)
+  })
+
+  it('nomme les notes à la française et joue juste', () => {
+    expect(noteLabel('C4')).toBe('Do')
+    expect(noteLabel('F#4')).toBe('Fa♯')
+    expect(noteFrequency('A4')).toBe(440)
+    expect(Math.round(noteFrequency('C4'))).toBe(262)
+    const keys = keyboardKeys('C3', 'C5')
+    expect(keys).toHaveLength(25)
+    expect(keys.filter((key) => !key.black)).toHaveLength(15)
+    expect(keys[1]).toEqual({ note: 'C#3', black: true })
+  })
+
+  it('a des mélodies jouables sur le clavier de l’appli', () => {
+    const range = new Set(keyboardKeys('C3', 'C5').map((key) => key.note))
+    let count = 0
+    for (const [id, guide] of Object.entries(GUIDES)) {
+      if (!guide.melody) continue
+      count++
+      expect(id.startsWith('piano-') || id.startsWith('parcours-'), id).toBe(true)
+      for (const note of guide.melody.notes) expect(range.has(note), `${id} ${note}`).toBe(true)
+    }
+    expect(count).toBeGreaterThanOrEqual(10)
+    expect(guideFor('parcours-premieres-touches-3')?.melody?.title).toBe('Au clair de la lune')
   })
 })

@@ -71,7 +71,7 @@ export function createBot(config: Pick<Config, 'botToken' | 'webAppUrl' | 'stora
       [
         `Salut ${ctx.from.first_name}\u00A0!`,
         '',
-        'Ici, chaque envie de scroller peut devenir un petit moment créatif\u00A0: dessin, écriture, musique, cinéma.',
+        'Ici, chaque envie de scroller peut devenir un petit moment créatif\u00A0: dessin, écriture, musique, cinéma, piano.',
         '',
         'La prochaine fois que ton pouce te démange, ouvre l’app et appuie sur « J’ai envie de scroller ». On s’occupe du reste.',
         '',

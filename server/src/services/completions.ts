@@ -40,7 +40,7 @@ function clean(value: string | undefined, max: number): string | null {
  *
  * - Dessin : avec une photo, ou sans photo une fois la durée écoulée.
  * - Écriture : avec le texte produit, ou sans texte une fois la durée écoulée.
- * - Musique, Cinéma : une fois la durée écoulée (garde-fou temporel léger),
+ * - Musique, Cinéma, Piano : une fois la durée écoulée (garde-fou temporel léger),
  *   avec, si on veut, le titre exploré.
  */
 export async function completeProposal(

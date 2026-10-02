@@ -149,7 +149,7 @@ export function ActivityScreen() {
                   Tu travailles&nbsp;: {step.focus.charAt(0).toLowerCase() + step.focus.slice(1)}
                 </p>
               )}
-              {/* Un coup de pouce : idées, pistes, défi, et pour Dessin « Sans papier », pour Musique et Cinéma « Sans son ». */}
+              {/* Un coup de pouce : idées, pistes, défi, et pour Dessin « Sans papier », pour Musique et Cinéma « Sans son », pour Piano « Sans piano ». */}
               <ActivityHelp
                 proposal={proposal}
                 onPad={

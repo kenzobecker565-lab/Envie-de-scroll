@@ -10,6 +10,8 @@ export type Route =
   | { name: 'welcome' }
   | { name: 'passions'; mode: 'onboarding' | 'edit' }
   | { name: 'moment' }
+  /** « Ton niveau » dans une passion qui le demande (Piano), à l'inscription ou plus tard. */
+  | { name: 'skill'; passion: PassionId; mode: 'onboarding' | 'edit' }
   | { name: 'home' }
   | { name: 'signal' }
   | { name: 'mood' }

@@ -23,6 +23,7 @@ import type {
   PassionId,
   ProposalResponse,
   UpdateSettingsRequest,
+  UpdateSkillRequest,
   UserResponse,
 } from '@scroll-up/shared'
 import { telegram } from '../telegram/webApp.ts'
@@ -122,6 +123,9 @@ export const api = {
   updateProject: (id: string, request: UpdateProjectRequest) =>
     call<ProjectDetailResponse>(`/projects/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(request) }),
   deleteProject: (id: string) => call<null>(`/projects/${encodeURIComponent(id)}`, { method: 'DELETE' }),
+
+  /** Le niveau dans une passion qui le demande (Piano). */
+  updateSkill: (request: UpdateSkillRequest) => call<UserResponse>('/me/skills', { method: 'PUT', body: JSON.stringify(request) }),
 
   /** Efface toutes les données du compte : la prochaine ouverture repart de l'inscription. */
   deleteMe: () => call<null>('/me', { method: 'DELETE' }),

@@ -194,9 +194,10 @@ export function GalleryScreen() {
 
 /**
  * Chaque passion a son objet : le dessin en polaroïd scotché, le texte sur une
- * page de carnet, la musique en vinyle, le cinéma en ticket de séance.
+ * page de carnet, la musique en vinyle, le cinéma en ticket de séance, le
+ * piano en page de partition.
  */
-const CARD_TONES = { dessin: 'default', ecriture: 'default', musique: 'good', cinema: 'warm' } as const
+const CARD_TONES = { dessin: 'default', ecriture: 'default', musique: 'good', cinema: 'warm', piano: 'default' } as const
 
 /** Pied de carte commun : passion, activité, date, minutons gagnés. */
 function CardFooter({ item }: { item: CompletionDTO }) {
@@ -223,6 +224,7 @@ function GalleryCard({ item }: { item: CompletionDTO }) {
   if (item.passion === 'dessin') return <PolaroidCard item={item} />
   if (item.passion === 'ecriture') return <NotebookCard item={item} />
   if (item.passion === 'musique') return <VinylCard item={item} />
+  if (item.passion === 'piano') return <ScoreCard item={item} />
   return <TicketCard item={item} />
 }
 
@@ -329,6 +331,46 @@ function Vinyl({ className }: { className?: string }) {
   )
 }
 
+/** Piano : une page de partition, la portée et quelques notes, et le morceau joué. */
+function ScoreCard({ item }: { item: CompletionDTO }) {
+  const title = item.exploredTitle
+  return (
+    <div className="flex flex-col gap-3 p-4">
+      <span className="text-12 font-bold tracking-wider uppercase opacity-80">Au piano</span>
+      <span className="font-display text-22 leading-tight font-extrabold tracking-tight">{title ?? 'Une séance au clavier'}</span>
+      <Staff className="h-14 w-full" />
+      <CardFooter item={item} />
+    </div>
+  )
+}
+
+/** Une portée en clé de sol, avec quelques notes qui montent. */
+function Staff({ className }: { className?: string }) {
+  const notes = [
+    { x: 64, y: 38 },
+    { x: 96, y: 32 },
+    { x: 128, y: 26 },
+    { x: 160, y: 20 },
+    { x: 192, y: 26 },
+    { x: 224, y: 14 },
+  ]
+  return (
+    <svg viewBox="0 0 260 56" preserveAspectRatio="none" aria-hidden="true" className={className}>
+      {[8, 16, 24, 32, 40].map((y) => (
+        <line key={y} x1="4" x2="256" y1={y} y2={y} style={{ stroke: 'var(--outline)', strokeWidth: 1.4, opacity: 0.55 }} />
+      ))}
+      {/* La clé de sol, stylisée. */}
+      <path d="M22 50 C14 44 16 34 24 30 C32 26 34 38 26 40 C18 42 16 24 26 14 C32 8 30 2 26 4 C22 6 22 16 24 26 L28 52" style={{ fill: 'none', stroke: 'var(--outline)', strokeWidth: 2.2, strokeLinecap: 'round' }} />
+      {notes.map((note, index) => (
+        <g key={index}>
+          <ellipse cx={note.x} cy={note.y} rx="6" ry="4.4" transform={`rotate(-20 ${note.x} ${note.y})`} style={{ fill: index % 2 ? 'var(--accent)' : 'var(--outline)' }} />
+          <line x1={note.x + 5.4} x2={note.x + 5.4} y1={note.y} y2={note.y - 22} style={{ stroke: 'var(--outline)', strokeWidth: 1.6 }} />
+        </g>
+      ))}
+    </svg>
+  )
+}
+
 /** Cinéma : un ticket de séance, avec son talon perforé. */
 function TicketCard({ item }: { item: CompletionDTO }) {
   const title = item.exploredTitle ?? item.extra?.items[0]
@@ -390,7 +432,7 @@ function GalleryDetail({ item, onChange }: { item: CompletionDTO; onChange: (ite
   const passion = getPassion(item.passion)
   const Icon = PASSION_ICONS[item.passion]
   const title = item.exploredTitle ?? (item.passion === 'musique' || item.passion === 'cinema' ? item.extra?.items[0] : undefined)
-  const fallbackTitle = item.passion === 'dessin' ? 'Ton dessin' : item.passion === 'ecriture' ? 'Ton texte' : 'Ta découverte'
+  const fallbackTitle = item.passion === 'dessin' ? 'Ton dessin' : item.passion === 'ecriture' ? 'Ton texte' : item.passion === 'piano' ? 'Ta séance au piano' : 'Ta découverte'
   return (
     <>
       <DialogHeader>

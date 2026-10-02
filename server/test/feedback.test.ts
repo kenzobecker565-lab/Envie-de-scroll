@@ -165,6 +165,7 @@ describe('admins et statistiques', () => {
     expect(stats).toContain('Moments de scroll : matin 0 · midi 0 · soir 0 · nuit 1 · pas dit 0 · relances coupées 0')
     expect(stats).toContain('→ dont tirette tirée vers le haut : 1 (100 %), le reste d’un toucher')
     expect(stats).toContain('Onglets ouverts : Progresser 2 · Galerie 1 · Créer 0')
+    expect(stats).toContain('Piano : 0 personne')
     expect(stats).toContain('Testeurs : 2')
     expect(stats).toContain('« J’ai envie de scroller » : 1 appui')
     expect(stats).toContain('activités validées : 1 (100 %')

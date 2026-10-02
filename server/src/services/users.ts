@@ -7,6 +7,7 @@ import {
   isPassionId,
   isPathStepId,
   isScrollMoment,
+  parseSkills,
   PASSION_IDS,
   type PassionId,
   type PassionStatsDTO,
@@ -37,6 +38,7 @@ export function toUserDTO(user: User): UserDTO {
     theme,
     remindersEnabled: user.remindersEnabled,
     scrollMoment: isScrollMoment(user.scrollMoment) ? user.scrollMoment : null,
+    skills: parseSkills(user.skills),
   }
 }
 

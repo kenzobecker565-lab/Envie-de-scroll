@@ -1,11 +1,31 @@
 import type { Passion, PassionId } from './types.ts'
 
-/** Les 4 passions de la V1, dans l'ordre d'affichage. */
+/**
+ * Les passions, dans l'ordre d'affichage : les 4 de la V1, puis les nouvelles.
+ * Les nouvelles passions demandent le niveau (`skill`) : on y apprend pas à
+ * pas, avec des activités et des parcours adaptés à là où l'on en est.
+ */
 export const PASSIONS: readonly Passion[] = [
   { id: 'dessin', label: 'Dessin', tagline: 'Un crayon, une feuille, et c’est parti', proof: 'photo', timeGuard: false, tone: 'accent' },
   { id: 'ecriture', label: 'Écriture', tagline: 'Des mots pour dire, inventer, raconter', proof: 'texte', timeGuard: false, tone: 'warm' },
   { id: 'musique', label: 'Musique', tagline: 'Écouter vraiment, découvrir, creuser', proof: 'titre', timeGuard: true, tone: 'warm' },
   { id: 'cinema', label: 'Cinéma / Animation', tagline: 'Films, animes, courts\u00A0: explorer', proof: 'titre', timeGuard: true, tone: 'accent' },
+  {
+    id: 'piano',
+    label: 'Piano',
+    tagline: 'Apprendre à jouer, une touche après l’autre',
+    proof: 'titre',
+    timeGuard: true,
+    tone: 'accent',
+    skill: {
+      question: 'Ton niveau au piano\u00A0?',
+      options: {
+        debutant: { label: 'Je n’ai jamais joué', hint: 'On part de zéro\u00A0: trouver les notes, poser la main, ton premier air.' },
+        bases: { label: 'Je connais les bases', hint: 'Tu repères les notes et joues de petits airs à une main.' },
+        confirme: { label: 'Je joue déjà', hint: 'Tu joues à deux mains et tu lis un peu les partitions.' },
+      },
+    },
+  },
 ]
 
 export const MIN_PASSIONS = 1

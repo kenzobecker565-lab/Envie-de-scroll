@@ -11,6 +11,7 @@ import {
   Moon,
   MoonStar,
   Pencil,
+  Piano,
   Rocket,
   Snail,
   Sun,
@@ -26,6 +27,7 @@ export const PASSION_ICONS: Record<PassionId, LucideIcon> = {
   ecriture: Feather,
   musique: Headphones,
   cinema: Clapperboard,
+  piano: Piano,
 }
 
 export const MOOD_ICONS: Record<MoodId, LucideIcon> = {
@@ -41,13 +43,18 @@ export const MOOD_ICONS: Record<MoodId, LucideIcon> = {
 
 /**
  * Couleur de sticker de chaque passion (classes Tailwind écrites en entier,
- * pour que Tailwind les trouve) : fond, fond une fois choisie, fond doux, pastille.
+ * pour que Tailwind les trouve) : fond, fond une fois choisie, fond doux,
+ * pastille (variante de Badge) et carte (ton de Card).
  */
-export const PASSION_COLORS: Record<PassionId, { bg: string; on: string; soft: string; badge: 'sky' | 'lilac' | 'good' | 'warm' }> = {
-  dessin: { bg: 'bg-sky', on: 'data-[state=on]:bg-sky', soft: 'bg-sky-soft', badge: 'sky' },
-  ecriture: { bg: 'bg-lilac', on: 'data-[state=on]:bg-lilac', soft: 'bg-lilac-soft', badge: 'lilac' },
-  musique: { bg: 'bg-good', on: 'data-[state=on]:bg-good', soft: 'bg-good-soft', badge: 'good' },
-  cinema: { bg: 'bg-warm', on: 'data-[state=on]:bg-warm', soft: 'bg-warm-soft', badge: 'warm' },
+export const PASSION_COLORS: Record<
+  PassionId,
+  { bg: string; on: string; soft: string; badge: 'sky' | 'lilac' | 'good' | 'warm' | 'default'; card: 'sky' | 'lilac' | 'good' | 'warm' | 'accent' }
+> = {
+  dessin: { bg: 'bg-sky', on: 'data-[state=on]:bg-sky', soft: 'bg-sky-soft', badge: 'sky', card: 'sky' },
+  ecriture: { bg: 'bg-lilac', on: 'data-[state=on]:bg-lilac', soft: 'bg-lilac-soft', badge: 'lilac', card: 'lilac' },
+  musique: { bg: 'bg-good', on: 'data-[state=on]:bg-good', soft: 'bg-good-soft', badge: 'good', card: 'good' },
+  cinema: { bg: 'bg-warm', on: 'data-[state=on]:bg-warm', soft: 'bg-warm-soft', badge: 'warm', card: 'warm' },
+  piano: { bg: 'bg-accent', on: 'data-[state=on]:bg-accent', soft: 'bg-accent-soft', badge: 'default', card: 'accent' },
 }
 
 /** Le moment où l'on scrolle le plus : une icône et une couleur de sticker (fond, fond une fois choisi). */

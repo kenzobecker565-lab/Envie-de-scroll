@@ -1,4 +1,4 @@
-import { BookOpen, Clapperboard, Ear, Eye, Feather, Globe, Lock, Popcorn, ScanFace, type LucideIcon } from 'lucide-react'
+import { BookOpen, Clapperboard, Ear, Eye, Feather, Globe, Hand, Lock, Music, Piano, Popcorn, ScanFace, type LucideIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 import { getPath, PATHS, type PassionId } from '@scroll-up/shared'
 import { cn } from '@/lib/utils'
@@ -19,16 +19,23 @@ const ICONS: Record<string, LucideIcon> = {
   'voyage-musical': Globe,
   'regard-curieux': Popcorn,
   'oeil-de-cineaste': Clapperboard,
+  'premieres-touches': Hand,
+  'premiers-morceaux': Music,
+  'jouer-pour-de-vrai': Piano,
 }
 
-const ENAMEL: Record<PassionId, string> = { dessin: 'var(--sky)', ecriture: 'var(--lilac)', musique: 'var(--good)', cinema: 'var(--accent)' }
+const ENAMEL: Record<PassionId, string> = { dessin: 'var(--sky)', ecriture: 'var(--lilac)', musique: 'var(--good)', cinema: 'var(--accent)', piano: 'var(--warm)' }
 
-/** Le contour : un rond (débutant) ou un écusson (confirmé), dans un carré de 100. */
+/** Le contour : un rond (débutant), un écusson (confirmé) ou un hexagone (avancé), dans un carré de 100. */
 const SHAPES = {
   1: { outer: 'M50 4 a46 46 0 1 1 0 92 a46 46 0 1 1 0 -92 z', inner: 'M50 15 a35 35 0 1 1 0 70 a35 35 0 1 1 0 -70 z' },
   2: {
     outer: 'M50 3 L90 16 Q92 60 50 97 Q8 60 10 16 Z',
     inner: 'M50 14 L80 24 Q81 57 50 85 Q19 57 20 24 Z',
+  },
+  3: {
+    outer: 'M50 3 L90.7 26.5 L90.7 73.5 L50 97 L9.3 73.5 L9.3 26.5 Z',
+    inner: 'M50 14 L81.2 32 L81.2 68 L50 86 L18.8 68 L18.8 32 Z',
   },
 } as const
 

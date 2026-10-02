@@ -38,7 +38,7 @@ export function PathScreen({ pathId }: { pathId: string }) {
   if (!path) return null
   const stats = statsFor(state.me.stats.byPassion, path.passion)
   const level = passionLevel(path.passion, stats.minutes).level
-  const progress = pathProgress(path.passion, stats.steps, level).find((entry) => entry.path.id === path.id)
+  const progress = pathProgress(path.passion, stats.steps, level, state.me.user.skills[path.passion]).find((entry) => entry.path.id === path.id)
   if (!progress) return null
   const passion = getPassion(path.passion)
   const Icon = PASSION_ICONS[path.passion]
@@ -74,7 +74,7 @@ export function PathScreen({ pathId }: { pathId: string }) {
       </header>
 
       {progress.finished && (
-        <Card tone={PASSION_COLORS[path.passion].badge} className="mt-6 flex-row items-center gap-4 shadow-pop" initial={{ scale: 0.8, rotate: -4, opacity: 0 }} animate={{ scale: 1, rotate: -1, opacity: 1 }}>
+        <Card tone={PASSION_COLORS[path.passion].card} className="mt-6 flex-row items-center gap-4 shadow-pop" initial={{ scale: 0.8, rotate: -4, opacity: 0 }} animate={{ scale: 1, rotate: -1, opacity: 1 }}>
           <Confetti count={20} />
           <BadgePin pathId={path.id} earned size={64} animate className="rotate-6" />
           <span className="flex flex-col">

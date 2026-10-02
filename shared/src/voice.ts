@@ -38,6 +38,13 @@ const RAW_CHEERS: Record<PassionId, string[]> = {
     'Un regard un peu plus affûté qu\'hier.',
     'Mieux qu\'une vidéo de 15 secondes, non ?',
   ],
+  piano: [
+    'Tes doigts en savent un peu plus qu\'avant.',
+    '{d} minutes au clavier : ça finit toujours par s\'entendre.',
+    'Une touche après l\'autre, ça devient de la musique.',
+    'Le piano aime la régularité : tu viens de lui en offrir.',
+    'Ce que tes mains apprennent ne s\'oublie pas.',
+  ],
 }
 
 /** Écriture avec un texte : on célèbre les mots eux-mêmes. */

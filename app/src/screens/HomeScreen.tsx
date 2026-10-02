@@ -97,7 +97,15 @@ export function HomeScreen() {
           <button type="button" className="pulse-text-button" onClick={() => open({ name: 'passionHub' })}>Tout voir <ArrowUpRight size={14} aria-hidden="true" /></button>
         </div>
         {passions.length > 0 ? <div className="pulse-passions" aria-label="Choisir une passion">
-          {passions.map((id) => <button key={id} type="button" aria-pressed={passion === id} aria-controls="pulse-learning pulse-project" onClick={() => { haptics.selection(); setSelection(id) }}>{getPassion(id).label}</button>)}
+          {passions.map((id) => {
+            const PassionIcon = PASSION_ICONS[id]
+            const selected = passion === id
+            return <motion.button key={id} type="button" className="pulse-passion" data-passion={id} aria-pressed={selected} aria-controls="pulse-learning pulse-project" whileTap={{ scale: .96 }} onClick={() => { haptics.selection(); setSelection(id) }}>
+              {selected && <motion.span className="pulse-passion-active" layoutId="pulse-passion-active" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+              <motion.span className="pulse-passion-icon" aria-hidden="true" animate={{ rotate: selected ? -8 : 0, scale: selected ? 1.08 : 1 }} transition={{ type: 'spring', stiffness: 350, damping: 18 }}><PassionIcon size={18} strokeWidth={2.2} /></motion.span>
+              <span className="pulse-passion-label">{getPassion(id).label}</span>
+            </motion.button>
+          })}
         </div> : <button type="button" className="pulse-choose" onClick={() => open({ name: 'passions', mode: 'edit' })}>Choisir mes passions <ArrowRight size={18} aria-hidden="true" /></button>}
 
         <div className="pulse-bento">
@@ -130,7 +138,7 @@ export function HomeScreen() {
 
       <section id="pulse-project" aria-labelledby="pulse-project-title" aria-live="polite">
         <div className="pulse-section-head"><h2 id="pulse-project-title">À retrouver</h2><button type="button" className="pulse-text-button" onClick={() => passion ? open({ name: 'passionSpace', passion }) : open({ name: 'passionHub' })}>Ma passion <ArrowUpRight size={14} aria-hidden="true" /></button></div>
-        <motion.button key={project?.id ?? passion ?? 'gallery'} type="button" className="pulse-project" whileTap={PRESSED} aria-haspopup={project ? 'dialog' : undefined} onClick={() => { if (project) { haptics.impact('light'); setProjectId(project.id) } else { open({ name: 'gallery', passion }) } }}>
+        <motion.button key={project?.id ?? passion ?? 'gallery'} type="button" className="pulse-project" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .2 }} whileTap={PRESSED} aria-haspopup={project ? 'dialog' : undefined} onClick={() => { if (project) { haptics.impact('light'); setProjectId(project.id) } else { open({ name: 'gallery', passion }) } }}>
           <span className="pulse-project-cover">{project?.coverUrl ? <img src={project.coverUrl} alt="" loading="lazy" /> : cover && Icon ? <ProjectCoverArtwork item={cover} icon={Icon} /> : Icon ? <Icon size={28} aria-hidden="true" /> : <BrandMark size={34} />}</span>
           <span className="pulse-project-copy"><span className="pulse-eyebrow">{passion ? getPassion(passion).label : 'Mes passions'} · {project ? project.finishedAt ? 'projet terminé' : 'projet en cours' : 'mes créations'}</span><strong>{project?.name ?? 'Ta galerie'}</strong><span className="pulse-link">{project ? 'Ouvrir le projet' : passionStats?.activities ? 'Retrouver mes créations' : 'Découvrir ma galerie'} <ArrowRight size={14} aria-hidden="true" /></span></span>
         </motion.button>

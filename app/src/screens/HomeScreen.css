@@ -18,9 +18,18 @@
 .pulse-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:25px 0 13px}
 .pulse-section-head h2{font-family:var(--font-display);font-size:21px;font-weight:750;line-height:1.2;letter-spacing:-.5px}
 .pulse-text-button{display:inline-flex;align-items:center;justify-content:center;gap:3px;padding:8px 0;border:0;background:transparent;font-size:12px;font-weight:650;color:var(--ink);flex-shrink:0}
-.pulse-passions{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.pulse-passions button{padding:9px 13px;border:1px solid var(--line);border-radius:24px;background:var(--surface-200);color:var(--ink);font-size:13px;font-weight:650;min-height:40px;transition:background .18s,color .18s}
-.pulse-passions button[aria-pressed=true]{background:var(--ink);color:var(--surface-200);border-color:var(--ink)}
+.pulse-passions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;isolation:isolate}
+.pulse-passions button{position:relative;display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 7px;border:1px solid var(--line);border-radius:25px;background:var(--surface-200);color:var(--ink);font-size:13px;font-weight:650;min-height:48px;max-width:100%;isolation:isolate;transition:border-color .18s}
+.pulse-passions button[aria-pressed=true]{border-color:var(--pulse-passion-color);font-weight:800;background:transparent}
+.pulse-passion[data-passion=dessin]{--pulse-passion-color:var(--sky);--pulse-passion-soft:var(--sky-soft)}
+.pulse-passion[data-passion=ecriture]{--pulse-passion-color:var(--lilac);--pulse-passion-soft:var(--lilac-soft)}
+.pulse-passion[data-passion=musique]{--pulse-passion-color:var(--good);--pulse-passion-soft:var(--good-soft)}
+.pulse-passion[data-passion=cinema]{--pulse-passion-color:var(--warm);--pulse-passion-soft:var(--warm-soft)}
+.pulse-passion[data-passion=piano]{--pulse-passion-color:var(--accent);--pulse-passion-soft:var(--accent-soft)}
+.pulse-passion-active{position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--pulse-passion-soft)}
+.pulse-passion-icon{display:grid;place-items:center;flex-shrink:0;width:31px;height:31px;border-radius:50%;background:var(--pulse-passion-soft);color:var(--ink)}
+.pulse-passion[aria-pressed=true] .pulse-passion-icon{background:var(--pulse-passion-color);color:var(--on-color)}
+.pulse-passion-label{min-width:0;text-align:left;line-height:1.25}
 .pulse-bento{display:grid;grid-template-columns:1.12fr 1fr;gap:10px}
 .pulse-tile{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;min-width:0;border:0;border-radius:23px;padding:18px;text-align:left;overflow:hidden}
 .pulse-tile h3{font-family:var(--font-display);font-size:23px;font-weight:750;line-height:1.1;letter-spacing:-.6px;overflow-wrap:anywhere}
@@ -56,5 +65,4 @@
 @media(max-width:359px){.pulse-header{flex-wrap:wrap}.pulse-hero{padding:20px}.pulse-hero h2{font-size:26px}.pulse-minuton{right:9px;top:30px}.pulse-minuton>svg{width:62px;height:62px}.pulse-tile{padding:14px}.pulse-tile h3{font-size:21px}.pulse-section-head h2{font-size:19px}.pulse-start{padding:13px;font-size:14px}.pulse-tile-caption{font-size:11px}}
 @media(pointer:coarse){.pulse-text-button,.pulse-passions button{min-height:44px}}
 @media(prefers-reduced-motion:reduce){.pulse-passions button{transition:none}}
-/* Un fond calme sur l'accueil ; le décor reste visible dans les autres espaces. */
-.pulse-home{background:color-mix(in srgb,var(--canvas) 22%,var(--surface-200))}
+/* Le fond transparent laisse apparaître le décor animé commun aux autres pages. */

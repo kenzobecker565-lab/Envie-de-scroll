@@ -141,7 +141,7 @@ function ProjectGauge({ project }: { project: ProjectDTO }) {
 
 /* ---------------------------------------------------------- la feuille */
 
-function ProjectSheet({ id, onClose }: { id: string; onClose: () => void }) {
+export function ProjectSheet({ id, onClose }: { id: string; onClose: () => void }) {
   const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
   const [detail, setDetail] = useState<ProjectDetailResponse>()

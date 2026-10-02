@@ -1,218 +1,147 @@
-import { ArrowRight } from 'lucide-react'
-import { motion } from 'motion/react'
-import { dayMoment, getPathStep, homeLine, isFixedActivityId, passionLevel, seededRandom } from '@scroll-up/shared'
-import { Button, PRESSED } from '@/components/ui/button'
-import { cardVariants } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
-import { Logo } from '../components/Brand.tsx'
-import { CoinIcon } from '../components/Coins.tsx'
+import { useState } from 'react'
+import { ArrowRight, ArrowUpRight, ShoppingBag } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { getPassion, getPathStep, isFixedActivityId, passionLevel, PASSION_IDS, STEPS_PER_PATH, type PassionId } from '@scroll-up/shared'
+import { PRESSED } from '@/components/ui/button'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { BrandMark, Logo } from '../components/Brand.tsx'
+import { Mascot } from '../components/Mascot.tsx'
 import { dayPeriod } from '../components/decor/Ornaments.tsx'
-import { ChallengeCard, challengePassions, todayKey, wordDone } from '../components/Challenge.tsx'
-import { MascotSays } from '../components/Mascot.tsx'
-import { ActivePathCard, featuredPath } from '../components/Paths.tsx'
+import { challengePassions, todayKey, wordDone } from '../components/Challenge.tsx'
+import { currentPath, featuredPath } from '../components/Paths.tsx'
+import { ProjectSheet } from '../components/Projects.tsx'
+import { ProjectCoverArtwork } from '../components/ShopArt.tsx'
 import { statsFor } from '../components/Progression.tsx'
 import { track } from '../api/client.ts'
 import { Screen } from '../components/Screen.tsx'
 import { AmbientButton } from '../components/AmbientButton.tsx'
-import { SettingsButton } from '../components/SettingsSheet.tsx'
-import { Tirette } from '../components/Tirette.tsx'
-import { useShop } from '../lib/shop.ts'
+import { useEquipped, useShop } from '../lib/shop.ts'
 import { formatNumber, plural } from '../lib/format.ts'
 import { lessonStack } from '../lib/useLesson.ts'
-import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
-import { fadeUp } from '../lib/motion.ts'
-import { useAppState, useNavigation } from '../state/AppState.tsx'
+import { PASSION_ICONS } from '../lib/icons.ts'
+import { useAppState, useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
+import './HomeScreen.css'
 
-/**
- * L'onglet « Créer » (l'accueil) : bonjour, une seule carte (l'activité en
- * cours, sinon le mode d'emploi, le mot du jour, le parcours ou le mois), et
- * tout le bas de l'écran pour la tirette « J'ai envie de scroller ». Jamais
- * de compteur de jours, jamais de reproche.
- */
+/** Pulse : une action principale, puis apprentissage, mois et projet par passion. */
 export function HomeScreen() {
   const { state, dispatch } = useAppState()
   const { push, reset } = useNavigation()
   const shop = useShop()
-  const { user, stats, openProposal } = state.me
+  const cover = useEquipped('cover')
+  const outfit = useEquipped('mascot')
+  const { user, stats, openProposal, projects } = state.me
+  const passions = PASSION_IDS.filter((id) => user.passions.includes(id) || stats.byPassion.some((row) => row.passion === id) || projects.some((project) => project.passion === id))
+  const recommended = featuredPath(user.passions, (id) => statsFor(stats.byPassion, id).steps, (id) => passionLevel(id, statsFor(stats.byPassion, id).minutes).level, user.skills)
+  const [selection, setSelection] = useState<PassionId | undefined>(openProposal?.passion ?? recommended?.progress.path.passion ?? passions[0])
+  const passion = selection && passions.includes(selection) ? selection : passions[0]
+  const [projectId, setProjectId] = useState<string>()
+  const passionStats = passion ? statsFor(stats.byPassion, passion) : null
+  const learning = passion && passionStats ? currentPath(passion, passionStats.steps, passionLevel(passion, passionStats.minutes).level, user.skills[passion]) : null
+  const project = [...projects].filter((entry) => entry.passion === passion).sort((a, b) => Number(Boolean(a.finishedAt)) - Number(Boolean(b.finishedAt)) || b.createdAt.localeCompare(a.createdAt))[0]
+  const Icon = passion ? PASSION_ICONS[passion] : null
+  const period = dayPeriod(new Date().getHours())
+  const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
+  const wordToday = challengePassions(user.passions).length > 0 && !wordDone(todayKey(), stats.challenge ?? [])
 
-  const start = (how: 'pull' | 'tap') => {
+  const open = (route: Route) => { haptics.impact('light'); push(route) }
+  const start = () => {
     haptics.impact('heavy')
     track('cta')
-    if (how === 'pull') track('pull')
     dispatch({ type: 'newFlow' })
     push({ name: 'signal' })
   }
-
-  const openShop = () => {
-    haptics.impact('light')
-    push({ name: 'shop' })
-  }
-
   const resume = () => {
     if (!openProposal) return
     haptics.impact('light')
-    const fixed = isFixedActivityId(openProposal.activityId)
-    dispatch({
-      type: 'newFlow',
-      flow: { mood: openProposal.mood ?? undefined, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(fixed ? { fixedStep: openProposal.activityId } : {}) },
-    })
-    // Une leçon reprend dans son parcours (le retour y ramène).
+    dispatch({ type: 'newFlow', flow: { mood: openProposal.mood ?? undefined, duration: openProposal.duration, passion: openProposal.passion, proposal: openProposal, ...(isFixedActivityId(openProposal.activityId) ? { fixedStep: openProposal.activityId } : {}) } })
     const lesson = getPathStep(openProposal.activityId)
     reset(lesson ? lessonStack(lesson, { name: 'activity' }) : [{ name: 'home' }, { name: 'activity' }])
   }
 
-  const ResumeIcon = openProposal ? PASSION_ICONS[openProposal.passion] : null
-  // Une seule carte sous le bonjour, la plus utile maintenant : l'activité en cours,
-  // le mode d'emploi (première fois), le mot du jour (pas encore fait), le parcours, sinon le mois.
-  const playsWord = challengePassions(user.passions).length > 0
-  const wordToday = playsWord && !wordDone(todayKey(), stats.challenge ?? [])
-  const featured =
-    !openProposal && stats.totalActivities > 0 && !wordToday
-      ? featuredPath(
-          user.passions,
-          (passion) => statsFor(stats.byPassion, passion).steps,
-          (passion) => passionLevel(passion, statsFor(stats.byPassion, passion).minutes).level,
-          user.skills,
-        )
-      : null
-  const card = openProposal && ResumeIcon ? 'resume' : stats.totalActivities === 0 ? 'how' : wordToday ? 'word' : featured ? 'path' : 'month'
-  const hour = new Date().getHours()
-  const period = dayPeriod(hour)
-  // La phrase d'accueil suit l'heure ; elle ne change pas à chaque retour sur l'accueil.
-  const line = homeLine(dayMoment(hour), seededRandom(`home:${user.id}:${new Date().toDateString()}:${dayMoment(hour)}`))
-  const hello = period === 'dusk' || period === 'night' ? 'Bonsoir' : 'Bonjour'
-
   return (
-    <Screen tabs className="pt-4 pb-0">
-      <header className="flex flex-wrap items-center justify-between gap-x-2 gap-y-3">
+    <Screen tabs className="pulse-home">
+      <header className="pulse-header">
         <Logo height={30} />
-        <div className="flex items-center gap-2 min-[380px]:gap-3">
+        <div className="pulse-tools">
           <AmbientButton />
-          <SettingsButton />
-          <Button variant="sun" size="sm" className="pl-2" haptic={false} onClick={openShop} aria-label={`Boutique : ${formatNumber(shop.balance)} minutons disponibles`}>
-          <CoinIcon size={26} className="motion-loop anim-coin" />
-          <span className="font-numbers text-17 font-extrabold">{formatNumber(shop.balance)}</span>
-          </Button>
+          <motion.button type="button" className="pulse-wallet" whileTap={PRESSED} onClick={() => open({ name: 'shop' })} aria-label={`Boutique : ${formatNumber(shop.balance)} minutons disponibles`}>
+            <span>{formatNumber(shop.balance)}</span><BrandMark size={24} />
+          </motion.button>
         </div>
       </header>
 
-      <div className="mt-6 flex flex-col gap-2">
-        <motion.h1 className="home-hello font-display font-extrabold tracking-tight text-ink" {...fadeUp(0)}>
-          {user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}
-        </motion.h1>
-        {/* Minuton, la mascotte, dit la phrase du moment. */}
-        <MascotSays mood={dayMoment(hour) === 'nuit' ? 'sleepy' : dayMoment(hour) === 'matin' ? 'happy' : 'wink'} size={52} className="mt-1">
-          {line}
-        </MascotSays>
+      <div className="pulse-greeting">
+        <p className="pulse-eyebrow">Ton espace</p>
+        <h1>{user.firstName ? `${hello} ${user.firstName}.` : `${hello}.`}</h1>
       </div>
 
-      <div className="mt-5 flex flex-col">
-        {card === 'resume' && openProposal && ResumeIcon && (
-          <motion.button
-            type="button"
-            onClick={resume}
-            {...fadeUp(0.2, 8)}
-            whileTap={PRESSED}
-            className={cn(cardVariants(), 'flex-row items-center text-left transition-shadow duration-150 active:shadow-press')}
-          >
-            <span className={cn('relative flex h-12 w-12 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline', PASSION_COLORS[openProposal.passion].bg)}>
-              <ResumeIcon size={22} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
-            </span>
-            <span className="flex min-w-0 flex-1 flex-col gap-1">
-              <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Tu étais en train de…</span>
-              <span className="line-clamp-2 text-15 font-bold text-ink">{openProposal.text}</span>
-              <span className="inline-flex items-center gap-1 text-14 font-bold text-accent-strong">
-                Reprendre
-                <ArrowRight size={16} strokeWidth={2.6} aria-hidden="true" />
-              </span>
-            </span>
+      <section className="pulse-hero" aria-labelledby="pulse-start-title">
+        <p className="pulse-eyebrow">Une activité pour maintenant</p>
+        <h2 id="pulse-start-title">Qu’as-tu envie<br />de faire&nbsp;?</h2>
+        <span className="pulse-minuton">{outfit ? <Mascot mood="wink" size={76} animated={false} /> : <BrandMark size={76} />}</span>
+        <motion.button type="button" className="pulse-start" whileTap={PRESSED} onClick={start}>
+          <span>J’ai envie de scroller</span><ArrowUpRight size={22} aria-hidden="true" />
+        </motion.button>
+        {stats.totalActivities === 0 && <p className="pulse-first-time">Choisis un temps et une passion, puis découvre ton activité.</p>}
+      </section>
+
+      {openProposal && <motion.button type="button" className="pulse-resume" whileTap={PRESSED} onClick={resume}>
+        <span><span className="pulse-eyebrow">Ton activité en cours · {getPassion(openProposal.passion).label}</span><span className="pulse-resume-title">{openProposal.text}</span><span className="pulse-link">Reprendre →</span></span>
+        <ArrowRight size={20} aria-hidden="true" />
+      </motion.button>}
+
+      <section aria-labelledby="pulse-passions-title">
+        <div className="pulse-section-head">
+          <h2 id="pulse-passions-title">Selon tes passions</h2>
+          <button type="button" className="pulse-text-button" onClick={() => open({ name: 'passionHub' })}>Tout voir <ArrowUpRight size={14} aria-hidden="true" /></button>
+        </div>
+        {passions.length > 0 ? <div className="pulse-passions" aria-label="Choisir une passion">
+          {passions.map((id) => <button key={id} type="button" aria-pressed={passion === id} aria-controls="pulse-learning pulse-project" onClick={() => { haptics.selection(); setSelection(id) }}>{getPassion(id).label}</button>)}
+        </div> : <button type="button" className="pulse-choose" onClick={() => open({ name: 'passions', mode: 'edit' })}>Choisir mes passions <ArrowRight size={18} aria-hidden="true" /></button>}
+
+        <div className="pulse-bento">
+          <div id="pulse-learning" className="pulse-learning-slot" aria-live="polite">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.button key={passion ?? 'empty'} type="button" className="pulse-tile pulse-learning" initial={{ opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -7 }} transition={{ duration: .16 }} whileTap={PRESSED}
+                onClick={() => learning ? open({ name: 'path', pathId: learning.path.id }) : passion ? open({ name: 'learnPassion', passion }) : open({ name: 'learn' })}
+                aria-label={learning ? `${learning.done > 0 && !learning.finished ? 'Continuer' : learning.finished ? 'Revoir' : 'Commencer'} ${learning.path.title}, ${getPassion(learning.path.passion).label}${learning.next ? `, étape ${learning.next.index} : ${learning.next.title}` : ''}` : 'Choisir une passion à apprendre'}>
+                <div>
+                  <p className="pulse-eyebrow">Apprendre{passion && ` · ${getPassion(passion).label}`}</p>
+                  <PassionArtwork passion={passion} />
+                  <h3>{learning ? learning.path.title : 'Une passion à découvrir'}</h3>
+                </div>
+                <span className="pulse-lesson-footer"><span>{learning?.next ? `Étape ${learning.next.index} / ${STEPS_PER_PATH} · ${learning.next.duration} min` : learning?.finished ? 'Parcours terminé · revoir' : 'À ton rythme'}</span><ArrowUpRight size={18} aria-hidden="true" /></span>
+              </motion.button>
+            </AnimatePresence>
+          </div>
+          <motion.button type="button" className="pulse-tile pulse-month" whileTap={PRESSED} onClick={() => open({ name: 'progress' })} aria-label={`Ma progression : ${plural(stats.monthActivities, 'activité réalisée', 'activités réalisées')} ce mois`}>
+            <p className="pulse-eyebrow">Ce mois</p>
+            <strong className="pulse-stat">{formatNumber(stats.monthActivities)}</strong>
+            <span className="pulse-tile-caption">{stats.monthActivities === 1 ? 'activité réalisée' : 'activités réalisées'} <ArrowUpRight size={14} aria-hidden="true" /></span>
           </motion.button>
-        )}
-
-        {card === 'how' && <HowItWorks />}
-
-        {card === 'word' && (
-          <ChallengeCard
-            done={stats.challenge ?? []}
-            onOpen={() => {
-              haptics.impact('light')
-              push({ name: 'challenge' })
-            }}
-          />
-        )}
-
-        {card === 'path' && featured && (
-          <ActivePathCard
-            progress={featured.progress}
-            started={featured.started}
-            onOpen={() => {
-              haptics.impact('light')
-              push({ name: 'path', pathId: featured.progress.path.id })
-            }}
-          />
-        )}
-
-        {card === 'month' && (
-          <motion.button
-            type="button"
-            onClick={openShop}
-            {...fadeUp(0.2, 8)}
-            whileTap={PRESSED}
-            className={cn(cardVariants(), 'flex-row items-center gap-3 py-3 pr-3 pl-4 text-left transition-shadow duration-150 active:shadow-press')}
-          >
-            <span className="flex min-w-0 flex-1 flex-col gap-1">
-              <span className="text-12 font-bold tracking-wider text-ink-soft uppercase">Ce mois-ci</span>
-              <MonthSummary monthActivities={stats.monthActivities} monthCoins={stats.monthCoins} totalActivities={stats.totalActivities} />
-            </span>
-            <ArrowRight size={20} strokeWidth={2.6} className="shrink-0 text-ink" aria-hidden="true" />
+          <motion.button type="button" className="pulse-tile pulse-shop" whileTap={PRESSED} onClick={() => open({ name: 'shop' })}>
+            <span className="pulse-shop-icons"><ShoppingBag size={22} aria-hidden="true" /><ArrowUpRight size={18} aria-hidden="true" /></span>
+            <h3>Tes envies</h3>
+            <span className="pulse-tile-caption">{formatNumber(shop.balance)} <BrandMark size={19} /><span className="sr-only">Minutons</span> disponibles</span>
           </motion.button>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {/* Tout le bas de l'écran : la tirette, à tirer vers le haut (ou à toucher). */}
-      <Tirette onStart={start} />
+      <section id="pulse-project" aria-labelledby="pulse-project-title" aria-live="polite">
+        <div className="pulse-section-head"><h2 id="pulse-project-title">À retrouver</h2><button type="button" className="pulse-text-button" onClick={() => passion ? open({ name: 'passionSpace', passion }) : open({ name: 'passionHub' })}>Ma passion <ArrowUpRight size={14} aria-hidden="true" /></button></div>
+        <motion.button key={project?.id ?? passion ?? 'gallery'} type="button" className="pulse-project" whileTap={PRESSED} aria-haspopup={project ? 'dialog' : undefined} onClick={() => { if (project) { haptics.impact('light'); setProjectId(project.id) } else { open({ name: 'gallery', passion }) } }}>
+          <span className="pulse-project-cover">{project?.coverUrl ? <img src={project.coverUrl} alt="" loading="lazy" /> : cover && Icon ? <ProjectCoverArtwork item={cover} icon={Icon} /> : Icon ? <Icon size={28} aria-hidden="true" /> : <BrandMark size={34} />}</span>
+          <span className="pulse-project-copy"><span className="pulse-eyebrow">{passion ? getPassion(passion).label : 'Mes passions'} · {project ? project.finishedAt ? 'projet terminé' : 'projet en cours' : 'mes créations'}</span><strong>{project?.name ?? 'Ta galerie'}</strong><span className="pulse-link">{project ? 'Ouvrir le projet' : passionStats?.activities ? 'Retrouver mes créations' : 'Découvrir ma galerie'} <ArrowRight size={14} aria-hidden="true" /></span></span>
+        </motion.button>
+      </section>
+      <div className="pulse-summary"><span>{formatNumber(stats.totalCoins)} Minutons gagnés au total</span>{wordToday && <button type="button" className="pulse-text-button" onClick={() => open({ name: 'challenge' })}>Mot du jour <ArrowUpRight size={14} aria-hidden="true" /></button>}</div>
+      <Dialog open={Boolean(projectId)} onOpenChange={(isOpen) => { if (!isOpen) setProjectId(undefined) }}><DialogContent>{projectId && <ProjectSheet key={projectId} id={projectId} onClose={() => setProjectId(undefined)} />}</DialogContent></Dialog>
     </Screen>
   )
 }
 
-/** Tant que la galerie est vide : le principe de l'app, en trois temps. */
-const STEPS = [
-  { text: 'Ton pouce te démange\u00A0? Tire la languette du bas.' },
-  { text: 'Ton temps, ta passion\u00A0: deux choix, et on crée.' },
-  { text: 'Une petite activité créative. Chaque minute = un minuton.' },
-] as const
-
-function HowItWorks() {
-  return (
-    <motion.section {...fadeUp(0.3, 8)} className={cn(cardVariants({ tone: 'muted' }), 'gap-2 py-3')} aria-labelledby="how-it-works">
-      <h2 id="how-it-works" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
-        Comment ça marche
-      </h2>
-      <ol className="flex flex-col gap-2">
-        {STEPS.map((step, index) => (
-          <li key={index} className="flex items-center gap-3">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-warm font-numbers text-13 font-extrabold text-on-color">
-              {index + 1}
-            </span>
-            <span className="text-13 leading-snug font-semibold text-ink">{step.text}</span>
-          </li>
-        ))}
-      </ol>
-    </motion.section>
-  )
-}
-
-function MonthSummary({ monthActivities, monthCoins, totalActivities }: { monthActivities: number; monthCoins: number; totalActivities: number }) {
-  if (monthActivities > 0) {
-    return (
-      <span className="font-display text-20 font-extrabold tracking-tight text-ink">
-        {plural(monthActivities, 'activité')} · {formatNumber(monthCoins)} minutons
-      </span>
-    )
-  }
-  if (totalActivities > 0) {
-    return <span className="text-15 font-semibold text-ink">Nouveau mois, nouvelle page. Ta galerie compte déjà {plural(totalActivities, 'création')}.</span>
-  }
-  return <span className="text-15 font-semibold text-ink">Ta galerie se remplira au fil de tes envies.</span>
+function PassionArtwork({ passion }: { passion?: PassionId }) {
+  const Icon = passion ? PASSION_ICONS[passion] : null
+  return <span className="pulse-art" aria-hidden="true">{passion === 'piano' ? <span className="pulse-keys">{Array.from({ length: 5 }, (_, index) => <span key={index} />)}</span> : <span className="pulse-art-card">{Icon ? <Icon size={42} strokeWidth={1.8} /> : <BrandMark size={54} />}</span>}</span>
 }

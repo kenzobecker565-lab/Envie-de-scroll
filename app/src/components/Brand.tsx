@@ -1,55 +1,36 @@
 import { cn } from '@/lib/utils'
-import { ICON_PATHS, ICON_SIZE, LOGO_COLORS, WORD_PATHS, WORD_SIZE } from './logoPaths.ts'
 
-/**
- * Le logo de Scroll-up : Minuton qui fait un clin d'œil sur son carré jaune,
- * et le nom avec son trait d'union tomate. L'icône garde ses couleurs dans
- * tous les thèmes ; les lettres du nom prennent la couleur du texte (claires
- * en thème sombre).
- */
-
-/** L'icône : Minuton sur son carré jaune (`square` : sans arrondi, pour un fond plein). */
+/** Le Minuton validé : des tracés SVG complets, lisibles à toutes les tailles. */
 export function LogoIcon({ size = 32, square = false, className }: { size?: number; square?: boolean; className?: string }) {
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${ICON_SIZE} ${ICON_SIZE}`} className={cn('shrink-0', className)} aria-hidden="true">
-      <rect width={ICON_SIZE} height={ICON_SIZE} rx={square ? 0 : 70} fill={LOGO_COLORS.yellow} />
-      <path d={ICON_PATHS.cheeks} fill={LOGO_COLORS.tomato} />
-      <path d={ICON_PATHS.ink} fill={LOGO_COLORS.ink} fillRule="evenodd" />
-      <path d={ICON_PATHS.shine} fill={LOGO_COLORS.shine} stroke={LOGO_COLORS.shine} strokeWidth={2.5} strokeLinejoin="round" />
-    </svg>
-  )
+  return <svg width={size} height={size} viewBox="0 0 100 100" className={cn('shrink-0', className)} aria-hidden="true">
+    <rect width="100" height="100" rx={square ? 0 : 22} fill="#FFD54A" />
+    <g fill="none" stroke="#151515" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="50" cy="62" r="36" fill="#FFD54A" />
+      <path d="M50 20v14M15 62h7M78 62h7M78 19l-4 8M88 29l-6 5" />
+      <path d="M63 56q6-7 12-2M63 56q5-1 10 3" />
+      <path d="M41 74q9 12 19 0" strokeWidth="5" />
+    </g>
+    <rect x="41" y="10" width="18" height="10" rx="3" fill="#151515" />
+    <ellipse cx="37" cy="56" rx="4.4" ry="6" fill="#151515" />
+    <ellipse cx="35.8" cy="53.5" rx="1.4" ry="1.8" fill="#FFFDF7" />
+    <ellipse cx="30" cy="70" rx="5.6" ry="3.5" fill="#FF6A4D" />
+    <ellipse cx="72" cy="70" rx="5.6" ry="3.5" fill="#FF6A4D" />
+    <path d="M25 43q5-8 12-11" fill="none" stroke="#FFFDF7" strokeWidth="3.5" strokeLinecap="round" />
+  </svg>
 }
 
-/** Le nom « Scroll-up », à la hauteur voulue. */
+/** Le nom reste lisible et suit la couleur du texte du thème. */
 export function Wordmark({ height = 20, decorative = false, className, style }: { height?: number; decorative?: boolean; className?: string; style?: React.CSSProperties }) {
-  const width = (height * WORD_SIZE.width) / WORD_SIZE.height
-  return (
-    <svg
-      width={width}
-      height={height}
-      viewBox={`0 0 ${WORD_SIZE.width} ${WORD_SIZE.height}`}
-      className={cn('shrink-0 text-ink', className)}
-      style={style}
-      {...(decorative ? { 'aria-hidden': true } : { role: 'img', 'aria-label': 'Scroll-up' })}
-    >
-      <path d={WORD_PATHS.letters} fill="currentColor" fillRule="evenodd" />
-      <path d={WORD_PATHS.dash} fill={LOGO_COLORS.tomato} />
-    </svg>
-  )
+  return <span className={cn('inline-flex shrink-0 text-ink', className)} style={{ fontFamily: "'Nunito Variable', 'Nunito', sans-serif", fontWeight: 1000, letterSpacing: '-0.055em', lineHeight: 1, fontSize: height * 1.3, ...style }} {...(decorative ? { 'aria-hidden': true } : { role: 'img', 'aria-label': 'Scroll-up' })}>
+    Scroll<span style={{ color: '#FF6A4D' }}>-</span>up
+  </span>
 }
 
-/** Le logo entier, l'icône et le nom côte à côte, dans les proportions du logo d'origine. */
+/** Même API pour tous les écrans, avec l'icône et le nom complets. */
 export function Logo({ height = 32, className }: { height?: number; className?: string }) {
-  const scale = height / ICON_SIZE
-  return (
-    <span className={cn('inline-flex shrink-0 items-start', className)} style={{ gap: 27 * scale }} role="img" aria-label="Scroll-up">
-      <LogoIcon size={height} />
-      <Wordmark height={WORD_SIZE.height * scale} decorative style={{ marginTop: 98.5 * scale }} />
-    </span>
-  )
+  return <span className={cn('inline-flex shrink-0 items-center gap-1.5', className)} role="img" aria-label="Scroll-up">
+    <LogoIcon size={height} /><Wordmark height={height * .51} decorative />
+  </span>
 }
 
-/** Minuton fait un clin d'œil : l'icône jaune du logo Scroll-up. */
-export function BrandMark({ size = 28 }: { size?: number }) {
-  return <LogoIcon size={size} />
-}
+export function BrandMark({ size = 28 }: { size?: number }) { return <LogoIcon size={size} /> }

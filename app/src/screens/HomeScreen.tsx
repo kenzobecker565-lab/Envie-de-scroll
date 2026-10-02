@@ -84,7 +84,7 @@ export function HomeScreen() {
 
   return (
     <Screen tabs className="pt-4 pb-0">
-      <header className="flex items-center justify-between">
+      <header className="flex flex-wrap items-center justify-between gap-x-2 gap-y-3">
         <Wordmark />
         <div className="flex items-center gap-2 min-[380px]:gap-3">
           <AmbientButton />

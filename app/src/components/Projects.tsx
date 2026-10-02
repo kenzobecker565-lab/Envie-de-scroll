@@ -45,9 +45,9 @@ function sorted(projects: readonly ProjectDTO[]): ProjectDTO[] {
 
 /* --------------------------------------------------------------- galerie */
 
-export function ProjectsSection() {
+export function ProjectsSection({ passion }: { passion?: PassionId }) {
   const { state } = useAppState()
-  const projects = sorted(state.me.projects ?? [])
+  const projects = sorted((state.me.projects ?? []).filter((project) => !passion || project.passion === passion))
   const [openId, setOpenId] = useState<string>()
   const [sheetOpen, setSheetOpen] = useState(false)
   const [creating, setCreating] = useState(false)
@@ -79,7 +79,7 @@ export function ProjectsSection() {
       <Dialog open={sheetOpen} onOpenChange={setSheetOpen}>
         <DialogContent>{openId && <ProjectSheet key={openId} id={openId} onClose={() => setSheetOpen(false)} />}</DialogContent>
       </Dialog>
-      <NewProjectDialog open={creating} onOpenChange={setCreating} onCreated={(project) => open(project.id)} />
+      <NewProjectDialog passion={passion} open={creating} onOpenChange={setCreating} onCreated={(project) => open(project.id)} />
     </section>
   )
 }

@@ -106,7 +106,7 @@ export function PassionProgressGrid({ title = 'Ta progression' }: { title?: stri
   )
 }
 
-function PassionCard({ passion, stats, index, onOpen }: { passion: PassionId; stats: PassionStatsDTO; index: number; onOpen: () => void }) {
+export function PassionCard({ passion, stats, index, onOpen }: { passion: PassionId; stats: PassionStatsDTO; index: number; onOpen: () => void }) {
   const info = getPassion(passion)
   const Icon = PASSION_ICONS[passion]
   const level = passionLevel(passion, stats.minutes)
@@ -206,13 +206,15 @@ function CollectionDots({ passion, tried }: { passion: PassionId; tried: readonl
 
 /* ------------------------------------------------------- le détail d'une passion */
 
-function PassionDetail({
+export function PassionDetail({
   passion,
   stats,
   canStart,
   onOpenPath,
   onChangeSkill,
+  section,
 }: {
+  section?: 'overview' | 'paths' | 'collection'
   passion: PassionId
   stats: PassionStatsDTO
   canStart: boolean
@@ -237,7 +239,7 @@ function PassionDetail({
 
   return (
     <>
-      <DialogHeader>
+      {!section && <DialogHeader>
         <DialogTitle className="flex items-center gap-2">
           <span className={cn('flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border-2 border-outline text-on-color [&>svg]:size-[18px]', PASSION_COLORS[passion].bg)}>
             <Icon aria-hidden="true" />
@@ -247,10 +249,10 @@ function PassionDetail({
         <DialogDescription>
           {plural(stats.activities, 'activité réalisée', 'activités réalisées')} · {plural(stats.minutes, 'minuton')}
         </DialogDescription>
-      </DialogHeader>
+      </DialogHeader>}
 
       {/* Le niveau actuel, en grand. */}
-      <Card tone={PASSION_COLORS[passion].card} className="shrink-0 flex-row items-center gap-4 shadow-pop" initial={{ rotate: -1.5, scale: 0.96 }} animate={{ rotate: -0.8, scale: 1 }}>
+      {(!section || section === 'overview') && <Card tone={PASSION_COLORS[passion].card} className="shrink-0 flex-row items-center gap-4 shadow-pop" initial={{ rotate: -1.5, scale: 0.96 }} animate={{ rotate: -0.8, scale: 1 }}>
         <span className="flex h-16 w-16 shrink-0 rotate-6 flex-col items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper text-on-color">
           <span className="text-11 font-bold tracking-wider uppercase">Niv.</span>
           <span className="font-numbers text-26 leading-none font-extrabold">{level.level}</span>
@@ -263,10 +265,10 @@ function PassionDetail({
           </span>
         </span>
         <Sparkle size={22} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-2 right-3" />
-      </Card>
+      </Card>}
 
       {/* Passion avec niveau (Piano) : d'où l'on part, et de quoi le changer. */}
-      {info.skill && (
+      {(!section || section === 'overview') && info.skill && (
         <button
           type="button"
           onClick={onChangeSkill}
@@ -282,7 +284,7 @@ function PassionDetail({
       )}
 
       {/* Les parcours : progresser étape par étape, de plus en plus exigeant. */}
-      <section className="flex shrink-0 flex-col gap-2" aria-labelledby="paths-title">
+      {(!section || section === 'paths') && <section className="flex shrink-0 flex-col gap-2" aria-labelledby="paths-title">
         <h3 id="paths-title" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
           Tes parcours
         </h3>
@@ -290,24 +292,24 @@ function PassionDetail({
         {pathProgress(passion, stats.steps, level.level, skill).map((progress, index) => (
           <PathCard key={progress.path.id} progress={progress} index={index} onOpen={() => onOpenPath(progress.path.id)} />
         ))}
-      </section>
+      </section>}
 
-      <SignatureSection passion={passion} stats={stats} />
+      {(!section || section === 'overview') && <SignatureSection passion={passion} stats={stats} />}
 
       {/* Les cinq niveaux. */}
-      <section className="flex shrink-0 flex-col gap-2" aria-labelledby="levels-title">
-        <h3 id="levels-title" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
+      {(!section || section === 'overview') && <details className="flex shrink-0 flex-col gap-2">
+        <summary className="text-12 font-bold tracking-wider text-ink-soft uppercase">
           Les niveaux
-        </h3>
+        </summary>
         <ol className="flex flex-col gap-2">
           {levelSteps(passion).map((step) => (
             <LevelRow key={step.level} step={step} passion={passion} reached={stats.minutes >= step.minutes} current={step.level === level.level} />
           ))}
         </ol>
-      </section>
+      </details>}
 
       {/* La collection : les activités faites se dévoilent, les autres restent à découvrir. */}
-      <section className="flex shrink-0 flex-col gap-3" aria-labelledby="collection-title">
+      {(!section || section === 'collection') && <section className="flex shrink-0 flex-col gap-3" aria-labelledby="collection-title">
         <h3 id="collection-title" className="flex items-baseline justify-between gap-2 text-12 font-bold tracking-wider text-ink-soft uppercase">
           Ta collection
           <span className="font-numbers text-13 tracking-normal text-ink normal-case">
@@ -343,7 +345,7 @@ function PassionDetail({
             </ul>
           </div>
         ))}
-      </section>
+      </section>}
 
       {canStart && (
         <Button className="w-full shrink-0" onClick={start}>

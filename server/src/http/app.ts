@@ -341,7 +341,8 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       const user = await currentUser(req, res)
       const limit = Math.min(50, Math.max(1, Number.parseInt(String(req.query.limit ?? '20'), 10) || 20))
       const cursor = typeof req.query.cursor === 'string' && req.query.cursor ? req.query.cursor : undefined
-      const page = await listCompletions(prisma, user, { cursor, limit })
+      const passion = isPassionId(req.query.passion) ? req.query.passion : undefined
+      const page = await listCompletions(prisma, user, { cursor, limit, passion })
       const body: CompletionsPage = { items: page.items.map((item) => toCompletionDTO(item, photoUrl)), nextCursor: page.nextCursor }
       res.json(body)
     }),

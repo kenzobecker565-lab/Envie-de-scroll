@@ -122,10 +122,10 @@ export async function completeProposal(
 export async function listCompletions(
   prisma: PrismaClient,
   user: User,
-  { cursor, limit }: { cursor?: string; limit: number },
+  { cursor, limit, passion }: { cursor?: string; limit: number; passion?: PassionId },
 ): Promise<{ items: Completion[]; nextCursor: string | null }> {
   const rows = await prisma.completion.findMany({
-    where: { userId: user.id },
+    where: { userId: user.id, ...(passion ? { passion } : {}) },
     orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
     take: limit + 1,
     ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),

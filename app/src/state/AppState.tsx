@@ -20,7 +20,10 @@ export type Route =
   | { name: 'proof' }
   | { name: 'done' }
   | { name: 'progress' }
-  | { name: 'gallery' }
+  | { name: 'gallery'; passion?: PassionId }
+  | { name: 'passionHub' }
+  | { name: 'passionSpace'; passion: PassionId }
+  | { name: 'profile' }
   | { name: 'path'; pathId: string }
   | { name: 'challenge' }
 

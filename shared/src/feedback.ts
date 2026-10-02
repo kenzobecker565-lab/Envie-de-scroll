@@ -55,6 +55,7 @@ export const APP_EVENTS = [
   'skill', // niveau déclaré dans une passion (data.passion, data.level)
   'melody_done', // mélodie guidée jouée jusqu'au bout sur le clavier de l'appli (data.melody)
   'melody_part', // une partie d'apprentissage réussie (data.melody, data.part)
+  'piano_stage', // piano ouvert en grand écran (paysage)
   'lesson', // leçon de parcours lancée (mode progression : ni signal ni humeur ; data.step, data.from : parcours ou enchaînement)
 ] as const
 export type AppEventName = (typeof APP_EVENTS)[number]

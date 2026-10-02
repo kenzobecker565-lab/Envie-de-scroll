@@ -53,6 +53,9 @@ export interface TelegramWebApp {
   openTelegramLink?(url: string): void
   openLink?(url: string): void
   addToHomeScreen?(): void
+  requestFullscreen?(): void
+  exitFullscreen?(): void
+  isFullscreen?: boolean
   checkHomeScreenStatus?(callback: (status: 'unsupported' | 'unknown' | 'added' | 'missed') => void): void
   showPopup?(
     params: { title?: string; message: string; buttons?: { id?: string; type?: 'default' | 'ok' | 'close' | 'cancel' | 'destructive'; text?: string }[] },
@@ -113,6 +116,7 @@ export const supports = {
   writeAccess: atLeast('6.9'),
   popup: atLeast('6.2'),
   homeScreen: atLeast('8.0'),
+  fullscreen: atLeast('8.0'),
 }
 
 /** À appeler au démarrage : l'app est prête, en plein écran vertical. */
@@ -122,6 +126,30 @@ export function initTelegram(): void {
   telegram.expand()
   // Évite que le glissement vers le bas (défilement de la galerie) ferme l'app.
   if (supports.verticalSwipes) telegram.disableVerticalSwipes?.()
+}
+
+/* ------------------------------- Plein écran ------------------------------- */
+
+/**
+ * Le plein écran de Telegram (8.0 et plus) : plus d'en-tête Telegram, toute
+ * la hauteur pour l'app (le piano en grand, en paysage). Sans effet ailleurs.
+ */
+export function enterFullscreen(): void {
+  if (!telegram || !supports.fullscreen || telegram.isFullscreen) return
+  try {
+    telegram.requestFullscreen?.()
+  } catch {
+    // Pas de plein écran (ordinateur, version trop ancienne) : l'app reste comme elle est.
+  }
+}
+
+export function exitFullscreen(): void {
+  if (!telegram || !supports.fullscreen || !telegram.isFullscreen) return
+  try {
+    telegram.exitFullscreen?.()
+  } catch {
+    // Rien à faire.
+  }
 }
 
 /* ------------------------- Raccourci sur l'écran d'accueil ------------------------- */

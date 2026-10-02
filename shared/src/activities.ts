@@ -121,7 +121,7 @@ export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
   // ⚠️ Ces 15 textes ne font pas partie de la liste validée de la V1 : à relire.
   piano: {
     5: [
-      "Apprends « Au clair de la lune », la chanson parfaite pour débuter : cinq notes, deux parties",
+      "Apprends « Au clair de la lune », la chanson parfaite pour débuter, en deux parties",
       "Apprends « Frère Jacques », phrase par phrase : chaque phrase se répète, c'est fait pour retenir",
       "Apprends « Ah ! vous dirai-je, maman », l'air que Mozart a varié douze fois",
       "Apprends le refrain de « Vive le vent » : trois Mi, trois Mi, et tout le monde reconnaît",
@@ -130,14 +130,14 @@ export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
     15: [
       "Apprends l'« Ode à la joie » de Beethoven en entier, partie par partie, puis enchaîne",
       "Apprends « When the Saints Go Marching In », le grand classique de La Nouvelle-Orléans",
-      "Apprends « Amazing Grace », lentement : laisse respirer les notes longues",
       "Apprends la « Berceuse » de Brahms, tout en douceur : l'air des boîtes à musique",
+      "Apprends « Au matin » de Grieg (Peer Gynt) : le lever du soleil en musique",
       "Apprends le début d'« Une petite musique de nuit » de Mozart : des sauts nets, comme un signal",
     ],
     30: [
       "Apprends le thème de la « Lettre à Élise » de Beethoven, partie par partie, puis joue-le d'une traite",
       "Apprends le « Menuet en sol » attribué à Bach, le morceau de tous les débuts de conservatoire",
-      "Apprends « Au matin » de Grieg (Peer Gynt) : le lever du soleil en musique",
+      "Apprends le thème du « Canon » de Pachelbel : des notes qui descendent marche par marche, et toute la magie est là",
       "Apprends le début de la « Marche turque » de Mozart : léger, rapide, sans jamais forcer",
       "Apprends « Greensleeves », la vieille chanson anglaise, phrase par phrase",
     ],

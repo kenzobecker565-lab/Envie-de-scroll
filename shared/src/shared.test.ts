@@ -542,6 +542,9 @@ describe('piano : niveau, contenu ciblé, mélodies', () => {
       expect(song.text, song.id).toMatch(/^Apprends /)
       const tune = keyboardMelody(song.id)
       expect(tune, song.id).toBeDefined()
+      // La chanson annoncée est bien celle qu'on joue : le premier mot marquant du titre est dans la consigne.
+      const word = tune!.title.split(/[(,]/)[0]!.split(/[^\p{L}]+/u).find((part) => part.length >= 4)!
+      expect(song.text, `${song.id} : la consigne n’annonce pas « ${tune!.title} »`).toContain(word)
       const parts = melodyParts(tune!)
       for (const part of parts) {
         expect(part.notes.length, `${song.id} : une partie trop longue pour la voir d’un coup`).toBeLessThanOrEqual(28)

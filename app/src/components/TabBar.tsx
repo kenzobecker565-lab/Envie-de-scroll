@@ -1,17 +1,18 @@
-import { Heart, Mountain, PenLine, UserRound, type LucideIcon } from 'lucide-react'
+import { GraduationCap, Heart, Mountain, PenLine, UserRound, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
 import { useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
-/** Les quatre espaces principaux. La barre se retire pendant les activités. */
+/** Les cinq espaces principaux. La barre se retire pendant les activités. */
 
-export type Tab = 'home' | 'passionHub' | 'progress' | 'profile'
+export type Tab = 'home' | 'learn' | 'passionHub' | 'progress' | 'profile'
 
 const TABS: readonly { id: Tab; label: string; icon: LucideIcon }[] = [
   { id: 'home', label: 'Accueil', icon: PenLine },
   { id: 'passionHub', label: 'Mes passions', icon: Heart },
+  { id: 'learn', label: 'Apprendre', icon: GraduationCap },
   { id: 'progress', label: 'Progression', icon: Mountain },
   { id: 'profile', label: 'Profil', icon: UserRound },
 ]
@@ -31,7 +32,7 @@ export const TAB_BAR_SPACE = 'pb-[calc(104px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
   const { route, reset } = useNavigation()
-  const current = route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'progress') : isTab(route.name) ? route.name : null
+  const current = route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'progress') : isTab(route.name) ? route.name : null
 
   const open = (tab: Tab) => {
     if (!current || tab === current) return
@@ -48,7 +49,7 @@ export function TabBar() {
         <motion.nav
           key="tabbar"
           aria-label="Navigation"
-          className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-4 gap-1.5 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
+          className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-5 gap-1 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
           initial={{ y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}
@@ -64,13 +65,13 @@ export function TabBar() {
                 aria-current={active ? 'page' : undefined}
                 whileTap={{ scale: 0.94 }}
                 className={cn(
-                  'relative isolate flex min-h-13 flex-col items-center justify-center gap-0.5 rounded-[15px] border-2 text-12 font-extrabold transition-colors duration-200',
+                  'relative isolate flex min-h-13 flex-col items-center justify-center gap-0.5 rounded-[15px] min-w-0 border-2 text-[9px] min-[360px]:text-[10px] min-[430px]:text-11 font-extrabold transition-colors duration-200',
                   active ? 'border-outline text-on-color' : 'border-transparent text-ink',
                 )}
               >
                 {active && <motion.span layoutId="tab-active" className="absolute inset-0 -z-10 rounded-[13px] bg-accent" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
                 <Icon size={20} strokeWidth={2.4} aria-hidden="true" />
-                {label}
+                <span className="text-center leading-tight">{label}</span>
               </motion.button>
             )
           })}

@@ -174,7 +174,7 @@ export function DoneScreen() {
       {/* Une seule grande nouvelle : la plus importante. Le reste se retrouve dans « Progresser ». */}
       {news === 'step' && step && stepProgress && (
         <div className="mt-6 w-full">
-          <StepBanner step={step} progress={stepProgress} onOpenPath={() => reset([...tabStack('progress'), { name: 'path', pathId: step.pathId }])} />
+          <StepBanner step={step} progress={stepProgress} onOpenPath={() => reset([...tabStack('learn'), { name: 'learnPassion', passion: step.passion }, { name: 'path', pathId: step.pathId }])} />
         </div>
       )}
       {news === 'level' && level && (
@@ -270,7 +270,7 @@ function StepDone({
   // La suite : l'étape d'après, ou au bout du parcours, le palier suivant s'il est ouvert.
   const nextPath = finished ? paths.find((entry) => entry.path.tier === path.tier + 1 && entry.unlocked && !entry.finished) : undefined
   const upNext = state.me.user.passions.includes(passion) ? (finished ? nextPath?.next : progress.next) ?? null : null
-  const openPath = () => reset([...tabStack('progress'), { name: 'path', pathId: (upNext ?? step).pathId }])
+  const openPath = () => reset([...tabStack('learn'), { name: 'learnPassion', passion: step.passion }, { name: 'path', pathId: (upNext ?? step).pathId }])
 
   return (
     <Screen className="items-center text-center">

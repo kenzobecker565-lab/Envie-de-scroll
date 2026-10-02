@@ -1,12 +1,14 @@
 import { Check, Info } from 'lucide-react'
 import { useState } from 'react'
-import { APP_THEMES, isAppTheme, type AppTheme } from '@scroll-up/shared'
+import { SHOP_ITEMS, APP_THEMES, isAppTheme, type AppTheme } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api } from '../api/client.ts'
 import { setAppTheme, THEME_INFO, useAppTheme } from '../lib/appTheme.ts'
 import { useAppState } from '../state/AppState.tsx'
+import { ShopPreview } from './ShopArt.tsx'
+import { useShop } from '../lib/shop.ts'
 import { haptics } from '../telegram/webApp.ts'
 
 /** Graisse et style du « Aa » de chaque vignette (ceux du thème de l'app ne s'y appliquent pas). */
@@ -66,12 +68,21 @@ export function useThemeChooser() {
 /** Les quatre thèmes en grille compacte (feuille des réglages). */
 export function ThemeGrid() {
   const { theme, choose, error } = useThemeChooser()
+  const shop = useShop()
+  const { dispatch } = useAppState()
+  const [shopError, setShopError] = useState<string>()
+  const selected = shop.equipped.theme ?? theme
+  const purchased = SHOP_ITEMS.filter((item) => item.category === 'theme' && shop.owned.includes(item.id))
+  const choosePurchased = (id: string) => {
+    setShopError(undefined)
+    api.equipItem('theme', id).then((next) => dispatch({ type: 'shop', shop: next })).catch((caught: Error) => setShopError(caught.message))
+  }
   return (
     <>
       <ToggleGroup
         type="single"
-        value={theme}
-        onValueChange={(value) => isAppTheme(value) && choose(value)}
+        value={selected}
+        onValueChange={(value) => { if (isAppTheme(value)) choose(value); else if (purchased.some((item) => item.id === value)) choosePurchased(value) }}
         className="grid grid-cols-2 gap-3"
         aria-label="Thème de l’app"
       >
@@ -86,12 +97,18 @@ export function ThemeGrid() {
           >
             <ThemePreview theme={id} className="h-16 w-full" />
             <span className="flex items-center justify-center gap-1 font-display text-15 font-extrabold tracking-tight">
-              {theme === id && <Check size={16} strokeWidth={3.2} aria-hidden="true" />}
+              {selected === id && <Check size={16} strokeWidth={3.2} aria-hidden="true" />}
               {THEME_INFO[id].label}
             </span>
           </ToggleGroupItem>
         ))}
+        {purchased.map((item) => <ToggleGroupItem key={item.id} value={item.id} variant="card" className="flex-col items-stretch gap-2 overflow-hidden p-2 text-center" aria-label={item.title}>
+          <span className="block h-36 overflow-hidden rounded-sm"><ShopPreview item={item} /></span>
+          <span className="flex items-center justify-center gap-1 font-display text-15 font-extrabold">{selected === item.id && <Check size={16} aria-hidden="true" />}{item.title}</span>
+          <span className="text-11 text-ink-soft">Débloqué · sans nouvel achat</span>
+        </ToggleGroupItem>)}
       </ToggleGroup>
+      {shopError && <p role="alert" className="text-13 text-accent-strong">{shopError}</p>}
       {error && (
         <Alert variant="warning" role="status">
           <Info aria-hidden="true" />

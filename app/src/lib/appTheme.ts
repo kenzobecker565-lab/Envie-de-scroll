@@ -7,7 +7,7 @@
  * serveur (pour suivre l'utilisateur d'un appareil à l'autre).
  */
 
-import { DEFAULT_THEME, isAppTheme, type AppTheme } from '@scroll-up/shared'
+import { getShopItem, DEFAULT_THEME, isAppTheme, type AppTheme } from '@scroll-up/shared'
 import { useSyncExternalStore } from 'react'
 
 /** Mode imposé par chaque thème (null : suit Telegram ou le système). */
@@ -74,4 +74,16 @@ export function subscribeAppTheme(listener: () => void): () => void {
 /** Le thème en cours, qui fait se redessiner le composant quand il change. */
 export function useAppTheme(): AppTheme {
   return useSyncExternalStore(subscribeAppTheme, getAppTheme)
+}
+
+/** Palette achetée : ses deux variantes sont claires et suivent le profil serveur. */
+let shopTheme: string | undefined
+export function getShopTheme(): string | undefined { return shopTheme }
+export function setShopTheme(id?: string): void {
+  const next = id && getShopItem(id)?.category === 'theme' ? id : undefined
+  if (next === shopTheme) return
+  shopTheme = next
+  if (next) document.documentElement.dataset.shopTheme = next
+  else delete document.documentElement.dataset.shopTheme
+  listeners.forEach((listener) => listener())
 }

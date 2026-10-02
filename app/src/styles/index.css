@@ -778,19 +778,23 @@
 }
 
 /* Les achats de thèmes changent la palette, en conservant les composants. */
-html[data-shop-theme='theme-crepuscule'], html[data-shop-theme='theme-jardin'] {
+:root[data-shop-theme='theme-crepuscule'], :root[data-shop-theme='theme-jardin'] {
   --ink: #292329; --ink-soft: #594952; --ink-faint: #8a7480;
   --outline: #292329; --on-color: #292329; --paper: #fffdf7;
   --card: #fffdf7; --surface-200: #fffdf7;
   --page-pattern: none;
-  --shadow-color: #292329;
+  --shadow-ink: #292329; --accent-ink: #292329;
+  --warm-soft: #fff0bd; --warm-ink: #6b4e00;
+  --good-soft: #dcedda; --good-ink: #246044;
+  --sky-soft: #dfedf4; --lilac-soft: #e9e0f1;
+  color-scheme: light;
 }
-html[data-shop-theme='theme-crepuscule'] {
+:root[data-shop-theme='theme-crepuscule'] {
   --canvas: #fff0e6; --surface-100: #fff5ee; --surface-300: #f3d6c8;
   --accent: #ee9b89; --accent-soft: #ffdbd2; --accent-strong: #a83e32;
   --line: #dfbcb3; --warm: #f6c681; --sky: #a6cae0; --good: #b8cead; --lilac: #b7a5d3;
 }
-html[data-shop-theme='theme-jardin'] {
+:root[data-shop-theme='theme-jardin'] {
   --canvas: #edf5e8; --surface-100: #f4f8ee; --surface-300: #d8e6c7;
   --accent: #86c9aa; --accent-soft: #d1eddc; --accent-strong: #28664c;
   --line: #bfceb1; --warm: #e4d78d; --sky: #a4cad7; --good: #a5d195; --lilac: #c4b9da;

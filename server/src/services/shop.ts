@@ -33,6 +33,12 @@ export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown)
       const debit = await tx.user.updateMany({ where: { id: userId, coinsSpent: { lte: earned - item.price } }, data: { coinsSpent: { increment: item.price } } })
       if (debit.count !== 1) throw new ApiError(409, 'invalid_request', 'Tu n’as pas encore assez de minutons disponibles.')
       await tx.shopPurchase.create({ data: { userId, itemId: item.id, price: item.price } })
+      if (item.category === 'theme') {
+        const user = await tx.user.findUniqueOrThrow({ where: { id: userId } })
+        const equipment = JSON.parse(user.shopEquipment) as Record<string, string>
+        equipment.theme = item.id
+        await tx.user.update({ where: { id: userId }, data: { shopEquipment: JSON.stringify(equipment) } })
+      }
     })
   } catch (error) {
     // Deux requêtes pour le même objet : la contrainte unique annule le second débit.

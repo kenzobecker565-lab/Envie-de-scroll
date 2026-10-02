@@ -12,7 +12,7 @@ import { EmptyState } from './components/Illustration.tsx'
 import { ShopScreen, BonusPianoScreen } from './screens/ShopScreen.tsx'
 import { syncShopAmbiance } from './lib/ambient.ts'
 import { suppressAmbient } from './lib/ambient.ts'
-import { setAppTheme } from './lib/appTheme.ts'
+import { setShopTheme, setAppTheme } from './lib/appTheme.ts'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
@@ -42,6 +42,7 @@ export function App() {
     try {
       const me = await api.me()
       // Le thème du profil l'emporte sur celui gardé sur ce téléphone.
+      setShopTheme(me.shop?.equipped.theme)
       setAppTheme(me.user.theme)
       setBoot({ status: 'ready', me })
     } catch (error) {
@@ -151,7 +152,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { state } = useAppState()
   useEffect(() => {
     const shop = state.me.shop
-    document.documentElement.dataset.shopTheme = shop?.equipped.theme ?? ''
+    setShopTheme(shop?.equipped.theme)
     syncShopAmbiance(shop?.owned ?? [], shop?.equipped.ambiance)
   }, [state.me.shop])
   const tone = toneFor(route, state.flow)

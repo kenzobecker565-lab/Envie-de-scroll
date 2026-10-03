@@ -28,6 +28,7 @@ export type Route =
   | { name: 'passionHub' }
   | { name: 'passionSpace'; passion: PassionId }
   | { name: 'profile' }
+  | { name: 'settings' }
   | { name: 'path'; pathId: string }
   | { name: 'challenge' }
 

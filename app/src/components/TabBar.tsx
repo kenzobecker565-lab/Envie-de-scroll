@@ -32,10 +32,10 @@ export const TAB_BAR_SPACE = 'pb-[calc(86px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
   const { route, reset } = useNavigation()
-  const current = route.name === 'progress' ? 'profile' : route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'profile') : isTab(route.name) ? route.name : null
+  const current = route.name === 'settings' ? 'profile' : route.name === 'challenge' ? 'learn' : route.name === 'progress' ? 'profile' : route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'profile') : isTab(route.name) ? route.name : null
 
   const open = (tab: Tab) => {
-    if (!current || tab === current) return
+    if (!current || (tab === current && route.name === current)) return
     haptics.selection()
     track('tab', { tab })
     const from = TABS.findIndex((entry) => entry.id === current)

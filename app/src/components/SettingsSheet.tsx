@@ -1,10 +1,9 @@
-import { BellRing, Check, ChevronRight, LoaderCircle, MessageCircleHeart, Music2, Settings2, SlidersHorizontal, Smartphone, Trash2, UserPlus } from 'lucide-react'
+import { BellRing, Check, ChevronRight, Clock3, Heart, ShieldCheck, LoaderCircle, MessageCircleHeart, Music2, Settings2, Smartphone, Trash2, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ambianceCredits, formatClock, isScrollMoment, SCROLL_MOMENT_INFO, SCROLL_MOMENTS } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Separator } from '@/components/ui/separator'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
@@ -15,25 +14,27 @@ import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { checkHomeScreen, haptics, requestHomeScreen, supports, telegram } from '../telegram/webApp.ts'
 import { AmbiancePicker } from './AmbiancePicker.tsx'
-import { ThemeGrid } from './ThemePicker.tsx'
 
 /**
- * Le bouton « Réglages » de l'accueil, et sa feuille : le style de l'app,
- * la musique d'ambiance, les passions, les relances du bot, inviter un ami,
- * donner son avis.
+ * Réglages quotidiens, aide et données : utilisés dans leur page dédiée.
  */
 export function SettingsButton() {
   const { push } = useNavigation()
-  return <Button variant="secondary" size="icon" onClick={() => { track('settings_open'); push({ name: 'profile' }) }} aria-label="Mon profil et mes réglages"><Settings2 aria-hidden="true" /></Button>
+  return <Button variant="secondary" size="icon" onClick={() => { push({ name: 'settings' }) }} aria-label="Mes réglages"><Settings2 aria-hidden="true" /></Button>
 }
 
 export function SettingsContent({ onEditPassions, onFeedback, onErase, embedded = false }: { embedded?: boolean; onEditPassions: () => void; onFeedback: () => void; onErase: () => void }) {
   const { state, dispatch } = useAppState()
   const { user } = state.me
   const [saving, setSaving] = useState(false)
+  const [momentOpen, setMomentOpen] = useState(false)
+  const [musicOpen, setMusicOpen] = useState(false)
+  const [error, setError] = useState<string>()
   const music = useAmbientEnabled()
 
   const toggleReminders = () => {
+    if (saving) return
+    setError(undefined)
     const next = !user.remindersEnabled
     haptics.selection()
     setSaving(true)
@@ -41,7 +42,7 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, embedded 
     api
       .updateSettings({ remindersEnabled: next })
       .then(({ user: updated }) => dispatch({ type: 'user', user: updated }))
-      .catch(() => dispatch({ type: 'user', user: { ...user, remindersEnabled: !next } }))
+      .catch(() => { dispatch({ type: 'user', user: { ...user, remindersEnabled: !next } }); setError('La relance n’a pas pu être enregistrée. Réessaie.') })
       .finally(() => setSaving(false))
   }
 
@@ -58,65 +59,28 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, embedded 
         <DialogDescription>Tout s’applique tout de suite.</DialogDescription>
       </DialogHeader>}
 
-      <details className="flex flex-col gap-3"><summary className="font-display text-22 font-extrabold">Apparence</summary><section className="mt-3 flex flex-col gap-3" aria-labelledby="settings-style">
-        <h2 id="settings-style" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
-          Ton style
-        </h2>
-        <ThemeGrid />
-      </section></details>
+      <section className="studio-settings-group" aria-labelledby="settings-daily">
+        <h2 id="settings-daily">Mon quotidien</h2>
+        <Row icon={<Heart aria-hidden="true"/>} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''}`} onClick={onEditPassions}/>
+        <Row icon={<Music2 aria-hidden="true"/>} title="Musique d’ambiance" description="Un fond musical pendant tes découvertes." onClick={() => { haptics.selection(); if (music) track('music_off'); setAmbientEnabled(!music) }} trailing={<Switch on={music} busy={false}/>} role="switch" checked={music}/>
+        {music && <><button type="button" className="studio-settings-disclosure" aria-expanded={musicOpen} onClick={() => setMusicOpen(value => !value)}>Choisir ma musique <ChevronRight size={17}/></button>{musicOpen && <div className="studio-settings-picker"><AmbiancePicker/></div>}</>}
+        <Row icon={<BellRing aria-hidden="true"/>} title="Relances" description="Un message du bot les jours sans activité." onClick={toggleReminders} disabled={saving} trailing={<Switch on={user.remindersEnabled} busy={saving}/>} role="switch" checked={user.remindersEnabled} live/>
+        {user.remindersEnabled && <><Row icon={<Clock3 aria-hidden="true"/>} title="Heure du rappel" description={user.scrollMoment ? formatClock(SCROLL_MOMENT_INFO[user.scrollMoment].remindAt) : '19 h'} onClick={() => setMomentOpen(value => !value)} trailing={<span className="studio-reminder-time">{user.scrollMoment ? formatClock(SCROLL_MOMENT_INFO[user.scrollMoment].remindAt) : '19 h'}<ChevronRight size={18}/></span>}/>{momentOpen && <div className="studio-settings-picker"><MomentPicker/></div>}</>}
+        {error && <p className="studio-settings-error" role="alert">{error}</p>}
+      </section>
+      <section className="studio-settings-group" aria-labelledby="settings-help">
+        <h2 id="settings-help">Aide et partage</h2>
+        {telegram && <HomeScreenRow/>}
+        <Row icon={<UserPlus aria-hidden="true"/>} title="Inviter un ami" description="Partage Swipe Up dans Telegram." onClick={sendInvite}/>
+        <Row icon={<MessageCircleHeart aria-hidden="true"/>} title="Donner mon avis" description="Tes idées pour améliorer l’application." onClick={onFeedback}/>
+      </section>
+      <section className="studio-settings-group" aria-labelledby="settings-data">
+        <h2 id="settings-data">Mes données</h2>
+        <Row icon={<ShieldCheck aria-hidden="true"/>} title="Gérer mes données" description="Effacer mon compte et mes créations." onClick={onErase}/>
+      </section>
 
-      <Separator />
-
-      <details><summary className="font-display text-22 font-extrabold">Musique</summary><section className="mt-3 flex flex-col gap-3" aria-labelledby="settings-music">
-        <h2 id="settings-music" className="text-12 font-bold tracking-wider text-ink-soft uppercase">
-          Ta musique
-        </h2>
-        <Row
-          icon={<Music2 aria-hidden="true" />}
-          title="Musique d’ambiance"
-          description="Tout doux, en fond. Elle se tait pendant les activités Musique et Cinéma."
-          onClick={() => {
-            haptics.selection()
-            if (music) track('music_off')
-            setAmbientEnabled(!music)
-          }}
-          trailing={<Switch on={music} busy={false} />}
-          role="switch"
-          checked={music}
-        />
-        <AmbiancePicker />
-      </section></details>
-
-      <Separator />
-
-      <div className="flex flex-col gap-3">
-        <Row icon={<SlidersHorizontal aria-hidden="true" />} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''}`} onClick={onEditPassions} />
-        <details><summary className="font-display text-22 font-extrabold">Relances</summary><div className="mt-3 flex flex-col gap-3"><Row
-          icon={<BellRing aria-hidden="true" />}
-          title="Petites relances"
-          description={
-            user.scrollMoment
-              ? `Un message du bot vers ${formatClock(SCROLL_MOMENT_INFO[user.scrollMoment].remindAt)}, juste avant ton moment de scroll. Seulement les jours sans activité.`
-              : 'Un message du bot vers 19 h, seulement les jours sans activité.'
-          }
-          onClick={toggleReminders}
-          trailing={<Switch on={user.remindersEnabled} busy={saving} />}
-          role="switch"
-          checked={user.remindersEnabled}
-          live
-        />
-        {user.remindersEnabled && <MomentPicker />}</div></details>
-        <details><summary className="font-display text-22 font-extrabold">Aide et partage</summary><div className="mt-3 flex flex-col gap-3">{telegram && <HomeScreenRow />}
-        <Row icon={<UserPlus aria-hidden="true" />} title="Inviter un ami" description="Partage Scroll-up dans une conversation Telegram." onClick={sendInvite} />
-        <Row icon={<MessageCircleHeart aria-hidden="true" />} title="Donner mon avis" description="Ce qui te plaît, ce qui te gêne, tes idées." onClick={onFeedback} tone="accent" /></div></details>
-      </div>
-
-      <Separator />
-
-      <details><summary className="font-display text-22 font-extrabold">Mes données</summary><div className="mt-3"><Row icon={<Trash2 aria-hidden="true" />} title="Effacer mes données" description="Tout supprimer et refaire l’inscription depuis le début." onClick={onErase} /></div></details>
-
-      <p className="text-center text-12 text-ink-soft">Scroll-up · version de test. Merci de faire partie des premiers&nbsp;!</p>
-      <p className="text-center text-11 text-ink-faint">Musiques&nbsp;: {ambianceCredits()}</p>
+      <p className="text-center text-12 text-ink-soft">Swipe Up · version de test. Merci de faire partie des premiers&nbsp;!</p>
+      <details className="studio-settings-credits"><summary>Crédits musicaux</summary><p>Musiques&nbsp;: {ambianceCredits()}</p></details>
     </>
   )
 }
@@ -214,15 +178,20 @@ function HomeScreenRow() {
 function MomentPicker() {
   const { state, dispatch } = useAppState()
   const { user } = state.me
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string>()
 
   const choose = (value: string) => {
-    if (!isScrollMoment(value) || value === user.scrollMoment) return
+    if (saving || !isScrollMoment(value) || value === user.scrollMoment) return
+    setSaving(true)
+    setError(undefined)
     haptics.selection()
     dispatch({ type: 'user', user: { ...user, scrollMoment: value } })
     api
       .updateSettings({ scrollMoment: value })
       .then(({ user: updated }) => dispatch({ type: 'user', user: updated }))
-      .catch(() => dispatch({ type: 'user', user }))
+      .catch(() => { dispatch({ type: 'user', user }); setError('Le nouvel horaire n’a pas pu être enregistré.') })
+      .finally(() => setSaving(false))
   }
 
   return (
@@ -234,13 +203,14 @@ function MomentPicker() {
         {SCROLL_MOMENTS.map((id) => {
           const { icon: Icon, on } = MOMENT_STYLE[id]
           return (
-            <ToggleGroupItem key={id} value={id} className={cn('min-h-16 flex-col justify-center gap-1 rounded-md px-1 text-13', on)} whileTap={{ scale: 0.94 }}>
+            <ToggleGroupItem key={id} value={id} disabled={saving} className={cn('min-h-16 flex-col justify-center gap-1 rounded-md px-1 text-13', on)} whileTap={{ scale: 0.94 }}>
               <Icon aria-hidden="true" />
               {SCROLL_MOMENT_INFO[id].short}
             </ToggleGroupItem>
           )
         })}
       </ToggleGroup>
+      {error && <p role="alert" className="text-12 text-accent-strong">{error}</p>}
     </div>
   )
 }
@@ -313,6 +283,7 @@ function Row({
   role,
   checked,
   live,
+  disabled,
 }: {
   icon: ReactNode
   title: string
@@ -324,8 +295,9 @@ function Row({
   checked?: boolean
   /** La description change selon l'état : les lecteurs d'écran l'annoncent. */
   live?: boolean
+  disabled?: boolean
 }) {
-  const className = cn('flex w-full items-center gap-3 rounded-md border-[2.5px] border-outline bg-card p-3 text-left shadow-chip', tone === 'accent' && 'bg-accent-soft')
+  const className = cn('studio-settings-row flex w-full items-center gap-3 rounded-md border-[2.5px] border-outline bg-card p-3 text-left shadow-chip', tone === 'accent' && 'bg-accent-soft')
   const content = (
     <>
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-surface-100 text-ink [&>svg]:size-5">{icon}</span>
@@ -345,6 +317,8 @@ function Row({
       onClick={onClick}
       whileTap={PRESSED}
       role={role}
+      disabled={disabled}
+      aria-busy={disabled || undefined}
       aria-checked={role === 'switch' ? checked : undefined}
       className={cn(className, 'transition-shadow duration-150 active:shadow-press')}
     >
@@ -353,16 +327,16 @@ function Row({
   )
 }
 
-/** Interrupteur en sticker : tomate quand il est allumé. */
+/** Purple switch shared by music and reminders. */
 function Switch({ on, busy }: { on: boolean; busy: boolean }) {
   return (
     <span
       aria-hidden="true"
-      className={cn('relative h-8 w-14 shrink-0 rounded-pill border-2 border-outline transition-colors duration-200', on ? 'bg-good' : 'bg-surface-300', busy && 'opacity-70')}
+      className={cn('studio-settings-switch relative h-8 w-14 shrink-0 rounded-pill border-2 border-outline transition-colors duration-200', on ? 'bg-good' : 'bg-surface-300', busy && 'opacity-70')}
     >
       <motion.span
         className="absolute top-0.5 left-0.5 h-6 w-6 rounded-pill border-2 border-outline bg-paper"
-        animate={{ x: on ? 24 : 0 }}
+        animate={{ x: on ? 19 : 0 }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
     </span>

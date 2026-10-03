@@ -28,3 +28,28 @@
 .studio-home-minuton {bottom:0;right:-5px;width:59%;max-width:240px}
 .studio-home::before {height:400px;background-image:linear-gradient(0deg,var(--canvas),transparent 17%),url('/art/home-night.webp')}
 @media(min-height:760px){.studio-home-hero{min-height:250px}.studio-home::before{height:420px}.studio-home-minuton{bottom:0}}
+
+/* Compact hero leaves the daily ritual visible immediately below Swipe. */
+.studio-home-hero {flex:0 0 clamp(172px,24vh,205px);min-height:172px}
+.studio-home::before {height:355px}
+.studio-home-minuton {width:53%;max-width:205px;right:0}
+.studio-home-hero h1 {margin-top:19px;max-width:59%}
+.studio-daily-card {position:relative;margin-top:14px;padding:11px;border-radius:19px;background:linear-gradient(120deg,#FCF2FF,#E5D0FF);border:1px solid #F7E9FF;color:#2D114F;box-shadow:0 3px 15px #130B3310}
+.studio-daily-open {display:flex;flex-direction:column;width:100%;position:relative;text-align:left;min-height:94px;padding-right:65px}
+.studio-daily-heading {display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.studio-daily-heading>svg {color:#A165DA;flex-shrink:0}
+.studio-daily-heading h2 {font-size:17px;font-weight:1000;line-height:1.15}
+.studio-daily-done {font-size:10px;font-weight:800;background:#BDEBCF;color:#2D6045;border-radius:99px;padding:2px 6px}
+.studio-daily-word {font-family:Georgia,serif;font-size:clamp(29px,8.2vw,39px);font-weight:900;line-height:1.1;overflow-wrap:anywhere;margin-top:5px}
+.studio-daily-subtitle {font-size:12px;font-weight:650;line-height:1.35;margin:3px 0 9px}
+.studio-daily-illustration {position:absolute;right:1px;top:18px;width:65px;height:60px;transform:rotate(-9deg);color:#7444B2}
+.studio-daily-illustration>svg:first-child {width:58px;height:58px;fill:#FFFBED;stroke-width:1.3}
+.studio-daily-illustration>svg:last-child {position:absolute;right:-3px;top:-9px;width:29px;height:44px;fill:#C798F7;stroke-width:1.4;transform:rotate(15deg)}
+.studio-daily-actions {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.studio-daily-actions>button {display:flex;align-items:center;justify-content:center;gap:8px;min-height:36px;font-size:14px;font-weight:1000;border-radius:99px;background:linear-gradient(120deg,#FFE7AB,#FFCB68)}
+.studio-daily-actions>button:last-child {background:linear-gradient(120deg,#E4BDFF,#CE9BF9)}
+.studio-home-resume {margin-top:13px}
+.studio-home-resume>h2 {font-size:19px}
+.studio-home .studio-section-heading {margin-top:13px}
+.studio-home .studio-section-heading h2 {font-size:20px}
+@media(max-width:359px){.studio-home-hero h1{font-size:33px}.studio-daily-heading h2{font-size:15px}.studio-daily-open{padding-right:54px}.studio-daily-illustration{width:54px}.studio-daily-illustration>svg:first-child{width:48px}.studio-daily-subtitle{font-size:11px}.studio-daily-actions>button{font-size:13px}}

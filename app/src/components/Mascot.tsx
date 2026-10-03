@@ -9,5 +9,5 @@ export function Mascot({ mood='happy', size=64, className, animated=true, access
 /** Assets extracted from the approved 2D character. The same drawing is used in previews and when equipped. */
 export function MinutonFigure({ mood='happy', size=64, className, animated=true, outfit }: { outfit?:string; mood?:MascotMood; size?:number; className?:string; animated?:boolean }) {
  const cell=outfit?COSTUMES[outfit]:undefined
- return <span aria-hidden="true" className={cn('minuton-art',animated&&'minuton-alive',className)} data-mood={mood} style={{width:size,height:size*1.1}}>{cell===undefined?<img src="/art/minuton-approved.webp" alt="" draggable={false} width="1160" height="1264"/>:<span className="minuton-costume" data-costume={outfit} style={{backgroundPosition:`${(cell%4)*100/3}% ${Math.floor(cell/4)*100/3}%`}}/>}</span>
+ return <span aria-hidden="true" className={cn('minuton-art',animated&&'minuton-alive',className)} data-mood={mood} style={{width:size,height:size*1.1}}>{cell===undefined||outfit==='mascot-basket'?<img src={outfit==='mascot-basket'?'/art/minuton-basket-approved.webp':'/art/minuton-approved.webp'} alt="" draggable={false}/>:<span className="minuton-costume" data-costume={outfit} style={{backgroundPosition:`${(cell%4)*100/3}% ${Math.floor(cell/4)*100/3}%`}}/>}</span>
 }

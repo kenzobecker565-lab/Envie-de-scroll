@@ -1,4 +1,4 @@
-import { ChevronDown, Clock3, FolderPlus, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
+import { ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import {
@@ -37,7 +37,6 @@ import { Mascot } from '../components/Mascot.tsx'
 import { MilestoneBanner } from '../components/Milestones.tsx'
 import { StepBanner } from '../components/Paths.tsx'
 import { LevelUpBanner, statsFor } from '../components/Progression.tsx'
-import { ProjectPicker } from '../components/Projects.tsx'
 import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen } from '../components/Screen.tsx'
@@ -50,7 +49,7 @@ import { haptics } from '../telegram/webApp.ts'
 /**
  * Confirmation : « Activité enregistrée. +X minutons ajoutés à ton total. »,
  * la fête, le compteur, UNE seule grande nouvelle (la plus importante), puis
- * la note. « Le savais-tu ? » et « Ranger dans un projet » sont repliés.
+ * la note. « Le savais-tu ? » est replié.
  */
 export function DoneScreen() {
   const { state, dispatch } = useAppState()
@@ -220,9 +219,7 @@ export function DoneScreen() {
         <Fold icon={<Lightbulb aria-hidden="true" />} title={'Le savais-tu\u00A0?'}>
           <p className="text-15 font-semibold text-ink">{fact}</p>
         </Fold>
-        <Fold icon={<FolderPlus aria-hidden="true" />} title="Ranger dans un projet">
-          <ProjectPicker completion={done.response.completion} label={false} />
-        </Fold>
+
       </div>
 
       <div className="mt-auto flex w-full flex-col">
@@ -376,7 +373,7 @@ function StepDone({
   )
 }
 
-/** Une ligne repliée (« Le savais-tu ? », « Ranger dans un projet ») : un toucher l'ouvre. */
+/** Une ligne repliée (« Le savais-tu ? ») : un toucher l'ouvre. */
 function Fold({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
   const id = `fold-${title.replace(/[^a-z]/gi, '').toLowerCase()}`

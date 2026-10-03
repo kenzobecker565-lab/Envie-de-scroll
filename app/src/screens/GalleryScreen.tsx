@@ -13,7 +13,6 @@ import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
 import { CoinIcon } from '../components/Coins.tsx'
 import { EmptyState } from '../components/Illustration.tsx'
-import { ProjectPicker, ProjectsSection } from '../components/Projects.tsx'
 import { statsFor } from '../components/Progression.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatDay, formatMonth, formatNumber, monthKey, plural } from '../lib/format.ts'
@@ -23,7 +22,7 @@ import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
 /**
- * L'onglet « Galerie » : les projets, puis une carte par activité réalisée,
+ * L'onglet « Galerie » : une carte par activité réalisée,
  * de la plus récente à la plus ancienne, groupées par mois. Toucher une carte
  * l'ouvre en grand. Les minutons, parcours et badges vivent dans l'onglet
  * « Progresser ». Jamais de calendrier de jours cochés ou manqués.
@@ -38,7 +37,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
   const { stats } = state.me
   const row = passion ? statsFor(stats.byPassion, passion) : null
 
-  const [filter, setFilter] = useState<'all' | 'word' | 'projects'>('all')
+  const [filter, setFilter] = useState<'all' | 'word'>('all')
   const [items, setItems] = useState<CompletionDTO[]>([])
   const [cursor, setCursor] = useState<string | null>(null)
   const [status, setStatus] = useState<'loading' | 'idle' | 'more' | 'error'>('loading')
@@ -96,13 +95,11 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
         <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">{passion ? `Créations · ${getPassion(passion).label}` : 'Historique'}</h1>
         <p className="text-15 font-semibold text-ink-soft">
           {plural(row?.activities ?? stats.totalActivities, 'création')} · {formatNumber(row?.minutes ?? stats.totalCoins)} minutons
-          {!passion && state.me.projects.length > 0 && <> · {plural(state.me.projects.length, 'projet')}</>}
         </p>
       </header>}
 
-      {!passion && <ProjectsSection />}
 
-      {embedded && <div className="workshop-filters" aria-label="Filtrer les créations">{([{id:'all',label:'Tout'},{id:'word',label:'Mot du jour'},{id:'projects',label:'Projets'}] as const).filter(entry=>entry.id!=='word'||passion==='dessin'||passion==='ecriture').map(entry=><button type="button" key={entry.id} aria-pressed={filter===entry.id} onClick={()=>setFilter(entry.id)}>{entry.label}</button>)}</div>}
+      {embedded && <div className="workshop-filters" aria-label="Filtrer les créations">{([{id:'all',label:'Tout'},{id:'word',label:'Mot du jour'}] as const).filter(entry=>entry.id!=='word'||passion==='dessin'||passion==='ecriture').map(entry=><button type="button" key={entry.id} aria-pressed={filter===entry.id} onClick={()=>setFilter(entry.id)}>{entry.label}</button>)}</div>}
       {embedded && <Button className="mt-3" onClick={startFlow}>{passion==='dessin'?'Créer un nouveau dessin':passion==='ecriture'?'Commencer un texte':'Nouvelle activité'}<ArrowRight/></Button>}
       {(!embedded && (view === 'list' || view === 'loading')) && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
       <div className={cn('flex flex-1 flex-col', view === 'list' || view === 'loading' ? 'mt-3' : 'mt-8')}>
@@ -143,7 +140,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
           )}
           {view === 'list' && (
             <motion.div key="list" className={embedded ? 'workshop-gallery-grid' : 'flex flex-col gap-4'} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              {items.filter(item=>filter==='all'||(filter==='projects'?Boolean(item.projectId):isChallengeId(item.activityId))).map((item, index) => {
+              {items.filter(item=>filter==='all'||isChallengeId(item.activityId)).map((item, index) => {
                 const previous = items[index - 1]
                 const newMonth = !previous || monthKey(previous.createdAt) !== monthKey(item.createdAt)
                 return (
@@ -170,7 +167,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
                   </Fragment>
                 )
               })}
-              {embedded && items.length>0 && !items.some(item=>filter==='all'||(filter==='projects'?Boolean(item.projectId):isChallengeId(item.activityId))) && <p className="workshop-filter-empty">Aucune création dans cette rubrique pour le moment.</p>}
+              {embedded && items.length>0 && !items.some(item=>filter==='all'||isChallengeId(item.activityId)) && <p className="workshop-filter-empty">Aucune création dans cette rubrique pour le moment.</p>}
               <div ref={sentinel} className={embedded?'workshop-sentinel':undefined}/>
               {status === 'more' && <CardSkeleton />}
               {status === 'error' && (
@@ -187,13 +184,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
       <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
         <DialogContent>
           {opened && (
-            <GalleryDetail
-              item={opened}
-              onChange={(updated) => {
-                setOpened(updated)
-                setItems((previous) => previous.map((item) => (item.id === updated.id ? updated : item)))
-              }}
-            />
+            <GalleryDetail item={opened} />
           )}
         </DialogContent>
       </Dialog>
@@ -438,7 +429,7 @@ function PhotoPendingNote() {
 /* ------------------------------ Vue détaillée ------------------------------ */
 
 /** Une création en grand, dans la feuille modale. */
-function GalleryDetail({ item, onChange }: { item: CompletionDTO; onChange: (item: CompletionDTO) => void }) {
+function GalleryDetail({ item }: { item: CompletionDTO }) {
   const { state } = useAppState()
   const passion = getPassion(item.passion)
   const Icon = PASSION_ICONS[item.passion]
@@ -495,7 +486,6 @@ function GalleryDetail({ item, onChange }: { item: CompletionDTO; onChange: (ite
           </div>
         )}
       </div>
-      <ProjectPicker completion={item} onChange={onChange} className="shrink-0" />
       <Card tone="good" className="flex-row items-center gap-3 shadow-chip">
         <CoinIcon size={28} />
         <p className="flex-1 text-15 font-semibold">

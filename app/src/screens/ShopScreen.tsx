@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Screen } from '../components/Screen.tsx'
 import { ShopPreview } from '../components/ShopArt.tsx'
+import { MinutonFigure } from '../components/Mascot.tsx'
 import { BrandMark } from '../components/Brand.tsx'
 import { PianoKeyboard } from '../components/PianoKeyboard.tsx'
 import { api } from '../api/client.ts'
@@ -15,6 +16,10 @@ import { formatNumber } from '../lib/format.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { setAmbientEnabled, suppressAmbient } from '../lib/ambient.ts'
 import { openExternal } from '../telegram/webApp.ts'
+
+const VISIBLE_CATEGORIES: ShopCategory[] = ['mascot', 'piano', ...SHOP_CATEGORIES.filter(id => !['mascot', 'piano', 'theme', 'cover'].includes(id))]
+const ART_MASCOTS = new Set(['mascot-beret', 'mascot-pianiste', 'mascot-casque'])
+type OutfitFilter = 'all' | 'sports' | 'arts'
 
 const DAVY_PARTITION = 'https://www.musicnotes.com/sheetmusic/pirates-of-the-caribbean-dead-mans-chest/davy-jones/MN0095169'
 
@@ -27,8 +32,9 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
   const { dispatch } = useAppState()
   const { push, replace } = useNavigation()
   const shop = useShop()
-  const [category, setCategory] = useState(initial)
+  const [category, setCategory] = useState<ShopCategory>(VISIBLE_CATEGORIES.includes(initial) ? initial : 'mascot')
   const [query, setQuery] = useState('')
+  const [outfitFilter, setOutfitFilter] = useState<OutfitFilter>('all')
   const [mine, setMine] = useState(library)
   const [filters, setFilters] = useState(false)
   const [selected, setSelected] = useState<ShopItem>()
@@ -86,6 +92,7 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
       dispatch({ type: 'shop', shop: await api.equipItem(item?.category ?? category, item?.id ?? null) })
       if (item?.category === 'ambiance') setAmbientEnabled(true)
       setNotice(item ? `${item.title} est activé.` : 'Le style gratuit est rétabli.')
+      if (category === 'mascot') { setOutfitFilter('all'); setQuery('') }
       setSelected(undefined); stopPreview()
     } catch (caught) { setError((caught as Error).message) }
     finally { setBusy(false) }
@@ -107,13 +114,14 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
   }
   const preview = (item: ShopItem) => { stopPreview(); setError(undefined); setSelected(item) }
   const featured = ['mascot-judo','mascot-basket','mascot-beret','mascot-pianiste']
-  const items = [...SHOP_ITEMS].sort((a,b) => (featured.includes(a.id)?featured.indexOf(a.id):99)-(featured.includes(b.id)?featured.indexOf(b.id):99)).filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)) && `${item.title} ${item.composer ?? ''} ${item.difficulty ?? ''}`.toLocaleLowerCase('fr').includes(query.toLocaleLowerCase('fr')))
+  const items = [...SHOP_ITEMS].sort((a,b) => (featured.includes(a.id)?featured.indexOf(a.id):99)-(featured.includes(b.id)?featured.indexOf(b.id):99)).filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)) && (category !== 'mascot' || outfitFilter === 'all' || (outfitFilter === 'arts' ? ART_MASCOTS.has(item.id) : !ART_MASCOTS.has(item.id))) && `${item.title} ${item.composer ?? ''} ${item.difficulty ?? ''}`.toLocaleLowerCase('fr').includes(query.toLocaleLowerCase('fr')))
   const owned = selected ? shop.owned.includes(selected.id) : false
   const active = selected ? shop.equipped[selected.category] === selected.id : false
 
   return <Screen tabs className="studio-shop">
     <AppHeader/><div className="studio-page-heading"><h1>Boutique</h1><button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={filters} onClick={()=>setFilters(value=>!value)}><Search size={18}/></button></div>
-    <div className="studio-shop-tabs" aria-label="Catégories de la boutique">{(['mascot','piano','theme',...SHOP_CATEGORIES.filter(id=>!['mascot','piano','theme'].includes(id))] as ShopCategory[]).map(id=><button type="button" key={id} aria-pressed={id===category} onClick={()=>{stopPreview();setQuery('');setCategory(id)}}>{SHOP_CATEGORY_LABELS[id]}</button>)}</div>
+    <div className="studio-shop-tabs" aria-label="Catégories de la boutique">{VISIBLE_CATEGORIES.map(id=><button type="button" key={id} aria-pressed={id===category} onClick={()=>{stopPreview();setQuery('');setCategory(id)}}>{SHOP_CATEGORY_LABELS[id]}</button>)}</div>
+    {category === 'mascot' && <><section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={58} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div><Check size={19} aria-hidden="true"/></section><div className="shop-outfit-filters" aria-label="Filtrer les tenues de Minuton">{([{id:'all',label:'Toutes les tenues'},{id:'sports',label:'Sports'},{id:'arts',label:'Arts et musique'}] as const).map(filter=><button type="button" key={filter.id} aria-pressed={outfitFilter===filter.id} onClick={()=>setOutfitFilter(filter.id)}>{filter.label}</button>)}</div></>}
     <div className="studio-shop-library"><button type="button" aria-pressed={!mine} onClick={()=>setMine(false)}>À découvrir</button><button type="button" aria-pressed={mine} onClick={()=>setMine(true)}>Mes achats</button></div>
     {filters&&<label className="mt-3 flex items-center gap-2 rounded-md border border-outline bg-surface-200 px-3 py-2"><Search size={18}/><span className="sr-only">Rechercher dans cette collection</span><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Rechercher…" className="min-w-0 flex-1 bg-transparent text-14 outline-none" type="search"/></label>}
     {shop.canClaimTestCredit && <Button className="mt-4" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
@@ -129,7 +137,7 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
         return <Card key={item.id} padding="none" className="shop-product min-w-0 gap-0 overflow-hidden" data-category={item.category}>
           <button type="button" onClick={() => preview(item)} aria-label={`Prévisualiser ${item.title}`} className="relative block w-full text-left focus-visible:outline-4 focus-visible:outline-accent">
             <ShopPreview item={item} />
-            {bought && <span className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-pill border-2 border-outline bg-good text-on-color"><Check size={15} aria-hidden="true" /><span className="sr-only">Acheté</span></span>}
+            {equipped && item.category === 'mascot' ? <span className="shop-worn-badge"><Check size={12} aria-hidden="true"/>Porté actuellement</span> : bought && <span className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-pill border-2 border-outline bg-good text-on-color"><Check size={15} aria-hidden="true" /><span className="sr-only">Acheté</span></span>}
           </button>
           <div className="shop-product-body">
 
@@ -141,14 +149,14 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
             {item.audio && <button type="button" onClick={() => previewAudio(item)} className="flex min-h-8 items-center gap-1.5 text-12 font-bold text-ink-soft" aria-label={`Écouter l’aperçu de ${item.title}`}>{playing === item.id ? <Square size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}{playing === item.id ? 'Arrêter' : 'Écouter'}</button>}
             <div className="shop-product-actions"><span className="shop-product-price"><Price value={item.price} size={18}/></span>
               {item.id === 'piano-davy-jones' ? <Button size="sm" variant="secondary" className="w-full px-2 text-12" onClick={() => playPiano(item)}><PianoIcon />Clavier libre</Button>
-                : bought ? <Button size="sm" variant="secondary" className="w-full px-2 text-12" disabled={busy || equipped} onClick={() => item.category === 'piano' ? playPiano(item) : void equip(item)}>{equipped ? <Check /> : item.category === 'piano' ? <Play /> : <Check />}{equipped ? 'Activé' : item.category === 'piano' ? 'Jouer' : 'Activer'}</Button>
+                : bought ? <Button size="sm" variant="secondary" className="w-full px-2 text-12" disabled={busy || equipped} onClick={() => item.category === 'piano' ? playPiano(item) : void equip(item)}>{equipped ? <Check /> : item.category === 'piano' ? <Play /> : <Check />}{equipped ? item.category === 'mascot' ? 'Porté' : 'Activé' : item.category === 'piano' ? 'Jouer' : item.category === 'mascot' ? 'Porter' : 'Activer'}</Button>
                 : <Button size="sm" className="w-full px-2 text-17" disabled={loading || busy} onClick={() => preview(item)} aria-label={`Acheter ${item.title} pour ${item.price} minutons`}>Acheter</Button>}
             </div>
           </div>
         </Card>
       })}
     </div>
-    {!items.length && <p className="mt-4 rounded-md border-2 border-dashed border-ink-faint p-4 text-14 text-ink-soft">{query ? 'Aucun résultat. Essaie un autre nom ou efface la recherche.' : 'Aucun achat dans cette catégorie. Explore le catalogue pour trouver ton prochain plaisir.'}</p>}
+    {!items.length && <p className="mt-4 rounded-md border-2 border-dashed border-ink-faint p-4 text-14 text-ink-soft">{query ? 'Aucun résultat. Essaie un autre nom ou efface la recherche.' : 'Aucun article ici pour le moment. Essaie un autre filtre ou explore le catalogue.'}</p>}
     <p className="mt-5 text-center text-12 text-ink-soft">Tes achats ne diminuent pas tes niveaux ni tes badges.</p>
 
     <Dialog open={Boolean(selected)} onOpenChange={(open) => { if (!open && !busy) { setSelected(undefined); stopPreview() } }}>
@@ -156,11 +164,10 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
         {selected && <>
           <DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.description}{selected.edition && ` ${selected.edition}.`}</DialogDescription></DialogHeader>
           <ShopPreview item={selected} detail />
-          {selected.category === 'cover' && <p className="text-13 text-ink-soft">Voici son rendu sur une carte de projet sans photo. Les projets avec une photo conservent leur image.</p>}
           {selected.audio && <Button variant="secondary" size="sm" onClick={() => previewAudio(selected)}>{playing === selected.id ? <Square /> : <Play />}{playing === selected.id ? 'Arrêter l’aperçu' : 'Écouter l’aperçu'}</Button>}
           {error && <p role="alert" className="text-14 text-accent-strong">{error}</p>}
           {selected.id === 'piano-davy-jones' ? <><Button variant="secondary" className="whitespace-normal" onClick={() => openExternal(DAVY_PARTITION)}><ExternalLink />Partition officielle</Button><Button onClick={() => playPiano(selected)}>Ouvrir le clavier libre</Button><p className="text-12 text-ink-soft">La partition s’ouvre chez Musicnotes et peut nécessiter un achat séparé. Sans débit de minutons. Le guidage intégré attend une autorisation.</p></>
-            : owned ? <Button disabled={busy || active} onClick={() => selected.category === 'piano' ? playPiano(selected) : void equip(selected)}>{active ? 'Activé' : selected.category === 'piano' ? 'Jouer ce morceau' : 'Activer cet objet'}</Button>
+            : owned ? <Button disabled={busy || active} onClick={() => selected.category === 'piano' ? playPiano(selected) : void equip(selected)}>{active ? selected.category === 'mascot' ? 'Porté actuellement' : 'Activé' : selected.category === 'piano' ? 'Jouer ce morceau' : selected.category === 'mascot' ? 'Porter cette tenue' : 'Activer cet objet'}</Button>
             : <>
               <div className="flex items-center justify-between gap-2 rounded-sm bg-surface-100 p-3"><span className="text-13 font-bold">Achat permanent</span><span className="text-22"><Price value={selected.price} size={28} /></span></div>
               {shop.balance >= selected.price ? <p className="flex items-center justify-between gap-2 text-13 text-ink-soft">Solde après l’achat <Price value={shop.balance - selected.price} size={20} /></p> : <p className="flex items-center justify-between gap-2 text-13 text-ink-soft">Il te manque <Price value={selected.price - shop.balance} size={20} /></p>}

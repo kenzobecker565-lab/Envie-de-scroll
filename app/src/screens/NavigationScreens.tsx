@@ -1,9 +1,9 @@
-import { Check, ChevronRight, Clock3, Lock, Plus, Settings, ShoppingBag, Sparkles, Zap } from 'lucide-react'
+import { Check, ChevronRight, Clock3, Lock, Settings, ShoppingBag, Sparkles, Zap } from 'lucide-react'
 import { AppHeader } from '../components/AppHeader.tsx'
 import { BadgePin } from '../components/BadgePin.tsx'
 import { currentPath, featuredPath, finishedPathIds } from '../components/Paths.tsx'
 import { useStartLesson } from '../lib/useLesson.ts'
-import { PassionPoster, PassionArtwork } from '../components/PassionArtwork.tsx'
+import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { useState } from 'react'
 import { getPassion, passionLevel, PATHS, type PassionId } from '@scroll-up/shared'
@@ -12,32 +12,9 @@ import { ProfileDecoration } from '../components/ShopArt.tsx'
 import { Button } from '@/components/ui/button'
 import { Screen } from '../components/Screen.tsx'
 import { PassionDetail, statsFor } from '../components/Progression.tsx'
-import { ProjectsSection } from '../components/Projects.tsx'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 
-export function PassionHubScreen() {
- const {state}=useAppState(),{push}=useNavigation(),{user,stats,projects}=state.me
- const passions=(['piano','dessin','ecriture','cinema','musique'] as PassionId[]).filter(id=>user.passions.includes(id)||stats.byPassion.some(row=>row.passion===id)||projects.some(project=>project.passion===id))
- return <Screen tabs className="studio-passions"><AppHeader/><div className="studio-page-heading"><h1>Mes passions</h1><button type="button" className="studio-icon-button" aria-label="Gérer mes passions" onClick={()=>push({name:'passions',mode:'edit'})}><Plus size={22}/></button></div><div className="studio-passions-grid">{passions.map(passion=><PassionPoster key={passion} passion={passion} stats={statsFor(stats.byPassion,passion)} onOpen={()=>push({name:'passionSpace',passion})}/>)}</div>{!passions.length&&<Button className="mt-5" onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions</Button>}</Screen>
-}
-
-export function PassionSpaceScreen({ passion }: { passion: PassionId }) {
-  const { state } = useAppState()
-  const { push, reset } = useNavigation()
-  const [section, setSection] = useState<'overview' | 'collection' | 'projects'>('overview')
-  const sections = [{ id: 'overview', label: 'Aperçu' }, { id: 'collection', label: 'Découvertes' }, { id: 'projects', label: 'Projets' }] as const
-  return <Screen tabs>
-    <Button variant="ghost" size="sm" onClick={() => reset([{ name: 'home' }, { name: 'passionHub' }])}>Toutes mes passions</Button>
-    <PassionArtwork passion={passion} className="da-passion-banner" /><h1 className="mt-3 font-display text-46 font-extrabold tracking-tight text-ink">{getPassion(passion).label}</h1>
-    <div className="mt-5 grid grid-cols-2 gap-2" aria-label="Rubriques de la passion">
-      {sections.map(({ id, label }) => <Button key={id} variant={section === id ? 'default' : 'secondary'} aria-pressed={section === id} onClick={() => setSection(id)}>{label}</Button>)}
-    </div>
-    <Button className="mt-3" variant="secondary" onClick={() => push({ name: 'gallery', passion })}>Mes créations</Button>
-    <div className="mt-6 flex flex-col gap-5">
-      {section === 'projects' ? <ProjectsSection passion={passion} /> : <PassionDetail passion={passion} stats={statsFor(state.me.stats.byPassion, passion)} section={section} canStart={state.me.user.passions.includes(passion)} onOpenPath={(pathId) => push({ name: 'path', pathId })} onChangeSkill={() => push({ name: 'skill', passion, mode: 'edit' })} />}
-    </div>
-  </Screen>
-}
+export { PassionHubScreen, PassionSpaceScreen } from './PassionWorkshop.tsx'
 
 export function LearnScreen() {
  const {state}=useAppState(),{push}=useNavigation(),startLesson=useStartLesson()

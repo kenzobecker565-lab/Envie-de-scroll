@@ -523,16 +523,8 @@ function CardSkeleton() {
 
 function GallerySkeleton() {
   return (
-    <div className="flex flex-col gap-4" aria-label="Chargement de ta galerie">
-      <Skeleton className="h-4 w-32" />
-      <Card padding="none" aria-hidden="true">
-        <Skeleton className="h-56 w-full rounded-none" />
-        <div className="px-4 pb-4">
-          <Skeleton className="h-4 w-4/5" />
-        </div>
-      </Card>
-      <CardSkeleton />
-      <CardSkeleton />
+    <div className="workshop-gallery-grid" role="status" aria-busy="true" aria-label="Chargement de ta galerie">
+      {[0,1,2,3].map(index => <div key={index} className="workshop-creation" aria-hidden="true"><Skeleton className="h-32 w-full"/><Skeleton className="mt-2 h-4 w-4/5"/><Skeleton className="h-3 w-1/2"/></div>)}
     </div>
   )
 }

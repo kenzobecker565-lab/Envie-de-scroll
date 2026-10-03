@@ -9,6 +9,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { api, ApiError } from '../api/client.ts'
+import { FlowStatus } from '../components/FlowStatus.tsx'
+import { Mascot } from '../components/Mascot.tsx'
 import { ConsigneBar } from '../components/Consigne.tsx'
 import { DrawingPad, type DrawingPadHandle } from '../components/DrawingPad.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
@@ -45,12 +47,13 @@ export function ProofScreen() {
   const passion = getPassion(proposal.passion)
 
   const submit = async (submission: Submission) => {
-    if (saving) return
+    if (saving) return false
     setSaving(true)
     setError(undefined)
     try {
       const previousStats = state.me.stats
       const response = await api.complete({ proposalId: proposal.id, ...submission, ...(state.flow.projectId ? { projectId: state.flow.projectId } : {}) })
+      writeDraft(`scroll-up:brouillon:${proposal.id}`, '')
       dispatch({ type: 'stats', stats: response.stats })
       dispatch({ type: 'openProposal', proposal: null })
       dispatch({ type: 'done', done: { response, previousStats, photoPending: response.completion.photoPending, continuation: { quiet: state.flow.quiet, projectId: state.flow.projectId } } })
@@ -58,17 +61,19 @@ export function ProofScreen() {
       // Une étape de parcours se fête dans son parcours (le retour y ramène).
       const lesson = getPathStep(proposal.activityId)
       reset(lesson ? lessonStack(lesson, { name: 'done' }) : [{ name: 'home' }, { name: 'done' }])
+      return true
     } catch (caught) {
       haptics.error()
       setError(caught instanceof ApiError ? caught.message : 'Oups, l’enregistrement a échoué. Réessaie\u00A0?')
       setSaving(false)
+      return false
     }
   }
 
-  const errorNote = error && (
+  const errorNote = saving ? <FlowStatus title={passion.id === 'dessin' ? 'Ton dessin rejoint ta galerie' : 'On enregistre ton activité'} description="Garde cet écran ouvert un instant." pose="wait"/> : error && (
     <Alert variant="warning" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
       <Info aria-hidden="true" />
-      <AlertDescription>{error}</AlertDescription>
+      <AlertDescription><strong>La connexion a été interrompue</strong><p>{error}</p><p>Ta création reste ici. Appuie de nouveau sur Enregistrer pour réessayer.</p></AlertDescription>
     </Alert>
   )
 
@@ -81,7 +86,7 @@ export function ProofScreen() {
 interface ProofProps {
   proposal: ProposalDTO
   saving: boolean
-  onSubmit: (submission: Submission) => void
+  onSubmit: (submission: Submission) => Promise<boolean>
   footer: React.ReactNode
 }
 
@@ -144,8 +149,9 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
 
   if (pad) {
     return (
-      <Screen className="pt-2">
+      <Screen className="pt-2 flow-proof">
         <ConsigneBar proposal={proposal} />
+      <div className="flow-proof-mascot"><Mascot pose={proposal.passion === 'dessin' ? 'draw' : proposal.passion === 'ecriture' ? 'write' : proposal.passion === 'piano' ? 'piano' : 'idea'} size={72}/></div>
         {/* Titre court : la consigne est juste au-dessus, la feuille garde la place. */}
         <h1 className="mb-4 font-display text-26 font-extrabold tracking-tight text-ink">Dessine ici, au doigt</h1>
         <DrawingPad ref={drawing} onInkChange={setHasInk} />
@@ -167,10 +173,11 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
   }
 
   return (
-    <Screen className="pt-2">
+    <Screen className="pt-2 flow-proof">
       <ConsigneBar proposal={proposal} />
+      <div className="flow-proof-mascot"><Mascot pose={proposal.passion === 'dessin' ? 'draw' : proposal.passion === 'ecriture' ? 'write' : proposal.passion === 'piano' ? 'piano' : 'idea'} size={72}/></div>
       <ScreenTitle subtitle={'Une photo, même rapide\u00A0: elle rejoindra ta galerie.'}>
-        Montre-nous ton dessin
+        Garde une trace de ton dessin
       </ScreenTitle>
       <input
         ref={input}
@@ -189,7 +196,7 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
             key="preview"
             className="p-2"
             initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-            animate={{ opacity: 1, scale: 1, rotate: -1 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0 }}
             transition={{ type: 'spring', stiffness: 220, damping: 18 }}
           >
@@ -263,6 +270,7 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
 function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofProps & { clockOffset: number }) {
   // Le brouillon est gardé sur le téléphone : on peut quitter l'app et revenir.
   const draftKey = `scroll-up:brouillon:${proposal.id}`
+  const completed = useRef(false)
   const [text, setText] = useState(() => readDraft(draftKey))
   const goal = guideFor(proposal.activityId)?.goal
   const words = countWords(text)
@@ -270,7 +278,7 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
   const wasReached = useRef(reached)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => writeDraft(draftKey, text), 400)
+    const timer = window.setTimeout(() => { if (!completed.current) writeDraft(draftKey, text) }, 400)
     return () => window.clearTimeout(timer)
   }, [draftKey, text])
 
@@ -279,14 +287,15 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
     wasReached.current = reached
   }, [reached])
 
-  const submit = (submission: Submission) => {
-    writeDraft(draftKey, '')
-    onSubmit(submission)
+  const submit = async (submission: Submission) => {
+    writeDraft(draftKey, text)
+    if (await onSubmit(submission)) { completed.current = true; writeDraft(draftKey, '') }
   }
 
   return (
-    <Screen className="pt-2">
+    <Screen className="pt-2 flow-proof">
       <ConsigneBar proposal={proposal} />
+      <div className="flow-proof-mascot"><Mascot pose={proposal.passion === 'dessin' ? 'draw' : proposal.passion === 'ecriture' ? 'write' : proposal.passion === 'piano' ? 'piano' : 'idea'} size={72}/></div>
       <ScreenTitle subtitle={'Écris ici, ou colle ce que tu as écrit ailleurs\u00A0: ton texte rejoindra ta galerie.'}>
         Ton carnet
       </ScreenTitle>
@@ -311,6 +320,7 @@ function TextProof({ proposal, clockOffset, saving, onSubmit, footer }: ProofPro
           style={NOTEBOOK_PAPER}
         />
       </div>
+      <p className="flow-draft-note">Brouillon gardé sur ce téléphone.</p>
       <WritingGauge goal={goal} text={text} words={words} reached={reached} />
 
       <PrimaryAction text="Enregistrer mon texte" icon={<Save aria-hidden="true" />} onClick={() => submit({ text })} enabled={text.trim().length > 0} loading={saving}>
@@ -396,8 +406,9 @@ function TitleProof({ proposal, idea, saving, onSubmit, footer }: ProofProps & {
   const copy = TITLE_PROOF[proposal.passion] ?? TITLE_PROOF.cinema!
   const Icon = PASSION_ICONS[proposal.passion]
   return (
-    <Screen className="pt-2">
+    <Screen className="pt-2 flow-proof">
       <ConsigneBar proposal={proposal} />
+      <div className="flow-proof-mascot"><Mascot pose={proposal.passion === 'dessin' ? 'draw' : proposal.passion === 'ecriture' ? 'write' : proposal.passion === 'piano' ? 'piano' : 'idea'} size={72}/></div>
       <ScreenTitle subtitle="C’est facultatif, mais ta galerie s’en souviendra.">{copy.question}</ScreenTitle>
       <label className="sr-only" htmlFor="proof-title">
         {copy.label}

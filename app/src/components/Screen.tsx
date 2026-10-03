@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useNavigation } from '../state/AppState.tsx'
 import { hasNativeBackButton } from '../telegram/buttons.ts'
+import { Logo } from './Brand.tsx'
 import { TAB_BAR_SPACE } from './TabBar.tsx'
 
 /**
@@ -13,11 +14,12 @@ import { TAB_BAR_SPACE } from './TabBar.tsx'
  * n'est pas disponible (navigateur de développement).
  */
 export function Screen({ children, className, footer, tabs = false }: { children: ReactNode; className?: string; footer?: ReactNode; tabs?: boolean }) {
-  const { canGoBack, back } = useNavigation()
+  const { canGoBack, back, route } = useNavigation()
+  const focused = ['signal','time','passion','activity','proof','done'].includes(route.name)
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col">
       {/* Les onglets s'atteignent par la barre du bas : pas de bouton retour dans l'app pour eux. */}
-      {!hasNativeBackButton && canGoBack && !tabs && (
+      {focused ? <header className="flow-header">{canGoBack && <Button variant="ghost" size="icon" onClick={back} aria-label="Retour"><ChevronLeft aria-hidden="true"/></Button>}<Logo height={28}/></header> : !hasNativeBackButton && canGoBack && !tabs && (
         <div className="px-4 pt-4">
           <Button variant="secondary" size="icon" onClick={back} aria-label="Retour">
             <ChevronLeft className="size-6" aria-hidden="true" />

@@ -6,9 +6,10 @@ import { RotateCcw, Send } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
+import { FlowStatus } from './components/FlowStatus.tsx'
 import { Logo } from './components/Brand.tsx'
 import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
-import { EmptyState } from './components/Illustration.tsx'
+import { MinutonFigure } from './components/Mascot.tsx'
 import { ShopScreen, BonusPianoScreen } from './screens/ShopScreen.tsx'
 import { syncShopAmbiance } from './lib/ambient.ts'
 import { suppressAmbient } from './lib/ambient.ts'
@@ -42,6 +43,7 @@ export function App() {
   const [tone, setTone] = useState<DecorTone>('mixed')
 
   const load = useCallback(async () => {
+    document.documentElement.dataset.screen = 'boot'
     setBoot({ status: 'loading' })
     try {
       const me = await api.me()
@@ -50,6 +52,7 @@ export function App() {
       setAppTheme('pop')
       setBoot({ status: 'ready', me })
     } catch (error) {
+      document.documentElement.dataset.screen = 'boot'
       setBoot({ status: 'error', error: error as Error })
     }
   }, [])
@@ -193,17 +196,10 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
 
 function BootSkeleton() {
   return (
-    <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col px-4 pt-4 pb-8" aria-busy="true" aria-label="Chargement">
-      <div className="flex items-center justify-between">
-        <Logo height={30} />
-        <Skeleton className="h-10 w-24 rounded-pill" />
-      </div>
-      <Skeleton className="mt-8 h-8 w-48" />
-      <Skeleton className="mt-2 h-4 w-64" />
-      <div className="flex flex-1 items-center py-8">
-        <Skeleton className="h-24 w-full rounded-pill" />
-      </div>
-      <Skeleton className="h-20 w-full rounded-md" />
+    <div className="flow-boot" aria-busy="true" aria-label="Chargement">
+      <Logo height={34}/>
+      <FlowStatus boot title="Ton atelier s’ouvre" description="On prépare tes passions." pose="wait"/>
+      <div className="flow-boot-skeleton"><Skeleton className="h-14 w-full"/><Skeleton className="h-24 w-full"/><div><Skeleton className="h-24 w-full"/><Skeleton className="h-24 w-full"/></div></div>
     </div>
   )
 }
@@ -212,33 +208,11 @@ function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
   const outsideTelegram = (error instanceof ApiError && error.code === 'unauthorized') || !canAuthenticate()
   const botUsername = import.meta.env.VITE_BOT_USERNAME as string | undefined
   return (
-    <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col items-center justify-center gap-8 px-6">
+    <div className="flow-boot flow-boot-error">
       <Logo height={40} />
-      <EmptyState
-        illustration={outsideTelegram ? 'open-telegram' : 'offline'}
-        illustrationClassName={outsideTelegram ? 'w-56' : 'w-32'}
-        title={outsideTelegram ? 'Ouvre l’app depuis Telegram' : 'Petit souci de connexion'}
-        description={
-          outsideTelegram
-            ? 'Scroll-up vit dans Telegram\u00A0: lance-la depuis le bot, avec le bouton « Ouvrir ».'
-            : 'On n’arrive pas à joindre le serveur. Vérifie ta connexion, puis réessaie.'
-        }
-        action={
-          outsideTelegram ? (
-            botUsername && (
-              <motion.a href={`https://t.me/${botUsername}`} className={cn(buttonVariants())} whileTap={{ scale: 0.96 }}>
-                <Send aria-hidden="true" />
-                Ouvrir le bot
-              </motion.a>
-            )
-          ) : (
-            <Button onClick={onRetry}>
-              <RotateCcw aria-hidden="true" />
-              Réessayer
-            </Button>
-          )
-        }
-      />
+      <MinutonFigure pose="wait" size={130}/>
+      <div className="flow-boot-error-copy"><h1>{outsideTelegram ? 'Ouvre l’app depuis Telegram' : 'Petit souci de connexion'}</h1><p>{outsideTelegram ? 'Scroll-up vit dans Telegram : lance-la depuis le bot, avec le bouton « Ouvrir ».' : 'On n’arrive pas à joindre le serveur. Vérifie ta connexion, puis réessaie.'}</p></div>
+      {outsideTelegram ? botUsername && <motion.a href={`https://t.me/${botUsername}`} className={cn(buttonVariants())} whileTap={{ scale: 0.96 }}><Send aria-hidden="true"/>Ouvrir le bot</motion.a> : <Button onClick={onRetry}><RotateCcw aria-hidden="true"/>Réessayer</Button>}
     </div>
   )
 }

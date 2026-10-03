@@ -63,7 +63,7 @@ export function ActivityHelp({
   }
 
   return (
-    <div className="mt-5 flex flex-col gap-3">
+    <div className="flow-help mt-5 flex flex-col gap-3">
       {proposal.extra && <ExtraLinks proposal={proposal} />}
 
       {(hasPanels || onPad || quiet) && (
@@ -71,17 +71,17 @@ export function ActivityHelp({
           <h2 id="help-title" className="text-13 font-extrabold text-ink-soft">
             Un coup de pouce&nbsp;?
           </h2>
-          <div className="flex flex-wrap gap-2">
+          <div className="flow-help-choices flex flex-col gap-0">
             {guide?.ideas && (
               <HelpToggle open={open === 'ideas'} onClick={() => toggle('ideas')} controls="help-ideas">
                 <Lightbulb aria-hidden="true" />
-                Une idée
+                Quelques idées
               </HelpToggle>
             )}
             {guide && (
               <HelpToggle open={open === 'tips'} onClick={() => toggle('tips')} controls="help-tips">
                 <LifeBuoy aria-hidden="true" />
-                Si tu bloques
+                Une piste pour commencer
               </HelpToggle>
             )}
             {canChallenge && (
@@ -93,7 +93,7 @@ export function ActivityHelp({
             {onPad && (
               <HelpAction onClick={onPad}>
                 <PenLine aria-hidden="true" />
-                Sans papier
+                Pas de papier ?
               </HelpAction>
             )}
             {quiet && (

@@ -129,7 +129,7 @@ export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: 
   }
 
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
+    <div className={cn('drawing-pad flex flex-col gap-3', className)}>
       <motion.div
         className="overflow-hidden rounded-md border-[2.5px] border-outline shadow-card"
         initial={{ opacity: 0, scale: 0.95, rotate: -1.5 }}

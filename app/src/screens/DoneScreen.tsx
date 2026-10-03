@@ -104,7 +104,7 @@ export function DoneScreen() {
   if (step && stepProgress) return <StepDone done={done} step={step} progress={stepProgress} paths={paths} level={level} cheer={cheer} />
 
   return (
-    <Screen className="items-center text-center">
+    <Screen className="items-center text-center flow-done">
       <div className="relative mt-8 flex h-32 w-32 items-center justify-center" style={{ perspective: 600 }}>
         {/* Rayons qui tournent, puis le minuton qui arrive en tournoyant. */}
         <motion.div className="absolute -inset-20" initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
@@ -113,14 +113,14 @@ export function DoneScreen() {
         <Confetti count={34} />
         <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute h-32 w-32 rounded-pill border-[3px] border-dashed border-outline opacity-40" />
         <motion.span
-          className="relative flex h-28 w-28 items-center justify-center rounded-pill border-[3px] border-outline bg-surface-200 shadow-pop"
+          className="flow-celebration relative flex h-28 w-28 items-center justify-center"
           initial={{ scale: 0.3, opacity: 0, rotateY: 0 }}
-          animate={{ scale: 1, opacity: 1, rotateY: 720 }}
+          animate={{ scale: 1, opacity: 1, rotateY: 0 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Minuton fait la fête. */}
           <span className="motion-loop anim-float" style={{ '--float-duration': '3s' } as React.CSSProperties}>
-            <Mascot mood="cheer" size={74} className="mt-1" />
+            <Mascot mood="cheer" size={124} className="mt-1" />
           </span>
         </motion.span>
         <Sparkle size={24} color="var(--accent)" className="motion-loop anim-twinkle absolute -top-3 -right-2" />
@@ -133,8 +133,9 @@ export function DoneScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.4 }}
       >
-        Activité enregistrée.
+        Bien joué !
       </motion.h1>
+      <p className="flow-completion-caption">{passion==='dessin'?'Ton dessin est enregistré.':passion==='ecriture'?'Ton texte est enregistré.':'Ton activité est enregistrée.'}</p>
       <motion.p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-16 text-ink-soft" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.4 }}>
         <Badge variant="good" tilt="left" className="text-15">
           +{earned} minutons
@@ -270,7 +271,7 @@ function StepDone({
   const openPath = () => reset([...tabStack('learn'), { name: 'learnPassion', passion: step.passion }, { name: 'path', pathId: (upNext ?? step).pathId }])
 
   return (
-    <Screen className="items-center text-center">
+    <Screen className="items-center text-center flow-done">
       <div className="relative mt-6 flex h-28 w-28 items-center justify-center">
         <motion.div className="absolute -inset-16" initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
           <Rays className="h-full w-full" />
@@ -280,12 +281,12 @@ function StepDone({
           <BadgePin pathId={path.id} earned size={104} animate />
         ) : (
           <motion.span
-            className="relative flex h-24 w-24 items-center justify-center rounded-pill border-[3px] border-outline bg-surface-200 shadow-pop"
+            className="flow-celebration relative flex h-24 w-24 items-center justify-center"
             initial={{ scale: 0.3, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 320, damping: 16 }}
           >
-            <Mascot mood="cheer" size={64} className="mt-1" />
+            <Mascot mood="cheer" size={116} className="mt-1" />
           </motion.span>
         )}
       </div>

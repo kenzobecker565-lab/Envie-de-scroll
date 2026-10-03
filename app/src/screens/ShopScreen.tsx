@@ -19,7 +19,7 @@ import { openExternal } from '../telegram/webApp.ts'
 
 const VISIBLE_CATEGORIES: ShopCategory[] = ['mascot', 'piano', ...SHOP_CATEGORIES.filter(id => !['mascot', 'piano', 'theme', 'cover'].includes(id))]
 const ART_MASCOTS = new Set(['mascot-beret', 'mascot-pianiste', 'mascot-casque'])
-type OutfitFilter = 'all' | 'sports' | 'arts'
+type OutfitFilter = 'all' | 'sports' | 'arts' | 'adventure' | 'female'
 
 const DAVY_PARTITION = 'https://www.musicnotes.com/sheetmusic/pirates-of-the-caribbean-dead-mans-chest/davy-jones/MN0095169'
 
@@ -113,15 +113,15 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
     player.play().catch(() => { stopPreview(); setError('L’aperçu audio n’a pas pu démarrer.') })
   }
   const preview = (item: ShopItem) => { stopPreview(); setError(undefined); setSelected(item) }
-  const featured = ['mascot-judo','mascot-basket','mascot-beret','mascot-pianiste']
-  const items = [...SHOP_ITEMS].sort((a,b) => (featured.includes(a.id)?featured.indexOf(a.id):99)-(featured.includes(b.id)?featured.indexOf(b.id):99)).filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)) && (category !== 'mascot' || outfitFilter === 'all' || (outfitFilter === 'arts' ? ART_MASCOTS.has(item.id) : !ART_MASCOTS.has(item.id))) && `${item.title} ${item.composer ?? ''} ${item.difficulty ?? ''}`.toLocaleLowerCase('fr').includes(query.toLocaleLowerCase('fr')))
+  const featured = ['mascot-basketteuse','mascot-judoka-f','mascot-athena','mascot-poney','mascot-judo','mascot-basket','mascot-beret','mascot-pianiste']
+  const items = [...SHOP_ITEMS].sort((a,b) => (featured.includes(a.id)?featured.indexOf(a.id):99)-(featured.includes(b.id)?featured.indexOf(b.id):99)).filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)) && (category !== 'mascot' || outfitFilter === 'all' || (outfitFilter === 'female' ? item.mascotGender === 'female' : (item.mascotGroup ?? (ART_MASCOTS.has(item.id) ? 'arts' : 'sports')) === outfitFilter)) && `${item.title} ${item.composer ?? ''} ${item.difficulty ?? ''}`.toLocaleLowerCase('fr').includes(query.toLocaleLowerCase('fr')))
   const owned = selected ? shop.owned.includes(selected.id) : false
   const active = selected ? shop.equipped[selected.category] === selected.id : false
 
   return <Screen tabs className="studio-shop">
     <AppHeader/><div className="studio-page-heading"><h1>Boutique</h1><button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={filters} onClick={()=>setFilters(value=>!value)}><Search size={18}/></button></div>
     <div className="studio-shop-tabs" aria-label="Catégories de la boutique">{VISIBLE_CATEGORIES.map(id=><button type="button" key={id} aria-pressed={id===category} onClick={()=>{stopPreview();setQuery('');setCategory(id)}}>{SHOP_CATEGORY_LABELS[id]}</button>)}</div>
-    {category === 'mascot' && <><section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={58} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div><Check size={19} aria-hidden="true"/></section><div className="shop-outfit-filters" aria-label="Filtrer les tenues de Minuton">{([{id:'all',label:'Toutes les tenues'},{id:'sports',label:'Sports'},{id:'arts',label:'Arts et musique'}] as const).map(filter=><button type="button" key={filter.id} aria-pressed={outfitFilter===filter.id} onClick={()=>setOutfitFilter(filter.id)}>{filter.label}</button>)}</div></>}
+    {category === 'mascot' && <><section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={58} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div><Check size={19} aria-hidden="true"/></section><div className="shop-outfit-filters" aria-label="Filtrer les tenues de Minuton">{([{id:'all',label:'Toutes les tenues'},{id:'female',label:'Féminins'},{id:'sports',label:'Sports'},{id:'arts',label:'Arts et musique'},{id:'adventure',label:'Univers'}] as const).map(filter=><button type="button" key={filter.id} aria-pressed={outfitFilter===filter.id} onClick={()=>setOutfitFilter(filter.id)}>{filter.label}</button>)}</div></>}
     <div className="studio-shop-library"><button type="button" aria-pressed={!mine} onClick={()=>setMine(false)}>À découvrir</button><button type="button" aria-pressed={mine} onClick={()=>setMine(true)}>Mes achats</button></div>
     {filters&&<label className="mt-3 flex items-center gap-2 rounded-md border border-outline bg-surface-200 px-3 py-2"><Search size={18}/><span className="sr-only">Rechercher dans cette collection</span><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Rechercher…" className="min-w-0 flex-1 bg-transparent text-14 outline-none" type="search"/></label>}
     {shop.canClaimTestCredit && <Button className="mt-4" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}

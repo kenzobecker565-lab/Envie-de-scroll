@@ -60,6 +60,7 @@ export function TabBar() {
             return (
               <motion.button
                 key={id}
+                data-tour-target={id === 'learn' ? 'learn' : id === 'shop' ? 'shop' : undefined}
                 type="button"
                 onClick={() => open(id)}
                 aria-current={active ? 'page' : undefined}

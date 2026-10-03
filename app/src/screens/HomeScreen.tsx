@@ -35,8 +35,8 @@ export function HomeScreen() {
    <h1 id="home-greeting"><span>{hello}</span><span className="home-name">{user.firstName||'à toi'}.</span></h1>
    <button className="studio-home-minuton" type="button" aria-label="Personnaliser Minuton" onClick={()=>push({name:'shop',category:'mascot'})}><Mascot size={200}/></button>
   </section>
-  <button type="button" className="studio-scroll-cta" onClick={start}><span>J’ai envie de swipe</span><ChevronRight size={26}/></button>
-  <section className="studio-daily-card" aria-labelledby="home-daily-word">
+  <button type="button" className="studio-scroll-cta" data-tour-target="swipe" onClick={start}><span>J’ai envie de swipe</span><ChevronRight size={26}/></button>
+  <section className="studio-daily-card" data-tour-target="word" aria-labelledby="home-daily-word">
    <button type="button" className="studio-daily-open" onClick={()=>push({name:'challenge'})} aria-label={`Le mot du jour : ${word}. Voir le défi et les mots du mois`}>
     <span className="studio-daily-heading"><Sparkles size={18}/><h2 id="home-daily-word">Le mot du jour</h2>{doneToday&&<span className="studio-daily-done">Fait ✓</span>}</span>
     <strong className="studio-daily-word">{word}</strong><span className="studio-daily-subtitle">Un mot, deux façons de créer</span>
@@ -45,7 +45,7 @@ export function HomeScreen() {
    <div className="studio-daily-actions"><button type="button" onClick={()=>user.passions.includes('dessin')?startChallenge('dessin',today):push({name:'challenge'})}><Brush size={19}/>Dessiner</button><button type="button" onClick={()=>user.passions.includes('ecriture')?startChallenge('ecriture',today):push({name:'challenge'})}><Feather size={19}/>Écrire</button></div>
   </section>
   <section className="studio-home-resume"><h2>{openProposal||featured?.started?'Reprendre mon activité':'À découvrir'}</h2><button type="button" className="studio-resume-row" onClick={openProposal?resume:()=>learning?push({name:'path',pathId:learning.path.id}):push({name:'learn'})}>{resumePassion&&<PassionArtwork passion={resumePassion}/>}<span className="studio-resume-copy"><strong>{openProposal?.text??learning?.path.title??'Trouve ta prochaine passion'}</strong><span>{resumePassion?getPassion(resumePassion).label:'Apprendre'}{learning&&!openProposal?` · Étape ${learning.next?.index??learning.path.steps.length} sur ${learning.path.steps.length}`:openProposal?` · ${openProposal.duration} min`:''}</span></span><span className="studio-resume-arrow"><ChevronRight size={22}/></span></button></section>
-  <section className="studio-home-passions" aria-labelledby="home-passions">
+  <section className="studio-home-passions" data-tour-target="passions" aria-labelledby="home-passions">
    <div className="studio-section-heading"><h2 id="home-passions">Tes passions</h2><button type="button" onClick={()=>push({name:'passionHub'})}>Tout voir <ChevronRight size={14}/></button></div>
    <div className="studio-home-cards">{passions.slice(0,2).map(passion=><PassionPoster key={passion} passion={passion} compact stats={statsFor(stats.byPassion,passion)} onOpen={()=>push({name:'passionSpace',passion})}/>)}{passions.length===0&&<button className="studio-empty-passions" type="button" onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions <ChevronRight/></button>}</div>
   </section>

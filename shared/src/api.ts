@@ -18,6 +18,8 @@ export interface UserDTO {
   passions: PassionId[]
   /** Vrai une fois les passions choisies. */
   onboarded: boolean
+  /** Tutoriel terminé ou passé, mémorisé pour tout le compte. */
+  tutorialCompleted: boolean
   /** Thème choisi dans l'app. */
   theme: AppTheme
   /** Relances du bot (au plus une par jour). */
@@ -132,6 +134,7 @@ export interface UpdateSkillRequest {
 }
 
 export interface UpdateSettingsRequest {
+  tutorialCompleted?: true
   remindersEnabled?: boolean
   scrollMoment?: ScrollMoment
 }

@@ -64,6 +64,7 @@ export interface DoneResult {
 }
 
 interface State {
+  tutorialOpen: boolean
   me: MeResponse
   stack: Route[]
   /** 1 : on avance (l'écran arrive de la droite), -1 : on revient. */
@@ -73,6 +74,8 @@ interface State {
 }
 
 type Action =
+  | { type: 'tutorial'; open: boolean }
+  | { type: 'tutorialCompleted' }
   | { type: 'push'; route: Route }
   | { type: 'back' }
   | { type: 'replace'; route: Route }
@@ -88,6 +91,8 @@ type Action =
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
+    case 'tutorial': return { ...state, tutorialOpen: action.open }
+    case 'tutorialCompleted': return { ...state, tutorialOpen: false, me: { ...state.me, user: { ...state.me.user, tutorialCompleted: true } } }
     case 'push':
       return { ...state, stack: [...state.stack, action.route], direction: 1 }
     case 'back':
@@ -129,6 +134,7 @@ export function initialStack(me: MeResponse): Route[] {
 export function AppStateProvider({ me, children }: { me: MeResponse; children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, () => ({
     me,
+    tutorialOpen: false,
     stack: initialStack(me),
     direction: 1 as const,
     flow: { clockOffset: Date.parse(me.serverTime) - Date.now() },

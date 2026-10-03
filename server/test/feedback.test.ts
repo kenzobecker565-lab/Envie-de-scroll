@@ -103,6 +103,20 @@ describe('suivi d’usage', () => {
 })
 
 describe('réglages', () => {
+  it('mémorise le tutoriel dans le compte sans changer les autres réglages', async () => {
+    const first = await request(app).get('/api/me').set(as()).expect(200)
+    expect(first.body.user.tutorialCompleted).toBe(false)
+    await request(app).put('/api/me/settings').set(as()).send({ remindersEnabled: false, scrollMoment: 'midi' }).expect(200)
+    const completed = await request(app).put('/api/me/settings').set(as()).send({ tutorialCompleted: true }).expect(200)
+    expect(completed.body.user).toMatchObject({ tutorialCompleted: true, remindersEnabled: false, scrollMoment: 'midi' })
+    const reopened = await request(app).get('/api/me').set(as()).expect(200)
+    expect(reopened.body.user.tutorialCompleted).toBe(true)
+    const other = await request(app).get('/api/me').set(as(43)).expect(200)
+    expect(other.body.user.tutorialCompleted).toBe(false)
+    await request(app).put('/api/me/settings').set(as()).send({ tutorialCompleted: false }).expect(400)
+    await request(app).put('/api/me/settings').set(as()).send({ tutorialCompleted: 'oui' }).expect(400)
+  })
+
   it('coupe et réactive les relances', async () => {
     const off = await request(app).put('/api/me/settings').set(as()).send({ remindersEnabled: false }).expect(200)
     expect(off.body.user.remindersEnabled).toBe(false)

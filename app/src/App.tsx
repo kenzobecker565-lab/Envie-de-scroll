@@ -165,6 +165,8 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 
+  useEffect(() => { document.documentElement.dataset.screen = route.name }, [route.name])
+
   const key = route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>

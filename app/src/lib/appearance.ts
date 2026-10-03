@@ -11,6 +11,7 @@ let snapshot = { mode, scene }
 function update() {
   const next = mode === 'dark' || (mode === 'auto' && getAppTheme() === 'nuit') ? 'night' : mode === 'light' ? 'day' : dayPeriod(new Date().getHours())
   document.documentElement.dataset.scene = next
+  document.documentElement.dataset.appearance = mode
   if (next !== scene || snapshot.mode !== mode) { scene = next; snapshot = { mode, scene }; listeners.forEach(fn => fn()) }
 }
 export function setAppearance(next: AppearanceMode) {

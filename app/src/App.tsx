@@ -17,6 +17,7 @@ import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
+import { SettingsScreen } from './screens/SettingsScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { PathScreen } from './screens/PathScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
@@ -42,9 +43,9 @@ export function App() {
     setBoot({ status: 'loading' })
     try {
       const me = await api.me()
-      // Le thème du profil l'emporte sur celui gardé sur ce téléphone.
+      // Legacy appearance choices are replaced by the approved automatic art direction.
       setShopTheme(me.shop?.equipped.theme)
-      setAppTheme(me.user.theme)
+      setAppTheme('pop')
       setBoot({ status: 'ready', me })
     } catch (error) {
       setBoot({ status: 'error', error: error as Error })
@@ -126,6 +127,7 @@ function screenFor(route: Route) {
     case 'passionHub': return <PassionHubScreen />
     case 'passionSpace': return <PassionSpaceScreen passion={route.passion} />
     case 'profile': return <ProfileScreen />
+    case 'settings': return <SettingsScreen />
     case 'signal':
       return <SignalScreen />
     case 'time':

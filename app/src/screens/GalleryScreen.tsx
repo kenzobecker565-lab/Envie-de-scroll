@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { getPassion, type PassionId, type CompletionDTO } from '@scroll-up/shared'
+import { Fragment, type ReactNode, useCallback, useEffect, useRef, useState } from 'react'
+import { getPassion, isChallengeId, type PassionId, type CompletionDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button, PRESSED } from '@/components/ui/button'
@@ -28,12 +28,17 @@ import { haptics } from '../telegram/webApp.ts'
  * l'ouvre en grand. Les minutons, parcours et badges vivent dans l'onglet
  * « Progresser ». Jamais de calendrier de jours cochés ou manqués.
  */
-export function GalleryScreen({ passion }: { passion?: PassionId }) {
+function GalleryFrame({ children, embedded, passion }: { children: ReactNode; embedded: boolean; passion?: PassionId }) {
+  return embedded ? <div className="workshop-gallery" data-passion={passion}>{children}</div> : <Screen tabs>{children}</Screen>
+}
+
+export function GalleryScreen({ passion, embedded = false }: { passion?: PassionId; embedded?: boolean }) {
   const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
   const { stats } = state.me
   const row = passion ? statsFor(stats.byPassion, passion) : null
 
+  const [filter, setFilter] = useState<'all' | 'word' | 'projects'>('all')
   const [items, setItems] = useState<CompletionDTO[]>([])
   const [cursor, setCursor] = useState<string | null>(null)
   const [status, setStatus] = useState<'loading' | 'idle' | 'more' | 'error'>('loading')
@@ -43,6 +48,7 @@ export function GalleryScreen({ passion }: { passion?: PassionId }) {
   const sentinel = useRef<HTMLDivElement>(null)
 
   const load = useCallback(async (from?: string) => {
+    setError(undefined)
     setStatus(from ? 'more' : 'loading')
     try {
       const page = await api.completions(from, passion)
@@ -85,18 +91,20 @@ export function GalleryScreen({ passion }: { passion?: PassionId }) {
   const view = status === 'loading' ? 'loading' : status === 'error' && items.length === 0 ? 'error' : items.length === 0 ? 'empty' : 'list'
 
   return (
-    <Screen tabs>
-      <header className="flex flex-col gap-2">
+    <GalleryFrame embedded={embedded} passion={passion}>
+      {!embedded && <header className="flex flex-col gap-2">
         <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">{passion ? `Créations · ${getPassion(passion).label}` : 'Historique'}</h1>
         <p className="text-15 font-semibold text-ink-soft">
           {plural(row?.activities ?? stats.totalActivities, 'création')} · {formatNumber(row?.minutes ?? stats.totalCoins)} minutons
           {!passion && state.me.projects.length > 0 && <> · {plural(state.me.projects.length, 'projet')}</>}
         </p>
-      </header>
+      </header>}
 
       {!passion && <ProjectsSection />}
 
-      {(view === 'list' || view === 'loading') && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
+      {embedded && <div className="workshop-filters" aria-label="Filtrer les créations">{([{id:'all',label:'Tout'},{id:'word',label:'Mot du jour'},{id:'projects',label:'Projets'}] as const).filter(entry=>entry.id!=='word'||passion==='dessin'||passion==='ecriture').map(entry=><button type="button" key={entry.id} aria-pressed={filter===entry.id} onClick={()=>setFilter(entry.id)}>{entry.label}</button>)}</div>}
+      {embedded && <Button className="mt-3" onClick={startFlow}>{passion==='dessin'?'Créer un nouveau dessin':passion==='ecriture'?'Commencer un texte':'Nouvelle activité'}<ArrowRight/></Button>}
+      {(!embedded && (view === 'list' || view === 'loading')) && <h2 className="mt-8 font-display text-26 font-extrabold tracking-tight text-ink">Tes créations</h2>}
       <div className={cn('flex flex-1 flex-col', view === 'list' || view === 'loading' ? 'mt-3' : 'mt-8')}>
         <AnimatePresence mode="wait" initial={false}>
           {view === 'loading' && (
@@ -127,20 +135,20 @@ export function GalleryScreen({ passion }: { passion?: PassionId }) {
               description={'Chaque envie de scroller transformée viendra s’afficher ici : tes dessins, tes textes, tes découvertes.'}
               action={
                 <Button onClick={startFlow} haptic={false}>
-                  J’ai envie de scroller
+                  J’ai envie de swipe
                   <ArrowRight aria-hidden="true" />
                 </Button>
               }
             />
           )}
           {view === 'list' && (
-            <motion.div key="list" className="flex flex-col gap-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              {items.map((item, index) => {
+            <motion.div key="list" className={embedded ? 'workshop-gallery-grid' : 'flex flex-col gap-4'} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              {items.filter(item=>filter==='all'||(filter==='projects'?Boolean(item.projectId):isChallengeId(item.activityId))).map((item, index) => {
                 const previous = items[index - 1]
                 const newMonth = !previous || monthKey(previous.createdAt) !== monthKey(item.createdAt)
                 return (
                   <Fragment key={item.id}>
-                    {newMonth && (
+                    {!embedded && newMonth && (
                       <h2 className={cn('flex', index > 0 && 'pt-4')}>
                         <Badge variant="secondary" tilt="left" className="capitalize">
                           {formatMonth(item.createdAt)}
@@ -151,18 +159,19 @@ export function GalleryScreen({ passion }: { passion?: PassionId }) {
                       type="button"
                       onClick={() => open(item)}
                       aria-haspopup="dialog"
-                      className={cn(cardVariants({ padding: 'none', tone: CARD_TONES[item.passion] }), 'block w-full text-left transition-shadow duration-150 active:shadow-press')}
+                      className={embedded ? 'workshop-creation' : cn(cardVariants({ padding: 'none', tone: CARD_TONES[item.passion] }), 'block w-full text-left transition-shadow duration-150 active:shadow-press')}
                       initial={{ opacity: 0, y: 28, rotate: 0 }}
-                      animate={{ opacity: 1, y: 0, rotate: index % 2 ? 1.2 : -1.2 }}
+                      animate={{ opacity: 1, y: 0, rotate: embedded ? 0 : index % 2 ? 1.2 : -1.2 }}
                       whileTap={PRESSED}
                       transition={{ delay: Math.min(index % 12, 6) * 0.06, type: 'spring', stiffness: 180, damping: 20 }}
                     >
-                      <GalleryCard item={item} />
+                      {embedded ? <><span className="workshop-creation-preview">{item.photoUrl?<img src={item.photoUrl} alt={item.activityText} loading="lazy"/>:<span>{item.text ?? item.exploredTitle ?? (item.photoPending?'Photo attendue':item.activityText)}</span>}</span><strong>{item.exploredTitle ?? item.activityText}</strong><small>{formatDay(item.createdAt)}</small></> : <GalleryCard item={item} />}
                     </motion.button>
                   </Fragment>
                 )
               })}
-              <div ref={sentinel} />
+              {embedded && items.length>0 && !items.some(item=>filter==='all'||(filter==='projects'?Boolean(item.projectId):isChallengeId(item.activityId))) && <p className="workshop-filter-empty">Aucune création dans cette rubrique pour le moment.</p>}
+              <div ref={sentinel} className={embedded?'workshop-sentinel':undefined}/>
               {status === 'more' && <CardSkeleton />}
               {status === 'error' && (
                 <Button variant="ghost" size="md" className="w-full" onClick={() => void load(cursor ?? undefined)}>
@@ -188,7 +197,7 @@ export function GalleryScreen({ passion }: { passion?: PassionId }) {
           )}
         </DialogContent>
       </Dialog>
-    </Screen>
+    </GalleryFrame>
   )
 }
 

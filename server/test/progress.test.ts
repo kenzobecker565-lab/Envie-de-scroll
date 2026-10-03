@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import request from 'supertest'
 import {
   pathsFor,
+  collection,
   type CompleteResponse,
   type MeResponse,
   type PassionDetailResponse,
@@ -196,5 +197,27 @@ describe('statistiques', () => {
     const mine = await personalStats(prisma, user)
     expect(mine).toContain('Parcours « Premières pages » : étape 1/6')
     expect(mine).toContain('Tes projets : 1 en cours, 0 terminé')
+  })
+})
+
+
+describe('activités choisies dans un atelier', () => {
+  it('lance exactement la carte choisie, sans humeur, et enregistre la création', async () => {
+    await onboard(['ecriture'])
+    const activity = collection('ecriture').find(group => group.duration === 5)!.activities[0]!
+    const { proposal } = await propose({ passion: 'ecriture', duration: 5, step: activity.id })
+    expect(proposal).toMatchObject({ activityId: activity.id, text: activity.text, mood: null })
+    const done = await write(proposal.id, 'Mon premier texte dans mon atelier.')
+    expect(done.completion.activityId).toBe(activity.id)
+    expect(done.stats.byPassion[0]?.tried).toContain(activity.id)
+  })
+  it('refuse les cartes d’une autre passion, une mauvaise durée et les identifiants inconnus', async () => {
+    await onboard(['ecriture', 'dessin'])
+    const activity = collection('ecriture').find(group => group.duration === 5)!.activities[0]!
+    await propose({ passion: 'dessin', duration: 5, step: activity.id }, 400)
+    await propose({ passion: 'ecriture', duration: 15, step: activity.id }, 400)
+    await propose({ passion: 'ecriture', duration: 5, step: 'inconnu' }, 400)
+    const { proposal } = await propose({ passion: 'ecriture', duration: 5, step: activity.id })
+    await propose({ passion: 'ecriture', duration: 5, step: activity.id, replacing: proposal.id }, 400)
   })
 })

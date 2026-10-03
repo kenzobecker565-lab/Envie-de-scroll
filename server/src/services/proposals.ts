@@ -8,6 +8,7 @@ import {
   getPassion,
   getPathStep,
   isActivityRating,
+  isBaseActivity,
   isChallengeId,
   isMoodId,
   isPathStepId,
@@ -97,6 +98,11 @@ export async function createProposal(
     if (request.replacing) throw badRequest('Le mot du jour ne se remplace pas.')
     if (!canPlayChallenge(challenge.id, localDate(now, user.timezone))) throw new ApiError(409, 'locked', 'Ce mot n’est pas encore là\u00A0: reviens le jour venu.')
     activity = challenge
+  } else if (request.step !== undefined && isBaseActivity(request.step)) {
+    const selected = getActivity(request.step)!
+    if (selected.passion !== passion || selected.duration !== duration) throw badRequest('Activité de l’atelier invalide.')
+    if (request.replacing) throw badRequest('Une activité choisie dans l’atelier ne se remplace pas.')
+    activity = selected
   } else if (request.step !== undefined) {
     const step = getPathStep(request.step)
     if (!step || step.passion !== passion || step.duration !== duration) throw badRequest('Étape de parcours invalide.')

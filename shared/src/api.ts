@@ -168,6 +168,7 @@ export interface CreateProposalRequest {
   /** « Une autre idée » : la proposition affichée, à remplacer. */
   replacing?: string
   /** Une étape de parcours à jouer (sa passion et sa durée doivent correspondre). */
+  /** An explicitly selected catalog activity, a lesson, or a daily word. */
   step?: string
   /** « Pas de son autour de toi » : seulement des activités qui se font sans écouter. */
   quiet?: boolean

@@ -8,7 +8,6 @@ import { todayKey } from '../components/Challenge.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { PassionArtwork, PassionPoster } from '../components/PassionArtwork.tsx'
 import { currentPath } from '../components/Paths.tsx'
-import { ProjectsSection } from '../components/Projects.tsx'
 import { PassionDetail, statsFor } from '../components/Progression.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatDay, plural } from '../lib/format.ts'
@@ -21,9 +20,9 @@ import { GalleryScreen } from './GalleryScreen.tsx'
 function useWorkshopStart() {
  const { state, dispatch } = useAppState()
  const { push, reset } = useNavigation()
- return (passion: PassionId, duration?: Duration, activityId?: string, projectId?: string) => {
+ return (passion: PassionId, duration?: Duration, activityId?: string) => {
   if (!state.me.user.passions.includes(passion)) { push({ name:'passions', mode:'edit' }); return }
-  dispatch({type:'newFlow',flow:{fixedPassion:passion, ...(duration?{passion,duration}:{}), ...(activityId?{fixedStep:activityId}:{}), ...(projectId?{projectId}:{})}})
+  dispatch({type:'newFlow',flow:{fixedPassion:passion, ...(duration?{passion,duration}:{}), ...(activityId?{fixedStep:activityId}:{})}})
   reset([{name:'home'},{name:'passionHub'},{name:'passionSpace',passion},{name:duration?'activity':'signal'}])
  }
 }
@@ -39,8 +38,8 @@ function RecentCreations() {
 
 export function PassionHubScreen() {
  const {state}=useAppState(),{push}=useNavigation(),start=useWorkshopStart()
- const {user,stats,projects}=state.me
- const passions=(['piano','dessin','ecriture','cinema','musique'] as PassionId[]).filter(id=>user.passions.includes(id)||stats.byPassion.some(row=>row.passion===id)||projects.some(project=>project.passion===id))
+ const {user,stats}=state.me
+ const passions=(['piano','dessin','ecriture','cinema','musique'] as PassionId[]).filter(id=>user.passions.includes(id)||stats.byPassion.some(row=>row.passion===id))
  const passion=user.passions.includes('dessin')?'dessin':user.passions[0]
  const idea=passion?collection(passion).find(group=>group.duration===5)?.activities[0]:undefined
  return <Screen tabs className="studio-passions"><AppHeader/><div className="studio-page-heading"><h1>Mes passions</h1><button type="button" className="studio-icon-button" aria-label="Gérer mes passions" onClick={()=>push({name:'passions',mode:'edit'})}><Plus size={22}/></button></div><p className="workshop-subtitle">Un peu chaque jour, à ta façon.</p>{passion&&idea&&<section className="workshop-idea"><Sparkles size={24}/><div><small>Une idée pour aujourd’hui</small><h2>{idea.text}</h2><span><Clock3 size={13}/>5 min · {getPassion(passion).label}</span></div><button type="button" onClick={()=>start(passion,5,idea.id)}>Essayer<ChevronRight size={16}/></button></section>}<div className="studio-passions-grid">{passions.map(id=><PassionPoster key={id} passion={id} stats={statsFor(stats.byPassion,id)} onOpen={()=>push({name:'passionSpace',passion:id})}/>)}</div>{!passions.length&&<Button onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions</Button>}<RecentCreations/></Screen>
@@ -56,21 +55,19 @@ const COPY:Record<PassionId,{create:string;gallery:string;title:string;cta:strin
 
 export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  const {state}=useAppState(),{push,reset}=useNavigation(),start=useWorkshopStart(),startWord=useStartChallenge(),shop=useShop()
- const [section,setSection]=useState<'create'|'gallery'|'projects'>('create')
+ const [section,setSection]=useState<'create'|'gallery'>('create')
  const row=statsFor(state.me.stats.byPassion,passion),copy=COPY[passion]
- const project=state.me.projects.find(item=>item.passion===passion&&!item.finishedAt)
  const progress=currentPath(passion,row.steps,passionLevel(passion,row.minutes).level,state.me.user.skills[passion])
  const day=todayKey(),word=dailyWord(day).word
  const owned=SHOP_ITEMS.filter(item=>item.category==='piano'&&shop.owned.includes(item.id))
  const available=state.me.user.passions.includes(passion)
- return <Screen tabs className="studio-workshop"><AppHeader/><button type="button" className="workshop-back" onClick={()=>reset([{name:'home'},{name:'passionHub'}])}><ArrowLeft size={17}/>Mes passions</button><header className="workshop-cover" data-passion={passion}><PassionArtwork passion={passion}/><h1>{getPassion(passion).label}</h1></header><div className="workshop-tabs" aria-label="Rubriques de la passion">{([{id:'create',label:copy.create},{id:'gallery',label:copy.gallery},{id:'projects',label:'Mes projets'}] as const).map(tab=><button key={tab.id} type="button" aria-pressed={section===tab.id} onClick={()=>setSection(tab.id)}>{tab.label}</button>)}</div>
- {section==='gallery'?passion==='piano'?<section className="workshop-section"><h2>Mon répertoire</h2><p>Les morceaux que tu as débloqués.</p>{owned.length?owned.map(item=><button key={item.id} type="button" className="workshop-repertoire" onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{[item.composer,item.edition??item.difficulty].filter(Boolean).join(' · ')}</small></span><Play size={20}/></button>):<div className="workshop-empty"><p>Ton répertoire commence avec un premier morceau.</p><Button onClick={()=>push({name:'shop',category:'piano'})}>Découvrir les morceaux</Button></div>}<h2 className="mt-5">Mes séances au piano</h2><GalleryScreen key={passion} passion={passion} embedded/></section>:<GalleryScreen key={passion} passion={passion} embedded/>:section==='projects'?<div className="workshop-projects"><ProjectsSection passion={passion}/></div>:<>
+ return <Screen tabs className="studio-workshop"><AppHeader/><button type="button" className="workshop-back" onClick={()=>reset([{name:'home'},{name:'passionHub'}])}><ArrowLeft size={17}/>Mes passions</button><header className="workshop-cover" data-passion={passion}><PassionArtwork passion={passion}/><h1>{getPassion(passion).label}</h1></header><div className="workshop-tabs" aria-label="Rubriques de la passion">{([{id:'create',label:copy.create},{id:'gallery',label:copy.gallery}] as const).map(tab=><button key={tab.id} type="button" aria-pressed={section===tab.id} onClick={()=>setSection(tab.id)}>{tab.label}</button>)}</div>
+ {section==='gallery'?passion==='piano'?<section className="workshop-section"><h2>Mon répertoire</h2><p>Les morceaux que tu as débloqués.</p>{owned.length?owned.map(item=><button key={item.id} type="button" className="workshop-repertoire" onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{[item.composer,item.edition??item.difficulty].filter(Boolean).join(' · ')}</small></span><Play size={20}/></button>):<div className="workshop-empty"><p>Ton répertoire commence avec un premier morceau.</p><Button onClick={()=>push({name:'shop',category:'piano'})}>Découvrir les morceaux</Button></div>}<h2 className="mt-5">Mes séances au piano</h2><GalleryScreen key={passion} passion={passion} embedded/></section>:<GalleryScreen key={passion} passion={passion} embedded/>:<>
  <div className="workshop-intro"><h2>{row.activities?copy.title:'Ton atelier commence ici.'}</h2><p>{plural(row.activities,'activité')} · {row.minutes} min de pratique</p></div>
  {!row.activities&&<section className="workshop-welcome"><Mascot size={94}/><div><h3>Un premier pas suffit pour commencer.</h3><p>Chaque création construira ton atelier.</p></div></section>}
  <Button className="workshop-main-cta" onClick={()=>start(passion)}>{available?row.activities?copy.cta:copy.first:'Ajouter cette passion'}<ArrowRight size={19}/></Button>
  {(passion==='dessin'||passion==='ecriture')&&<section className="workshop-word"><div><small>Le mot du jour</small><h2>{word}</h2><p>À toi de lui donner vie · 15 min</p></div><button type="button" onClick={()=>available?startWord(passion,day):push({name:'passions',mode:'edit'})}>{passion==='dessin'?'Dessiner':'Écrire'}<ChevronRight size={17}/></button></section>}
  <section className="workshop-section"><h2>Une petite pause créative</h2><div className="workshop-quick">{([5,15] as Duration[]).map(duration=>{const activity=collection(passion).find(group=>group.duration===duration)?.activities[0];return activity&&<button type="button" key={duration} onClick={()=>start(passion,duration,activity.id)}><Clock3 size={19}/><strong>{activity.text}</strong><span>{duration} min<ChevronRight size={15}/></span></button>})}</div></section>
- {project&&<section className="workshop-current"><small>Ton projet en cours</small><h2>{project.name}</h2><span>{project.goal?`${project.creations} / ${project.goal} créations`:plural(project.creations,'création')}</span>{project.goal&&<span className="workshop-gauge"><i style={{width:`${Math.min(100,project.creations/project.goal*100)}%`}}/></span>}<Button variant="secondary" size="sm" onClick={()=>start(passion,undefined,undefined,project.id)}>Continuer ce projet<ArrowRight size={17}/></Button><button type="button" className="workshop-text-link" onClick={()=>setSection('projects')}>Voir mes projets</button></section>}
  {progress&&<section className="workshop-current"><small>Pour progresser</small><h2>{progress.path.title}</h2><p>{progress.done} leçons sur {progress.path.steps.length}</p><span className="workshop-gauge"><i style={{width:`${progress.done/progress.path.steps.length*100}%`}}/></span>{progress.next&&<p>Prochaine leçon : {progress.next.title}</p>}<Button variant="secondary" size="sm" onClick={()=>push({name:'path',pathId:progress.path.id})}>Continuer dans Apprendre<ChevronRight size={16}/></Button></section>}
  {passion==='piano'&&owned.slice(0,2).map(item=><button key={item.id} type="button" className="workshop-repertoire" onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{[item.composer,item.edition??item.difficulty].filter(Boolean).join(' · ')}</small></span><Play size={20}/></button>)}
  {passion==='piano'&&<button type="button" className="workshop-repertoire" onClick={()=>setSection('gallery')}><span><strong>Mon répertoire</strong><small>{plural(owned.length,'morceau débloqué','morceaux débloqués')}</small></span><ChevronRight size={22}/></button>}

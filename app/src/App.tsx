@@ -46,7 +46,7 @@ export function App() {
     try {
       const me = await api.me()
       // Legacy appearance choices are replaced by the approved automatic art direction.
-      setShopTheme(me.shop?.equipped.theme)
+      setShopTheme(undefined)
       setAppTheme('pop')
       setBoot({ status: 'ready', me })
     } catch (error) {
@@ -161,7 +161,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   }, [route.name, state.me.user, dispatch])
   useEffect(() => {
     const shop = state.me.shop
-    setShopTheme(shop?.equipped.theme)
+    setShopTheme(undefined)
     syncShopAmbiance(shop?.owned ?? [], shop?.equipped.ambiance)
   }, [state.me.shop])
   const tone = toneFor(route, state.flow)

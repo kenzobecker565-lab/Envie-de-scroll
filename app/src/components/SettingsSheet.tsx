@@ -1,4 +1,4 @@
-import { BellRing, Check, ChevronRight, Clock3, Heart, ShieldCheck, LoaderCircle, MessageCircleHeart, Music2, Settings2, Smartphone, Trash2, UserPlus } from 'lucide-react'
+import { BellRing, Check, ChevronRight, CircleHelp, Clock3, Heart, ShieldCheck, LoaderCircle, MessageCircleHeart, Music2, Settings2, Smartphone, Trash2, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ambianceCredits, formatClock, isScrollMoment, SCROLL_MOMENT_INFO, SCROLL_MOMENTS } from '@scroll-up/shared'
@@ -23,7 +23,7 @@ export function SettingsButton() {
   return <Button variant="secondary" size="icon" onClick={() => { push({ name: 'settings' }) }} aria-label="Mes réglages"><Settings2 aria-hidden="true" /></Button>
 }
 
-export function SettingsContent({ onEditPassions, onFeedback, onErase, embedded = false }: { embedded?: boolean; onEditPassions: () => void; onFeedback: () => void; onErase: () => void }) {
+export function SettingsContent({ onEditPassions, onFeedback, onErase, onReplayTutorial, embedded = false }: { embedded?: boolean; onReplayTutorial: () => void; onEditPassions: () => void; onFeedback: () => void; onErase: () => void }) {
   const { state, dispatch } = useAppState()
   const { user } = state.me
   const [saving, setSaving] = useState(false)
@@ -70,6 +70,7 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, embedded 
       </section>
       <section className="studio-settings-group" aria-labelledby="settings-help">
         <h2 id="settings-help">Aide et partage</h2>
+        <Row icon={<CircleHelp aria-hidden="true"/>} title="Revoir le tutoriel" description="Les quatre repères pour découvrir Swipe Up." onClick={onReplayTutorial}/>
         {telegram && <HomeScreenRow/>}
         <Row icon={<UserPlus aria-hidden="true"/>} title="Inviter un ami" description="Partage Swipe Up dans Telegram." onClick={sendInvite}/>
         <Row icon={<MessageCircleHeart aria-hidden="true"/>} title="Donner mon avis" description="Tes idées pour améliorer l’application." onClick={onFeedback}/>

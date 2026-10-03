@@ -35,6 +35,7 @@ export function toUserDTO(user: User): UserDTO {
     firstName: user.firstName,
     passions,
     onboarded: passions.length > 0,
+    tutorialCompleted: user.tutorialCompleted,
     theme,
     remindersEnabled: user.remindersEnabled,
     scrollMoment: isScrollMoment(user.scrollMoment) ? user.scrollMoment : null,

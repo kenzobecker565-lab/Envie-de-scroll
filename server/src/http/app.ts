@@ -231,16 +231,18 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.put(
     '/me/settings',
     asyncRoute(async (req, res) => {
-      const { remindersEnabled, scrollMoment } = (req.body ?? {}) as Record<string, unknown>
+      const { remindersEnabled, scrollMoment, tutorialCompleted } = (req.body ?? {}) as Record<string, unknown>
       if (remindersEnabled !== undefined && typeof remindersEnabled !== 'boolean') throw badRequest('Réglage inconnu.')
       if (scrollMoment !== undefined && !isScrollMoment(scrollMoment)) throw badRequest('Moment inconnu.')
-      if (remindersEnabled === undefined && scrollMoment === undefined) throw badRequest('Réglage inconnu.')
+      if (tutorialCompleted !== undefined && tutorialCompleted !== true) throw badRequest('Tutoriel inconnu.')
+      if (remindersEnabled === undefined && scrollMoment === undefined && tutorialCompleted === undefined) throw badRequest('Réglage inconnu.')
       const user = await currentUser(req, res)
       const updated = await prisma.user.update({
         where: { id: user.id },
         data: {
           ...(remindersEnabled !== undefined ? { remindersEnabled, ...(remindersEnabled ? { unansweredReminders: 0 } : {}) } : {}),
           ...(scrollMoment !== undefined ? { scrollMoment } : {}),
+          ...(tutorialCompleted === true ? { tutorialCompleted: true } : {}),
         },
       })
       const body: UserResponse = { user: toUserDTO(updated) }

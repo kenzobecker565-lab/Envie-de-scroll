@@ -26,6 +26,8 @@ model User {
   /// Le bot peut écrire à l'utilisateur (/start, ou autorisation dans la Mini App)
   canMessage          Boolean  @default(false)
   remindersEnabled    Boolean  @default(true)
+  /// Tutoriel de première utilisation terminé ou passé
+  tutorialCompleted   Boolean  @default(false)
   /// Moment où la personne scrolle le plus (matin, midi, soir, nuit) : la relance arrive juste avant
   scrollMoment        String?
   /// Niveau déclaré dans les passions qui le demandent, en JSON : {"piano":"debutant"}

@@ -114,7 +114,7 @@ export function WelcomeScreen() {
           &nbsp;?
         </motion.h1>
         <motion.p className="text-16 text-ink-soft" {...fadeUp(0.4)}>
-          Quand ton pouce te démange, tire la languette en bas de l’écran&nbsp;: on te propose une petite activité créative, liée à ce que tu aimes. Tout ce que tu fais
+          Quand ton pouce te démange, touche « J’ai envie de swipe »&nbsp;: choisis ton temps et une passion, puis découvre une activité créative. Tout ce que tu fais
           rejoint ta galerie.
         </motion.p>
       </div>

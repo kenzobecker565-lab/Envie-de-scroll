@@ -21,6 +21,8 @@ import { SettingsScreen } from './screens/SettingsScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { PathScreen } from './screens/PathScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
+import { GuidedTour } from './components/GuidedTour.tsx'
+import { tutorialSeen } from './lib/tutorial.ts'
 import { TabBar } from './components/TabBar.tsx'
 import { LearnScreen, LearnPassionScreen, PassionHubScreen, PassionSpaceScreen, ProfileScreen } from './screens/NavigationScreens.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
@@ -153,7 +155,10 @@ function screenFor(route: Route) {
 
 function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { route, direction, canGoBack, back } = useNavigation()
-  const { state } = useAppState()
+  const { state, dispatch } = useAppState()
+  useEffect(() => {
+    if (route.name === 'home' && state.me.user.onboarded && !tutorialSeen(state.me.user)) dispatch({ type: 'tutorial', open: true })
+  }, [route.name, state.me.user, dispatch])
   useEffect(() => {
     const shop = state.me.shop
     setShopTheme(shop?.equipped.theme)
@@ -179,6 +184,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
       </AnimatePresence>
       {/* Navigation des six espaces, masquée pendant les activités. */}
       <TabBar />
+      {state.tutorialOpen && route.name === 'home' && <GuidedTour/>}
     </>
   )
 }

@@ -7,7 +7,7 @@
  * promo/ambiances/build.mjs) : 3 minutes au plus, tous au même volume.
  */
 
-export const AMBIANCE_IDS = ['jazz', 'lofi', 'piano', 'bossa', 'acoustique', 'synthwave', '8bit', 'ambient', 'tropical', 'pluie', 'aube', 'orbite'] as const
+export const AMBIANCE_IDS = ['signature', 'jazz', 'lofi', 'piano', 'bossa', 'acoustique', 'synthwave', '8bit', 'ambient', 'tropical', 'pluie', 'aube', 'orbite'] as const
 export type AmbianceId = (typeof AMBIANCE_IDS)[number]
 
 /** Le choix dans les réglages : un style, ou « au hasard ». */
@@ -30,6 +30,7 @@ const MACLEOD = 'Kevin MacLeod'
 
 export const PREMIUM_AMBIANCES = { aube: 'ambiance-aube', orbite: 'ambiance-orbite' } as const
 export const AMBIANCES: readonly Ambiance[] = [
+  { id: 'signature', label: 'Signature Scroll-up', mood: 'Un petit élan · piano doux et lumière', src: '/music/scroll-up-signature.mp3', tone: 'lilac', credit: null },
   { id: 'jazz', label: 'Jazz noir', mood: 'Un club enfumé, tard le soir', src: '/music/jazz-noir.mp3', tone: 'lilac', credit: null },
   { id: 'lofi', label: 'Lo-fi', mood: 'Un beat tranquille pour se poser', src: '/music/lofi.mp3', tone: 'sky', credit: { title: 'Study and Relax', author: MACLEOD } },
   { id: 'piano', label: 'Piano', mood: 'Satie, doux et lent', src: '/music/piano.mp3', tone: 'warm', credit: { title: 'Gymnopédie n°\u00A01 (Erik Satie)', author: MACLEOD } },
@@ -44,7 +45,7 @@ export const AMBIANCES: readonly Ambiance[] = [
   { id: 'orbite', label: 'Orbite', mood: 'Composition originale Scroll-up', src: '/music/shop-orbite.mp3', tone: 'lilac', credit: null },
 ]
 
-export const DEFAULT_AMBIANCE: AmbianceId = 'jazz'
+export const DEFAULT_AMBIANCE: AmbianceId = 'signature'
 
 export function isAmbianceId(value: unknown): value is AmbianceId {
   return AMBIANCE_IDS.includes(value as AmbianceId)
@@ -75,5 +76,5 @@ export function resolveAmbiance(choice: AmbianceChoice, current: AmbianceId | nu
 /** La ligne de crédits des morceaux sous licence (titres, auteur, source, licence). */
 export function ambianceCredits(): string {
   const titles = AMBIANCES.filter((ambiance) => ambiance.credit).map((ambiance) => `«\u00A0${ambiance.credit?.title}\u00A0»`)
-  return `${titles.join(', ')}\u00A0: ${MACLEOD} (incompetech.com), licence CC BY 4.0, extraits raccourcis et mis au même volume. Jazz noir, pluie, Aube tranquille et Orbite\u00A0: créés pour Scroll-up.`
+  return `${titles.join(', ')}\u00A0: ${MACLEOD} (incompetech.com), licence CC BY 4.0, extraits raccourcis et mis au même volume. Signature Scroll-up, jazz noir, pluie, Aube tranquille et Orbite\u00A0: créés pour Scroll-up.`
 }

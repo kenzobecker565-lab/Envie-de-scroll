@@ -1,9 +1,9 @@
 /**
- * Musique d'ambiance, en boucle, très douce. Dix styles au choix (jazz noir,
+ * Musique d'ambiance, en boucle, très douce. Une signature et plusieurs styles au choix (jazz noir,
  * lo-fi, piano, bossa nova… et la pluie), ou « au hasard » : un style
  * différent à chaque ouverture. La liste est dans shared/src/ambiances.ts.
  *
- * - Elle démarre au premier toucher (les navigateurs refusent le son avant).
+ * - Signature par défaut dès l’ouverture, ou au premier geste si autoplay est bloqué.
  * - On la coupe ou la remet d'un geste (accueil, réglages) ; le choix et le
  *   style sont gardés sur ce téléphone.
  * - Elle se retire toute seule quand l'app passe en arrière-plan, et pendant
@@ -18,6 +18,7 @@ import { useSyncExternalStore } from 'react'
 import { PREMIUM_AMBIANCES, DEFAULT_AMBIANCE, getAmbiance, isAmbianceChoice, resolveAmbiance, type AmbianceChoice, type AmbianceId } from '@scroll-up/shared'
 
 const STORAGE_KEY = 'scroll-up:music'
+const DEFAULT_VERSION_KEY = 'scroll-up:music-default:v2'
 const STYLE_KEY = 'scroll-up:music-style'
 /** Volume de croisière (0 à 1) : un fond, jamais au premier plan. */
 const LEVEL = 0.32
@@ -40,6 +41,7 @@ let context: AudioContext | undefined
 let gain: GainNode | undefined
 let pauseTimer: number | undefined
 let switchTimer: number | undefined
+let initialized = false
 
 function readEnabled(): boolean {
   try {
@@ -51,7 +53,12 @@ function readEnabled(): boolean {
 
 function readChoice(): AmbianceChoice {
   try {
-    const stored = window.localStorage.getItem(STYLE_KEY)
+    let stored = window.localStorage.getItem(STYLE_KEY)
+    // One-time adoption of the old default. Keep other explicit choices and mute.
+    if (!window.localStorage.getItem(DEFAULT_VERSION_KEY)) {
+      if (stored === 'jazz') { stored = DEFAULT_AMBIANCE; store(STYLE_KEY, stored) }
+      store(DEFAULT_VERSION_KEY, 'done')
+    }
     return isAmbianceChoice(stored) ? stored : DEFAULT_AMBIANCE
   } catch {
     return DEFAULT_AMBIANCE
@@ -71,7 +78,7 @@ function notify() {
   listeners.forEach((listener) => listener())
 }
 
-/** Crée le lecteur (au premier toucher seulement). */
+/** Prépare un seul lecteur et son contrôle de volume. */
 function ensurePlayer(): boolean {
   if (audio) return true
   try {
@@ -84,6 +91,9 @@ function ensurePlayer(): boolean {
       gain = context.createGain()
       gain.gain.value = 0
       context.createMediaElementSource(audio).connect(gain).connect(context.destination)
+      context.addEventListener('statechange', () => {
+        if (context?.state === 'running' && audio && !audio.paused && enabled && suppressed.size === 0 && document.visibilityState === 'visible') fadeTo(LEVEL)
+      })
     } else {
       audio.volume = 0
     }
@@ -113,7 +123,11 @@ function apply() {
     window.clearTimeout(pauseTimer)
     void context?.resume().catch(() => {})
     audio.play().then(
-      () => fadeTo(LEVEL),
+      () => {
+        if (!enabled || suppressed.size || document.visibilityState !== 'visible') { apply(); return }
+        if (!context || context.state === 'running') fadeTo(LEVEL)
+        else unlocked = false // The media may start while Web Audio still needs a gesture.
+      },
       () => {
         // Lecture refusée (réglage du téléphone…) : on réessaiera au prochain toucher.
         unlocked = false
@@ -148,16 +162,22 @@ function load(next: AmbianceId) {
   }
 }
 
-/** À appeler une fois au démarrage : attend le premier toucher, suit la visibilité de l'app. */
+/** À appeler une fois au démarrage : essaie immédiatement, suit visibilité et gestes. */
 export function initAmbient(): void {
+  if (initialized) return
+  initialized = true
   const unlock = () => {
-    if (unlocked) return
+    if (unlocked && audio && !audio.paused && (!context || context.state === 'running')) return
     unlocked = true
     apply()
   }
   window.addEventListener('pointerdown', unlock, { capture: true })
   window.addEventListener('keydown', unlock, { capture: true })
+  window.addEventListener('touchend', unlock, { capture: true, passive: true })
   document.addEventListener('visibilitychange', apply)
+  // Try immediately; a rejected autoplay is retried on the first real gesture.
+  unlocked = true
+  apply()
 }
 
 export function isAmbientEnabled(): boolean {

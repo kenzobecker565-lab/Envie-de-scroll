@@ -5,7 +5,7 @@ import { track } from '../api/client.ts'
 import { useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
 
-/** Les six espaces principaux. La barre se retire pendant les activités. */
+/** Les cinq onglets principaux. La barre se retire pendant les activités. */
 
 export type Tab = 'home' | 'learn' | 'passionHub' | 'progress' | 'profile' | 'shop'
 
@@ -28,7 +28,7 @@ export function isTab(name: string): name is Tab {
 }
 
 /** Hauteur réservée en bas des écrans à onglets (barre + marge + zone sûre). */
-export const TAB_BAR_SPACE = 'pb-[calc(104px+env(safe-area-inset-bottom))]'
+export const TAB_BAR_SPACE = 'pb-[calc(86px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
   const { route, reset } = useNavigation()
@@ -49,7 +49,7 @@ export function TabBar() {
         <motion.nav
           key="tabbar"
           aria-label="Navigation"
-          className="da-tabbar fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-30 mx-auto grid max-w-[480px] grid-cols-5 gap-1 rounded-[22px] border-[2.5px] border-outline bg-surface-200 p-1.5 shadow-card"
+          className="studio-tabbar"
           initial={{ y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}
@@ -69,8 +69,8 @@ export function TabBar() {
                   active ? 'border-outline text-on-color' : 'border-transparent text-ink',
                 )}
               >
-                {active && <motion.span layoutId="tab-active" className="absolute inset-0 -z-10 rounded-[13px] bg-accent" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
-                <Icon size={20} strokeWidth={2.4} aria-hidden="true" />
+
+                <Icon size={23} strokeWidth={1.8} aria-hidden="true" />
                 <span className="text-center leading-tight">{label}</span>
               </motion.button>
             )

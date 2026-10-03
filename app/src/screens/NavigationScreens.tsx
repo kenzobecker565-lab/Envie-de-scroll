@@ -1,8 +1,14 @@
+import { Check, ChevronRight, Clock3, Lock, Moon, Plus, Settings, ShoppingBag, Sparkles, Zap } from 'lucide-react'
+import { AppHeader } from '../components/AppHeader.tsx'
+import { BadgePin } from '../components/BadgePin.tsx'
+import { currentPath, featuredPath, finishedPathIds } from '../components/Paths.tsx'
+import { useStartLesson } from '../lib/useLesson.ts'
+import { useAppearance } from '../lib/appearance.ts'
 import { PassionPoster, PassionArtwork } from '../components/PassionArtwork.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { AppearancePicker } from '../components/AppearancePicker.tsx'
 import { useState } from 'react'
-import { getPassion, PASSION_IDS, type PassionId } from '@scroll-up/shared'
+import { getPassion, passionLevel, PATHS, type PassionId } from '@scroll-up/shared'
 import { useEquipped } from '../lib/shop.ts'
 import { ProfileDecoration } from '../components/ShopArt.tsx'
 import { Button } from '@/components/ui/button'
@@ -14,18 +20,9 @@ import { FeedbackDialog } from '../components/FeedbackDialog.tsx'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 
 export function PassionHubScreen() {
-  const { state } = useAppState()
-  const { push } = useNavigation()
-  const { user, stats, projects } = state.me
-  const passions = PASSION_IDS.filter((id) => user.passions.includes(id) || stats.byPassion.some((row) => row.passion === id) || projects.some((project) => project.passion === id))
-  return <Screen tabs>
-    <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Mes passions</h1>
-    <p className="mt-2 text-15 text-ink-soft">Choisis une passion pour retrouver ses créations, ses découvertes et ses projets.</p>
-    <div className="da-passion-grid mt-6">
-      {passions.map((passion) => <PassionPoster key={passion} passion={passion} stats={statsFor(stats.byPassion, passion)} onOpen={() => push({ name: 'passionSpace', passion })} />)}
-      <Button variant="secondary" onClick={() => push({ name: 'passions', mode: 'edit' })}>Gérer mes passions</Button>
-    </div>
-  </Screen>
+ const {state}=useAppState(),{push}=useNavigation(),{user,stats,projects}=state.me
+ const passions=(['piano','dessin','ecriture','cinema','musique'] as PassionId[]).filter(id=>user.passions.includes(id)||stats.byPassion.some(row=>row.passion===id)||projects.some(project=>project.passion===id))
+ return <Screen tabs className="studio-passions"><AppHeader/><div className="studio-page-heading"><h1>Mes passions</h1><button type="button" className="studio-icon-button" aria-label="Gérer mes passions" onClick={()=>push({name:'passions',mode:'edit'})}><Plus size={22}/></button></div><div className="studio-passions-grid">{passions.map(passion=><PassionPoster key={passion} passion={passion} stats={statsFor(stats.byPassion,passion)} onOpen={()=>push({name:'passionSpace',passion})}/>)}</div>{!passions.length&&<Button className="mt-5" onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions</Button>}</Screen>
 }
 
 export function PassionSpaceScreen({ passion }: { passion: PassionId }) {
@@ -47,18 +44,14 @@ export function PassionSpaceScreen({ passion }: { passion: PassionId }) {
 }
 
 export function LearnScreen() {
-  const { state } = useAppState()
-  const { push } = useNavigation()
-  const { user, stats } = state.me
-  const passions = PASSION_IDS.filter((id) => user.passions.includes(id) || stats.byPassion.some((row) => row.passion === id && row.steps.length > 0))
-  return <Screen tabs>
-    <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Apprendre</h1>
-    <p className="mt-2 text-15 text-ink-soft">Choisis une passion et avance à ton rythme, une leçon à la fois.</p>
-    <div className="da-passion-grid mt-6">
-      {passions.map((passion) => <PassionPoster key={passion} passion={passion} stats={statsFor(stats.byPassion, passion)} onOpen={() => push({ name: 'learnPassion', passion })} />)}
-      {passions.length === 0 && <Button variant="secondary" onClick={() => push({ name: 'passions', mode: 'edit' })}>Choisir mes passions</Button>}
-    </div>
-  </Screen>
+ const {state}=useAppState(),{push}=useNavigation(),startLesson=useStartLesson()
+ const {user,stats}=state.me
+ const initial=featuredPath(user.passions,id=>statsFor(stats.byPassion,id).steps,id=>passionLevel(id,statsFor(stats.byPassion,id).minutes).level,user.skills)
+ const [selected,setSelected]=useState<PassionId|undefined>(initial?.progress.path.passion??user.passions[0])
+ const passion=selected&&user.passions.includes(selected)?selected:user.passions[0]
+ const row=passion?statsFor(stats.byPassion,passion):null
+ const progress=passion&&row?currentPath(passion,row.steps,passionLevel(passion,row.minutes).level,user.skills[passion]):null
+ return <Screen tabs className="studio-learn"><AppHeader/><h1 className="studio-page-title">Apprendre</h1>{progress?<article className="studio-learning-card"><div className="studio-learning-hero"><PassionArtwork passion={progress.path.passion}/><span className="studio-learning-character"><Mascot size={135}/></span><div className="studio-learning-title"><span className="studio-tag">{getPassion(progress.path.passion).label}</span><h2>{progress.path.title}</h2></div></div><div className="studio-learning-body"><p className="studio-learning-count">{progress.finished?'Parcours terminé':`Étape ${progress.next?.index??1} sur ${progress.path.steps.length}`}</p><div className="studio-learning-gauge"><i style={{width:`${progress.done/progress.path.steps.length*100}%`}}/></div><ol className="studio-lesson-list">{progress.path.steps.map(step=>{const done=step.index<=progress.done, current=step.index===progress.next?.index;return <li key={step.id}><button type="button" disabled={!done&&!current} aria-current={current?'step':undefined} onClick={()=>startLesson(step,'parcours')}><span className={`studio-step-number ${done?'is-done':''}`}>{done?<Check size={17}/>:current?step.index:<Lock size={14}/>}</span><span>{step.title}</span><ChevronRight size={16}/></button></li>})}</ol><Button className="studio-continue" onClick={()=>progress.next?startLesson(progress.next,'parcours'):push({name:'path',pathId:progress.path.id})}>{progress.finished?'Revoir le parcours':progress.done?'Continuer':'Commencer'}<ChevronRight/></Button></div></article>:<Button className="mt-5" onClick={()=>push({name:'passions',mode:'edit'})}>Choisir une passion</Button>}{user.passions.length>1&&<div className="studio-learn-passions" aria-label="Passion à apprendre">{user.passions.map(id=><button type="button" key={id} aria-pressed={id===passion} onClick={()=>setSelected(id)}>{getPassion(id).label}</button>)}</div>}{passion&&<button type="button" className="studio-all-paths" onClick={()=>push({name:'learnPassion',passion})}>Tous les parcours {getPassion(passion).label}<ChevronRight size={16}/></button>}</Screen>
 }
 
 export function LearnPassionScreen({ passion }: { passion: PassionId }) {
@@ -76,20 +69,13 @@ export function LearnPassionScreen({ passion }: { passion: PassionId }) {
 }
 
 export function ProfileScreen() {
-  const { state } = useAppState()
-  const decoration = useEquipped('profile')
-  const { push } = useNavigation()
-  const [feedback, setFeedback] = useState(false)
-  const [erase, setErase] = useState(false)
-  return <Screen tabs>
-    <div className="da-profile-hero"><Mascot size={116} mood="cheer" /><div><p className="text-ink-soft">Ton espace créatif</p><h1 className="font-display text-40 font-extrabold text-ink">{state.me.user.firstName || 'Mon profil'}</h1></div></div><div className="da-profile-stats"><div><strong>{state.me.stats.totalActivities}</strong><span>activités</span></div><div><strong>{state.me.stats.totalCoins}</strong><span>minutons gagnés</span></div></div><Button variant="secondary" onClick={() => push({ name: 'progress' })}>Ma progression et mes réussites</Button><div className="mt-5"><AppearancePicker /></div>
-    <div className="mt-5"><ProfileDecoration item={decoration} /></div>
-    <Button className="mt-4" variant="secondary" onClick={() => push({ name: 'shop', library: true })}>Mes achats et personnalisations</Button>
-    <p className="mt-2 text-15 text-ink-soft">Tes préférences, tes relances et tes données.</p>
-    <div className="mt-6 flex flex-col gap-5">
-      <SettingsContent embedded onEditPassions={() => push({ name: 'passions', mode: 'edit' })} onFeedback={() => setFeedback(true)} onErase={() => setErase(true)} />
-    </div>
-    <FeedbackDialog open={feedback} onOpenChange={setFeedback} context="réglages" />
-    <EraseDialog open={erase} onOpenChange={setErase} />
-  </Screen>
+ const {state}=useAppState(),{push}=useNavigation(),{user,stats}=state.me
+ const decoration=useEquipped('profile')
+ const [feedback,setFeedback]=useState(false),[erase,setErase]=useState(false),[settings,setSettings]=useState(false),[appearance,setAppearanceOpen]=useState(false)
+ const {mode}=useAppearance()
+ const best=[...stats.byPassion].sort((a,b)=>b.minutes-a.minutes)[0]
+ const bestPassion=best?.passion??user.passions[0]??'piano', level=passionLevel(bestPassion,best?.minutes??0)
+ const earned=finishedPathIds(stats.byPassion)
+ const badges=[...PATHS].sort((a,b)=>Number(earned.includes(b.id))-Number(earned.includes(a.id))).slice(0,5)
+ return <Screen tabs className="studio-profile"><AppHeader settings onSettings={()=>setSettings(value=>!value)}/><section className="studio-profile-hero"><Mascot size={180}/><div className="studio-profile-copy"><h1>{user.firstName||'Mon profil'}</h1><span className="studio-level">Niveau {level.level}</span><span className="studio-level-passion">{getPassion(bestPassion).label}</span><div className="studio-profile-gauge"><span className="studio-gauge"><i style={{width:`${level.progress*100}%`}}/></span><small>{best?.minutes??0}{level.next?` / ${level.next.minutes}`:' · max'}</small></div></div></section><div className="studio-profile-stats"><div><Zap size={27}/><span><strong>{stats.totalActivities}</strong><small>activités</small></span></div><div><Clock3 size={27}/><span><strong>{stats.monthCoins}</strong><small>min ce mois</small></span></div></div><section className="studio-profile-badges"><div className="studio-section-heading"><h2>Mes badges</h2><button type="button" onClick={()=>push({name:'progress'})}>Tout voir<ChevronRight size={14}/></button></div><div className="studio-badge-row">{badges.map(path=><button type="button" key={path.id} onClick={()=>push({name:'path',pathId:path.id})} aria-label={`${path.badge}, ${earned.includes(path.id)?'gagné':'à débloquer'}`}><BadgePin pathId={path.id} earned={earned.includes(path.id)} size={56}/></button>)}</div></section><button type="button" className="studio-setting-row" aria-expanded={appearance} onClick={()=>setAppearanceOpen(value=>!value)}><Moon size={21}/><span>Ambiance · {mode==='auto'?'Automatique':mode==='light'?'Claire':'Sombre'}</span><ChevronRight size={19}/></button>{appearance&&<div className="mt-3"><AppearancePicker/></div>}{decoration&&<div className="mt-4"><ProfileDecoration item={decoration} compact/></div>}<button type="button" className="studio-setting-row" onClick={()=>push({name:'shop',library:true})}><ShoppingBag size={21}/><span>Mes achats et personnalisations</span><ChevronRight size={19}/></button><button type="button" className="studio-setting-row" onClick={()=>push({name:'challenge'})}><Sparkles size={21}/><span>Le mot du jour</span><ChevronRight size={19}/></button><button type="button" className="studio-setting-row" aria-expanded={settings} onClick={()=>setSettings(value=>!value)}><Settings size={21}/><span>Mes réglages</span><ChevronRight size={19}/></button>{settings&&<div className="mt-5 flex flex-col gap-5"><SettingsContent embedded onEditPassions={()=>push({name:'passions',mode:'edit'})} onFeedback={()=>setFeedback(true)} onErase={()=>setErase(true)}/></div>}<FeedbackDialog open={feedback} onOpenChange={setFeedback} context="réglages"/><EraseDialog open={erase} onOpenChange={setErase}/></Screen>
 }

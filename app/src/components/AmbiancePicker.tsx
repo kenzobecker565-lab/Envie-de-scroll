@@ -10,6 +10,7 @@ import { useShop } from '../lib/shop.ts'
 import { haptics } from '../telegram/webApp.ts'
 
 const ICONS: Record<AmbianceChoice, LucideIcon> = {
+  signature: Sparkles,
   aube: Sun,
   orbite: Sparkles,
   jazz: Martini,

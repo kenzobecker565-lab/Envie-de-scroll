@@ -19,7 +19,7 @@ import './styles/art-direction.css'
 
 // Le dernier thème choisi sur ce téléphone, avant le premier affichage.
 initAppTheme()
-// La musique d'ambiance attend le premier toucher.
+// Essaie la signature dès l’ouverture ; premier toucher si autoplay est bloqué.
 initAmbient()
 
 createRoot(document.getElementById('root')!).render(

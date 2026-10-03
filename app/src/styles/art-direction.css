@@ -272,3 +272,5 @@ html[data-scene] .shop-product-actions [data-slot='button'] {height:29px;min-hei
 .flow-proof .drawing-pad>div:first-child{order:2}.flow-proof .drawing-pad>[role='toolbar']{order:1;margin-bottom:1px}.flow-proof .drawing-pad>div:last-child{order:3}.flow-activity:has(#lesson-keyboard) .flow-task>.da-activity-art{display:none}.flow-activity:has(#lesson-keyboard) .flow-task{margin-top:-3px}.flow-activity .shadow-chip,.flow-activity .shadow-card{box-shadow:none!important}.flow-activity [aria-label^='Les notes'] li[aria-current]{color:#FFF}.flow-activity [data-slot='badge'][data-variant='lilac']{background:#EBDDF8;color:#633785}.flow-proof [data-slot='button']:disabled{background:#EFE7F2!important;color:#8D7B9B!important;border-color:#E0D5E5!important}
 
 .flow-boot-error-copy h1{font-size:27px;font-weight:950;line-height:1.2}.flow-boot-error-copy p{font-size:14px;line-height:1.6;color:#796686;margin-top:12px}.flow-boot-error [data-slot='button']{border-radius:99px}
+
+.workshop-text-read{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#8543B7;padding:5px 0}

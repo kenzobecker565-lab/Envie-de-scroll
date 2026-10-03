@@ -162,7 +162,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
                       whileTap={PRESSED}
                       transition={{ delay: Math.min(index % 12, 6) * 0.06, type: 'spring', stiffness: 180, damping: 20 }}
                     >
-                      {embedded ? <><span className="workshop-creation-preview">{item.photoUrl?<img src={item.photoUrl} alt={item.activityText} loading="lazy"/>:<span>{item.text ?? item.exploredTitle ?? (item.photoPending?'Photo attendue':item.activityText)}</span>}</span><strong>{item.exploredTitle ?? item.activityText}</strong><small>{formatDay(item.createdAt)}</small></> : <GalleryCard item={item} />}
+                      {embedded ? <><span className="workshop-creation-preview">{item.photoUrl?<img src={item.photoUrl} alt={item.activityText} loading="lazy"/>:<span>{item.text ?? item.exploredTitle ?? (item.photoPending?'Photo attendue':item.activityText)}</span>}</span><strong>{item.exploredTitle ?? item.activityText}</strong><small>{formatDay(item.createdAt)}</small>{item.text && <span className="workshop-text-read">Lire le texte entier <Maximize2 size={13} aria-hidden="true" /></span>}</> : <GalleryCard item={item} />}
                     </motion.button>
                   </Fragment>
                 )
@@ -464,11 +464,11 @@ function GalleryDetail({ item }: { item: CompletionDTO }) {
         </Alert>
       )}
       {item.text && (
-        <Card tone="lilac" className="gap-2 shadow-chip">
+        <Card tone="lilac" className="min-w-0 shrink-0 gap-2 shadow-chip">
           <span aria-hidden="true" className="block h-6 font-display text-46 leading-none font-extrabold">
             “
           </span>
-          <blockquote className="font-display text-17 leading-snug font-semibold whitespace-pre-line">{item.text}</blockquote>
+          <blockquote className="font-display text-17 leading-relaxed font-semibold whitespace-pre-wrap [overflow-wrap:anywhere]">{item.text}</blockquote>
         </Card>
       )}
 

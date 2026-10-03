@@ -1,0 +1,218 @@
+import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
+import { useCallback, useEffect, useState } from 'react'
+import { getMood, getPassion, type MeResponse } from '@scroll-up/shared'
+import { api, ApiError, canAuthenticate } from './api/client.ts'
+import { RotateCcw, Send } from 'lucide-react'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
+import { FlowStatus } from './components/FlowStatus.tsx'
+import { Logo } from './components/Brand.tsx'
+import { Backdrop, type DecorTone } from './components/decor/Backdrop.tsx'
+import { MinutonFigure } from './components/Mascot.tsx'
+import { ShopScreen, BonusPianoScreen } from './screens/ShopScreen.tsx'
+import { syncShopAmbiance } from './lib/ambient.ts'
+import { suppressAmbient } from './lib/ambient.ts'
+import { setShopTheme, setAppTheme } from './lib/appTheme.ts'
+import { ActivityScreen } from './screens/ActivityScreen.tsx'
+import { PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
+import { DoneScreen } from './screens/DoneScreen.tsx'
+import { GalleryScreen } from './screens/GalleryScreen.tsx'
+import { SettingsScreen } from './screens/SettingsScreen.tsx'
+import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
+import { PathScreen } from './screens/PathScreen.tsx'
+import { ProgressScreen } from './screens/ProgressScreen.tsx'
+import { GuidedTour } from './components/GuidedTour.tsx'
+import { tutorialSeen } from './lib/tutorial.ts'
+import { TabBar } from './components/TabBar.tsx'
+import { LearnScreen, LearnPassionScreen, PassionHubScreen, PassionSpaceScreen, ProfileScreen } from './screens/NavigationScreens.tsx'
+import { HomeScreen } from './screens/HomeScreen.tsx'
+import { MomentScreen, PassionsScreen, SkillScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
+import { ProofScreen } from './screens/ProofScreen.tsx'
+import { SignalScreen } from './screens/SignalScreen.tsx'
+import { AppStateProvider, useAppState, useNavigation, type Flow, type Route } from './state/AppState.tsx'
+import { useBackButton } from './telegram/buttons.ts'
+import { syncTheme } from './telegram/theme.ts'
+import { startAppearance } from './lib/appearance.ts'
+import { initTelegram } from './telegram/webApp.ts'
+
+type Boot = { status: 'loading' } | { status: 'ready'; me: MeResponse } | { status: 'error'; error: ApiError | Error }
+
+export function App() {
+  const [boot, setBoot] = useState<Boot>({ status: 'loading' })
+  const [tone, setTone] = useState<DecorTone>('mixed')
+
+  const load = useCallback(async () => {
+    document.documentElement.dataset.screen = 'boot'
+    setBoot({ status: 'loading' })
+    try {
+      const me = await api.me()
+      // Legacy appearance choices are replaced by the approved automatic art direction.
+      setShopTheme(undefined)
+      setAppTheme('pop')
+      setBoot({ status: 'ready', me })
+    } catch (error) {
+      document.documentElement.dataset.screen = 'boot'
+      setBoot({ status: 'error', error: error as Error })
+    }
+  }, [])
+
+  useEffect(() => {
+    initTelegram()
+    const stopTheme = syncTheme()
+    const stopAppearance = startAppearance()
+    void load()
+    return () => { stopTheme(); stopAppearance() }
+  }, [load])
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <Backdrop tone={tone} />
+      <div className="relative z-10 mx-auto w-full max-w-[480px]">
+        {boot.status === 'loading' && <BootSkeleton />}
+        {boot.status === 'error' && <BootError error={boot.error} onRetry={load} />}
+        {boot.status === 'ready' && (
+          <AppStateProvider me={boot.me}>
+            <Router onTone={setTone} />
+          </AppStateProvider>
+        )}
+      </div>
+    </MotionConfig>
+  )
+}
+
+/* ----------------------------- Transitions -------------------------------- */
+
+const screenVariants: Variants = {
+  enter: (direction: 1 | -1) => ({ opacity: 0, x: direction * 32, y: 10, scale: 0.985 }),
+  center: { opacity: 1, x: 0, y: 0, scale: 1, transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] } },
+  exit: (direction: 1 | -1) => ({ opacity: 0, x: direction * -24, scale: 0.99, transition: { duration: 0.16, ease: 'easeIn' } }),
+}
+
+/** Couleur du décor selon l'écran et les choix du parcours. */
+function toneFor(route: Route, flow: Flow): DecorTone {
+  const moodTone: DecorTone = flow.mood ? (getMood(flow.mood).energy === 'basse' ? 'calm' : 'warm') : 'mixed'
+  switch (route.name) {
+    case 'signal':
+      return 'calm'
+    case 'time':
+    case 'passion':
+      return moodTone
+    case 'activity':
+    case 'proof':
+      return flow.passion ? (getPassion(flow.passion).tone === 'warm' ? 'warm' : 'calm') : moodTone
+    case 'done':
+      return 'good'
+    case 'progress':
+    case 'gallery':
+    case 'path':
+    case 'challenge':
+      return 'warm'
+    default:
+      return 'mixed'
+  }
+}
+
+function screenFor(route: Route) {
+  switch (route.name) {
+    case 'welcome':
+      return <WelcomeScreen />
+    case 'passions':
+      return <PassionsScreen mode={route.mode} />
+    case 'moment':
+      return <MomentScreen />
+    case 'skill':
+      return <SkillScreen passion={route.passion} mode={route.mode} />
+    case 'home':
+      return <HomeScreen />
+    case 'shop': return <ShopScreen category={route.category} library={route.library} />
+    case 'bonusPiano': return <BonusPianoScreen itemId={route.itemId} />
+    case 'learn': return <LearnScreen />
+    case 'learnPassion': return <LearnPassionScreen passion={route.passion} />
+    case 'passionHub': return <PassionHubScreen />
+    case 'passionSpace': return <PassionSpaceScreen passion={route.passion} />
+    case 'profile': return <ProfileScreen />
+    case 'settings': return <SettingsScreen />
+    case 'signal':
+      return <SignalScreen />
+    case 'time':
+      return <TimeScreen />
+    case 'passion':
+      return <PassionPickScreen />
+    case 'activity':
+      return <ActivityScreen />
+    case 'proof':
+      return <ProofScreen />
+    case 'done':
+      return <DoneScreen />
+    case 'progress':
+      return <ProgressScreen />
+    case 'gallery':
+      return <GalleryScreen passion={route.passion} />
+    case 'path':
+      return <PathScreen pathId={route.pathId} />
+    case 'challenge':
+      return <ChallengeScreen />
+  }
+}
+
+function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
+  const { route, direction, canGoBack, back } = useNavigation()
+  const { state, dispatch } = useAppState()
+  useEffect(() => {
+    if (route.name === 'home' && state.me.user.onboarded && !tutorialSeen(state.me.user)) dispatch({ type: 'tutorial', open: true })
+  }, [route.name, state.me.user, dispatch])
+  useEffect(() => {
+    const shop = state.me.shop
+    setShopTheme(undefined)
+    syncShopAmbiance(shop?.owned ?? [], shop?.equipped.ambiance)
+  }, [state.me.shop])
+  const tone = toneFor(route, state.flow)
+  useEffect(() => onTone(tone), [tone, onTone])
+  // Pendant une activité Musique, Cinéma ou Piano, on écoute, regarde ou joue autre chose : la musique d'ambiance se retire.
+  const elsewhere = (route.name === 'activity' || route.name === 'proof') && (state.flow.passion === 'musique' || state.flow.passion === 'cinema' || state.flow.passion === 'piano')
+  useEffect(() => (elsewhere ? suppressAmbient('activité') : undefined), [elsewhere])
+  // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
+  useBackButton(canGoBack ? back : undefined)
+
+  useEffect(() => { document.documentElement.dataset.screen = route.name }, [route.name])
+
+  const key = route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
+  return (
+    <>
+      <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+        <motion.div key={key} custom={direction} variants={screenVariants} initial="enter" animate="center" exit="exit">
+          {screenFor(route)}
+        </motion.div>
+      </AnimatePresence>
+      {/* Navigation des six espaces, masquée pendant les activités. */}
+      <TabBar />
+      {state.tutorialOpen && route.name === 'home' && <GuidedTour/>}
+    </>
+  )
+}
+
+/* --------------------------- Démarrage de l'app --------------------------- */
+
+function BootSkeleton() {
+  return (
+    <div className="flow-boot" aria-busy="true" aria-label="Chargement">
+      <Logo height={34}/>
+      <FlowStatus boot title="Ton atelier s’ouvre" description="On prépare tes passions." pose="wait"/>
+      <div className="flow-boot-skeleton"><Skeleton className="h-14 w-full"/><Skeleton className="h-24 w-full"/><div><Skeleton className="h-24 w-full"/><Skeleton className="h-24 w-full"/></div></div>
+    </div>
+  )
+}
+
+function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
+  const outsideTelegram = (error instanceof ApiError && error.code === 'unauthorized') || !canAuthenticate()
+  const botUsername = import.meta.env.VITE_BOT_USERNAME as string | undefined
+  return (
+    <div className="flow-boot flow-boot-error">
+      <Logo height={40} />
+      <MinutonFigure pose="wait" size={130}/>
+      <div className="flow-boot-error-copy"><h1>{outsideTelegram ? 'Ouvre l’app depuis Telegram' : 'Petit souci de connexion'}</h1><p>{outsideTelegram ? 'Scroll-up vit dans Telegram : lance-la depuis le bot, avec le bouton « Ouvrir ».' : 'On n’arrive pas à joindre le serveur. Vérifie ta connexion, puis réessaie.'}</p></div>
+      {outsideTelegram ? botUsername && <motion.a href={`https://t.me/${botUsername}`} className={cn(buttonVariants())} whileTap={{ scale: 0.96 }}><Send aria-hidden="true"/>Ouvrir le bot</motion.a> : <Button onClick={onRetry}><RotateCcw aria-hidden="true"/>Réessayer</Button>}
+    </div>
+  )
+}

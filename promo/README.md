@@ -1,5 +1,13 @@
 # Pub de 15 secondes (motion design)
 
+> 🆕 **La vidéo de présentation Scroll-up (61 s, toute l'app, voix off, musique, jazz noir)** : [dossier `presentation/`](presentation/README.md).
+>
+> **Les musiques d'ambiance de l'app** (dix styles : morceaux de Kevin MacLeod sous licence CC BY 4.0, pluie synthétisée) : `ambiances/build.mjs` les prépare dans `app/public/music/`.
+>
+> **La vidéo virale Scroll-up (25 s, vraie app filmée, sous-titres, musique vidIQ)** : [dossier `viral/`](viral/README.md).
+>
+> **La pub Scroll-up (30 s, style Pop, musique et bruitages sans voix off)** : [dossier `scrollup/`](scrollup/README.md).
+>
 > 🎬 **Voir aussi la pub de 28 s** (voix off, vraies vidéos, démo de l'app, codes des pubs Reels et TikTok) : [dossier `pub/`](pub/README.md).
 
 ▶️ **[Voir la vidéo](plutot-que-scroller-15s.mp4)** (MP4, 15 s, avec musique, bruitages et voix off)

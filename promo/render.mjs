@@ -3,6 +3,8 @@
  *
  *   node render.mjs                     → build/plutot-que-scroller-15s.mp4
  *   node render.mjs --ad=pub            → build/pub/plutot-que-scroller-pub.mp4 (pub de 28 s)
+ *   node render.mjs --ad=scrollup       → build/scrollup/scroll-up-pub-30s.mp4 (pub Scroll-up, 30 s)
+ *   node render.mjs --ad=presentation   → build/presentation/scroll-up-presentation.mp4 (présentation, 61 s)
  *   node render.mjs --stills=0.5,4.2    → <build>/stills/*.png (vérifications)
  *   node render.mjs --sheet             → <build>/planche.png (planche contact)
  *   node render.mjs --audio             → refait seulement la bande-son de la vidéo
@@ -35,6 +37,9 @@ const args = Object.fromEntries(
 const ADS = {
   '15s': { page: 'promo/index.html', audio: './audio.mjs', build: 'build', out: 'plutot-que-scroller-15s.mp4' },
   pub: { page: 'promo/pub/index.html', audio: './pub/audio.mjs', build: 'build/pub', out: 'plutot-que-scroller-pub.mp4' },
+  scrollup: { page: 'promo/scrollup/index.html', audio: './scrollup/audio.mjs', build: 'build/scrollup', out: 'scroll-up-pub-30s.mp4' },
+  viral: { page: 'promo/viral/index.html', audio: './viral/audio.mjs', build: 'build/viral', out: 'scroll-up-viral.mp4' },
+  presentation: { page: 'promo/presentation/index.html', audio: './presentation/audio.mjs', build: 'build/presentation', out: 'scroll-up-presentation.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)
@@ -46,7 +51,7 @@ const TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
-  // src/lib/pictos.ts, partagé avec l'app, est écrit sans annotation de type
+  // prototype/src/lib/pictos.ts, partagé avec l'app, est écrit sans annotation de type
   '.ts': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.woff2': 'font/woff2',

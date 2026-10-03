@@ -1,0 +1,180 @@
+// Modèle de données de Scroll-up (V1 test).
+// Après une modification : `npm run db:migrate` (crée une migration et
+// régénère le client Prisma).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+/// Un utilisateur Telegram (identifié par son id Telegram, via initData).
+model User {
+  id                  BigInt   @id
+  firstName           String   @default("")
+  username            String?
+  languageCode        String?
+  /// Passions choisies, en JSON : ["dessin","musique"]
+  passions            String   @default("[]")
+  /// Thème de l'app : pop (par défaut), nuit, bd ou memphis
+  theme               String   @default("pop")
+  /// Fuseau horaire envoyé par la Mini App (pour « ce mois-ci » et les relances)
+  timezone            String   @default("Europe/Paris")
+  /// Le bot peut écrire à l'utilisateur (/start, ou autorisation dans la Mini App)
+  canMessage          Boolean  @default(false)
+  remindersEnabled    Boolean  @default(true)
+  /// Tutoriel de première utilisation terminé ou passé
+  tutorialCompleted   Boolean  @default(false)
+  /// Moment où la personne scrolle le plus (matin, midi, soir, nuit) : la relance arrive juste avant
+  scrollMoment        String?
+  /// Niveau déclaré dans les passions qui le demandent, en JSON : {"piano":"debutant"}
+  skills              String   @default("{}")
+  /// Nombre de relances envoyées (pour alterner les deux messages)
+  reminderCount       Int      @default(0)
+  /// Relances envoyées depuis la dernière ouverture de l'app
+  unansweredReminders Int      @default(0)
+  /// Date locale (AAAA-MM-JJ) de la dernière relance
+  lastReminderDate    String?
+  lastSeenAt          DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  /// Crédit de boutique pour tester les achats, sans gonfler la progression.
+  shopBonus Int @default(0)
+  shopTestCreditClaimed Boolean @default(false)
+  coinsSpent Int @default(0)
+  shopEquipment String @default("{}")
+  purchases ShopPurchase[]
+
+  proposals   Proposal[]
+  completions Completion[]
+  feedbacks   Feedback[]
+  events      AppEvent[]
+  projects    Project[]
+}
+
+/// Une activité proposée (tirée au sort) à un utilisateur.
+model Proposal {
+  id         String   @id @default(cuid())
+  userId     BigInt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activityId String
+  passion    String
+  /// Humeur choisie ; vide pour une leçon de parcours (le mode progression ne la demande pas)
+  mood       String?
+  duration   Int
+  intro      String
+  /// Tirage de l'appli (mots, film…), en JSON
+  extra      String?
+  /// open | replaced (« Une autre idée ») | abandoned | completed
+  status     String   @default("open")
+  createdAt  DateTime @default(now())
+
+  completion Completion?
+
+  @@index([userId, createdAt])
+}
+
+/// Une activité réalisée : une carte de la galerie.
+model Completion {
+  id            String   @id @default(cuid())
+  userId        BigInt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  proposalId    String   @unique
+  proposal      Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  activityId    String
+  passion       String
+  mood          String?
+  duration      Int
+  /// Copie du texte de l'activité au moment de la validation
+  activityText  String
+  extra         String?
+  /// Minutons gagnés (1 minute = 1 minuton, la monnaie de l'app)
+  coins         Int
+  /// Écriture : le texte produit
+  text          String?
+  /// Musique, Cinéma : ce qui a été exploré
+  exploredTitle String?
+  /// Dessin : « tg:<file_id> » (photo relayée vers le chat de stockage) ou « local:<fichier> » (développement)
+  photoRef      String?
+  /// Dessin enregistré sans photo : la prochaine photo envoyée au bot s'y range
+  photoPending  Boolean  @default(false)
+  /// Note donnée après coup : 3 j'ai adoré, 2 sympa, 1 pas pour moi
+  rating        Int?
+  /// Date locale de l'utilisateur (AAAA-MM-JJ)
+  localDate     String
+  /// Le projet où la création est rangée (facultatif)
+  projectId     String?
+  project       Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  createdAt     DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([userId, localDate])
+  @@index([projectId])
+}
+
+/// Un projet : des créations d'une même passion rangées ensemble (« Mon carnet de chats »).
+model Project {
+  id          String       @id @default(cuid())
+  userId      BigInt
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  passion     String
+  name        String
+  /// Objectif facultatif : nombre de créations à atteindre
+  goal        Int?
+  finishedAt  DateTime?
+  createdAt   DateTime     @default(now())
+  completions Completion[]
+
+  @@index([userId, createdAt])
+}
+
+/// Un avis écrit par un testeur (dans l'app, ou en écrivant au bot).
+model Feedback {
+  id        String   @id @default(cuid())
+  userId    BigInt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message   String
+  /// app (formulaire de l'app) ou bot (message écrit au bot)
+  source    String   @default("app")
+  /// D'où vient l'avis (écran, activité…)
+  context   String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+/// Un événement d'usage (appui sur le gros bouton, humeur choisie…), sans texte libre.
+model AppEvent {
+  id        String   @id @default(cuid())
+  userId    BigInt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  /// Détails en JSON (identifiants, nombres)
+  data      String?
+  createdAt DateTime @default(now())
+
+  @@index([name, createdAt])
+  @@index([userId, createdAt])
+}
+
+/// Réglages du serveur modifiables sans redéploiement (ex. : les admins revendiqués par /admin).
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+/// Achats permanents. Un objet ne peut être acheté qu’une fois par utilisateur.
+model ShopPurchase {
+  id String @id @default(cuid())
+  userId BigInt
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemId String
+  price Int
+  createdAt DateTime @default(now())
+  @@unique([userId, itemId])
+}

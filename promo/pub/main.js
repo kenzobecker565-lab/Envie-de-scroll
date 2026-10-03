@@ -24,7 +24,7 @@
 
 import { clamp, ease, finalize, lerp, onFrame, prog, rng, seek as seekEngine, set, stagger, tw } from '../engine.js'
 import { CLIPS } from './clips.js'
-import { PICTOS, spotFor } from '../../src/lib/pictos.ts'
+import { PICTOS, spotFor } from '../../prototype/src/lib/pictos.ts'
 import { BEAT, CAPTIONS, DROP, DURATION, FPS, HEIGHT, SWIPES, T, WIDTH, vo } from './timeline.js'
 
 // --------------------------------------------------------------- utilitaires

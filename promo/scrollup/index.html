@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scroll-up · pub 30 s</title>
+    <!-- Polices des quatre thèmes de l'app (installées dans promo/ par `npm install`). -->
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/bricolage-grotesque/index.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/rethink-sans/index.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/rubik/index.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/rubik/wght-italic.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource/bangers/index.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/nunito/index.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/nunito/wght-italic.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/syne/index.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/outfit/index.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="frame">
+      <div id="stage">
+        <svg width="0" height="0" style="position: absolute">
+          <defs>
+            <!-- Flou de mouvement vertical du fil, piloté par sa vitesse. -->
+            <filter id="mblur" x="-2%" y="-10%" width="104%" height="120%">
+              <feGaussianBlur id="mblurNode" stdDeviation="0 0" />
+            </filter>
+          </defs>
+        </svg>
+        <div id="cam" class="layer">
+          <section id="S1" class="layer night"></section>
+          <section id="S2" class="layer"></section>
+          <section id="S3" class="layer"></section>
+          <section id="S4" class="layer"></section>
+          <section id="S5" class="layer"></section>
+          <section id="S6" class="layer"></section>
+          <section id="S7" class="layer"></section>
+          <section id="S8" class="layer"></section>
+          <!-- Par-dessus tout : iris, grain. -->
+          <section id="fx" class="layer"></section>
+        </div>
+      </div>
+    </div>
+
+    <div id="controls">
+      <button id="play" type="button">Lecture</button>
+      <input id="scrub" type="range" min="0" max="30" step="0.001" value="0" />
+      <span id="clock">0,00 s</span>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

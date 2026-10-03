@@ -187,3 +187,18 @@ it('achète les nouvelles tenues féminines et restaure la dernière portée san
   const other = await request(app).get('/api/shop').set(as(2)).expect(200)
   expect(other.body.owned).toEqual([])
 })
+
+it('achète et équipe les huit costumes Halloween aux prix du catalogue', async () => {
+  await fund(1000)
+  const costumes = ['vampire', 'sorcier', 'citrouille', 'fantome', 'vampiresse', 'sorciere', 'citrouille-f', 'fantome-f']
+  for (const costume of costumes) {
+    const itemId = `mascot-halloween-${costume}`
+    await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(200)
+    const result = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(200)
+    expect(result.body.equipped.mascot).toBe(itemId)
+  }
+  const restored = await request(app).get('/api/me').set(as()).expect(200)
+  expect(restored.body.shop).toMatchObject({ spent: 680, balance: 320, equipped: { mascot: 'mascot-halloween-fantome-f' } })
+  expect(restored.body.shop.owned).toHaveLength(8)
+  expect(restored.body.stats.totalCoins).toBe(1000)
+})

@@ -1,0 +1,134 @@
+/* Vidéo de présentation : compléments à ../viral/viral.css (même téléphone, mêmes sous-titres). */
+
+/* La conversation avec le bot, dans le téléphone (une messagerie générique). */
+.chat {
+  position: absolute;
+  inset: 0;
+  background: #d9e7c9;
+  background-image: radial-gradient(#c3d7ae 3px, transparent 3.8px);
+  background-size: 34px 34px;
+  font-family: var(--font-sans);
+  color: #151515;
+}
+
+.chat .bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 150px;
+  padding: 58px 22px 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fffdf7;
+  border-bottom: 4px solid #151515;
+}
+
+.chat .bar .who {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.chat .bar b {
+  font: 800 28px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.chat .bar small {
+  font-size: 20px;
+  color: #6b6b6b;
+}
+
+.chat .bubble {
+  position: absolute;
+  box-sizing: border-box;
+  border: 4px solid #151515;
+  border-radius: 24px;
+  box-shadow: 5px 5px 0 #151515;
+  font-size: 21px;
+  line-height: 1.34;
+  padding: 14px 18px;
+}
+
+.chat .bubble.me {
+  right: 20px;
+  background: #e5fbc9;
+  border-bottom-right-radius: 6px;
+  font-weight: 700;
+}
+
+.chat .bubble.bot {
+  left: 20px;
+  width: 404px;
+  background: #fffdf7;
+  border-bottom-left-radius: 6px;
+}
+
+.chat .bubble p {
+  margin: 0 0 10px;
+}
+
+.chat .bubble p:last-child {
+  margin: 0;
+}
+
+.chat .open {
+  position: absolute;
+  left: 20px;
+  width: 404px;
+  height: 66px;
+  box-sizing: border-box;
+  border: 4px solid #151515;
+  border-radius: 18px;
+  box-shadow: 5px 5px 0 #151515;
+  background: var(--sky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font: 800 24px var(--font-sans);
+}
+
+.chat .input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  padding: 14px 20px 30px;
+  box-sizing: border-box;
+  background: #fffdf7;
+  border-top: 4px solid #151515;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  color: #8a8a8a;
+}
+
+/* L'écran de l'app s'ouvre par-dessus la conversation, comme une Mini App. */
+.device .sheet {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 68px;
+}
+
+/* Les quatre activités, côte à côte : elles défilent d'un verbe à l'autre. */
+.device .strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.device .strip img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -15,6 +15,8 @@ import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { PianoKeyboard } from '../components/PianoKeyboard.tsx'
 import { DifficultyMeter } from '../components/Paths.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
+import { Mascot } from '../components/Mascot.tsx'
+import { FlowStatus } from '../components/FlowStatus.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { lessonStack } from '../lib/useLesson.ts'
@@ -134,7 +136,7 @@ export function ActivityScreen() {
   }
 
   return (
-    <Screen>
+    <Screen className="flow-activity">
       <FloatingConsigne proposal={proposal} show={!loading && consignePassed} compact={Boolean(proposal && keyboardMelody(proposal.activityId))} />
       {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
       <div className="flex flex-wrap items-center gap-3">
@@ -162,13 +164,14 @@ export function ActivityScreen() {
           {proposal && !loading ? (
             <motion.div
               key={proposal.id}
-              initial={{ opacity: 0, rotateY: 95, scale: 0.94 }}
-              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-              exit={{ opacity: 0, rotateY: -95, scale: 0.94 }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformOrigin: 'center' }}
             >
-              <Card padding="none" className="gap-0 shadow-pop">
+              <section className="flow-idea"><div><small>{step ? 'À toi de jouer' : 'Une idée pour toi'}</small><p>{step ? 'Avance à ton rythme.' : 'Un petit moment pour ta passion.'}</p></div><Mascot pose={melody ? 'piano' : 'idea'} size={90}/></section>
+              <Card padding="none" className="gap-0 flow-task">
                 {/* Le haut de la carte : la scène de la passion. */}
                 <PassionArtwork passion={passionId} className="da-activity-art" />
                 <div className="flex flex-col gap-2 p-4">
@@ -272,29 +275,11 @@ export function ActivityScreen() {
 
 /** Le dos de la carte, pendant qu'on en tire une : la couleur de la passion, des motifs, un point d'interrogation. */
 function CardBack({ passion }: { passion: PassionId }) {
-  const Icon = PASSION_ICONS[passion]
-  return (
-    <motion.div
-      initial={{ opacity: 0, rotateY: 95, scale: 0.94 }}
-      animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-      exit={{ opacity: 0, rotateY: -95, scale: 0.94 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className={cn('relative flex h-64 flex-col items-center justify-center gap-3 overflow-hidden rounded-lg border-[2.5px] border-outline shadow-pop', PASSION_COLORS[passion].bg)}
-    >
-      {/* Motif du dos de carte. */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-3 rounded-md border-2 border-dashed border-outline/50"
-        style={{ backgroundImage: 'radial-gradient(color-mix(in srgb, var(--paper) 55%, transparent) 2px, transparent 2.5px)', backgroundSize: '18px 18px' }}
-      />
-      <span className="relative flex h-20 w-20 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper font-display text-46 font-extrabold text-on-color shadow-chip">?</span>
-      <span className="relative inline-flex items-center gap-2 rounded-pill border-2 border-outline bg-paper px-3 py-1 text-14 font-bold text-on-color">
-        <Icon size={16} strokeWidth={2.4} aria-hidden="true" />
-        On tire une carte pour toi…
-      </span>
-      <Sparkle size={30} color="var(--paper)" className="motion-loop anim-spin-slow absolute top-6 right-6" style={{ '--spin-duration': '6s' } as React.CSSProperties} />
-    </motion.div>
-  )
+  return <div className="flow-loading">
+    <PassionArtwork passion={passion} className="da-activity-art"/>
+    <FlowStatus title="Une idée arrive" description="On prépare ton activité." pose="think"/>
+    <Skeleton className="h-5 w-3/4"/><Skeleton className="mt-3 h-4 w-full"/><Skeleton className="mt-2 h-4 w-4/5"/>
+  </div>
 }
 
 /** Étape de parcours : le parcours, la marche (difficulté) et sa place dans l'ascension. */
@@ -402,9 +387,10 @@ function PlayedValidate({
   }, [played])
   return (
     <div className="flex flex-col gap-2">
+      {saving && <FlowStatus title="Ton morceau rejoint ta galerie" description="On enregistre ce que tu viens de jouer." pose="wait"/>}
       <Button variant="good" className="w-full" disabled={!played || saving || disabled} onClick={onValidate} aria-describedby="lesson-hint">
         {saving ? <LoaderCircle className="motion-safe:animate-spin" aria-hidden="true" /> : played ? <Check aria-hidden="true" /> : <Piano aria-hidden="true" />}
-        {played ? (lesson ? 'Valider la leçon' : 'Valider') : 'Joue le morceau pour valider'}
+        {saving ? 'Enregistrement…' : played ? (lesson ? 'Valider la leçon' : 'J’ai terminé') : 'Joue le morceau pour valider'}
       </Button>
       <p id="lesson-hint" role={error ? 'alert' : undefined} className={cn('text-center text-12', error ? 'font-bold text-ink' : 'text-ink-soft')}>
         {error ?? (played ? (lesson ? 'Bravo\u00A0! Valide, et l’étape suivante t’attend.' : 'Bravo\u00A0! Il rejoint ton répertoire.') : 'Ça se valide au clavier, dès la dernière note.')}
@@ -443,7 +429,7 @@ function ValidateButton({
     return (
       <Button variant="good" className="w-full" onClick={onValidate} disabled={disabled}>
         <Check aria-hidden="true" />
-        Valider
+        J’ai terminé
       </Button>
     )
   }
@@ -465,7 +451,7 @@ function ValidateButton({
           />
         )}
         {locked ? <Hourglass className="relative" aria-hidden="true" /> : <Check aria-hidden="true" />}
-        <span className="relative">Valider</span>
+        <span className="relative">J’ai terminé</span>
       </Button>
       <p id="validate-hint" className="text-center text-12 text-ink-soft">
         {locked

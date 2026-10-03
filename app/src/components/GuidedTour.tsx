@@ -103,7 +103,7 @@ export function GuidedTour() {
       </DialogPrimitive.Overlay>
       <DialogPrimitive.Content ref={card} tabIndex={-1} className="tour-card" data-side={position.side} style={{ top: position.top, left: position.left, width: position.width, maxHeight: viewport.height - 32 }} onOpenAutoFocus={event => { event.preventDefault(); card.current?.focus({ preventScroll: true }) }} onCloseAutoFocus={event => { event.preventDefault(); requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-tour-target="swipe"]')?.focus({ preventScroll: true })) }} onPointerDownOutside={event => event.preventDefault()}>
         {position.showPointer && <span className="tour-pointer" style={{ left: position.pointer }} aria-hidden="true"/>}
-        <span className="tour-minuton"><MinutonFigure size={77} animated={false}/></span>
+        <span className="tour-minuton"><MinutonFigure pose={(['welcome','draw','idea','cheer'] as const)[step]} size={77} animated={false}/></span>
         <div className="tour-card-body">
           <div className="tour-progress" aria-label={`Étape ${step + 1} sur ${TOUR_STEPS.length}`}><span>{step + 1}/{TOUR_STEPS.length}</span><span className="tour-dots" aria-hidden="true">{TOUR_STEPS.map((_, i) => <i key={i} data-done={i <= step}/>)}</span></div>
           <DialogPrimitive.Title>{current.title}</DialogPrimitive.Title>

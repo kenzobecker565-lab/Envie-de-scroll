@@ -89,7 +89,7 @@ function DialogContent({
               <div className="flex h-8 shrink-0 touch-none items-center justify-center" onPointerDown={(event) => drag.start(event)} aria-hidden="true">
                 <span className="h-1.5 w-12 rounded-pill bg-outline" />
               </div>
-              <div className="flex flex-col gap-4 overflow-y-auto px-4 pb-[max(24px,env(safe-area-inset-bottom))]">{children}</div>
+              <div data-slot="dialog-scroll" className="flex min-h-0 flex-col gap-4 overflow-y-auto overscroll-contain px-4 pb-[max(24px,env(safe-area-inset-bottom))] [&>*]:shrink-0">{children}</div>
               {showCloseButton && (
                 <DialogPrimitive.Close
                   data-slot="dialog-close"

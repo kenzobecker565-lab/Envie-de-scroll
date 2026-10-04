@@ -6,7 +6,7 @@
  * production, sinon l'historique des utilisateurs ne correspondrait plus.
  */
 
-export const PASSION_IDS = ['dessin', 'ecriture', 'musique', 'cinema', 'piano'] as const
+export const PASSION_IDS = ['dessin', 'ecriture', 'musique', 'cinema', 'piano', 'rythme', 'logique', 'francais'] as const
 export type PassionId = (typeof PASSION_IDS)[number]
 
 /** Les trois temps proposés dans cette V1 (en minutes). */

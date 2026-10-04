@@ -23,7 +23,7 @@ export function HomeScreen() {
  const today=todayKey(), {word}=dailyWord(today), startChallenge=useStartChallenge()
  const doneToday=wordDone(today,stats.challenge??[])
  const period=dayPeriod(new Date().getHours()), hello=period==='night'||period==='dusk'?'Bonsoir':'Bonjour'
- const ordered=['piano','dessin','ecriture','cinema','musique'] as PassionId[]
+ const ordered=['dessin','piano','ecriture','rythme','logique','francais'] as PassionId[]
  const passions=ordered.filter(id=>user.passions.includes(id)||stats.byPassion.some(row=>row.passion===id))
  const featured=featuredPath(user.passions,id=>statsFor(stats.byPassion,id).steps,id=>passionLevel(id,statsFor(stats.byPassion,id).minutes).level,user.skills)
  const learning=featured?.progress

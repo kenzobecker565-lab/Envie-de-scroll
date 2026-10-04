@@ -1,6 +1,8 @@
 /** Une icône Lucide par passion et par mood. */
 
 import {
+  Search,
+  BookOpen,
   Clapperboard,
   CloudLightning,
   Coffee,
@@ -23,6 +25,7 @@ import {
 import type { MoodId, PassionId, ScrollMoment } from '@scroll-up/shared'
 
 export const PASSION_ICONS: Record<PassionId, LucideIcon> = {
+ rythme: Headphones, logique: Search, francais: BookOpen,
   dessin: Pencil,
   ecriture: Feather,
   musique: Headphones,
@@ -50,6 +53,7 @@ export const PASSION_COLORS: Record<
   PassionId,
   { bg: string; on: string; soft: string; badge: 'sky' | 'lilac' | 'good' | 'warm' | 'default'; card: 'sky' | 'lilac' | 'good' | 'warm' | 'accent' }
 > = {
+ rythme: { bg: 'bg-good', on: 'data-[state=on]:bg-good', soft: 'bg-good-soft', badge: 'good', card: 'good' }, logique: { bg: 'bg-warm', on: 'data-[state=on]:bg-warm', soft: 'bg-warm-soft', badge: 'warm', card: 'warm' }, francais: { bg: 'bg-lilac', on: 'data-[state=on]:bg-lilac', soft: 'bg-lilac-soft', badge: 'lilac', card: 'lilac' },
   dessin: { bg: 'bg-sky', on: 'data-[state=on]:bg-sky', soft: 'bg-sky-soft', badge: 'sky', card: 'sky' },
   ecriture: { bg: 'bg-lilac', on: 'data-[state=on]:bg-lilac', soft: 'bg-lilac-soft', badge: 'lilac', card: 'lilac' },
   musique: { bg: 'bg-good', on: 'data-[state=on]:bg-good', soft: 'bg-good-soft', badge: 'good', card: 'good' },

@@ -23,3 +23,5 @@ export * from './keyboard.ts'
 export * from './shop.ts'
 
 export * from './pianoClassics.ts'
+
+export * from './workshops.ts'

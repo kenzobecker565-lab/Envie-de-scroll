@@ -13,6 +13,7 @@
  * de la proposition, parmi les listes de prompts.ts.
  */
 
+import { WORKSHOP_ACTIVITIES } from './workshops.ts'
 import { getChallengeActivity, isChallengeId } from './monthly.ts'
 import { getPathStep, isPathStepId } from './paths.ts'
 import { frenchTypography } from './typography.ts'
@@ -21,7 +22,9 @@ import type { Activity, Duration, ExtraKind, PassionId } from './types.ts'
 type RawActivity = string | [text: string, extra: ExtraKind]
 type RawPassion = Record<Duration, [RawActivity, RawActivity, RawActivity, RawActivity, RawActivity]>
 
+function workshopRaw(passion: PassionId): RawPassion { return Object.fromEntries([5,15,30].map(duration => [duration, WORKSHOP_ACTIVITIES.filter(a=>a.passion===passion&&a.duration===duration&&a.number<16).map(a=>a.text)])) as RawPassion }
 export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
+  rythme: workshopRaw('rythme'), logique: workshopRaw('logique'), francais: workshopRaw('francais'),
   dessin: {
     5: [
       "Dessine un objet de ton bureau",
@@ -150,7 +153,7 @@ function build(): Activity[] {
   const list: Activity[] = []
   for (const passion of Object.keys(RAW_ACTIVITIES) as PassionId[]) {
     DURATION_ORDER.forEach((duration, durationIndex) => {
-      RAW_ACTIVITIES[passion][duration].forEach((raw, index) => {
+      RAW_ACTIVITIES[passion]![duration].forEach((raw, index) => {
         const number = durationIndex * 5 + index + 1
         const [text, extra] = typeof raw === 'string' ? [raw, undefined] : raw
         list.push({
@@ -167,7 +170,7 @@ function build(): Activity[] {
   return list
 }
 
-export const ACTIVITIES: readonly Activity[] = build()
+export const ACTIVITIES: readonly Activity[] = [...build(), ...WORKSHOP_ACTIVITIES.filter(a=>a.number>=16)]
 
 const BY_ID = new Map(ACTIVITIES.map((activity) => [activity.id, activity]))
 
@@ -178,7 +181,7 @@ export function getActivity(id: string): Activity | undefined {
 
 /** Une étape de parcours ou un mot du jour : une activité fixée d'avance, sans « Une autre idée ». */
 export function isFixedActivityId(id: string): boolean {
-  return isPathStepId(id) || isChallengeId(id)
+  return isPathStepId(id) || isChallengeId(id) || (id.includes('-lesson-') && BY_ID.has(id))
 }
 
 /** Vrai pour les 60 activités de base (pas les étapes de parcours) : celles de la collection. */
@@ -188,5 +191,5 @@ export function isBaseActivity(id: string): boolean {
 
 /** Les 5 activités d'une passion pour un temps donné. */
 export function activitiesFor(passion: PassionId, duration: Duration): Activity[] {
-  return ACTIVITIES.filter((activity) => activity.passion === passion && activity.duration === duration)
+  return ACTIVITIES.filter((activity) => activity.passion === passion && activity.duration === duration && activity.number < 16)
 }

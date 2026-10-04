@@ -12,6 +12,7 @@ import type { PassionId } from './types.ts'
 
 /** `{d}` : la durée en minutes ; `{n}` : le nombre de mots écrits (Écriture, si un texte a été enregistré). */
 const RAW_CHEERS: Record<PassionId, string[]> = {
+ rythme: ['Ton beat prend forme.'], logique: ['Tu as croisé les bons indices.'], francais: ['Une règle de plus en pratique.'],
   dessin: [
     'Un dessin de plus dans ton carnet.',
     'Ta main progresse, même quand tu ne le vois pas.',

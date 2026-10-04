@@ -80,6 +80,7 @@ export interface ProposalDTO {
 }
 
 export interface CompletionDTO {
+  workshop?: import('./workshops.ts').WorkshopResult | null
   id: string
   activityId: string
   passion: PassionId
@@ -179,6 +180,7 @@ export interface CreateProposalRequest {
  * quand une photo (champ `photo`) accompagne un dessin.
  */
 export interface CompleteRequest {
+  workshop?: import('./workshops.ts').WorkshopSubmission
   proposalId: string
   text?: string
   exploredTitle?: string

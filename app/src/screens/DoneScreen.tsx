@@ -2,6 +2,8 @@ import { ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, S
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import {
+  WORKSHOP_LESSONS,
+  workshopConfig,
   cheerFor,
   collectionSize,
   countWords,
@@ -75,7 +77,7 @@ export function DoneScreen() {
   const before = statsFor(done.previousStats.byPassion, passion)
   const after = statsFor(done.response.stats.byPassion, passion)
   const level = levelCrossed(passion, before.minutes, after.minutes)
-  const discovered = isBaseActivity(activityId) && !before.tried.includes(activityId)
+  const discovered = isBaseActivity(activityId) && !activityId.includes('-lesson-') && !before.tried.includes(activityId)
   // Une étape de parcours : la marche franchie, la suivante qui s'ouvre (ou le badge).
   const step = getPathStep(activityId)
   const challenge = getChallengeActivity(activityId)
@@ -98,6 +100,14 @@ export function DoneScreen() {
       projectId: done.continuation?.projectId,
     } })
     reset([{ name: 'home' }, { name: 'activity' }])
+  }
+
+  const workshop = workshopConfig(activityId)
+  const nextWorkshopLesson = workshop?.lesson !== undefined && workshop.lesson < 2 ? WORKSHOP_LESSONS[workshop.activity.passion as keyof typeof WORKSHOP_LESSONS][workshop.lesson + 1] : undefined
+  const continueWorkshop = () => {
+    if (!workshop || workshop.lesson === undefined || !nextWorkshopLesson) return
+    dispatch({ type: 'newFlow', flow: { passion, fixedPassion: passion, duration: 5, fixedStep: `${passion}-lesson-${workshop.lesson + 2}` } })
+    reset([{ name: 'home' }, { name: 'learn' }, { name: 'learnPassion', passion }, { name: 'activity' }])
   }
 
   // Le mode progression : une étape réussie propose aussitôt la suivante.
@@ -224,8 +234,8 @@ export function DoneScreen() {
       </div>
 
       <div className="mt-auto flex w-full flex-col">
-        <PrimaryAction text="Une nouvelle activité" icon={<Shuffle aria-hidden="true" />} onClick={continuePassion}>
-          <p className="mb-2 text-13 text-ink-soft">On continue en {getPassion(passion).label}, avec le même temps disponible.</p>
+        <PrimaryAction text={nextWorkshopLesson ? "Continuer la leçon suivante" : "Une nouvelle activité"} icon={<Shuffle aria-hidden="true" />} onClick={nextWorkshopLesson ? continueWorkshop : continuePassion}>
+          <p className="mb-2 text-13 text-ink-soft">{nextWorkshopLesson ? nextWorkshopLesson.title : `On continue en ${getPassion(passion).label}, avec le même temps disponible.`}</p>
           <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
             <House aria-hidden="true" />
             Retour à l’accueil

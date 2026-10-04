@@ -1,4 +1,5 @@
 import {
+  activePassions,
   canPlayChallenge,
   canPlayStep,
   drawExtra,
@@ -80,7 +81,7 @@ export async function createProposal(
   { random = Math.random, now = new Date() }: { random?: () => number; now?: Date } = {},
 ): Promise<Proposal> {
   const { passion, mood, duration } = request
-  if (!parsePassions(user).includes(passion)) throw badRequest('Cette passion ne fait pas partie de ton profil')
+  if (![...parsePassions(user), ...activePassions(parsePassions(user))].includes(passion)) throw badRequest('Cette passion ne fait pas partie de ton profil')
 
   let currentId: string | undefined
   if (request.replacing) {

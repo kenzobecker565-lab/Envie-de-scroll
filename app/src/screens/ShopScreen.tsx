@@ -1,6 +1,6 @@
 import { AppHeader } from '../components/AppHeader.tsx'
-import { useEffect, useState } from 'react'
-import { ArrowLeft, Check, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles } from 'lucide-react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { ArrowLeft, Check, ChevronLeft, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles } from 'lucide-react'
 import { getShopItem, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -26,7 +26,7 @@ const COLLECTIONS = [
   { id: 'adventure', title: 'Univers', subtitle: 'Éveille ton imagination', outfits: ['mascot-athena', 'mascot-astronaute-f'], Icon: Sparkles },
   { id: 'halloween', title: 'Halloween', subtitle: 'Des costumes à frissonner', outfits: ['mascot-halloween-vampire', 'mascot-halloween-sorciere'], Icon: Ghost },
 ] as const
-const FEATURED = COLLECTIONS[3]
+const SHOWCASE = [COLLECTIONS[3], COLLECTIONS[0], COLLECTIONS[2], COLLECTIONS[1]]
 type CollectionId = typeof COLLECTIONS[number]['id']
 type Shelf = 'discover' | 'owned' | 'favorites'
 type Gender = 'all' | 'male' | 'female'
@@ -41,11 +41,26 @@ function CollectionArt({ outfits }: { outfits: readonly string[] }) {
   return <div className="skin-collection-art" aria-hidden="true">{outfits.map(id => <MinutonFigure key={id} outfit={id} size={150} animated={false}/>)}</div>
 }
 
+function SwipeSurface({ children, onStep, label, className }: { children: ReactNode; onStep: (direction: number) => void; label: string; className: string }) {
+  const start = useRef<{ x: number; y: number } | null>(null)
+  const swiped = useRef(false)
+  return <div className={className} role="region" aria-label={label} tabIndex={0}
+    onKeyDown={event => { if (event.target !== event.currentTarget) return; if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); onStep(event.key === 'ArrowRight' ? 1 : -1) } }}
+    onTouchStart={event => { swiped.current = false; const touch = event.touches[0]; start.current = touch ? { x: touch.clientX, y: touch.clientY } : null }}
+    onTouchCancel={() => { start.current = null }}
+    onTouchEnd={event => { const touch = event.changedTouches[0], origin = start.current; start.current = null; if (!touch || !origin) return; const dx = touch.clientX - origin.x, dy = touch.clientY - origin.y; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) { swiped.current = true; onStep(dx < 0 ? 1 : -1) } }}
+    onClickCapture={event => { if (swiped.current) { event.preventDefault(); event.stopPropagation(); swiped.current = false } }}>
+    {children}
+  </div>
+}
+
 export function ShopScreen({ library = false }: { category?: ShopCategory; library?: boolean }) {
   const { state, dispatch } = useAppState()
   const shop = useShop()
   const [shelf, setShelf] = useState<Shelf>(library ? 'owned' : 'discover')
   const [collection, setCollection] = useState<CollectionId>()
+  const [showcaseIndex, setShowcaseIndex] = useState(0)
+  const [skinIndex, setSkinIndex] = useState(0)
   const [gender, setGender] = useState<Gender>('all')
   const [query, setQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
@@ -106,7 +121,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
   }
   const preview = (item: ShopItem) => { setError(undefined); setSelected(item) }
   const changeShelf = (next: Shelf) => { setShelf(next); setCollection(undefined); setGender('all'); setQuery('') }
-  const openCollection = (id: CollectionId) => { setCollection(id); setGender('all'); setQuery(''); setSearchOpen(false) }
+  const openCollection = (id: CollectionId) => { setSkinIndex(0); setCollection(id); setGender('all'); setQuery(''); setSearchOpen(false) }
   const activeCollection = COLLECTIONS.find(value => value.id === collection)
   const items = SKINS.filter(item => (!collection || groupOf(item) === collection)
     && (shelf !== 'owned' || shop.owned.includes(item.id))
@@ -118,7 +133,15 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
   const active = selected ? shop.equipped.mascot === selected.id : false
   const overview = shelf === 'discover' && !collection && !query && gender === 'all'
 
-  return <Screen tabs className="studio-shop skin-shop">
+  const showcase = SHOWCASE[showcaseIndex] ?? COLLECTIONS[3]
+  const stepShowcase = (direction: number) => setShowcaseIndex(value => (value + direction + SHOWCASE.length) % SHOWCASE.length)
+  const spotlight = items.length ? items[skinIndex % items.length] : undefined
+  const stepSkin = (direction: number) => { if (items.length) setSkinIndex(value => (value + direction + items.length) % items.length) }
+  const world = selected ? groupOf(selected) : collection ?? showcase.id
+  const collectionOwned = activeCollection ? SKINS.filter(item => groupOf(item) === activeCollection.id && shop.owned.includes(item.id)).length : 0
+
+  return <Screen tabs className="studio-shop skin-shop immersive-shop">
+    <div className="skin-world" aria-hidden="true">{COLLECTIONS.map(value => <div key={value.id} data-world={value.id} data-active={world === value.id} style={{ backgroundImage: `url('/art/shop-world-${value.id}.webp')` }}/>)}</div>
     <AppHeader/>
     <div className="studio-page-heading"><div><h1>Boutique</h1><p className="skin-shop-intro">Trouve le Minuton qui te ressemble.</p></div><button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><Search size={18}/></button></div>
     <div className="skin-shop-tabs" aria-label="Parcourir la boutique">{([{id:'discover', label:'Minutons'}, {id:'owned',label:'Mes achats'}, {id:'favorites',label:'Favoris'}] as const).map(tab => <button type="button" key={tab.id} aria-pressed={shelf === tab.id} onClick={() => changeShelf(tab.id)}>{tab.label}{tab.id === 'owned' && ownedCount > 0 && <span>{ownedCount}</span>}{tab.id === 'favorites' && favorites.length > 0 && <span>{favorites.length}</span>}</button>)}</div>
@@ -129,13 +152,27 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
     {error && !selected && <div role="alert" className="mt-3"><p>{error}</p><Button variant="secondary" size="sm" onClick={() => void refresh()}><RotateCcw/>Réessayer</Button></div>}
     {loading && <p role="status" className="mt-4">Chargement de tes achats…</p>}
     {overview && <>
-      <section className="skin-featured" data-collection={FEATURED.id} aria-label="Collection à la une"><div className="skin-featured-top"><span><Ghost size={14}/>À la une</span><small>{countOf(FEATURED.id)} tenues</small></div><CollectionArt outfits={FEATURED.outfits}/><div className="skin-featured-copy"><h2>La magie d’Halloween</h2><p>Un costume pour chaque petit frisson.</p><button type="button" onClick={() => openCollection(FEATURED.id)}>Voir la collection<ChevronRight size={18}/></button></div></section>
+      <SwipeSurface className="skin-world-carousel" label="Collections à parcourir" onStep={stepShowcase}>
+        <section className="skin-featured" data-collection={showcase.id} aria-label="Collection à la une">
+          <div className="skin-featured-top"><span><showcase.Icon size={14}/>À explorer</span><small>{countOf(showcase.id)} tenues</small></div>
+          <h2 className="skin-showcase-title">{showcase.title}</h2><CollectionArt outfits={showcase.outfits}/>
+          <div className="skin-featured-copy"><p>{showcase.subtitle}</p><button type="button" onClick={() => openCollection(showcase.id)}>Voir la collection<ChevronRight size={18}/></button></div>
+        </section>
+      </SwipeSurface>
+      <div className="skin-carousel-controls"><button type="button" aria-label="Collection précédente" onClick={() => stepShowcase(-1)}><ChevronLeft size={20}/></button><div><div className="skin-carousel-dots">{SHOWCASE.map((value,index) => <button type="button" key={value.id} aria-label={`Afficher la collection ${value.title}`} aria-pressed={showcaseIndex === index} onClick={() => setShowcaseIndex(index)}/>)}</div><p aria-live="polite">{showcaseIndex + 1} / {SHOWCASE.length} collections</p></div><button type="button" aria-label="Collection suivante" onClick={() => stepShowcase(1)}><ChevronRight size={20}/></button></div>
+      {favorites.length > 0 && <section className="skin-wishes"><div className="skin-section-title"><h2>Tes envies</h2><button type="button" onClick={() => changeShelf('favorites')}>Voir les favoris<ChevronRight size={14}/></button></div><div>{SKINS.filter(item => favorites.includes(item.id)).slice(0,3).map(item => <button type="button" key={item.id} onClick={() => preview(item)}><MinutonFigure outfit={item.id} size={85} animated={false}/><strong>{item.title.replace('Minuton ', '')}</strong><Price value={item.price} size={16}/></button>)}</div></section>}
       <section className="skin-collections"><div className="skin-section-title"><h2>Explore les collections</h2><span>4 univers</span></div><div className="skin-collections-grid">{COLLECTIONS.map(value => <button type="button" key={value.id} data-collection={value.id} onClick={() => openCollection(value.id)} aria-label={`Explorer la collection ${value.title}`}><CollectionArt outfits={value.outfits}/><div><strong><value.Icon size={15}/>{value.title}</strong><span>{countOf(value.id)} tenues<ChevronRight size={15}/></span></div></button>)}</div></section>
     </>}
-    {activeCollection && <><button type="button" className="skin-back" onClick={() => { setCollection(undefined); setQuery(''); setGender('all') }}><ArrowLeft size={16}/>Toutes les collections</button><section className="skin-collection-banner" data-collection={activeCollection.id}><CollectionArt outfits={activeCollection.outfits}/><div><h2>{activeCollection.title}</h2><p>{activeCollection.subtitle}</p></div></section></>}
+    {activeCollection && <><button type="button" className="skin-back" onClick={() => { setCollection(undefined); setQuery(''); setGender('all') }}><ArrowLeft size={16}/>Toutes les collections</button><section className="skin-collection-intro"><h2>{activeCollection.title}</h2><p>{countOf(activeCollection.id)} tenues · {activeCollection.subtitle}</p></section>
+      {spotlight && <SwipeSurface className="skin-spotlight" label="Tenues à parcourir" onStep={stepSkin}>
+        <div className="skin-spotlight-stage"><MinutonFigure key={spotlight.id} outfit={spotlight.id} size={250} animated={false}/><button type="button" aria-label="Tenue précédente" onClick={() => stepSkin(-1)}><ChevronLeft size={20}/></button><button type="button" aria-label="Tenue suivante" onClick={() => stepSkin(1)}><ChevronRight size={20}/></button></div>
+        <h3>{spotlight.title.replace('Minuton ', '')}</h3><Price value={spotlight.price}/><button type="button" className="skin-spotlight-open" onClick={() => preview(spotlight)}>Voir cette tenue<ChevronRight size={16}/></button><p aria-live="polite">{skinIndex % items.length + 1} / {items.length} tenues</p>
+      </SwipeSurface>}
+      <section className="skin-collection-progress" aria-label="Progression de la collection"><div><strong>Ta collection</strong><span>{collectionOwned} / {countOf(activeCollection.id)} tenues</span></div><progress max={countOf(activeCollection.id)} value={collectionOwned}/></section>
+    </>}
     <section className="skin-catalogue" aria-label="Catalogue des tenues"><div className="skin-section-title"><h2>{activeCollection ? 'Choisis ta tenue' : shelf === 'owned' ? 'Mes tenues' : shelf === 'favorites' ? 'Mes envies' : 'Toutes les tenues'}</h2><span>{items.length} {items.length === 1 ? 'tenue' : 'tenues'}</span></div>
       {!overview && !activeCollection && <p className="skin-shelf-caption">{shelf === 'owned' ? 'Tes tenues débloquées, prêtes à être portées.' : shelf === 'favorites' ? 'Les tenues que tu as gardées de côté.' : 'Une tenue pour chaque envie.'}</p>}
-      <div className="skin-gender-filters" aria-label="Filtrer les tenues">{([{id:'all',label:'Tout'}, {id:'male',label:'Masculins'}, {id:'female',label:'Féminins'}] as const).map(filter => <button type="button" key={filter.id} aria-pressed={gender === filter.id} onClick={() => setGender(filter.id)}>{filter.label}</button>)}</div>
+      <div className="skin-gender-filters" aria-label="Filtrer les tenues">{([{id:'all',label:'Tout'}, {id:'male',label:'Masculins'}, {id:'female',label:'Féminins'}] as const).map(filter => <button type="button" key={filter.id} aria-pressed={gender === filter.id} onClick={() => { setGender(filter.id); setSkinIndex(0) }}>{filter.label}</button>)}</div>
       <div className="studio-shop-grid">{items.map(item => {
         const bought = shop.owned.includes(item.id), equipped = shop.equipped.mascot === item.id
         return <Card key={item.id} padding="none" className="shop-product min-w-0 gap-0 overflow-hidden" data-category="mascot">
@@ -146,7 +183,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
       {!items.length && <div className="skin-empty"><Heart size={27}/><p>{query ? 'Aucune tenue ne correspond à ta recherche.' : shelf === 'favorites' ? 'Touche le cœur d’une tenue pour la retrouver ici.' : shelf === 'owned' ? 'Tes prochaines tenues débloquées apparaîtront ici.' : 'Aucune tenue avec ces filtres.'}</p><button type="button" onClick={() => { changeShelf('discover'); setSearchOpen(false) }}>Explorer les tenues<ChevronRight size={15}/></button></div>}
     </section>
     <p className="skin-shop-footnote">Tes achats ne diminuent pas tes niveaux ni tes badges.{shop.bonus > 0 && <span>Crédit de test inclus dans le solde.</span>}</p>
-    <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog">
+    <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog immersive-preview" data-world={selected ? groupOf(selected) : undefined}>
       {selected && <><DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>Collection {COLLECTIONS.find(value => value.id === groupOf(selected))?.title}</DialogDescription></DialogHeader><ShopPreview item={selected} detail/><p className="skin-preview-description">{selected.description}</p><button type="button" className="skin-preview-favorite" aria-pressed={favorites.includes(selected.id)} onClick={() => toggleFavorite(selected.id)}><Heart size={17} fill={favorites.includes(selected.id) ? 'currentColor' : 'none'}/>{favorites.includes(selected.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button>
         {error && <p role="alert">{error}</p>}
         {owned ? <Button disabled={busy || loading || active} onClick={() => void equip(selected)}>{busy ? 'Activation…' : active ? 'Porté actuellement' : 'Porter cette tenue'}</Button> : <><div className="skin-purchase-info"><span>Achat permanent</span><Price value={selected.price}/></div><p className="skin-purchase-balance">{shop.balance >= selected.price ? <>Solde après l’achat<Price value={shop.balance - selected.price} size={18}/></> : <>Il te manque<Price value={selected.price - shop.balance} size={18}/></>}</p><Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>Acheter · <Price value={selected.price}/></>}</Button><p className="skin-purchase-caption">Retrouve cette tenue dans Mes achats après l’achat.</p></>}

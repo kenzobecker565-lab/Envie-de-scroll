@@ -372,3 +372,78 @@ html[data-scene] .skin-preview-dialog [data-slot='button'][data-variant='ghost']
 @media(max-width:359px){.skin-shop .studio-shop-grid .shop-art{height:137px}.skin-shop .studio-shop-grid .shop-art>.minuton-art{width:129px!important;height:129px!important}.skin-shop .shop-product-body{padding:8px}.skin-shop .shop-product-body h3{font-size:13px}.skin-collections-grid strong{font-size:11px}.skin-featured-copy h2{font-size:22px}.skin-featured .skin-collection-art{height:165px}.skin-collection-banner h2{font-size:18px}}
 :root[data-screen='shop']:not([data-shop-theme]){--canvas:#FFFAF3;--surface-100:#FFF7ED;--surface-200:#FFFDFA;--surface-300:#ECE3EF;--ink:#422346;--ink-soft:#7B637E;--ink-faint:#9A829F;--line:#E6DDEA;--outline:#DED3E8;--accent:#71347D;--accent-strong:#71347D;--accent-soft:#F0E4F4;--lilac-soft:#F0E6FC;--good-soft:#E0F4E8;--good-ink:#235A46;--warm-soft:#FFF0C9;--warm-ink:#704D1B;--sky-soft:#E3EFFA;color-scheme:light}
 :root[data-screen='shop'][data-scene] .studio-tabbar button[aria-current]{color:#71347D}
+
+/* Décors immersifs par collection, sans modifier le défilement du document. */
+.skin-world{position:fixed;inset:0;max-width:480px;margin:auto;z-index:-1;pointer-events:none;background:#EEE3F4}
+.skin-world>div{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .45s ease}
+.skin-world>div[data-active='true']{opacity:1}
+.skin-world::after{content:'';position:absolute;inset:0;background:linear-gradient(#FFFDF522,#FFFDF511 45%,#FFFDF53D)}
+.immersive-shop .studio-page-heading{margin-top:19px}
+.immersive-shop .studio-page-heading h1{text-shadow:0 2px 9px #FFFDF8CC}
+.immersive-shop .skin-shop-intro{color:#634367;text-shadow:0 1px 6px #FFFDF8}
+.immersive-shop .studio-header{border-radius:16px;background:#FFFDF866;padding:5px 8px}
+.immersive-shop .skin-shop-tabs{background:#FFFDF8ED;border-color:#FFFDF8;margin-bottom:7px}
+.immersive-shop .shop-current-outfit{background:#FFFDF8E8;margin:8px 0;padding:5px 10px;border-color:#FFFDF8}
+.immersive-shop .skin-world-carousel{touch-action:pan-y}
+.immersive-shop .skin-featured{background:#FFFDF837;border:2px solid #FFFDF8E8;border-radius:28px;margin-top:13px;box-shadow:0 5px 18px #45205216}
+.immersive-shop .skin-featured-top{padding:12px 14px 0}
+.skin-showcase-title{font-size:28px;font-weight:1000;text-align:center;line-height:1.15;color:#512458;text-shadow:0 1px 8px #FFFDF8;margin-top:9px}
+.immersive-shop .skin-featured .skin-collection-art{height:225px;margin-top:4px}
+.immersive-shop .skin-featured .skin-collection-art>.minuton-art{max-width:180px}
+.immersive-shop .skin-collection-art::before{display:none}
+.immersive-shop .skin-featured-copy{background:#FFFDF898;padding:7px 17px 16px}
+.immersive-shop .skin-featured-copy p{margin-top:0;color:#65426D;font-weight:800}
+.immersive-shop .skin-featured-copy>button{margin-top:8px}
+.skin-carousel-controls{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0}
+.skin-carousel-controls>button,.skin-spotlight-stage>button{width:39px;height:39px;border-radius:50%;background:#FFFDF8EE;border:1px solid #DDCDE2;display:flex;align-items:center;justify-content:center;color:#673270;flex-shrink:0}
+.skin-carousel-controls>div{display:flex;flex-direction:column;gap:5px;align-items:center}
+.skin-carousel-controls p{font-size:11px;color:#58305F;background:#FFFDF8CF;border-radius:99px;padding:2px 9px}
+.skin-carousel-dots{display:flex;gap:0}
+.skin-carousel-dots button{width:28px;height:24px;position:relative}
+.skin-carousel-dots button::before{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:#C7B1D1;left:10px;top:8px;box-shadow:0 0 0 1px #FFFDF8}
+.skin-carousel-dots button[aria-pressed='true']::before{background:#753B80}
+.immersive-shop .skin-collections,.immersive-shop .skin-catalogue,.skin-wishes{background:#FFFDF8F0;border:1px solid #EADDEAC9;border-radius:22px;padding:14px;margin:15px 0 0;box-shadow:0 3px 12px #44204F0A}
+.immersive-shop .skin-section-title h2{font-size:18px}
+.immersive-shop .skin-collections-grid{gap:9px}
+.immersive-shop .skin-collections-grid .skin-collection-art{background-size:cover!important;background-position:center!important}
+.immersive-shop .skin-collections-grid [data-collection='sports'] .skin-collection-art{background-image:url('/art/shop-world-sports.webp')}
+.immersive-shop .skin-collections-grid [data-collection='arts'] .skin-collection-art{background-image:url('/art/shop-world-arts.webp')}
+.immersive-shop .skin-collections-grid [data-collection='adventure'] .skin-collection-art{background-image:url('/art/shop-world-adventure.webp')}
+.immersive-shop .skin-collections-grid [data-collection='halloween'] .skin-collection-art{background-image:url('/art/shop-world-halloween.webp')}
+.skin-wishes .skin-section-title>button{display:flex;gap:4px;align-items:center;font-size:10px;font-weight:850;color:#805087}
+.skin-wishes>div:last-child{display:flex;gap:8px}
+.skin-wishes>div:last-child>button{display:flex;flex:1;min-width:0;flex-direction:column;align-items:center;border:1px solid #E4D6E8;border-radius:14px;padding:7px;background:#F8F0F9;color:#66356E;font-size:11px;gap:5px}
+.skin-wishes strong{font-size:10px;line-height:1.3;overflow-wrap:anywhere}
+.immersive-shop .skin-back{border-radius:99px;background:#FFFDF8DF;width:max-content;max-width:100%;padding:0 12px;margin-top:13px}
+.skin-collection-intro{text-align:center;margin:16px 0 10px;background:#FFFDF880;border-radius:17px;padding:10px}
+.skin-collection-intro h2{font-size:29px;font-weight:1000;color:#53245B;line-height:1.15}
+.skin-collection-intro p{font-size:11px;margin-top:6px;color:#68446F}
+.skin-spotlight{touch-action:pan-y;border:2px solid #FFFDF8E6;border-radius:25px;background:#FFFDF840;display:flex;flex-direction:column;align-items:center;gap:8px;padding:13px;box-shadow:0 4px 14px #4E255C10}
+.skin-spotlight-stage{position:relative;width:100%;height:265px;display:flex;justify-content:center;align-items:center}
+.skin-spotlight-stage>.minuton-art{max-width:90%;height:100%!important}
+.skin-spotlight-stage>button{position:absolute;left:-5px;top:44%}
+.skin-spotlight-stage>button:last-child{left:auto;right:-5px}
+.skin-spotlight h3{font-size:24px;font-weight:1000;color:#53245B;text-align:center;line-height:1.2;text-shadow:0 1px 7px #FFFDF8}
+.skin-spotlight-open{display:flex;align-items:center;justify-content:center;gap:6px;background:#71347D;color:#FFFDF8;width:100%;min-height:44px;border-radius:99px;font-size:13px;font-weight:900;margin-top:3px}
+.skin-spotlight>p{font-size:11px;color:#65426D;background:#FFFDF8C9;border-radius:99px;padding:3px 11px}
+.skin-collection-progress{background:#FFFDF8ED;border:1px solid #E3D3E8;border-radius:17px;padding:12px 15px;margin-top:12px}
+.skin-collection-progress>div{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#67426E;font-size:12px}
+.skin-collection-progress strong{font-weight:950}
+.skin-collection-progress progress{display:block;appearance:none;width:100%;height:6px;border:0;border-radius:99px;overflow:hidden;margin-top:8px;background:#E8DEED}
+.skin-collection-progress progress::-webkit-progress-bar{background:#E8DEED;border-radius:99px}
+.skin-collection-progress progress::-webkit-progress-value{background:#9A68AE;border-radius:99px}
+.skin-collection-progress progress::-moz-progress-bar{background:#9A68AE;border-radius:99px}
+.immersive-shop .skin-shop-footnote{background:#FFFDF8DE;padding:9px;border-radius:12px;margin-top:16px}
+html[data-scene] .immersive-preview{background-size:cover;background-position:center;max-height:94dvh}
+html[data-scene] .immersive-preview[data-world='halloween']{background-image:linear-gradient(#FFFDF8A6,#FFFDF8DE),url('/art/shop-world-halloween.webp')}
+html[data-scene] .immersive-preview[data-world='sports']{background-image:linear-gradient(#FFFDF8A6,#FFFDF8DE),url('/art/shop-world-sports.webp')}
+html[data-scene] .immersive-preview[data-world='adventure']{background-image:linear-gradient(#FFFDF866,#FFFDF8D9),url('/art/shop-world-adventure.webp')}
+html[data-scene] .immersive-preview[data-world='arts']{background-image:linear-gradient(#FFFDF8A6,#FFFDF8DE),url('/art/shop-world-arts.webp')}
+.immersive-preview .shop-art{background:#FFFDF819!important;border:0;min-height:275px;padding:8px}
+.immersive-preview .shop-art>span.absolute{display:none}
+.immersive-preview .shop-art>.minuton-art{width:245px!important;height:270px!important}
+.immersive-preview .skin-preview-description{background:#FFFDF8D9;color:#67476E;border-radius:13px;padding:10px;font-size:12px}
+.immersive-preview .skin-purchase-info{background:#FFFDF8ED}
+@media(max-width:359px){.immersive-shop .skin-featured .skin-collection-art{height:180px}.skin-showcase-title{font-size:25px}.skin-spotlight-stage{height:235px}.immersive-shop .skin-section-title h2{font-size:16px}.immersive-shop .skin-collections,.immersive-shop .skin-catalogue,.skin-wishes{padding:10px}.skin-spotlight h3{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.skin-world>div{transition:none}}
+.immersive-shop .studio-header{background:#FFFDF8D9}

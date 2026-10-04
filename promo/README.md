@@ -1,5 +1,7 @@
 # Pub de 15 secondes (motion design)
 
+> 🆕 **La pub « Envol » (30 s, scroller vers le haut, design actuel de l'app, Minuton, musique tirée de la signature)** : [dossier `envol/`](envol/README.md).
+>
 > 🆕 **La vidéo de présentation Scroll-up (61 s, toute l'app, voix off, musique, jazz noir)** : [dossier `presentation/`](presentation/README.md).
 >
 > **Les musiques d'ambiance de l'app** (dix styles : morceaux de Kevin MacLeod sous licence CC BY 4.0, pluie synthétisée) : `ambiances/build.mjs` les prépare dans `app/public/music/`.

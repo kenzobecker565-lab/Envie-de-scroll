@@ -39,6 +39,7 @@ const ADS = {
   pub: { page: 'promo/pub/index.html', audio: './pub/audio.mjs', build: 'build/pub', out: 'plutot-que-scroller-pub.mp4' },
   scrollup: { page: 'promo/scrollup/index.html', audio: './scrollup/audio.mjs', build: 'build/scrollup', out: 'scroll-up-pub-30s.mp4' },
   viral: { page: 'promo/viral/index.html', audio: './viral/audio.mjs', build: 'build/viral', out: 'scroll-up-viral.mp4' },
+  envol: { page: 'promo/envol/index.html', audio: './envol/audio.mjs', build: 'build/envol', out: 'scroll-up-envol.mp4' },
   presentation: { page: 'promo/presentation/index.html', audio: './presentation/audio.mjs', build: 'build/presentation', out: 'scroll-up-presentation.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
@@ -58,6 +59,7 @@ const TYPES = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
   '.json': 'application/json',
   '.wav': 'audio/wav',
 }

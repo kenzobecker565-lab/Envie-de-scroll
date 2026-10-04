@@ -33,6 +33,7 @@ const GOALS = [5, 10, 20] as const
 
 /** Des idées de noms, pour ne pas partir d'une page blanche. */
 const IDEAS: Record<PassionId, string[]> = {
+ rythme: ['Mes beats'], logique: ['Mes dossiers'], francais: ['Mes révisions'],
   dessin: ['Mon carnet de croquis', 'Les objets de ma chambre', 'Portraits de famille'],
   ecriture: ['Ma nouvelle', 'Mon journal de bord', 'Poèmes du quotidien'],
   musique: ['Le tour du jazz', 'Les années 80', 'Ma playlist idéale'],

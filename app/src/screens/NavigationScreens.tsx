@@ -1,12 +1,11 @@
-import { Check, ChevronRight, Clock3, Lock, Settings, ShoppingBag, Sparkles, Zap } from 'lucide-react'
+import { WorkshopLearningOverview, WorkshopLearning } from './WorkshopLearning.tsx'
+import { ChevronRight, Clock3, Settings, ShoppingBag, Sparkles, Zap } from 'lucide-react'
 import { AppHeader } from '../components/AppHeader.tsx'
 import { BadgePin } from '../components/BadgePin.tsx'
-import { currentPath, featuredPath, finishedPathIds } from '../components/Paths.tsx'
-import { useStartLesson } from '../lib/useLesson.ts'
+import { finishedPathIds } from '../components/Paths.tsx'
 import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { Mascot } from '../components/Mascot.tsx'
-import { useState } from 'react'
-import { getPassion, passionLevel, PATHS, type PassionId } from '@scroll-up/shared'
+import { isWorkshop, getPassion, passionLevel, PATHS, type PassionId } from '@scroll-up/shared'
 import { useEquipped } from '../lib/shop.ts'
 import { ProfileDecoration } from '../components/ShopArt.tsx'
 import { Button } from '@/components/ui/button'
@@ -16,20 +15,12 @@ import { useAppState, useNavigation } from '../state/AppState.tsx'
 
 export { PassionHubScreen, PassionSpaceScreen } from './PassionWorkshop.tsx'
 
-export function LearnScreen() {
- const {state}=useAppState(),{push}=useNavigation(),startLesson=useStartLesson()
- const {user,stats}=state.me
- const initial=featuredPath(user.passions,id=>statsFor(stats.byPassion,id).steps,id=>passionLevel(id,statsFor(stats.byPassion,id).minutes).level,user.skills)
- const [selected,setSelected]=useState<PassionId|undefined>(initial?.progress.path.passion??user.passions[0])
- const passion=selected&&user.passions.includes(selected)?selected:user.passions[0]
- const row=passion?statsFor(stats.byPassion,passion):null
- const progress=passion&&row?currentPath(passion,row.steps,passionLevel(passion,row.minutes).level,user.skills[passion]):null
- return <Screen tabs className="studio-learn"><AppHeader/><h1 className="studio-page-title">Apprendre</h1>{progress?<article className="studio-learning-card"><div className="studio-learning-hero"><PassionArtwork passion={progress.path.passion}/><span className="studio-learning-character"><Mascot pose={progress.path.passion==='piano'?'piano':progress.path.passion==='dessin'?'draw':progress.path.passion==='ecriture'?'write':'idea'} size={135}/></span><div className="studio-learning-title"><span className="studio-tag">{getPassion(progress.path.passion).label}</span><h2>{progress.path.title}</h2></div></div><div className="studio-learning-body"><p className="studio-learning-count">{progress.finished?'Parcours terminé':`Étape ${progress.next?.index??1} sur ${progress.path.steps.length}`}</p><div className="studio-learning-gauge"><i style={{width:`${progress.done/progress.path.steps.length*100}%`}}/></div><ol className="studio-lesson-list">{progress.path.steps.map(step=>{const done=step.index<=progress.done, current=step.index===progress.next?.index;return <li key={step.id}><button type="button" disabled={!done&&!current} aria-current={current?'step':undefined} onClick={()=>startLesson(step,'parcours')}><span className={`studio-step-number ${done?'is-done':''}`}>{done?<Check size={17}/>:current?step.index:<Lock size={14}/>}</span><span>{step.title}</span><ChevronRight size={16}/></button></li>})}</ol><Button className="studio-continue" onClick={()=>progress.next?startLesson(progress.next,'parcours'):push({name:'path',pathId:progress.path.id})}>{progress.finished?'Revoir le parcours':progress.done?'Continuer':'Commencer'}<ChevronRight/></Button></div></article>:<Button className="mt-5" onClick={()=>push({name:'passions',mode:'edit'})}>Choisir une passion</Button>}{user.passions.length>1&&<div className="studio-learn-passions" aria-label="Passion à apprendre">{user.passions.map(id=><button type="button" key={id} aria-pressed={id===passion} onClick={()=>setSelected(id)}>{getPassion(id).label}</button>)}</div>}{passion&&<button type="button" className="studio-all-paths" onClick={()=>push({name:'learnPassion',passion})}>Tous les parcours {getPassion(passion).label}<ChevronRight size={16}/></button>}</Screen>
-}
+export function LearnScreen() { return <WorkshopLearningOverview/> }
 
 export function LearnPassionScreen({ passion }: { passion: PassionId }) {
   const { state } = useAppState()
   const { push, reset } = useNavigation()
+  if (isWorkshop(passion)) return <WorkshopLearning passion={passion}/>
   return <Screen tabs>
     <Button variant="ghost" size="sm" onClick={() => reset([{ name: 'home' }, { name: 'learn' }])}>Toutes les passions à apprendre</Button>
     <PassionArtwork passion={passion} className="da-passion-banner" /><h1 className="mt-3 font-display text-46 font-extrabold tracking-tight text-ink">{getPassion(passion).label}</h1>

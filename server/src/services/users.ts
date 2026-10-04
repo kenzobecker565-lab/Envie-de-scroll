@@ -1,4 +1,5 @@
 import {
+  activePassions,
   countWords,
   DEFAULT_THEME,
   isAppTheme,
@@ -28,7 +29,7 @@ export function parsePassions(user: Pick<User, 'passions'>): PassionId[] {
 }
 
 export function toUserDTO(user: User): UserDTO {
-  const passions = parsePassions(user)
+  const passions = activePassions(parsePassions(user))
   const theme = isAppTheme(user.theme) ? user.theme : DEFAULT_THEME
   return {
     id: user.id.toString(),

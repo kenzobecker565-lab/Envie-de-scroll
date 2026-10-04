@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight, ChevronRight, Clock3, Plus, Sparkles, Play } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { collection, dailyWord, getPassion, passionLevel, SHOP_ITEMS, type CompletionDTO, type Duration, type PassionId } from '@scroll-up/shared'
+import { isWorkshop, WORKSHOP_LESSONS, collection, dailyWord, getPassion, passionLevel, SHOP_ITEMS, type CompletionDTO, type Duration, type PassionId } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
 import { api } from '../api/client.ts'
 import { AppHeader } from '../components/AppHeader.tsx'
@@ -20,10 +20,14 @@ import { GalleryScreen } from './GalleryScreen.tsx'
 function useWorkshopStart() {
  const { state, dispatch } = useAppState()
  const { push, reset } = useNavigation()
- return (passion: PassionId, duration?: Duration, activityId?: string) => {
-  if (!state.me.user.passions.includes(passion)) { push({ name:'passions', mode:'edit' }); return }
-  dispatch({type:'newFlow',flow:{fixedPassion:passion, ...(duration?{passion,duration}:{}), ...(activityId?{fixedStep:activityId}:{})}})
-  reset([{name:'home'},{name:'passionHub'},{name:'passionSpace',passion},{name:duration?'activity':'signal'}])
+ const [busy,setBusy]=useState(false)
+ return async (passion: PassionId, duration?: Duration, activityId?: string) => {
+  if(busy)return;setBusy(true)
+  try {
+   if (!state.me.user.passions.includes(passion)) { const response=await api.updatePassions([...state.me.user.passions,passion]);dispatch({type:'user',user:response.user}) }
+   dispatch({type:'newFlow',flow:{fixedPassion:passion, ...(duration?{passion,duration}:{}), ...(activityId?{fixedStep:activityId}:{})}})
+   reset([{name:'home'},{name:'passionHub'},{name:'passionSpace',passion},{name:duration?'activity':'signal'}])
+  } catch { push({name:'passions',mode:'edit'}) } finally {setBusy(false)}
  }
 }
 
@@ -39,13 +43,14 @@ function RecentCreations() {
 export function PassionHubScreen() {
  const {state}=useAppState(),{push}=useNavigation(),start=useWorkshopStart()
  const {user,stats}=state.me
- const passions=(['piano','dessin','ecriture','cinema','musique'] as PassionId[]).filter(id=>user.passions.includes(id)||stats.byPassion.some(row=>row.passion===id))
+ const passions=(['dessin','piano','ecriture','rythme','logique','francais'] as PassionId[])
  const passion=user.passions.includes('dessin')?'dessin':user.passions[0]
  const idea=passion?collection(passion).find(group=>group.duration===5)?.activities[0]:undefined
  return <Screen tabs className="studio-passions"><AppHeader/><div className="studio-page-heading"><h1>Mes passions</h1><button type="button" className="studio-icon-button" aria-label="Gérer mes passions" onClick={()=>push({name:'passions',mode:'edit'})}><Plus size={22}/></button></div><p className="workshop-subtitle">Un peu chaque jour, à ta façon.</p>{passion&&idea&&<section className="workshop-idea"><Sparkles size={24}/><div><small>Une idée pour aujourd’hui</small><h2>{idea.text}</h2><span><Clock3 size={13}/>5 min · {getPassion(passion).label}</span></div><button type="button" onClick={()=>start(passion,5,idea.id)}>Essayer<ChevronRight size={16}/></button></section>}<div className="studio-passions-grid">{passions.map(id=><PassionPoster key={id} passion={id} stats={statsFor(stats.byPassion,id)} onOpen={()=>push({name:'passionSpace',passion:id})}/>)}</div>{!passions.length&&<Button onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions</Button>}<RecentCreations/></Screen>
 }
 
 const COPY:Record<PassionId,{create:string;gallery:string;title:string;cta:string;first:string}>={
+ rythme:{create:'Composer',gallery:'Mes beats',title:'Ton studio, à ton rythme.',cta:'Composer un beat',first:'Créer mon premier beat'}, logique:{create:'Résoudre',gallery:'Mon carnet',title:'Chaque indice compte.',cta:'Ouvrir un dossier',first:'Résoudre ma première énigme'}, francais:{create:'Réviser',gallery:'Mes séances',title:'Les règles en pratique.',cta:'Commencer une révision',first:'Faire ma première révision'},
  dessin:{create:'Créer',gallery:'Ma galerie',title:'Ton atelier, à ton rythme.',cta:'Créer un dessin',first:'Faire mon premier dessin'},
  ecriture:{create:'Créer',gallery:'Mes textes',title:'Une page pour tes idées.',cta:'Commencer un texte',first:'Écrire mon premier texte'},
  piano:{create:'Jouer',gallery:'Mon répertoire',title:'Ton piano, à portée de main.',cta:'Jouer du piano',first:'Jouer pour la première fois'},
@@ -67,10 +72,12 @@ export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  {!row.activities&&<section className="workshop-welcome"><Mascot pose={passion==='dessin'?'draw':passion==='ecriture'?'write':passion==='piano'?'piano':'welcome'} size={94}/><div><h3>Un premier pas suffit pour commencer.</h3><p>Chaque création construira ton atelier.</p></div></section>}
  <Button className="workshop-main-cta" onClick={()=>start(passion)}>{available?row.activities?copy.cta:copy.first:'Ajouter cette passion'}<ArrowRight size={19}/></Button>
  {(passion==='dessin'||passion==='ecriture')&&<section className="workshop-word"><div><small>Le mot du jour</small><h2>{word}</h2><p>À toi de lui donner vie · 15 min</p></div><button type="button" onClick={()=>available?startWord(passion,day):push({name:'passions',mode:'edit'})}>{passion==='dessin'?'Dessiner':'Écrire'}<ChevronRight size={17}/></button></section>}
+ {isWorkshop(passion)&&<section className="workshop-section"><h2>{passion==='rythme'?'Choisir un défi':passion==='logique'?'Choisir un dossier':'Les règles en pratique'}</h2><div className="iw-workshop-families">{(passion==='rythme'?['Reproduire une boucle','Compléter un beat','Deux instruments','Créer une variation','Composition libre']:passion==='logique'?['Déduction','Cryptographie','Contraintes','Enquêtes','Dossier surprise']:['Conjugaison','Orthographe','Grammaire et accords','Ponctuation et syntaxe','Révision mixte']).map((label,i)=><button type="button" key={label} onClick={()=>start(passion,5,`${passion}-5-${i+1}`)}><strong>{label}</strong><span>Ouvrir · 5 min<ChevronRight size={14}/></span></button>)}</div></section>}
  <section className="workshop-section"><h2>Une petite pause créative</h2><div className="workshop-quick">{([5,15] as Duration[]).map(duration=>{const activity=collection(passion).find(group=>group.duration===duration)?.activities[0];return activity&&<button type="button" key={duration} onClick={()=>start(passion,duration,activity.id)}><Clock3 size={19}/><strong>{activity.text}</strong><span>{duration} min<ChevronRight size={15}/></span></button>})}</div></section>
  {progress&&<section className="workshop-current"><small>Pour progresser</small><h2>{progress.path.title}</h2><p>{progress.done} leçons sur {progress.path.steps.length}</p><span className="workshop-gauge"><i style={{width:`${progress.done/progress.path.steps.length*100}%`}}/></span>{progress.next&&<p>Prochaine leçon : {progress.next.title}</p>}<Button variant="secondary" size="sm" onClick={()=>push({name:'path',pathId:progress.path.id})}>Continuer dans Apprendre<ChevronRight size={16}/></Button></section>}
  {passion==='piano'&&owned.slice(0,2).map(item=><button key={item.id} type="button" className="workshop-repertoire" onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{[item.composer,item.edition??item.difficulty].filter(Boolean).join(' · ')}</small></span><Play size={20}/></button>)}
  {passion==='piano'&&<button type="button" className="workshop-repertoire" onClick={()=>setSection('gallery')}><span><strong>Mon répertoire</strong><small>{plural(owned.length,'morceau débloqué','morceaux débloqués')}</small></span><ChevronRight size={22}/></button>}
+ {isWorkshop(passion)&&<section className="workshop-current"><small>Comprendre · Essayer · Pratiquer</small><h2>{WORKSHOP_LESSONS[passion][0]!.title}</h2><p>Trois leçons pour passer des bases à la pratique.</p><Button variant="secondary" size="sm" onClick={()=>push({name:'learnPassion',passion})}>Apprendre<ChevronRight size={16}/></Button></section>}
  <details className="workshop-details"><summary>Ma progression et mes découvertes</summary><div><PassionDetail passion={passion} stats={row} section="overview" canStart={false} onOpenPath={pathId=>push({name:'path',pathId})} onChangeSkill={()=>push({name:'skill',passion,mode:'edit'})}/><PassionDetail passion={passion} stats={row} section="collection" canStart={false} onOpenPath={pathId=>push({name:'path',pathId})} onChangeSkill={()=>push({name:'skill',passion,mode:'edit'})}/></div></details>
  </>}
  </Screen>

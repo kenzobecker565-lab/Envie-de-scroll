@@ -1,5 +1,7 @@
 import {
   coinsFor,
+  isWorkshop,
+  validateWorkshop,
   getActivity,
   getPassion,
   isActivityRating,
@@ -21,6 +23,7 @@ import { projectForPassion } from './projects.ts'
 import { parseExtra } from './proposals.ts'
 
 export interface CompleteInput {
+  workshop?: unknown
   proposalId: string
   text?: string
   exploredTitle?: string
@@ -61,15 +64,20 @@ export async function completeProposal(
   if (proposal.status !== 'open') throw new ApiError(409, 'invalid_request', 'Cette activité n’est plus en cours\u00A0: relance « J’ai envie de scroller ».')
 
   const passion = getPassion(proposal.passion as PassionId)
+  let workshop: ReturnType<typeof validateWorkshop> | undefined
+  if (isWorkshop(passion.id)) {
+    try { workshop = validateWorkshop(proposal.activityId, input.workshop) }
+    catch (error) { throw badRequest(error instanceof Error ? error.message : "Atelier invalide.") }
+  }
   const duration = proposal.duration as Duration
   const text = passion.proof === 'texte' ? clean(input.text, MAX_TEXT_LENGTH) : null
   const melody = input.played ? keyboardMelody(proposal.activityId) : undefined
-  const exploredTitle = passion.proof === 'titre' ? (clean(input.exploredTitle, MAX_TITLE_LENGTH) ?? melody?.title ?? null) : null
+  const exploredTitle = passion.proof === 'titre' ? (workshop?.summary ?? clean(input.exploredTitle, MAX_TITLE_LENGTH) ?? melody?.title ?? null) : null
   const photo = passion.proof === 'photo' ? input.photo : undefined
 
   const project = input.projectId ? await projectForPassion(prisma, user, input.projectId, proposal.passion) : null
 
-  const hasProof = Boolean(text || photo || melody)
+  const hasProof = Boolean(text || photo || melody || workshop)
   const unlocked = now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
   if (!hasProof && !unlocked) {
     throw passion.timeGuard
@@ -102,6 +110,7 @@ export async function completeProposal(
           coins: coinsFor(duration),
           text,
           exploredTitle,
+          workshopData: workshop ? JSON.stringify(workshop) : null,
           photoRef,
           photoPending: passion.proof === 'photo' && !photoRef,
           localDate: localDate(now, user.timezone),
@@ -136,6 +145,7 @@ export async function listCompletions(
 
 export function toCompletionDTO(completion: Completion, photoUrl: (completion: Completion) => string): CompletionDTO {
   return {
+    workshop: completion.workshopData ? JSON.parse(completion.workshopData) : null,
     id: completion.id,
     activityId: completion.activityId,
     passion: completion.passion as PassionId,

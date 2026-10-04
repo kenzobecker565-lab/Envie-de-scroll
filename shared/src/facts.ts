@@ -9,6 +9,7 @@ import { frenchTypography } from './typography.ts'
 import type { PassionId } from './types.ts'
 
 const RAW_FACTS: Record<PassionId, string[]> = {
+ rythme: ['Quatre doubles croches divisent chaque temps en quatre pas.'], logique: ['Une déduction doit respecter tous les indices, pas seulement le dernier.'], francais: ['Après « si » au présent, la proposition principale peut être au futur.'],
   dessin: [
     'Les dessins de la grotte Chauvet, en Ardèche, ont environ 36 000 ans. Dessiner, c\'est l\'une des plus vieilles choses que l\'humanité sache faire.',
     'Avant l\'invention de la gomme, on effaçait le crayon avec de la mie de pain.',
@@ -79,6 +80,7 @@ const RAW_FACTS: Record<PassionId, string[]> = {
   ],
 }
 export const FACTS: Readonly<Record<PassionId, readonly string[]>> = {
+ rythme: RAW_FACTS.rythme, logique: RAW_FACTS.logique, francais: RAW_FACTS.francais,
   dessin: RAW_FACTS.dessin.map(frenchTypography),
   ecriture: RAW_FACTS.ecriture.map(frenchTypography),
   musique: RAW_FACTS.musique.map(frenchTypography),

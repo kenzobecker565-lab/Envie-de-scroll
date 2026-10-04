@@ -97,6 +97,7 @@ model Completion {
   /// Écriture : le texte produit
   text          String?
   /// Musique, Cinéma : ce qui a été exploré
+  workshopData  String?
   exploredTitle String?
   /// Dessin : « tg:<file_id> » (photo relayée vers le chat de stockage) ou « local:<fichier> » (développement)
   photoRef      String?

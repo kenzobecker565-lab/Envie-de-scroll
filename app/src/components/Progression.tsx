@@ -120,7 +120,7 @@ export function PassionCard({ passion, stats, index, onOpen }: { passion: Passio
       animate={{ opacity: 1, y: 0, rotate: index % 2 ? 0.6 : -0.6 }}
       transition={{ delay: 0.15 + index * 0.06, type: 'spring', stiffness: 260, damping: 20 }}
       aria-haspopup="dialog"
-      aria-label={`${info.label} : ${level.title ? `niveau ${level.level}, ${level.title}` : 'à découvrir'}. ${plural(stats.tried.length, 'activité découverte', 'activités découvertes')} sur ${size}.`}
+      aria-label={`${info.label} : ${level.title ? `niveau ${level.level}, ${level.title}` : 'à découvrir'}. ${plural(stats.tried.filter(id=>!id.includes('-lesson-')).length, 'activité découverte', 'activités découvertes')} sur ${size}.`}
       className={cn('flex w-full items-start gap-3 rounded-md border-[2.5px] border-outline p-3 text-left shadow-chip transition-shadow duration-150 active:shadow-press', PASSION_COLORS[passion].soft)}
     >
       <span className={cn('flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-2 border-outline text-on-color [&>svg]:size-5', PASSION_COLORS[passion].bg)}>
@@ -228,7 +228,7 @@ export function PassionDetail({
   const skill = state.me.user.skills[passion]
   const { reset } = useNavigation()
   const groups = collection(passion)
-  const found = stats.tried.length
+  const found = stats.tried.filter(id=>!id.includes('-lesson-')).length
 
   const start = () => {
     haptics.impact('heavy')

@@ -15,6 +15,7 @@ export const LEVEL_MINUTES = [5, 30, 120, 300, 600] as const
 
 /** Le titre de chaque niveau, du 1 au 5, par passion. */
 export const LEVEL_TITLES: Record<PassionId, readonly [string, string, string, string, string]> = {
+ rythme: ['Première pulsation', 'Beatmaker', 'Arrangeur·euse', 'Producteur·rice', 'Virtuose du rythme'], logique: ['Observateur·rice', 'Analyste', 'Détective', 'Stratège', 'Maître des énigmes'], francais: ['Première révision', 'Précision', 'Plume sûre', 'Maîtrise', 'Expert·e'],
   dessin: ['Gribouilleur·euse', 'Croqueur·euse', 'Dessinateur·rice', 'Illustrateur·rice', 'Virtuose du trait'],
   ecriture: ['Griffonneur·euse', 'Plume', 'Conteur·euse', 'Auteur·rice', 'Romancier·ère'],
   musique: ['Curieux·euse', 'Auditeur·rice', 'Mélomane', 'Dénicheur·euse', 'Encyclopédie sonore'],
@@ -70,12 +71,12 @@ export function levelCrossed(passion: PassionId, before: number, after: number):
 
 /** La collection d'une passion : ses activités, rangées par temps. */
 export function collection(passion: PassionId): { duration: Duration; activities: Activity[] }[] {
-  return DURATIONS.map((duration) => ({ duration, activities: ACTIVITIES.filter((activity) => activity.passion === passion && activity.duration === duration) }))
+  return DURATIONS.map((duration) => ({ duration, activities: ACTIVITIES.filter((activity) => activity.passion === passion && activity.duration === duration && activity.number < 16) }))
 }
 
 /** Nombre d'activités dans la collection d'une passion. */
 export function collectionSize(passion: PassionId): number {
-  return ACTIVITIES.filter((activity) => activity.passion === passion).length
+  return ACTIVITIES.filter((activity) => activity.passion === passion && activity.number < 16).length
 }
 
 /** Nombre de mots d'un texte (écriture). */

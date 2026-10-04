@@ -20,6 +20,7 @@ import { PASSION_COLORS } from '../lib/icons.ts'
 const WORDS_PER_PAGE = 250
 
 const TITLES: Record<PassionId, { title: string; icon: typeof Disc3 }> = {
+ rythme: {title: 'Tes beats', icon: Disc3}, logique: {title: 'Ton carnet de déduction', icon: NotebookPen}, francais: {title: 'Tes révisions', icon: PenLine},
   dessin: { title: 'Ton carnet de croquis', icon: NotebookPen },
   ecriture: { title: 'Ton carnet d’écriture', icon: PenLine },
   musique: { title: 'Ta discothèque', icon: Disc3 },

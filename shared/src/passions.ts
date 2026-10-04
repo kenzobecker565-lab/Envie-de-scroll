@@ -5,7 +5,7 @@ import type { Passion, PassionId } from './types.ts'
  * Les nouvelles passions demandent le niveau (`skill`) : on y apprend pas à
  * pas, avec des activités et des parcours adaptés à là où l'on en est.
  */
-export const PASSIONS: readonly Passion[] = [
+const KNOWN_PASSIONS: readonly Passion[] = [
   { id: 'dessin', label: 'Dessin', tagline: 'Un crayon, une feuille, et c’est parti', proof: 'photo', timeGuard: false, tone: 'accent' },
   { id: 'ecriture', label: 'Écriture', tagline: 'Des mots pour dire, inventer, raconter', proof: 'texte', timeGuard: false, tone: 'warm' },
   { id: 'musique', label: 'Musique', tagline: 'Écouter vraiment, découvrir, creuser', proof: 'titre', timeGuard: true, tone: 'warm' },
@@ -26,13 +26,24 @@ export const PASSIONS: readonly Passion[] = [
       },
     },
   },
+  { id: 'rythme', label: 'Rythme', tagline: 'Dans ton studio : compose tes propres beats', proof: 'titre', timeGuard: false, tone: 'accent' },
+  { id: 'logique', label: 'Logique et énigmes', tagline: 'À toi de déduire, croiser les indices et résoudre', proof: 'titre', timeGuard: false, tone: 'warm' },
+  { id: 'francais', label: 'Français', tagline: 'Orthographe, grammaire et conjugaison en pratique', proof: 'titre', timeGuard: false, tone: 'accent' },
 ]
+
+export const ACTIVE_PASSION_IDS: readonly PassionId[] = ['dessin', 'piano', 'ecriture', 'rythme', 'logique', 'francais']
+export const PASSIONS = ACTIVE_PASSION_IDS.map(id => KNOWN_PASSIONS.find(p => p.id === id)!)
+/** Remplace uniquement les préférences, jamais les identifiants de l’historique. */
+export function activePassions(ids: readonly PassionId[]): PassionId[] {
+  const selected = new Set<PassionId>(ids.map(id => id === 'musique' ? 'rythme' : id === 'cinema' ? 'logique' : id))
+  return ACTIVE_PASSION_IDS.filter(id => selected.has(id))
+}
 
 export const MIN_PASSIONS = 1
 /** Pas de limite : on peut choisir toutes les passions. */
 export const MAX_PASSIONS = PASSIONS.length
 
-const BY_ID = new Map(PASSIONS.map((passion) => [passion.id, passion]))
+const BY_ID = new Map(KNOWN_PASSIONS.map((passion) => [passion.id, passion]))
 
 export function getPassion(id: PassionId): Passion {
   const passion = BY_ID.get(id)
@@ -54,5 +65,5 @@ export function normalizePassions(value: unknown): PassionId[] | null {
   const unique = new Set(value)
   if (unique.size !== value.length) return null
   if (unique.size < MIN_PASSIONS || unique.size > MAX_PASSIONS) return null
-  return PASSIONS.map((passion) => passion.id).filter((id) => unique.has(id))
+  return (value.includes('musique') || value.includes('cinema') ? KNOWN_PASSIONS : PASSIONS).map((passion) => passion.id).filter((id) => unique.has(id))
 }

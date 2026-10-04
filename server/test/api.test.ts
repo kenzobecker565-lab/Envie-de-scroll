@@ -163,10 +163,10 @@ describe('authentification', () => {
 describe('profil', () => {
   it('enregistre autant de passions qu’on veut (au moins une)', async () => {
     const response = await request(app).put('/api/me/passions').set(as()).send({ passions: ['cinema', 'dessin'] }).expect(200)
-    expect(response.body.user).toMatchObject({ passions: ['dessin', 'cinema'], onboarded: true })
+    expect(response.body.user).toMatchObject({ passions: ['dessin', 'logique'], onboarded: true })
     await request(app).put('/api/me/passions').set(as()).send({ passions: [] }).expect(400)
     const all = await request(app).put('/api/me/passions').set(as()).send({ passions: ['piano', 'dessin', 'ecriture', 'musique', 'cinema'] }).expect(200)
-    expect(all.body.user.passions).toEqual(['dessin', 'ecriture', 'musique', 'cinema', 'piano'])
+    expect(all.body.user.passions).toEqual(['dessin', 'piano', 'ecriture', 'rythme', 'logique'])
   })
 })
 

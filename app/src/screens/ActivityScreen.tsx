@@ -1,7 +1,8 @@
+import { InteractiveWorkshop } from './InteractiveWorkshop.tsx'
 import { CalendarHeart, Check, Clock3, Hourglass, Info, LoaderCircle, Mountain, Piano, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, keyboardMelody, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PassionId, type PathStep, type ProposalDTO } from '@scroll-up/shared'
+import { isWorkshop, getChallengeActivity, getPassion, getPath, getPathStep, isFixedActivityId, keyboardMelody, STEPS_PER_PATH, type ActivityExtra, type ChallengeActivity, type PassionId, type PathStep, type ProposalDTO } from '@scroll-up/shared'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -135,6 +136,8 @@ export function ActivityScreen() {
     }
   }
 
+  if (isWorkshop(passionId) && proposal && !loading) return <InteractiveWorkshop key={proposal.id} proposal={proposal} onAnother={!fixedStep ? () => void load(proposal.id) : undefined}/>
+
   return (
     <Screen className="flow-activity">
       <FloatingConsigne proposal={proposal} show={!loading && consignePassed} compact={Boolean(proposal && keyboardMelody(proposal.activityId))} />
@@ -255,7 +258,7 @@ export function ActivityScreen() {
             clockOffset={flow.clockOffset}
             disabled={loading}
             onValidate={() => {
-              dispatch({ type: 'flow', flow: { pad: false } })
+              dispatch({ type: 'flow', flow: { pad: passionId === 'dessin' } })
               push({ name: 'proof' })
             }}
           />

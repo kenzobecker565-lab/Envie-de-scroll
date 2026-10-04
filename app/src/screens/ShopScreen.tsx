@@ -1,7 +1,7 @@
 import { AppHeader } from '../components/AppHeader.tsx'
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { Check, ExternalLink, Eye, Play, RotateCcw, Square, Search, Ghost } from 'lucide-react'
-import { getShopItem, SHOP_CATEGORIES, SHOP_CATEGORY_LABELS, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
+import { useEffect, useState } from 'react'
+import { ArrowLeft, Check, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles } from 'lucide-react'
+import { getShopItem, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
@@ -13,54 +13,64 @@ import { PianoKeyboard } from '../components/PianoKeyboard.tsx'
 import { api } from '../api/client.ts'
 import { useShop } from '../lib/shop.ts'
 import { formatNumber } from '../lib/format.ts'
-import { useAppState, useNavigation } from '../state/AppState.tsx'
-import { setAmbientEnabled, suppressAmbient } from '../lib/ambient.ts'
+import { useAppState } from '../state/AppState.tsx'
+import { suppressAmbient } from '../lib/ambient.ts'
 import { openExternal } from '../telegram/webApp.ts'
 
-const VISIBLE_CATEGORIES: ShopCategory[] = ['mascot', 'piano', ...SHOP_CATEGORIES.filter(id => !['mascot', 'piano', 'theme', 'cover'].includes(id))]
-const ART_MASCOTS = new Set(['mascot-beret', 'mascot-pianiste', 'mascot-casque'])
-type OutfitFilter = 'all' | 'sports' | 'arts' | 'adventure' | 'female' | 'halloween'
-
 const DAVY_PARTITION = 'https://www.musicnotes.com/sheetmusic/pirates-of-the-caribbean-dead-mans-chest/davy-jones/MN0095169'
+const ART_MASCOTS = new Set(['mascot-beret', 'mascot-pianiste', 'mascot-casque'])
+const SKINS = SHOP_ITEMS.filter(item => item.category === 'mascot')
+const COLLECTIONS = [
+  { id: 'sports', title: 'Sports', subtitle: 'Entre sur le terrain', outfits: ['mascot-basket', 'mascot-basketteuse'], Icon: Trophy },
+  { id: 'arts', title: 'Arts et musique', subtitle: 'Exprime ta créativité', outfits: ['mascot-beret', 'mascot-danseuse'], Icon: Palette },
+  { id: 'adventure', title: 'Univers', subtitle: 'Éveille ton imagination', outfits: ['mascot-athena', 'mascot-astronaute-f'], Icon: Sparkles },
+  { id: 'halloween', title: 'Halloween', subtitle: 'Des costumes à frissonner', outfits: ['mascot-halloween-vampire', 'mascot-halloween-sorciere'], Icon: Ghost },
+] as const
+const FEATURED = COLLECTIONS[3]
+type CollectionId = typeof COLLECTIONS[number]['id']
+type Shelf = 'discover' | 'owned' | 'favorites'
+type Gender = 'all' | 'male' | 'female'
+const groupOf = (item: ShopItem) => item.mascotGroup ?? (ART_MASCOTS.has(item.id) ? 'arts' : 'sports')
+const countOf = (id: CollectionId) => SKINS.filter(item => groupOf(item) === id).length
 
-/** Le logo Minuton remplace le nom de la monnaie, sans perdre son libellé accessible. */
 function Price({ value, size = 24 }: { value: number; size?: number }) {
   return <span className="inline-flex items-center justify-center gap-1.5 font-numbers font-extrabold tabular-nums" aria-label={`${formatNumber(value)} minutons`}><span aria-hidden="true">{formatNumber(value)}</span><BrandMark size={size} /></span>
 }
 
-export function ShopScreen({ category: initial = 'mascot', library = false }: { category?: ShopCategory; library?: boolean }) {
-  const { dispatch } = useAppState()
-  const { push, replace } = useNavigation()
+function CollectionArt({ outfits }: { outfits: readonly string[] }) {
+  return <div className="skin-collection-art" aria-hidden="true">{outfits.map(id => <MinutonFigure key={id} outfit={id} size={150} animated={false}/>)}</div>
+}
+
+export function ShopScreen({ library = false }: { category?: ShopCategory; library?: boolean }) {
+  const { state, dispatch } = useAppState()
   const shop = useShop()
-  const [category, setCategory] = useState<ShopCategory>(VISIBLE_CATEGORIES.includes(initial) ? initial : 'mascot')
+  const [shelf, setShelf] = useState<Shelf>(library ? 'owned' : 'discover')
+  const [collection, setCollection] = useState<CollectionId>()
+  const [gender, setGender] = useState<Gender>('all')
   const [query, setQuery] = useState('')
-  const [outfitFilter, setOutfitFilter] = useState<OutfitFilter>('all')
-  const [mine, setMine] = useState(library)
-  const [filters, setFilters] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const [selected, setSelected] = useState<ShopItem>()
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(true)
   const [notice, setNotice] = useState<string>()
-  const [playing, setPlaying] = useState<string>()
-  const audio = useRef<HTMLAudioElement | null>(null)
-  const releaseAudio = useRef<(() => void) | undefined>(undefined)
-
-  const stopPreview = () => {
-    audio.current?.pause()
-    audio.current = null
-    releaseAudio.current?.()
-    releaseAudio.current = undefined
-    setPlaying(undefined)
+  const favoriteKey = `scroll-up:skin-favorites:${state.me.user.id}`
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    try { const saved: unknown = JSON.parse(localStorage.getItem(favoriteKey) ?? '[]'); return Array.isArray(saved) ? saved.filter((id): id is string => typeof id === 'string' && SKINS.some(item => item.id === id)) : [] }
+    catch { return [] }
+  })
+  const toggleFavorite = (id: string) => {
+    const next = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites, id]
+    setFavorites(next)
+    try { localStorage.setItem(favoriteKey, JSON.stringify(next)) } catch { /* Les favoris restent utilisables pendant la session. */ }
   }
   useEffect(() => {
     let alive = true
-    api.shop().then((value) => { if (alive) dispatch({ type: 'shop', shop: value }) })
+    api.shop().then(value => { if (alive) dispatch({ type: 'shop', shop: value }) })
       .catch((caught: Error) => { if (alive) setError(caught.message) })
       .finally(() => { if (alive) setLoading(false) })
-    return () => { alive = false; audio.current?.pause(); releaseAudio.current?.() }
+    return () => { alive = false }
   }, [dispatch])
-
   const refresh = async () => {
     setError(undefined); setLoading(true)
     try { dispatch({ type: 'shop', shop: await api.shop() }) }
@@ -70,10 +80,8 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
   const claimCredit = async () => {
     if (busy) return
     setBusy(true); setError(undefined)
-    try {
-      dispatch({ type: 'shop', shop: await api.claimShopTestCredit() })
-      setNotice('10 000 Minutons de test sont disponibles pour tes achats. Ta progression reste inchangée.')
-    } catch (caught) { setError((caught as Error).message) }
+    try { dispatch({ type: 'shop', shop: await api.claimShopTestCredit() }); setNotice('10 000 Minutons de test sont disponibles. Ta progression reste inchangée.') }
+    catch (caught) { setError((caught as Error).message) }
     finally { setBusy(false) }
   }
   const purchase = async () => {
@@ -81,106 +89,72 @@ export function ShopScreen({ category: initial = 'mascot', library = false }: { 
     setBusy(true); setError(undefined)
     try {
       dispatch({ type: 'shop', shop: await api.buyItem(selected.id) })
-      setNotice(selected.category === 'theme' ? `${selected.title} est débloqué et activé !` : `${selected.title} est débloqué !`)
-      setSelected(undefined); stopPreview()
+      setNotice(`${selected.title} rejoint tes achats. Tu peux maintenant porter cette tenue.`)
+      // L’aperçu reste ouvert pour proposer de porter immédiatement la nouvelle tenue.
     } catch (caught) { setError((caught as Error).message) }
     finally { setBusy(false) }
   }
   const equip = async (item: ShopItem | null) => {
+    if (busy) return
     setBusy(true); setError(undefined)
     try {
-      dispatch({ type: 'shop', shop: await api.equipItem(item?.category ?? category, item?.id ?? null) })
-      if (item?.category === 'ambiance') setAmbientEnabled(true)
-      setNotice(item ? `${item.title} est activé.` : 'Le style gratuit est rétabli.')
-      if (category === 'mascot') { if (outfitFilter !== 'halloween') setOutfitFilter('all'); setQuery('') }
-      setSelected(undefined); stopPreview()
+      dispatch({ type: 'shop', shop: await api.equipItem('mascot', item?.id ?? null) })
+      setNotice(item ? `${item.title} est porté.` : 'Minuton classique est de retour.')
+      setSelected(undefined)
     } catch (caught) { setError((caught as Error).message) }
     finally { setBusy(false) }
   }
-  const playPiano = (item: ShopItem) => {
-    stopPreview()
-    replace({ name: 'shop', category, library: mine })
-    push({ name: 'bonusPiano', itemId: item.id })
-  }
-  const previewAudio = (item: ShopItem) => {
-    if (playing === item.id) { stopPreview(); return }
-    stopPreview()
-    if (!item.audio) return
-    releaseAudio.current = suppressAmbient('aperçu boutique')
-    const player = new Audio(item.audio)
-    audio.current = player; player.volume = 0.4; setPlaying(item.id)
-    player.onended = stopPreview
-    player.play().catch(() => { stopPreview(); setError('L’aperçu audio n’a pas pu démarrer.') })
-  }
-  const preview = (item: ShopItem) => { stopPreview(); setError(undefined); setSelected(item) }
-  const featured = ['mascot-basketteuse','mascot-judoka-f','mascot-athena','mascot-poney','mascot-judo','mascot-basket','mascot-beret','mascot-pianiste']
-  const items = [...SHOP_ITEMS].sort((a,b) => (featured.includes(a.id)?featured.indexOf(a.id):99)-(featured.includes(b.id)?featured.indexOf(b.id):99)).filter((item) => item.category === category && (!mine || shop.owned.includes(item.id)) && (category !== 'mascot' || outfitFilter === 'all' || (outfitFilter === 'female' ? item.mascotGender === 'female' : (item.mascotGroup ?? (ART_MASCOTS.has(item.id) ? 'arts' : 'sports')) === outfitFilter)) && `${item.title} ${item.composer ?? ''} ${item.difficulty ?? ''}`.toLocaleLowerCase('fr').includes(query.toLocaleLowerCase('fr')))
+  const preview = (item: ShopItem) => { setError(undefined); setSelected(item) }
+  const changeShelf = (next: Shelf) => { setShelf(next); setCollection(undefined); setGender('all'); setQuery('') }
+  const openCollection = (id: CollectionId) => { setCollection(id); setGender('all'); setQuery(''); setSearchOpen(false) }
+  const activeCollection = COLLECTIONS.find(value => value.id === collection)
+  const items = SKINS.filter(item => (!collection || groupOf(item) === collection)
+    && (shelf !== 'owned' || shop.owned.includes(item.id))
+    && (shelf !== 'favorites' || favorites.includes(item.id))
+    && (gender === 'all' || (gender === 'female' ? item.mascotGender === 'female' : item.mascotGender !== 'female'))
+    && item.title.toLocaleLowerCase('fr').includes(query.trim().toLocaleLowerCase('fr')))
+  const ownedCount = SKINS.filter(item => shop.owned.includes(item.id)).length
   const owned = selected ? shop.owned.includes(selected.id) : false
-  const active = selected ? shop.equipped[selected.category] === selected.id : false
+  const active = selected ? shop.equipped.mascot === selected.id : false
+  const overview = shelf === 'discover' && !collection && !query && gender === 'all'
 
-  return <Screen tabs className="studio-shop">
-    <AppHeader/><div className="studio-page-heading"><h1>Boutique</h1><button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={filters} onClick={()=>setFilters(value=>!value)}><Search size={18}/></button></div>
-    <div className="studio-shop-tabs" aria-label="Catégories de la boutique">{VISIBLE_CATEGORIES.map(id=><Fragment key={id}><button type="button" aria-pressed={id===category && !(id==='mascot' && outfitFilter==='halloween')} onClick={()=>{stopPreview();setQuery('');setCategory(id);if(id==='mascot')setOutfitFilter('all')}}>{SHOP_CATEGORY_LABELS[id]}</button>{id==='mascot' && <button type="button" aria-pressed={category==='mascot' && outfitFilter==='halloween'} onClick={()=>{stopPreview();setQuery('');setCategory('mascot');setOutfitFilter('halloween')}}>Halloween</button>}</Fragment>)}</div>
-    {category === 'mascot' && <><section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={58} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div><Check size={19} aria-hidden="true"/></section>{outfitFilter!=='halloween' && <div className="shop-outfit-filters" aria-label="Filtrer les tenues de Minuton">{([{id:'all',label:'Toutes les tenues'},{id:'female',label:'Féminins'},{id:'sports',label:'Sports'},{id:'arts',label:'Arts et musique'},{id:'adventure',label:'Univers'}] as const).map(filter=><button type="button" key={filter.id} aria-pressed={outfitFilter===filter.id} onClick={()=>setOutfitFilter(filter.id)}>{filter.label}</button>)}</div>}{outfitFilter==='halloween' && <section className="shop-halloween-heading"><Ghost size={28} aria-hidden="true"/><div><h2>Collection Halloween</h2><p>8 costumes · versions masculines et féminines</p></div></section>}</>}
-    <div className="studio-shop-library"><button type="button" aria-pressed={!mine} onClick={()=>setMine(false)}>À découvrir</button><button type="button" aria-pressed={mine} onClick={()=>setMine(true)}>Mes achats</button></div>
-    {filters&&<label className="mt-3 flex items-center gap-2 rounded-md border border-outline bg-surface-200 px-3 py-2"><Search size={18}/><span className="sr-only">Rechercher dans cette collection</span><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Rechercher…" className="min-w-0 flex-1 bg-transparent text-14 outline-none" type="search"/></label>}
-    {shop.canClaimTestCredit && <Button className="mt-4" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
-    {shop.bonus > 0 && <p className="mt-2 text-12 text-ink-soft">Crédit de test inclus dans le solde · sans effet sur ta progression.</p>}
-    {notice && <p role="status" className="mt-3 rounded-sm bg-good/15 p-3 text-14 font-bold">{notice}</p>}
-    {error && !selected && <div role="alert" className="mt-3 text-14 text-accent-strong"><p>{error}</p><Button variant="secondary" size="sm" onClick={() => void refresh()}><RotateCcw />Réessayer</Button></div>}
-    {loading && <p role="status" className="mt-4 text-14">Chargement de tes achats…</p>}
-    {!loading && category !== 'piano' && shop.equipped[category] && <Button variant="ghost" size="sm" className="mt-3" disabled={busy} onClick={() => void equip(null)}>Revenir au style gratuit</Button>}
-
-    <div className="studio-shop-grid">
-      {items.map((item) => {
-        const bought = shop.owned.includes(item.id), equipped = shop.equipped[item.category] === item.id
-        return <Card key={item.id} padding="none" className="shop-product min-w-0 gap-0 overflow-hidden" data-category={item.category}>
-          <button type="button" onClick={() => preview(item)} aria-label={`Prévisualiser ${item.title}`} className="relative block w-full text-left focus-visible:outline-4 focus-visible:outline-accent">
-            <ShopPreview item={item} />
-            {equipped && item.category === 'mascot' ? <span className="shop-worn-badge"><Check size={12} aria-hidden="true"/>Porté actuellement</span> : bought && <span className="absolute top-2 right-2 flex h-7 w-7 items-center justify-center rounded-pill border-2 border-outline bg-good text-on-color"><Check size={15} aria-hidden="true" /><span className="sr-only">Acheté</span></span>}
-          </button>
-          <div className="shop-product-body">
-
-            <h3 className="font-display text-17 leading-tight font-extrabold">{item.title.replace('Minuton ', '')}</h3>
-            {item.composer && <p className="text-12 font-bold text-ink-soft">{item.composer}</p>}
-            {item.edition && <p className="text-11 text-ink-soft">{item.edition}</p>}
-            {item.difficulty && <p className="text-11 font-semibold text-ink-soft">{item.id === 'piano-davy-jones' ? 'Partition externe' : item.difficulty}</p>}
-            <button type="button" onClick={() => preview(item)} className="shop-preview-link" aria-label={`Voir l’aperçu de ${item.title}`}><Eye size={15} aria-hidden="true" />Voir l’aperçu</button>
-            {item.audio && <button type="button" onClick={() => previewAudio(item)} className="flex min-h-8 items-center gap-1.5 text-12 font-bold text-ink-soft" aria-label={`Écouter l’aperçu de ${item.title}`}>{playing === item.id ? <Square size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}{playing === item.id ? 'Arrêter' : 'Écouter'}</button>}
-            <div className="shop-product-actions"><span className="shop-product-price"><Price value={item.price} size={18}/></span>
-              {item.id === 'piano-davy-jones' ? <Button size="sm" variant="secondary" className="w-full px-2 text-12" onClick={() => playPiano(item)}><PianoIcon />Clavier libre</Button>
-                : bought ? <Button size="sm" variant="secondary" className="w-full px-2 text-12" disabled={busy || equipped} onClick={() => item.category === 'piano' ? playPiano(item) : void equip(item)}>{equipped ? <Check /> : item.category === 'piano' ? <Play /> : <Check />}{equipped ? item.category === 'mascot' ? 'Porté' : 'Activé' : item.category === 'piano' ? 'Jouer' : item.category === 'mascot' ? 'Porter' : 'Activer'}</Button>
-                : <Button size="sm" className="w-full px-2 text-17" disabled={loading || busy} onClick={() => preview(item)} aria-label={`Acheter ${item.title} pour ${item.price} minutons`}>Acheter</Button>}
-            </div>
-          </div>
+  return <Screen tabs className="studio-shop skin-shop">
+    <AppHeader/>
+    <div className="studio-page-heading"><div><h1>Boutique</h1><p className="skin-shop-intro">Trouve le Minuton qui te ressemble.</p></div><button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><Search size={18}/></button></div>
+    <div className="skin-shop-tabs" aria-label="Parcourir la boutique">{([{id:'discover', label:'Minutons'}, {id:'owned',label:'Mes achats'}, {id:'favorites',label:'Favoris'}] as const).map(tab => <button type="button" key={tab.id} aria-pressed={shelf === tab.id} onClick={() => changeShelf(tab.id)}>{tab.label}{tab.id === 'owned' && ownedCount > 0 && <span>{ownedCount}</span>}{tab.id === 'favorites' && favorites.length > 0 && <span>{favorites.length}</span>}</button>)}</div>
+    {searchOpen && <label className="skin-shop-search"><Search size={18}/><span className="sr-only">Rechercher une tenue</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Rechercher une tenue…" type="search"/></label>}
+    <section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={52} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div>{shop.equipped.mascot ? <button type="button" disabled={busy || loading} className="skin-reset" aria-label="Revenir à Minuton classique" onClick={() => void equip(null)}><RotateCcw size={17}/></button> : <Check size={18} aria-hidden="true"/>}</section>
+    {shop.canClaimTestCredit && <Button className="mt-3" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
+    {notice && <p role="status" className="skin-shop-notice">{notice}</p>}
+    {error && !selected && <div role="alert" className="mt-3"><p>{error}</p><Button variant="secondary" size="sm" onClick={() => void refresh()}><RotateCcw/>Réessayer</Button></div>}
+    {loading && <p role="status" className="mt-4">Chargement de tes achats…</p>}
+    {overview && <>
+      <section className="skin-featured" data-collection={FEATURED.id} aria-label="Collection à la une"><div className="skin-featured-top"><span><Ghost size={14}/>À la une</span><small>{countOf(FEATURED.id)} tenues</small></div><CollectionArt outfits={FEATURED.outfits}/><div className="skin-featured-copy"><h2>La magie d’Halloween</h2><p>Un costume pour chaque petit frisson.</p><button type="button" onClick={() => openCollection(FEATURED.id)}>Voir la collection<ChevronRight size={18}/></button></div></section>
+      <section className="skin-collections"><div className="skin-section-title"><h2>Explore les collections</h2><span>4 univers</span></div><div className="skin-collections-grid">{COLLECTIONS.map(value => <button type="button" key={value.id} data-collection={value.id} onClick={() => openCollection(value.id)} aria-label={`Explorer la collection ${value.title}`}><CollectionArt outfits={value.outfits}/><div><strong><value.Icon size={15}/>{value.title}</strong><span>{countOf(value.id)} tenues<ChevronRight size={15}/></span></div></button>)}</div></section>
+    </>}
+    {activeCollection && <><button type="button" className="skin-back" onClick={() => { setCollection(undefined); setQuery(''); setGender('all') }}><ArrowLeft size={16}/>Toutes les collections</button><section className="skin-collection-banner" data-collection={activeCollection.id}><CollectionArt outfits={activeCollection.outfits}/><div><h2>{activeCollection.title}</h2><p>{activeCollection.subtitle}</p></div></section></>}
+    <section className="skin-catalogue" aria-label="Catalogue des tenues"><div className="skin-section-title"><h2>{activeCollection ? 'Choisis ta tenue' : shelf === 'owned' ? 'Mes tenues' : shelf === 'favorites' ? 'Mes envies' : 'Toutes les tenues'}</h2><span>{items.length} {items.length === 1 ? 'tenue' : 'tenues'}</span></div>
+      {!overview && !activeCollection && <p className="skin-shelf-caption">{shelf === 'owned' ? 'Tes tenues débloquées, prêtes à être portées.' : shelf === 'favorites' ? 'Les tenues que tu as gardées de côté.' : 'Une tenue pour chaque envie.'}</p>}
+      <div className="skin-gender-filters" aria-label="Filtrer les tenues">{([{id:'all',label:'Tout'}, {id:'male',label:'Masculins'}, {id:'female',label:'Féminins'}] as const).map(filter => <button type="button" key={filter.id} aria-pressed={gender === filter.id} onClick={() => setGender(filter.id)}>{filter.label}</button>)}</div>
+      <div className="studio-shop-grid">{items.map(item => {
+        const bought = shop.owned.includes(item.id), equipped = shop.equipped.mascot === item.id
+        return <Card key={item.id} padding="none" className="shop-product min-w-0 gap-0 overflow-hidden" data-category="mascot">
+          <div className="skin-product-art"><button type="button" onClick={() => preview(item)} aria-label={`Prévisualiser ${item.title}`}><ShopPreview item={item}/></button><button type="button" className="skin-favorite" aria-label={`${favorites.includes(item.id) ? 'Retirer' : 'Ajouter'} ${item.title} ${favorites.includes(item.id) ? 'des' : 'aux'} favoris`} aria-pressed={favorites.includes(item.id)} onClick={() => toggleFavorite(item.id)}><Heart size={18} fill={favorites.includes(item.id) ? 'currentColor' : 'none'}/></button>{equipped ? <span className="shop-worn-badge"><Check size={12}/>Porté actuellement</span> : bought && <span className="skin-owned-badge"><Check size={12}/>Acheté</span>}</div>
+          <div className="shop-product-body"><small>{COLLECTIONS.find(value => value.id === groupOf(item))?.title}</small><h3>{item.title.replace('Minuton ', '')}</h3><div className="shop-product-actions"><span className="shop-product-price"><Price value={item.price} size={18}/></span>{bought ? <Button size="sm" variant="secondary" disabled={busy || loading || equipped} onClick={() => void equip(item)}>{equipped ? 'Porté' : 'Porter'}</Button> : <Button size="sm" variant="secondary" onClick={() => preview(item)} aria-label={`Voir l’aperçu de ${item.title}`}>Voir<ChevronRight size={14}/></Button>}</div></div>
         </Card>
-      })}
-    </div>
-    {!items.length && <p className="mt-4 rounded-md border-2 border-dashed border-ink-faint p-4 text-14 text-ink-soft">{query ? 'Aucun résultat. Essaie un autre nom ou efface la recherche.' : 'Aucun article ici pour le moment. Essaie un autre filtre ou explore le catalogue.'}</p>}
-    <p className="mt-5 text-center text-12 text-ink-soft">Tes achats ne diminuent pas tes niveaux ni tes badges.</p>
-
-    <Dialog open={Boolean(selected)} onOpenChange={(open) => { if (!open && !busy) { setSelected(undefined); stopPreview() } }}>
-      <DialogContent>
-        {selected && <>
-          <DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.description}{selected.edition && ` ${selected.edition}.`}</DialogDescription></DialogHeader>
-          <ShopPreview item={selected} detail />
-          {selected.audio && <Button variant="secondary" size="sm" onClick={() => previewAudio(selected)}>{playing === selected.id ? <Square /> : <Play />}{playing === selected.id ? 'Arrêter l’aperçu' : 'Écouter l’aperçu'}</Button>}
-          {error && <p role="alert" className="text-14 text-accent-strong">{error}</p>}
-          {selected.id === 'piano-davy-jones' ? <><Button variant="secondary" className="whitespace-normal" onClick={() => openExternal(DAVY_PARTITION)}><ExternalLink />Partition officielle</Button><Button onClick={() => playPiano(selected)}>Ouvrir le clavier libre</Button><p className="text-12 text-ink-soft">La partition s’ouvre chez Musicnotes et peut nécessiter un achat séparé. Sans débit de minutons. Le guidage intégré attend une autorisation.</p></>
-            : owned ? <Button disabled={busy || active} onClick={() => selected.category === 'piano' ? playPiano(selected) : void equip(selected)}>{active ? selected.category === 'mascot' ? 'Porté actuellement' : 'Activé' : selected.category === 'piano' ? 'Jouer ce morceau' : selected.category === 'mascot' ? 'Porter cette tenue' : 'Activer cet objet'}</Button>
-            : <>
-              <div className="flex items-center justify-between gap-2 rounded-sm bg-surface-100 p-3"><span className="text-13 font-bold">Achat permanent</span><span className="text-22"><Price value={selected.price} size={28} /></span></div>
-              {shop.balance >= selected.price ? <p className="flex items-center justify-between gap-2 text-13 text-ink-soft">Solde après l’achat <Price value={shop.balance - selected.price} size={20} /></p> : <p className="flex items-center justify-between gap-2 text-13 text-ink-soft">Il te manque <Price value={selected.price - shop.balance} size={20} /></p>}
-              <Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>{selected.category === 'theme' ? 'Débloquer et activer' : 'Débloquer'} <Price value={selected.price} /></>}</Button>
-            </>}
-          <Button variant="ghost" disabled={busy} onClick={() => { setSelected(undefined); stopPreview() }}>Fermer l’aperçu</Button>
-        </>}
-      </DialogContent>
-    </Dialog>
+      })}</div>
+      {!items.length && <div className="skin-empty"><Heart size={27}/><p>{query ? 'Aucune tenue ne correspond à ta recherche.' : shelf === 'favorites' ? 'Touche le cœur d’une tenue pour la retrouver ici.' : shelf === 'owned' ? 'Tes prochaines tenues débloquées apparaîtront ici.' : 'Aucune tenue avec ces filtres.'}</p><button type="button" onClick={() => { changeShelf('discover'); setSearchOpen(false) }}>Explorer les tenues<ChevronRight size={15}/></button></div>}
+    </section>
+    <p className="skin-shop-footnote">Tes achats ne diminuent pas tes niveaux ni tes badges.{shop.bonus > 0 && <span>Crédit de test inclus dans le solde.</span>}</p>
+    <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog">
+      {selected && <><DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>Collection {COLLECTIONS.find(value => value.id === groupOf(selected))?.title}</DialogDescription></DialogHeader><ShopPreview item={selected} detail/><p className="skin-preview-description">{selected.description}</p><button type="button" className="skin-preview-favorite" aria-pressed={favorites.includes(selected.id)} onClick={() => toggleFavorite(selected.id)}><Heart size={17} fill={favorites.includes(selected.id) ? 'currentColor' : 'none'}/>{favorites.includes(selected.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button>
+        {error && <p role="alert">{error}</p>}
+        {owned ? <Button disabled={busy || loading || active} onClick={() => void equip(selected)}>{busy ? 'Activation…' : active ? 'Porté actuellement' : 'Porter cette tenue'}</Button> : <><div className="skin-purchase-info"><span>Achat permanent</span><Price value={selected.price}/></div><p className="skin-purchase-balance">{shop.balance >= selected.price ? <>Solde après l’achat<Price value={shop.balance - selected.price} size={18}/></> : <>Il te manque<Price value={selected.price - shop.balance} size={18}/></>}</p><Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>Acheter · <Price value={selected.price}/></>}</Button><p className="skin-purchase-caption">Retrouve cette tenue dans Mes achats après l’achat.</p></>}
+        <Button variant="ghost" disabled={busy} onClick={() => setSelected(undefined)}>Fermer l’aperçu</Button>
+      </>}
+    </DialogContent></Dialog>
   </Screen>
 }
-
-function PianoIcon() { return <Play aria-hidden="true" /> }
 
 export function BonusPianoScreen({ itemId }: { itemId: string }) {
   const item = getShopItem(itemId)

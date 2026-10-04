@@ -42,19 +42,19 @@ it('refuse un manque de fonds, un faux article et Davy Jones sans dépenser', as
 })
 it('isole les achats, bloque l’équipement non possédé et conserve les choix après rechargement', async () => {
   await fund(100)
-  await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-casque' }).expect(403)
-  await request(app).post('/api/shop/purchases').set(as()).send({ itemId: 'mascot-casque' }).expect(200)
-  const equipped = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-casque' }).expect(200)
-  expect(equipped.body.equipped).toEqual({ mascot: 'mascot-casque' })
+  await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-pianiste' }).expect(403)
+  await request(app).post('/api/shop/purchases').set(as()).send({ itemId: 'mascot-pianiste' }).expect(200)
+  const equipped = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-pianiste' }).expect(200)
+  expect(equipped.body.equipped).toEqual({ mascot: 'mascot-pianiste' })
   const restored = await request(app).get('/api/me').set(as()).expect(200)
-  expect(restored.body.shop.equipped).toEqual({ mascot: 'mascot-casque' })
+  expect(restored.body.shop.equipped).toEqual({ mascot: 'mascot-pianiste' })
   const other = await request(app).get('/api/shop').set(as(2)).expect(200)
   expect(other.body.owned).toEqual([])
-  await request(app).put('/api/shop/equipment').set(as(2)).send({ category: 'mascot', itemId: 'mascot-casque' }).expect(403)
-  await request(app).put('/api/shop/equipment').set(as()).send({ category: 'theme', itemId: 'mascot-casque' }).expect(403)
+  await request(app).put('/api/shop/equipment').set(as(2)).send({ category: 'mascot', itemId: 'mascot-pianiste' }).expect(403)
+  await request(app).put('/api/shop/equipment').set(as()).send({ category: 'theme', itemId: 'mascot-pianiste' }).expect(403)
   const cleared = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: null }).expect(200)
   expect(cleared.body.equipped).toEqual({})
-  expect(cleared.body.owned).toContain('mascot-casque')
+  expect(cleared.body.owned).toContain('mascot-pianiste')
 })
 it('ne laisse pas deux achats concurrents dépasser le solde', async () => {
   await fund(100)
@@ -154,9 +154,9 @@ it('achète et restaure les nouvelles palettes et couvertures', async () => {
   expect(restored.body.shop).toMatchObject({ balance: 10, spent: 90, equipped: { palette: 'palette-ocean', cover: 'cover-sakura' } })
 })
 
-it('achète les douze tenues sportives et restaure la dernière tenue équipée', async () => {
+it('achète les quatre tenues sportives masculines de la V1 et restaure la dernière tenue équipée', async () => {
   await fund(2000)
-  const sports = ['basket', 'judo', 'equitation', 'football', 'tennis', 'boxe', 'natation', 'cyclisme', 'rugby', 'baseball', 'ski', 'skate']
+  const sports = ['basket', 'judo', 'equitation', 'football']
   for (const sport of sports) {
     const itemId = `mascot-${sport}`
     await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
@@ -165,25 +165,25 @@ it('achète les douze tenues sportives et restaure la dernière tenue équipée'
     expect(equipped.body.equipped.mascot).toBe(itemId)
   }
   const restored = await request(app).get('/api/me').set(as()).expect(200)
-  expect(restored.body.shop.owned).toHaveLength(12)
-  expect(restored.body.shop.equipped.mascot).toBe('mascot-skate')
+  expect(restored.body.shop.owned).toHaveLength(4)
+  expect(restored.body.shop.equipped.mascot).toBe('mascot-football')
   expect(restored.body.stats.totalCoins).toBe(2000)
 })
 
 it('achète les nouvelles tenues féminines et restaure la dernière portée sans redébiter', async () => {
   await fund(500)
-  for (const itemId of ['mascot-judoka-f', 'mascot-athena', 'mascot-poney']) {
+  for (const itemId of ['mascot-judoka-f', 'mascot-athena', 'mascot-cavaliere']) {
     await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
     await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(200)
     const result = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(200)
     expect(result.body.equipped.mascot).toBe(itemId)
   }
   const restored = await request(app).get('/api/me').set(as()).expect(200)
-  expect(restored.body.shop).toMatchObject({ spent: 300, balance: 200, equipped: { mascot: 'mascot-poney' } })
-  expect(restored.body.shop.owned).toEqual(expect.arrayContaining(['mascot-judoka-f', 'mascot-athena', 'mascot-poney']))
+  expect(restored.body.shop).toMatchObject({ spent: 270, balance: 230, equipped: { mascot: 'mascot-cavaliere' } })
+  expect(restored.body.shop.owned).toEqual(expect.arrayContaining(['mascot-judoka-f', 'mascot-athena', 'mascot-cavaliere']))
   const repeated = await request(app).post('/api/shop/purchases').set(as()).send({ itemId: 'mascot-athena' }).expect(200)
-  expect(repeated.body.spent).toBe(300)
-  expect(repeated.body.equipped.mascot).toBe('mascot-poney')
+  expect(repeated.body.spent).toBe(270)
+  expect(repeated.body.equipped.mascot).toBe('mascot-cavaliere')
   const other = await request(app).get('/api/shop').set(as(2)).expect(200)
   expect(other.body.owned).toEqual([])
 })
@@ -201,4 +201,37 @@ it('achète et équipe les huit costumes Halloween aux prix du catalogue', async
   expect(restored.body.shop).toMatchObject({ spent: 680, balance: 320, equipped: { mascot: 'mascot-halloween-fantome-f' } })
   expect(restored.body.shop.owned).toHaveLength(8)
   expect(restored.body.stats.totalCoins).toBe(1000)
+})
+
+
+it('retire les anciennes tenues de la vente sans perdre les achats ou leur équipement', async () => {
+  await fund(500)
+  await prisma.shopPurchase.create({ data: { userId: 1n, itemId: 'mascot-poney', price: 110 } })
+  await prisma.user.update({ where: { id: 1n }, data: { coinsSpent: 110 } })
+  for (const itemId of ['mascot-poney', 'mascot-cheffe', 'mascot-casque']) {
+    await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(400)
+  }
+  await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-cheffe' }).expect(403)
+  const worn = await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-poney' }).expect(200)
+  expect(worn.body).toMatchObject({ spent: 110, balance: 390, owned: ['mascot-poney'], equipped: { mascot: 'mascot-poney' } })
+  const restored = await request(app).get('/api/me').set(as()).expect(200)
+  expect(restored.body.shop).toEqual(worn.body)
+  expect(restored.body.stats.totalCoins).toBe(500)
+})
+
+it('achète les nouvelles tenues créatives et divines puis les restaure sans double débit', async () => {
+  await fund(3000)
+  const ids = ['photographe', 'cineaste', 'violoniste', 'dj', 'ecrivaine', 'zeus', 'poseidon', 'apollon', 'hermes', 'hera', 'artemis', 'aphrodite']
+  for (const name of ids) {
+    const itemId = `mascot-${name}`
+    await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
+    const first = await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(200)
+    const again = await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(200)
+    expect(again.body.spent).toBe(first.body.spent)
+    await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(200)
+  }
+  const restored = await request(app).get('/api/me').set(as()).expect(200)
+  expect(restored.body.shop.owned).toHaveLength(12)
+  expect(restored.body.shop.equipped.mascot).toBe('mascot-aphrodite')
+  expect(restored.body.stats.totalCoins).toBe(3000)
 })

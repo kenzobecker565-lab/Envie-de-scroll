@@ -25,7 +25,7 @@ export async function getShop(prisma: PrismaClient, userId: bigint, admins: read
 export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown, admins: readonly string[] = []): Promise<ShopState> {
   const item = typeof id === 'string' ? getShopItem(id) : undefined
   if (!item) throw badRequest('Objet inconnu.')
-  if (!item.available) throw badRequest('Ce morceau attend encore son autorisation. Aucun achat possible.')
+  if (!item.available) throw badRequest(item.category === 'mascot' ? 'Cette tenue ne fait plus partie de la boutique. Tes tenues déjà achetées restent disponibles dans Mes achats.' : 'Ce morceau attend encore son autorisation. Aucun achat possible.')
   try {
     await prisma.$transaction(async (tx) => {
       if (await tx.shopPurchase.findUnique({ where: { userId_itemId: { userId, itemId: item.id } } })) return
@@ -57,7 +57,7 @@ export async function equipItem(prisma: PrismaClient, userId: bigint, category: 
     const user = await tx.user.findUniqueOrThrow({ where: { id: userId } })
     if (id !== null) {
       const item = getShopItem(id as string)
-      if (!item?.available || item.category !== category || !(await tx.shopPurchase.findUnique({ where: { userId_itemId: { userId, itemId: item.id } } }))) throw new ApiError(403, 'unauthorized', 'Débloque cet objet avant de l’utiliser.')
+      if (!item || (!item.available && item.category !== 'mascot') || item.category !== category || !(await tx.shopPurchase.findUnique({ where: { userId_itemId: { userId, itemId: item.id } } }))) throw new ApiError(403, 'unauthorized', 'Débloque cet objet avant de l’utiliser.')
     }
     const equipped = JSON.parse(user.shopEquipment) as Record<string, string>
     if (id === null) delete equipped[category as string]

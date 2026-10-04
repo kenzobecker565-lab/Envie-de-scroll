@@ -315,7 +315,7 @@ html[data-scene] .skin-shop{color:#422346;--ink:#422346;--ink-soft:#7B637E;--sur
 .skin-collections-grid .skin-collection-art{height:113px;background:#F0E7F6}
 .skin-collections-grid [data-collection='sports'] .skin-collection-art{background:#F3E9D7}
 .skin-collections-grid [data-collection='arts'] .skin-collection-art{background:#F7E3E9}
-.skin-collections-grid [data-collection='adventure'] .skin-collection-art{background:#E3EFEB}
+.skin-collections-grid [data-collection='olympus'] .skin-collection-art{background:#E3EFEB}
 .skin-collections-grid>button>div:last-child{padding:10px;display:flex;flex-direction:column;gap:6px}
 .skin-collections-grid strong{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;color:#53295C;line-height:1.2}
 .skin-collections-grid strong svg{flex-shrink:0}
@@ -327,7 +327,7 @@ html[data-scene] .skin-shop{color:#422346;--ink:#422346;--ink-soft:#7B637E;--sur
 .skin-collection-banner p{font-size:11px;line-height:1.5;color:#7B637E;margin-top:6px}
 .skin-collection-banner[data-collection='sports']{background:#F3E9D7}
 .skin-collection-banner[data-collection='arts']{background:#F7E3E9}
-.skin-collection-banner[data-collection='adventure']{background:#E3EFEB}
+.skin-collection-banner[data-collection='olympus']{background:#E3EFEB}
 .skin-catalogue{margin-top:23px}
 .skin-shelf-caption{font-size:12px;color:#7B637E;margin:-5px 0 12px}
 .skin-gender-filters{display:flex;gap:6px;margin-bottom:13px;padding:4px;background:#F4EDF5;border-radius:99px}
@@ -408,7 +408,7 @@ html[data-scene] .skin-preview-dialog [data-slot='button'][data-variant='ghost']
 .immersive-shop .skin-collections-grid .skin-collection-art{background-size:cover!important;background-position:center!important}
 .immersive-shop .skin-collections-grid [data-collection='sports'] .skin-collection-art{background-image:url('/art/shop-world-sports.webp')}
 .immersive-shop .skin-collections-grid [data-collection='arts'] .skin-collection-art{background-image:url('/art/shop-world-arts.webp')}
-.immersive-shop .skin-collections-grid [data-collection='adventure'] .skin-collection-art{background-image:url('/art/shop-world-adventure.webp')}
+.immersive-shop .skin-collections-grid [data-collection='olympus'] .skin-collection-art{background-image:url('/art/shop-world-adventure.webp')}
 .immersive-shop .skin-collections-grid [data-collection='halloween'] .skin-collection-art{background-image:url('/art/shop-world-halloween.webp')}
 .skin-wishes .skin-section-title>button{display:flex;gap:4px;align-items:center;font-size:10px;font-weight:850;color:#805087}
 .skin-wishes>div:last-child{display:flex;gap:8px}
@@ -437,7 +437,7 @@ html[data-scene] .skin-preview-dialog [data-slot='button'][data-variant='ghost']
 html[data-scene] .immersive-preview{background-size:cover;background-position:center;max-height:94dvh}
 html[data-scene] .immersive-preview[data-world='halloween']{background-image:linear-gradient(#FFFDF8A6,#FFFDF8DE),url('/art/shop-world-halloween.webp')}
 html[data-scene] .immersive-preview[data-world='sports']{background-image:linear-gradient(#FFFDF8A6,#FFFDF8DE),url('/art/shop-world-sports.webp')}
-html[data-scene] .immersive-preview[data-world='adventure']{background-image:linear-gradient(#FFFDF866,#FFFDF8D9),url('/art/shop-world-adventure.webp')}
+html[data-scene] .immersive-preview[data-world='olympus']{background-image:linear-gradient(#FFFDF866,#FFFDF8D9),url('/art/shop-world-adventure.webp')}
 html[data-scene] .immersive-preview[data-world='arts']{background-image:linear-gradient(#FFFDF8A6,#FFFDF8DE),url('/art/shop-world-arts.webp')}
 .immersive-preview .shop-art{background:#FFFDF819!important;border:0;min-height:275px;padding:8px}
 .immersive-preview .shop-art>span.absolute{display:none}

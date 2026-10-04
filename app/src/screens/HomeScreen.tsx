@@ -2,6 +2,7 @@ import { BookOpen, Brush, ChevronRight, Feather, Sparkles } from 'lucide-react'
 import { dailyWord, getPassion, getPathStep, isFixedActivityId, passionLevel, type PassionId } from '@scroll-up/shared'
 import { Screen } from '../components/Screen.tsx'
 import { AppHeader } from '../components/AppHeader.tsx'
+import { ScrollCallToAction } from '../components/ScrollCallToAction.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { PassionArtwork, PassionPoster } from '../components/PassionArtwork.tsx'
 import { todayKey, wordDone } from '../components/Challenge.tsx'
@@ -35,7 +36,7 @@ export function HomeScreen() {
    <h1 id="home-greeting"><span>{hello}</span><span className="home-name">{user.firstName||'à toi'}.</span></h1>
    <button className="studio-home-minuton" type="button" aria-label="Personnaliser Minuton" onClick={()=>push({name:'shop',category:'mascot'})}><Mascot size={200}/></button>
   </section>
-  <button type="button" className="studio-scroll-cta" data-tour-target="swipe" onClick={start}><span>J’ai envie de scroll</span><ChevronRight size={26}/></button>
+  <ScrollCallToAction onStart={start}/>
   <section className="studio-daily-card" data-tour-target="word" aria-labelledby="home-daily-word">
    <button type="button" className="studio-daily-open" onClick={()=>push({name:'challenge'})} aria-label={`Le mot du jour : ${word}. Voir le défi et les mots du mois`}>
     <span className="studio-daily-heading"><Sparkles size={18}/><h2 id="home-daily-word">Le mot du jour</h2>{doneToday&&<span className="studio-daily-done">Fait ✓</span>}</span>

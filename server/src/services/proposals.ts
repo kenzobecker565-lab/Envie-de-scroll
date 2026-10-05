@@ -84,11 +84,13 @@ export async function createProposal(
   if (![...parsePassions(user), ...activePassions(parsePassions(user))].includes(passion)) throw badRequest('Cette passion ne fait pas partie de ton profil')
 
   let currentId: string | undefined
+  let currentProposal: Proposal | undefined
   if (request.replacing) {
     const current = await prisma.proposal.findFirst({ where: { id: request.replacing, userId: user.id } })
     if (!current) throw new ApiError(404, 'not_found', 'Proposition introuvable')
     if (current.status === 'completed') throw new ApiError(409, 'already_completed', 'Cette activité est déjà enregistrée')
     currentId = current.activityId
+    currentProposal = current
   }
 
   let activity: Activity
@@ -102,7 +104,13 @@ export async function createProposal(
   } else if (request.step !== undefined && isBaseActivity(request.step)) {
     const selected = getActivity(request.step)!
     if (selected.passion !== passion || selected.duration !== duration) throw badRequest('Activité de l’atelier invalide.')
-    if (request.replacing) throw badRequest('Une activité choisie dans l’atelier ne se remplace pas.')
+    if (request.replacing) {
+      if (passion !== 'sport' || currentProposal?.passion !== 'sport' || currentProposal.duration !== duration) {
+        throw badRequest('Une activité choisie dans l’atelier ne se remplace pas.')
+      }
+      if (currentProposal.status !== 'open') throw new ApiError(409, 'invalid_request', 'Cette séance n’est plus en cours.')
+      if (selected.id === currentId || selected.id.includes('-lesson-')) throw badRequest('Choisis une autre séance.')
+    }
     activity = selected
   } else if (request.step !== undefined) {
     const step = getPathStep(request.step)

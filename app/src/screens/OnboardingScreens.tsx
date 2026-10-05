@@ -42,7 +42,7 @@ const ONBOARDING_STEPS = 3
 /** Les passions, en bulles qui flottent autour de l'illustration. */
 const ORBIT = [
   { id: 'dessin', className: '-top-3 -left-2', rotate: -10, delay: '0s' },
-  { id: 'rythme', className: '-top-4 right-2', rotate: 8, delay: '-1.4s' },
+  { id: 'sport', className: '-top-4 right-2', rotate: 8, delay: '-1.4s' },
   { id: 'piano', className: 'top-[40%] -right-5', rotate: 10, delay: '-2s' },
   { id: 'ecriture', className: 'bottom-2 -left-3', rotate: 6, delay: '-2.6s' },
   { id: 'logique', className: '-bottom-4 right-6', rotate: -6, delay: '-0.8s' },

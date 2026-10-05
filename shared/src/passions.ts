@@ -26,16 +26,17 @@ const KNOWN_PASSIONS: readonly Passion[] = [
       },
     },
   },
+  { id: 'sport', label: 'Sport', tagline: 'Une pause pour bouger, avec ton chrono', proof: 'titre', timeGuard: true, tone: 'accent' },
   { id: 'rythme', label: 'Rythme', tagline: 'Dans ton studio : compose tes propres beats', proof: 'titre', timeGuard: false, tone: 'accent' },
   { id: 'logique', label: 'Logique et énigmes', tagline: 'À toi de déduire, croiser les indices et résoudre', proof: 'titre', timeGuard: false, tone: 'warm' },
   { id: 'francais', label: 'Français', tagline: 'Orthographe, grammaire et conjugaison en pratique', proof: 'titre', timeGuard: false, tone: 'accent' },
 ]
 
-export const ACTIVE_PASSION_IDS: readonly PassionId[] = ['dessin', 'piano', 'ecriture', 'rythme', 'logique', 'francais']
+export const ACTIVE_PASSION_IDS: readonly PassionId[] = ['dessin', 'piano', 'ecriture', 'sport', 'logique', 'francais']
 export const PASSIONS = ACTIVE_PASSION_IDS.map(id => KNOWN_PASSIONS.find(p => p.id === id)!)
 /** Remplace uniquement les préférences, jamais les identifiants de l’historique. */
 export function activePassions(ids: readonly PassionId[]): PassionId[] {
-  const selected = new Set<PassionId>(ids.map(id => id === 'musique' ? 'rythme' : id === 'cinema' ? 'logique' : id))
+  const selected = new Set<PassionId>(ids.map(id => id === 'musique' || id === 'rythme' ? 'sport' : id === 'cinema' ? 'logique' : id))
   return ACTIVE_PASSION_IDS.filter(id => selected.has(id))
 }
 
@@ -65,5 +66,5 @@ export function normalizePassions(value: unknown): PassionId[] | null {
   const unique = new Set(value)
   if (unique.size !== value.length) return null
   if (unique.size < MIN_PASSIONS || unique.size > MAX_PASSIONS) return null
-  return (value.includes('musique') || value.includes('cinema') ? KNOWN_PASSIONS : PASSIONS).map((passion) => passion.id).filter((id) => unique.has(id))
+  return (value.includes('musique') || value.includes('cinema') || value.includes('rythme') ? KNOWN_PASSIONS : PASSIONS).map((passion) => passion.id).filter((id) => unique.has(id))
 }

@@ -1,3 +1,4 @@
+import { SportLearning } from './SportSession.tsx'
 import { WorkshopLearningOverview, WorkshopLearning } from './WorkshopLearning.tsx'
 import { ChevronRight, Clock3, Settings, ShoppingBag, Sparkles, Zap } from 'lucide-react'
 import { AppHeader } from '../components/AppHeader.tsx'
@@ -20,6 +21,7 @@ export function LearnScreen() { return <WorkshopLearningOverview/> }
 export function LearnPassionScreen({ passion }: { passion: PassionId }) {
   const { state } = useAppState()
   const { push, reset } = useNavigation()
+  if (passion==='sport') return <SportLearning/>
   if (isWorkshop(passion)) return <WorkshopLearning passion={passion}/>
   return <Screen tabs>
     <Button variant="ghost" size="sm" onClick={() => reset([{ name: 'home' }, { name: 'learn' }])}>Toutes les passions à apprendre</Button>

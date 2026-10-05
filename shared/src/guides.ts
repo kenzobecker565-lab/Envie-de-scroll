@@ -850,6 +850,7 @@ const RAW_PIANO_GUIDES: Record<string, RawGuide> = {
 
 /** Pour les étapes de parcours : des pistes générales, par passion. */
 const RAW_PASSION_TIPS: Record<PassionId, string[]> = {
+ sport: ['Prends ton temps et garde une amplitude confortable.'],
  rythme: ['Pose la grosse caisse sur les temps, puis varie.'], logique: ['Chaque personne occupe une seule place. Croise les indices avant de conclure.'], francais: ['Identifie le sujet et le temps avant de choisir la forme.'],
   dessin: [
     'Commence léger, renforce à la fin.',
@@ -898,7 +899,7 @@ export const GUIDES: Readonly<Record<string, ActivityGuide>> = Object.fromEntrie
 )
 
 const PASSION_GUIDES: Record<PassionId, ActivityGuide> = {
- rythme: buildGuide({tips: RAW_PASSION_TIPS.rythme}), logique: buildGuide({tips: RAW_PASSION_TIPS.logique}), francais: buildGuide({tips: RAW_PASSION_TIPS.francais}),
+ sport: buildGuide({tips: RAW_PASSION_TIPS.sport}), rythme: buildGuide({tips: RAW_PASSION_TIPS.rythme}), logique: buildGuide({tips: RAW_PASSION_TIPS.logique}), francais: buildGuide({tips: RAW_PASSION_TIPS.francais}),
   dessin: buildGuide({ tips: RAW_PASSION_TIPS.dessin }),
   ecriture: buildGuide({ tips: RAW_PASSION_TIPS.ecriture }),
   musique: buildGuide({ tips: RAW_PASSION_TIPS.musique }),

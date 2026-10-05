@@ -1,4 +1,4 @@
-import { ArrowRight, Disc3, Film, NotebookPen, PenLine, Piano } from 'lucide-react'
+import { ArrowRight, Dumbbell, Disc3, Film, NotebookPen, PenLine, Piano } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import type { CompletionDTO, PassionDetailResponse, PassionId, PassionStatsDTO } from '@scroll-up/shared'
@@ -20,7 +20,7 @@ import { PASSION_COLORS } from '../lib/icons.ts'
 const WORDS_PER_PAGE = 250
 
 const TITLES: Record<PassionId, { title: string; icon: typeof Disc3 }> = {
- rythme: {title: 'Tes beats', icon: Disc3}, logique: {title: 'Ton carnet de déduction', icon: NotebookPen}, francais: {title: 'Tes révisions', icon: PenLine},
+ sport: {title: 'Mes séances au poids du corps', icon: Dumbbell}, rythme: {title: 'Tes beats', icon: Disc3}, logique: {title: 'Ton carnet de déduction', icon: NotebookPen}, francais: {title: 'Tes révisions', icon: PenLine},
   dessin: { title: 'Ton carnet de croquis', icon: NotebookPen },
   ecriture: { title: 'Ton carnet d’écriture', icon: PenLine },
   musique: { title: 'Ta discothèque', icon: Disc3 },
@@ -30,6 +30,7 @@ const TITLES: Record<PassionId, { title: string; icon: typeof Disc3 }> = {
 
 /** « 3 dessins », « 1 240 mots », « 8 découvertes » : le chiffre qui parle le plus, par passion. */
 export function signatureLabel(passion: PassionId, stats: PassionStatsDTO): string | null {
+  if (passion === 'sport') return stats.activities ? plural(stats.activities, 'séance') : null
   if (passion === 'dessin') return stats.drawings ? plural(stats.drawings, 'dessin') : null
   if (passion === 'ecriture') return stats.words ? plural(stats.words, 'mot') : null
   if (passion === 'piano') return stats.explored ? plural(stats.explored, 'morceau', 'morceaux') : null

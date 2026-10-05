@@ -2,6 +2,8 @@ import { ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, S
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import {
+  SPORT_LESSONS,
+  sportProgram,
   WORKSHOP_LESSONS,
   workshopConfig,
   cheerFor,
@@ -104,6 +106,9 @@ export function DoneScreen() {
   }
 
   const workshop = workshopConfig(activityId)
+  const sportLesson=sportProgram(activityId)?.lesson
+  const nextSportLesson=sportLesson!==undefined?SPORT_LESSONS[sportLesson+1]:undefined
+  const continueSport=()=>{if(sportLesson===undefined||!nextSportLesson)return;dispatch({type:'newFlow',flow:{passion:'sport',fixedPassion:'sport',duration:5,fixedStep:`sport-lesson-${sportLesson+2}`}});reset([{name:'home'},{name:'learn'},{name:'learnPassion',passion:'sport'},{name:'activity'}])}
   const nextWorkshopLesson = workshop?.lesson !== undefined && workshop.lesson < 2 ? WORKSHOP_LESSONS[workshop.activity.passion as keyof typeof WORKSHOP_LESSONS][workshop.lesson + 1] : undefined
   const continueWorkshop = () => {
     if (!workshop || workshop.lesson === undefined || !nextWorkshopLesson) return
@@ -235,8 +240,8 @@ export function DoneScreen() {
       </div>
 
       <div className="mt-auto flex w-full flex-col">
-        <PrimaryAction text={nextWorkshopLesson ? "Continuer la leçon suivante" : "Une nouvelle activité"} icon={<Shuffle aria-hidden="true" />} onClick={nextWorkshopLesson ? continueWorkshop : continuePassion}>
-          <p className="mb-2 text-13 text-ink-soft">{nextWorkshopLesson ? nextWorkshopLesson.title : `On continue en ${getPassion(passion).label}, avec le même temps disponible.`}</p>
+        <PrimaryAction text={nextSportLesson||nextWorkshopLesson ? "Continuer la leçon suivante" : "Une nouvelle activité"} icon={<Shuffle aria-hidden="true" />} onClick={nextSportLesson?continueSport:nextWorkshopLesson ? continueWorkshop : continuePassion}>
+          <p className="mb-2 text-13 text-ink-soft">{nextSportLesson?nextSportLesson.title:nextWorkshopLesson ? nextWorkshopLesson.title : `On continue en ${getPassion(passion).label}, avec le même temps disponible.`}</p>
           <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
             <House aria-hidden="true" />
             Retour à l’accueil

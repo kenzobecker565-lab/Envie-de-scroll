@@ -33,3 +33,25 @@ it('les préférences héritées ouvrent les nouveaux ateliers et gardent les an
  expect(JSON.parse((await db.prisma.user.findUniqueOrThrow({where:{id:42n}})).passions)).toEqual(['musique','cinema'])
  await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5}).expect(201)
 })
+it('valide une énigme sans solution trouvée, conserve les réponses et calcule le résultat sans faire confiance au client',async()=>{
+ await request(app).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
+ const proposed=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:15,step:'logique-15-6'}).expect(201)
+ const cases=workshopConfig('logique-15-6')!.cases,p=cases[0]!
+ const wrong={rooms:[0,0,-1,-1],times:[0,0,-1,-1]}
+ const workshop={version:1,passion:'logique',answers:{[p.id]:wrong},logicResults:cases.map(p=>({id:p.id,correct:true})),summary:'Tout résolu'}
+ const done=await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop}).expect(201)
+ expect(done.body.coinsEarned).toBe(15);expect(done.body.completion.workshop.summary).toBe('2 dossiers étudiés · 0/2 résolu')
+ expect(done.body.completion.workshop.logicResults).toEqual(cases.map(p=>({id:p.id,correct:false})))
+ expect(done.body.completion.workshop.answers[p.id]).toEqual(wrong)
+ expect(done.body.completion.workshop.answers[cases[1]!.id]).toBeNull()
+ const gallery=await request(app).get('/api/completions?passion=logique').set(auth).expect(200);expect(gallery.body.items[0].workshop).toEqual(done.body.completion.workshop)
+ await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop}).expect(409)
+})
+it('accepte un dossier non répondu et refuse une répartition illisible',async()=>{
+ await request(app).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
+ const proposed=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5,step:'logique-5-1'}).expect(201)
+ const p=workshopConfig('logique-5-1')!.cases[0]!
+ await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop:{version:1,passion:'logique',answers:{[p.id]:{rooms:[99],times:[]}}}}).expect(400)
+ const done=await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop:{version:1,passion:'logique',answers:{}}}).expect(201)
+ expect(done.body.completion.workshop.logicResults).toEqual([{id:p.id,correct:false}]);expect(done.body.coinsEarned).toBe(5)
+})

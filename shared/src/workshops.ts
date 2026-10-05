@@ -206,7 +206,7 @@ export function workshopConfig(activityId:string) {
  return {activity:a,lesson,variant,cases,questions:a.duration===30?[...questions,...TEXT_CORRECTIONS]:questions,task:BEAT_TASKS[lesson===0?0:lesson===1?1:lesson===2?3:variant]!}
 }
 export type WorkshopSubmission = {version:1; passion:WorkshopId; beat?:Beat; answers?:Record<string,unknown>; savedRules?:string[]}
-export type WorkshopResult = WorkshopSubmission & {summary:string; reviewRules?:string[]}
+export type WorkshopResult = WorkshopSubmission & {summary:string; reviewRules?:string[]; logicResults?:{id:string;correct:boolean}[]}
 export function normalizeCode(value:unknown):string {return typeof value==='string'?value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s/g,'').toUpperCase():''}
 export function puzzleCorrect(p:Puzzle,value:unknown):boolean {
  if(p.kind==='code')return normalizeCode(value)===p.answer
@@ -236,9 +236,20 @@ export function validateWorkshop(activityId:string,input:unknown):WorkshopResult
  }
  if(!data.answers||typeof data.answers!=='object'||Array.isArray(data.answers))throw new Error('Réponses manquantes.')
  if(data.passion==='logique'){
-  if(config.cases.some(p=>!puzzleCorrect(p,data.answers![p.id])))throw new Error('Le dossier contient encore une contradiction. Vérifie les indices.')
-  const answers=Object.fromEntries(config.cases.map(p=>[p.id,data.answers![p.id]]))
-  return {version:1,passion:'logique',answers,summary:`${config.cases.length} dossier${config.cases.length>1?'s':''} résolu${config.cases.length>1?'s':''}`}
+  const answers=Object.fromEntries(config.cases.map(p=>{
+   const value=data.answers![p.id]
+   if(value===undefined||value===null)return [p.id,null]
+   if(p.kind==='code') {
+    if(typeof value!=='string'||value.length>80)throw new Error('Réponse illisible.')
+    return [p.id,value.trim()]
+   }
+   const assignment=value as Assignment
+   if(!assignment||!Array.isArray(assignment.rooms)||!Array.isArray(assignment.times)||assignment.rooms.length!==4||assignment.times.length!==4||[...assignment.rooms,...assignment.times].some(v=>!Number.isInteger(v)||v < -1||v > 3))throw new Error('Répartition illisible.')
+   return [p.id,{rooms:assignment.rooms,times:assignment.times}]
+  }))
+  const logicResults=config.cases.map(p=>({id:p.id,correct:puzzleCorrect(p,answers[p.id])}))
+  const correct=logicResults.filter(r=>r.correct).length,count=config.cases.length
+  return {version:1,passion:'logique',answers,logicResults,summary:correct===count?`${count} dossier${count>1?'s':''} résolu${count>1?'s':''}`:`${count} dossier${count>1?'s':''} étudié${count>1?'s':''} · ${correct}/${count} résolu${correct>1?'s':''}`}
  }
  if(config.questions.some(q=>data.answers![q.id]!==0&&data.answers![q.id]!==1))throw new Error('Termine tous les exercices avant d’enregistrer.')
  const answers=Object.fromEntries(config.questions.map(q=>[q.id,data.answers![q.id]]))

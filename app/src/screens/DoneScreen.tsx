@@ -87,7 +87,8 @@ export function DoneScreen() {
   const news = step && stepProgress ? 'step' : level ? 'level' : milestone ? 'milestone' : challenge ? 'challenge' : discovered ? 'discovered' : null
   // Une félicitation et une anecdote, toujours les mêmes pour cette création.
   const { id: completionId, duration, text } = done.response.completion
-  const cheer = cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
+  const studiedLogic = passion === 'logique' && done.response.completion.workshop?.logicResults?.some(result => !result.correct)
+  const cheer = studiedLogic ? 'Tu as pris le temps de chercher et de comprendre. Ta séance compte.' : cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
   const fact = factFor(passion, seededRandom(`fact:${completionId}`))
 
   const continuePassion = () => {

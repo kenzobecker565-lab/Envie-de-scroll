@@ -21,7 +21,7 @@ describe('six ateliers V1',()=>{
   expect(FRENCH_QUESTIONS).toHaveLength(48);for(const q of FRENCH_QUESTIONS){expect(FRENCH_RULES.some(r=>r.id===q.rule)).toBe(true);expect(q.options[0]).not.toBe(q.options[1]);expect(q.options[q.answer]).toBeTruthy()}
  })
  it('vérifie les dossiers et calcule le résultat français sans score fourni par le client',()=>{
-  for(const a of WORKSHOP_ACTIVITIES.filter(a=>a.passion!=='rythme')){const c=workshopConfig(a.id)!;const answers=Object.fromEntries(a.passion==='logique'?c.cases.map(p=>[p.id,p.kind==='grid'?p.solution:p.answer]):c.questions.map(q=>[q.id,q.answer]));const result=validateWorkshop(a.id,{version:1,passion:a.passion,answers});expect(result.summary).toBeTruthy();expect(()=>validateWorkshop(a.id,{version:1,passion:a.passion,answers:{}})).toThrow()}
+  for(const a of WORKSHOP_ACTIVITIES.filter(a=>a.passion!=='rythme')){const c=workshopConfig(a.id)!;const answers=Object.fromEntries(a.passion==='logique'?c.cases.map(p=>[p.id,p.kind==='grid'?p.solution:p.answer]):c.questions.map(q=>[q.id,q.answer]));const result=validateWorkshop(a.id,{version:1,passion:a.passion,answers});expect(result.summary).toBeTruthy();if(a.passion==='francais')expect(()=>validateWorkshop(a.id,{version:1,passion:a.passion,answers:{}})).toThrow();else expect(validateWorkshop(a.id,{version:1,passion:a.passion,answers:{}}).logicResults?.every(r=>!r.correct)).toBe(true)}
   const c=workshopConfig('francais-5-1')!,answers=Object.fromEntries(c.questions.map(q=>[q.id,1-q.answer]));expect(validateWorkshop('francais-5-1',{version:1,passion:'francais',answers}).reviewRules!.length).toBeGreaterThan(0)
  })
  it('refuse les séquences mal formées, les défis non respectés et les sections identiques',()=>{

@@ -1,3 +1,5 @@
+import { studioConfig } from '@scroll-up/shared'
+import { StudioSession, StudioSaved } from './StudioSession.tsx'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, Bookmark, Check, HelpCircle, Play, Plus, Square } from 'lucide-react'
 import { BEAT_PALETTES, FRENCH_RULES, TRACKS, WORKSHOP_LESSONS, emptyPattern, getPassion, explainPuzzle, puzzleCorrect, referencePattern, validateWorkshop, workshopConfig, type Assignment, type Beat, type FrenchQuestion, type ProposalDTO, type Puzzle, type WorkshopResult, type WorkshopSubmission } from '@scroll-up/shared'
@@ -19,7 +21,7 @@ function initial(proposal:ProposalDTO):Draft {
  return {beat:copy?{...copy,name:copy.name+' · copie',patterns:Array.from({length:count},(_,i)=>structuredClone(copy!.patterns[i%copy!.patterns.length]!))}:{name:'',tempo:90,palette:'hip-hop',patterns:Array.from({length:count},()=>structuredClone(pattern))},answers:{},notes:{},index:0,stage:c.lesson===undefined?2:0,checked:[],review:[]}
 }
 
-export function InteractiveWorkshop({proposal,onAnother}:{proposal:ProposalDTO;onAnother?:()=>void}) {
+function LegacyInteractiveWorkshop({proposal,onAnother}:{proposal:ProposalDTO;onAnother?:()=>void}) {
  const {state,dispatch}=useAppState(),{reset}=useNavigation(),config=workshopConfig(proposal.activityId)!
  const key=`scroll-up:workshop:${state.me.user.id}:${proposal.id}`
  const [draft,setDraft]=useState<Draft>(()=>readDraft(key,initial(proposal))),[saving,setSaving]=useState(false),[error,setError]=useState<string>()
@@ -106,6 +108,7 @@ export function WorkshopGalleryDetail({result,activityId}:{result:WorkshopResult
   dispatch({type:'newFlow',flow:{passion:'rythme',fixedPassion:'rythme',duration:result.beat.patterns.length===3?30:result.beat.patterns.length===2?15:5,fixedStep:`rythme-${result.beat.patterns.length===3?30:result.beat.patterns.length===2?15:5}-${result.beat.patterns.length===3?15:result.beat.patterns.length===2?10:5}`}})
   reset([{name:'home'},{name:'passionHub'},{name:'passionSpace',passion:'rythme'},{name:'activity'}])
  }catch(e){setError((e as Error).message);setCopying(false)}}
+ if(result.version===2&&result.studio)return <StudioSaved result={result}/>
  return <div className="workshop-gallery-detail"><h2>{result.summary}</h2>{result.beat?<><BeatStudio beat={result.beat} readOnly/><Button disabled={copying} onClick={()=>void copy()}><Plus size={17}/>Modifier une copie</Button>{error&&<p role="alert">{error}</p>}</>:result.passion==='francais'?config?.questions.map(q=><section className="iw-card" key={q.id}><h3>{q.prompt}</h3><p>Ta réponse : {q.options[result.answers?.[q.id] as number]}</p><p className="iw-correct">Correction : {q.options[q.answer]}</p><p>{FRENCH_RULES.find(r=>r.id===q.rule)?.explanation}</p></section>):config?.cases.map(p=><LogicCorrection key={p.id} puzzle={p} answer={result.answers?.[p.id]}/>)}</div>
 }
 
@@ -114,3 +117,5 @@ function LogicCorrection({puzzle,answer}:{puzzle:Puzzle;answer?:unknown}) {
  const explanation=explainPuzzle(puzzle,answer),correct=puzzleCorrect(puzzle,answer)
  return <section className="iw-card logic-correction" aria-label={`Correction : ${puzzle.title}`}><span className="iw-eyebrow">{puzzle.family} · {correct?'Réponse juste':'À comprendre'}</span><h2>Correction : {puzzle.title}</h2>{explanation.mistakes.length>0&&<div className="logic-mistakes"><h3>Ce qui manquait dans ta réponse</h3><ul>{explanation.mistakes.map(text=><li key={text}>{text}</li>)}</ul></div>}<div className="logic-solution"><h3>La solution</h3><ul>{explanation.solution.map(text=><li key={text}>{text}</li>)}</ul></div><h3>Le raisonnement, étape par étape</h3><ol className="logic-explanation">{explanation.steps.map((text,i)=><li key={i}><span>{i+1}</span><p>{text}</p></li>)}</ol><p className="iw-muted">Comprendre la méthode fait partie de l’activité. Une réponse incorrecte n’empêche pas d’enregistrer ta séance.</p></section>
 }
+
+export function InteractiveWorkshop(props:{proposal:ProposalDTO;onAnother?:()=>void}) { return studioConfig(props.proposal.activityId)?<StudioSession {...props}/>:<LegacyInteractiveWorkshop {...props}/> }

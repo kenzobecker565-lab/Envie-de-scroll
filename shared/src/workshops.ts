@@ -1,3 +1,4 @@
+import { STUDIO_FRENCH_RULES, STUDIO_LESSONS, studioConfig, validateStudio, type StudioValidated } from './studio.ts'
 import type { Activity, Duration, PassionId } from './types.ts'
 
 export const WORKSHOP_IDS = ['rythme', 'logique', 'francais'] as const
@@ -20,6 +21,7 @@ export const BEAT_TASKS = [
 
 export type FrenchRule = { id: string; title: string; category: string; explanation: string; example: string }
 export const FRENCH_RULES: FrenchRule[] = [
+ ...STUDIO_FRENCH_RULES,
  {id:'conditionnel', title:'Futur ou conditionnel ?', category:'Conjugaison', explanation:'Avec « si » + imparfait, la conséquence s’exprime au conditionnel présent. Le futur présente un événement à venir.', example:'Si j’avais le temps, je terminerais. Demain, je terminerai.'},
  {id:'infinitif', title:'-er ou -é ?', category:'Orthographe', explanation:'Remplace le verbe par « vendre » ou « vendu » : vendre indique l’infinitif (-er), vendu le participe passé (-é).', example:'Je vais parler → vendre. J’ai parlé → vendu.'},
  {id:'a', title:'a ou à ?', category:'Orthographe', explanation:'« a » est le verbe avoir : tu peux le remplacer par « avait ». « à » est une préposition.', example:'Il a (avait) rendez-vous à midi.'},
@@ -185,11 +187,11 @@ export const LOGIC_CASES:Puzzle[]=[...Array.from({length:6},(_,i)=>dossier(i,'D�
 
 export const WORKSHOP_LESSONS:Record<WorkshopId,{title:string;rule:string;example:string}[]> = {
  rythme:[{title:'Placer quatre temps',rule:'Une mesure à quatre temps se divise ici en 16 pas : quatre pas pour chaque temps.',example:'Place une grosse caisse aux pas 1, 5, 9 et 13.'},{title:'Construire le contretemps',rule:'La caisse claire sur les temps 2 et 4 donne un repère régulier.',example:'Grosse caisse : 1, 5, 9, 13. Caisse claire : 5 et 13.'},{title:'Faire vivre une boucle',rule:'Une variation conserve les repères tout en changeant quelques accents.',example:'Change deux pas du modèle puis écoute les deux versions.'}],
- logique:[{title:'Éliminer les impossibilités',rule:'Chaque personne a une seule salle et un seul horaire. Une exclusion réduit les choix ; une confirmation élimine sa ligne et sa colonne.',example:'« Sam n’est pas aux Archives » : marque cette case d’une croix.'},{title:'Croiser les indices',rule:'Deux indices peuvent contraindre une même valeur. Compare les délais aux horaires disponibles.',example:'Un accès 20 minutes avant 18 h 30 doit être à 18 h 10.'},{title:'Vérifier une hypothèse',rule:'Une solution doit satisfaire tous les indices. Un seul indice contredit suffit à éliminer une hypothèse.',example:'Relis chaque témoignage et vérifie les affectations une à une.'}],
- francais:[{title:'Futur ou conditionnel ?',rule:FRENCH_RULES[0]!.explanation,example:FRENCH_RULES[0]!.example},{title:'Accorder avec le sujet',rule:FRENCH_RULES[3]!.explanation,example:FRENCH_RULES[3]!.example},{title:'Le participe passé',rule:FRENCH_RULES[5]!.explanation,example:FRENCH_RULES[5]!.example}],
+ logique:STUDIO_LESSONS.logique,
+ francais:STUDIO_LESSONS.francais,
 }
 export const WORKSHOP_ACTIVITIES:Activity[]=WORKSHOP_IDS.flatMap(passion=>[
- ...([5,15,30] as Duration[]).flatMap((duration,di)=>Array.from({length:5},(_,i)=>({id:`${passion}-${duration}-${di*5+i+1}`,passion,duration,number:di*5+i+1,text:passion==='rythme'?BEAT_TASKS[i]!.title+(duration===15?' · deux variations':duration===30?' · intro, thème et final':''):passion==='logique'?['Déduction : croiser les indices','Cryptographie : lire entre les lettres','Contraintes : ouvrir le coffre','Enquêtes : reconstituer les accès','Dossier surprise'][i]!:['Conjugaison : reprendre les bases','Orthographe : lever les doutes','Grammaire : trouver les accords','Ponctuation : clarifier la phrase','Révision mixte'][i]!}))),
+ ...([5,15,30] as Duration[]).flatMap((duration,di)=>Array.from({length:5},(_,i)=>({id:`${passion}-${duration}-${di*5+i+1}`,passion,duration,number:di*5+i+1,text:studioConfig(`${passion}-${duration}-${di*5+i+1}`)?.title ?? (passion==='rythme'?BEAT_TASKS[i]!.title+(duration===15?' · deux variations':duration===30?' · intro, thème et final':''):passion==='logique'?['Déduction : croiser les indices','Cryptographie : lire entre les lettres','Contraintes : ouvrir le coffre','Enquêtes : reconstituer les accès','Dossier surprise'][i]!:['Conjugaison : reprendre les bases','Orthographe : lever les doutes','Grammaire : trouver les accords','Ponctuation : clarifier la phrase','Révision mixte'][i]!)}))),
  ...WORKSHOP_LESSONS[passion].map((lesson,i)=>({id:`${passion}-lesson-${i+1}`,passion,duration:5 as Duration,number:16+i,text:lesson.title})),
 ])
 export function workshopConfig(activityId:string) {
@@ -205,8 +207,8 @@ export function workshopConfig(activityId:string) {
  const questions=lesson!==undefined?bank:bank.slice(0,a.duration===5?6:a.duration===15?12:18)
  return {activity:a,lesson,variant,cases,questions:a.duration===30?[...questions,...TEXT_CORRECTIONS]:questions,task:BEAT_TASKS[lesson===0?0:lesson===1?1:lesson===2?3:variant]!}
 }
-export type WorkshopSubmission = {version:1; passion:WorkshopId; beat?:Beat; answers?:Record<string,unknown>; savedRules?:string[]}
-export type WorkshopResult = WorkshopSubmission & {summary:string; reviewRules?:string[]; logicResults?:{id:string;correct:boolean}[]}
+export type WorkshopSubmission = {version:1|2; passion:WorkshopId; beat?:Beat; answers?:Record<string,unknown>; savedRules?:string[]}
+export type WorkshopResult = WorkshopSubmission & {summary:string; reviewRules?:string[]; logicResults?:{id:string;correct:boolean}[];studio?:StudioValidated['studio']}
 export function normalizeCode(value:unknown):string {return typeof value==='string'?value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s/g,'').toUpperCase():''}
 export function puzzleCorrect(p:Puzzle,value:unknown):boolean {
  if(p.kind==='code')return normalizeCode(value)===p.answer
@@ -214,6 +216,7 @@ export function puzzleCorrect(p:Puzzle,value:unknown):boolean {
  return !!s&&Array.isArray(s.rooms)&&Array.isArray(s.times)&&s.rooms.length===4&&s.times.length===4&&s.rooms.every((v,i)=>v===p.solution.rooms[i])&&s.times.every((v,i)=>v===p.solution.times[i])
 }
 export function validateWorkshop(activityId:string,input:unknown):WorkshopResult {
+ if((input as WorkshopSubmission|undefined)?.version===2)return validateStudio(activityId,input)
  const config=workshopConfig(activityId);const data=input as WorkshopSubmission|undefined
  if(!config||!data||data.version!==1||data.passion!==config.activity.passion)throw new Error('Atelier invalide.')
  if(data.passion==='rythme') {

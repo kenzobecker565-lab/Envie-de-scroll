@@ -32,7 +32,7 @@ export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
       "Dessine un objet de ton bureau",
       "Dessine ton animal préféré en formes simples (des ronds, des triangles, rien de plus)",
       "Dessine 3 petits objets autour de toi, en 1 minute chacun",
-      "Dessine le thème du jour — ton mood, ton repas, ta tenue, ce que tu veux",
+      "Dessine le thème du jour — un objet, un lieu ou une scène de ton choix",
       "Un doodle libre : remplis la page de petits motifs répétés, sans but précis",
     ],
     15: [
@@ -54,7 +54,7 @@ export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
     5: [
       "Décris en 3 phrases ce que tu vois ou ressens là, maintenant",
       "Termine cette phrase de 5 façons différentes : \"Aujourd'hui, j'ai remarqué que...\"",
-      "Écris une liste de 10 mots qui décrivent ton humeur",
+      "Décris un personnage en 10 mots : son allure, ses habitudes, ses particularités",
       "Écris le titre et la première phrase d'une histoire que tu n'écriras jamais",
       "Décris un objet autour de toi comme si tu le voyais pour la première fois",
     ],

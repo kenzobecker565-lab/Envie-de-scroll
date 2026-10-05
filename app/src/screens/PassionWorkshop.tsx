@@ -1,3 +1,4 @@
+import { PassionCatalog } from './PassionCatalog.tsx'
 import { ArrowLeft, ArrowRight, ChevronRight, Clock3, Plus, Sparkles, Play } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { isWorkshop, WORKSHOP_LESSONS, collection, dailyWord, getPassion, passionLevel, SHOP_ITEMS, type CompletionDTO, type Duration, type PassionId } from '@scroll-up/shared'
@@ -69,6 +70,7 @@ export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  const owned=SHOP_ITEMS.filter(item=>item.category==='piano'&&shop.owned.includes(item.id))
  const available=state.me.user.passions.includes(passion)
  if(passion==='sport')return <SportSpace onBack={()=>reset([{name:'home'},{name:'passionHub'}])} onStart={(duration,id)=>start('sport',duration,id)}/>
+ if(['dessin','piano','ecriture','logique','francais'].includes(passion))return <PassionCatalog passion={passion} onStart={(duration,id)=>start(passion,duration,id)}/>
  return <Screen tabs className="studio-workshop"><AppHeader/><button type="button" className="workshop-back" onClick={()=>reset([{name:'home'},{name:'passionHub'}])}><ArrowLeft size={17}/>Mes passions</button><header className="workshop-cover" data-passion={passion}><PassionArtwork passion={passion}/><h1>{getPassion(passion).label}</h1></header><div className="workshop-tabs" aria-label="Rubriques de la passion">{([{id:'create',label:copy.create},{id:'gallery',label:copy.gallery}] as const).map(tab=><button key={tab.id} type="button" aria-pressed={section===tab.id} onClick={()=>setSection(tab.id)}>{tab.label}</button>)}</div>
  {section==='gallery'?passion==='piano'?<section className="workshop-section"><h2>Mon répertoire</h2><p>Les morceaux que tu as débloqués.</p>{owned.length?owned.map(item=><button key={item.id} type="button" className="workshop-repertoire" onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{[item.composer,item.edition??item.difficulty].filter(Boolean).join(' · ')}</small></span><Play size={20}/></button>):<div className="workshop-empty"><p>Ton répertoire commence avec un premier morceau.</p></div>}<h2 className="mt-5">Mes séances au piano</h2><GalleryScreen key={passion} passion={passion} embedded/></section>:<GalleryScreen key={passion} passion={passion} embedded/>:<>
  <div className="workshop-intro"><h2>{row.activities?copy.title:'Ton atelier commence ici.'}</h2><p>{plural(row.activities,'activité')} · {row.minutes} min de pratique</p></div>

@@ -8,7 +8,7 @@ describe('six ateliers V1',()=>{
   expect(activePassions(['musique','cinema','dessin'])).toEqual(['dessin','sport','logique'])
  })
  it('propose trois leçons et quinze défis par nouvel atelier',()=>{
-  for(const id of ['rythme','logique','francais'])expect(WORKSHOP_ACTIVITIES.filter(a=>a.passion===id)).toHaveLength(18)
+  for(const id of ['rythme','logique','francais'])expect(WORKSHOP_ACTIVITIES.filter(a=>a.passion===id)).toHaveLength(id==='rythme'?18:20)
  })
  it('vérifie l’unicité de chaque dossier de déduction et enquête',()=>{
   for(const p of LOGIC_CASES){if(p.kind!=='grid')continue;expect(solveCase(p.clues),p.id).toEqual([p.solution]);expect(puzzleCorrect(p,p.solution)).toBe(true);expect(puzzleCorrect(p,{rooms:[0,0,0,0],times:[0,0,0,0]})).toBe(false)}

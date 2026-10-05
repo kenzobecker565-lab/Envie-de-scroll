@@ -29,3 +29,5 @@ export * from './workshops.ts'
 export * from './logicReview.ts'
 
 export * from './sport.ts'
+
+export * from './studio.ts'

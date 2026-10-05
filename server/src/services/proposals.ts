@@ -1,5 +1,6 @@
 import {
   activePassions,
+  activitiesFor,
   canPlayChallenge,
   canPlayStep,
   drawExtra,
@@ -131,7 +132,7 @@ export async function createProposal(
     })
     // Les notes données (la plus récente par activité) font pencher le tirage, comme l'humeur.
     const rated = await prisma.completion.findMany({
-      where: { userId: user.id, passion, duration, rating: { not: null } },
+      where: { userId: user.id, passion, duration },
       orderBy: { createdAt: 'asc' },
       select: { activityId: true, rating: true },
     })
@@ -142,7 +143,8 @@ export async function createProposal(
     const skill = parseSkills(user.skills)[passion]
     const suited = skill ? skillActivitiesFor(passion, duration, skill).map((activity) => activity.id) : []
     const narrowed = quietIds ? quietIds.filter((id) => suited.includes(id)) : suited
-    const allowedIds = narrowed.length ? narrowed : quietIds
+    const unseen = passion === 'logique' || passion === 'francais' ? activitiesFor(passion, duration).filter(a => a.id !== currentId && !rated.some(row => row.activityId === a.id)).map(a => a.id) : []
+    const allowedIds = unseen.length ? unseen : narrowed.length ? narrowed : quietIds
     if (allowedIds?.length === 0) {
       throw new ApiError(409, 'no_quiet', `Toutes les activités ${getPassion(passion).label} de ${duration}\u00A0min s’écoutent. Essaie un autre temps, ou une autre passion.`)
     }

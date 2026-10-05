@@ -1,10 +1,9 @@
-import { ChevronRight, Headphones, Search, BookOpen } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { getPassion, passionLevel, type PassionId, type PassionStatsDTO } from '@scroll-up/shared'
 const panels: Partial<Record<PassionId, [number,number]>> = { piano:[0,451], dessin:[451,389], ecriture:[840,378], cinema:[1218,412], musique:[1630,418] }
 export function PassionArtwork({ passion, className='' }: { passion:PassionId; className?:string }) {
  if (passion==='rythme'||passion==='logique'||passion==='francais') {
-  const Icon=passion==='rythme'?Headphones:passion==='logique'?Search:BookOpen
-  return <span aria-hidden="true" className={`studio-native-art ${className}`} data-passion={passion}><span className="native-art-orbit"/><Icon size={68} strokeWidth={1.5}/><span className="native-art-detail">{passion==='rythme'?'▮ ▮ ▮ ▮':passion==='logique'?'01 / 02 / 03':'Aa'}</span></span>
+  return <span aria-hidden="true" className={`studio-passion-art ${className}`} style={{backgroundImage:`url('/art/passion-${passion}.webp')`,backgroundSize:'cover',backgroundPosition:'center 35%'}}/>
  }
  const [left,width]=panels[passion]!
  return <span aria-hidden="true" className={`studio-passion-art ${className}`} style={{backgroundSize:`${2048/width*100}% auto`,backgroundPosition:`${left/(2048-width)*100}% 35%`}}/>

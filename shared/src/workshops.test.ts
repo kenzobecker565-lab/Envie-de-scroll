@@ -4,8 +4,8 @@ import { BEAT_TASKS, FRENCH_QUESTIONS, FRENCH_RULES, LOGIC_CASES, WORKSHOP_ACTIV
 
 describe('six ateliers V1',()=>{
  it('migre les préférences sans modifier les données historiques',()=>{
-  expect(ACTIVE_PASSION_IDS).toEqual(['dessin','piano','ecriture','rythme','logique','francais'])
-  expect(activePassions(['musique','cinema','dessin'])).toEqual(['dessin','rythme','logique'])
+  expect(ACTIVE_PASSION_IDS).toEqual(['dessin','piano','ecriture','sport','logique','francais'])
+  expect(activePassions(['musique','cinema','dessin'])).toEqual(['dessin','sport','logique'])
  })
  it('propose trois leçons et quinze défis par nouvel atelier',()=>{
   for(const id of ['rythme','logique','francais'])expect(WORKSHOP_ACTIVITIES.filter(a=>a.passion===id)).toHaveLength(18)

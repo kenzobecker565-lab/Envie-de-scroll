@@ -29,7 +29,7 @@ it('corrige les exercices côté serveur et garde les règles à revoir',async()
 })
 it('les préférences héritées ouvrent les nouveaux ateliers et gardent les anciens identifiants',async()=>{
  await request(app).put('/api/me/passions').set(auth).send({passions:['musique','cinema']}).expect(200)
- const me=await request(app).get('/api/me').set(auth).expect(200);expect(me.body.user.passions).toEqual(['rythme','logique'])
+ const me=await request(app).get('/api/me').set(auth).expect(200);expect(me.body.user.passions).toEqual(['sport','logique'])
  expect(JSON.parse((await db.prisma.user.findUniqueOrThrow({where:{id:42n}})).passions)).toEqual(['musique','cinema'])
  await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5}).expect(201)
 })

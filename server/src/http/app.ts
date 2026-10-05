@@ -345,6 +345,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
           proposalId: fields.proposalId,
           text: typeof fields.text === 'string' ? fields.text : undefined,
           exploredTitle: typeof fields.exploredTitle === 'string' ? fields.exploredTitle : undefined,
+          sport: fields.sport,
           workshop: fields.workshop,
           played: fields.played === true || fields.played === 'true',
           photo: req.file ? { buffer: req.file.buffer, mimetype: req.file.mimetype } : undefined,

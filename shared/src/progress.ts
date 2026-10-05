@@ -15,6 +15,7 @@ export const LEVEL_MINUTES = [5, 30, 120, 300, 600] as const
 
 /** Le titre de chaque niveau, du 1 au 5, par passion. */
 export const LEVEL_TITLES: Record<PassionId, readonly [string, string, string, string, string]> = {
+ sport: ['Premier mouvement', 'Élan', 'Régularité', 'Endurance', 'Toujours en mouvement'],
  rythme: ['Première pulsation', 'Beatmaker', 'Arrangeur·euse', 'Producteur·rice', 'Virtuose du rythme'], logique: ['Observateur·rice', 'Analyste', 'Détective', 'Stratège', 'Maître des énigmes'], francais: ['Première révision', 'Précision', 'Plume sûre', 'Maîtrise', 'Expert·e'],
   dessin: ['Gribouilleur·euse', 'Croqueur·euse', 'Dessinateur·rice', 'Illustrateur·rice', 'Virtuose du trait'],
   ecriture: ['Griffonneur·euse', 'Plume', 'Conteur·euse', 'Auteur·rice', 'Romancier·ère'],

@@ -166,7 +166,7 @@ describe('profil', () => {
     expect(response.body.user).toMatchObject({ passions: ['dessin', 'logique'], onboarded: true })
     await request(app).put('/api/me/passions').set(as()).send({ passions: [] }).expect(400)
     const all = await request(app).put('/api/me/passions').set(as()).send({ passions: ['piano', 'dessin', 'ecriture', 'musique', 'cinema'] }).expect(200)
-    expect(all.body.user.passions).toEqual(['dessin', 'piano', 'ecriture', 'rythme', 'logique'])
+    expect(all.body.user.passions).toEqual(['dessin', 'piano', 'ecriture', 'sport', 'logique'])
   })
 })
 

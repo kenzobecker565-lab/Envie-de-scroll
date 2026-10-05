@@ -13,6 +13,7 @@
  * de la proposition, parmi les listes de prompts.ts.
  */
 
+import { SPORT_ACTIVITIES } from './sport.ts'
 import { WORKSHOP_ACTIVITIES } from './workshops.ts'
 import { getChallengeActivity, isChallengeId } from './monthly.ts'
 import { getPathStep, isPathStepId } from './paths.ts'
@@ -24,6 +25,7 @@ type RawPassion = Record<Duration, [RawActivity, RawActivity, RawActivity, RawAc
 
 function workshopRaw(passion: PassionId): RawPassion { return Object.fromEntries([5,15,30].map(duration => [duration, WORKSHOP_ACTIVITIES.filter(a=>a.passion===passion&&a.duration===duration&&a.number<16).map(a=>a.text)])) as RawPassion }
 export const RAW_ACTIVITIES: Record<PassionId, RawPassion> = {
+  sport: Object.fromEntries([5,15,30].map(duration=>[duration,SPORT_ACTIVITIES.filter(a=>a.duration===duration&&a.number<16).map(a=>a.text)])) as RawPassion,
   rythme: workshopRaw('rythme'), logique: workshopRaw('logique'), francais: workshopRaw('francais'),
   dessin: {
     5: [
@@ -170,7 +172,7 @@ function build(): Activity[] {
   return list
 }
 
-export const ACTIVITIES: readonly Activity[] = [...build(), ...WORKSHOP_ACTIVITIES.filter(a=>a.number>=16)]
+export const ACTIVITIES: readonly Activity[] = [...build(), ...WORKSHOP_ACTIVITIES.filter(a=>a.number>=16), ...SPORT_ACTIVITIES.filter(a=>a.number>=16)]
 
 const BY_ID = new Map(ACTIVITIES.map((activity) => [activity.id, activity]))
 

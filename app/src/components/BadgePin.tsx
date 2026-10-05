@@ -24,7 +24,7 @@ const ICONS: Record<string, LucideIcon> = {
   'jouer-pour-de-vrai': Piano,
 }
 
-const ENAMEL: Record<PassionId, string> = { rythme: 'var(--good)', logique: 'var(--warm)', francais: 'var(--lilac)', dessin: 'var(--sky)', ecriture: 'var(--lilac)', musique: 'var(--good)', cinema: 'var(--accent)', piano: 'var(--warm)' }
+const ENAMEL: Record<PassionId, string> = { sport: 'var(--good)', rythme: 'var(--good)', logique: 'var(--warm)', francais: 'var(--lilac)', dessin: 'var(--sky)', ecriture: 'var(--lilac)', musique: 'var(--good)', cinema: 'var(--accent)', piano: 'var(--warm)' }
 
 /** Le contour : un rond (débutant), un écusson (confirmé) ou un hexagone (avancé), dans un carré de 100. */
 const SHAPES = {

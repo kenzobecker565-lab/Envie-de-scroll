@@ -99,7 +99,7 @@ export const api = {
 
   propose: (request: CreateProposalRequest) => call<ProposalResponse>('/proposals', { method: 'POST', body: JSON.stringify(request) }),
 
-  complete: ({ proposalId, text, exploredTitle, played, photo, projectId, workshop }: { proposalId: string; text?: string; exploredTitle?: string; played?: boolean; photo?: Blob; projectId?: string; workshop?: import('@scroll-up/shared').WorkshopSubmission }) => {
+  complete: ({ proposalId, text, exploredTitle, played, photo, projectId, workshop, sport }: { proposalId: string; text?: string; exploredTitle?: string; played?: boolean; photo?: Blob; projectId?: string; sport?: import('@scroll-up/shared').SportSubmission; workshop?: import('@scroll-up/shared').WorkshopSubmission }) => {
     if (photo) {
       const form = new FormData()
       form.set('proposalId', proposalId)
@@ -107,7 +107,7 @@ export const api = {
       form.set('photo', photo, 'dessin.jpg')
       return call<CompleteResponse>('/completions', { method: 'POST', body: form })
     }
-    return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle, played, projectId, workshop }) })
+    return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle, played, projectId, workshop, sport }) })
   },
 
   completions: (cursor?: string, passion?: PassionId) =>

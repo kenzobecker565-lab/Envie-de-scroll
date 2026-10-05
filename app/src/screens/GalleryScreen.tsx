@@ -1,3 +1,4 @@
+import { SportGalleryDetail } from './SportSession.tsx'
 import { WorkshopGalleryDetail } from './InteractiveWorkshop.tsx'
 import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -200,7 +201,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
  * page de carnet, la musique en vinyle, le cinéma en ticket de séance, le
  * piano en page de partition.
  */
-const CARD_TONES = { rythme: 'good', logique: 'warm', francais: 'default', dessin: 'default', ecriture: 'default', musique: 'good', cinema: 'warm', piano: 'default' } as const
+const CARD_TONES = { sport: 'good', rythme: 'good', logique: 'warm', francais: 'default', dessin: 'default', ecriture: 'default', musique: 'good', cinema: 'warm', piano: 'default' } as const
 
 /** Pied de carte commun : passion, activité, date, minutons gagnés. */
 function CardFooter({ item }: { item: CompletionDTO }) {
@@ -224,6 +225,7 @@ function CardFooter({ item }: { item: CompletionDTO }) {
 }
 
 function GalleryCard({ item }: { item: CompletionDTO }) {
+  if (item.sport) return <div className="p-4"><h3 className="font-bold">{item.sport.summary}</h3><p className="my-3 text-sm">Revoir les mouvements de ma séance</p><CardFooter item={item}/></div>
   if (item.workshop) return <div className="p-4"><h3 className="font-bold">{item.workshop.summary}</h3><p className="my-3 text-sm">{item.passion==='rythme'?'Écouter et ouvrir mon beat':item.passion==='logique'?'Revoir mon raisonnement':'Revoir mes corrections'}</p><CardFooter item={item}/></div>
   if (item.passion === 'dessin') return <PolaroidCard item={item} />
   if (item.passion === 'ecriture') return <NotebookCard item={item} />
@@ -433,6 +435,7 @@ function PhotoPendingNote() {
 /** Une création en grand, dans la feuille modale. */
 function GalleryDetail({ item }: { item: CompletionDTO }) {
   const { state } = useAppState()
+  if (item.sport) return <><DialogHeader><DialogTitle>{item.sport.summary}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><SportGalleryDetail activityId={item.activityId}/></>
   if (item.workshop) return <><DialogHeader><DialogTitle>{item.activityText}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><WorkshopGalleryDetail result={item.workshop} activityId={item.activityId}/></>
   const passion = getPassion(item.passion)
   const Icon = PASSION_ICONS[item.passion]

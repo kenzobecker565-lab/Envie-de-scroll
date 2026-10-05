@@ -80,6 +80,7 @@ export interface ProposalDTO {
 }
 
 export interface CompletionDTO {
+  sport?: import('./sport.ts').SportResult | null
   workshop?: import('./workshops.ts').WorkshopResult | null
   id: string
   activityId: string
@@ -180,6 +181,7 @@ export interface CreateProposalRequest {
  * quand une photo (champ `photo`) accompagne un dessin.
  */
 export interface CompleteRequest {
+  sport?: import('./sport.ts').SportSubmission
   workshop?: import('./workshops.ts').WorkshopSubmission
   proposalId: string
   text?: string

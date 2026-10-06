@@ -433,7 +433,7 @@ function PhotoPendingNote() {
 /* ------------------------------ Vue détaillée ------------------------------ */
 
 /** Une création en grand, dans la feuille modale. */
-function GalleryDetail({ item }: { item: CompletionDTO }) {
+export function GalleryDetail({ item }: { item: CompletionDTO }) {
   const { state } = useAppState()
   if (item.sport) return <><DialogHeader><DialogTitle>{item.sport.summary}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><SportGalleryDetail activityId={item.activityId}/></>
   if (item.workshop) return <><DialogHeader><DialogTitle>{item.activityText}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><WorkshopGalleryDetail result={item.workshop} activityId={item.activityId}/></>

@@ -23,6 +23,9 @@ export type Route =
   | { name: 'gallery'; passion?: PassionId }
   | { name: 'shop'; category?: import('@scroll-up/shared').ShopCategory; library?: boolean }
   | { name: 'bonusPiano'; itemId: string }
+  | { name: 'learningLesson'; lessonId: string; entryId?:string }
+  | { name: 'learningNotebooks'; passion?:import('@scroll-up/shared').LearningPassion; review?:boolean }
+  | { name: 'atelier'; focus?:string }
   | { name: 'learn' }
   | { name: 'learnPassion'; passion: PassionId }
   | { name: 'passionHub' }

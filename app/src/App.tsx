@@ -1,6 +1,8 @@
+import {AtelierScreen} from './screens/AtelierScreen.tsx'
+import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
-import { getMood, getPassion, type MeResponse } from '@scroll-up/shared'
+import { getMood, getPassion, getPath, LEARNING_PASSIONS, type MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
 import { RotateCcw, Send } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -20,7 +22,6 @@ import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
 import { SettingsScreen } from './screens/SettingsScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
-import { PathScreen } from './screens/PathScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
 import { GuidedTour } from './components/GuidedTour.tsx'
 import { tutorialSeen } from './lib/tutorial.ts'
@@ -127,6 +128,8 @@ function screenFor(route: Route) {
       return <HomeScreen />
     case 'shop': return <ShopScreen category={route.category} library={route.library} />
     case 'bonusPiano': return <BonusPianoScreen itemId={route.itemId} />
+    case 'learningLesson': return <LearningLessonScreen lessonId={route.lessonId} entryId={route.entryId}/>
+    case 'learningNotebooks': return <LearningNotebooks passion={route.passion} review={route.review}/>
     case 'learn': return <LearnScreen />
     case 'learnPassion': return <LearnPassionScreen passion={route.passion} />
     case 'passionHub': return <PassionHubScreen />
@@ -147,10 +150,14 @@ function screenFor(route: Route) {
       return <DoneScreen />
     case 'progress':
       return <ProgressScreen />
+    case 'atelier':
+      return <AtelierScreen focus={route.focus}/>
     case 'gallery':
       return <GalleryScreen passion={route.passion} />
-    case 'path':
-      return <PathScreen pathId={route.pathId} />
+    case 'path': {
+      const passion = getPath(route.pathId)?.passion
+      return <LearningOverview passion={LEARNING_PASSIONS.some(id => id === passion) ? passion : undefined}/>
+    }
     case 'challenge':
       return <ChallengeScreen />
   }
@@ -170,14 +177,14 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const tone = toneFor(route, state.flow)
   useEffect(() => onTone(tone), [tone, onTone])
   // Pendant une activité Musique, Cinéma ou Piano, on écoute, regarde ou joue autre chose : la musique d'ambiance se retire.
-  const elsewhere = (route.name === 'activity' || route.name === 'proof') && (state.flow.passion === 'musique' || state.flow.passion === 'cinema' || state.flow.passion === 'piano')
+  const elsewhere = (route.name === 'learningLesson' && route.lessonId.startsWith('learn-v1-piano-')) || (route.name === 'activity' || route.name === 'proof') && (state.flow.passion === 'musique' || state.flow.passion === 'cinema' || state.flow.passion === 'piano')
   useEffect(() => (elsewhere ? suppressAmbient('activité') : undefined), [elsewhere])
   // Bouton retour natif de Telegram dès qu'on n'est plus sur le premier écran.
   useBackButton(canGoBack ? back : undefined)
 
   useEffect(() => { document.documentElement.dataset.screen = route.name }, [route.name])
 
-  const key = route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
+  const key = route.name === 'learningLesson' ? `lesson-${route.lessonId}-${route.entryId??'new'}` : route.name==='learningNotebooks'?`notebooks-${route.passion??'all'}-${route.review??false}` : route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>
       <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>

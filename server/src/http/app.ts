@@ -25,6 +25,7 @@
  * Authentification : en-tête `Authorization: tma <initData>` (voir auth/).
  */
 
+import {learningLesson,validateLearning,learningAttempted, type LearningWork} from '@scroll-up/shared'
 import path from 'node:path'
 import { pipeline } from 'node:stream/promises'
 import express, { type ErrorRequestHandler, type NextFunction, type Request, type RequestHandler, type Response } from 'express'
@@ -107,7 +108,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   if (webhook) app.post(webhook.path, webhook.handler)
 
   const api = express.Router()
-  api.use(express.json({ limit: '256kb' }))
+  api.use(express.json({ limit: '1mb' }))
 
   api.get('/health', (_req, res) => {
     res.json({ ok: true })
@@ -160,6 +161,29 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   }
 
   const photoUrl = (completion: { id: string }) => signedPhotoUrl(completion.id, config.signingSecret, now())
+  const learningDTO = (entry: {id:string;lessonId:string;passion:string;title:string;completed:boolean;mastered:boolean;review:boolean;updatedAt:Date;work:string}, includeWork = true) => {
+    const {work: stored, ...metadata} = entry
+    const work = JSON.parse(stored) as LearningWork
+    return {...metadata, updatedAt: entry.updatedAt.toISOString(), attempted: learningAttempted(work), ...(includeWork ? {work} : {})}
+  }
+  api.get('/learning',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const items=await prisma.learningEntry.findMany({where:{userId:user.id},orderBy:[{updatedAt:'desc'},{id:'desc'}],select:{id:true,lessonId:true,passion:true,title:true,completed:true,mastered:true,review:true,updatedAt:true,work:true}});res.json({items:items.map(entry => learningDTO(entry, false))})}))
+  api.get('/learning/:id',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const item=await prisma.learningEntry.findFirst({where:{id:String(req.params.id),userId:user.id}});if(!item)throw new ApiError(404,'not_found','Carnet introuvable.');const {userId,createdAt,...entry}=item;res.json(learningDTO(entry))}))
+  api.put('/learning/:id',asyncRoute(async(req,res)=>{
+    const user=await currentUser(req,res),id=String(req.params.id),lesson=learningLesson(String(req.body?.lessonId));
+    if(!/^[a-zA-Z0-9-]{16,80}$/.test(id)||!lesson)throw badRequest('Leçon ou identifiant invalide.');
+    let checked;try{checked=validateLearning(lesson.id,req.body.work)}catch(e){throw badRequest((e as Error).message)}
+    const stored=JSON.stringify(checked.work),existing=await prisma.learningEntry.findUnique({where:{id}});
+    if(existing&&existing.userId!==user.id)throw new ApiError(404,'not_found','Carnet introuvable.');
+    if(existing&&existing.lessonId!==lesson.id)throw badRequest('Ce carnet appartient à une autre leçon.');
+    if(existing?.completed&&existing.work!==stored)throw new ApiError(409,'already_completed','Cet essai est déjà conservé. Commence un nouvel essai.');
+    const data={lessonId:lesson.id,passion:lesson.passion,title:lesson.title,work:stored,completed:checked.work.completed,mastered:checked.mastered,review:checked.work.review};
+    let entry=existing;
+    if(!existing){try{entry=await prisma.learningEntry.create({data:{id,userId:user.id,...data}})}catch(e){if((e as {code?:string}).code==='P2002')throw new ApiError(409,'already_completed','Cet identifiant est déjà utilisé. Recharge ton carnet.');throw e}}
+    else if(!existing.completed){const updated=await prisma.learningEntry.updateMany({where:{id,userId:user.id,lessonId:lesson.id,completed:false},data});if(!updated.count)throw new ApiError(409,'already_completed','Cet essai vient d’être conservé. Recharge ton carnet.');entry=await prisma.learningEntry.findUniqueOrThrow({where:{id}})}
+    if(!entry)throw new ApiError(404,'not_found','Carnet introuvable.');
+    const {userId,createdAt,...dto}=entry;res.json(learningDTO(dto));
+  }))
+
 
   /* -------------------------------- Profil -------------------------------- */
 
@@ -374,6 +398,8 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       res.json(body)
     }),
   )
+
+  api.get('/completions/:id',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const item=await prisma.completion.findFirst({where:{id:String(req.params.id),userId:user.id}});if(!item)throw new ApiError(404,'not_found','Création introuvable.');res.json({completion:toCompletionDTO(item,photoUrl)})}))
 
   api.put(
     '/completions/:id/rating',

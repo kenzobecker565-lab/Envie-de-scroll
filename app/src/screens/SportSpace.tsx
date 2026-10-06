@@ -22,7 +22,7 @@ export function SportSpace({onStart,onBack}:{onStart:(duration:Duration,id:strin
    <div className="sport-duration-options" aria-label="Durée de la séance">{([5,15,30] as Duration[]).map(time=><button key={time} type="button" aria-pressed={duration===time} onClick={()=>setDuration(time)}>{time} min</button>)}</div>
    <div className="sport-session-list">{SPORT_SESSIONS[duration].map((session,i)=><button type="button" className="sport-session-row" key={session.title} disabled={busy} onClick={()=>void start(i)}><SportFigure exercise={sportSessionFigure(session)}/><span><strong>{session.title}</strong><small><Clock3 size={13}/>{duration} min</small></span><ChevronRight size={18}/></button>)}</div>
    <p className="sport-space-note">Poids du corps · préparation et pauses incluses</p>
-   <section className="sport-learn-card"><BookOpen size={34}/><div><h2>Les bases du poids du corps</h2><p>6 leçons pour comprendre les gestes</p><Button variant="secondary" size="sm" onClick={()=>push({name:'learnPassion',passion:'sport'})}>Apprendre<ChevronRight size={16}/></Button></div></section>
+   <section className="sport-learn-card"><BookOpen size={34}/><div><h2>Les bases du poids du corps</h2><p>12 leçons pour comprendre les gestes</p><Button variant="secondary" size="sm" onClick={()=>push({name:'learnPassion',passion:'sport'})}>Apprendre<ChevronRight size={16}/></Button></div></section>
   </>}
  </Screen>
 }

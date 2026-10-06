@@ -33,3 +33,5 @@ export * from './sport.ts'
 export * from './studio.ts'
 
 export * from './powerGrid.ts'
+
+export * from "./learning/index.ts"

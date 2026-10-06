@@ -1,3 +1,4 @@
+import './PianoKeyboard.css'
 import { ArrowRight, AudioWaveform, Check, Ear, Maximize2, RotateCcw, Smartphone, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -55,7 +56,10 @@ function readPedal(): boolean {
 /* ------------------------------ Le jeu en cours ----------------------------- */
 
 /** Tout l'état d'un morceau au clavier, partagé entre le clavier de l'activité et le grand écran. */
-function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | undefined) {
+function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | undefined, onNote?: (note:string,down:boolean)=>void) {
+  const [speed,setSpeed]=useState(1),[showNames,setShowNames]=useState(true),[showGuide,setShowGuide]=useState(true),[metronome,setMetronome]=useState(false),[keyWidth,setKeyWidth]=useState(42)
+  const noteCallback=useRef(onNote);noteCallback.current=onNote
+  useEffect(()=>{if(!metronome)return;const timer=window.setInterval(()=>{const h=playNote('C6');window.setTimeout(()=>h.release(),35)},600/speed);return()=>window.clearInterval(timer)},[metronome,speed])
   const parts = useMemo(() => (melody ? melodyParts(melody) : []), [melody])
   const [part, setPart] = useState(0)
   const [step, setStep] = useState(0)
@@ -65,6 +69,7 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
   const [demo, setDemo] = useState<number | null>(null)
   const [pedal, setPedalState] = useState(readPedal)
   const timers = useRef<number[]>([])
+  const demoSounds = useRef<NoteHandle[]>([])
   const completed = useRef(false)
   // Les notes qui sonnent : tenues (par touche), ou lâchées mais gardées par la pédale.
   const held = useRef(new Map<string, NoteHandle>())
@@ -82,9 +87,10 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
   const stopDemo = () => {
     timers.current.forEach((timer) => window.clearTimeout(timer))
     timers.current = []
+    demoSounds.current.forEach(h=>h.release());demoSounds.current=[]
     setDemo(null)
   }
-  useEffect(() => () => timers.current.forEach((timer) => window.clearTimeout(timer)), [])
+  useEffect(() => () => {timers.current.forEach((timer) => window.clearTimeout(timer));demoSounds.current.forEach(h=>h.release())}, [])
 
   /** Une note lâchée : elle s'étouffe, sauf avec la pédale (elle résonne alors jusqu'au bout). */
   const letGo = (handle: NoteHandle) => {
@@ -111,6 +117,7 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
     const previous = held.current.get(note)
     if (previous) letGo(previous)
     held.current.set(note, playNote(note))
+    noteCallback.current?.(note,true)
     setPressed((keys) => new Set(keys).add(note))
     if (!melody || !current || partDone || demo !== null) return
     if (note !== target) {
@@ -140,6 +147,7 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
     const handle = held.current.get(note)
     if (handle) {
       held.current.delete(note)
+      noteCallback.current?.(note,false)
       letGo(handle)
     }
     setPressed((keys) => {
@@ -154,15 +162,11 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
     if (!current) return
     haptics.impact('light')
     stopDemo()
-    timers.current = current.notes.map((note, index) =>
-      window.setTimeout(() => {
-        setDemo(index)
-        const handle = playNote(note)
-        // Chaque note tient jusqu'à la suivante (et résonne avec la pédale).
-        timers.current.push(window.setTimeout(() => letGo(handle), 450))
-      }, index * 480),
-    )
-    timers.current.push(window.setTimeout(() => setDemo(null), current.notes.length * 480 + 200))
+    const offset=parts.slice(0,part).reduce((n,p)=>n+p.notes.length,0)
+    const durations=current.notes.map((_,i)=>(melody?.beats?.[offset+i]??1)*(melody?.beats?600:480)/speed)
+    let elapsed=0
+    timers.current=current.notes.map((note,index)=>{const at=elapsed;elapsed+=durations[index]!;return window.setTimeout(()=>{setDemo(index);const handle=playNote(note);demoSounds.current.push(handle);timers.current.push(window.setTimeout(()=>letGo(handle),durations[index]!*0.92))},at)})
+    timers.current.push(window.setTimeout(()=>setDemo(null),elapsed+200))
   }
 
   const goTo = (index: number) => {
@@ -192,15 +196,16 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
     },
   })
 
-  return { melody, parts, part, current, notes, step, partDone, allDone, target, lit, demo, miss, cleared, nextPart, pressed, pedal, setPedal, listen, goTo, keyProps }
+  useEffect(()=>()=>{held.current.forEach(h=>h.release());ringing.current.forEach(h=>h.release())},[])
+  return { speed,setSpeed,showNames,setShowNames,showGuide,setShowGuide,metronome,setMetronome,keyWidth,setKeyWidth, melody, parts, part, current, notes, step, partDone, allDone, target, lit, demo, miss, cleared, nextPart, pressed, pedal, setPedal, listen, goTo, keyProps }
 }
 
 type PianoPlay = ReturnType<typeof usePianoPlay>
 
 /* -------------------------------- Le clavier -------------------------------- */
 
-export function PianoKeyboard({ melody, onComplete }: { melody?: Melody; onComplete?: () => void }) {
-  const play = usePianoPlay(melody, onComplete)
+export function PianoKeyboard({ melody, onComplete, onNote }: { melody?: Melody; onComplete?: () => void; onNote?:(note:string,down:boolean)=>void }) {
+  const play = usePianoPlay(melody, onComplete, onNote)
   const [stage, setStage] = useState(false)
   const [range, setRange] = useState<Range>(melody?.notes[0] ? rangeFor(melody.notes[0], 'mid') : 'mid')
   // Juste les touches qu'il faut pour la partie ; sinon une octave, graves ou médium.
@@ -219,7 +224,7 @@ export function PianoKeyboard({ melody, onComplete }: { melody?: Melody; onCompl
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="piano-keyboard flex flex-col gap-3">
       {melody && play.current && (
         <div className="flex flex-col gap-2.5">
           <div className="flex items-center justify-between gap-2">
@@ -259,6 +264,7 @@ export function PianoKeyboard({ melody, onComplete }: { melody?: Melody; onCompl
         </button>
       </div>
 
+      <PianoControls play={play}/>
       <div className="h-44">
         <Keys play={play} from={portion?.from ?? RANGES[range].from} to={portion?.to ?? RANGES[range].to} />
       </div>
@@ -334,10 +340,11 @@ function PianoStage({ play, onClose }: { play: PianoPlay; onClose: () => void })
         paddingLeft: inset('top'),
       }
   // Plus large qu'en hauteur : au moins une octave et demie, jusqu'à deux octaves.
-  const portion = (play.current ? keyboardWindow(play.current.notes, 12, 15) : null) ?? { from: 'C3', to: 'C5' }
+  const [octave,setOctave]=useState<number|null>(null)
+  const portion = octave===null?((play.current ? keyboardWindow(play.current.notes, 15, 15) : null) ?? { from: 'C3', to: 'C5' }):{from:`C${octave}`,to:`C${octave+2}`}
 
   return (
-    <div className="fixed z-[60] flex flex-col gap-2 bg-canvas" style={frame} role="dialog" aria-modal="true" aria-label="Le piano en grand écran">
+    <div className="piano-stage fixed z-[60] flex flex-col gap-2 bg-canvas" style={frame} role="dialog" aria-modal="true" aria-label="Le piano en grand écran">
       <motion.div className="flex min-h-0 flex-1 flex-col gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
         <div className="flex items-center gap-2">
           <button
@@ -361,10 +368,11 @@ function PianoStage({ play, onClose }: { play: PianoPlay; onClose: () => void })
             {play.melody && <ListenButton onClick={play.listen} />}
           </span>
         </div>
+        <div className="piano-stage-controls"><PianoControls play={play} compact/><label>Registre <select aria-label="Registre du clavier" value={octave??'auto'} onChange={e=>setOctave(e.target.value==='auto'?null:+e.target.value)}><option value="auto">Adapté au morceau</option><option value="2">Grave · Do2–Do4</option><option value="3">Central · Do3–Do5</option><option value="4">Aigu · Do4–Do6</option></select></label></div>
         {play.melody && play.current && <NotesSheet play={play} strip />}
         <Status play={play} onDone={onClose} />
-        <div className="min-h-0 flex-1">
-          <Keys play={play} from={portion.from} to={portion.to} large />
+        <div className="min-h-0 flex-1 overflow-x-auto">
+          <div style={{height:'100%',minWidth:keyboardKeys(portion.from,portion.to).filter(k=>!k.black).length*play.keyWidth}}><Keys play={play} from={portion.from} to={portion.to} large /></div>
         </div>
       </motion.div>
     </div>
@@ -373,6 +381,7 @@ function PianoStage({ play, onClose }: { play: PianoPlay; onClose: () => void })
 
 /* ------------------------------ Les morceaux ------------------------------- */
 
+function PianoControls({play,compact=false}:{play:PianoPlay;compact?:boolean}){return <div className={`piano-options ${compact?'compact':''}`}><label>Vitesse {Math.round(play.speed*100)} %<input aria-label="Vitesse de démonstration" type="range" min="0.4" max="1.2" step="0.1" value={play.speed} onChange={e=>play.setSpeed(+e.target.value)}/></label><label><input type="checkbox" checked={play.showNames} onChange={e=>play.setShowNames(e.target.checked)}/> Noms</label><label><input type="checkbox" checked={play.showGuide} onChange={e=>play.setShowGuide(e.target.checked)}/> Guide</label><label><input type="checkbox" checked={play.metronome} onChange={e=>play.setMetronome(e.target.checked)}/> Métronome</label>{compact&&<label>Touches<input aria-label="Largeur des touches" type="range" min="32" max="70" value={play.keyWidth} onChange={e=>play.setKeyWidth(+e.target.value)}/></label>}</div>}
 function ListenButton({ onClick }: { onClick: () => void }) {
   return (
     <button
@@ -542,7 +551,7 @@ function Keys({ play, from, to, large = false }: { play: PianoPlay; from: string
       <div className="relative h-full">
         <div className="grid h-full gap-1" style={{ gridTemplateColumns: `repeat(${whites.length}, minmax(0, 1fr))` }}>
           {whites.map((key) => {
-            const isTarget = key.note === play.lit
+            const isTarget = play.showGuide && key.note === play.lit
             const down = play.pressed.has(key.note)
             return (
               <button
@@ -559,7 +568,7 @@ function Keys({ play, from, to, large = false }: { play: PianoPlay; from: string
               >
                 {isTarget && <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute inset-x-1 top-2 h-2 rounded-pill bg-[#fffdf7]/80" />}
                 {key.note === 'C4' && <span aria-hidden="true" className="mb-1 h-1.5 w-1.5 rounded-pill bg-[#1d1a17]/50" />}
-                {noteLabel(key.note)}
+                {play.showNames?noteLabel(key.note):''}
               </button>
             )
           })}
@@ -568,7 +577,7 @@ function Keys({ play, from, to, large = false }: { play: PianoPlay; from: string
           if (!key.black) return null
           // La touche noire se pose à cheval sur la touche blanche qui la précède et la suivante.
           const whitesBefore = keys.slice(0, index).filter((entry) => !entry.black).length
-          const isTarget = key.note === play.lit
+          const isTarget = play.showGuide && key.note === play.lit
           const down = play.pressed.has(key.note)
           return (
             <button

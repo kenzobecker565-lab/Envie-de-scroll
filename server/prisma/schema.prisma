@@ -54,6 +54,7 @@ model User {
   feedbacks   Feedback[]
   events      AppEvent[]
   projects    Project[]
+  learningEntries LearningEntry[]
 }
 
 /// Une activité proposée (tirée au sort) à un utilisateur.
@@ -178,4 +179,20 @@ model ShopPurchase {
   price Int
   createdAt DateTime @default(now())
   @@unique([userId, itemId])
+}
+
+model LearningEntry {
+ id String @id
+ userId BigInt
+ user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ lessonId String
+ passion String
+ title String
+ work String
+ completed Boolean @default(false)
+ mastered Boolean @default(false)
+ review Boolean @default(false)
+ updatedAt DateTime @updatedAt
+ createdAt DateTime @default(now())
+ @@index([userId, updatedAt])
 }

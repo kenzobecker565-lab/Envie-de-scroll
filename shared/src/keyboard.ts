@@ -22,6 +22,8 @@ export interface Melody {
   /** Les phrases : une ligne chacune à l'écran. */
   phrases: readonly (readonly string[])[]
   /** Les parties d'apprentissage, si la notation les fixe (« || ») : l'indice de la première phrase de chacune. */
+  /** Durées en pulsations, dans le même ordre que notes (facultatif). */
+  beats?: readonly number[]
   partStarts?: readonly number[]
 }
 

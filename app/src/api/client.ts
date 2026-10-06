@@ -87,6 +87,9 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  learning:()=>call<{items:import('@scroll-up/shared').LearningRecord[]}>('/learning'),
+  learningEntry:(id:string)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`),
+  saveLearning:(id:string,lessonId:string,work:import('@scroll-up/shared').LearningWork)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`,{method:'PUT',body:JSON.stringify({lessonId,work})}),
   shop: () => call<import('@scroll-up/shared').ShopState>('/shop'),
   claimShopTestCredit: () => call<import('@scroll-up/shared').ShopState>('/shop/test-credit', { method: 'POST' }),
   buyItem: (itemId: string) => call<import('@scroll-up/shared').ShopState>('/shop/purchases', { method: 'POST', body: JSON.stringify({ itemId }) }),
@@ -110,8 +113,9 @@ export const api = {
     return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle, played, projectId, workshop, sport }) })
   },
 
-  completions: (cursor?: string, passion?: PassionId) =>
-    call<CompletionsPage>(`/completions?limit=12${passion ? `&passion=${passion}` : ''}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
+  completion: (id:string) => call<CompletionResponse>(`/completions/${encodeURIComponent(id)}`),
+  completions: (cursor?: string, passion?: PassionId, limit=12) =>
+    call<CompletionsPage>(`/completions?limit=${limit}${passion ? `&passion=${passion}` : ''}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`),
 
   rate: (completionId: string, rating: ActivityRating) =>
     call<CompletionResponse>(`/completions/${encodeURIComponent(completionId)}/rating`, { method: 'PUT', body: JSON.stringify({ rating }) }),

@@ -1,3 +1,4 @@
+import {MinutonHangs} from '../components/MinutonHangs.tsx'
 import { ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
@@ -239,16 +240,16 @@ export function DoneScreen() {
 
       </div>
 
-      <div className="mt-auto flex w-full flex-col">
+      <MinutonHangs item={done.response.completion}/><div className="mt-auto flex w-full flex-col">
         <PrimaryAction text={nextSportLesson||nextWorkshopLesson ? "Continuer la leçon suivante" : "Une nouvelle activité"} icon={<Shuffle aria-hidden="true" />} onClick={nextSportLesson?continueSport:nextWorkshopLesson ? continueWorkshop : continuePassion}>
           <p className="mb-2 text-13 text-ink-soft">{nextSportLesson?nextSportLesson.title:nextWorkshopLesson ? nextWorkshopLesson.title : `On continue en ${getPassion(passion).label}, avec le même temps disponible.`}</p>
           <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
             <House aria-hidden="true" />
             Retour à l’accueil
           </Button>
-          <Button variant="ghost" size="sm" className="w-full" onClick={() => reset(tabStack('gallery'))}>
+          <Button variant="ghost" size="sm" className="w-full" onClick={() => reset([{name:'home'},{name:'passionHub'},{name:'atelier',focus:completionId}])}>
             <Images aria-hidden="true" />
-            Voir ma galerie
+            Voir chez Minuton
           </Button>
         </PrimaryAction>
       </div>

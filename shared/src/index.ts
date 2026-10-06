@@ -25,6 +25,7 @@ export * from './shop.ts'
 export * from './pianoClassics.ts'
 
 export * from './workshops.ts'
+export * from './workshopCoins.ts'
 
 export * from './logicReview.ts'
 

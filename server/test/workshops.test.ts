@@ -40,7 +40,7 @@ it('valide une énigme sans solution trouvée, conserve les réponses et calcule
  const wrong={rooms:[0,0,-1,-1],times:[0,0,-1,-1]}
  const workshop={version:1,passion:'logique',answers:{[p.id]:wrong},logicResults:cases.map(p=>({id:p.id,correct:true})),summary:'Tout résolu'}
  const done=await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop}).expect(201)
- expect(done.body.coinsEarned).toBe(15);expect(done.body.completion.workshop.summary).toBe('2 dossiers étudiés · 0/2 résolu')
+ expect(done.body.coinsEarned).toBe(0);expect(done.body.completion.workshop.summary).toBe('2 dossiers étudiés · 0/2 résolu')
  expect(done.body.completion.workshop.logicResults).toEqual(cases.map(p=>({id:p.id,correct:false})))
  expect(done.body.completion.workshop.answers[p.id]).toEqual(wrong)
  expect(done.body.completion.workshop.answers[cases[1]!.id]).toBeNull()
@@ -53,14 +53,14 @@ it('accepte un dossier non répondu et refuse une répartition illisible',async(
  const p=workshopConfig('logique-5-1')!.cases[0]!
  await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop:{version:1,passion:'logique',answers:{[p.id]:{rooms:[99],times:[]}}}}).expect(400)
  const done=await request(app).post('/api/completions').set(auth).send({proposalId:proposed.body.proposal.id,workshop:{version:1,passion:'logique',answers:{}}}).expect(201)
- expect(done.body.completion.workshop.logicResults).toEqual([{id:p.id,correct:false}]);expect(done.body.coinsEarned).toBe(5)
+ expect(done.body.completion.workshop.logicResults).toEqual([{id:p.id,correct:false}]);expect(done.body.coinsEarned).toBe(0)
 })
 it('archive les nouveaux scénarios non résolus sans croire une correction fournie par le client',async()=>{
  await request(app).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
  const p=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:30,step:'logique-30-11'}).expect(201)
  const body={proposalId:p.body.proposal.id,workshop:{version:2,contentRevision:3,passion:'logique',notebook:'Hypothèse vérifiée : recaler la caméra avant d’accuser.',answers:{},summary:'tout juste',studio:{steps:[{correct:true}]}}}
  const done=await request(app).post('/api/completions').set(auth).send(body).expect(201)
- expect(done.body.completion.workshop.studio.notebook).toBe('Hypothèse vérifiée : recaler la caméra avant d’accuser.');expect(done.body.coinsEarned).toBe(30);expect(done.body.completion.workshop.studio.steps).toHaveLength(6);expect(done.body.completion.workshop.studio.steps.every((s:{correct:boolean})=>!s.correct)).toBe(true)
+ expect(done.body.completion.workshop.studio.notebook).toBe('Hypothèse vérifiée : recaler la caméra avant d’accuser.');expect(done.body.coinsEarned).toBe(0);expect(done.body.completion.workshop.studio.steps).toHaveLength(6);expect(done.body.completion.workshop.studio.steps.every((s:{correct:boolean})=>!s.correct)).toBe(true)
  const gallery=await request(app).get('/api/completions?passion=logique').set(auth).expect(200);expect(gallery.body.items[0].workshop).toEqual(done.body.completion.workshop)
  await request(app).post('/api/completions').set(auth).send(body).expect(409)
 })
@@ -81,4 +81,22 @@ it('le tirage surprise préfère le dossier jamais terminé puis reste disponibl
  const last=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5}).expect(201);expect(last.body.proposal.activityId).toBe('logique-5-5')
  await request(app).post('/api/completions').set(auth).send({proposalId:last.body.proposal.id,workshop:{version:2,contentRevision:3,passion:'logique',notebook:'Hypothèse vérifiée : recaler la caméra avant d’accuser.',answers:{}}}).expect(201)
  const replay=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5}).expect(201);expect(replay.body.proposal.activityId).not.toBe('logique-5-5')
+})
+it('compte les minutes passées tant qu’une énigme n’est pas résolue sans voir la solution',async()=>{
+ const {studioConfig}=await import('@scroll-up/shared')
+ let clock=new Date('2026-10-06T18:00:00Z')
+ const timed=createApp({prisma:db.prisma,config:{botToken:TEST_BOT_TOKEN,devAuth:true,initDataMaxAge:0,signingSecret:'test',appDistDir:undefined},photos:createPhotoService({telegram:undefined,storageChatId:undefined,localDir:db.dir+'/photos'}),now:()=>clock})
+ await request(timed).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
+ const c=studioConfig('logique-30-11')!,solved=Object.fromEntries(c.tasks.map(t=>[t.id,t.solution]))
+ const play=async(minutes:number,workshop:Record<string,unknown>)=>{
+  const id=(await request(timed).post('/api/proposals').set(auth).send({passion:'logique',duration:30,step:'logique-30-11'}).expect(201)).body.proposal.id
+  clock=new Date(clock.getTime()+minutes*60_000)
+  return (await request(timed).post('/api/completions').set(auth).send({proposalId:id,workshop:{version:2,contentRevision:c.revision,passion:'logique',...workshop}}).expect(201)).body.coinsEarned
+ }
+ expect(await play(0.05,{answers:{}})).toBe(0)
+ expect(await play(7.5,{answers:{}})).toBe(7)
+ expect(await play(45,{answers:{}})).toBe(30)
+ expect(await play(2,{answers:solved})).toBe(30)
+ expect(await play(2,{answers:solved,sawSolution:true})).toBe(2)
+ const me=await request(timed).get('/api/me').set(auth).expect(200);expect(me.body.stats.totalCoins).toBe(0+7+30+30+2)
 })

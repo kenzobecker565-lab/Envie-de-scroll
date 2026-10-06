@@ -3,6 +3,8 @@ import {
   coinsFor,
   isWorkshop,
   validateWorkshop,
+  workshopCoins,
+  workshopSolved,
   getActivity,
   getPassion,
   isActivityRating,
@@ -52,6 +54,9 @@ function clean(value: string | undefined, max: number): string | null {
  *   avec, si on veut, le titre exploré.
  * - Leçon de piano (mode progression) : dès que la mélodie de la leçon a été
  *   jouée sur le clavier de l'appli, sans attendre ; son titre est gardé.
+ * - Énigmes, Français : dès qu'on veut, même sans tout résoudre. La durée
+ *   entière en minutons seulement si tout est juste sans avoir vu de solution ;
+ *   sinon, les minutes réellement passées depuis l'ouverture.
  */
 export async function completeProposal(
   prisma: PrismaClient,
@@ -92,6 +97,11 @@ export async function completeProposal(
       : new ApiError(409, 'proof_required', passion.proof === 'photo' ? 'Ajoute la photo de ton dessin.' : 'Ajoute le texte que tu as écrit.')
   }
 
+  const sawSolution = (input.workshop as { sawSolution?: unknown } | undefined)?.sawSolution === true
+  const coins = workshop
+    ? workshopCoins(duration, { solved: !sawSolution && workshopSolved(workshop), elapsedMs: now.getTime() - proposal.createdAt.getTime() })
+    : coinsFor(duration)
+
   let photoRef: string | null = null
   if (photo) {
     try {
@@ -114,7 +124,7 @@ export async function completeProposal(
           duration,
           activityText: getActivity(proposal.activityId)?.text ?? '',
           extra: proposal.extra,
-          coins: coinsFor(duration),
+          coins,
           text,
           exploredTitle,
           workshopData: sport ? JSON.stringify(sport) : workshop ? JSON.stringify(workshop) : null,

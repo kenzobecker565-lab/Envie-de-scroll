@@ -6,6 +6,7 @@ import {
   sportProgram,
   WORKSHOP_LESSONS,
   workshopConfig,
+  workshopSolved,
   cheerFor,
   collectionSize,
   countWords,
@@ -89,7 +90,7 @@ export function DoneScreen() {
   const news = step && stepProgress ? 'step' : level ? 'level' : milestone ? 'milestone' : challenge ? 'challenge' : discovered ? 'discovered' : null
   // Une félicitation et une anecdote, toujours les mêmes pour cette création.
   const { id: completionId, duration, text } = done.response.completion
-  const studiedLogic = passion === 'logique' && done.response.completion.workshop?.logicResults?.some(result => !result.correct)
+  const studiedLogic = passion === 'logique' && !!done.response.completion.workshop && !workshopSolved(done.response.completion.workshop)
   const cheer = studiedLogic ? 'Tu as pris le temps de chercher et de comprendre. Ta séance compte.' : cheerFor(passion, { duration, words: text ? countWords(text) : 0 }, seededRandom(`cheer:${completionId}`))
   const fact = factFor(passion, seededRandom(`fact:${completionId}`))
 
@@ -153,10 +154,17 @@ export function DoneScreen() {
       </motion.h1>
       <p className="flow-completion-caption">{passion==='dessin'?'Ton dessin est enregistré.':passion==='ecriture'?'Ton texte est enregistré.':'Ton activité est enregistrée.'}</p>
       <motion.p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-16 text-ink-soft" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.4 }}>
-        <Badge variant="good" tilt="left" className="text-15">
-          +{earned} minutons
-        </Badge>
-        ajoutés à ton total.
+        {earned > 0 ? (
+          <>
+            <Badge variant="good" tilt="left" className="text-15">
+              +{earned} minutons
+            </Badge>
+            ajoutés à ton total.
+          </>
+        ) : (
+          // Atelier enregistré en moins d'une minute, sans tout résoudre : rien de perdu, mais pas de minuton.
+          'Elle t’attend dans ta galerie. Les minutons viennent avec les minutes de recherche.'
+        )}
       </motion.p>
       <motion.p className="mt-3 max-w-[320px] text-15 font-semibold text-ink" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }}>
         {cheer}

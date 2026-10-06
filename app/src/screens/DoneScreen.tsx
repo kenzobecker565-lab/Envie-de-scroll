@@ -1,5 +1,5 @@
 import {MinutonHangs} from '../components/MinutonHangs.tsx'
-import { ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
+import { Check, ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import {
@@ -34,13 +34,12 @@ import { Button } from '@/components/ui/button'
 import { Card, CardEyebrow } from '@/components/ui/card'
 import { BadgePin } from '../components/BadgePin.tsx'
 import { ChallengeBanner } from '../components/Challenge.tsx'
-import { CoinCounter, CoinIcon } from '../components/Coins.tsx'
+import { CoinCounter } from '../components/Coins.tsx'
 import { Confetti } from '../components/Confetti.tsx'
 import { Rays } from '../components/decor/Ornaments.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { MilestoneBanner } from '../components/Milestones.tsx'
-import { StepBanner } from '../components/Paths.tsx'
 import { LevelUpBanner, statsFor } from '../components/Progression.tsx'
 import { RateActivity } from '../components/RateActivity.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
@@ -120,141 +119,34 @@ export function DoneScreen() {
   // Le mode progression : une étape réussie propose aussitôt la suivante.
   if (step && stepProgress) return <StepDone done={done} step={step} progress={stepProgress} paths={paths} level={level} cheer={cheer} />
 
-  return (
-    <Screen className="items-center text-center flow-done">
-      <div className="relative mt-8 flex h-32 w-32 items-center justify-center" style={{ perspective: 600 }}>
-        {/* Rayons qui tournent, puis le minuton qui arrive en tournoyant. */}
-        <motion.div className="absolute -inset-20" initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-          <Rays className="h-full w-full" />
-        </motion.div>
-        <Confetti count={34} />
-        <span aria-hidden="true" className="motion-loop anim-pulse-soft absolute h-32 w-32 rounded-pill border-[3px] border-dashed border-outline opacity-40" />
-        <motion.span
-          className="flow-celebration relative flex h-28 w-28 items-center justify-center"
-          initial={{ scale: 0.3, opacity: 0, rotateY: 0 }}
-          animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Minuton fait la fête. */}
-          <span className="motion-loop anim-float" style={{ '--float-duration': '3s' } as React.CSSProperties}>
-            <Mascot mood="cheer" size={124} className="mt-1" />
-          </span>
-        </motion.span>
-        <Sparkle size={24} color="var(--accent)" className="motion-loop anim-twinkle absolute -top-3 -right-2" />
-        <Sparkle size={18} color="var(--good)" className="motion-loop anim-twinkle absolute bottom-0 -left-5" style={{ '--twinkle-delay': '-1s' } as React.CSSProperties} />
-      </div>
+  return <Screen className="items-center text-center flow-done flow-done-compact">
+    <h1 className="font-display text-32 font-extrabold">Bien joué !</h1>
+    <p className="flow-completion-caption">{passion === 'dessin' && done.response.completion.photoUrl ? 'Ton dessin est enregistré.' : passion === 'ecriture' && text ? 'Ton texte est enregistré.' : 'Ton activité est enregistrée.'}</p>
+    <section className="done-creation" aria-label="Ma création enregistrée">
+      <MinutonHangs item={done.response.completion}/>
+      {text && <p className="done-text-preview">{text}</p>}
+      <small>{text ? 'Ton texte complet t’attend chez Minuton.' : 'Ce moment prend sa place dans ton atelier.'}</small>
+    </section>
+    <Badge variant="good">+{earned} minutons</Badge>
+    <p className="text-14 text-ink-soft">{cheer}</p>
+    <div className="done-primary-actions">
+      <Button onClick={() => reset([{name:'home'},{name:'atelier',focus:completionId}])}><Images/>Voir chez Minuton</Button>
+      <Button variant="secondary" onClick={nextSportLesson ? continueSport : nextWorkshopLesson ? continueWorkshop : continuePassion}><Shuffle/>{nextSportLesson || nextWorkshopLesson ? 'Continuer la leçon suivante' : 'Une nouvelle activité'}</Button>
+      <Button variant="ghost" onClick={() => reset([{name:'home'}], -1)}><House/>Retour à l’accueil</Button>
+    </div>
+    {done.photoPending && <Alert variant="info"><Send/><AlertDescription>Envoie la photo de ton dessin au bot quand tu veux : elle rejoindra ton atelier.</AlertDescription></Alert>}
+    <div className="done-details">
+      <Fold icon={<Sparkles/>} title="Ma progression"><CoinCounter value={shown} tone="good"/><p className="text-13">minutons gagnés au total</p>
+        {news === 'level' && level && <LevelUpBanner passion={passion} step={level}/>}
+        {news === 'milestone' && milestone && <MilestoneBanner milestone={milestone}/>}
+        {news === 'challenge' && challenge && <ChallengeBanner word={challenge.word} count={new Set((done.response.stats.challenge ?? []).map(id => id.slice(-10))).size} onOpen={() => reset([...tabStack('learn'),{name:'challenge'}])}/>}
+        {news === 'discovered' && <p>Nouvelle activité dans tes découvertes : {after.tried.length}/{collectionSize(passion)}</p>}
+      </Fold>
+      <Fold icon={<Lightbulb/>} title="Une petite découverte"><p>{fact}</p></Fold>
+      <Fold icon={<Check/>} title="Donner mon avis sur cette activité"><RateActivity completionId={completionId} initial={done.response.completion.rating}/></Fold>
+    </div>
+  </Screen>
 
-      <motion.h1
-        className="mt-8 font-display text-40 font-extrabold tracking-tight text-ink"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.4 }}
-      >
-        Bien joué !
-      </motion.h1>
-      <p className="flow-completion-caption">{passion==='dessin'?'Ton dessin est enregistré.':passion==='ecriture'?'Ton texte est enregistré.':'Ton activité est enregistrée.'}</p>
-      <motion.p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-16 text-ink-soft" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.4 }}>
-        <Badge variant="good" tilt="left" className="text-15">
-          +{earned} minutons
-        </Badge>
-        ajoutés à ton total.
-      </motion.p>
-      <motion.p className="mt-3 max-w-[320px] text-15 font-semibold text-ink" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }}>
-        {cheer}
-      </motion.p>
-      <Card
-        padding="lg"
-        className="mt-8 items-center gap-3 overflow-visible bg-warm text-on-color"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.35, duration: 0.4 }}
-      >
-        {/* Les minutons gagnés tombent dans le compteur. */}
-        {!reduced &&
-          Array.from({ length: 6 }, (_, index) => (
-            <motion.span
-              key={index}
-              aria-hidden="true"
-              className="absolute top-6"
-              style={{ left: `${30 + index * 8}%` }}
-              initial={{ y: -190, opacity: 0, rotate: 0 }}
-              animate={{ y: [-190, -150, -8, 6], opacity: [0, 1, 1, 0], rotate: [0, index % 2 ? 40 : -40, index % 2 ? 180 : -180, index % 2 ? 200 : -200] }}
-              transition={{ delay: 0.55 + index * 0.08, duration: 0.65, ease: 'easeIn', times: [0, 0.2, 0.85, 1] }}
-            >
-              <CoinIcon size={18} />
-            </motion.span>
-          ))}
-        <CoinCounter value={shown} tone="good" />
-        <span className="text-14 font-bold">minutons au total</span>
-      </Card>
-
-      {/* Une seule grande nouvelle : la plus importante. Le reste se retrouve dans « Progresser ». */}
-      {news === 'step' && step && stepProgress && (
-        <div className="mt-6 w-full">
-          <StepBanner step={step} progress={stepProgress} onOpenPath={() => reset([...tabStack('learn'), { name: 'learnPassion', passion: step.passion }, { name: 'path', pathId: step.pathId }])} />
-        </div>
-      )}
-      {news === 'level' && level && (
-        <div className="mt-6 w-full">
-          <LevelUpBanner passion={passion} step={level} />
-        </div>
-      )}
-      {news === 'milestone' && milestone && (
-        <div className="mt-6 w-full">
-          <MilestoneBanner milestone={milestone} />
-        </div>
-      )}
-      {news === 'challenge' && challenge && (
-        <div className="mt-6 w-full">
-          <ChallengeBanner word={challenge.word} count={new Set((done.response.stats.challenge ?? []).map((id) => id.slice(-10))).size} onOpen={() => reset([...tabStack('progress'), { name: 'challenge' }])} />
-        </div>
-      )}
-      {news === 'discovered' && (
-        <motion.p
-          className="mt-6 inline-flex items-center gap-2 text-14 font-bold text-ink"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, type: 'spring', stiffness: 300, damping: 16 }}
-        >
-          <Sparkle size={16} color="var(--accent)" />
-          Nouvelle activité dans ta collection {getPassion(passion).label}&nbsp;: {after.tried.length}/{collectionSize(passion)}
-        </motion.p>
-      )}
-
-      <div className="mt-6 w-full">
-        <RateActivity completionId={done.response.completion.id} initial={done.response.completion.rating} />
-      </div>
-
-      {done.photoPending && (
-        <Alert variant="info" role="status" className="mt-6" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-          <Send aria-hidden="true" />
-          <AlertDescription>Envoie la photo de ton dessin au bot quand tu veux&nbsp;: elle rejoindra ta galerie.</AlertDescription>
-        </Alert>
-      )}
-
-      {/* Repliés : à ouvrir si on en a envie. */}
-      <div className="mt-6 flex w-full flex-col gap-3 text-left">
-        <Fold icon={<Lightbulb aria-hidden="true" />} title={'Le savais-tu\u00A0?'}>
-          <p className="text-15 font-semibold text-ink">{fact}</p>
-        </Fold>
-
-      </div>
-
-      <MinutonHangs item={done.response.completion}/><div className="mt-auto flex w-full flex-col">
-        <PrimaryAction text={nextSportLesson||nextWorkshopLesson ? "Continuer la leçon suivante" : "Une nouvelle activité"} icon={<Shuffle aria-hidden="true" />} onClick={nextSportLesson?continueSport:nextWorkshopLesson ? continueWorkshop : continuePassion}>
-          <p className="mb-2 text-13 text-ink-soft">{nextSportLesson?nextSportLesson.title:nextWorkshopLesson ? nextWorkshopLesson.title : `On continue en ${getPassion(passion).label}, avec le même temps disponible.`}</p>
-          <Button variant="ghost" size="md" className="w-full" onClick={() => reset([{ name: 'home' }], -1)}>
-            <House aria-hidden="true" />
-            Retour à l’accueil
-          </Button>
-          <Button variant="ghost" size="sm" className="w-full" onClick={() => reset([{name:'home'},{name:'passionHub'},{name:'atelier',focus:completionId}])}>
-            <Images aria-hidden="true" />
-            Voir chez Minuton
-          </Button>
-        </PrimaryAction>
-      </div>
-    </Screen>
-  )
 }
 
 /**

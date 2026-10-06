@@ -1,9 +1,10 @@
 import type { UserDTO } from '@scroll-up/shared'
 
 export const TOUR_STEPS = [
-  { targets: ['swipe'], title: 'Ton premier swipe', text: 'Envie de scroller ? Choisis ton temps et une passion : on te propose une activité.' },
+  { targets: ['swipe'], title: 'Ton premier moment pour toi', text: 'Envie de scroller ? Choisis ton temps et une passion : on te propose une activité.' },
   { targets: ['word'], title: 'Ton rendez-vous créatif', text: 'Un nouveau mot chaque jour, à dessiner ou à écrire.' },
-  { targets: ['passions', 'learn'], title: 'Explore ce que tu aimes', text: 'Retrouve tes passions et progresse dans Apprendre, à ton rythme.' },
+  { targets: ['passions', 'learn'], title: 'Explore ce que tu aimes', text: 'Explore tes activités dans Passions. Dans Apprendre, suis des leçons indépendantes : tes essais restent dans tes carnets.' },
+  { targets: ['atelier'], title: 'Bienvenue chez Minuton', text: 'Tes créations remplissent ton atelier. Ouvre-les en entier et mets ta préférée à l’honneur.' },
   { targets: ['wallet', 'shop'], title: 'Donne du style à Minuton', text: 'Termine des activités, gagne des minutons et personnalise Minuton dans la boutique.' },
 ] as const
 

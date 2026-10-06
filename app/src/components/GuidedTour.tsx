@@ -108,7 +108,7 @@ export function GuidedTour() {
           <div className="tour-progress" aria-label={`Étape ${step + 1} sur ${TOUR_STEPS.length}`}><span>{step + 1}/{TOUR_STEPS.length}</span><span className="tour-dots" aria-hidden="true">{TOUR_STEPS.map((_, i) => <i key={i} data-done={i <= step}/>)}</span></div>
           <DialogPrimitive.Title>{current.title}</DialogPrimitive.Title>
           <DialogPrimitive.Description>{current.text}</DialogPrimitive.Description>
-          <div className="tour-controls"><button type="button" onClick={() => finish()}>Passer</button><button type="button" className={last ? 'tour-start' : 'tour-next'} onClick={() => { if (last) finish(true); else { haptics.selection(); setStep(value => value + 1) } }}>{last ? 'Faire mon premier swipe' : 'Suivant'}{!last && <ChevronRight size={19}/>}</button></div>
+          <div className="tour-controls"><button type="button" onClick={() => finish()}>Passer</button><button type="button" className={last ? 'tour-start' : 'tour-next'} onClick={() => { if (last) finish(true); else { haptics.selection(); setStep(value => value + 1) } }}>{last ? 'Commencer ma première activité' : 'Suivant'}{!last && <ChevronRight size={19}/>}</button></div>
         </div>
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>

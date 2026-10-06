@@ -7,8 +7,8 @@ export const ATELIER_CAPACITY: Record<LearningPassion, number> = {
   francais: 2,
   sport: 2,
 }
-export function atelierSelection(items: CompletionDTO[], passion: LearningPassion) {
+export function atelierSelection(items: CompletionDTO[], passion: LearningPassion, pinned?: string) {
   return [...new Map(items.filter((i) => i.passion === passion).map((i) => [i.id, i])).values()]
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id))
+    .sort((a, b) => Number(b.id === pinned) - Number(a.id === pinned) || b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id))
     .slice(0, ATELIER_CAPACITY[passion])
 }

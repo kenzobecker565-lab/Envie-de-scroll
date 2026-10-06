@@ -131,3 +131,10 @@ export function validateLearning(id: string, value: unknown): { work: LearningWo
       lesson.tasks.every((t) => v.checked.includes(t.id) && learningCorrect(t, v.answers[t.id])),
   }
 }
+
+/** Reading corrections and checking a checklist do not constitute an exercise attempt. */
+export function learningAttempted(work: LearningWork): boolean {
+  return !!(work.first.trim() || work.final.trim() || work.notebook.trim() ||
+    work.ink.length || work.firstInk.length || work.notes.length || work.firstNotes.length ||
+    Object.values(work.answers).some(value => typeof value === 'string' ? value.trim().length > 0 : value !== null && value !== undefined))
+}

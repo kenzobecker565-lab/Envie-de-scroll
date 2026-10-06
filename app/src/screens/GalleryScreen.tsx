@@ -134,7 +134,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
               description={'Chaque envie de scroller transformée viendra s’afficher ici : tes dessins, tes textes, tes découvertes.'}
               action={
                 <Button onClick={startFlow} haptic={false}>
-                  J’ai envie de swipe
+                  J’ai envie de scroll
                   <ArrowRight aria-hidden="true" />
                 </Button>
               }

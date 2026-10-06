@@ -7,6 +7,7 @@ import {
   emptyLearningWork,
   getPassion,
   learningCorrect,
+  learningAttempted,
   learningLesson,
   validateLearning,
   SPORT_SOURCES,
@@ -35,6 +36,7 @@ export function LearningOverview({ passion }: { passion?: PassionId }) {
     current = items.find((i) => !i.completed && (!passion || i.passion === passion)),
     lessons = LEARNING_LESSONS.filter((l) => l.passion === passion)
   const known = new Set(items.filter((i) => i.completed).map((i) => i.lessonId))
+  const practiced = new Set(items.filter((i) => i.attempted).map((i) => i.lessonId))
   return (
     <Screen tabs className="learning-screen">
       <AppHeader />
@@ -81,7 +83,7 @@ export function LearningOverview({ passion }: { passion?: PassionId }) {
                 <small>
                   {LEARNING_LESSONS.filter((l) => l.passion === id && known.has(l.id)).length} / 12 leçons consultées
                 </small>
-                <small>{LEARNING_LESSONS.find((l) => l.passion === id)!.goal}</small>
+                <small>{items.filter(i => i.passion === id && i.attempted && i.completed).length} essais conservés{['francais','logique'].includes(id) && ` · ${new Set(items.filter(i => i.passion === id && i.mastered).map(i => i.lessonId)).size} résolues sans aide`}</small>
               </span>
               <ChevronRight size={18} />
             </button>
@@ -118,8 +120,12 @@ export function LearningOverview({ passion }: { passion?: PassionId }) {
                       <small>
                         {mastered
                           ? 'Exercices résolus sans aide'
+                          : items.some(i => i.lessonId === l.id && i.review)
+                            ? 'À revoir · reprendre la leçon'
+                          : practiced.has(l.id)
+                            ? 'Essayée · poursuivre ma pratique'
                           : known.has(l.id)
-                            ? 'Leçon consultée · refaire un essai'
+                            ? 'Consultée · faire un premier essai'
                             : 'Découvrir · pratiquer · faire le point'}
                       </small>
                     </span>
@@ -161,7 +167,7 @@ export function LearningNotebooks({ passion, review = false }: { passion?: Learn
     { items, loading, error, reload } = useLearning(),
     [filter, setFilter] = useState(passion ?? 'all'),
     [onlyReview, setOnlyReview] = useState(review)
-  const shown = items.filter((i) => (filter === 'all' || i.passion === filter) && (!onlyReview || i.review))
+  const shown = items.filter((i) => (i.attempted || (onlyReview && i.review)) && (filter === 'all' || i.passion === filter) && (!onlyReview || i.review))
   return (
     <Screen tabs className="learning-screen">
       <AppHeader />
@@ -202,7 +208,7 @@ export function LearningNotebooks({ passion, review = false }: { passion?: Learn
                 {getPassion(i.passion).label} · {new Date(i.updatedAt).toLocaleDateString('fr-FR')}
               </small>
               <small>
-                {i.mastered ? 'Résolu sans aide' : i.completed ? 'Essai conservé' : 'En cours'}
+                {i.mastered ? 'Résolu sans aide' : !i.attempted ? 'Leçon consultée' : i.completed ? 'Essai conservé' : 'Essai en cours'}
                 {i.review ? ' · À revoir' : ''}
               </small>
             </span>
@@ -289,25 +295,20 @@ function Question({
     [reveal, setReveal] = useState(false),
     value = String(work.answers[task.id] ?? ''),
     checked = work.checked.includes(task.id),
-    correct = learningCorrect(task, value)
+    correct = learningCorrect(task, value),
+    shortAnswer = String(task.solution).length <= 45 && !String(task.solution).includes('\n'),
+    updateAnswer = (value: string) => {
+      setReveal(false)
+      change({ answers: { ...work.answers, [task.id]: value }, checked: work.checked.filter(id => id !== task.id) })
+    }
   return (
     <section className="learn-card">
       <h2>{task.title}</h2>
       <p>{task.prompt}</p>
       <label className="learn-label">
         Ma réponse
-        <textarea
-          rows={3}
-          maxLength={1000}
-          value={value}
-          onChange={(e) => {
-            setReveal(false)
-            change({
-              answers: { ...work.answers, [task.id]: e.target.value },
-              checked: work.checked.filter((id) => id !== task.id),
-            })
-          }}
-        />
+        {shortAnswer ? <input type="text" maxLength={1000} value={value} autoComplete="off" onChange={e => updateAnswer(e.target.value)} /> :
+          <textarea rows={3} maxLength={1000} value={value} onChange={e => updateAnswer(e.target.value)} />}
       </label>
       <div className="learn-tools">
         <Button
@@ -559,7 +560,7 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
       </Screen>
     )
   return (
-    <Screen tabs className="learning-screen learning-lesson">
+    <Screen className="learning-screen learning-lesson">
       <AppHeader />
       <button className="learn-text-button" onClick={() => push({ name: 'learnPassion', passion: lesson.passion })}>
         <ChevronLeft size={16} />
@@ -576,9 +577,10 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
       <p>{lesson.goal}</p>
       {readOnly ? (
         <>
-          <div className="learn-mint">Essai conservé dans ton carnet</div>
+          <div className="learn-mint">{learningAttempted(work) ? 'Essai conservé dans ton carnet' : 'Leçon consultée · ta lecture est enregistrée'}</div>
           <ReadWork lesson={lesson} work={work} />
-          <Button onClick={retry}>Faire un nouvel essai</Button>
+          <Button onClick={retry}>{learningAttempted(work) ? 'Faire un nouvel essai' : 'Faire mon premier essai'}</Button>
+          <Button variant="secondary" onClick={() => push({ name: 'learnPassion', passion: lesson.passion })}>Choisir ma prochaine leçon</Button>
           <Button variant="secondary" onClick={() => push({ name: 'learningNotebooks', passion: lesson.passion })}>
             Mes carnets d’apprentissage
           </Button>
@@ -615,10 +617,7 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
                   </Button>
                 </div>
               </section>
-              <section className="learn-card">
-                <h2>Un exemple</h2>
-                <p className="learn-example-text">{lesson.example}</p>
-              </section>
+              <details className="learn-card"><summary>Voir un exemple</summary><p className="learn-example-text">{lesson.example}</p></details>
               {lesson.passion === 'piano' && (
                 <LearningPiano lesson={lesson} notes={work.firstNotes} onChange={(v) => change({ firstNotes: v })} />
               )}{' '}
@@ -632,10 +631,7 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
             </>
           ) : work.step === 1 || work.step === 2 ? (
             <>
-              <section className="learn-card">
-                <h2>{work.step === 1 ? 'Un premier essai accompagné' : 'À toi de pratiquer'}</h2>
-                <p>{work.step === 1 ? lesson.guided : lesson.practice}</p>
-              </section>
+              {lesson.tasks.length ? <details className="learn-practice-help"><summary>Les repères de cet exercice</summary><p>{work.step === 1 ? lesson.guided : lesson.practice}</p></details> : <section className="learn-card learn-practice-brief"><h2>{work.step === 1 ? 'Essai guidé' : 'À toi de pratiquer'}</h2><p>{work.step === 1 ? lesson.guided : lesson.practice}</p></section>}
               {lesson.tasks.length ? (
                 <Question
                   key={lesson.tasks[work.step - 1]!.id}
@@ -699,7 +695,8 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
             </>
           ) : (
             <>
-              <h2>Regarde tes progrès</h2>
+              <h2>{learningAttempted(work) ? 'Faire le point sur mon essai' : 'Lire les corrections'}</h2>
+              {!learningAttempted(work) && <p>Tu peux terminer ta lecture sans répondre. La leçon sera marquée « consultée », sans ajouter un essai vide à ton carnet.</p>}
               <ReadWork lesson={lesson} work={work} />
               {lesson.passion === 'ecriture' && (
                 <label className="learn-label">
@@ -736,7 +733,7 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
                 Garder cette leçon à revoir
               </label>
               <Button disabled={busy} onClick={() => void save(true)}>
-                {busy ? 'Enregistrement…' : 'Garder mon essai dans le carnet'}
+                {busy ? 'Enregistrement…' : learningAttempted(work) ? 'Garder mon essai dans le carnet' : 'Marquer la leçon comme consultée'}
               </Button>
               <Button variant="secondary" onClick={() => go(2)}>
                 Retravailler mon essai

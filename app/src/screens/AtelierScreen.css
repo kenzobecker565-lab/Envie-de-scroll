@@ -376,3 +376,8 @@
 .atelier-link {
   color: #302044;
 }
+
+.atelier-work-row{display:flex;align-items:center;gap:7px}.atelier-work-row .atelier-work{flex:1;min-width:0}.atelier-pin{display:grid;place-items:center;flex-shrink:0;width:40px;height:44px;border:1px solid #e7dfeb;border-radius:15px;color:#895ab4;background:#fffdfa}.atelier-pin[aria-pressed=true]{background:#e8f4ef;color:#235a46;border-color:#a8d9c5}.atelier-frame{position:relative}.atelier-frame-pin{position:absolute;right:3px;top:3px;color:#7935c8}
+.atelier-room[data-corner=ecriture] .atelier-frame{border-width:2px;border-radius:3px 12px 12px 3px;border-color:#bca1c4;background:repeating-linear-gradient(#fffdf7 0 14px,#ded4e7 14px 15px);padding-top:14px;box-shadow:-3px 0 #c8b3d0,2px 6px 12px #674b3026}
+.atelier-room[data-corner=piano] .atelier-frame{border-color:#51415f;border-radius:12px;background:linear-gradient(#fffdf7 80%,#44324e 80%);padding-bottom:18px}.atelier-room[data-corner=piano] .atelier-frame-icon{color:#69537a}
+.atelier-room[data-corner=logique] .atelier-frame{border-width:2px;background:#efe3c7;border-color:#c6a576;rotate:-3deg;border-radius:2px 2px 12px 12px}.atelier-room[data-corner=francais] .atelier-frame{border:1px solid #cdb7de;border-left:7px solid #a885c0;border-radius:4px 10px 10px 4px;background:#faf3ff}.atelier-room[data-corner=sport] .atelier-frame{border-width:2px;border-color:#8abca7;background:#edf8f2;border-radius:15px}.atelier-room[data-corner=sport] .atelier-frame-icon{color:#235a46}

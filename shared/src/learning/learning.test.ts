@@ -4,6 +4,7 @@ import {
   LEARNING_PASSIONS,
   emptyLearningWork,
   learningCorrect,
+  learningAttempted,
   validateLearning,
   learningLesson,
 } from './index.ts'
@@ -76,4 +77,12 @@ describe('Parcours indépendants', () => {
     }
     expect(validateLearning('learn-v1-ecriture-1', work).work).toEqual(work)
   })
+})
+
+it('distingue une lecture avec indices et corrections d’un véritable essai', () => {
+  expect(learningAttempted({...emptyLearningWork(), step:3, completed:true, hints:2, selfChecks:[true]})).toBe(false)
+  expect(learningAttempted({...emptyLearningWork(), answers:{q:'   '}})).toBe(false)
+  expect(learningAttempted({...emptyLearningWork(), answers:{q:'sont'}})).toBe(true)
+  expect(learningAttempted({...emptyLearningWork(), first:'Un premier jet'})).toBe(true)
+  expect(learningAttempted({...emptyLearningWork(), firstNotes:[{note:'C4',at:0,duration:200}]})).toBe(true)
 })

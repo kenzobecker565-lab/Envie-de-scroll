@@ -23,3 +23,5 @@
 @media(max-width:359px){.sport-lesson-row>.sport-figure{width:54px}.sport-lesson-copy{font-size:13px}.sport-session-row{gap:8px;padding:7px 10px}.sport-session-row>.sport-figure{width:64px}.sport-session-row strong{font-size:14px}.sport-space-nav button{font-size:10px}}
 .sport-lesson-title{font-size:27px!important;padding:2px 8px}.sport-plan{border:1px solid var(--line);border-radius:20px;padding:16px;background:var(--surface-200)}.sport-plan summary{font-size:15px;font-weight:900;cursor:pointer}.sport-plan p{font-size:12px;line-height:1.6;margin-top:12px;color:var(--ink-soft)}.sport-plan .sport-program-list{margin-top:12px}
 .sport-actions{display:flex;flex-direction:column;gap:7px}.sport-live .sport-actions{position:sticky;bottom:8px;z-index:5;padding:8px 0;background:var(--surface-100);border-radius:20px}.sport-actions [data-slot=button]{width:100%}
+
+.sport-start-sticky{position:sticky;bottom:max(12px,env(safe-area-inset-bottom));z-index:5;box-shadow:0 0 0 7px var(--canvas)!important}

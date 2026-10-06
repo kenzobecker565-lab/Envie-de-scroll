@@ -194,7 +194,8 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
       </AnimatePresence>
       {/* Navigation des six espaces, masquée pendant les activités. */}
       <TabBar />
-      {state.tutorialOpen && route.name === 'home' && <GuidedTour/>}
+      {/* Le tutoriel fait visiter les vraies pages : il reste ouvert d'un écran à l'autre. */}
+      {state.tutorialOpen && <GuidedTour/>}
     </>
   )
 }

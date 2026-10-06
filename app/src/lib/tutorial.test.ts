@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { rememberTutorial, TOUR_STEPS, tourCardCenter, tutorialSeen, tourCardPosition } from './tutorial.ts'
+import { rememberTutorial, TOUR_STEPS, tourCardCenter, tourCardDock, tutorialSeen, tourCardPosition } from './tutorial.ts'
 
 afterEach(() => vi.unstubAllGlobals())
 describe('tutoriel de première utilisation', () => {
@@ -36,7 +36,7 @@ describe('tutoriel de première utilisation', () => {
   })
   it('fait le tour de toute l’app avec des bulles courtes, lisibles sur un petit écran', () => {
     // Les cibles posées dans l'app (data-tour-target) : accueil, en-tête et barre d'onglets.
-    const known = new Set(['swipe', 'word', 'atelier', 'wallet', 'passions-tab', 'learn', 'shop', 'profile'])
+    const known = new Set(['swipe', 'word', 'atelier', 'wallet', 'passions-tab', 'learn', 'shop', 'profile', 'settings'])
     expect(TOUR_STEPS.length).toBeGreaterThanOrEqual(10)
     for (const step of TOUR_STEPS) {
       expect(step.title.length).toBeLessThanOrEqual(40)
@@ -45,7 +45,17 @@ describe('tutoriel de première utilisation', () => {
       for (const target of step.targets) expect(known.has(target)).toBe(true)
     }
     expect(new Set(TOUR_STEPS.map(step => step.title)).size).toBe(TOUR_STEPS.length)
-    for (const target of known) expect(TOUR_STEPS.some(step => step.targets.includes(target))).toBe(true)
+    for (const target of known) if (target !== 'atelier') expect(TOUR_STEPS.some(step => step.targets.includes(target))).toBe(true)
+  })
+  it('emmène sur chaque page qu’il présente, et finit sur l’accueil', () => {
+    for (const page of ['home', 'atelier', 'passionHub', 'learn', 'shop', 'profile']) expect(TOUR_STEPS.some(step => step.page === page)).toBe(true)
+    expect(TOUR_STEPS[0]!.page).toBe('home')
+    expect(TOUR_STEPS.at(-1)!.page).toBe('home')
+  })
+  it('pose la bulle d’une page juste au-dessus des onglets', () => {
+    const card = tourCardDock({ width: 390, height: 844 }, 250, 770)
+    expect(card.top + 250).toBeLessThanOrEqual(770 - 12)
+    expect(card.left).toBeGreaterThanOrEqual(16)
   })
   it('centre une bulle sans cible en laissant la place de Minuton au-dessus', () => {
     for (const viewport of [{ width: 320, height: 568 }, { width: 390, height: 844 }]) {

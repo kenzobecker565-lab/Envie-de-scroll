@@ -2,21 +2,34 @@ import { ChevronRight } from 'lucide-react'
 import { Dialog as DialogPrimitive } from 'radix-ui'
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import { api, track } from '../api/client.ts'
-import { rememberTutorial, TOUR_STEPS, tourCardCenter, tourCardPosition, type TourRect } from '../lib/tutorial.ts'
+import { rememberTutorial, TOUR_STEPS, tourCardCenter, tourCardDock, tourCardPosition, type TourPage, type TourRect } from '../lib/tutorial.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { useBackButtonOverlay } from '../telegram/buttons.ts'
 import { haptics } from '../telegram/webApp.ts'
 import { MinutonFigure } from './Mascot.tsx'
+import { tabStack } from './TabBar.tsx'
 import './GuidedTour.css'
 
-/** A modal coach above the real home; spotlight coordinates follow scrolling and resizing. A step without target is a centred card. */
+/** La pile de navigation de chaque page que le tutoriel fait visiter : l'accueil reste dessous, pour le bouton retour. */
+function stackFor(page: TourPage) {
+  return page === 'home' ? [{ name: 'home' as const }] : page === 'atelier' ? [{ name: 'home' as const }, { name: 'atelier' as const }] : tabStack(page)
+}
+
+/**
+ * A modal coach that walks through the real app: each step opens its page (home, atelier, tabs),
+ * then spotlights its targets; coordinates follow scrolling and resizing. A step without target is
+ * a centred card, or a card docked above the tabs to let the page show.
+ */
 export function GuidedTour() {
   const { state, dispatch } = useAppState()
-  const { push } = useNavigation()
+  const { route, push, reset } = useNavigation()
   const [step, setStep] = useState(0)
   const [rects, setRects] = useState<TourRect[]>([])
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight })
   const [cardHeight, setCardHeight] = useState(230)
+  const [navTop, setNavTop] = useState(window.innerHeight - 80)
+  // Faux tant que la page de l'étape n'est pas affichée et mesurée : la bulle attend, invisible.
+  const [ready, setReady] = useState(false)
   const card = useRef<HTMLDivElement | null>(null)
   // The dialog mounts one frame after the tour (portal): measure the card once it really exists.
   const [cardElement, setCardElement] = useState<HTMLDivElement | null>(null)
@@ -25,7 +38,6 @@ export function GuidedTour() {
   const maskId = useId().replace(/:/g, '')
   const current = TOUR_STEPS[step] ?? TOUR_STEPS[0]!
   const last = step === TOUR_STEPS.length - 1
-  const centered = current.targets.length === 0
 
   const finish = useCallback((start = false) => {
     if (finishing.current) return
@@ -39,29 +51,45 @@ export function GuidedTour() {
   }, [dispatch, push, state.me.user.id])
   useBackButtonOverlay(() => finish())
 
+  // Emmène sur la page de l'étape.
+  useEffect(() => {
+    if (route.name !== current.page) reset(stackFor(current.page))
+  }, [current.page, route.name, reset])
+
   useLayoutEffect(() => {
     let frame = 0
     let alive = true
     let scrolled = false
+    const began = performance.now()
+    setReady(false)
+    setRects([])
+    if (route.name !== current.page) return
     const selector = (target: string) => `[data-tour-target="${target}"]`
     const measure = () => {
       if (!alive) return
       const height = window.visualViewport?.height ?? window.innerHeight
-      if (!current.targets.length) { setViewport({ width: window.innerWidth, height }); setRects([]); return }
-      const elements = current.targets.map(target => document.querySelector<HTMLElement>(selector(target)))
-      if (elements.some(element => !element)) { frame = requestAnimationFrame(measure); return }
-      const first = elements[0]!.getBoundingClientRect()
       const nav = document.querySelector('.studio-tabbar')?.getBoundingClientRect()
+      setViewport({ width: window.innerWidth, height })
+      setNavTop(nav ? nav.top : height - 16)
+      if (!current.targets.length) { setReady(true); return }
+      const elements = current.targets.map(target => document.querySelector<HTMLElement>(selector(target)))
+      if (elements.some(element => !element)) {
+        // La page arrive (transition) : on attend ses éléments ; introuvables, la bulle se montre quand même, au centre.
+        if (performance.now() - began < 2500) frame = requestAnimationFrame(measure)
+        else setReady(true)
+        return
+      }
+      const first = elements[0]!.getBoundingClientRect()
       const bottom = nav ? Math.min(height, nav.top) : height - 16
       if (!scrolled && (first.top < 16 || first.bottom > bottom - 12)) {
         scrolled = true
         elements[0]!.scrollIntoView({ block: 'center', behavior: 'instant' })
       }
-      setViewport({ width: window.innerWidth, height })
       setRects(elements.map(element => {
         const r = element!.getBoundingClientRect()
         return { x: r.left - 5, y: r.top - 5, width: r.width + 10, height: r.height + 10 }
       }))
+      setReady(true)
     }
     frame = requestAnimationFrame(measure)
     const observer = new ResizeObserver(measure)
@@ -70,13 +98,13 @@ export function GuidedTour() {
     window.addEventListener('scroll', measure, { passive: true })
     window.visualViewport?.addEventListener('resize', measure)
     // Router and tab-bar transitions finish after their first layout. Recheck those coordinates.
-    const settled = window.setTimeout(measure, 500)
+    const settled = [350, 700, 1100].map(delay => window.setTimeout(measure, delay))
     return () => {
-      alive = false; cancelAnimationFrame(frame); clearTimeout(settled); observer.disconnect()
+      alive = false; cancelAnimationFrame(frame); settled.forEach(clearTimeout); observer.disconnect()
       window.removeEventListener('resize', measure); window.removeEventListener('scroll', measure)
       window.visualViewport?.removeEventListener('resize', measure)
     }
-  }, [current])
+  }, [current, route.name])
 
   useLayoutEffect(() => {
     if (!cardElement) return
@@ -95,19 +123,18 @@ export function GuidedTour() {
     if (p.side === 'below' && overlap > 1 && rects[0].y > 100) window.scrollBy({ top: overlap, behavior: 'instant' })
   }, [rects, viewport, cardHeight])
 
-  if (!centered && !rects.length) return null
-  const position = centered ? tourCardCenter(viewport, cardHeight) : tourCardPosition(rects[0]!, viewport, cardHeight)
+  const position = current.dock ? tourCardDock(viewport, cardHeight, navTop) : rects[0] ? tourCardPosition(rects[0], viewport, cardHeight) : tourCardCenter(viewport, cardHeight)
   const radius = current.radius ?? 19
   return <DialogPrimitive.Root open onOpenChange={open => { if (!open) finish() }}>
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="tour-overlay">
         <svg width="100%" height="100%" aria-hidden="true">
           <defs><mask id={maskId}><rect width="100%" height="100%" fill="white"/>{rects.map((r, index) => <rect key={index} {...r} rx={radius} fill="black"/>)}</mask></defs>
-          <rect width="100%" height="100%" fill="#050A21" fillOpacity=".68" mask={`url(#${maskId})`}/>
+          <rect width="100%" height="100%" fill="#050A21" fillOpacity={current.dim ?? 0.68} mask={`url(#${maskId})`}/>
           {rects.map((r, index) => <g key={index} className="tour-focus-ring"><rect {...r} rx={radius} fill="none" stroke="#AD69FF" strokeWidth="5"/><rect {...r} rx={radius} fill="none" stroke="#FFF7FF" strokeWidth="2"/></g>)}
         </svg>
       </DialogPrimitive.Overlay>
-      <DialogPrimitive.Content ref={cardRef} tabIndex={-1} className="tour-card" data-side={position.side} style={{ top: position.top, left: position.left, width: position.width, maxHeight: viewport.height - 32 }} onOpenAutoFocus={event => { event.preventDefault(); card.current?.focus({ preventScroll: true }) }} onCloseAutoFocus={event => { event.preventDefault(); requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-tour-target="swipe"]')?.focus({ preventScroll: true })) }} onPointerDownOutside={event => event.preventDefault()}>
+      <DialogPrimitive.Content ref={cardRef} tabIndex={-1} className="tour-card" data-side={position.side} style={{ top: position.top, left: position.left, width: position.width, maxHeight: viewport.height - 32, visibility: ready ? 'visible' : 'hidden' }} onOpenAutoFocus={event => { event.preventDefault(); card.current?.focus({ preventScroll: true }) }} onCloseAutoFocus={event => { event.preventDefault(); requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-tour-target="swipe"]')?.focus({ preventScroll: true })) }} onPointerDownOutside={event => event.preventDefault()}>
         {position.showPointer && <span className="tour-pointer" style={{ left: position.pointer }} aria-hidden="true"/>}
         <span className="tour-minuton"><MinutonFigure pose={current.pose} size={77} animated={false}/></span>
         <div className="tour-card-body">

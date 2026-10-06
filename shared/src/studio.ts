@@ -1,11 +1,13 @@
 import type { Duration } from './types.ts'
+import { powerAnswerWellFormed, powerGridStatus, portLabel, type PowerGridSpec } from './powerGrid.ts'
 import { ADVANCED_LOGIC_STUDIO } from './logicAdvanced.ts'
 
 export type Evidence = { title:string; text:string }
 export type StudioTask = {
- id:string; title:string; kind:'choice'|'input'|'order'|'circuit'|'repair'|'rewrite'|'deduction'|'selection'|'route'; prompt:string;
+ id:string; title:string; kind:'choice'|'input'|'order'|'circuit'|'repair'|'rewrite'|'deduction'|'selection'|'route'|'power'; prompt:string;
  options?:string[]; solution:string|number|number[]|string[]; alternatives?:string[]; evidence:Evidence[];
  explanation:string[]; hints:string[]; rule?:string;
+ evidenceLayout?:'all'; cards?:{title:string;lines:string[]}[]; power?:PowerGridSpec;
  fields?:{label:string;options?:string[]}[];
  route?:{labels:string[];edges:[number,number,number][];windows:{node:number;from:number;to:number;service:number}[];deadline:number};
  repairs?:{wrong:string;right:string;rule:string}[];
@@ -168,6 +170,7 @@ export function reviewStudioConfig(ruleIds:string[]):StudioConfig{
 export function normalizeFrench(value:string):string{return value.normalize('NFC').replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim().toLocaleLowerCase('fr')}
 export function studioCorrect(t:StudioTask,value:unknown):boolean|null{
  if(t.kind==='rewrite')return null
+ if(t.kind==='power')return !!t.power&&powerGridStatus(t.power,value).valid
  if(t.kind==='circuit'){
   if(!Array.isArray(value)||!t.circuit)return false;const {nodes,edges,targets,budget}=t.circuit
   if(value.some(v=>!Number.isInteger(v)||v<0||v>=nodes.length)||new Set(value).size!==value.length||!value.includes(0)||value.reduce((s:number,i:number)=>s+nodes[i]!.cost,0)>budget)return false
@@ -184,6 +187,7 @@ export function studioCorrect(t:StudioTask,value:unknown):boolean|null{
 }
 export function studioAnswerLabel(t:StudioTask,value:unknown):string{
  if(value===undefined||value===null)return 'Sans réponse'
+ if(t.kind==='power')return Array.isArray(value)?t.power!.nodes.flatMap((n,i)=>Number.isInteger(value[i])&&value[i]>=0&&value[i]<n.ports.length?[`${n.label} : ${portLabel(n.ports[value[i]]!)}`]:[]).join('\n'):'Sans réponse'
  if(t.kind==='choice')return t.options?.[Number(value)]??'Sans réponse'
  if(t.kind==='deduction')return Array.isArray(value)?t.fields!.map((f,i)=>`${f.label} : ${value[i]||'Sans réponse'}`).join('\n'):'Sans réponse'
  if(t.kind==='route')return Array.isArray(value)?value.map(i=>t.route!.labels[Number(i)]??'?').join(' → '):'Sans réponse'
@@ -203,6 +207,7 @@ export function validateStudio(id:string,input:unknown):StudioValidated{
  const rules=new Set<string>(),answers:Record<string,unknown>={}
  const steps=c.tasks.map(t=>{let v=d.answers![t.id]
   if(v===undefined||v===null){if(c.passion==='francais')throw new Error('Termine tous les exercices avant d’enregistrer.');v=null}
+  else if(t.kind==='power'){if(!powerAnswerWellFormed(t.power!,v))throw new Error('Réseau illisible.')}
   else if(t.kind==='choice'){if(!Number.isInteger(v)||Number(v)<0||Number(v)>=t.options!.length)throw new Error('Choix illisible.')}
   else if(t.kind==='route'){const max=t.route!.labels.length;if(!Array.isArray(v)||v.length>max+1||v.some(n=>!Number.isInteger(n)||n<0||n>=max))throw new Error('Parcours illisible.')}
   else if(t.kind==='deduction'){if(!Array.isArray(v)||v.length!==t.fields!.length||v.some((s,i)=>typeof s!=='string'||s.length>120||(s!==''&&t.fields![i]!.options?.length&&!t.fields![i]!.options!.includes(s))))throw new Error('Tableau illisible.')}

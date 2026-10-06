@@ -207,7 +207,7 @@ export function workshopConfig(activityId:string) {
  const questions=lesson!==undefined?bank:bank.slice(0,a.duration===5?6:a.duration===15?12:18)
  return {activity:a,lesson,variant,cases,questions:a.duration===30?[...questions,...TEXT_CORRECTIONS]:questions,task:BEAT_TASKS[lesson===0?0:lesson===1?1:lesson===2?3:variant]!}
 }
-export type WorkshopSubmission = {version:1|2; passion:WorkshopId; beat?:Beat; answers?:Record<string,unknown>; savedRules?:string[]}
+export type WorkshopSubmission = {version:1|2; contentRevision?:number; notebook?:string; passion:WorkshopId; beat?:Beat; answers?:Record<string,unknown>; savedRules?:string[]}
 export type WorkshopResult = WorkshopSubmission & {summary:string; reviewRules?:string[]; logicResults?:{id:string;correct:boolean}[];studio?:StudioValidated['studio']}
 export function normalizeCode(value:unknown):string {return typeof value==='string'?value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s/g,'').toUpperCase():''}
 export function puzzleCorrect(p:Puzzle,value:unknown):boolean {

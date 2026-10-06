@@ -9,6 +9,9 @@ import { haptics } from '../telegram/webApp.ts'
 
 export type Tab = 'home' | 'learn' | 'passionHub' | 'progress' | 'profile' | 'shop'
 
+/** Les onglets que le tutoriel met en lumière. */
+const TOUR_TARGETS: Partial<Record<Tab, string>> = { passionHub: 'passions-tab', learn: 'learn', shop: 'shop', profile: 'profile' }
+
 const TABS: readonly { id: Tab; label: string; icon: LucideIcon }[] = [
   { id: 'home', label: 'Accueil', icon: Home },
   { id: 'passionHub', label: 'Passions', icon: Heart },
@@ -60,7 +63,7 @@ export function TabBar() {
             return (
               <motion.button
                 key={id}
-                data-tour-target={id === 'learn' ? 'learn' : id === 'shop' ? 'shop' : undefined}
+                data-tour-target={TOUR_TARGETS[id]}
                 type="button"
                 onClick={() => open(id)}
                 aria-current={active ? 'page' : undefined}

@@ -35,6 +35,7 @@ it('sauvegarde les versions complètes et isole les carnets des comptes et des a
   const list = await request(app).get('/api/learning').set(auth).expect(200)
   expect(list.body.items).toHaveLength(1)
   expect(list.body.items[0]).not.toHaveProperty('work')
+  expect(list.body.items[0].attempted).toBe(true)
   await request(app).get(url).set(other).expect(404)
   await request(app).put(url).set(other).send(body).expect(404)
   expect((await request(app).get('/api/learning').set(other)).body.items).toEqual([])
@@ -69,6 +70,10 @@ it('fige un essai terminé, permet une répétition réseau identique et calcule
     .send({ lessonId: lesson.id, work: { ...emptyLearningWork(), step: 3, completed: true }, mastered: true })
     .expect(200)
   expect(consulted.body.mastered).toBe(false)
+  expect(consulted.body.attempted).toBe(false)
+  const list = (await request(app).get('/api/learning').set(auth)).body.items
+  expect(list.find((entry: {id:string}) => entry.id === 'another-learning-0001').attempted).toBe(false)
+  expect(list.every((entry: object) => !('work' in entry))).toBe(true)
 })
 it('refuse un carnet malformé, une substitution de leçon et une requête sans authentification', async () => {
   await request(app).put(url).send({}).expect(401)

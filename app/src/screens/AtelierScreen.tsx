@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Archive, BookOpen, ChevronRight, Frame, Music2, Pencil, Ruler } from 'lucide-react'
+import { Pin, Brain, Dumbbell, Archive, BookOpen, ChevronRight, Frame, Music2, Pencil } from 'lucide-react'
 import { LEARNING_PASSIONS, getPassion, type CompletionDTO, type LearningPassion } from '@scroll-up/shared'
 import { api } from '../api/client.ts'
-import { useNavigation } from '../state/AppState.tsx'
+import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { AppHeader } from '../components/AppHeader.tsx'
 import { Mascot } from '../components/Mascot.tsx'
@@ -21,8 +21,14 @@ const CORNERS: Record<LearningPassion, string> = {
 }
 type Corner = { items: CompletionDTO[]; more: boolean; error: boolean }
 export function AtelierScreen({ focus }: { focus?: string }) {
+  const { state } = useAppState()
+  const pinKey = `scroll-up:atelier-pins:${state.me.user.id}`
   const { push } = useNavigation(),
     [selected, setSelected] = useState<LearningPassion>('dessin'),
+    [pins, setPins] = useState<Partial<Record<LearningPassion, string>>>(() => {
+      try { const value = JSON.parse(localStorage.getItem(pinKey) ?? '{}'); return value && typeof value === 'object' && !Array.isArray(value) ? value : {} } catch { return {} }
+    }),
+    [pinError, setPinError] = useState(''),
     [corners, setCorners] = useState<Partial<Record<LearningPassion, Corner>>>({}),
     [opened, setOpened] = useState<CompletionDTO>(),
     [focusError, setFocusError] = useState(false),
@@ -36,7 +42,7 @@ export function AtelierScreen({ focus }: { focus?: string }) {
           if (live)
             setCorners((v) => ({
               ...v,
-              [passion]: { items: atelierSelection(page.items, passion), more: !!page.nextCursor, error: false },
+              [passion]: { items: atelierSelection([...(v[passion]?.items.filter(i => i.id === pins[passion]) ?? []), ...page.items], passion, pins[passion]), more: !!page.nextCursor, error: false },
             }))
         })
         .catch(() => {
@@ -49,7 +55,18 @@ export function AtelierScreen({ focus }: { focus?: string }) {
     return () => {
       live = false
     }
-  }, [reload])
+  }, [reload, pins])
+  useEffect(() => {
+    let live = true
+    for (const passion of LEARNING_PASSIONS) {
+      const id = pins[passion]
+      if (typeof id !== 'string') continue
+      api.completion(id).then(({completion}) => {
+        if (live && completion.passion === passion) setCorners(v => ({...v, [passion]: {...(v[passion] ?? {more:true,error:false}), items: atelierSelection([completion, ...(v[passion]?.items ?? [])], passion, id)}}))
+      }).catch(() => {})
+    }
+    return () => { live = false }
+  }, [pins, reload])
   useEffect(() => {
     if (!focus) return
     let live = true
@@ -69,7 +86,14 @@ export function AtelierScreen({ focus }: { focus?: string }) {
     }
   }, [focus, reload])
   const corner = corners[selected],
-    items = corner?.items ?? []
+    items = [...(corner?.items ?? [])].sort((a,b) => Number(b.id === pins[selected]) - Number(a.id === pins[selected]))
+  const togglePin = (item: CompletionDTO) => {
+    const passion = item.passion as LearningPassion
+    if (!LEARNING_PASSIONS.includes(passion)) return
+    const next = {...pins, [passion]: pins[passion] === item.id ? undefined : item.id}
+    try { localStorage.setItem(pinKey, JSON.stringify(next)); setPins(next); setPinError('') } catch { setPinError('Cette mise à l’honneur n’a pas pu être mémorisée sur cet appareil.') }
+  }
+  const CornerIcon = selected === 'piano' ? Music2 : selected === 'ecriture' ? Pencil : selected === 'logique' ? Brain : selected === 'francais' ? BookOpen : selected === 'sport' ? Dumbbell : Frame
   return (
     <Screen tabs className="atelier-screen">
       <AppHeader />
@@ -94,7 +118,7 @@ export function AtelierScreen({ focus }: { focus?: string }) {
           </button>
         ))}
       </div>
-      <section className="atelier-room" aria-label={CORNERS[selected]}>
+      <section className="atelier-room" data-corner={selected} aria-label={CORNERS[selected]}>
         <div className="atelier-room-label">
           <span>MON ATELIER</span>
           <h2>{CORNERS[selected]}</h2>
@@ -108,21 +132,12 @@ export function AtelierScreen({ focus }: { focus?: string }) {
               onClick={() => setOpened(item)}
               aria-label={`Ouvrir ${item.exploredTitle ?? item.activityText}`}
             >
+              {item.id === pins[selected] && <Pin className="atelier-frame-pin" size={12}/>}
               {item.photoUrl ? (
                 <img src={item.photoUrl} alt="" />
               ) : (
                 <>
-                  <span className="atelier-frame-icon" aria-hidden="true">
-                    {selected === 'piano' ? (
-                      <Music2 />
-                    ) : selected === 'ecriture' ? (
-                      <Pencil />
-                    ) : selected === 'dessin' ? (
-                      <Frame />
-                    ) : (
-                      <Ruler />
-                    )}
-                  </span>
+                  <span className="atelier-frame-icon" aria-hidden="true"><CornerIcon/></span>
                   <span>{item.text ?? item.exploredTitle ?? item.activityText}</span>
                 </>
               )}
@@ -161,14 +176,13 @@ export function AtelierScreen({ focus }: { focus?: string }) {
       )}
       <div className="atelier-section-heading">
         <h2>{getPassion(selected).label}</h2>
-        <span>
-          {items.length} / {ATELIER_CAPACITY[selected]} places
-        </span>
+        <span>{items.length ? `${items.length} à découvrir` : 'À toi de créer'}</span>
       </div>
-      <p className="atelier-subtle">Les plus récentes sont exposées. Les précédentes restent dans la réserve.</p>
+      <p className="atelier-subtle">Choisis une création à mettre à l’honneur. Toutes les autres restent dans ta réserve.</p>
+      {pinError && <p role="alert">{pinError}</p>}
       <div className="atelier-works">
         {items.map((item) => (
-          <button key={item.id} className="atelier-work" onClick={() => setOpened(item)}>
+          <div key={item.id} className="atelier-work-row"><button className="atelier-work" onClick={() => setOpened(item)}>
             {item.photoUrl ? (
               <img src={item.photoUrl} alt="" loading="lazy" />
             ) : (
@@ -184,7 +198,7 @@ export function AtelierScreen({ focus }: { focus?: string }) {
               {item.text && <small>Lire mon texte en entier</small>}
             </span>
             <ChevronRight size={18} />
-          </button>
+          </button><button className="atelier-pin" aria-label={`${pins[selected] === item.id ? 'Retirer de' : 'Mettre à'} l’honneur cette création`} aria-pressed={pins[selected] === item.id} onClick={() => togglePin(item)}><Pin size={18}/></button></div>
         ))}
       </div>
       {corner && !corner.error && !items.length && (
@@ -214,7 +228,7 @@ export function AtelierScreen({ focus }: { focus?: string }) {
           if (!open) setOpened(undefined)
         }}
       >
-        <DialogContent>{opened && <GalleryDetail item={opened} />}</DialogContent>
+        <DialogContent>{opened && <><GalleryDetail item={opened}/>{LEARNING_PASSIONS.includes(opened.passion as LearningPassion) && <Button variant="secondary" onClick={() => togglePin(opened)}><Pin size={17}/>{pins[opened.passion as LearningPassion] === opened.id ? 'Retirer de la mise à l’honneur' : 'Mettre à l’honneur dans mon atelier'}</Button>}<small>Mise à l’honneur mémorisée sur cet appareil.</small>{pinError && <p role="alert">{pinError}</p>}</>}</DialogContent>
       </Dialog>
     </Screen>
   )

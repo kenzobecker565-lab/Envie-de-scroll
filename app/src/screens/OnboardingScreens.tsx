@@ -1,4 +1,4 @@
-import { ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
+import { BookOpen, Images, ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import {
@@ -9,7 +9,7 @@ import {
   MAX_PASSIONS,
   missingSkills,
   PASSIONS,
-  pathsFor,
+  LEARNING_LESSONS,
   SKILL_LEVELS,
   SKILL_TIER,
   SCROLL_MOMENT_INFO,
@@ -26,107 +26,33 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
 import { Logo } from '../components/Brand.tsx'
-import { Sparkle } from '../components/decor/Sparkle.tsx'
-import { Illustration } from '../components/Illustration.tsx'
+import { Mascot } from '../components/Mascot.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
 import { MOMENT_STYLE, PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
-import { fadeUp, popIn } from '../lib/motion.ts'
+import { popIn } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics, requestWriteAccessIfNeeded } from '../telegram/webApp.ts'
 
 /** Bienvenue, passions, moment de scroll. */
 const ONBOARDING_STEPS = 3
 
-/** Les passions, en bulles qui flottent autour de l'illustration. */
-const ORBIT = [
-  { id: 'dessin', className: '-top-3 -left-2', rotate: -10, delay: '0s' },
-  { id: 'sport', className: '-top-4 right-2', rotate: 8, delay: '-1.4s' },
-  { id: 'piano', className: 'top-[40%] -right-5', rotate: 10, delay: '-2s' },
-  { id: 'ecriture', className: 'bottom-2 -left-3', rotate: 6, delay: '-2.6s' },
-  { id: 'logique', className: '-bottom-4 right-6', rotate: -6, delay: '-0.8s' },
-] as const
-
-/** Onboarding, étape 1 : une bienvenue courte. */
+/** Première impression avec le Minuton et les repères actuels. */
 export function WelcomeScreen() {
-  const { state } = useAppState()
-  const { push } = useNavigation()
+  const { state } = useAppState(), { push } = useNavigation()
   const name = state.me.user.firstName
-  return (
-    <Screen>
-      <div className="mb-5 flex justify-center">
-        <Logo height={34} />
-      </div>
-      <StepProgress current={1} total={ONBOARDING_STEPS} label="Bienvenue" />
-      <motion.div
-        className="relative mx-auto mt-8 w-full max-w-sm"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 120, damping: 16 }}
-      >
-        <div className="motion-loop anim-float" style={{ '--float-duration': '6s' } as React.CSSProperties}>
-          <div className="-rotate-2 rounded-lg border-[2.5px] border-outline bg-surface-200 p-4 shadow-card">
-            <Illustration name="welcome" className="w-full" />
-          </div>
-        </div>
-        {ORBIT.map((bubble, index) => {
-          const Icon = PASSION_ICONS[bubble.id]
-          return (
-            <motion.span
-              key={bubble.id}
-              aria-hidden="true"
-              className={`absolute ${bubble.className}`}
-              initial={{ opacity: 0, scale: 0, rotate: 0 }}
-              animate={{ opacity: 1, scale: 1, rotate: bubble.rotate }}
-              transition={{ delay: 0.5 + index * 0.12, type: 'spring', stiffness: 300, damping: 14 }}
-            >
-              <span
-                className={`motion-loop anim-float flex h-12 w-12 items-center justify-center rounded-pill border-[2.5px] border-outline ${PASSION_COLORS[bubble.id].bg}`}
-                style={{ '--float-duration': `${4 + index}s`, '--float-delay': bubble.delay } as React.CSSProperties}
-              >
-                <Icon size={22} strokeWidth={2.3} className="text-on-color" />
-              </span>
-            </motion.span>
-          )
-        })}
-        <Sparkle size={22} className="motion-loop anim-twinkle absolute top-1/2 -right-3" style={{ '--twinkle-delay': '-0.4s' } as React.CSSProperties} />
-        <Sparkle size={16} color="var(--accent)" className="motion-loop anim-twinkle absolute -top-4 left-1/2" style={{ '--twinkle-delay': '-1.3s' } as React.CSSProperties} />
-      </motion.div>
-
-      <div className="mt-8 flex flex-col items-start gap-4">
-        <motion.div {...fadeUp(0.15)}>
-          <Badge variant="sky" tilt="left">
-            <Sparkles aria-hidden="true" />
-            {name ? `Bienvenue, ${name}` : 'Bienvenue'}
-          </Badge>
-        </motion.div>
-        <motion.h1 className="font-display text-40 font-extrabold tracking-tight text-balance text-ink" {...fadeUp(0.25)}>
-          Et si ton envie de scroller devenait{' '}
-          <motion.span
-            className="inline-block rounded-sm border-[2.5px] border-outline bg-warm px-2 whitespace-nowrap text-on-color"
-            initial={{ rotate: 0, scale: 0.9 }}
-            animate={{ rotate: -2, scale: 1 }}
-            transition={{ delay: 0.8, type: 'spring', stiffness: 300, damping: 12 }}
-          >
-            autre chose
-          </motion.span>
-          &nbsp;?
-        </motion.h1>
-        <motion.p className="text-16 text-ink-soft" {...fadeUp(0.4)}>
-          Quand ton pouce te démange, touche « J’ai envie de swipe »&nbsp;: choisis ton temps et une passion, puis découvre une activité créative. Tout ce que tu fais
-          rejoint ta galerie.
-        </motion.p>
-      </div>
-
-      <motion.div className="mt-auto pt-8" {...fadeUp(0.55)}>
-        <Button className="w-full" onClick={() => push({ name: 'passions', mode: 'onboarding' })}>
-          C’est parti
-          <ArrowRight aria-hidden="true" />
-        </Button>
-      </motion.div>
-    </Screen>
-  )
+  return <Screen className="studio-onboarding">
+    <Logo height={30}/><StepProgress current={1} total={ONBOARDING_STEPS} label="Bienvenue"/>
+    <div className="onboarding-minuton"><Mascot pose="welcome" size={160}/><span>5 · 15 · 30 minutes pour toi</span></div>
+    <header><small>{name ? `Bienvenue, ${name}` : 'Bienvenue'}</small><h1>Ton envie de scroller peut créer quelque chose.</h1><p>Avec « J’ai envie de scroll », choisis ton temps et une passion. Minuton t’aide à te lancer.</p></header>
+    <div className="onboarding-landmarks">
+      <div><Sparkles/><span><strong>J’ai envie de scroll</strong><small>Une activité à faire maintenant.</small></span></div>
+      <div><BookOpen/><span><strong>Apprendre</strong><small>Des leçons pour comprendre et essayer.</small></span></div>
+      <div><Images/><span><strong>Chez Minuton</strong><small>Tes créations réunies dans ton atelier.</small></span></div>
+    </div>
+    <Button className="w-full" onClick={() => push({name:'passions',mode:'onboarding'})}>Choisir mes passions<ArrowRight/></Button>
+  </Screen>
 }
 
 /** Choix des passions, autant qu'on veut (onboarding, ou modification depuis les réglages). */
@@ -171,14 +97,14 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
   const label = count === 0 ? 'Choisis au moins une passion' : mode === 'onboarding' ? 'Continuer' : 'Enregistrer'
 
   return (
-    <Screen>
+    <Screen className="studio-onboarding">
       <ScreenTitle
         eyebrow={mode === 'onboarding' ? <StepProgress current={2} total={ONBOARDING_STEPS} label="Tes passions" /> : undefined}
         aside={
           mode === 'onboarding' ? (
             <div className="motion-loop anim-float shrink-0" style={{ '--float-duration': '5s' } as React.CSSProperties}>
               <div className="rotate-3 rounded-md border-[2.5px] border-outline bg-surface-200 p-2 shadow-chip">
-                <Illustration name="choose-passions" className="h-16" />
+                <Mascot pose="think" size={64}/>
               </div>
             </div>
           ) : undefined
@@ -260,7 +186,7 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
   }
 
   return (
-    <Screen>
+    <Screen className="studio-onboarding">
       <ScreenTitle
         eyebrow={mode === 'onboarding' ? <StepProgress current={2} total={ONBOARDING_STEPS} label="Ton niveau" /> : undefined}
         aside={
@@ -290,7 +216,7 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
         {SKILL_LEVELS.map((id, index) => {
           const option = question.options[id]
           const LevelIcon = SKILL_ICONS[id]
-          const firstPath = pathsFor(passion).find((path) => path.tier === SKILL_TIER[id])
+          const firstPath = LEARNING_LESSONS.find(lesson => lesson.passion === passion && lesson.level === SKILL_TIER[id] - 1)
           return (
             <ToggleGroupItem key={id} value={id} className={cn('items-start gap-3 p-4 text-ink', PASSION_COLORS[passion].on, 'data-[state=on]:text-on-color')} {...popIn(index)} whileTap={{ scale: 0.98 }}>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper text-on-color">
@@ -302,7 +228,7 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
                 {firstPath && (
                   <span className="mt-1 inline-flex items-center gap-1.5 text-12 font-extrabold">
                     <Mountain size={14} strokeWidth={2.4} aria-hidden="true" />
-                    Tu commences par «&nbsp;{firstPath.title}&nbsp;»
+                    Tu peux découvrir «&nbsp;{firstPath.title}&nbsp;»
                   </span>
                 )}
               </span>
@@ -366,7 +292,7 @@ export function MomentScreen() {
 
   const chosen = moment ? SCROLL_MOMENT_INFO[moment] : null
   return (
-    <Screen>
+    <Screen className="studio-onboarding">
       <ScreenTitle
         eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />}
         aside={

@@ -25,7 +25,7 @@
  * Authentification : en-tête `Authorization: tma <initData>` (voir auth/).
  */
 
-import {learningLesson,validateLearning} from '@scroll-up/shared'
+import {learningLesson,validateLearning,learningAttempted, type LearningWork} from '@scroll-up/shared'
 import path from 'node:path'
 import { pipeline } from 'node:stream/promises'
 import express, { type ErrorRequestHandler, type NextFunction, type Request, type RequestHandler, type Response } from 'express'
@@ -161,8 +161,12 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   }
 
   const photoUrl = (completion: { id: string }) => signedPhotoUrl(completion.id, config.signingSecret, now())
-  const learningDTO=(entry:{id:string;lessonId:string;passion:string;title:string;completed:boolean;mastered:boolean;review:boolean;updatedAt:Date;work?:string})=>({...entry,updatedAt:entry.updatedAt.toISOString(),...(entry.work?{work:JSON.parse(entry.work)}:{})})
-  api.get('/learning',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const items=await prisma.learningEntry.findMany({where:{userId:user.id},orderBy:[{updatedAt:'desc'},{id:'desc'}],select:{id:true,lessonId:true,passion:true,title:true,completed:true,mastered:true,review:true,updatedAt:true}});res.json({items:items.map(learningDTO)})}))
+  const learningDTO = (entry: {id:string;lessonId:string;passion:string;title:string;completed:boolean;mastered:boolean;review:boolean;updatedAt:Date;work:string}, includeWork = true) => {
+    const {work: stored, ...metadata} = entry
+    const work = JSON.parse(stored) as LearningWork
+    return {...metadata, updatedAt: entry.updatedAt.toISOString(), attempted: learningAttempted(work), ...(includeWork ? {work} : {})}
+  }
+  api.get('/learning',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const items=await prisma.learningEntry.findMany({where:{userId:user.id},orderBy:[{updatedAt:'desc'},{id:'desc'}],select:{id:true,lessonId:true,passion:true,title:true,completed:true,mastered:true,review:true,updatedAt:true,work:true}});res.json({items:items.map(entry => learningDTO(entry, false))})}))
   api.get('/learning/:id',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const item=await prisma.learningEntry.findFirst({where:{id:String(req.params.id),userId:user.id}});if(!item)throw new ApiError(404,'not_found','Carnet introuvable.');const {userId,createdAt,...entry}=item;res.json(learningDTO(entry))}))
   api.put('/learning/:id',asyncRoute(async(req,res)=>{
     const user=await currentUser(req,res),id=String(req.params.id),lesson=learningLesson(String(req.body?.lessonId));

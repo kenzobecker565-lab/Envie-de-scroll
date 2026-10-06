@@ -46,6 +46,7 @@ export type LearningRecord = {
   title: string
   completed: boolean
   mastered: boolean
+  attempted?: boolean
   review: boolean
   updatedAt: string
   work?: LearningWork

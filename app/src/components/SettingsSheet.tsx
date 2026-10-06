@@ -70,7 +70,7 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, onReplayT
       </section>
       <section className="studio-settings-group" aria-labelledby="settings-help">
         <h2 id="settings-help">Aide et partage</h2>
-        <Row icon={<CircleHelp aria-hidden="true"/>} title="Revoir le tutoriel" description="Les quatre repères pour découvrir Scroll-up." onClick={onReplayTutorial}/>
+        <Row icon={<CircleHelp aria-hidden="true"/>} title="Revoir le tutoriel" description="Les repères pour découvrir Scroll-up." onClick={onReplayTutorial}/>
         {telegram && <HomeScreenRow/>}
         <Row icon={<UserPlus aria-hidden="true"/>} title="Inviter un ami" description="Partage Scroll-up dans Telegram." onClick={sendInvite}/>
         <Row icon={<MessageCircleHeart aria-hidden="true"/>} title="Donner mon avis" description="Tes idées pour améliorer l’application." onClick={onFeedback}/>

@@ -434,7 +434,7 @@ function ValidateButton({
     return (
       <Button variant="good" className="w-full" onClick={onValidate} disabled={disabled}>
         <Check aria-hidden="true" />
-        J’ai terminé
+        {proposal.passion === 'ecriture' ? 'Commencer à écrire' : proposal.passion === 'dessin' ? 'Commencer à dessiner' : 'J’ai terminé'}
       </Button>
     )
   }

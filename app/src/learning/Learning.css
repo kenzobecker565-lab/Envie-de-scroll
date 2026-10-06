@@ -426,3 +426,5 @@
   background-repeat: no-repeat;
   background-image: url('/art/passions-approved.webp');
 }
+
+.learning-lesson{gap:12px;padding-top:16px}.learning-lesson h1{font-size:27px}.learning-lesson>p{font-size:13px;line-height:1.55}.learning-lesson .learn-card{padding:16px;gap:10px;border-radius:20px}.learning-lesson .learn-editable{gap:12px}.learning-lesson .learn-card p{line-height:1.6}.learn-label input{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface-100);font-size:16px;font-weight:500;outline-color:var(--accent)}.learn-practice-help{font-size:13px;color:var(--ink-soft)}.learn-practice-help summary{min-height:36px}.learn-practice-brief{padding:12px 16px!important}.learn-practice-brief h2{font-size:17px}.learning-lesson .learn-example-svg{max-height:200px}.learning-lesson .learn-draw-scroll{max-height:360px}.learning-lesson .learn-stages{position:sticky;top:0;z-index:4;padding:7px 0;background:var(--canvas)}

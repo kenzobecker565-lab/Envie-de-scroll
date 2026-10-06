@@ -82,17 +82,19 @@ export function BadgePin({ pathId, earned, size = 72, className, animate = false
 
 /** La vitrine : les 8 badges, gagnés en couleur, les autres en silhouette. */
 export function BadgeShelf({ finished }: { finished: readonly string[] }) {
-  const earned = PATHS.filter((path) => finished.includes(path.id)).length
+  const badges = PATHS.filter((path) => finished.includes(path.id))
+  const earned = badges.length
+  if (!earned) return null
   return (
     <section className="mt-8 flex flex-col gap-3" aria-labelledby="badges-title">
       <h2 id="badges-title" className="flex items-baseline justify-between gap-2">
         <span className="font-display text-26 font-extrabold tracking-tight text-ink">Tes badges</span>
         <span className="font-numbers text-15 font-extrabold text-ink-soft">
-          {earned}/{PATHS.length}
+          {earned} conservés
         </span>
       </h2>
       <div className="grid grid-cols-4 gap-x-2 gap-y-4 rounded-lg border-[2.5px] border-outline bg-surface-100 p-4 shadow-card">
-        {PATHS.map((path, index) => {
+        {badges.map((path, index) => {
           const has = finished.includes(path.id)
           return (
             <motion.div
@@ -108,7 +110,7 @@ export function BadgeShelf({ finished }: { finished: readonly string[] }) {
           )
         })}
       </div>
-      <p className="text-13 text-ink-soft">Un badge par parcours terminé. Tous les parcours sont dans le détail de chaque passion.</p>
+      <p className="text-13 text-ink-soft">Tes badges des premiers parcours restent acquis. Retrouve les nouvelles leçons dans Apprendre.</p>
     </section>
   )
 }

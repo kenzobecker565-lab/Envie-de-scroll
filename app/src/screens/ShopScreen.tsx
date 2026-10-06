@@ -174,7 +174,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
       </SwipeSurface>}
       <section className="skin-collection-progress" aria-label="Progression de la collection"><div><strong>Ta collection</strong><span>{collectionOwned} / {countOf(activeCollection.id)} tenues</span></div><progress max={countOf(activeCollection.id)} value={collectionOwned}/></section>
     </>}
-    <section className="skin-catalogue" aria-label="Catalogue des tenues"><div className="skin-section-title"><h2>{activeCollection ? 'Choisis ta tenue' : shelf === 'owned' ? 'Mes tenues' : shelf === 'favorites' ? 'Mes envies' : 'Toutes les tenues'}</h2><span>{items.length} {items.length === 1 ? 'tenue' : 'tenues'}</span></div>
+    {!overview && <section className="skin-catalogue" aria-label="Catalogue des tenues"><div className="skin-section-title"><h2>{activeCollection ? 'Choisis ta tenue' : shelf === 'owned' ? 'Mes tenues' : shelf === 'favorites' ? 'Mes envies' : 'Toutes les tenues'}</h2><span>{items.length} {items.length === 1 ? 'tenue' : 'tenues'}</span></div>
       {!overview && !activeCollection && <p className="skin-shelf-caption">{shelf === 'owned' ? 'Tes tenues débloquées, prêtes à être portées.' : shelf === 'favorites' ? 'Les tenues que tu as gardées de côté.' : 'Une tenue pour chaque envie.'}</p>}
       <div className="skin-gender-filters" aria-label="Filtrer les tenues">{([{id:'all',label:'Tout'}, {id:'male',label:'Masculins'}, {id:'female',label:'Féminins'}] as const).map(filter => <button type="button" key={filter.id} aria-pressed={gender === filter.id} onClick={() => { setGender(filter.id); setSkinIndex(0) }}>{filter.label}</button>)}</div>
       <div className="studio-shop-grid">{items.map(item => {
@@ -185,7 +185,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
         </Card>
       })}</div>
       {!items.length && <div className="skin-empty"><Heart size={27}/><p>{query ? 'Aucune tenue ne correspond à ta recherche.' : shelf === 'favorites' ? 'Touche le cœur d’une tenue pour la retrouver ici.' : shelf === 'owned' ? 'Tes prochaines tenues débloquées apparaîtront ici.' : 'Aucune tenue avec ces filtres.'}</p><button type="button" onClick={() => { changeShelf('discover'); setSearchOpen(false) }}>Explorer les tenues<ChevronRight size={15}/></button></div>}
-    </section>
+    </section>}
     <p className="skin-shop-footnote">Tes achats ne diminuent pas tes niveaux ni tes badges.{shop.bonus > 0 && <span>Crédit de test inclus dans le solde.</span>}</p>
     <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog immersive-preview" data-world={selected ? (groupOf(selected) === 'adventure' ? 'olympus' : groupOf(selected)) : undefined}>
       {selected && <><DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.available ? `Collection ${COLLECTIONS.find(value => value.id === groupOf(selected))?.title}` : 'Ancienne collection · cette tenue reste à toi'}</DialogDescription></DialogHeader><ShopPreview item={selected} detail/><p className="skin-preview-description">{selected.description}</p><button type="button" className="skin-preview-favorite" aria-pressed={favorites.includes(selected.id)} onClick={() => toggleFavorite(selected.id)}><Heart size={17} fill={favorites.includes(selected.id) ? 'currentColor' : 'none'}/>{favorites.includes(selected.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button>

@@ -44,7 +44,9 @@ export function DrawingExample({ visual, step = 2 }: { visual?: string; step?: n
       <rect width="360" height="240" rx="16" fill="#faf5ec" />
       {visual === 'trait' ? (
         <g fill="none" stroke="#745984" strokeWidth="3">
-          <path d="M40 60H300M40 120Q110 25 175 120T320 120M40 190Q100 130 160 190T300 190" />
+          <path d="M40 60H300" />
+          {grid && <path d="M40 120Q110 25 175 120T320 120" />}
+          {shade && <path d="M40 190Q100 130 160 190T300 190" />}
           {[40, 170, 300].map((x) => (
             <circle key={x} cx={x} cy="60" r="5" fill="#933aff" />
           ))}

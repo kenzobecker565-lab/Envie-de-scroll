@@ -84,7 +84,7 @@ export function ProgressScreen() {
 
       <div className="mt-8 flex flex-col gap-3">
         <Button variant="secondary" onClick={() => push({ name: 'gallery' })}>Historique de mes activités</Button>
-        <Button variant="secondary" onClick={() => push({ name: 'passionHub' })}>Progresser dans une passion</Button>
+        <Button variant="secondary" onClick={() => push({ name: 'learn' })}>Mes leçons et ma progression</Button>
       </div>
       {stats.byPassion.some((row) => row.steps.length > 0) && <BadgeShelf finished={finishedPathIds(stats.byPassion)} />}
     </Screen>

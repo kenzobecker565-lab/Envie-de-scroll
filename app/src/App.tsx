@@ -1,8 +1,8 @@
 import {AtelierScreen} from './screens/AtelierScreen.tsx'
-import {LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
+import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
-import { getMood, getPassion, type MeResponse } from '@scroll-up/shared'
+import { getMood, getPassion, getPath, LEARNING_PASSIONS, type MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
 import { RotateCcw, Send } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -22,7 +22,6 @@ import { DoneScreen } from './screens/DoneScreen.tsx'
 import { GalleryScreen } from './screens/GalleryScreen.tsx'
 import { SettingsScreen } from './screens/SettingsScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
-import { PathScreen } from './screens/PathScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
 import { GuidedTour } from './components/GuidedTour.tsx'
 import { tutorialSeen } from './lib/tutorial.ts'
@@ -155,8 +154,10 @@ function screenFor(route: Route) {
       return <AtelierScreen focus={route.focus}/>
     case 'gallery':
       return <GalleryScreen passion={route.passion} />
-    case 'path':
-      return <PathScreen pathId={route.pathId} />
+    case 'path': {
+      const passion = getPath(route.pathId)?.passion
+      return <LearningOverview passion={LEARNING_PASSIONS.some(id => id === passion) ? passion : undefined}/>
+    }
     case 'challenge':
       return <ChallengeScreen />
   }

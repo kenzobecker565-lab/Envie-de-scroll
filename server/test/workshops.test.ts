@@ -76,7 +76,8 @@ it('refuse un nouveau français incomplet et conserve une réécriture sans l’
 })
 it('le tirage surprise préfère le dossier jamais terminé puis reste disponible après le tour du catalogue',async()=>{
  await request(app).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
- for(let i=1;i<=4;i++){const p=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5,step:`logique-5-${i}`}).expect(201);await request(app).post('/api/completions').set(auth).send({proposalId:p.body.proposal.id,workshop:{version:2,contentRevision:3,passion:'logique',notebook:'Hypothèse vérifiée : recaler la caméra avant d’accuser.',answers:{}}}).expect(201)}
+ const {studioConfig}=await import('@scroll-up/shared')
+ for(let i=1;i<=4;i++){const p=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5,step:`logique-5-${i}`}).expect(201);await request(app).post('/api/completions').set(auth).send({proposalId:p.body.proposal.id,workshop:{version:2,contentRevision:studioConfig(`logique-5-${i}`)!.revision,passion:'logique',notebook:'Hypothèse vérifiée : recaler la caméra avant d’accuser.',answers:{}}}).expect(201)}
  const last=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5}).expect(201);expect(last.body.proposal.activityId).toBe('logique-5-5')
  await request(app).post('/api/completions').set(auth).send({proposalId:last.body.proposal.id,workshop:{version:2,contentRevision:3,passion:'logique',notebook:'Hypothèse vérifiée : recaler la caméra avant d’accuser.',answers:{}}}).expect(201)
  const replay=await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5}).expect(201);expect(replay.body.proposal.activityId).not.toBe('logique-5-5')

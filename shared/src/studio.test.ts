@@ -3,7 +3,7 @@ import { FRENCH_RULES, LOGIC_STUDIO, STUDIO_LESSONS, collection, reviewStudioCon
 const solution=(t:StudioTask)=>t.kind==='rewrite'?'Voici une proposition de réécriture complète.':t.kind==='repair'?t.repairs!.map(r=>r.right):t.solution
 it('expose cinq expériences différentes par durée et des séquences plus longues, sans changer les anciens identifiants',()=>{
  for(const passion of ['logique','francais'] as const){let counts:number[]=[];for(const d of [5,15,30] as const){const a=collection(passion).find(g=>g.duration===d)!.activities;expect(a).toHaveLength(5);expect(new Set(a.map(t=>t.text)).size).toBe(5);counts.push(studioConfig(a[0]!.id)!.tasks.length)}expect(counts[1]).toBeGreaterThan(counts[0]!);expect(counts[2]).toBeGreaterThan(counts[1]!);expect(STUDIO_LESSONS[passion]).toHaveLength(5)}
- expect(new Set(LOGIC_STUDIO.flatMap(c=>c.tasks.map(t=>t.kind)))).toEqual(new Set(['input','order','circuit','deduction','route','selection']))
+ expect(new Set(LOGIC_STUDIO.flatMap(c=>c.tasks.map(t=>t.kind)))).toEqual(new Set(['input','order','circuit','deduction','route','selection','power']))
 })
 it('les réseaux ont une solution unique reliée à la source, dans le budget',()=>{
  for(const t of LOGIC_STUDIO.flatMap(c=>c.tasks).filter(t=>t.kind==='circuit')){const valid:number[][]=[];for(let mask=0;mask<2**t.circuit!.nodes.length;mask++){const nodes=Array.from({length:t.circuit!.nodes.length},(_,i)=>i).filter(i=>mask&(1<<i));if(studioCorrect(t,nodes))valid.push(nodes)}expect(valid,t.id).toEqual([t.solution]);expect(studioCorrect(t,[0,2,5,8])).toBe(false);expect(studioCorrect(t,[0,1,2,4,5,8,8])).toBe(false)}

@@ -91,7 +91,7 @@ export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, 
 // Les codes restent côté serveur ; le client ne reçoit jamais la liste des codes.
 const SKIN_CODES: Readonly<Record<string, string>> = {
   'bea9f4846c575907ba628ad8f4262611bb12082975fc473e403cacfbef0997db': 'mascot-private-maradona',
-  'ce8c422a30195bee0620c4bf12df17d2699e688e707143c57d5729fb4f362e61': 'mascot-private-poney',
+  '9253f1476e7c805ac1a0331ec2c4aea286d299412a1156fcb3bae77f98e5083e': 'mascot-private-poney',
 }
 
 /** Un code partagé peut offrir la même tenue à plusieurs comptes, sans débit. */

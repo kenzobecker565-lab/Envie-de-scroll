@@ -235,3 +235,42 @@ it('achète les nouvelles tenues créatives et divines puis les restaure sans do
   expect(restored.body.shop.equipped.mascot).toBe('mascot-aphrodite')
   expect(restored.body.stats.totalCoins).toBe(3000)
 })
+
+it('offre les deux skins privés par codes partagés, sans débit et avec restauration de la tenue', async () => {
+  await fund(30)
+  await fund(10, 2)
+  for (const [code, itemId] of [['25022024', 'mascot-private-poney'], ['30101960', 'mascot-private-maradona']]) {
+    await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(400)
+    await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
+    const redeemed = await request(app).post('/api/shop/codes').set(as()).send({ code: ` ${code} `, itemId: 'mascot-zeus', userId: '2' }).expect(200)
+    expect(redeemed.body).toMatchObject({ spent: 0, balance: 30, redeemedItemId: itemId })
+    expect(redeemed.body.owned).toContain(itemId)
+    expect((await request(app).get('/api/shop').set(as(2))).body.owned).not.toContain(itemId)
+    const repeated = await request(app).post('/api/shop/codes').set(as()).send({ code }).expect(200)
+    expect(repeated.body).toEqual(redeemed.body)
+    const other = await request(app).post('/api/shop/codes').set(as(2)).send({ code }).expect(200)
+    expect(other.body).toMatchObject({ spent: 0, balance: 10, redeemedItemId: itemId })
+    await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(200)
+    expect((await request(app).get('/api/me').set(as())).body.shop.equipped.mascot).toBe(itemId)
+    expect(await prisma.shopPurchase.count({ where: { itemId } })).toBe(2)
+  }
+  expect((await request(app).get('/api/me').set(as())).body.stats.totalCoins).toBe(30)
+  expect(await prisma.shopPurchase.findMany()).toEqual(expect.arrayContaining([expect.objectContaining({ price: 0 })]))
+})
+
+it('refuse les codes erronés ou malformés sans offrir de skin et exige une authentification', async () => {
+  await fund(0)
+  await request(app).post('/api/shop/codes').send({ code: '25022024' }).expect(401)
+  for (const code of [undefined, null, 25022024, [], {}, '', ' ', 'x'.repeat(65), 'FAUX', 'mascot-private-poney']) {
+    await request(app).post('/api/shop/codes').set(as()).send({ code }).expect(400)
+  }
+  expect(await prisma.shopPurchase.count()).toBe(0)
+  expect((await request(app).get('/api/shop').set(as())).body).toMatchObject({ spent: 0, balance: 0, owned: [] })
+})
+
+it('ne duplique pas un skin offert lors de deux activations simultanées', async () => {
+  await fund(0)
+  const responses = await Promise.all([1, 2].map(() => request(app).post('/api/shop/codes').set(as()).send({ code: '25022024' })))
+  expect(responses.map(result => result.status)).toEqual([200, 200])
+  expect(await prisma.shopPurchase.count()).toBe(1)
+})

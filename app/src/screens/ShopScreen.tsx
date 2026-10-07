@@ -1,8 +1,9 @@
 import { AppHeader } from '../components/AppHeader.tsx'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { ArrowLeft, Check, ChevronLeft, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles } from 'lucide-react'
+import { ArrowLeft, Check, ChevronLeft, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles, Gift } from 'lucide-react'
 import { getShopItem, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Screen } from '../components/Screen.tsx'
@@ -70,6 +71,9 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
   const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(true)
   const [notice, setNotice] = useState<string>()
+  const [codeOpen, setCodeOpen] = useState(false)
+  const [code, setCode] = useState('')
+  const [codeError, setCodeError] = useState<string>()
   const favoriteKey = `scroll-up:skin-favorites:${state.me.user.id}`
   const [favorites, setFavorites] = useState<string[]>(() => {
     try { const saved: unknown = JSON.parse(localStorage.getItem(favoriteKey) ?? '[]'); return Array.isArray(saved) ? saved.filter((id): id is string => typeof id === 'string' && ALL_SKINS.some(item => item.id === id)) : [] }
@@ -98,6 +102,18 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
     setBusy(true); setError(undefined)
     try { dispatch({ type: 'shop', shop: await api.claimShopTestCredit() }); setNotice('10 000 Minutons de test sont disponibles. Ta progression reste inchangée.') }
     catch (caught) { setError((caught as Error).message) }
+    finally { setBusy(false) }
+  }
+  const redeemCode = async () => {
+    if (busy || !code.trim()) return
+    setBusy(true); setCodeError(undefined); setError(undefined)
+    try {
+      const result = await api.redeemSkinCode(code)
+      const item = getShopItem(result.redeemedItemId)
+      dispatch({ type: 'shop', shop: result })
+      setNotice(`${item?.title ?? 'Ta tenue'} est disponible dans Mes achats.`)
+      setCodeOpen(false); setCode(''); changeShelf('owned'); setSelected(item)
+    } catch (caught) { setCodeError((caught as Error).message) }
     finally { setBusy(false) }
   }
   const purchase = async () => {
@@ -152,6 +168,16 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
     {searchOpen && <label className="skin-shop-search"><Search size={18}/><span className="sr-only">Rechercher une tenue</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Rechercher une tenue…" type="search"/></label>}
     <section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={52} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div>{shop.equipped.mascot ? <button type="button" disabled={busy || loading} className="skin-reset" aria-label="Revenir à Minuton classique" onClick={() => void equip(null)}><RotateCcw size={17}/></button> : <Check size={18} aria-hidden="true"/>}</section>
     {shop.canClaimTestCredit && <Button className="mt-3" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
+    <Button className="mt-3" variant="secondary" disabled={busy || loading} onClick={() => { setCodeError(undefined); setCodeOpen(true) }}><Gift size={18}/>Utiliser un code</Button>
+    <Dialog open={codeOpen} onOpenChange={open => { if (!busy) { setCodeOpen(open); setCodeError(undefined) } }}><DialogContent>
+      <DialogHeader><DialogTitle>Un cadeau pour ton Minuton</DialogTitle><DialogDescription>Saisis ton code pour recevoir une tenue offerte. Tu la retrouveras dans Mes achats.</DialogDescription></DialogHeader>
+      <form className="flex flex-col gap-4" onSubmit={event => { event.preventDefault(); void redeemCode() }}>
+        <label htmlFor="skin-code" className="font-bold">Ton code</label>
+        <Input id="skin-code" autoFocus autoComplete="off" autoCapitalize="none" spellCheck={false} maxLength={64} value={code} onChange={event => { setCode(event.target.value); setCodeError(undefined) }} placeholder="Saisis ton code…" disabled={busy} aria-invalid={Boolean(codeError)} aria-describedby={codeError ? 'skin-code-error' : undefined}/>
+        {codeError && <p id="skin-code-error" role="alert">{codeError}</p>}
+        <Button type="submit" disabled={busy || !code.trim()}>{busy ? 'Déblocage…' : 'Débloquer ma tenue'}</Button>
+      </form>
+    </DialogContent></Dialog>
     {notice && <p role="status" className="skin-shop-notice">{notice}</p>}
     {error && !selected && <div role="alert" className="mt-3"><p>{error}</p><Button variant="secondary" size="sm" onClick={() => void refresh()}><RotateCcw/>Réessayer</Button></div>}
     {loading && <p role="status" className="mt-4">Chargement de tes achats…</p>}
@@ -180,15 +206,15 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
       <div className="studio-shop-grid">{items.map(item => {
         const bought = shop.owned.includes(item.id), equipped = shop.equipped.mascot === item.id
         return <Card key={item.id} padding="none" className="shop-product min-w-0 gap-0 overflow-hidden" data-category="mascot">
-          <div className="skin-product-art"><button type="button" onClick={() => preview(item)} aria-label={`Prévisualiser ${item.title}`}><ShopPreview item={item}/></button><button type="button" className="skin-favorite" aria-label={`${favorites.includes(item.id) ? 'Retirer' : 'Ajouter'} ${item.title} ${favorites.includes(item.id) ? 'des' : 'aux'} favoris`} aria-pressed={favorites.includes(item.id)} onClick={() => toggleFavorite(item.id)}><Heart size={18} fill={favorites.includes(item.id) ? 'currentColor' : 'none'}/></button>{equipped ? <span className="shop-worn-badge"><Check size={12}/>Porté actuellement</span> : bought && <span className="skin-owned-badge"><Check size={12}/>Acheté</span>}</div>
-          <div className="shop-product-body"><small>{item.available ? COLLECTIONS.find(value => value.id === groupOf(item))?.title : 'Tenue conservée'}</small><h3>{item.title.replace('Minuton ', '')}</h3><div className="shop-product-actions"><span className="shop-product-price"><Price value={item.price} size={18}/></span>{bought ? <Button size="sm" variant="secondary" disabled={busy || loading || equipped} onClick={() => void equip(item)}>{equipped ? 'Porté' : 'Porter'}</Button> : <Button size="sm" variant="secondary" onClick={() => preview(item)} aria-label={`Voir l’aperçu de ${item.title}`}>Voir<ChevronRight size={14}/></Button>}</div></div>
+          <div className="skin-product-art"><button type="button" onClick={() => preview(item)} aria-label={`Prévisualiser ${item.title}`}><ShopPreview item={item}/></button><button type="button" className="skin-favorite" aria-label={`${favorites.includes(item.id) ? 'Retirer' : 'Ajouter'} ${item.title} ${favorites.includes(item.id) ? 'des' : 'aux'} favoris`} aria-pressed={favorites.includes(item.id)} onClick={() => toggleFavorite(item.id)}><Heart size={18} fill={favorites.includes(item.id) ? 'currentColor' : 'none'}/></button>{equipped ? <span className="shop-worn-badge"><Check size={12}/>Porté actuellement</span> : bought && <span className="skin-owned-badge"><Check size={12}/>{item.redemptionOnly ? 'Débloqué' : 'Acheté'}</span>}</div>
+          <div className="shop-product-body"><small>{item.redemptionOnly ? 'Édition privée' : item.available ? COLLECTIONS.find(value => value.id === groupOf(item))?.title : 'Tenue conservée'}</small><h3>{item.title.replace('Minuton ', '')}</h3><div className="shop-product-actions"><span className="shop-product-price">{item.redemptionOnly ? 'Offert' : <Price value={item.price} size={18}/>}</span>{bought ? <Button size="sm" variant="secondary" disabled={busy || loading || equipped} onClick={() => void equip(item)}>{equipped ? 'Porté' : 'Porter'}</Button> : <Button size="sm" variant="secondary" onClick={() => preview(item)} aria-label={`Voir l’aperçu de ${item.title}`}>Voir<ChevronRight size={14}/></Button>}</div></div>
         </Card>
       })}</div>
       {!items.length && <div className="skin-empty"><Heart size={27}/><p>{query ? 'Aucune tenue ne correspond à ta recherche.' : shelf === 'favorites' ? 'Touche le cœur d’une tenue pour la retrouver ici.' : shelf === 'owned' ? 'Tes prochaines tenues débloquées apparaîtront ici.' : 'Aucune tenue avec ces filtres.'}</p><button type="button" onClick={() => { changeShelf('discover'); setSearchOpen(false) }}>Explorer les tenues<ChevronRight size={15}/></button></div>}
     </section>}
     <p className="skin-shop-footnote">Tes achats ne diminuent pas tes niveaux ni tes badges.{shop.bonus > 0 && <span>Crédit de test inclus dans le solde.</span>}</p>
     <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog immersive-preview" data-world={selected ? (groupOf(selected) === 'adventure' ? 'olympus' : groupOf(selected)) : undefined}>
-      {selected && <><DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.available ? `Collection ${COLLECTIONS.find(value => value.id === groupOf(selected))?.title}` : 'Ancienne collection · cette tenue reste à toi'}</DialogDescription></DialogHeader><ShopPreview item={selected} detail/><p className="skin-preview-description">{selected.description}</p><button type="button" className="skin-preview-favorite" aria-pressed={favorites.includes(selected.id)} onClick={() => toggleFavorite(selected.id)}><Heart size={17} fill={favorites.includes(selected.id) ? 'currentColor' : 'none'}/>{favorites.includes(selected.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button>
+      {selected && <><DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.redemptionOnly ? 'Édition privée · offerte par code' : selected.available ? `Collection ${COLLECTIONS.find(value => value.id === groupOf(selected))?.title}` : 'Ancienne collection · cette tenue reste à toi'}</DialogDescription></DialogHeader><ShopPreview item={selected} detail/><p className="skin-preview-description">{selected.description}</p><button type="button" className="skin-preview-favorite" aria-pressed={favorites.includes(selected.id)} onClick={() => toggleFavorite(selected.id)}><Heart size={17} fill={favorites.includes(selected.id) ? 'currentColor' : 'none'}/>{favorites.includes(selected.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button>
         {error && <p role="alert">{error}</p>}
         {owned ? <Button disabled={busy || loading || active} onClick={() => void equip(selected)}>{busy ? 'Activation…' : active ? 'Porté actuellement' : 'Porter cette tenue'}</Button> : <><div className="skin-purchase-info"><span>Achat permanent</span><Price value={selected.price}/></div><p className="skin-purchase-balance">{shop.balance >= selected.price ? <>Solde après l’achat<Price value={shop.balance - selected.price} size={18}/></> : <>Il te manque<Price value={selected.price - shop.balance} size={18}/></>}</p><Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>Acheter · <Price value={selected.price}/></>}</Button><p className="skin-purchase-caption">Retrouve cette tenue dans Mes achats après l’achat.</p></>}
         <Button variant="ghost" disabled={busy} onClick={() => setSelected(undefined)}>Fermer l’aperçu</Button>

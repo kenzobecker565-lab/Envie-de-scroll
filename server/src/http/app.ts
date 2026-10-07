@@ -64,7 +64,7 @@ import { createProposal, findOpenProposal, toProposalDTO } from '../services/pro
 import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
 import { deleteUserData, getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
-import { getShop, buyItem, equipItem, bonusMelody, claimShopTestCredit } from '../services/shop.ts'
+import { getShop, buyItem, equipItem, bonusMelody, claimShopTestCredit, redeemSkinCode } from '../services/shop.ts'
 import { ApiError, badRequest } from './errors.ts'
 
 export interface AppDeps {
@@ -225,6 +225,10 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.post('/shop/test-credit', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)
     res.json(await claimShopTestCredit(prisma, user.id, config.adminIds))
+  }))
+  api.post('/shop/codes', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    res.json(await redeemSkinCode(prisma, user.id, req.body?.code, config.adminIds))
   }))
   api.post('/shop/purchases', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)

@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { CLASSIC_MELODIES, getShopItem, melody, SHOP_CATEGORIES, type ShopCategory, type ShopState } from '@scroll-up/shared'
 import type { PrismaClient } from '../db.ts'
 import { isAdmin } from './feedback.ts'
@@ -25,6 +26,7 @@ export async function getShop(prisma: PrismaClient, userId: bigint, admins: read
 export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown, admins: readonly string[] = []): Promise<ShopState> {
   const item = typeof id === 'string' ? getShopItem(id) : undefined
   if (!item) throw badRequest('Objet inconnu.')
+  if (item.redemptionOnly) throw badRequest('Cette tenue se débloque uniquement avec un code.')
   if (!item.available) throw badRequest(item.category === 'mascot' ? 'Cette tenue ne fait plus partie de la boutique. Tes tenues déjà achetées restent disponibles dans Mes achats.' : 'Ce morceau attend encore son autorisation. Aucun achat possible.')
   try {
     await prisma.$transaction(async (tx) => {
@@ -84,4 +86,20 @@ export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, 
   if (!(await isAdmin(prisma, admins, userId))) throw new ApiError(403, 'unauthorized', 'Ce crédit de test est réservé au compte administrateur.')
   await prisma.user.updateMany({ where: { id: userId, shopTestCreditClaimed: false }, data: { shopTestCreditClaimed: true, shopBonus: { increment: 10_000 } } })
   return getShop(prisma, userId, admins)
+}
+
+// Les codes restent côté serveur ; le client ne reçoit jamais la liste des codes.
+const SKIN_CODES: Readonly<Record<string, string>> = {
+  'bea9f4846c575907ba628ad8f4262611bb12082975fc473e403cacfbef0997db': 'mascot-private-maradona',
+  'ce8c422a30195bee0620c4bf12df17d2699e688e707143c57d5729fb4f362e61': 'mascot-private-poney',
+}
+
+/** Un code partagé peut offrir la même tenue à plusieurs comptes, sans débit. */
+export async function redeemSkinCode(prisma: PrismaClient, userId: bigint, code: unknown, admins: readonly string[] = []): Promise<ShopState & { redeemedItemId: string }> {
+  if (typeof code !== 'string' || code.trim().length < 1 || code.trim().length > 64) throw badRequest('Saisis un code valide.')
+  const itemId = SKIN_CODES[createHash('sha256').update(code.trim()).digest('hex')]
+  const item = itemId ? getShopItem(itemId) : undefined
+  if (!item?.redemptionOnly) throw badRequest('Ce code n’est pas reconnu. Vérifie-le et réessaie.')
+  await prisma.shopPurchase.upsert({ where: { userId_itemId: { userId, itemId: item.id } }, create: { userId, itemId: item.id, price: 0 }, update: {} })
+  return { ...await getShop(prisma, userId, admins), redeemedItemId: item.id }
 }

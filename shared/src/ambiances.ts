@@ -30,7 +30,7 @@ const MACLEOD = 'Kevin MacLeod'
 
 export const PREMIUM_AMBIANCES = { aube: 'ambiance-aube', orbite: 'ambiance-orbite' } as const
 export const AMBIANCES: readonly Ambiance[] = [
-  { id: 'signature', label: 'Signature Scroll-up', mood: 'Un petit élan · piano doux et lumière', src: '/music/scroll-up-signature.mp3', tone: 'lilac', credit: null },
+  { id: 'signature', label: 'Signature Scroll-up', mood: 'Une pause au soleil · guitare et bossa douce', src: '/music/scroll-up-signature-bossa-v1.mp3', tone: 'lilac', credit: null },
   { id: 'jazz', label: 'Jazz noir', mood: 'Un club enfumé, tard le soir', src: '/music/jazz-noir.mp3', tone: 'lilac', credit: null },
   { id: 'lofi', label: 'Lo-fi', mood: 'Un beat tranquille pour se poser', src: '/music/lofi.mp3', tone: 'sky', credit: { title: 'Study and Relax', author: MACLEOD } },
   { id: 'piano', label: 'Piano', mood: 'Satie, doux et lent', src: '/music/piano.mp3', tone: 'warm', credit: { title: 'Gymnopédie n°\u00A01 (Erik Satie)', author: MACLEOD } },

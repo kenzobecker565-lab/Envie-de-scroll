@@ -153,6 +153,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
   const active = selected ? shop.equipped.mascot === selected.id : false
   const overview = shelf === 'discover' && !collection && !query && gender === 'all'
 
+  const featuredSkin = getShopItem('mascot-bruno-mars')
   const showcase = SHOWCASE[showcaseIndex] ?? COLLECTIONS[3]
   const stepShowcase = (direction: number) => setShowcaseIndex(value => (value + direction + SHOWCASE.length) % SHOWCASE.length)
   const spotlight = items.length ? items[skinIndex % items.length] : undefined
@@ -182,6 +183,12 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
     {error && !selected && <div role="alert" className="mt-3"><p>{error}</p><Button variant="secondary" size="sm" onClick={() => void refresh()}><RotateCcw/>Réessayer</Button></div>}
     {loading && <p role="status" className="mt-4">Chargement de tes achats…</p>}
     {overview && <>
+      {featuredSkin && <section className="skin-spotlight" aria-label="Minuton en vedette">
+        <div className="skin-featured-top"><span><Sparkles size={14}/>En vedette</span><small>Édition développement</small></div>
+        <div className="skin-spotlight-stage"><MinutonFigure outfit={featuredSkin.id} size={250} animated={false}/></div>
+        <h2>{featuredSkin.title}</h2><p>Le groove s’invite chez Minuton.</p>
+        <button type="button" className="skin-spotlight-open" onClick={() => preview(featuredSkin)}>{shop.owned.includes(featuredSkin.id) ? 'Voir ma tenue' : 'Découvrir la tenue offerte'}<ChevronRight size={16}/></button>
+      </section>}
       <SwipeSurface className="skin-world-carousel" label="Collections à parcourir" onStep={stepShowcase}>
         <section className="skin-featured" data-collection={showcase.id} aria-label="Collection à la une">
           <div className="skin-featured-top"><span><showcase.Icon size={14}/>À explorer</span><small>{countOf(showcase.id)} tenues</small></div>

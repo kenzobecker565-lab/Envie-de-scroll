@@ -89,6 +89,7 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 export const api = {
   learning:()=>call<{items:import('@scroll-up/shared').LearningRecord[]}>('/learning'),
   learningEntry:(id:string)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`),
+  setLearningReview:(id:string,review:boolean)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}/review`,{method:'PATCH',body:JSON.stringify({review})}),
   saveLearning:(id:string,lessonId:string,work:import('@scroll-up/shared').LearningWork)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`,{method:'PUT',body:JSON.stringify({lessonId,work})}),
   shop: () => call<import('@scroll-up/shared').ShopState>('/shop'),
   claimShopTestCredit: () => call<import('@scroll-up/shared').ShopState>('/shop/test-credit', { method: 'POST' }),

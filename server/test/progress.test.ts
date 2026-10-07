@@ -78,7 +78,7 @@ describe('parcours', () => {
     await propose({ passion: 'ecriture', mood: 'souffler', duration: step1!.duration, step: step1!.id, replacing: first.proposal.id }, 400)
     const done = await write(first.proposal.id, 'Je me souviens de la mer.')
     expect(done.completion.activityText).toBe(step1!.text)
-    expect(done.stats.byPassion[0]).toMatchObject({ steps: [step1!.id], tried: [], minutes: 5 })
+    expect(done.stats.byPassion[0]).toMatchObject({ steps: [step1!.id], tried: [], minutes: 0, coins: 5 })
 
     // Puis l'étape 2 s'ouvre.
     const second = await propose({ passion: 'ecriture', mood: 'souffler', duration: step2!.duration, step: step2!.id })
@@ -117,7 +117,7 @@ describe('projets', () => {
     const other = await propose({ passion: 'ecriture', mood: 'ennui', duration: 5 })
     const second = await write(other.proposal.id, 'Cinq six.')
     const assigned = await request(app).put(`/api/completions/${second.completion.id}/project`).set(as()).send({ projectId }).expect(200)
-    expect(assigned.body.projects[0]).toMatchObject({ creations: 2, minutes: 20, words: 6 })
+    expect(assigned.body.projects[0]).toMatchObject({ creations: 2, minutes: 0, words: 6 })
 
     // Pas dans un projet d'une autre passion.
     const drawing = (await request(app).post('/api/projects').set(as()).send({ passion: 'dessin', name: 'Croquis' }).expect(201)).body as ProjectDetailResponse

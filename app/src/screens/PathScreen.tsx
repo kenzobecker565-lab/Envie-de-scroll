@@ -39,7 +39,7 @@ export function PathScreen({ pathId }: { pathId: string }) {
 
   if (!path) return null
   const stats = statsFor(state.me.stats.byPassion, path.passion)
-  const level = passionLevel(path.passion, stats.minutes).level
+  const level = passionLevel(path.passion, stats.coins).level
   const progress = pathProgress(path.passion, stats.steps, level, state.me.user.skills[path.passion]).find((entry) => entry.path.id === path.id)
   if (!progress) return null
   const passion = getPassion(path.passion)

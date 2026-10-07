@@ -79,12 +79,12 @@ export function DoneScreen() {
   const { passion, activityId } = done.response.completion
   const before = statsFor(done.previousStats.byPassion, passion)
   const after = statsFor(done.response.stats.byPassion, passion)
-  const level = levelCrossed(passion, before.minutes, after.minutes)
+  const level = levelCrossed(passion, before.coins, after.coins)
   const discovered = isBaseActivity(activityId) && !activityId.includes('-lesson-') && !before.tried.includes(activityId)
   // Une étape de parcours : la marche franchie, la suivante qui s'ouvre (ou le badge).
   const step = getPathStep(activityId)
   const challenge = getChallengeActivity(activityId)
-  const paths = step ? pathProgress(passion, after.steps, passionLevel(passion, after.minutes).level, state.me.user.skills[passion]) : []
+  const paths = step ? pathProgress(passion, after.steps, passionLevel(passion, after.coins).level, state.me.user.skills[passion]) : []
   const stepProgress = step ? paths.find((entry) => entry.path.id === step.pathId) : undefined
   // Une seule grande nouvelle à la fois : l'étape de parcours, sinon le niveau, le palier, le mot du jour, la collection.
   const news = step && stepProgress ? 'step' : level ? 'level' : milestone ? 'milestone' : challenge ? 'challenge' : discovered ? 'discovered' : null

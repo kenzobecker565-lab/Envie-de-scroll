@@ -96,7 +96,7 @@ export function GalleryScreen({ passion, embedded = false }: { passion?: Passion
       {!embedded && <header className="flex flex-col gap-2">
         <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">{passion ? `Créations · ${getPassion(passion).label}` : 'Historique'}</h1>
         <p className="text-15 font-semibold text-ink-soft">
-          {plural(row?.activities ?? stats.totalActivities, 'création')} · {formatNumber(row?.minutes ?? stats.totalCoins)} minutons
+          {plural(row?.activities ?? stats.totalActivities, 'création')} · {formatNumber(row?.coins ?? stats.totalCoins)} minutons
         </p>
       </header>}
 

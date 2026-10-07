@@ -245,6 +245,6 @@ export function currentPath(passion: PassionId, steps: readonly string[], level:
 }
 
 /** Les parcours terminés, toutes passions confondues (pour la vitrine des badges). */
-export function finishedPathIds(byPassion: readonly { passion: PassionId; steps: readonly string[]; minutes: number }[]): string[] {
-  return byPassion.flatMap((row) => pathProgress(row.passion, row.steps, passionLevel(row.passion, row.minutes).level).filter((entry) => entry.finished).map((entry) => entry.path.id))
+export function finishedPathIds(byPassion: readonly { passion: PassionId; steps: readonly string[]; coins: number }[]): string[] {
+  return byPassion.flatMap((row) => pathProgress(row.passion, row.steps, passionLevel(row.passion, row.coins).level).filter((entry) => entry.finished).map((entry) => entry.path.id))
 }

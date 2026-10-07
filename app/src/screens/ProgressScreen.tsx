@@ -51,7 +51,7 @@ export function ProgressScreen() {
             {stats.monthActivities > 0 && <span className="whitespace-nowrap"> · {formatNumber(stats.monthActivities)} ce mois-ci</span>}
           </p>
           <Badge variant="secondary" size="sm">
-            <Timer aria-hidden="true" />1 min = 1 minuton
+            <Timer aria-hidden="true" />Récompenses des activités
           </Badge>
         </div>
         {/* Un gros minuton en sticker, qui flotte et fait un tour de temps en temps. */}
@@ -63,6 +63,12 @@ export function ProgressScreen() {
         <Sparkle size={20} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-3 right-20" />
       </Card>
       <Button className="mt-4" variant="secondary" onClick={() => push({ name: 'shop' })}>Boutique · {shop.balance} minutons disponibles</Button>
+      <Card className="mt-4">
+        <h2 className="font-bold">Mes séances</h2>
+        <p>{stats.totalMinutes} min au total · {stats.monthMinutes} min ce mois-ci</p>
+        <p>{plural(stats.monthActivities, 'activité')} · {plural(stats.monthCoins, 'minuton')} gagnés ce mois-ci</p>
+        <small>Durée écoulée entre l’ouverture et l’enregistrement, plafonnée à la durée choisie. Les pauses peuvent être incluses. Les niveaux suivent les minutons gagnés.</small>
+      </Card>
       {stats.totalCoins > 0 && (
         <motion.div className="mt-4 px-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           <MilestoneProgress total={stats.totalCoins} />

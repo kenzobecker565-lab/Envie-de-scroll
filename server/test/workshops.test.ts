@@ -100,3 +100,21 @@ it('compte les minutes passées tant qu’une énigme n’est pas résolue sans 
  expect(await play(2,{answers:solved,sawSolution:true})).toBe(2)
  const me=await request(timed).get('/api/me').set(auth).expect(200);expect(me.body.stats.totalCoins).toBe(0+7+30+30+2)
 })
+
+it('sépare les durées historiques des récompenses et remet seulement les compteurs mensuels à zéro', async () => {
+ const {studioConfig}=await import('@scroll-up/shared')
+ let clock=new Date('2026-10-06T18:00:00Z')
+ const timed=createApp({prisma:db.prisma,config:{botToken:TEST_BOT_TOKEN,devAuth:true,initDataMaxAge:0,signingSecret:'test',appDistDir:undefined},photos:createPhotoService({telegram:undefined,storageChatId:undefined,localDir:db.dir+'/photos'}),now:()=>clock})
+ await request(timed).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
+ const c=studioConfig('logique-30-11')!
+ const proposal=(await request(timed).post('/api/proposals').set(auth).send({passion:'logique',duration:30,step:'logique-30-11'}).expect(201)).body.proposal
+ clock=new Date(clock.getTime()+2*60_000)
+ const done=await request(timed).post('/api/completions').set(auth).send({proposalId:proposal.id,workshop:{version:2,contentRevision:c.revision,passion:'logique',answers:Object.fromEntries(c.tasks.map(t=>[t.id,t.solution]))}}).expect(201)
+ expect(done.body.stats).toMatchObject({totalCoins:30,monthCoins:30,totalMinutes:2,monthMinutes:2,totalActivities:1})
+ expect(done.body.stats.byPassion[0]).toMatchObject({coins:30,minutes:2,activities:1})
+ // Recalcul de l'historique à la lecture, sans modifier les récompenses stockées.
+ clock=new Date('2026-11-01T10:00:00Z')
+ const me=await request(timed).get('/api/me').set(auth).expect(200)
+ expect(me.body.stats).toMatchObject({totalCoins:30,monthCoins:0,totalMinutes:2,monthMinutes:0,totalActivities:1,monthActivities:0})
+ expect(await db.prisma.completion.findUnique({where:{id:done.body.completion.id}})).toMatchObject({coins:30})
+})

@@ -18,6 +18,7 @@ import {
 import type { PrismaClient, User } from '../db.ts'
 import type { TelegramUser } from '../auth/initData.ts'
 import { isValidTimeZone, localMonth } from '../lib/time.ts'
+import { sessionMinutes } from './sessionMinutes.ts'
 
 export function parsePassions(user: Pick<User, 'passions'>): PassionId[] {
   try {
@@ -89,22 +90,25 @@ export async function deleteUserData(prisma: PrismaClient, userId: bigint): Prom
 
 export async function getStats(prisma: PrismaClient, user: User, now = new Date()): Promise<StatsDTO> {
   const month = `${localMonth(now, user.timezone)}-`
-  const rows = await prisma.completion.findMany({
+  const completions = await prisma.completion.findMany({
     where: { userId: user.id },
-    select: { passion: true, activityId: true, coins: true, text: true, photoRef: true, exploredTitle: true, localDate: true },
+    select: { passion: true, activityId: true, coins: true, text: true, photoRef: true, exploredTitle: true, localDate: true, duration: true, createdAt: true, proposal: { select: { createdAt: true } } },
   })
+  const rows = completions.map((row) => ({ ...row, minutes: sessionMinutes(row) }))
   const thisMonth = rows.filter((row) => row.localDate.startsWith(month))
   return {
     totalCoins: rows.reduce((sum, row) => sum + row.coins, 0),
+    totalMinutes: rows.reduce((sum, row) => sum + row.minutes, 0),
     totalActivities: rows.length,
     monthActivities: thisMonth.length,
     monthCoins: thisMonth.reduce((sum, row) => sum + row.coins, 0),
+    monthMinutes: thisMonth.reduce((sum, row) => sum + row.minutes, 0),
     byPassion: passionStats(rows),
     challenge: [...new Set(thisMonth.map((row) => row.activityId).filter(isChallengeId))].sort(),
   }
 }
 
-type StatsRow = { passion: string; activityId: string; coins: number; text: string | null; photoRef: string | null; exploredTitle: string | null }
+type StatsRow = { passion: string; activityId: string; coins: number; minutes: number; text: string | null; photoRef: string | null; exploredTitle: string | null }
 
 /** Minutons, activités, collection, étapes de parcours et signature, par passion. */
 function passionStats(rows: StatsRow[]): PassionStatsDTO[] {
@@ -115,7 +119,8 @@ function passionStats(rows: StatsRow[]): PassionStatsDTO[] {
     return [
       {
         passion,
-        minutes: mine.reduce((sum, row) => sum + row.coins, 0),
+        minutes: mine.reduce((sum, row) => sum + row.minutes, 0),
+        coins: mine.reduce((sum, row) => sum + row.coins, 0),
         activities: mine.length,
         tried: ids.filter(isBaseActivity),
         steps: ids.filter(isPathStepId),

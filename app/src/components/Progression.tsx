@@ -18,7 +18,7 @@ import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
-import { formatMinutes, plural } from '../lib/format.ts'
+import { plural } from '../lib/format.ts'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -34,7 +34,7 @@ import { SignatureSection, signatureLabel } from './Signature.tsx'
  * explorés), les cinq niveaux, la collection, et de quoi lancer une activité.
  */
 
-const EMPTY: Omit<PassionStatsDTO, 'passion'> = { minutes: 0, activities: 0, tried: [], steps: [], drawings: 0, words: 0, explored: 0 }
+const EMPTY: Omit<PassionStatsDTO, 'passion'> = { minutes: 0, coins: 0, activities: 0, tried: [], steps: [], drawings: 0, words: 0, explored: 0 }
 
 /** Les chiffres d'une passion (zéro si rien n'a encore été fait). */
 export function statsFor(byPassion: readonly PassionStatsDTO[] | undefined, passion: PassionId): PassionStatsDTO {
@@ -109,7 +109,7 @@ export function PassionProgressGrid({ title = 'Ta progression' }: { title?: stri
 export function PassionCard({ passion, stats, index, onOpen }: { passion: PassionId; stats: PassionStatsDTO; index: number; onOpen: () => void }) {
   const info = getPassion(passion)
   const Icon = PASSION_ICONS[passion]
-  const level = passionLevel(passion, stats.minutes)
+  const level = passionLevel(passion, stats.coins)
   const size = collectionSize(passion)
   return (
     <motion.button
@@ -140,7 +140,7 @@ export function PassionCard({ passion, stats, index, onOpen }: { passion: Passio
         <Gauge value={level.progress} delay={0.35 + index * 0.06} />
         <span className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <span className="text-12 font-semibold text-ink-soft">
-            {level.next ? (level.level === 0 ? 'Ta 1re activité\u00A0: niveau 1' : `Encore ${formatMinutes(level.next.minutes - stats.minutes)}`) : 'Niveau maximal'}
+            {level.next ? (level.level === 0 ? 'Ta 1re activité\u00A0: niveau 1' : `Encore ${plural(level.next.minutes - stats.coins, 'minuton')}`) : 'Niveau maximal'}
           </span>
           <CollectionDots passion={passion} tried={stats.tried} />
         </span>
@@ -223,7 +223,7 @@ export function PassionDetail({
 }) {
   const info = getPassion(passion)
   const Icon = PASSION_ICONS[passion]
-  const level = passionLevel(passion, stats.minutes)
+  const level = passionLevel(passion, stats.coins)
   const { state, dispatch } = useAppState()
   const skill = state.me.user.skills[passion]
   const { reset } = useNavigation()
@@ -247,7 +247,7 @@ export function PassionDetail({
           {info.label}
         </DialogTitle>
         <DialogDescription>
-          {plural(stats.activities, 'activité réalisée', 'activités réalisées')} · {plural(stats.minutes, 'minuton')}
+          {plural(stats.activities, 'activité réalisée', 'activités réalisées')} · {plural(stats.coins, 'minuton')}
         </DialogDescription>
       </DialogHeader>}
 
@@ -261,7 +261,7 @@ export function PassionDetail({
           <span className="font-display text-22 leading-tight font-extrabold tracking-tight">{level.title ?? 'À découvrir'}</span>
           <Gauge value={level.progress} />
           <span className="text-13 font-semibold">
-            {level.next ? `Encore ${formatMinutes(level.next.minutes - stats.minutes)} pour devenir ${level.next.title}` : 'Tu as atteint le niveau maximal. Bravo\u00A0!'}
+            {level.next ? `Encore ${plural(level.next.minutes - stats.coins, 'minuton')} pour devenir ${level.next.title}` : 'Tu as atteint le niveau maximal. Bravo\u00A0!'}
           </span>
         </span>
         <Sparkle size={22} color="var(--surface-200)" className="motion-loop anim-twinkle absolute top-2 right-3" />
@@ -303,7 +303,7 @@ export function PassionDetail({
         </summary>
         <ol className="flex flex-col gap-2">
           {levelSteps(passion).map((step) => (
-            <LevelRow key={step.level} step={step} passion={passion} reached={stats.minutes >= step.minutes} current={step.level === level.level} />
+            <LevelRow key={step.level} step={step} passion={passion} reached={stats.coins >= step.minutes} current={step.level === level.level} />
           ))}
         </ol>
       </details>}
@@ -376,7 +376,7 @@ function LevelRow({ step, passion, reached, current }: { step: LevelStep; passio
         {step.level}
       </span>
       <span className={cn('min-w-0 flex-1 font-display text-15 font-extrabold tracking-tight', reached ? 'text-ink' : 'text-ink-soft')}>{step.title}</span>
-      <span className={cn('shrink-0 text-12 font-bold', reached ? 'text-ink' : 'text-ink-faint')}>{reached ? <Check size={16} strokeWidth={3} aria-label="atteint" /> : `à ${formatMinutes(step.minutes)}`}</span>
+      <span className={cn('shrink-0 text-12 font-bold', reached ? 'text-ink' : 'text-ink-faint')}>{reached ? <Check size={16} strokeWidth={3} aria-label="atteint" /> : `à ${plural(step.minutes, 'minuton')}`}</span>
     </li>
   )
 }

@@ -239,7 +239,7 @@ it('achète les nouvelles tenues créatives et divines puis les restaure sans do
 it('offre les deux skins privés par codes partagés, sans débit et avec restauration de la tenue', async () => {
   await fund(30)
   await fund(10, 2)
-  for (const [code, itemId] of [['25022024', 'mascot-private-poney'], ['30101960', 'mascot-private-maradona']]) {
+  for (const [code, itemId] of [['26022024', 'mascot-private-poney'], ['30101960', 'mascot-private-maradona']]) {
     await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(400)
     await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
     const redeemed = await request(app).post('/api/shop/codes').set(as()).send({ code: ` ${code} `, itemId: 'mascot-zeus', userId: '2' }).expect(200)
@@ -260,8 +260,8 @@ it('offre les deux skins privés par codes partagés, sans débit et avec restau
 
 it('refuse les codes erronés ou malformés sans offrir de skin et exige une authentification', async () => {
   await fund(0)
-  await request(app).post('/api/shop/codes').send({ code: '25022024' }).expect(401)
-  for (const code of [undefined, null, 25022024, [], {}, '', ' ', 'x'.repeat(65), 'FAUX', 'mascot-private-poney']) {
+  await request(app).post('/api/shop/codes').send({ code: '26022024' }).expect(401)
+  for (const code of [undefined, null, 26022024, [], {}, '', ' ', 'x'.repeat(65), 'FAUX', '25022024', 'mascot-private-poney']) {
     await request(app).post('/api/shop/codes').set(as()).send({ code }).expect(400)
   }
   expect(await prisma.shopPurchase.count()).toBe(0)
@@ -270,7 +270,7 @@ it('refuse les codes erronés ou malformés sans offrir de skin et exige une aut
 
 it('ne duplique pas un skin offert lors de deux activations simultanées', async () => {
   await fund(0)
-  const responses = await Promise.all([1, 2].map(() => request(app).post('/api/shop/codes').set(as()).send({ code: '25022024' })))
+  const responses = await Promise.all([1, 2].map(() => request(app).post('/api/shop/codes').set(as()).send({ code: '26022024' })))
   expect(responses.map(result => result.status)).toEqual([200, 200])
   expect(await prisma.shopPurchase.count()).toBe(1)
 })

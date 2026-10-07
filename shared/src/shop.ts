@@ -12,6 +12,8 @@ export interface ShopItem {
   colors: readonly string[]
   /** Disponibilité à la vente. Les tenues retirées restent équipables par leurs propriétaires. */
   available: boolean
+  /** Tenue privée offerte par code, jamais proposée à la vente. */
+  redemptionOnly?: boolean
   difficulty?: string
   audio?: string
   composer?: string
@@ -21,6 +23,8 @@ export interface ShopItem {
   mascotArt?: { src: string; width: number; height: number; viewBox: [number, number, number, number] }
 }
 export const SHOP_ITEMS: readonly ShopItem[] = [
+  { id: 'mascot-private-maradona', category: 'mascot', title: 'Minuton Maradona', description: 'Le numéro 10 argentin, sa chevelure bouclée et son ballon. Une tenue offerte en édition privée.', price: 0, symbol: '⚽', colors: ['#B7DFF5', '#F6ECD5'], available: false, redemptionOnly: true, mascotArt: { src: '/art/minuton-private-maradona.webp', width: 1254, height: 1254, viewBox: [0, 0, 1254, 1254] } },
+  { id: 'mascot-private-poney', category: 'mascot', title: 'Minuton complice', description: 'Une robe ivoire, une tresse et un poney alezan. Une tenue offerte en édition privée.', price: 0, symbol: '🐴', colors: ['#F5E7D2', '#D7AC83'], available: false, redemptionOnly: true, mascotGender: 'female', mascotArt: { src: '/art/minuton-private-poney.webp', width: 1254, height: 1254, viewBox: [0, 0, 1254, 1254] } },
   { id: 'ambiance-aube', category: 'ambiance', title: 'Aube tranquille', description: 'Une composition originale aux notes douces, pour créer au calme.', price: 40, symbol: '🌅', colors: ['#FFC78A','#FFE6BA'], available: true, audio: '/music/shop-aube.mp3' },
   { id: 'ambiance-orbite', category: 'ambiance', title: 'Orbite', description: 'Une composition originale aux nappes spatiales et légères.', price: 60, symbol: '🪐', colors: ['#C1B3FF','#8CB8FF'], available: true, audio: '/music/shop-orbite.mp3' },
   { id: 'piano-lanterne', category: 'piano', title: 'La lanterne', description: 'Une petite mélodie originale à jouer note après note sur le clavier.', price: 50, symbol: '🎹', colors: ['#FFE6A7','#FFCC80'], available: true, difficulty: 'Débutant', audio: '/music/shop-lanterne.mp3' },

@@ -93,6 +93,7 @@ export const api = {
   saveLearning:(id:string,lessonId:string,work:import('@scroll-up/shared').LearningWork)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`,{method:'PUT',body:JSON.stringify({lessonId,work})}),
   shop: () => call<import('@scroll-up/shared').ShopState>('/shop'),
   claimShopTestCredit: () => call<import('@scroll-up/shared').ShopState>('/shop/test-credit', { method: 'POST' }),
+  redeemSkinCode: (code: string) => call<import('@scroll-up/shared').ShopState & { redeemedItemId: string }>('/shop/codes', { method: 'POST', body: JSON.stringify({ code }) }),
   buyItem: (itemId: string) => call<import('@scroll-up/shared').ShopState>('/shop/purchases', { method: 'POST', body: JSON.stringify({ itemId }) }),
   equipItem: (category: import('@scroll-up/shared').ShopCategory, itemId: string | null) => call<import('@scroll-up/shared').ShopState>('/shop/equipment', { method: 'PUT', body: JSON.stringify({ category, itemId }) }),
   bonusMelody: (id: string) => call<{ melody: import('@scroll-up/shared').Melody }>(`/shop/piano/${id}`),

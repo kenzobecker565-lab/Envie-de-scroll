@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import {
   formatClock,
+  reminderMinutes,
   getPassion,
-  isScrollMoment,
   isSkillLevel,
   MAX_PASSIONS,
   missingSkills,
@@ -12,10 +12,7 @@ import {
   LEARNING_LESSONS,
   SKILL_LEVELS,
   SKILL_TIER,
-  SCROLL_MOMENT_INFO,
-  SCROLL_MOMENTS,
   type PassionId,
-  type ScrollMoment,
   type SkillLevel,
   type UpdateSettingsRequest,
 } from '@scroll-up/shared'
@@ -32,6 +29,7 @@ import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
 import { popIn } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics, requestWriteAccessIfNeeded } from '../telegram/webApp.ts'
+import { ReminderTimePicker } from '../components/ReminderTimePicker.tsx'
 import './OnboardingScreens.css'
 
 /** Bienvenue, passions, moment de scroll. */
@@ -253,13 +251,12 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
 }
 
 /**
- * Onboarding, étape 3 : le moment où l'on scrolle le plus. Le bot relance
- * juste avant (une fois par jour au plus) ; on peut aussi refuser les messages.
+ * Onboarding, étape 3 : une heure locale précise pour le rappel facultatif.
  */
 export function MomentScreen() {
   const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
-  const [moment, setMoment] = useState<ScrollMoment | null>(state.me.user.scrollMoment)
+  const [reminderTime, setReminderTime] = useState(() => reminderMinutes(state.me.user.scrollMoment, 19, state.me.user.reminderTime))
   const [saving, setSaving] = useState<'moment' | 'none' | null>(null)
   const [error, setError] = useState<string>()
 
@@ -280,77 +277,15 @@ export function MomentScreen() {
     }
   }
 
-  const chosen = moment ? SCROLL_MOMENT_INFO[moment] : null
-  return (
-    <Screen className="studio-onboarding onboarding-refresh">
-      <ScreenTitle
-        eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />}
-        aside={
-          <MinutonFigure pose="wait" size={64} animated={false}/>
-        }
-        subtitle="Le bot t’enverra un petit message juste avant. Une fois par jour au plus, et jamais les jours où tu as déjà créé."
-      >
-        Tu scrolles surtout quand&nbsp;?
-      </ScreenTitle>
-
-      <ToggleGroup
-        type="single"
-        variant="card"
-        value={moment ?? ''}
-        onValueChange={(value) => {
-          if (!isScrollMoment(value)) return
-          haptics.selection()
-          setMoment(value)
-        }}
-        className="onboarding-choice-grid"
-        aria-label="Ton moment de scroll"
-      >
-        {SCROLL_MOMENTS.map((id, index) => {
-          const info = SCROLL_MOMENT_INFO[id]
-          return (
-            <ToggleGroupItem
-              key={id}
-              value={id}
-              aria-label={`${info.label} : ${info.hint}. Message vers ${formatClock(info.remindAt)}.`}
-              className="onboarding-moment-card"
-              data-moment={id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * .05 }}
-              whileTap={{ scale: .98 }}
-            >
-              <span className="onboarding-moment-scene" aria-hidden="true"><span className="onboarding-moment-orb"/><span className="onboarding-moment-hill"/><span className="onboarding-selection">{moment === id && <Check size={16}/>}</span></span>
-              <span className="onboarding-moment-copy"><strong>{info.label}</strong><small>{info.hint}</small></span>
-            </ToggleGroupItem>
-          )
-        })}
-      </ToggleGroup>
-
-      <p className="mt-6 flex justify-center" aria-live="polite">
-        <Badge variant={chosen ? 'good' : 'secondary'} size="sm" className="px-3">
-          <BellRing aria-hidden="true" />
-          {chosen ? `Message vers ${formatClock(chosen.remindAt)}` : 'Choisis ton moment'}
-        </Badge>
-      </p>
-
-      <PrimaryAction
-        text={chosen ? 'C’est parti' : 'Choisis ton moment'}
-        icon={chosen ? <Check aria-hidden="true" /> : undefined}
-        onClick={() => moment && void save({ scrollMoment: moment, remindersEnabled: true }, 'moment')}
-        enabled={Boolean(moment)}
-        loading={saving === 'moment'}
-      >
-        {error && (
-          <Alert variant="warning" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <Info aria-hidden="true" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-        <Button variant="ghost" size="md" className="w-full" disabled={saving !== null} onClick={() => void save({ remindersEnabled: false }, 'none')}>
-          <BellOff aria-hidden="true" />
-          Pas de message, merci
-        </Button>
-      </PrimaryAction>
-    </Screen>
-  )
+  return <Screen className="studio-onboarding onboarding-refresh">
+    <ScreenTitle eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />} subtitle="Choisis l’heure de ton petit rappel.">
+      Ton moment pour créer
+    </ScreenTitle>
+    <ReminderTimePicker value={reminderTime} onChange={setReminderTime} disabled={saving !== null}/>
+    <PrimaryAction text={`Me rappeler à ${formatClock(reminderTime)}`} icon={<BellRing aria-hidden="true"/>} onClick={() => void save({ reminderTime, remindersEnabled: true }, 'moment')} enabled={saving === null} loading={saving === 'moment'}>
+      {error && <Alert variant="warning"><Info aria-hidden="true"/><AlertDescription>{error}</AlertDescription></Alert>}
+      <Button variant="ghost" size="md" className="w-full" disabled={saving !== null} onClick={() => void save({ remindersEnabled: false }, 'none')}><BellOff aria-hidden="true"/>Pas de notification</Button>
+      <p className="reminder-footnote">Tu pourras modifier l’heure dans tes réglages.</p>
+    </PrimaryAction>
+  </Screen>
 }

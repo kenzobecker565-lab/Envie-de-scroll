@@ -41,6 +41,7 @@ export function toUserDTO(user: User): UserDTO {
     theme,
     remindersEnabled: user.remindersEnabled,
     scrollMoment: isScrollMoment(user.scrollMoment) ? user.scrollMoment : null,
+    reminderTime: user.reminderTime,
     skills: parseSkills(user.skills),
   }
 }

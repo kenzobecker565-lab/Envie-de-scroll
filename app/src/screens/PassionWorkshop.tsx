@@ -65,7 +65,7 @@ export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  const {state}=useAppState(),{push,reset}=useNavigation(),start=useWorkshopStart(),startWord=useStartChallenge(),shop=useShop()
  const [section,setSection]=useState<'create'|'gallery'>('create')
  const row=statsFor(state.me.stats.byPassion,passion),copy=COPY[passion]
- const progress=currentPath(passion,row.steps,passionLevel(passion,row.minutes).level,state.me.user.skills[passion])
+ const progress=currentPath(passion,row.steps,passionLevel(passion,row.coins).level,state.me.user.skills[passion])
  const day=todayKey(),word=dailyWord(day).word
  const owned=SHOP_ITEMS.filter(item=>item.category==='piano'&&shop.owned.includes(item.id))
  const available=state.me.user.passions.includes(passion)
@@ -73,7 +73,7 @@ export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  if(['dessin','piano','ecriture','logique','francais'].includes(passion))return <PassionCatalog passion={passion} onStart={(duration,id)=>start(passion,duration,id)}/>
  return <Screen tabs className="studio-workshop"><AppHeader/><button type="button" className="workshop-back" onClick={()=>reset([{name:'home'},{name:'passionHub'}])}><ArrowLeft size={17}/>Mes passions</button><header className="workshop-cover" data-passion={passion}><PassionArtwork passion={passion}/><h1>{getPassion(passion).label}</h1></header><div className="workshop-tabs" aria-label="Rubriques de la passion">{([{id:'create',label:copy.create},{id:'gallery',label:copy.gallery}] as const).map(tab=><button key={tab.id} type="button" aria-pressed={section===tab.id} onClick={()=>setSection(tab.id)}>{tab.label}</button>)}</div>
  {section==='gallery'?passion==='piano'?<section className="workshop-section"><h2>Mon répertoire</h2><p>Les morceaux que tu as débloqués.</p>{owned.length?owned.map(item=><button key={item.id} type="button" className="workshop-repertoire" onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{[item.composer,item.edition??item.difficulty].filter(Boolean).join(' · ')}</small></span><Play size={20}/></button>):<div className="workshop-empty"><p>Ton répertoire commence avec un premier morceau.</p></div>}<h2 className="mt-5">Mes séances au piano</h2><GalleryScreen key={passion} passion={passion} embedded/></section>:<GalleryScreen key={passion} passion={passion} embedded/>:<>
- <div className="workshop-intro"><h2>{row.activities?copy.title:'Ton atelier commence ici.'}</h2><p>{plural(row.activities,'activité')} · {row.minutes} min de pratique</p></div>
+ <div className="workshop-intro"><h2>{row.activities?copy.title:'Ton atelier commence ici.'}</h2><p>{plural(row.activities,'activité')} · {row.minutes} min de séance</p></div>
  {!row.activities&&<section className="workshop-welcome"><Mascot pose={passion==='dessin'?'draw':passion==='ecriture'?'write':passion==='piano'?'piano':'welcome'} size={94}/><div><h3>Un premier pas suffit pour commencer.</h3><p>{'Chaque création construira ton atelier.'}</p></div></section>}
  <Button className="workshop-main-cta" onClick={()=>start(passion)}>{available?row.activities?copy.cta:copy.first:'Ajouter cette passion'}<ArrowRight size={19}/></Button>
  {(passion==='dessin'||passion==='ecriture')&&<section className="workshop-word"><div><small>Le mot du jour</small><h2>{word}</h2><p>À toi de lui donner vie · 15 min</p></div><button type="button" onClick={()=>available?startWord(passion,day):push({name:'passions',mode:'edit'})}>{passion==='dessin'?'Dessiner':'Écrire'}<ChevronRight size={17}/></button></section>}

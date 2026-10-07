@@ -332,3 +332,9 @@ Chaque requête porte `Authorization: tma <initData>`. Les types des requêtes e
 ## Hors périmètre de cette V1
 
 Créneaux de 1 h et plus, personnalisation premium, paiement, boutique de badges, TMDB / Jikan, fonctions sociales, autres langues que le français.
+
+### Durée des séances et révisions
+
+Les statistiques séparent les minutons gagnés, les activités enregistrées et la durée des séances. Cette durée correspond aux minutes entières écoulées entre la création de la proposition et son enregistrement, plafonnées à la durée choisie ; les pauses peuvent être incluses. L'historique est recalculé depuis les dates existantes, sans modifier les récompenses. Les niveaux restent fondés sur les minutons gagnés et leurs seuils sont affichés en minutons.
+
+Dans un carnet d'apprentissage terminé, « C'est acquis » retire l'essai des révisions ; « Ajouter aux révisions » permet de l'y remettre. Ce statut appartient au compte. Le contenu archivé et le résultat calculé restent inchangés : retirer une révision ne transforme pas un essai incorrect en réussite.

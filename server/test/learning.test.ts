@@ -106,3 +106,29 @@ it('n’ouvre une création ciblée qu’à son propriétaire', async () => {
   expect(read.body.completion.text).toBe('Texte intégral de mon activité.')
   await request(app).get(endpoint).set(other).expect(404)
 })
+
+it('retire et rétablit une révision sans modifier le travail ni fabriquer une réussite', async () => {
+ const work = { ...emptyLearningWork(), first: 'Mon essai initial', final: 'Mon essai conservé', completed: true, review: true, step: 3 }
+ const body = { lessonId: 'learn-v1-ecriture-1', work }
+ const before = (await request(app).put(url).set(auth).send(body).expect(200)).body
+ const stored = await db.prisma.learningEntry.findUniqueOrThrow({where:{id}})
+ const endpoint = url + '/review'
+ await request(app).patch(endpoint).send({review:false}).expect(401)
+ await request(app).patch(endpoint).set(other).send({review:false}).expect(404)
+ await request(app).patch(endpoint).set(auth).send({review:'false'}).expect(400)
+ const acquired = (await request(app).patch(endpoint).set(auth).send({review:false,mastered:true,work:{final:'écrasé'}}).expect(200)).body
+ expect(acquired.review).toBe(false)
+ expect(acquired.work).toEqual(before.work)
+ expect(acquired.mastered).toBe(before.mastered)
+ expect((await request(app).get('/api/learning').set(auth)).body.items[0].review).toBe(false)
+ // Une répétition de l'enregistrement original ne restaure pas l'ancien statut.
+ expect((await request(app).put(url).set(auth).send(body).expect(200)).body.review).toBe(false)
+ expect((await db.prisma.learningEntry.findUniqueOrThrow({where:{id}})).work).toBe(stored.work)
+ await request(app).put(url).set(auth).send({...body,work:{...work,final:'Autre contenu'}}).expect(409)
+ expect((await request(app).patch(endpoint).set(auth).send({review:true}).expect(200)).body.review).toBe(true)
+})
+it('réserve le changement de statut aux essais conservés', async () => {
+ await request(app).put(url).set(auth).send({lessonId:'learn-v1-ecriture-1',work:emptyLearningWork()}).expect(200)
+ await request(app).patch(url+'/review').set(auth).send({review:false}).expect(409)
+ await request(app).patch('/api/learning/absent-learning-0001/review').set(auth).send({review:false}).expect(404)
+})

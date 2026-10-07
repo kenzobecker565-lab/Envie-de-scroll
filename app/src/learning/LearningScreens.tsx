@@ -436,6 +436,8 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
     [id, setId] = useState(draft.id),
     [loading, setLoading] = useState(!!entryId || draft.local),
     [readOnly, setReadOnly] = useState(false),
+    [reviewStatus, setReviewStatus] = useState(false),
+    [reviewMessage, setReviewMessage] = useState(''),
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
     [localOK, setLocalOK] = useState(true),
@@ -463,6 +465,7 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
         if (r.completed || draft.id !== lookupId || !draft.local) setWork(r.work)
         setId(r.id)
         setReadOnly(r.completed)
+        setReviewStatus(r.review)
         setLoading(false)
       })
       .catch((e) => {
@@ -510,6 +513,7 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
         setSaved(true)
         if (completed) {
           setReadOnly(true)
+          setReviewStatus(result.review)
           setWork(result.work!)
           try {
             localStorage.removeItem(key)
@@ -533,7 +537,25 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
     setWork(emptyLearningWork())
     setDemo(0)
     setError('')
+    setReviewMessage('')
     window.scrollTo(0, 0)
+  }
+  const toggleReview = async () => {
+    if (saving.current) return
+    saving.current = true
+    setBusy(true)
+    setError('')
+    setReviewMessage('')
+    try {
+      const result = await api.setLearningReview(id, !reviewStatus)
+      setReviewStatus(result.review)
+      setReviewMessage(result.review ? 'Ajouté aux révisions. Ton essai est conservé.' : 'Retiré des révisions. Ton essai est conservé.')
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      saving.current = false
+      setBusy(false)
+    }
   }
   if (!lesson)
     return (
@@ -579,7 +601,13 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
         <>
           <div className="learn-mint">{learningAttempted(work) ? 'Essai conservé dans ton carnet' : 'Leçon consultée · ta lecture est enregistrée'}</div>
           <ReadWork lesson={lesson} work={work} />
-          <Button onClick={retry}>{learningAttempted(work) ? 'Faire un nouvel essai' : 'Faire mon premier essai'}</Button>
+          <section className="learn-card">
+            <h2>{reviewStatus ? 'À revoir' : 'Hors de mes révisions'}</h2>
+            <p>Tu peux modifier ce statut sans changer ton essai ni son résultat.</p>
+            <Button disabled={busy} variant="secondary" onClick={() => void toggleReview()}>{busy ? 'Enregistrement…' : reviewStatus ? 'C’est acquis · retirer des révisions' : 'Ajouter aux révisions'}</Button>
+            {reviewMessage && <p role="status">{reviewMessage}</p>}
+          </section>
+          <Button disabled={busy} onClick={retry}>{learningAttempted(work) ? 'Faire un nouvel essai' : 'Faire mon premier essai'}</Button>
           <Button variant="secondary" onClick={() => push({ name: 'learnPassion', passion: lesson.passion })}>Choisir ma prochaine leçon</Button>
           <Button variant="secondary" onClick={() => push({ name: 'learningNotebooks', passion: lesson.passion })}>
             Mes carnets d’apprentissage

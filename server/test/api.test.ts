@@ -234,10 +234,12 @@ describe('parcours complet', () => {
     expect(body.completion.exploredTitle).toBe('Blonde — Frank Ocean')
     expect(body.stats).toEqual({
       totalCoins: 15,
+      totalMinutes: 15,
       totalActivities: 1,
       monthActivities: 1,
       monthCoins: 15,
-      byPassion: [{ passion: 'musique', minutes: 15, activities: 1, tried: [proposal.activityId], steps: [], drawings: 0, words: 0, explored: 1 }],
+      monthMinutes: 15,
+      byPassion: [{ passion: 'musique', minutes: 15, coins: 15, activities: 1, tried: [proposal.activityId], steps: [], drawings: 0, words: 0, explored: 1 }],
       challenge: [],
     })
 

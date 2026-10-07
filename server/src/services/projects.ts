@@ -20,6 +20,7 @@ import type { Completion, PrismaClient, Project, User } from '../db.ts'
 import { ApiError, badRequest } from '../http/errors.ts'
 import { toCompletionDTO } from './completions.ts'
 import { parsePassions } from './users.ts'
+import { sessionMinutes } from './sessionMinutes.ts'
 
 export const MAX_PROJECT_NAME = 40
 export const MAX_PROJECT_GOAL = 100
@@ -27,7 +28,7 @@ export const MAX_PROJECT_GOAL = 100
 const MAX_PROJECTS = 30
 
 type PhotoUrl = (completion: Completion) => string
-type ProjectRow = Project & { completions: Completion[] }
+type ProjectRow = Project & { completions: (Completion & { proposal: { createdAt: Date } })[] }
 
 export function toProjectDTO(project: ProjectRow, photoUrl: PhotoUrl): ProjectDTO {
   const withPhoto = project.completions.filter((completion) => completion.photoRef)
@@ -38,7 +39,7 @@ export function toProjectDTO(project: ProjectRow, photoUrl: PhotoUrl): ProjectDT
     name: project.name,
     goal: project.goal,
     creations: project.completions.length,
-    minutes: project.completions.reduce((sum, completion) => sum + completion.coins, 0),
+    minutes: project.completions.reduce((sum, completion) => sum + sessionMinutes(completion), 0),
     words: project.completions.reduce((sum, completion) => sum + countWords(completion.text), 0),
     coverUrl: cover ? photoUrl(cover) : null,
     createdAt: project.createdAt.toISOString(),
@@ -46,7 +47,7 @@ export function toProjectDTO(project: ProjectRow, photoUrl: PhotoUrl): ProjectDT
   }
 }
 
-const withCompletions = { completions: { orderBy: { createdAt: 'asc' as const } } }
+const withCompletions = { completions: { orderBy: { createdAt: 'asc' as const }, include: { proposal: { select: { createdAt: true } } } } }
 
 export async function listProjects(prisma: PrismaClient, user: User, photoUrl: PhotoUrl): Promise<ProjectDTO[]> {
   const projects = await prisma.project.findMany({ where: { userId: user.id }, orderBy: { createdAt: 'desc' }, include: withCompletions })

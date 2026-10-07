@@ -168,6 +168,17 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   }
   api.get('/learning',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const items=await prisma.learningEntry.findMany({where:{userId:user.id},orderBy:[{updatedAt:'desc'},{id:'desc'}],select:{id:true,lessonId:true,passion:true,title:true,completed:true,mastered:true,review:true,updatedAt:true,work:true}});res.json({items:items.map(entry => learningDTO(entry, false))})}))
   api.get('/learning/:id',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const item=await prisma.learningEntry.findFirst({where:{id:String(req.params.id),userId:user.id}});if(!item)throw new ApiError(404,'not_found','Carnet introuvable.');const {userId,createdAt,...entry}=item;res.json(learningDTO(entry))}))
+  api.patch('/learning/:id/review', asyncRoute(async (req, res) => {
+    const user = await currentUser(req, res)
+    if (typeof req.body?.review !== 'boolean') throw badRequest('Statut de révision invalide.')
+    const entry = await prisma.learningEntry.findFirst({ where: { id: String(req.params.id), userId: user.id } })
+    if (!entry) throw new ApiError(404, 'not_found', 'Carnet introuvable.')
+    if (!entry.completed) throw new ApiError(409, 'invalid_request', 'Conserve ton essai avant de modifier son statut de révision.')
+    // Le travail archivé et le résultat calculé restent immuables.
+    const updated = await prisma.learningEntry.update({ where: { id: entry.id }, data: { review: req.body.review } })
+    const { userId, createdAt, ...dto } = updated
+    res.json(learningDTO(dto))
+  }))
   api.put('/learning/:id',asyncRoute(async(req,res)=>{
     const user=await currentUser(req,res),id=String(req.params.id),lesson=learningLesson(String(req.body?.lessonId));
     if(!/^[a-zA-Z0-9-]{16,80}$/.test(id)||!lesson)throw badRequest('Leçon ou identifiant invalide.');

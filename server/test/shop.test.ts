@@ -236,10 +236,10 @@ it('achète les nouvelles tenues créatives et divines puis les restaure sans do
   expect(restored.body.stats.totalCoins).toBe(3000)
 })
 
-it('offre les deux skins privés par codes partagés, sans débit et avec restauration de la tenue', async () => {
+it('offre les skins privés et le cadeau testeurs par codes partagés, sans débit et avec restauration de la tenue', async () => {
   await fund(30)
   await fund(10, 2)
-  for (const [code, itemId] of [['26022024', 'mascot-private-poney'], ['30101960', 'mascot-private-maradona']]) {
+  for (const [code, itemId] of [['26022024', 'mascot-private-poney'], ['30101960', 'mascot-private-maradona'], ['TESTEURSV1', 'mascot-testers-explorer']]) {
     await request(app).post('/api/shop/purchases').set(as()).send({ itemId }).expect(400)
     await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId }).expect(403)
     const redeemed = await request(app).post('/api/shop/codes').set(as()).send({ code: ` ${code} `, itemId: 'mascot-zeus', userId: '2' }).expect(200)

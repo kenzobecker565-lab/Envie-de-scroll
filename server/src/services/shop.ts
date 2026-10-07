@@ -90,6 +90,7 @@ export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, 
 
 // Les codes restent côté serveur ; le client ne reçoit jamais la liste des codes.
 const SKIN_CODES: Readonly<Record<string, string>> = {
+  '8de38b9402d05ba561c6f5dd48a7d0a14c771fba26a1b86eaf48dca47921f5ed': 'mascot-testers-explorer',
   'bea9f4846c575907ba628ad8f4262611bb12082975fc473e403cacfbef0997db': 'mascot-private-maradona',
   '9253f1476e7c805ac1a0331ec2c4aea286d299412a1156fcb3bae77f98e5083e': 'mascot-private-poney',
 }

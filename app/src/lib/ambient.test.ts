@@ -32,7 +32,7 @@ afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers() })
 describe('signature music startup', () => {
  it('starts the signature without waiting for a gesture when allowed', async () => {
   const t=await setup();t.ambient.initAmbient();await t.settle()
-  expect(t.audios[0]!.src).toBe('/music/scroll-up-signature.mp3');expect(t.audios[0]!.paused).toBe(false);expect(t.ramp).toHaveBeenCalledWith(.32,1.2)
+  expect(t.audios[0]!.src).toBe('/music/scroll-up-signature-bossa-v1.mp3');expect(t.audios[0]!.paused).toBe(false);expect(t.ramp).toHaveBeenCalledWith(.32,1.2)
   t.ambient.initAmbient();expect(t.audios).toHaveLength(1)
  })
  it('retries blocked autoplay on a real gesture', async () => {

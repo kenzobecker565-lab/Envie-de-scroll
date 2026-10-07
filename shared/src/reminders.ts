@@ -41,7 +41,12 @@ export function isScrollMoment(value: unknown): value is ScrollMoment {
 }
 
 /** L'heure de la relance (minutes depuis minuit) : juste avant le moment choisi, sinon l'heure par défaut. */
-export function reminderMinutes(moment: ScrollMoment | null, defaultHour: number): number {
+export function isReminderTime(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value < 1440
+}
+
+export function reminderMinutes(moment: ScrollMoment | null, defaultHour: number, chosen?: number | null): number {
+  if (isReminderTime(chosen)) return chosen
   return moment ? SCROLL_MOMENT_INFO[moment].remindAt : defaultHour * 60
 }
 

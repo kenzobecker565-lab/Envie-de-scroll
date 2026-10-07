@@ -26,6 +26,8 @@ export interface UserDTO {
   remindersEnabled: boolean
   /** Le moment où la personne scrolle le plus : la relance arrive juste avant (sinon vers 19 h). */
   scrollMoment: ScrollMoment | null
+  /** Heure locale choisie, en minutes depuis minuit ; sinon ancien moment ou 19 h. */
+  reminderTime?: number | null
   /** Le niveau déclaré dans les passions qui le demandent (Piano). */
   skills: Skills
 }
@@ -143,6 +145,7 @@ export interface UpdateSettingsRequest {
   tutorialCompleted?: true
   remindersEnabled?: boolean
   scrollMoment?: ScrollMoment
+  reminderTime?: number
 }
 
 /** Un avis écrit, envoyé depuis l'app. */

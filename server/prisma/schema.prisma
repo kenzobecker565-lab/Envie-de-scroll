@@ -30,6 +30,8 @@ model User {
   tutorialCompleted   Boolean  @default(false)
   /// Moment où la personne scrolle le plus (matin, midi, soir, nuit) : la relance arrive juste avant
   scrollMoment        String?
+  /// Heure de rappel locale, en minutes depuis minuit (0–1439)
+  reminderTime        Int?
   /// Niveau déclaré dans les passions qui le demandent, en JSON : {"piano":"debutant"}
   skills              String   @default("{}")
   /// Nombre de relances envoyées (pour alterner les deux messages)

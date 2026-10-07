@@ -86,3 +86,29 @@ describe('relances', () => {
     expect((await prisma.user.findUnique({ where: { id: 1n } }))?.canMessage).toBe(false)
   })
 })
+
+ describe('heure précise', () => {
+  it('respecte l’heure locale choisie plutôt que l’ancien créneau et ne renvoie pas deux fois', async () => {
+    await prisma.user.update({ where: { id: 1n }, data: { scrollMoment: 'matin', reminderTime: 1110 } })
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T16:29:00Z'))).toBe(0)
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T16:30:00Z'))).toBe(1)
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T16:31:00Z'))).toBe(0)
+  })
+  it('rattrape 23 h 59 à minuit sans le répéter', async () => {
+    await prisma.user.update({ where: { id: 1n }, data: { reminderTime: 1439 } })
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T21:58:00Z'))).toBe(0)
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T22:00:00Z'))).toBe(1)
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T22:01:00Z'))).toBe(0)
+  })
+  it('ne double pas un rappel déjà envoyé à 23 h 59 lorsque minuit passe', async () => {
+    await prisma.user.update({ where: { id: 1n }, data: { reminderTime: 1439 } })
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T21:59:00Z'))).toBe(1)
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T22:00:00Z'))).toBe(0)
+  })
+  it('respecte une activité faite avant minuit lorsque le rappel traverse minuit', async () => {
+    await prisma.user.update({ where: { id: 1n }, data: { reminderTime: 1439 } })
+    const proposal = await prisma.proposal.create({ data: { userId: 1n, activityId: 'dessin-5-1', passion: 'dessin', mood: 'ennui', duration: 5, intro: '' } })
+    await prisma.completion.create({ data: { userId: 1n, proposalId: proposal.id, activityId: 'dessin-5-1', passion: 'dessin', mood: 'ennui', duration: 5, activityText: '', coins: 5, localDate: '2026-10-07' } })
+    expect(await sendDueReminders(deps(), new Date('2026-10-07T22:00:00Z'))).toBe(0)
+  })
+})

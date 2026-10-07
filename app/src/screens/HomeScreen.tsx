@@ -1,9 +1,9 @@
-import { BookOpen, Brush, ChevronRight, Feather, Images, Sparkles } from 'lucide-react'
+import { BookOpen, Brush, ChevronRight, Feather, Sparkles } from 'lucide-react'
 import { dailyWord, getPassion, getPathStep, isFixedActivityId, type PassionId } from '@scroll-up/shared'
 import { Screen } from '../components/Screen.tsx'
 import { AppHeader } from '../components/AppHeader.tsx'
 import { ScrollCallToAction } from '../components/ScrollCallToAction.tsx'
-import { Mascot } from '../components/Mascot.tsx'
+import { Mascot, MinutonFigure } from '../components/Mascot.tsx'
 import { PassionArtwork, PassionPoster } from '../components/PassionArtwork.tsx'
 import { todayKey, wordDone } from '../components/Challenge.tsx'
 import { useStartChallenge } from '../lib/useStartChallenge.ts'
@@ -46,7 +46,7 @@ export function HomeScreen() {
    <div className="studio-daily-actions"><button type="button" onClick={()=>user.passions.includes('dessin')?startChallenge('dessin',today):push({name:'challenge'})}><Brush size={19}/>Dessiner</button><button type="button" onClick={()=>user.passions.includes('ecriture')?startChallenge('ecriture',today):push({name:'challenge'})}><Feather size={19}/>Écrire</button></div>
   </section>
   <section className="studio-home-resume"><h2>{openProposal?'Reprendre mon activité':learning?'Reprendre ma leçon':'À découvrir'}</h2><button type="button" className="studio-resume-row" onClick={openProposal?resume:()=>learning?push({name:'learningLesson',lessonId:learning.lessonId,entryId:learning.id}):push({name:'learn'})}>{resumePassion&&<PassionArtwork passion={resumePassion}/>}<span className="studio-resume-copy"><strong>{openProposal?.text??learning?.title??'Apprendre à ton rythme'}</strong><span>{resumePassion?getPassion(resumePassion).label:'Apprendre'}{learning&&!openProposal?' · Leçon en cours':openProposal?` · ${openProposal.duration} min`:''}</span></span><span className="studio-resume-arrow"><ChevronRight size={22}/></span></button></section>
-  <button type="button" className="studio-home-atelier" data-tour-target="atelier" onClick={()=>{haptics.selection();push({name:'atelier'})}}><span className="studio-home-atelier-icon"><Images size={23} aria-hidden="true"/></span><span className="studio-home-atelier-copy"><strong>Chez Minuton</strong><small>Retrouve tes créations dans ton atelier</small></span><ChevronRight size={21} aria-hidden="true"/></button>
+  <button type="button" className="studio-home-atelier" data-tour-target="atelier" onClick={()=>{haptics.selection();push({name:'atelier'})}}><span className="studio-home-atelier-icon"><MinutonFigure pose="draw" size={62} animated={false}/></span><span className="studio-home-atelier-copy"><strong>Chez Minuton</strong><small>Retrouve tes créations dans ton atelier</small></span><ChevronRight size={21} aria-hidden="true"/></button>
   <section className="studio-home-passions" data-tour-target="passions" aria-labelledby="home-passions">
    <div className="studio-section-heading"><h2 id="home-passions">Tes passions</h2><button type="button" onClick={()=>push({name:'passionHub'})}>Tout voir <ChevronRight size={14}/></button></div>
    <div className="studio-home-cards">{passions.slice(0,2).map(passion=><PassionPoster key={passion} passion={passion} compact stats={statsFor(stats.byPassion,passion)} onOpen={()=>push({name:'passionSpace',passion})}/>)}{passions.length===0&&<button className="studio-empty-passions" type="button" onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions <ChevronRight/></button>}</div>

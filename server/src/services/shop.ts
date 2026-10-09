@@ -91,6 +91,7 @@ export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, 
 
 // Une seule liste côté serveur pour le déblocage et le mémo réservé aux admins.
 const SKIN_GIFTS = [
+  { code: 'RANMA', itemId: 'mascot-private-ranma' },
   { code: 'TESTEURSV1', itemId: 'mascot-testers-explorer' },
   { code: '30101960', itemId: 'mascot-private-maradona' },
   { code: '26022024', itemId: 'mascot-private-poney' },
@@ -105,6 +106,7 @@ export async function redeemSkinCode(prisma: PrismaClient, userId: bigint, code:
   const itemId = SKIN_CODES[createHash('sha256').update(code.trim()).digest('hex')]
   const item = itemId ? getShopItem(itemId) : undefined
   if (!item?.redemptionOnly) throw badRequest('Ce code n’est pas reconnu. Vérifie-le et réessaie.')
+  if (item.id === 'mascot-private-ranma' && !(await isAdmin(prisma, admins, userId))) throw new ApiError(403, 'unauthorized', 'Cette tenue personnelle est réservée au compte administrateur.')
   await prisma.shopPurchase.upsert({ where: { userId_itemId: { userId, itemId: item.id } }, create: { userId, itemId: item.id, price: 0 }, update: {} })
   return { ...await getShop(prisma, userId, admins), redeemedItemId: item.id }
 }

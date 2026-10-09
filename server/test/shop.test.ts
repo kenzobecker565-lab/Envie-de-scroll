@@ -281,6 +281,7 @@ it('réserve le mémo des codes aux admins même après le crédit de test', asy
   await prisma.setting.create({ data: { key: 'admins', value: '["1"]' } })
   const admin = await request(app).get('/api/shop').set(as()).expect(200)
   expect(admin.body.giftCodes).toEqual([
+    { code: 'RANMA', itemId: 'mascot-private-ranma', title: 'Minuton Ranma · Tenue bleue' },
     { code: 'TESTEURSV1', itemId: 'mascot-testers-explorer', title: 'Minuton Explorateur' },
     { code: '30101960', itemId: 'mascot-private-maradona', title: 'Minuton Maradona' },
     { code: '26022024', itemId: 'mascot-private-poney', title: 'Minuton complice' },
@@ -293,4 +294,19 @@ it('réserve le mémo des codes aux admins même après le crédit de test', asy
   expect(other.body).not.toHaveProperty('giftCodes')
   const otherMe = await request(app).get('/api/me').set(as(2)).expect(200)
   expect(otherMe.body.shop).not.toHaveProperty('giftCodes')
+})
+
+
+it('réserve Ranma au compte administrateur, même si un autre utilisateur connaît le code', async () => {
+  await fund(30)
+  await fund(10, 2)
+  await prisma.setting.create({ data: { key: 'admins', value: '["1"]' } })
+  await request(app).post('/api/shop/codes').set(as(2)).send({ code: 'RANMA', admin: true }).expect(403)
+  await request(app).post('/api/shop/purchases').set(as()).send({ itemId: 'mascot-private-ranma' }).expect(400)
+  const redeemed = await request(app).post('/api/shop/codes').set(as()).send({ code: ' RANMA ' }).expect(200)
+  expect(redeemed.body).toMatchObject({ spent: 0, balance: 30, redeemedItemId: 'mascot-private-ranma' })
+  await request(app).post('/api/shop/codes').set(as()).send({ code: 'RANMA' }).expect(200)
+  await request(app).put('/api/shop/equipment').set(as()).send({ category: 'mascot', itemId: 'mascot-private-ranma' }).expect(200)
+  expect((await request(app).get('/api/me').set(as())).body.shop.equipped.mascot).toBe('mascot-private-ranma')
+  expect(await prisma.shopPurchase.count({ where: { itemId: 'mascot-private-ranma' } })).toBe(1)
 })

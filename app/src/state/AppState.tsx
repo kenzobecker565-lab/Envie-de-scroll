@@ -32,6 +32,7 @@ export type Route =
   | { name: 'passionSpace'; passion: PassionId }
   | { name: 'profile' }
   | { name: 'settings' }
+  | { name: 'testers' }
   | { name: 'path'; pathId: string }
   | { name: 'challenge' }
 

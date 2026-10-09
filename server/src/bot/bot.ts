@@ -65,6 +65,7 @@ export function createBot(config: Pick<Config, 'botToken' | 'webAppUrl' | 'stora
 
   bot.start(async (ctx) => {
     await welcome(ctx.from)
+    if (!(await prisma.appEvent.findFirst({ where: { userId: BigInt(ctx.from.id), name: 'bot_start' } }))) await prisma.appEvent.create({ data: { userId: BigInt(ctx.from.id), name: 'bot_start' } })
     await prisma.user.update({ where: { id: BigInt(ctx.from.id) }, data: { remindersEnabled: true } })
     const keyboard = openAppKeyboard(config.webAppUrl)
     await ctx.reply(

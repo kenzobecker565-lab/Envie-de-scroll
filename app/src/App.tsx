@@ -1,3 +1,4 @@
+import { TestersScreen } from './screens/TestersScreen.tsx'
 import {AtelierScreen} from './screens/AtelierScreen.tsx'
 import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
@@ -136,6 +137,7 @@ function screenFor(route: Route) {
     case 'passionSpace': return <PassionSpaceScreen passion={route.passion} />
     case 'profile': return <ProfileScreen />
     case 'settings': return <SettingsScreen />
+    case 'testers': return <TestersScreen />
     case 'signal':
       return <SignalScreen />
     case 'time':

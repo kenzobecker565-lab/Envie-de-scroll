@@ -121,6 +121,8 @@ export interface ShopState {
   /** Crédit de test distinct des minutons gagnés avec les activités. */
   bonus?: number
   canClaimTestCredit?: boolean
+  /** Codes cadeaux : envoyés uniquement au compte administrateur authentifié. */
+  giftCodes?: { code: string; itemId: string; title: string }[]
   earned: number
   spent: number
   balance: number

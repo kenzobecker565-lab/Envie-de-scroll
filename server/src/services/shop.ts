@@ -20,7 +20,8 @@ export async function getShop(prisma: PrismaClient, userId: bigint, admins: read
       return typeof id === 'string' && owned.includes(id) && getShopItem(id)?.category === category ? [[category, id]] : []
     }))
   } catch { /* Un ancien profil sans équipement conserve les réglages gratuits. */ }
-  return { earned, bonus: user.shopBonus, canClaimTestCredit: !user.shopTestCreditClaimed && await isAdmin(prisma, admins, userId), spent: user.coinsSpent, balance: Math.max(0, earned + user.shopBonus - user.coinsSpent), owned, equipped }
+  const admin = await isAdmin(prisma, admins, userId)
+  return { ...(admin ? { giftCodes: SKIN_GIFTS.map(gift => ({ ...gift, title: getShopItem(gift.itemId)!.title })) } : {}), earned, bonus: user.shopBonus, canClaimTestCredit: !user.shopTestCreditClaimed && admin, spent: user.coinsSpent, balance: Math.max(0, earned + user.shopBonus - user.coinsSpent), owned, equipped }
 }
 
 export async function buyItem(prisma: PrismaClient, userId: bigint, id: unknown, admins: readonly string[] = []): Promise<ShopState> {
@@ -88,12 +89,15 @@ export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, 
   return getShop(prisma, userId, admins)
 }
 
-// Les codes restent côté serveur ; le client ne reçoit jamais la liste des codes.
-const SKIN_CODES: Readonly<Record<string, string>> = {
-  '8de38b9402d05ba561c6f5dd48a7d0a14c771fba26a1b86eaf48dca47921f5ed': 'mascot-testers-explorer',
-  'bea9f4846c575907ba628ad8f4262611bb12082975fc473e403cacfbef0997db': 'mascot-private-maradona',
-  '9253f1476e7c805ac1a0331ec2c4aea286d299412a1156fcb3bae77f98e5083e': 'mascot-private-poney',
-}
+// Une seule liste côté serveur pour le déblocage et le mémo réservé aux admins.
+const SKIN_GIFTS = [
+  { code: 'TESTEURSV1', itemId: 'mascot-testers-explorer' },
+  { code: '30101960', itemId: 'mascot-private-maradona' },
+  { code: '26022024', itemId: 'mascot-private-poney' },
+] as const
+const SKIN_CODES: Readonly<Record<string, string>> = Object.fromEntries(
+  SKIN_GIFTS.map(({ code, itemId }) => [createHash('sha256').update(code).digest('hex'), itemId]),
+)
 
 /** Un code partagé peut offrir la même tenue à plusieurs comptes, sans débit. */
 export async function redeemSkinCode(prisma: PrismaClient, userId: bigint, code: unknown, admins: readonly string[] = []): Promise<ShopState & { redeemedItemId: string }> {

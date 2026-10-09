@@ -1,6 +1,6 @@
 import { AppHeader } from '../components/AppHeader.tsx'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { ArrowLeft, Check, ChevronLeft, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles, Gift } from 'lucide-react'
+import { ArrowLeft, Check, ChevronLeft, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles, Gift, Copy } from 'lucide-react'
 import { getShopItem, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -170,6 +170,18 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
     <section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={52} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div>{shop.equipped.mascot ? <button type="button" disabled={busy || loading} className="skin-reset" aria-label="Revenir à Minuton classique" onClick={() => void equip(null)}><RotateCcw size={17}/></button> : <Check size={18} aria-hidden="true"/>}</section>
     {shop.canClaimTestCredit && <Button className="mt-3" variant="secondary" disabled={busy || loading} onClick={() => void claimCredit()}>Recevoir 10 000 Minutons de test</Button>}
     <Button className="mt-3" variant="secondary" disabled={busy || loading} onClick={() => { setCodeError(undefined); setCodeOpen(true) }}><Gift size={18}/>Utiliser un code</Button>
+    {!!shop.giftCodes?.length && <details className="mt-3 rounded-2xl border border-purple-200 bg-white/90 p-4">
+      <summary className="cursor-pointer font-bold text-ink">Mes codes cadeaux · Administrateur</summary>
+      <p className="mt-2 text-sm text-ink-soft">Retrouve les codes à partager pour offrir tes Minutons exclusifs.</p>
+      <div className="mt-3 flex flex-col gap-3">{shop.giftCodes.map(gift => <div key={gift.itemId} className="rounded-xl bg-purple-50 p-3">
+        <strong className="block text-ink">{gift.title}</strong>
+        <code className="mt-1 block select-all text-lg font-bold text-ink">{gift.code}</code>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <Button size="sm" variant="secondary" onClick={() => { void navigator.clipboard?.writeText(gift.code).then(() => setNotice('Code copié.')).catch(() => setNotice('Sélectionne le code affiché pour le copier.')); if (!navigator.clipboard) setNotice('Sélectionne le code affiché pour le copier.') }}><Copy size={16}/>Copier</Button>
+          <Button size="sm" variant="ghost" disabled={busy || loading} onClick={() => { setCode(gift.code); setCodeError(undefined); setCodeOpen(true) }}>Utiliser ce code</Button>
+        </div>
+      </div>)}</div>
+    </details>}
     <Dialog open={codeOpen} onOpenChange={open => { if (!busy) { setCodeOpen(open); setCodeError(undefined) } }}><DialogContent>
       <DialogHeader><DialogTitle>Un cadeau pour ton Minuton</DialogTitle><DialogDescription>Saisis ton code pour recevoir une tenue offerte. Tu la retrouveras dans Mes achats.</DialogDescription></DialogHeader>
       <form className="flex flex-col gap-4" onSubmit={event => { event.preventDefault(); void redeemCode() }}>

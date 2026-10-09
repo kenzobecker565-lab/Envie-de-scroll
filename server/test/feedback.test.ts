@@ -37,6 +37,31 @@ afterEach(async () => {
 
 const as = (id = 42) => ({ Authorization: `dev ${id}`, 'X-Timezone': 'Europe/Paris' })
 
+describe('suivi nominatif des testeurs', () => {
+  it('protège les profils et distingue bot, ouverture et inscription', async () => {
+    await request(app).get('/api/admin/testers').expect(401)
+    await request(app).get('/api/admin/testers').set(as(7)).expect(403)
+    expect(await prisma.user.count()).toBe(0)
+    await claimAdmin(prisma, [], 42)
+    const botUser = await prisma.user.create({ data: { id: 7n, firstName: 'Nora', username: 'nora_test' } })
+    await prisma.appEvent.create({ data: { userId: botUser.id, name: 'bot_start' } })
+    let result = await request(app).get('/api/admin/testers').set(as()).expect(200)
+    expect(result.headers['cache-control']).toBe('no-store')
+    expect(result.body.items[0]).toMatchObject({ id: '7', botStarted: true, openedAt: null, registered: false })
+    // /start creates a user immediately before /me: its first app opening must still be recorded.
+    await request(app).get('/api/me').set(as(7)).expect(200)
+    await request(app).get('/api/me').set(as(7)).expect(200)
+    expect(await prisma.appEvent.count({ where: { userId: 7n, name: 'open' } })).toBe(1)
+    await request(app).put('/api/me/passions').set(as(7)).send({ passions: ['dessin'] }).expect(200)
+    result = await request(app).get('/api/admin/testers?q=Camille').set(as()).expect(200)
+    expect(result.body.summary).toEqual({ botStarted: 1, opened: 1, registered: 1 })
+    expect(result.body.items[0]).toMatchObject({ registered: true, activities: 0, tutorialCompleted: false })
+    expect(result.body.items[0].openedAt).not.toBeNull()
+    expect((await request(app).get('/api/me').set(as()).expect(200)).body.isAdmin).toBe(true)
+    expect((await request(app).get('/api/me').set(as(7)).expect(200)).body.isAdmin).toBe(false)
+  })
+})
+
 /** Une activité d'écriture validée (5 min), pour noter, compter, exporter. */
 async function writeSomething(id = 42) {
   await request(app).put('/api/me/passions').set(as(id)).send({ passions: ['ecriture'] }).expect(200)

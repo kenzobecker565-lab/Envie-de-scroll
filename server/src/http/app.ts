@@ -31,6 +31,7 @@ import { pipeline } from 'node:stream/promises'
 import express, { type ErrorRequestHandler, type NextFunction, type Request, type RequestHandler, type Response } from 'express'
 import multer from 'multer'
 import {
+  activePassions,
   DURATIONS,
   isAppEventName,
   isAppTheme,
@@ -62,9 +63,9 @@ import { type TelegramUser, InitDataError, validateInitData } from '../auth/init
 import { signedPhotoUrl, verifyPhotoSignature, type PhotoService } from '../photos/photos.ts'
 import { completeProposal, listCompletions, toCompletionDTO } from '../services/completions.ts'
 import { createProposal, findOpenProposal, toProposalDTO } from '../services/proposals.ts'
-import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
+import { isAdmin, cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
-import { deleteUserData, getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
+import { deleteUserData, getStats, parsePassions, toUserDTO, upsertFromTelegram } from '../services/users.ts'
 import { getShop, buyItem, equipItem, bonusMelody, claimShopTestCredit, redeemSkinCode } from '../services/shop.ts'
 import { ApiError, badRequest } from './errors.ts'
 
@@ -204,9 +205,10 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     asyncRoute(async (req, res) => {
       const before = await prisma.user.findUnique({ where: { id: BigInt(telegramUserOf(res).id) }, select: { lastSeenAt: true } })
       const user = await currentUser(req, res)
-      if (!before || now().getTime() - before.lastSeenAt.getTime() > SESSION_GAP_MS) await recordEvent(prisma, user, 'open', undefined, now())
+      if (!before || !(await prisma.appEvent.findFirst({ where: { userId: user.id, name: 'open' }, select: { id: true } })) || now().getTime() - before.lastSeenAt.getTime() > SESSION_GAP_MS) await recordEvent(prisma, user, 'open', undefined, now())
       const [stats, open, projects] = await Promise.all([getStats(prisma, user, now()), findOpenProposal(prisma, user, now()), listProjects(prisma, user, photoUrl)])
       const body: MeResponse = {
+        isAdmin: await isAdmin(prisma, config.adminIds ?? [], user.id),
         user: toUserDTO(user),
         stats,
         openProposal: open ? toProposalDTO(open) : null,
@@ -318,6 +320,33 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   )
 
   /* --------------------------- Avis et suivi du test ---------------------------- */
+
+  api.get('/admin/testers', asyncRoute(async (req, res) => {
+    const id = BigInt(telegramUserOf(res).id)
+    if (!(await isAdmin(prisma, config.adminIds ?? [], id))) throw new ApiError(403, 'unauthorized', 'Accès réservé à l’administrateur.')
+    const q = typeof req.query.q === 'string' ? req.query.q.trim().slice(0, 80) : ''
+    const where = q ? { OR: [{ firstName: { contains: q } }, { username: { contains: q.replace(/^@/, '') } }] } : {}
+    const total = await prisma.user.count({ where })
+    const pages = Math.max(1, Math.ceil(total / 50))
+    const page = Math.min(pages, Math.max(1, Number.parseInt(String(req.query.page ?? '1'), 10) || 1))
+    const [rows, botStarted, opened, registered] = await Promise.all([
+      prisma.user.findMany({ where, skip: (page - 1) * 50, take: 50, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+        select: { id: true, firstName: true, username: true, passions: true, tutorialCompleted: true,
+          events: { where: { name: { in: ['open', 'bot_start'] } }, orderBy: { createdAt: 'asc' }, select: { name: true, createdAt: true } },
+          _count: { select: { completions: true } } } }),
+      prisma.user.count({ where: { events: { some: { name: 'bot_start' } } } }),
+      prisma.user.count({ where: { events: { some: { name: 'open' } } } }),
+      prisma.user.count({ where: { passions: { not: '[]' } } }),
+    ])
+    res.setHeader('Cache-Control', 'no-store')
+    res.json({ total, page, pages, summary: { botStarted, opened, registered }, items: rows.map(row => {
+      const visits = row.events.filter(event => event.name === 'open')
+      return { id: row.id.toString(), firstName: row.firstName, username: row.username,
+        openedAt: visits[0]?.createdAt.toISOString() ?? null, lastOpenedAt: visits.at(-1)?.createdAt.toISOString() ?? null,
+        botStarted: row.events.some(event => event.name === 'bot_start'), registered: activePassions(parsePassions(row)).length > 0,
+        tutorialCompleted: row.tutorialCompleted, activities: row._count.completions }
+    }) })
+  }))
 
   api.post(
     '/feedback',

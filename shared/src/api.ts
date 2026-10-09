@@ -219,7 +219,16 @@ export interface AssignProjectRequest {
 
 /* ------------------------------- Réponses -------------------------------- */
 
+export interface TestersResponse {
+  total: number
+  page: number
+  pages: number
+  summary: { botStarted: number; opened: number; registered: number }
+  items: { id: string; firstName: string; username: string | null; openedAt: string | null; lastOpenedAt: string | null; botStarted: boolean; registered: boolean; tutorialCompleted: boolean; activities: number }[]
+}
+
 export interface MeResponse {
+  isAdmin?: boolean
   shop?: import('./shop.ts').ShopState
   user: UserDTO
   stats: StatsDTO

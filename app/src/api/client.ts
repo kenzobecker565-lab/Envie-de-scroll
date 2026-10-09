@@ -87,6 +87,7 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  testers: (page = 1, q = '') => call<import('@scroll-up/shared').TestersResponse>(`/admin/testers?page=${page}&q=${encodeURIComponent(q)}`),
   learning:()=>call<{items:import('@scroll-up/shared').LearningRecord[]}>('/learning'),
   learningEntry:(id:string)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`),
   setLearningReview:(id:string,review:boolean)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}/review`,{method:'PATCH',body:JSON.stringify({review})}),

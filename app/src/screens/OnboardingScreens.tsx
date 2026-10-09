@@ -1,10 +1,10 @@
-import { BookOpen, Images, ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
+import { BookOpen, ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import {
   formatClock,
+  reminderMinutes,
   getPassion,
-  isScrollMoment,
   isSkillLevel,
   MAX_PASSIONS,
   missingSkills,
@@ -12,10 +12,7 @@ import {
   LEARNING_LESSONS,
   SKILL_LEVELS,
   SKILL_TIER,
-  SCROLL_MOMENT_INFO,
-  SCROLL_MOMENTS,
   type PassionId,
-  type ScrollMoment,
   type SkillLevel,
   type UpdateSettingsRequest,
 } from '@scroll-up/shared'
@@ -23,17 +20,17 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
 import { Logo } from '../components/Brand.tsx'
-import { Mascot } from '../components/Mascot.tsx'
+import { Mascot, MinutonFigure } from '../components/Mascot.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
-import { MOMENT_STYLE, PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { popIn } from '../lib/motion.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics, requestWriteAccessIfNeeded } from '../telegram/webApp.ts'
+import { ReminderTimePicker } from '../components/ReminderTimePicker.tsx'
+import './OnboardingScreens.css'
 
 /** Bienvenue, passions, moment de scroll. */
 const ONBOARDING_STEPS = 3
@@ -42,14 +39,14 @@ const ONBOARDING_STEPS = 3
 export function WelcomeScreen() {
   const { state } = useAppState(), { push } = useNavigation()
   const name = state.me.user.firstName
-  return <Screen className="studio-onboarding">
+  return <Screen className="studio-onboarding onboarding-refresh">
     <Logo height={30}/><StepProgress current={1} total={ONBOARDING_STEPS} label="Bienvenue"/>
     <div className="onboarding-minuton"><Mascot pose="welcome" size={160}/><span>5 · 15 · 30 minutes pour toi</span></div>
     <header><small>{name ? `Bienvenue, ${name}` : 'Bienvenue'}</small><h1>Ton envie de scroller peut créer quelque chose.</h1><p>Avec « J’ai envie de scroll », choisis ton temps et une passion. Minuton t’aide à te lancer.</p></header>
     <div className="onboarding-landmarks">
       <div><Sparkles/><span><strong>J’ai envie de scroll</strong><small>Une activité à faire maintenant.</small></span></div>
       <div><BookOpen/><span><strong>Apprendre</strong><small>Des leçons pour comprendre et essayer.</small></span></div>
-      <div><Images/><span><strong>Chez Minuton</strong><small>Tes créations réunies dans ton atelier.</small></span></div>
+      <div><MinutonFigure pose="draw" size={40} animated={false}/><span><strong>Chez Minuton</strong><small>Tes créations réunies dans ton atelier.</small></span></div>
     </div>
     <Button className="w-full" onClick={() => push({name:'passions',mode:'onboarding'})}>Choisir mes passions<ArrowRight/></Button>
   </Screen>
@@ -97,16 +94,12 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
   const label = count === 0 ? 'Choisis au moins une passion' : mode === 'onboarding' ? 'Continuer' : 'Enregistrer'
 
   return (
-    <Screen className="studio-onboarding">
+    <Screen className="studio-onboarding onboarding-refresh">
       <ScreenTitle
         eyebrow={mode === 'onboarding' ? <StepProgress current={2} total={ONBOARDING_STEPS} label="Tes passions" /> : undefined}
         aside={
           mode === 'onboarding' ? (
-            <div className="motion-loop anim-float shrink-0" style={{ '--float-duration': '5s' } as React.CSSProperties}>
-              <div className="rotate-3 rounded-md border-[2.5px] border-outline bg-surface-200 p-2 shadow-chip">
-                <Mascot pose="think" size={64}/>
-              </div>
-            </div>
+            <MinutonFigure pose="think" size={64} animated={false}/>
           ) : undefined
         }
         subtitle="Choisis-en autant que tu veux. Tu pourras changer d’avis quand tu veux."
@@ -119,11 +112,11 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
         variant="card"
         value={selected}
         onValueChange={(value) => change(value as PassionId[])}
-        className="grid grid-cols-2 gap-4"
+        className="onboarding-choice-grid"
         aria-label="Tes passions"
       >
         {PASSIONS.map((passion, index) => (
-          <PassionCard key={passion.id} passion={passion} index={index} selected={selected.includes(passion.id)} />
+          <PassionCard key={passion.id} passion={passion} index={index} selected={selected.includes(passion.id)} illustrated />
         ))}
       </ToggleGroup>
 
@@ -161,7 +154,6 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
   const [level, setLevel] = useState<SkillLevel | null>(state.me.user.skills[passion] ?? null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string>()
-  const Icon = PASSION_ICONS[passion]
   if (!info.skill) return null
   const question = info.skill
 
@@ -186,15 +178,11 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
   }
 
   return (
-    <Screen className="studio-onboarding">
+    <Screen className="studio-onboarding onboarding-refresh">
       <ScreenTitle
         eyebrow={mode === 'onboarding' ? <StepProgress current={2} total={ONBOARDING_STEPS} label="Ton niveau" /> : undefined}
         aside={
-          <span className="motion-loop anim-float shrink-0" style={{ '--float-duration': '5s' } as React.CSSProperties}>
-            <span className={cn('flex h-14 w-14 -rotate-6 items-center justify-center rounded-pill border-[2.5px] border-outline shadow-chip', PASSION_COLORS[passion].bg)}>
-              <Icon size={26} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
-            </span>
-          </span>
+          <MinutonFigure pose="piano" size={64} animated={false}/>
         }
         subtitle="Pour te proposer des exercices à ta mesure, pas à pas. Tu pourras le changer quand tu veux."
       >
@@ -218,7 +206,7 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
           const LevelIcon = SKILL_ICONS[id]
           const firstPath = LEARNING_LESSONS.find(lesson => lesson.passion === passion && lesson.level === SKILL_TIER[id] - 1)
           return (
-            <ToggleGroupItem key={id} value={id} className={cn('items-start gap-3 p-4 text-ink', PASSION_COLORS[passion].on, 'data-[state=on]:text-on-color')} {...popIn(index)} whileTap={{ scale: 0.98 }}>
+            <ToggleGroupItem key={id} value={id} className="onboarding-level-card items-start gap-3 p-4" {...popIn(index)} whileTap={{ scale: 0.98 }}>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper text-on-color">
                 <LevelIcon size={20} strokeWidth={2.3} aria-hidden="true" />
               </span>
@@ -239,7 +227,7 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
                     animate={{ scale: 1, rotate: -8 }}
                     exit={{ scale: 0 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 22 }}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper text-on-color"
+                    className="onboarding-level-check flex h-8 w-8 shrink-0 items-center justify-center rounded-pill"
                   >
                     <Check size={16} strokeWidth={3.2} aria-hidden="true" />
                   </motion.span>
@@ -263,13 +251,12 @@ export function SkillScreen({ passion, mode }: { passion: PassionId; mode: 'onbo
 }
 
 /**
- * Onboarding, étape 3 : le moment où l'on scrolle le plus. Le bot relance
- * juste avant (une fois par jour au plus) ; on peut aussi refuser les messages.
+ * Onboarding, étape 3 : une heure locale précise pour le rappel facultatif.
  */
 export function MomentScreen() {
   const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
-  const [moment, setMoment] = useState<ScrollMoment | null>(state.me.user.scrollMoment)
+  const [reminderTime, setReminderTime] = useState(() => reminderMinutes(state.me.user.scrollMoment, 19, state.me.user.reminderTime))
   const [saving, setSaving] = useState<'moment' | 'none' | null>(null)
   const [error, setError] = useState<string>()
 
@@ -290,99 +277,15 @@ export function MomentScreen() {
     }
   }
 
-  const chosen = moment ? SCROLL_MOMENT_INFO[moment] : null
-  return (
-    <Screen className="studio-onboarding">
-      <ScreenTitle
-        eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />}
-        aside={
-          <span className="motion-loop anim-float shrink-0" style={{ '--float-duration': '5s' } as React.CSSProperties}>
-            <span className="flex h-14 w-14 rotate-6 items-center justify-center rounded-pill border-[2.5px] border-outline bg-warm shadow-chip">
-              <BellRing size={26} strokeWidth={2.3} className="text-on-color" aria-hidden="true" />
-            </span>
-          </span>
-        }
-        subtitle="Le bot t’enverra un petit message juste avant. Une fois par jour au plus, et jamais les jours où tu as déjà créé."
-      >
-        Tu scrolles surtout quand&nbsp;?
-      </ScreenTitle>
-
-      <ToggleGroup
-        type="single"
-        variant="card"
-        value={moment ?? ''}
-        onValueChange={(value) => {
-          if (!isScrollMoment(value)) return
-          haptics.selection()
-          setMoment(value)
-        }}
-        className="grid grid-cols-2 gap-4"
-        aria-label="Ton moment de scroll"
-      >
-        {SCROLL_MOMENTS.map((id, index) => {
-          const info = SCROLL_MOMENT_INFO[id]
-          const { icon: Icon, bg, on } = MOMENT_STYLE[id]
-          const entrance = popIn(index)
-          return (
-            <ToggleGroupItem
-              key={id}
-              value={id}
-              aria-label={`${info.label} : ${info.hint}. Message vers ${formatClock(info.remindAt)}.`}
-              className={cn('min-h-40 flex-col items-start justify-between gap-3 text-on-color', bg, on)}
-              initial={{ ...entrance.initial, rotate: index % 2 ? 4 : -4 }}
-              animate={{ ...entrance.animate, rotate: index % 2 ? 1 : -1 }}
-              transition={entrance.transition}
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-pill border-[2.5px] border-on-color bg-paper">
-                <Icon size={24} strokeWidth={2.2} className="text-on-color" aria-hidden="true" />
-              </span>
-              <span className="flex flex-col gap-1">
-                <span className="font-display text-20 font-extrabold tracking-tight">{info.label}</span>
-                <span className="text-12 font-medium opacity-80">{info.hint}</span>
-              </span>
-              <AnimatePresence>
-                {moment === id && (
-                  <motion.span
-                    initial={{ scale: 0, rotate: -40 }}
-                    animate={{ scale: 1, rotate: -8 }}
-                    exit={{ scale: 0 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 22 }}
-                    className="absolute -top-3 -right-3 flex h-9 w-9 items-center justify-center rounded-pill border-[2.5px] border-outline bg-paper text-on-color"
-                  >
-                    <Check size={18} strokeWidth={3.2} aria-hidden="true" />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </ToggleGroupItem>
-          )
-        })}
-      </ToggleGroup>
-
-      <p className="mt-6 flex justify-center" aria-live="polite">
-        <Badge variant={chosen ? 'good' : 'secondary'} size="sm" className="px-3">
-          <BellRing aria-hidden="true" />
-          {chosen ? `Message vers ${formatClock(chosen.remindAt)}` : 'Choisis ton moment'}
-        </Badge>
-      </p>
-
-      <PrimaryAction
-        text={chosen ? 'C’est parti' : 'Choisis ton moment'}
-        icon={chosen ? <Check aria-hidden="true" /> : undefined}
-        onClick={() => moment && void save({ scrollMoment: moment, remindersEnabled: true }, 'moment')}
-        enabled={Boolean(moment)}
-        loading={saving === 'moment'}
-      >
-        {error && (
-          <Alert variant="warning" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <Info aria-hidden="true" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-        <Button variant="ghost" size="md" className="w-full" disabled={saving !== null} onClick={() => void save({ remindersEnabled: false }, 'none')}>
-          <BellOff aria-hidden="true" />
-          Pas de message, merci
-        </Button>
-      </PrimaryAction>
-    </Screen>
-  )
+  return <Screen className="studio-onboarding onboarding-refresh">
+    <ScreenTitle eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />} subtitle="Choisis l’heure de ton petit rappel.">
+      Ton moment pour créer
+    </ScreenTitle>
+    <ReminderTimePicker value={reminderTime} onChange={setReminderTime} disabled={saving !== null}/>
+    <PrimaryAction text={`Me rappeler à ${formatClock(reminderTime)}`} icon={<BellRing aria-hidden="true"/>} onClick={() => void save({ reminderTime, remindersEnabled: true }, 'moment')} enabled={saving === null} loading={saving === 'moment'}>
+      {error && <Alert variant="warning"><Info aria-hidden="true"/><AlertDescription>{error}</AlertDescription></Alert>}
+      <Button variant="ghost" size="md" className="w-full" disabled={saving !== null} onClick={() => void save({ remindersEnabled: false }, 'none')}><BellOff aria-hidden="true"/>Pas de notification</Button>
+      <p className="reminder-footnote">Tu pourras modifier l’heure dans tes réglages.</p>
+    </PrimaryAction>
+  </Screen>
 }

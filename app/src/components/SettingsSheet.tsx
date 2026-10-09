@@ -1,19 +1,18 @@
 import { BellRing, Check, ChevronRight, CircleHelp, Clock3, Heart, ShieldCheck, LoaderCircle, MessageCircleHeart, Music2, Settings2, Smartphone, Trash2, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { ambianceCredits, formatClock, isScrollMoment, SCROLL_MOMENT_INFO, SCROLL_MOMENTS } from '@scroll-up/shared'
+import { ambianceCredits, formatClock, reminderMinutes } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { api, ApiError, track } from '../api/client.ts'
 import { setAmbientEnabled, useAmbientEnabled } from '../lib/ambient.ts'
 import { homeScreenConfirm, homeScreenView, type HomeScreenState } from '../lib/homeScreen.ts'
-import { MOMENT_STYLE } from '../lib/icons.ts'
 import { invite } from '../lib/share.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { checkHomeScreen, haptics, requestHomeScreen, supports, telegram } from '../telegram/webApp.ts'
 import { AmbiancePicker } from './AmbiancePicker.tsx'
+import { ReminderTimePicker } from './ReminderTimePicker.tsx'
 
 /**
  * Réglages quotidiens, aide et données : utilisés dans leur page dédiée.
@@ -65,7 +64,7 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, onReplayT
         <Row icon={<Music2 aria-hidden="true"/>} title="Musique d’ambiance" description="Un fond musical pendant tes découvertes." onClick={() => { haptics.selection(); if (music) track('music_off'); setAmbientEnabled(!music) }} trailing={<Switch on={music} busy={false}/>} role="switch" checked={music}/>
         {music && <><button type="button" className="studio-settings-disclosure" aria-expanded={musicOpen} onClick={() => setMusicOpen(value => !value)}>Choisir ma musique <ChevronRight size={17}/></button>{musicOpen && <div className="studio-settings-picker"><AmbiancePicker/></div>}</>}
         <Row icon={<BellRing aria-hidden="true"/>} title="Relances" description="Un message du bot les jours sans activité." onClick={toggleReminders} disabled={saving} trailing={<Switch on={user.remindersEnabled} busy={saving}/>} role="switch" checked={user.remindersEnabled} live/>
-        {user.remindersEnabled && <><Row icon={<Clock3 aria-hidden="true"/>} title="Heure du rappel" description={user.scrollMoment ? formatClock(SCROLL_MOMENT_INFO[user.scrollMoment].remindAt) : '19 h'} onClick={() => setMomentOpen(value => !value)} trailing={<span className="studio-reminder-time">{user.scrollMoment ? formatClock(SCROLL_MOMENT_INFO[user.scrollMoment].remindAt) : '19 h'}<ChevronRight size={18}/></span>}/>{momentOpen && <div className="studio-settings-picker"><MomentPicker/></div>}</>}
+        {user.remindersEnabled && <><Row icon={<Clock3 aria-hidden="true"/>} title="Heure du rappel" description={formatClock(reminderMinutes(user.scrollMoment, 19, user.reminderTime))} onClick={() => setMomentOpen(value => !value)} trailing={<span className="studio-reminder-time">{formatClock(reminderMinutes(user.scrollMoment, 19, user.reminderTime))}<ChevronRight size={18}/></span>}/>{momentOpen && <div className="studio-settings-picker"><MomentPicker/></div>}</>}
         {error && <p className="studio-settings-error" role="alert">{error}</p>}
       </section>
       <section className="studio-settings-group" aria-labelledby="settings-help">
@@ -175,45 +174,28 @@ function HomeScreenRow() {
   )
 }
 
-/** Le moment où l'on scrolle le plus : la relance du bot arrive juste avant. */
+/** Une heure locale précise, enregistrée uniquement après confirmation. */
 function MomentPicker() {
   const { state, dispatch } = useAppState()
   const { user } = state.me
+  const savedTime = reminderMinutes(user.scrollMoment, 19, user.reminderTime)
+  const [time, setTime] = useState(savedTime)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string>()
-
-  const choose = (value: string) => {
-    if (saving || !isScrollMoment(value) || value === user.scrollMoment) return
-    setSaving(true)
-    setError(undefined)
-    haptics.selection()
-    dispatch({ type: 'user', user: { ...user, scrollMoment: value } })
-    api
-      .updateSettings({ scrollMoment: value })
-      .then(({ user: updated }) => dispatch({ type: 'user', user: updated }))
-      .catch(() => { dispatch({ type: 'user', user }); setError('Le nouvel horaire n’a pas pu être enregistré.') })
-      .finally(() => setSaving(false))
+  const save = async () => {
+    if (saving || time === savedTime) return
+    setSaving(true); setError(undefined)
+    try {
+      const { user: updated } = await api.updateSettings({ reminderTime: time })
+      dispatch({ type: 'user', user: updated }); haptics.success()
+    } catch { setError('Le nouvel horaire n’a pas pu être enregistré. Réessaie.'); haptics.error() }
+    finally { setSaving(false) }
   }
-
-  return (
-    <div className="flex flex-col gap-2 pl-1">
-      <span id="settings-moment" className="text-13 font-bold text-ink-soft">
-        Tu scrolles surtout…
-      </span>
-      <ToggleGroup type="single" variant="chip" value={user.scrollMoment ?? ''} onValueChange={choose} className="grid grid-cols-4 gap-2" aria-labelledby="settings-moment">
-        {SCROLL_MOMENTS.map((id) => {
-          const { icon: Icon, on } = MOMENT_STYLE[id]
-          return (
-            <ToggleGroupItem key={id} value={id} disabled={saving} className={cn('min-h-16 flex-col justify-center gap-1 rounded-md px-1 text-13', on)} whileTap={{ scale: 0.94 }}>
-              <Icon aria-hidden="true" />
-              {SCROLL_MOMENT_INFO[id].short}
-            </ToggleGroupItem>
-          )
-        })}
-      </ToggleGroup>
-      {error && <p role="alert" className="text-12 text-accent-strong">{error}</p>}
-    </div>
-  )
+  return <div className="flex flex-col gap-2">
+    <ReminderTimePicker value={time} onChange={setTime} disabled={saving}/>
+    <Button disabled={saving || time === savedTime} onClick={() => void save()}>{saving ? 'Enregistrement…' : time === savedTime ? 'Horaire enregistré' : `Enregistrer à ${formatClock(time)}`}</Button>
+    {error && <p role="alert" className="text-12 text-accent-strong">{error}</p>}
+  </div>
 }
 
 /**

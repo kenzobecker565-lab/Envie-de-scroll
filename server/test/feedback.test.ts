@@ -211,3 +211,24 @@ describe('admins et statistiques', () => {
     expect(await recentFeedback(prisma)).toContain('Pas encore d’avis')
   })
 })
+
+describe('heure du rappel', () => {
+  it('conserve les minutes exactes et les isole par utilisateur', async () => {
+    for (const reminderTime of [0, 1110, 1439]) {
+      await request(app).put('/api/me/settings').set(as()).send({ reminderTime }).expect(200)
+      const me = await request(app).get('/api/me').set(as()).expect(200)
+      expect(me.body.user.reminderTime).toBe(reminderTime)
+    }
+    const other = await request(app).get('/api/me').set(as(7)).expect(200)
+    expect(other.body.user.reminderTime).toBeNull()
+    await request(app).put('/api/me/settings').set(as()).send({ scrollMoment: 'matin' }).expect(200)
+    expect((await prisma.user.findUnique({ where: { id: 42n } }))?.reminderTime).toBeNull()
+  })
+  it('refuse les heures invalides sans les enregistrer', async () => {
+    await request(app).get('/api/me').set(as()).expect(200)
+    for (const reminderTime of [-1, 1440, 1.5, '18:30', null]) {
+      await request(app).put('/api/me/settings').set(as()).send({ reminderTime }).expect(400)
+    }
+    expect((await prisma.user.findUnique({ where: { id: 42n } }))?.reminderTime).toBeNull()
+  })
+})

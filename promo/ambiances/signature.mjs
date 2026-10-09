@@ -1,4 +1,5 @@
-/** Original Scroll-up signature: « Un petit élan ».
+/** Former Scroll-up signature: « Un petit élan » (the app now plays grand-defile.mjs;
+ * this one stays as the source of the promo envol music).
  * 84 BPM, D major, 32 bars (~91 s), soft electric piano / felt keys,
  * warm pad and quiet brushed pulse. Four-note ascending identity, varied
  * over Dmaj9–Bm7–Gmaj9–Aadd9. No third-party recording or melody.
@@ -40,7 +41,7 @@ const middle=channels.map((channel,c)=>{const out=new Float32Array(count);for(le
 const temp=mkdtempSync(join(tmpdir(),'scrollup-signature-'))
 try{
  const wav=join(temp,'signature.wav');writeWav(wav,middle[0],middle[1],random)
- const target=new URL('../../app/public/music/scroll-up-signature.mp3',import.meta.url).pathname
+ const target=process.argv[2]??'un-petit-elan.mp3'
  const r=spawnSync('ffmpeg',['-y','-loglevel','error','-i',wav,'-af','loudnorm=I=-19:TP=-2:LRA=7','-ar','44100','-codec:a','libmp3lame','-b:a','96k','-metadata','title=Un petit élan — Scroll-up',target],{stdio:'inherit'})
  if(r.status!==0)throw Error('ffmpeg failed')
  console.log(target)

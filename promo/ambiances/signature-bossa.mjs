@@ -1,4 +1,5 @@
-/** Original Scroll-up bossa signature, « Une pause au soleil ».
+/** Former Scroll-up bossa signature, « Une pause au soleil » (the app now plays
+ * grand-defile.mjs).
  * 96 BPM, 32 bars, Cmaj9–Am9–Dm9–G13, nylon-string plucks,
  * soft bass, restrained shaker and rim. No third-party melody or recording.
  * Render three identical cycles and retain the middle for wrapped tails.
@@ -47,7 +48,7 @@ const middle=channels.map((ch,c)=>{const out=new Float32Array(count);for(let i=0
 const temp=mkdtempSync(join(tmpdir(),'scrollup-bossa-'))
 try{
  const wav=join(temp,'bossa.wav');writeWav(wav,middle[0],middle[1],random)
- const target=new URL('../../app/public/music/scroll-up-signature-bossa-v1.mp3',import.meta.url).pathname
+ const target=process.argv[2]??'une-pause-au-soleil.mp3'
  const result=spawnSync('ffmpeg',['-y','-loglevel','error','-i',wav,'-af','loudnorm=I=-19:TP=-2:LRA=7','-ar','44100','-codec:a','libmp3lame','-b:a','96k','-metadata','title=Une pause au soleil — Scroll-up',target],{stdio:'inherit'})
  if(result.status!==0)throw Error('ffmpeg failed')
  console.log(target)

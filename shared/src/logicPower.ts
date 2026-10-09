@@ -1,0 +1,17 @@
+import type { StudioTask } from './studio.ts'
+import type { PowerGridSpec } from './powerGrid.ts'
+export const POWER_GRID_SPEC:PowerGridSpec={"nodes": [{"label": "S", "x": 0, "y": 0, "cost": 1, "ports": [6]}, {"label": "B", "x": 1, "y": 0, "cost": 1, "ports": [15]}, {"label": "C", "x": 2, "y": 0, "cost": 3, "ports": [15]}, {"label": "D", "x": 3, "y": 0, "cost": 4, "ports": [15]}, {"label": "E", "x": 0, "y": 1, "cost": 5, "ports": [15]}, {"label": "F", "x": 1, "y": 1, "cost": 4, "ports": [5, 10]}, {"label": "G", "x": 2, "y": 1, "cost": 2, "ports": [7, 14, 13, 11]}, {"label": "H", "x": 3, "y": 1, "cost": 4, "ports": [15]}, {"label": "I", "x": 0, "y": 2, "cost": 5, "ports": [15]}, {"label": "J", "x": 1, "y": 2, "cost": 1, "ports": [15]}, {"label": "K", "x": 2, "y": 2, "cost": 3, "ports": [10, 5]}, {"label": "L", "x": 3, "y": 2, "cost": 4, "ports": [15]}, {"label": "M", "x": 0, "y": 3, "cost": 5, "ports": [15]}, {"label": "N", "x": 1, "y": 3, "cost": 2, "ports": [15]}, {"label": "O", "x": 2, "y": 3, "cost": 2, "ports": [15]}, {"label": "P", "x": 3, "y": 3, "cost": 1, "ports": [15]}], "targets": [{"node": 3, "label": "Archives", "stabilizer": 6}, {"node": 12, "label": "Radio"}, {"node": 15, "label": "Poste de contrôle"}], "incompatible": [[5, 9]], "budget": 32}
+export const POWER_GRID_SOLUTION=[0, -1, 0, 0, 0, 1, 2, -1, -1, -1, 1, -1, 0, 0, 0, 0]
+export const ORIENTABLE_POWER_TASK:StudioTask={
+ id:'depth4-power',title:'Le réseau sous tension',kind:'power',prompt:'Alimente les trois bâtiments dans le budget. Les archives doivent recevoir un courant stabilisé ; F et J ne peuvent pas être actifs ensemble.',
+ solution:POWER_GRID_SOLUTION,power:POWER_GRID_SPEC,
+ evidence:[{title:'Mission',text:'S est la source, toujours active. D alimente les Archives, M la Radio, P le Poste de contrôle. Budget : 32 unités, coût de S compris. Tout relais activé coûte son nombre d’unités, même s’il est isolé.'},{title:'Connexions',text:'Un câble conduit seulement si les deux relais sont actifs et présentent une connexion face à face. F, G et K peuvent pivoter. Les autres relais sont fixes. G est le stabilisateur : aucun trajet de S vers les Archives ne peut le contourner. F et J activés ensemble provoquent une surcharge et coupent tout le réseau.'}],
+ explanation:[
+ 'Le détour par B paraît économique, mais il permettrait d’alimenter C puis D sans passer par G. Il faut alimenter les Archives par S → E → F → G → C → D.',
+ 'F doit relier gauche et droite. G doit relier haut, bas et gauche : le haut rejoint C et D, la gauche reçoit le courant de F, le bas rejoint K. K doit relier haut et bas.',
+ 'Depuis G et K, la branche rejoint O. Elle se partage vers P pour le Poste de contrôle et vers N puis M pour la Radio. I est plus cher que ce détour commun.',
+ 'Active S, C, D, E, F, G, K, M, N, O et P. Coût : 1+3+4+5+4+2+3+5+2+2+1 = 32. B, H, I, J et L restent coupés ; F et J ne sont jamais actifs ensemble.',
+ 'Les trois bâtiments sont alimentés. Retirer G couperait l’alimentation des Archives : le stabilisateur est donc incontournable. Les autres configurations échouent sur le budget, la stabilisation, l’orientation ou la surcharge.'
+ ],
+ hints:['Commence par les Archives : un raccourci qui contourne G est interdit, même si le bâtiment s’allume.','À partir du stabilisateur, cherche une branche commune pour les deux autres bâtiments. Compare le coût du relais I à celui d’un détour par le bas.','F relie gauche/droite ; G doit desservir une branche au-dessus et une au-dessous ; K prolonge la branche verticale.']
+}

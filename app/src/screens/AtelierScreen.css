@@ -1,0 +1,383 @@
+.atelier-screen {
+  max-width: 760px;
+  margin: auto;
+  color: var(--ink, #302044);
+}
+.atelier-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 22px;
+}
+.atelier-heading h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 8vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 6px 0;
+}
+.atelier-heading p,
+.atelier-subtle {
+  font-size: 14px;
+  color: #7b7081;
+  line-height: 1.6;
+}
+.atelier-heading > div > span {
+  color: #897492;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.atelier-reserve-icon {
+  border: 1px solid #e4dce7;
+  border-radius: 50%;
+  padding: 13px;
+  background: #fff;
+  flex-shrink: 0;
+}
+.atelier-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 0 12px;
+  scrollbar-width: thin;
+}
+.atelier-tabs button {
+  white-space: nowrap;
+  border: 1px solid #e6dfe9;
+  background: #fffdf9;
+  border-radius: 30px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 800;
+}
+.atelier-tabs button[aria-pressed='true'] {
+  background: #8c3cec;
+  color: white;
+  border-color: #8c3cec;
+  box-shadow: 0 4px 10px #8c3cec20;
+}
+.atelier-room {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 4/4.7;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #eee7de url('/art/atelier-gallery.webp') center/cover;
+  margin: 6px 0 24px;
+  border: 1px solid #e5dccf;
+  box-shadow: 0 16px 38px #755e3b12;
+}
+.atelier-room-label {
+  text-align: center;
+  position: absolute;
+  top: 7%;
+  left: 7%;
+  right: 7%;
+}
+.atelier-room-label > span {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: #897c6e;
+  font-weight: 800;
+}
+.atelier-room-label h2 {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 4.5vw, 26px);
+  font-weight: 800;
+  margin-top: 5px;
+}
+.atelier-frames {
+  position: absolute;
+  top: 23%;
+  left: 14%;
+  right: 14%;
+  height: 34%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-content: center;
+}
+.atelier-frame {
+  background: #fffdf7;
+  border: 5px solid #d7b993;
+  outline: 1px solid #bda186;
+  box-shadow: 2px 6px 12px #674b3026;
+  aspect-ratio: 1/1.15;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  min-width: 0;
+  font-size: 9px;
+  line-height: 1.5;
+  text-align: left;
+  color: #655267;
+}
+.atelier-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.atelier-frame > span:last-child {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
+}
+.atelier-frame-icon {
+  margin-bottom: 4px;
+  color: #a17dc5;
+}
+.atelier-frame-icon svg {
+  width: 18px;
+}
+.atelier-frames[data-count='1'],
+.atelier-frames[data-count='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  left: 21%;
+  right: 21%;
+}
+.atelier-empty-wall {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+  padding: 20px;
+  border: 1px dashed #bda995;
+  border-radius: 10px;
+  color: #887567;
+  font-size: 13px;
+  background: #fffcf680;
+}
+.atelier-mascot {
+  position: absolute;
+  bottom: 12%;
+  right: 13%;
+  filter: drop-shadow(0 7px 4px #876a4730);
+}
+.atelier-room-caption {
+  position: absolute;
+  bottom: 4%;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: #746352;
+}
+.atelier-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.atelier-section-heading h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 23px;
+}
+.atelier-section-heading > span {
+  font-size: 12px;
+  color: #887591;
+}
+.atelier-subtle {
+  margin: 6px 0 16px;
+}
+.atelier-works {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.atelier-work,
+.atelier-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  width: 100%;
+  border: 1px solid #e7dfeb;
+  border-radius: 21px;
+  background: #fffdfa;
+  padding: 14px;
+}
+.atelier-work > img,
+.atelier-work-symbol {
+  width: 52px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: #f1e8f8;
+}
+.atelier-work-symbol {
+  display: grid;
+  place-items: center;
+  color: #9966bf;
+}
+.atelier-work > span:not(.atelier-work-symbol),
+.atelier-link > span {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+.atelier-work strong {
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.atelier-work small,
+.atelier-link small {
+  color: #85778d;
+  font-size: 12px;
+}
+.atelier-link {
+  margin-top: 16px;
+  background: #f3ebfb;
+  padding: 18px;
+}
+.atelier-link > svg {
+  flex-shrink: 0;
+  width: 20px;
+  color: #895ab4;
+}
+.atelier-notebooks {
+  background: #e8f4ef;
+}
+.atelier-link strong {
+  font-size: 15px;
+}
+.minuton-hangs {
+  height: 150px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  overflow: hidden;
+  width: 100%;
+  margin: 10px 0;
+}
+.minuton-hangs-mascot {
+  animation: minuton-install 2.5s ease-in-out both;
+}
+.minuton-hangs-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  width: 106px;
+  height: 114px;
+  padding: 8px;
+  border: 6px solid #dabf9e;
+  background: #fffdf9;
+  box-shadow: 0 6px 16px #80613f20;
+  animation: frame-install 2.5s ease-in-out both;
+  overflow: hidden;
+}
+.minuton-hangs-frame img {
+  max-height: 100%;
+  object-fit: contain;
+}
+.minuton-hangs-frame span {
+  font-size: 11px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.minuton-hangs-frame svg {
+  width: 22px;
+  color: #9865c4;
+}
+@keyframes frame-install {
+  0%,
+  15% {
+    transform: translate(-45px, 70px) rotate(-12deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes minuton-install {
+  0% {
+    transform: translateX(-40px);
+  }
+  65% {
+    transform: translate(12px, -8px) rotate(-7deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .minuton-hangs-frame,
+  .minuton-hangs-mascot {
+    animation: none;
+  }
+}
+@media (min-width: 600px) {
+  .atelier-room {
+    aspect-ratio: 1.2;
+    max-height: 620px;
+  }
+  .atelier-frame {
+    font-size: 12px;
+  }
+  .atelier-mascot {
+    right: 17%;
+    bottom: 10%;
+  }
+}
+@media (max-width: 350px) {
+  .atelier-frames {
+    gap: 8px;
+  }
+  .atelier-frame {
+    border-width: 3px;
+  }
+  .atelier-room-label h2 {
+    font-size: 16px;
+  }
+}
+.atelier-screen {
+  width: 100%;
+  min-width: 0;
+}
+.atelier-tabs,
+.atelier-room {
+  min-width: 0;
+  max-width: 100%;
+}
+.atelier-work > svg {
+  flex-shrink: 0;
+}
+
+.atelier-room,
+.atelier-work,
+.atelier-link {
+  color: #302044;
+}
+
+.atelier-work-row{display:flex;align-items:center;gap:7px}.atelier-work-row .atelier-work{flex:1;min-width:0}.atelier-pin{display:grid;place-items:center;flex-shrink:0;width:40px;height:44px;border:1px solid #e7dfeb;border-radius:15px;color:#895ab4;background:#fffdfa}.atelier-pin[aria-pressed=true]{background:#e8f4ef;color:#235a46;border-color:#a8d9c5}.atelier-frame{position:relative}.atelier-frame-pin{position:absolute;right:3px;top:3px;color:#7935c8}
+.atelier-room[data-corner=ecriture] .atelier-frame{border-width:2px;border-radius:3px 12px 12px 3px;border-color:#bca1c4;background:repeating-linear-gradient(#fffdf7 0 14px,#ded4e7 14px 15px);padding-top:14px;box-shadow:-3px 0 #c8b3d0,2px 6px 12px #674b3026}
+.atelier-room[data-corner=piano] .atelier-frame{border-color:#51415f;border-radius:12px;background:linear-gradient(#fffdf7 80%,#44324e 80%);padding-bottom:18px}.atelier-room[data-corner=piano] .atelier-frame-icon{color:#69537a}
+.atelier-room[data-corner=logique] .atelier-frame{border-width:2px;background:#efe3c7;border-color:#c6a576;rotate:-3deg;border-radius:2px 2px 12px 12px}.atelier-room[data-corner=francais] .atelier-frame{border:1px solid #cdb7de;border-left:7px solid #a885c0;border-radius:4px 10px 10px 4px;background:#faf3ff}.atelier-room[data-corner=sport] .atelier-frame{border-width:2px;border-color:#8abca7;background:#edf8f2;border-radius:15px}.atelier-room[data-corner=sport] .atelier-frame-icon{color:#235a46}

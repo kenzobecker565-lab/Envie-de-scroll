@@ -1,0 +1,12 @@
+# Seul le nécessaire part dans l'image (voir Dockerfile).
+.git
+**/node_modules
+**/dist
+server/data
+server/src/generated
+server/.env
+.env
+docs
+promo
+prototype/*
+!prototype/package.json

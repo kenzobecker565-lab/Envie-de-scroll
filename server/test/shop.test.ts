@@ -274,3 +274,23 @@ it('ne duplique pas un skin offert lors de deux activations simultanées', async
   expect(responses.map(result => result.status)).toEqual([200, 200])
   expect(await prisma.shopPurchase.count()).toBe(1)
 })
+
+
+it('réserve le mémo des codes aux admins même après le crédit de test', async () => {
+  await fund(30)
+  await prisma.setting.create({ data: { key: 'admins', value: '["1"]' } })
+  const admin = await request(app).get('/api/shop').set(as()).expect(200)
+  expect(admin.body.giftCodes).toEqual([
+    { code: 'TESTEURSV1', itemId: 'mascot-testers-explorer', title: 'Minuton Explorateur' },
+    { code: '30101960', itemId: 'mascot-private-maradona', title: 'Minuton Maradona' },
+    { code: '26022024', itemId: 'mascot-private-poney', title: 'Minuton complice' },
+  ])
+  await request(app).post('/api/shop/test-credit').set(as()).expect(200)
+  const after = await request(app).get('/api/me').set(as()).expect(200)
+  expect(after.body.shop.giftCodes).toEqual(admin.body.giftCodes)
+  expect(after.body.shop.canClaimTestCredit).toBe(false)
+  const other = await request(app).get('/api/shop?admin=true').set(as(2)).expect(200)
+  expect(other.body).not.toHaveProperty('giftCodes')
+  const otherMe = await request(app).get('/api/me').set(as(2)).expect(200)
+  expect(otherMe.body.shop).not.toHaveProperty('giftCodes')
+})

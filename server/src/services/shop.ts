@@ -91,6 +91,7 @@ export async function claimShopTestCredit(prisma: PrismaClient, userId: bigint, 
 
 // Une seule liste côté serveur pour le déblocage et le mémo réservé aux admins.
 const SKIN_GIFTS = [
+  { code: '07102025', itemId: 'mascot-private-rabbi-jacob' },
   { code: 'RANMA', itemId: 'mascot-private-ranma' },
   { code: 'TESTEURSV1', itemId: 'mascot-testers-explorer' },
   { code: '30101960', itemId: 'mascot-private-maradona' },

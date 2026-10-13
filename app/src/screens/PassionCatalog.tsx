@@ -1,3 +1,4 @@
+import { RhythmLibrary } from './PianoRhythm.tsx'
 import { useState } from 'react'
 import { ArrowLeft, BookOpen, ChevronRight, ChevronsUp, Clock3, Images, Play, Shuffle } from 'lucide-react'
 import { collection, dailyWord, getPassion, SHOP_ITEMS, studioConfig, type Duration, type PassionId } from '@scroll-up/shared'
@@ -19,13 +20,15 @@ const titles:Partial<Record<PassionId,string[][]>>={
 const subtitles:Partial<Record<PassionId,string>>={dessin:'Ton atelier, à ton rythme.',piano:'Les mélodies à portée de main.',ecriture:'Une page pour tes idées.',logique:'Chaque dossier raconte une histoire.',francais:'Les règles en pratique.'}
 export function PassionCatalog({passion,onStart}:{passion:PassionId;onStart:(duration:Duration,id?:string)=>Promise<void>}){
  const {state}=useAppState(),{push,reset}=useNavigation(),shop=useShop(),startWord=useStartChallenge()
+ const [pianoMode,setPianoMode]=useState<'keyboard'|'rhythm'>('keyboard')
  const [duration,setDuration]=useState<Duration>(5),[gallery,setGallery]=useState(false),[busy,setBusy]=useState(false)
  const activities=collection(passion).find(g=>g.duration===duration)?.activities??[],di=duration===5?0:duration===15?1:2
  const owned=SHOP_ITEMS.filter(i=>i.category==='piano'&&shop.owned.includes(i.id)),tried=state.me.stats.byPassion.find(p=>p.passion===passion)?.tried??[]
  const start=async(id?:string)=>{if(busy)return;setBusy(true);try{await onStart(duration,id)}finally{setBusy(false)}}
  const day=todayKey()
  return <Screen tabs className="interactive-workshop passion-catalog"><AppHeader/><div className="catalog-nav"><button type="button" onClick={()=>reset([{name:'home'},{name:'passionHub'}])}><ArrowLeft size={16}/>Mes passions</button><button type="button" onClick={()=>setGallery(!gallery)}><Images size={16}/>{gallery?'Choisir une activité':passion==='ecriture'?'Mes textes':passion==='piano'?'Mon répertoire':'Mes séances'}</button></div><WorkshopHero passion={passion} title={getPassion(passion).label} subtitle={subtitles[passion]??''}/>
- {gallery?<>{passion==='piano'&&<section className="iw-card"><h2>Mon répertoire</h2>{owned.length?owned.map(item=><button type="button" className="iw-learn-row" key={item.id} onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{item.composer}</small></span><Play size={18}/></button>):<p>Les morceaux débloqués trouveront leur place ici.</p>}</section>}<GalleryScreen passion={passion} embedded/></>:<>
+ {passion==='piano'&&!gallery&&<div className="rhythm-modes" aria-label="Façon de jouer"><button type="button" aria-pressed={pianoMode==='keyboard'} onClick={()=>setPianoMode('keyboard')}>Au clavier</button><button type="button" aria-pressed={pianoMode==='rhythm'} onClick={()=>setPianoMode('rhythm')}>En rythme</button></div>}
+ {passion==='piano'&&!gallery&&pianoMode==='rhythm'?<RhythmLibrary/>:gallery?<>{passion==='piano'&&<section className="iw-card"><h2>Mon répertoire</h2>{owned.length?owned.map(item=><button type="button" className="iw-learn-row" key={item.id} onClick={()=>push({name:'bonusPiano',itemId:item.id})}><span><strong>{item.title}</strong><small>{item.composer}</small></span><Play size={18}/></button>):<p>Les morceaux débloqués trouveront leur place ici.</p>}</section>}<GalleryScreen passion={passion} embedded/></>:<>
  <h2 className="catalog-title">{passion==='francais'?'Choisir ma révision':passion==='logique'?'Choisir mon défi':passion==='piano'?'Choisir ma mélodie':'Choisir mon activité'}</h2>
  <div className="catalog-durations" aria-label="Durée de l’activité">{([5,15,30] as Duration[]).map(d=><button type="button" key={d} aria-pressed={duration===d} onClick={()=>setDuration(d)}>{d} min</button>)}</div>
  <button className="catalog-scroll" type="button" disabled={busy} onClick={()=>void start()}><ChevronsUp size={26}/>J’ai envie de scroll<Shuffle size={18}/></button><p className="catalog-surprise">{passion==='logique'?'Un dossier':passion==='francais'?'Une révision':'Une activité'} surprise de {duration} min</p>

@@ -25,7 +25,6 @@
  * Authentification : en-tête `Authorization: tma <initData>` (voir auth/).
  */
 
-import { startRhythm, finishRhythm } from '../services/pianoRhythm.ts'
 import {learningLesson,validateLearning,learningAttempted, type LearningWork} from '@scroll-up/shared'
 import path from 'node:path'
 import { pipeline } from 'node:stream/promises'
@@ -220,8 +219,6 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     }),
   )
 
-  api.post('/piano-rhythm/start', asyncRoute(async(req,res)=>{const user=await currentUser(req,res);res.status(201).json(await startRhythm(prisma,user,req.body?.songId,now()))}))
-  api.post('/piano-rhythm/finish', asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const result=await finishRhythm(prisma,user,req.body?.sessionId,req.body?.hits,now());res.json({...result,stats:await getStats(prisma,user,now())})}))
 
   api.get('/shop', asyncRoute(async (req, res) => {
     const user = await currentUser(req, res)

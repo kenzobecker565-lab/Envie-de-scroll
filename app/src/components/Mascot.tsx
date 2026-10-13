@@ -1,3 +1,4 @@
+import './MinutonAnimations.css'
 import { useId } from 'react'
 import { getShopItem } from '@scroll-up/shared'
 import { useEquipped } from '../lib/shop.ts'

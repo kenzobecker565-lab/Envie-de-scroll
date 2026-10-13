@@ -1,3 +1,4 @@
+import { PianoRhythm } from './screens/PianoRhythm.tsx'
 import {AtelierScreen} from './screens/AtelierScreen.tsx'
 import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
@@ -127,6 +128,7 @@ function screenFor(route: Route) {
     case 'home':
       return <HomeScreen />
     case 'shop': return <ShopScreen category={route.category} library={route.library} />
+    case 'pianoRhythm': return <PianoRhythm songId={route.songId}/>
     case 'bonusPiano': return <BonusPianoScreen itemId={route.itemId} />
     case 'learningLesson': return <LearningLessonScreen lessonId={route.lessonId} entryId={route.entryId}/>
     case 'learningNotebooks': return <LearningNotebooks passion={route.passion} review={route.review}/>

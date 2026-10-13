@@ -87,6 +87,8 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  startRhythm: (songId: string) => call<{sessionId:string}>('/piano-rhythm/start', {method:'POST',body:JSON.stringify({songId})}),
+  finishRhythm: (sessionId: string,hits:number) => call<{coins:number;stats:import('@scroll-up/shared').StatsDTO}>('/piano-rhythm/finish', {method:'POST',body:JSON.stringify({sessionId,hits})}),
   learning:()=>call<{items:import('@scroll-up/shared').LearningRecord[]}>('/learning'),
   learningEntry:(id:string)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`),
   setLearningReview:(id:string,review:boolean)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}/review`,{method:'PATCH',body:JSON.stringify({review})}),

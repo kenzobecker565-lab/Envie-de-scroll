@@ -36,3 +36,5 @@ export * from './studio.ts'
 export * from './powerGrid.ts'
 
 export * from "./learning/index.ts"
+
+export * from './pianoRhythm.ts'

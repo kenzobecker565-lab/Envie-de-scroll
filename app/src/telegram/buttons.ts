@@ -22,6 +22,13 @@ export function useBackButton(onBack: (() => void) | undefined): void {
   const visible = onBack !== undefined
 
   useEffect(() => {
+    if (!visible || telegram) return
+    const back = (event: Event) => { event.preventDefault(); (overlays.at(-1) ?? handler.current)?.() }
+    window.addEventListener('scrollup-android-back', back)
+    return () => window.removeEventListener('scrollup-android-back', back)
+  }, [visible])
+
+  useEffect(() => {
     if (!telegram || !hasNativeBackButton) return
     const button = telegram.BackButton
     if (!visible) {

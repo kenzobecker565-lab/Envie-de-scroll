@@ -23,3 +23,10 @@ server/data/
 server/src/generated/
 .env
 *.tsbuildinfo
+
+# Android build outputs and private signing material
+android/.gradle/
+android/**/build/
+android/local.properties
+*.jks
+*.keystore

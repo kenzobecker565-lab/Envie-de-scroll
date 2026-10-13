@@ -1,3 +1,4 @@
+import { deviceAuthorization, isDeviceMode } from '../lib/device.ts'
 /**
  * Appels à l'API du serveur (même origine : /api).
  * Chaque requête porte les initData Telegram, que le serveur vérifie.
@@ -50,6 +51,9 @@ function devUser(): string {
 
 function authorization(): string | undefined {
   if (telegram?.initData) return `tma ${telegram.initData}`
+  if (isDeviceMode()) {
+    try { return deviceAuthorization(localStorage, bytes => crypto.getRandomValues(bytes)) } catch { return undefined }
+  }
   if (import.meta.env.DEV) return `dev ${devUser()}`
   return undefined
 }

@@ -1,3 +1,4 @@
+import { deviceUser } from '../auth/device.ts'
 /**
  * ============================================================================
  *  API REST consommée par la Mini App
@@ -146,6 +147,10 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
         ;(res.locals as AuthLocals).telegramUser = user
         return next()
       }
+      if (scheme === 'device') {
+        const user = deviceUser(value, config.signingSecret)
+        if (user) { (res.locals as AuthLocals).telegramUser = user; return next() }
+      }
       if (scheme === 'dev' && config.devAuth && /^\d{1,15}$/.test(value)) {
         ;(res.locals as AuthLocals).telegramUser = { id: Number(value), first_name: req.get('x-dev-first-name') ?? 'Camille' }
         return next()
@@ -159,7 +164,9 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   /** Charge (ou crée) l'utilisateur de la requête. */
   async function currentUser(req: Request, res: Response): Promise<User> {
     const timezone = req.get('x-timezone') ?? undefined
-    return upsertFromTelegram(prisma, telegramUserOf(res), { timezone, now: now() })
+    const user = await upsertFromTelegram(prisma, telegramUserOf(res), { timezone, now: now() })
+    if (user.id < 0n && (user.remindersEnabled || user.canMessage)) return prisma.user.update({where:{id:user.id},data:{remindersEnabled:false,canMessage:false}})
+    return user
   }
 
   const photoUrl = (completion: { id: string }) => signedPhotoUrl(completion.id, config.signingSecret, now())
@@ -283,7 +290,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       const updated = await prisma.user.update({
         where: { id: user.id },
         data: {
-          ...(remindersEnabled !== undefined ? { remindersEnabled, ...(remindersEnabled ? { unansweredReminders: 0 } : {}) } : {}),
+          ...(remindersEnabled !== undefined ? { remindersEnabled: user.id < 0n ? false : remindersEnabled, ...(remindersEnabled ? { unansweredReminders: 0 } : {}) } : {}),
           ...(scrollMoment !== undefined ? { scrollMoment, reminderTime: null } : {}),
           ...(reminderTime !== undefined ? { reminderTime } : {}),
           ...(tutorialCompleted === true ? { tutorialCompleted: true } : {}),

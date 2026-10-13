@@ -1,3 +1,4 @@
+import { isDeviceMode } from '../lib/device.ts'
 import { BellRing, Check, ChevronRight, CircleHelp, Clock3, Heart, ShieldCheck, LoaderCircle, MessageCircleHeart, Music2, Settings2, Smartphone, Trash2, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
@@ -63,7 +64,7 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, onReplayT
         <Row icon={<Heart aria-hidden="true"/>} title="Mes passions" description={`${user.passions.length} choisie${user.passions.length > 1 ? 's' : ''}`} onClick={onEditPassions}/>
         <Row icon={<Music2 aria-hidden="true"/>} title="Musique d’ambiance" description="Un fond musical pendant tes découvertes." onClick={() => { haptics.selection(); if (music) track('music_off'); setAmbientEnabled(!music) }} trailing={<Switch on={music} busy={false}/>} role="switch" checked={music}/>
         {music && <><button type="button" className="studio-settings-disclosure" aria-expanded={musicOpen} onClick={() => setMusicOpen(value => !value)}>Choisir ma musique <ChevronRight size={17}/></button>{musicOpen && <div className="studio-settings-picker"><AmbiancePicker/></div>}</>}
-        <Row icon={<BellRing aria-hidden="true"/>} title="Relances" description="Un message du bot les jours sans activité." onClick={toggleReminders} disabled={saving} trailing={<Switch on={user.remindersEnabled} busy={saving}/>} role="switch" checked={user.remindersEnabled} live/>
+        {!isDeviceMode()&&<Row icon={<BellRing aria-hidden="true"/>} title="Relances" description="Un message du bot les jours sans activité." onClick={toggleReminders} disabled={saving} trailing={<Switch on={user.remindersEnabled} busy={saving}/>} role="switch" checked={user.remindersEnabled} live/>}
         {user.remindersEnabled && <><Row icon={<Clock3 aria-hidden="true"/>} title="Heure du rappel" description={formatClock(reminderMinutes(user.scrollMoment, 19, user.reminderTime))} onClick={() => setMomentOpen(value => !value)} trailing={<span className="studio-reminder-time">{formatClock(reminderMinutes(user.scrollMoment, 19, user.reminderTime))}<ChevronRight size={18}/></span>}/>{momentOpen && <div className="studio-settings-picker"><MomentPicker/></div>}</>}
         {error && <p className="studio-settings-error" role="alert">{error}</p>}
       </section>
@@ -71,7 +72,7 @@ export function SettingsContent({ onEditPassions, onFeedback, onErase, onReplayT
         <h2 id="settings-help">Aide et partage</h2>
         <Row icon={<CircleHelp aria-hidden="true"/>} title="Revoir le tutoriel" description="Les repères pour découvrir Scroll-up." onClick={onReplayTutorial}/>
         {telegram && <HomeScreenRow/>}
-        <Row icon={<UserPlus aria-hidden="true"/>} title="Inviter un ami" description="Partage Scroll-up dans Telegram." onClick={sendInvite}/>
+        {!isDeviceMode()&&<Row icon={<UserPlus aria-hidden="true"/>} title="Inviter un ami" description="Partage Scroll-up dans Telegram." onClick={sendInvite}/>}
         <Row icon={<MessageCircleHeart aria-hidden="true"/>} title="Donner mon avis" description="Tes idées pour améliorer l’application." onClick={onFeedback}/>
       </section>
       <section className="studio-settings-group" aria-labelledby="settings-data">

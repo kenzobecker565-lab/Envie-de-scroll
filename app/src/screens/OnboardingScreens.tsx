@@ -1,3 +1,4 @@
+import { isDeviceMode } from '../lib/device.ts'
 import { BookOpen, ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
@@ -278,14 +279,14 @@ export function MomentScreen() {
   }
 
   return <Screen className="studio-onboarding onboarding-refresh">
-    <ScreenTitle eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />} subtitle="Choisis l’heure de ton petit rappel.">
-      Ton moment pour créer
+    <ScreenTitle eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />} subtitle={isDeviceMode() ? 'Ta progression sera retrouvée sur ce téléphone, sans inscription.' : 'Choisis l’heure de ton petit rappel.'}>
+      {isDeviceMode() ? 'Ton espace personnel' : 'Ton moment pour créer'}
     </ScreenTitle>
-    <ReminderTimePicker value={reminderTime} onChange={setReminderTime} disabled={saving !== null}/>
-    <PrimaryAction text={`Me rappeler à ${formatClock(reminderTime)}`} icon={<BellRing aria-hidden="true"/>} onClick={() => void save({ reminderTime, remindersEnabled: true }, 'moment')} enabled={saving === null} loading={saving === 'moment'}>
+    {!isDeviceMode()&&<ReminderTimePicker value={reminderTime} onChange={setReminderTime} disabled={saving !== null}/>}
+    <PrimaryAction text={isDeviceMode() ? 'Découvrir Scroll-up' : `Me rappeler à ${formatClock(reminderTime)}`} icon={<BellRing aria-hidden="true"/>} onClick={() => void save(isDeviceMode() ? {remindersEnabled:false} : { reminderTime, remindersEnabled: true }, 'moment')} enabled={saving === null} loading={saving === 'moment'}>
       {error && <Alert variant="warning"><Info aria-hidden="true"/><AlertDescription>{error}</AlertDescription></Alert>}
-      <Button variant="ghost" size="md" className="w-full" disabled={saving !== null} onClick={() => void save({ remindersEnabled: false }, 'none')}><BellOff aria-hidden="true"/>Pas de notification</Button>
-      <p className="reminder-footnote">Tu pourras modifier l’heure dans tes réglages.</p>
+      {!isDeviceMode()&&<Button variant="ghost" size="md" className="w-full" disabled={saving !== null} onClick={() => void save({ remindersEnabled: false }, 'none')}><BellOff aria-hidden="true"/>Pas de notification</Button>}
+      <p className="reminder-footnote">{isDeviceMode() ? 'Internet est nécessaire. Désinstaller l’application ou effacer ses données coupe l’accès à cette progression.' : 'Tu pourras modifier l’heure dans tes réglages.'}</p>
     </PrimaryAction>
   </Screen>
 }

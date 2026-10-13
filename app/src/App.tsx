@@ -1,3 +1,4 @@
+import { isDeviceMode } from './lib/device.ts'
 import { TestersScreen } from './screens/TestersScreen.tsx'
 import {AtelierScreen} from './screens/AtelierScreen.tsx'
 import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
@@ -215,7 +216,7 @@ function BootSkeleton() {
 }
 
 function BootError({ error, onRetry }: { error: Error; onRetry: () => void }) {
-  const outsideTelegram = (error instanceof ApiError && error.code === 'unauthorized') || !canAuthenticate()
+  const outsideTelegram = !isDeviceMode() && ((error instanceof ApiError && error.code === 'unauthorized') || !canAuthenticate())
   const botUsername = import.meta.env.VITE_BOT_USERNAME as string | undefined
   return (
     <div className="flow-boot flow-boot-error">

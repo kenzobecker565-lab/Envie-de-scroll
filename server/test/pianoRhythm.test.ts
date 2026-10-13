@@ -32,3 +32,15 @@ it('termine même sans réussite et plafonne les minutes à la musique après un
   const done=await request(app).post('/api/piano-rhythm/finish').set(as()).send({sessionId:started.body.sessionId,hits:0}).expect(200)
   expect(done.body).toMatchObject({coins:2,stats:{totalMinutes:2,totalCoins:2}})
 })
+
+it('enregistre les nouveaux morceaux rapides avec leur nombre réel de notes',async()=>{
+  const {rhythmSong,rhythmTiles}=await import('@scroll-up/shared')
+  const song=rhythmSong('turque')!,tiles=rhythmTiles(song)
+  const started=await request(app).post('/api/piano-rhythm/start').set(as()).send({songId:song.id}).expect(201)
+  clock.advanceMinutes(2)
+  await request(app).post('/api/piano-rhythm/finish').set(as()).send({sessionId:started.body.sessionId,hits:tiles.length+1}).expect(400)
+  const done=await request(app).post('/api/piano-rhythm/finish').set(as()).send({sessionId:started.body.sessionId,hits:tiles.length}).expect(200)
+  expect(done.body.stats.totalActivities).toBe(1)
+  const gallery=await request(app).get('/api/completions').set(as()).expect(200)
+  expect(gallery.body.items[0].exploredTitle).toBe('Marche turque · En rythme')
+})

@@ -27,9 +27,6 @@ function audio(): { context: AudioContext; master: GainNode } | undefined {
   return master ? { context, master } : undefined
 }
 
-/** Unlock from a user gesture without playing an unrelated note. */
-export function unlockPianoAudio(): void { audio() }
-
 /** Une note qui sonne : `release()` la laisse s'étouffer (la touche est lâchée, sans pédale). */
 export interface NoteHandle {
   release(): void

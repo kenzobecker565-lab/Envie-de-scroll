@@ -1,3 +1,5 @@
+import {DrawingSession} from './DrawingAtelier.tsx'
+import {drawingActivity} from '@scroll-up/shared'
 import { SportSession } from './SportSession.tsx'
 import { InteractiveWorkshop } from './InteractiveWorkshop.tsx'
 import { CalendarHeart, Check, Clock3, Hourglass, Info, LoaderCircle, Mountain, Piano, RotateCcw, Shuffle, Sparkles } from 'lucide-react'
@@ -137,6 +139,7 @@ export function ActivityScreen() {
     }
   }
 
+  if(proposal&&!loading&&drawingActivity(proposal.activityId))return <DrawingSession key={proposal.id} proposal={proposal}/>
   if (passionId==='sport' && proposal && !loading) return <SportSession key={proposal.id} proposal={proposal}/>
   if (isWorkshop(passionId) && proposal && !loading) return <InteractiveWorkshop key={proposal.id} proposal={proposal} onAnother={!fixedStep ? () => void load(proposal.id) : undefined}/>
 

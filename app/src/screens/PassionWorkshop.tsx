@@ -1,3 +1,4 @@
+import {DrawingAtelier} from './DrawingAtelier.tsx'
 import { PassionCatalog } from './PassionCatalog.tsx'
 import { ArrowLeft, ArrowRight, ChevronRight, Clock3, Plus, Sparkles, Play } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -48,7 +49,7 @@ export function PassionHubScreen() {
  const passions=(['dessin','piano','ecriture','sport','logique','francais'] as PassionId[])
  const passion=user.passions.includes('dessin')?'dessin':user.passions[0]
  const idea=passion?collection(passion).find(group=>group.duration===5)?.activities[0]:undefined
- return <Screen tabs className="studio-passions"><AppHeader/><div className="studio-page-heading"><h1>Mes passions</h1><button type="button" className="studio-icon-button" aria-label="Gérer mes passions" onClick={()=>push({name:'passions',mode:'edit'})}><Plus size={22}/></button></div><p className="workshop-subtitle">Un peu chaque jour, à ta façon.</p>{passion&&idea&&<section className="workshop-idea"><Sparkles size={24}/><div><small>Une idée pour aujourd’hui</small><h2>{idea.text}</h2><span><Clock3 size={13}/>5 min · {getPassion(passion).label}</span></div><button type="button" onClick={()=>start(passion,5,idea.id)}>Essayer<ChevronRight size={16}/></button></section>}<div className="studio-passions-grid">{passions.map(id=><PassionPoster key={id} passion={id} stats={statsFor(stats.byPassion,id)} onOpen={()=>push({name:'passionSpace',passion:id})}/>)}</div>{!passions.length&&<Button onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions</Button>}<RecentCreations/></Screen>
+ return <Screen tabs className="studio-passions"><AppHeader/><div className="studio-page-heading"><h1>Mes passions</h1><button type="button" className="studio-icon-button" aria-label="Gérer mes passions" onClick={()=>push({name:'passions',mode:'edit'})}><Plus size={22}/></button></div><p className="workshop-subtitle">Un peu chaque jour, à ta façon.</p>{passion&&idea&&<section className="workshop-idea"><Sparkles size={24}/><div><small>Une idée pour aujourd’hui</small><h2>{idea.text}</h2><span><Clock3 size={13}/>5 min · {getPassion(passion).label}</span></div><button type="button" onClick={()=>passion==='dessin'?push({name:'drawing',duration:5}):start(passion,5,idea.id)}>Essayer<ChevronRight size={16}/></button></section>}<div className="studio-passions-grid">{passions.map(id=><PassionPoster key={id} passion={id} stats={statsFor(stats.byPassion,id)} onOpen={()=>push({name:'passionSpace',passion:id})}/>)}</div>{!passions.length&&<Button onClick={()=>push({name:'passions',mode:'edit'})}>Choisir mes passions</Button>}<RecentCreations/></Screen>
 }
 
 const COPY:Record<PassionId,{create:string;gallery:string;title:string;cta:string;first:string}>={
@@ -69,6 +70,7 @@ export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  const day=todayKey(),word=dailyWord(day).word
  const owned=SHOP_ITEMS.filter(item=>item.category==='piano'&&shop.owned.includes(item.id))
  const available=state.me.user.passions.includes(passion)
+ if(['dessin'].includes(passion))return <DrawingAtelier/>
  if(passion==='sport')return <SportSpace onBack={()=>reset([{name:'home'},{name:'passionHub'}])} onStart={(duration,id)=>start('sport',duration,id)}/>
  if(['dessin','piano','ecriture','logique','francais'].includes(passion))return <PassionCatalog passion={passion} onStart={(duration,id)=>start(passion,duration,id)}/>
  return <Screen tabs className="studio-workshop"><AppHeader/><button type="button" className="workshop-back" onClick={()=>reset([{name:'home'},{name:'passionHub'}])}><ArrowLeft size={17}/>Mes passions</button><header className="workshop-cover" data-passion={passion}><PassionArtwork passion={passion}/><h1>{getPassion(passion).label}</h1></header><div className="workshop-tabs" aria-label="Rubriques de la passion">{([{id:'create',label:copy.create},{id:'gallery',label:copy.gallery}] as const).map(tab=><button key={tab.id} type="button" aria-pressed={section===tab.id} onClick={()=>setSection(tab.id)}>{tab.label}</button>)}</div>

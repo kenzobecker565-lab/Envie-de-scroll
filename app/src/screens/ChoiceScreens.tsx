@@ -32,7 +32,7 @@ export function PassionPickScreen() {
     track('passion', { passion })
     setSelected(passion)
     dispatch({ type: 'flow', flow: { passion } })
-    advance(() => push({ name: 'activity' }))
+    advance(()=>push(passion==='dessin'?{name:'drawing',duration:state.flow.duration}:{name:'activity'}))
   }
 
   return (

@@ -102,12 +102,15 @@ export const api = {
   updateTheme: (theme: AppTheme) => call<UserResponse>('/me/theme', { method: 'PUT', body: JSON.stringify({ theme }) }),
   updatePassions: (passions: PassionId[]) => call<UserResponse>('/me/passions', { method: 'PUT', body: JSON.stringify({ passions }) }),
 
+  drawingSuggestions:(duration:import('@scroll-up/shared').Duration,style:import('@scroll-up/shared').DrawingStyle,recent:string[]=[])=>call<{items:import('@scroll-up/shared').DrawingActivity[]}>('/drawing/suggestions',{method:'POST',body:JSON.stringify({duration,style,recent})}),
   propose: (request: CreateProposalRequest) => call<ProposalResponse>('/proposals', { method: 'POST', body: JSON.stringify(request) }),
 
   complete: ({ proposalId, text, exploredTitle, played, photo, projectId, workshop, sport }: { proposalId: string; text?: string; exploredTitle?: string; played?: boolean; photo?: Blob; projectId?: string; sport?: import('@scroll-up/shared').SportSubmission; workshop?: import('@scroll-up/shared').WorkshopSubmission }) => {
     if (photo) {
       const form = new FormData()
       form.set('proposalId', proposalId)
+      if(text)form.set('text',text)
+      if(exploredTitle)form.set('exploredTitle',exploredTitle)
       if (projectId) form.set('projectId', projectId)
       form.set('photo', photo, 'dessin.jpg')
       return call<CompleteResponse>('/completions', { method: 'POST', body: form })

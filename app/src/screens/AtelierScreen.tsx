@@ -206,7 +206,7 @@ export function AtelierScreen({ focus }: { focus?: string }) {
           Découvrir les activités de {getPassion(selected).label.toLocaleLowerCase('fr')}
         </Button>
       )}
-      <button className="atelier-link" onClick={() => push({ name: 'gallery', passion: selected })}>
+      <button className="atelier-link" onClick={() => push(selected==='dessin'?{name:'drawingNotebook'}:{name:'gallery',passion:selected})}>
         <Archive />
         <span>
           <strong>{corner?.more ? 'Ouvrir ma réserve' : 'Voir en liste'}</strong>

@@ -1,0 +1,23 @@
+import {chromium} from 'playwright'
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+const headers={Authorization:'dev 4242'}
+for(let i=0;i<40;i++){try{const r=await fetch('http://127.0.0.1:3000/api/health');if(r.ok)break}catch{}await new Promise(r=>setTimeout(r,500))}
+const put=async(path,body)=>{const r=await fetch(`http://127.0.0.1:3000/api${path}`,{method:'PUT',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify(body)});assert(r.ok,await r.text())}
+await put('/me/passions',{passions:['dessin']});await put('/me/settings',{tutorialCompleted:true})
+fs.mkdirSync('drawing-browser-results',{recursive:true})
+const browser=await chromium.launch({headless:true}),page=await browser.newPage({viewport:{width:390,height:844}}),errors=[]
+page.on('pageerror',e=>errors.push(e.message))
+await page.goto('http://127.0.0.1:5173/?dev_user=4242');await page.getByRole('button',{name:'Passions',exact:true}).click();await page.getByRole('button',{name:/^Dessin, niveau/}).click()
+await page.getByRole('button',{name:'Manga',exact:true}).click();await page.getByRole('button',{name:'5 min',exact:true}).click()
+await page.locator('.da-choice').first().waitFor();assert.equal(await page.locator('.da-choice').count(),3)
+const first=await page.locator('.da-choice strong').allTextContents();await page.getByRole('button',{name:'Trois autres idées'}).click();await page.getByRole('button',{name:'Commencer ce dessin'}).waitFor({state:'visible'});await page.waitForFunction(()=>document.querySelectorAll('.da-choice').length===3&&!document.querySelector('.da-primary').disabled)
+const second=await page.locator('.da-choice strong').allTextContents();assert(second.every(x=>!first.includes(x)))
+await page.screenshot({path:'drawing-browser-results/01-choix.png',fullPage:true})
+for(const width of [320,390,430]){await page.setViewportSize({width,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Overflow at ${width}`)}
+await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'Voir les 15 activités',exact:true}).click();assert.equal(await page.locator('.da-choice').count(),15);await page.getByRole('button',{name:'Revenir aux trois idées'}).click()
+await page.getByRole('button',{name:'Commencer ce dessin'}).click();await page.getByRole('button',{name:'J’ai terminé',exact:true}).waitFor();await page.getByRole('button',{name:'Chrono',exact:true}).click();await page.getByRole('button',{name:'Pause',exact:true}).click();const timer=await page.getByRole('timer').innerText();await page.waitForTimeout(1200);assert.equal(await page.getByRole('timer').innerText(),timer)
+await page.screenshot({path:'drawing-browser-results/02-seance.png',fullPage:true});await page.getByRole('button',{name:'J’ai terminé',exact:true}).click();await page.getByLabel('Titre de ton dessin').fill('Mon regard de test');await page.getByText('Ajouter une note',{exact:true}).click();await page.getByRole('textbox',{name:'Ta note personnelle'}).fill('Un premier dessin.\nUne note personnelle complète.');await page.screenshot({path:'drawing-browser-results/03-enregistrer.png',fullPage:true});await page.getByRole('button',{name:'Enregistrer sans photo'}).click();await page.getByRole('button',{name:/Mon regard de test/}).click();assert((await page.locator('.da-note').innerText()).includes('Une note personnelle complète.'))
+await page.keyboard.press('Escape');await page.getByRole('button',{name:'Un nouveau dessin'}).click();await page.getByRole('button',{name:'Dans l’app',exact:true}).click();await page.getByRole('button',{name:'Commencer ce dessin'}).click();const canvas=page.locator('canvas');await canvas.waitFor();const b=await canvas.boundingBox();await page.mouse.move(b.x+30,b.y+30);await page.mouse.down();await page.mouse.move(b.x+b.width-30,b.y+b.height-30,{steps:20});await page.mouse.up();await page.getByRole('button',{name:'J’ai terminé',exact:true}).click();await page.getByRole('button',{name:'Enregistrer dans mon carnet'}).click();await page.locator('.da-gallery img').first().waitFor();await page.screenshot({path:'drawing-browser-results/04-carnet.png',fullPage:true})
+await page.getByRole('button',{name:'Personnaliser',exact:true}).click();assert(await page.getByRole('button',{name:/Atelier.*6 dessins/}).isDisabled())
+assert.deepEqual(errors,[]);await browser.close();console.log('Drawing flow: choices, refresh, all 15, mobile widths, timer, notes, optional proof, canvas, private notebook and cover gate passed.')

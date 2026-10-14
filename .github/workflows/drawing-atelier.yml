@@ -1,0 +1,43 @@
+name: Parcours dessin sur mobile
+on:
+  pull_request:
+    paths:
+      - 'app/src/**'
+      - 'app/public/art/drawing-v2/**'
+      - 'shared/src/drawing*'
+      - 'server/src/**'
+      - 'scripts/test-drawing-browser.mjs'
+      - '.github/workflows/drawing-atelier.yml'
+permissions:
+  contents: read
+jobs:
+  dessin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false playwright
+      - run: npx playwright install chromium --with-deps
+      - name: Ouvrir la version locale et tester
+        env:
+          DATABASE_URL: file:/tmp/scroll-up-drawing-browser.db
+          DEV_AUTH: 'true'
+          BOT_MODE: 'off'
+          REMINDERS_ENABLED: 'false'
+        run: |
+          npm run dev -w server > server-browser.log 2>&1 &
+          npm run dev -w app -- --host 127.0.0.1 > vite-browser.log 2>&1 &
+          node scripts/test-drawing-browser.mjs
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: dessin-mobile
+          path: |
+            drawing-browser-results
+            server-browser.log
+            vite-browser.log

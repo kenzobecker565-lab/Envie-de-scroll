@@ -16,6 +16,8 @@ export type Route =
   | { name: 'signal' }
   | { name: 'time' }
   | { name: 'passion' }
+  | { name: 'drawing'; duration?: Duration }
+  | { name: 'drawingNotebook' }
   | { name: 'activity' }
   | { name: 'proof' }
   | { name: 'done' }

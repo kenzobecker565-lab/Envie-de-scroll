@@ -1,3 +1,4 @@
+import {DrawingAtelier,DrawingNotebook} from './screens/DrawingAtelier.tsx'
 import {AtelierScreen} from './screens/AtelierScreen.tsx'
 import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
@@ -142,6 +143,8 @@ function screenFor(route: Route) {
       return <TimeScreen />
     case 'passion':
       return <PassionPickScreen />
+    case 'drawing': return <DrawingAtelier initialDuration={route.duration}/>
+    case 'drawingNotebook': return <DrawingNotebook/>
     case 'activity':
       return <ActivityScreen />
     case 'proof':

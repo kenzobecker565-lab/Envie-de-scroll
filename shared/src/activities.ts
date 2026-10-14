@@ -1,3 +1,4 @@
+import {drawingActivity} from './drawing.ts'
 /**
  * ============================================================================
  *  LES ACTIVITÉS : 60 VALIDÉES POUR LA V1, PUIS LES NOUVELLES PASSIONS
@@ -178,7 +179,7 @@ const BY_ID = new Map(ACTIVITIES.map((activity) => [activity.id, activity]))
 
 /** Une des 60 activités, une étape de parcours (voir paths.ts) ou un mot du jour (voir monthly.ts). */
 export function getActivity(id: string): Activity | undefined {
-  return BY_ID.get(id) ?? getPathStep(id) ?? getChallengeActivity(id)
+  return drawingActivity(id) ?? BY_ID.get(id) ?? getPathStep(id) ?? getChallengeActivity(id)
 }
 
 /** Une étape de parcours ou un mot du jour : une activité fixée d'avance, sans « Une autre idée ». */
@@ -188,7 +189,7 @@ export function isFixedActivityId(id: string): boolean {
 
 /** Vrai pour les 60 activités de base (pas les étapes de parcours) : celles de la collection. */
 export function isBaseActivity(id: string): boolean {
-  return BY_ID.has(id)
+  return BY_ID.has(id)||Boolean(drawingActivity(id))
 }
 
 /** Les 5 activités d'une passion pour un temps donné. */

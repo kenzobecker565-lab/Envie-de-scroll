@@ -1,3 +1,4 @@
+import {drawingSuggestions,isDrawingStyle} from '@scroll-up/shared'
 /**
  * ============================================================================
  *  API REST consommée par la Mini App
@@ -343,6 +344,13 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
 
   /* ------------------------------ Activités ------------------------------- */
 
+  api.post('/drawing/suggestions',asyncRoute(async(req,res)=>{
+ const {duration,style,recent}=req.body??{}
+ if(!DURATIONS.includes(duration)||!isDrawingStyle(style))throw badRequest('Style ou durée invalide.')
+ if(recent!==undefined&&(!Array.isArray(recent)||recent.length>135||recent.some((id:unknown)=>typeof id!=='string'||id.length>80)))throw badRequest('Historique invalide.')
+ const user=await currentUser(req,res),done=await prisma.completion.findMany({where:{userId:user.id,passion:'dessin'},select:{activityId:true}})
+ res.json({items:drawingSuggestions(duration,style,done.map(row=>row.activityId),recent??[],random)})
+ }))
   api.post(
     '/proposals',
     asyncRoute(async (req, res) => {

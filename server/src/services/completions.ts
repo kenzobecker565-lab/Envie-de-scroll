@@ -1,3 +1,4 @@
+import {drawingActivity} from '@scroll-up/shared'
 import { validateSport } from '@scroll-up/shared'
 import {
   coinsFor,
@@ -81,24 +82,25 @@ export async function completeProposal(
     try { sport=validateSport(proposal.activityId,input.sport) }
     catch(error){throw badRequest(error instanceof Error ? error.message : 'Séance invalide.')}
   }
+  const drawing=drawingActivity(proposal.activityId)
   const duration = proposal.duration as Duration
-  const text = passion.proof === 'texte' ? clean(input.text, MAX_TEXT_LENGTH) : null
+  const text = passion.proof === 'texte'||drawing ? clean(input.text, MAX_TEXT_LENGTH) : null
   const melody = input.played ? keyboardMelody(proposal.activityId) : undefined
-  const exploredTitle = passion.proof === 'titre' ? (sport?.summary ?? workshop?.summary ?? clean(input.exploredTitle, MAX_TITLE_LENGTH) ?? melody?.title ?? null) : null
+  const exploredTitle = passion.proof === 'titre'||drawing ? (sport?.summary ?? workshop?.summary ?? clean(input.exploredTitle, MAX_TITLE_LENGTH) ?? melody?.title ?? null) : null
   const photo = passion.proof === 'photo' ? input.photo : undefined
 
   const project = input.projectId ? await projectForPassion(prisma, user, input.projectId, proposal.passion) : null
 
   const hasProof = Boolean(text || photo || melody || workshop)
   const unlocked = now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
-  if (!hasProof && !unlocked) {
+  if (!drawing && !hasProof && !unlocked) {
     throw passion.timeGuard
       ? new ApiError(409, 'too_early', `Encore un peu de patience\u00A0: l’activité dure ${duration} minutes.`)
       : new ApiError(409, 'proof_required', passion.proof === 'photo' ? 'Ajoute la photo de ton dessin.' : 'Ajoute le texte que tu as écrit.')
   }
 
   const sawSolution = (input.workshop as { sawSolution?: unknown } | undefined)?.sawSolution === true
-  const coins = workshop
+  const coins = drawing ? Math.max(0,Math.min(duration,Math.floor((now.getTime()-proposal.createdAt.getTime())/60000))) : workshop
     ? workshopCoins(duration, { solved: !sawSolution && workshopSolved(workshop), elapsedMs: now.getTime() - proposal.createdAt.getTime() })
     : coinsFor(duration)
 

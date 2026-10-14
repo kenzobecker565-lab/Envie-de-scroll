@@ -29,7 +29,7 @@ export function ScrollMenuScreen() {
     haptics.selection()
     track('time', { duration }); track('passion', { passion })
     dispatch({ type: 'flow', flow: { duration, passion } })
-    push({ name: 'activity' })
+    push(passion==='dessin'?{name:'drawing',duration}:{name:'activity'})
   }
   return <Screen className="scroll-menu">
     <section className="flow-welcome"><div><h1>J’ai envie de scroll</h1><p>On en fait un moment pour toi ?</p></div><Mascot pose="think" size={108}/></section>

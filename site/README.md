@@ -1,31 +1,48 @@
 # Site de Scroll-up
 
-Le site de présentation : une page d'accueil qui invite à rejoindre le test sur Telegram, une liste d'attente pour la sortie sur les stores, et les pages Confidentialité et Mentions légales. Il reprend la charte de la refonte de l'app (violet, crème, police Outfit, Minuton).
+Le site de présentation de l’app. Son rôle : faire rejoindre le test sur Telegram. En second : la liste d’attente pour l’App Store et Google Play. Il contient aussi les pages Confidentialité et Mentions légales, qui seront demandées par les stores.
 
-Fichiers statiques, sans outil de construction : on peut l'héberger n'importe où (GitHub Pages, Netlify, Cloudflare Pages, ou le serveur de l'app).
+Fichiers statiques, sans outil de construction : on peut l’héberger n’importe où (Netlify, Cloudflare Pages, GitHub Pages ou le serveur de l’app).
 
 ## Avant la mise en ligne
 
-1. **Lien du bot** : dans `main.js`, remplace `https://t.me/TON_BOT` par le lien du bot de test (par exemple `https://t.me/scrollup_app_bot`). Tous les boutons « Essayer » le reprennent.
-2. **Liste d'attente** (facultatif) : crée un formulaire chez un service comme Formspree, Tally ou Brevo, puis colle son adresse dans `waitlistEndpoint`, toujours dans `main.js`. Tant que c'est vide, le site affiche « La liste d'attente ouvre très bientôt ».
-3. **Pages légales** : complète les passages surlignés en jaune dans `confidentialite.html` et `mentions-legales.html` (contact, statut, hébergeur, date). Ces pages seront aussi demandées par l'App Store et Google Play.
-4. **Chiffres** : la section « Le problème » cite Médiamétrie (août 2026) et le Pew Research Center (2025). Vérifie-les avant publication.
+Tous les réglages sont en haut de `main.js`, dans `CONFIG` :
+
+1. **`botUrl`** (indispensable) : le lien du bot de test, par exemple `https://t.me/scrollup_app_bot`. Tous les boutons « Essayer » et le QR code le reprennent.
+   - Si la Mini App a un lien direct (créé dans BotFather avec `/newapp`, de la forme `https://t.me/ton_bot/app`), mets-le à la place. L’app s’ouvre alors en un seul geste, sans passer par « Démarrer ». Pense dans ce cas à adapter les trois étapes de la section « Rejoins le test ».
+2. **`waitlistEndpoint`** (facultatif) : l’adresse d’un formulaire Formspree, Tally ou Brevo. Tant que c’est vide, le site affiche « La liste d’attente ouvre très bientôt ».
+3. **`apkUrl`** (facultatif) : le lien de l’app Android de test. S’il est rempli, un bloc « Télécharger l’app Android de test » apparaît pour ceux qui n’ont pas Telegram.
+4. **`contactEmail`** (conseillé) : l’adresse affichée en pied de page. L’App Store demandera une adresse d’assistance.
+5. **`plausibleDomain`** (facultatif) : active la mesure d’audience Plausible, sans cookie, et compte les clics sur « Essayer » par emplacement (accueil, démo, calcul, barre du bas…). Si tu l’actives, mets à jour le paragraphe « Ce site » de `confidentialite.html`.
+
+Ensuite :
+
+- **Pages légales** : complète les passages surlignés en jaune dans `confidentialite.html` et `mentions-legales.html` (contact, statut, hébergeur, date).
+- **Image de partage** : quand le nom de domaine est connu, remplace `og-image.jpg` par l’adresse complète dans `index.html` (par exemple `https://scroll-up.fr/og-image.jpg`). Certaines applis n’affichent l’aperçu qu’avec une adresse complète.
+- **Chiffre** : la section « Fais le calcul » cite Médiamétrie (août 2026). Vérifie-le avant publication.
 
 ## Ce que contient la page
 
-- **Accueil** : le titre « J’ai envie de ~~scroller~~ créer ! » écrit à la main, le téléphone et ses autocollants (minutons, niveau, chrono).
-- **Bande d’activités** qui défile : de vraies activités de l’app.
-- **Le calcul** : un curseur « tu scrolles combien de temps par jour ? », puis ce que donneraient 5, 15 ou 30 minutes rendues (créations, heures, niveau 5, minutons).
-- **La démo** : on choisit son temps et ses passions, le site tire trois vraies activités de l’app (`idees.js`).
-- **Comment ça marche** : sur ordinateur, le téléphone change d’écran au fil des étapes.
-- **Scroll contre Scroll-up**, **les passions** (cartes à retourner, avec les 5 niveaux), **ce que tu y gagnes** (minutons, tenues de Minuton et leurs prix, niveaux, musique signature à écouter, rappel).
-- **Notre histoire** avec la story de 10 secondes, **rejoindre le test** (avec un QR code pour passer de l’ordinateur au téléphone), **questions**.
+Tout ce qui est montré correspond à la V1 des testeurs (branche `v1-test`) : captures, activités, leçons, tenues et prix de la boutique.
 
-Les animations s’arrêtent si le téléphone ou l’ordinateur demande moins de mouvements.
+1. **Accueil** : la promesse, le bouton « Essayer gratuitement », trois réassurances (sans inscription, sans pub, rien n’est bloqué) et l’écran d’accueil de l’app.
+2. **Bande d’activités** : de vraies activités de l’app qui défilent.
+3. **Démo** : le même tirage que l’app (temps, passion ou « Surprends-moi », une idée, « Une autre idée ») avec ses vraies activités (`idees.js`).
+4. **Comment ça marche** : quatre étapes avec les vrais écrans. Sur ordinateur, le téléphone suit la lecture.
+5. **Passions** : cartes à retourner, avec une activité et les cinq niveaux.
+6. **Apprendre** : les 72 leçons.
+7. **Ce que tu y gagnes** : minutons, tenues de Minuton, niveaux, atelier.
+8. **Fais le calcul** : le temps de scroll sur un an, et ce que rendraient 5, 15 ou 30 minutes par jour.
+9. **Rejoins le test** : « J’ai Telegram » ou « Je n’ai pas Telegram » (liens d’installation), QR code sur ordinateur, liste d’attente.
+10. **Questions**.
 
-## Mettre à jour les idées de la démo
+Sur téléphone, une barre « Essayer » reste en bas de l’écran entre l’accueil et la section « Rejoins le test ». Les animations s’arrêtent si l’appareil demande moins de mouvements.
 
-`idees.js` reprend les activités de `shared/src/activities.ts` (branche `develop`). Si elles changent, il suffit de régénérer ce fichier avec les cinq premières activités de chaque passion et de chaque durée.
+## Mettre à jour le contenu
+
+- **Captures** (`assets/v1-*.webp`) : prises sur la V1 en local, en 390 px de large. À refaire si l’app change beaucoup.
+- **Idées de la démo** (`idees.js`) : les cinq premières activités de chaque passion et de chaque durée de `shared/src/activities.ts`.
+- **Chiffres** (154 activités, 72 leçons) : à ajuster si le contenu de l’app évolue.
 
 ## Voir le site en local
 
@@ -33,6 +50,4 @@ Les animations s’arrêtent si le téléphone ou l’ordinateur demande moins d
 npx serve site
 ```
 
-## Images
-
-Les illustrations viennent de la refonte de l'app (`app/public/art`, branche `develop`) et les captures d'écran de la version de développement. Elles sont en WebP, réduites à la taille d’affichage. La story (`assets/media`) existe en WebM et en MP4 ; la musique n’est chargée que si l’on appuie sur lecture. Le QR code est généré dans le navigateur par `vendor/qrcode.js` (licence MIT).
+Le QR code est généré dans le navigateur par `vendor/qrcode.js` (licence MIT). Le site pèse environ 1 Mo, polices comprises.

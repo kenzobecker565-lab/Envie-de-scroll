@@ -15,6 +15,9 @@ export type Route =
   | { name: 'home' }
   | { name: 'signal' }
   | { name: 'time' }
+  | { name: 'ideas' }
+  | { name: 'activityBrief' }
+  | { name: 'creativeSession' }
   | { name: 'passion' }
   | { name: 'drawing'; duration?: Duration }
   | { name: 'drawingNotebook' }
@@ -38,6 +41,9 @@ export type Route =
   | { name: 'challenge' }
 
 export interface Flow {
+  selectedActivity?: string
+  scrollFlow?: boolean
+  external?: boolean
   mood?: MoodId
   duration?: Duration
   passion?: PassionId

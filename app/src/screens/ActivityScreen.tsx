@@ -140,11 +140,11 @@ export function ActivityScreen() {
   }
 
   if(proposal&&!loading&&drawingActivity(proposal.activityId))return <DrawingSession key={proposal.id} proposal={proposal}/>
-  if (passionId==='sport' && proposal && !loading) return <SportSession key={proposal.id} proposal={proposal}/>
-  if (isWorkshop(passionId) && proposal && !loading) return <InteractiveWorkshop key={proposal.id} proposal={proposal} onAnother={!fixedStep ? () => void load(proposal.id) : undefined}/>
+  if (passionId==='sport' && proposal && !loading) return <div className={flow.scrollFlow?"scroll-native":""}><SportSession key={proposal.id} proposal={proposal}/></div>
+  if (isWorkshop(passionId) && proposal && !loading) return <div className={flow.scrollFlow?"scroll-native":""}><InteractiveWorkshop key={proposal.id} proposal={proposal} onAnother={!fixedStep ? () => void load(proposal.id) : undefined}/></div>
 
   return (
-    <Screen className="flow-activity">
+    <Screen className={flow.scrollFlow?"flow-activity scroll-native":"flow-activity"}>
       <FloatingConsigne proposal={proposal} show={!loading && consignePassed} compact={Boolean(proposal && keyboardMelody(proposal.activityId))} />
       {/* La scène de la passion, en grand, avec la passion et le temps choisis. */}
       <div className="flex flex-wrap items-center gap-3">

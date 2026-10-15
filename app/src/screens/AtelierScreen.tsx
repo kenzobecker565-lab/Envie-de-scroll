@@ -1,10 +1,12 @@
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { Pin, Brain, Dumbbell, Archive, BookOpen, ChevronRight, Frame, Music2, Pencil } from 'lucide-react'
-import { LEARNING_PASSIONS, getPassion, type CompletionDTO, type LearningPassion } from '@scroll-up/shared'
+import { Palette, Check, X, Pin, Brain, Dumbbell, Archive, BookOpen, ChevronRight, Frame, Music2, Pencil } from 'lucide-react'
+import { LEARNING_PASSIONS, getPassion, parseAtelierAppearance, ATELIER_AMBIANCES, ATELIER_FRAMES, ATELIER_DECORS, type AtelierAppearance, type CompletionDTO, type LearningPassion } from '@scroll-up/shared'
 import { api } from '../api/client.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { Screen } from '../components/Screen.tsx'
-import { AppHeader } from '../components/AppHeader.tsx'
+import { CarnetHeader } from '../components/CarnetHeader.tsx'
+import { PracticeProgress } from '../components/PracticeProgress.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { Button } from '../components/ui/button.tsx'
 import { Dialog, DialogContent } from '../components/ui/dialog.tsx'
@@ -21,7 +23,12 @@ const CORNERS: Record<LearningPassion, string> = {
 }
 type Corner = { items: CompletionDTO[]; more: boolean; error: boolean }
 export function AtelierScreen({ focus }: { focus?: string }) {
-  const { state } = useAppState()
+  const reduced=useReducedMotion()
+ const { state, dispatch } = useAppState()
+ const [appearance,setAppearance]=useState(()=>parseAtelierAppearance(state.me.user.atelier))
+ const [draft,setDraft]=useState<AtelierAppearance>(appearance),[editing,setEditing]=useState(false),[saving,setSaving]=useState(false),[appearanceError,setAppearanceError]=useState('')
+ const visible=editing?draft:appearance
+ const saveAppearance=async()=>{if(saving)return;setSaving(true);setAppearanceError('');try{const response=await api.updateAtelier(draft);dispatch({type:'user',user:response.user});setAppearance(parseAtelierAppearance(response.user.atelier));setEditing(false)}catch(e){setAppearanceError((e as Error).message)}finally{setSaving(false)}}
   const pinKey = `scroll-up:atelier-pins:${state.me.user.id}`
   const { push } = useNavigation(),
     [selected, setSelected] = useState<LearningPassion>('dessin'),
@@ -95,22 +102,9 @@ export function AtelierScreen({ focus }: { focus?: string }) {
   }
   const CornerIcon = selected === 'piano' ? Music2 : selected === 'ecriture' ? Pencil : selected === 'logique' ? Brain : selected === 'francais' ? BookOpen : selected === 'sport' ? Dumbbell : Frame
   return (
-    <Screen tabs className="atelier-screen">
-      <AppHeader />
-      <header className="atelier-heading">
-        <div>
-          <span>Ton espace, tes créations</span>
-          <h1>Chez Minuton</h1>
-          <p>Un petit bout de toi, à chaque activité.</p>
-        </div>
-        <button
-          className="atelier-reserve-icon"
-          aria-label="Ouvrir la réserve et l’historique"
-          onClick={() => push({ name: 'gallery' })}
-        >
-          <Archive size={22} />
-        </button>
-      </header>
+    <Screen tabs className="atelier-screen carnet-page carnet-atelier">
+      <CarnetHeader title="Mon atelier" subtitle="Un espace qui grandit avec toi." pose="draw" action={<button type="button" className="studio-icon-button" aria-label="Personnaliser mon atelier" aria-expanded={editing} onClick={()=>{setDraft(appearance);setEditing(v=>!v);setAppearanceError('')}}><Palette size={20}/></button>}/>
+      <button type="button" className="atelier-personalize" aria-expanded={editing} onClick={()=>{setDraft(appearance);setEditing(v=>!v);setAppearanceError('')}}><Palette size={18}/>Personnaliser mon atelier</button>
       <div className="atelier-tabs" aria-label="Les six coins de l’atelier">
         {LEARNING_PASSIONS.map((p) => (
           <button key={p} aria-pressed={p === selected} onClick={() => setSelected(p)}>
@@ -118,7 +112,7 @@ export function AtelierScreen({ focus }: { focus?: string }) {
           </button>
         ))}
       </div>
-      <section className="atelier-room" data-corner={selected} aria-label={CORNERS[selected]}>
+      <AnimatePresence mode="wait" initial={false}><motion.section key={selected} initial={{opacity:0,y:reduced?0:7}} animate={{opacity:1,y:0}} exit={{opacity:0,y:reduced?0:-5}} transition={{duration:reduced?0:.2}} className="atelier-room" data-ambiance={visible.ambiance} data-frames={visible.frames} data-decor={visible.decor} data-corner={selected} aria-label={CORNERS[selected]}>
         <div className="atelier-room-label">
           <span>MON ATELIER</span>
           <h2>{CORNERS[selected]}</h2>
@@ -150,13 +144,22 @@ export function AtelierScreen({ focus }: { focus?: string }) {
             </div>
           )}
         </div>
-        <div className="atelier-mascot">
+        {visible.mascot && <div className="atelier-mascot">
           <Mascot pose={items.length ? 'cheer' : 'welcome'} size={110} animated={false} />
-        </div>
+        </div>}
         <span className="atelier-room-caption">
           {items.length ? 'Tes dernières activités prennent place ici.' : 'L’atelier se remplit avec toi.'}
         </span>
-      </section>
+      </motion.section></AnimatePresence>
+      {editing&&<section className="atelier-editor" aria-label="Personnalisation de mon atelier">
+        <div className="atelier-editor-heading"><h2>L’ambiance de mon atelier</h2><button type="button" aria-label="Annuler la personnalisation" disabled={saving} onClick={()=>{setDraft(appearance);setEditing(false);setAppearanceError('')}}><X size={20}/></button></div>
+        <fieldset disabled={saving}><legend>Ambiance</legend><div className="atelier-options">{ATELIER_AMBIANCES.map(value=><button type="button" key={value} data-ambiance={value} aria-pressed={draft.ambiance===value} onClick={()=>setDraft(v=>({...v,ambiance:value}))}><span className="atelier-swatch"/>{({lavande:'Lavande',sauge:'Sauge',crepuscule:'Crépuscule'})[value]}</button>)}</div></fieldset>
+        <fieldset disabled={saving}><legend>Cadres</legend><div className="atelier-options">{ATELIER_FRAMES.map(value=><button type="button" key={value} aria-pressed={draft.frames===value} onClick={()=>setDraft(v=>({...v,frames:value}))}>{({bois:'Bois',violet:'Violet',papier:'Papier'})[value]}</button>)}</div></fieldset>
+        <fieldset disabled={saving}><legend>Décor</legend><div className="atelier-options">{ATELIER_DECORS.map(value=><button type="button" key={value} aria-pressed={draft.decor===value} onClick={()=>setDraft(v=>({...v,decor:value}))}>{value==='atelier'?'Atelier créatif':'Épuré'}</button>)}</div></fieldset>
+        <label className="atelier-show-mascot"><input type="checkbox" checked={draft.mascot} disabled={saving} onChange={e=>setDraft(v=>({...v,mascot:e.target.checked}))}/>Afficher Minuton dans l’atelier</label>
+        {appearanceError&&<p role="alert">{appearanceError}</p>}<Button disabled={saving} onClick={()=>void saveAppearance()}><Check size={18}/>{saving?'Enregistrement…':'Enregistrer mon ambiance'}</Button><small>Conservé sur ton compte. L’aperçu ne dépense aucun Minuton.</small>
+      </section>}
+      <PracticeProgress passion={selected} rows={state.me.stats.byPassion}/>
       {!corner && <p role="status">Minuton ouvre l’atelier…</p>}
       {corner?.error && (
         <div role="alert">

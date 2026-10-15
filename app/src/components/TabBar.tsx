@@ -1,5 +1,5 @@
 import { ShoppingBag, GraduationCap, Heart, Home, UserRound, type LucideIcon } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
 import { useNavigation, type Route } from '../state/AppState.tsx'
@@ -34,6 +34,7 @@ export function isTab(name: string): name is Tab {
 export const TAB_BAR_SPACE = 'pb-[calc(86px+env(safe-area-inset-bottom))]'
 
 export function TabBar() {
+  const reduced=useReducedMotion()
   const { route, reset } = useNavigation()
   const current = route.name==='learningLesson'?null:['drawing','drawingNotebook'].includes(route.name)?'passionHub': ['learningNotebooks','path'].includes(route.name)?'learn':route.name==='atelier'?'passionHub':route.name === 'settings' ? 'profile' : route.name === 'challenge' ? 'learn' : route.name === 'progress' ? 'profile' : route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? (route.passion ? 'passionHub' : 'profile') : isTab(route.name) ? route.name : null
 
@@ -53,10 +54,10 @@ export function TabBar() {
           key="tabbar"
           aria-label="Navigation"
           className="studio-tabbar"
-          initial={{ y: 120, opacity: 0 }}
+          initial={{ y: reduced?0:40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 120, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+          exit={{ y: reduced?0:40, opacity: 0 }}
+          transition={{ duration:reduced?0:.24, ease:[.22,1,.36,1] }}
         >
           {TABS.map(({ id, label, icon: Icon }) => {
             const active = id === current
@@ -74,6 +75,7 @@ export function TabBar() {
                 )}
               >
 
+                {active&&<motion.span layoutId="active-main-tab" className="tab-active-surface" transition={{duration:reduced?0:.26,ease:[.22,1,.36,1]}}/>}
                 <Icon size={23} strokeWidth={1.8} aria-hidden="true" />
                 <span className="text-center leading-tight">{label}</span>
               </motion.button>

@@ -52,6 +52,7 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
   const duration = proposal.duration as Duration
   return {
     id: proposal.id,
+    external: proposal.external,
     activityId: proposal.activityId,
     passion: proposal.passion as PassionId,
     mood: isMoodId(proposal.mood) ? proposal.mood : null,
@@ -160,6 +161,7 @@ export async function createProposal(
     prisma.proposal.create({
       data: {
         userId: user.id,
+        external: request.external ?? false,
         activityId: activity.id,
         passion,
         mood: mood ?? null,

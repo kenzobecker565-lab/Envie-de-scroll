@@ -1,3 +1,4 @@
+import { CompletionCelebration } from './CompletionCelebration.tsx'
 import {MinutonHangs} from '../components/MinutonHangs.tsx'
 import { Check, ChevronDown, Clock3, House, Images, Lightbulb, Mountain, Piano, Play, Send, Shuffle, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
@@ -119,6 +120,8 @@ export function DoneScreen() {
 
   // Le mode progression : une étape réussie propose aussitôt la suivante.
   if (step && stepProgress) return <StepDone done={done} step={step} progress={stepProgress} paths={paths} level={level} cheer={cheer} />
+
+  if (!challenge) return <CompletionCelebration done={done}/>
 
   return <Screen className="items-center text-center flow-done flow-done-compact">
     <h1 className="font-display text-32 font-extrabold">Bien joué !</h1>

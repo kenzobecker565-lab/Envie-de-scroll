@@ -91,6 +91,7 @@ export const api = {
   learningEntry:(id:string)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`),
   setLearningReview:(id:string,review:boolean)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}/review`,{method:'PATCH',body:JSON.stringify({review})}),
   saveLearning:(id:string,lessonId:string,work:import('@scroll-up/shared').LearningWork)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`,{method:'PUT',body:JSON.stringify({lessonId,work})}),
+  updateAtelier:(appearance:import('@scroll-up/shared').AtelierAppearance)=>call<UserResponse>('/me/atelier',{method:'PUT',body:JSON.stringify(appearance)}),
   shop: () => call<import('@scroll-up/shared').ShopState>('/shop'),
   claimShopTestCredit: () => call<import('@scroll-up/shared').ShopState>('/shop/test-credit', { method: 'POST' }),
   redeemSkinCode: (code: string) => call<import('@scroll-up/shared').ShopState & { redeemedItemId: string }>('/shop/codes', { method: 'POST', body: JSON.stringify({ code }) }),
@@ -105,17 +106,18 @@ export const api = {
   drawingSuggestions:(duration:import('@scroll-up/shared').Duration,style:import('@scroll-up/shared').DrawingStyle,recent:string[]=[])=>call<{items:import('@scroll-up/shared').DrawingActivity[]}>('/drawing/suggestions',{method:'POST',body:JSON.stringify({duration,style,recent})}),
   propose: (request: CreateProposalRequest) => call<ProposalResponse>('/proposals', { method: 'POST', body: JSON.stringify(request) }),
 
-  complete: ({ proposalId, text, exploredTitle, played, photo, projectId, workshop, sport }: { proposalId: string; text?: string; exploredTitle?: string; played?: boolean; photo?: Blob; projectId?: string; sport?: import('@scroll-up/shared').SportSubmission; workshop?: import('@scroll-up/shared').WorkshopSubmission }) => {
+  complete: ({ external, proposalId, text, exploredTitle, played, photo, projectId, workshop, sport }: { external?: boolean; proposalId: string; text?: string; exploredTitle?: string; played?: boolean; photo?: Blob; projectId?: string; sport?: import('@scroll-up/shared').SportSubmission; workshop?: import('@scroll-up/shared').WorkshopSubmission }) => {
     if (photo) {
       const form = new FormData()
       form.set('proposalId', proposalId)
+      if(external)form.set('external','true')
       if(text)form.set('text',text)
       if(exploredTitle)form.set('exploredTitle',exploredTitle)
       if (projectId) form.set('projectId', projectId)
       form.set('photo', photo, 'dessin.jpg')
       return call<CompleteResponse>('/completions', { method: 'POST', body: form })
     }
-    return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ proposalId, text, exploredTitle, played, projectId, workshop, sport }) })
+    return call<CompleteResponse>('/completions', { method: 'POST', body: JSON.stringify({ external, proposalId, text, exploredTitle, played, projectId, workshop, sport }) })
   },
 
   completion: (id:string) => call<CompletionResponse>(`/completions/${encodeURIComponent(id)}`),

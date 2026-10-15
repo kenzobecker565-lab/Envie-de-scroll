@@ -13,6 +13,7 @@ import type { AppTheme } from './themes.ts'
 import type { ActivityExtra, Duration, MoodId, PassionId, SkillLevel } from './types.ts'
 
 export interface UserDTO {
+  atelier?: import('./scrollFlow.ts').AtelierAppearance
   id: string
   firstName: string
   passions: PassionId[]
@@ -69,6 +70,7 @@ export interface StatsDTO {
 }
 
 export interface ProposalDTO {
+  external?: boolean
   id: string
   activityId: string
   passion: PassionId
@@ -170,6 +172,7 @@ export interface UpdatePassionsRequest {
 }
 
 export interface CreateProposalRequest {
+  external?: boolean
   passion: PassionId
   /** Facultatif : le parcours envie de scroller ne demande plus l’humeur. */
   mood?: MoodId
@@ -188,6 +191,8 @@ export interface CreateProposalRequest {
  * quand une photo (champ `photo`) accompagne un dessin.
  */
 export interface CompleteRequest {
+  /** Voluntary practice outside the interactive exercise; no mandatory upload. */
+  external?: boolean
   sport?: import('./sport.ts').SportSubmission
   workshop?: import('./workshops.ts').WorkshopSubmission
   proposalId: string

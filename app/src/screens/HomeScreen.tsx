@@ -1,5 +1,5 @@
 import { Clock3, Compass, ChevronRight, Images } from 'lucide-react'
-import { ACTIVE_PASSION_IDS, getPassion, getPathStep, isFixedActivityId } from '@scroll-up/shared'
+import { getPassion, getPathStep, isFixedActivityId } from '@scroll-up/shared'
 import { Screen } from '../components/Screen.tsx'
 import { Logo, BrandMark } from '../components/Brand.tsx'
 import { ScrollCallToAction } from '../components/ScrollCallToAction.tsx'
@@ -17,25 +17,22 @@ import './HomeScreen.css'
 /** The approved “Le décollage” home. Existing activity flows are preserved. */
 export function HomeScreen() {
  const {state,dispatch}=useAppState(), {push,reset}=useNavigation()
- const {user,openProposal}=state.me
+ const {openProposal}=state.me
  const shop=useShop()
  const {items:learningEntries}=useLearning()
  const learning=learningEntries.find(entry=>!entry.completed)
- const start=()=>{haptics.impact('heavy');track('cta');dispatch({type:'newFlow'});push({name:'signal'})}
+ const start=()=>{haptics.impact('heavy');track('cta');dispatch({type:'newFlow',flow:{scrollFlow:true}});push({name:'signal'})}
  const quickStart=()=>{
   haptics.selection();track('cta',{source:'home-five-minutes'})
-  const preferred=ACTIVE_PASSION_IDS.filter(passion=>user.passions.includes(passion))
-  const pool=preferred.length?preferred:ACTIVE_PASSION_IDS
-  const passion=pool[Math.floor(Math.random()*pool.length)]!
-  dispatch({type:'newFlow',flow:{duration:5,passion}})
-  push(passion==='dessin'?{name:'drawing',duration:5}:{name:'activity'})
+  dispatch({type:'newFlow',flow:{duration:5,scrollFlow:true}})
+  push({name:'ideas'})
  }
  const resume=()=>{
   if(!openProposal)return
   haptics.impact('light')
   dispatch({type:'newFlow',flow:{mood:openProposal.mood??undefined,duration:openProposal.duration,passion:openProposal.passion,proposal:openProposal,...(isFixedActivityId(openProposal.activityId)?{fixedStep:openProposal.activityId}:{})}})
   const lesson=getPathStep(openProposal.activityId)
-  reset(lesson?lessonStack(lesson,{name:'activity'}):[{name:'home'},{name:'activity'}])
+  reset(lesson?lessonStack(lesson,{name:'activity'}):[{name:'home'}, {name:openProposal.external||openProposal.passion==='ecriture'||(openProposal.passion==='dessin'&&!openProposal.activityId.startsWith('dessin-v2-'))?'creativeSession':'activity'}])
  }
  const resumePassion=openProposal?.passion??learning?.passion
  return <Screen tabs className="studio-home grand-geste-home">

@@ -149,7 +149,8 @@ describe('authentification', () => {
     const initData = makeInitData({ id: 5150, first_name: 'Sam', allows_write_to_pm: true })
     const response = await request(app).get('/api/me').set('Authorization', `tma ${initData}`).expect(200)
     const body = response.body as MeResponse
-    expect(body.user).toEqual({ id: '5150', firstName: 'Sam', passions: [], onboarded: false, tutorialCompleted: false, theme: 'pop', remindersEnabled: true, scrollMoment: null, reminderTime: null, skills: {} })
+    expect(body.user).toEqual({
+      atelier: {ambiance:'lavande',frames:'bois',decor:'atelier',mascot:true}, id: '5150', firstName: 'Sam', passions: [], onboarded: false, tutorialCompleted: false, theme: 'pop', remindersEnabled: true, scrollMoment: null, reminderTime: null, skills: {} })
     const user = await prisma.user.findUnique({ where: { id: 5150n } })
     expect(user?.canMessage).toBe(true)
   })
@@ -371,4 +372,44 @@ describe('fichiers servis avec l’app', () => {
       expect(fs.existsSync(file), ambiance.src).toBe(true)
     }
   })
+})
+
+describe('nouveau parcours de pratique',()=>{
+ it('conserve le décor sur le compte et refuse les valeurs inconnues',async()=>{
+  await onboard(['dessin'])
+  const appearance={ambiance:'sauge',frames:'papier',decor:'epure',mascot:false}
+  const saved=await request(app).put('/api/me/atelier').set(as()).send(appearance).expect(200)
+  expect(saved.body.user.atelier).toEqual(appearance)
+  const reloaded=await request(app).get('/api/me').set(as()).expect(200)
+  expect(reloaded.body.user.atelier).toEqual(appearance)
+  await request(app).put('/api/me/atelier').set(as()).send({...appearance,ambiance:'javascript:bad'}).expect(400)
+  const other=await request(app).get('/api/me').set(as(43)).expect(200)
+  expect(other.body.user.atelier.ambiance).toBe('lavande')
+ })
+ it('valide une activité hors de l’app sans photo, crédite le temps réel et empêche le double crédit',async()=>{
+  await onboard(['dessin'])
+  const started=await request(app).post('/api/proposals').set(as()).send({passion:'dessin',duration:5,step:'dessin-5-1',external:true}).expect(201)
+  expect(started.body.proposal.external).toBe(true)
+  clock.advanceMinutes(2)
+  const saved=await request(app).post('/api/completions').set(as()).send({proposalId:started.body.proposal.id,external:true}).expect(201)
+  expect(saved.body.coinsEarned).toBe(2);expect(saved.body.stats.totalMinutes).toBe(2);expect(saved.body.stats.byPassion[0].tried).toContain('dessin-5-1')
+  await request(app).post('/api/completions').set(as()).send({proposalId:started.body.proposal.id,external:true}).expect(409)
+ })
+ it('une répétition ajoute du temps mais pas une nouvelle découverte ; le crédit est plafonné',async()=>{
+  await onboard(['dessin'])
+  for(let i=0;i<2;i++){
+   const start=await request(app).post('/api/proposals').set(as()).send({passion:'dessin',duration:5,step:'dessin-5-1'}).expect(201)
+   clock.advanceMinutes(8)
+   await request(app).post('/api/completions').set(as()).send({proposalId:start.body.proposal.id,external:true}).expect(201)
+  }
+  const {body}=await request(app).get('/api/me').set(as()).expect(200)
+  expect(body.stats.byPassion[0].tried).toEqual(['dessin-5-1']);expect(body.stats.totalCoins).toBe(10);expect(body.stats.totalMinutes).toBe(10)
+ })
+ it('accepte une séance de français sur papier sans fabriquer de correction numérique',async()=>{
+  await onboard(['francais'])
+  const start=await request(app).post('/api/proposals').set(as()).send({passion:'francais',duration:5,step:'francais-5-1',external:true}).expect(201)
+  clock.advanceMinutes(3)
+  const {body}=await request(app).post('/api/completions').set(as()).send({proposalId:start.body.proposal.id,external:true,exploredTitle:'Travail sur papier'}).expect(201)
+  expect(body.completion.workshop).toBeNull();expect(body.coinsEarned).toBe(3);expect(body.completion.exploredTitle).toBe('Travail sur papier')
+ })
 })

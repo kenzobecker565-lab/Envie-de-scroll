@@ -1,8 +1,9 @@
+import { IdeasScreen, ActivityBriefScreen, CreativeSessionScreen } from './screens/ScrollFlowScreens.tsx'
 import {DrawingAtelier,DrawingNotebook} from './screens/DrawingAtelier.tsx'
 import {AtelierScreen} from './screens/AtelierScreen.tsx'
 import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
-import { AnimatePresence, motion, MotionConfig, type Variants } from 'motion/react'
-import { useCallback, useEffect, useState } from 'react'
+import { AnimatePresence, motion, MotionConfig, useReducedMotion, type Variants } from 'motion/react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { getMood, getPassion, getPath, LEARNING_PASSIONS, type MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
 import { RotateCcw, Send } from 'lucide-react'
@@ -85,10 +86,11 @@ export function App() {
 
 /* ----------------------------- Transitions -------------------------------- */
 
+interface TransitionContext { direction:1|-1; flight:boolean; reduced:boolean }
 const screenVariants: Variants = {
-  enter: (direction: 1 | -1) => ({ opacity: 0, x: direction * 32, y: 10, scale: 0.985 }),
-  center: { opacity: 1, x: 0, y: 0, scale: 1, transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] } },
-  exit: (direction: 1 | -1) => ({ opacity: 0, x: direction * -24, scale: 0.99, transition: { duration: 0.16, ease: 'easeIn' } }),
+ enter: ({direction,flight,reduced}:TransitionContext) => ({opacity:flight||reduced?1:0,x:flight||reduced?0:direction*18,y:0}),
+ center: ({reduced}:TransitionContext) => ({opacity:1,x:0,y:0,transition:{duration:reduced?0:.3,ease:[.22,1,.36,1]}}),
+ exit: ({direction,flight,reduced}:TransitionContext) => ({opacity:flight?1:0,x:flight||reduced?0:direction*-10,transition:{duration:reduced||flight?0:.12,ease:'easeIn'}}),
 }
 
 /** Couleur du décor selon l'écran et les choix du parcours. */
@@ -141,6 +143,9 @@ function screenFor(route: Route) {
       return <SignalScreen />
     case 'time':
       return <TimeScreen />
+    case 'ideas': return <IdeasScreen/>
+    case 'activityBrief': return <ActivityBriefScreen/>
+    case 'creativeSession': return <CreativeSessionScreen/>
     case 'passion':
       return <PassionPickScreen />
     case 'drawing': return <DrawingAtelier initialDuration={route.duration}/>
@@ -169,6 +174,9 @@ function screenFor(route: Route) {
 function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const { route, direction, canGoBack, back } = useNavigation()
   const { state, dispatch } = useAppState()
+  const reduced=Boolean(useReducedMotion()),previous=useRef(route.name)
+  const transitionContext:TransitionContext={direction,flight:(route.name==='signal'||route.name==='time')&&previous.current==='home',reduced}
+  useEffect(()=>{previous.current=route.name},[route.name])
   useEffect(() => {
     if (route.name === 'home' && state.me.user.onboarded && !tutorialSeen(state.me.user)) dispatch({ type: 'tutorial', open: true })
   }, [route.name, state.me.user, dispatch])
@@ -190,8 +198,8 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
   const key = route.name === 'learningLesson' ? `lesson-${route.lessonId}-${route.entryId??'new'}` : route.name==='learningNotebooks'?`notebooks-${route.passion??'all'}-${route.review??false}` : route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>
-      <AnimatePresence mode="wait" custom={direction} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
-        <motion.div key={key} custom={direction} variants={screenVariants} initial="enter" animate="center" exit="exit">
+      <AnimatePresence mode="wait" custom={transitionContext} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+        <motion.div key={key} custom={transitionContext} variants={screenVariants} initial="enter" animate="center" exit="exit">
           {screenFor(route)}
         </motion.div>
       </AnimatePresence>

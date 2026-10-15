@@ -33,6 +33,10 @@ import express, { type ErrorRequestHandler, type NextFunction, type Request, typ
 import multer from 'multer'
 import {
   DURATIONS,
+  parseAtelierAppearance,
+  ATELIER_AMBIANCES,
+  ATELIER_FRAMES,
+  ATELIER_DECORS,
   isAppEventName,
   isAppTheme,
   isMoodId,
@@ -344,6 +348,13 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
 
   /* ------------------------------ Activités ------------------------------- */
 
+  api.put('/me/atelier',asyncRoute(async(req,res)=>{
+    const user=await currentUser(req,res),v=req.body
+    if(!v||!ATELIER_AMBIANCES.includes(v.ambiance)||!ATELIER_FRAMES.includes(v.frames)||!ATELIER_DECORS.includes(v.decor)||typeof v.mascot!=='boolean')throw badRequest('Personnalisation de l’atelier invalide.')
+    const updated=await prisma.user.update({where:{id:user.id},data:{atelierAppearance:JSON.stringify(parseAtelierAppearance(v))}})
+    res.json({user:toUserDTO(updated)})
+  }))
+
   api.post('/drawing/suggestions',asyncRoute(async(req,res)=>{
  const {duration,style,recent}=req.body??{}
  if(!DURATIONS.includes(duration)||!isDrawingStyle(style))throw badRequest('Style ou durée invalide.')
@@ -354,7 +365,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.post(
     '/proposals',
     asyncRoute(async (req, res) => {
-      const { passion, mood, duration, replacing, step, quiet } = (req.body ?? {}) as Record<string, unknown>
+      const { passion, mood, duration, replacing, step, quiet, external } = (req.body ?? {}) as Record<string, unknown>
       // L’humeur est facultative, y compris pour le parcours envie de scroller.
       if (!isPassionId(passion) || (mood !== undefined && !isMoodId(mood)) || !DURATIONS.includes(duration as Duration)) {
         throw badRequest('Passion, mood ou temps invalide.')
@@ -362,8 +373,9 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       if (replacing !== undefined && typeof replacing !== 'string') throw badRequest('Proposition à remplacer invalide.')
       if (step !== undefined && typeof step !== 'string') throw badRequest('Étape de parcours invalide.')
       const user = await currentUser(req, res)
+      if (external !== undefined && typeof external !== 'boolean')throw badRequest('Mode de réalisation invalide.')
       if (quiet !== undefined && typeof quiet !== 'boolean') throw badRequest('Option « sans son » invalide.')
-      const proposal = await createProposal(prisma, user, { passion, mood: isMoodId(mood) ? mood : undefined, duration: duration as Duration, replacing, step, quiet }, { random, now: now() })
+      const proposal = await createProposal(prisma, user, { passion, mood: isMoodId(mood) ? mood : undefined, duration: duration as Duration, replacing, step, quiet, external:external as boolean|undefined }, { random, now: now() })
       const body: ProposalResponse = { proposal: toProposalDTO(proposal), serverTime: now().toISOString() }
       res.status(201).json(body)
     }),
@@ -387,6 +399,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     asyncRoute(async (req, res) => {
       const fields = (req.body ?? {}) as Record<string, unknown>
       if (typeof fields.proposalId !== 'string' || fields.proposalId.length === 0) throw badRequest('Proposition manquante.')
+      if(fields.external!==undefined&&fields.external!==true&&fields.external!==false&&fields.external!=='true'&&fields.external!=='false')throw badRequest('Mode de réalisation invalide.')
       const user = await currentUser(req, res)
       const completion = await completeProposal(
         prisma,
@@ -394,6 +407,7 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
         user,
         {
           proposalId: fields.proposalId,
+          external: fields.external===true||fields.external==='true',
           text: typeof fields.text === 'string' ? fields.text : undefined,
           exploredTitle: typeof fields.exploredTitle === 'string' ? fields.exploredTitle : undefined,
           sport: fields.sport,

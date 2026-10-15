@@ -1,0 +1,2 @@
+ALTER TABLE "User" ADD COLUMN "atelierAppearance" TEXT NOT NULL DEFAULT '{}';
+ALTER TABLE "Proposal" ADD COLUMN "external" BOOLEAN NOT NULL DEFAULT false;

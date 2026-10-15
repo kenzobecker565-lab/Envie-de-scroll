@@ -45,6 +45,7 @@ model User {
   updatedAt           DateTime @updatedAt
 
   /// Crédit de boutique pour tester les achats, sans gonfler la progression.
+  atelierAppearance String @default("{}")
   shopBonus Int @default(0)
   shopTestCreditClaimed Boolean @default(false)
   coinsSpent Int @default(0)
@@ -65,6 +66,7 @@ model Proposal {
   userId     BigInt
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   activityId String
+  external   Boolean @default(false)
   passion    String
   /// Humeur choisie ; vide pour une leçon de parcours (le mode progression ne la demande pas)
   mood       String?

@@ -3,11 +3,10 @@ import {DrawingAtelier} from './DrawingAtelier.tsx'
 import { PassionCatalog } from './PassionCatalog.tsx'
 import { ArrowLeft, ArrowRight, ChevronRight, Clock3, Plus, Sparkles, Play } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { collection, dailyWord, getPassion, passionLevel, SHOP_ITEMS, type CompletionDTO, type Duration, type PassionId } from '@scroll-up/shared'
+import { collection, getPassion, passionLevel, SHOP_ITEMS, type CompletionDTO, type Duration, type PassionId } from '@scroll-up/shared'
 import { Button } from '@/components/ui/button'
 import { api } from '../api/client.ts'
 import { AppHeader } from '../components/AppHeader.tsx'
-import { todayKey } from '../components/Challenge.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { PassionArtwork, PassionPoster } from '../components/PassionArtwork.tsx'
 import { currentPath } from '../components/Paths.tsx'
@@ -15,7 +14,6 @@ import { PassionDetail, statsFor } from '../components/Progression.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { formatDay, plural } from '../lib/format.ts'
 import { useShop } from '../lib/shop.ts'
-import { useStartChallenge } from '../lib/useStartChallenge.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { GalleryScreen } from './GalleryScreen.tsx'
 import { SportSpace } from './SportSpace.tsx'
@@ -64,11 +62,10 @@ const COPY:Record<PassionId,{create:string;gallery:string;title:string;cta:strin
 }
 
 export function PassionSpaceScreen({passion}:{passion:PassionId}) {
- const {state}=useAppState(),{push,reset}=useNavigation(),start=useWorkshopStart(),startWord=useStartChallenge(),shop=useShop()
+ const {state}=useAppState(),{push,reset}=useNavigation(),start=useWorkshopStart(),shop=useShop()
  const [section,setSection]=useState<'create'|'gallery'>('create')
  const row=statsFor(state.me.stats.byPassion,passion),copy=COPY[passion]
  const progress=currentPath(passion,row.steps,passionLevel(passion,row.coins).level,state.me.user.skills[passion])
- const day=todayKey(),word=dailyWord(day).word
  const owned=SHOP_ITEMS.filter(item=>item.category==='piano'&&shop.owned.includes(item.id))
  const available=state.me.user.passions.includes(passion)
  if(['dessin'].includes(passion))return <DrawingAtelier/>
@@ -79,7 +76,6 @@ export function PassionSpaceScreen({passion}:{passion:PassionId}) {
  <div className="workshop-intro"><h2>{row.activities?copy.title:'Ton atelier commence ici.'}</h2><p>{plural(row.activities,'activité')} · {row.minutes} min de séance</p></div>
  {!row.activities&&<section className="workshop-welcome"><Mascot pose={passion==='dessin'?'draw':passion==='ecriture'?'write':passion==='piano'?'piano':'welcome'} size={94}/><div><h3>Un premier pas suffit pour commencer.</h3><p>{'Chaque création construira ton atelier.'}</p></div></section>}
  <Button className="workshop-main-cta" onClick={()=>start(passion)}>{available?row.activities?copy.cta:copy.first:'Ajouter cette passion'}<ArrowRight size={19}/></Button>
- {(passion==='dessin'||passion==='ecriture')&&<section className="workshop-word"><div><small>Le mot du jour</small><h2>{word}</h2><p>À toi de lui donner vie · 15 min</p></div><button type="button" onClick={()=>available?startWord(passion,day):push({name:'passions',mode:'edit'})}>{passion==='dessin'?'Dessiner':'Écrire'}<ChevronRight size={17}/></button></section>}
  {<section className="workshop-section"><h2>{passion==='rythme'?'Choisir un défi':passion==='logique'?'Choisir un dossier':'Les règles en pratique'}</h2><div className="iw-workshop-families">{(passion==='rythme'?['Reproduire une boucle','Compléter un beat','Deux instruments','Créer une variation','Composition libre']:passion==='logique'?['Déduction','Cryptographie','Contraintes','Enquêtes','Dossier surprise']:['Conjugaison','Orthographe','Grammaire et accords','Ponctuation et syntaxe','Révision mixte']).map((label,i)=><button type="button" key={label} onClick={()=>start(passion,5,`${passion}-5-${i+1}`)}><strong>{label}</strong><span>Ouvrir · 5 min<ChevronRight size={14}/></span></button>)}</div></section>}
  <section className="workshop-section"><h2>{'Une petite pause créative'}</h2><div className="workshop-quick">{([5,15] as Duration[]).map(duration=>{const activity=collection(passion).find(group=>group.duration===duration)?.activities[0];return activity&&<button type="button" key={duration} onClick={()=>start(passion,duration,activity.id)}><Clock3 size={19}/><strong>{activity.text}</strong><span>{duration} min<ChevronRight size={15}/></span></button>})}</div></section>
  {progress&&<section className="workshop-current"><small>Pour progresser</small><h2>{progress.path.title}</h2><p>{progress.done} leçons sur {progress.path.steps.length}</p><span className="workshop-gauge"><i style={{width:`${progress.done/progress.path.steps.length*100}%`}}/></span>{progress.next&&<p>Prochaine leçon : {progress.next.title}</p>}<Button variant="secondary" size="sm" onClick={()=>push({name:'path',pathId:progress.path.id})}>Continuer dans Apprendre<ChevronRight size={16}/></Button></section>}

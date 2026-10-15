@@ -1,3 +1,4 @@
+import { BrandMark } from './Brand.tsx'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { formatNumber } from '../lib/format.ts'
@@ -7,16 +8,7 @@ import { formatNumber } from '../lib/format.ts'
  * soleil cerné d'encre, aiguilles sur la minute.
  */
 export function CoinIcon({ size = 20, className }: { size?: number; className?: string }) {
-  const ink = { stroke: 'var(--on-color)', strokeLinecap: 'round' as const }
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" className={cn('shrink-0', className)}>
-      <rect x="9.6" y="0.6" width="4.8" height="3" rx="1.2" style={{ fill: 'var(--on-color)' }} />
-      <circle cx="12" cy="13.4" r="9.6" style={{ fill: 'var(--warm)', stroke: 'var(--on-color)', strokeWidth: 2 }} />
-      <path d="M12 13.4V8.2" style={{ ...ink, strokeWidth: 2.2 }} />
-      <path d="M12 13.4l3.4 2.1" style={{ ...ink, strokeWidth: 2.2 }} />
-      <path d="M7.4 10.6a5.4 5.4 0 0 1 2.4-2.4" style={{ ...ink, fill: 'none', strokeWidth: 1.5 }} />
-    </svg>
-  )
+  return <span className={cn('inline-flex shrink-0',className)}><BrandMark size={size}/></span>
 }
 
 const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']

@@ -1,3 +1,4 @@
+import { parseAtelierAppearance } from '@scroll-up/shared'
 import {
   activePassions,
   countWords,
@@ -43,6 +44,7 @@ export function toUserDTO(user: User): UserDTO {
     scrollMoment: isScrollMoment(user.scrollMoment) ? user.scrollMoment : null,
     reminderTime: user.reminderTime,
     skills: parseSkills(user.skills),
+    atelier: parseAtelierAppearance(user.atelierAppearance),
   }
 }
 

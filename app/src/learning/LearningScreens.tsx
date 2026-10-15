@@ -19,6 +19,7 @@ import {
   type StudioTask,
 } from '@scroll-up/shared'
 import { api } from '../api/client.ts'
+import { CarnetHeader } from '../components/CarnetHeader.tsx'
 import { AppHeader } from '../components/AppHeader.tsx'
 import { Screen } from '../components/Screen.tsx'
 import { Button } from '../components/ui/button.tsx'
@@ -38,16 +39,17 @@ export function LearningOverview({ passion }: { passion?: PassionId }) {
   const known = new Set(items.filter((i) => i.completed).map((i) => i.lessonId))
   const practiced = new Set(items.filter((i) => i.attempted).map((i) => i.lessonId))
   return (
-    <Screen tabs className="learning-screen">
-      <AppHeader />
-      <header className="learn-heading">
+    <Screen tabs className={passion ? "learning-screen" : "learning-screen carnet-page carnet-learn"}>
+      {!passion && <CarnetHeader title="Apprendre" subtitle="Un petit pas, un vrai progrès." pose="think"/>}
+      {passion && <AppHeader />}
+      {passion && <header className="learn-heading">
         <div>
           <span className="learn-eyebrow">À ton rythme</span>
           <h1>{passion ? getPassion(passion).label : 'Apprendre'}</h1>
           <p>{passion ? '12 leçons · 3 niveaux · des exercices dédiés' : 'Comprendre, essayer, puis progresser.'}</p>
         </div>
         <Mascot pose="idea" size={76} />
-      </header>
+      </header>}
       {passion && (
         <button className="learn-text-button" onClick={() => push({ name: 'learn' })}>
           <ChevronLeft size={16} />
@@ -169,8 +171,9 @@ export function LearningNotebooks({ passion, review = false }: { passion?: Learn
     [onlyReview, setOnlyReview] = useState(review)
   const shown = items.filter((i) => (i.attempted || (onlyReview && i.review)) && (filter === 'all' || i.passion === filter) && (!onlyReview || i.review))
   return (
-    <Screen tabs className="learning-screen">
-      <AppHeader />
+    <Screen tabs className={passion ? "learning-screen" : "learning-screen carnet-page carnet-learn"}>
+      {!passion && <CarnetHeader title="Apprendre" subtitle="Un petit pas, un vrai progrès." pose="think"/>}
+      {passion && <AppHeader />}
       <h1>Mes carnets d’apprentissage</h1>
       <p>Chaque essai conserve son contenu. Les activités scroll restent dans Chez Minuton.</p>
       <div className="learn-filters">

@@ -1,4 +1,4 @@
-import { AppHeader } from '../components/AppHeader.tsx'
+import { CarnetHeader } from '../components/CarnetHeader.tsx'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ArrowLeft, Check, ChevronLeft, ChevronRight, ExternalLink, Heart, RotateCcw, Search, Ghost, Trophy, Palette, Sparkles, Gift, Copy } from 'lucide-react'
 import { getShopItem, SHOP_ITEMS, type ShopCategory, type ShopItem, type Melody } from '@scroll-up/shared'
@@ -158,13 +158,10 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
   const stepShowcase = (direction: number) => setShowcaseIndex(value => (value + direction + SHOWCASE.length) % SHOWCASE.length)
   const spotlight = items.length ? items[skinIndex % items.length] : undefined
   const stepSkin = (direction: number) => { if (items.length) setSkinIndex(value => (value + direction + items.length) % items.length) }
-  const world = selected ? (groupOf(selected) === 'adventure' ? 'olympus' : groupOf(selected)) : collection ?? showcase.id
   const collectionOwned = activeCollection ? SKINS.filter(item => groupOf(item) === activeCollection.id && shop.owned.includes(item.id)).length : 0
 
-  return <Screen tabs className="studio-shop skin-shop immersive-shop">
-    <div className="skin-world" aria-hidden="true">{COLLECTIONS.map(value => <div key={value.id} data-world={value.id} data-active={world === value.id} style={{ backgroundImage: `url('/art/shop-world-${value.id === 'olympus' ? 'adventure' : value.id}.webp')` }}/>)}</div>
-    <AppHeader/>
-    <div className="studio-page-heading"><div><h1>Boutique</h1><p className="skin-shop-intro">Trouve le Minuton qui te ressemble.</p></div><button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><Search size={18}/></button></div>
+  return <Screen tabs className="studio-shop skin-shop immersive-shop carnet-page carnet-shop">
+    <CarnetHeader title="Boutique" subtitle="Trouve le Minuton qui te ressemble." pose="welcome" action={<button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><Search size={18}/></button>}/>
     <div className="skin-shop-tabs" aria-label="Parcourir la boutique">{([{id:'discover', label:'Minutons'}, {id:'owned',label:'Mes achats'}, {id:'favorites',label:'Favoris'}] as const).map(tab => <button type="button" key={tab.id} aria-pressed={shelf === tab.id} onClick={() => changeShelf(tab.id)}>{tab.label}{tab.id === 'owned' && ownedCount > 0 && <span>{ownedCount}</span>}{tab.id === 'favorites' && visibleFavorites.length > 0 && <span>{visibleFavorites.length}</span>}</button>)}</div>
     {searchOpen && <label className="skin-shop-search"><Search size={18}/><span className="sr-only">Rechercher une tenue</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Rechercher une tenue…" type="search"/></label>}
     <section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={52} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div>{shop.equipped.mascot ? <button type="button" disabled={busy || loading} className="skin-reset" aria-label="Revenir à Minuton classique" onClick={() => void equip(null)}><RotateCcw size={17}/></button> : <Check size={18} aria-hidden="true"/>}</section>

@@ -3,10 +3,10 @@ import { getPassion, passionLevel, type PassionId, type PassionStatsDTO } from '
 const panels: Partial<Record<PassionId, [number,number]>> = { piano:[0,451], dessin:[451,389], ecriture:[840,378], cinema:[1218,412], musique:[1630,418] }
 export function PassionArtwork({ passion, className='' }: { passion:PassionId; className?:string }) {
  if (passion==='sport'||passion==='rythme'||passion==='logique'||passion==='francais') {
-  return <span aria-hidden="true" className={`studio-passion-art ${className}`} style={{backgroundImage:`url('/art/passion-${passion}.webp')`,backgroundSize:'cover',backgroundPosition:'center 35%'}}/>
+  return <span data-passion={passion} aria-hidden="true" className={`studio-passion-art ${className}`} style={{backgroundImage:`url('/art/passion-${passion}.webp')`,backgroundSize:'cover',backgroundPosition:'center 35%'}}/>
  }
  const [left,width]=panels[passion]!
- return <span aria-hidden="true" className={`studio-passion-art ${className}`} style={{backgroundSize:`${2048/width*100}% auto`,backgroundPosition:`${left/(2048-width)*100}% 35%`}}/>
+ return <span data-passion={passion} aria-hidden="true" className={`studio-passion-art ${className}`} style={{backgroundSize:`${2048/width*100}% auto`,backgroundPosition:`${left/(2048-width)*100}% 35%`}}/>
 }
 export function PassionPoster({ passion, stats, onOpen, compact=false }: { passion:PassionId; stats:PassionStatsDTO; onOpen:()=>void; compact?:boolean }) {
  const level=passionLevel(passion,stats.coins), percent=Math.round(level.progress*100)

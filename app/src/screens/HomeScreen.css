@@ -1,67 +1,45 @@
-/* Home 3 / Le déclic. Scoped here: other screens and shared navigation keep their design. */
-.grand-geste-home {
- --home-ink:#241333;--home-purple:#6138d7;--home-paper:#fffaf4;
- position:relative;isolation:isolate;background:var(--home-paper);color:var(--home-ink);
- padding-top:clamp(14px,3vh,24px);gap:0;
- font-family:'Outfit Variable',system-ui,sans-serif;
-}
-.grand-geste-home::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 100% 48%,#f4d5c54d,transparent 65%),radial-gradient(ellipse at 0 15%,#dfd3ff4d,transparent 60%)}
-.grand-geste-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:15px;min-width:0}
-.grand-geste-header .brand-wordmark{font-family:'Outfit Variable',system-ui,sans-serif;font-style:italic;letter-spacing:-.9px;font-weight:900;color:var(--home-ink)}
+/* Le décollage: all visual changes are scoped to home. */
+.grand-geste-home{--home-ink:#241333;--home-purple:#6138d7;--home-paper:#fffaf4;position:relative;isolation:isolate;background:var(--home-paper);color:var(--home-ink);padding:0 0 110px;gap:0;font-family:'Outfit Variable',system-ui,sans-serif}
+.flight-cover{background:radial-gradient(ellipse at 85% 88%,#9150ff,transparent 65%),linear-gradient(145deg,#5624e4,#6234e7 65%,#7134e9);padding:20px 20px 18px;border-radius:0 0 34px 34px;overflow:hidden;color:#fff9ec}
+.grand-geste-header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;margin-bottom:18px}
+.grand-geste-header .brand-wordmark{font-family:'Outfit Variable',system-ui,sans-serif;font-style:italic;letter-spacing:-.9px;font-weight:900;color:#fff9ec}
 .grand-geste-tools{display:flex;align-items:center;gap:7px;flex-shrink:0}
-.grand-geste-wallet{display:flex;align-items:center;gap:6px;min-height:44px;padding:8px 10px;background:#fffdf9;border:1px solid #e8dfea;border-radius:30px;color:var(--home-ink);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.grand-geste-wallet{display:flex;align-items:center;gap:6px;min-height:44px;padding:8px 10px;background:#ffffff12;border:1px solid #ffffff30;border-radius:30px;color:#fff9ec;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
 .grand-geste-profile{display:grid;place-items:center;width:44px;height:44px;border:1px solid #e6d7f3;background:#efe2ff;border-radius:50%;overflow:hidden}
 .grand-geste-profile .minuton-art{flex-shrink:0}
-.grand-geste-cta{position:relative;isolation:isolate;display:block;flex-shrink:0;width:100%;height:clamp(390px,64svh,620px);min-height:390px;overflow:hidden;border:1px solid #9c81f5;border-radius:38px 38px 48px 38px;background:#6240d5;color:white;text-align:left;cursor:pointer;box-shadow:0 12px 32px #6038b921;touch-action:pan-y;-webkit-tap-highlight-color:transparent}
-/* The whole scene is a single native button; the dial never nests a button. */
-.declic-cta{height:clamp(540px,72svh,650px);min-height:540px;border-color:#e9d9ef;background:#f4e6ec;color:var(--home-ink);border-radius:38px;box-shadow:0 12px 30px #6038b915;container-type:inline-size}
-.declic-art{position:absolute;inset:0;z-index:-2;background:#f6e8ec url('/art/home-declic.webp') center/cover no-repeat;transition:transform .52s cubic-bezier(.2,.7,.2,1)}
-.declic-cta::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#fff6ebad,transparent 53%)}
-.grand-geste-heading{position:absolute;z-index:3;top:7%;left:7%;right:4%;font-family:'Outfit Variable',system-ui,sans-serif;font-size:clamp(43px,14.2vw,65px);font-weight:850;letter-spacing:-2px;line-height:1.02;text-wrap:nowrap;transition:transform .42s,opacity .42s}
-.declic-heading{color:#241333;text-shadow:0 1px 20px #fff8e7c9}
-.declic-stage{position:absolute;left:14%;right:14%;bottom:7%;aspect-ratio:1;isolation:isolate}
-.declic-stage::before{content:'';position:absolute;inset:5% -5% -6%;z-index:-2;border-radius:50%;background:radial-gradient(ellipse,#dfb57b4d,transparent 68%);transform:translateY(12%)}
-.declic-dial{position:absolute;inset:4%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8%;border:6px solid #e6d2ff;border-radius:50%;color:#fff7ff;background:radial-gradient(ellipse at 32% 17%,#ae81ff 0%,#8251eb 25%,#6838d6 58%,#4925a0 100%);box-shadow:0 12px 18px #45216f40,0 0 0 7px #fdf5e9,0 0 0 9px #d0b68c,inset 0 4px 8px #fff8,inset 0 -8px 18px #28105260;transition:transform .18s,box-shadow .18s}
-.declic-dial::before{content:'';position:absolute;inset:8%;border:1px solid #e7d0ff70;border-radius:50%;pointer-events:none;box-shadow:inset 0 3px 9px #40208024}
-.declic-arrow{display:grid;place-items:center;filter:drop-shadow(0 0 8px #f5d8ff55);transition:transform .4s,opacity .4s}
-.declic-arrow>svg{width:clamp(60px,19vw,88px);height:clamp(60px,19vw,88px)}
-.declic-hint{text-align:center;font-size:clamp(12px,3.6vw,16px);font-weight:500;line-height:1.25;color:#f4e7ff}
-.declic-character{position:absolute;z-index:2;right:-9%;top:-17%;width:47%;transform:rotate(9deg);transform-origin:bottom;pointer-events:none;transition:transform .45s}
-.declic-character .minuton-art{width:100%!important;height:auto!important;aspect-ratio:1/1.1}
-.declic-ripple{position:absolute;inset:4%;z-index:-1;border:3px solid #b487ee;border-radius:50%;opacity:0;pointer-events:none}
-.grand-geste-flash{position:absolute;z-index:4;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--press-x) var(--press-y),#fff7d690,transparent 65%);opacity:0;pointer-events:none}
-.declic-cta:active:not(:disabled) .declic-dial{transform:translateY(5px) scale(.98);box-shadow:0 3px 7px #45216f40,0 0 0 7px #fdf5e9,0 0 0 9px #d0b68c,inset 0 5px 13px #28105250}
-.grand-geste-cta:focus-visible,.grand-geste-home button:focus-visible{outline:3px solid #9c6bdf;outline-offset:4px}
-.declic-cta[data-launching='true'] .declic-dial{animation:declic-press .5s ease-out both}
-.declic-cta[data-launching='true'] .declic-ripple{animation:declic-wave .52s ease-out both}
-.declic-cta[data-launching='true'] .declic-ripple-outer{animation-delay:.06s}
-.declic-cta[data-launching='true'] .declic-arrow{transform:translateY(-15px);opacity:.5}
-.declic-cta[data-launching='true'] .declic-character{transform:translateY(-9px) rotate(0deg)}
-.declic-cta[data-launching='true'] .declic-art{transform:scale(1.035)}
-.declic-cta[data-launching='true'] .grand-geste-flash{animation:declic-light .5s ease-out both}
-@keyframes declic-press{0%{transform:translateY(4px) scale(.97)}45%{transform:translateY(-2px) scale(1.025)}100%{transform:translateY(0) scale(1)}}
-@keyframes declic-wave{0%{transform:scale(.98);opacity:.7}100%{transform:scale(1.35);opacity:0}}
-@keyframes declic-light{0%,100%{opacity:0}40%{opacity:.45}}
-.grand-geste-quick{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:49px;margin:8px 0 5px;color:var(--home-purple);font-size:16px;font-weight:750;text-decoration:underline;text-underline-offset:4px}
-.grand-geste-resume{margin:5px 0 0}
-.grand-geste-resume>button{display:flex;align-items:center;gap:11px;width:100%;padding:8px 12px 8px 8px;min-height:66px;background:#fffdfb;border:1px solid #ede4e9;border-radius:21px;box-shadow:0 4px 12px #3a183509;text-align:left}
-.grand-geste-resume .studio-passion-art{width:55px;height:49px;flex-shrink:0;border-radius:12px;overflow:hidden}
+.flight-scene{position:relative;isolation:isolate}
+.grand-geste-heading{position:relative;z-index:2;margin:0;font-family:'Outfit Variable',system-ui,sans-serif;font-size:clamp(43px,14.2vw,65px);font-weight:850;letter-spacing:-2px;line-height:1.02;text-wrap:nowrap;color:#fff9ec}
+.flight-subtitle{position:relative;z-index:2;font-size:clamp(15px,4.5vw,18px);line-height:1.35;max-width:260px;color:#e6d8ff;margin:11px 0 0}
+.flight-stage{position:relative;height:clamp(200px,30svh,290px);margin:-4px -20px 0;pointer-events:none;isolation:isolate}
+.flight-stage::before,.flight-stage::after{content:'';position:absolute;z-index:-1;bottom:-20px;width:155px;height:95px;border-radius:60% 70% 0 0;background:linear-gradient(#cb96ff70,#ac69ed20)}
+.flight-stage::before{left:-65px;transform:rotate(15deg)}
+.flight-stage::after{right:-70px;bottom:-8px;transform:rotate(-15deg)}
+.flight-craft{position:absolute;width:min(100%,410px);height:100%;left:50%;transform:translateX(-50%);transform-origin:center}
+.flight-plane{position:absolute;left:0;top:-8%;width:100%;height:125%;object-fit:contain;object-position:center;z-index:2}
+.flight-pilot{position:absolute;z-index:3;left:42%;top:-2%;width:39%;transform:rotate(12deg);filter:drop-shadow(0 4px 3px #35137d35)}
+.flight-pilot .minuton-art{width:100%!important;height:auto!important;aspect-ratio:1/1.1}
+.grand-geste-cta{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;gap:16px;width:100%;min-height:56px;padding:12px 18px;border:1px solid #fff3d9;border-radius:21px;background:#fff9ed;color:#24104a;font-size:23px;font-weight:800;box-shadow:0 6px 15px #39127c20;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .15s,box-shadow .15s}
+.grand-geste-cta>svg{position:absolute;right:18px}
+.grand-geste-cta:active:not(:disabled){transform:translateY(3px) scale(.99);box-shadow:0 2px 5px #39127c20}
+.grand-geste-home button:focus-visible{outline:3px solid #c69aff;outline-offset:4px}
+.flight-scene[data-launching='true'] .flight-craft{animation:flight-takeoff .52s cubic-bezier(.35,0,.65,1) both}
+.flight-scene[data-launching='true'] .flight-launch{animation:flight-press .52s ease-out both}
+@keyframes flight-takeoff{0%{transform:translateX(-50%)}20%{transform:translate(-52%,3%) rotate(-3deg)}100%{transform:translate(35%,-65%) rotate(8deg);opacity:0}}
+@keyframes flight-press{0%{transform:translateY(3px) scale(.99)}45%,100%{transform:none}}
+.flight-content{padding:14px 16px 0}
+.grand-geste-quick{display:flex;align-items:center;gap:12px;width:100%;min-height:62px;padding:10px 14px;background:#fffdfa;border:1px solid #f0e7ee;border-radius:21px;color:var(--home-purple);font-size:17px;font-weight:750;text-align:left;box-shadow:0 4px 15px #6038b909}
+.grand-geste-quick>span{flex:1}.grand-geste-quick>svg:first-child{box-sizing:content-box;padding:8px;background:#eee2ff;border-radius:13px}
+.grand-geste-resume{margin:10px 0 0}
+.grand-geste-resume>button{display:flex;align-items:center;gap:11px;width:100%;padding:8px 12px 8px 8px;min-height:74px;background:#fffdfb;border:1px solid #ede4e9;border-radius:21px;box-shadow:0 4px 12px #3a183509;text-align:left}
+.grand-geste-resume .studio-passion-art{width:57px;height:55px;flex-shrink:0;border-radius:12px;overflow:hidden}
 .grand-geste-resume>button>span{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
-.grand-geste-resume strong{font-size:14px;font-weight:650;line-height:1.3}
-.grand-geste-resume small{font-size:12px;color:#776a80}
-.grand-geste-resume svg{flex-shrink:0}
-.grand-geste-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
-.grand-geste-shortcuts>button{display:flex;align-items:center;gap:7px;min-width:0;min-height:65px;padding:10px;background:#fffaf8;border:1px solid #ede2ed;border-radius:18px;color:#644597;text-align:left}
-.grand-geste-shortcuts>button>span{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
-.grand-geste-shortcuts small{font-size:10px;color:#776a80;font-weight:500}
-.grand-geste-shortcuts strong{font-size:13px;line-height:1.3;font-weight:650;overflow-wrap:anywhere}
-.grand-geste-shortcuts>button>svg{flex-shrink:0}
-.grand-geste-shortcuts>button>svg:last-child{width:12px}
-.grand-geste-passions-link{display:flex;align-items:center;justify-content:center;gap:5px;min-height:44px;margin-top:5px;color:#776183;font-size:13px;font-weight:600}
-/* Keep the atmospheric day/night preference without imposing it on other pages. */
+.grand-geste-resume strong{font-size:15px;font-weight:650;line-height:1.3}.grand-geste-resume small{font-size:12px;color:#776a80}.grand-geste-resume svg{flex-shrink:0}
+.grand-geste-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.grand-geste-shortcuts>button{display:flex;align-items:center;gap:7px;min-width:0;min-height:59px;padding:10px;background:#fffaf8;border:1px solid #ede2ed;border-radius:18px;color:var(--home-ink);text-align:left}
+.grand-geste-shortcuts>button>span{min-width:0;flex:1}.grand-geste-shortcuts strong{font-size:14px;line-height:1.3;font-weight:650}.grand-geste-shortcuts>button>svg{flex-shrink:0}.grand-geste-shortcuts>button>svg:last-child{width:12px}
 :root[data-scene='night'] .grand-geste-home{--home-ink:#f7edff;--home-paper:#21142f;--home-purple:#cfb7ff}
-:root[data-scene='night'] .grand-geste-wallet,:root[data-scene='night'] .grand-geste-resume>button,:root[data-scene='night'] .grand-geste-shortcuts>button{background:#30203f;border-color:#503965;color:#f7edff}
-:root[data-scene='night'] .grand-geste-resume small,:root[data-scene='night'] .grand-geste-shortcuts small,:root[data-scene='night'] .grand-geste-passions-link{color:#d0b9df}
+:root[data-scene='night'] .grand-geste-resume>button,:root[data-scene='night'] .grand-geste-shortcuts>button,:root[data-scene='night'] .grand-geste-quick{background:#30203f;border-color:#503965}
+:root[data-scene='night'] .grand-geste-resume small{color:#d0b9df}
 @media(min-width:480px){.grand-geste-heading{font-size:65px}}
-@media(max-width:359px){.grand-geste-header .brand-wordmark{font-size:20px!important}.grand-geste-header .inline-flex{gap:3px}.grand-geste-wallet{padding:7px;font-size:12px}.grand-geste-heading{font-size:43px;letter-spacing:-1.6px}.grand-geste-quick{font-size:14px}.grand-geste-shortcuts{grid-template-columns:1fr}.grand-geste-cta{border-radius:29px;min-height:365px}.grand-geste-tools{gap:5px}}
-@media(prefers-reduced-motion:reduce){.grand-geste-cta,.grand-geste-cta *{animation:none!important;transition:none!important}.grand-geste-cta:active:not(:disabled){transform:none}.grand-geste-cta[data-launching='true'] .grand-geste-heading{opacity:1;transform:none}.declic-cta[data-launching='true'] .declic-arrow,.declic-cta[data-launching='true'] .declic-character,.declic-cta[data-launching='true'] .declic-art{transform:none;opacity:1}}
+@media(max-width:359px){.flight-cover{padding:16px 16px 18px}.grand-geste-header .brand-wordmark{font-size:20px!important}.grand-geste-header .inline-flex{gap:3px}.grand-geste-wallet{padding:7px;font-size:12px}.grand-geste-heading{font-size:43px;letter-spacing:-1.6px}.grand-geste-tools{gap:5px}.grand-geste-shortcuts strong{font-size:12px}.grand-geste-shortcuts>button{gap:5px;padding:9px}.flight-stage{margin-left:-16px;margin-right:-16px}}
+@media(prefers-reduced-motion:reduce){.flight-scene *{animation:none!important;transition:none!important}.grand-geste-cta:active:not(:disabled){transform:none}}

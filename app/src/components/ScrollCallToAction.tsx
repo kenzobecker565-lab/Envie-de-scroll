@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { useReducedMotion } from 'motion/react'
-import { Mascot } from './Mascot.tsx'
+import { MinutonFigure } from './Mascot.tsx'
 
 /** A single accessible action with a brief takeoff before the existing flow. */
 export function ScrollCallToAction({ onStart }: { onStart: () => void }) {
@@ -25,7 +25,7 @@ export function ScrollCallToAction({ onStart }: { onStart: () => void }) {
     <p className="flight-subtitle">Transforme cette envie en une idée.</p>
     <div className="flight-stage" aria-hidden="true">
       <div className="flight-craft">
-        <span className="flight-pilot"><Mascot pose="cheer" size={138} animated={false}/></span>
+        <span className="flight-pilot"><MinutonFigure pose="cheer" size={138} animated={false}/></span>
         <img className="flight-plane" src="/art/home-takeoff.webp" alt="" draggable={false}/>
       </div>
     </div>

@@ -6,7 +6,6 @@ import { ScrollCallToAction } from '../components/ScrollCallToAction.tsx'
 import { Mascot } from '../components/Mascot.tsx'
 import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { useLearning } from '../learning/useLearning.ts'
-import { useAppearance } from '../lib/appearance.ts'
 import { useShop } from '../lib/shop.ts'
 import { formatNumber } from '../lib/format.ts'
 import { lessonStack } from '../lib/useLesson.ts'
@@ -17,7 +16,7 @@ import './HomeScreen.css'
 
 /** The approved “Le décollage” home. Existing activity flows are preserved. */
 export function HomeScreen() {
- const {state,dispatch}=useAppState(), {push,reset}=useNavigation(), {scene}=useAppearance()
+ const {state,dispatch}=useAppState(), {push,reset}=useNavigation()
  const {user,openProposal}=state.me
  const shop=useShop()
  const {items:learningEntries}=useLearning()
@@ -39,7 +38,7 @@ export function HomeScreen() {
   reset(lesson?lessonStack(lesson,{name:'activity'}):[{name:'home'},{name:'activity'}])
  }
  const resumePassion=openProposal?.passion??learning?.passion
- return <Screen tabs className={`studio-home grand-geste-home scene-${scene}`}>
+ return <Screen tabs className="studio-home grand-geste-home">
   <div className="flight-cover">
   <header className="grand-geste-header">
    <Logo height={30}/>

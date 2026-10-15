@@ -16,7 +16,7 @@ import { haptics } from '../telegram/webApp.ts'
 import { track } from '../api/client.ts'
 import './HomeScreen.css'
 
-/** The approved second home, “Le grand geste”. All changes stay on this screen. */
+/** The approved third home, “Le déclic”. All changes stay on this screen. */
 export function HomeScreen() {
  const {state,dispatch}=useAppState(), {push,reset}=useNavigation(), {scene}=useAppearance()
  const {user,stats,openProposal}=state.me

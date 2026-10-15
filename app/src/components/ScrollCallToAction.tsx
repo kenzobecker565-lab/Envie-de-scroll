@@ -1,34 +1,44 @@
-import { useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
+import { ArrowUp } from 'lucide-react'
+import { useReducedMotion } from 'motion/react'
+import { Mascot } from './Mascot.tsx'
 
-/** The creative portal stays a native button and leaves vertical scrolling to the browser. */
+/** A native, keyboard-accessible button. Let the ribbon finish before navigating. */
 export function ScrollCallToAction({ onStart }: { onStart: () => void }) {
-  const [pressed, setPressed] = useState(false)
-  const [point, setPoint] = useState({ x: 0, y: 0 })
   const [launching, setLaunching] = useState(false)
+  const [point, setPoint] = useState({ x: 50, y: 60 })
   const started = useRef(false)
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const reducedMotion = useReducedMotion()
+  const labelId = useId()
+  useEffect(() => () => { if (timer.current !== undefined) clearTimeout(timer.current) }, [])
+
   const start = () => {
     if (started.current) return
     started.current = true
     setLaunching(true)
-    onStart()
+    // Motion-sensitive users go straight to the existing activity flow.
+    timer.current = setTimeout(onStart, reducedMotion ? 0 : 520)
   }
-  return <button type="button" className="studio-scroll-cta" data-tour-target="swipe" data-pressed={pressed} data-launching={launching}
-    style={{ '--press-x': `${point.x}px`, '--press-y': `${point.y}px` } as CSSProperties} onClick={start}
-    onPointerDown={event => { const box = event.currentTarget.getBoundingClientRect(); setPoint({ x: event.clientX - box.left, y: event.clientY - box.top }); setPressed(true) }}
-    onPointerUp={() => setPressed(false)} onPointerCancel={() => setPressed(false)} onPointerLeave={() => setPressed(false)} onBlur={() => setPressed(false)}>
-    <span className="scroll-portal-cards" aria-hidden="true">
-      <span className="scroll-portal-card"><span className="scroll-portal-paper">
-        <svg viewBox="0 0 48 48" width="43" height="43"><rect x="5" y="7" width="38" height="34" rx="4" fill="#3B204E"/>{[0,1,2,3,4].map(i => <rect key={i} x={8+i*7} y="10" width="6" height="28" rx="1" fill="#FFFEF5"/>)}{[0,1,3].map(i => <rect key={i} x={12+i*7} y="10" width="4" height="17" rx="1" fill="#3B204E"/>)}</svg>
-      </span></span>
-      <span className="scroll-portal-card"><span className="scroll-portal-paper">
-        <svg viewBox="0 0 48 48" width="43" height="43" fill="none"><path d="M8 36c-4 6 4 10 10 4s10 3 16-2" stroke="#B379E9" strokeWidth="4" strokeLinecap="round"/><path d="m20 27 16-20c3-3 6-1 4 3L25 31Z" fill="#AF74DD" stroke="#482459" strokeWidth="2"/><path d="M21 26c-6-2-7 3-7 8 5 0 11-1 10-6" fill="#60317A"/></svg>
-      </span></span>
-      <span className="scroll-portal-card"><span className="scroll-portal-paper">
-        <svg viewBox="0 0 48 48" width="43" height="43"><text x="5" y="33" fontFamily="Georgia, serif" fontStyle="italic" fontSize="29" fill="#482459">Aa</text><path d="M8 39h30" stroke="#AC8353" strokeWidth="1.7" strokeLinecap="round"/></svg>
-      </span></span>
+
+  return <button type="button" className="grand-geste-cta" data-tour-target="swipe"
+    data-launching={launching} disabled={launching} aria-busy={launching} aria-labelledby={labelId}
+    style={{ '--press-x': `${point.x}%`, '--press-y': `${point.y}%` } as CSSProperties}
+    onPointerDown={event => {
+      const box = event.currentTarget.getBoundingClientRect()
+      setPoint({ x: (event.clientX - box.left) / box.width * 100, y: (event.clientY - box.top) / box.height * 100 })
+    }} onClick={start}>
+    <span className="grand-geste-art" aria-hidden="true" />
+    <span className="grand-geste-heading" id={labelId}>J’ai envie<br/>de scroller.</span>
+    <span className="grand-geste-hint">Appuie pour changer d’élan</span>
+    <span className="grand-geste-character" aria-hidden="true"><Mascot pose="idea" size={158} animated={false}/></span>
+    <span className="grand-geste-ribbon" aria-hidden="true">
+      <svg viewBox="0 0 360 360" fill="none" preserveAspectRatio="none">
+        <path className="grand-geste-trail" d="M24 380C37 302 287 302 225 221C173 153 100 185 161 81C177 54 185 32 185 8"/>
+        <path className="grand-geste-comet" d="M24 380C37 302 287 302 225 221C173 153 100 185 161 81C177 54 185 32 185 8" pathLength="100"/>
+      </svg>
+      <span className="grand-geste-grip"><ArrowUp size={36} strokeWidth={2.5}/></span>
     </span>
-    <span className="scroll-portal-surface" aria-hidden="true"><span className="scroll-portal-ripple"/></span>
-    <span className="scroll-cta-label">J’ai envie de scroll</span>
-    <span className="scroll-portal-launch" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m7 16 6.5-6.5L20 16"/></svg></span>
+    <span className="grand-geste-flash" aria-hidden="true"/>
   </button>
 }

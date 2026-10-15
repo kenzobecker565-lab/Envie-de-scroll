@@ -40,3 +40,4 @@ export * from "./learning/index.ts"
 export * from './drawing.ts'
 
 export * from "./scrollFlow.ts"
+export * from './activityBriefs.ts'

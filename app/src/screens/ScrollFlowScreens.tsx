@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowUpRight, Check, Clock3, LoaderCircle, Pause, Play, Shuffle } from 'lucide-react'
-import { DURATIONS, SPORT_EXERCISES, studioConfig, sportProgram, getActivity, getPassion, guideFor, keyboardMelody, scrollSuggestions, type Duration } from '@scroll-up/shared'
+import { activityBrief, type Activity, DURATIONS, SPORT_EXERCISES, studioConfig, sportProgram, getActivity, getPassion, guideFor, keyboardMelody, scrollSuggestions, type Duration } from '@scroll-up/shared'
 import { StudioTaskPlayer } from './StudioSession.tsx'
 import { SportInstructions } from '../components/SportMovement.tsx'
 import { api, track } from '../api/client.ts'
@@ -40,7 +40,7 @@ export function IdeasScreen() {
  const reduced=useReducedMotion()
  const another=()=>{const nextRecent=[...recent,...ideas.map(a=>a.id)].slice(-60);setRecent(nextRecent);setIdeas(scrollSuggestions(preferred,duration,tried,nextRecent));setBatch(v=>v+1);haptics.selection()}
  return <FlowShell step={2} title="3 idées pour toi" subtitle={`${duration} minutes · Laquelle te donne envie ?`} illustration={<MinutonFigure pose="idea" size={84} animated={false}/>}>
-  <AnimatePresence mode="wait" initial={false}><motion.div key={batch} className="scroll-ideas" initial={{opacity:0,y:reduced?0:12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:reduced?0:-8}} transition={{duration:reduced?0:.22}}>{ideas.map((activity,index)=><motion.button type="button" className="scroll-idea" data-passion={activity.passion} key={activity.id} initial={{opacity:0,y:reduced?0:14}} animate={{opacity:1,y:0}} transition={{delay:reduced?0:index*.06,duration:.24}} onClick={()=>{dispatch({type:'flow',flow:{selectedActivity:activity.id,passion:activity.passion,duration,scrollFlow:true,proposal:undefined,fixedStep:undefined}});push({name:'activityBrief'})}}><span><small>{getPassion(activity.passion).label}</small><strong>{activity.text}</strong><em>{MATERIALS[activity.passion]}</em></span><PassionArtwork passion={activity.passion}/><ArrowUpRight size={20} aria-hidden="true"/></motion.button>)}</motion.div></AnimatePresence>
+  <AnimatePresence mode="wait" initial={false}><motion.div key={batch} className="scroll-ideas" initial={{opacity:0,y:reduced?0:12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:reduced?0:-8}} transition={{duration:reduced?0:.22}}>{ideas.map((activity,index)=><motion.button type="button" className="scroll-idea" data-passion={activity.passion} key={activity.id} initial={{opacity:0,y:reduced?0:14}} animate={{opacity:1,y:0}} transition={{delay:reduced?0:index*.06,duration:.24}} onClick={()=>{dispatch({type:'flow',flow:{selectedActivity:activity.id,passion:activity.passion,duration,scrollFlow:true,proposal:undefined,fixedStep:undefined}});push({name:'activityBrief'})}}><span><small>{getPassion(activity.passion).label}</small><strong>{activityBrief(activity)?.title??activity.text}</strong><em>{activityBrief(activity)?.outcome??MATERIALS[activity.passion]}</em></span><PassionArtwork passion={activity.passion}/><ArrowUpRight size={20} aria-hidden="true"/></motion.button>)}</motion.div></AnimatePresence>
   {!ideas.length&&<p role="status">Aucune idée pour ce temps. Choisis une autre durée.</p>}
   <Button variant="secondary" onClick={another}><Shuffle size={19}/>Trois autres idées</Button><button type="button" className="scroll-text-button" onClick={()=>{if(state.stack.at(-2)?.name==='home')push({name:'signal'});else back()}}>Modifier mon temps</button>
  </FlowShell>
@@ -61,9 +61,10 @@ export function ActivityBriefScreen() {
   }catch(e){setError((e as Error).message);setBusy(false);lock.current=false}
  }
  if(!activity)return <Screen><p>Choisis d’abord une activité.</p><Button onClick={back}>Voir les idées</Button></Screen>
+ const brief=activityBrief(activity)
  const support=activity.passion==='dessin'?'Sur papier':activity.passion==='piano'?'Sur mon piano':'Hors de l’app'
- return <FlowShell step={3} title={getPassion(activity.passion).label} subtitle={`${activity.duration} minutes · À toi de créer`}>
-  <PassionArtwork passion={activity.passion} className="scroll-brief-art"/><h2 className="scroll-instruction">{activity.text}</h2><p className="scroll-materials">{MATERIALS[activity.passion]}</p>
+ return <FlowShell step={3} title={getPassion(activity.passion).label} subtitle={`${activity.duration} minutes · À toi de jouer`}>
+  <PassionArtwork passion={activity.passion} className="scroll-brief-art"/><h2 className="scroll-instruction">{brief?.title??activity.text}</h2>{brief&&<p className="scroll-outcome">{brief.outcome}</p>}<p className="scroll-materials">{brief?.materials??MATERIALS[activity.passion]}</p><p className="scroll-original-instruction">{activity.text}</p><ActivityPlan activity={activity} collapsible label="Comment te lancer"/>
   <fieldset className="scroll-support" disabled={busy}><legend>Où veux-tu pratiquer ?</legend><div><button type="button" aria-pressed={!external} onClick={()=>setExternal(false)}>Dans l’app</button><button type="button" aria-pressed={external} onClick={()=>setExternal(true)}>{support}</button></div></fieldset>
   <p className="scroll-note">Tu pourras valider avec ou sans création jointe.</p>{error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={busy} onClick={()=>void start()}>{busy?<LoaderCircle className="animate-spin"/>:<ArrowUpRight/>}{busy?'On ouvre ton activité…':'Commencer mon activité'}</Button><button type="button" className="scroll-text-button" disabled={busy} onClick={back}>Choisir une autre idée</button>
  </FlowShell>
@@ -95,10 +96,12 @@ export function CreativeSessionScreen() {
  const isDrawing=proposal.passion==='dessin',isWriting=proposal.passion==='ecriture'
  const pick=async(file:File|undefined)=>{if(!file)return;setPreparing(true);setError('');try{const value=await prepareImage(file);setPhoto(value);setPreview(URL.createObjectURL(value))}catch{setError('Cette image n’a pas pu être ouverte. Essaie une autre photo.')}finally{setPreparing(false)}}
  const guide=guideFor(proposal.activityId)
+ const activity=getActivity(proposal.activityId)
  const melody=keyboardMelody(proposal.activityId)
  return <FlowShell step={3} title={getPassion(proposal.passion).label} subtitle={`${proposal.duration} minutes · Ton moment de pratique`}>
   <SessionTimer createdAt={proposal.createdAt} duration={proposal.duration} clockOffset={state.flow.clockOffset}/>
   <details className="session-instructions" open={external||Boolean(proposal.extra)}><summary>Revoir la consigne</summary><p>{proposal.text}</p>{proposal.extra&&<p>{proposal.extra.items.join(' · ')}</p>}{guide&&<p>{guide.tips.join(' ')}</p>}{melody&&<p>Au piano : {melody.title}</p>}</details>
+  {activity&&<ActivityPlan activity={activity} collapsible/>}
   {isDrawing&&<div hidden={external}><DrawingPad ref={drawing} onInkChange={setHasInk}/></div>}
   {isWriting&&<label className="session-writing">{external?'Un texte ou une note à conserver (facultatif)':'Ton texte'}<textarea maxLength={6000} rows={10} value={text} disabled={saving} onChange={e=>setText(e.target.value)} placeholder="Tes premières lignes…"/><small>Brouillon gardé sur ce téléphone.</small></label>}
   {external&&<ExternalReference activityId={proposal.activityId}/>}
@@ -117,4 +120,12 @@ function ExternalReference({activityId}:{activityId:string}) {
  if(sport)return <section className="external-reference"><h2>Ta séance, à emporter</h2><p>{sport.equipment} · {sport.rounds} tour{sport.rounds>1?'s':''}.</p><ol>{sport.segments.map((part,index)=><li key={index}>{part.title} · {part.seconds} s</li>)}</ol>{sport.session.exercises.map(exercise=><details key={exercise}><summary>Voir le mouvement : {SPORT_EXERCISES[exercise].title}</summary><SportInstructions exercise={exercise} easy={false}/></details>)}</section>
  if(melody)return <section className="external-reference"><h2>{melody.title}</h2><p>Les notes, phrase par phrase, pour ton piano.</p>{melody.phrases.map((phrase,index)=><p className="external-notes" key={index}>{phrase.join(' · ')}</p>)}</section>
  return null
+}
+
+/** Optional help stays available during practice without covering the creative tools. */
+function ActivityPlan({activity,collapsible=false,label="Un coup de main pour avancer ?"}:{activity:Activity;collapsible?:boolean;label?:string}) {
+ const brief=activityBrief(activity)
+ if(!brief)return null
+ const content=<><p className="scroll-note">{brief.steps.some(step=>step.minutes)?'Un rythme indicatif, sans obligation de finir au chronomètre.':'Des repères pour commencer, à ton rythme.'}</p><ol>{brief.steps.map((step,index)=><li key={step.title}><span aria-hidden="true">{index+1}</span><div><strong>{step.title}{step.minutes!==undefined&&<small> · {step.minutes} min</small>}</strong><p>{step.text}</p></div></li>)}</ol></>
+ return collapsible?<details className="activity-plan"><summary>{label}</summary>{content}</details>:<section className="activity-plan" aria-label="Déroulé de l’activité"><h3>Comment te lancer</h3>{content}</section>
 }

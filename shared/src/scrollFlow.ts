@@ -35,10 +35,15 @@ export function progressFor(passion:PassionId, rows:readonly PassionStatsDTO[]) 
 export const ATELIER_AMBIANCES=['lavande','sauge','crepuscule'] as const
 export const ATELIER_FRAMES=['bois','violet','papier'] as const
 export const ATELIER_DECORS=['atelier','epure'] as const
-export interface AtelierAppearance { ambiance:typeof ATELIER_AMBIANCES[number]; frames:typeof ATELIER_FRAMES[number]; decor:typeof ATELIER_DECORS[number]; mascot:boolean }
+export interface AtelierAppearance { ambiance:typeof ATELIER_AMBIANCES[number]; frames:typeof ATELIER_FRAMES[number]; decor:typeof ATELIER_DECORS[number]; mascot:boolean; notebook?:{title:string;color:'violet'|'lavande'|'sauge';motif:'avion'|'etoile'|'aucun'}; exposed?:string[] }
 export const DEFAULT_ATELIER:AtelierAppearance={ambiance:'lavande',frames:'bois',decor:'atelier',mascot:true}
 export function parseAtelierAppearance(value:unknown):AtelierAppearance {
  let v:Record<string,unknown>={}
  try{const raw=typeof value==='string'?JSON.parse(value):value;if(raw&&typeof raw==='object'&&!Array.isArray(raw))v=raw as Record<string,unknown>}catch{/* Use shared defaults for old accounts. */}
- return {ambiance:ATELIER_AMBIANCES.includes(v.ambiance as AtelierAppearance['ambiance'])?v.ambiance as AtelierAppearance['ambiance']:DEFAULT_ATELIER.ambiance,frames:ATELIER_FRAMES.includes(v.frames as AtelierAppearance['frames'])?v.frames as AtelierAppearance['frames']:DEFAULT_ATELIER.frames,decor:ATELIER_DECORS.includes(v.decor as AtelierAppearance['decor'])?v.decor as AtelierAppearance['decor']:DEFAULT_ATELIER.decor,mascot:typeof v.mascot==='boolean'?v.mascot:true}
+ return {ambiance:ATELIER_AMBIANCES.includes(v.ambiance as AtelierAppearance['ambiance'])?v.ambiance as AtelierAppearance['ambiance']:DEFAULT_ATELIER.ambiance,frames:ATELIER_FRAMES.includes(v.frames as AtelierAppearance['frames'])?v.frames as AtelierAppearance['frames']:DEFAULT_ATELIER.frames,decor:ATELIER_DECORS.includes(v.decor as AtelierAppearance['decor'])?v.decor as AtelierAppearance['decor']:DEFAULT_ATELIER.decor,mascot:typeof v.mascot==='boolean'?v.mascot:true,...parseGalleryPreferences(v)}
+}
+
+function parseGalleryPreferences(v:Record<string,unknown>):Pick<AtelierAppearance,'notebook'|'exposed'> {
+ const n=v.notebook as Record<string,unknown>|undefined
+ return {...(n&&typeof n.title==='string'&&['violet','lavande','sauge'].includes(String(n.color))&&['avion','etoile','aucun'].includes(String(n.motif))?{notebook:{title:n.title.trim().slice(0,60)||'Mes petits élans',color:n.color as 'violet'|'lavande'|'sauge',motif:n.motif as 'avion'|'etoile'|'aucun'}}:{}),...(Array.isArray(v.exposed)?{exposed:[...new Set(v.exposed.filter((id):id is string=>typeof id==='string'&&id.length<=100))].slice(0,12)}:{})}
 }

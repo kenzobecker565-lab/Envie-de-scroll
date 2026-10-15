@@ -91,6 +91,7 @@ export const api = {
   learningEntry:(id:string)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`),
   setLearningReview:(id:string,review:boolean)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}/review`,{method:'PATCH',body:JSON.stringify({review})}),
   saveLearning:(id:string,lessonId:string,work:import('@scroll-up/shared').LearningWork)=>call<import('@scroll-up/shared').LearningRecord>(`/learning/${encodeURIComponent(id)}`,{method:'PUT',body:JSON.stringify({lessonId,work})}),
+  attachCreation:(id:string,{text,photo}:{text?:string;photo?:Blob})=>{const form=new FormData();if(text!==undefined)form.set('text',text);if(photo)form.set('photo',photo);return call<{completion:import('@scroll-up/shared').CompletionDTO}>(`/completions/${encodeURIComponent(id)}/creation`,{method:'PATCH',body:form})},
   updateAtelier:(appearance:import('@scroll-up/shared').AtelierAppearance)=>call<UserResponse>('/me/atelier',{method:'PUT',body:JSON.stringify(appearance)}),
   shop: () => call<import('@scroll-up/shared').ShopState>('/shop'),
   claimShopTestCredit: () => call<import('@scroll-up/shared').ShopState>('/shop/test-credit', { method: 'POST' }),

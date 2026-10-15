@@ -1,6 +1,6 @@
 import { SportGalleryDetail } from './SportSession.tsx'
 import { WorkshopGalleryDetail } from './InteractiveWorkshop.tsx'
-import { ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
+import { BookOpen, ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Fragment, type ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { getPassion, isChallengeId, type PassionId, type CompletionDTO } from '@scroll-up/shared'
@@ -33,7 +33,13 @@ function GalleryFrame({ children, embedded, passion }: { children: ReactNode; em
   return embedded ? <div className="workshop-gallery" data-passion={passion}>{children}</div> : <Screen tabs>{children}</Screen>
 }
 
-export function GalleryScreen({ passion, embedded = false }: { passion?: PassionId; embedded?: boolean }) {
+export function GalleryScreen({passion,embedded=false}:{passion?:PassionId;embedded?:boolean}) {
+ const {push}=useNavigation()
+ if(!embedded)return <LegacyGalleryScreen passion={passion}/>
+ return <div className="workshop-gallery"><Button variant="secondary" onClick={()=>push({name:'gallery',passion})}><BookOpen size={19}/>Ouvrir ma galerie de {passion?getPassion(passion).label.toLocaleLowerCase('fr'):'créations'}<ArrowRight size={18}/></Button></div>
+}
+
+function LegacyGalleryScreen({ passion, embedded = false }: { passion?: PassionId; embedded?: boolean }) {
   const { state, dispatch } = useAppState()
   const { reset } = useNavigation()
   const { stats } = state.me
@@ -433,10 +439,11 @@ function PhotoPendingNote() {
 /* ------------------------------ Vue détaillée ------------------------------ */
 
 /** Une création en grand, dans la feuille modale. */
-export function GalleryDetail({ item }: { item: CompletionDTO }) {
+export function GalleryDetail({ item, clean = false, titleOverride }: { item: CompletionDTO; clean?:boolean; titleOverride?:string }) {
   const { state } = useAppState()
-  if (item.sport) return <><DialogHeader><DialogTitle>{item.sport.summary}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><SportGalleryDetail activityId={item.activityId}/></>
-  if (item.workshop) return <><DialogHeader><DialogTitle>{item.activityText}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><WorkshopGalleryDetail result={item.workshop} activityId={item.activityId}/></>
+  const savedText=item.text&&<section><h3 className="font-bold">Mon texte conservé</h3><p className="whitespace-pre-wrap [overflow-wrap:anywhere]">{item.text}</p></section>
+  if (item.sport) return <><DialogHeader><DialogTitle>{item.sport.summary}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><SportGalleryDetail activityId={item.activityId}/>{savedText}</>
+  if (item.workshop) return <><DialogHeader><DialogTitle>{item.activityText}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><WorkshopGalleryDetail result={item.workshop} activityId={item.activityId}/>{savedText}</>
   const passion = getPassion(item.passion)
   const Icon = PASSION_ICONS[item.passion]
   const title = item.exploredTitle ?? (item.passion === 'musique' || item.passion === 'cinema' ? item.extra?.items[0] : undefined)
@@ -454,7 +461,7 @@ export function GalleryDetail({ item }: { item: CompletionDTO }) {
             <span className="font-numbers">{item.duration} min</span>
           </Badge>
         </div>
-        <DialogTitle>{title ?? fallbackTitle}</DialogTitle>
+        <DialogTitle>{titleOverride ?? title ?? fallbackTitle}</DialogTitle>
         <DialogDescription>{formatDay(item.createdAt)}</DialogDescription>
       </DialogHeader>
 
@@ -492,12 +499,12 @@ export function GalleryDetail({ item }: { item: CompletionDTO }) {
           </div>
         )}
       </div>
-      <Card tone="good" className="flex-row items-center gap-3 shadow-chip">
+      {!clean&&<Card tone="good" className="flex-row items-center gap-3 shadow-chip">
         <CoinIcon size={28} />
         <p className="flex-1 text-15 font-semibold">
           <span className="font-numbers font-extrabold">+{item.coins}</span> minutons gagnés
         </p>
-      </Card>
+      </Card>}
       <Button
         variant="secondary"
         className="w-full"

@@ -1,9 +1,8 @@
 import { IdeasScreen, ActivityBriefScreen, CreativeSessionScreen } from './screens/ScrollFlowScreens.tsx'
 import {DrawingAtelier,DrawingNotebook} from './screens/DrawingAtelier.tsx'
-import {AtelierScreen} from './screens/AtelierScreen.tsx'
 import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, useReducedMotion, type Variants } from 'motion/react'
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useCallback, useEffect, useState, useRef, lazy, Suspense } from 'react'
 import { getMood, getPassion, getPath, LEARNING_PASSIONS, type MeResponse } from '@scroll-up/shared'
 import { api, ApiError, canAuthenticate } from './api/client.ts'
 import { RotateCcw, Send } from 'lucide-react'
@@ -21,7 +20,6 @@ import { setShopTheme, setAppTheme } from './lib/appTheme.ts'
 import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
-import { GalleryScreen } from './screens/GalleryScreen.tsx'
 import { SettingsScreen } from './screens/SettingsScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
@@ -87,6 +85,9 @@ export function App() {
 /* ----------------------------- Transitions -------------------------------- */
 
 interface TransitionContext { direction:1|-1; flight:boolean; reduced:boolean }
+const PersonalGallery=lazy(()=>import('./screens/PersonalGallery.tsx').then(module=>({default:module.PersonalGallery})))
+const AtelierScreen=lazy(()=>import('./screens/AtelierScreen.tsx').then(module=>({default:module.AtelierScreen})))
+
 const screenVariants: Variants = {
  enter: ({direction,flight,reduced}:TransitionContext) => ({opacity:flight||reduced?1:0,x:flight||reduced?0:direction*18,y:0}),
  center: ({reduced}:TransitionContext) => ({opacity:1,x:0,y:0,transition:{duration:reduced?0:.3,ease:[.22,1,.36,1]}}),
@@ -161,7 +162,7 @@ function screenFor(route: Route) {
     case 'atelier':
       return <AtelierScreen focus={route.focus}/>
     case 'gallery':
-      return <GalleryScreen passion={route.passion} />
+      return <PersonalGallery passion={route.passion} focus={route.focus}/>
     case 'path': {
       const passion = getPath(route.pathId)?.passion
       return <LearningOverview passion={LEARNING_PASSIONS.some(id => id === passion) ? passion : undefined}/>
@@ -200,7 +201,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
     <>
       <AnimatePresence mode="wait" custom={transitionContext} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
         <motion.div key={key} custom={transitionContext} variants={screenVariants} initial="enter" animate="center" exit="exit">
-          {screenFor(route)}
+          <Suspense fallback={<p role="status" className="p-6 text-center">Minuton ouvre ta galerie…</p>}>{screenFor(route)}</Suspense>
         </motion.div>
       </AnimatePresence>
       {/* Navigation des six espaces, masquée pendant les activités. */}

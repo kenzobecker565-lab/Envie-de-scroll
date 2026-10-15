@@ -413,3 +413,34 @@ describe('nouveau parcours de pratique',()=>{
   expect(body.completion.workshop).toBeNull();expect(body.coinsEarned).toBe(3);expect(body.completion.exploredTitle).toBe('Travail sur papier')
  })
 })
+
+describe('galerie et souvenirs personnels',()=>{
+ async function drawing(id=42){await onboard(['dessin'],id);const p=await propose({passion:'dessin',duration:5,step:'dessin-5-1',external:true},id);clock.advanceMinutes(2);return (await request(app).post('/api/completions').set(as(id)).send({proposalId:p.id,external:true}).expect(201)).body.completion}
+ it('ajoute un souvenir sans crédit supplémentaire et protège les créations existantes',async()=>{
+  const item=await drawing()
+  const before=(await request(app).get('/api/me').set(as())).body.stats
+  const added=await request(app).patch(`/api/completions/${item.id}/creation`).set(as()).field('text','Mon souvenir').attach('photo',PNG,{filename:'souvenir.png',contentType:'image/png'}).expect(200)
+  expect(added.body.completion.text).toBe('Mon souvenir');expect(added.body.completion.photoPending).toBe(false);expect(added.body.completion.photoUrl).toBeTruthy()
+  await request(app).get(added.body.completion.photoUrl).expect(200)
+  await request(app).patch(`/api/completions/${item.id}/creation`).set(as()).send({text:'Écraser le texte'}).expect(400)
+  await request(app).patch(`/api/completions/${item.id}/creation`).set(as(43)).send({text:'Autre compte'}).expect(404)
+  const after=(await request(app).get('/api/me').set(as())).body.stats
+  expect(after.totalActivities).toBe(before.totalActivities);expect(after.totalCoins).toBe(before.totalCoins);expect(after.totalMinutes).toBe(before.totalMinutes)
+ })
+ it('conserve le carnet et les œuvres exposées sur le compte sans effacer les préférences précédentes',async()=>{
+  const item=await drawing(),appearance={ambiance:'sauge',frames:'papier',decor:'epure',mascot:false},notebook={title:'Mes mots',color:'lavande',motif:'etoile'}
+  await request(app).put('/api/me/atelier').set(as()).send({...appearance,notebook,exposed:[item.id]}).expect(200)
+  const saved=await request(app).put('/api/me/atelier').set(as()).send({...appearance,frames:'bois'}).expect(200)
+  expect(saved.body.user.atelier.notebook).toEqual(notebook);expect(saved.body.user.atelier.exposed).toEqual([item.id])
+  const other=await drawing(43)
+  await request(app).put('/api/me/atelier').set(as()).send({...appearance,exposed:[other.id]}).expect(400)
+  await request(app).put('/api/me/atelier').set(as()).send({...appearance,notebook:{...notebook,title:''}}).expect(400)
+  await request(app).put('/api/me/atelier').set(as()).send({...appearance,exposed:Array(13).fill(item.id)}).expect(400)
+  const reloaded=await request(app).get('/api/me').set(as()).expect(200)
+  expect(reloaded.body.user.atelier.exposed).toEqual([item.id]);expect(reloaded.body.user.atelier.notebook).toEqual(notebook)
+ })
+ it('refuse les souvenirs vides ou trop longs',async()=>{
+  const item=await drawing()
+  for(const body of [{},{text:''},{text:'a'.repeat(6001)},{text:42}])await request(app).patch(`/api/completions/${item.id}/creation`).set(as()).send(body).expect(400)
+ })
+})

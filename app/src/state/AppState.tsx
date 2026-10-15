@@ -25,7 +25,7 @@ export type Route =
   | { name: 'proof' }
   | { name: 'done' }
   | { name: 'progress' }
-  | { name: 'gallery'; passion?: PassionId }
+  | { name: 'gallery'; passion?: PassionId; focus?:string }
   | { name: 'shop'; category?: import('@scroll-up/shared').ShopCategory; library?: boolean }
   | { name: 'bonusPiano'; itemId: string }
   | { name: 'learningLesson'; lessonId: string; entryId?:string }

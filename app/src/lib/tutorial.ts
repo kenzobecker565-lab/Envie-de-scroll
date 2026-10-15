@@ -2,7 +2,7 @@ import type { UserDTO } from '@scroll-up/shared'
 
 export type TourPose = 'welcome' | 'think' | 'idea' | 'draw' | 'write' | 'piano' | 'cheer' | 'wait'
 /** La page où se joue l'étape : le tutoriel y emmène vraiment. */
-export type TourPage = 'home' | 'atelier' | 'passionHub' | 'learn' | 'shop' | 'profile'
+export type TourPage = 'home' | 'atelier' | 'gallery' | 'passionHub' | 'learn' | 'shop' | 'profile'
 export interface TourStep {
   page: TourPage
   /** Éléments mis en lumière (`data-tour-target`). Aucun : la carte s'affiche au centre, pour ce qui ne se voit pas sur l'accueil. */
@@ -24,9 +24,9 @@ export const TOUR_STEPS: readonly TourStep[] = [
   { page: 'home', targets: [], chapter: 'Le principe', pose: 'welcome', title: 'Bienvenue sur Scroll-up', text: 'Ici, l’envie de scroller devient 5, 15 ou 30 minutes de création. Voici l’app en une minute ; tu peux passer quand tu veux.' },
   { page: 'home', targets: ['swipe'], chapter: 'Le principe', pose: 'idea', radius: 30, title: 'Ton bouton anti-scroll', text: 'Touche « Je me lance », règle ton temps et choisis parmi trois idées adaptées à tes passions.' },
   { page: 'home', targets: [], chapter: 'Créer', pose: 'draw', title: 'Pendant une activité', text: 'La consigne reste sous tes yeux. Tu bloques ? « Un coup de pouce » donne des pistes, « Une autre idée » en tire une nouvelle.' },
-  { page: 'home', targets: [], chapter: 'Créer', pose: 'write', title: 'Garde une trace', text: 'Dessine au doigt ou photographie ton dessin, écris dans ton carnet, joue au clavier, suis le chrono du sport ou mène l’enquête. Tout rejoint ton atelier.' },
+  { page: 'home', targets: [], chapter: 'Créer', pose: 'write', title: 'Garde une trace', text: 'Dessine au doigt ou photographie ton dessin, écris dans ton carnet, joue au clavier, suis le chrono du sport ou mène l’enquête. Tout rejoint ta galerie.' },
   { page: 'home', targets: ['wallet'], chapter: 'Créer', pose: 'cheer', title: '1 minute = 1 minuton', text: 'Chaque minute de création rapporte un minuton. Énigmes et français : la durée entière si tout est juste, sinon tes minutes de recherche.' },
-  { page: 'atelier', targets: [], dock: true, dim: 0.32, chapter: 'Ton espace', pose: 'cheer', title: 'Mon atelier', text: 'Tes créations s’exposent par passion. Choisis ton ambiance, tes cadres et ta création à mettre à l’honneur.' },
+  { page: 'gallery', targets: ['gallery'], dock: true, dim: 0.32, chapter: 'Ton espace', pose: 'cheer', title: 'Ma galerie', text: 'Retrouve tes dessins, feuillette tes textes et conserve tes séances. Ton exposition accueille tes créations préférées dans un décor personnel.' },
   { page: 'passionHub', targets: ['passions-tab'], dim: 0.32, chapter: 'Explorer', pose: 'think', title: 'L’espace de chaque passion', text: 'Voici Passions : chaque passion a son coin, avec ses activités par durée, ses énigmes, ses séances de sport ou ses morceaux.' },
   { page: 'learn', targets: ['learn'], dim: 0.32, chapter: 'Explorer', pose: 'write', title: 'Apprendre à ton rythme', text: 'Voici Apprendre : des leçons courtes et indépendantes pour comprendre, essayer, pratiquer. Tes essais restent dans tes carnets.' },
   { page: 'shop', targets: ['shop', 'wallet'], dim: 0.32, chapter: 'Explorer', pose: 'cheer', title: 'La boutique de Minuton', text: 'Voici la boutique : dépense tes minutons en tenues pour Minuton. Acheter ne fait jamais baisser tes niveaux ni tes badges.' },

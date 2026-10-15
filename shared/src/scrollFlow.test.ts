@@ -20,3 +20,9 @@ describe('le parcours envie de scroller',()=>{
   expect(parseAtelierAppearance('{bad')).toEqual(DEFAULT_ATELIER);expect(parseAtelierAppearance({ambiance:'sauge',frames:'papier',decor:'epure',mascot:false})).toEqual({ambiance:'sauge',frames:'papier',decor:'epure',mascot:false})
  })
 })
+
+it('conserve les préférences de galerie valides et filtre les anciennes données abîmées',()=>{
+ const appearance={...DEFAULT_ATELIER,notebook:{title:'  Mon carnet  ',color:'sauge',motif:'etoile'},exposed:['a','a','b',17]}
+ expect(parseAtelierAppearance(appearance)).toEqual({...DEFAULT_ATELIER,notebook:{title:'Mon carnet',color:'sauge',motif:'etoile'},exposed:['a','b']})
+ expect(parseAtelierAppearance({...appearance,notebook:{title:'Titre',color:'inconnu',motif:'etoile'},exposed:null})).toEqual(DEFAULT_ATELIER)
+})

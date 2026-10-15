@@ -351,7 +351,16 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
   api.put('/me/atelier',asyncRoute(async(req,res)=>{
     const user=await currentUser(req,res),v=req.body
     if(!v||!ATELIER_AMBIANCES.includes(v.ambiance)||!ATELIER_FRAMES.includes(v.frames)||!ATELIER_DECORS.includes(v.decor)||typeof v.mascot!=='boolean')throw badRequest('Personnalisation de l’atelier invalide.')
-    const updated=await prisma.user.update({where:{id:user.id},data:{atelierAppearance:JSON.stringify(parseAtelierAppearance(v))}})
+    if(v.notebook!==undefined&&(!v.notebook||typeof v.notebook.title!=='string'||v.notebook.title.trim().length<1||v.notebook.title.length>60||!['violet','lavande','sauge'].includes(v.notebook.color)||!['avion','etoile','aucun'].includes(v.notebook.motif)))throw badRequest('Couverture du carnet invalide.')
+    if(v.exposed!==undefined){
+      if(!Array.isArray(v.exposed)||v.exposed.length>12||v.exposed.some((id:unknown)=>typeof id!=='string'||id.length>100))throw badRequest('Sélection de créations invalide.')
+      const ids=[...new Set(v.exposed)] as string[]
+      const count=await prisma.completion.count({where:{id:{in:ids},userId:user.id}})
+      if(count!==ids.length)throw badRequest('Une création sélectionnée est introuvable.')
+    }
+    const previous=parseAtelierAppearance(user.atelierAppearance)
+    const appearance=parseAtelierAppearance({...previous,...v})
+    const updated=await prisma.user.update({where:{id:user.id},data:{atelierAppearance:JSON.stringify(appearance)}})
     res.json({user:toUserDTO(updated)})
   }))
 
@@ -439,6 +448,27 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       res.json(body)
     }),
   )
+
+  api.patch('/completions/:id/creation',
+    (req,res,next)=>{upload.single('photo')(req,res,(error:unknown)=>{if(error)return next(badRequest('Cette photo est trop volumineuse ou invalide.'));next()})},
+    asyncRoute(async(req,res)=>{
+      const user=await currentUser(req,res),id=String(req.params.id)
+      const item=await prisma.completion.findFirst({where:{id,userId:user.id}})
+      if(!item)throw new ApiError(404,'not_found','Création introuvable.')
+      const text=req.body?.text
+      if(text!==undefined&&(typeof text!=='string'||!text.trim()||text.length>6000))throw badRequest('Le texte doit contenir entre 1 et 6000 caractères.')
+      if(!req.file&&text===undefined)throw badRequest('Ajoute un texte ou une photo.')
+      if(req.file&&(item.passion!=='dessin'||item.photoRef))throw badRequest('Cette séance ne peut pas recevoir de nouvelle photo.')
+      if(text!==undefined&&item.text)throw badRequest('Cette séance contient déjà un texte. Il est conservé sans modification.')
+      let photoRef:string|undefined
+      try{
+        if(req.file)photoRef=await photos.save({buffer:req.file.buffer,mimetype:req.file.mimetype},`Galerie · utilisateur ${user.id} · ${item.activityId}`)
+        const updated=await prisma.completion.updateMany({where:{id,userId:user.id,...(req.file?{photoRef:null}:{}),...(text!==undefined?{text:null}:{})},data:{...(text!==undefined?{text:text.trim()}:{}),...(photoRef?{photoRef,photoPending:false}:{})}})
+        if(updated.count!==1)throw badRequest('Un souvenir a déjà été ajouté. Réouvre cette séance.')
+      }catch(error){if(photoRef)await photos.remove(photoRef).catch(()=>{});throw error}
+      const completion=await prisma.completion.findUniqueOrThrow({where:{id}})
+      res.json({completion:toCompletionDTO(completion,photoUrl)})
+    }))
 
   api.get('/completions/:id',asyncRoute(async(req,res)=>{const user=await currentUser(req,res);const item=await prisma.completion.findFirst({where:{id:String(req.params.id),userId:user.id}});if(!item)throw new ApiError(404,'not_found','Création introuvable.');res.json({completion:toCompletionDTO(item,photoUrl)})}))
 

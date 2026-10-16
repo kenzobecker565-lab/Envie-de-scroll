@@ -41,7 +41,7 @@ export function HomeScreen() {
    <Logo height={30}/>
    <div className="grand-geste-tools">
     <button type="button" className="grand-geste-wallet" data-tour-target="wallet" onClick={()=>push({name:'shop'})} aria-label={`Boutique : ${formatNumber(shop.balance)} minutons disponibles`}><BrandMark size={22}/><span>{formatNumber(shop.balance)}</span></button>
-    <button type="button" className="grand-geste-profile" data-tour-target="settings" aria-label="Mon profil et mes réglages" onClick={()=>push({name:'profile'})}><Mascot size={40} animated={false}/></button>
+    <button type="button" className="grand-geste-profile" data-tour-target="profile" aria-label="Mon profil" onClick={()=>push({name:'profile'})}><Mascot size={40} animated={false}/></button>
    </div>
   </header>
   <h1 className="sr-only">Scroll-up : une activité pour toi</h1>

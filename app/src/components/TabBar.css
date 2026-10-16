@@ -1,0 +1,7 @@
+/* Four primary destinations with the solid violet active pill from the approved mockups. */
+.studio-tabbar{grid-template-columns:repeat(4,minmax(0,1fr))!important;min-height:72px}
+html .studio-tabbar button{font-size:11px!important;min-height:53px;gap:4px}
+.studio-tabbar .tab-active-surface{background:linear-gradient(145deg,#6d22ff,#5720ed);border-radius:19px;inset:0 6px}
+html[data-scene] .studio-tabbar button[aria-current='page']{color:#fff!important}
+.studio-tabbar button>svg{fill:none!important}
+@media(max-width:359px){html .studio-tabbar button{font-size:10px!important}}

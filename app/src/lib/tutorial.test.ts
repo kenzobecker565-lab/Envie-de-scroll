@@ -36,7 +36,7 @@ describe('tutoriel de première utilisation', () => {
   })
   it('fait le tour de toute l’app avec des bulles courtes, lisibles sur un petit écran', () => {
     // Les cibles posées dans l'app (data-tour-target) : accueil, en-tête et barre d'onglets.
-    const known = new Set(['swipe', 'atelier', 'gallery', 'wallet', 'passions-tab', 'learn', 'shop', 'profile', 'settings'])
+    const known = new Set(['swipe', 'atelier', 'gallery', 'wallet', 'passions-tab', 'shop', 'profile', 'settings'])
     expect(TOUR_STEPS.length).toBeGreaterThanOrEqual(10)
     for (const step of TOUR_STEPS) {
       expect(step.title.length).toBeLessThanOrEqual(40)

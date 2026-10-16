@@ -1,6 +1,6 @@
 import { IdeasScreen, ActivityBriefScreen, CreativeSessionScreen } from './screens/ScrollFlowScreens.tsx'
 import {DrawingAtelier,DrawingNotebook} from './screens/DrawingAtelier.tsx'
-import {LearningOverview,LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
+import {LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
 import { AnimatePresence, motion, MotionConfig, useReducedMotion, type Variants } from 'motion/react'
 import { useCallback, useEffect, useState, useRef, lazy, Suspense } from 'react'
 import { getMood, getPassion, getPath, LEARNING_PASSIONS, type MeResponse } from '@scroll-up/shared'
@@ -26,7 +26,7 @@ import { ProgressScreen } from './screens/ProgressScreen.tsx'
 import { GuidedTour } from './components/GuidedTour.tsx'
 import { tutorialSeen } from './lib/tutorial.ts'
 import { TabBar } from './components/TabBar.tsx'
-import { LearnScreen, LearnPassionScreen, PassionHubScreen, PassionSpaceScreen, ProfileScreen } from './screens/NavigationScreens.tsx'
+import { ProfileScreen } from './screens/NavigationScreens.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
 import { MomentScreen, PassionsScreen, SkillScreen, WelcomeScreen } from './screens/OnboardingScreens.tsx'
 import { ProofScreen } from './screens/ProofScreen.tsx'
@@ -85,6 +85,8 @@ export function App() {
 /* ----------------------------- Transitions -------------------------------- */
 
 interface TransitionContext { direction:1|-1; flight:boolean; reduced:boolean }
+const ExplorerScreen=lazy(()=>import('./screens/ExplorerScreen.tsx').then(module=>({default:module.ExplorerScreen})))
+const ExplorerPassion=lazy(()=>import('./screens/ExplorerScreen.tsx').then(module=>({default:module.ExplorerPassion})))
 const PersonalGallery=lazy(()=>import('./screens/PersonalGallery.tsx').then(module=>({default:module.PersonalGallery})))
 const AtelierScreen=lazy(()=>import('./screens/AtelierScreen.tsx').then(module=>({default:module.AtelierScreen})))
 
@@ -134,10 +136,11 @@ function screenFor(route: Route) {
     case 'bonusPiano': return <BonusPianoScreen itemId={route.itemId} />
     case 'learningLesson': return <LearningLessonScreen lessonId={route.lessonId} entryId={route.entryId}/>
     case 'learningNotebooks': return <LearningNotebooks passion={route.passion} review={route.review}/>
-    case 'learn': return <LearnScreen />
-    case 'learnPassion': return <LearnPassionScreen passion={route.passion} />
-    case 'passionHub': return <PassionHubScreen />
-    case 'passionSpace': return <PassionSpaceScreen passion={route.passion} />
+    case 'learn': return <ExplorerScreen catalogue/>
+    case 'learnPassion': return <ExplorerPassion passion={route.passion} mode="learn"/>
+    case 'passionHub': return <ExplorerScreen/>
+    case 'exploreCatalogue': return <ExplorerScreen catalogue/>
+    case 'passionSpace': return <ExplorerPassion passion={route.passion} mode={route.mode}/>
     case 'profile': return <ProfileScreen />
     case 'settings': return <SettingsScreen />
     case 'signal':
@@ -165,7 +168,7 @@ function screenFor(route: Route) {
       return <PersonalGallery passion={route.passion} focus={route.focus}/>
     case 'path': {
       const passion = getPath(route.pathId)?.passion
-      return <LearningOverview passion={LEARNING_PASSIONS.some(id => id === passion) ? passion : undefined}/>
+      return passion&&LEARNING_PASSIONS.some(id=>id===passion)?<ExplorerPassion passion={passion} mode="learn"/>:<ExplorerScreen catalogue/>
     }
     case 'challenge':
       return <ChallengeScreen />
@@ -196,12 +199,12 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
 
   useEffect(() => { document.documentElement.dataset.screen = route.name }, [route.name])
 
-  const key = route.name === 'learningLesson' ? `lesson-${route.lessonId}-${route.entryId??'new'}` : route.name==='learningNotebooks'?`notebooks-${route.passion??'all'}-${route.review??false}` : route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
+  const key = route.name === 'learningLesson' ? `lesson-${route.lessonId}-${route.entryId??'new'}` : route.name==='learningNotebooks'?`notebooks-${route.passion??'all'}-${route.review??false}` : route.name === 'shop' ? `shop-${route.category ?? 'ambiance'}-${route.library ?? false}` : route.name === 'bonusPiano' ? `bonus-${route.itemId}` : route.name === 'learnPassion' ? `learn-${route.passion}` : route.name === 'passionSpace' ? `space-${route.passion}-${route.mode??'choose'}` : route.name === 'gallery' ? `gallery-${route.passion ?? 'all'}` : route.name === 'passions' ? `passions-${route.mode}` : route.name === 'path' ? `path-${route.pathId}` : route.name === 'skill' ? `skill-${route.passion}` : route.name
   return (
     <>
       <AnimatePresence mode="wait" custom={transitionContext} initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
         <motion.div key={key} custom={transitionContext} variants={screenVariants} initial="enter" animate="center" exit="exit">
-          <Suspense fallback={<p role="status" className="p-6 text-center">Minuton ouvre ta galerie…</p>}>{screenFor(route)}</Suspense>
+          <Suspense fallback={<p role="status" className="p-6 text-center">Minuton prépare ton espace…</p>}>{screenFor(route)}</Suspense>
         </motion.div>
       </AnimatePresence>
       {/* Navigation des six espaces, masquée pendant les activités. */}

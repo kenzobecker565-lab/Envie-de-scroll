@@ -34,7 +34,8 @@ export type Route =
   | { name: 'learn' }
   | { name: 'learnPassion'; passion: PassionId }
   | { name: 'passionHub' }
-  | { name: 'passionSpace'; passion: PassionId }
+  | { name: 'exploreCatalogue' }
+  | { name: 'passionSpace'; passion: PassionId; mode?:'practice'|'learn' }
   | { name: 'profile' }
   | { name: 'settings' }
   | { name: 'path'; pathId: string }

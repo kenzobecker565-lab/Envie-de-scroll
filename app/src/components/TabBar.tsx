@@ -1,11 +1,12 @@
-import { Images, ShoppingBag, GraduationCap, Heart, Home, UserRound, type LucideIcon } from 'lucide-react'
+import { Images, ShoppingBag, Compass, Home, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
 import { useNavigation, type Route } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
+import './TabBar.css'
 
-/** Les six onglets principaux. La barre se retire pendant les activités. */
+/** Les quatre onglets principaux. La barre se retire pendant les activités. */
 
 export type Tab = 'home' | 'learn' | 'passionHub' | 'progress' | 'profile' | 'shop' | 'gallery'
 
@@ -14,15 +15,14 @@ const TOUR_TARGETS: Partial<Record<Tab, string>> = { gallery:'gallery', passionH
 
 const TABS: readonly { id: Tab; label: string; icon: LucideIcon }[] = [
   { id: 'home', label: 'Accueil', icon: Home },
-  { id: 'passionHub', label: 'Passions', icon: Heart },
-  { id: 'learn', label: 'Apprendre', icon: GraduationCap },
+  { id: 'passionHub', label: 'Explorer', icon: Compass },
   { id:'gallery', label:'Galerie', icon:Images },
   { id: 'shop', label: 'Boutique', icon: ShoppingBag },
-  { id: 'profile', label: 'Profil', icon: UserRound },
 ]
 
 /** La pile d'un onglet : l'accueil en dessous, pour que le bouton retour de Telegram y ramène. */
 export function tabStack(tab: Tab | 'gallery'): Route[] {
+  if(tab==='learn')return [{name:'home'},{name:'passionHub'},{name:'exploreCatalogue'}]
   if (tab === 'gallery') return [{ name: 'home' }, { name: 'gallery' }]
   return tab === 'home' ? [{ name: 'home' }] : [{ name: 'home' }, { name: tab }]
 }
@@ -37,7 +37,7 @@ export const TAB_BAR_SPACE = 'pb-[calc(86px+env(safe-area-inset-bottom))]'
 export function TabBar() {
   const reduced=useReducedMotion()
   const { route, reset } = useNavigation()
-  const current = route.name==='learningLesson'?null:['drawing','drawingNotebook'].includes(route.name)?'passionHub': ['learningNotebooks','path'].includes(route.name)?'learn':route.name==='atelier'?'gallery':route.name === 'settings' ? 'profile' : route.name === 'challenge' ? 'learn' : route.name === 'progress' ? 'profile' : route.name === 'learnPassion' ? 'learn' : route.name === 'passionSpace' ? 'passionHub' : route.name === 'gallery' ? 'gallery' : isTab(route.name) ? route.name : null
+  const current = route.name==='learningLesson'?null:['passionHub','exploreCatalogue','passionSpace','learn','learnPassion','learningNotebooks','path','drawing','drawingNotebook','challenge'].includes(route.name)?'passionHub':['profile','settings','progress'].includes(route.name)?'profile':route.name==='atelier'||route.name==='gallery'?'gallery':isTab(route.name)?route.name:null
 
   const open = (tab: Tab) => {
     if (!current || (tab === current && route.name === current && !(route.name==='gallery'&&(route.passion||route.focus)))) return

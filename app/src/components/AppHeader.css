@@ -1,0 +1,5 @@
+.studio-profile-avatar{display:grid;place-items:center;width:42px;height:42px;min-width:42px;overflow:hidden;border:2px solid #d9bdff;border-radius:50%;background:#f5eaff;box-shadow:0 2px 4px #48256820;position:relative}
+.studio-profile-avatar>.minuton-art{pointer-events:none;transform:scale(1.18) translateY(3px);flex-shrink:0}
+.studio-profile-avatar:focus-visible{outline:3px solid #b994ef;outline-offset:3px}
+@media(max-width:359px){.studio-profile-avatar{width:36px;height:36px;min-width:36px}.studio-header-tools{gap:5px}}
+.studio-header-brand{display:flex;align-items:center;gap:5px;min-width:0}.studio-header-back{display:grid;place-items:center;min-width:32px;min-height:40px;color:inherit}.studio-header-brand>svg{max-width:130px}

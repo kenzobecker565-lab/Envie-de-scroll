@@ -1,0 +1,418 @@
+/* ==========================================================================
+   Pub Scroll-up : scène 1080 × 1920 (format vertical 9:16)
+   Couleurs, polices, contours et ombres pleines repris de l'app
+   (app/src/styles/index.css), agrandis ×2,7 (écran de 400 px → 1080 px).
+   ========================================================================== */
+
+:root,
+[data-theme='pop'] {
+  --canvas: #fff3d1;
+  --surface-100: #fff8e3;
+  --surface-200: #fffdf7;
+  --ink: #151515;
+  --ink-soft: #4d4636;
+  --ink-faint: #8a7f63;
+  --outline: #151515;
+  --on-color: #151515;
+  --paper: #fffdf7;
+  --accent: #ff6a4d;
+  --accent-strong: #c73a1e;
+  --warm: #ffd23f;
+  --good: #93e5b8;
+  --sky: #86c8ff;
+  --lilac: #cdb8ff;
+  --shadow-ink: #151515;
+  --page-pattern: none;
+  --page-pattern-size: auto;
+  --font-display: 'Bricolage Grotesque Variable', 'Arial Black', sans-serif;
+  --font-sans: 'Rethink Sans Variable', system-ui, sans-serif;
+  --font-numbers: 'Bricolage Grotesque Variable', sans-serif;
+  --r-sm: 27px;
+  --r-md: 48px;
+  --r-lg: 64px;
+  --display-weight: 800;
+  --display-style: normal;
+  --display-spacing: -0.025em;
+  --fs-title: 150px;
+}
+
+/* Pop Nuit : fond noir, contours crème, ombres violettes, titres en italique. */
+[data-theme='nuit'] {
+  --canvas: #121019;
+  --surface-100: #18151f;
+  --surface-200: #1e1a29;
+  --ink: #fff6e9;
+  --ink-soft: #c3b9d4;
+  --ink-faint: #857b96;
+  --outline: #fff6e9;
+  --on-color: #121019;
+  --paper: #fff6e9;
+  --accent: #ff5e5b;
+  --accent-strong: #ff8a87;
+  --warm: #ffd60a;
+  --good: #00f5a0;
+  --sky: #00d1ff;
+  --lilac: #b388ff;
+  --shadow-ink: #b388ff;
+  --page-pattern: radial-gradient(#2c2640 3.5px, transparent 4.3px);
+  --page-pattern-size: 54px 54px;
+  --font-display: 'Rubik Variable', sans-serif;
+  --font-sans: 'Rubik Variable', sans-serif;
+  --font-numbers: 'Rubik Variable', sans-serif;
+  --display-weight: 900;
+  --display-style: italic;
+  --display-spacing: -0.02em;
+}
+
+/* BD : cases cernées, trame de points, lettrage de bande dessinée. */
+[data-theme='bd'] {
+  --canvas: #ffffff;
+  --surface-100: #f6fbfd;
+  --surface-200: #ffffff;
+  --ink: #111111;
+  --ink-soft: #3a3a3a;
+  --ink-faint: #8a8a8a;
+  --outline: #111111;
+  --on-color: #111111;
+  --paper: #ffffff;
+  --accent: #e63946;
+  --accent-strong: #c1121f;
+  --warm: #ffd23f;
+  --good: #52d17c;
+  --sky: #4cc9f0;
+  --lilac: #ff7eb6;
+  --shadow-ink: #111111;
+  --page-pattern: radial-gradient(#cdeffb 6px, transparent 7.3px);
+  --page-pattern-size: 32px 32px;
+  --font-display: 'Bangers', Impact, sans-serif;
+  --font-sans: 'Nunito Variable', system-ui, sans-serif;
+  --font-numbers: 'Bangers', Impact, sans-serif;
+  --r-sm: 11px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --display-weight: 400;
+  --display-style: normal;
+  --display-spacing: 0.03em;
+}
+
+/* Memphis : formes géométriques années 80, rose, turquoise, jaune. */
+[data-theme='memphis'] {
+  --canvas: #fff8ee;
+  --surface-100: #fffbf4;
+  --surface-200: #ffffff;
+  --ink: #161616;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #8c8577;
+  --outline: #161616;
+  --on-color: #161616;
+  --paper: #ffffff;
+  --accent: #ff6fb5;
+  --accent-strong: #c2185b;
+  --warm: #ffc300;
+  --good: #1fc8b3;
+  --sky: #7b9bff;
+  --lilac: #ff7a3d;
+  --shadow-ink: #161616;
+  --page-pattern: radial-gradient(#e9ddc8 4.3px, transparent 5.1px);
+  --page-pattern-size: 70px 70px;
+  --font-display: 'Syne Variable', sans-serif;
+  --font-sans: 'Outfit Variable', system-ui, sans-serif;
+  --font-numbers: 'Syne Variable', sans-serif;
+  --r-sm: 11px;
+  --r-md: 16px;
+  --r-lg: 16px;
+  --display-weight: 700;
+  --display-style: normal;
+  --display-spacing: -0.04em;
+  /* Syne est très large : les titres descendent d'un cran. */
+  --fs-title: 124px;
+}
+
+html,
+body {
+  margin: 0;
+  background: #000;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-kerning: normal;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.scene {
+  background-color: var(--canvas);
+  background-image: var(--page-pattern);
+  background-size: var(--page-pattern-size);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.abs {
+  position: absolute;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  letter-spacing: var(--display-spacing);
+  line-height: 0.95;
+}
+
+.sans {
+  font-family: var(--font-sans);
+}
+
+/* Les mots et les lettres animés un par un. */
+.w,
+.ch {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* Sticker : gros contour, ombre pleine décalée (sans flou). */
+.sk {
+  border: 8px solid var(--outline);
+  box-shadow: calc(var(--sh, 11) * 1px) calc(var(--sh, 11) * 1px) 0 var(--shadow-ink);
+  box-sizing: border-box;
+}
+
+.sk-thin {
+  border-width: 6px;
+}
+
+.pill {
+  border-radius: 999px;
+}
+
+.r-sm {
+  border-radius: var(--r-sm);
+}
+.r-md {
+  border-radius: var(--r-md);
+}
+.r-lg {
+  border-radius: var(--r-lg);
+}
+
+.bg-accent { background: var(--accent); }
+.bg-warm { background: var(--warm); }
+.bg-good { background: var(--good); }
+.bg-sky { background: var(--sky); }
+.bg-lilac { background: var(--lilac); }
+.bg-paper { background: var(--paper); }
+.bg-surface { background: var(--surface-200); }
+.bg-canvas { background: var(--canvas); }
+
+.on-color {
+  color: var(--on-color);
+}
+
+svg.i {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------------------------------------------------------------- 1 · la nuit */
+
+.night {
+  background: radial-gradient(900px 1300px at 50% 58%, #1f2436 0%, #12131a 70%);
+  color: #d9d6e4;
+}
+
+.phone {
+  left: 200px;
+  top: 470px;
+  width: 680px;
+  height: 1360px;
+  border: 12px solid #06070a;
+  border-radius: 96px;
+  background: #1d1f2b;
+  box-sizing: border-box;
+  box-shadow: 18px 18px 0 #06070a;
+}
+
+.screen {
+  position: absolute;
+  inset: 18px;
+  border-radius: 74px;
+  overflow: hidden;
+  background: #0e0f15;
+  border: 6px solid #06070a;
+}
+
+.post {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1300px;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------- les textes */
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 38px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  height: 92px;
+  padding: 0 34px;
+  border: 7px solid var(--outline);
+  border-radius: 999px;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 42px;
+  color: var(--on-color);
+  box-shadow: calc(var(--sh, 8) * 1px) calc(var(--sh, 8) * 1px) 0 var(--shadow-ink);
+}
+
+/* Pas de dépassement de ligne dans les écrans : le texte long revient à la ligne. */
+.balance {
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------ 7 · la galerie */
+
+.gcard {
+  position: absolute;
+  width: 456px;
+  height: 380px;
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  box-sizing: border-box;
+}
+
+.gcard .face {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--on-color);
+}
+
+.gcard .quote {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  letter-spacing: var(--display-spacing);
+  font-size: 46px;
+  line-height: 1;
+}
+
+[data-theme='bd'] .gcard .quote {
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0;
+  font-size: 42px;
+}
+
+[data-theme='nuit'] .gcard .quote {
+  font-style: italic;
+  font-weight: 600;
+}
+
+[data-theme='memphis'] .gcard .quote {
+  font-size: 38px;
+}
+
+.deco {
+  display: none;
+}
+[data-theme='nuit'] .deco-nuit,
+[data-theme='bd'] .deco-bd,
+[data-theme='memphis'] .deco-memphis {
+  display: block;
+}
+
+/* Memphis : ombre rayée au lieu de l'ombre pleine. */
+[data-theme='memphis'] .face {
+  box-shadow: none;
+}
+.stripes {
+  display: none;
+}
+[data-theme='memphis'] .stripes {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform: translate(22px, 22px);
+  border: 6px solid var(--outline);
+  border-radius: var(--r-lg);
+  background-image: repeating-linear-gradient(45deg, var(--outline) 0 5px, transparent 5px 18px);
+  z-index: -1;
+}
+
+/* ------------------------------------------------------------ aperçu navigateur */
+
+#controls {
+  display: none;
+}
+
+body.preview {
+  background: #222;
+  font-family: system-ui, sans-serif;
+}
+
+body.preview #frame {
+  width: 540px;
+  height: 960px;
+  margin: 16px auto 8px;
+  overflow: hidden;
+}
+
+body.preview #stage {
+  transform: scale(0.5);
+  transform-origin: 0 0;
+}
+
+body.preview #controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+}
+
+body.preview #scrub {
+  width: 380px;
+}

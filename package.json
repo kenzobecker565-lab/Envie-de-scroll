@@ -1,0 +1,26 @@
+{
+  "name": "scroll-up",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Scroll-up — V1 test en Telegram Mini App : transformer l'envie de scroller en activité créative.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "workspaces": [
+    "shared",
+    "server",
+    "app",
+    "prototype"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "npm run build -w app",
+    "start": "npm run start -w server",
+    "test": "npm run test -w shared -w server -w app",
+    "typecheck": "npm run typecheck -w shared -w server -w app",
+    "db:migrate": "npm run db:migrate -w server",
+    "db:deploy": "npm run db:deploy -w server",
+    "db:studio": "npm run db:studio -w server"
+  }
+}

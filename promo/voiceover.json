@@ -1,0 +1,24 @@
+{
+  "_doc": "Voix off de la pub. « beat » = temps musical où la réplique démarre (128 BPM, voir cues.js) ; « say » = orthographe envoyée à la synthèse vocale quand elle diffère du texte (« plusse » force la prononciation /plys/ : « plus » au sens de « davantage »).",
+  "voice": "fr_FR-siwis-medium",
+  "speaker": null,
+  "lengthScale": 1.0,
+  "noiseScale": 0.33,
+  "noiseW": 0.5,
+  "lines": [
+    { "id": "01-tu-scrolles", "text": "Tu scrolles.", "beat": 0.4 },
+    { "id": "02-encore", "text": "Encore.", "beat": 2, "lengthScale": 0.85 },
+    { "id": "03-et-encore", "text": "Et encore.", "beat": 3.05, "lengthScale": 0.92 },
+    { "id": "04-cette-envie", "text": "Cette envie-là ?", "beat": 4.6, "lengthScale": 0.95 },
+    { "id": "05-transforme-la", "text": "Transforme-la.", "beat": 6.2 },
+    { "id": "06-dessine", "text": "Dessine !", "beat": 8.2 },
+    { "id": "07-filme", "text": "Filme !", "beat": 10 },
+    { "id": "08-ecris", "text": "Écris !", "beat": 12 },
+    { "id": "09-joue", "text": "Joue !", "beat": 14 },
+    { "id": "10-bouge", "text": "Bouge !", "beat": 16 },
+    { "id": "11-cuisine", "text": "Cuisine !", "beat": 18 },
+    { "id": "12-chaque-envie-compte", "text": "Chaque envie compte.", "beat": 20.5 },
+    { "id": "13-scrolle-moins-cree-plus", "text": "Scrolle moins. Et crée plus !", "say": "Scrolle moins. Et crée plusse !", "beat": 24 },
+    { "id": "14-signature", "text": "Plutôt Que Scroller.", "beat": 28.2 }
+  ]
+}

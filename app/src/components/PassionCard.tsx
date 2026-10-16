@@ -5,7 +5,7 @@ import { ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { PASSION_COLORS, PASSION_ICONS } from '../lib/icons.ts'
 import { popIn } from '../lib/motion.ts'
-import { PassionArtwork } from './PassionArtwork.tsx'
+import { PassionIllustration } from './PassionIllustration.tsx'
 import { PassionScene } from './decor/PassionScene.tsx'
 
 /**
@@ -16,7 +16,7 @@ import { PassionScene } from './decor/PassionScene.tsx'
  */
 export function PassionCard({ passion, selected, index, illustrated = false }: { passion: Passion; selected: boolean; index: number; illustrated?: boolean }) {
   if (illustrated) return <ToggleGroupItem value={passion.id} variant="card" aria-label={`${passion.label} : ${passion.tagline}`} className="onboarding-passion-card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * .04 }} whileTap={{ scale: .98 }}>
-    <span className="onboarding-passion-cover"><PassionArtwork passion={passion.id}/><span className="onboarding-selection" aria-hidden="true">{selected && <Check size={16}/>}</span></span>
+    <span className="onboarding-passion-cover"><PassionIllustration passion={passion.id}/><span className="onboarding-selection" aria-hidden="true">{selected && <Check size={16}/>}</span></span>
     <span className="onboarding-passion-copy"><strong>{passion.label}</strong><small>{passion.tagline}</small></span>
   </ToggleGroupItem>
   const Icon = PASSION_ICONS[passion.id]

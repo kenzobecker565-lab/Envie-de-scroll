@@ -1,3 +1,4 @@
+import {PassionIllustration} from '../components/PassionIllustration.tsx'
 import {useEffect,useMemo,useState} from 'react'
 import {AnimatePresence,motion,useReducedMotion} from 'motion/react'
 import {BookOpen,Check,ChevronDown,ChevronRight,Heart,Images,Pencil,Shuffle} from 'lucide-react'
@@ -15,7 +16,7 @@ import './ExplorerScreen.css'
 const LABELS:Partial<Record<PassionId,string>>={dessin:'le dessin',ecriture:'l’écriture',piano:'le piano',sport:'le sport',logique:'la logique',francais:'le français'}
 const GALLERY_LABELS:Partial<Record<PassionId,string>>={dessin:'mes dessins',ecriture:'mes textes',piano:'mon répertoire',sport:'mes séances',logique:'mes énigmes',francais:'mes pages de français'}
 const POSES={dessin:'gallery-drawing',ecriture:'gallery-writing',piano:'gallery-piano',sport:'gallery-sport',logique:'gallery-logic',francais:'gallery-reading'} as const
-function ExplorerArt({passion}:{passion:PassionId}){return <span className="explore-passion-art" data-passion={passion} aria-hidden="true"/>}
+function ExplorerArt({passion}:{passion:PassionId}){return <PassionIllustration passion={passion} className="explore-passion-art"/>}
 function passionLabel(passion:PassionId){return passion==='logique'?'Logique':getPassion(passion).label}
 
 export function ExplorerScreen({catalogue=false}:{catalogue?:boolean}){

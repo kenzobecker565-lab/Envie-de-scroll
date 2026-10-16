@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react'
 import { Dialog as DialogPrimitive } from 'radix-ui'
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import { api, track } from '../api/client.ts'
-import { rememberTutorial, TOUR_STEPS, tourCardCenter, tourCardDock, tourCardPosition, type TourPage, type TourRect } from '../lib/tutorial.ts'
+import { rememberTutorial, TOUR_STEPS, tourCardCenter, tourCardDock, tourCardPosition, type TourPage, type TourRect, type TourStep } from '../lib/tutorial.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { useBackButtonOverlay } from '../telegram/buttons.ts'
 import { haptics } from '../telegram/webApp.ts'
@@ -20,7 +20,7 @@ function stackFor(page: TourPage) {
  * then spotlights its targets; coordinates follow scrolling and resizing. A step without target is
  * a centred card, or a card docked above the tabs to let the page show.
  */
-export function GuidedTour() {
+export function GuidedTour({steps=TOUR_STEPS,onFinish}:{steps?:readonly TourStep[];onFinish?:()=>void}) {
   const { state, dispatch } = useAppState()
   const { route, push, reset } = useNavigation()
   const [step, setStep] = useState(0)
@@ -35,25 +35,27 @@ export function GuidedTour() {
   const [cardElement, setCardElement] = useState<HTMLDivElement | null>(null)
   const cardRef = useCallback((element: HTMLDivElement | null) => { card.current = element; setCardElement(element) }, [])
   const finishing = useRef(false)
+  const returnFocus=useRef(document.activeElement instanceof HTMLElement?document.activeElement:null)
   const maskId = useId().replace(/:/g, '')
-  const current = TOUR_STEPS[step] ?? TOUR_STEPS[0]!
-  const last = step === TOUR_STEPS.length - 1
+  const current = steps[step] ?? steps[0]!
+  const last = step === steps.length - 1
 
   const finish = useCallback((start = false) => {
     if (finishing.current) return
     finishing.current = true
+    if(onFinish){onFinish();return}
     rememberTutorial(state.me.user.id)
     dispatch({ type: 'tutorialCompleted' })
     // Saving must never hold up a first activity. A local fallback also prevents repeat prompts.
     void api.updateSettings({ tutorialCompleted: true }).catch(() => {})
     haptics.impact('light')
     if (start) { track('cta', { from: 'tutorial' }); dispatch({ type: 'newFlow' }); push({ name: 'signal' }) }
-  }, [dispatch, push, state.me.user.id])
+  }, [dispatch, push, state.me.user.id,onFinish])
   useBackButtonOverlay(() => finish())
 
   // Emmène sur la page de l'étape.
   useEffect(() => {
-    if (route.name !== stackFor(current.page).at(-1)?.name) reset(stackFor(current.page))
+    if (current.page && route.name !== stackFor(current.page).at(-1)?.name) reset(stackFor(current.page))
   }, [current.page, route.name, reset])
 
   useLayoutEffect(() => {
@@ -63,7 +65,7 @@ export function GuidedTour() {
     const began = performance.now()
     setReady(false)
     setRects([])
-    if (route.name !== stackFor(current.page).at(-1)?.name) return
+    if (current.page && route.name !== stackFor(current.page).at(-1)?.name) return
     const selector = (target: string) => `[data-tour-target="${target}"]`
     const measure = () => {
       if (!alive) return
@@ -71,8 +73,8 @@ export function GuidedTour() {
       const nav = document.querySelector('.studio-tabbar')?.getBoundingClientRect()
       setViewport({ width: window.innerWidth, height })
       setNavTop(nav ? nav.top : height - 16)
-      if (!current.targets.length) { setReady(true); return }
-      const elements = current.targets.map(target => document.querySelector<HTMLElement>(selector(target)))
+      if (!current.targets.length&&!current.selectors?.length) { setReady(true); return }
+      const elements = [...current.targets.map(selector),...(current.selectors??[])].map(target=>document.querySelector<HTMLElement>(target))
       if (elements.some(element => !element)) {
         // La page arrive (transition) : on attend ses éléments ; introuvables, la bulle se montre quand même, au centre.
         if (performance.now() - began < 2500) frame = requestAnimationFrame(measure)
@@ -134,15 +136,15 @@ export function GuidedTour() {
           {rects.map((r, index) => <g key={index} className="tour-focus-ring"><rect {...r} rx={radius} fill="none" stroke="#AD69FF" strokeWidth="5"/><rect {...r} rx={radius} fill="none" stroke="#FFF7FF" strokeWidth="2"/></g>)}
         </svg>
       </DialogPrimitive.Overlay>
-      <DialogPrimitive.Content ref={cardRef} tabIndex={-1} className="tour-card" data-side={position.side} style={{ top: position.top, left: position.left, width: position.width, maxHeight: viewport.height - 32, visibility: ready ? 'visible' : 'hidden' }} onOpenAutoFocus={event => { event.preventDefault(); card.current?.focus({ preventScroll: true }) }} onCloseAutoFocus={event => { event.preventDefault(); requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-tour-target="swipe"]')?.focus({ preventScroll: true })) }} onPointerDownOutside={event => event.preventDefault()}>
+      <DialogPrimitive.Content ref={cardRef} tabIndex={-1} className="tour-card" data-side={position.side} style={{ top: position.top, left: position.left, width: position.width, maxHeight: viewport.height - 32, visibility: ready ? 'visible' : 'hidden' }} onOpenAutoFocus={event => { event.preventDefault(); card.current?.focus({ preventScroll: true }) }} onCloseAutoFocus={event => { event.preventDefault(); requestAnimationFrame(() => (onFinish&&returnFocus.current?.isConnected?returnFocus.current:document.querySelector<HTMLElement>('[data-tour-target="swipe"]'))?.focus({ preventScroll: true })) }} onPointerDownOutside={event => event.preventDefault()}>
         {position.showPointer && <span className="tour-pointer" style={{ left: position.pointer }} aria-hidden="true"/>}
         <span className="tour-minuton"><MinutonFigure pose={current.pose} size={77} animated={false}/></span>
         <div className="tour-card-body">
-          <div className="tour-progress" aria-label={`Étape ${step + 1} sur ${TOUR_STEPS.length} : ${current.chapter}`}><span>{step + 1}/{TOUR_STEPS.length}</span><span className="tour-chapter" aria-hidden="true">{current.chapter}</span></div>
-          <span className="tour-bar" aria-hidden="true"><i style={{ width: `${(step + 1) / TOUR_STEPS.length * 100}%` }}/></span>
+          <div className="tour-progress" aria-label={`Étape ${step + 1} sur ${steps.length} : ${current.chapter}`}><span>{step + 1}/{steps.length}</span><span className="tour-chapter" aria-hidden="true">{current.chapter}</span></div>
+          <span className="tour-bar" aria-hidden="true"><i style={{ width: `${(step + 1) / steps.length * 100}%` }}/></span>
           <DialogPrimitive.Title>{current.title}</DialogPrimitive.Title>
           <DialogPrimitive.Description>{current.text}</DialogPrimitive.Description>
-          <div className="tour-controls"><button type="button" onClick={() => finish()}>Passer</button><button type="button" className={last ? 'tour-start' : 'tour-next'} onClick={() => { if (last) finish(true); else { haptics.selection(); setStep(value => value + 1) } }}>{last ? 'Choisir mon temps' : 'Suivant'}{!last && <ChevronRight size={19}/>}</button></div>
+          <div className="tour-controls"><button type="button" onClick={() => finish()}>Passer</button><button type="button" className={last ? 'tour-start' : 'tour-next'} onClick={() => { if (last) finish(true); else { haptics.selection(); setStep(value => value + 1) } }}>{last ? (onFinish?'C’est compris':'Choisir mon temps') : 'Suivant'}{!last && <ChevronRight size={19}/>}</button></div>
         </div>
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>

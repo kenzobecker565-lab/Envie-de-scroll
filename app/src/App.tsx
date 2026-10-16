@@ -23,6 +23,7 @@ import { DoneScreen } from './screens/DoneScreen.tsx'
 import { SettingsScreen } from './screens/SettingsScreen.tsx'
 import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
+import {ContextualGuides} from './components/ContextualGuides.tsx'
 import { GuidedTour } from './components/GuidedTour.tsx'
 import { tutorialSeen } from './lib/tutorial.ts'
 import { TabBar } from './components/TabBar.tsx'
@@ -211,6 +212,7 @@ function Router({ onTone }: { onTone: (tone: DecorTone) => void }) {
       <TabBar />
       {/* Le tutoriel fait visiter les vraies pages : il reste ouvert d'un écran à l'autre. */}
       {state.tutorialOpen && <GuidedTour/>}
+      <ContextualGuides/>
     </>
   )
 }

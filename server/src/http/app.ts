@@ -1,3 +1,4 @@
+import {isDiscoveryGuide,parseDiscoveryGuides} from '@scroll-up/shared'
 import {drawingSuggestions,isDrawingStyle} from '@scroll-up/shared'
 /**
  * ============================================================================
@@ -390,6 +391,16 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
     }),
   )
 
+  api.post('/me/guides/:id',asyncRoute(async(req,res)=>{
+    const id=String(req.params.id)
+    if(!isDiscoveryGuide(id))throw badRequest('Guide inconnu.')
+    const user=await currentUser(req,res)
+    const updated=await prisma.$transaction(async tx=>{
+      const latest=await tx.user.findUniqueOrThrow({where:{id:user.id}})
+      return tx.user.update({where:{id:user.id},data:{completedGuides:JSON.stringify([...new Set([...parseDiscoveryGuides(latest.completedGuides),id])])}})
+    })
+    res.json({user:toUserDTO(updated)})
+  }))
   api.get('/proposals/saved',asyncRoute(async(req,res)=>{
     const user=await currentUser(req,res)
     res.json({items:(await listSavedProposals(prisma,user)).map(toProposalDTO),serverTime:now().toISOString()})

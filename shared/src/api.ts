@@ -21,6 +21,7 @@ export interface UserDTO {
   onboarded: boolean
   /** Tutoriel terminé ou passé, mémorisé pour tout le compte. */
   tutorialCompleted: boolean
+  completedGuides?: import('./onboardingGuides.ts').DiscoveryGuide[]
   /** Thème choisi dans l'app. */
   theme: AppTheme
   /** Relances du bot (au plus une par jour). */

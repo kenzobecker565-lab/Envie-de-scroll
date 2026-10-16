@@ -41,3 +41,5 @@ export * from './drawing.ts'
 
 export * from "./scrollFlow.ts"
 export * from './activityBriefs.ts'
+
+export * from './onboardingGuides.ts'

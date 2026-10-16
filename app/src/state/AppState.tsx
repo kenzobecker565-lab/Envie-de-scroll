@@ -88,6 +88,7 @@ interface State {
 type Action =
   | { type: 'tutorial'; open: boolean }
   | { type: 'tutorialCompleted' }
+  | {type:'guideCompleted';id:import('@scroll-up/shared').DiscoveryGuide}
   | { type: 'push'; route: Route }
   | { type: 'back' }
   | { type: 'replace'; route: Route }
@@ -105,6 +106,7 @@ function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'tutorial': return { ...state, tutorialOpen: action.open }
     case 'tutorialCompleted': return { ...state, tutorialOpen: false, me: { ...state.me, user: { ...state.me.user, tutorialCompleted: true } } }
+    case 'guideCompleted': return {...state,me:{...state.me,user:{...state.me.user,completedGuides:[...new Set([...(state.me.user.completedGuides??[]),action.id])]}}}
     case 'push':
       return { ...state, stack: [...state.stack, action.route], direction: 1 }
     case 'back':

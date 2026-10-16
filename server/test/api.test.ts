@@ -150,7 +150,7 @@ describe('authentification', () => {
     const response = await request(app).get('/api/me').set('Authorization', `tma ${initData}`).expect(200)
     const body = response.body as MeResponse
     expect(body.user).toEqual({
-      atelier: {ambiance:'lavande',frames:'bois',decor:'atelier',mascot:true}, id: '5150', firstName: 'Sam', passions: [], onboarded: false, tutorialCompleted: false, theme: 'pop', remindersEnabled: true, scrollMoment: null, reminderTime: null, skills: {} })
+      atelier: {ambiance:'lavande',frames:'bois',decor:'atelier',mascot:true}, id: '5150', firstName: 'Sam', passions: [], onboarded: false, tutorialCompleted: false, completedGuides: [], theme: 'pop', remindersEnabled: true, scrollMoment: null, reminderTime: null, skills: {} })
     const user = await prisma.user.findUnique({ where: { id: 5150n } })
     expect(user?.canMessage).toBe(true)
   })

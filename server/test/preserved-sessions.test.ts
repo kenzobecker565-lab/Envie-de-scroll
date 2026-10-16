@@ -36,3 +36,11 @@ it('keeps old unfinished sessions accessible beyond the home resume TTL',async()
  expect((await request(app).get('/api/proposals/saved').set(auth)).body.items.map((p:{id:string})=>p.id)).toContain(p.id)
  const r=await action(p.id,'resume');expect(r.activeSeconds).toBe(120)
 })
+it('persists independent discovery guides on the account, idempotently and without changing the welcome flag',async()=>{
+ for(const id of ['explorer','shop','explorer'])await request(app).post(`/api/me/guides/${id}`).set(auth).expect(200)
+ const me=(await request(app).get('/api/me').set(auth)).body.user
+ expect(me.completedGuides).toEqual(['explorer','shop']);expect(me.tutorialCompleted).toBe(false)
+ expect((await request(app).get('/api/me').set(other)).body.user.completedGuides).toEqual([])
+ await request(app).post('/api/me/guides/unknown').set(auth).expect(400)
+ await request(app).post('/api/me/guides/gallery').expect(401)
+})

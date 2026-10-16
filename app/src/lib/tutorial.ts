@@ -4,8 +4,9 @@ export type TourPose = 'welcome' | 'think' | 'idea' | 'draw' | 'write' | 'piano'
 /** La page où se joue l'étape : le tutoriel y emmène vraiment. */
 export type TourPage = 'home' | 'atelier' | 'gallery' | 'passionHub' | 'learn' | 'shop' | 'profile'
 export interface TourStep {
-  page: TourPage
+  page?: TourPage
   /** Éléments mis en lumière (`data-tour-target`). Aucun : la carte s'affiche au centre, pour ce qui ne se voit pas sur l'accueil. */
+  selectors?:readonly string[]
   targets: readonly string[]
   /** Carte posée en bas, au-dessus des onglets, pour laisser voir la page. */
   dock?: boolean

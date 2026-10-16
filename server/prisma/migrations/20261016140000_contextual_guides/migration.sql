@@ -1,0 +1,1 @@
+ALTER TABLE "User" ADD COLUMN "completedGuides" TEXT NOT NULL DEFAULT '[]';

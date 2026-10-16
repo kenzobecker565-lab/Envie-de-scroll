@@ -1,5 +1,6 @@
 import { parseAtelierAppearance } from '@scroll-up/shared'
 import {
+  parseDiscoveryGuides,
   activePassions,
   countWords,
   DEFAULT_THEME,
@@ -39,6 +40,7 @@ export function toUserDTO(user: User): UserDTO {
     passions,
     onboarded: passions.length > 0,
     tutorialCompleted: user.tutorialCompleted,
+    completedGuides:parseDiscoveryGuides(user.completedGuides),
     theme,
     remindersEnabled: user.remindersEnabled,
     scrollMoment: isScrollMoment(user.scrollMoment) ? user.scrollMoment : null,

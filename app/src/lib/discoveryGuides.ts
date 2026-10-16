@@ -20,7 +20,7 @@ export const DISCOVERY_TOURS:Record<DiscoveryGuide,DiscoveryTour>={
   step('Comprendre, puis essayer','Chaque leçon avance en quatre temps : comprendre, essai guidé, à toi, puis bilan.','think'),
   step('Garde ta progression','Utilise « Sauvegarder ma progression » pour reprendre plus tard. À la fin, conserve ton essai pour le retrouver dans tes carnets.','write')]},
  gallery:{anchor:'.gallery-passions',steps:[
-  step('Une place pour tes créations','Choisis une passion pour retrouver tes dessins, tes textes ou tes séances enregistrées.','draw',['.gallery-passions']),
+  step('Une place pour tes créations','Chaque coin de ton atelier ouvre une passion. Retrouve tes dessins, tes textes et tes séances enregistrées.','draw',['.gallery-passions']),
   step('Ton exposition personnelle','Mon exposition rassemble tes créations préférées dans un décor que tu peux personnaliser.','cheer',['.gallery-segment'])]},
  notebook:{anchor:'.gallery-book-cover',steps:[
   step('Ton vrai carnet','Ouvre ton carnet pour relire tes pages conservées. Le sommaire permet de retrouver une entrée directement.','write'),

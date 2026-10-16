@@ -3,7 +3,6 @@ import {ArrowLeft,ArrowUpRight,BookOpen,ChevronLeft,ChevronRight,FileText,Pin,Se
 import {ACTIVE_PASSION_IDS,getPassion,LEARNING_PASSIONS,parseAtelierAppearance,type CompletionDTO,type PassionId,type LearningPassion} from '@scroll-up/shared'
 import {Screen} from '../components/Screen.tsx'
 import {CarnetHeader} from '../components/CarnetHeader.tsx'
-import {PassionArtwork} from '../components/PassionArtwork.tsx'
 import {MinutonFigure} from '../components/Mascot.tsx'
 import {Button} from '../components/ui/button.tsx'
 import {Dialog,DialogContent} from '../components/ui/dialog.tsx'
@@ -16,9 +15,10 @@ import {GalleryDetail} from './GalleryScreen.tsx'
 import {GalleryNotebook} from './GalleryNotebook.tsx'
 import {useGallery} from './useGallery.ts'
 import './PersonalGallery.css'
-import {GalleryStudio,ExhibitionRoom,PianoFolios,GalleryWorkPreview} from '../components/LivingGallery.tsx'
+import {DrawingRoom,LogicRoom} from '../components/PassionRooms.tsx'
+import {GalleryStudio,PianoFolios,GalleryWorkPreview} from '../components/LivingGallery.tsx'
 
-const TITLES:Partial<Record<PassionId,[string,string]>>={dessin:['Mes dessins','Un mur pour tes idées.'],ecriture:['Mon carnet','Tes idées prennent vie ici.'],piano:['Ton salon musical','Des morceaux qui racontent ton histoire.'],sport:['Mon carnet sportif','La trace de tes moments actifs.'],logique:['Mes énigmes','Tes pistes et tes déclics.'],francais:['Mon carnet de français','Les mots que tu apprivoises.']}
+const TITLES:Partial<Record<PassionId,[string,string]>>={dessin:['Ton atelier dessin','Un mur pour tes idées.'],ecriture:['Tes pages à toi','Tes idées prennent vie ici.'],piano:['Ton salon musical','Des morceaux qui racontent ton histoire.'],sport:['Tes pauses actives','La trace de tes moments actifs.'],logique:['Ton bureau d’enquête','Tes pistes et tes déclics.'],francais:['Ton cabinet des mots','Les mots que tu apprivoises.']}
 export function PersonalGallery({passion,focus}:{passion?:PassionId;focus?:string}){
  const {state,dispatch}=useAppState(),{push,reset,back}=useNavigation(),gallery=useGallery(passion)
  const [archive,setArchive]=useState(false)
@@ -41,20 +41,21 @@ export function PersonalGallery({passion,focus}:{passion?:PassionId;focus?:strin
  {gallery.error&&<div role="alert"><p>{gallery.error}</p><Button variant="secondary" onClick={()=>void gallery.load(gallery.cursor??undefined)}>Réessayer</Button></div>}
  {notebook?<><GalleryNotebook key={openedBook} items={gallery.items} french={passion==='francais'} more={!!gallery.cursor} loading={gallery.loading} onMore={()=>void gallery.load(gallery.cursor??undefined)}/>{!gallery.loading&&!gallery.error&&!works.length&&<GalleryEmpty start={start} writing/>}<button className="gallery-text-button" type="button" onClick={()=>setSessions(v=>!v)}>{sessions?'Masquer les séances':'Voir mes séances, même sans texte joint'}</button>{sessions&&filtered.map(item=><SessionRow item={item} key={item.id} open={setOpened}/>)}</>:<>
  {(passion||archive)&&<>
- {passion==='dessin'&&<><div className="gallery-segment"><button type="button" aria-pressed={mode==='wall'} onClick={()=>setMode('wall')}>Mon mur</button><button type="button" aria-pressed={mode==='list'} onClick={()=>setMode('list')}>Tous mes dessins</button></div>{mode==='wall'&&<><ExhibitionRoom items={chosen} appearance={appearance} onOpen={setOpened} loading={gallery.loading}/><button className="gallery-text-button" onClick={()=>push({name:'atelier'})}>Personnaliser mon exposition<ChevronRight size={16}/></button></>}</>}
+ {passion==='dessin'&&<><div className="gallery-segment"><button type="button" aria-pressed={mode==='wall'} onClick={()=>setMode('wall')}>Mon mur</button><button type="button" aria-pressed={mode==='list'} onClick={()=>setMode('list')}>Tous mes dessins</button></div>{mode==='wall'&&<><DrawingRoom items={chosen} onOpen={setOpened} onChoose={()=>push({name:'atelier'})} onStart={start}/><button className="gallery-text-button" onClick={()=>push({name:'atelier'})}>Personnaliser mon exposition<ChevronRight size={16}/></button></>}</>}
  {passion==='piano'&&<div className="gallery-segment"><button type="button" aria-pressed={!sessions} onClick={()=>setSessions(false)}>Mes morceaux</button><button type="button" aria-pressed={sessions} onClick={()=>setSessions(true)}>Mes séances</button></div>}
- {passion==='sport'&&<SportCalendar items={gallery.items} more={!!gallery.cursor} onOpen={setOpened}/>}
- {passion==='logique'&&<PassionArtwork passion="logique" className="gallery-passion-banner"/>}
+ {passion==='sport'&&<section className="passion-room sport-room"><div className="room-intro"><small>UN PEU DE MOUVEMENT</small><h2>Chaque pause compte</h2></div><SportCalendar items={gallery.items} more={!!gallery.cursor} onOpen={setOpened}/><MinutonFigure pose="gallery-sport" size={125} animated={false}/><button type="button" className="room-action" onClick={start}>Bouger à nouveau<ArrowUpRight size={18}/></button></section>}
+ {(passion!=='dessin'||mode==='list')&&<>
  {passion==='piano'?<details className="living-music-tools"><summary>Rechercher et trier</summary><button type="button" className="gallery-text-button" onClick={()=>setAscending(v=>!v)} aria-label="Changer l’ordre des créations">{ascending?'Plus anciennes':'Plus récentes'}</button><label className="gallery-search"><Search size={19}/><input aria-label="Rechercher dans la galerie" placeholder="Rechercher un morceau…" value={query} onChange={e=>setQuery(e.target.value)}/></label></details>:<> <div className="gallery-list-heading"><h2>{passion==='sport'?'Mes dernières séances':passion==='logique'?'Mes dossiers':passion==='dessin'?'Mes dessins':'Mes créations'}</h2><button type="button" onClick={()=>setAscending(v=>!v)} aria-label="Changer l’ordre des créations">{ascending?'Plus anciennes':'Plus récentes'}</button></div>
  <label className="gallery-search"><Search size={19}/><input aria-label="Rechercher dans la galerie" placeholder="Rechercher une création, une séance…" value={query} onChange={e=>setQuery(e.target.value)}/></label></>}
 
  {!passion&&<div className="gallery-chips" aria-label="Filtrer par passion"><button type="button" aria-pressed={filter==='all'} onClick={()=>setFilter('all')}>Tout</button>{ACTIVE_PASSION_IDS.map(id=><button type="button" key={id} aria-pressed={filter===id} onClick={()=>setFilter(id)}>{getPassion(id).label}</button>)}</div>}
  <button className={`gallery-text-button${passion==='piano'?' living-piano-legacy-toggle':''}`} type="button" onClick={()=>setSessions(v=>!v)}>{passion==='piano'?(sessions?'Voir mon répertoire':'Voir toutes mes séances'):sessions?'Voir les créations uniquement':'Inclure les séances sans création jointe'}</button>
- {passion==='piano'&&!sessions?<PianoFolios items={shown} onOpen={setOpened} onStart={start}/>:<div className={passion&&passion!=='dessin'?'gallery-session-list':'gallery-creation-grid'}>{shown.map(item=>passion&&passion!=='dessin'?<SessionRow item={item} key={item.id} open={setOpened}/>:<button type="button" className="gallery-creation-card" key={item.id} onClick={()=>setOpened(item)}><CreationPreview item={item}/><strong>{creationTitle(item)}</strong><small>{getPassion(item.passion).label} · {formatDay(item.createdAt)}</small>{appearance.exposed?.includes(item.id)&&<Pin className="gallery-card-pin" size={15} aria-label="Exposée"/>}</button>)}</div>}
+ {passion==='logique'?<LogicRoom items={shown} onOpen={setOpened} onStart={start}/>:passion==='piano'&&!sessions?<PianoFolios items={shown} onOpen={setOpened} onStart={start}/>:<div className={passion&&passion!=='dessin'?'gallery-session-list':'gallery-creation-grid'}>{shown.map(item=>passion&&passion!=='dessin'?<SessionRow item={item} key={item.id} open={setOpened}/>:<button type="button" className="gallery-creation-card" key={item.id} onClick={()=>setOpened(item)}><CreationPreview item={item}/><strong>{creationTitle(item)}</strong><small>{getPassion(item.passion).label} · {formatDay(item.createdAt)}</small>{appearance.exposed?.includes(item.id)&&<Pin className="gallery-card-pin" size={15} aria-label="Exposée"/>}</button>)}</div>}
  {!gallery.loading&&!gallery.error&&!shown.length&&(query||filter!=='all'?<p role="status">Aucun résultat parmi les entrées chargées.{gallery.cursor?' Charge la suite pour poursuivre la recherche.':''}</p>:<GalleryEmpty start={start}/>)}
  {!sessions&&without.length>0&&<p className="gallery-subtle">{without.length} séance{without.length>1?'s':''} sans création jointe {without.length>1?'conservées':'conservée'} dans ton historique.</p>}
 
  {gallery.cursor&&<Button variant="secondary" disabled={gallery.loading} onClick={()=>void gallery.load(gallery.cursor!)}>{gallery.loading?'Chargement…':'Charger les créations précédentes'}</Button>}
+ </>}
  </>}
  </>}
  <button className="gallery-text-button" type="button" onClick={()=>push({name:'learningNotebooks',...(passion&&LEARNING_PASSIONS.includes(passion as LearningPassion)?{passion:passion as LearningPassion}:{})})}><BookOpen size={18}/>Mes carnets d’apprentissage</button>

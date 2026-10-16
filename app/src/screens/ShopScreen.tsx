@@ -17,6 +17,7 @@ import { formatNumber } from '../lib/format.ts'
 import { useAppState } from '../state/AppState.tsx'
 import { suppressAmbient } from '../lib/ambient.ts'
 import { openExternal } from '../telegram/webApp.ts'
+import './ShopScreen.css'
 
 const DAVY_PARTITION = 'https://www.musicnotes.com/sheetmusic/pirates-of-the-caribbean-dead-mans-chest/davy-jones/MN0095169'
 const ART_MASCOTS = new Set(['mascot-beret', 'mascot-pianiste', 'mascot-casque'])
@@ -160,8 +161,8 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
   const stepSkin = (direction: number) => { if (items.length) setSkinIndex(value => (value + direction + items.length) % items.length) }
   const collectionOwned = activeCollection ? SKINS.filter(item => groupOf(item) === activeCollection.id && shop.owned.includes(item.id)).length : 0
 
-  return <Screen tabs className="studio-shop skin-shop immersive-shop carnet-page carnet-shop">
-    <CarnetHeader title="Boutique" subtitle="Trouve le Minuton qui te ressemble." pose="welcome" action={<button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><Search size={18}/></button>}/>
+  return <Screen tabs className="studio-shop skin-shop immersive-shop carnet-page carnet-shop renewed-shop">
+    <CarnetHeader variant="banner" title="Boutique" subtitle="Trouve le Minuton qui te ressemble." pose="welcome" action={<button type="button" className="studio-icon-button" aria-label="Rechercher dans la boutique" aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><Search size={18}/></button>}/>
     <div className="skin-shop-tabs" aria-label="Parcourir la boutique">{([{id:'discover', label:'Minutons'}, {id:'owned',label:'Mes achats'}, {id:'favorites',label:'Favoris'}] as const).map(tab => <button type="button" key={tab.id} aria-pressed={shelf === tab.id} onClick={() => changeShelf(tab.id)}>{tab.label}{tab.id === 'owned' && ownedCount > 0 && <span>{ownedCount}</span>}{tab.id === 'favorites' && visibleFavorites.length > 0 && <span>{visibleFavorites.length}</span>}</button>)}</div>
     {searchOpen && <label className="skin-shop-search"><Search size={18}/><span className="sr-only">Rechercher une tenue</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Rechercher une tenue…" type="search"/></label>}
     <section className="shop-current-outfit" aria-label="Minuton porté actuellement"><MinutonFigure size={52} outfit={shop.equipped.mascot} animated={false}/><div><small>Porté actuellement</small><strong>{getShopItem(shop.equipped.mascot ?? '')?.title ?? 'Minuton classique'}</strong></div>{shop.equipped.mascot ? <button type="button" disabled={busy || loading} className="skin-reset" aria-label="Revenir à Minuton classique" onClick={() => void equip(null)}><RotateCcw size={17}/></button> : <Check size={18} aria-hidden="true"/>}</section>
@@ -179,7 +180,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
         </div>
       </div>)}</div>
     </details>}
-    <Dialog open={codeOpen} onOpenChange={open => { if (!busy) { setCodeOpen(open); setCodeError(undefined) } }}><DialogContent>
+    <Dialog open={codeOpen} onOpenChange={open => { if (!busy) { setCodeOpen(open); setCodeError(undefined) } }}><DialogContent className="renewed-shop-dialog">
       <DialogHeader><DialogTitle>Un cadeau pour ton Minuton</DialogTitle><DialogDescription>Saisis ton code pour recevoir une tenue offerte. Tu la retrouveras dans Mes achats.</DialogDescription></DialogHeader>
       <form className="flex flex-col gap-4" onSubmit={event => { event.preventDefault(); void redeemCode() }}>
         <label htmlFor="skin-code" className="font-bold">Ton code</label>
@@ -229,7 +230,7 @@ export function ShopScreen({ library = false }: { category?: ShopCategory; libra
       {!items.length && <div className="skin-empty"><Heart size={27}/><p>{query ? 'Aucune tenue ne correspond à ta recherche.' : shelf === 'favorites' ? 'Touche le cœur d’une tenue pour la retrouver ici.' : shelf === 'owned' ? 'Tes prochaines tenues débloquées apparaîtront ici.' : 'Aucune tenue avec ces filtres.'}</p><button type="button" onClick={() => { changeShelf('discover'); setSearchOpen(false) }}>Explorer les tenues<ChevronRight size={15}/></button></div>}
     </section>}
     <p className="skin-shop-footnote">Tes achats ne diminuent pas tes niveaux ni tes badges.{shop.bonus > 0 && <span>Crédit de test inclus dans le solde.</span>}</p>
-    <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog immersive-preview" data-world={selected ? (groupOf(selected) === 'adventure' ? 'olympus' : groupOf(selected)) : undefined}>
+    <Dialog open={Boolean(selected)} onOpenChange={open => { if (!open && !busy) setSelected(undefined) }}><DialogContent className="skin-preview-dialog immersive-preview renewed-shop-dialog" data-world={selected ? (groupOf(selected) === 'adventure' ? 'olympus' : groupOf(selected)) : undefined}>
       {selected && <><DialogHeader><DialogTitle>{selected.title}</DialogTitle><DialogDescription>{selected.redemptionOnly ? 'Édition privée · offerte par code' : selected.available ? `Collection ${COLLECTIONS.find(value => value.id === groupOf(selected))?.title}` : 'Ancienne collection · cette tenue reste à toi'}</DialogDescription></DialogHeader><ShopPreview item={selected} detail/><p className="skin-preview-description">{selected.description}</p><button type="button" className="skin-preview-favorite" aria-pressed={favorites.includes(selected.id)} onClick={() => toggleFavorite(selected.id)}><Heart size={17} fill={favorites.includes(selected.id) ? 'currentColor' : 'none'}/>{favorites.includes(selected.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button>
         {error && <p role="alert">{error}</p>}
         {owned ? <Button disabled={busy || loading || active} onClick={() => void equip(selected)}>{busy ? 'Activation…' : active ? 'Porté actuellement' : 'Porter cette tenue'}</Button> : <><div className="skin-purchase-info"><span>Achat permanent</span><Price value={selected.price}/></div><p className="skin-purchase-balance">{shop.balance >= selected.price ? <>Solde après l’achat<Price value={shop.balance - selected.price} size={18}/></> : <>Il te manque<Price value={selected.price - shop.balance} size={18}/></>}</p><Button disabled={busy || loading || shop.balance < selected.price} onClick={() => void purchase()} aria-label={`Confirmer l’achat de ${selected.title}`}>{busy ? 'Achat en cours…' : <>Acheter · <Price value={selected.price}/></>}</Button><p className="skin-purchase-caption">Retrouve cette tenue dans Mes achats après l’achat.</p></>}

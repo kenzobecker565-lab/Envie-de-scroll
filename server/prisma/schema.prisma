@@ -74,9 +74,13 @@ model Proposal {
   intro      String
   /// Tirage de l'appli (mots, film…), en JSON
   extra      String?
-  /// open | replaced (« Une autre idée ») | abandoned | completed
+  /// open | saved (à reprendre) | replaced | abandoned (historique) | completed
   status     String   @default("open")
   createdAt  DateTime @default(now())
+  /// Chronomètre créatif, calculé côté serveur (les pauses ne rapportent rien).
+  timerTracked Boolean @default(false)
+  activeSeconds Int @default(0)
+  activeSince DateTime?
 
   completion Completion?
 

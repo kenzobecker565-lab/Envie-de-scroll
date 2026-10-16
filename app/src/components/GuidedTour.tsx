@@ -53,7 +53,7 @@ export function GuidedTour() {
 
   // Emmène sur la page de l'étape.
   useEffect(() => {
-    if (route.name !== current.page) reset(stackFor(current.page))
+    if (route.name !== stackFor(current.page).at(-1)?.name) reset(stackFor(current.page))
   }, [current.page, route.name, reset])
 
   useLayoutEffect(() => {
@@ -63,7 +63,7 @@ export function GuidedTour() {
     const began = performance.now()
     setReady(false)
     setRects([])
-    if (route.name !== current.page) return
+    if (route.name !== stackFor(current.page).at(-1)?.name) return
     const selector = (target: string) => `[data-tour-target="${target}"]`
     const measure = () => {
       if (!alive) return
@@ -142,7 +142,7 @@ export function GuidedTour() {
           <span className="tour-bar" aria-hidden="true"><i style={{ width: `${(step + 1) / TOUR_STEPS.length * 100}%` }}/></span>
           <DialogPrimitive.Title>{current.title}</DialogPrimitive.Title>
           <DialogPrimitive.Description>{current.text}</DialogPrimitive.Description>
-          <div className="tour-controls"><button type="button" onClick={() => finish()}>Passer</button><button type="button" className={last ? 'tour-start' : 'tour-next'} onClick={() => { if (last) finish(true); else { haptics.selection(); setStep(value => value + 1) } }}>{last ? 'Commencer ma première activité' : 'Suivant'}{!last && <ChevronRight size={19}/>}</button></div>
+          <div className="tour-controls"><button type="button" onClick={() => finish()}>Passer</button><button type="button" className={last ? 'tour-start' : 'tour-next'} onClick={() => { if (last) finish(true); else { haptics.selection(); setStep(value => value + 1) } }}>{last ? 'Choisir mon temps' : 'Suivant'}{!last && <ChevronRight size={19}/>}</button></div>
         </div>
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>

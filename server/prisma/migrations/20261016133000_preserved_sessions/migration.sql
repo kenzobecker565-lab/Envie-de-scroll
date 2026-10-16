@@ -1,0 +1,3 @@
+ALTER TABLE "Proposal" ADD COLUMN "timerTracked" BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE "Proposal" ADD COLUMN "activeSeconds" INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE "Proposal" ADD COLUMN "activeSince" DATETIME;

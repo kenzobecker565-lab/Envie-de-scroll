@@ -66,7 +66,7 @@ import type { PrismaClient, User } from '../db.ts'
 import { type TelegramUser, InitDataError, validateInitData } from '../auth/initData.ts'
 import { signedPhotoUrl, verifyPhotoSignature, type PhotoService } from '../photos/photos.ts'
 import { completeProposal, listCompletions, toCompletionDTO } from '../services/completions.ts'
-import { createProposal, findOpenProposal, toProposalDTO } from '../services/proposals.ts'
+import { createProposal, findOpenProposal, toProposalDTO, listSavedProposals, updateSession } from '../services/proposals.ts'
 import { cleanEventData, rateCompletion, recordEvent, saveFeedback, type Notify } from '../services/feedback.ts'
 import { assignProject, createProject, deleteProject, listProjects, passionDetail, projectDetail, updateProject } from '../services/projects.ts'
 import { deleteUserData, getStats, toUserDTO, upsertFromTelegram } from '../services/users.ts'
@@ -389,6 +389,17 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
       res.status(201).json(body)
     }),
   )
+
+  api.get('/proposals/saved',asyncRoute(async(req,res)=>{
+    const user=await currentUser(req,res)
+    res.json({items:(await listSavedProposals(prisma,user)).map(toProposalDTO),serverTime:now().toISOString()})
+  }))
+  api.post('/proposals/:id/session',asyncRoute(async(req,res)=>{
+    const action=req.body?.action
+    if(action!=='pause'&&action!=='resume')throw badRequest('Action de séance invalide.')
+    const user=await currentUser(req,res),proposal=await updateSession(prisma,user,String(req.params.id),action,now())
+    res.json({proposal:toProposalDTO(proposal),serverTime:now().toISOString()})
+  }))
 
   const upload = multer({
     storage: multer.memoryStorage(),

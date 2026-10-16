@@ -47,7 +47,7 @@ export function toProjectDTO(project: ProjectRow, photoUrl: PhotoUrl): ProjectDT
   }
 }
 
-const withCompletions = { completions: { orderBy: { createdAt: 'asc' as const }, include: { proposal: { select: { createdAt: true } } } } }
+const withCompletions = { completions: { orderBy: { createdAt: 'asc' as const }, include: { proposal: { select: { createdAt: true, timerTracked:true, activeSeconds:true } } } } }
 
 export async function listProjects(prisma: PrismaClient, user: User, photoUrl: PhotoUrl): Promise<ProjectDTO[]> {
   const projects = await prisma.project.findMany({ where: { userId: user.id }, orderBy: { createdAt: 'desc' }, include: withCompletions })

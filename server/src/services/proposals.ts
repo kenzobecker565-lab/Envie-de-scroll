@@ -1,4 +1,5 @@
 import {
+  isFixedActivityId,
   activePassions,
   activitiesFor,
   canPlayChallenge,
@@ -51,6 +52,9 @@ export function toProposalDTO(proposal: Proposal): ProposalDTO {
   const activity = getActivity(proposal.activityId)
   const duration = proposal.duration as Duration
   return {
+    timerTracked: proposal.timerTracked,
+    activeSeconds: proposal.activeSeconds,
+    activeSince: proposal.activeSince?.toISOString() ?? null,
     id: proposal.id,
     external: proposal.external,
     activityId: proposal.activityId,
@@ -153,14 +157,13 @@ export async function createProposal(
   }
   const extra = activity.extra ? drawExtra(activity.extra, random) : null
 
-  const [, proposal] = await prisma.$transaction([
-    prisma.proposal.updateMany({
-      where: { userId: user.id, status: 'open' },
-      data: { status: request.replacing ? 'replaced' : 'abandoned' },
-    }),
-    prisma.proposal.create({
+  const proposal = await prisma.$transaction(async tx => {
+    await preserveOpenSessions(tx, user.id, now, request.replacing)
+    return tx.proposal.create({
       data: {
         userId: user.id,
+        timerTracked: isBaseActivity(activity.id) && !isFixedActivityId(activity.id) && (request.external === true || ['dessin','ecriture'].includes(passion)),
+        activeSince: now,
         external: request.external ?? false,
         activityId: activity.id,
         passion,
@@ -170,8 +173,8 @@ export async function createProposal(
         extra: extra ? JSON.stringify(extra) : null,
         createdAt: now,
       },
-    }),
-  ])
+    })
+  })
   return proposal
 }
 
@@ -181,4 +184,25 @@ export async function findOpenProposal(prisma: PrismaClient, user: User, now = n
     where: { userId: user.id, status: 'open', createdAt: { gte: new Date(now.getTime() - OPEN_PROPOSAL_TTL_MS) } },
     orderBy: { createdAt: 'desc' },
   })
+}
+
+/** Freeze the running counter before putting a session aside. Never discard its creation. */
+export function activeSessionSeconds(proposal: {timerTracked:boolean;activeSeconds:number;activeSince:Date|null;createdAt:Date;duration:number}, now:Date):number {
+  const seconds = proposal.timerTracked ? proposal.activeSeconds + (proposal.activeSince ? Math.max(0, (now.getTime()-proposal.activeSince.getTime())/1000) : 0) : Math.max(0,(now.getTime()-proposal.createdAt.getTime())/1000)
+  return Math.min(proposal.duration*60,seconds)
+}
+async function preserveOpenSessions(db:Pick<PrismaClient,'proposal'>,userId:bigint,now:Date,replacing?:string) {
+  const open=await db.proposal.findMany({where:{userId,status:'open'}})
+  for(const proposal of open) await db.proposal.update({where:{id:proposal.id},data:{status:proposal.id===replacing?'replaced':'saved',activeSeconds:Math.floor(activeSessionSeconds(proposal,now)),activeSince:null}})
+}
+export async function listSavedProposals(prisma:PrismaClient,user:User) {
+  return prisma.proposal.findMany({where:{userId:user.id,status:{in:['open','saved']}},orderBy:[{createdAt:'desc'},{id:'desc'}]})
+}
+export async function updateSession(prisma:PrismaClient,user:User,id:string,action:'pause'|'resume',now:Date) {
+ return prisma.$transaction(async tx=>{
+  const proposal=await tx.proposal.findFirst({where:{id,userId:user.id,status:{in:['open','saved']}}})
+  if(!proposal)throw new ApiError(404,'not_found','Cette séance n’est plus disponible.')
+  if(action==='resume'&&proposal.status==='saved')await preserveOpenSessions(tx,user.id,now)
+  return tx.proposal.update({where:{id},data:{timerTracked:proposal.timerTracked||(isBaseActivity(proposal.activityId)&&!isFixedActivityId(proposal.activityId)&&(proposal.external||['dessin','ecriture'].includes(proposal.passion))),status:action==='resume'?'open':proposal.status,activeSeconds:Math.floor(activeSessionSeconds(proposal,now)),activeSince:action==='resume'?now:null}})
+ })
 }

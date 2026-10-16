@@ -46,3 +46,4 @@ html[data-scene] main.scroll-flow{padding-left:20px;padding-right:20px}
 .scroll-flow .activity-plan li p {font-size:.9rem;line-height:1.6;margin:5px 0 0;color:#655b70;overflow-wrap:anywhere}
 .scroll-flow .activity-plan .scroll-note {text-align:left;margin:8px 0 0}
 .scroll-flow .activity-plan li small {margin-left:4px}
+.session-task-reminder{background:#fffdf8;border:1px solid #e9d9f4;border-radius:18px;padding:14px 16px;font-size:14px;line-height:1.6;color:#603e7a}.session-stop-dialog{background:#fffaf1!important;border:1px solid #e8d8f1!important;border-radius:28px!important;text-align:center;color:#301746}.session-stop-dialog h2{font-size:26px;font-weight:950;color:#6329c5}.session-stop-dialog>.minuton-art{margin:auto}.session-timer{flex-wrap:wrap}.session-timer small{flex-basis:100%;font-size:12px;font-weight:600;color:#80628f;text-align:center}

@@ -105,6 +105,8 @@ export const api = {
   updatePassions: (passions: PassionId[]) => call<UserResponse>('/me/passions', { method: 'PUT', body: JSON.stringify({ passions }) }),
 
   drawingSuggestions:(duration:import('@scroll-up/shared').Duration,style:import('@scroll-up/shared').DrawingStyle,recent:string[]=[])=>call<{items:import('@scroll-up/shared').DrawingActivity[]}>('/drawing/suggestions',{method:'POST',body:JSON.stringify({duration,style,recent})}),
+  savedSessions:()=>call<{items:import('@scroll-up/shared').ProposalDTO[];serverTime:string}>('/proposals/saved'),
+  session:(id:string,action:'pause'|'resume',keepalive=false)=>call<ProposalResponse>(`/proposals/${encodeURIComponent(id)}/session`,{method:'POST',body:JSON.stringify({action}),keepalive}),
   propose: (request: CreateProposalRequest) => call<ProposalResponse>('/proposals', { method: 'POST', body: JSON.stringify(request) }),
 
   complete: ({ external, proposalId, text, exploredTitle, played, photo, projectId, workshop, sport }: { external?: boolean; proposalId: string; text?: string; exploredTitle?: string; played?: boolean; photo?: Blob; projectId?: string; sport?: import('@scroll-up/shared').SportSubmission; workshop?: import('@scroll-up/shared').WorkshopSubmission }) => {

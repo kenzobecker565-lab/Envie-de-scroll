@@ -1,4 +1,4 @@
-import { BookOpen, ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sparkles, Sprout, Star, type LucideIcon } from 'lucide-react'
+import { ArrowRight, BellOff, BellRing, Check, Footprints, Info, Mountain, Sprout, Star, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import {
@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { api, ApiError, track } from '../api/client.ts'
 import { Logo } from '../components/Brand.tsx'
-import { Mascot, MinutonFigure } from '../components/Mascot.tsx'
+import { MinutonFigure } from '../components/Mascot.tsx'
 import { PassionCard } from '../components/PassionCard.tsx'
 import { PrimaryAction } from '../components/PrimaryAction.tsx'
 import { Screen, ScreenTitle, StepProgress } from '../components/Screen.tsx'
@@ -32,22 +32,16 @@ import { haptics, requestWriteAccessIfNeeded } from '../telegram/webApp.ts'
 import { ReminderTimePicker } from '../components/ReminderTimePicker.tsx'
 import './OnboardingScreens.css'
 
-/** Bienvenue, passions, moment de scroll. */
-const ONBOARDING_STEPS = 3
+/** Deux étapes avant la première activité ; les rappels restent facultatifs. */
+const ONBOARDING_STEPS = 2
 
 /** Première impression avec le Minuton et les repères actuels. */
 export function WelcomeScreen() {
-  const { state } = useAppState(), { push } = useNavigation()
-  const name = state.me.user.firstName
-  return <Screen className="studio-onboarding onboarding-refresh">
-    <Logo height={30}/><StepProgress current={1} total={ONBOARDING_STEPS} label="Bienvenue"/>
-    <div className="onboarding-minuton"><Mascot pose="welcome" size={160}/><span>5 · 15 · 30 minutes pour toi</span></div>
-    <header><small>{name ? `Bienvenue, ${name}` : 'Bienvenue'}</small><h1>Ton envie de scroller peut créer quelque chose.</h1><p>Avec « J’ai envie de scroll », choisis ton temps et une passion. Minuton t’aide à te lancer.</p></header>
-    <div className="onboarding-landmarks">
-      <div><Sparkles/><span><strong>J’ai envie de scroll</strong><small>Une activité à faire maintenant.</small></span></div>
-      <div><BookOpen/><span><strong>Apprendre</strong><small>Des leçons pour comprendre et essayer.</small></span></div>
-      <div><MinutonFigure pose="draw" size={40} animated={false}/><span><strong>Chez Minuton</strong><small>Tes créations réunies dans ton atelier.</small></span></div>
-    </div>
+  const { push } = useNavigation()
+  return <Screen className="studio-onboarding onboarding-refresh onboarding-welcome">
+    <div className="onboarding-welcome-cover"><Logo height={30}/><div><h1>Une envie.<br/>Une création.</h1><MinutonFigure pose="cheer" size={160} animated={false}/></div><p>Fais quelque chose de ton envie de scroller.</p></div>
+    <StepProgress current={1} total={ONBOARDING_STEPS} label="Bienvenue"/>
+    <section className="onboarding-essentials"><h2>Quelques minutes pour toi.</h2><p>Choisis ton temps, découvre trois idées et lance-toi, dans l’app ou ailleurs.</p><div><span>5 min</span><span>15 min</span><span>30 min</span></div><small>Tes créations trouveront leur place dans ta galerie.</small></section>
     <Button className="w-full" onClick={() => push({name:'passions',mode:'onboarding'})}>Choisir mes passions<ArrowRight/></Button>
   </Screen>
 }
@@ -55,7 +49,7 @@ export function WelcomeScreen() {
 /** Choix des passions, autant qu'on veut (onboarding, ou modification depuis les réglages). */
 export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
   const { state, dispatch } = useAppState()
-  const { push, back, replace } = useNavigation()
+  const { back, replace, reset } = useNavigation()
   const [selected, setSelected] = useState<PassionId[]>(state.me.user.passions)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string>()
@@ -74,10 +68,12 @@ export function PassionsScreen({ mode }: { mode: 'onboarding' | 'edit' }) {
       const { user } = await api.updatePassions(selected)
       dispatch({ type: 'user', user })
       haptics.success()
-      // Une passion qui demande le niveau (Piano) : la page « Ton niveau » d'abord.
+      // Le niveau reste accessible lors de la modification des passions.
       const missing = missingSkills(user.passions, user.skills)[0]
       if (mode === 'onboarding') {
-        push(missing ? { name: 'skill', passion: missing, mode: 'onboarding' } : { name: 'moment' })
+        const settings=await api.updateSettings({remindersEnabled:false})
+        dispatch({type:'user',user:settings.user})
+        reset([{name:'home'}])
       } else if (missing) {
         replace({ name: 'skill', passion: missing, mode: 'edit' })
       } else {
@@ -278,7 +274,7 @@ export function MomentScreen() {
   }
 
   return <Screen className="studio-onboarding onboarding-refresh">
-    <ScreenTitle eyebrow={<StepProgress current={3} total={ONBOARDING_STEPS} label="Ton moment" />} subtitle="Choisis l’heure de ton petit rappel.">
+    <ScreenTitle subtitle="Choisis l’heure de ton petit rappel.">
       Ton moment pour créer
     </ScreenTitle>
     <ReminderTimePicker value={reminderTime} onChange={setReminderTime} disabled={saving !== null}/>

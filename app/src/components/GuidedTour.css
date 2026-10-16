@@ -14,7 +14,7 @@
 .tour-controls>button:first-child {padding:7px 3px;color:#635085;background:transparent}
 .tour-controls .tour-next,.tour-controls .tour-start {display:flex;align-items:center;justify-content:center;gap:4px;padding:9px 17px;line-height:1.15;text-align:center}
 .tour-next {background:linear-gradient(120deg,#A551FF,#7B30EA);color:#FFF;box-shadow:inset 0 1px 0 #FFF5}
-.tour-start {background:linear-gradient(120deg,#A0FFE0,#6FF0CD);color:#142440;flex:1;max-width:236px}
+.tour-start {background:linear-gradient(120deg,#8D43F4,#6124DC);color:#FFF;flex:1;max-width:236px}
 .tour-controls button:focus-visible {outline:3px solid #9F63EC;outline-offset:3px}
 .tour-pointer {position:absolute;width:22px;height:22px;background:#FFF9F0;transform:translateX(-50%) rotate(45deg);z-index:-1}
 .tour-card[data-side='below'] .tour-pointer {top:-10px}

@@ -21,18 +21,9 @@ export interface TourStep {
 
 /** Le tour complet de l'app, de l'envie de scroller jusqu'au bot Telegram. « Passer » reste possible à chaque étape. */
 export const TOUR_STEPS: readonly TourStep[] = [
-  { page: 'home', targets: [], chapter: 'Le principe', pose: 'welcome', title: 'Bienvenue sur Scroll-up', text: 'Ici, l’envie de scroller devient 5, 15 ou 30 minutes de création. Voici l’app en une minute ; tu peux passer quand tu veux.' },
-  { page: 'home', targets: ['swipe'], chapter: 'Le principe', pose: 'idea', radius: 30, title: 'Ton bouton anti-scroll', text: 'Touche « Je me lance », règle ton temps et choisis parmi trois idées adaptées à tes passions.' },
-  { page: 'home', targets: [], chapter: 'Créer', pose: 'draw', title: 'Pendant une activité', text: 'La consigne reste sous tes yeux. Tu bloques ? « Un coup de pouce » donne des pistes, « Une autre idée » en tire une nouvelle.' },
-  { page: 'home', targets: [], chapter: 'Créer', pose: 'write', title: 'Garde une trace', text: 'Dessine au doigt ou photographie ton dessin, écris dans ton carnet, joue au clavier, suis le chrono du sport ou mène l’enquête. Tout rejoint ta galerie.' },
-  { page: 'home', targets: ['wallet'], chapter: 'Créer', pose: 'cheer', title: '1 minute = 1 minuton', text: 'Chaque minute de création rapporte un minuton. Énigmes et français : la durée entière si tout est juste, sinon tes minutes de recherche.' },
-  { page: 'gallery', targets: ['gallery'], dock: true, dim: 0.32, chapter: 'Ton espace', pose: 'cheer', title: 'Ma galerie', text: 'Retrouve tes dessins, feuillette tes textes et conserve tes séances. Ton exposition accueille tes créations préférées dans un décor personnel.' },
-  { page: 'passionHub', targets: ['passions-tab'], dim: 0.32, chapter: 'Explorer', pose: 'think', title: 'L’espace de chaque passion', text: 'Explorer regroupe tes passions : choisis un univers, puis Pratiquer pour trois idées ou Apprendre pour une leçon guidée.' },
-  { page: 'learn', targets: ['passions-tab'], dim: 0.32, chapter: 'Explorer', pose: 'write', title: 'Apprendre à ton rythme', text: 'Dans chaque passion, Apprendre réunit les leçons. Suis l’ordre conseillé ou choisis celle qui t’intéresse ; tes essais restent dans tes carnets.' },
-  { page: 'shop', targets: ['shop', 'wallet'], dim: 0.32, chapter: 'Explorer', pose: 'cheer', title: 'La boutique de Minuton', text: 'Voici la boutique : dépense tes minutons en tenues pour Minuton. Acheter ne fait jamais baisser tes niveaux ni tes badges.' },
-  { page: 'profile', targets: ['profile', 'settings'], dim: 0.32, chapter: 'Ton espace', pose: 'welcome', title: 'Ton profil', text: 'Ton avatar Minuton ouvre le profil : niveaux, badges et personnalisations. La roue dentée donne accès à tes réglages.' },
-  { page: 'home', targets: [], chapter: 'Ton espace', pose: 'wait', title: 'Scroll-up vit dans Telegram', text: 'Le bot t’envoie un petit rappel au moment où tu scrolles d’habitude, jamais les jours où tu as créé. Un dessin sans photo ? Envoie-la-lui.' },
-  { page: 'home', targets: [], chapter: 'Ton espace', pose: 'cheer', title: 'Ici, rien ne se perd', text: 'Pas de série à tenir, pas de reproche : chaque création compte. Ce tutoriel t’attend dans tes réglages si tu veux le revoir.' },
+ {page:'home',targets:[],chapter:'Le principe',pose:'welcome',title:'Une envie. Une création.',text:'Quelques minutes suffisent pour dessiner, écrire, bouger ou découvrir quelque chose. Choisis ce qui te fait envie.'},
+ {page:'home',targets:['swipe'],chapter:'À toi de choisir',pose:'idea',radius:30,title:'Ton temps, trois idées',text:'Touche « Je me lance », choisis 5, 15 ou 30 minutes, puis une des trois idées. Tu peux pratiquer dans l’app ou ailleurs.'},
+ {page:'home',targets:['atelier'],chapter:'Ton espace',pose:'draw',title:'Tes créations restent avec toi',text:'Les activités terminées rejoignent ta galerie. Une séance inachevée ? Garde-la pour plus tard et retrouve-la sur l’accueil.'},
 ]
 
 const key = (userId: string) => `scroll-up:tutorial:v1:${userId}`

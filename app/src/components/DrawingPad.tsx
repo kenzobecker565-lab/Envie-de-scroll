@@ -41,17 +41,23 @@ export interface DrawingPadHandle {
   toBlob(): Promise<Blob | null>
 }
 
-export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: boolean) => void; className?: string }>(function DrawingPad({ onInkChange, className }, ref) {
+function readDrawing(key?:string):Stroke[]{
+ try{const value=key?JSON.parse(localStorage.getItem(key)??'[]'):[];return Array.isArray(value)&&value.every(s=>typeof s.color==='string'&&Number.isFinite(s.width)&&s.width>0&&Array.isArray(s.points)&&s.points.every((p:{x:number;y:number})=>Number.isFinite(p.x)&&Number.isFinite(p.y)))?value:[]}catch{return []}
+}
+export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: boolean) => void; className?: string; draftKey?:string }>(function DrawingPad({ onInkChange, className, draftKey }, ref) {
   const palette = useEquipped('palette')
   const colors = palette ? palette.colors.map((value, index) => ({ name: `${palette.title} ${index + 1}`, value })) : COLORS
   const canvas = useRef<HTMLCanvasElement>(null)
-  const strokes = useRef<Stroke[]>([])
+  const [restoredStrokes]=useState(()=>readDrawing(draftKey))
+  const strokes = useRef<Stroke[]>(restoredStrokes)
   const current = useRef<Stroke | null>(null)
   const [color, setColor] = useState<string>(COLORS[0].value)
   useEffect(() => { setColor(colors[0].value) }, [palette?.id])
   const [width, setWidth] = useState<number>(WIDTHS[1].value)
   const [erasing, setErasing] = useState(false)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(strokes.current.length)
+  const [saveError,setSaveError]=useState(false)
+  const persist=()=>{if(!draftKey)return;try{localStorage.setItem(draftKey,JSON.stringify(strokes.current));setSaveError(false)}catch{setSaveError(true)}}
 
   const context = () => canvas.current?.getContext('2d') ?? null
 
@@ -65,6 +71,11 @@ export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: 
   }, [])
 
   useEffect(() => redraw(), [redraw])
+  useEffect(()=>{
+    const flush=()=>{if(!draftKey)return;try{localStorage.setItem(draftKey,JSON.stringify(current.current?[...strokes.current,current.current]:strokes.current))}catch{/* The visible save warning remains authoritative. */}}
+    window.addEventListener('pagehide',flush)
+    return()=>window.removeEventListener('pagehide',flush)
+  },[draftKey])
   useEffect(() => onInkChange?.(count > 0), [count, onInkChange])
 
   useImperativeHandle(ref, () => ({
@@ -109,14 +120,14 @@ export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: 
     if (!current.current) return
     strokes.current.push(current.current)
     current.current = null
-    setCount(strokes.current.length)
+    setCount(strokes.current.length);persist();redraw()
   }
 
   const undo = () => {
     if (!strokes.current.length) return
     haptics.selection()
     strokes.current.pop()
-    setCount(strokes.current.length)
+    setCount(strokes.current.length);persist()
     redraw()
   }
 
@@ -124,7 +135,7 @@ export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: 
     if (!strokes.current.length) return
     haptics.impact('medium')
     strokes.current = []
-    setCount(0)
+    setCount(0);persist()
     redraw()
   }
 
@@ -152,6 +163,7 @@ export const DrawingPad = forwardRef<DrawingPadHandle, { onInkChange?: (hasInk: 
         />
       </motion.div>
 
+      {draftKey&&<small role="status">{saveError?'Le dessin n’a pas pu être sauvegardé sur cet appareil. Garde cette page ouverte et termine pour le conserver.':'Dessin sauvegardé sur cet appareil.'}</small>}
       {/* Couleurs et gomme. */}
       <div className="flex items-center justify-between gap-2" role="toolbar" aria-label="Outils de dessin">
         <div className="flex flex-wrap items-center gap-1.5">

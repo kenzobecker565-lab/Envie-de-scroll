@@ -123,6 +123,7 @@ function SkipProof({
 /* ---------------------------------- Dessin --------------------------------- */
 
 function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit, footer }: ProofProps & { clockOffset: number; pad: boolean }) {
+  const {state}=useAppState()
   const inputId = useId()
   const input = useRef<HTMLInputElement>(null)
   const [photo, setPhoto] = useState<Blob>()
@@ -154,7 +155,7 @@ function PhotoProof({ proposal, clockOffset, pad: startWithPad, saving, onSubmit
       <div className="flow-proof-mascot"><Mascot pose={proposal.passion === 'dessin' ? 'draw' : proposal.passion === 'ecriture' ? 'write' : proposal.passion === 'piano' ? 'piano' : 'idea'} size={72}/></div>
         {/* Titre court : la consigne est juste au-dessus, la feuille garde la place. */}
         <h1 className="mb-4 font-display text-26 font-extrabold tracking-tight text-ink">Dessine ici, au doigt</h1>
-        <DrawingPad ref={drawing} onInkChange={setHasInk} />
+        <DrawingPad key={proposal.id} draftKey={`scroll-up:dessin:${state.me.user.id}:${proposal.id}`} ref={drawing} onInkChange={setHasInk} />
         <button type="button" onClick={() => setPad(false)} className="mt-4 inline-flex items-center gap-2 self-center text-14 font-bold text-ink-soft underline decoration-2 underline-offset-4">
           <Camera size={16} aria-hidden="true" />
           Plutôt une photo d’un dessin sur papier&nbsp;?

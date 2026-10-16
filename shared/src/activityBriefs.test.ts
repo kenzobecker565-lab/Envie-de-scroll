@@ -10,13 +10,13 @@ describe('les repères des activités proposées',()=>{
    const activities=activitiesFor(passion,duration)
    expect(activities).toHaveLength(5)
    for(const activity of activities){
-    const original=structuredClone(activity),brief=activityBrief(activity)
+    const original=JSON.stringify(activity),brief=activityBrief(activity)
     expect(brief,activity.id).toBeDefined()
     expect(brief!.title.length).toBeGreaterThan(3)
     expect(brief!.outcome.length).toBeGreaterThan(10)
     expect(brief!.materials.length).toBeGreaterThan(10)
     expect(brief!.steps).toHaveLength(3)
-    expect(activity).toEqual(original)
+    expect(JSON.stringify(activity)).toBe(original)
     titles.add(brief!.title)
    }
   }

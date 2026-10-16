@@ -70,6 +70,9 @@ export interface StatsDTO {
 }
 
 export interface ProposalDTO {
+  timerTracked?: boolean
+  activeSeconds?: number
+  activeSince?: string | null
   external?: boolean
   id: string
   activityId: string

@@ -95,7 +95,7 @@ export async function getStats(prisma: PrismaClient, user: User, now = new Date(
   const month = `${localMonth(now, user.timezone)}-`
   const completions = await prisma.completion.findMany({
     where: { userId: user.id },
-    select: { passion: true, activityId: true, coins: true, text: true, photoRef: true, exploredTitle: true, localDate: true, duration: true, createdAt: true, proposal: { select: { createdAt: true } } },
+    select: { passion: true, activityId: true, coins: true, text: true, photoRef: true, exploredTitle: true, localDate: true, duration: true, createdAt: true, proposal: { select: { createdAt: true, timerTracked:true, activeSeconds:true } } },
   })
   const rows = completions.map((row) => ({ ...row, minutes: sessionMinutes(row) }))
   const thisMonth = rows.filter((row) => row.localDate.startsWith(month))

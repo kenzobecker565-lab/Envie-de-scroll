@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowUpRight, Check, Clock3, LoaderCircle, Pause, Play, Shuffle } from 'lucide-react'
-import { activityBrief, type Activity, DURATIONS, SPORT_EXERCISES, studioConfig, sportProgram, getActivity, getPassion, guideFor, keyboardMelody, scrollSuggestions, type Duration } from '@scroll-up/shared'
+import { activityBrief, type Activity, DURATIONS, SPORT_EXERCISES, studioConfig, sportProgram, getActivity, getPassion, guideFor, keyboardMelody, scrollSuggestions } from '@scroll-up/shared'
 import { StudioTaskPlayer } from './StudioSession.tsx'
 import { SportInstructions } from '../components/SportMovement.tsx'
 import { api, track } from '../api/client.ts'
@@ -11,6 +11,8 @@ import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { DrawingPad, type DrawingPadHandle } from '../components/DrawingPad.tsx'
 import { Button } from '../components/ui/button.tsx'
 import { Screen } from '../components/Screen.tsx'
+import {useCreativeClock} from '../lib/useCreativeClock.ts'
+import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '../components/ui/dialog.tsx'
 import { prepareImage } from '../lib/image.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -66,30 +68,30 @@ export function ActivityBriefScreen() {
  return <FlowShell step={3} title={getPassion(activity.passion).label} subtitle={`${activity.duration} minutes · À toi de jouer`}>
   <PassionArtwork passion={activity.passion} className="scroll-brief-art"/><h2 className="scroll-instruction">{brief?.title??activity.text}</h2>{brief&&<p className="scroll-outcome">{brief.outcome}</p>}<p className="scroll-materials">{brief?.materials??MATERIALS[activity.passion]}</p><p className="scroll-original-instruction">{activity.text}</p><ActivityPlan activity={activity} collapsible label="Comment te lancer"/>
   <fieldset className="scroll-support" disabled={busy}><legend>Où veux-tu pratiquer ?</legend><div><button type="button" aria-pressed={!external} onClick={()=>setExternal(false)}>Dans l’app</button><button type="button" aria-pressed={external} onClick={()=>setExternal(true)}>{support}</button></div></fieldset>
-  <p className="scroll-note">Tu pourras valider avec ou sans création jointe.</p>{error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={busy} onClick={()=>void start()}>{busy?<LoaderCircle className="animate-spin"/>:<ArrowUpRight/>}{busy?'On ouvre ton activité…':'Commencer mon activité'}</Button><button type="button" className="scroll-text-button" disabled={busy} onClick={back}>Choisir une autre idée</button>
+  <p className="scroll-note">Tu pourras valider avec ou sans création jointe.</p>{state.me.openProposal&&<p className="session-task-reminder">Ta séance précédente sera gardée dans « Mes séances à reprendre » sur l’accueil.</p>}{error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={busy} onClick={()=>void start()}>{busy?<LoaderCircle className="animate-spin"/>:<ArrowUpRight/>}{busy?'On ouvre ton activité…':'Commencer mon activité'}</Button><button type="button" className="scroll-text-button" disabled={busy} onClick={back}>Choisir une autre idée</button>
  </FlowShell>
-}
-export function SessionTimer({createdAt,duration,clockOffset}:{createdAt:string;duration:Duration;clockOffset:number}) {
- const [now,setNow]=useState(Date.now()),[paused,setPaused]=useState(false),[pauseTime,setPauseTime]=useState(0),pauseStart=useRef(0)
- useEffect(()=>{if(paused)return;const timer=setInterval(()=>setNow(Date.now()),1000);return()=>clearInterval(timer)},[paused])
- const seconds=Math.max(0,duration*60-Math.floor((now+clockOffset-Date.parse(createdAt)-pauseTime)/1000))
- return <div className="session-timer"><Clock3 size={23}/><output aria-label="Temps restant">{Math.floor(seconds/60)}:{String(seconds%60).padStart(2,'0')}</output><button type="button" aria-label={paused?'Reprendre le chronomètre':'Mettre le chronomètre en pause'} onClick={()=>{if(paused){const at=Date.now();setPauseTime(v=>v+at-pauseStart.current);setNow(at)}else pauseStart.current=Date.now();setPaused(v=>!v)}}>{paused?<Play size={22}/>:<Pause size={22}/>}</button>{seconds===0&&<small>Tu peux prendre ton temps.</small>}</div>
 }
 export function CreativeSessionScreen() {
  const {state,dispatch}=useAppState(),{reset}=useNavigation(),proposal=state.flow.proposal
  const [external,setExternal]=useState(Boolean(state.flow.external??proposal?.external)),[hasInk,setHasInk]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(''),[photo,setPhoto]=useState<Blob>(),[preview,setPreview]=useState(''),[preparing,setPreparing]=useState(false)
+ const clock=useCreativeClock(proposal,state.flow.clockOffset,external)
+ const [stopping,setStopping]=useState(false),[draftError,setDraftError]=useState(false)
+ const inkKey=`scroll-up:dessin:${state.me.user.id}:${proposal?.id}`
  const drawing=useRef<DrawingPadHandle>(null),lock=useRef(false)
  const draftKey=`scroll-up:brouillon:${proposal?.id}`
  const [text,setText]=useState(()=>{try{return localStorage.getItem(draftKey)??''}catch{return ''}})
- useEffect(()=>{try{localStorage.setItem(draftKey,text)}catch{/* A full device must not prevent completing. */}},[text,draftKey])
+ useEffect(()=>{try{localStorage.setItem(draftKey,text);setDraftError(false)}catch{setDraftError(true)}},[text,draftKey])
  useEffect(()=>()=>{if(preview)URL.revokeObjectURL(preview)},[preview])
  const finish=async()=>{
-  if(!proposal||lock.current)return;lock.current=true;setSaving(true);setError('')
+  if(!proposal||lock.current||clock.busy)return
+  if(clock.elapsed<60&&!text.trim()&&!photo&&!(hasInk&&!external)){setStopping(true);await clock.pause();return}
+  lock.current=true;setSaving(true);setError('')
   try{
    const image=!external&&proposal.passion==='dessin'&&hasInk?await drawing.current?.toBlob():photo
    const response=await api.complete({proposalId:proposal.id,external:true,...(image?{photo:image}:{}),...(text.trim()?proposal.passion==='ecriture'?{text}:{exploredTitle:text}:{} )})
+   clock.markFinished()
    dispatch({type:'stats',stats:response.stats});dispatch({type:'openProposal',proposal:null});dispatch({type:'done',done:{response,previousStats:state.me.stats,photoPending:response.completion.photoPending}});dispatch({type:'newFlow'})
-   try{localStorage.removeItem(draftKey)}catch{/* no-op */}reset([{name:'home'},{name:'done'}])
+   try{localStorage.removeItem(draftKey);localStorage.removeItem(inkKey)}catch{/* no-op */}reset([{name:'home'},{name:'done'}])
   }catch(e){setError((e as Error).message);setSaving(false);lock.current=false}
  }
  if(!proposal)return <Screen><p>Cette séance n’est plus ouverte.</p><Button onClick={()=>reset([{name:'home'}])}>Retour à l’accueil</Button></Screen>
@@ -99,16 +101,19 @@ export function CreativeSessionScreen() {
  const activity=getActivity(proposal.activityId)
  const melody=keyboardMelody(proposal.activityId)
  return <FlowShell step={3} title={getPassion(proposal.passion).label} subtitle={`${proposal.duration} minutes · Ton moment de pratique`}>
-  <SessionTimer createdAt={proposal.createdAt} duration={proposal.duration} clockOffset={state.flow.clockOffset}/>
+  <div className="session-timer"><Clock3 size={23}/><output aria-label="Temps restant">{Math.floor(clock.seconds/60)}:{String(clock.seconds%60).padStart(2,'0')}</output><button type="button" disabled={clock.busy||saving} aria-label={clock.paused?'Reprendre le chronomètre':'Mettre le chronomètre en pause'} onClick={()=>void clock.toggle()}>{clock.paused?<Play size={22}/>:<Pause size={22}/>}</button>{clock.paused&&<small>En pause · les minutes ne sont pas comptées.</small>}</div>{clock.error&&<p role="alert">{clock.error}</p>}
+  {isWriting&&<p className="session-task-reminder">{activity?activityBrief(activity)?.outcome??proposal.text:proposal.text}</p>}
   <details className="session-instructions" open={external||Boolean(proposal.extra)}><summary>Revoir la consigne</summary><p>{proposal.text}</p>{proposal.extra&&<p>{proposal.extra.items.join(' · ')}</p>}{guide&&<p>{guide.tips.join(' ')}</p>}{melody&&<p>Au piano : {melody.title}</p>}</details>
   {activity&&<ActivityPlan activity={activity} collapsible/>}
-  {isDrawing&&<div hidden={external}><DrawingPad ref={drawing} onInkChange={setHasInk}/></div>}
-  {isWriting&&<label className="session-writing">{external?'Un texte ou une note à conserver (facultatif)':'Ton texte'}<textarea maxLength={6000} rows={10} value={text} disabled={saving} onChange={e=>setText(e.target.value)} placeholder="Tes premières lignes…"/><small>Brouillon gardé sur ce téléphone.</small></label>}
+  {isDrawing&&<div hidden={external}><DrawingPad key={proposal.id} draftKey={inkKey} ref={drawing} onInkChange={setHasInk}/></div>}
+  {isWriting&&<label className="session-writing">{external?'Un texte ou une note à conserver (facultatif)':'Ton texte'}<textarea maxLength={6000} rows={10} value={text} disabled={saving} onChange={e=>setText(e.target.value)} placeholder="Tes premières lignes…"/><small>{draftError?'Le brouillon n’a pas pu être sauvegardé. Garde cette page ouverte pour le conserver.':'Brouillon gardé sur ce téléphone.'}</small></label>}
   {external&&<ExternalReference activityId={proposal.activityId}/>}
   {external&&!isWriting&&<section className="session-external"><MinutonFigure pose="idea" size={85} animated={false}/><h2>À toi de jouer, à ta façon.</h2><p>Garde la consigne sous les yeux, puis reviens valider quand tu as terminé.</p>{!isDrawing&&<label>Une note à conserver (facultatif)<textarea maxLength={200} value={text} onChange={e=>setText(e.target.value)} rows={3}/></label>}</section>}
   {isDrawing&&external&&<label className="session-photo">{preview?<img src={preview} alt="Aperçu de mon dessin"/>:<span>Ajouter une photo (facultatif)</span>}<input type="file" accept="image/*" disabled={saving||preparing} onChange={e=>{void pick(e.target.files?.[0]);e.target.value=''}}/></label>}
   {(isDrawing||isWriting)&&<button type="button" className="scroll-text-button" disabled={saving} onClick={()=>{setExternal(v=>!v);dispatch({type:'flow',flow:{external:!external}})}}>{external?'Revenir à la création dans l’app':isDrawing?'Je préfère dessiner sur papier':'Je préfère écrire ailleurs'}</button>}
-  {error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={saving||preparing} onClick={()=>void finish()}>{saving?<LoaderCircle className="animate-spin"/>:<Check/>}{saving?'Enregistrement…':'J’ai terminé'}</Button><p className="scroll-note">La création jointe est facultative. L’expérience suit les minutes de pratique enregistrées.</p>
+  {error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={saving||preparing||clock.busy} onClick={()=>void finish()}>{saving?<LoaderCircle className="animate-spin"/>:<Check/>}{saving?'Enregistrement…':'J’ai terminé'}</Button><p className="scroll-note">La création jointe est facultative. L’expérience suit les minutes de pratique enregistrées.</p>
+  <button type="button" className="scroll-text-button" disabled={saving||clock.busy} onClick={async()=>{if(await clock.pause())reset([{name:'home'}])}}>Garder pour plus tard</button>
+  <Dialog open={stopping} onOpenChange={setStopping}><DialogContent className="session-stop-dialog"><DialogHeader><DialogTitle>On garde cette idée ?</DialogTitle><DialogDescription>Tu viens de commencer. Tu peux garder cette séance pour plus tard ; elle ne sera pas comptée comme une activité terminée.</DialogDescription></DialogHeader><MinutonFigure pose="idea" size={100} animated={false}/>{clock.error&&<p role="alert">{clock.error}</p>}<Button className="scroll-primary" disabled={clock.busy} onClick={async()=>{if(await clock.pause()){setStopping(false);reset([{name:'home'}])}}}>Garder pour plus tard</Button><Button variant="secondary" disabled={clock.busy} onClick={async()=>{if(await clock.resume())setStopping(false)}}>Continuer mon activité</Button></DialogContent></Dialog>
  </FlowShell>
 }
 

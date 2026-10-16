@@ -26,7 +26,7 @@ import { ApiError, badRequest } from '../http/errors.ts'
 import { localDate } from '../lib/time.ts'
 import type { IncomingPhoto, PhotoService } from '../photos/photos.ts'
 import { projectForPassion } from './projects.ts'
-import { parseExtra } from './proposals.ts'
+import { activeSessionSeconds, parseExtra } from './proposals.ts'
 
 export interface CompleteInput {
   external?: boolean
@@ -104,8 +104,10 @@ export async function completeProposal(
       : new ApiError(409, 'proof_required', passion.proof === 'photo' ? 'Ajoute la photo de ton dessin.' : 'Ajoute le texte que tu as écrit.')
   }
 
+  const activeSeconds=activeSessionSeconds(proposal,now)
+  if((external||drawing)&&!text&&!photo&&activeSeconds<60)throw new ApiError(409,'too_early','Prends au moins une minute pour cette activité, ou garde-la pour plus tard.')
   const sawSolution = (input.workshop as { sawSolution?: unknown } | undefined)?.sawSolution === true
-  const coins = external || drawing ? Math.max(0,Math.min(duration,Math.floor((now.getTime()-proposal.createdAt.getTime())/60000))) : workshop
+  const coins = external || drawing ? Math.floor(activeSeconds/60) : workshop
     ? workshopCoins(duration, { solved: !sawSolution && workshopSolved(workshop), elapsedMs: now.getTime() - proposal.createdAt.getTime() })
     : coinsFor(duration)
 
@@ -142,7 +144,7 @@ export async function completeProposal(
           createdAt: now,
         },
       }),
-      prisma.proposal.update({ where: { id: proposal.id }, data: { status: 'completed' } }),
+      prisma.proposal.update({ where: { id: proposal.id }, data: { status: 'completed', activeSeconds:Math.floor(activeSeconds), activeSince:null } }),
     ])
     return completion
   } catch (error) {

@@ -96,19 +96,19 @@ export async function completeProposal(
 
   const project = input.projectId ? await projectForPassion(prisma, user, input.projectId, proposal.passion) : null
 
+  const activeSeconds=activeSessionSeconds(proposal,now)
   const hasProof = Boolean(text || photo || melody || workshop)
-  const unlocked = now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
+  const unlocked = proposal.timerTracked ? activeSeconds*1000>=duration*60000-UNLOCK_TOLERANCE_MS : now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
   if (!external && !drawing && !hasProof && !unlocked) {
     throw passion.timeGuard
       ? new ApiError(409, 'too_early', `Encore un peu de patience\u00A0: l’activité dure ${duration} minutes.`)
       : new ApiError(409, 'proof_required', passion.proof === 'photo' ? 'Ajoute la photo de ton dessin.' : 'Ajoute le texte que tu as écrit.')
   }
 
-  const activeSeconds=activeSessionSeconds(proposal,now)
   if((external||drawing)&&!text&&!photo&&activeSeconds<60)throw new ApiError(409,'too_early','Prends au moins une minute pour cette activité, ou garde-la pour plus tard.')
   const sawSolution = (input.workshop as { sawSolution?: unknown } | undefined)?.sawSolution === true
   const coins = external || drawing ? Math.floor(activeSeconds/60) : workshop
-    ? workshopCoins(duration, { solved: !sawSolution && workshopSolved(workshop), elapsedMs: now.getTime() - proposal.createdAt.getTime() })
+    ? workshopCoins(duration, { solved: !sawSolution && workshopSolved(workshop), elapsedMs: activeSeconds*1000 })
     : coinsFor(duration)
 
   let photoRef: string | null = null

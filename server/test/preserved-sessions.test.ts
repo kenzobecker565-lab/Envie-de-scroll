@@ -1,3 +1,4 @@
+import {studioConfig} from '@scroll-up/shared'
 import {beforeEach,afterEach,it,expect} from 'vitest'
 import request from 'supertest'
 import {createApp} from '../src/http/app.ts'
@@ -43,4 +44,22 @@ it('persists independent discovery guides on the account, idempotently and witho
  expect((await request(app).get('/api/me').set(other)).body.user.completedGuides).toEqual([])
  await request(app).post('/api/me/guides/unknown').set(auth).expect(400)
  await request(app).post('/api/me/guides/gallery').expect(401)
+})
+
+it('excludes paused time from a logic search reward and XP minutes',async()=>{
+ await request(app).put('/api/me/passions').set(auth).send({passions:['logique']}).expect(200)
+ const p=(await request(app).post('/api/proposals').set(auth).send({passion:'logique',duration:5,step:'logique-5-1'}).expect(201)).body.proposal
+ clock.advanceMinutes(2);await action(p.id,'pause');clock.advanceMinutes(20)
+ const c=studioConfig(p.activityId)!
+ const r=await request(app).post('/api/completions').set(auth).send({proposalId:p.id,workshop:{version:2,passion:'logique',answers:{},contentRevision:c.revision,sawSolution:true}}).expect(201)
+ expect(r.body.coinsEarned).toBe(2);expect(r.body.stats.totalMinutes).toBe(2)
+})
+it('does not unlock a native piano session while the clock is paused',async()=>{
+ await request(app).put('/api/me/passions').set(auth).send({passions:['piano']}).expect(200)
+ const p=(await request(app).post('/api/proposals').set(auth).send({passion:'piano',duration:5,step:'piano-5-1'}).expect(201)).body.proposal
+ clock.advanceMinutes(2);await action(p.id,'pause');clock.advanceMinutes(20)
+ await request(app).post('/api/completions').set(auth).send({proposalId:p.id}).expect(409)
+ await action(p.id,'resume');clock.advanceMinutes(3)
+ const r=await request(app).post('/api/completions').set(auth).send({proposalId:p.id}).expect(201)
+ expect(r.body.stats.totalMinutes).toBe(5)
 })

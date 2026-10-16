@@ -162,7 +162,7 @@ export async function createProposal(
     return tx.proposal.create({
       data: {
         userId: user.id,
-        timerTracked: isBaseActivity(activity.id) && !isFixedActivityId(activity.id) && (request.external === true || ['dessin','ecriture'].includes(passion)),
+        timerTracked: isBaseActivity(activity.id) && !isFixedActivityId(activity.id) && (request.external === true || ['dessin','ecriture','piano','logique','francais'].includes(passion)),
         activeSince: now,
         external: request.external ?? false,
         activityId: activity.id,
@@ -203,6 +203,6 @@ export async function updateSession(prisma:PrismaClient,user:User,id:string,acti
   const proposal=await tx.proposal.findFirst({where:{id,userId:user.id,status:{in:['open','saved']}}})
   if(!proposal)throw new ApiError(404,'not_found','Cette séance n’est plus disponible.')
   if(action==='resume'&&proposal.status==='saved')await preserveOpenSessions(tx,user.id,now)
-  return tx.proposal.update({where:{id},data:{timerTracked:proposal.timerTracked||(isBaseActivity(proposal.activityId)&&!isFixedActivityId(proposal.activityId)&&(proposal.external||['dessin','ecriture'].includes(proposal.passion))),status:action==='resume'?'open':proposal.status,activeSeconds:Math.floor(activeSessionSeconds(proposal,now)),activeSince:action==='resume'?now:null}})
+  return tx.proposal.update({where:{id},data:{timerTracked:proposal.timerTracked||(isBaseActivity(proposal.activityId)&&!isFixedActivityId(proposal.activityId)&&(proposal.external||['dessin','ecriture','piano','logique','francais'].includes(proposal.passion))),status:action==='resume'?'open':proposal.status,activeSeconds:Math.floor(activeSessionSeconds(proposal,now)),activeSince:action==='resume'?now:null}})
  })
 }

@@ -6,5 +6,5 @@ export function sessionStack(proposal:ProposalDTO):Route[]{
  return lesson?lessonStack(lesson,{name:'activity'}):[{name:'home'},{name:!proposal.activityId.startsWith('dessin-v2-')&&(proposal.external||proposal.passion==='ecriture'||(proposal.passion==='dessin'&&!proposal.activityId.startsWith('dessin-v2-')))?'creativeSession':'activity'}]
 }
 export function sessionFlow(proposal:ProposalDTO,serverTime:string){
- return {duration:proposal.duration,passion:proposal.passion,proposal,external:proposal.external,pad:!proposal.external,scrollFlow:true,clockOffset:Date.parse(serverTime)-Date.now(),...(isFixedActivityId(proposal.activityId)?{fixedStep:proposal.activityId}:{})}
+ return {mood:proposal.mood??undefined,duration:proposal.duration,passion:proposal.passion,proposal,external:proposal.external,pad:!proposal.external,scrollFlow:true,clockOffset:Date.parse(serverTime)-Date.now(),...(isFixedActivityId(proposal.activityId)?{fixedStep:proposal.activityId}:{})}
 }

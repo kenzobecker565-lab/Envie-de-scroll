@@ -1,3 +1,4 @@
+import {PianoActivity} from './PianoActivity.tsx'
 import {DrawingSession} from './DrawingAtelier.tsx'
 import {drawingActivity} from '@scroll-up/shared'
 import { SportSession } from './SportSession.tsx'
@@ -139,6 +140,7 @@ export function ActivityScreen() {
     }
   }
 
+  if(proposal&&!loading&&passionId==='piano'&&!isFixedActivityId(proposal.activityId))return <PianoActivity key={proposal.id} proposal={proposal}/>
   if(proposal&&!loading&&drawingActivity(proposal.activityId))return <DrawingSession key={proposal.id} proposal={proposal}/>
   if (passionId==='sport' && proposal && !loading) return <div className={flow.scrollFlow?"scroll-native":""}><SportSession key={proposal.id} proposal={proposal}/></div>
   if (isWorkshop(passionId) && proposal && !loading) return <div className={flow.scrollFlow?"scroll-native":""}><InteractiveWorkshop key={proposal.id} proposal={proposal} onAnother={!fixedStep ? () => void load(proposal.id) : undefined}/></div>

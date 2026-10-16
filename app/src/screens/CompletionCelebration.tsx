@@ -10,10 +10,11 @@ import { useAppState, useNavigation, type DoneResult } from '../state/AppState.t
 export function CompletionCelebration({done}:{done:DoneResult}) {
  const {state,dispatch}=useAppState(),{reset}=useNavigation(),{completion,stats,coinsEarned}=done.response
  const after=progressFor(completion.passion,stats.byPassion),before=progressFor(completion.passion,done.previousStats.byPassion)
+ const earnedXp=Math.max(0,after.xp-before.xp)
  const hasCreation=Boolean(completion.photoUrl||completion.text)
  return <FlowShell step={3} title="Tu l’as fait !" subtitle={hasCreation?'Ta création est enregistrée.':'Ton activité est enregistrée.'} illustration={<MinutonFigure pose="cheer" size={100} animated={false}/>}>
   <div className="completion-preview"><MinutonHangs item={completion}/></div>
-  {coinsEarned>0?<div className="completion-rewards"><span><Star size={25}/>+{Math.max(0,after.xp-before.xp)} XP</span><span><BrandMark size={30}/>+{coinsEarned}<small>minutons</small></span></div>:<p className="completion-keep">Ta création compte. Les XP et les minutons commencent à partir d’une minute de pratique.</p>}
+  {coinsEarned>0||earnedXp>0?<div className="completion-rewards">{earnedXp>0&&<span><Star size={25}/>+{earnedXp} XP</span>}{coinsEarned>0&&<span><BrandMark size={30}/>+{coinsEarned}<small>minutons</small></span>}</div>:<p className="completion-keep">Ta création compte. Les XP et les minutons commencent à partir d’une minute de pratique.</p>}
   <PracticeProgress passion={completion.passion} rows={stats.byPassion}/>
   {!hasCreation&&<p className="completion-keep">Même sans fichier joint, cette activité garde sa place dans ta galerie.</p>}
   <Button className="scroll-primary" onClick={()=>reset([{name:'home'},{name:'gallery',passion:completion.passion,focus:completion.id}])}>Voir dans ma galerie<ArrowUpRight/></Button>

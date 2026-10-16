@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { ArrowLeft, ArrowUpRight, Check, Clock3, LoaderCircle, Pause, Play, Shuffle } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Check, LoaderCircle, Shuffle } from 'lucide-react'
 import { activityBrief, type Activity, DURATIONS, SPORT_EXERCISES, studioConfig, sportProgram, getActivity, getPassion, guideFor, keyboardMelody, scrollSuggestions } from '@scroll-up/shared'
 import { StudioTaskPlayer } from './StudioSession.tsx'
 import { SportInstructions } from '../components/SportMovement.tsx'
@@ -11,6 +11,7 @@ import { PassionArtwork } from '../components/PassionArtwork.tsx'
 import { DrawingPad, type DrawingPadHandle } from '../components/DrawingPad.tsx'
 import { Button } from '../components/ui/button.tsx'
 import { Screen } from '../components/Screen.tsx'
+import {ActivityStage,ActivityClock} from '../components/ActivityStage.tsx'
 import {useCreativeClock} from '../lib/useCreativeClock.ts'
 import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '../components/ui/dialog.tsx'
 import { prepareImage } from '../lib/image.ts'
@@ -100,21 +101,20 @@ export function CreativeSessionScreen() {
  const guide=guideFor(proposal.activityId)
  const activity=getActivity(proposal.activityId)
  const melody=keyboardMelody(proposal.activityId)
- return <FlowShell step={3} title={getPassion(proposal.passion).label} subtitle={`${proposal.duration} minutes · Ton moment de pratique`}>
-  <div className="session-timer"><Clock3 size={23}/><output aria-label="Temps restant">{Math.floor(clock.seconds/60)}:{String(clock.seconds%60).padStart(2,'0')}</output><button type="button" disabled={clock.busy||saving} aria-label={clock.paused?'Reprendre le chronomètre':'Mettre le chronomètre en pause'} onClick={()=>void clock.toggle()}>{clock.paused?<Play size={22}/>:<Pause size={22}/>}</button>{clock.paused&&<small>En pause · les minutes ne sont pas comptées.</small>}</div>{clock.error&&<p role="alert">{clock.error}</p>}
-  {isWriting&&<p className="session-task-reminder">{activity?activityBrief(activity)?.outcome??proposal.text:proposal.text}</p>}
-  <details className="session-instructions" open={external||Boolean(proposal.extra)}><summary>Revoir la consigne</summary><p>{proposal.text}</p>{proposal.extra&&<p>{proposal.extra.items.join(' · ')}</p>}{guide&&<p>{guide.tips.join(' ')}</p>}{melody&&<p>Au piano : {melody.title}</p>}</details>
-  {activity&&<ActivityPlan activity={activity} collapsible/>}
+ const brief=activity?activityBrief(activity):undefined
+ return <ActivityStage passion={proposal.passion} clock={<ActivityClock clock={clock}/>}>
+  <section className="stage-task-heading"><h2>{brief?.title??getPassion(proposal.passion).label}</h2><p>{brief?.outcome??proposal.text}</p></section>
   {isDrawing&&<div hidden={external}><DrawingPad key={proposal.id} draftKey={inkKey} ref={drawing} onInkChange={setHasInk}/></div>}
-  {isWriting&&<label className="session-writing">{external?'Un texte ou une note à conserver (facultatif)':'Ton texte'}<textarea maxLength={6000} rows={10} value={text} disabled={saving} onChange={e=>setText(e.target.value)} placeholder="Tes premières lignes…"/><small>{draftError?'Le brouillon n’a pas pu être sauvegardé. Garde cette page ouverte pour le conserver.':'Brouillon gardé sur ce téléphone.'}</small></label>}
+  {isWriting&&<label className="session-writing">{external?'Un texte ou une note à conserver (facultatif)':'Ton texte'}<textarea maxLength={6000} rows={8} value={text} disabled={saving} onChange={e=>setText(e.target.value)} placeholder="Tes premières lignes…"/><small>{draftError?'Le brouillon n’a pas pu être sauvegardé. Garde cette page ouverte pour le conserver.':'Brouillon gardé sur ce téléphone.'}</small></label>}
   {external&&<ExternalReference activityId={proposal.activityId}/>}
   {external&&!isWriting&&<section className="session-external"><MinutonFigure pose="idea" size={85} animated={false}/><h2>À toi de jouer, à ta façon.</h2><p>Garde la consigne sous les yeux, puis reviens valider quand tu as terminé.</p>{!isDrawing&&<label>Une note à conserver (facultatif)<textarea maxLength={200} value={text} onChange={e=>setText(e.target.value)} rows={3}/></label>}</section>}
   {isDrawing&&external&&<label className="session-photo">{preview?<img src={preview} alt="Aperçu de mon dessin"/>:<span>Ajouter une photo (facultatif)</span>}<input type="file" accept="image/*" disabled={saving||preparing} onChange={e=>{void pick(e.target.files?.[0]);e.target.value=''}}/></label>}
-  {(isDrawing||isWriting)&&<button type="button" className="scroll-text-button" disabled={saving} onClick={()=>{setExternal(v=>!v);dispatch({type:'flow',flow:{external:!external}})}}>{external?'Revenir à la création dans l’app':isDrawing?'Je préfère dessiner sur papier':'Je préfère écrire ailleurs'}</button>}
-  {error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={saving||preparing||clock.busy} onClick={()=>void finish()}>{saving?<LoaderCircle className="animate-spin"/>:<Check/>}{saving?'Enregistrement…':'J’ai terminé'}</Button><p className="scroll-note">La création jointe est facultative. L’expérience suit les minutes de pratique enregistrées.</p>
-  <button type="button" className="scroll-text-button" disabled={saving||clock.busy} onClick={async()=>{if(await clock.pause())reset([{name:'home'}])}}>Garder pour plus tard</button>
+  <details className="session-instructions" ><summary>{isWriting?'Besoin d’un début ?':'Revoir les repères'}</summary><p>{proposal.text}</p>{proposal.extra&&<p>{proposal.extra.items.join(' · ')}</p>}{guide&&<p>{guide.tips.join(' ')}</p>}{melody&&<p>Au piano : {melody.title}</p>}{activity&&<ActivityPlan activity={activity}/>}
+  {(isDrawing||isWriting)&&<button type="button" className="scroll-text-button" disabled={saving} onClick={()=>{setExternal(v=>!v);dispatch({type:'flow',flow:{external:!external}})}}>{external?'Revenir à la création dans l’app':isDrawing?'Je préfère dessiner sur papier':'Je préfère écrire ailleurs'}</button>}</details>
+  <footer className="stage-actions">{error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={saving||preparing||clock.busy} onClick={()=>void finish()}>{saving?<LoaderCircle className="animate-spin"/>:<Check/>}{saving?'Enregistrement…':'J’ai terminé'}</Button><p className="scroll-note">La création jointe est facultative. L’expérience suit les minutes de pratique enregistrées.</p>
+  <button type="button" className="scroll-text-button" disabled={saving||clock.busy} onClick={async()=>{if(await clock.pause())reset([{name:'home'}])}}>Garder pour plus tard</button></footer>
   <Dialog open={stopping} onOpenChange={setStopping}><DialogContent className="session-stop-dialog"><DialogHeader><DialogTitle>On garde cette idée ?</DialogTitle><DialogDescription>Tu viens de commencer. Tu peux garder cette séance pour plus tard ; elle ne sera pas comptée comme une activité terminée.</DialogDescription></DialogHeader><MinutonFigure pose="idea" size={100} animated={false}/>{clock.error&&<p role="alert">{clock.error}</p>}<Button className="scroll-primary" disabled={clock.busy} onClick={async()=>{if(await clock.pause()){setStopping(false);reset([{name:'home'}])}}}>Garder pour plus tard</Button><Button variant="secondary" disabled={clock.busy} onClick={async()=>{if(await clock.resume())setStopping(false)}}>Continuer mon activité</Button></DialogContent></Dialog>
- </FlowShell>
+ </ActivityStage>
 }
 
 /** Keep the full exercise/reference available even when the work is done on paper. */

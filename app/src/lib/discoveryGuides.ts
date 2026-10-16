@@ -31,7 +31,7 @@ export const DISCOVERY_TOURS:Record<DiscoveryGuide,DiscoveryTour>={
  shop:{anchor:'.skin-shop-tabs',steps:[
   step('Habille ton Minuton','Explore les collections et ouvre une tenue pour la prévisualiser avant de l’acheter.','welcome'),
   step('Tes minutons, tes choix','Les minutons gagnés pendant tes activités servent aux achats. Les dépenser ne fait pas baisser ton expérience.','cheer',['[data-tour-target="wallet"]']),
-  step('Retrouve tes tenues','Mes achats réunit les tenues obtenues pour les porter. Favoris garde celles que tu aimerais retrouver.','idea',['.skin-shop-tabs'])]},
+  step('Retrouve tes tenues','Mes tenues réunit tes tenues obtenues. Essayage te permet de voir les autres sur Minuton, sans changer ta tenue actuelle.','idea',['.skin-shop-tabs'])]},
  profile:{anchor:'.studio-profile-hero',steps:[
   step('Ton chemin parcouru','Ton profil rassemble ton niveau, ton expérience et tes activités. Les minutes de pratique font progresser ton expérience.','cheer',['.studio-profile-hero']),
   step('Tes réglages à portée de main','La roue dentée ouvre les réglages : rappels, passions et tutoriel de bienvenue. Ton avatar permet de revenir ici.','idea',['[data-tour-target="settings"]'])]},

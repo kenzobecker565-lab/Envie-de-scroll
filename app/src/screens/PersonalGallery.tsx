@@ -30,7 +30,7 @@ export function PersonalGallery({passion,focus}:{passion?:PassionId;focus?:strin
  const notebook=passion==='ecriture'||passion==='francais'
  const [openedBook,setOpenedBook]=useState(0)
  const chosen=useMemo(()=>{const ids=appearance.exposed;const eligible=gallery.items.filter(item=>item.photoUrl);return ids?eligible.filter(item=>ids.includes(item.id)):eligible.slice(0,4)},[appearance.exposed,gallery.items])
- return <Screen tabs className="carnet-page personal-gallery"><CarnetHeader title={title} subtitle={subtitle} pose={passion==='piano'?'piano':passion==='dessin'?'draw':passion==='ecriture'||passion==='francais'?'write':'idea'}/>
+ return <Screen tabs className="carnet-page personal-gallery"><CarnetHeader title={title} subtitle={subtitle} variant="banner" pose={passion==='piano'?'gallery-piano':passion==='ecriture'?'gallery-writing':passion==='sport'?'gallery-sport':passion==='logique'?'gallery-logic':passion==='francais'?'gallery-reading':'gallery-drawing'}/>
  {passion&&<button type="button" className="gallery-back" onClick={()=>{if(state.stack.at(-2)?.name==='gallery')back();else reset([{name:'home'},{name:'gallery'}])}}><ArrowLeft size={18}/>Galerie</button>}
  {!passion&&<><div className="gallery-segment"><button type="button" aria-pressed="true">Créations</button><button type="button" onClick={()=>push({name:'atelier'})}>Mon exposition</button></div><div className="gallery-passions" aria-label="Les espaces de la galerie">{ACTIVE_PASSION_IDS.map(id=><button type="button" key={id} onClick={()=>push({name:'gallery',passion:id})}><PassionArtwork passion={id}/><strong>{getPassion(id).label}</strong></button>)}</div></>}
  {focusError&&<p role="alert">{focusError}</p>}

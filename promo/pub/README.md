@@ -47,9 +47,9 @@ Les mêmes informations sont dans `credits.json`. Les clips ne sont pas versionn
 
 ## Refaire la vidéo
 
-Prérequis : les dépendances de l'app installées à la racine (`npm install`, pour les polices et pour lancer l'app), les dépendances de `promo/` (`npm install`, `npx playwright install chromium`) et [ffmpeg](https://ffmpeg.org) (dans le `PATH`, ou désigné par la variable `FFMPEG`).
+Prérequis : les dépendances installées à la racine (`npm install`, pour les polices et pour lancer le prototype), les dépendances de `promo/` (`npm install`, `npx playwright install chromium`) et [ffmpeg](https://ffmpeg.org) (dans le `PATH`, ou désigné par la variable `FFMPEG`).
 
-1. **Les captures de l'app.** À la racine du dépôt, lance l'app (`npm run dev`). Puis, dans `promo/`, lance `npm run pub:capture`. Le script parcourt l'app comme une vraie personne, écran par écran, en haute définition. Il crée `build/pub/app/*.png` et `zones.json`, qui donne la position des éléments touchés.
+1. **Les captures de l'app.** À la racine du dépôt, lance le prototype (`npm run dev -w prototype`). Puis, dans `promo/`, lance `npm run pub:capture`. Le script parcourt l'app comme une vraie personne, écran par écran, en haute définition. Il crée `build/pub/app/*.png` et `zones.json`, qui donne la position des éléments touchés.
 2. **Les clips.** Télécharge les dix vidéos Pexels ci-dessus en HD. Range-les dans `build/pub/broll/` en les nommant d'après la première colonne du tableau (`hook-fille.mp4`, `dessin.mp4`…).
 3. **Les médias.** `npm run pub:prepare` découpe les passages utiles des clips (`clips.js`) en images 1080 × 1920. Il décode aussi la voix et la musique.
 4. **Le rendu.** `npm run pub:render` produit `build/pub/plutot-que-scroller-pub.mp4` : bande-son, 1 680 images, puis encodage H.264 + AAC avec une sonie de −14 LUFS.

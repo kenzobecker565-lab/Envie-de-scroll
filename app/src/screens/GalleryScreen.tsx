@@ -1,3 +1,4 @@
+import {SavedActivity} from '../components/SavedActivity.tsx'
 import { SportGalleryDetail } from './SportSession.tsx'
 import { WorkshopGalleryDetail } from './InteractiveWorkshop.tsx'
 import { BookOpen, ArrowRight, ChevronDown, Clapperboard, Clock3, Maximize2, RotateCcw, Send, Share2 } from 'lucide-react'
@@ -441,6 +442,7 @@ function PhotoPendingNote() {
 /** Une création en grand, dans la feuille modale. */
 export function GalleryDetail({ item, clean = false, titleOverride }: { item: CompletionDTO; clean?:boolean; titleOverride?:string }) {
   const { state } = useAppState()
+  if(clean)return <SavedActivity key={item.id} item={item} title={titleOverride}/>
   const savedText=item.text&&<section><h3 className="font-bold">Mon texte conservé</h3><p className="whitespace-pre-wrap [overflow-wrap:anywhere]">{item.text}</p></section>
   if (item.sport) return <><DialogHeader><DialogTitle>{item.sport.summary}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><SportGalleryDetail activityId={item.activityId}/>{savedText}</>
   if (item.workshop) return <><DialogHeader><DialogTitle>{item.activityText}</DialogTitle><DialogDescription>{formatDay(item.createdAt)}</DialogDescription></DialogHeader><WorkshopGalleryDetail result={item.workshop} activityId={item.activityId}/>{savedText}</>

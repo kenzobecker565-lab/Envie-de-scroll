@@ -19,7 +19,7 @@ export function Screen({ children, className, footer, tabs = false }: { children
   return (
     <div className="flex min-h-[var(--tg-viewport-stable-height,100dvh)] flex-col">
       {/* Les onglets s'atteignent par la barre du bas : pas de bouton retour dans l'app pour eux. */}
-      {focused ? <header className="flow-header">{canGoBack && <Button variant="ghost" size="icon" onClick={back} aria-label="Retour"><ChevronLeft aria-hidden="true"/></Button>}<Logo height={28}/></header> : !hasNativeBackButton && canGoBack && !tabs && !['signal','time','ideas','activityBrief','creativeSession'].includes(route.name) && !className?.includes('scroll-flow') && (
+      {focused ? <header className="flow-header">{canGoBack && <Button variant="ghost" size="icon" onClick={back} aria-label="Retour"><ChevronLeft aria-hidden="true"/></Button>}<Logo height={28}/></header> : !hasNativeBackButton && canGoBack && !tabs && !['signal','time','ideas','activityBrief','creativeSession'].includes(route.name) && !className?.includes('scroll-flow') && !className?.includes('harmonized-lesson') && (
         <div className="px-4 pt-4">
           <Button variant="secondary" size="icon" onClick={back} aria-label="Retour">
             <ChevronLeft className="size-6" aria-hidden="true" />

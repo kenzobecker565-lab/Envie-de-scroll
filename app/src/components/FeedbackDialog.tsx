@@ -65,7 +65,7 @@ export function FeedbackDialog({ open, onOpenChange, context }: { open: boolean;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="harmonized-feedback">
         <AnimatePresence mode="wait" initial={false}>
           {status === 'sent' ? (
             <motion.div

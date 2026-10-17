@@ -4,16 +4,15 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { BadgeShelf } from '../components/BadgePin.tsx'
-import { ChallengeCard, challengePassions } from '../components/Challenge.tsx'
 import { CoinIcon } from '../components/Coins.tsx'
 import { Sparkle } from '../components/decor/Sparkle.tsx'
 import { MilestoneProgress } from '../components/Milestones.tsx'
 import { finishedPathIds } from '../components/Paths.tsx'
 import { Screen } from '../components/Screen.tsx'
+import {CarnetHeader} from '../components/CarnetHeader.tsx'
 import { useShop } from '../lib/shop.ts'
 import { formatNumber, plural } from '../lib/format.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
-import { haptics } from '../telegram/webApp.ts'
 
 /**
  * L'onglet « Progresser » : tout ce qui compte et tout ce qui monte, au même
@@ -25,11 +24,11 @@ export function ProgressScreen() {
   const { state } = useAppState()
   const { push } = useNavigation()
   const shop = useShop()
-  const { user, stats } = state.me
+  const { stats } = state.me
 
   return (
-    <Screen tabs>
-      <h1 className="font-display text-46 font-extrabold tracking-tight text-ink">Progression</h1>
+    <Screen tabs className="carnet-page harmonized-progress">
+      <CarnetHeader title="Ton chemin parcouru" subtitle="Chaque activité compte." pose="cheer" variant="banner"/>
 
       {/* Les minutons, en grand, sur un sticker soleil. */}
       <Card
@@ -67,7 +66,7 @@ export function ProgressScreen() {
         <h2 className="font-bold">Mes séances</h2>
         <p>{stats.totalMinutes} min au total · {stats.monthMinutes} min ce mois-ci</p>
         <p>{plural(stats.monthActivities, 'activité')} · {plural(stats.monthCoins, 'minuton')} gagnés ce mois-ci</p>
-        <small>Durée écoulée entre l’ouverture et l’enregistrement, plafonnée à la durée choisie. Les pauses peuvent être incluses. Les niveaux suivent les minutons gagnés.</small>
+        <small>Durée écoulée entre l’ouverture et l’enregistrement, plafonnée à la durée choisie. Les pauses peuvent être incluses. Les niveaux suivent tes minutes de pratique.</small>
       </Card>
       {stats.totalCoins > 0 && (
         <motion.div className="mt-4 px-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
@@ -75,18 +74,6 @@ export function ProgressScreen() {
         </motion.div>
       )}
 
-      {challengePassions(user.passions).length > 0 && (
-        <div className="mt-6 flex flex-col">
-          <ChallengeCard
-            done={stats.challenge ?? []}
-            delay={0.15}
-            onOpen={() => {
-              haptics.impact('light')
-              push({ name: 'challenge' })
-            }}
-          />
-        </div>
-      )}
 
       <div className="mt-8 flex flex-col gap-3">
         <Button variant="secondary" onClick={() => push({ name: 'gallery' })}>Historique de mes activités</Button>

@@ -1,3 +1,4 @@
+import './Harmonized.css'
 import { IdeasScreen, ActivityBriefScreen, CreativeSessionScreen } from './screens/ScrollFlowScreens.tsx'
 import {DrawingAtelier,DrawingNotebook} from './screens/DrawingAtelier.tsx'
 import {LearningLessonScreen,LearningNotebooks} from './learning/LearningScreens.tsx'
@@ -21,7 +22,6 @@ import { ActivityScreen } from './screens/ActivityScreen.tsx'
 import { PassionPickScreen, TimeScreen } from './screens/ChoiceScreens.tsx'
 import { DoneScreen } from './screens/DoneScreen.tsx'
 import { SettingsScreen } from './screens/SettingsScreen.tsx'
-import { ChallengeScreen } from './screens/ChallengeScreen.tsx'
 import { ProgressScreen } from './screens/ProgressScreen.tsx'
 import {ContextualGuides} from './components/ContextualGuides.tsx'
 import { GuidedTour } from './components/GuidedTour.tsx'
@@ -172,7 +172,7 @@ function screenFor(route: Route) {
       return passion&&LEARNING_PASSIONS.some(id=>id===passion)?<ExplorerPassion passion={passion} mode="learn"/>:<ExplorerScreen catalogue/>
     }
     case 'challenge':
-      return <ChallengeScreen />
+      return <ProfileScreen />
   }
 }
 

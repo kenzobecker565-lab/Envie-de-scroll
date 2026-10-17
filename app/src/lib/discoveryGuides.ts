@@ -22,7 +22,7 @@ export const DISCOVERY_TOURS:Record<DiscoveryGuide,DiscoveryTour>={
  gallery:{anchor:'.gallery-passions',steps:[
   step('Une place pour tes créations','Chaque coin de ton atelier ouvre une passion. Retrouve tes dessins, tes textes et tes séances enregistrées.','draw',['.gallery-passions']),
   step('Ton exposition personnelle','Mon exposition rassemble tes créations préférées dans un décor que tu peux personnaliser.','cheer',['.gallery-segment'])]},
- notebook:{anchor:'.gallery-book-cover',steps:[
+ notebook:{anchor:'.notebook-room',steps:[
   step('Ton vrai carnet','Ouvre ton carnet pour relire tes pages conservées. Le sommaire permet de retrouver une entrée directement.','write'),
   step('Feuillette à ta façon','Dans le carnet ouvert, utilise les flèches ou glisse horizontalement pour changer de page. Le sommaire reste disponible pour choisir une autre entrée.','idea')]},
  exhibition:{anchor:'.gallery-exhibition-wall',steps:[
@@ -32,8 +32,8 @@ export const DISCOVERY_TOURS:Record<DiscoveryGuide,DiscoveryTour>={
   step('Habille ton Minuton','Explore les collections et ouvre une tenue pour la prévisualiser avant de l’acheter.','welcome'),
   step('Tes minutons, tes choix','Les minutons gagnés pendant tes activités servent aux achats. Les dépenser ne fait pas baisser ton expérience.','cheer',['[data-tour-target="wallet"]']),
   step('Retrouve tes tenues','Mes tenues réunit tes tenues obtenues. Essayage te permet de voir les autres sur Minuton, sans changer ta tenue actuelle.','idea',['.skin-shop-tabs'])]},
- profile:{anchor:'.studio-profile-hero',steps:[
-  step('Ton chemin parcouru','Ton profil rassemble ton niveau, ton expérience et tes activités. Les minutes de pratique font progresser ton expérience.','cheer',['.studio-profile-hero']),
+ profile:{anchor:'.profile-experience',steps:[
+  step('Ton chemin parcouru','Ton profil rassemble ton niveau, ton expérience et tes activités. Les minutes de pratique font progresser ton expérience.','cheer',['.profile-experience']),
   step('Tes réglages à portée de main','La roue dentée ouvre les réglages : rappels, passions et tutoriel de bienvenue. Ton avatar permet de revenir ici.','idea',['[data-tour-target="settings"]'])]},
 }
 export function guideForRoute(route:Route):DiscoveryGuide|undefined{

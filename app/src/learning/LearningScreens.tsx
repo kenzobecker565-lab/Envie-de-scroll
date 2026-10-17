@@ -171,11 +171,9 @@ export function LearningNotebooks({ passion, review = false }: { passion?: Learn
     [onlyReview, setOnlyReview] = useState(review)
   const shown = items.filter((i) => (i.attempted || (onlyReview && i.review)) && (filter === 'all' || i.passion === filter) && (!onlyReview || i.review))
   return (
-    <Screen tabs className={passion ? "learning-screen" : "learning-screen carnet-page carnet-learn"}>
-      {!passion && <CarnetHeader title="Apprendre" subtitle="Un petit pas, un vrai progrès." pose="think"/>}
-      {passion && <AppHeader />}
-      <h1>Mes carnets d’apprentissage</h1>
-      <p>Chaque essai conserve son contenu. Les activités scroll restent dans Chez Minuton.</p>
+    <Screen tabs className="learning-screen carnet-page harmonized-notebooks">
+      <CarnetHeader title="Mes carnets d’apprentissage" subtitle="Tes essais, au même endroit." pose="gallery-writing" variant="banner"/>
+      <p className="learn-notebook-note">Retrouve ici tes essais de leçons. Tes autres créations restent dans la galerie.</p>
       <div className="learn-filters">
         <button aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
           Tout
@@ -198,13 +196,13 @@ export function LearningNotebooks({ passion, review = false }: { passion?: Learn
           <Button onClick={() => void reload()}>Réessayer</Button>
         </div>
       ) : shown.length ? (
-        shown.map((i) => (
+        <div className="learning-notebook-grid">{shown.map((i) => (
           <button
             key={i.id}
-            className="learn-row"
+            className="learn-row notebook-entry"
             onClick={() => push({ name: 'learningLesson', lessonId: i.lessonId, entryId: i.id })}
           >
-            <BookOpen />
+            <PassionArtwork passion={i.passion}/>
             <span>
               <strong>{i.title}</strong>
               <small>
@@ -217,7 +215,7 @@ export function LearningNotebooks({ passion, review = false }: { passion?: Learn
             </span>
             <ChevronRight />
           </button>
-        ))
+        ))}</div>
       ) : (
         <section className="learn-card">
           <Mascot pose="wait" size={84} />
@@ -585,12 +583,9 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
       </Screen>
     )
   return (
-    <Screen className="learning-screen learning-lesson">
-      <AppHeader />
-      <button className="learn-text-button" onClick={() => push({ name: 'learnPassion', passion: lesson.passion })}>
-        <ChevronLeft size={16} />
-        Apprendre · {getPassion(lesson.passion).label}
-      </button>
+    <Screen className="learning-screen learning-lesson carnet-page harmonized-lesson">
+      <CarnetHeader title={lesson.title} subtitle={lesson.goal} pose={lesson.passion==='piano'?'gallery-piano':lesson.passion==='sport'?'gallery-sport':lesson.passion==='logique'?'gallery-logic':lesson.passion==='francais'?'gallery-reading':lesson.passion==='ecriture'?'gallery-writing':'gallery-drawing'} variant="banner" onBack={()=>push({name:'learnPassion',passion:lesson.passion})} backLabel={`Apprendre · ${getPassion(lesson.passion).label}`}/>
+      <span className="sr-only">Apprendre · {getPassion(lesson.passion).label}</span>
       <div className="learn-step-label">
         <span>{LEARNING_LEVELS[lesson.level]}</span>
         <span>Leçon {lesson.number} / 12</span>
@@ -598,8 +593,6 @@ export function LearningLessonScreen({ lessonId, entryId }: { lessonId: string; 
       <div className="learn-progress">
         <i style={{ width: `${(work.step + 1) * 25}%` }} />
       </div>
-      <h1>{lesson.title}</h1>
-      <p>{lesson.goal}</p>
       {readOnly ? (
         <>
           <div className="learn-mint">{learningAttempted(work) ? 'Essai conservé dans ton carnet' : 'Leçon consultée · ta lecture est enregistrée'}</div>

@@ -229,9 +229,9 @@ export function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChang
 
   return (
     <Dialog open={open} onOpenChange={(next) => !busy && onOpenChange(next)}>
-      <DialogContent>
+      <DialogContent className="harmonized-erase">
         <DialogHeader>
-          <DialogTitle>Tout effacer&nbsp;?</DialogTitle>
+          <DialogTitle>Effacer mes données&nbsp;?</DialogTitle>
           <DialogDescription>
             Tes créations, tes minutons, tes parcours, tes projets et tes réglages seront supprimés. L’app repartira de l’inscription. C’est définitif.
           </DialogDescription>
@@ -242,13 +242,14 @@ export function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChang
           </p>
         )}
         <div className="flex flex-col gap-2">
-          <Button className="w-full" onClick={() => void erase()} disabled={busy} aria-busy={busy}>
+          <Button size="md" className="w-full erase-cancel" onClick={() => onOpenChange(false)} disabled={busy}>
+            Garder mes données
+          </Button>
+          <Button variant="secondary" className="w-full erase-confirm" onClick={() => void erase()} disabled={busy} aria-busy={busy}>
             {busy ? <LoaderCircle className="motion-safe:animate-spin" aria-hidden="true" /> : <Trash2 aria-hidden="true" />}
             {busy ? 'Effacement…' : 'Tout effacer'}
           </Button>
-          <Button variant="ghost" size="md" className="w-full" onClick={() => onOpenChange(false)} disabled={busy}>
-            Annuler
-          </Button>
+
         </div>
       </DialogContent>
     </Dialog>

@@ -31,7 +31,7 @@ export function CompletionCelebration({done}:{done:DoneResult}) {
    <p className="celebration-saved" role="status"><Check size={18}/>{photo||writing?'Ajouté à ta galerie':'Activité enregistrée'}</p>
   </section>
   {(coinsEarned>0||earnedXp>0)&&<div className="celebration-rewards" aria-label="Tes récompenses">{earnedXp>0&&<span><Sparkles size={26} fill="currentColor"/>+{earnedXp} XP</span>}{coinsEarned>0&&<span><BrandMark size={30}/><strong>+{coinsEarned} <small>minutons</small></strong></span>}</div>}
-  <section className="celebration-progress" aria-label={`Ma progression en ${label}`}><div><strong>{label} · Niveau {after.level}</strong>{after.total>0&&<span>{after.count} / {after.total} activités</span>}</div><progress aria-label="Expérience vers le niveau suivant" value={after.progress} max={1}/></section>
+  <section className="celebration-progress" aria-label={`Ma progression en ${label}`}><div><strong>{label} · Niveau {after.level}</strong>{after.total>0&&<span>{after.count} / {after.total} activités découvertes</span>}</div><progress aria-label="Expérience vers le niveau suivant" value={after.progress} max={1}/><div className="celebration-xp-caption"><span>{after.xp}{after.nextXp?` / ${after.nextXp}`:''} XP</span><span>{after.next?`${Math.max(0,(after.nextXp??after.xp)-after.xp)} XP avant le niveau ${after.next.level}`:'Niveau maximum atteint'}</span></div></section>
   <div className="celebration-actions"><Button onClick={()=>reset([{name:'home'},{name:'gallery',passion:completion.passion,focus:completion.id}])}><Images size={22}/>Voir dans ma galerie</Button><button type="button" onClick={()=>reset([{name:'home'}],-1)}>Retour à l’accueil</button></div>
  </Screen>
 }

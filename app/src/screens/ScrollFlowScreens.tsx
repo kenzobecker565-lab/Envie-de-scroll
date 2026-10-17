@@ -14,6 +14,8 @@ import { Screen } from '../components/Screen.tsx'
 import {ActivityStage,ActivityClock} from '../components/ActivityStage.tsx'
 import {useCreativeClock} from '../lib/useCreativeClock.ts'
 import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '../components/ui/dialog.tsx'
+import {readSessionSupport,saveSessionSupport,clearSessionSupport} from '../lib/sessionSupport.ts'
+import {usePhotoDraft} from '../lib/usePhotoDraft.ts'
 import { prepareImage } from '../lib/image.ts'
 import { useAppState, useNavigation } from '../state/AppState.tsx'
 import { haptics } from '../telegram/webApp.ts'
@@ -74,7 +76,9 @@ export function ActivityBriefScreen() {
 }
 export function CreativeSessionScreen() {
  const {state,dispatch}=useAppState(),{reset}=useNavigation(),proposal=state.flow.proposal
- const [external,setExternal]=useState(Boolean(state.flow.external??proposal?.external)),[hasInk,setHasInk]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(''),[photo,setPhoto]=useState<Blob>(),[preview,setPreview]=useState(''),[preparing,setPreparing]=useState(false)
+ const [external,setExternal]=useState(()=>readSessionSupport(state.me.user.id,proposal?.id,Boolean(state.flow.external??proposal?.external))),[hasInk,setHasInk]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(''),[preparing,setPreparing]=useState(false)
+ useEffect(()=>{if(proposal)saveSessionSupport(state.me.user.id,proposal.id,external)},[state.me.user.id,proposal?.id,external])
+ const photoDraft=usePhotoDraft(state.me.user.id,proposal?.passion==='dessin'?proposal.id:undefined),{photo,preview}=photoDraft
  const clock=useCreativeClock(proposal,state.flow.clockOffset,external)
  const [stopping,setStopping]=useState(false),[draftError,setDraftError]=useState(false)
  const inkKey=`scroll-up:dessin:${state.me.user.id}:${proposal?.id}`
@@ -82,22 +86,23 @@ export function CreativeSessionScreen() {
  const draftKey=`scroll-up:brouillon:${proposal?.id}`
  const [text,setText]=useState(()=>{try{return localStorage.getItem(draftKey)??''}catch{return ''}})
  useEffect(()=>{try{localStorage.setItem(draftKey,text);setDraftError(false)}catch{setDraftError(true)}},[text,draftKey])
- useEffect(()=>()=>{if(preview)URL.revokeObjectURL(preview)},[preview])
  const finish=async()=>{
-  if(!proposal||lock.current||clock.busy)return
+  if(!proposal||lock.current||clock.busy||photoDraft.restoring)return
   if(clock.elapsed<60&&!text.trim()&&!photo&&!(hasInk&&!external)){setStopping(true);await clock.pause();return}
   lock.current=true;setSaving(true);setError('')
   try{
    const image=!external&&proposal.passion==='dessin'&&hasInk?await drawing.current?.toBlob():photo
    const response=await api.complete({proposalId:proposal.id,external:true,...(image?{photo:image}:{}),...(text.trim()?proposal.passion==='ecriture'?{text}:{exploredTitle:text}:{} )})
    clock.markFinished()
+   await photoDraft.clear()
+   clearSessionSupport(state.me.user.id,proposal.id)
    dispatch({type:'stats',stats:response.stats});dispatch({type:'openProposal',proposal:null});dispatch({type:'done',done:{response,previousStats:state.me.stats,photoPending:response.completion.photoPending}});dispatch({type:'newFlow'})
    try{localStorage.removeItem(draftKey);localStorage.removeItem(inkKey)}catch{/* no-op */}reset([{name:'home'},{name:'done'}])
   }catch(e){setError((e as Error).message);setSaving(false);lock.current=false}
  }
  if(!proposal)return <Screen><p>Cette séance n’est plus ouverte.</p><Button onClick={()=>reset([{name:'home'}])}>Retour à l’accueil</Button></Screen>
  const isDrawing=proposal.passion==='dessin',isWriting=proposal.passion==='ecriture'
- const pick=async(file:File|undefined)=>{if(!file)return;setPreparing(true);setError('');try{const value=await prepareImage(file);setPhoto(value);setPreview(URL.createObjectURL(value))}catch{setError('Cette image n’a pas pu être ouverte. Essaie une autre photo.')}finally{setPreparing(false)}}
+ const pick=async(file:File|undefined)=>{if(!file)return;setPreparing(true);setError('');try{const value=await prepareImage(file);await photoDraft.choose(value)}catch{setError('Cette image n’a pas pu être ouverte. Essaie une autre photo.')}finally{setPreparing(false)}}
  const guide=guideFor(proposal.activityId)
  const activity=getActivity(proposal.activityId)
  const melody=keyboardMelody(proposal.activityId)
@@ -108,11 +113,11 @@ export function CreativeSessionScreen() {
   {isWriting&&<label className="session-writing">{external?'Un texte ou une note à conserver (facultatif)':'Ton texte'}<textarea maxLength={6000} rows={8} value={text} disabled={saving} onChange={e=>setText(e.target.value)} placeholder="Tes premières lignes…"/><small>{draftError?'Le brouillon n’a pas pu être sauvegardé. Garde cette page ouverte pour le conserver.':'Brouillon gardé sur ce téléphone.'}</small></label>}
   {external&&<ExternalReference activityId={proposal.activityId}/>}
   {external&&!isWriting&&<section className="session-external"><MinutonFigure pose="idea" size={85} animated={false}/><h2>À toi de jouer, à ta façon.</h2><p>Garde la consigne sous les yeux, puis reviens valider quand tu as terminé.</p>{!isDrawing&&<label>Une note à conserver (facultatif)<textarea maxLength={200} value={text} onChange={e=>setText(e.target.value)} rows={3}/></label>}</section>}
-  {isDrawing&&external&&<label className="session-photo">{preview?<img src={preview} alt="Aperçu de mon dessin"/>:<span>Ajouter une photo (facultatif)</span>}<input type="file" accept="image/*" disabled={saving||preparing} onChange={e=>{void pick(e.target.files?.[0]);e.target.value=''}}/></label>}
+  {isDrawing&&external&&<label className="session-photo">{preview?<img src={preview} alt="Aperçu de mon dessin"/>:<span>Ajouter une photo (facultatif)</span>}<input type="file" accept="image/*" disabled={saving||preparing||photoDraft.restoring} onChange={e=>{void pick(e.target.files?.[0]);e.target.value=''}}/></label>}
   <details className="session-instructions" ><summary>{isWriting?'Besoin d’un début ?':'Revoir les repères'}</summary><p>{proposal.text}</p>{proposal.extra&&<p>{proposal.extra.items.join(' · ')}</p>}{guide&&<p>{guide.tips.join(' ')}</p>}{melody&&<p>Au piano : {melody.title}</p>}{activity&&<ActivityPlan activity={activity}/>}
   {(isDrawing||isWriting)&&<button type="button" className="scroll-text-button" disabled={saving} onClick={()=>{setExternal(v=>!v);dispatch({type:'flow',flow:{external:!external}})}}>{external?'Revenir à la création dans l’app':isDrawing?'Je préfère dessiner sur papier':'Je préfère écrire ailleurs'}</button>}</details>
-  <footer className="stage-actions">{error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={saving||preparing||clock.busy} onClick={()=>void finish()}>{saving?<LoaderCircle className="animate-spin"/>:<Check/>}{saving?'Enregistrement…':'J’ai terminé'}</Button><p className="scroll-note">La création jointe est facultative. L’expérience suit les minutes de pratique enregistrées.</p>
-  <button type="button" className="scroll-text-button" disabled={saving||clock.busy} onClick={async()=>{if(await clock.pause())reset([{name:'home'}])}}>Garder pour plus tard</button></footer>
+  <footer className="stage-actions">{photoDraft.restoring&&<p className="scroll-note" role="status">On retrouve ta photo…</p>}{photoDraft.error&&<p role="alert">{photoDraft.error}</p>}{error&&<p role="alert">{error}</p>}<Button className="scroll-primary" disabled={saving||preparing||photoDraft.restoring||clock.busy} onClick={()=>void finish()}>{saving?<LoaderCircle className="animate-spin"/>:<Check/>}{saving?'Enregistrement…':'J’ai terminé'}</Button><p className="scroll-note">La création jointe est facultative. L’expérience suit les minutes de pratique enregistrées.</p>
+  <button type="button" className="scroll-text-button" disabled={saving||preparing||photoDraft.restoring||clock.busy} onClick={async()=>{if(await clock.pause())reset([{name:'home'}])}}>Garder pour plus tard</button></footer>
   <Dialog open={stopping} onOpenChange={setStopping}><DialogContent className="session-stop-dialog"><DialogHeader><DialogTitle>On garde cette idée ?</DialogTitle><DialogDescription>Tu viens de commencer. Tu peux garder cette séance pour plus tard ; elle ne sera pas comptée comme une activité terminée.</DialogDescription></DialogHeader><MinutonFigure pose="idea" size={100} animated={false}/>{clock.error&&<p role="alert">{clock.error}</p>}<Button className="scroll-primary" disabled={clock.busy} onClick={async()=>{if(await clock.pause()){setStopping(false);reset([{name:'home'}])}}}>Garder pour plus tard</Button><Button variant="secondary" disabled={clock.busy} onClick={async()=>{if(await clock.resume())setStopping(false)}}>Continuer mon activité</Button></DialogContent></Dialog>
  </ActivityStage>
 }

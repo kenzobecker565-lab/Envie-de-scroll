@@ -19,7 +19,7 @@ export function LearnPassionScreen({ passion }: { passion: PassionId }) {return 
 export function ProfileScreen() {
  const {state}=useAppState(),{push,back}=useNavigation(),{user,stats}=state.me
  const decoration=useEquipped('profile')
- const best=[...stats.byPassion].sort((a,b)=>b.coins-a.coins)[0]
+ const best=[...stats.byPassion].sort((a,b)=>b.minutes-a.minutes)[0]
  const bestPassion=best?.passion??user.passions[0]??'piano', level=experience(bestPassion,best?.minutes??0)
  const earned=finishedPathIds(stats.byPassion)
  const badges=PATHS.filter(path=>earned.includes(path.id)).slice(0,5)

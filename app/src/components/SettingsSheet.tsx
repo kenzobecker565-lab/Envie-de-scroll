@@ -1,6 +1,7 @@
 import { BellRing, Check, ChevronRight, CircleHelp, Clock3, Heart, ShieldCheck, LoaderCircle, MessageCircleHeart, Music2, Settings2, Smartphone, Trash2, UserPlus } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import {clearUserPhotoDrafts} from '../lib/photoDraft.ts'
 import { ambianceCredits, formatClock, reminderMinutes } from '@scroll-up/shared'
 import { Button, PRESSED } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -204,6 +205,7 @@ function MomentPicker() {
  * téléphone). L'app redémarre sur l'inscription.
  */
 export function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+  const {state:photoDraftState}=useAppState()
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string>()
 
@@ -213,6 +215,7 @@ export function EraseDialog({ open, onOpenChange }: { open: boolean; onOpenChang
     haptics.impact('heavy')
     try {
       await api.deleteMe()
+      try { await clearUserPhotoDrafts(photoDraftState.me.user.id) } catch { /* Device storage may be unavailable. */ }
       try {
         for (const key of Object.keys(window.localStorage)) if (key.startsWith('scroll-up:')) window.localStorage.removeItem(key)
       } catch {

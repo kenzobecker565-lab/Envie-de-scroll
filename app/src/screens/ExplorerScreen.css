@@ -14,7 +14,7 @@ html[data-scene] .explorer-screen .carnet-heading p{font-size:15px;max-width:58%
 .explore-passion-open>.studio-passion-art,.explore-cat-art{width:100%;height:113px;display:block;border-radius:12px;background-color:#f0e4ff;overflow:hidden}
 .explore-cat-art{background:linear-gradient(145deg,#ece0ff,#fff4dc)}.explore-cat-art>img{width:100%;height:100%;object-fit:contain;display:block}
 .explore-passion-open>strong{font-size:18px;font-weight:900;line-height:1.15;padding:0 5px;letter-spacing:-.4px}.explore-passion-open>small{font-size:11px;font-weight:550;color:#7133e8;padding:0 25px 0 5px;min-height:16px}
-.explore-passion-open>svg{position:absolute;right:9px;bottom:13px;color:#7133e8}
+.explore-passion-open>svg:not(.explore-passion-art){position:absolute;right:9px;bottom:13px;color:#7133e8}
 .explore-favorite{position:absolute;right:9px;top:9px;display:grid;place-items:center;min-width:36px;min-height:36px;border-radius:50%;background:#fffc;color:#6b2be2;border:1px solid #fff9}.explore-favorite:disabled{opacity:.5}
 .explore-all[data-slot='button']{width:100%;border-radius:22px;min-height:46px;height:auto;padding:11px 15px;border-color:#8c51f5;box-shadow:none;color:#6424ed;background:#fffdf8;font-size:15px}
 .explore-note{text-align:center;font-size:12px;color:#6a34be;line-height:1.6;margin:0}
@@ -46,3 +46,6 @@ html[data-scene] .explorer-screen .carnet-heading p{font-size:15px;max-width:58%
 .explore-resume>.explore-passion-art{width:68px;height:78px}.explore-choice>.explore-passion-art{width:105px;height:115px;align-self:start;margin-top:18px}.explore-idea>.explore-passion-art{width:72px;height:75px}.explore-idea>span.explore-passion-art{flex:0 0 72px}.explore-lesson>.explore-passion-art{width:55px;height:55px}
 .explore-lesson-visual{background:#ece0ff}.explore-lesson-visual>svg{filter:saturate(1.6) contrast(1.12)}
 @media(max-width:359px){.explore-passion-art{height:95px}.explore-resume>.explore-passion-art{width:50px;height:61px}.explore-choice>.explore-passion-art{width:85px;height:105px}.explore-idea>.explore-passion-art{width:57px;height:63px;flex-basis:57px}.explore-lesson>.explore-passion-art{width:38px;height:45px}}
+
+/* Editorial card artwork keeps the approved crop; compact lesson icons retain their existing visuals. */
+.explore-passion-art[data-variant="editorial"]{background:none}

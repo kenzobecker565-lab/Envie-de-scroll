@@ -62,9 +62,21 @@ function timezone(): string | undefined {
   }
 }
 
-export const canAuthenticate = () => authorization() !== undefined
+let guestReady = false
+let guestSession: Promise<void> | undefined
+async function ensureGuestSession(): Promise<void> {
+  if (authorization() || guestReady) return
+  guestSession ??= fetch('/api/guest-session', {method: 'POST', credentials: 'same-origin'})
+    .then(async response => {
+      if (!response.ok) throw new ApiError('unauthorized', 'L’accès invité est indisponible. Ouvre cette version depuis Telegram.', response.status)
+      guestReady = true
+    }).catch(error => {guestSession = undefined; throw error})
+  await guestSession
+}
+export const canAuthenticate = () => authorization() !== undefined || guestReady
 
 async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
+  await ensureGuestSession()
   const headers = new Headers(init.headers)
   const auth = authorization()
   if (auth) headers.set('Authorization', auth)
@@ -74,7 +86,7 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 
   let response: Response
   try {
-    response = await fetch(`/api${path}`, { ...init, headers })
+    response = await fetch(`/api${path}`, { ...init, headers, credentials: 'same-origin' })
   } catch {
     throw new ApiError('network', 'La connexion a flanché. Vérifie ton réseau et réessaie.')
   }

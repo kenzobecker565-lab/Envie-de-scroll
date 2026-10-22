@@ -1,3 +1,4 @@
+import {createGuestSession, verifyGuestSession, guestCookieValue, GUEST_COOKIE, guestCookieMaxAge} from '../auth/guest.ts'
 import {isDiscoveryGuide,parseDiscoveryGuides} from '@scroll-up/shared'
 import {drawingSuggestions,isDrawingStyle} from '@scroll-up/shared'
 /**
@@ -76,7 +77,7 @@ import { ApiError, badRequest } from './errors.ts'
 
 export interface AppDeps {
   prisma: PrismaClient
-  config: Pick<Config, 'botToken' | 'devAuth' | 'initDataMaxAge' | 'signingSecret' | 'appDistDir'> & Partial<Pick<Config, 'adminIds'>>
+  config: Pick<Config, 'botToken' | 'devAuth' | 'initDataMaxAge' | 'signingSecret' | 'appDistDir'> & Partial<Pick<Config, 'adminIds' | 'guestAuth' | 'webAppUrl'>>
   photos: PhotoService
   /** Middleware du webhook Telegram, monté avant l'API (mode webhook). */
   webhook?: { path: string; handler: RequestHandler }
@@ -141,6 +142,20 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
 
   /* --------------------------- Authentification --------------------------- */
 
+  api.post('/guest-session', (req, res, next) => {
+    if (!config.guestAuth) return next(new ApiError(403, 'unauthorized', 'L’accès invité n’est pas disponible sur cette version.'))
+    // Same-origin cookie sessions only. No arbitrary identities or development auth in production.
+    const origin = req.get('origin')
+    const expectedOrigin = config.webAppUrl ? new URL(config.webAppUrl).origin : `${req.protocol}://${req.get('host')}`
+    if (origin && origin !== expectedOrigin) return next(new ApiError(403, 'unauthorized', 'Origine non autorisée.'))
+    const existing = guestCookieValue(req.get('cookie'))
+    const token = verifyGuestSession(existing, config.signingSecret, now()) === undefined ? createGuestSession(config.signingSecret, now()) : existing
+    res.setHeader('Cache-Control', 'no-store')
+    res.cookie(GUEST_COOKIE, token, {httpOnly: true, secure: expectedOrigin.startsWith('https:'), sameSite: 'strict', path: '/api', maxAge: guestCookieMaxAge})
+    res.json({ok: true, guest: true})
+  })
+
+
   api.use((req: Request, res: Response, next: NextFunction) => {
     const header = req.get('authorization') ?? ''
     const [scheme, ...rest] = header.split(' ')
@@ -150,6 +165,13 @@ export function createApp({ prisma, config, photos, webhook, notify, botUsername
         const { user } = validateInitData(value, config.botToken, { maxAgeSeconds: config.initDataMaxAge, now: now() })
         ;(res.locals as AuthLocals).telegramUser = user
         return next()
+      }
+      if (!header && config.guestAuth) {
+        const id = verifyGuestSession(guestCookieValue(req.get('cookie')), config.signingSecret, now())
+        if (id !== undefined) {
+          ;(res.locals as AuthLocals).telegramUser = {id, first_name: 'Invité', allows_write_to_pm: false}
+          return next()
+        }
       }
       if (scheme === 'dev' && config.devAuth && /^\d{1,15}$/.test(value)) {
         ;(res.locals as AuthLocals).telegramUser = { id: Number(value), first_name: req.get('x-dev-first-name') ?? 'Camille' }

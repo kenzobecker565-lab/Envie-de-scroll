@@ -26,6 +26,8 @@ export interface Config {
   webhookSecret: string
   /** Accepte `Authorization: dev <id>` (développement hors Telegram). Jamais en production. */
   devAuth: boolean
+  /** Isolated guest profiles for the presentation and Android demo. */
+  guestAuth: boolean
   /** Durée de validité des initData Telegram, en secondes. */
   initDataMaxAge: number
   /** Clé qui signe les adresses des photos. */
@@ -92,6 +94,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     botMode: botToken ? botMode : 'off',
     webhookSecret: createHash('sha256').update(`scroll-up-webhook:${botToken ?? ''}`).digest('hex').slice(0, 48),
     devAuth,
+    guestAuth: bool(env.GUEST_AUTH, env.RAILWAY_GIT_BRANCH === 'develop' || env.RAILWAY_PUBLIC_DOMAIN === 'envie-de-scroll-scroll-up-devellopment.up.railway.app'),
     initDataMaxAge: int(env.INIT_DATA_MAX_AGE, 24 * 3600),
     signingSecret,
     reminderHour: Math.min(23, Math.max(0, int(env.REMINDER_HOUR, 19))),

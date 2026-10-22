@@ -1,0 +1,11 @@
+{
+  "name": "@scroll-up/offline",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Version hors ligne de Scroll-up (APK de présentation) : l'app et un serveur local qui reprend les services du serveur.",
+  "scripts": {
+    "build": "vite build --config vite.config.ts",
+    "dev": "vite --config vite.config.ts"
+  }
+}

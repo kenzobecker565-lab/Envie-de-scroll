@@ -30,3 +30,8 @@ android/.gradle/
 android/local.properties
 *.jks
 *.keystore
+
+# Version hors ligne (APK de présentation)
+offline/dist/
+android/offline/build/
+*.p12

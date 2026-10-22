@@ -48,7 +48,15 @@ function devUser(): string {
   return fromUrl && /^\d{1,15}$/.test(fromUrl) ? fromUrl : '1'
 }
 
+/**
+ * Version hors ligne (APK de présentation, dossier offline/) : un serveur local
+ * tourne dans l'app et répond à la place de /api. Aucune connexion nécessaire.
+ */
+type LocalApi = (input: string, init?: RequestInit) => Promise<Response>
+const localApi = (): LocalApi | undefined => (globalThis as { __SCROLLUP_LOCAL_API__?: LocalApi }).__SCROLLUP_LOCAL_API__
+
 function authorization(): string | undefined {
+  if (localApi()) return 'local'
   if (telegram?.initData) return `tma ${telegram.initData}`
   if (import.meta.env.DEV) return `dev ${devUser()}`
   return undefined
@@ -86,7 +94,7 @@ async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
 
   let response: Response
   try {
-    response = await fetch(`/api${path}`, { ...init, headers, credentials: 'same-origin' })
+    response = await (localApi() ?? fetch)(`/api${path}`, { ...init, headers, credentials: 'same-origin' })
   } catch {
     throw new ApiError('network', 'La connexion a flanché. Vérifie ton réseau et réessaie.')
   }

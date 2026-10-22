@@ -15,11 +15,36 @@ export const hasNativeMainButton = Boolean(telegram && supports.mainButton)
 /** Fenêtres ouvertes par-dessus l'écran : le bouton retour les ferme d'abord. */
 const overlays: (() => void)[] = []
 
+/**
+ * Hors de Telegram, l'application Android envoie l'événement
+ * `scrollup-android-back` quand on appuie sur « Retour » : la fenêtre ouverte
+ * se ferme, sinon on revient à l'écran précédent. S'il n'y a plus rien à
+ * fermer, l'événement n'est pas annulé et Android propose de quitter.
+ */
+let screenBack: (() => void) | undefined
+if (typeof window !== 'undefined') {
+  window.addEventListener('scrollup-android-back', (event) => {
+    const close = overlays.at(-1) ?? screenBack
+    if (!close) return
+    event.preventDefault()
+    close()
+  })
+}
+
 /** Affiche le bouton retour de Telegram tant que `onBack` est défini. */
 export function useBackButton(onBack: (() => void) | undefined): void {
   const handler = useRef(onBack)
   handler.current = onBack
   const visible = onBack !== undefined
+
+  useEffect(() => {
+    if (!visible) return
+    const back = () => handler.current?.()
+    screenBack = back
+    return () => {
+      if (screenBack === back) screenBack = undefined
+    }
+  }, [visible])
 
   useEffect(() => {
     if (!telegram || !hasNativeBackButton) return

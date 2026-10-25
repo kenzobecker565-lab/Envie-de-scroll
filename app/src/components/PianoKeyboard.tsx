@@ -3,7 +3,7 @@ import { ArrowRight, AudioWaveform, Check, Volume2, Music2, Maximize2, RotateCcw
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { keyboardKeys, keyboardWindow, melodyParts, midiNumber, noteLabel, type Melody, type MelodyPart } from '@scroll-up/shared'
+import { keyboardKeys, keyboardWindow, melodyParts, midiNumber, noteLabel, type Melody, type MelodyPart, type PianoSupport } from '@scroll-up/shared'
 import { cn } from '@/lib/utils'
 import { track } from '../api/client.ts'
 import { playNote, type NoteHandle } from '../lib/pianoSound.ts'
@@ -56,7 +56,7 @@ function readPedal(): boolean {
 /* ------------------------------ Le jeu en cours ----------------------------- */
 
 /** Tout l'état d'un morceau au clavier, partagé entre le clavier de l'activité et le grand écran. */
-function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | undefined, onNote?: (note:string,down:boolean)=>void, draftKey?:string) {
+function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | undefined, onNote?: (note:string,down:boolean)=>void, draftKey?:string, support?:PianoSupport, onMistake?:()=>void) {
   const [speed,setSpeed]=useState(1),[showNames,setShowNames]=useState(true),[showGuide,setShowGuide]=useState(true),[metronome,setMetronome]=useState(false),[keyWidth,setKeyWidth]=useState(42)
   const noteCallback=useRef(onNote);noteCallback.current=onNote
   useEffect(()=>{if(!metronome)return;const timer=window.setInterval(()=>{const h=playNote('C6');window.setTimeout(()=>h.release(),35)},600/speed);return()=>window.clearInterval(timer)},[metronome,speed])
@@ -83,7 +83,8 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
   useEffect(()=>{if(!draftKey)return;try{localStorage.setItem(draftKey,JSON.stringify({part,step,cleared:[...cleared]}))}catch{/* The current play remains usable. */}},[draftKey,part,step,cleared])
   useEffect(()=>{if(allDone&&!completed.current){completed.current=true;onComplete?.()}},[allDone,onComplete])
   const target = current && !partDone ? notes[step] : undefined
-  const lit = demo !== null ? notes[demo] : target
+  const guidance = !support || support === 'guided' || (support === 'start' && step === 0)
+  const lit = demo !== null ? notes[demo] : guidance ? target : undefined
   // La partie suivante à apprendre : la première pas encore jouée.
   const nextPart = parts.findIndex((_, index) => !cleared.has(index) && index !== part)
 
@@ -126,7 +127,8 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
     if (note !== target) {
       if (target) {
         haptics.impact('light')
-        setMiss(`Presque ! Cherche le ${noteLabel(target)}.`)
+        onMistake?.()
+        setMiss(guidance ? `Presque ! Cherche le ${noteLabel(target)}.` : 'Essaie une autre note. Tu peux reprendre la phrase avec de l’aide.')
       }
       return
     }
@@ -200,15 +202,15 @@ function usePianoPlay(melody: Melody | undefined, onComplete: (() => void) | und
   })
 
   useEffect(()=>()=>{held.current.forEach(h=>h.release());ringing.current.forEach(h=>h.release())},[])
-  return { speed,setSpeed,showNames,setShowNames,showGuide,setShowGuide,metronome,setMetronome,keyWidth,setKeyWidth, melody, parts, part, current, notes, step, partDone, allDone, target, lit, demo, miss, cleared, nextPart, pressed, pedal, setPedal, listen, goTo, keyProps }
+  return { support, guidance, speed,setSpeed,showNames,setShowNames,showGuide:guidance&&showGuide,setShowGuide,metronome,setMetronome,keyWidth,setKeyWidth, melody, parts, part, current, notes, step, partDone, allDone, target, lit, demo, miss, cleared, nextPart, pressed, pedal, setPedal, listen, goTo, keyProps }
 }
 
 type PianoPlay = ReturnType<typeof usePianoPlay>
 
 /* -------------------------------- Le clavier -------------------------------- */
 
-export function PianoKeyboard({ melody, onComplete, onNote, layout, draftKey, help }: { melody?: Melody; onComplete?: () => void; onNote?:(note:string,down:boolean)=>void; layout?:'activity';draftKey?:string;help?:ReactNode }) {
-  const play = usePianoPlay(melody, onComplete, onNote,draftKey)
+export function PianoKeyboard({ melody, onComplete, onNote, layout, draftKey, help, support, onMistake }: { support?:PianoSupport;onMistake?:()=>void;melody?: Melody; onComplete?: () => void; onNote?:(note:string,down:boolean)=>void; layout?:'activity';draftKey?:string;help?:ReactNode }) {
+  const play = usePianoPlay(melody, onComplete, onNote,draftKey,support,onMistake)
   const [stage, setStage] = useState(false)
   const [range, setRange] = useState<Range>(melody?.notes[0] ? rangeFor(melody.notes[0], 'mid') : 'mid')
   // Juste les touches qu'il faut pour la partie ; sinon une octave, graves ou médium.
@@ -230,10 +232,10 @@ export function PianoKeyboard({ melody, onComplete, onNote, layout, draftKey, he
   if(layout==='activity')return <div className="piano-keyboard piano-activity-keyboard">
     {melody&&<div className="stage-piano-title"><h2>{melody.title}</h2><p>Partie {play.part+1} sur {play.parts.length}</p></div>}
     {play.parts.length>1&&<div className="stage-piano-parts"><PartPills play={play}/></div>}
-    {play.current&&<div className="stage-note-ribbon" aria-label="Notes à jouer">{play.notes.slice(Math.max(0,play.step-1),Math.max(0,play.step-1)+5).map(noteLabel).join(' · ')}</div>}
+    {play.current&&play.guidance&&<div className="stage-note-ribbon" aria-label="Notes à jouer">{(play.support==='start'?play.notes.slice(0,1):play.notes.slice(Math.max(0,play.step-1),Math.max(0,play.step-1)+5)).map(noteLabel).join(' · ')}</div>}
     <div className="stage-piano-keys"><Keys play={play} from={portion?.from??RANGES[range].from} to={portion?.to??RANGES[range].to}/></div>
     <div className="stage-piano-status"><Status play={play}/></div>
-    <div className="stage-piano-controls">{melody?<ListenButton onClick={play.listen}/>:<PedalButton play={play}/>}<button type="button" aria-pressed={play.showGuide} onClick={()=>play.setShowGuide(!play.showGuide)}><Music2/>Guide</button><button type="button" onClick={openStage}><Maximize2/>Grand écran</button></div>
+    <div className="stage-piano-controls">{melody?(play.support!=='memory'&&<ListenButton onClick={play.listen}/>):<PedalButton play={play}/>}{!play.support&&<button type="button" aria-pressed={play.showGuide} onClick={()=>play.setShowGuide(!play.showGuide)}><Music2/>Guide</button>}<button type="button" onClick={openStage}><Maximize2/>Grand écran</button></div>
     <details onToggle={e=>setOptions(e.currentTarget.open)}><summary><Lightbulb size={16} className="inline"/> Un coup de main ?</summary>{options&&<>{help}<PianoControls play={play}/><PedalButton play={play}/>{play.current&&<NotesSheet play={play}/>}</>}</details>
     {stage&&createPortal(<PianoStage play={play} onClose={()=>setStage(false)}/>,document.body)}
   </div>
@@ -243,7 +245,7 @@ export function PianoKeyboard({ melody, onComplete, onNote, layout, draftKey, he
         <div className="flex flex-col gap-2.5">
           <div className="flex items-center justify-between gap-2">
             <span className="min-w-0 font-display text-17 leading-tight font-extrabold tracking-tight text-ink">{melody.title}</span>
-            <ListenButton onClick={play.listen} />
+            {play.support!=='memory'&&<ListenButton onClick={play.listen} />}
           </div>
           {play.parts.length > 1 && <PartPills play={play} />}
           <NotesSheet play={play} />
@@ -379,7 +381,7 @@ function PianoStage({ play, onClose }: { play: PianoPlay; onClose: () => void })
               </span>
             )}
             <PedalButton play={play} />
-            {play.melody && <ListenButton onClick={play.listen} />}
+            {play.melody && play.support!=='memory'&&<ListenButton onClick={play.listen} />}
           </span>
         </div>
         <div className="piano-stage-controls"><PianoControls play={play} compact/><label>Registre <select aria-label="Registre du clavier" value={octave??'auto'} onChange={e=>setOctave(e.target.value==='auto'?null:+e.target.value)}><option value="auto">Adapté au morceau</option><option value="2">Grave · Do2–Do4</option><option value="3">Central · Do3–Do5</option><option value="4">Aigu · Do4–Do6</option></select></label></div>
@@ -460,7 +462,7 @@ function PartPills({ play, compact = false }: { play: PianoPlay; compact?: boole
  * trait, pour laisser la hauteur au clavier.
  */
 function NotesSheet({ play, strip = false }: { play: PianoPlay; strip?: boolean }) {
-  if (!play.current || !play.melody) return null
+  if (!play.current || !play.melody || (play.support && play.support!=='guided')) return null
   let offset = 0
   const chip = (note: string, index: number) => {
     const now = play.demo !== null ? index === play.demo : index === play.step
@@ -511,7 +513,7 @@ function Status({ play, onDone }: { play: PianoPlay; onDone?: () => void }) {
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-pill border-2 border-outline bg-good text-on-color">
               <Check size={15} strokeWidth={3} aria-hidden="true" />
             </span>
-            {play.parts.length > 1 ? 'Tout le morceau est joué !' : 'C’est joué, note pour note !'}
+            {play.support ? 'Passage joué' : play.parts.length > 1 ? 'Tout le morceau est joué !' : 'C’est joué, note pour note !'}
           </span>
           <span className="flex shrink-0 items-center gap-3">
             <button type="button" onClick={() => play.goTo(0)} className="inline-flex items-center gap-1 text-14 font-extrabold text-ink underline decoration-2 underline-offset-4">
@@ -549,7 +551,7 @@ function Status({ play, onDone }: { play: PianoPlay; onDone?: () => void }) {
         </motion.div>
       ) : (
         <motion.p key="hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-13 font-semibold text-ink-soft" aria-live="polite">
-          {play.miss ?? (play.target ? `Joue la touche qui s’allume : ${noteLabel(play.target)} (${play.step + 1}/${play.notes.length}).` : '')}
+          {play.miss ?? (play.target ? play.guidance ? `Joue la touche indiquée : ${noteLabel(play.target)} (${play.step + 1}/${play.notes.length}).` : `Retrouve la suite de mémoire (${play.step + 1}/${play.notes.length}).` : '')}
         </motion.p>
       )}
     </AnimatePresence>

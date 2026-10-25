@@ -98,11 +98,13 @@ describe('piano : niveau et contenu ciblé', () => {
     await propose({ passion: 'piano', duration: 5, step: 'parcours-premieres-touches-2' })
   })
 
-  it('un tuto de chanson se valide aussi au clavier ; « joué » ne vaut que pour le piano', async () => {
+  it('une séance piano exige le temps de pratique même après un passage joué', async () => {
     await onboard(['piano', 'musique'])
     const song = await propose({ passion: 'piano', mood: 'ennui', duration: 15 })
     expect(song.text).toMatch(/^Apprends /)
-    const done = await request(app).post('/api/completions').set(as()).send({ proposalId: song.id, played: true }).expect(201)
+    await request(app).post('/api/completions').set(as()).send({ proposalId: song.id, played: true }).expect(409)
+    clock.advanceMinutes(15)
+    const done = await request(app).post('/api/completions').set(as()).send({ proposalId: song.id, played: true, exploredTitle: 'Extrait · Séance de pratique' }).expect(201)
     expect(done.body.completion.exploredTitle).toBeTruthy()
     const listening = await propose({ passion: 'musique', mood: 'ennui', duration: 15 })
     await request(app).post('/api/completions').set(as()).send({ proposalId: listening.id, played: true }).expect(409)

@@ -43,3 +43,5 @@ export * from "./scrollFlow.ts"
 export * from './activityBriefs.ts'
 
 export * from './onboardingGuides.ts'
+
+export * from './pianoPractice.ts'

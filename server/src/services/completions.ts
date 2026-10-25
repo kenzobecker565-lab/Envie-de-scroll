@@ -1,6 +1,7 @@
 import {drawingActivity} from '@scroll-up/shared'
 import { validateSport } from '@scroll-up/shared'
 import {
+  isPianoPracticeActivity,
   coinsFor,
   isWorkshop,
   isBaseActivity,
@@ -99,6 +100,7 @@ export async function completeProposal(
   const activeSeconds=activeSessionSeconds(proposal,now)
   const hasProof = Boolean(text || photo || melody || workshop)
   const unlocked = proposal.timerTracked ? activeSeconds*1000>=duration*60000-UNLOCK_TOLERANCE_MS : now.getTime() >= unlockTime(proposal.createdAt, duration).getTime() - UNLOCK_TOLERANCE_MS
+  if (!external && isPianoPracticeActivity(proposal.activityId) && !unlocked) throw new ApiError(409, 'too_early', 'Continue à pratiquer jusqu’à la fin de la séance.')
   if (!external && !drawing && !hasProof && !unlocked) {
     throw passion.timeGuard
       ? new ApiError(409, 'too_early', `Encore un peu de patience\u00A0: l’activité dure ${duration} minutes.`)

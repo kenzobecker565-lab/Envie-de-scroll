@@ -7,7 +7,7 @@
  * manqués. Un niveau ne redescend pas.
  */
 
-import { ACTIVITIES } from './activities.ts'
+import { activitiesFor } from './activities.ts'
 import { DURATIONS, type Activity, type Duration, type PassionId } from './types.ts'
 
 /** Minutons à gagner dans une passion pour atteindre les niveaux 1 à 5. */
@@ -72,12 +72,12 @@ export function levelCrossed(passion: PassionId, before: number, after: number):
 
 /** La collection d'une passion : ses activités, rangées par temps. */
 export function collection(passion: PassionId): { duration: Duration; activities: Activity[] }[] {
-  return DURATIONS.map((duration) => ({ duration, activities: ACTIVITIES.filter((activity) => activity.passion === passion && activity.duration === duration && activity.number < 16) }))
+  return DURATIONS.map((duration) => ({ duration, activities: activitiesFor(passion,duration) }))
 }
 
 /** Nombre d'activités dans la collection d'une passion. */
 export function collectionSize(passion: PassionId): number {
-  return ACTIVITIES.filter((activity) => activity.passion === passion && activity.number < 16).length
+  return DURATIONS.reduce((total,duration)=>total+activitiesFor(passion,duration).length,0)
 }
 
 /** Nombre de mots d'un texte (écriture). */

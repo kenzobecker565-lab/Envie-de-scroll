@@ -8,7 +8,7 @@ describe('les repères des activités proposées',()=>{
   const titles=new Set<string>()
   for(const passion of ACTIVE_PASSION_IDS)for(const duration of [5,15,30] as const){
    const activities=activitiesFor(passion,duration)
-   expect(activities).toHaveLength(5)
+   expect(activities).toHaveLength(passion==='piano'?3:5)
    for(const activity of activities){
     const original=JSON.stringify(activity),brief=activityBrief(activity)
     expect(brief,activity.id).toBeDefined()

@@ -94,10 +94,10 @@ function seeded(seed: number): () => number {
 
 describe('bibliothèque des 60 activités', () => {
   it('contient 5 activités par passion et par temps : 60 pour la V1, 75 avec le Piano', () => {
-    expect(ACTIVITIES.filter(a=>!['rythme','sport','logique','francais'].includes(a.passion))).toHaveLength(75)
+    expect(ACTIVITIES.filter(a=>a.number<16&&!['rythme','sport','logique','francais'].includes(a.passion))).toHaveLength(75)
     expect(ACTIVITIES.filter((activity) => ['dessin','ecriture','musique','cinema'].includes(activity.passion))).toHaveLength(60)
     for (const passion of PASSION_IDS) {
-      for (const duration of DURATIONS) expect(activitiesFor(passion, duration)).toHaveLength(5)
+      for (const duration of DURATIONS) expect(activitiesFor(passion, duration)).toHaveLength(passion==='piano'?3:5)
     }
   })
 
@@ -333,8 +333,8 @@ describe('progression par passion', () => {
   it('a cinq titres par passion et une collection de 15 activités, 5 par temps', () => {
     for (const passion of PASSION_IDS) {
       expect(LEVEL_TITLES[passion]).toHaveLength(5)
-      expect(collectionSize(passion)).toBe(15)
-      expect(collection(passion).map((group) => group.activities.length)).toEqual([5, 5, 5])
+      expect(collectionSize(passion)).toBe(passion==='piano'?9:15)
+      expect(collection(passion).map((group) => group.activities.length)).toEqual(passion==='piano'?[3,3,3]:[5,5,5])
     }
   })
 })
@@ -536,8 +536,8 @@ describe('piano : niveau, contenu ciblé, mélodies', () => {
   })
 
   it('« J’ai envie de scroller » au piano : que des tutos de chansons, chaque partie tient à l’écran et sur le clavier', () => {
-    const songs = ACTIVITIES.filter((activity) => activity.passion === 'piano')
-    expect(songs).toHaveLength(15)
+    const songs = DURATIONS.flatMap(duration=>activitiesFor('piano',duration))
+    expect(songs).toHaveLength(9)
     for (const song of songs) {
       expect(song.text, song.id).toMatch(/^Apprends /)
       const tune = keyboardMelody(song.id)

@@ -1,3 +1,4 @@
+import {pianoFreeMelody,pianoFreePiece} from './pianoFree.ts'
 /**
  * ============================================================================
  *  AIDER À DÉMARRER : astuces, idées concrètes, défis en plus
@@ -913,12 +914,16 @@ const PASSION_GUIDES: Record<PassionId, ActivityGuide> = {
  * est jouée jusqu'au bout, l'activité est réussie, sans attendre une durée.
  */
 export function keyboardMelody(activityId: string): Melody | undefined {
+  const free=pianoFreeMelody(activityId)
+  if(free)return free
   const activity = getPathStep(activityId) ?? getActivity(activityId)
   return activity?.passion === 'piano' ? GUIDES[activityId]?.melody : undefined
 }
 
 /** Le guide d'une activité ; pour une étape de parcours ou un mot du jour, les pistes générales de sa passion. */
 export function guideFor(activityId: string): ActivityGuide | undefined {
+  const piece=pianoFreePiece(activityId)
+  if(piece)return buildGuide({tips:[...piece.tips],melody:pianoFreeMelody(activityId)})
   const guide = GUIDES[activityId]
   if (guide) return guide
   const fixed = getPathStep(activityId) ?? getChallengeActivity(activityId)

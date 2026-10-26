@@ -1,0 +1,27 @@
+import { melody, type Melody } from './keyboard.ts'
+import type { Activity, Duration } from './types.ts'
+
+/** Our one-hand excerpts of public-domain compositions; no third-party recordings. */
+export interface PianoFreePiece {
+ id:string;duration:Duration;title:string;composer:string;excerpt:string;notation:string;beats:readonly number[];source:string;tips:readonly string[]
+}
+const cancan='G3 C4 D4 F4 E4 D4 G4 G4'
+const elise='E5 D#5 E5 D#5 E5 B4 D5 C5 A4'
+export const PIANO_FREE_PIECES:readonly PianoFreePiece[]=[
+ {id:'piano-free-cancan-5',duration:5,title:'French Cancan',composer:'Jacques Offenbach',excerpt:'La boucle du galop',notation:cancan,beats:[.5,.5,.5,.5,.5,.5,1,1],source:'https://imslp.org/wiki/Orph%C3%A9e_aux_enfers_(Offenbach,_Jacques)',tips:['Repère le Sol sous le Do central.','Commence lentement : les premières notes montent, puis reviennent au Sol.','Répète la même boucle sans chercher la vitesse du cancan.']},
+ {id:'piano-free-korobeiniki-5',duration:5,title:'Korobeiniki',composer:'Air traditionnel russe',excerpt:'Le motif traditionnel associé à Tetris',notation:'E4 B3 C4 D4 C4 B3 A3 A3 C4 E4 D4 C4 B3',beats:[1,.5,.5,1,.5,.5,1,.5,.5,1,.5,.5,1.5],source:'https://commons.wikimedia.org/wiki/File:Korobeiniki.svg',tips:['Commence sur Mi, puis descends au Si.','Repère le retour au La, ton point de repos.','Il s’agit de l’air traditionnel, adapté pour une main.']},
+ {id:'piano-free-grieg-5',duration:5,title:'Dans l’antre du roi de la montagne',composer:'Edvard Grieg',excerpt:'Le premier motif, sans accélération',notation:'A3 B3 C4 D4 E4 C4 E4',beats:[.5,.5,.5,.5,.5,.5,1],source:'https://www.mutopiaproject.org/ftp/GriegE/O46/Dans_l_antre_du_roi_de_la_montagne/Dans_l_antre_du_roi_de_la_montagne-let.pdf',tips:['Le motif est transposé pour commencer sur La.','Monte jusqu’au Mi, puis reviens au Do.','Garde une vitesse régulière, même après plusieurs répétitions.']},
+ {id:'piano-free-habanera-15',duration:15,title:'Habanera de Carmen',composer:'Georges Bizet',excerpt:'Deux phrases descendantes',notation:'D5 D5 C#5 C5 C5 B4 A#4 A4 | A4 A4 G#4 G4 G4 F#4 F4 E4',beats:[.75,.25,.5,.5,.75,.25,.5,1,.75,.25,.5,.5,.75,.25,.5,1],source:'https://imslp.org/wiki/Carmen_(Bizet,_Georges)',tips:['Observe les touches noires avant de commencer.','La mélodie descend par petits pas.','Travaille une phrase à la fois, puis relie les deux à vitesse lente.']},
+ {id:'piano-free-gymnopedie-15',duration:15,title:'Gymnopédie nº 1',composer:'Erik Satie',excerpt:'Les premières notes de la mélodie',notation:'F#4 A4 G4 F#4 | C#4 B3 C#4 D4 A3 F#3',beats:[1,1,1,1,1,1,1,1,3,6],source:'https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=37',tips:['Cette version transpose la mélodie une octave plus bas.','Laisse sonner les notes longues.','La fin descend vers le grave : repère-la avant de relier les phrases.']},
+ {id:'piano-free-elise-15',duration:15,title:'Lettre à Élise',composer:'Ludwig van Beethoven',excerpt:'Le motif célèbre et sa réponse',notation:elise+' | C4 E4 A4 B4 E4 G#4 B4 C5',beats:[.5,.5,.5,.5,.5,.5,.5,.5,1.5,.5,.5,.5,1.5,.5,.5,.5,1.5],source:'https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931',tips:['Repère le Mi et le Ré dièse voisins.','Travaille séparément les deux petits déplacements de la réponse.','Le but est le rappel des notes, à une vitesse confortable.']},
+ {id:'piano-free-cancan-30',duration:30,title:'French Cancan',composer:'Jacques Offenbach',excerpt:'Le thème développé',notation:cancan+' | G4 A4 E4 F4 D4 D4 D4 F4 | E4 D4 C4 C5 B4 A4 G4 F4 | E4 D4 C4 G4 D4 E4 C4',beats:[.5,.5,.5,.5,.5,.5,1,1,.5,.5,.5,.5,.5,.5,1,1,.5,.5,1,.5,.5,.5,.5,1,.5,.5,1,1,.5,.5,2],source:'https://imslp.org/wiki/Orph%C3%A9e_aux_enfers_(Offenbach,_Jacques)',tips:['Apprends les quatre phrases sans accélérer.','La troisième phrase descend du Do aigu : prépare ce déplacement.','Rejoue chaque raccord avant de tenter tout l’extrait.']},
+ {id:'piano-free-elise-30',duration:30,title:'Lettre à Élise',composer:'Ludwig van Beethoven',excerpt:'Le premier thème développé',notation:elise+' | C4 E4 A4 B4 E4 G#4 B4 C5 | '+elise+' | C4 E4 A4 B4 E4 C5 B4 A4',beats:[.5,.5,.5,.5,.5,.5,.5,.5,1.5,.5,.5,.5,1.5,.5,.5,.5,1.5,.5,.5,.5,.5,.5,.5,.5,.5,1.5,.5,.5,.5,1.5,.5,.5,.5,2],source:'https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=931',tips:['La troisième phrase reprend la première.','Les deux réponses ne finissent pas de la même façon.','Joue les raccords lentement avant l’essai sans indication.']},
+ {id:'piano-free-canon-30',duration:30,title:'Canon de Pachelbel',composer:'Johann Pachelbel',excerpt:'Quatre phrases du thème',notation:'F#4 E4 D4 C#4 | B3 A3 B3 C#4 | D4 C#4 B3 A3 | G3 F#3 G3 E3',beats:[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],source:'https://imslp.org/wiki/Canon_and_Gigue_in_D_major,_P.37_(Pachelbel,_Johann)',tips:['Apprends d’abord le dessin des notes qui descendent.','Pose chaque note régulièrement.','La dernière phrase descend davantage : prépare ta main avant le raccord.']},
+]
+export const pianoFreePiece=(id:string)=>PIANO_FREE_PIECES.find(piece=>piece.id===id)
+export function pianoFreeMelody(id:string):Melody|undefined {
+ const piece=pianoFreePiece(id)
+ if(!piece)return undefined
+ return {...melody(piece.title+' · '+piece.excerpt,piece.notation),beats:piece.beats}
+}
+export const PIANO_FREE_ACTIVITIES:readonly Activity[]=PIANO_FREE_PIECES.map((p,i)=>({id:p.id,passion:'piano',duration:p.duration,number:100+i,text:`Apprends « ${p.title} » : ${p.excerpt.toLocaleLowerCase('fr')}. Écoute, répète et retrouve les notes sans indication.`}))

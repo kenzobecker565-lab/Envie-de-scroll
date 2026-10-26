@@ -45,3 +45,5 @@ export * from './activityBriefs.ts'
 export * from './onboardingGuides.ts'
 
 export * from './pianoPractice.ts'
+
+export * from './pianoFree.ts'

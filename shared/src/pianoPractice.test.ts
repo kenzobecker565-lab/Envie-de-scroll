@@ -26,7 +26,7 @@ describe('apprendre un extrait au piano',()=>{
   expect(pianoPracticeExcerpt(original,30).phrases).toHaveLength(4)
   expect(original.phrases).toHaveLength(5)
  })
- it('prépare trois propositions modernes par durée sans mélodies de substitution',()=>{
+ it('propose trois extraits du domaine public par durée',()=>{
   for(const duration of [5,15,30])expect(PIANO_BEGINNER_CATALOG.filter(a=>a.duration===duration)).toHaveLength(3)
   expect(new Set(PIANO_BEGINNER_CATALOG.map(a=>a.id)).size).toBe(9)
  })

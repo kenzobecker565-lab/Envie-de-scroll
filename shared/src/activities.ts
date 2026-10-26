@@ -1,3 +1,4 @@
+import {PIANO_FREE_ACTIVITIES} from './pianoFree.ts'
 import {drawingActivity} from './drawing.ts'
 /**
  * ============================================================================
@@ -173,7 +174,7 @@ function build(): Activity[] {
   return list
 }
 
-export const ACTIVITIES: readonly Activity[] = [...build(), ...WORKSHOP_ACTIVITIES.filter(a=>a.number>=16), ...SPORT_ACTIVITIES.filter(a=>a.number>=16)]
+export const ACTIVITIES: readonly Activity[] = [...build(), ...PIANO_FREE_ACTIVITIES, ...WORKSHOP_ACTIVITIES.filter(a=>a.number>=16), ...SPORT_ACTIVITIES.filter(a=>a.number>=16)]
 
 const BY_ID = new Map(ACTIVITIES.map((activity) => [activity.id, activity]))
 
@@ -194,5 +195,6 @@ export function isBaseActivity(id: string): boolean {
 
 /** Les 5 activités d'une passion pour un temps donné. */
 export function activitiesFor(passion: PassionId, duration: Duration): Activity[] {
+  if(passion==='piano')return PIANO_FREE_ACTIVITIES.filter(a=>a.duration===duration)
   return ACTIVITIES.filter((activity) => activity.passion === passion && activity.duration === duration && activity.number < 16)
 }

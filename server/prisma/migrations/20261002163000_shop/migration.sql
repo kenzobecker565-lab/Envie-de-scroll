@@ -1,0 +1,11 @@
+ALTER TABLE "User" ADD COLUMN "coinsSpent" INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE "User" ADD COLUMN "shopEquipment" TEXT NOT NULL DEFAULT '{}';
+CREATE TABLE "ShopPurchase" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" BIGINT NOT NULL,
+  "itemId" TEXT NOT NULL,
+  "price" INTEGER NOT NULL,
+  "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "ShopPurchase_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE UNIQUE INDEX "ShopPurchase_userId_itemId_key" ON "ShopPurchase"("userId", "itemId");

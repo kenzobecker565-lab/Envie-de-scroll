@@ -1,0 +1,225 @@
+<title>Story Top chrono</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900;1000&display=swap">
+<style>
+/* Story 9:16 de 10 s, calée sur Le grand défilé (136 BPM, une mesure = 1,765 s). */
+:root { --bg: #FFFAF2; --ink: #24113F; --ink-soft: #615179; --accent: #903CF8; --lilac: #F0E4FF; --gold: #FFD568;
+  --font: 'Nunito', 'Nunito Variable', system-ui, -apple-system, sans-serif }
+* { box-sizing: border-box }
+html, body { margin: 0; background: #1A1230; color: var(--ink); font-family: var(--font) }
+body { min-height: 100%; display: grid; place-items: center; padding-inline: 16px; padding-block: 16px }
+.stage { position: relative; width: min(100%, calc((100dvh - 110px) * 9 / 16), 540px); aspect-ratio: 9 / 16 }
+.story { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; overflow: hidden; container-type: size;
+  background: radial-gradient(110% 60% at 50% 32%, #EBDDFF 0%, #FFFAF2 64%); border-radius: 0 }
+.story > * { position: absolute }
+.controls { display: flex; gap: 10px; justify-content: center; margin-top: 14px }
+.controls button { font: inherit; font-weight: 900; font-size: 16px; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--accent); color: #fff; cursor: pointer }
+.controls button.ghost { background: #2E2448; color: #F0E4FF }
+.controls button:focus-visible { outline: 3px solid #D6B8FF; outline-offset: 2px }
+body.render { padding: 0; display: block; background: transparent }
+body.render .stage { width: 1080px; aspect-ratio: auto; height: 1920px }
+body.render .controls { display: none }
+
+.word { left: 0; right: 0; text-align: center; font-weight: 1000; font-size: 17cqw; letter-spacing: -.045em; line-height: 1; white-space: nowrap; color: var(--ink) }
+#word-move > .word { position: absolute }
+.word .ch { display: inline-block; transform-origin: 50% 90% }
+.word .up { color: var(--accent) }
+.ring { width: 76cqw; left: 12cqw; top: calc(34cqh - 38cqw); overflow: visible }
+.ring circle { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50px 50px }
+.ring line { stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; transform-origin: 50px 50px }
+.ring .ticks path { stroke: #D6B8FF; stroke-width: 2.2; stroke-linecap: round }
+.m-pos { width: 52cqw; left: 24cqw; top: calc(34cqh - 27.3cqw); aspect-ratio: 1 / 1.05; z-index: 3 }
+.m-jump { position: absolute; inset: 0; transform-origin: 50% 100% }
+.m-jump img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain }
+.tag { left: 0; right: 0; text-align: center; font-weight: 800; font-size: 5.6cqw; color: var(--ink-soft); top: 65cqh; margin: 0 }
+.head { left: 0; right: 0; top: 21cqh; text-align: center; font-weight: 1000; font-size: 12.5cqw; line-height: 1.08; letter-spacing: -.035em; color: var(--ink) }
+.head .line { display: block; position: relative; height: 1.08em }
+.head .line > span { position: absolute; left: 0; right: 0 }
+.strike { left: 0; right: 0; top: 54%; height: .11em; margin: 0 auto; width: 4.3em; background: var(--accent); border-radius: 99px; transform-origin: 0 50% }
+.head .cree { color: var(--accent) }
+.choose { left: 0; right: 0; top: 23cqh; text-align: center; font-weight: 1000; font-size: 9.6cqw; letter-spacing: -.03em; color: var(--ink) }
+.pill { display: flex; align-items: center; gap: 2cqw; padding: 2.2cqw 4.4cqw 2.2cqw 2.6cqw; border-radius: 99px; font-weight: 900; font-size: 5.4cqw; color: var(--ink); border: .7cqw solid #fff; box-shadow: 0 1.6cqw 3.4cqw #24113F26; z-index: 4; white-space: nowrap }
+.pill i { width: 3.4cqw; height: 3.4cqw; border-radius: 50%; background: var(--ink); opacity: .85; flex: none }
+.caption { left: 50%; translate: -50% 0; top: 78cqh; display: flex; align-items: center; gap: 2.4cqw; padding: 2.4cqw 5cqw; background: var(--ink); color: #fff; border-radius: 99px; font-weight: 900; font-size: 5.2cqw; white-space: nowrap }
+.caption svg { width: 6cqw; height: 6cqw }
+.star { width: 13cqw; height: 13cqw; filter: drop-shadow(0 0 2cqw #CB9EFF) }
+.slogan { left: 0; right: 0; text-align: center; top: 31cqh; font-weight: 900; font-size: 5.3cqw; color: var(--ink-soft); margin: 0 }
+.cta { left: 50%; translate: -50% 0; top: 75cqh; display: flex; align-items: center; gap: 2.6cqw; padding: 3cqw 6.4cqw 3cqw 5cqw; background: var(--accent); color: #fff; border-radius: 99px; font-weight: 1000; font-size: 5cqw; white-space: nowrap; box-shadow: 0 2cqw 5cqw #903CF855; z-index: 5 }
+.cta svg { width: 7cqw; height: 7cqw }
+#pills, #coins { inset: 0 }
+#pills > .pill, #coins > .coin { position: absolute }
+.coin { width: 11cqw; height: 11cqw; left: calc(50cqw - 5.5cqw); top: calc(52cqh - 5.5cqw); z-index: 2 }
+.coin svg { width: 100%; height: 100%; display: block }
+.spark { width: 4.6cqw; height: 4.6cqw; margin: -2.3cqw; background: #B57BFF; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%) }
+</style>
+
+<div class="stage" id="stage">
+  <div class="story" id="story" role="img" aria-label="Story Scroll-up de 10 secondes : Minuton lance le chrono, le nom apparaît, Envie de scroller devient Envie de créer, les six passions, puis le logo et Dispo en test sur Telegram.">
+    <svg class="ring" viewBox="0 0 100 100"><g class="ticks"><path d="M50 2v5M98 50h-5M50 98v-5M2 50h5"/></g><circle cx="50" cy="50" r="46" pathLength="100" stroke-dasharray="100"/><line x1="50" y1="50" x2="50" y2="14"/></svg>
+    <div class="spark" style="left:18cqw;top:20cqh"></div><div class="spark" style="left:84cqw;top:26cqh"></div><div class="spark" style="left:14cqw;top:46cqh"></div><div class="spark" style="left:88cqw;top:44cqh"></div>
+    <div id="coins"></div>
+    <div class="m-pos"><div class="m-jump">
+      <img data-pose="wait" src="{{BIG_WAIT}}" alt="">
+      <img data-pose="cheer" src="{{BIG_CHEER}}" alt="">
+      <img data-pose="think" src="{{BIG_THINK}}" alt="">
+      <img data-pose="idea" src="{{BIG_IDEA}}" alt="">
+      <img data-pose="welcome" src="{{BIG_WELCOME}}" alt="">
+    </div></div>
+    <div id="word-move" style="left:0;right:0;top:56cqh;height:17cqw"><div class="word" id="word" style="top:0"></div></div>
+    <svg class="star" id="star" viewBox="0 0 40 40"><path d="M18 1 Q20 0 20 4 L21 11 Q22 14 26 15 L33 17 Q36 18 32 20 L25 22 Q22 23 21 27 L19 34 Q18 38 16 34 L14 27 Q13 24 9 23 L2 21 Q-1 20 3 18 L10 16 Q13 15 14 11 L16 3Z" fill="#AA6AFB"/><path d="M31 26 L33 31 L39 33 L33 35 L31 40 L29 35 L24 33 L29 31Z" fill="#CB9EFF"/></svg>
+    <p class="tag" id="tag">Une minute pour créer</p>
+    <div class="head" id="head"><span class="line" id="l1"><span>Envie de</span></span><span class="line" id="l2"><span id="scroller"><span id="scrollerWord">scroller</span> ?</span><span class="cree" id="cree">créer ?</span><span class="strike" id="strike" style="position:absolute"></span></span></div>
+    <div class="choose" id="choose">Choisis ta passion</div>
+    <div id="pills"></div>
+    <div class="caption" id="caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg>5, 15 ou 30 minutes</div>
+    <p class="slogan" id="slogan">Transforme ton scroll en création.</p>
+    <div class="cta" id="cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 10.5l7 2.5M21 3l-4 18-7-8M21 3 10 13"/></svg>Dispo en test sur Telegram</div>
+  </div>
+</div>
+<div class="controls"><button type="button" id="play">Lire avec le son</button><button type="button" class="ghost" id="mute">Lire sans le son</button></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="coin" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#FFC533" stroke="#FFF0A1" stroke-width="2"/><circle cx="16" cy="16" r="10.5" fill="#FFD95A" stroke="#E79A13" stroke-width="1.5"/><path d="M18 8 L12 16 H18 L14 24" fill="none" stroke="#D88B12" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13 Q8 7 14 6" fill="none" stroke="#FFF8D8" stroke-width="2" stroke-linecap="round"/></symbol></defs></svg>
+<audio id="music" preload="auto" src="{{STORY_MUSIC}}"></audio>
+
+<script>
+document.fonts.ready.then(() => {
+  const T = 10000, BAR = 1764.7, BEAT = BAR / 4
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)]
+  const story = $('#story')
+  if (location.hash === '#render') document.body.classList.add('render')
+
+  // Le nom, lettre par lettre.
+  const word = $('#word')
+  word.innerHTML = [...'Scroll-up'].map((c, i) => `<span class="ch${i >= 7 ? ' up' : ''}">${c}</span>`).join('')
+  // Les passions, autour de Minuton.
+  const PASSIONS = [
+    ['Dessin', '#FFD568', 'left:5cqw;top:37cqh', -6], ['Piano', '#B5DDF4', 'right:5cqw;top:35cqh', 5],
+    ['Écriture', '#E4D2FF', 'left:2cqw;top:51cqh', 4], ['Sport', '#9BEBD3', 'right:3cqw;top:49cqh', -5],
+    ['Logique', '#D6B8FF', 'left:7cqw;top:65cqh', -3], ['Français', '#FFC2B0', 'right:5cqw;top:63cqh', 6]]
+  $('#pills').innerHTML = PASSIONS.map(([n, c, pos, r]) => `<div class="pill" style="${pos};background:${c};rotate:${r}deg"><i></i>${n}</div>`).join('')
+  $('#coins').innerHTML = Array.from({ length: 16 }, () => '<div class="coin"><svg viewBox="0 0 32 32"><use href="#coin"/></svg></div>').join('')
+
+  /** Une piste par élément sur les 10 s : [instant en ms, valeurs, courbe vers l'instant suivant]. */
+  function track(el, keys) {
+    keys = [...keys].sort((a, b) => a[0] - b[0])
+    const frames = []
+    if (keys[0][0] > 0) frames.push({ offset: 0, ...keys[0][1] })
+    keys.forEach(([t, v, e]) => frames.push({ offset: Math.min(1, t / T), ...v, easing: e || 'linear' }))
+    if (keys.at(-1)[0] < T) frames.push({ offset: 1, ...keys.at(-1)[1] })
+    return el.animate(frames, { duration: T, fill: 'both', easing: 'linear' })
+  }
+  const OUT = 'cubic-bezier(.2,.8,.3,1)', IN = 'cubic-bezier(.6,0,1,.6)', INOUT = 'cubic-bezier(.65,0,.35,1)', BACK = 'cubic-bezier(.3,1.5,.5,1)'
+
+  // Les temps forts, sur la grille de la musique.
+  const B2 = BAR, B3 = 2 * BAR, B4 = 3 * BAR, B5 = 4 * BAR      // 1,76 · 3,53 · 5,29 · 7,06 s
+  const JUMP = 3 * BEAT                                          // 1,32 s : le chrono a fait le tour
+
+  /* ---------- Minuton : position par scène, sauts, poses ---------- */
+  const SCENE_Y = { a: 0, b: 26, c: 18, d: 19 }
+  track($('.m-pos'), [
+    [0, { transform: 'none' }], [B3 - 40, { transform: 'none' }, INOUT], [B3 + 420, { transform: `translateY(${SCENE_Y.b}cqh) scale(.92)` }],
+    [B4 - 40, { transform: `translateY(${SCENE_Y.b}cqh) scale(.92)` }, INOUT], [B4 + 380, { transform: `translateY(${SCENE_Y.c}cqh) scale(.86)` }],
+    [B5 - 40, { transform: `translateY(${SCENE_Y.c}cqh) scale(.86)` }, INOUT], [B5 + 380, { transform: `translateY(${SCENE_Y.d}cqh) scale(1)` }]])
+  // Sauts et rebonds (une seule piste, aucun ne se chevauche).
+  const jumps = [[0, { transform: 'translateY(-90cqh) scale(.9,1.1)' }, IN], [BEAT, { transform: 'scale(1.16,.82)' }, OUT], [BEAT + 140, { transform: 'scale(.95,1.06)' }, 'ease-in-out'], [BEAT + 280, { transform: 'none' }]]
+  const hop = (t, h = 10, squash = .12) => jumps.push(
+    [t, { transform: 'none' }, 'ease-out'], [t + 70, { transform: `scale(${1 + squash},${1 - squash})` }, OUT],
+    [t + 260, { transform: `translateY(-${h}cqh) scale(.95,1.06)` }, IN], [t + 440, { transform: `scale(${1 + squash * .7},${1 - squash * .7})` }, 'ease-out'], [t + 540, { transform: 'none' }])
+  hop(JUMP, 11); hop(B2 + 2 * BEAT, 3, .05); hop(B3, 6); hop(B3 + 2 * BEAT, 4, .07); hop(B4, 7); hop(B5, 14, .14)
+  for (let t = B5 + 2 * BEAT; t < T - 500; t += 2 * BEAT) hop(t, 3, .05)
+  track($('.m-jump'), jumps)
+  const poses = [['wait', 0, JUMP + 20], ['cheer', JUMP + 20, B3], ['think', B3, B3 + 2 * BEAT], ['idea', B3 + 2 * BEAT, B4], ['welcome', B4, B5], ['cheer', B5, T + 1]]
+  $$('[data-pose]').forEach(img => {
+    const keys = [[0, { opacity: 0 }]]
+    poses.filter(p => p[0] === img.dataset.pose).forEach(([, a, b]) => { keys.push([a - 1, { opacity: 0 }], [a, { opacity: 1 }]); if (b < T) keys.push([b - 1, { opacity: 1 }], [b, { opacity: 0 }]) })
+    if (img.dataset.pose === 'wait') keys.splice(0, 2, [0, { opacity: 1 }])
+    track(img, keys)
+  })
+
+  /* ---------- Scène A : le chrono ---------- */
+  const ring = $('.ring')
+  track(ring, [[0, { opacity: 0, transform: 'scale(.85)' }], [BEAT - 60, { opacity: 0, transform: 'scale(.85)' }, OUT], [BEAT + 200, { opacity: 1, transform: 'scale(1)' }], [JUMP, { opacity: 1, transform: 'scale(1)' }, 'ease-out'], [JUMP + 260, { opacity: 0, transform: 'scale(1.45)' }]])
+  track($('.ring circle'), [[0, { strokeDashoffset: 100 }], [BEAT + 150, { strokeDashoffset: 100 }], [JUMP, { strokeDashoffset: 0 }]])
+  track($('.ring line'), [[0, { transform: 'rotate(0deg)' }], [BEAT + 150, { transform: 'rotate(0deg)' }], [JUMP, { transform: 'rotate(360deg)' }]])
+  $$('.spark').forEach((s, i) => track(s, [[0, { opacity: 0, transform: 'scale(0) rotate(0deg)' }], [JUMP + 60 + i * 60, { opacity: 0, transform: 'scale(0) rotate(0deg)' }, OUT], [JUMP + 300 + i * 60, { opacity: 1, transform: 'scale(1.3) rotate(45deg)' }, 'ease-in'], [JUMP + 760 + i * 60, { opacity: 0, transform: 'scale(.2) rotate(90deg)' }]]))
+  // Les lettres jaillissent avec le saut, puis restent.
+  $$('.word .ch').forEach((ch, i) => {
+    const t = JUMP + 140 + i * 55
+    track(ch, [[0, { transform: 'translateY(60%) scale(.3)', opacity: 0 }], [t, { transform: 'translateY(60%) scale(.3)', opacity: 0 }, OUT], [t + 300, { transform: 'translateY(-14%) scale(1.14)', opacity: 1 }, 'ease-in-out'], [t + 520, { transform: 'none', opacity: 1 }]])
+  })
+  // Le nom devient l'en-tête (scènes B et C), puis grandit pour la fin (D), décalé pour faire place à l'étoile.
+  // Il s'efface sur place puis réapparaît en haut : il ne traverse pas Minuton.
+  track(word, [[0, { opacity: 1 }], [B3 - 20, { opacity: 1 }, 'ease-in'], [B3 + 160, { opacity: 0 }], [B3 + 300, { opacity: 0 }, 'ease-out'], [B3 + 520, { opacity: 1 }]])
+  track($('#word-move'), [[0, { transform: 'none' }], [B3 - 20, { transform: 'none' }, 'ease-in'], [B3 + 160, { transform: 'scale(.7)' }], [B3 + 161, { transform: 'translateY(-41cqh) scale(.3)' }, OUT], [B3 + 520, { transform: 'translateY(-44cqh) scale(.4)' }],
+    [B5 - 40, { transform: 'translateY(-44cqh) scale(.4)' }, INOUT], [B5 + 420, { transform: 'translate(6cqw,-37cqh) scale(.92)' }]])
+  track($('#tag'), [[0, { opacity: 0, transform: 'translateY(3cqh)' }], [JUMP + 760, { opacity: 0, transform: 'translateY(3cqh)' }, OUT], [JUMP + 1160, { opacity: 1, transform: 'none' }], [B3 - 40, { opacity: 1, transform: 'none' }, 'ease-in'], [B3 + 200, { opacity: 0, transform: 'translateY(-3cqh)' }]])
+
+  /* ---------- Scène B : envie de scroller → créer ---------- */
+  const lineIn = (el, t, outT) => track(el, [[0, { opacity: 0, transform: 'translateY(40%)' }], [t, { opacity: 0, transform: 'translateY(40%)' }, OUT], [t + 360, { opacity: 1, transform: 'none' }],
+    ...(outT ? [[outT, { opacity: 1, transform: 'none' }, IN], [outT + 260, { opacity: 0, transform: 'translateY(-40%)' }]] : [])])
+  lineIn($('#l1'), B3 + 330, B4 - 80)
+  const SWAP = B3 + 2 * BEAT
+  const sWord = $('#scrollerWord'), strike = $('#strike')
+  Object.assign(strike.style, { left: sWord.offsetLeft - 8 + 'px', width: sWord.offsetWidth + 16 + 'px', right: 'auto', margin: '0' })
+  track($('#scroller'), [[0, { opacity: 0, transform: 'translateY(40%)' }], [B3 + 420, { opacity: 0, transform: 'translateY(40%)' }, OUT], [B3 + 780, { opacity: 1, transform: 'none' }], [SWAP + 200, { opacity: 1, transform: 'none' }, IN], [SWAP + 400, { opacity: 0, transform: 'translateY(50%) rotate(4deg)' }]])
+  track($('#strike'), [[0, { transform: 'scaleX(0)', opacity: 1 }], [SWAP - 160, { transform: 'scaleX(0)', opacity: 1 }, OUT], [SWAP + 60, { transform: 'scaleX(1)', opacity: 1 }], [SWAP + 220, { transform: 'scaleX(1)', opacity: 1 }], [SWAP + 380, { transform: 'scaleX(1)', opacity: 0 }]])
+  track($('#cree'), [[0, { opacity: 0, transform: 'scale(.3)' }], [SWAP + 260, { opacity: 0, transform: 'scale(.3)' }, BACK], [SWAP + 600, { opacity: 1, transform: 'none' }], [B4 - 80, { opacity: 1, transform: 'none' }, IN], [B4 + 180, { opacity: 0, transform: 'translateY(-40%)' }]])
+
+  /* ---------- Scène C : les passions ---------- */
+  track($('#choose'), [[0, { opacity: 0, transform: 'translateY(30%)' }], [B4 + 80, { opacity: 0, transform: 'translateY(30%)' }, OUT], [B4 + 420, { opacity: 1, transform: 'none' }], [B5 - 60, { opacity: 1, transform: 'none' }, IN], [B5 + 200, { opacity: 0, transform: 'translateY(-30%)' }]])
+  $$('.pill').forEach((p, i) => {
+    const t = B4 + 120 + i * (BEAT / 2), side = i % 2 ? 1 : -1
+    track(p, [[0, { opacity: 0, transform: 'scale(0)' }], [t, { opacity: 0, transform: 'scale(0)' }, BACK], [t + 320, { opacity: 1, transform: 'none' }],
+      [B5 - 20, { opacity: 1, transform: 'none' }, IN], [B5 + 360, { opacity: 0, transform: `translate(${side * 60}cqw,-8cqh) rotate(${side * 25}deg)` }]])
+  })
+  track($('#caption'), [[0, { opacity: 0, transform: 'translateY(40%)' }], [B4 + 700, { opacity: 0, transform: 'translateY(40%)' }, OUT], [B4 + 1050, { opacity: 1, transform: 'none' }], [B5 - 40, { opacity: 1, transform: 'none' }, IN], [B5 + 220, { opacity: 0, transform: 'translateY(40%)' }]])
+
+  /* ---------- Scène D : le logo et la pluie de minutons ---------- */
+  // L'étoile se place à gauche du nom final (mesuré sur le nom au repos).
+  const star = $('#star'), ww = word.scrollWidth ? [...word.children].reduce((w, c) => w + c.offsetWidth, 0) : 800
+  const sw = star.getBoundingClientRect().width / (story.getBoundingClientRect().width / 1080)
+  const finalW = ww * .92, cx = 540 + 0.06 * 1080
+  star.style.left = `${cx - finalW / 2 - sw - 18}px`
+  star.style.top = `calc(19cqh + ${(17 * 10.8 - sw) / 2}px)`
+  track(star, [[0, { opacity: 0, transform: 'scale(0) rotate(-180deg)' }], [B5 + 260, { opacity: 0, transform: 'scale(0) rotate(-180deg)' }, BACK], [B5 + 720, { opacity: 1, transform: 'none' }]])
+  track($('#slogan'), [[0, { opacity: 0, transform: 'translateY(40%)' }], [B5 + 560, { opacity: 0, transform: 'translateY(40%)' }, OUT], [B5 + 920, { opacity: 1, transform: 'none' }]])
+  track($('#cta'), [[0, { opacity: 0, transform: 'scale(0)' }], [B5 + 2 * BEAT, { opacity: 0, transform: 'scale(0)' }, BACK], [B5 + 2 * BEAT + 380, { opacity: 1, transform: 'none' }],
+    [B5 + 6 * BEAT, { opacity: 1, transform: 'none' }, 'ease-out'], [B5 + 6 * BEAT + 140, { opacity: 1, transform: 'scale(1.07)' }, 'ease-in'], [B5 + 6 * BEAT + 300, { opacity: 1, transform: 'none' }]])
+  $$('.coin').forEach((c, i) => {
+    const a = -Math.PI / 2 + (i / 15 - .5) * 2.6, v = 34 + (i * 37 % 20), t0 = B5 + 40 + (i % 4) * 40
+    const pts = [[0, { opacity: 0, transform: 'translate(0,0) scale(.4) rotate(0deg)' }], [t0, { opacity: 0, transform: 'translate(0,0) scale(.4) rotate(0deg)' }]]
+    for (let k = 1; k <= 8; k++) {
+      const s = k / 8, x = Math.cos(a) * v * s * 1.2, y = Math.sin(a) * v * s * 1.6 + 110 * s * s
+      pts.push([t0 + k * 260, { opacity: k < 8 ? 1 : 0, transform: `translate(${x.toFixed(1)}cqw,${(y * .5625).toFixed(1)}cqh) scale(1) rotate(${(k * 80 * (i % 2 ? 1 : -1))}deg)` }])
+    }
+    track(c, pts)
+  })
+
+  /* ---------- Lecture : en direct, ou image par image pour le rendu ---------- */
+  const anims = story.getAnimations({ subtree: true })
+  anims.forEach(a => a.pause())
+  window.seek = ms => anims.forEach(a => { a.currentTime = ms })
+  const music = $('#music')
+  let raf = 0
+  function play(withSound) {
+    cancelAnimationFrame(raf)
+    music.pause(); music.currentTime = 0
+    const start = performance.now()
+    if (withSound) music.play().catch(() => {})
+    const tick = () => {
+      const t = withSound && !music.paused ? music.currentTime * 1000 : performance.now() - start
+      seek(Math.min(T, t))
+      if (t < T) raf = requestAnimationFrame(tick)
+    }
+    tick()
+  }
+  $('#play').addEventListener('click', () => play(true))
+  $('#mute').addEventListener('click', () => play(false))
+  // Le repos montre l'image finale ; la story se joue toute seule (sans le son) une fois à l'ouverture.
+  function fit() { const s = $('#stage').getBoundingClientRect().width / 1080; story.style.transform = `scale(${s})` }
+  if (!document.body.classList.contains('render')) { fit(); addEventListener('resize', fit) }
+  seek(T)
+  if (!document.body.classList.contains('render') && !matchMedia('(prefers-reduced-motion: reduce)').matches) setTimeout(() => play(false), 500)
+})
+</script>

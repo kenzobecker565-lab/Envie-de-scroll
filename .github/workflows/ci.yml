@@ -1,6 +1,7 @@
 # Vérifications automatiques lancées par GitHub à chaque pull request et à
-# chaque mise à jour de la branche principale : tests (dont la couverture de
-# la bibliothèque d'activités), typage TypeScript et construction de l'app.
+# chaque mise à jour de la branche principale : tests (bibliothèque
+# d'activités, règles, API, bot), typage TypeScript et construction de la
+# Mini App. Le prototype web (prototype/) est vérifié aussi.
 name: Vérifications
 
 on:
@@ -25,5 +26,27 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci
+      - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Prototype web
+        run: |
+          npm test -w prototype
+          npm run build -w prototype
+
+  image:
+    name: Image Docker (déploiement)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Construction de l'image
+        run: docker build -t scroll-up .
+      - name: Démarrage et santé
+        run: |
+          docker run -d --name scroll-up -p 8080:8080 -e PORT=8080 -v scroll-up-data:/data scroll-up
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8080/api/health; then exit 0; fi
+            sleep 2
+          done
+          docker logs scroll-up
+          exit 1

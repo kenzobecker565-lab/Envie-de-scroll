@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scroll-up : transforme ton envie de scroller en création</title>
+<meta name="description" content="Quand l’envie de scroller arrive, Scroll-up te propose 5, 15 ou 30 minutes pour dessiner, écrire, jouer du piano, bouger ou résoudre une énigme. Gratuit, sans pub, en test sur Telegram.">
+<meta name="theme-color" content="#5624E4">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Scroll-up">
+<meta property="og:title" content="Scroll-up : transforme ton envie de scroller en création">
+<meta property="og:description" content="5, 15 ou 30 minutes pour créer à la place du scroll. Gratuit, sans pub, en test sur Telegram.">
+<meta property="og:image" content="og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Scroll-up : J’ai envie de créer. Minuton, la mascotte, et l’écran d’accueil de l’app.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Scroll-up",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Telegram (iPhone, Android, ordinateur)",
+  "inLanguage": "fr",
+  "description": "Quand l’envie de scroller arrive, Scroll-up propose 5, 15 ou 30 minutes pour dessiner, écrire, jouer du piano, bouger ou résoudre une énigme.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "author": { "@type": "Person", "name": "Kenzo Becker" }
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 40 40"><path d="M18 1 Q20 0 20 4 L21 11 Q22 14 26 15 L33 17 Q36 18 32 20 L25 22 Q22 23 21 27 L19 34 Q18 38 16 34 L14 27 Q13 24 9 23 L2 21 Q-1 20 3 18 L10 16 Q13 15 14 11 L16 3Z"/><path class="logo-small" d="M31 26 L33 31 L39 33 L33 35 L31 40 L29 35 L24 33 L29 31Z"/></symbol>
+    <symbol id="coin" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#FFC533" stroke="#FFF0A1" stroke-width="2"/><circle cx="16" cy="16" r="10.5" fill="#FFD95A" stroke="#E79A13" stroke-width="1.5"/><path d="M18 8 L12 16 H18 L14 24" fill="none" stroke="#D88B12" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13 Q8 7 14 6" fill="none" stroke="#FFF8D8" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="fleche" viewBox="0 0 20 20"><path d="M6 14 14 6M7.5 6H14v6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="telegram" viewBox="0 0 24 24"><path d="M21 3 3 10.5l7 2.5M21 3l-4 18-7-8M21 3 10 13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="melange" viewBox="0 0 20 20"><path d="M3 6h3.5c2 0 3 1 4 3l1 2c1 2 2 3 4 3H17M14.5 12l2.5 2-2.5 2M3 14h3.5c1 0 1.7-.3 2.3-.8M11.2 6.8c.6-.5 1.3-.8 2.3-.8H17M14.5 4 17 6l-2.5 2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <nav class="nav wrap" aria-label="Principale">
+    <a class="brand" href="./" aria-label="Scroll-up, accueil">
+      <svg class="logo" width="30" height="30" aria-hidden="true"><use href="#logo"/></svg>
+      <span>Scroll-up</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#demo">Essayer une idée</a></li>
+      <li><a href="#comment">Comment ça marche</a></li>
+      <li><a href="#passions">Passions</a></li>
+      <li><a href="#questions">Questions</a></li>
+    </ul>
+    <a class="btn btn-small" data-bot-link data-suivi="nav" href="https://t.me/TON_BOT" target="_blank" rel="noopener">Essayer</a>
+  </nav>
+
+  <div class="hero-grid wrap">
+    <div class="hero-text">
+      <p class="eyebrow"><span class="pastille-live" aria-hidden="true"></span>Gratuit · en test sur Telegram</p>
+      <h1 class="titre-hero" aria-label="J’ai envie de créer.">
+        <span aria-hidden="true">J’ai envie de <span class="rature"><span class="rature-mot">scroller</span><span class="rature-trait"></span><span class="rature-main">créer&nbsp;!</span></span></span>
+      </h1>
+      <p class="lead">Quand l’envie de scroller arrive, appuie sur un bouton. Minuton te propose 5, 15 ou 30&nbsp;minutes pour dessiner, écrire, jouer du piano, bouger ou résoudre une énigme.</p>
+      <div class="hero-actions" id="hero-actions">
+        <a class="btn btn-cream" data-bot-link data-suivi="hero" href="https://t.me/TON_BOT" target="_blank" rel="noopener">
+          Essayer gratuitement
+          <svg width="20" height="20" aria-hidden="true"><use href="#fleche"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#demo">Tirer une idée ici</a>
+      </div>
+      <ul class="rassure">
+        <li>Sans inscription</li>
+        <li>Sans pub</li>
+        <li>Rien n’est bloqué sur ton téléphone</li>
+      </ul>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone phone-hero">
+        <img src="assets/v1-accueil.webp" alt="L’accueil de Scroll-up : « Bonsoir », Minuton, et le gros bouton « J’ai envie de scroll »" width="560" height="1212" fetchpriority="high">
+      </div>
+      <div class="sticker sticker-coin" aria-hidden="true"><svg width="26" height="26"><use href="#coin"/></svg>+15 minutons</div>
+      <figure class="sticker sticker-citation">
+        <blockquote>Ce dessin n’existait pas il y a 15&nbsp;minutes.</blockquote>
+        <figcaption>L’app, à la fin d’une activité</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <ul class="chiffres wrap" aria-label="Scroll-up en chiffres">
+    <li><strong>154</strong> activités</li>
+    <li><strong>72</strong> leçons</li>
+    <li><strong>6</strong> passions</li>
+    <li><strong>5 · 15 · 30</strong> minutes</li>
+  </ul>
+</header>
+
+<div class="defile" aria-label="Exemples d’activités de l’app">
+  <ul class="defile-ligne" data-marquee>
+    <li><b>Dessin</b> Une mini-BD de 3&nbsp;cases sur ta journée</li>
+    <li><b>Piano</b> Apprends l’«&nbsp;Ode à la joie&nbsp;» de Beethoven</li>
+    <li><b>Énigme</b> Le train de minuit</li>
+    <li><b>Écriture</b> Écris le titre et la première phrase d’une histoire que tu n’écriras jamais</li>
+    <li><b>Sport</b> Réveil musculaire, 5&nbsp;minutes</li>
+    <li><b>Français</b> La chasse aux fautes</li>
+    <li><b>Dessin</b> Dessine la pochette d’un album que tu apprécies</li>
+    <li><b>Écriture</b> Une fausse interview de toi dans 10&nbsp;ans</li>
+    <li><b>Piano</b> Le thème de la «&nbsp;Lettre à Élise&nbsp;»</li>
+    <li><b>Énigme</b> La photo qui trahit</li>
+  </ul>
+</div>
+
+<main id="contenu">
+
+  <section id="demo" class="demo" aria-labelledby="demo-titre">
+    <div class="wrap">
+      <div class="demo-tete">
+        <div>
+          <p class="eyebrow eyebrow-dark">Essaie, là, maintenant</p>
+          <h2 id="demo-titre">Une envie de scroller&nbsp;? Essaie plutôt ça.</h2>
+          <p class="demo-intro">Le même tirage que dans l’app, avec ses vraies activités.</p>
+        </div>
+        <img class="demo-minuton" id="demo-minuton" src="assets/minuton-idea.webp" alt="" width="360" height="329" loading="lazy">
+      </div>
+
+      <div class="demo-boite">
+        <form class="demo-choix" id="demo-form">
+          <fieldset>
+            <legend>Combien de temps&nbsp;?</legend>
+            <div class="puces puces-temps">
+              <label class="puce"><input type="radio" name="duree" value="5"><span>5 min</span></label>
+              <label class="puce"><input type="radio" name="duree" value="15" checked><span>15 min</span></label>
+              <label class="puce"><input type="radio" name="duree" value="30"><span>30 min</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Quelle passion&nbsp;?</legend>
+            <label class="surprise"><input type="radio" name="passion" value="surprise"><span><svg width="20" height="20" aria-hidden="true"><use href="#melange"/></svg><b>Surprends-moi</b><small>Une idée parmi toutes les passions</small></span></label>
+            <div class="puces puces-passions">
+              <label class="puce puce-img"><input type="radio" name="passion" value="dessin" checked><span><img src="assets/passion-dessin.webp" alt="" width="320" height="480" loading="lazy"><i>Dessin</i></span></label>
+              <label class="puce puce-img"><input type="radio" name="passion" value="piano"><span><img src="assets/passion-piano.webp" alt="" width="320" height="480" loading="lazy"><i>Piano</i></span></label>
+              <label class="puce puce-img"><input type="radio" name="passion" value="ecriture"><span><img src="assets/passion-ecriture.webp" alt="" width="320" height="480" loading="lazy"><i>Écriture</i></span></label>
+              <label class="puce puce-img"><input type="radio" name="passion" value="sport"><span><img src="assets/passion-sport.webp" alt="" width="320" height="480" loading="lazy"><i>Sport</i></span></label>
+              <label class="puce puce-img"><input type="radio" name="passion" value="logique"><span><img src="assets/passion-logique.webp" alt="" width="320" height="480" loading="lazy"><i>Énigmes</i></span></label>
+              <label class="puce puce-img"><input type="radio" name="passion" value="francais"><span><img src="assets/passion-francais.webp" alt="" width="320" height="480" loading="lazy"><i>Français</i></span></label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="demo-resultat" aria-live="polite">
+          <div class="idee-carte" id="idee-carte">
+            <p class="idee-tags"><span id="idee-passion">Dessin</span><span id="idee-temps">15 min</span></p>
+            <p class="idee-surtitre">Une idée pour toi</p>
+            <p class="idee-texte" id="idee-texte">Dessine un personnage à partir de 3&nbsp;mots que l’appli tire au hasard pour toi</p>
+          </div>
+          <div class="demo-actions">
+            <a class="btn btn-violet" data-bot-link data-suivi="demo" href="https://t.me/TON_BOT" target="_blank" rel="noopener">La faire dans Scroll-up <svg width="20" height="20" aria-hidden="true"><use href="#fleche"/></svg></a>
+            <button type="button" class="btn btn-lien" id="autre-idee"><svg width="20" height="20" aria-hidden="true"><use href="#melange"/></svg>Une autre idée</button>
+          </div>
+          <p class="demo-note">Dans l’app, Minuton lance ton chrono, garde la consigne sous tes yeux et te donne un coup de pouce si tu bloques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comment" class="comment" aria-labelledby="comment-titre">
+    <div class="wrap comment-grid">
+      <div class="comment-ecran" aria-hidden="true">
+        <div class="phone phone-sticky">
+          <img src="assets/v1-choix.webp" alt="" width="560" height="1212" loading="lazy" data-ecran="1" class="actif">
+          <img src="assets/v1-dessin.webp" alt="" width="560" height="1212" loading="lazy" data-ecran="2">
+          <img src="assets/v1-fin.webp" alt="" width="560" height="1212" loading="lazy" data-ecran="3">
+          <img src="assets/v1-boutique.webp" alt="" width="560" height="1212" loading="lazy" data-ecran="4">
+        </div>
+      </div>
+      <div class="comment-texte">
+        <p class="eyebrow eyebrow-dark">Comment ça marche</p>
+        <h2 id="comment-titre">Un bouton, une idée, une création qui reste.</h2>
+        <ol class="etapes">
+          <li data-etape="1">
+            <div class="phone phone-small"><img src="assets/v1-choix.webp" alt="L’écran « J’ai envie de scroll » : combien de temps, et quelle passion" width="560" height="1212" loading="lazy"></div>
+            <h3><span>1</span>Tu as envie de scroller&nbsp;?</h3>
+            <p>Ouvre Scroll-up et appuie sur «&nbsp;J’ai envie de scroll&nbsp;». Choisis ton temps et ta passion, ou laisse Minuton te surprendre.</p>
+          </li>
+          <li data-etape="2">
+            <div class="phone phone-small"><img src="assets/v1-dessin.webp" alt="Un dessin au doigt en cours, avec la consigne en haut de l’écran" width="560" height="1212" loading="lazy"></div>
+            <h3><span>2</span>Tu t’y mets</h3>
+            <p>La consigne reste sous tes yeux. Dessine au doigt ou sur papier, écris, joue sur le clavier de l’écran. Une piste pour commencer si tu bloques.</p>
+          </li>
+          <li data-etape="3">
+            <div class="phone phone-small"><img src="assets/v1-fin.webp" alt="L’écran de fin : « Bien joué ! », le dessin encadré et +15 minutons" width="560" height="1212" loading="lazy"></div>
+            <h3><span>3</span>C’est gardé chez Minuton</h3>
+            <p>Ta création rejoint ton atelier, rangée par passion. Tu vois enfin ce que ton temps a produit.</p>
+          </li>
+          <li data-etape="4">
+            <div class="phone phone-small"><img src="assets/v1-boutique.webp" alt="La boutique : les tenues de Minuton, dont la collection Halloween" width="560" height="1212" loading="lazy"></div>
+            <h3><span>4</span>Tu progresses</h3>
+            <p>Une minute de création, un minuton. Tu montes de niveau dans chaque passion et tu habilles Minuton dans la boutique.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="passions" class="passions wrap" aria-labelledby="passions-titre">
+    <p class="eyebrow eyebrow-dark">Six passions</p>
+    <h2 id="passions-titre">Choisis-en une, ou toutes.</h2>
+    <p class="passions-aide">Touche une carte pour voir une activité et les cinq niveaux à gagner.</p>
+    <ul class="grille-passions">
+      <li><button type="button" class="carte" aria-pressed="false">
+        <span class="face face-avant"><img src="assets/passion-dessin.webp" alt="" width="320" height="480" loading="lazy"><span class="carte-legende"><span class="carte-nom">Dessin</span><span class="carte-desc">Au doigt dans l’app ou sur papier</span></span></span>
+        <span class="face face-dos"><span class="carte-nom">Dessin</span><span class="carte-ex">«&nbsp;Une mini-BD de 3&nbsp;cases sur ta journée&nbsp;»</span><span class="niveaux">Gribouilleur·euse → Croqueur·euse → Dessinateur·rice → Illustrateur·rice → <b>Virtuose du trait</b></span></span>
+      </button></li>
+      <li><button type="button" class="carte" aria-pressed="false">
+        <span class="face face-avant"><img src="assets/passion-piano.webp" alt="" width="320" height="480" loading="lazy"><span class="carte-legende"><span class="carte-nom">Piano</span><span class="carte-desc">Un clavier sur l’écran, même sans jamais avoir joué</span></span></span>
+        <span class="face face-dos"><span class="carte-nom">Piano</span><span class="carte-ex">«&nbsp;Apprends le thème du Canon de Pachelbel, marche par marche&nbsp;»</span><span class="niveaux">Pianoteur·euse → Doigts agiles → Musicien·ne → Pianiste → <b>Virtuose du clavier</b></span></span>
+      </button></li>
+      <li><button type="button" class="carte" aria-pressed="false">
+        <span class="face face-avant"><img src="assets/passion-ecriture.webp" alt="" width="320" height="480" loading="lazy"><span class="carte-legende"><span class="carte-nom">Écriture</span><span class="carte-desc">Des mots pour dire, inventer, raconter</span></span></span>
+        <span class="face face-dos"><span class="carte-nom">Écriture</span><span class="carte-ex">«&nbsp;Rédige une fausse interview de toi dans 10&nbsp;ans&nbsp;»</span><span class="niveaux">Griffonneur·euse → Plume → Conteur·euse → Auteur·rice → <b>Romancier·ère</b></span></span>
+      </button></li>
+      <li><button type="button" class="carte" aria-pressed="false">
+        <span class="face face-avant"><img src="assets/passion-sport.webp" alt="" width="320" height="480" loading="lazy"><span class="carte-legende"><span class="carte-nom">Sport</span><span class="carte-desc">Des séances guidées, sans matériel</span></span></span>
+        <span class="face face-dos"><span class="carte-nom">Sport</span><span class="carte-ex">«&nbsp;Réveil musculaire&nbsp;»&nbsp;: 5&nbsp;minutes pour se remettre en mouvement</span><span class="niveaux">Premier mouvement → Élan → Régularité → Endurance → <b>Toujours en mouvement</b></span></span>
+      </button></li>
+      <li><button type="button" class="carte" aria-pressed="false">
+        <span class="face face-avant"><img src="assets/passion-logique.webp" alt="" width="320" height="480" loading="lazy"><span class="carte-legende"><span class="carte-nom">Énigmes</span><span class="carte-desc">Des enquêtes à résoudre en croisant les indices</span></span></span>
+        <span class="face face-dos"><span class="carte-nom">Énigmes</span><span class="carte-ex">«&nbsp;Le train de minuit&nbsp;»&nbsp;: une enquête de 30&nbsp;minutes</span><span class="niveaux">Observateur·rice → Analyste → Détective → Stratège → <b>Maître des énigmes</b></span></span>
+      </button></li>
+      <li><button type="button" class="carte" aria-pressed="false">
+        <span class="face face-avant"><img src="assets/passion-francais.webp" alt="" width="320" height="480" loading="lazy"><span class="carte-legende"><span class="carte-nom">Français</span><span class="carte-desc">Orthographe, grammaire et conjugaison</span></span></span>
+        <span class="face face-dos"><span class="carte-nom">Français</span><span class="carte-ex">«&nbsp;La chasse aux fautes&nbsp;»&nbsp;: repère et corrige un texte</span><span class="niveaux">Première révision → Précision → Plume sûre → Maîtrise → <b>Expert·e</b></span></span>
+      </button></li>
+    </ul>
+  </section>
+
+  <section class="apprendre" aria-labelledby="apprendre-titre">
+    <div class="wrap apprendre-grid">
+      <div class="apprendre-texte">
+        <p class="eyebrow">Apprendre</p>
+        <h2 id="apprendre-titre">Envie d’aller plus loin&nbsp;? 72 leçons, à ton rythme.</h2>
+        <p>Douze leçons par passion pour comprendre, essayer, puis progresser. Au piano, l’app part de zéro si tu n’as jamais joué&nbsp;: trouver les notes, poser la main, ton premier air.</p>
+        <ul class="apprendre-points">
+          <li>Tes essais sont gardés dans tes carnets d’apprentissage</li>
+          <li>Pour les énigmes et le français, l’app compte celles que tu résous sans aide</li>
+          <li>Tu choisis ton niveau, et tu peux le changer quand tu veux</li>
+        </ul>
+      </div>
+      <div class="phone phone-apprendre"><img src="assets/v1-apprendre.webp" alt="L’écran Apprendre : dessin, écriture, piano, énigmes, français et sport, 12 leçons chacun" width="560" height="1212" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="recompenses wrap" aria-labelledby="recompenses-titre">
+    <p class="eyebrow eyebrow-dark">Ce que tu y gagnes</p>
+    <h2 id="recompenses-titre">Ici, ton temps laisse une trace.</h2>
+    <div class="bento">
+      <article class="tuile tuile-minutons">
+        <div class="piece" aria-hidden="true"><svg width="88" height="88"><use href="#coin"/></svg></div>
+        <h3>1 minute = 1 minuton</h3>
+        <p>La monnaie de Scroll-up. Tu la gagnes en créant, jamais en regardant.</p>
+      </article>
+      <article class="tuile tuile-tenues">
+        <h3>Habille Minuton</h3>
+        <p>Des tenues à débloquer avec tes minutons, et des collections comme Halloween.</p>
+        <ul class="tenues">
+          <li><img src="assets/tenue-artiste.webp" alt="" width="180" height="180" loading="lazy"><span>Artiste</span><b><svg width="14" height="14" aria-hidden="true"><use href="#coin"/></svg>40</b></li>
+          <li><img src="assets/tenue-pianiste.webp" alt="" width="180" height="180" loading="lazy"><span>Pianiste</span><b><svg width="14" height="14" aria-hidden="true"><use href="#coin"/></svg>70</b></li>
+          <li><img src="assets/tenue-football.webp" alt="" width="180" height="180" loading="lazy"><span>Footballeur</span><b><svg width="14" height="14" aria-hidden="true"><use href="#coin"/></svg>65</b></li>
+          <li><img src="assets/tenue-basket.webp" alt="" width="180" height="180" loading="lazy"><span>Basket</span><b><svg width="14" height="14" aria-hidden="true"><use href="#coin"/></svg>70</b></li>
+          <li><img src="assets/tenue-judo.webp" alt="" width="180" height="180" loading="lazy"><span>Judoka</span><b><svg width="14" height="14" aria-hidden="true"><use href="#coin"/></svg>70</b></li>
+          <li><img src="assets/tenue-cavalier.webp" alt="" width="180" height="180" loading="lazy"><span>Cavalier</span><b><svg width="14" height="14" aria-hidden="true"><use href="#coin"/></svg>80</b></li>
+        </ul>
+      </article>
+      <article class="tuile tuile-niveaux">
+        <h3>5 niveaux par passion</h3>
+        <p>Ton niveau monte avec le temps passé à créer. Exemple en dessin&nbsp;:</p>
+        <ol class="echelle">
+          <li><span>5 min</span>Gribouilleur·euse</li>
+          <li><span>30 min</span>Croqueur·euse</li>
+          <li><span>2 h</span>Dessinateur·rice</li>
+          <li><span>5 h</span>Illustrateur·rice</li>
+          <li><span>10 h</span>Virtuose du trait</li>
+        </ol>
+      </article>
+      <article class="tuile tuile-atelier">
+        <h3>Ton atelier</h3>
+        <p>Chaque création y prend sa place, et tu choisis celle à mettre à l’honneur.</p>
+        <img src="assets/v1-atelier.webp" alt="Une création ouverte dans l’atelier : « Ton dessin », +15 minutons gagnés" width="560" height="1212" loading="lazy">
+      </article>
+    </div>
+  </section>
+
+  <section id="calcul" class="calcul" aria-labelledby="calcul-titre">
+    <div class="wrap calcul-grid">
+      <div class="calcul-question">
+        <p class="eyebrow eyebrow-dark">Fais le calcul</p>
+        <h2 id="calcul-titre">Tu scrolles combien de temps par jour&nbsp;?</h2>
+        <label class="curseur-label" for="temps-scroll">Mon temps sur les réseaux&nbsp;: <output id="temps-scroll-val" for="temps-scroll">2 h 39</output></label>
+        <input id="temps-scroll" class="curseur" type="range" min="15" max="360" step="1" value="159">
+        <p class="calcul-note">Réglé sur la moyenne des 15-24&nbsp;ans qui vont sur les réseaux chaque jour<sup><a href="#sources">1</a></sup>.</p>
+        <p class="calcul-gros"><strong id="jours-an">40</strong> <span>jours entiers par an</span></p>
+      </div>
+
+      <div class="calcul-carte" aria-live="polite">
+        <p class="calcul-carte-titre">Rends-en juste
+          <span class="choix-minutes" role="radiogroup" aria-label="Minutes rendues par jour">
+            <button type="button" role="radio" aria-checked="false" data-rendu="5">5</button>
+            <button type="button" role="radio" aria-checked="true" data-rendu="15">15</button>
+            <button type="button" role="radio" aria-checked="false" data-rendu="30">30</button>
+          </span>
+          minutes par jour&nbsp;:
+        </p>
+        <ul class="calcul-liste">
+          <li><strong>365</strong> créations dans ton atelier en un an</li>
+          <li><strong id="heures-rendues">91 h</strong> de dessin, de piano ou d’écriture</li>
+          <li><strong id="niveau-max">40 jours</strong> pour atteindre le niveau 5 dans une passion</li>
+          <li><strong id="minutons-an">5 475</strong> minutons pour habiller Minuton</li>
+        </ul>
+        <a class="btn btn-violet" data-bot-link data-suivi="calcul" href="https://t.me/TON_BOT" target="_blank" rel="noopener">Commencer maintenant <svg width="20" height="20" aria-hidden="true"><use href="#fleche"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="rejoindre" class="rejoindre" aria-labelledby="rejoindre-titre">
+    <div class="wrap">
+      <p class="eyebrow">Le test est ouvert</p>
+      <h2 id="rejoindre-titre">Rejoins le test en 30&nbsp;secondes.</h2>
+
+      <div class="onglets" role="tablist" aria-label="As-tu Telegram ?">
+        <button type="button" role="tab" id="onglet-oui" aria-controls="panneau-oui" aria-selected="true">J’ai Telegram</button>
+        <button type="button" role="tab" id="onglet-non" aria-controls="panneau-non" aria-selected="false" tabindex="-1">Je n’ai pas Telegram</button>
+      </div>
+
+      <div class="rejoindre-grid">
+        <div class="panneau" role="tabpanel" id="panneau-oui" aria-labelledby="onglet-oui">
+          <ol class="mode-emploi">
+            <li><span><b>Appuie sur le bouton</b> ci-dessous, depuis ton téléphone</span></li>
+            <li><span><b>Dans Telegram</b>, touche «&nbsp;Démarrer&nbsp;»</span></li>
+            <li><span><b>Touche «&nbsp;Ouvrir Scroll-up&nbsp;»</b>&nbsp;: c’est parti</span></li>
+          </ol>
+          <a class="btn btn-cream" data-bot-link data-suivi="rejoindre" href="https://t.me/TON_BOT" target="_blank" rel="noopener">
+            <svg width="20" height="20" aria-hidden="true"><use href="#telegram"/></svg>
+            Ouvrir Scroll-up dans Telegram
+          </a>
+        </div>
+
+        <div class="panneau" role="tabpanel" id="panneau-non" aria-labelledby="onglet-non" hidden>
+          <p class="panneau-intro">Telegram est une messagerie gratuite. Installe-la, crée ton compte avec ton numéro, puis reviens sur cette page.</p>
+          <div class="stores">
+            <a class="btn btn-cream" href="https://apps.apple.com/app/telegram-messenger/id686449807" target="_blank" rel="noopener">Telegram sur l’App Store</a>
+            <a class="btn btn-cream" href="https://play.google.com/store/apps/details?id=org.telegram.messenger" target="_blank" rel="noopener">Telegram sur Google Play</a>
+          </div>
+          <div class="apk" id="bloc-apk" hidden>
+            <p><b>Sur Android, sans Telegram&nbsp;:</b> tu peux aussi installer la version de test directement.</p>
+            <a class="btn btn-ghost" id="lien-apk" data-suivi="apk" href="#">Télécharger l’app Android de test</a>
+          </div>
+        </div>
+
+        <div class="rejoindre-cote">
+          <div class="qr-carte">
+            <div class="qr" id="qr" role="img" aria-label="QR code vers Scroll-up sur Telegram"></div>
+            <p><strong>Sur ordinateur&nbsp;?</strong> Scanne avec ton téléphone&nbsp;: l’app est pensée pour lui.</p>
+          </div>
+          <div class="attente">
+            <h3>Tu préfères attendre l’App Store&nbsp;?</h3>
+            <p>Laisse ton e-mail&nbsp;: on te prévient à la sortie sur l’App Store et Google Play. Rien d’autre.</p>
+            <form id="liste-attente" class="form" novalidate hidden>
+              <label for="email">Ton adresse e-mail</label>
+              <div class="form-row">
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="prenom@exemple.fr" required>
+                <button class="btn btn-ink" type="submit">Me prévenir</button>
+              </div>
+              <p class="form-msg" role="status" aria-live="polite"></p>
+            </form>
+            <p id="attente-bientot" class="bientot">La liste d’attente ouvre très bientôt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="questions" class="questions wrap" aria-labelledby="questions-titre">
+    <h2 id="questions-titre">Questions</h2>
+    <div class="questions-liste">
+      <details>
+        <summary>C’est vraiment gratuit&nbsp;?</summary>
+        <p>Oui. Pendant le test, tout est gratuit et il n’y a pas de publicité.</p>
+      </details>
+      <details>
+        <summary>Pourquoi Telegram&nbsp;?</summary>
+        <p>Pour tester sans rien installer de plus&nbsp;: Scroll-up s’ouvre comme une app, directement dans Telegram, sur téléphone comme sur ordinateur. Les versions App Store et Google Play viendront ensuite.</p>
+      </details>
+      <details>
+        <summary>Il faut créer un compte&nbsp;?</summary>
+        <p>Non. Scroll-up utilise ton compte Telegram&nbsp;: tu ouvres l’app et tu commences.</p>
+      </details>
+      <details>
+        <summary>Ça bloque mes autres apps&nbsp;?</summary>
+        <p>Non. Scroll-up n’interdit rien et ne te fait pas la morale. Il te propose mieux au moment où l’envie arrive, et c’est toi qui choisis.</p>
+      </details>
+      <details>
+        <summary>Il faut du matériel&nbsp;?</summary>
+        <p>Non. Tu peux dessiner au doigt dans l’app ou sur papier, le piano se joue sur l’écran et le sport se fait sans matériel. Chaque activité dit ce qu’il te faut.</p>
+      </details>
+      <details>
+        <summary>Je débute, c’est pour moi&nbsp;?</summary>
+        <p>Oui. Tu indiques ton niveau, et au piano l’app part de zéro si tu n’as jamais joué. Les activités sont courtes et faites pour être réussies.</p>
+      </details>
+      <details>
+        <summary>Je vais recevoir des messages&nbsp;?</summary>
+        <p>Un petit rappel par jour au maximum, à l’heure que tu choisis. Tu peux aussi choisir «&nbsp;Pas de notification&nbsp;». Écrire /stop au bot coupe les relances.</p>
+      </details>
+      <details>
+        <summary>Que deviennent mes créations&nbsp;?</summary>
+        <p>Elles restent privées, dans ton atelier. Tu peux tout effacer à tout moment depuis les réglages de l’app. Le détail est dans la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+      </details>
+      <details>
+        <summary>Comment donner mon avis&nbsp;?</summary>
+        <p>Écris directement au bot sur Telegram, ou utilise «&nbsp;Donner mon avis&nbsp;» à la fin d’une activité. Pendant le test, chaque message est lu.</p>
+      </details>
+      <details>
+        <summary>À partir de quel âge&nbsp;?</summary>
+        <p>Scroll-up est ouvert à partir de 15&nbsp;ans.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="sources" class="sources wrap" aria-label="Sources">
+    <ol>
+      <li>Médiamétrie, audience Internet d’août 2026&nbsp;: 83&nbsp;% des 15-24&nbsp;ans se rendent chaque jour sur un réseau social, 2&nbsp;h&nbsp;39 par jour en moyenne.</li>
+    </ol>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-marque">
+      <div class="brand brand-dark"><svg class="logo" width="26" height="26" aria-hidden="true"><use href="#logo"/></svg><span>Scroll-up</span></div>
+      <p>L’app qui transforme l’envie de scroller en envie de créer.</p>
+      <p class="contact" id="contact" hidden>Contact&nbsp;: <span id="contact-email"></span></p>
+    </div>
+    <ul class="footer-liens">
+      <li><a data-bot-link data-suivi="footer" href="https://t.me/TON_BOT" target="_blank" rel="noopener">Essayer sur Telegram</a></li>
+      <li><a href="#questions">Aide</a></li>
+      <li><a href="confidentialite.html">Confidentialité</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+    <a class="haut" href="#">
+      <img src="assets/minuton-welcome.webp" alt="" width="285" height="300" loading="lazy">
+      <span>Scroll up&nbsp;!<small>Remonter en haut</small></span>
+    </a>
+    <p class="footer-copy">Créé par Kenzo Becker · © <span data-year>2026</span></p>
+  </div>
+</footer>
+
+<div class="barre-cta" id="barre-cta" aria-hidden="true">
+  <span class="barre-texte"><b>Gratuit</b> · sur Telegram</span>
+  <a class="btn btn-cream" data-bot-link data-suivi="barre" href="https://t.me/TON_BOT" target="_blank" rel="noopener" tabindex="-1">Essayer</a>
+</div>
+
+<script src="idees.js" defer></script>
+<script src="vendor/qrcode.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>

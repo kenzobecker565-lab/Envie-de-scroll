@@ -1,0 +1,86 @@
+/* Vidéo virale : compléments à ../scrollup/style.css (mêmes jetons, mêmes stickers). */
+
+#bg {
+  background: var(--canvas);
+}
+
+/* Le téléphone : un seul, du début à la fin (fil sans fin, puis la vraie app). */
+.device {
+  position: absolute;
+  left: 276px;
+  top: 600px;
+  width: 528px;
+  height: 1091px;
+  border: 10px solid #0d0d10;
+  border-radius: 84px;
+  background: #0d0d10;
+  box-sizing: border-box;
+  box-shadow: 16px 16px 0 var(--shadow-ink);
+  transform-origin: 50% 40%;
+}
+
+.device .glass {
+  position: absolute;
+  inset: 12px;
+  border-radius: 68px;
+  overflow: hidden;
+  background: #0e0f15;
+}
+
+.device .island {
+  position: absolute;
+  left: 50%;
+  top: 22px;
+  width: 132px;
+  height: 36px;
+  margin-left: -66px;
+  border-radius: 20px;
+  background: #0d0d10;
+  z-index: 5;
+}
+
+.device img.take {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Les sous-titres : gros, gras, en stickers. */
+.cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.cap > span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--ink);
+}
+
+.cap .box {
+  display: inline-block;
+  padding: 10px 30px 18px;
+  border: 8px solid var(--outline);
+  border-radius: 28px;
+  box-shadow: 12px 12px 0 var(--shadow-ink);
+}
+
+.cap.dark > span {
+  color: #f4f1fa;
+}
+
+.small-print {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--ink-soft);
+}

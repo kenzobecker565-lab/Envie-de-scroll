@@ -1,0 +1,290 @@
+@import 'tailwindcss';
+
+/*
+ * ============================================================================
+ *  IDENTITÉ VISUELLE — « encre et papier »
+ * ============================================================================
+ * Un papier neutre, des cartes blanches, une encre presque noire et un accent
+ * tomate vif pour l'action principale. Pas d'emoji : des pictogrammes au
+ * trait posés sur une tache de couleur (src/lib/pictos.ts). Titres et texte
+ * en Figtree (titres très gras et serrés) ; Fraunces est réservée au logo.
+ *
+ * Toutes les couleurs sont des variables : le mode sombre les redéfinit
+ * simplement dans la classe `.dark` (posée sur <html>).
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme static {
+  --font-display: 'Figtree Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Surfaces et texte */
+  --color-paper: #f5f4f1;
+  --color-paper-deep: #e8e6e1;
+  --color-card: #ffffff;
+  --color-ink: #191613;
+  --color-ink-soft: #5d5853;
+  --color-ink-faint: #7d7872;
+  --color-line: #e4e1dc;
+
+  /* Action principale */
+  --color-primary: #cc3615;
+  --color-primary-strong: #ab2c0f;
+  --color-primary-soft: #fde5dc;
+  --color-on-primary: #ffffff;
+
+  /* Accents */
+  --color-saffron: #f2b632;
+  --color-saffron-soft: #fcf1d2;
+  --color-sage: #3f7a50;
+  --color-sage-soft: #e2f0e4;
+  --color-danger: #b3261e;
+  --color-danger-soft: #fbe3e1;
+
+  /* Moods : énergie basse (crépuscule) / énergie haute (braise) */
+  --color-dusk: #4f52a8;
+  --color-dusk-soft: #ecebfa;
+  --color-ember: #a83f18;
+  --color-ember-soft: #fde8dd;
+
+  /* Animations (désactivées si l'utilisateur préfère réduire les animations) */
+  --animate-step-forward: step-forward 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-step-back: step-back 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade-up: fade-up 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade-in: fade-in 200ms ease-out both;
+  --animate-fade-down: fade-down 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-sheet-up: sheet-up 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-pop: pop 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-feed-up: feed-up 15s linear infinite;
+  --animate-urge-strike: urge-strike 6.5s cubic-bezier(0.55, 0, 0.3, 1) infinite;
+  --animate-nudge: nudge 2.4s ease-in-out infinite;
+  --animate-float: float 5s ease-in-out infinite;
+
+  @keyframes step-forward {
+    from { opacity: 0; transform: translateX(28px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes step-back {
+    from { opacity: 0; transform: translateX(-28px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes sheet-up {
+    from { opacity: 0; transform: translateY(32px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(0.5) rotate(-8deg); }
+    100% { opacity: 1; transform: none; }
+  }
+  /* Le bouton de l'accueil : le fil qui défile, le trait qui le barre, la flèche. */
+  @keyframes feed-up {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+  @keyframes urge-strike {
+    0%, 52% { stroke-dashoffset: 1; opacity: 0; }
+    52.5% { stroke-dashoffset: 1; opacity: 1; }
+    64%, 86% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+    50% { transform: translateY(-6px) rotate(var(--tilt, 0deg)); }
+  }
+}
+
+/* Ombres : définies hors de @theme pour pouvoir changer en mode sombre. */
+:root {
+  --shadow-soft: 0 1px 2px rgb(25 22 19 / 0.05), 0 8px 20px -12px rgb(25 22 19 / 0.16);
+  --shadow-lift: 0 2px 6px rgb(25 22 19 / 0.07), 0 20px 40px -18px rgb(25 22 19 / 0.34);
+}
+
+.dark {
+  --color-paper: #141311;
+  --color-paper-deep: #0b0a09;
+  --color-card: #1e1c1a;
+  --color-ink: #f4f2ee;
+  --color-ink-soft: #b5aea6;
+  --color-ink-faint: #8d867f;
+  --color-line: #34312d;
+
+  --color-primary: #ff6b47;
+  --color-primary-strong: #ff8a6b;
+  --color-primary-soft: #3d1f16;
+  --color-on-primary: #1a0d08;
+
+  --color-saffron: #f6c75c;
+  --color-saffron-soft: #3a3018;
+  --color-sage: #8cc79b;
+  --color-sage-soft: #1f3326;
+  --color-danger: #ff8a80;
+  --color-danger-soft: #3d1c1a;
+
+  --color-dusk: #b8bbff;
+  --color-dusk-soft: #262543;
+  --color-ember: #ffa47c;
+  --color-ember-soft: #3d231a;
+
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.35), 0 10px 24px -14px rgb(0 0 0 / 0.7);
+  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.4), 0 22px 44px -20px rgb(0 0 0 / 0.85);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+/*
+ * Le bouton de l'accueil (UrgeButton) : une carte tomate, les mêmes couleurs
+ * en clair et en sombre, avec un léger grain d'impression.
+ */
+@utility urge-card {
+  background: linear-gradient(158deg, #e2461f 0%, #cf3a18 48%, #a82b0f 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    inset 0 -18px 40px rgb(0 0 0 / 0.12),
+    0 26px 44px -22px rgb(204 54 21 / 0.75),
+    0 2px 6px rgb(25 22 19 / 0.08);
+}
+
+/* Le mini-fil : en perspective, et qui s'efface en haut et en bas. */
+@utility urge-feed {
+  perspective: 700px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 45%, transparent 76%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 45%, transparent 76%);
+}
+
+@utility urge-plane {
+  transform: rotateX(24deg) rotateZ(-9deg);
+  transform-origin: 50% 0%;
+}
+
+/* Grain de papier (bruit SVG), à poser par-dessus une couleur. */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/*
+ * Couleur d'accent par famille de passions : le composant pose
+ * `style={{ '--accent': '#E4572E' }}` et utilise ces utilitaires.
+ * Le mélange avec les couleurs du thème garde un bon contraste en clair
+ * comme en sombre.
+ */
+@utility tint-accent {
+  background-color: color-mix(in oklab, var(--accent) 13%, var(--color-card));
+}
+
+@utility tint-accent-strong {
+  background-color: color-mix(in oklab, var(--accent) 24%, var(--color-card));
+}
+
+@utility border-accent {
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--color-line));
+}
+
+@utility text-accent {
+  color: color-mix(in oklab, var(--accent) 55%, var(--color-ink));
+}
+
+@utility bg-accent {
+  background-color: var(--accent);
+}
+
+/* Fond pointillé façon carnet, visible autour de l'app sur grand écran. */
+@utility bg-dots {
+  background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 14%, transparent) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Le logo seulement : Fraunces, avec son axe « SOFT » (empattements arrondis). */
+@utility font-brand {
+  font-family: 'Fraunces Variable', ui-serif, Georgia, serif;
+  font-variation-settings: 'SOFT' 100;
+}
+
+/*
+ * Tache de couleur derrière un pictogramme (voir <Picto spot>) : l'accent de
+ * l'élément (--accent), mélangé au fond de carte pour rester doux.
+ */
+@utility spot-accent {
+  fill: color-mix(in oklab, var(--accent) 48%, var(--color-card));
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Styles de page, volontairement HORS des couches (@layer) de Tailwind : quand
+ * l'app est intégrée dans une page hôte qui a son propre style de base (par
+ * exemple un aperçu sur claude.ai), ce sont bien le fond, la police et la
+ * taille de texte de l'app qui s'appliquent.
+ */
+html {
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--color-paper-deep);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 28%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2.5px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  label[for] {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

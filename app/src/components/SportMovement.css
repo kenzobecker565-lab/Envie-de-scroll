@@ -1,0 +1,15 @@
+.sport-movement{border:1px solid #E6D8F0;border-radius:23px;padding:10px;background:linear-gradient(150deg,#FFFDFA,#F2EAFE);color:#35204F;overflow:hidden}
+.sport-figure{display:block;width:100%;aspect-ratio:1;background-repeat:no-repeat;mix-blend-mode:multiply;flex-shrink:0}
+.sport-studio-stage{height:230px;position:relative;overflow:hidden;border-radius:18px;background:radial-gradient(ellipse at 58% 60%,#E8DAFA 0 34%,transparent 65%)}
+.sport-stage-frame{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.sport-stage-frame .sport-figure{width:230px;max-width:100%}
+.sport-stage-start{opacity:0}.sport-stage-end{opacity:1}
+.sport-movement[data-playing=true] .sport-stage-start{animation:sport-frame-start 4s infinite}.sport-movement[data-playing=true] .sport-stage-end{animation:sport-frame-end 4s infinite}
+.sport-poses{display:grid;grid-template-columns:1fr 1fr;gap:9px;text-align:center;margin-top:8px}.sport-poses>div{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:16px;background:#FFFFFFA6;padding:3px 6px 7px}
+.sport-poses .sport-figure{width:84px;max-width:100%}.sport-poses small{font-size:11px;font-weight:850;padding:4px 12px;border-radius:99px;background:#EDE1FD}
+.sport-play{display:flex;justify-content:center;align-items:center;gap:6px;font-size:12px;font-weight:850;color:#7731C9;min-height:40px;width:100%;border-radius:99px;background:#EEE2FB}
+.sport-movement.is-compact .sport-studio-stage{height:150px}.sport-movement.is-compact .sport-stage-frame .sport-figure{width:160px}.sport-movement.is-compact .sport-poses .sport-figure{width:52px}.sport-movement.is-compact .sport-play{min-height:32px;font-size:11px}
+.sport-understand{background:var(--accent-soft);border-radius:99px;padding:9px;text-align:center;color:var(--accent-strong);font-size:12px;font-weight:850}
+.sport-instructions ol{list-style:none;display:flex;flex-direction:column;gap:10px}.sport-instructions li{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.6}.sport-instructions li>span{display:grid;place-items:center;flex:0 0 25px;height:25px;border-radius:50%;background:var(--good-soft);color:var(--good-ink);font-weight:950}
+.sport-instructions details{border:1px solid var(--line);border-radius:16px;padding:12px;font-size:13px}.sport-instructions summary{font-weight:850;cursor:pointer}.sport-instructions details p{margin-top:10px}.sport-cue{background:var(--good-soft);color:var(--good-ink);border-radius:14px;padding:12px;font-size:13px!important;line-height:1.5!important}
+@keyframes sport-frame-start{0%,40%,100%{opacity:1}50%,90%{opacity:0}}@keyframes sport-frame-end{0%,40%,100%{opacity:0}50%,90%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.sport-movement[data-playing=true] .sport-stage-frame{animation:none}.sport-stage-start{opacity:0}.sport-stage-end{opacity:1}}

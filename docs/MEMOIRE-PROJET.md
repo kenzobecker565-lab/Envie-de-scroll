@@ -290,6 +290,7 @@ Autres travaux de cours ou perso dans les artifacts, sans lien avec Scroll-up : 
 - **13-14/10** : dossier marketing de cours (Docs puis Word) ; recherche design et refonte (jugée faible).
 - **15/10** : avis sur la refonte ChatGPT de `develop` ; site web en trois versions (V3 actuelle, fidèle à la V1).
 - **16/10** : création de ce fichier.
+- **27/10** : premier Short YouTube avec Minuton, « le chat farceur » (voir section 12).
 
 ---
 
@@ -298,3 +299,15 @@ Autres travaux de cours ou perso dans les artifacts, sans lien avec Scroll-up : 
 1. **Site** : brancher le vrai lien du bot, puis héberger et remplir les pages légales (voir section 6).
 2. **App** : corriger le message de bienvenue du bot ; suivre la refonte `develop` (4 onglets, moins de compteurs, retirer les tenues à l'image de vraies personnes).
 3. **Version finale** : choix technique pour l'App Store (Capacitor ou React Native, plutôt qu'une Mini App) ; monétisation à décider ; Play Store « par Google » mis en attente par Kenzo.
+4. **Shorts YouTube** : en faire d'autres sur le même modèle (section 12).
+
+---
+
+## 12. Shorts YouTube avec Minuton
+
+- **Objectif de Kenzo** : des Shorts « pour les jeunes » avec Minuton. Les prototypes (illustrations, découpage) sont faits avec ChatGPT ; Claude fait le montage et l'animation.
+- **Short n°1, « le chat farceur »** (27/10) : 20 s, 1080×1920, sans paroles, monté sur le tempo de « Monkeys Spinning Monkeys » (Kevin MacLeod, CC-BY 4.0, crédit obligatoire dans la description).
+  - Sources et méthode : `promo/shorts/01-chat-farceur/` (`prep.py`, `render.py`, `audio.py`, README, texte YouTube).
+  - Le pack de ChatGPT (images, chat détouré) n'est pas dans le dépôt.
+- **Point à trancher avec Kenzo** : le réglage YouTube « conçu pour les enfants ». L'app est ouverte à partir de 15 ans, mais un dessin animé simple peut être considéré par YouTube comme du contenu pour enfants. Cela coupe les commentaires et certaines fonctions, et une erreur de réglage peut être sanctionnée.
+

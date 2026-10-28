@@ -108,7 +108,8 @@ export class Studio {
     const S = evaluate(this.C, t)
     const ctx = this.ctx
     const cam = S.camera
-    const z = Math.max(0.2, cam.zoom)
+    // une caméra penchée montrerait les coins vides : on zoome juste assez pour les cacher
+    const z = Math.max(0.2, cam.zoom) * (1 + Math.abs(cam.rot) * 2.4)
     if (!cam.free) {
       cam.x = clamp(cam.x, W / (2 * z), W - W / (2 * z))
       cam.y = clamp(cam.y, H / (2 * z), H - H / (2 * z))

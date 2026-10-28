@@ -48,6 +48,10 @@ class Assets:
 
     def _raw(self, code):
         """Sprite brut (sans normalisation d'échelle) d'une pose de Minuton."""
+        extra = self.root / "Minuton" / "extra" / f"{code}.png"
+        if extra.exists():
+            im = _solid_alpha(self._file(extra.relative_to(self.root)))
+            return Sprite(im, im.width / 2, im.height - 1)
         assets = self.index["assets"]
         if code in assets and "file" in assets[code] and code.startswith("M") and "_" not in code:
             im = _solid_alpha(self._file(assets[code]["file"]))

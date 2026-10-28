@@ -164,7 +164,7 @@ WALK_R = ["M13", "M14", "M15", "M16"]
 WALK_L = ["M17", "M18", "M19", "M20"]
 
 # Poses manquantes (planche M21_M27 tronquée) : remplacement provisoire
-FALLBACK = {"M24": "M23", "M25": "M23", "M26": "M23", "M27": "M22"}
+FALLBACK = {"M24": "M01", "M25": "M26", "M26": "M23", "M27": "M22"}
 
 
 def _broken(code):
@@ -176,7 +176,10 @@ def _broken(code):
     return a[-3:].max() < 10 or a.mean() < 5
 
 
+# M24 et M25 ont les pieds coupés dans la planche reçue : toujours remplacés sauf version corrigée
 for _c in list(FALLBACK):
+    if _c in ("M24", "M25") and not (A.root / "Minuton" / "extra" / f"{_c}.png").exists():
+        continue
     if not _broken(_c):
         FALLBACK.pop(_c)
 if FALLBACK:
@@ -528,10 +531,10 @@ def s10(t):
 def x_path(t):
     """Position de Minuton de S11 à S13 et pose correspondante."""
     segs = [  # (t0, t1, x0, x1, cycle, i/s des poses)
-        (32.0, 33.2, 280, 170, WALK_L, 8),
-        (34.0, 35.4, 170, 940, WALK_R, 12),
-        (36.0, 36.8, 940, 170, WALK_L, 16),
-        (36.8, 37.6, 170, 940, WALK_R, 16),
+        (32.0, 33.2, 280, 220, WALK_L, 8),
+        (34.0, 35.4, 220, 940, WALK_R, 12),
+        (36.0, 36.8, 940, 200, WALK_L, 16),
+        (36.8, 37.6, 200, 940, WALK_R, 16),
         (37.6, 38.5, 940, 280, WALK_L, 16),
     ]
     for t0, t1, x0, x1, cyc, fps in segs:
@@ -540,7 +543,7 @@ def x_path(t):
     if t < 32.0:
         return 280, "M22"
     if t < 34.0:
-        return 170, "M24"
+        return 220, "M24"
     if t < 36.0:
         return 940, "M23"
     if t < 40.0:
@@ -567,8 +570,12 @@ def s11_13(t):
     last = SWITCHES[idx - 1][0] if idx else 0
     mix = min((t - last) * 10, 1) if idx else 1
     ang = flower_spring(t, SWITCHES)
+    actor = (code, x)
+    if t >= 38.5:  # rire : petits sauts
+        hop = abs(math.sin((t - 38.5) * math.pi * 3))
+        actor = (code, x, GROUND - 22 * hop, 1 + 0.03 * (1 - hop), 1 - 0.05 * (1 - hop))
     f = wide(t, plant=olds[idx - 1] if idx else "PL8", plant2=olds[idx], mix=mix, g=1.36, angle=ang,
-             actors=[(code, x)])
+             actors=[actor])
     return camera(f, 1.0, 540, 960)
 
 

@@ -1,0 +1,16 @@
+{
+  "name": "studio-minuton",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mini studio d'animation des épisodes de Minuton : moteur, éditeur web, rendu MP4.",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "render": "node render.mjs",
+    "stills": "node render.mjs --stills",
+    "sheet": "node render.mjs --sheet"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

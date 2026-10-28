@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lecteur de rendu</title>
+    <style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+  </head>
+  <body>
+    <canvas id="c" width="1080" height="1920"></canvas>
+    <script type="module">
+      // Page utilisée par render.mjs : une image par appel à seek(t).
+      import { Studio } from '../engine/studio.js'
+      const q = new URLSearchParams(location.search)
+      const ep = (await import(`../episodes/${q.get('ep')}.js?v=${Date.now()}`)).default
+      const studio = new Studio(document.getElementById('c'), ep)
+      const ready = studio.load()
+      window.__studio = {
+        ready: ready.then(() => true),
+        duration: ep.duration,
+        fps: ep.fps ?? 30,
+        seek: (t) => {
+          studio.render(t, { safe: q.has('safe') })
+          return true
+        },
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8" />
+<title>Test marionnette</title>
+<style>body{margin:0;background:#cfe6cf}</style>
+<canvas id="c" width="1600" height="1000"></canvas>
+<script type="module">
+  import { loadMinutonRig, drawMinuton } from '../engine/draw-minuton.js'
+  import { initialBody, initialArms, expr, ARM_POSES } from '../engine/actions.js'
+  const rig = await loadMinutonRig('../library/minuton')
+  const ctx = document.getElementById('c').getContext('2d')
+  const cases = [
+    ['neutral', {}, {}], ['joy', { turn: 0.5 }, {}], ['curious', { turn: 0.9 }, {}], ['joy', { turn: -0.5 }, { pose: 'cheer' }],
+    ['surprise', { turn: -0.92 }, {}], ['neutral', { spin: -1 }, {}], ['laugh', {}, { pose: 'cheer' }], ['idea', { turn: 0.35 }, { pose: 'reachUp' }],
+    ['focus', { turn: -0.3 }, { pose: 'hips' }], ['sleep', {}, {}], ['mischief', { turn: 0.6 }, { pose: 'think' }], ['joy', { amp: 1, phase: 0.25, turn: 0.95 }, {}],
+  ]
+  cases.forEach(([e, b, a], i) => {
+    const x = 140 + (i % 6) * 265
+    const y = 440 + Math.floor(i / 6) * 480
+    const body = { ...initialBody({ x, y, scale: 0.6 }), ...b }
+    const arms = a.pose ? { ...initialArms(), ...ARM_POSES[a.pose], w: 1 } : initialArms()
+    drawMinuton(ctx, { body, arms, face: expr(e), t: 0 }, rig)
+    ctx.fillStyle = '#333'; ctx.font = '20px sans-serif'; ctx.fillText(e, x - 40, y + 30)
+  })
+  window.done = true
+</script>
+</html>

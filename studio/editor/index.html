@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Studio Minuton</title>
+    <link rel="stylesheet" href="./editor.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="bar">
+        <div class="brand"><span class="logo">⏱</span> Studio Minuton</div>
+        <select id="episode" title="Épisode"></select>
+        <div class="transport">
+          <button id="start" title="Début (Origine)">⏮</button>
+          <button id="prev" title="Image précédente (←)">◀︎</button>
+          <button id="play" class="primary" title="Lecture / pause (Espace)">▶︎</button>
+          <button id="next" title="Image suivante (→)">▶︎|</button>
+          <span id="time" class="time">0:00.00</span>
+        </div>
+        <div class="toggles">
+          <label title="Vitesse de lecture"><select id="speed"><option value="0.25">×0,25</option><option value="0.5">×0,5</option><option value="1" selected>×1</option></select></label>
+          <label><input type="checkbox" id="sound" checked /> Son</label>
+          <label><input type="checkbox" id="loop" /> Boucle</label>
+          <label><input type="checkbox" id="safe" /> Zones Shorts</label>
+          <label><input type="checkbox" id="debug" /> Repères</label>
+        </div>
+      </header>
+      <main>
+        <section class="stage">
+          <canvas id="view" width="1080" height="1920"></canvas>
+          <div id="status" class="status"></div>
+        </section>
+        <aside class="side">
+          <h2 id="title">—</h2>
+          <p class="hint">Les épisodes sont des fichiers dans <code>studio/episodes/</code>. Enregistre le fichier : l'aperçu se recharge tout seul.</p>
+          <div id="events" class="events"></div>
+          <details class="help">
+            <summary>Raccourcis et rendu</summary>
+            <p><kbd>Espace</kbd> lecture/pause · <kbd>←</kbd>/<kbd>→</kbd> image par image · <kbd>Maj</kbd> + flèches : ±1 s · <kbd>L</kbd> boucle sur le plan</p>
+            <p>Vidéo finale : <code>cd studio && node render.mjs &lt;épisode&gt;</code></p>
+          </details>
+        </aside>
+      </main>
+      <footer class="timeline">
+        <canvas id="tl"></canvas>
+      </footer>
+    </div>
+    <audio id="audio" preload="auto"></audio>
+    <script type="module" src="./editor.js"></script>
+  </body>
+</html>

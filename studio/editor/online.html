@@ -1,0 +1,113 @@
+<title>Studio Minuton</title>
+<meta name="claude:viewport-fit-sides" content="cover" />
+<style>
+  /* Studio sombre (un seul thème assumé, comme une salle de montage) : scène au centre, timeline en bas. */
+  :root {
+    --bg: #17121c;
+    --panel: #221a2a;
+    --line: #3a2e45;
+    --text: #f2ecf7;
+    --muted: #a99bb8;
+    --accent: #ffcc33;
+    --accent-ink: #2a0b26;
+    --violet: #9b5de5;
+    --chip: #2e2438;
+    --check-a: #1c1622;
+    --check-b: #1f1825;
+    --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color-scheme: dark;
+    font-family: var(--font);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); }
+  #app { display: grid; grid-template-rows: auto minmax(0, 1fr) 150px; height: 100%; }
+  .bar {
+    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
+    padding-block: 8px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  .brand { font-weight: 700; letter-spacing: 0.02em; }
+  .logo { color: var(--accent); }
+  select, button { background: var(--chip); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font: inherit; cursor: pointer; }
+  button:hover, select:hover { border-color: var(--violet); }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; min-width: 44px; }
+  .transport { display: flex; gap: 6px; align-items: center; }
+  .time { font-variant-numeric: tabular-nums; min-width: 120px; text-align: right; color: var(--accent); font-weight: 600; }
+  .toggles { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-left: auto; color: var(--muted); font-size: 14px; }
+  .toggles label { display: flex; gap: 5px; align-items: center; cursor: pointer; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 0; }
+  .stage { position: relative; display: flex; align-items: center; justify-content: center; padding: 12px; min-height: 0; background: repeating-conic-gradient(var(--check-a) 0 25%, var(--check-b) 0 50%) 50% / 24px 24px; }
+  #view { height: 100%; max-height: 100%; max-width: 100%; aspect-ratio: 9 / 16; width: auto; border-radius: 10px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); background: var(--bg); }
+  .status { position: absolute; top: 18px; left: 18px; padding: 6px 10px; border-radius: 8px; background: var(--panel); font-size: 13px; display: none; max-width: 70%; white-space: pre-wrap; }
+  .status.show { display: block; }
+  .status.error { background: #6b1030; }
+  .side { border-left: 1px solid var(--line); background: var(--panel); padding: 12px 14px; overflow: auto; min-height: 0; min-width: 0; }
+  .side h2 { margin: 4px 0 6px; font-size: 18px; text-wrap: balance; }
+  .hint { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+  code, kbd { background: var(--chip); border-radius: 5px; padding: 1px 5px; font-size: 12px; }
+  .events { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; }
+  .ev { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 6px; padding: 3px 6px; border-radius: 6px; cursor: pointer; color: var(--muted); overflow-wrap: anywhere; }
+  .ev:hover { background: var(--chip); color: var(--text); }
+  .ev.past { opacity: 0.55; }
+  .ev.now { background: #3a2c48; color: var(--text); opacity: 1; }
+  .ev b { color: var(--text); font-weight: 600; }
+  .ev .t { font-variant-numeric: tabular-nums; color: var(--accent); }
+  .help { margin-top: 14px; color: var(--muted); font-size: 13px; }
+  .timeline { border-top: 1px solid var(--line); background: var(--panel); min-width: 0; }
+  #tl { width: 100%; height: 100%; display: block; cursor: pointer; touch-action: none; }
+  @media (max-width: 900px) {
+    main { grid-template-columns: minmax(0, 1fr); }
+    .side { display: none; }
+    .toggles { margin-left: 0; }
+    #app { grid-template-rows: auto minmax(0, 1fr) 120px; }
+  }
+</style>
+
+<div id="app">
+  <header class="bar">
+    <div class="brand"><span class="logo">⏱</span> Studio Minuton</div>
+    <select id="episode" title="Épisode"></select>
+    <div class="transport">
+      <button id="start" title="Début" aria-label="Revenir au début">⏮</button>
+      <button id="prev" title="Image précédente (←)" aria-label="Image précédente">◀︎</button>
+      <button id="play" class="primary" title="Lecture / pause (Espace)" aria-label="Lecture ou pause">▶︎</button>
+      <button id="next" title="Image suivante (→)" aria-label="Image suivante">▶︎|</button>
+      <span id="time" class="time">0:00.00</span>
+    </div>
+    <div class="toggles">
+      <label title="Vitesse de lecture"><select id="speed"><option value="0.25">×0,25</option><option value="0.5">×0,5</option><option value="1" selected>×1</option></select></label>
+      <label><input type="checkbox" id="sound" checked /> Son</label>
+      <label><input type="checkbox" id="loop" /> Boucle</label>
+      <label><input type="checkbox" id="safe" /> Zones Shorts</label>
+      <label><input type="checkbox" id="debug" /> Repères</label>
+    </div>
+  </header>
+  <main>
+    <section class="stage">
+      <canvas id="view" width="1080" height="1920"></canvas>
+      <div id="status" class="status"></div>
+    </section>
+    <aside class="side">
+      <h2 id="title">—</h2>
+      <p class="hint">Tout ce que fait l'épisode, seconde par seconde. Clique sur une ligne pour y aller.</p>
+      <div id="events" class="events"></div>
+      <details class="help">
+        <summary>Raccourcis</summary>
+        <p><kbd>Espace</kbd> lecture ou pause · <kbd>←</kbd> et <kbd>→</kbd> image par image · <kbd>Maj</kbd> + flèches : une seconde · <kbd>L</kbd> boucle sur trois secondes</p>
+        <p>Zones Shorts : montre ce que l'interface YouTube cache (titre, boutons).</p>
+      </details>
+    </aside>
+  </main>
+  <footer class="timeline"><canvas id="tl"></canvas></footer>
+</div>
+<audio id="audio" preload="auto"></audio>
+<script>
+  window.STUDIO_STATIC = {
+    root: './',
+    episodes: ['03_la_flaque'],
+    audio: { '03_la_flaque': 'studio/build/web/03_la_flaque.mp3' },
+  }
+</script>
+<script type="module" src="studio/editor/editor.js"></script>

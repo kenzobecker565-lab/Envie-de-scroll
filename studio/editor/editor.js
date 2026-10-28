@@ -9,11 +9,14 @@ const view = $('view')
 const tl = $('tl')
 const audio = $('audio')
 const params = new URLSearchParams(location.search)
+// Version en ligne (sans serveur) : la page définit window.STUDIO_STATIC = { episodes, audio, root }
+const STATIC = window.STUDIO_STATIC ?? null
 
 let studio = null
 let ep = null
-let epId = params.get('ep')
-let t = Number(params.get('t') ?? 0)
+let epId = params.get('ep') ?? (location.hash.slice(1) || null)
+// en ligne, on ouvre juste après le fondu d'ouverture pour que l'image ne soit pas noire
+let t = Number(params.get('t') ?? (window.STUDIO_STATIC ? 1.5 : 0))
 let playing = false
 let lastTick = 0
 let mtime = 0
@@ -33,14 +36,14 @@ const fmt = (x) => {
 }
 
 async function listEpisodes() {
-  const list = await (await fetch('/api/episodes')).json()
+  const list = STATIC ? STATIC.episodes : await (await fetch('/api/episodes')).json()
   const sel = $('episode')
   sel.innerHTML = list.map((e) => `<option value="${e}">${e.replace(/_/g, ' ')}</option>`).join('')
   if (!epId || !list.includes(epId)) epId = list[list.length - 1]
   sel.value = epId
   sel.onchange = () => {
     epId = sel.value
-    history.replaceState(null, '', `?ep=${epId}`)
+    if (!STATIC) history.replaceState(null, '', `?ep=${epId}`)
     t = 0
     load()
   }
@@ -49,9 +52,9 @@ async function listEpisodes() {
 async function load(keepTime = false) {
   try {
     status('Chargement…')
-    mtime = await (await fetch(`/api/mtime?ep=${epId}`)).json()
-    ep = (await import(`../episodes/${epId}.js?v=${mtime}`)).default
-    const s = new Studio(view, ep)
+    mtime = STATIC ? 0 : await (await fetch(`/api/mtime?ep=${epId}`)).json()
+    ep = (await import(STATIC ? `../episodes/${epId}.js` : `../episodes/${epId}.js?v=${mtime}`)).default
+    const s = new Studio(view, ep, { root: STATIC ? STATIC.root : '/' })
     await s.load()
     studio = s
     if (!keepTime) t = Math.min(t, ep.duration)
@@ -70,6 +73,12 @@ async function loadAudio() {
   audioReady = false
   if (!$('sound').checked) return
   try {
+    if (STATIC) {
+      audio.src = STATIC.audio[epId]
+      await new Promise((r) => (audio.oncanplaythrough = r))
+      audioReady = true
+      return
+    }
     const res = await fetch(`/api/audio?ep=${epId}&v=${mtime}`)
     if (!res.ok) throw new Error(await res.text())
     const blob = await res.blob()
@@ -281,7 +290,7 @@ addEventListener('resize', drawTimeline)
 
 // rechargement automatique quand l'épisode est modifié
 setInterval(async () => {
-  if (!epId) return
+  if (!epId || STATIC) return
   try {
     const m = await (await fetch(`/api/mtime?ep=${epId}`)).json()
     if (m !== mtime) load(true)

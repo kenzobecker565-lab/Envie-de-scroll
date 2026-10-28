@@ -1,0 +1,208 @@
+{
+  "episode": "Le cœur en papier",
+  "format": "9:16",
+  "duration_seconds": 30,
+  "images": [
+    {
+      "id": "P01",
+      "desc": "Défilement",
+      "time": "0–2 s",
+      "file": "Images/01_P01_Defilement.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P02_A",
+      "desc": "Éveillé devant la tablette",
+      "time": "2–4 s",
+      "file": "Images/02_P02_A_Eveille_devant_la_tablette.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P02_B",
+      "desc": "Paupières mi-closes",
+      "time": "4–6 s",
+      "file": "Images/03_P02_B_Paupieres_mi-closes.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P03_A",
+      "desc": "Bord de la feuille soulevé",
+      "time": "6–6,7 s",
+      "file": "Images/04_P03_A_Bord_de_la_feuille_souleve.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P03_B",
+      "desc": "Feuille au-dessus de la table",
+      "time": "6,7–7,4 s",
+      "file": "Images/05_P03_B_Feuille_au-dessus_de_la_table.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P03_C",
+      "desc": "Feuille à mi-chemin du visage",
+      "time": "7,4–8,2 s",
+      "file": "Images/06_P03_C_Feuille_a_mi-chemin_du_visage.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P03_D",
+      "desc": "Feuille près du visage",
+      "time": "8,2–9 s",
+      "file": "Images/07_P03_D_Feuille_pres_du_visage.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P04",
+      "desc": "Feuille sur le visage",
+      "time": "9–11 s",
+      "file": "Images/08_P04_Feuille_sur_le_visage.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P05_A",
+      "desc": "Feuille à moitié retirée",
+      "time": "11–12 s",
+      "file": "Images/09_P05_A_Feuille_a_moitie_retiree.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P05_B",
+      "desc": "Feuille devant le ventre",
+      "time": "12–13 s",
+      "file": "Images/10_P05_B_Feuille_devant_le_ventre.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P06_A",
+      "desc": "Regard vers la feuille",
+      "time": "13–13,3 s",
+      "file": "Images/11_P06_A_Regard_vers_la_feuille.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P06_B",
+      "desc": "Regard vers la tablette",
+      "time": "13,3–13,7 s",
+      "file": "Images/12_P06_B_Regard_vers_la_tablette.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P06_C",
+      "desc": "Retour du regard vers la feuille",
+      "time": "13,7–14 s",
+      "file": "Images/13_P06_C_Retour_du_regard_vers_la_feuille.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P07",
+      "desc": "L'idée",
+      "time": "14–16 s",
+      "file": "Images/14_P07_Lidee.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P08_A",
+      "desc": "Début du tracé",
+      "time": "16–17 s",
+      "file": "Images/15_P08_A_Debut_du_trace.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P08_B",
+      "desc": "Demi-cœur",
+      "time": "17–18 s",
+      "file": "Images/16_P08_B_Demi-coeur.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P08_C",
+      "desc": "Contour complet",
+      "time": "18–19 s",
+      "file": "Images/17_P08_C_Contour_complet.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P08_D",
+      "desc": "Cœur à moitié colorié",
+      "time": "19–20,5 s",
+      "file": "Images/18_P08_D_Coeur_a_moitie_colorie.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P08_E",
+      "desc": "Cœur entièrement violet",
+      "time": "20,5–22 s",
+      "file": "Images/19_P08_E_Coeur_entierement_violet.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P09_A",
+      "desc": "Feuille pliée",
+      "time": "22–22,7 s",
+      "file": "Images/20_P09_A_Feuille_pliee.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P09_B",
+      "desc": "Cœur à moitié détaché",
+      "time": "22,7–23,5 s",
+      "file": "Images/21_P09_B_Coeur_a_moitie_detache.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P09_C",
+      "desc": "Dernier morceau de papier",
+      "time": "23,5–24,2 s",
+      "file": "Images/22_P09_C_Dernier_morceau_de_papier.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P09_D",
+      "desc": "Cœur libre",
+      "time": "24,2–25 s",
+      "file": "Images/23_P09_D_Coeur_libre.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P10",
+      "desc": "Le cœur offert au spectateur",
+      "time": "25–28 s",
+      "file": "Images/24_P10_Le_coeur_offert_au_spectateur.jpg",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "id": "P11",
+      "desc": "Cœur posé sur la tablette éteinte",
+      "time": "28–30 s",
+      "file": "Images/25_P11_Coeur_pose_sur_la_tablette_eteinte.jpg",
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "note": "Images fixes au format portrait natif. Les durées sont indicatives et totalisent les 30 secondes du scénario. Les mouvements et les bruitages sont à réaliser au montage."
+}

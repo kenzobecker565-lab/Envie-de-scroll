@@ -231,3 +231,16 @@ Les codes renvoient à la liste ci-dessus. **Ce que je fais au montage** est ind
 | **Total** | | **47** |
 
 **Ordre conseillé :** commence par D1, M01 et PL0. Envoie-les-moi d'abord : je fais un essai d'incrustation pour vérifier que les échelles et la lumière collent avant que tu génères tout le reste.
+
+---
+
+## Résultat du test d'incrustation (D1, M01, PL0)
+
+Le test est validé (`02_test_incrustation.jpg`). Les pieds de Minuton et la base du pot reposent sur le même sol, la lumière et le style collent, et le ciel laisse toute la place au tournesol. Position retenue en 1080 × 1920 : Minuton les pieds vers (270, 1450) pour 480 px de haut, le pot sur la tache de terre vers (620, 1420) pour 230 px de haut. J'ajoute moi-même les ombres de contact.
+
+### Consignes pour la suite de la génération
+
+1. **Minuton (M02 à M27) :** même canevas, même échelle et même marge de 8 % que M01, personnage entier. Pour les planches de marche, garder la même taille de personnage que M01 sur chaque pose. Je recale chaque pose par sa boîte de contenu et le bas des pieds.
+2. **Plante PL1 à PL3 :** même canevas 1024 × 1536 que PL0, pot exactement au même endroit et à la même taille.
+3. **Plante PL4 à PL8, nouveau canevas.** Avec le pot à la taille de PL0, le tournesol ne pourrait pas monter plus haut que la barrière. Ces cinq images utilisent donc un canevas 1024 × 1536 avec un **pot plus petit** : le même pot, environ 2 fois plus petit (environ 15 % de la hauteur de l'image), centré en bas. La fleur peut alors monter jusqu'en haut du canevas. Garder ce petit pot identique d'une image à l'autre : je remets tout à l'échelle en me calant sur le pot.
+4. **D2 et D3 :** générés en modifiant D1, même cadrage exactement (barrière, buissons, tache de terre au même endroit).

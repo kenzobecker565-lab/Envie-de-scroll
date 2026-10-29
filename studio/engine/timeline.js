@@ -94,13 +94,16 @@ function evalKeyed(start, events, t, keys) {
 
 const hash = (str) => [...str].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7)
 
-/** Clignements automatiques : toutes les 2,5 à 4,5 s, 0,16 s chacun. */
+/**
+ * Clignements automatiques : toutes les 2,5 à 4,5 s. La paupière se ferme vite
+ * (0,06 s), reste fermée un instant, puis se rouvre plus lentement (0,11 s).
+ */
 function autoBlink(t, seed) {
   const r = rng(seed)
   let at = 0.8 + r() * 2
   while (at < t + 1) {
     const d = t - at
-    if (d >= 0 && d < 0.16) return Math.sin((d / 0.16) * Math.PI)
+    if (d >= 0 && d < 0.21) return d < 0.06 ? d / 0.06 : d < 0.1 ? 1 : 1 - (d - 0.1) / 0.11
     at += 2.5 + r() * 2
     if (r() < 0.2) at -= 2.2 // double clignement de temps en temps
   }
@@ -118,7 +121,11 @@ export function evaluate(C, t) {
       const face = { ...evalChannel(A.face, t) }
       const blink = face.open > 0.3 && face.happy < 0.5 ? autoBlink(t, A.blinkSeed) : 0
       face.open = face.open * (1 - blink)
-      actors.push({ id: A.id, type: 'minuton', def: A.def, body, arms, face, t })
+      face.blink = blink
+      // vitesse du corps (px/s), pour faire traîner le visage et les bras derrière lui
+      const before = evalChannel(A.body, Math.max(0, t - 0.06))
+      const vel = { x: (body.x - before.x) / 0.06, y: (body.y - body.lift - (before.y - before.lift)) / 0.06 }
+      actors.push({ id: A.id, type: 'minuton', def: A.def, body, arms, face, t, vel })
     } else {
       actors.push({ id: A.id, type: A.type, def: A.def, props: evalChannel(A.props, t), t })
     }

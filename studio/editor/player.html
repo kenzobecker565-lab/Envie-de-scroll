@@ -18,9 +18,10 @@
         ready: ready.then(() => true),
         duration: ep.duration,
         fps: ep.fps ?? 30,
+        // une image = le canevas copié en JPEG (bien plus rapide qu'une capture d'écran PNG)
         seek: (t) => {
           studio.render(t, { safe: q.has('safe') })
-          return true
+          return document.getElementById('c').toDataURL('image/jpeg', 0.95)
         },
       }
     </script>

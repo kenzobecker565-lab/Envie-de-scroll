@@ -32,6 +32,18 @@ export const EXPRESSIONS = {
   sad: { browTilt: 0.85, open: 0.85, smile: -0.85, mouthW: 0.35, browY: 0.0 },
   grumpy: { squint: 0.3, browTilt: -0.6, browY: -0.04, smile: -0.5, mouthW: 0.36 },
   determined: { squint: 0.2, browTilt: -0.4, smile: 0.4, mouthW: 0.42 },
+  // expressions supplémentaires de la marionnette en images (pièces ChatGPT)
+  wonder: { wide: 1.12, browY: 0.08, smile: 1, mouthOpen: 0.4 },
+  fear: { wide: 1.15, pupil: 0.7, browTilt: 0.8, smile: -0.4 },
+  embarrassed: { browTilt: 0.5, smile: -0.2, cheek: 1, lookY: 0.5 },
+  dizzy: { smile: -0.2 },
+  wink: { smile: 1 },
+  winkRight: { smile: 1 },
+  yawn: { open: 0.5, mouthOpen: 0.9, round: 1 },
+  tongue: { happy: 1, smile: 1, mouthOpen: 0.4 },
+  oops: { browTilt: 0.6, smile: 0.3 },
+  shock: { wide: 1.15, pupil: 0.7, mouthOpen: 0.8, round: 1 },
+  smug: { squint: 0.4, smile: 1 },
 }
 export const NEUTRAL_FACE = {
   open: 1, happy: 0, wide: 1, squint: 0, pupil: 1,
@@ -68,7 +80,7 @@ export function initialBody(def) {
   }
 }
 export const initialArms = () => ({ w: 0, ...ARM_POSES.down, flapL: 0, flapR: 0 })
-export const initialFace = (def) => expr(def.expr ?? 'neutral')
+export const initialFace = (def) => ({ ...expr(def.expr ?? 'neutral'), name: def.expr ?? 'neutral' })
 
 // ------------------------------------------------------------------ corps
 
@@ -212,11 +224,11 @@ export const ARMS = {
     dur: (ev) => ev.dur ?? 0.3,
     apply(s, u, ev, d) {
       const tgt = { ...(ARM_POSES[ev.pose] ?? {}), ...pick(ev, ['aL', 'bL', 'aR', 'bR']), w: 1 }
-      return { ...mix(s, tgt, prog(u, 0, d, ev.ease ?? 'out3')), flapL: 0, flapR: 0 }
+      return { ...mix(s, tgt, prog(u, 0, d, ev.ease ?? 'out3')), flapL: 0, flapR: 0, gesture: null, pose: ev.pose ?? 'custom', L: ev.L, R: ev.R }
     },
   },
   /** Retour aux bras automatiques (balancement de marche) */
-  auto: { dur: (ev) => ev.dur ?? 0.3, apply: (s, u, ev, d) => ({ ...s, w: lerp(s.w, 0, prog(u, 0, d)), flapL: 0, flapR: 0 }) },
+  auto: { dur: (ev) => ev.dur ?? 0.3, apply: (s, u, ev, d) => ({ ...s, w: lerp(s.w, 0, prog(u, 0, d)), flapL: 0, flapR: 0, gesture: null, L: undefined, R: undefined }) },
   /** Saluer : { side: 'R' | 'L', n } */
   wave: {
     dur: (ev) => ev.dur ?? 0.3 + (ev.n ?? 3) * 0.32,
@@ -224,7 +236,7 @@ export const ARMS = {
       const side = ev.side ?? 'R'
       const up = prog(u, 0, 0.25, 'out3') * (1 - prog(u, d - 0.2, 0.2))
       const osc = Math.sin(((u - 0.25) / 0.32) * Math.PI * 2) * 0.45 * (u > 0.25 ? 1 : 0)
-      const o = { ...s, w: Math.max(s.w, up) }
+      const o = { ...s, w: Math.max(s.w, up), gesture: up > 0.05 ? 'wave' : null, side }
       o[`a${side}`] = lerp(s[`a${side}`], 2.5, up)
       o[`b${side}`] = lerp(s[`b${side}`], 0.5 + osc, up)
       if (s.w < 0.5) {
@@ -241,7 +253,7 @@ export const ARMS = {
     apply(s, u, ev, d) {
       const k = prog(u, 0, 0.2, 'out3') * (1 - prog(u, d - 0.25, 0.25))
       const b = Math.sin(u * 14) * 0.25
-      return { ...mix(s, { ...ARM_POSES.cheer, w: 1 }, k), bL: lerp(s.bL, -0.3 + b, k), bR: lerp(s.bR, -0.3 - b, k) }
+      return { ...mix(s, { ...ARM_POSES.cheer, w: 1 }, k), bL: lerp(s.bL, -0.3 + b, k), bR: lerp(s.bR, -0.3 - b, k), gesture: k > 0.05 ? 'cheer' : null }
     },
   },
   /** Battre des bras (panique, envol) : { dur } */
@@ -250,7 +262,7 @@ export const ARMS = {
     apply(s, u, ev, d) {
       const k = prog(u, 0, 0.15) * (1 - prog(u, d - 0.15, 0.15))
       const f = Math.sin(u * 22) * 0.6
-      return { ...s, w: Math.max(s.w, k), aL: lerp(s.aL, 1.6 + f, k), aR: lerp(s.aR, 1.6 + f, k), bL: lerp(s.bL, 0.2, k), bR: lerp(s.bR, 0.2, k) }
+      return { ...s, gesture: k > 0.05 ? 'flap' : null, w: Math.max(s.w, k), aL: lerp(s.aL, 1.6 + f, k), aR: lerp(s.aR, 1.6 + f, k), bL: lerp(s.bL, 0.2, k), bR: lerp(s.bR, 0.2, k) }
     },
   },
   /** Montrer du doigt : { side, angle } */
@@ -258,7 +270,7 @@ export const ARMS = {
     dur: (ev) => ev.dur ?? 0.3,
     apply(s, u, ev, d) {
       const side = ev.side ?? 'R'
-      const o = { ...s, w: 1 }
+      const o = { ...s, w: 1, gesture: 'point', side, angle: ev.angle ?? 1.7 }
       o[`a${side}`] = lerp(s[`a${side}`], ev.angle ?? 1.7, prog(u, 0, d, 'back'))
       o[`b${side}`] = lerp(s[`b${side}`], 0, prog(u, 0, d))
       return o
@@ -276,7 +288,9 @@ export const FACE = {
       const tgt = { ...expr(ev.name ?? 'neutral'), ...pick(ev, Object.keys(NEUTRAL_FACE)) }
       delete tgt.lookX
       delete tgt.lookY
-      return mix(s, tgt, prog(u, 0, d, 'out'))
+      const p = prog(u, 0, d, 'out')
+      // dessins choisis (marionnette en images) : changent d'un coup, comme une substitution
+      return { ...mix(s, tgt, p), name: ev.name ?? 'neutral', eyes: ev.eyes, mouth: ev.mouth, cheeks: ev.cheeks }
     },
   },
   /** Regard : { x, y } de -1 à 1 */
@@ -289,7 +303,7 @@ export const FACE = {
     apply(s, u, ev, d) {
       const k = prog(u, 0, 0.1) * (1 - prog(u, d - 0.1, 0.1))
       const o = Math.max(0, Math.sin(u * 17) * 0.5 + Math.sin(u * 7.3) * 0.3)
-      return { ...s, mouthOpen: lerp(s.mouthOpen, o, k), round: lerp(s.round, Math.max(0, Math.sin(u * 5)) * 0.5, k) }
+      return { ...s, mouthOpen: lerp(s.mouthOpen, o, k), round: lerp(s.round, Math.max(0, Math.sin(u * 5)) * 0.5, k), babbling: u < d - 0.05 }
     },
   },
 }

@@ -65,8 +65,8 @@ async function openPages(count) {
       errors.push(e.message)
     }
     shots.push(async (t) => {
-      await page.evaluate((x) => window.__studio.seek(x), t)
-      return page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: 1080, height: 1920 } })
+      const url = await page.evaluate((x) => window.__studio.seek(x), t)
+      return Buffer.from(url.slice(url.indexOf(',') + 1), 'base64') // JPEG
     })
   }
   const close = async () => {
@@ -85,7 +85,7 @@ async function stills(times) {
   fs.mkdirSync(dir, { recursive: true })
   const { shots, close } = await openPages(1)
   for (const t of times) {
-    const f = path.join(dir, `t${t.toFixed(2).padStart(6, '0')}.png`)
+    const f = path.join(dir, `t${t.toFixed(2).padStart(6, '0')}.jpg`)
     fs.writeFileSync(f, await shots[0](t))
     console.log(f)
   }
@@ -99,11 +99,11 @@ async function sheet() {
   const { shots, close, duration } = await openPages(1)
   const step = Number(args.step ?? 1)
   let i = 0
-  for (let t = 0; t < duration; t += step) fs.writeFileSync(path.join(dir, `${String(i++).padStart(3, '0')}.png`), await shots[0](t + 0.01))
+  for (let t = 0; t < duration; t += step) fs.writeFileSync(path.join(dir, `${String(i++).padStart(3, '0')}.jpg`), await shots[0](t + 0.01))
   await close()
   const cols = 8
   const out = path.join(epBuild, 'planche.png')
-  await run(FFMPEG, ['-y', '-loglevel', 'error', '-i', path.join(dir, '%03d.png'), '-vf', `scale=180:320,tile=${cols}x${Math.ceil(i / cols)}:padding=4:color=0x222222`, '-frames:v', '1', out])
+  await run(FFMPEG, ['-y', '-loglevel', 'error', '-i', path.join(dir, '%03d.jpg'), '-vf', `scale=180:320,tile=${cols}x${Math.ceil(i / cols)}:padding=4:color=0x222222`, '-frames:v', '1', out])
   console.log(out)
 }
 
@@ -112,21 +112,22 @@ async function audioArgs() {
   const m = await run(FFMPEG, ['-hide_banner', '-i', wav, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'])
   const s = JSON.parse(m.slice(m.lastIndexOf('{'), m.lastIndexOf('}') + 1))
   const ln = `loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=${s.input_i}:measured_TP=${s.input_tp}:measured_LRA=${s.input_lra}:measured_thresh=${s.input_thresh}:offset=${s.target_offset}:linear=true`
-  return { wav, args: ['-af', `${ln},aresample=48000`, '-c:a', 'aac', '-b:a', '192k'] }
+  return { wav, args: ['-af', `${ln},aresample=48000`, '-c:a', 'aac', '-b:a', '320k', '-ar', '48000'] }
 }
 
 async function video() {
   const a = await audioArgs()
   const out = path.join(build, `${ep}${args.draft ? '_brouillon' : ''}.mp4`)
-  const workers = Number(args.workers ?? 4)
+  const workers = Number(args.workers ?? 3)
   const { shots, close, duration, fps } = await openPages(workers)
   const frames = Math.round(duration * fps)
   const started = Date.now()
   await run(
     FFMPEG,
-    ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-', '-i', a.wav,
+    ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-', '-i', a.wav,
       '-vf', `scale=${W}:${H}:out_color_matrix=bt709:out_range=tv,format=yuv420p`,
-      '-c:v', 'libx264', '-preset', args.draft ? 'veryfast' : 'slow', '-crf', '17', '-tune', 'animation',
+      // réglages conseillés par YouTube : H.264 High, 2 images B, image clé toutes les 0,5 s
+      '-c:v', 'libx264', '-preset', args.draft ? 'veryfast' : 'medium', '-crf', '15', '-tune', 'animation', '-profile:v', 'high', '-bf', '2', '-g', String(Math.round(fps / 2)),
       '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
       ...a.args, '-movflags', '+faststart', '-shortest', out],
     {

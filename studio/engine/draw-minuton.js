@@ -6,12 +6,14 @@
  */
 import { clamp, lerp } from './core.js'
 import { ARM_POSES } from './actions.js'
+import { drawMinutonBitmap, loadBitmapRig } from './draw-minuton-bitmap.js'
 
 export const BASE_R = 180
 
 /** Charge la marionnette (rig.json + corps de face + corps tournés). */
 export async function loadMinutonRig(base) {
   const rig = await (await fetch(`${base}/rig.json`)).json()
+  rig.bitmap = await loadBitmapRig(base) // pièces ChatGPT de la vue de face, si elles existent
   rig.views ??= { front: { ...rig.body, face: { cx: 0, cy: 0, hw: 0.88, hh: 0.88 }, bodyX: [-0.98, 0.98] } }
   for (const v of Object.values(rig.views)) {
     v.img = new Image()
@@ -61,6 +63,8 @@ const WHITE = '#fffdf8'
 
 export function drawMinuton(ctx, a, rig, opts = {}) {
   const b = a.body
+  // vue de face (et léger trois-quarts) : la marionnette en images, si elle existe
+  if (rig.bitmap && Math.abs(b.turn ?? 0) < 0.75 && (b.spin ?? 1) >= 0 && !opts.vector) return drawMinutonBitmap(ctx, a, rig.bitmap, opts)
   const R = BASE_R * b.scale
   const C = rig.colors
   const H = rig.centerHeight

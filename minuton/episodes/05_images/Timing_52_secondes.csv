@@ -1,0 +1,38 @@
+﻿ordre;fichier;plan;debut_s;fin_s;duree_s;action
+1;P01_A.jpg;1;0.000;1.000;1.000;Minuton assis dans l'herbe, une feuille et un crayon violet devant lui, il dessine, concentré. En haut à gauche, un tout petit oisillon bleu tombe de l'arbre en battant des ailes maladroitement.
+2;P01_B.jpg;1;1.000;2.000;1.000;Même image. L'oisillon est à mi-hauteur, ailes ouvertes, affolé. Minuton dessine toujours.
+3;P01_C.jpg;1;2.000;3.000;1.000;Même image. L'oisillon vient d'atterrir dans l'herbe juste devant Minuton, avec quelques petites plumes bleues qui volent autour de lui. Minuton relève la tête, surpris, le crayon en l'air.
+4;P02_A.jpg;2;3.000;4.333;1.333;L'oisillon assis dans l'herbe, sonné, de petites étoiles autour de la tête.
+5;P02_B.jpg;2;4.333;5.667;1.333;Il secoue la tête, les plumes de son épi ébouriffées.
+6;P02_C.jpg;2;5.667;7.000;1.333;Il lève les yeux vers le haut, inquiet, le bec ouvert pour pépier.
+7;P03_A.jpg;3;7.000;8.500;1.500;Contre-plongée : le grand arbre vu d'en bas, le nid minuscule tout en haut, ciel bleu.
+8;P03_B.jpg;3;8.500;10.000;1.500;Plan moyen : Minuton (debout) et l'oisillon (dans l'herbe à ses pieds) regardent tous les deux vers le haut de l'arbre, de dos et de trois-quarts.
+9;P04_A.jpg;4;10.000;11.250;1.250;Minuton s'accroupit et prend délicatement l'oisillon dans ses deux mains, regard doux.
+10;P04_B.jpg;4;11.250;12.500;1.250;Minuton sur la pointe des pieds, bras tendus vers le haut avec l'oisillon dans les mains : le nid est beaucoup trop haut.
+11;P04_C.jpg;4;12.500;13.750;1.250;Il s'étire encore plus, tout tremblant, joues très rouges d'effort, l'oisillon tend le cou.
+12;P04_D.jpg;4;13.750;15.000;1.250;Il retombe sur ses talons, déçu, l'oisillon dans les mains contre son ventre.
+13;P05_A.jpg;5;15.000;16.286;1.286;Minuton apporte un pot de fleurs orange retourné et le pose au pied de l'arbre. L'oisillon le regarde, assis dans l'herbe.
+14;P05_B.jpg;5;16.286;17.571;1.286;Sur le pot, il pose un petit arrosoir violet retourné.
+15;P05_C.jpg;5;17.571;18.857;1.286;Au-dessus, un petit seau bleu retourné. La pile est haute et bancale.
+16;P05_D.jpg;5;18.857;20.143;1.286;Minuton est monté tout en haut de la pile, l'oisillon perché sur sa couronne, bras tendus vers le nid presque atteint. La pile commence à vaciller.
+17;P05_E.jpg;5;20.143;21.429;1.286;La pile penche fortement, Minuton bat des bras pour garder l'équilibre, l'oisillon s'accroche à la couronne.
+18;P05_F.jpg;5;21.429;22.714;1.286;La pile s'écroule dans l'herbe, Minuton tombe sur le dos tout en douceur dans l'herbe, l'oisillon rebondit sur son ventre. Les objets roulent autour (rien de dangereux, ambiance comique douce).
+19;P05_G.jpg;5;22.714;24.000;1.286;Minuton assis dans l'herbe, étourdi, de petites étoiles autour de la tête. L'oisillon assis sur sa tête, étourdi aussi.
+20;P06_A.jpg;6;24.000;25.333;1.333;L'oisillon pleure doucement, une petite larme, tête basse. Minuton le regarde, peiné.
+21;P06_B.jpg;6;25.333;26.667;1.333;Minuton pose doucement sa main sur la tête de l'oisillon pour le consoler.
+22;P06_C.jpg;6;26.667;28.000;1.333;Minuton a une idée : ses yeux brillent, un doigt levé, l'oisillon relève la tête, curieux.
+23;P07_A.jpg;7;28.000;29.600;1.600;Minuton fait la démonstration : il bat très fort de ses petits bras, les deux pieds décollés du sol, yeux fermés de concentration. L'oisillon le regarde, impressionné.
+24;P07_B.jpg;7;29.600;31.200;1.600;L'oisillon imite : il bat des ailes de toutes ses forces et décolle d'un tout petit peu. Minuton l'encourage, poings serrés.
+25;P07_C.jpg;7;31.200;32.800;1.600;"L'oisillon retombe dans l'herbe sur les fesses. Minuton rit gentiment, une main devant la bouche ; l'oisillon rit aussi."
+26;P07_D.jpg;7;32.800;34.400;1.600;Minuton court sur la pelouse en tenant l'oisillon à bout de bras au-dessus de sa tête, comme un avion. L'oisillon a les ailes grandes ouvertes, ravi.
+27;P07_E.jpg;7;34.400;36.000;1.600;Au sommet d'un saut, Minuton lance doucement l'oisillon vers le ciel.
+28;P08_A.jpg;8;36.000;37.250;1.250;Plan large : l'oisillon en l'air bat des ailes maladroitement, Minuton en bas, mains jointes, retient son souffle.
+29;P08_B.jpg;8;37.250;38.500;1.250;L'oisillon prend de la hauteur vers le nid, de plus en plus assuré.
+30;P08_C.jpg;8;38.500;39.750;1.250;Plan rapproché du nid (cadrage `R2_nid`) : l'oisillon atterrit dans le nid, ailes levées en victoire.
+31;P08_D.jpg;8;39.750;41.000;1.250;Plan large : Minuton en bas sautille de joie, bras levés.
+32;P09_A.jpg;9;41.000;43.000;2.000;Cadrage `R2_nid` : la maman oiseau est arrivée dans le nid et serre tendrement son petit sous son aile, yeux fermés de bonheur.
+33;P09_B.jpg;9;43.000;45.000;2.000;Gros plan sur Minuton, ému, mains jointes contre sa joue, une petite larme de joie.
+34;P10_A.jpg;10;45.000;46.333;1.333;La maman oiseau descend en vol vers Minuton, une longue plume bleue dans le bec.
+35;P10_B.jpg;10;46.333;47.667;1.333;Elle dépose délicatement la plume sur la couronne de Minuton. Minuton ferme les yeux, ravi.
+36;P10_C.jpg;10;47.667;49.000;1.333;Minuton seul, fier, la plume bleue plantée dans sa couronne, au coucher du soleil (ciel orange et rose). Il la regarde en levant les yeux, souriant.
+37;P11_A.jpg;11;49.000;52.000;3.000;Coucher du soleil : Minuton, la plume sur la couronne, bat des bras en riant et fait un tout petit saut. En haut de l'arbre, l'oisillon et sa maman le regardent depuis le nid.

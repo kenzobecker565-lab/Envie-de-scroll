@@ -31,3 +31,21 @@ python3 audio_e02.py /tmp/raw2.wav
 ffmpeg -y -i /tmp/raw2.wav -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 /tmp/audio2.wav
 python3 render_e02.py ../episodes/02_images ../episodes/02_le_tournesol.mp4 /tmp/audio2.wav
 ```
+
+## Refaire l'épisode 5 (« Le petit oiseau »)
+
+Les 37 images de l'épisode sont des illustrations complètes générées par ChatGPT. `render_e05.py` enchaîne les images. Il ajoute :
+- une caméra continue par plan ;
+- des coupes vives dans l'action et des fondus doux dans les moments calmes ;
+- un passage doré pour le coucher de soleil ;
+- des secousses aux chocs ;
+- quelques effets (étincelles, cœurs).
+
+`audio_e05.py` génère la bande son.
+
+```bash
+cd minuton/montage
+python3 audio_e05.py /tmp/raw5.wav
+ffmpeg -y -i /tmp/raw5.wav -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 /tmp/audio5.wav
+python3 render_e05.py ../episodes/05_images /tmp/e05.mp4 /tmp/audio5.wav
+```

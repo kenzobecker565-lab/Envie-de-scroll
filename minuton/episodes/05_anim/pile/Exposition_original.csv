@@ -1,0 +1,35 @@
+﻿ordre;fichier;type;debut_plan_s;fin_plan_s;debut_episode_s;fin_episode_s;duree_s;section;consigne
+1;A01.png;NOUVELLE;0.000000;0.170000;15.000000;15.170000;0.170000;1;Le pot n'est pas encore au pied de l'arbre. Minuton arrive **par la droite de l'image**, le pot orange retourné serré dans ses bras contre son ventre. Il est à mi-chemin entre le bord droit et l'arbre, pied gauche en avant (pas de marche). L'oisillon, assis à gauche, le regarde.
+2;A02.png;NOUVELLE;0.170000;0.340000;15.170000;15.340000;0.170000;1;Même scène : Minuton a avancé d'un petit pas vers l'arbre, les deux pieds sous lui (position de passage), le corps un peu plus haut.
+3;A03.png;NOUVELLE;0.340000;0.510000;15.340000;15.510000;0.170000;1;Minuton est presque au pied de l'arbre, pied droit en avant, il se penche pour poser le pot.
+4;P05_A.png;CLE;0.510000;0.860000;15.510000;15.860000;0.350000;1;(le pot est posé)
+5;A05.png;NOUVELLE;0.860000;1.310000;15.860000;16.310000;0.450000;1;Minuton se redresse, les mains sur les hanches, fier de lui, petit sourire. L'oisillon penche la tête, curieux.
+6;B01.png;NOUVELLE;1.310000;1.560000;16.310000;16.560000;0.250000;2;Minuton tient le petit arrosoir violet retourné à deux mains contre son ventre, à côté du pot.
+7;B02.png;NOUVELLE;1.560000;1.810000;16.560000;16.810000;0.250000;2;Il soulève l'arrosoir au-dessus du pot, sur la pointe des pieds, bras tendus vers le haut, la langue un peu tirée de concentration.
+8;P05_B.png;CLE;1.810000;2.160000;16.810000;17.160000;0.350000;2;(l'arrosoir est posé sur le pot)
+9;B04.png;NOUVELLE;2.160000;2.610000;17.160000;17.610000;0.450000;2;"Minuton se frotte les mains, content ; l'oisillon fait un petit saut d'enthousiasme."
+10;C01.png;NOUVELLE;2.610000;2.860000;17.610000;17.860000;0.250000;3;Minuton tient le petit seau bleu retourné à deux mains contre son ventre, à côté de la pile pot + arrosoir.
+11;C02.png;NOUVELLE;2.860000;3.110000;17.860000;18.110000;0.250000;3;"Sur la pointe des pieds, bras tendus au maximum, il pose le seau sur l'arrosoir ; ses joues sont rouges d'effort."
+12;P05_C.png;CLE;3.110000;3.460000;18.110000;18.460000;0.350000;3;(le seau est posé, la pile est haute)
+13;C04.png;NOUVELLE;3.460000;3.910000;18.460000;18.910000;0.450000;3;Minuton lève les yeux vers le haut de la pile, puis vers le nid, satisfait. L'oisillon s'approche en sautillant.
+14;D01.png;NOUVELLE;3.910000;4.110000;18.910000;19.110000;0.200000;4;Minuton prend l'oisillon et le pose sur sa couronne, puis agrippe le pot à deux mains, un pied posé sur le bord du pot.
+15;D02.png;NOUVELLE;4.110000;4.310000;19.110000;19.310000;0.200000;4;Il est monté sur le pot, accroché à l'arrosoir, l'oisillon toujours sur sa couronne.
+16;D03.png;NOUVELLE;4.310000;4.510000;19.310000;19.510000;0.200000;4;Il grimpe sur l'arrosoir, accroché au seau, un genou levé.
+17;D04.png;NOUVELLE;4.510000;4.710000;19.510000;19.710000;0.200000;4;Il se met debout sur le seau, bras écartés pour l'équilibre, un peu instable.
+18;P05_D.png;CLE;4.710000;5.110000;19.710000;20.110000;0.400000;4;(en haut de la pile, bras tendus vers le nid, la pile commence à vaciller)
+19;E01.png;NOUVELLE;5.110000;5.230000;20.110000;20.230000;0.120000;5;Toute la pile (pot, arrosoir, seau, avec Minuton et l'oisillon dessus) penche de **5° vers la gauche**. Minuton bat des bras, inquiet.
+20;E02.png;NOUVELLE;5.230000;5.350000;20.230000;20.350000;0.120000;5;La pile penche maintenant de **8° vers la droite**, Minuton bras dans l'autre sens, bouche en « o ».
+21;E03.png;NOUVELLE;5.350000;5.470000;20.350000;20.470000;0.120000;5;Penche de **12° vers la gauche**, Minuton sur un pied, l'oisillon s'agrippe à la couronne, plumes ébouriffées.
+22;E04.png;NOUVELLE;5.470000;5.590000;20.470000;20.590000;0.120000;5;Penche de **16° vers la droite**, Minuton bat des bras très vite (traits de mouvement autour des bras).
+23;P05_E.png;CLE;5.590000;5.840000;20.590000;20.840000;0.250000;5;(la pile penche fortement)
+24;E06.png;NOUVELLE;5.840000;5.990000;20.840000;20.990000;0.150000;5;"La pile se sépare : le seau, l'arrosoir et le pot commencent à glisser chacun de son côté. Minuton est suspendu en l'air au-dessus, bras et jambes écartés, yeux ronds ; l'oisillon décolle de sa couronne."
+25;F01.png;NOUVELLE;5.990000;6.110000;20.990000;21.110000;0.120000;6;Tout tombe : Minuton en l'air à mi-hauteur, tombant en arrière, les objets en l'air à différentes hauteurs, l'oisillon au-dessus de lui.
+26;F02.png;NOUVELLE;6.110000;6.230000;21.110000;21.230000;0.120000;6;Impact : Minuton touche l'herbe sur le dos, tout **aplati** (écrasé comme un ballon), petit nuage d'herbe et de feuilles. Les objets touchent le sol autour de lui.
+27;P05_F.png;CLE;6.230000;6.480000;21.230000;21.480000;0.250000;6;(sur le dos, l'oisillon rebondit sur son ventre)
+28;F04.png;NOUVELLE;6.480000;6.630000;21.480000;21.630000;0.150000;6;L'oisillon est en l'air au-dessus du ventre de Minuton (il vient de rebondir), les objets roulent un peu plus loin.
+29;F05.png;NOUVELLE;6.630000;6.780000;21.630000;21.780000;0.150000;6;"L'oisillon retombe et se pose assis sur le ventre de Minuton ; les objets ralentissent."
+30;F06.png;NOUVELLE;6.780000;7.280000;21.780000;22.280000;0.500000;6;Tout est immobile : Minuton allongé sur le dos, sonné, l'oisillon assis sur son ventre, les objets arrêtés dans l'herbe.
+31;G01.png;NOUVELLE;7.280000;7.530000;22.280000;22.530000;0.250000;7;Minuton se redresse en position assise, l'oisillon glisse de son ventre vers sa tête.
+32;P05_G.png;CLE;7.530000;7.880000;22.530000;22.880000;0.350000;7;(assis, étourdi, étoiles autour de la tête, l'oisillon sur sa tête)
+33;G03.png;NOUVELLE;7.880000;8.230000;22.880000;23.230000;0.350000;7;"Même image, mais les petites étoiles ont **tourné d'un quart de tour** autour de la tête ; Minuton penche un peu la tête de l'autre côté."
+34;G04.png;NOUVELLE;8.230000;8.580000;23.230000;23.580000;0.350000;7;"Les étoiles ont encore tourné d'un quart de tour ; l'oisillon penche de l'autre côté sur la tête de Minuton."

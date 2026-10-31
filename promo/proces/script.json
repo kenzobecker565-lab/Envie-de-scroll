@@ -1,0 +1,26 @@
+{
+  "_doc": "Texte du procès (sous-titres), une entrée par réplique, dans l'ordre. « who » : narrateur, juge, procureur, avocate (une voix ElevenLabs par personnage, voir media/ et voix.py). « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
+  "voices": {
+    "narrateur": { "name": "George", "file": "media/narrateur.mp3" },
+    "juge": { "name": "Bill", "file": "media/juge.mp3" },
+    "procureur": { "name": "Adam", "file": "media/procureur.mp3" },
+    "avocate": { "name": "Sarah", "file": "media/avocate.mp3" }
+  },
+  "lines": [
+    { "id": "01-maries", "who": "narrateur", "text": "Paul et Anne étaient mariés depuis cinquante-deux ans." },
+    { "id": "02-charcot", "who": "narrateur", "text": "Anne souffrait de la maladie de Charcot. Elle ne pouvait plus bouger, plus manger, bientôt plus respirer." },
+    { "id": "03-nuit", "who": "narrateur", "text": "Une nuit, Paul lui a donné une dose mortelle de médicaments. Puis il a appelé la police lui-même." },
+    { "id": "04-juge", "who": "narrateur", "text": "Aujourd'hui, il est jugé pour assassinat.", "gap": 0.4 },
+    { "id": "05-ouverte", "who": "juge", "text": "L'audience est ouverte. Monsieur le procureur.", "gap": 0.6 },
+    { "id": "06-semaines", "who": "procureur", "text": "Pendant trois semaines, l'accusé a mis ces médicaments de côté. Trois semaines. Ce n'est pas un coup de folie, c'est une décision préparée." },
+    { "id": "07-supplie", "who": "avocate", "text": "Pendant trois semaines, Anne l'a supplié. Onze fois, d'après l'infirmière qui l'a entendue. Elle ne pouvait plus écrire. Elle ne pouvait plus que demander.", "gap": 0.4 },
+    { "id": "08-fille", "who": "procureur", "text": "Et une semaine avant, devant sa fille, elle a dit qu'elle voulait voir naître son petit-fils. Qui sait ce qu'elle voulait vraiment, cette nuit-là ? Personne. Sauf lui.", "gap": 0.4 },
+    { "id": "09-promesse", "who": "avocate", "text": "Il n'a rien caché. Il a appelé la police. Il a dit : « Je lui avais promis. » Ce n'est pas un meurtrier. C'est un mari qui a tenu sa promesse.", "gap": 0.4 },
+    { "id": "10-loi", "who": "procureur", "text": "La loi lui offrait une autre voie : la sédation profonde, décidée avec des médecins. Il a choisi seul. Si on l'acquitte, qui décidera demain qu'une vie ne vaut plus la peine d'être vécue ?", "gap": 0.4 },
+    { "id": "11-peine", "who": "avocate", "text": "Vous jugez un homme de 79 ans qui a perdu la femme de sa vie. Quelle peine pourrait être pire que celle qu'il vit déjà ?", "say": "Vous jugez un homme de soixante-dix-neuf ans qui a perdu la femme de sa vie. Quelle peine pourrait être pire que celle qu'il vit déjà ?", "gap": 0.4 },
+    { "id": "12-compassion", "who": "procureur", "text": "La compassion n'est pas un permis de tuer.", "gap": 0.5 },
+    { "id": "13-amour", "who": "avocate", "text": "Et la loi n'est pas faite pour punir l'amour.", "gap": 0.35 },
+    { "id": "14-clos", "who": "juge", "text": "Les débats sont clos.", "gap": 0.9 },
+    { "id": "15-jury", "who": "narrateur", "text": "Le jury, c'est toi. Coupable… ou non coupable ? Donne ton verdict en commentaire.", "gap": 1.2 }
+  ]
+}

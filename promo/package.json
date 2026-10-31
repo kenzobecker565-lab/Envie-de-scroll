@@ -2,7 +2,7 @@
   "name": "plutot-que-scroller-promo",
   "private": true,
   "version": "1.0.0",
-  "description": "Pubs en motion design pour Plutôt Que Scroller (rendu image par image) : 15 s, la pub de 28 s (pub/), et l'explication en 3D du micro-ondes (micro-ondes/).",
+  "description": "Vidéos en motion design rendues image par image : pubs de Plutôt Que Scroller (15 s, 28 s dans pub/), explication en 3D du micro-ondes (micro-ondes/) et procès « à toi de juger » (proces/).",
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
@@ -19,7 +19,11 @@
     "mo:render": "node render.mjs --ad=micro-ondes",
     "mo:audio": "node render.mjs --ad=micro-ondes --audio",
     "mo:sheet": "node render.mjs --ad=micro-ondes --sheet --step=2",
-    "mo:stills": "node render.mjs --ad=micro-ondes --stills=1.5,7.4,18.2,24.8,34,42,47.5,55.2,62,70,77,84.2"
+    "mo:stills": "node render.mjs --ad=micro-ondes --stills=1.5,7.4,18.2,24.8,34,42,47.5,55.2,62,70,77,84.2",
+    "pr:voice": "cd proces && python voix.py",
+    "pr:render": "node render.mjs --ad=proces",
+    "pr:audio": "node render.mjs --ad=proces --audio",
+    "pr:stills": "node render.mjs --ad=proces --stills=1.5,12,16.8,24.5,32,50.5,61,69.5,77.5,89"
   },
   "devDependencies": {
     "playwright": "1.56.1",

@@ -1,0 +1,1141 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 94.75,
+ "lines": [
+  {
+   "id": "01-maries",
+   "who": "narrateur",
+   "text": "Paul et Anne étaient mariés depuis cinquante-deux ans.",
+   "start": 0.6,
+   "dur": 2.57,
+   "words": [
+    {
+     "w": "Paul",
+     "t": 0.6
+    },
+    {
+     "w": "et",
+     "t": 0.88
+    },
+    {
+     "w": "Anne",
+     "t": 1.04
+    },
+    {
+     "w": "étaient",
+     "t": 1.32
+    },
+    {
+     "w": "mariés",
+     "t": 1.52
+    },
+    {
+     "w": "depuis",
+     "t": 1.94
+    },
+    {
+     "w": "cinquante-deux",
+     "t": 2.28
+    },
+    {
+     "w": "ans.",
+     "t": 2.62
+    }
+   ]
+  },
+  {
+   "id": "02-charcot",
+   "who": "narrateur",
+   "text": "Anne souffrait de la maladie de Charcot. Elle ne pouvait plus bouger, plus manger, bientôt plus respirer.",
+   "start": 3.42,
+   "dur": 5.71,
+   "words": [
+    {
+     "w": "Anne",
+     "t": 3.42
+    },
+    {
+     "w": "souffrait",
+     "t": 3.68
+    },
+    {
+     "w": "de",
+     "t": 4.12
+    },
+    {
+     "w": "la",
+     "t": 4.24
+    },
+    {
+     "w": "maladie",
+     "t": 4.32
+    },
+    {
+     "w": "de",
+     "t": 4.66
+    },
+    {
+     "w": "Charcot.",
+     "t": 4.76
+    },
+    {
+     "w": "Elle",
+     "t": 5.56
+    },
+    {
+     "w": "ne",
+     "t": 5.66
+    },
+    {
+     "w": "pouvait",
+     "t": 5.78
+    },
+    {
+     "w": "plus",
+     "t": 5.96
+    },
+    {
+     "w": "bouger,",
+     "t": 6.16
+    },
+    {
+     "w": "plus",
+     "t": 6.96
+    },
+    {
+     "w": "manger,",
+     "t": 7.1
+    },
+    {
+     "w": "bientôt",
+     "t": 7.86
+    },
+    {
+     "w": "plus",
+     "t": 8.18
+    },
+    {
+     "w": "respirer.",
+     "t": 8.42
+    }
+   ]
+  },
+  {
+   "id": "03-nuit",
+   "who": "narrateur",
+   "text": "Une nuit, Paul lui a donné une dose mortelle de médicaments. Puis il a appelé la police lui-même.",
+   "start": 9.38,
+   "dur": 5.16,
+   "words": [
+    {
+     "w": "Une",
+     "t": 9.4
+    },
+    {
+     "w": "nuit,",
+     "t": 9.54
+    },
+    {
+     "w": "Paul",
+     "t": 10.18
+    },
+    {
+     "w": "lui",
+     "t": 10.4
+    },
+    {
+     "w": "a",
+     "t": 10.54
+    },
+    {
+     "w": "donné",
+     "t": 10.64
+    },
+    {
+     "w": "une",
+     "t": 10.84
+    },
+    {
+     "w": "dose",
+     "t": 11.0
+    },
+    {
+     "w": "mortelle",
+     "t": 11.22
+    },
+    {
+     "w": "de",
+     "t": 11.68
+    },
+    {
+     "w": "médicaments.",
+     "t": 11.8
+    },
+    {
+     "w": "Puis",
+     "t": 12.7
+    },
+    {
+     "w": "il",
+     "t": 12.86
+    },
+    {
+     "w": "a",
+     "t": 13.06
+    },
+    {
+     "w": "appelé",
+     "t": 13.16
+    },
+    {
+     "w": "la",
+     "t": 13.42
+    },
+    {
+     "w": "police",
+     "t": 13.5
+    },
+    {
+     "w": "lui-même.",
+     "t": 14.167
+    }
+   ]
+  },
+  {
+   "id": "04-juge",
+   "who": "narrateur",
+   "text": "Aujourd'hui, il est jugé pour assassinat.",
+   "start": 14.94,
+   "dur": 2.274,
+   "words": [
+    {
+     "w": "Aujourd'hui,",
+     "t": 15.106
+    },
+    {
+     "w": "il",
+     "t": 15.773
+    },
+    {
+     "w": "est",
+     "t": 15.933
+    },
+    {
+     "w": "jugé",
+     "t": 16.033
+    },
+    {
+     "w": "pour",
+     "t": 16.353
+    },
+    {
+     "w": "assassinat.",
+     "t": 16.873
+    }
+   ]
+  },
+  {
+   "id": "05-ouverte",
+   "who": "juge",
+   "text": "L'audience est ouverte. Monsieur le procureur.",
+   "start": 17.813,
+   "dur": 3.39,
+   "words": [
+    {
+     "w": "L'audience",
+     "t": 17.933
+    },
+    {
+     "w": "est",
+     "t": 18.173
+    },
+    {
+     "w": "ouverte.",
+     "t": 18.633
+    },
+    {
+     "w": "Monsieur",
+     "t": 19.593
+    },
+    {
+     "w": "le",
+     "t": 20.073
+    },
+    {
+     "w": "procureur.",
+     "t": 20.253
+    }
+   ]
+  },
+  {
+   "id": "06-semaines",
+   "who": "procureur",
+   "text": "Pendant trois semaines, l'accusé a mis ces médicaments de côté. Trois semaines. Ce n'est pas un coup de folie, c'est une décision préparée.",
+   "start": 21.453,
+   "dur": 7.85,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 21.453
+    },
+    {
+     "w": "trois",
+     "t": 21.753
+    },
+    {
+     "w": "semaines,",
+     "t": 22.053
+    },
+    {
+     "w": "l'accusé",
+     "t": 22.693
+    },
+    {
+     "w": "a",
+     "t": 23.333
+    },
+    {
+     "w": "mis",
+     "t": 23.473
+    },
+    {
+     "w": "ces",
+     "t": 23.613
+    },
+    {
+     "w": "médicaments",
+     "t": 23.753
+    },
+    {
+     "w": "de",
+     "t": 24.173
+    },
+    {
+     "w": "côté.",
+     "t": 24.353
+    },
+    {
+     "w": "Trois",
+     "t": 25.073
+    },
+    {
+     "w": "semaines.",
+     "t": 25.413
+    },
+    {
+     "w": "Ce",
+     "t": 26.213
+    },
+    {
+     "w": "n'est",
+     "t": 26.323
+    },
+    {
+     "w": "pas",
+     "t": 26.433
+    },
+    {
+     "w": "un",
+     "t": 26.553
+    },
+    {
+     "w": "coup",
+     "t": 26.773
+    },
+    {
+     "w": "de",
+     "t": 26.893
+    },
+    {
+     "w": "folie,",
+     "t": 26.953
+    },
+    {
+     "w": "c'est",
+     "t": 27.383
+    },
+    {
+     "w": "une",
+     "t": 27.813
+    },
+    {
+     "w": "décision",
+     "t": 27.973
+    },
+    {
+     "w": "préparée.",
+     "t": 28.493
+    }
+   ]
+  },
+  {
+   "id": "07-supplie",
+   "who": "avocate",
+   "text": "Pendant trois semaines, Anne l'a supplié. Onze fois, d'après l'infirmière qui l'a entendue. Elle ne pouvait plus écrire. Elle ne pouvait plus que demander.",
+   "start": 29.703,
+   "dur": 8.6,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 29.703
+    },
+    {
+     "w": "trois",
+     "t": 29.983
+    },
+    {
+     "w": "semaines,",
+     "t": 30.243
+    },
+    {
+     "w": "Anne",
+     "t": 30.903
+    },
+    {
+     "w": "l'a",
+     "t": 31.41
+    },
+    {
+     "w": "supplié.",
+     "t": 31.916
+    },
+    {
+     "w": "Onze",
+     "t": 32.423
+    },
+    {
+     "w": "fois,",
+     "t": 32.783
+    },
+    {
+     "w": "d'après",
+     "t": 33.193
+    },
+    {
+     "w": "l'infirmière",
+     "t": 33.603
+    },
+    {
+     "w": "qui",
+     "t": 34.013
+    },
+    {
+     "w": "l'a",
+     "t": 34.423
+    },
+    {
+     "w": "entendue.",
+     "t": 34.833
+    },
+    {
+     "w": "Elle",
+     "t": 35.243
+    },
+    {
+     "w": "ne",
+     "t": 35.363
+    },
+    {
+     "w": "pouvait",
+     "t": 35.483
+    },
+    {
+     "w": "plus",
+     "t": 35.683
+    },
+    {
+     "w": "écrire.",
+     "t": 35.883
+    },
+    {
+     "w": "Elle",
+     "t": 36.803
+    },
+    {
+     "w": "ne",
+     "t": 36.883
+    },
+    {
+     "w": "pouvait",
+     "t": 37.003
+    },
+    {
+     "w": "plus",
+     "t": 37.243
+    },
+    {
+     "w": "que",
+     "t": 37.483
+    },
+    {
+     "w": "demander.",
+     "t": 37.663
+    }
+   ]
+  },
+  {
+   "id": "08-fille",
+   "who": "procureur",
+   "text": "Et une semaine avant, devant sa fille, elle a dit qu'elle voulait voir naître son petit-fils. Qui sait ce qu'elle voulait vraiment, cette nuit-là ? Personne. Sauf lui.",
+   "start": 38.703,
+   "dur": 8.53,
+   "words": [
+    {
+     "w": "Et",
+     "t": 38.773
+    },
+    {
+     "w": "une",
+     "t": 38.853
+    },
+    {
+     "w": "semaine",
+     "t": 38.993
+    },
+    {
+     "w": "avant,",
+     "t": 39.253
+    },
+    {
+     "w": "devant",
+     "t": 39.713
+    },
+    {
+     "w": "sa",
+     "t": 39.813
+    },
+    {
+     "w": "fille,",
+     "t": 40.113
+    },
+    {
+     "w": "elle",
+     "t": 40.873
+    },
+    {
+     "w": "a",
+     "t": 40.953
+    },
+    {
+     "w": "dit",
+     "t": 41.073
+    },
+    {
+     "w": "qu'elle",
+     "t": 41.193
+    },
+    {
+     "w": "voulait",
+     "t": 41.313
+    },
+    {
+     "w": "voir",
+     "t": 41.553
+    },
+    {
+     "w": "naître",
+     "t": 41.753
+    },
+    {
+     "w": "son",
+     "t": 42.053
+    },
+    {
+     "w": "petit-fils.",
+     "t": 42.713
+    },
+    {
+     "w": "Qui",
+     "t": 43.373
+    },
+    {
+     "w": "sait",
+     "t": 43.493
+    },
+    {
+     "w": "ce",
+     "t": 43.693
+    },
+    {
+     "w": "qu'elle",
+     "t": 43.843
+    },
+    {
+     "w": "voulait",
+     "t": 43.993
+    },
+    {
+     "w": "vraiment,",
+     "t": 44.253
+    },
+    {
+     "w": "cette",
+     "t": 44.593
+    },
+    {
+     "w": "nuit-là ?",
+     "t": 45.243
+    },
+    {
+     "w": "Personne.",
+     "t": 45.893
+    },
+    {
+     "w": "Sauf",
+     "t": 46.533
+    },
+    {
+     "w": "lui.",
+     "t": 46.793
+    }
+   ]
+  },
+  {
+   "id": "09-promesse",
+   "who": "avocate",
+   "text": "Il n'a rien caché. Il a appelé la police. Il a dit : « Je lui avais promis. » Ce n'est pas un meurtrier. C'est un mari qui a tenu sa promesse.",
+   "start": 47.633,
+   "dur": 8.0,
+   "words": [
+    {
+     "w": "Il",
+     "t": 47.683
+    },
+    {
+     "w": "n'a",
+     "t": 47.803
+    },
+    {
+     "w": "rien",
+     "t": 47.923
+    },
+    {
+     "w": "caché.",
+     "t": 48.123
+    },
+    {
+     "w": "Il",
+     "t": 48.923
+    },
+    {
+     "w": "a",
+     "t": 49.023
+    },
+    {
+     "w": "appelé",
+     "t": 49.143
+    },
+    {
+     "w": "la",
+     "t": 49.383
+    },
+    {
+     "w": "police.",
+     "t": 49.483
+    },
+    {
+     "w": "Il",
+     "t": 50.243
+    },
+    {
+     "w": "a",
+     "t": 50.363
+    },
+    {
+     "w": "dit : «",
+     "t": 50.483
+    },
+    {
+     "w": "Je",
+     "t": 51.183
+    },
+    {
+     "w": "lui",
+     "t": 51.303
+    },
+    {
+     "w": "avais",
+     "t": 51.423
+    },
+    {
+     "w": "promis. »",
+     "t": 51.643
+    },
+    {
+     "w": "Ce",
+     "t": 52.363
+    },
+    {
+     "w": "n'est",
+     "t": 52.483
+    },
+    {
+     "w": "pas",
+     "t": 52.603
+    },
+    {
+     "w": "un",
+     "t": 52.703
+    },
+    {
+     "w": "meurtrier.",
+     "t": 52.883
+    },
+    {
+     "w": "C'est",
+     "t": 53.393
+    },
+    {
+     "w": "un",
+     "t": 53.903
+    },
+    {
+     "w": "mari",
+     "t": 54.023
+    },
+    {
+     "w": "qui",
+     "t": 54.243
+    },
+    {
+     "w": "a",
+     "t": 54.423
+    },
+    {
+     "w": "tenu",
+     "t": 54.523
+    },
+    {
+     "w": "sa",
+     "t": 54.783
+    },
+    {
+     "w": "promesse.",
+     "t": 54.923
+    }
+   ]
+  },
+  {
+   "id": "10-loi",
+   "who": "procureur",
+   "text": "La loi lui offrait une autre voie : la sédation profonde, décidée avec des médecins. Il a choisi seul. Si on l'acquitte, qui décidera demain qu'une vie ne vaut plus la peine d'être vécue ?",
+   "start": 56.033,
+   "dur": 10.81,
+   "words": [
+    {
+     "w": "La",
+     "t": 56.073
+    },
+    {
+     "w": "loi",
+     "t": 56.233
+    },
+    {
+     "w": "lui",
+     "t": 56.393
+    },
+    {
+     "w": "offrait",
+     "t": 56.553
+    },
+    {
+     "w": "une",
+     "t": 56.893
+    },
+    {
+     "w": "autre",
+     "t": 57.133
+    },
+    {
+     "w": "voie :",
+     "t": 57.373
+    },
+    {
+     "w": "la",
+     "t": 58.113
+    },
+    {
+     "w": "sédation",
+     "t": 58.233
+    },
+    {
+     "w": "profonde,",
+     "t": 58.693
+    },
+    {
+     "w": "décidée",
+     "t": 59.653
+    },
+    {
+     "w": "avec",
+     "t": 60.173
+    },
+    {
+     "w": "des",
+     "t": 60.413
+    },
+    {
+     "w": "médecins.",
+     "t": 60.633
+    },
+    {
+     "w": "Il",
+     "t": 61.333
+    },
+    {
+     "w": "a",
+     "t": 61.453
+    },
+    {
+     "w": "choisi",
+     "t": 61.573
+    },
+    {
+     "w": "seul.",
+     "t": 61.893
+    },
+    {
+     "w": "Si",
+     "t": 62.693
+    },
+    {
+     "w": "on",
+     "t": 62.813
+    },
+    {
+     "w": "l'acquitte,",
+     "t": 63.293
+    },
+    {
+     "w": "qui",
+     "t": 63.773
+    },
+    {
+     "w": "décidera",
+     "t": 63.893
+    },
+    {
+     "w": "demain",
+     "t": 64.393
+    },
+    {
+     "w": "qu'une",
+     "t": 64.673
+    },
+    {
+     "w": "vie",
+     "t": 64.953
+    },
+    {
+     "w": "ne",
+     "t": 65.153
+    },
+    {
+     "w": "vaut",
+     "t": 65.313
+    },
+    {
+     "w": "plus",
+     "t": 65.473
+    },
+    {
+     "w": "la",
+     "t": 65.653
+    },
+    {
+     "w": "peine",
+     "t": 65.813
+    },
+    {
+     "w": "d'être",
+     "t": 66.033
+    },
+    {
+     "w": "vécue ?",
+     "t": 66.253
+    }
+   ]
+  },
+  {
+   "id": "11-peine",
+   "who": "avocate",
+   "text": "Vous jugez un homme de 79 ans qui a perdu la femme de sa vie. Quelle peine pourrait être pire que celle qu'il vit déjà ?",
+   "start": 67.243,
+   "dur": 6.52,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 67.303
+    },
+    {
+     "w": "jugez",
+     "t": 67.423
+    },
+    {
+     "w": "un",
+     "t": 67.803
+    },
+    {
+     "w": "homme",
+     "t": 67.923
+    },
+    {
+     "w": "de",
+     "t": 68.123
+    },
+    {
+     "w": "79",
+     "t": 68.263
+    },
+    {
+     "w": "ans",
+     "t": 68.783
+    },
+    {
+     "w": "qui",
+     "t": 69.163
+    },
+    {
+     "w": "a",
+     "t": 69.303
+    },
+    {
+     "w": "perdu",
+     "t": 69.403
+    },
+    {
+     "w": "la",
+     "t": 69.623
+    },
+    {
+     "w": "femme",
+     "t": 69.803
+    },
+    {
+     "w": "de",
+     "t": 69.983
+    },
+    {
+     "w": "sa",
+     "t": 70.123
+    },
+    {
+     "w": "vie.",
+     "t": 70.283
+    },
+    {
+     "w": "Quelle",
+     "t": 71.043
+    },
+    {
+     "w": "peine",
+     "t": 71.243
+    },
+    {
+     "w": "pourrait",
+     "t": 71.483
+    },
+    {
+     "w": "être",
+     "t": 71.743
+    },
+    {
+     "w": "pire",
+     "t": 71.963
+    },
+    {
+     "w": "que",
+     "t": 72.323
+    },
+    {
+     "w": "celle",
+     "t": 72.463
+    },
+    {
+     "w": "qu'il",
+     "t": 72.663
+    },
+    {
+     "w": "vit",
+     "t": 72.863
+    },
+    {
+     "w": "déjà ?",
+     "t": 72.983
+    }
+   ]
+  },
+  {
+   "id": "12-compassion",
+   "who": "procureur",
+   "text": "La compassion n'est pas un permis de tuer.",
+   "start": 74.263,
+   "dur": 2.126,
+   "words": [
+    {
+     "w": "La",
+     "t": 74.263
+    },
+    {
+     "w": "compassion",
+     "t": 74.423
+    },
+    {
+     "w": "n'est",
+     "t": 74.803
+    },
+    {
+     "w": "pas",
+     "t": 75.183
+    },
+    {
+     "w": "un",
+     "t": 75.323
+    },
+    {
+     "w": "permis",
+     "t": 75.523
+    },
+    {
+     "w": "de",
+     "t": 75.843
+    },
+    {
+     "w": "tuer.",
+     "t": 75.983
+    }
+   ]
+  },
+  {
+   "id": "13-amour",
+   "who": "avocate",
+   "text": "Et la loi n'est pas faite pour punir l'amour.",
+   "start": 76.74,
+   "dur": 1.913,
+   "words": [
+    {
+     "w": "Et",
+     "t": 76.74
+    },
+    {
+     "w": "la",
+     "t": 76.8
+    },
+    {
+     "w": "loi",
+     "t": 76.9
+    },
+    {
+     "w": "n'est",
+     "t": 77.08
+    },
+    {
+     "w": "pas",
+     "t": 77.26
+    },
+    {
+     "w": "faite",
+     "t": 77.38
+    },
+    {
+     "w": "pour",
+     "t": 77.62
+    },
+    {
+     "w": "punir",
+     "t": 77.78
+    },
+    {
+     "w": "l'amour.",
+     "t": 78.216
+    }
+   ]
+  },
+  {
+   "id": "14-clos",
+   "who": "juge",
+   "text": "Les débats sont clos.",
+   "start": 79.553,
+   "dur": 1.37,
+   "words": [
+    {
+     "w": "Les",
+     "t": 79.673
+    },
+    {
+     "w": "débats",
+     "t": 79.793
+    },
+    {
+     "w": "sont",
+     "t": 80.273
+    },
+    {
+     "w": "clos.",
+     "t": 80.433
+    }
+   ]
+  },
+  {
+   "id": "15-jury",
+   "who": "narrateur",
+   "text": "Le jury, c'est toi. Coupable… ou non coupable ? Donne ton verdict en commentaire.",
+   "start": 82.123,
+   "dur": 5.125,
+   "words": [
+    {
+     "w": "Le",
+     "t": 82.123
+    },
+    {
+     "w": "jury,",
+     "t": 82.293
+    },
+    {
+     "w": "c'est",
+     "t": 82.743
+    },
+    {
+     "w": "toi.",
+     "t": 83.193
+    },
+    {
+     "w": "Coupable…",
+     "t": 83.833
+    },
+    {
+     "w": "ou",
+     "t": 84.213
+    },
+    {
+     "w": "non",
+     "t": 84.673
+    },
+    {
+     "w": "coupable ?",
+     "t": 84.833
+    },
+    {
+     "w": "Donne",
+     "t": 85.713
+    },
+    {
+     "w": "ton",
+     "t": 85.953
+    },
+    {
+     "w": "verdict",
+     "t": 86.033
+    },
+    {
+     "w": "en",
+     "t": 86.333
+    },
+    {
+     "w": "commentaire.",
+     "t": 86.573
+    }
+   ]
+  }
+ ]
+}

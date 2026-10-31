@@ -15,7 +15,7 @@
     "pub:audio": "node render.mjs --ad=pub --audio",
     "pub:sheet": "node render.mjs --ad=pub --sheet --step=0.5",
     "pub:stills": "node render.mjs --ad=pub --stills=0.5,3.9,7.6,9.5,13.8,15.5,18.5,21.5,24.5,27.5",
-    "mo:voice": "cd micro-ondes && python voix.py",
+    "mo:voice": "cd micro-ondes && python narration.py media/voix-off.mp3",
     "mo:render": "node render.mjs --ad=micro-ondes",
     "mo:audio": "node render.mjs --ad=micro-ondes --audio",
     "mo:sheet": "node render.mjs --ad=micro-ondes --sheet --step=2",

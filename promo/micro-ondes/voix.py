@@ -1,5 +1,6 @@
 """
-Voix off de « Comment ça marche ? Le micro-ondes », synthétisée avec Piper.
+Voix off de « Pourquoi ça chauffe ? Le micro-ondes », synthétisée avec Piper
+(hors ligne, une réplique par fichier ; la vidéo utilise plutôt narration.py).
 
 Pour chaque réplique de voix.json : N prises, transcrites par Whisper ; la
 mieux comprise est gardée (silences retirés) dans voice/<id>.wav. Le script

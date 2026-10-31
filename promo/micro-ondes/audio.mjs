@@ -8,7 +8,9 @@
  *  - Bruitages synthétisés, calés sur les mêmes repères que l'image (cues.js) :
  *    pops d'apparition, volets, flamme, bascules du champ, ronronnement du
  *    magnétron, plaques de métal, porte, interrupteurs, sonnerie…
- *  - Voix off : voice/<id>.wav (Piper, voir voix.py), placées d'après timeline.json.
+ *  - Voix off : voice/narration.wav (lue d'une traite, voir narration.py) ou
+ *    voice/<id>.wav (Piper, une réplique par fichier, voir voix.py), placées
+ *    d'après timeline.json.
  *  La musique et les bruitages baissent quand la voix parle. Sonie : −14 LUFS.
  *
  *   node micro-ondes/audio.mjs [sortie.wav]
@@ -22,7 +24,8 @@ import { makeCues } from './cues.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const BUILD = path.join(HERE, '..', 'build', 'micro-ondes')
-const C = makeCues(JSON.parse(fs.readFileSync(path.join(HERE, 'timeline.json'), 'utf8')))
+const TIMELINE = JSON.parse(fs.readFileSync(path.join(HERE, 'timeline.json'), 'utf8'))
+const C = makeCues(TIMELINE)
 const { S, E, W } = C
 const DURATION = C.duration
 const N = Math.ceil(DURATION * SR)
@@ -387,16 +390,23 @@ function score() {
 
 // ===================================================================== voix
 
-function voiceTrack() {
-  for (const line of C.lines) {
-    const { sr, x } = readWav(path.join(HERE, 'voice', `${line.id}.wav`))
-    const y = sr === SR ? x : resample(x, sr, SR)
-    const s0 = Math.round(line.start * SR)
-    for (let i = 0; i < y.length && s0 + i < N; i++) {
-      B.voice[0][s0 + i] += y[i]
-      B.voice[1][s0 + i] += y[i]
-    }
+/** Pose un fichier de voix (mono) à l'instant `at`. */
+function placeVoice(file, at) {
+  const { sr, x } = readWav(path.join(HERE, file))
+  const y = sr === SR ? x : resample(x, sr, SR)
+  const s0 = Math.round(at * SR)
+  for (let i = 0; i < y.length; i++) {
+    const j = s0 + i
+    if (j < 0 || j >= N) continue
+    B.voice[0][j] += y[i]
+    B.voice[1][j] += y[i]
   }
+}
+
+function voiceTrack() {
+  // Narration d'un seul tenant (narration.py), ou une réplique par fichier (voix.py).
+  if (TIMELINE.narration) placeVoice(TIMELINE.narration.file, TIMELINE.narration.offset)
+  else for (const line of C.lines) placeVoice(`voice/${line.id}.wav`, line.start)
   filterBus(B.voice, [['highpass', 90, 0.7], ['peaking', 250, 1, -2.5], ['peaking', 3200, 0.9, 3], ['highshelf', 9000, 0.7, 1.5]])
   for (const ch of B.voice) compress(ch, { threshold: -20, ratio: 2.8, makeup: 4 })
 }

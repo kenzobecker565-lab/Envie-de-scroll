@@ -1,5 +1,5 @@
 {
-  "_doc": "Voix off de « Comment ça marche ? Le micro-ondes ». Chaque réplique devient voice/<id>.wav ; « say » = texte envoyé à la synthèse quand il diffère des sous-titres ; « pause » = silence ajouté après la réplique (secondes). Les départs des répliques et les temps de chaque mot (sous-titres), mesurés par Whisper, sont écrits par voix.py dans timeline.json.",
+  "_doc": "Texte de la voix off de « Pourquoi ça chauffe ? Le micro-ondes » (sous-titres), une entrée par réplique. narration.py retrouve ces répliques dans la narration lue d’une traite ; voix.py peut aussi les synthétiser une par une avec Piper (voice/<id>.wav) ; « say » = texte envoyé à la synthèse quand il diffère des sous-titres ; « pause » = silence ajouté après la réplique (secondes). Les départs des répliques et les temps de chaque mot (sous-titres), mesurés par Whisper, sont écrits dans timeline.json par narration.py (ou voix.py).",
   "voice": "fr_FR-tom-medium",
   "lengthScale": 0.8,
   "noiseScale": 0.4,

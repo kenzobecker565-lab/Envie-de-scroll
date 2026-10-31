@@ -1,7 +1,7 @@
 # Les histoires de Minuton — Épisode 1 : « Une minute pour Piou »
 
 - **Chaîne :** Les histoires de Minuton
-- **Durée :** environ 40 s, vertical 9:16 (YouTube Shorts)
+- **Durée :** environ 41 s, vertical 9:16 (YouTube Shorts)
 - **Public :** enfants et familles
 - **Ton :** comique et tendre, rythme rapide, avec des voix
 - **Personnages :** Minuton, et Piou l'oisillon (de l'épisode « Le petit oiseau » : même dessin, même jardin, même arbre)
@@ -23,39 +23,55 @@ C'est l'anniversaire de Piou dans une minute… et Minuton a oublié le cadeau !
 
 ---
 
-## Découpage (40 s)
+## Découpage (41 s)
 
 **VO** = voix. Toutes les répliques s'affichent aussi en **sous-titres** incrustés, au style Shorts : beaucoup de gens regardent sans le son.
 
 | Temps | Plan | Image | Voix | Musique / bruitages |
 |---|---|---|---|---|
-| **0 – 3 s** | 1 · HOOK | Gros plan sur Minuton, yeux écarquillés, devant un calendrier accroché à la barrière : une case est entourée en rouge, avec un petit dessin de gâteau et une plume bleue. | **Minuton** (paniqué) : « Oh non… L'anniversaire de Piou… c'est dans une minute ! » | Petit « ding » d'alerte comique au premier plan. |
-| **3 – 5 s** | 2 | Plan rapproché : Minuton, le regard décidé, appuie sur son bouton latéral. | **Minuton** : « Une minute ? C'est largement assez ! » | **CLIC**, puis le **tic-tac** démarre et ne s'arrête plus. La musique énergique commence. |
-| **5 – 11 s** | 3 · Essai 1 | Il ramasse un gros caillou, l'emballe dans une feuille avec un ruban, regarde le paquet… et le jette par-dessus son épaule. | **Minuton** : « Un caillou ? … Non. » | Papier qui se froisse, « tok » du caillou qui retombe, petit « boing ». |
-| **11 – 17 s** | 4 · Essai 2 | Il façonne un gâteau de boue et plante une fleur dessus, fier. Le gâteau s'écroule et l'éclabousse. | **Minuton** (fier) : « Un gâteau ! » puis (couvert de boue) « … Beurk. » | Mains dans la boue, « **splotch** » de l'effondrement. |
-| **17 – 21 s** | 5 · Essai 3 | Il cueille la plus belle fleur du jardin. Un papillon se pose dessus… et s'envole avec. | **Minuton** : « Hé ! Rends-moi ça ! » | « Pop » de la fleur cueillie, petits battements d'ailes, « fiou » de l'envol. |
-| **21 – 25 s** | 6 · Creux | Minuton assis dans l'herbe, découragé. Puis il aperçoit son crayon violet et une feuille, et ses yeux s'illuminent. | **Narrateur** (doux) : « Plus que dix secondes… » / **Minuton** : « Mais oui ! » | La musique s'arrête : on n'entend plus que le **tic-tac**, plus fort. « Ding » de l'idée. |
-| **25 – 30 s** | 7 · Course finale | Il dessine à toute vitesse, avec des traits de mouvement et la langue tirée. | — | Crayon qui gratte très vite. La musique repart plus vite, le tic-tac s'accélère. |
-| **30 – 34 s** | 8 | Piou arrive en voletant. Minuton cache vite le dessin dans son dos, puis le lui tend. | **Piou** : « Coucou Minuton ! » / **Minuton** : « Joyeux anniversaire, Piou ! » | Battements d'ailes, petit « piou » joyeux. |
-| **34 – 38 s** | 9 · Émotion | Piou découvre le dessin (Minuton et Piou sous l'arbre, avec un cœur), les yeux brillants, puis le câlin. | **Piou** (ému) : « C'est nous deux… C'est le plus beau cadeau du monde ! » | Musique tendre, petit scintillement. |
-| **38 – 40 s** | 10 · Chute | **DING** : la minute est écoulée. Minuton fait un clin d'œil au spectateur, avec Piou sur sa couronne. Le titre « Les histoires de Minuton » apparaît. | **Minuton** (clin d'œil) : « Pile à l'heure ! » | Sonnerie de chronomètre, dernier accord, coupé net. |
+| **0 – 3,5 s** | 1 · HOOK | Gros plan sur Minuton, yeux écarquillés, devant un calendrier accroché à la barrière : une case est entourée en rouge, avec un petit dessin de gâteau et une plume bleue. | **Minuton** (paniqué) : « Oh non… L'anniversaire de Piou… c'est dans une minute ! » | Petit « ding » d'alerte comique au premier plan. |
+| **3,5 – 6,5 s** | 2 | Plan rapproché : Minuton, le regard décidé, appuie sur son bouton latéral. | **Minuton** : « Une minute ? C'est largement assez ! » | **CLIC**, puis le **tic-tac** démarre et ne s'arrête plus. La musique énergique commence. |
+| **6,5 – 12 s** | 3 · Essai 1 | Il ramasse un gros caillou, l'emballe dans une feuille avec un ruban, regarde le paquet… et le jette par-dessus son épaule. | **Minuton** : « Un caillou ? … Non. » | Papier qui se froisse, « tok » du caillou qui retombe, petit « boing ». |
+| **12 – 17,5 s** | 4 · Essai 2 | Il façonne un gâteau de boue et plante une fleur dessus, fier. Le gâteau s'écroule et l'éclabousse. | **Minuton** (fier) : « Un gâteau ! » puis (couvert de boue) « … Beurk. » | Mains dans la boue, « **splotch** » de l'effondrement. |
+| **17,5 – 22 s** | 5 · Essai 3 | Il cueille la plus belle fleur du jardin. Un papillon se pose dessus… et s'envole avec. | **Minuton** : « Hé ! Rends-moi ça ! » | « Pop » de la fleur cueillie, petits battements d'ailes, « fiou » de l'envol. |
+| **22 – 26 s** | 6 · Creux | Minuton assis dans l'herbe, découragé. Puis il aperçoit son crayon violet et une feuille, et ses yeux s'illuminent. | **Narrateur** (doux) : « Plus que dix secondes… » / **Minuton** : « Mais oui ! » | La musique s'arrête : on n'entend plus que le **tic-tac**, plus fort. « Ding » de l'idée. |
+| **26 – 30 s** | 7 · Course finale | Il dessine à toute vitesse, avec des traits de mouvement et la langue tirée. | — | Crayon qui gratte très vite. La musique repart plus vite, le tic-tac s'accélère. |
+| **30 – 34,5 s** | 8 | Piou arrive en voletant. Minuton cache vite le dessin dans son dos, puis le lui tend. | **Piou** : « Salut Minuton ! » / **Minuton** : « Joyeux anniversaire, Piou ! » | Battements d'ailes, petit « piou » joyeux. |
+| **34,5 – 38,5 s** | 9 · Émotion | Piou découvre le dessin (Minuton et Piou sous l'arbre, avec un cœur), les yeux brillants, puis le câlin. | **Piou** (ému) : « C'est nous deux… C'est le plus beau cadeau du monde ! » | Musique tendre, petit scintillement. |
+| **38,5 – 41 s** | 10 · Chute | **DING** : la minute est écoulée. Minuton fait un clin d'œil au spectateur, avec Piou sur sa couronne. Le titre « Les histoires de Minuton » apparaît. | **Minuton** (clin d'œil) : « Pile à l'heure ! » | Sonnerie de chronomètre, dernier accord, coupé net. |
 
-Les voix comptent environ **55 mots**, ce qui laisse de la place à l'action et aux bruitages (sans voix pendant la course finale).
+Les voix comptent environ **55 mots** (24 s de parole), ce qui laisse de la place à l'action et aux bruitages (sans voix pendant la course finale).
 
 ---
 
-## Les voix
+## Les voix (synthèse vocale)
 
-| Personnage | Voix |
+Les 13 répliques sont générées avec **Kokoro**, un modèle de synthèse vocale libre, dans sa voix française *ff_siwis*. Chaque personnage reçoit ensuite son timbre, avec une hauteur montée et des formants déplacés, comme une voix de dessin animé.
+
+| Personnage | Réglage |
 |---|---|
-| **Minuton** | Enjouée et expressive, une voix de cartoon un peu aiguë, rapide quand il panique. Il peut être joué par un adulte qui « fait la voix ». |
-| **Piou** | Toute petite voix, aiguë et douce. |
-| **Narrateur** | Une seule réplique, posée et chaleureuse. On peut la confier à la voix de Minuton, ou la supprimer et l'afficher seulement en sous-titre. |
+| **Minuton** | +4 demi-tons : voix de cartoon, vive, un peu aiguë |
+| **Piou** | +6 demi-tons, un peu plus lent : petite voix d'oisillon. Au-delà, les mots deviennent incompréhensibles. |
+| **Narrateur** | Voix naturelle, un peu ralentie, posée |
 
-**Trois façons de les obtenir :**
-1. **Les enregistrer vous-mêmes (recommandé).** C'est gratuit, sans souci de droits, et ça donne une identité unique à la chaîne. Un téléphone dans une pièce calme suffit. Envoie-moi un fichier par réplique, et je m'occupe du nettoyage, du niveau et du calage sur l'image.
-2. **Une voix de synthèse avec licence commerciale** (par exemple ElevenLabs, offre payante).
-3. **Une voix de synthèse libre** que j'installe moi-même : je dois d'abord vérifier que sa licence autorise l'usage commercial pour une chaîne monétisée.
+**Comment je les vérifie.** Je ne peux pas écouter, alors je fais transcrire chaque prise par Whisper, un modèle de reconnaissance vocale. Je compare ensuite le texte qu'il entend au texte attendu. Kokoro varie un peu d'une génération à l'autre : je fais plusieurs prises par réplique et je garde la mieux comprise.
+
+Les 13 répliques passent. Les seuls écarts sont des homophones : « Piou » écrit « Pio », « Hé » écrit « Et », « dix » écrit « 10 ».
+
+**Deux changements dans le texte :**
+- Piou dit **« Salut Minuton ! »** au lieu de « Coucou Minuton ! » : la synthèse rendait « coucou » incompréhensible, quel que soit le réglage.
+- Pour « Beurk », j'impose la prononciation, que la synthèse lisait à l'anglaise.
+
+**Les fichiers :**
+- `E01_voix/` : une réplique par fichier WAV ;
+- `E01_voix_essai.mp4` : toutes les répliques à la suite, avec leur texte à l'écran, pour les écouter.
+
+Pour les régénérer : `minuton/montage/voix_e01.py`.
+
+**Licences.** Les poids de Kokoro sont sous licence Apache 2.0, et la voix *ff_siwis* est entraînée sur la base SIWIS (CC BY 4.0). L'usage commercial est autorisé, avec un crédit à mettre dans la description :
+> Voix de synthèse : Kokoro-82M (hexgrad, licence Apache 2.0), voix « ff_siwis » issue de la SIWIS French Speech Synthesis Database (CC BY 4.0).
+
+Pas besoin de cocher « contenu modifié ou synthétique » sur YouTube : cette case concerne les contenus réalistes, pas un dessin animé.
 
 ---
 
@@ -77,38 +93,9 @@ Je vais les chercher moi-même, et je vérifie la licence de chaque fichier avan
 
 ---
 
-## Images à générer (images clés)
+## Images à générer
 
-On applique la méthode validée sur « La pile ». Ces **19 images clés** viennent d'abord, puis je te demanderai les intervalles et les poses vivantes plan par plan, comme pour « La pile ».
-
-À joindre à chaque génération :
-- les références `R0_oisillon` et `R1_jardin` de l'épisode « Le petit oiseau » ;
-- `M01_reference_complete.png` ;
-- l'image précédente.
-
-Toutes les images sont au format 9:16 (941 × 1672), dans le jardin habituel, sans texte, et le décor reste identique à l'intérieur d'un même plan.
-
-| Code | Plan | Image |
-|---|---|---|
-| **K01** | 1 | Gros plan : Minuton, yeux écarquillés, bouche en « o », devant un petit calendrier accroché à la barrière. Une case est entourée en rouge, avec un dessin de gâteau et une plume bleue (aucun chiffre ni mot). |
-| **K02** | 2 | Plan rapproché : Minuton, l'air décidé, appuie sur son bouton latéral avec un doigt. |
-| **K03** | 3 | Plan moyen dans le jardin : Minuton ramasse un gros caillou gris rond, une feuille blanche et un ruban rouge posés à côté. |
-| **K04** | 3 | Même plan : il tient le caillou emballé dans la feuille avec un gros nœud rouge, et le regarde, dubitatif. |
-| **K05** | 3 | Même plan : il jette le paquet par-dessus son épaule, qui vole en arrière. |
-| **K06** | 4 | Plan moyen : Minuton accroupi, les mains pleines de boue, devant un petit gâteau de boue surmonté d'une fleur jaune. Il est fier. |
-| **K07** | 4 | Même plan : le gâteau s'est effondré et a éclaboussé Minuton, couvert de taches de boue, l'air dépité. |
-| **K08** | 5 | Plan moyen près d'un massif de fleurs : Minuton tient une magnifique fleur rose qu'il vient de cueillir, émerveillé. |
-| **K09** | 5 | Même plan : un joli papillon orange et violet s'est posé sur la fleur. Minuton le regarde, surpris. |
-| **K10** | 5 | Même plan : le papillon s'envole en emportant la fleur. Minuton tend les bras vers lui, la bouche grande ouverte. |
-| **K11** | 6 | Plan moyen : Minuton assis dans l'herbe, découragé, tête basse, bras ballants. |
-| **K12** | 6 | Même plan : il relève la tête, les yeux qui brillent. Dans l'herbe à côté de lui, son crayon violet et une feuille blanche. |
-| **K13** | 7 | Plan rapproché : il dessine à toute vitesse sur la feuille posée dans l'herbe, langue tirée, traits de mouvement autour du crayon. |
-| **K14** | 8 | Plan moyen : Minuton debout, le dessin caché dans son dos, sourire innocent. Piou arrive en voletant par la gauche. |
-| **K15** | 8 | Même plan : Minuton tend le dessin à Piou, posé devant lui. Le dessin est visible : un Minuton et un Piou dessinés au crayon violet sous un arbre, avec un cœur (style dessin d'enfant). |
-| **K16** | 9 | Gros plan sur Piou qui tient le dessin dans ses ailes, les yeux brillants, une petite larme de joie. |
-| **K17** | 9 | Plan rapproché : câlin entre Minuton et Piou. Minuton ferme les yeux, heureux ; Piou est blotti contre son disque. |
-| **K18** | 10 | Plan rapproché : Minuton face au spectateur, fait un clin d'œil, Piou perché sur sa couronne, ailes levées. |
-| **K19** | 10 | Plan large de fin : Minuton et Piou saluent devant le grand arbre, avec un espace dégagé dans le ciel pour le titre de la chaîne. |
+La liste complète est dans **`E01_images_animation.md`** : 82 images, avec les 19 clés, les intervalles, les bouches pour la synchro labiale et les poses vivantes, plan par plan, avec les prompts.
 
 ---
 

@@ -1,0 +1,924 @@
+{
+  "episode": "Le tournesol",
+  "logical_assets": 47,
+  "png_files": 27,
+  "assets": {
+    "D1": {
+      "file": "Decors/D1.png",
+      "width": 941,
+      "height": 1671,
+      "mode": "RGB"
+    },
+    "M01": {
+      "file": "Minuton/M01.png",
+      "width": 1217,
+      "height": 1293,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        62,
+        71,
+        1157,
+        1188
+      ],
+      "pivot_bottom_center": [
+        609.5,
+        1188
+      ]
+    },
+    "PL0": {
+      "file": "Plantes/PL0.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        227,
+        1020,
+        796,
+        1472
+      ],
+      "pivot_bottom_center": [
+        511.5,
+        1472
+      ],
+      "lower_pot_anchor_estimate": [
+        511.5,
+        1472
+      ]
+    },
+    "D2": {
+      "file": "Decors/D2.png",
+      "width": 941,
+      "height": 1671,
+      "mode": "RGB"
+    },
+    "D3": {
+      "file": "Decors/D3.png",
+      "width": 941,
+      "height": 1671,
+      "mode": "RGB"
+    },
+    "M02_M06": {
+      "file": "Minuton/M02_M06.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        24,
+        21,
+        1464,
+        975
+      ],
+      "pivot_bottom_center": [
+        744.0,
+        975
+      ]
+    },
+    "M07_M09": {
+      "file": "Minuton/M07_M09.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        21,
+        16,
+        2114,
+        709
+      ],
+      "pivot_bottom_center": [
+        1067.5,
+        709
+      ]
+    },
+    "M10_M12": {
+      "file": "Minuton/M10_M12.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        148,
+        32,
+        2021,
+        699
+      ],
+      "pivot_bottom_center": [
+        1084.5,
+        699
+      ]
+    },
+    "M13_M16": {
+      "file": "Minuton/M13_M16.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        29,
+        65,
+        2160,
+        627
+      ],
+      "pivot_bottom_center": [
+        1094.5,
+        627
+      ]
+    },
+    "M17_M20": {
+      "file": "Minuton/M17_M20.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        66,
+        56,
+        2113,
+        629
+      ],
+      "pivot_bottom_center": [
+        1089.5,
+        629
+      ]
+    },
+    "M21_M27": {
+      "file": "Minuton/M21_M27.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        152,
+        10,
+        1380,
+        1001
+      ],
+      "pivot_bottom_center": [
+        766.0,
+        1001
+      ]
+    },
+    "PL1": {
+      "file": "Plantes/PL1.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        228,
+        930,
+        797,
+        1462
+      ],
+      "pivot_bottom_center": [
+        512.5,
+        1462
+      ],
+      "lower_pot_anchor_estimate": [
+        512.5,
+        1462
+      ]
+    },
+    "PL2": {
+      "file": "Plantes/PL2.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        227,
+        618,
+        796,
+        1440
+      ],
+      "pivot_bottom_center": [
+        511.5,
+        1440
+      ],
+      "lower_pot_anchor_estimate": [
+        511.5,
+        1440
+      ]
+    },
+    "PL3": {
+      "file": "Plantes/PL3.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        230,
+        468,
+        795,
+        1439
+      ],
+      "pivot_bottom_center": [
+        512.5,
+        1439
+      ],
+      "lower_pot_anchor_estimate": [
+        512.5,
+        1439
+      ]
+    },
+    "PL4": {
+      "file": "Plantes/PL4.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        196,
+        91,
+        827,
+        1438
+      ],
+      "pivot_bottom_center": [
+        511.5,
+        1438
+      ],
+      "lower_pot_anchor_estimate": [
+        513.0,
+        1438
+      ]
+    },
+    "PL5": {
+      "file": "Plantes/PL5.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        175,
+        10,
+        848,
+        1472
+      ],
+      "pivot_bottom_center": [
+        511.5,
+        1472
+      ],
+      "lower_pot_anchor_estimate": [
+        512.0,
+        1472
+      ]
+    },
+    "PL6": {
+      "file": "Plantes/PL6.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        228,
+        12,
+        797,
+        1472
+      ],
+      "pivot_bottom_center": [
+        512.5,
+        1472
+      ],
+      "lower_pot_anchor_estimate": [
+        512.5,
+        1472
+      ]
+    },
+    "PL7": {
+      "file": "Plantes/PL7.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        229,
+        9,
+        848,
+        1471
+      ],
+      "pivot_bottom_center": [
+        538.5,
+        1471
+      ],
+      "lower_pot_anchor_estimate": [
+        512.5,
+        1471
+      ]
+    },
+    "PL8": {
+      "file": "Plantes/PL8.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        32,
+        99,
+        976,
+        1470
+      ],
+      "pivot_bottom_center": [
+        504.0,
+        1470
+      ],
+      "lower_pot_anchor_estimate": [
+        513.0,
+        1470
+      ]
+    },
+    "E1": {
+      "file": "Elements/E1.png",
+      "width": 1402,
+      "height": 1122,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        290,
+        142,
+        1160,
+        1020
+      ],
+      "pivot_bottom_center": [
+        725.0,
+        1020
+      ]
+    },
+    "E2": {
+      "file": "Elements/E2.png",
+      "width": 1216,
+      "height": 1293,
+      "mode": "RGBA",
+      "alpha_bbox_threshold_16": [
+        210,
+        58,
+        1160,
+        1240
+      ],
+      "pivot_bottom_center": [
+        685.0,
+        1240
+      ]
+    },
+    "G1a": {
+      "file": "Gros_plans/G1a.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB"
+    },
+    "G1b": {
+      "file": "Gros_plans/G1b.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB"
+    },
+    "G2a": {
+      "file": "Gros_plans/G2a.png",
+      "width": 941,
+      "height": 1670,
+      "mode": "RGB"
+    },
+    "G2b": {
+      "file": "Gros_plans/G2b.png",
+      "width": 941,
+      "height": 1670,
+      "mode": "RGB"
+    },
+    "G3": {
+      "file": "Gros_plans/G3.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB"
+    },
+    "G4": {
+      "file": "Gros_plans/G4.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB"
+    }
+  },
+  "sheets": {
+    "M02_M06": {
+      "columns": 3,
+      "rows": 2,
+      "cells": [
+        {
+          "code": "M02",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alpha_bbox_local": [
+            24,
+            21,
+            506,
+            497
+          ],
+          "pivot_local": [
+            265.0,
+            497
+          ]
+        },
+        {
+          "code": "M03",
+          "rect": [
+            512,
+            0,
+            1024,
+            512
+          ],
+          "alpha_bbox_local": [
+            86,
+            32,
+            469,
+            499
+          ],
+          "pivot_local": [
+            277.5,
+            499
+          ]
+        },
+        {
+          "code": "M04",
+          "rect": [
+            1024,
+            0,
+            1536,
+            512
+          ],
+          "alpha_bbox_local": [
+            77,
+            24,
+            440,
+            500
+          ],
+          "pivot_local": [
+            258.5,
+            500
+          ]
+        },
+        {
+          "code": "M05",
+          "rect": [
+            0,
+            512,
+            512,
+            1024
+          ],
+          "alpha_bbox_local": [
+            82,
+            23,
+            463,
+            463
+          ],
+          "pivot_local": [
+            272.5,
+            463
+          ]
+        },
+        {
+          "code": "M06",
+          "rect": [
+            512,
+            512,
+            1024,
+            1024
+          ],
+          "alpha_bbox_local": [
+            97,
+            26,
+            469,
+            463
+          ],
+          "pivot_local": [
+            283.0,
+            463
+          ]
+        }
+      ],
+      "empty_cells": 1
+    },
+    "M07_M09": {
+      "columns": 3,
+      "rows": 1,
+      "cells": [
+        {
+          "code": "M07",
+          "rect": [
+            0,
+            0,
+            724,
+            724
+          ],
+          "alpha_bbox_local": [
+            21,
+            16,
+            698,
+            709
+          ],
+          "pivot_local": [
+            359.5,
+            709
+          ]
+        },
+        {
+          "code": "M08",
+          "rect": [
+            724,
+            0,
+            1448,
+            724
+          ],
+          "alpha_bbox_local": [
+            61,
+            51,
+            612,
+            709
+          ],
+          "pivot_local": [
+            336.5,
+            709
+          ]
+        },
+        {
+          "code": "M09",
+          "rect": [
+            1448,
+            0,
+            2172,
+            724
+          ],
+          "alpha_bbox_local": [
+            27,
+            176,
+            666,
+            698
+          ],
+          "pivot_local": [
+            346.5,
+            698
+          ]
+        }
+      ],
+      "empty_cells": 0
+    },
+    "M10_M12": {
+      "columns": 3,
+      "rows": 1,
+      "cells": [
+        {
+          "code": "M10",
+          "rect": [
+            0,
+            0,
+            724,
+            724
+          ],
+          "alpha_bbox_local": [
+            148,
+            33,
+            666,
+            699
+          ],
+          "pivot_local": [
+            407.0,
+            699
+          ]
+        },
+        {
+          "code": "M11",
+          "rect": [
+            724,
+            0,
+            1448,
+            724
+          ],
+          "alpha_bbox_local": [
+            105,
+            32,
+            620,
+            698
+          ],
+          "pivot_local": [
+            362.5,
+            698
+          ]
+        },
+        {
+          "code": "M12",
+          "rect": [
+            1448,
+            0,
+            2172,
+            724
+          ],
+          "alpha_bbox_local": [
+            59,
+            32,
+            573,
+            699
+          ],
+          "pivot_local": [
+            316.0,
+            699
+          ]
+        }
+      ],
+      "empty_cells": 0
+    },
+    "M13_M16": {
+      "columns": 4,
+      "rows": 1,
+      "cells": [
+        {
+          "code": "M13",
+          "rect": [
+            0,
+            0,
+            543,
+            724
+          ],
+          "alpha_bbox_local": [
+            29,
+            71,
+            543,
+            626
+          ],
+          "pivot_local": [
+            286.0,
+            626
+          ]
+        },
+        {
+          "code": "M14",
+          "rect": [
+            543,
+            0,
+            1086,
+            724
+          ],
+          "alpha_bbox_local": [
+            0,
+            75,
+            498,
+            627
+          ],
+          "pivot_local": [
+            249.0,
+            627
+          ]
+        },
+        {
+          "code": "M15",
+          "rect": [
+            1086,
+            0,
+            1629,
+            724
+          ],
+          "alpha_bbox_local": [
+            16,
+            65,
+            492,
+            627
+          ],
+          "pivot_local": [
+            254.0,
+            627
+          ]
+        },
+        {
+          "code": "M16",
+          "rect": [
+            1629,
+            0,
+            2172,
+            724
+          ],
+          "alpha_bbox_local": [
+            42,
+            69,
+            531,
+            626
+          ],
+          "pivot_local": [
+            286.5,
+            626
+          ]
+        }
+      ],
+      "empty_cells": 0
+    },
+    "M17_M20": {
+      "columns": 4,
+      "rows": 1,
+      "cells": [
+        {
+          "code": "M17",
+          "rect": [
+            0,
+            0,
+            543,
+            724
+          ],
+          "alpha_bbox_local": [
+            66,
+            69,
+            511,
+            623
+          ],
+          "pivot_local": [
+            288.5,
+            623
+          ]
+        },
+        {
+          "code": "M18",
+          "rect": [
+            543,
+            0,
+            1086,
+            724
+          ],
+          "alpha_bbox_local": [
+            72,
+            84,
+            464,
+            624
+          ],
+          "pivot_local": [
+            268.0,
+            624
+          ]
+        },
+        {
+          "code": "M19",
+          "rect": [
+            1086,
+            0,
+            1629,
+            724
+          ],
+          "alpha_bbox_local": [
+            9,
+            63,
+            451,
+            629
+          ],
+          "pivot_local": [
+            230.0,
+            629
+          ]
+        },
+        {
+          "code": "M20",
+          "rect": [
+            1629,
+            0,
+            2172,
+            724
+          ],
+          "alpha_bbox_local": [
+            20,
+            56,
+            484,
+            622
+          ],
+          "pivot_local": [
+            252.0,
+            622
+          ]
+        }
+      ],
+      "empty_cells": 0
+    },
+    "M21_M27": {
+      "columns": 3,
+      "rows": 3,
+      "cells": [
+        {
+          "code": "M21",
+          "rect": [
+            0,
+            0,
+            512,
+            341
+          ],
+          "alpha_bbox_local": [
+            156,
+            24,
+            489,
+            334
+          ],
+          "pivot_local": [
+            322.5,
+            334
+          ]
+        },
+        {
+          "code": "M22",
+          "rect": [
+            512,
+            0,
+            1024,
+            341
+          ],
+          "alpha_bbox_local": [
+            127,
+            11,
+            382,
+            331
+          ],
+          "pivot_local": [
+            254.5,
+            331
+          ]
+        },
+        {
+          "code": "M23",
+          "rect": [
+            1024,
+            0,
+            1536,
+            341
+          ],
+          "alpha_bbox_local": [
+            46,
+            10,
+            353,
+            332
+          ],
+          "pivot_local": [
+            199.5,
+            332
+          ]
+        },
+        {
+          "code": "M24",
+          "rect": [
+            0,
+            341,
+            512,
+            683
+          ],
+          "alpha_bbox_local": [
+            162,
+            8,
+            480,
+            342
+          ],
+          "pivot_local": [
+            321.0,
+            342
+          ]
+        },
+        {
+          "code": "M25",
+          "rect": [
+            512,
+            341,
+            1024,
+            683
+          ],
+          "alpha_bbox_local": [
+            85,
+            9,
+            427,
+            320
+          ],
+          "pivot_local": [
+            256.0,
+            320
+          ]
+        },
+        {
+          "code": "M26",
+          "rect": [
+            1024,
+            341,
+            1536,
+            683
+          ],
+          "alpha_bbox_local": [
+            53,
+            9,
+            356,
+            322
+          ],
+          "pivot_local": [
+            204.5,
+            322
+          ]
+        },
+        {
+          "code": "M27",
+          "rect": [
+            0,
+            683,
+            512,
+            1024
+          ],
+          "alpha_bbox_local": [
+            152,
+            0,
+            436,
+            318
+          ],
+          "pivot_local": [
+            294.0,
+            318
+          ]
+        }
+      ],
+      "empty_cells": 2
+    }
+  },
+  "note": "PNG sources sans recadrage. Atlas à découper avec les cellules indiquées ; pivots à stabiliser au montage."
+}

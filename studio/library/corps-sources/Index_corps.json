@@ -1,0 +1,90 @@
+{
+  "note": "Sources PNG natives, sans recadrage. Ajuster le pivot et la hauteur du boîtier dans le moteur pour raccorder avec B1.",
+  "bodies": {
+    "B2": {
+      "file": "Corps/B2.png",
+      "angle": "Trois-quarts gauche",
+      "width": 1216,
+      "height": 1293,
+      "alpha_bbox_threshold_16": [
+        187,
+        84,
+        1062,
+        1127
+      ],
+      "pivot_lower_center": [
+        624.5,
+        1127
+      ],
+      "content_height": 1043
+    },
+    "B3": {
+      "file": "Corps/B3.png",
+      "angle": "Profil gauche",
+      "width": 1217,
+      "height": 1293,
+      "alpha_bbox_threshold_16": [
+        451,
+        124,
+        801,
+        1133
+      ],
+      "pivot_lower_center": [
+        626.0,
+        1133
+      ],
+      "content_height": 1009
+    },
+    "B4": {
+      "file": "Corps/B4.png",
+      "angle": "Dos",
+      "width": 1217,
+      "height": 1293,
+      "alpha_bbox_threshold_16": [
+        149,
+        66,
+        1063,
+        1147
+      ],
+      "pivot_lower_center": [
+        606.0,
+        1147
+      ],
+      "content_height": 1081
+    },
+    "B5": {
+      "file": "Corps/B5.png",
+      "angle": "Trois-quarts droite",
+      "width": 1217,
+      "height": 1293,
+      "alpha_bbox_threshold_16": [
+        177,
+        65,
+        1058,
+        1190
+      ],
+      "pivot_lower_center": [
+        617.5,
+        1190
+      ],
+      "content_height": 1125
+    },
+    "B6": {
+      "file": "Corps/B6.png",
+      "angle": "Profil droit",
+      "width": 1051,
+      "height": 1497,
+      "alpha_bbox_threshold_16": [
+        309,
+        82,
+        761,
+        1335
+      ],
+      "pivot_lower_center": [
+        535.0,
+        1335
+      ],
+      "content_height": 1253
+    }
+  }
+}

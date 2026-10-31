@@ -8,7 +8,7 @@ import sys
 import numpy as np
 
 from render_pile import DUR, SHEET, starts
-from sfx import SR, Track, bandpass, bell, bird, boing, creak, hz, lowpass, marimba, pluck, plop, pop, rng, rustle, step, swoosh, tok, tt
+from sfx import SR, Track, tick, bandpass, bell, bird, boing, creak, hz, lowpass, marimba, pluck, plop, pop, rng, rustle, step, swoosh, tok, tt
 
 T = Track(DUR)
 add = T.add
@@ -81,6 +81,7 @@ add(pluck(hz(41), 0.5), t_("A03"), 0.1)
 add(tok(), t_("P05_A"), 0.36)
 add(pluck(hz(65), 0.8), t_("P05_A"), 0.14)
 add(pop(700), t_("A05") + 0.05, 0.1)
+add(tick(), t_("A05b"), 0.06)  # petit clignement
 
 # 2. l'arrosoir — effort, posé (la)
 add(stretch(0.36, 330, 620), t_("B02"), 0.12)
@@ -97,7 +98,7 @@ add(pluck(hz(72), 0.8), t_("P05_C"), 0.15)
 add(piou(3700), t_("C04") + 0.1, 0.1, -0.4)
 
 # 4. il grimpe — une note plus haute à chaque étage
-for n, m in zip(["D01", "D02", "D03", "D04", "P05_D"], [72, 74, 76, 77, 81]):
+for n, m in zip(["D01", "D01b", "D02", "D02b", "D03", "D03b", "D04", "D04b", "P05_D"], [65, 67, 69, 70, 72, 74, 76, 77, 81]):
     add(marimba(hz(m)), t_(n), 0.12)
     add(rustle(0.1, 90), t_(n), 0.05)
     if n != "P05_D":
@@ -105,7 +106,7 @@ for n, m in zip(["D01", "D02", "D03", "D04", "P05_D"], [72, 74, 76, 77, 81]):
 add(bell(hz(93), 1.0, 0.4), t_("P05_D") + 0.05, 0.06)  # petit éclat de fierté
 
 # 5. ça vacille — grincements de plus en plus aigus, trémolo qui accélère
-wob = [t_("E03", 0), t_("E04", 0), t_("E03", 1), t_("E04", 1)]
+wob = [t_("E01"), t_("E02"), t_("E03"), t_("E04"), t_("E04b")]
 for i, s in enumerate(wob):
     add(creak(0.2, 120 + i * 30), s, 0.2 + i * 0.03, -0.35 if i % 2 else 0.35)
 t, gap, k = t_("P05_D") + 0.25, 0.09, 0
@@ -121,7 +122,7 @@ add(bell(hz(72), 0.6, 0.3), t_("P05_E") + 0.15, 0.08)
 
 # 6. patatras — sifflet qui descend, impact, rebonds de plus en plus courts, silence
 add(swoosh(0.3, 400, 3500), t_("E06"), 0.22)
-add(slide(0.22, 1500, 500), t_("E06") + 0.02, 0.12)
+add(slide(0.24, 1500, 500), t_("E06") + 0.02, 0.12)
 impact = t_("F02")
 add(thud(), impact, 0.95)
 for s, f, g, p in [(0.02, 700, 0.3, -0.6), (0.09, 1100, 0.26, 0.6), (0.15, 900, 0.24, 0.2),
@@ -132,6 +133,7 @@ add(boing(330), t_("P05_F"), 0.22)
 add(slide(0.16, 500, 1100), t_("F04"), 0.08)  # l'oisillon remonte
 add(plop(), t_("F05"), 0.3)
 add(rustle(0.5, 30), t_("F06"), 0.04)
+add(tick(False), t_("F06b"), 0.05)  # clignement sonné
 
 # 7. étourdis — il se redresse, « wah-wah », étoiles qui tintent à chaque dessin
 add(rustle(0.3, 70), t_("G01"), 0.07)

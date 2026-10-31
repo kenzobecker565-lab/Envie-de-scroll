@@ -20,32 +20,38 @@ src = Path(sys.argv[1]) if len(sys.argv) > 1 else None  # dossier des dessins (d
 # - un temps suspendu (« oh oh ») au sommet du déséquilibre, juste avant la chute ;
 # - l'impact tenu un instant, puis un vrai silence avant l'étourdissement.
 SHEET = [
-    ("A01", 0.13), ("A02", 0.13), ("A03", 0.17), ("P05_A", 0.27), ("A05", 0.6),             # le pot
-    ("B01", 0.2), ("B02", 0.37), ("P05_B", 0.2), ("B04", 0.5),                                # l'arrosoir
-    ("C01", 0.2), ("C02", 0.4), ("P05_C", 0.2), ("C04", 0.5),                                 # le seau
-    ("D01", 0.22), ("D02", 0.18), ("D03", 0.18), ("D04", 0.2), ("P05_D", 0.57),               # il grimpe
-    ("E03", 0.2), ("E04", 0.17), ("E03", 0.14), ("E04", 0.11), ("P05_E", 0.27), ("E06", 0.12), # ça vacille (E01, E02 manquants)
-    ("F01", 0.08), ("F02", 0.17), ("P05_F", 0.12), ("F04", 0.17), ("F05", 0.1), ("F06", 0.6),   # patatras
-    ("G01", 0.3), ("P05_G", 0.4), ("G03", 0.4), ("G04", 0.42),                                 # étourdis
+    ("A01", 0.1), ("A01b", 0.09), ("A02", 0.1), ("A03", 0.15), ("P05_A", 0.25),                 # le pot
+    ("A05", 0.3), ("A05b", 0.12), ("A05", 0.2),                                                    # fier (clignement)
+    ("B01", 0.2), ("B02", 0.35), ("P05_B", 0.2), ("B03b", 0.1), ("B04", 0.42),                    # l'arrosoir
+    ("C01", 0.2), ("C02", 0.4), ("P05_C", 0.2), ("C04", 0.5),                                     # le seau
+    ("D01", 0.14), ("D01b", 0.1), ("D02", 0.12), ("D02b", 0.1), ("D03", 0.12), ("D03b", 0.1),     # il grimpe
+    ("D04", 0.12), ("D04b", 0.1), ("P05_D", 0.3), ("P05_Db", 0.25),
+    ("E01", 0.17), ("E02", 0.15), ("E03", 0.13), ("E04", 0.11), ("E04b", 0.08), ("P05_E", 0.27),   # ça vacille
+    ("E06", 0.09),
+    ("F00", 0.06), ("F01", 0.07), ("F02", 0.17), ("F02b", 0.08), ("P05_F", 0.1), ("F04", 0.15),   # patatras
+    ("F05", 0.1), ("F06", 0.3), ("F06b", 0.15), ("F06", 0.2),
+    ("G01", 0.2), ("G02", 0.15), ("P05_G", 0.35), ("G03", 0.35), ("G04", 0.3), ("G04b", 0.32),     # étourdis
 ]
 starts = np.cumsum([0] + [d for _, d in SHEET])
 DUR = float(starts[-1])
 T = {f"{n}@{i}": float(starts[i]) for i, (n, _) in enumerate(SHEET)}
 
 # Enchaînement d'une image (50 %) entre dessins proches : adoucit sans dédoubler
-SOFT = {("A02", "A03"), ("B04", "C01"), ("C02", "P05_C"), ("P05_C", "C04"), ("C04", "D01"), ("P05_D", "E03"),
-        ("F04", "F05"), ("F05", "F06"), ("F06", "G01"), ("P05_G", "G03"), ("G03", "G04"), ("A05", "B01")}
+SOFT = {("A02", "A03"), ("B04", "C01"), ("C02", "P05_C"), ("P05_C", "C04"), ("C04", "D01"), ("P05_D", "P05_Db"),
+        ("P05_Db", "E01"), ("F04", "F05"), ("F05", "F06"), ("F06", "G01"), ("G01", "G02"), ("P05_G", "G03"),
+        ("G03", "G04"), ("G04", "G04b"), ("A05", "B01")}
 # Traînées de vitesse (direction du mouvement en pixels) sur les dessins de chute
-SMEAR = {"E06": (0, 22), "F01": (0, 38)}
+SMEAR = {"E06": (0, 18), "F00": (0, 24), "F01": (0, 30)}
 
 # Caméra : (temps, centre x, centre y, zoom), interpolée en douceur. Elle monte avec
 # la pile, se resserre pendant le déséquilibre, suit la chute, puis recule un peu.
-t_climb, t_wobble, t_fall, t_dizzy = starts[13], starts[18], starts[24], starts[30]
+first = lambda n: float(starts[[x for x, _ in SHEET].index(n)])
+t_climb, t_wobble, t_fall, t_dizzy = first("D01"), first("E01"), first("F00"), first("G01")
 CAM = [
-    (0.0, 470, 900, 1.0), (starts[13], 470, 880, 1.04), (t_wobble, 470, 760, 1.1),
-    (starts[22], 470, 740, 1.14), (t_fall + 0.1, 470, 900, 1.06), (t_dizzy, 470, 930, 1.08), (DUR, 470, 940, 1.13),
+    (0.0, 470, 900, 1.0), (t_climb, 470, 880, 1.04), (first("P05_D"), 470, 760, 1.1),
+    (first("P05_E"), 470, 740, 1.14), (first("F02") + 0.05, 470, 900, 1.06), (t_dizzy, 470, 930, 1.08), (DUR, 470, 940, 1.13),
 ]
-IMPACT = float(starts[25])  # F02
+IMPACT = first("F02")
 
 
 def ease(x):

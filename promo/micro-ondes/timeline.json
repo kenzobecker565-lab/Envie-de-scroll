@@ -1,0 +1,1202 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 86.2,
+ "lines": [
+  {
+   "id": "01-feu",
+   "text": "Si tu poses ton plat sur le feu, il chauffe.",
+   "start": 0.7,
+   "dur": 2.28,
+   "words": [
+    {
+     "w": "Si",
+     "t": 0.7
+    },
+    {
+     "w": "tu",
+     "t": 0.92
+    },
+    {
+     "w": "poses",
+     "t": 1.06
+    },
+    {
+     "w": "ton",
+     "t": 1.32
+    },
+    {
+     "w": "plat",
+     "t": 1.46
+    },
+    {
+     "w": "sur",
+     "t": 1.68
+    },
+    {
+     "w": "le",
+     "t": 1.84
+    },
+    {
+     "w": "feu,",
+     "t": 1.96
+    },
+    {
+     "w": "il",
+     "t": 2.42
+    },
+    {
+     "w": "chauffe.",
+     "t": 2.48
+    }
+   ]
+  },
+  {
+   "id": "02-brule",
+   "text": "Mais le dessous brûle, et le milieu reste froid. La chaleur entre par l'extérieur, très lentement.",
+   "start": 3.16,
+   "dur": 5.26,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 3.16
+    },
+    {
+     "w": "le",
+     "t": 3.4
+    },
+    {
+     "w": "dessous",
+     "t": 3.54
+    },
+    {
+     "w": "brûle,",
+     "t": 3.86
+    },
+    {
+     "w": "et",
+     "t": 4.54
+    },
+    {
+     "w": "le",
+     "t": 4.68
+    },
+    {
+     "w": "milieu",
+     "t": 4.82
+    },
+    {
+     "w": "reste",
+     "t": 5.12
+    },
+    {
+     "w": "froid.",
+     "t": 5.42
+    },
+    {
+     "w": "La",
+     "t": 6.06
+    },
+    {
+     "w": "chaleur",
+     "t": 6.18
+    },
+    {
+     "w": "entre",
+     "t": 6.62
+    },
+    {
+     "w": "par",
+     "t": 6.84
+    },
+    {
+     "w": "l'extérieur,",
+     "t": 7.24
+    },
+    {
+     "w": "très",
+     "t": 7.64
+    },
+    {
+     "w": "lentement.",
+     "t": 7.94
+    }
+   ]
+  },
+  {
+   "id": "03-eau",
+   "text": "Alors tu chauffes ce qu'il y a dedans : l'eau.",
+   "start": 8.95,
+   "dur": 2.18,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 8.95
+    },
+    {
+     "w": "tu",
+     "t": 9.19
+    },
+    {
+     "w": "chauffes",
+     "t": 9.39
+    },
+    {
+     "w": "ce",
+     "t": 9.73
+    },
+    {
+     "w": "qu'il",
+     "t": 9.85
+    },
+    {
+     "w": "y",
+     "t": 9.97
+    },
+    {
+     "w": "a",
+     "t": 10.09
+    },
+    {
+     "w": "dedans :",
+     "t": 10.23
+    },
+    {
+     "w": "l'eau.",
+     "t": 10.68
+    }
+   ]
+  },
+  {
+   "id": "04-molecule",
+   "text": "Une molécule d'eau, c'est un petit aimant électrique : un côté plus, un côté moins.",
+   "start": 11.31,
+   "dur": 3.82,
+   "words": [
+    {
+     "w": "Une",
+     "t": 11.31
+    },
+    {
+     "w": "molécule",
+     "t": 11.47
+    },
+    {
+     "w": "d'eau,",
+     "t": 11.77
+    },
+    {
+     "w": "c'est",
+     "t": 12.07
+    },
+    {
+     "w": "un",
+     "t": 12.37
+    },
+    {
+     "w": "petit",
+     "t": 12.47
+    },
+    {
+     "w": "aimant",
+     "t": 12.71
+    },
+    {
+     "w": "électrique :",
+     "t": 13.05
+    },
+    {
+     "w": "un",
+     "t": 13.77
+    },
+    {
+     "w": "côté",
+     "t": 13.87
+    },
+    {
+     "w": "plus,",
+     "t": 14.09
+    },
+    {
+     "w": "un",
+     "t": 14.55
+    },
+    {
+     "w": "côté",
+     "t": 14.63
+    },
+    {
+     "w": "moins.",
+     "t": 14.85
+    }
+   ]
+  },
+  {
+   "id": "05-champ",
+   "text": "Si tu fais basculer un champ électrique, elle se retourne pour le suivre.",
+   "start": 15.31,
+   "dur": 3.48,
+   "words": [
+    {
+     "w": "Si",
+     "t": 15.31
+    },
+    {
+     "w": "tu",
+     "t": 15.51
+    },
+    {
+     "w": "fais",
+     "t": 15.63
+    },
+    {
+     "w": "basculer",
+     "t": 15.79
+    },
+    {
+     "w": "un",
+     "t": 16.27
+    },
+    {
+     "w": "champ",
+     "t": 16.43
+    },
+    {
+     "w": "électrique,",
+     "t": 16.61
+    },
+    {
+     "w": "elle",
+     "t": 17.35
+    },
+    {
+     "w": "se",
+     "t": 17.45
+    },
+    {
+     "w": "retourne",
+     "t": 17.61
+    },
+    {
+     "w": "pour",
+     "t": 18.03
+    },
+    {
+     "w": "le",
+     "t": 18.17
+    },
+    {
+     "w": "suivre.",
+     "t": 18.29
+    }
+   ]
+  },
+  {
+   "id": "06-milliards",
+   "text": "Fais-le deux milliards et demi de fois par seconde : les molécules s'agitent, se frottent, et chauffent.",
+   "start": 18.97,
+   "dur": 4.91,
+   "words": [
+    {
+     "w": "Fais-le",
+     "t": 19.163
+    },
+    {
+     "w": "deux",
+     "t": 19.357
+    },
+    {
+     "w": "milliards",
+     "t": 19.55
+    },
+    {
+     "w": "et",
+     "t": 19.81
+    },
+    {
+     "w": "demi",
+     "t": 20.03
+    },
+    {
+     "w": "de",
+     "t": 20.23
+    },
+    {
+     "w": "fois",
+     "t": 20.37
+    },
+    {
+     "w": "par",
+     "t": 20.57
+    },
+    {
+     "w": "seconde :",
+     "t": 20.77
+    },
+    {
+     "w": "les",
+     "t": 21.39
+    },
+    {
+     "w": "molécules",
+     "t": 21.51
+    },
+    {
+     "w": "s'agitent,",
+     "t": 22.05
+    },
+    {
+     "w": "se",
+     "t": 22.59
+    },
+    {
+     "w": "frottent,",
+     "t": 22.79
+    },
+    {
+     "w": "et",
+     "t": 23.29
+    },
+    {
+     "w": "chauffent.",
+     "t": 23.39
+    }
+   ]
+  },
+  {
+   "id": "07-nom-onde",
+   "text": "Ça s'appelle une micro-onde.",
+   "start": 24.06,
+   "dur": 1.47,
+   "words": [
+    {
+     "w": "Ça",
+     "t": 24.06
+    },
+    {
+     "w": "s'appelle",
+     "t": 24.34
+    },
+    {
+     "w": "une",
+     "t": 24.62
+    },
+    {
+     "w": "micro-onde.",
+     "t": 25.075
+    }
+   ]
+  },
+  {
+   "id": "08-magnetron",
+   "text": "Pour la fabriquer, il te faut un tube spécial. Ça s'appelle un magnétron.",
+   "start": 26.16,
+   "dur": 3.98,
+   "words": [
+    {
+     "w": "Pour",
+     "t": 26.16
+    },
+    {
+     "w": "la",
+     "t": 26.28
+    },
+    {
+     "w": "fabriquer,",
+     "t": 26.4
+    },
+    {
+     "w": "il",
+     "t": 27.18
+    },
+    {
+     "w": "te",
+     "t": 27.26
+    },
+    {
+     "w": "faut",
+     "t": 27.38
+    },
+    {
+     "w": "un",
+     "t": 27.62
+    },
+    {
+     "w": "tube",
+     "t": 27.76
+    },
+    {
+     "w": "spécial.",
+     "t": 27.96
+    },
+    {
+     "w": "Ça",
+     "t": 28.76
+    },
+    {
+     "w": "s'appelle",
+     "t": 29.07
+    },
+    {
+     "w": "un",
+     "t": 29.38
+    },
+    {
+     "w": "magnétron.",
+     "t": 29.58
+    }
+   ]
+  },
+  {
+   "id": "09-chocolat",
+   "text": "En 1945, un ingénieur a remarqué qu'il faisait fondre la barre chocolatée dans sa poche.",
+   "start": 30.32,
+   "dur": 5.37,
+   "words": [
+    {
+     "w": "En",
+     "t": 30.32
+    },
+    {
+     "w": "1945,",
+     "t": 30.46
+    },
+    {
+     "w": "un",
+     "t": 32.02
+    },
+    {
+     "w": "ingénieur",
+     "t": 32.14
+    },
+    {
+     "w": "a",
+     "t": 32.7
+    },
+    {
+     "w": "remarqué",
+     "t": 32.82
+    },
+    {
+     "w": "qu'il",
+     "t": 33.13
+    },
+    {
+     "w": "faisait",
+     "t": 33.44
+    },
+    {
+     "w": "fondre",
+     "t": 33.68
+    },
+    {
+     "w": "la",
+     "t": 34.04
+    },
+    {
+     "w": "barre",
+     "t": 34.14
+    },
+    {
+     "w": "chocolatée",
+     "t": 34.32
+    },
+    {
+     "w": "dans",
+     "t": 34.92
+    },
+    {
+     "w": "sa",
+     "t": 35.04
+    },
+    {
+     "w": "poche.",
+     "t": 35.16
+    }
+   ]
+  },
+  {
+   "id": "10-partout",
+   "text": "Mais les ondes partent dans tous les sens. Et toi aussi, tu es plein d'eau.",
+   "start": 36.22,
+   "dur": 3.71,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 36.22
+    },
+    {
+     "w": "les",
+     "t": 36.42
+    },
+    {
+     "w": "ondes",
+     "t": 36.58
+    },
+    {
+     "w": "partent",
+     "t": 36.84
+    },
+    {
+     "w": "dans",
+     "t": 37.24
+    },
+    {
+     "w": "tous",
+     "t": 37.32
+    },
+    {
+     "w": "les",
+     "t": 37.48
+    },
+    {
+     "w": "sens.",
+     "t": 37.6
+    },
+    {
+     "w": "Et",
+     "t": 38.22
+    },
+    {
+     "w": "toi",
+     "t": 38.4
+    },
+    {
+     "w": "aussi,",
+     "t": 38.62
+    },
+    {
+     "w": "tu",
+     "t": 39.22
+    },
+    {
+     "w": "es",
+     "t": 39.32
+    },
+    {
+     "w": "plein",
+     "t": 39.46
+    },
+    {
+     "w": "d'eau.",
+     "t": 39.695
+    }
+   ]
+  },
+  {
+   "id": "11-boite",
+   "text": "Alors tu enfermes tout dans une boîte en métal. Le métal renvoie les ondes, comme un miroir.",
+   "start": 40.11,
+   "dur": 5.2,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 40.11
+    },
+    {
+     "w": "tu",
+     "t": 40.33
+    },
+    {
+     "w": "enfermes",
+     "t": 40.59
+    },
+    {
+     "w": "tout",
+     "t": 41.11
+    },
+    {
+     "w": "dans",
+     "t": 41.25
+    },
+    {
+     "w": "une",
+     "t": 41.41
+    },
+    {
+     "w": "boîte",
+     "t": 41.61
+    },
+    {
+     "w": "en",
+     "t": 42.03
+    },
+    {
+     "w": "métal.",
+     "t": 42.11
+    },
+    {
+     "w": "Le",
+     "t": 42.85
+    },
+    {
+     "w": "métal",
+     "t": 43.03
+    },
+    {
+     "w": "renvoie",
+     "t": 43.43
+    },
+    {
+     "w": "les",
+     "t": 43.87
+    },
+    {
+     "w": "ondes,",
+     "t": 44.01
+    },
+    {
+     "w": "comme",
+     "t": 44.41
+    },
+    {
+     "w": "un",
+     "t": 44.61
+    },
+    {
+     "w": "miroir.",
+     "t": 44.71
+    }
+   ]
+  },
+  {
+   "id": "12-faraday",
+   "text": "Ça s'appelle une cage de Faraday.",
+   "start": 45.49,
+   "dur": 1.78,
+   "words": [
+    {
+     "w": "Ça",
+     "t": 45.49
+    },
+    {
+     "w": "s'appelle",
+     "t": 45.77
+    },
+    {
+     "w": "une",
+     "t": 46.05
+    },
+    {
+     "w": "cage",
+     "t": 46.27
+    },
+    {
+     "w": "de",
+     "t": 46.55
+    },
+    {
+     "w": "Faraday.",
+     "t": 46.71
+    }
+   ]
+  },
+  {
+   "id": "13-vitre",
+   "text": "Mais tu ne vois plus ton plat. Alors tu mets une vitre, avec une grille percée de petits trous.",
+   "start": 47.8,
+   "dur": 4.27,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 47.8
+    },
+    {
+     "w": "tu",
+     "t": 48.0
+    },
+    {
+     "w": "ne",
+     "t": 48.14
+    },
+    {
+     "w": "vois",
+     "t": 48.26
+    },
+    {
+     "w": "plus",
+     "t": 48.42
+    },
+    {
+     "w": "ton",
+     "t": 48.6
+    },
+    {
+     "w": "plat.",
+     "t": 48.76
+    },
+    {
+     "w": "Alors",
+     "t": 49.2
+    },
+    {
+     "w": "tu",
+     "t": 49.36
+    },
+    {
+     "w": "mets",
+     "t": 49.64
+    },
+    {
+     "w": "une",
+     "t": 49.82
+    },
+    {
+     "w": "vitre,",
+     "t": 50.04
+    },
+    {
+     "w": "avec",
+     "t": 50.4
+    },
+    {
+     "w": "une",
+     "t": 50.62
+    },
+    {
+     "w": "grille",
+     "t": 50.8
+    },
+    {
+     "w": "percée",
+     "t": 51.0
+    },
+    {
+     "w": "de",
+     "t": 51.42
+    },
+    {
+     "w": "petits",
+     "t": 51.52
+    },
+    {
+     "w": "trous.",
+     "t": 51.74
+    }
+   ]
+  },
+  {
+   "id": "14-12cm",
+   "text": "Cette onde mesure 12 centimètres : trop grosse pour passer. La lumière, elle, passe sans problème.",
+   "start": 52.25,
+   "dur": 5.22,
+   "words": [
+    {
+     "w": "Cette",
+     "t": 52.25
+    },
+    {
+     "w": "onde",
+     "t": 52.39
+    },
+    {
+     "w": "mesure",
+     "t": 52.61
+    },
+    {
+     "w": "12",
+     "t": 52.81
+    },
+    {
+     "w": "centimètres :",
+     "t": 53.45
+    },
+    {
+     "w": "trop",
+     "t": 54.09
+    },
+    {
+     "w": "grosse",
+     "t": 54.27
+    },
+    {
+     "w": "pour",
+     "t": 54.53
+    },
+    {
+     "w": "passer.",
+     "t": 54.73
+    },
+    {
+     "w": "La",
+     "t": 55.27
+    },
+    {
+     "w": "lumière,",
+     "t": 55.37
+    },
+    {
+     "w": "elle,",
+     "t": 55.73
+    },
+    {
+     "w": "passe",
+     "t": 56.57
+    },
+    {
+     "w": "sans",
+     "t": 56.77
+    },
+    {
+     "w": "problème.",
+     "t": 57.03
+    }
+   ]
+  },
+  {
+   "id": "15-rebond",
+   "text": "Mais les ondes rebondissent et se superposent. Certains endroits chauffent fort, d'autres pas du tout.",
+   "start": 58.0,
+   "dur": 4.82,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 58.0
+    },
+    {
+     "w": "les",
+     "t": 58.2
+    },
+    {
+     "w": "ondes",
+     "t": 58.38
+    },
+    {
+     "w": "rebondissent",
+     "t": 58.8
+    },
+    {
+     "w": "et",
+     "t": 59.22
+    },
+    {
+     "w": "se",
+     "t": 59.36
+    },
+    {
+     "w": "superposent.",
+     "t": 59.48
+    },
+    {
+     "w": "Certains",
+     "t": 60.38
+    },
+    {
+     "w": "endroits",
+     "t": 60.8
+    },
+    {
+     "w": "chauffent",
+     "t": 61.16
+    },
+    {
+     "w": "fort,",
+     "t": 61.5
+    },
+    {
+     "w": "d'autres",
+     "t": 61.85
+    },
+    {
+     "w": "pas",
+     "t": 62.2
+    },
+    {
+     "w": "du",
+     "t": 62.44
+    },
+    {
+     "w": "tout.",
+     "t": 62.58
+    }
+   ]
+  },
+  {
+   "id": "16-plateau",
+   "text": "Alors tu fais tourner le plat. Ça s'appelle un plateau tournant.",
+   "start": 63.0,
+   "dur": 2.84,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 63.0
+    },
+    {
+     "w": "tu",
+     "t": 63.22
+    },
+    {
+     "w": "fais",
+     "t": 63.48
+    },
+    {
+     "w": "tourner",
+     "t": 63.64
+    },
+    {
+     "w": "le",
+     "t": 63.92
+    },
+    {
+     "w": "plat.",
+     "t": 64.02
+    },
+    {
+     "w": "Ça",
+     "t": 64.38
+    },
+    {
+     "w": "s'appelle",
+     "t": 64.67
+    },
+    {
+     "w": "un",
+     "t": 64.96
+    },
+    {
+     "w": "plateau",
+     "t": 65.16
+    },
+    {
+     "w": "tournant.",
+     "t": 65.44
+    }
+   ]
+  },
+  {
+   "id": "17-porte",
+   "text": "Mais si quelqu'un ouvre la porte en pleine marche ? Alors tu caches des interrupteurs dans la porte. Dès qu'elle s'ouvre, tout s'arrête.",
+   "start": 66.37,
+   "dur": 6.39,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 66.37
+    },
+    {
+     "w": "si",
+     "t": 66.59
+    },
+    {
+     "w": "quelqu'un",
+     "t": 66.87
+    },
+    {
+     "w": "ouvre",
+     "t": 67.15
+    },
+    {
+     "w": "la",
+     "t": 67.45
+    },
+    {
+     "w": "porte",
+     "t": 67.57
+    },
+    {
+     "w": "en",
+     "t": 67.79
+    },
+    {
+     "w": "pleine",
+     "t": 67.99
+    },
+    {
+     "w": "marche ?",
+     "t": 68.25
+    },
+    {
+     "w": "Alors",
+     "t": 68.77
+    },
+    {
+     "w": "tu",
+     "t": 68.99
+    },
+    {
+     "w": "caches",
+     "t": 69.21
+    },
+    {
+     "w": "des",
+     "t": 69.47
+    },
+    {
+     "w": "interrupteurs",
+     "t": 69.65
+    },
+    {
+     "w": "dans",
+     "t": 70.31
+    },
+    {
+     "w": "la",
+     "t": 70.43
+    },
+    {
+     "w": "porte.",
+     "t": 70.53
+    },
+    {
+     "w": "Dès",
+     "t": 71.07
+    },
+    {
+     "w": "qu'elle",
+     "t": 71.41
+    },
+    {
+     "w": "s'ouvre,",
+     "t": 71.75
+    },
+    {
+     "w": "tout",
+     "t": 72.09
+    },
+    {
+     "w": "s'arrête.",
+     "t": 72.425
+    }
+   ]
+  },
+  {
+   "id": "18-puissance",
+   "text": "Et à moitié de puissance, le magnétron ne chauffe pas moins fort. Il s'allume, s'éteint, et se rallume. C'est pour ça que le bruit change.",
+   "start": 73.29,
+   "dur": 7.24,
+   "words": [
+    {
+     "w": "Et",
+     "t": 73.29
+    },
+    {
+     "w": "à",
+     "t": 73.41
+    },
+    {
+     "w": "moitié",
+     "t": 73.51
+    },
+    {
+     "w": "de",
+     "t": 73.85
+    },
+    {
+     "w": "puissance,",
+     "t": 73.97
+    },
+    {
+     "w": "le",
+     "t": 74.73
+    },
+    {
+     "w": "magnétron",
+     "t": 74.79
+    },
+    {
+     "w": "ne",
+     "t": 75.27
+    },
+    {
+     "w": "chauffe",
+     "t": 75.43
+    },
+    {
+     "w": "pas",
+     "t": 75.83
+    },
+    {
+     "w": "moins",
+     "t": 75.91
+    },
+    {
+     "w": "fort.",
+     "t": 76.05
+    },
+    {
+     "w": "Il",
+     "t": 76.77
+    },
+    {
+     "w": "s'allume,",
+     "t": 77.183
+    },
+    {
+     "w": "s'éteint,",
+     "t": 77.597
+    },
+    {
+     "w": "et",
+     "t": 78.01
+    },
+    {
+     "w": "se",
+     "t": 78.23
+    },
+    {
+     "w": "rallume.",
+     "t": 78.41
+    },
+    {
+     "w": "C'est",
+     "t": 78.84
+    },
+    {
+     "w": "pour",
+     "t": 79.27
+    },
+    {
+     "w": "ça",
+     "t": 79.45
+    },
+    {
+     "w": "que",
+     "t": 79.59
+    },
+    {
+     "w": "le",
+     "t": 79.71
+    },
+    {
+     "w": "bruit",
+     "t": 79.81
+    },
+    {
+     "w": "change.",
+     "t": 80.03
+    }
+   ]
+  },
+  {
+   "id": "19-bravo",
+   "text": "Félicitations, tu as construit un micro-ondes.",
+   "start": 81.11,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Félicitations,",
+     "t": 81.11
+    },
+    {
+     "w": "tu",
+     "t": 82.19
+    },
+    {
+     "w": "as",
+     "t": 82.27
+    },
+    {
+     "w": "construit",
+     "t": 82.39
+    },
+    {
+     "w": "un",
+     "t": 82.95
+    },
+    {
+     "w": "micro-ondes.",
+     "t": 83.285
+    }
+   ]
+  }
+ ]
+}

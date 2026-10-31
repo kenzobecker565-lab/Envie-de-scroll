@@ -3,6 +3,7 @@
  *
  *   node render.mjs                     → build/plutot-que-scroller-15s.mp4
  *   node render.mjs --ad=pub            → build/pub/plutot-que-scroller-pub.mp4 (pub de 28 s)
+ *   node render.mjs --ad=micro-ondes    → build/micro-ondes/micro-ondes.mp4 (explication en 3D)
  *   node render.mjs --stills=0.5,4.2    → <build>/stills/*.png (vérifications)
  *   node render.mjs --sheet             → <build>/planche.png (planche contact)
  *   node render.mjs --audio             → refait seulement la bande-son de la vidéo
@@ -35,6 +36,7 @@ const args = Object.fromEntries(
 const ADS = {
   '15s': { page: 'promo/index.html', audio: './audio.mjs', build: 'build', out: 'plutot-que-scroller-15s.mp4' },
   pub: { page: 'promo/pub/index.html', audio: './pub/audio.mjs', build: 'build/pub', out: 'plutot-que-scroller-pub.mp4' },
+  'micro-ondes': { page: 'promo/micro-ondes/index.html', audio: './micro-ondes/audio.mjs', build: 'build/micro-ondes', out: 'micro-ondes.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)
@@ -92,7 +94,12 @@ function run(cmd, cmdArgs, { input } = {}) {
  */
 async function openPages(count = 1) {
   const server = await serve()
-  const browser = await chromium.launch()
+  // CHROMIUM : chemin d'un Chromium déjà installé (sinon celui de Playwright).
+  // WebGL (pub en 3D) : rendu logiciel SwiftShader, identique sur toutes les machines.
+  const browser = await chromium.launch({
+    executablePath: process.env.CHROMIUM || undefined,
+    args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
+  })
   const errors = []
   const close = async () => {
     await browser.close()

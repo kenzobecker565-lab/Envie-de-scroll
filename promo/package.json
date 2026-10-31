@@ -1,0 +1,32 @@
+{
+  "name": "plutot-que-scroller-promo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Vidéos en motion design rendues image par image : pubs de Plutôt Que Scroller (15 s, 28 s dans pub/), explication en 3D du micro-ondes (micro-ondes/) et procès « à toi de juger » (proces/).",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs",
+    "audio": "node render.mjs --audio",
+    "sheet": "node render.mjs --sheet",
+    "stills": "node render.mjs --stills=0.5,2.6,4.4,6.2,8.9,10.6,12.4,14.9",
+    "pub:capture": "node pub/capture-app.mjs",
+    "pub:prepare": "node pub/prepare.mjs",
+    "pub:render": "node render.mjs --ad=pub",
+    "pub:audio": "node render.mjs --ad=pub --audio",
+    "pub:sheet": "node render.mjs --ad=pub --sheet --step=0.5",
+    "pub:stills": "node render.mjs --ad=pub --stills=0.5,3.9,7.6,9.5,13.8,15.5,18.5,21.5,24.5,27.5",
+    "mo:voice": "cd micro-ondes && python narration.py media/voix-off.mp3",
+    "mo:render": "node render.mjs --ad=micro-ondes",
+    "mo:audio": "node render.mjs --ad=micro-ondes --audio",
+    "mo:sheet": "node render.mjs --ad=micro-ondes --sheet --step=2",
+    "mo:stills": "node render.mjs --ad=micro-ondes --stills=1.5,7.4,18.2,24.8,34,42,47.5,55.2,62,70,77,84.2",
+    "pr:voice": "cd proces && python voix.py",
+    "pr:render": "node render.mjs --ad=proces",
+    "pr:audio": "node render.mjs --ad=proces --audio",
+    "pr:stills": "node render.mjs --ad=proces --stills=1.5,12,16.8,24.5,32,50.5,61,69.5,77.5,89"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1",
+    "three": "0.170.0"
+  }
+}

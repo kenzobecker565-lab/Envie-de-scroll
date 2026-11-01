@@ -29,24 +29,34 @@ export function makeCues(tl) {
   }
   const cut = (id) => S(id) - 0.15
 
+  // Les scènes. « cut » : transition d'entrée (volet de couleur, ou flash blanc
+  // pour le montage rapide des faits).
+  const outside = W('14', 'regardez') - 0.12
   const sections = [
-    { id: 'couple', t0: 0, t1: cut('02') },
-    { id: 'chambre', t0: cut('02'), t1: cut('04') },
-    { id: 'tribunal', t0: cut('04'), t1: cut('15') },
-    { id: 'vote', t0: cut('15'), t1: tl.duration },
+    { id: 'accuse', t0: 0, t1: cut('02') },
+    { id: 'foule', t0: cut('02'), t1: cut('03'), cut: 'flash' },
+    { id: 'toi', t0: cut('03'), t1: cut('04'), cut: 'flash' },
+    { id: 'mairie', t0: cut('04'), t1: cut('05'), cut: 'wipe' },
+    { id: 'maternite', t0: cut('05'), t1: cut('06'), cut: 'flash' },
+    { id: 'factures', t0: cut('06'), t1: cut('07'), cut: 'flash' },
+    { id: 'peine', t0: cut('07'), t1: cut('08'), cut: 'flash' },
+    { id: 'tribunal', t0: cut('08'), t1: outside, cut: 'wipe' },
+    { id: 'dehors', t0: outside, t1: cut('15'), cut: 'flash' },
+    { id: 'tribunal2', t0: cut('15'), t1: cut('18'), cut: 'flash' },
+    { id: 'vote', t0: cut('18'), t1: tl.duration, cut: 'wipe' },
   ]
   // Coups de marteau du juge.
-  const gavel = [W('05', 'laudience') - 0.25, W('14', 'clos') + 0.35]
+  const gavel = [W('08', 'laudience') - 0.25, W('17', 'clos') + 0.35]
   // La jauge « coupable / non coupable » après chaque argument (−1 coupable … +1 non coupable).
   const balance = [
-    [S('06'), -0.35],
-    [S('07'), 0.15],
-    [S('08'), -0.3],
-    [S('09'), 0.25],
-    [S('10'), -0.4],
-    [S('11'), 0.3],
-    [S('12'), -0.2],
-    [S('13'), 0.05],
+    [S('09'), -0.4],
+    [S('10'), 0.25],
+    [S('11'), -0.35],
+    [S('12'), 0.35],
+    [S('13'), -0.25],
+    [S('14'), 0.15],
+    [S('15'), -0.1],
+    [S('16'), 0.05],
   ]
   return { S, E, W, line, sections, gavel, balance, duration: tl.duration, lines: tl.lines }
 }

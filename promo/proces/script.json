@@ -7,20 +7,23 @@
     "avocate": { "name": "Sarah", "file": "media/avocate.mp3" }
   },
   "lines": [
-    { "id": "01-maries", "who": "narrateur", "text": "Paul et Anne étaient mariés depuis cinquante-deux ans." },
-    { "id": "02-charcot", "who": "narrateur", "text": "Anne souffrait de la maladie de Charcot. Elle ne pouvait plus bouger, plus manger, bientôt plus respirer." },
-    { "id": "03-nuit", "who": "narrateur", "text": "Une nuit, Paul lui a donné une dose mortelle de médicaments. Puis il a appelé la police lui-même." },
-    { "id": "04-juge", "who": "narrateur", "text": "Aujourd'hui, il est jugé pour assassinat.", "gap": 0.4 },
-    { "id": "05-ouverte", "who": "juge", "text": "L'audience est ouverte. Monsieur le procureur.", "gap": 0.6 },
-    { "id": "06-semaines", "who": "procureur", "text": "Pendant trois semaines, l'accusé a mis ces médicaments de côté. Trois semaines. Ce n'est pas un coup de folie, c'est une décision préparée." },
-    { "id": "07-supplie", "who": "avocate", "text": "Pendant trois semaines, Anne l'a supplié. Onze fois, d'après l'infirmière qui l'a entendue. Elle ne pouvait plus écrire. Elle ne pouvait plus que demander.", "gap": 0.4 },
-    { "id": "08-fille", "who": "procureur", "text": "Et une semaine avant, devant sa fille, elle a dit qu'elle voulait voir naître son petit-fils. Qui sait ce qu'elle voulait vraiment, cette nuit-là ? Personne. Sauf lui.", "gap": 0.4 },
-    { "id": "09-promesse", "who": "avocate", "text": "Il n'a rien caché. Il a appelé la police. Il a dit : « Je lui avais promis. » Ce n'est pas un meurtrier. C'est un mari qui a tenu sa promesse.", "gap": 0.4 },
-    { "id": "10-loi", "who": "procureur", "text": "La loi lui offrait une autre voie : la sédation profonde, décidée avec des médecins. Il a choisi seul. Si on l'acquitte, qui décidera demain qu'une vie ne vaut plus la peine d'être vécue ?", "gap": 0.4 },
-    { "id": "11-peine", "who": "avocate", "text": "Vous jugez un homme de 79 ans qui a perdu la femme de sa vie. Quelle peine pourrait être pire que celle qu'il vit déjà ?", "say": "Vous jugez un homme de soixante-dix-neuf ans qui a perdu la femme de sa vie. Quelle peine pourrait être pire que celle qu'il vit déjà ?", "gap": 0.4 },
-    { "id": "12-compassion", "who": "procureur", "text": "La compassion n'est pas un permis de tuer.", "gap": 0.5 },
-    { "id": "13-amour", "who": "avocate", "text": "Et la loi n'est pas faite pour punir l'amour.", "gap": 0.35 },
-    { "id": "14-clos", "who": "juge", "text": "Les débats sont clos.", "gap": 0.9 },
-    { "id": "15-jury", "who": "narrateur", "text": "Le jury, c'est toi. Coupable… ou non coupable ? Donne ton verdict en commentaire.", "gap": 1.2 }
+    { "id": "01-vole", "who": "narrateur", "text": "Cet homme a volé trois millions d'euros d'argent public." },
+    { "id": "02-ville", "who": "narrateur", "text": "Et toute sa ville est dans la rue pour le défendre." },
+    { "id": "03-toi", "who": "narrateur", "text": "Dans deux minutes, c'est toi qui décides s'il va en prison.", "gap": 0.35 },
+    { "id": "04-maire", "who": "narrateur", "text": "Marc Delmas, maire depuis dix-huit ans.", "gap": 0.5 },
+    { "id": "05-maternite", "who": "narrateur", "text": "L'État veut fermer la maternité de sa ville : la prochaine est à soixante-dix kilomètres." },
+    { "id": "06-factures", "who": "narrateur", "text": "Alors pendant six ans, il fait passer de l'argent public dans de fausses factures." },
+    { "id": "07-peine", "who": "narrateur", "text": "Accusation : détournement de fonds publics. Peine encourue : dix ans de prison.", "gap": 0.3 },
+    { "id": "08-ouverte", "who": "juge", "text": "L'audience est ouverte. Monsieur le procureur.", "gap": 0.6 },
+    { "id": "09-roi", "who": "procureur", "text": "Quarante-sept fausses factures. Six ans de mensonges au conseil municipal, aux contrôleurs, aux électeurs. Il n'a pas sauvé une maternité. Il s'est placé au-dessus de la loi. Quand un élu décide seul où va votre argent, ce n'est plus un maire. C'est un roi." },
+    { "id": "10-bebes", "who": "avocate", "text": "Trois cent douze bébés sont nés dans cette maternité depuis. Trois d'entre eux ne seraient pas nés vivants après une heure de route. Allez demander à leurs mères si c'était du vol.", "gap": 0.4 },
+    { "id": "11-campagne", "who": "procureur", "text": "Parlons plutôt de ce que madame l'avocate oublie. Sur ces trois millions, trois cent mille euros ne sont jamais arrivés à l'hôpital. Ils ont payé sa campagne de réélection. Le sauveur de la maternité finançait aussi ses affiches.", "gap": 0.4 },
+    { "id": "12-salaire", "who": "avocate", "text": "Ses affiches… Pendant six ans, cet homme a reversé tout son salaire de maire à l'hôpital. Trois cent quatre-vingt mille euros, de sa poche. Faites le calcul, monsieur le procureur : dans cette histoire, le seul qui a perdu de l'argent, c'est lui.", "gap": 0.4 },
+    { "id": "13-demain", "who": "procureur", "text": "Faire le bien avec l'argent des autres, c'est toujours prendre l'argent des autres. Aujourd'hui une maternité. Demain, qui décidera de ce qui mérite d'être sauvé ?", "gap": 0.4 },
+    { "id": "14-dehors", "who": "avocate", "text": "La loi existe pour protéger les citoyens. Regardez dehors : ce sont eux qui le défendent.", "gap": 0.4 },
+    { "id": "15-voleur", "who": "procureur", "text": "Un voleur généreux reste un voleur.", "gap": 0.5 },
+    { "id": "16-etat", "who": "avocate", "text": "Et un État qui ferme les maternités n'a pas de leçon de morale à donner.", "gap": 0.35 },
+    { "id": "17-clos", "who": "juge", "text": "Les débats sont clos.", "gap": 0.9 },
+    { "id": "18-jury", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, à sa place, tu aurais laissé fermer la maternité ?", "gap": 1.2 }
   ]
 }

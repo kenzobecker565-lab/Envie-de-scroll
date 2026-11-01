@@ -25,7 +25,8 @@
     "pr:audio": "node render.mjs --ad=proces --audio",
     "pr:stills": "node render.mjs --ad=proces --stills=1.8,4.6,7.6,10.5,14.5,19.5,24,33,50,60,72,93.5,101,112",
     "pr:marque": "node proces/marque.mjs",
-    "pr:marque-video": "node proces/marque.mjs --video"
+    "pr:marque-video": "node proces/marque.mjs --video",
+    "pr:court": "node proces/court.mjs"
   },
   "devDependencies": {
     "playwright": "1.56.1",

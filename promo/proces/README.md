@@ -2,6 +2,8 @@
 
 ▶️ **[Voir la vidéo](proces.mp4)** (MP4, 1080 × 1920, 30 images/s, 2 min, avec voix, musique et bruitages)
 
+⚡ **[Version courte (1 min)](proces-court.mp4)**, pour TikTok et Instagram : les passages les plus forts, montés à partir de la vidéo complète (`npm run pr:court`, voir `court.mjs`).
+
 Une vidéo verticale (Reels / TikTok / Shorts) qui met en scène un procès, puis laisse le public trancher en commentaire : coupable ou non coupable ? Le verdict n'est jamais donné.
 
 **L'affaire est inventée.** Marc Delmas, maire depuis dix-huit ans, a détourné trois millions d'euros d'argent public, avec de fausses factures, pour garder ouverte la maternité de sa ville. Le cadre juridique est réel : en France, le détournement de fonds publics par un élu est puni de dix ans de prison (article 432-15 du Code pénal). Le dilemme est construit pour diviser : voler pour une bonne cause, est-ce que ça reste voler ? Chaque argument retourne le précédent, pour que le spectateur change d'avis en cours de route.
@@ -47,6 +49,10 @@ npm run pr:render        # → build/proces/proces.mp4 (environ une heure)
 | --- | --- |
 | `npm run pr:marque` | Photo de profil (`marque/photo-de-profil.png`) et calques PNG |
 | `npm run pr:marque-video` | Incruste les calques : `build/proces/proces.mp4` → `build/proces/proces-marque.mp4` |
+
+## La version courte (1 min)
+
+`court.mjs` monte une version d'environ 1 minute à partir de la vidéo complète, sans nouvelle voix ni nouveau rendu 3D. Il garde les passages les plus forts (l'accroche, la maternité, les fausses factures, la peine, « c'est un roi », les 312 bébés, les 300 000 € de campagne, les 380 000 € de sa poche, les deux phrases-chocs, le vote) et les enchaîne avec un flash blanc et un fondu sonore. Les bornes sont calées sur les mots de `timeline.json` (tableau `SEGMENTS`). « Dans deux minutes… » est retiré.
 
 ## Modifier la vidéo
 

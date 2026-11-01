@@ -1,9 +1,11 @@
 /**
  * La marque « Affaire Classée ? » (@affaireclassee0).
  *
- *   node proces/marque.mjs            → proces/marque/ : photo de profil + calques PNG
- *   node proces/marque.mjs --video    → incruste le bandeau et la signature dans
- *                                       build/proces/proces.mp4 → build/proces/proces-marque.mp4
+ *   node proces/marque.mjs                       → proces/marque/ : photo de profil + calques PNG
+ *   node proces/marque.mjs --video               → affaire n°1 : build/proces/proces.mp4
+ *                                                  → build/proces/proces-marque.mp4
+ *   node proces/marque.mjs --video=affaire-02    → n'importe quelle affaire : build/<dossier>/<dossier>.mp4
+ *                                                  → build/<dossier>/<dossier>-marque.mp4
  *
  * Les images viennent de marque.html (photographiées par Chromium, fond
  * transparent pour les calques). L'incrustation se fait avec ffmpeg, sans
@@ -17,7 +19,6 @@ import http from 'node:http'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
-import { makeCues } from './cues.js'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(here, '..', '..')
@@ -51,11 +52,14 @@ async function images() {
   server.close()
 }
 
-function video() {
-  const C = makeCues(JSON.parse(fs.readFileSync(path.join(here, 'timeline.json'), 'utf8')))
+/** Incruste les calques dans la vidéo d'une affaire (dossier promo/<dir>, avec cues.js et timeline.json). */
+async function video(dir) {
+  const ep = path.join(here, '..', dir)
+  const { makeCues } = await import(path.join(ep, 'cues.js'))
+  const C = makeCues(JSON.parse(fs.readFileSync(path.join(ep, 'timeline.json'), 'utf8')))
   const vote = C.sections.find((s) => s.id === 'vote').t0 + 0.6
-  const src = path.join(here, '..', 'build', 'proces', 'proces.mp4')
-  const dst = path.join(here, '..', 'build', 'proces', 'proces-marque.mp4')
+  const src = path.join(here, '..', 'build', dir, `${dir}.mp4`)
+  const dst = path.join(here, '..', 'build', dir, `${dir}-marque.mp4`)
   // Le bandeau s'efface pendant la signature de fin (le tampon passe en grand).
   const filter =
     `[1:v]format=rgba,fade=t=out:st=${vote.toFixed(2)}:d=0.3:alpha=1[b];` +
@@ -77,5 +81,6 @@ function video() {
   console.log(dst)
 }
 
-if (process.argv.includes('--video')) video()
+const arg = process.argv.find((a) => a.startsWith('--video'))
+if (arg) await video(arg.includes('=') ? arg.split('=')[1] : 'proces')
 else await images()

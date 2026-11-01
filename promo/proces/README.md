@@ -37,6 +37,17 @@ npm run pr:render        # → build/proces/proces.mp4 (environ une heure)
 | `npm run pr:stills` | Quelques images clés dans `build/proces/stills/` |
 | `npm run pr:voice` | Redécoupe les voix et recalcule `timeline.json` (`pip install faster-whisper`) |
 
+## La marque « Affaire Classée ? » (@affaireclassee0)
+
+`marque.html` dessine la photo de profil et les deux calques de la vidéo. `marque.mjs` les photographie dans `marque/` et les incruste dans la vidéo avec ffmpeg, sans refaire le rendu 3D :
+- **le bandeau** : le petit tampon « AFFAIRE CLASSÉE ? » en haut, pendant toute la vidéo ;
+- **la signature** : le tampon en grand et le pseudo, sur l'écran de vote.
+
+| Commande | Rôle |
+| --- | --- |
+| `npm run pr:marque` | Photo de profil (`marque/photo-de-profil.png`) et calques PNG |
+| `npm run pr:marque-video` | Incruste les calques : `build/proces/proces.mp4` → `build/proces/proces-marque.mp4` |
+
 ## Modifier la vidéo
 
 - **Le texte** : `script.json` (une entrée par réplique, avec son personnage et le silence `gap` avant elle). Regénère ensuite la voix du personnage concerné (tout son texte, d'une traite) dans `media/<personnage>.mp3`, puis lance `npm run pr:voice`.

@@ -31,7 +31,15 @@
     "a2:render": "node render.mjs --ad=affaire-02",
     "a2:audio": "node render.mjs --ad=affaire-02 --audio",
     "a2:stills": "node render.mjs --ad=affaire-02 --stills=0.4,3.6,7,9.4,13.5,20.5,26.5,30.5,35.5,44",
-    "a2:marque-video": "node proces/marque.mjs --video=affaire-02"
+    "a2:marque-video": "node proces/marque.mjs --video=affaire-02",
+    "a3:voice": "cd affaire-03 && python voix.py",
+    "a3:render": "node render.mjs --ad=affaire-03",
+    "a3:audio": "node render.mjs --ad=affaire-03 --audio",
+    "a3:marque-video": "node proces/marque.mjs --video=affaire-03",
+    "a4:voice": "cd affaire-04 && python voix.py",
+    "a4:render": "node render.mjs --ad=affaire-04",
+    "a4:audio": "node render.mjs --ad=affaire-04 --audio",
+    "a4:marque-video": "node proces/marque.mjs --video=affaire-04"
   },
   "devDependencies": {
     "playwright": "1.56.1",

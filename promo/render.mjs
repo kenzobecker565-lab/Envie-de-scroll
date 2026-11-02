@@ -6,6 +6,8 @@
  *   node render.mjs --ad=micro-ondes    → build/micro-ondes/micro-ondes.mp4 (explication en 3D)
  *   node render.mjs --ad=proces         → build/proces/proces.mp4 (affaire n°1, le maire Robin des Bois)
  *   node render.mjs --ad=affaire-02     → build/affaire-02/affaire-02.mp4 (affaire n°2, la mère justicière)
+ *   node render.mjs --ad=affaire-03     → build/affaire-03/affaire-03.mp4 (affaire n°3, le boulanger)
+ *   node render.mjs --ad=affaire-04     → build/affaire-04/affaire-04.mp4 (affaire n°4, mamie cannabis)
  *   node render.mjs --stills=0.5,4.2    → <build>/stills/*.png (vérifications)
  *   node render.mjs --sheet             → <build>/planche.png (planche contact)
  *   node render.mjs --audio             → refait seulement la bande-son de la vidéo
@@ -41,6 +43,8 @@ const ADS = {
   'micro-ondes': { page: 'promo/micro-ondes/index.html', audio: './micro-ondes/audio.mjs', build: 'build/micro-ondes', out: 'micro-ondes.mp4' },
   proces: { page: 'promo/proces/index.html', audio: './proces/audio.mjs', build: 'build/proces', out: 'proces.mp4' },
   'affaire-02': { page: 'promo/affaire-02/index.html', audio: './affaire-02/audio.mjs', build: 'build/affaire-02', out: 'affaire-02.mp4' },
+  'affaire-03': { page: 'promo/affaire-03/index.html', audio: './affaire-03/audio.mjs', build: 'build/affaire-03', out: 'affaire-03.mp4' },
+  'affaire-04': { page: 'promo/affaire-04/index.html', audio: './affaire-04/audio.mjs', build: 'build/affaire-04', out: 'affaire-04.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)

@@ -39,6 +39,7 @@ def main() -> None:
     parser.add_argument("affaire", help="dossier de l'affaire (ex. affaire-03)")
     parser.add_argument("--takes", type=int, default=3)
     parser.add_argument("--only", default=None, help="ids de répliques à refaire, séparés par des virgules")
+    parser.add_argument("--first", type=int, default=0, help="numéro de la première prise (pour en ajouter de nouvelles sans refaire les anciennes)")
     args = parser.parse_args()
 
     # Les poids du modèle ont été enregistrés sur GPU : on force le chargement sur le processeur.
@@ -56,7 +57,7 @@ def main() -> None:
         if only and line["id"] not in only:
             continue
         role = ROLES[line["who"]]
-        for take in range(args.takes):
+        for take in range(args.first, args.first + args.takes):
             started = time.time()
             torch.manual_seed(1000 * take + zlib.crc32(line["id"].encode()) % 1000)
             wav = model.generate(
@@ -67,7 +68,7 @@ def main() -> None:
                 cfg_weight=role["cfg"],
             )
             torchaudio.save(str(out / f"{line['id']}-{take}.wav"), wav, model.sr, encoding="PCM_S", bits_per_sample=16)
-            print(f"{line['id']:16} prise {take + 1}/{args.takes}  {wav.shape[-1] / model.sr:4.1f} s  ({time.time() - started:.0f} s de calcul)", flush=True)
+            print(f"{line['id']:16} prise {take + 1}/{args.first + args.takes}  {wav.shape[-1] / model.sr:4.1f} s  ({time.time() - started:.0f} s de calcul)", flush=True)
 
 
 if __name__ == "__main__":

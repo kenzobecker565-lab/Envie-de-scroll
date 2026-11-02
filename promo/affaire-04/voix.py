@@ -4,9 +4,9 @@ Voix de l'affaire n°4 : un fichier par personnage → une réplique par fichier
 Les trois voix (narrateur, procureur, avocate) sont générées gratuitement avec
 Chatterbox (voir ../voix-libres) : media/<personnage>.wav.
 
-Ce script, identique à celui des affaires n°1 et n°2 :
-  1. resserre le rythme de chaque fichier (pauses de plus de 0,35 s raccourcies,
-     tempo +4 % sans changer la hauteur de la voix) ;
+Ce script, comme celui des affaires n°1 et n°2 :
+  1. resserre le rythme de chaque fichier (pauses de plus de 0,3 s raccourcies,
+     tempo +12 % sans changer la hauteur de la voix) ;
   2. le fait transcrire par Whisper et y retrouve les répliques de script.json ;
   3. découpe chaque réplique (voice/<id>.wav) ;
   4. enchaîne le dialogue et écrit timeline.json.
@@ -27,7 +27,9 @@ from narration import tighten  # noqa: E402
 from voix import align, for_asr, read, tokens, write  # noqa: E402
 
 START = 0.6  # première réplique (après l'apparition du titre)
-TAIL = 5.0  # fin : écran de vote
+TAIL = 4.5  # fin : écran de vote
+MAX_PAUSE = 0.3  # pause maximale gardée dans une réplique (secondes)
+TEMPO = 1.12  # Chatterbox parle posément : on accélère un peu, sans changer la hauteur de la voix
 DEFAULT_GAP = 0.25
 
 
@@ -56,7 +58,7 @@ def main() -> None:
     for who, voice in script["voices"].items():
         mine = [l for l in script["lines"] if l["who"] == who]
         full = HERE / "voice" / f"{who}.wav"
-        tighten(str(HERE / voice["file"]), full, 0.35, 1.04)
+        tighten(str(HERE / voice["file"]), full, MAX_PAUSE, TEMPO)
         x, sr = read(full)
         segs, _ = asr.transcribe(for_asr(full), language="fr", beam_size=5, word_timestamps=True)
         heard = [(w.word.strip(), w.start, w.end) for s in segs for w in s.words]

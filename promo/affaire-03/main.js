@@ -624,7 +624,7 @@ section('rue', ['#121a2c', '#03050a'], (root, sec) => {
   return {
     light: { hemi: 0.16, key: 0.12 },
     spot: NO_SPOT,
-    cam: (t) => camAt(t, [{ t: 0, pos: [5.5, 3.6, 14.5], look: [0.4, 2.8, -3], push: 0.55 }]),
+    cam: (t) => camAt(t, [{ t: 0, pos: [5.0, 4.6, 21.0], look: [0.6, 3.3, -3], push: 0.7 }]),
     update(t) {
       // Il se glisse vers la porte, lampe torche à la main.
       const walk = prog(t, 0.2, tIn - 0.2 + 0.8, ease.io2)
@@ -644,19 +644,19 @@ section('descente', ['#0f1830', '#03050a'], (root, sec) => {
   makeShop(root)
   const baker = makeBaker(root)
   const thief = makeBurglar(root)
-  thief.g.position.set(-1.2, 0, 0.6)
-  thief.g.rotation.y = 0.8
+  thief.g.position.set(1.2, 0, 0.4)
+  thief.g.rotation.y = 1.2
   const tPin = W('02', 'rouleau') - 0.1
   const tCotes = W('02', 'deux') - 0.1
   label('ROULEAU À PÂTISSERIE', 'pill yellow', { t0: tPin, t1: tCotes - 0.1, x: 540, y: 340, rot: -2 })
-  label('2 CÔTES CASSÉES', 'stamp', { t0: tCotes, t1: sec.t1, x: 540, y: 500, rot: -8, dur: 0.25 })
+  label('2 CÔTES CASSÉES', 'stamp', { t0: tCotes, t1: sec.t1, x: 540, y: 500, rot: -8, dur: 0.25 }).el.style.fontSize = '104px'
   return {
     light: { hemi: 0.2, key: 0.15 },
     spot: { pos: [3, 8, 3], target: [3.2, 2, -2], i: 90 },
     cam: (t) =>
       camAt(t, [
         { t: sec.t0, pos: [-1.0, 3.6, 8.5], look: [2.6, 2.6, -2.2], push: 0.4 },
-        { t: tCotes - 0.08, dur: 0.12, pos: [-0.2, 3.0, 6.0], look: [1.4, 2.0, -1.0], push: 0.1 },
+        { t: tCotes - 0.08, dur: 0.12, pos: [-0.6, 3.6, 10.0], look: [2.2, 1.9, -0.3], push: 0.1 },
       ]),
     update(t) {
       // Il descend l'escalier, le rouleau levé.
@@ -731,8 +731,8 @@ section('tribunal', ['#3a2a20', '#0e0a08'], (root, sec) => {
     fileList.push(f.g)
   }
   const shows = [
-    evidence(clock, 'avocate', W('05', 'trois') - 0.15, W('05', 'nuit') - 0.1, -1, 0.45),
-    evidence(files, 'avocate', W('07', 'condamne') - 0.2, E('07') - 0.05, -1, 0.42),
+    evidence(clock, 'avocate', W('05', 'trois') - 0.15, W('05', 'nuit') - 0.1, -1, 0.28),
+    evidence(files, 'avocate', W('07', 'condamne') - 0.2, E('07') - 0.05, -1, 0.3),
   ]
   const plan = [
     { t: sec.t0, shot: 'gavel', push: 0.06 },
@@ -753,11 +753,12 @@ section('tribunal', ['#3a2a20', '#0e0a08'], (root, sec) => {
   coups.update = (t) => {
     coups.el.innerHTML = `${Math.min(4, 1 + Math.floor((t - coups.t0) / 0.15))}<span class="unit">COUPS</span>`
   }
-  const cond = label('0', 'big white', { t0: W('07', '11') - 0.1, t1: E('07'), x: 540, y: 380, dur: 0.3 })
+  const cond = label('0', 'big white', { t0: W('07', '11') - 0.1, t1: E('07'), x: 540, y: 370, dur: 0.3 })
   cond.update = (t) => {
-    cond.el.innerHTML = `${Math.min(11, 1 + Math.floor((t - cond.t0) / 0.07))}<span class="unit">CONDAMNATIONS</span>`
+    cond.el.textContent = String(Math.min(11, 1 + Math.floor((t - cond.t0) / 0.07)))
   }
-  label('LE BOULANGER : 0', 'pill', { t0: W('07', 'boulanger') - 0.1, t1: E('07'), x: 540, y: 520, rot: 2 })
+  label('CONDAMNATIONS', 'pill red', { t0: W('07', '11') + 0.1, t1: W('07', 'boulanger') - 0.15, x: 540, y: 510, rot: -2 })
+  label('LE BOULANGER : 0', 'pill', { t0: W('07', 'boulanger') - 0.1, t1: E('07'), x: 540, y: 510, rot: 2 })
   label('On juge ce qui s’est passé cette nuit-là.', 'quote red', { t0: S('08') + 0.05, t1: E('08') + 0.15, x: 540, y: 500, dur: 0.3 })
   label('Cette nuit-là, il a protégé sa maison.', 'quote blue', { t0: S('09') + 0.05, t1: E('09') + 0.4, x: 540, y: 500, dur: 0.3 })
 

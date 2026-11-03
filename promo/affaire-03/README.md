@@ -1,4 +1,4 @@
-# Affaire Classée ? · affaire n°3 : le boulanger (≈ 45 s)
+# Affaire Classée ? · affaire n°3 : le boulanger (≈ 54 s)
 
 ▶️ **[Voir la vidéo](affaire-03.mp4)** (MP4, 1080 × 1920, 30 images/s, avec la marque @affaireclassee0)
 

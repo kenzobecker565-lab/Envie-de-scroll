@@ -1,10 +1,10 @@
-# Affaire Classée ? · affaire n°4 : mamie cannabis (≈ 45 s)
+# Affaire Classée ? · affaire n°4 : mamie cannabis (≈ 52 s)
 
 ▶️ **[Voir la vidéo](affaire-04.mp4)** (MP4, 1080 × 1920, 30 images/s, avec la marque @affaireclassee0)
 
 **L'affaire est inventée.** Une femme de 78 ans cultive douze plants de cannabis dans son jardin pour calmer les douleurs de son mari, atteint de la maladie de Parkinson. Elle en a aussi vendu à trois voisins malades, à prix coûtant.
 
-Le cadre juridique est réel : en France, la production de stupéfiants, culture comprise, est punie jusqu'à vingt ans de réclusion criminelle (article 222-35 du Code pénal). La vidéo dit bien « jusqu'à » : c'est le maximum prévu par la loi, pas la peine attendue. Il n'y a aucune indication de culture ni de préparation.
+Le cadre juridique est réel : en France, la production de stupéfiants, culture comprise, est punie jusqu'à vingt ans de réclusion criminelle (article 222-35 du Code pénal). La vidéo dit bien « jusqu'à » : c'est le maximum prévu par la loi, pas la peine attendue. La vidéo ne dit rien de la façon de cultiver ou de préparer le cannabis.
 
 ## Le déroulé
 
@@ -18,6 +18,8 @@ Le cadre juridique est réel : en France, la production de stupéfiants, culture
 ## Les voix
 
 Les trois voix sont gratuites, générées sur la machine avec Chatterbox à partir de voix de livres audio libres de droits : voir [`../voix-libres`](../voix-libres/README.md).
+
+Deux répliques étaient mal prononcées dans les trois premières prises (« Elle a à 78 ans », « 68 ans ») : elles ont été refaites avec quatre prises de plus (`generer.py affaire-04 --only 01-plants,09-tremble --first 3 --takes 4`), puis vérifiées à l'oreille de Whisper « medium », plus précis que « small ».
 
 ## Refaire la vidéo
 

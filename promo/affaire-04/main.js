@@ -574,22 +574,26 @@ const NO_SPOT = { pos: [0, 10, 6], target: [0, 1, 0], i: 0 }
 section('jardin', ['#9cc6ea', '#e9f1f8'], (root, sec) => {
   const garden = makeGarden(root)
   const mamie = makeBuddy(root, { suit: '#9c7aa6', hair: '#d9d9d9', bun: true, skin: '#EFD3AE' })
-  mamie.g.position.set(-3.4, 0, -0.8)
-  mamie.g.rotation.y = 0.9
+  mamie.g.position.set(-0.3, 0, 1.4)
+  mamie.g.rotation.y = 0.55
   mamie.g.scale.setScalar(0.9)
   const can = makeCan(mamie.armR.mid)
   can.position.set(0, -0.75, 0.15)
   const t78 = W('01', '78') - 0.1
   const tPlants = W('01', '12') - 0.15
   label('78<span class="unit">ANS</span>', 'big white', { t0: t78, t1: sec.t1, x: 540, y: 340, dur: 0.35 })
-  const count = label('0', 'pill red', { t0: tPlants, t1: sec.t1, x: 540, y: 480, rot: -2 })
+  const count = label('12 PLANTS DE CANNABIS', 'pill red', { t0: tPlants, t1: sec.t1, x: 540, y: 480, rot: -2 })
   count.update = (t) => {
     count.el.textContent = `${Math.min(12, 1 + Math.floor((t - tPlants) / 0.08))} PLANTS DE CANNABIS`
   }
   return {
     light: { hemi: 0.9, key: 1.6 },
     spot: NO_SPOT,
-    cam: (t) => camAt(t, [{ t: 0, pos: [1.0, 4.6, 12.5], look: [-0.6, 1.6, -2.0], push: 0.5 }]),
+    // Gros plan sur elle, puis on recule sur « douze plants » pour découvrir le jardin.
+    cam: (t) => camAt(t, [
+      { t: 0, pos: [1.3, 3.4, 10.4], look: [-0.2, 2.4, 1.2], push: 0.3 },
+      { t: tPlants - 0.2, pos: [0.7, 5.4, 15.0], look: [0.2, 1.3, -1.6], dur: 0.9, push: 0.35 },
+    ]),
     update(t) {
       // Les plants apparaissent un à un sur « douze plants ».
       garden.plants.forEach((p, i) => {
@@ -626,7 +630,7 @@ section('salon', ['#e8d9bf', '#b9a07e'], (root, sec) => {
   return {
     light: { hemi: 0.55, key: 0.8 },
     spot: NO_SPOT,
-    cam: (t) => camAt(t, [{ t: sec.t0, pos: [1.2, 3.2, 7.0], look: [0.2, 1.7, -0.6], push: 0.35 }]),
+    cam: (t) => camAt(t, [{ t: sec.t0, pos: [0.9, 3.4, 9.6], look: [0.1, 2.0, -0.6], push: 0.25 }]),
     update(t) {
       // Il est assis ; sa main tremble.
       const h = living.husband
@@ -642,13 +646,13 @@ section('salon', ['#e8d9bf', '#b9a07e'], (root, sec) => {
 // ------------------------------------------------ 2 · le procès
 
 /** Les preuves qui apparaissent devant l'orateur (position calculée à partir du plan). */
-function evidence(obj, shot, t0, t1, side, scale = 0.36) {
+function evidence(obj, shot, t0, t1, side, scale = 0.36, dy = 0) {
   const sh = SHOTS[shot]
   const cam = new THREE.Vector3(...sh.pos)
   const look = new THREE.Vector3(...sh.look)
   const dir = look.clone().sub(cam).normalize()
   const right = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize()
-  const at = cam.clone().addScaledVector(dir, 4.6).addScaledVector(right, 0.42 * side).add(new THREE.Vector3(0, 0.45, 0))
+  const at = cam.clone().addScaledVector(dir, 4.6).addScaledVector(right, 0.42 * side).add(new THREE.Vector3(0, 0.45 + dy, 0))
   obj.visible = false
   return { obj, t0, t1, at, scale }
 }
@@ -658,7 +662,7 @@ section('tribunal', ['#3a2a20', '#0e0a08'], (root, sec) => {
   const cash = makeCash(root)
   const plant = makePlant(root)
   const shows = [
-    evidence(plant, 'procureur', W('04', 'cultiver') - 0.2, E('04') - 0.05, 1, 0.5),
+    evidence(plant, 'procureur', W('04', 'cultiver') - 0.2, E('04') - 0.05, 1, 0.42, -0.75),
     evidence(cup.g, 'avocate', W('05', 'tisanes') - 0.2, E('05') - 0.05, -1, 0.8),
     evidence(cash, 'procureur', W('06', '2') - 0.2, E('06') - 0.05, 1, 0.7),
   ]
@@ -682,8 +686,8 @@ section('tribunal', ['#3a2a20', '#0e0a08'], (root, sec) => {
   label('À PRIX COÛTANT', 'pill yellow', { t0: W('07', 'prix') - 0.1, t1: E('07'), x: 540, y: 380, rot: -2 })
   label('0 € DE BÉNÉFICE', 'pill', { t0: W('07', 'benefice') - 0.15, t1: E('07'), x: 540, y: 490, rot: 2 })
   label('UNE LISTE D’ATTENTE', 'pill blue', { t0: W('07', 'liste') - 0.1, t1: E('07'), x: 540, y: 600, rot: -2 })
-  label('Chaque dealer viendra dire qu’il soigne ses clients.', 'quote red', { t0: S('08') + 0.05, t1: E('08') + 0.15, x: 540, y: 490, dur: 0.3 }).el.style.fontSize = '80px'
-  label('Aucun dealer n’a 78 ans et un mari qui tremble.', 'quote blue', { t0: S('09') + 0.05, t1: E('09') + 0.4, x: 540, y: 490, dur: 0.3 }).el.style.fontSize = '80px'
+  label('Chaque dealer viendra dire qu’il soigne ses clients.', 'quote red', { t0: S('08') + 0.05, t1: E('08') + 0.15, x: 540, y: 385, dur: 0.3 }).el.style.fontSize = '72px'
+  label('Aucun dealer n’a 78 ans et un mari qui tremble.', 'quote blue', { t0: S('09') + 0.05, t1: E('09') + 0.4, x: 540, y: 385, dur: 0.3 }).el.style.fontSize = '72px'
 
   return {
     sets: [COURT],

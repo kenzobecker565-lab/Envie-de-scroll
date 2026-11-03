@@ -1,13 +1,13 @@
 {
  "_doc": "Généré par voix.py : ne pas modifier à la main.",
- "duration": 52.32,
+ "duration": 51.77,
  "lines": [
   {
    "id": "01-plants",
    "who": "narrateur",
    "text": "Elle a 78 ans. Les gendarmes ont trouvé 12 plants de cannabis dans son jardin.",
    "start": 0.6,
-   "dur": 4.42,
+   "dur": 4.28,
    "words": [
     {
      "w": "Elle",
@@ -15,59 +15,59 @@
     },
     {
      "w": "a",
-     "t": 0.74
+     "t": 0.72
     },
     {
      "w": "78",
-     "t": 0.9
+     "t": 0.8
     },
     {
      "w": "ans.",
-     "t": 1.36
+     "t": 1.24
     },
     {
      "w": "Les",
-     "t": 2.12
+     "t": 1.98
     },
     {
      "w": "gendarmes",
-     "t": 2.24
+     "t": 2.08
     },
     {
      "w": "ont",
-     "t": 2.66
+     "t": 2.46
     },
     {
      "w": "trouvé",
-     "t": 2.72
+     "t": 2.52
     },
     {
      "w": "12",
-     "t": 2.96
+     "t": 2.72
     },
     {
      "w": "plants",
-     "t": 3.23
+     "t": 3.03
     },
     {
      "w": "de",
-     "t": 3.5
+     "t": 3.34
     },
     {
      "w": "cannabis",
-     "t": 3.64
+     "t": 3.48
     },
     {
      "w": "dans",
-     "t": 4.02
+     "t": 3.86
     },
     {
      "w": "son",
-     "t": 4.32
+     "t": 4.2
     },
     {
      "w": "jardin.",
-     "t": 4.5
+     "t": 4.36
     }
    ]
   },
@@ -75,36 +75,36 @@
    "id": "02-vingt",
    "who": "narrateur",
    "text": "Elle risque jusqu'à 20 ans de prison.",
-   "start": 5.27,
+   "start": 5.13,
    "dur": 1.76,
    "words": [
     {
      "w": "Elle",
-     "t": 5.3
+     "t": 5.17
     },
     {
      "w": "risque",
-     "t": 5.4
+     "t": 5.27
     },
     {
      "w": "jusqu'à",
-     "t": 5.75
+     "t": 5.62
     },
     {
      "w": "20",
-     "t": 6.1
+     "t": 5.97
     },
     {
      "w": "ans",
-     "t": 6.28
+     "t": 6.15
     },
     {
      "w": "de",
-     "t": 6.44
+     "t": 6.31
     },
     {
      "w": "prison.",
-     "t": 6.56
+     "t": 6.43
     }
    ]
   },
@@ -112,68 +112,68 @@
    "id": "03-mari",
    "who": "narrateur",
    "text": "Son mari a la maladie de Parkinson. Elle dit que c'était pour calmer ses douleurs.",
-   "start": 7.33,
-   "dur": 3.55,
+   "start": 7.19,
+   "dur": 3.56,
    "words": [
     {
      "w": "Son",
-     "t": 7.41
+     "t": 7.26
     },
     {
      "w": "mari",
-     "t": 7.49
+     "t": 7.36
     },
     {
      "w": "a",
-     "t": 7.75
+     "t": 7.6
     },
     {
      "w": "la",
-     "t": 7.87
+     "t": 7.74
     },
     {
      "w": "maladie",
-     "t": 7.95
+     "t": 7.82
     },
     {
      "w": "de",
-     "t": 8.27
+     "t": 8.14
     },
     {
      "w": "Parkinson.",
-     "t": 8.35
+     "t": 8.22
     },
     {
      "w": "Elle",
-     "t": 9.15
+     "t": 9.02
     },
     {
      "w": "dit",
-     "t": 9.25
+     "t": 9.12
     },
     {
      "w": "que",
-     "t": 9.39
+     "t": 9.26
     },
     {
      "w": "c'était",
-     "t": 9.56
+     "t": 9.42
     },
     {
      "w": "pour",
-     "t": 9.73
+     "t": 9.58
     },
     {
      "w": "calmer",
-     "t": 9.91
+     "t": 9.76
     },
     {
      "w": "ses",
-     "t": 10.23
+     "t": 10.08
     },
     {
      "w": "douleurs.",
-     "t": 10.37
+     "t": 10.24
     }
    ]
   },
@@ -181,108 +181,108 @@
    "id": "04-meme",
    "who": "procureur",
    "text": "La loi est la même pour tout le monde. À vingt ans ou à soixante-dix-huit ans, cultiver de la drogue, c'est cultiver de la drogue.",
-   "start": 11.58,
+   "start": 11.45,
    "dur": 7.74,
    "words": [
     {
      "w": "La",
-     "t": 11.58
+     "t": 11.45
     },
     {
      "w": "loi",
-     "t": 11.76
+     "t": 11.63
     },
     {
      "w": "est",
-     "t": 12.02
+     "t": 11.89
     },
     {
      "w": "la",
-     "t": 12.3
+     "t": 12.17
     },
     {
      "w": "même",
-     "t": 12.42
+     "t": 12.29
     },
     {
      "w": "pour",
-     "t": 12.68
+     "t": 12.55
     },
     {
      "w": "tout",
-     "t": 13.02
+     "t": 12.89
     },
     {
      "w": "le",
-     "t": 13.26
+     "t": 13.13
     },
     {
      "w": "monde.",
-     "t": 13.38
+     "t": 13.25
     },
     {
      "w": "À",
-     "t": 13.94
+     "t": 13.81
     },
     {
      "w": "vingt",
-     "t": 14.18
+     "t": 14.05
     },
     {
      "w": "ans",
-     "t": 14.42
+     "t": 14.29
     },
     {
      "w": "ou",
-     "t": 14.64
+     "t": 14.51
     },
     {
      "w": "à",
-     "t": 14.8
+     "t": 14.67
     },
     {
      "w": "soixante-dix-huit",
-     "t": 15.16
+     "t": 15.02
     },
     {
      "w": "ans,",
-     "t": 15.52
+     "t": 15.37
     },
     {
      "w": "cultiver",
-     "t": 16.22
+     "t": 16.09
     },
     {
      "w": "de",
-     "t": 16.66
+     "t": 16.53
     },
     {
      "w": "la",
-     "t": 16.82
+     "t": 16.69
     },
     {
      "w": "drogue,",
-     "t": 16.96
+     "t": 16.83
     },
     {
      "w": "c'est",
-     "t": 17.38
+     "t": 17.25
     },
     {
      "w": "cultiver",
-     "t": 17.8
+     "t": 17.67
     },
     {
      "w": "de",
-     "t": 18.44
+     "t": 18.31
     },
     {
      "w": "la",
-     "t": 18.62
+     "t": 18.49
     },
     {
      "w": "drogue.",
-     "t": 18.74
+     "t": 18.61
     }
    ]
   },
@@ -290,80 +290,80 @@
    "id": "05-sommeil",
    "who": "avocate",
    "text": "Son mari ne dormait plus. Les médicaments ne suffisaient plus. Avec ses tisanes, il a retrouvé le sommeil.",
-   "start": 19.62,
-   "dur": 5.35,
+   "start": 19.49,
+   "dur": 5.38,
    "words": [
     {
      "w": "Son",
-     "t": 19.62
+     "t": 19.49
     },
     {
      "w": "mari",
-     "t": 19.8
+     "t": 19.67
     },
     {
      "w": "ne",
-     "t": 20.04
+     "t": 19.91
     },
     {
      "w": "dormait",
-     "t": 20.2
+     "t": 20.07
     },
     {
      "w": "plus.",
-     "t": 20.5
+     "t": 20.37
     },
     {
      "w": "Les",
-     "t": 21.22
+     "t": 21.09
     },
     {
      "w": "médicaments",
-     "t": 21.3
+     "t": 21.17
     },
     {
      "w": "ne",
-     "t": 21.74
+     "t": 21.61
     },
     {
      "w": "suffisaient",
-     "t": 22.03
+     "t": 21.79
     },
     {
      "w": "plus.",
-     "t": 22.32
+     "t": 22.31
     },
     {
      "w": "Avec",
-     "t": 22.94
+     "t": 22.81
     },
     {
      "w": "ses",
-     "t": 23.2
+     "t": 23.07
     },
     {
      "w": "tisanes,",
-     "t": 23.46
+     "t": 23.33
     },
     {
      "w": "il",
-     "t": 23.72
+     "t": 23.59
     },
     {
      "w": "a",
-     "t": 23.74
+     "t": 23.61
     },
     {
      "w": "retrouvé",
-     "t": 23.8
+     "t": 23.69
     },
     {
      "w": "le",
-     "t": 24.14
+     "t": 24.03
     },
     {
      "w": "sommeil.",
-     "t": 24.26
+     "t": 24.13
     }
    ]
   },
@@ -371,60 +371,60 @@
    "id": "06-vendu",
    "who": "procureur",
    "text": "Des tisanes qu'elle a aussi vendues. À trois voisins. Pour 2 000 euros.",
-   "start": 25.27,
-   "dur": 4.06,
+   "start": 25.17,
+   "dur": 4.05,
    "words": [
     {
      "w": "Des",
-     "t": 25.33
+     "t": 25.23
     },
     {
      "w": "tisanes",
-     "t": 25.53
+     "t": 25.43
     },
     {
      "w": "qu'elle",
-     "t": 25.91
+     "t": 25.81
     },
     {
      "w": "a",
-     "t": 26.29
+     "t": 26.19
     },
     {
      "w": "aussi",
-     "t": 26.41
+     "t": 26.31
     },
     {
      "w": "vendues.",
-     "t": 26.63
+     "t": 26.53
     },
     {
      "w": "À",
-     "t": 27.13
+     "t": 27.03
     },
     {
      "w": "trois",
-     "t": 27.41
+     "t": 27.32
     },
     {
      "w": "voisins.",
-     "t": 27.69
+     "t": 27.61
     },
     {
      "w": "Pour",
-     "t": 28.19
+     "t": 28.07
     },
     {
      "w": "2",
-     "t": 28.423
+     "t": 28.303
     },
     {
      "w": "000",
-     "t": 28.657
+     "t": 28.537
     },
     {
      "w": "euros.",
-     "t": 28.89
+     "t": 28.77
     }
    ]
   },
@@ -432,80 +432,80 @@
    "id": "07-attente",
    "who": "avocate",
    "text": "Trois voisins malades, à prix coûtant. Elle n'a pas fait de bénéfice. Elle a fait une liste d'attente.",
-   "start": 29.63,
-   "dur": 5.01,
+   "start": 29.52,
+   "dur": 4.99,
    "words": [
     {
      "w": "Trois",
-     "t": 29.89
+     "t": 29.82
     },
     {
      "w": "voisins",
-     "t": 30.17
+     "t": 30.08
     },
     {
      "w": "malades,",
-     "t": 30.49
+     "t": 30.36
     },
     {
      "w": "à",
-     "t": 30.82
+     "t": 30.69
     },
     {
      "w": "prix",
-     "t": 31.15
+     "t": 31.02
     },
     {
      "w": "coûtant.",
-     "t": 31.48
+     "t": 31.35
     },
     {
      "w": "Elle",
-     "t": 31.81
+     "t": 31.68
     },
     {
      "w": "n'a",
-     "t": 31.93
+     "t": 31.8
     },
     {
      "w": "pas",
-     "t": 32.05
+     "t": 31.92
     },
     {
      "w": "fait",
-     "t": 32.17
+     "t": 32.04
     },
     {
      "w": "de",
-     "t": 32.35
+     "t": 32.24
     },
     {
      "w": "bénéfice.",
-     "t": 32.81
+     "t": 32.69
     },
     {
      "w": "Elle",
-     "t": 33.27
+     "t": 33.14
     },
     {
      "w": "a",
-     "t": 33.35
+     "t": 33.22
     },
     {
      "w": "fait",
-     "t": 33.43
+     "t": 33.32
     },
     {
      "w": "une",
-     "t": 33.57
+     "t": 33.46
     },
     {
      "w": "liste",
-     "t": 33.69
+     "t": 33.56
     },
     {
      "w": "d'attente.",
-     "t": 34.36
+     "t": 34.24
     }
    ]
   },
@@ -513,52 +513,52 @@
    "id": "08-dealer",
    "who": "procureur",
    "text": "Si on l'acquitte, chaque dealer viendra dire qu'il soigne ses clients.",
-   "start": 34.99,
-   "dur": 4.88,
+   "start": 34.86,
+   "dur": 4.13,
    "words": [
     {
      "w": "Si",
-     "t": 35.08
+     "t": 34.93
     },
     {
      "w": "on",
-     "t": 35.3
+     "t": 35.07
     },
     {
      "w": "l'acquitte,",
-     "t": 35.84
+     "t": 35.57
     },
     {
      "w": "chaque",
-     "t": 36.38
+     "t": 36.07
     },
     {
      "w": "dealer",
-     "t": 36.6
+     "t": 36.27
     },
     {
      "w": "viendra",
-     "t": 37.0
+     "t": 36.55
     },
     {
      "w": "dire",
-     "t": 38.08
+     "t": 37.13
     },
     {
      "w": "qu'il",
-     "t": 38.43
+     "t": 37.48
     },
     {
      "w": "soigne",
-     "t": 38.78
+     "t": 37.83
     },
     {
      "w": "ses",
-     "t": 39.2
+     "t": 38.25
     },
     {
      "w": "clients.",
-     "t": 39.36
+     "t": 38.45
     }
    ]
   },
@@ -566,48 +566,48 @@
    "id": "09-tremble",
    "who": "avocate",
    "text": "Aucun dealer n'a 78 ans et un mari qui tremble.",
-   "start": 40.12,
-   "dur": 3.26,
+   "start": 39.24,
+   "dur": 3.59,
    "words": [
     {
      "w": "Aucun",
-     "t": 40.4
+     "t": 39.53
     },
     {
      "w": "dealer",
-     "t": 40.72
+     "t": 39.93
     },
     {
      "w": "n'a",
-     "t": 41.013
+     "t": 40.33
     },
     {
      "w": "78",
-     "t": 41.307
+     "t": 40.73
     },
     {
      "w": "ans",
-     "t": 41.6
+     "t": 41.13
     },
     {
      "w": "et",
-     "t": 42.02
+     "t": 41.65
     },
     {
      "w": "un",
-     "t": 42.2
+     "t": 41.67
     },
     {
      "w": "mari",
-     "t": 42.3
+     "t": 41.81
     },
     {
      "w": "qui",
-     "t": 42.54
+     "t": 42.03
     },
     {
      "w": "tremble.",
-     "t": 42.8
+     "t": 42.23
     }
    ]
   },
@@ -615,60 +615,60 @@
    "id": "10-jury",
    "who": "narrateur",
    "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu l'aurais dénoncée ?",
-   "start": 44.18,
+   "start": 43.63,
    "dur": 3.64,
    "words": [
     {
      "w": "Tu",
-     "t": 44.22
+     "t": 43.68
     },
     {
      "w": "es",
-     "t": 44.34
+     "t": 43.8
     },
     {
      "w": "le",
-     "t": 44.46
+     "t": 43.9
     },
     {
      "w": "juré.",
-     "t": 44.56
+     "t": 44.02
     },
     {
      "w": "Coupable…",
-     "t": 45.1
+     "t": 44.54
     },
     {
      "w": "ou",
-     "t": 45.52
+     "t": 44.98
     },
     {
      "w": "non",
-     "t": 45.7
+     "t": 45.14
     },
     {
      "w": "coupable ?",
-     "t": 45.84
+     "t": 45.3
     },
     {
      "w": "Et",
-     "t": 46.56
+     "t": 46.02
     },
     {
      "w": "toi,",
-     "t": 46.62
+     "t": 46.1
     },
     {
      "w": "tu",
-     "t": 46.78
+     "t": 46.24
     },
     {
      "w": "l'aurais",
-     "t": 47.348
+     "t": 46.806
     },
     {
      "w": "dénoncée ?",
-     "t": 47.82
+     "t": 47.27
     }
    ]
   }

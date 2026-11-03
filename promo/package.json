@@ -39,7 +39,11 @@
     "a4:voice": "cd affaire-04 && python voix.py",
     "a4:render": "node render.mjs --ad=affaire-04",
     "a4:audio": "node render.mjs --ad=affaire-04 --audio",
-    "a4:marque-video": "node proces/marque.mjs --video=affaire-04"
+    "a4:marque-video": "node proces/marque.mjs --video=affaire-04",
+    "a5:voice": "cd affaire-05 && python voix.py",
+    "a5:render": "node render.mjs --ad=affaire-05",
+    "a5:audio": "node render.mjs --ad=affaire-05 --audio",
+    "a5:marque-video": "node proces/marque.mjs --video=affaire-05"
   },
   "devDependencies": {
     "playwright": "1.56.1",

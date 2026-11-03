@@ -57,7 +57,7 @@ async function video(dir) {
   const ep = path.join(here, '..', dir)
   const { makeCues } = await import(path.join(ep, 'cues.js'))
   const C = makeCues(JSON.parse(fs.readFileSync(path.join(ep, 'timeline.json'), 'utf8')))
-  const vote = C.sections.find((s) => s.id === 'vote').t0 + 0.6
+  const vote = C.signature ?? C.sections.find((s) => s.id === 'vote').t0 + 0.6
   const src = path.join(here, '..', 'build', dir, `${dir}.mp4`)
   const dst = path.join(here, '..', 'build', dir, `${dir}-marque.mp4`)
   // Le bandeau s'efface pendant la signature de fin (le tampon passe en grand).

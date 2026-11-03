@@ -1,0 +1,161 @@
+{
+ "_doc": "Affaire n°5 : l'adresse (affaire fictive, scénario proposé par le créateur du compte). Texte des sous-titres, une entrée par réplique, dans l'ordre. « who » : narrateur, procureur, avocate (voir media/ et le README). « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-adresse",
+   "who": "narrateur",
+   "text": "Sarah a donné une adresse à un ami."
+  },
+  {
+   "id": "02-soir",
+   "who": "narrateur",
+   "text": "Le soir même, il y a agressé une femme.",
+   "gap": 0.2
+  },
+  {
+   "id": "03-sarah",
+   "who": "narrateur",
+   "text": "Aujourd'hui, c'est Sarah qui doit s'expliquer.",
+   "gap": 0.25
+  },
+  {
+   "id": "04-loyer",
+   "who": "narrateur",
+   "text": "Cet ami possédait un appartement. Pendant 11 mois, sa locataire n'avait plus payé son loyer.",
+   "say": "Cet ami possédait un appartement. Pendant onze mois, sa locataire n'avait plus payé son loyer.",
+   "gap": 0.5
+  },
+  {
+   "id": "05-voiture",
+   "who": "narrateur",
+   "text": "Étranglé par son crédit, il avait fini par dormir dans sa voiture.",
+   "gap": 0.25
+  },
+  {
+   "id": "06-partie",
+   "who": "narrateur",
+   "text": "Puis elle était partie, sans rembourser sa dette ni lui laisser d'adresse.",
+   "gap": 0.25
+  },
+  {
+   "id": "07-ecole",
+   "who": "procureur",
+   "text": "Sarah était aussi l'enseignante du fils de cette femme.",
+   "gap": 0.7
+  },
+  {
+   "id": "08-joindre",
+   "who": "procureur",
+   "text": "La mère lui avait communiqué leur nouvelle adresse pour que l'école puisse les joindre.",
+   "gap": 0.2
+  },
+  {
+   "id": "09-autorise",
+   "who": "procureur",
+   "text": "Elle ne l'avait pas autorisée à la transmettre à son ancien propriétaire.",
+   "gap": 0.2
+  },
+  {
+   "id": "10-ami",
+   "who": "avocate",
+   "text": "Cet homme était son ami depuis 15 ans.",
+   "say": "Cet homme était son ami depuis quinze ans.",
+   "gap": 0.3
+  },
+  {
+   "id": "11-economies",
+   "who": "avocate",
+   "text": "Elle l'avait vu perdre ses économies, puis dormir dans sa voiture. Elle voulait l'aider à récupérer ce qu'on lui devait.",
+   "gap": 0.2
+  },
+  {
+   "id": "12-message",
+   "who": "procureur",
+   "text": "Avant de lui donner l'adresse, elle avait reçu ce message :",
+   "say": "Avant de lui donner l'adresse, elle avait reçu ce message.",
+   "gap": 0.3
+  },
+  {
+   "id": "13-regler",
+   "who": "procureur",
+   "text": "«Puisque personne ne fait rien, je vais régler ça moi-même.» Elle connaissait sa colère.",
+   "say": "Puisque personne ne fait rien, je vais régler ça moi-même. Elle connaissait sa colère.",
+   "gap": 0.2
+  },
+  {
+   "id": "14-jamais",
+   "who": "avocate",
+   "text": "Elle connaissait aussi son ami. En 15 ans, elle ne l'avait jamais vu violent. Elle pensait qu'il irait réclamer son argent.",
+   "say": "Elle connaissait aussi son ami. En quinze ans, elle ne l'avait jamais vu violent. Elle pensait qu'il irait réclamer son argent.",
+   "gap": 0.3
+  },
+  {
+   "id": "15-proposer",
+   "who": "procureur",
+   "text": "Elle pouvait proposer de transmettre un message. Elle a préféré révéler le domicile d'une mère et de son enfant.",
+   "gap": 0.3
+  },
+  {
+   "id": "16-hopital",
+   "who": "procureur",
+   "text": "Cette femme a fini à l'hôpital.",
+   "gap": 0.25
+  },
+  {
+   "id": "17-frapper",
+   "who": "avocate",
+   "text": "Parce que cet homme a choisi de la frapper. Sarah voulait aider un ami, pas préparer une agression.",
+   "gap": 0.3
+  },
+  {
+   "id": "18-prevoir",
+   "who": "avocate",
+   "text": "Devait-elle prévoir un geste qu'il n'avait jamais eu auparavant ?",
+   "gap": 0.2
+  },
+  {
+   "id": "19-oublier",
+   "who": "procureur",
+   "text": "Son amitié lui a fait oublier la confiance qu'une mère avait placée en elle.",
+   "gap": 0.4
+  },
+  {
+   "id": "20-croire",
+   "who": "avocate",
+   "text": "Ou cette amitié lui a fait croire qu'elle pouvait lui faire confiance, elle aussi.",
+   "gap": 0.3
+  },
+  {
+   "id": "21-yeux",
+   "who": "narrateur",
+   "text": "Sarah a-t-elle fermé les yeux sur un danger évident, ou a-t-elle été trahie par son ami ?",
+   "gap": 0.8
+  },
+  {
+   "id": "22-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Quel est ton verdict ?",
+   "gap": 0.3
+  },
+  {
+   "id": "23-abonne",
+   "who": "narrateur",
+   "text": "Abonne-toi pour découvrir le verdict dans la prochaine vidéo.",
+   "gap": 0.35
+  }
+ ]
+}

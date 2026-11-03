@@ -11,6 +11,8 @@
  *   node render.mjs --stills=0.5,4.2    → <build>/stills/*.png (vérifications)
  *   node render.mjs --sheet             → <build>/planche.png (planche contact)
  *   node render.mjs --audio             → refait seulement la bande-son de la vidéo
+ *   node render.mjs --from=4.9 --to=7.4 --out=x.mp4 → un seul passage, sans le son
+ *                                         (pour remplacer quelques secondes sans tout refaire)
  *
  * Il faut Chromium via Playwright (`npx playwright install chromium`) et
  * ffmpeg (dans le PATH, ou désigné par la variable d'environnement FFMPEG).
@@ -199,18 +201,21 @@ async function video() {
   const workers = Number(args.workers ?? 3)
   const { shots, close, duration, fps: pageFps } = await openPages(workers)
   const fps = Number(args.fps ?? pageFps)
-  const frames = Math.round(duration * fps)
+  // --from / --to : ne rend qu'un passage (sans le son), à recoller ensuite dans la vidéo.
+  const first = args.from ? Math.round(Number(args.from) * fps) : 0
+  const partial = Boolean(args.from || args.to)
+  const frames = (args.to ? Math.round(Number(args.to) * fps) : Math.round(duration * fps)) - first
   const started = Date.now()
   await run(
     FFMPEG,
     [
       '-y', '-hide_banner', '-loglevel', 'error',
       '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-',
-      '-i', wav,
+      ...(partial ? [] : ['-i', wav]),
       '-vf', 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p',
       '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-profile:v', 'high', '-tune', 'animation',
       '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
-      ...audioArgs,
+      ...(partial ? ['-an'] : audioArgs),
       '-movflags', '+faststart', '-shortest', out,
     ],
     {
@@ -235,7 +240,7 @@ async function video() {
             const i = next++
             if (i >= frames) return
             while (i - written > workers * 4) await new Promise((r) => setTimeout(r, 10))
-            ready.set(i, await shot(i / fps))
+            ready.set(i, await shot((first + i) / fps))
             pump()
           }
         }

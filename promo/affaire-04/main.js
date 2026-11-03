@@ -608,7 +608,7 @@ section('jardin', ['#9cc6ea', '#e9f1f8'], (root, sec) => {
 })
 
 section('vingt', ['#2a1d16', '#050403'], (root, sec) => {
-  label('20 ANS DE PRISON', 'stamp', { t0: W('02', '20') - 0.1, t1: sec.t1, x: 540, y: 460, rot: -8, dur: 0.3 })
+  label('20 ANS<br>DE PRISON', 'stamp', { t0: W('02', '20') - 0.1, t1: sec.t1, x: 540, y: 520, rot: -8, dur: 0.3 }).el.style.cssText += 'font-size:120px;line-height:1;text-align:center'
   label('jusqu’à', 'pill small', { t0: W('02', 'jusqua') - 0.1, t1: sec.t1, x: 540, y: 330 })
   return {
     sets: [COURT],

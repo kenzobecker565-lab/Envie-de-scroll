@@ -51,6 +51,10 @@ const ADS = {
   'affaire-05': { page: 'promo/affaire-05/index.html', audio: './affaire-05/audio.mjs', build: 'build/affaire-05', out: 'affaire-05.mp4' },
   'demo-v2': { page: 'promo/demo-v2/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v2', out: 'demo-v2.mp4' },
   'demo-v3': { page: 'promo/demo-v3/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v3', out: 'demo-v3.mp4' },
+  'proto-flat': { page: 'promo/prototypes/flat/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-flat', out: 'proto-flat.mp4' },
+  'proto-bd': { page: 'promo/prototypes/bd/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-bd', out: 'proto-bd.mp4' },
+  'proto-noir': { page: 'promo/prototypes/noir/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-noir', out: 'proto-noir.mp4' },
+  'proto-cartoon': { page: 'promo/prototypes/cartoon/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-cartoon', out: 'proto-cartoon.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)

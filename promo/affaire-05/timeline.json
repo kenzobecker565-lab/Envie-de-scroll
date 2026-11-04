@@ -1,13 +1,13 @@
 {
  "_doc": "Généré par voix.py : ne pas modifier à la main.",
- "duration": 101.67,
+ "duration": 94.63,
  "lines": [
   {
    "id": "01-adresse",
    "who": "narrateur",
    "text": "Sarah a donné une adresse à un ami.",
    "start": 0.6,
-   "dur": 1.97,
+   "dur": 2.16,
    "words": [
     {
      "w": "Sarah",
@@ -15,31 +15,31 @@
     },
     {
      "w": "a",
-     "t": 0.88
+     "t": 0.9
     },
     {
      "w": "donné",
-     "t": 1.12
+     "t": 1.26
     },
     {
      "w": "une",
-     "t": 1.34
+     "t": 1.5
     },
     {
      "w": "adresse",
-     "t": 1.6
+     "t": 1.7
     },
     {
      "w": "à",
-     "t": 1.9
+     "t": 2.04
     },
     {
      "w": "un",
-     "t": 2.08
+     "t": 2.22
     },
     {
      "w": "ami.",
-     "t": 2.2
+     "t": 2.34
     }
    ]
   },
@@ -47,44 +47,44 @@
    "id": "02-soir",
    "who": "narrateur",
    "text": "Le soir même, il y a agressé une femme.",
-   "start": 2.77,
-   "dur": 2.736,
+   "start": 2.96,
+   "dur": 2.366,
    "words": [
     {
      "w": "Le",
-     "t": 2.82
+     "t": 3.02
     },
     {
      "w": "soir",
-     "t": 2.92
+     "t": 3.14
     },
     {
      "w": "même,",
-     "t": 3.2
+     "t": 3.36
     },
     {
      "w": "il",
-     "t": 3.98
+     "t": 4.04
     },
     {
      "w": "y",
-     "t": 4.06
+     "t": 4.14
     },
     {
      "w": "a",
-     "t": 4.2
+     "t": 4.3
     },
     {
      "w": "agressé",
-     "t": 4.26
+     "t": 4.32
     },
     {
      "w": "une",
-     "t": 4.86
+     "t": 4.8
     },
     {
      "w": "femme.",
-     "t": 5.08
+     "t": 4.94
     }
    ]
   },
@@ -92,32 +92,32 @@
    "id": "03-sarah",
    "who": "narrateur",
    "text": "Aujourd'hui, c'est Sarah qui doit s'expliquer.",
-   "start": 5.756,
-   "dur": 2.299,
+   "start": 5.576,
+   "dur": 2.368,
    "words": [
     {
      "w": "Aujourd'hui,",
-     "t": 5.883
+     "t": 5.576
     },
     {
      "w": "c'est",
-     "t": 6.437
+     "t": 6.117
     },
     {
      "w": "Sarah",
-     "t": 6.99
+     "t": 6.67
     },
     {
      "w": "qui",
-     "t": 7.23
+     "t": 6.95
     },
     {
      "w": "doit",
-     "t": 7.41
+     "t": 7.21
     },
     {
      "w": "s'expliquer.",
-     "t": 7.745
+     "t": 7.614
     }
    ]
   },
@@ -125,68 +125,68 @@
    "id": "04-loyer",
    "who": "narrateur",
    "text": "Cet ami possédait un appartement. Pendant 11 mois, sa locataire n'avait plus payé son loyer.",
-   "start": 8.555,
-   "dur": 4.865,
+   "start": 8.444,
+   "dur": 5.556,
    "words": [
     {
      "w": "Cet",
-     "t": 8.58
+     "t": 8.518
     },
     {
      "w": "ami",
-     "t": 8.915
+     "t": 8.922
     },
     {
      "w": "possédait",
-     "t": 9.25
+     "t": 9.326
     },
     {
      "w": "un",
-     "t": 9.61
+     "t": 9.73
     },
     {
      "w": "appartement.",
-     "t": 9.77
+     "t": 9.87
     },
     {
      "w": "Pendant",
-     "t": 10.59
+     "t": 10.65
     },
     {
      "w": "11",
-     "t": 10.85
+     "t": 10.97
     },
     {
      "w": "mois,",
-     "t": 11.11
+     "t": 11.31
     },
     {
      "w": "sa",
-     "t": 11.65
+     "t": 12.01
     },
     {
      "w": "locataire",
-     "t": 11.73
+     "t": 12.11
     },
     {
      "w": "n'avait",
-     "t": 12.07
+     "t": 12.42
     },
     {
      "w": "plus",
-     "t": 12.41
+     "t": 12.73
     },
     {
      "w": "payé",
-     "t": 12.55
+     "t": 13.01
     },
     {
      "w": "son",
-     "t": 12.81
+     "t": 13.35
     },
     {
      "w": "loyer.",
-     "t": 12.99
+     "t": 13.51
     }
    ]
   },
@@ -194,56 +194,56 @@
    "id": "05-voiture",
    "who": "narrateur",
    "text": "Étranglé par son crédit, il avait fini par dormir dans sa voiture.",
-   "start": 13.67,
-   "dur": 3.44,
+   "start": 14.25,
+   "dur": 3.62,
    "words": [
     {
      "w": "Étranglé",
-     "t": 13.67
+     "t": 14.32
     },
     {
      "w": "par",
-     "t": 14.16
+     "t": 14.76
     },
     {
      "w": "son",
-     "t": 14.34
+     "t": 14.96
     },
     {
      "w": "crédit,",
-     "t": 14.5
+     "t": 15.12
     },
     {
      "w": "il",
-     "t": 15.24
+     "t": 15.88
     },
     {
      "w": "avait",
-     "t": 15.34
+     "t": 15.98
     },
     {
      "w": "fini",
-     "t": 15.5
+     "t": 16.16
     },
     {
      "w": "par",
-     "t": 15.74
+     "t": 16.38
     },
     {
      "w": "dormir",
-     "t": 15.94
+     "t": 16.62
     },
     {
      "w": "dans",
-     "t": 16.22
+     "t": 16.98
     },
     {
      "w": "sa",
-     "t": 16.4
+     "t": 17.22
     },
     {
      "w": "voiture.",
-     "t": 16.56
+     "t": 17.4
     }
    ]
   },
@@ -251,56 +251,56 @@
    "id": "06-partie",
    "who": "narrateur",
    "text": "Puis elle était partie, sans rembourser sa dette ni lui laisser d'adresse.",
-   "start": 17.36,
-   "dur": 3.91,
+   "start": 18.12,
+   "dur": 3.87,
    "words": [
     {
      "w": "Puis",
-     "t": 17.36
+     "t": 18.14
     },
     {
      "w": "elle",
-     "t": 17.93
+     "t": 18.32
     },
     {
      "w": "était",
-     "t": 18.07
+     "t": 18.6
     },
     {
      "w": "partie,",
-     "t": 18.21
+     "t": 18.76
     },
     {
      "w": "sans",
-     "t": 19.03
+     "t": 19.48
     },
     {
      "w": "rembourser",
-     "t": 19.15
+     "t": 19.72
     },
     {
      "w": "sa",
-     "t": 19.61
+     "t": 20.16
     },
     {
      "w": "dette",
-     "t": 19.79
+     "t": 20.34
     },
     {
      "w": "ni",
-     "t": 20.23
+     "t": 20.76
     },
     {
      "w": "lui",
-     "t": 20.33
+     "t": 21.04
     },
     {
      "w": "laisser",
-     "t": 20.47
+     "t": 21.2
     },
     {
      "w": "d'adresse.",
-     "t": 20.99
+     "t": 21.7
     }
    ]
   },
@@ -308,44 +308,44 @@
    "id": "07-ecole",
    "who": "procureur",
    "text": "Sarah était aussi l'enseignante du fils de cette femme.",
-   "start": 21.97,
-   "dur": 3.33,
+   "start": 22.69,
+   "dur": 2.91,
    "words": [
     {
      "w": "Sarah",
-     "t": 21.97
-    },
-    {
-     "w": "était",
-     "t": 22.31
-    },
-    {
-     "w": "aussi",
      "t": 22.69
     },
     {
+     "w": "était",
+     "t": 23.01
+    },
+    {
+     "w": "aussi",
+     "t": 23.37
+    },
+    {
      "w": "l'enseignante",
-     "t": 23.3
+     "t": 23.87
     },
     {
      "w": "du",
-     "t": 23.91
+     "t": 24.37
     },
     {
      "w": "fils",
-     "t": 24.17
+     "t": 24.57
     },
     {
      "w": "de",
-     "t": 24.41
+     "t": 24.85
     },
     {
      "w": "cette",
-     "t": 24.61
+     "t": 25.01
     },
     {
      "w": "femme.",
-     "t": 24.83
+     "t": 25.17
     }
    ]
   },
@@ -353,64 +353,64 @@
    "id": "08-joindre",
    "who": "procureur",
    "text": "La mère lui avait communiqué leur nouvelle adresse pour que l'école puisse les joindre.",
-   "start": 25.5,
-   "dur": 4.7,
+   "start": 25.8,
+   "dur": 3.69,
    "words": [
     {
      "w": "La",
-     "t": 25.54
+     "t": 25.85
     },
     {
      "w": "mère",
-     "t": 25.7
+     "t": 25.99
     },
     {
      "w": "lui",
-     "t": 25.96
+     "t": 26.15
     },
     {
      "w": "avait",
-     "t": 26.24
+     "t": 26.35
     },
     {
      "w": "communiqué",
-     "t": 26.48
+     "t": 26.51
     },
     {
      "w": "leur",
-     "t": 27.12
+     "t": 26.99
     },
     {
      "w": "nouvelle",
-     "t": 27.4
+     "t": 27.19
     },
     {
      "w": "adresse",
-     "t": 27.7
+     "t": 27.43
     },
     {
      "w": "pour",
-     "t": 28.2
+     "t": 27.81
     },
     {
      "w": "que",
-     "t": 28.58
+     "t": 28.13
     },
     {
      "w": "l'école",
-     "t": 28.83
+     "t": 28.32
     },
     {
      "w": "puisse",
-     "t": 29.08
+     "t": 28.51
     },
     {
      "w": "les",
-     "t": 29.46
+     "t": 28.83
     },
     {
      "w": "joindre.",
-     "t": 29.7
+     "t": 29.01
     }
    ]
   },
@@ -418,56 +418,56 @@
    "id": "09-autorise",
    "who": "procureur",
    "text": "Elle ne l'avait pas autorisée à la transmettre à son ancien propriétaire.",
-   "start": 30.4,
-   "dur": 4.12,
+   "start": 29.69,
+   "dur": 3.3,
    "words": [
     {
      "w": "Elle",
-     "t": 30.44
+     "t": 29.73
     },
     {
      "w": "ne",
-     "t": 30.6
+     "t": 29.83
     },
     {
      "w": "l'avait",
-     "t": 30.8
+     "t": 29.98
     },
     {
      "w": "pas",
-     "t": 31.0
+     "t": 30.13
     },
     {
      "w": "autorisée",
-     "t": 31.34
+     "t": 30.33
     },
     {
      "w": "à",
-     "t": 32.1
+     "t": 30.85
     },
     {
      "w": "la",
-     "t": 32.38
+     "t": 31.01
     },
     {
      "w": "transmettre",
-     "t": 32.48
+     "t": 31.11
     },
     {
      "w": "à",
-     "t": 33.04
+     "t": 31.59
     },
     {
      "w": "son",
-     "t": 33.16
+     "t": 31.71
     },
     {
      "w": "ancien",
-     "t": 33.3
+     "t": 31.85
     },
     {
      "w": "propriétaire.",
-     "t": 33.64
+     "t": 32.15
     }
    ]
   },
@@ -475,40 +475,40 @@
    "id": "10-ami",
    "who": "avocate",
    "text": "Cet homme était son ami depuis 15 ans.",
-   "start": 34.82,
-   "dur": 2.06,
+   "start": 33.29,
+   "dur": 2.15,
    "words": [
     {
      "w": "Cet",
-     "t": 34.94
+     "t": 33.29
     },
     {
      "w": "homme",
-     "t": 35.06
+     "t": 33.57
     },
     {
      "w": "était",
-     "t": 35.28
+     "t": 33.75
     },
     {
      "w": "son",
-     "t": 35.44
+     "t": 33.99
     },
     {
      "w": "ami",
-     "t": 35.68
+     "t": 34.21
     },
     {
      "w": "depuis",
-     "t": 35.94
+     "t": 34.43
     },
     {
      "w": "15",
-     "t": 36.2
+     "t": 34.65
     },
     {
      "w": "ans.",
-     "t": 36.56
+     "t": 35.11
     }
    ]
   },
@@ -516,88 +516,88 @@
    "id": "11-economies",
    "who": "avocate",
    "text": "Elle l'avait vu perdre ses économies, puis dormir dans sa voiture. Elle voulait l'aider à récupérer ce qu'on lui devait.",
-   "start": 37.08,
-   "dur": 5.91,
+   "start": 35.64,
+   "dur": 5.38,
    "words": [
     {
      "w": "Elle",
-     "t": 37.13
+     "t": 35.65
     },
     {
      "w": "l'avait",
-     "t": 37.28
+     "t": 35.81
     },
     {
      "w": "vu",
-     "t": 37.43
+     "t": 35.97
     },
     {
      "w": "perdre",
-     "t": 37.65
+     "t": 36.17
     },
     {
      "w": "ses",
-     "t": 38.07
+     "t": 36.41
     },
     {
      "w": "économies,",
-     "t": 38.17
+     "t": 36.67
     },
     {
      "w": "puis",
-     "t": 39.07
+     "t": 37.63
     },
     {
      "w": "dormir",
-     "t": 39.11
+     "t": 37.65
     },
     {
      "w": "dans",
-     "t": 39.43
+     "t": 38.01
     },
     {
      "w": "sa",
-     "t": 39.63
+     "t": 38.25
     },
     {
      "w": "voiture.",
-     "t": 39.79
+     "t": 38.41
     },
     {
      "w": "Elle",
-     "t": 40.65
+     "t": 39.13
     },
     {
      "w": "voulait",
-     "t": 40.79
+     "t": 39.21
     },
     {
      "w": "l'aider",
-     "t": 41.05
+     "t": 39.45
     },
     {
      "w": "à",
-     "t": 41.31
+     "t": 39.69
     },
     {
      "w": "récupérer",
-     "t": 41.45
+     "t": 39.85
     },
     {
      "w": "ce",
-     "t": 41.85
+     "t": 40.23
     },
     {
      "w": "qu'on",
-     "t": 41.99
+     "t": 40.37
     },
     {
      "w": "lui",
-     "t": 42.13
+     "t": 40.51
     },
     {
      "w": "devait.",
-     "t": 42.23
+     "t": 40.63
     }
    ]
   },
@@ -605,48 +605,48 @@
    "id": "12-message",
    "who": "procureur",
    "text": "Avant de lui donner l'adresse, elle avait reçu ce message :",
-   "start": 43.29,
-   "dur": 3.88,
+   "start": 41.32,
+   "dur": 2.72,
    "words": [
     {
      "w": "Avant",
-     "t": 43.31
+     "t": 41.35
     },
     {
      "w": "de",
-     "t": 43.55
+     "t": 41.53
     },
     {
      "w": "lui",
-     "t": 43.89
+     "t": 41.73
     },
     {
      "w": "donner",
-     "t": 44.07
+     "t": 41.81
     },
     {
      "w": "l'adresse,",
-     "t": 44.71
+     "t": 42.35
     },
     {
      "w": "elle",
-     "t": 45.35
+     "t": 42.89
     },
     {
      "w": "avait",
-     "t": 45.49
+     "t": 42.95
     },
     {
      "w": "reçu",
-     "t": 45.79
+     "t": 43.11
     },
     {
      "w": "ce",
-     "t": 46.33
+     "t": 43.39
     },
     {
      "w": "message :",
-     "t": 46.55
+     "t": 43.55
     }
    ]
   },
@@ -654,64 +654,64 @@
    "id": "13-regler",
    "who": "procureur",
    "text": "«Puisque personne ne fait rien, je vais régler ça moi-même.» Elle connaissait sa colère.",
-   "start": 47.37,
-   "dur": 5.77,
+   "start": 44.24,
+   "dur": 4.25,
    "words": [
     {
      "w": "«Puisque",
-     "t": 47.59
+     "t": 44.27
     },
     {
      "w": "personne",
-     "t": 47.99
+     "t": 44.55
     },
     {
      "w": "ne",
-     "t": 48.61
+     "t": 44.85
     },
     {
      "w": "fait",
-     "t": 49.05
+     "t": 45.09
     },
     {
      "w": "rien,",
-     "t": 49.21
+     "t": 45.23
     },
     {
      "w": "je",
-     "t": 49.81
+     "t": 45.81
     },
     {
      "w": "vais",
-     "t": 49.91
+     "t": 45.93
     },
     {
      "w": "régler",
-     "t": 50.13
+     "t": 46.01
     },
     {
      "w": "ça",
-     "t": 50.55
+     "t": 46.23
     },
     {
      "w": "moi-même.»",
-     "t": 51.09
+     "t": 46.71
     },
     {
      "w": "Elle",
-     "t": 51.63
+     "t": 47.19
     },
     {
      "w": "connaissait",
-     "t": 51.79
+     "t": 47.31
     },
     {
      "w": "sa",
-     "t": 52.39
+     "t": 47.83
     },
     {
      "w": "colère.",
-     "t": 52.63
+     "t": 47.99
     }
    ]
   },
@@ -719,92 +719,92 @@
    "id": "14-jamais",
    "who": "avocate",
    "text": "Elle connaissait aussi son ami. En 15 ans, elle ne l'avait jamais vu violent. Elle pensait qu'il irait réclamer son argent.",
-   "start": 53.44,
-   "dur": 6.38,
+   "start": 48.79,
+   "dur": 5.66,
    "words": [
     {
      "w": "Elle",
-     "t": 53.86
+     "t": 48.79
     },
     {
      "w": "connaissait",
-     "t": 54.3
+     "t": 48.89
     },
     {
      "w": "aussi",
-     "t": 54.74
+     "t": 49.29
     },
     {
      "w": "son",
-     "t": 54.92
+     "t": 49.49
     },
     {
      "w": "ami.",
-     "t": 55.12
+     "t": 49.73
     },
     {
      "w": "En",
-     "t": 55.66
+     "t": 50.25
     },
     {
      "w": "15",
-     "t": 55.76
+     "t": 50.37
     },
     {
      "w": "ans,",
-     "t": 56.04
+     "t": 50.75
     },
     {
      "w": "elle",
-     "t": 56.36
+     "t": 51.25
     },
     {
      "w": "ne",
-     "t": 56.44
+     "t": 51.27
     },
     {
      "w": "l'avait",
-     "t": 56.6
+     "t": 51.42
     },
     {
      "w": "jamais",
-     "t": 56.76
+     "t": 51.57
     },
     {
      "w": "vu",
-     "t": 56.98
+     "t": 51.87
     },
     {
      "w": "violent.",
-     "t": 57.24
+     "t": 52.17
     },
     {
      "w": "Elle",
-     "t": 57.8
+     "t": 52.73
     },
     {
      "w": "pensait",
-     "t": 57.9
+     "t": 52.83
     },
     {
      "w": "qu'il",
-     "t": 58.16
+     "t": 53.06
     },
     {
      "w": "irait",
-     "t": 58.42
+     "t": 53.29
     },
     {
      "w": "réclamer",
-     "t": 58.64
+     "t": 53.49
     },
     {
      "w": "son",
-     "t": 59.0
+     "t": 53.85
     },
     {
      "w": "argent.",
-     "t": 59.18
+     "t": 54.01
     }
    ]
   },
@@ -812,84 +812,84 @@
    "id": "15-proposer",
    "who": "procureur",
    "text": "Elle pouvait proposer de transmettre un message. Elle a préféré révéler le domicile d'une mère et de son enfant.",
-   "start": 60.12,
-   "dur": 6.86,
+   "start": 54.75,
+   "dur": 5.24,
    "words": [
     {
      "w": "Elle",
-     "t": 60.12
+     "t": 54.79
     },
     {
      "w": "pouvait",
-     "t": 60.3
+     "t": 54.89
     },
     {
      "w": "proposer",
-     "t": 60.7
+     "t": 55.15
     },
     {
      "w": "de",
-     "t": 61.44
+     "t": 55.61
     },
     {
      "w": "transmettre",
-     "t": 61.66
+     "t": 55.71
     },
     {
      "w": "un",
-     "t": 62.34
+     "t": 56.15
     },
     {
      "w": "message.",
-     "t": 62.52
+     "t": 56.27
     },
     {
      "w": "Elle",
-     "t": 63.28
+     "t": 57.03
     },
     {
      "w": "a",
-     "t": 63.44
+     "t": 57.13
     },
     {
      "w": "préféré",
-     "t": 63.58
+     "t": 57.23
     },
     {
      "w": "révéler",
-     "t": 64.22
+     "t": 57.57
     },
     {
      "w": "le",
-     "t": 64.76
+     "t": 57.99
     },
     {
      "w": "domicile",
-     "t": 64.96
+     "t": 58.11
     },
     {
      "w": "d'une",
-     "t": 65.35
+     "t": 58.43
     },
     {
      "w": "mère",
-     "t": 65.74
+     "t": 58.75
     },
     {
      "w": "et",
-     "t": 66.08
+     "t": 58.99
     },
     {
      "w": "de",
-     "t": 66.32
+     "t": 59.29
     },
     {
      "w": "son",
-     "t": 66.48
+     "t": 59.41
     },
     {
      "w": "enfant.",
-     "t": 66.64
+     "t": 59.53
     }
    ]
   },
@@ -897,32 +897,32 @@
    "id": "16-hopital",
    "who": "procureur",
    "text": "Cette femme a fini à l'hôpital.",
-   "start": 67.23,
-   "dur": 2.45,
+   "start": 60.24,
+   "dur": 1.93,
    "words": [
     {
      "w": "Cette",
-     "t": 67.23
+     "t": 60.27
     },
     {
      "w": "femme",
-     "t": 67.71
+     "t": 60.49
     },
     {
      "w": "a",
-     "t": 68.07
+     "t": 60.81
     },
     {
      "w": "fini",
-     "t": 68.37
+     "t": 60.99
     },
     {
      "w": "à",
-     "t": 68.69
+     "t": 61.29
     },
     {
      "w": "l'hôpital.",
-     "t": 69.3
+     "t": 61.85
     }
    ]
   },
@@ -930,80 +930,80 @@
    "id": "17-frapper",
    "who": "avocate",
    "text": "Parce que cet homme a choisi de la frapper. Sarah voulait aider un ami, pas préparer une agression.",
-   "start": 69.98,
-   "dur": 4.885,
+   "start": 62.47,
+   "dur": 4.905,
    "words": [
     {
      "w": "Parce",
-     "t": 70.36
+     "t": 62.49
     },
     {
      "w": "que",
-     "t": 70.6
+     "t": 62.63
     },
     {
      "w": "cet",
-     "t": 70.76
+     "t": 62.77
     },
     {
      "w": "homme",
-     "t": 70.94
+     "t": 62.95
     },
     {
      "w": "a",
-     "t": 71.1
+     "t": 63.21
     },
     {
      "w": "choisi",
-     "t": 71.2
+     "t": 63.35
     },
     {
      "w": "de",
-     "t": 71.48
+     "t": 63.79
     },
     {
      "w": "la",
-     "t": 71.58
+     "t": 63.91
     },
     {
      "w": "frapper.",
-     "t": 71.68
+     "t": 63.99
     },
     {
      "w": "Sarah",
-     "t": 72.4
+     "t": 64.77
     },
     {
      "w": "voulait",
-     "t": 72.58
+     "t": 64.93
     },
     {
      "w": "aider",
-     "t": 72.9
+     "t": 65.25
     },
     {
      "w": "un",
-     "t": 73.12
+     "t": 65.47
     },
     {
      "w": "ami,",
-     "t": 73.28
+     "t": 65.69
     },
     {
      "w": "pas",
-     "t": 73.84
+     "t": 66.23
     },
     {
      "w": "préparer",
-     "t": 73.9
+     "t": 66.33
     },
     {
      "w": "une",
-     "t": 74.32
+     "t": 66.77
     },
     {
      "w": "agression.",
-     "t": 74.44
+     "t": 66.89
     }
    ]
   },
@@ -1011,44 +1011,44 @@
    "id": "18-prevoir",
    "who": "avocate",
    "text": "Devait-elle prévoir un geste qu'il n'avait jamais eu auparavant ?",
-   "start": 75.065,
-   "dur": 3.38,
+   "start": 67.575,
+   "dur": 3.17,
    "words": [
     {
      "w": "Devait-elle",
-     "t": 75.15
+     "t": 67.66
     },
     {
      "w": "prévoir",
-     "t": 75.66
+     "t": 68.23
     },
     {
      "w": "un",
-     "t": 76.04
+     "t": 68.61
     },
     {
      "w": "geste",
-     "t": 76.22
+     "t": 68.77
     },
     {
      "w": "qu'il",
-     "t": 76.513
+     "t": 69.05
     },
     {
      "w": "n'avait",
-     "t": 76.807
+     "t": 69.33
     },
     {
      "w": "jamais",
-     "t": 77.1
+     "t": 69.61
     },
     {
      "w": "eu",
-     "t": 77.34
+     "t": 69.87
     },
     {
      "w": "auparavant ?",
-     "t": 77.52
+     "t": 70.13
     }
    ]
   },
@@ -1056,64 +1056,64 @@
    "id": "19-oublier",
    "who": "procureur",
    "text": "Son amitié lui a fait oublier la confiance qu'une mère avait placée en elle.",
-   "start": 78.845,
-   "dur": 4.72,
+   "start": 71.145,
+   "dur": 3.86,
    "words": [
     {
      "w": "Son",
-     "t": 78.935
+     "t": 71.385
     },
     {
      "w": "amitié",
-     "t": 79.095
+     "t": 71.685
     },
     {
      "w": "lui",
-     "t": 79.595
+     "t": 71.985
     },
     {
      "w": "a",
-     "t": 79.915
+     "t": 72.125
     },
     {
      "w": "fait",
-     "t": 80.075
+     "t": 72.265
     },
     {
      "w": "oublier",
-     "t": 80.275
+     "t": 72.405
     },
     {
      "w": "la",
-     "t": 80.795
+     "t": 72.745
     },
     {
      "w": "confiance",
-     "t": 80.975
+     "t": 72.905
     },
     {
      "w": "qu'une",
-     "t": 81.455
+     "t": 73.315
     },
     {
      "w": "mère",
-     "t": 81.935
+     "t": 73.725
     },
     {
      "w": "avait",
-     "t": 82.135
+     "t": 73.885
     },
     {
      "w": "placée",
-     "t": 82.355
+     "t": 74.105
     },
     {
      "w": "en",
-     "t": 82.855
+     "t": 74.485
     },
     {
      "w": "elle.",
-     "t": 83.135
+     "t": 74.645
     }
    ]
   },
@@ -1121,64 +1121,64 @@
    "id": "20-croire",
    "who": "avocate",
    "text": "Ou cette amitié lui a fait croire qu'elle pouvait lui faire confiance, elle aussi.",
-   "start": 83.865,
-   "dur": 3.48,
+   "start": 75.305,
+   "dur": 3.64,
    "words": [
     {
      "w": "Ou",
-     "t": 83.865
+     "t": 75.305
     },
     {
      "w": "cette",
-     "t": 84.045
+     "t": 75.575
     },
     {
      "w": "amitié",
-     "t": 84.275
+     "t": 75.855
     },
     {
      "w": "lui",
-     "t": 84.595
+     "t": 76.175
     },
     {
      "w": "a",
-     "t": 84.815
+     "t": 76.375
     },
     {
      "w": "fait",
-     "t": 84.935
+     "t": 76.495
     },
     {
      "w": "croire",
-     "t": 85.015
+     "t": 76.595
     },
     {
      "w": "qu'elle",
-     "t": 85.235
+     "t": 76.855
     },
     {
      "w": "pouvait",
-     "t": 85.455
+     "t": 77.115
     },
     {
      "w": "lui",
-     "t": 85.675
+     "t": 77.335
     },
     {
      "w": "faire",
-     "t": 85.835
+     "t": 77.495
     },
     {
      "w": "confiance,",
-     "t": 86.015
+     "t": 77.695
     },
     {
      "w": "elle",
-     "t": 86.815
+     "t": 78.415
     },
     {
      "w": "aussi.",
-     "t": 86.915
+     "t": 78.495
     }
    ]
   },
@@ -1186,72 +1186,72 @@
    "id": "21-yeux",
    "who": "narrateur",
    "text": "Sarah a-t-elle fermé les yeux sur un danger évident, ou a-t-elle été trahie par son ami ?",
-   "start": 88.145,
-   "dur": 4.43,
+   "start": 79.745,
+   "dur": 5.41,
    "words": [
     {
      "w": "Sarah",
-     "t": 88.385
+     "t": 79.955
     },
     {
      "w": "a-t-elle",
-     "t": 88.745
+     "t": 80.415
     },
     {
      "w": "fermé",
-     "t": 89.105
+     "t": 80.875
     },
     {
      "w": "les",
-     "t": 89.425
+     "t": 81.195
     },
     {
      "w": "yeux",
-     "t": 89.585
+     "t": 81.335
     },
     {
      "w": "sur",
-     "t": 89.725
+     "t": 81.595
     },
     {
      "w": "un",
-     "t": 89.905
+     "t": 81.815
     },
     {
      "w": "danger",
-     "t": 90.025
+     "t": 81.975
     },
     {
      "w": "évident,",
-     "t": 90.305
+     "t": 82.255
     },
     {
      "w": "ou",
-     "t": 90.765
+     "t": 82.795
     },
     {
      "w": "a-t-elle",
-     "t": 91.055
+     "t": 83.265
     },
     {
      "w": "été",
-     "t": 91.345
+     "t": 83.735
     },
     {
      "w": "trahie",
-     "t": 91.585
+     "t": 84.055
     },
     {
      "w": "par",
-     "t": 91.825
+     "t": 84.375
     },
     {
      "w": "son",
-     "t": 91.985
+     "t": 84.575
     },
     {
      "w": "ami ?",
-     "t": 92.165
+     "t": 84.755
     }
    ]
   },
@@ -1259,40 +1259,40 @@
    "id": "22-jury",
    "who": "narrateur",
    "text": "Tu es le juré. Quel est ton verdict ?",
-   "start": 92.875,
-   "dur": 1.76,
+   "start": 85.455,
+   "dur": 1.805,
    "words": [
     {
      "w": "Tu",
-     "t": 92.875
+     "t": 85.455
     },
     {
      "w": "es",
-     "t": 93.015
+     "t": 85.655
     },
     {
      "w": "le",
-     "t": 93.095
+     "t": 85.755
     },
     {
      "w": "juré.",
-     "t": 93.235
+     "t": 85.855
     },
     {
      "w": "Quel",
-     "t": 93.895
+     "t": 86.495
     },
     {
      "w": "est",
-     "t": 93.955
+     "t": 86.595
     },
     {
      "w": "ton",
-     "t": 94.075
+     "t": 86.735
     },
     {
      "w": "verdict ?",
-     "t": 94.215
+     "t": 86.855
     }
    ]
   },
@@ -1300,44 +1300,44 @@
    "id": "23-abonne",
    "who": "narrateur",
    "text": "Abonne-toi pour découvrir le verdict dans la prochaine vidéo.",
-   "start": 94.985,
-   "dur": 3.19,
+   "start": 87.61,
+   "dur": 3.52,
    "words": [
     {
      "w": "Abonne-toi",
-     "t": 95.185
+     "t": 87.815
     },
     {
      "w": "pour",
-     "t": 95.805
+     "t": 88.425
     },
     {
      "w": "découvrir",
-     "t": 96.025
+     "t": 88.725
     },
     {
      "w": "le",
-     "t": 96.345
+     "t": 89.125
     },
     {
      "w": "verdict",
-     "t": 96.585
+     "t": 89.325
     },
     {
      "w": "dans",
-     "t": 96.825
+     "t": 89.645
     },
     {
      "w": "la",
-     "t": 97.145
+     "t": 90.045
     },
     {
      "w": "prochaine",
-     "t": 97.245
+     "t": 90.165
     },
     {
      "w": "vidéo.",
-     "t": 97.525
+     "t": 90.465
     }
    ]
   }

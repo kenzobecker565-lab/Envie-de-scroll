@@ -1,4 +1,4 @@
-# Affaire Classée ? · affaire n°5 : l'adresse (≈ 1 min 42)
+# Affaire Classée ? · affaire n°5 : l'adresse (≈ 1 min 35)
 
 ▶️ **[Voir la vidéo](affaire-05.mp4)** (MP4, 1080 × 1920, 30 images/s, avec la marque @affaireclassee0)
 
@@ -19,15 +19,21 @@ On ne montre aucun geste violent : la rue de nuit, le tampon « AGRESSÉE » et 
 
 ## Les voix
 
-Les trois voix sont gratuites, générées sur la machine avec Chatterbox : voir [`../voix-libres`](../voix-libres/README.md). Les longues tirades du scénario sont découpées en répliques courtes, ce qui fiabilise la voix et laisse un plan par argument.
+Les voix viennent d'**ElevenLabs** (modèle Eleven v4). Le créateur du compte les a générées sur le site, une prise par réplique, et elles sont rangées dans `media/elevenlabs/<id>.mp3` :
 
-La signature de la marque apparaît sur « Quel est ton verdict ? » (`signature` dans `cues.js`, lu par `proces/marque.mjs`).
+- narrateur : « François Louis » ;
+- procureur : « Yann » ;
+- défense : « Bass », une voix d'homme. Dans cette affaire, la défense est donc un avocat : l'étiquette dit « L'AVOCAT DE LA DÉFENSE ». Le rôle garde son nom `avocate` dans `script.json`.
+
+`elevenlabs.py` assemble les prises en un fichier par personnage (`media/<personnage>.wav`). `voix.py` découpe ensuite chaque réplique et écrit `timeline.json`, avec un tempo de +6 % seulement. La première version de l'affaire utilisait les voix gratuites de Chatterbox (voir [`../voix-libres`](../voix-libres/README.md)) ; elle reste dans l'historique git.
+
+La signature de la marque apparaît sur « Quel est ton verdict ? » (`signature` dans `cues.js`, lu par `proces/marque.mjs`). L'appel à s'abonner n'a pas de sous-titres, puisque le bouton le dit déjà.
 
 ## Refaire la vidéo
 
 ```bash
 cd promo
-cbenv/bin/python voix-libres/generer.py affaire-05 && python voix-libres/choisir.py affaire-05
+python affaire-05/elevenlabs.py   # prises ElevenLabs → un fichier par personnage
 npm run a5:voice           # découpe → timeline.json
 npm run a5:render          # → build/affaire-05/affaire-05.mp4
 npm run a5:marque-video    # → build/affaire-05/affaire-05-marque.mp4

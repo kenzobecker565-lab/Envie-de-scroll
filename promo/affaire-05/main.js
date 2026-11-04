@@ -573,7 +573,8 @@ const court = makeCourt(COURT)
 const cast = {
   juge: makeBuddy(COURT, { robe: '#a3201a', jabot: true, hair: '#8a8a8a' }),
   procureur: makeBuddy(COURT, { robe: COL.red, jabot: true, hair: '#2b2118' }),
-  avocate: makeBuddy(COURT, { robe: COL.black, jabot: true, hair: '#6b3e22', bun: true, skin: '#EFD3AE' }),
+  // La défense est un avocat dans cette affaire (voix d'homme) ; le rôle garde son nom « avocate » dans le script.
+  avocate: makeBuddy(COURT, { robe: COL.black, jabot: true, hair: '#3a2a1e' }),
   accuse: makeBuddy(COURT, { suit: '#2f7a8a', hair: '#4a2c1a', bun: true, skin: '#EFD3AE' }),
 }
 cast.juge.g.position.set(0, 1.0, -7.0)
@@ -581,7 +582,7 @@ cast.procureur.g.position.set(-5.3, 0, -2.3)
 cast.procureur.g.rotation.y = 0.55
 cast.avocate.g.position.set(5.3, 0, -2.3)
 cast.avocate.g.rotation.y = -0.55
-cast.avocate.g.scale.setScalar(0.95)
+cast.avocate.g.scale.setScalar(1.0)
 cast.accuse.g.position.set(7.0, -0.35, -5.4)
 cast.accuse.g.rotation.y = -0.5
 cast.accuse.g.scale.setScalar(0.9)
@@ -923,7 +924,7 @@ function balanceAt(t) {
   return v
 }
 
-const ROLE = { juge: 'LE JUGE', procureur: 'LE PROCUREUR', avocate: 'L’AVOCATE DE LA DÉFENSE' }
+const ROLE = { juge: 'LE JUGE', procureur: 'LE PROCUREUR', avocate: 'L’AVOCAT DE LA DÉFENSE' }
 for (const l of C.lines.filter((x) => ROLE[x.who])) label(ROLE[l.who], `who ${l.who}`, { t0: l.start - 0.05, t1: l.start + l.dur, x: 540, y: 1250, dur: 0.3, parent: hud })
 
 function updateHud(t) {
@@ -939,7 +940,8 @@ function updateHud(t) {
 
 const capsEl = $('#captions')
 const CHUNKS = []
-for (const line of C.lines) {
+// Pas de sous-titres sur l'appel à s'abonner : le bouton et l'étiquette le disent déjà.
+for (const line of C.lines.filter((l) => l.id !== '23-abonne')) {
   let cur = null
   const mine = []
   line.words.forEach((w, i) => {

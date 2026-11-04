@@ -29,7 +29,7 @@ from voix import align, for_asr, read, tokens, write  # noqa: E402
 START = 0.6  # première réplique (après l'apparition du titre)
 TAIL = 3.5  # fin : écran de vote et appel à s'abonner
 MAX_PAUSE = 0.3  # pause maximale gardée dans une réplique (secondes)
-TEMPO = 1.12  # Chatterbox parle posément : on accélère un peu, sans changer la hauteur de la voix
+TEMPO = 1.06  # ElevenLabs parle naturellement : on resserre à peine le rythme
 DEFAULT_GAP = 0.25
 
 

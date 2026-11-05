@@ -145,7 +145,7 @@ async function openPages(count = 1) {
     }
     shots.push(async (t) => {
       await page.evaluate((time) => window.__promo.seek(time), t)
-      return page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT } })
+      return page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT }, timeout: 300000 })
     })
   }
   if (errors.length) {

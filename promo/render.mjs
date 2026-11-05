@@ -58,6 +58,7 @@ const ADS = {
   'proto-noir': { page: 'promo/prototypes/noir/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-noir', out: 'proto-noir.mp4' },
   'proto-cartoon': { page: 'promo/prototypes/cartoon/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-cartoon', out: 'proto-cartoon.mp4' },
   'proto-diorama': { page: 'promo/prototypes/diorama/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-diorama', out: 'proto-diorama.mp4' },
+  'proto-tiltshift': { page: 'promo/prototypes/tiltshift/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-tiltshift', out: 'proto-tiltshift.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)
@@ -136,7 +137,7 @@ async function openPages(count = 1) {
     page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
     await page.goto(`http://127.0.0.1:${server.address().port}/${AD.page}?render`)
     try {
-      await page.waitForFunction(() => window.__promo, null, { timeout: 15000 })
+      await page.waitForFunction(() => window.__promo, null, { timeout: 120000 })
       await page.evaluate(() => window.__promo.ready)
       meta = await page.evaluate(() => ({ duration: window.__promo.duration, fps: window.__promo.fps }))
     } catch (error) {

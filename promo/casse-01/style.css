@@ -1,0 +1,42 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Figtree Variable', sans-serif; background: radial-gradient(ellipse at 50% 40%, #2b2f55, #0b0c1a 75%); }
+#gl { position: absolute; inset: 0; visibility: hidden; }
+#out { position: absolute; inset: 0; }
+#ui { position: absolute; inset: 0; pointer-events: none; }
+.tag { position: absolute; left: 0; top: 0; white-space: nowrap; font-weight: 900; }
+.clock { font-variant-numeric: tabular-nums; font-size: 150px; color: #fff; padding: 10px 40px 18px; border-radius: 34px; background: rgba(12, 14, 30, 0.82); border: 6px solid #ff5a5a; box-shadow: 0 0 60px rgba(255, 70, 70, 0.45); }
+.clock .s { color: #ff7a7a; font-size: 110px; }
+.pin { font-size: 46px; padding: 8px 24px 12px; border-radius: 18px; color: #fff; box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+.pin::after { content: ''; position: absolute; left: 50%; bottom: -18px; margin-left: -12px; border: 12px solid transparent; border-top-color: inherit; }
+.pin.red { background: #e5484d; border-color: #e5484d; }
+.pin.dark { background: #1d1f27; border-color: #1d1f27; }
+.pin.blue { background: #3b82f6; border-color: #3b82f6; }
+.pin.yellow { background: #ffd166; color: #10121a; border-color: #ffd166; }
+.caps .w { display: inline-block; margin: 0 11px; font-size: 100px; font-weight: 900; color: #fff; -webkit-text-stroke: 18px #10121a; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0, 0, 0, 0.4); padding: 0 14px 6px; border-radius: 22px; }
+.caps .w.on { color: #10121a; -webkit-text-stroke: 0; background: #ffd166; text-shadow: none; box-shadow: 0 10px 0 #b8892a; }
+#stage { background: radial-gradient(ellipse at 50% 40%, var(--sky, #2b2f55), #0b0c1a 78%); }
+.caps { position: absolute; left: 0; right: 0; top: 1430px; display: flex; justify-content: center; }
+.caps .line { display: flex; flex-wrap: wrap; justify-content: center; max-width: 1020px; }
+.money { display: flex; align-items: baseline; gap: 14px; color: #fff; -webkit-text-stroke: 18px #10121a; paint-order: stroke fill; text-shadow: 0 14px 0 rgba(0, 0, 0, 0.35); }
+.money .num { font-size: 150px; font-variant-numeric: tabular-nums; }
+.money .cur { font-size: 120px; color: #7fe8ff; }
+.stamp { font-size: 96px; color: #e5484d; padding: 4px 40px 12px; border: 14px solid #e5484d; border-radius: 30px; background: rgba(255, 255, 255, 0.93); }
+.stamp.green { color: #12a150; border-color: #12a150; font-size: 78px; }
+.slam { font-size: 130px; color: #fff; -webkit-text-stroke: 22px #10121a; paint-order: stroke fill; text-shadow: 0 14px 0 rgba(0, 0, 0, 0.35); }
+.slam.yellow { color: #ffd166; font-size: 170px; }
+.pill { font-size: 54px; padding: 10px 32px 14px; border-radius: 22px; color: #fff; background: #10121a; box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+.pill.small { font-size: 42px; }
+.pill.yellow { background: #ffd166; color: #10121a; box-shadow: 0 10px 0 #b8892a; }
+.pill.red { background: #e5484d; box-shadow: 0 10px 0 #8f1f24; }
+.pin.light { background: #f4f1ea; color: #10121a; border-color: #f4f1ea; }
+.pin.orange { background: #d9822b; border-color: #d9822b; }
+.clock.red { border-color: #ffd166; box-shadow: 0 0 70px rgba(255, 209, 102, 0.6); }
+.clock.red .h { color: #ffd166; }
+.question { font-size: 420px; color: #ffd166; -webkit-text-stroke: 28px #10121a; paint-order: stroke fill; text-shadow: 0 20px 0 rgba(0, 0, 0, 0.35); }
+.calendar { width: 640px; padding: 22px 26px 26px; border-radius: 28px; background: #fbf6ea; box-shadow: 0 16px 0 rgba(0, 0, 0, 0.35); }
+.calendar .head { text-align: center; font-size: 46px; color: #e5484d; margin-bottom: 14px; }
+.calendar .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; font-size: 36px; color: #10121a; }
+.calendar b { color: #8a8a99; font-size: 30px; }
+.calendar span { padding: 6px 0; border-radius: 50%; }
+.calendar span.fri { color: #fff; background: #e5484d; box-shadow: 0 0 0 5px #ffd166; }

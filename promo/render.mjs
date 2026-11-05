@@ -49,6 +49,7 @@ const ADS = {
   'affaire-03': { page: 'promo/affaire-03/index.html', audio: './affaire-03/audio.mjs', build: 'build/affaire-03', out: 'affaire-03.mp4' },
   'affaire-04': { page: 'promo/affaire-04/index.html', audio: './affaire-04/audio.mjs', build: 'build/affaire-04', out: 'affaire-04.mp4' },
   'affaire-05': { page: 'promo/affaire-05/index.html', audio: './affaire-05/audio.mjs', build: 'build/affaire-05', out: 'affaire-05.mp4' },
+  'affaire-06': { page: 'promo/affaire-06/index.html', audio: './affaire-06/audio.mjs', build: 'build/affaire-06', out: 'affaire-06.mp4' },
   'demo-v2': { page: 'promo/demo-v2/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v2', out: 'demo-v2.mp4' },
   'demo-v3': { page: 'promo/demo-v3/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v3', out: 'demo-v3.mp4' },
   'proto-flat': { page: 'promo/prototypes/flat/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-flat', out: 'proto-flat.mp4' },

@@ -1,13 +1,16 @@
 """
 Enveloppe de la voix pour la synchronisation des lèvres : pour chaque réplique
-de l'affaire n°5 (../affaire-05/voice/<id>.wav), l'ouverture de la bouche
-(0 → 1) 60 fois par seconde → levres.json.
+d'une affaire (<affaire>/voice/<id>.wav), l'ouverture de la bouche (0 → 1)
+60 fois par seconde → levres.json (dans demo-v2/ pour l'affaire n°5 par défaut,
+sinon dans le dossier de l'affaire).
 
-    python demo-v2/levres.py
+    python demo-v2/levres.py              # affaire n°5 → demo-v2/levres.json
+    python demo-v2/levres.py affaire-06   # → affaire-06/levres.json
 """
 
 import json
 import pathlib
+import sys
 import wave
 
 import numpy as np
@@ -16,7 +19,9 @@ HERE = pathlib.Path(__file__).parent
 RATE = 60
 
 out = {}
-for p in sorted((HERE.parent / "affaire-05" / "voice").glob("*.wav")):
+AFFAIRE = sys.argv[1] if len(sys.argv) > 1 else "affaire-05"
+OUT = HERE / "levres.json" if AFFAIRE == "affaire-05" else HERE.parent / AFFAIRE / "levres.json"
+for p in sorted((HERE.parent / AFFAIRE / "voice").glob("*.wav")):
     with wave.open(str(p)) as w:
         sr = w.getframerate()
         x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
@@ -30,5 +35,5 @@ for p in sorted((HERE.parent / "affaire-05" / "voice").glob("*.wav")):
     # Lissage court, puis petites variations pour que la bouche ne reste pas figée.
     v = np.convolve(v, np.ones(3) / 3, mode="same")
     out[p.stem] = [round(float(a), 2) for a in v]
-(HERE / "levres.json").write_text(json.dumps(out))
+OUT.write_text(json.dumps(out))
 print(len(out), "répliques")

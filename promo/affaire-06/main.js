@@ -306,7 +306,7 @@ tag('LEUR VIE', 'pill red', { t0: Wd('09', 'vie') - 0.1, t1: E('09') + 0.2, y: 2
 tag('TU ES LE JURÉ', 'big white', { t0: Wd('10', 'jure') - 0.15, y: 330, from: 1.4, dur: 0.5 })
 tag('COUPABLE', 'vote red', { t0: Wd('10', 'coupable') - 0.1, y: 540, rot: -3 })
 tag('NON COUPABLE', 'vote blue', { t0: Wd('10', 'non') - 0.1, y: 720, rot: 3 })
-tag('Et toi, tu l’aurais laissé t’opérer ?', 'pill yellow', { t0: Wd('10', 'et') - 0.1, y: 880, from: 1.2 }).el.style.fontSize = '50px'
+tag('Et toi, tu l’aurais laissé t’opérer ?', 'pill yellow', { t0: Wd('10', 'et') - 0.1, y: 1640, from: 1.2 }).el.style.fontSize = '50px'
 
 // Qui parle.
 const who = document.createElement('div')

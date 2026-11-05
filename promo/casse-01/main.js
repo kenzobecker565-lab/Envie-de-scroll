@@ -180,6 +180,27 @@ for (const x of [-10.4, -3.6, 2.2, 9.4]) {
   mesh(new THREE.IcosahedronGeometry(0.75, 1), M('#4f8a66', { flatShading: true }), tr).position.y = 1.4
 }
 
+// ------------------------------------------------------------- la rue vit
+
+function smallCar(color) {
+  const g = group(scene)
+  rbox(1.6, 0.42, 0.8, 0.15, M(color, { metalness: 0.3, roughness: 0.4 }), g).position.y = 0.32
+  rbox(0.9, 0.34, 0.72, 0.12, M(color, { metalness: 0.3, roughness: 0.4 }), g).position.set(-0.1, 0.66, 0)
+  for (const [x, z] of [[-0.5, 0.4], [0.5, 0.4], [-0.5, -0.4], [0.5, -0.4]]) {
+    const w = mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.12, 14), M('#111'), g)
+    w.rotation.x = Math.PI / 2
+    w.position.set(x, 0.17, z)
+  }
+  for (const z of [-0.25, 0.25]) rbox(0.04, 0.08, 0.14, 0.02, glow('#fff3c4'), g).position.set(0.81, 0.36, z)
+  return g
+}
+const traffic = [
+  { car: smallCar('#e5484d'), lane: 0.75, dir: 1, speed: 4.2, off: 0 },
+  { car: smallCar('#3b82f6'), lane: 2.45, dir: -1, speed: 3.4, off: 9 },
+  { car: smallCar('#ffd166'), lane: 0.75, dir: 1, speed: 3.8, off: 17 },
+  { car: smallCar('#2aa198'), lane: 2.45, dir: -1, speed: 4.6, off: 25 },
+]
+
 // ---------------------------------------------------------------- figurines
 
 function figurine(color, { head = '#f2c4a0', cap = null, badge = false, tie = false } = {}) {
@@ -195,12 +216,51 @@ function figurine(color, { head = '#f2c4a0', cap = null, badge = false, tie = fa
   }
   if (badge) mesh(new THREE.BoxGeometry(0.14, 0.1, 0.03), glow('#ffd166'), g).position.set(0.1, 0.85, 0.25)
   if (tie) mesh(new THREE.BoxGeometry(0.06, 0.3, 0.03), M('#b3261e'), g).position.set(0, 0.8, 0.26)
+  // Bras (pivot à l'épaule) qui se balancent à la marche.
+  g.userData.arms = [-1, 1].map((sd) => {
+    const pivot = group(g, sd * 0.3, 0.95, 0)
+    mesh(new THREE.CapsuleGeometry(0.07, 0.36, 4, 10), M(color), pivot).position.y = -0.22
+    return pivot
+  })
+  g.scale.setScalar(1.35)
   return g
 }
+const passers = [
+  { fig: null, color: '#8e7cc3', z: -1.3, dir: 1, speed: 0.9, off: 2 },
+  { fig: null, color: '#6aa84f', z: 4.6, dir: -1, speed: 1.1, off: 12 },
+  { fig: null, color: '#c27ba0', z: 4.9, dir: 1, speed: 0.8, off: 20 },
+]
+for (const ps of passers) ps.fig = null
 const expert = figurine('#4a4f5c', { badge: true, tie: true })
 const manager = figurine('#f4f1ea', { head: '#e8b48f', tie: true })
 const fake = figurine('#d9822b', { cap: '#8a4b12' })
 const real = figurine('#d9822b', { cap: '#8a4b12' })
+for (const ps of passers) {
+  ps.fig = figurine(ps.color, { head: '#e8b48f' })
+  ps.fig.scale.setScalar(1.1)
+}
+// Étincelles autour des diamants.
+const starTex = (() => {
+  const c = document.createElement('canvas')
+  c.width = c.height = 64
+  const g = c.getContext('2d')
+  const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32)
+  gr.addColorStop(0, 'rgba(255,255,255,1)')
+  gr.addColorStop(0.25, 'rgba(190,240,255,0.9)')
+  gr.addColorStop(1, 'rgba(190,240,255,0)')
+  g.fillStyle = gr
+  g.fillRect(0, 0, 64, 64)
+  g.fillStyle = 'rgba(255,255,255,0.95)'
+  g.fillRect(30, 2, 4, 60)
+  g.fillRect(2, 30, 60, 4)
+  const t = new THREE.CanvasTexture(c)
+  return t
+})()
+const sparks = Array.from({ length: 16 }, (_, k) => {
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }))
+  scene.add(sp)
+  return { sp, k }
+})
 // La mallette (avec les diamants qui brillent quand elle est ouverte).
 function briefcase(parent) {
   const g = group(parent)
@@ -250,7 +310,7 @@ const realIn = dashed([[11, 2.6], [5.0, 2.2], [-1.0, 1.6], [-4.2, -1.6]], '#ffd0
 
 const ui = document.getElementById('ui')
 const tags = []
-function tag(html, cls, { t0, t1 = Infinity, at = null, dy = 1.7, x = 540, y = 400, rot = 0, from = 1.6, dur = 0.3 }) {
+function tag(html, cls, { t0, t1 = Infinity, at = null, dy = 2.3, x = 540, y = 400, rot = 0, from = 1.6, dur = 0.3 }) {
   const el = document.createElement('div')
   el.className = `tag ${cls}`
   el.innerHTML = html
@@ -373,11 +433,19 @@ const sharp = document.createElement('canvas')
 sharp.width = W
 sharp.height = H
 const sctx = sharp.getContext('2d')
-function composite(band) {
+// Transitions entre les chapitres : filé horizontal + flash.
+const CUTS = [S('02') - 0.15, S('03') + 0.05, Wd('04', 'chaque') - 0.15, S('05') - 0.1, S('07') - 0.08, S('08') - 0.1, S('09') - 0.1]
+const flashEl = document.createElement('div')
+flashEl.style.cssText = 'position:absolute;inset:0;background:#fff;pointer-events:none;opacity:0'
+document.getElementById('stage').append(flashEl)
+function composite(band, t) {
   out.clearRect(0, 0, W, H)
   out.filter = 'blur(9px) saturate(1.25)'
   out.drawImage(gl, -30, -30, W + 60, H + 60)
   out.filter = 'none'
+  let whip = 0
+  for (const c of CUTS) if (t > c - 0.05 && t < c + 0.3) whip = Math.max(whip, Math.sin(Math.PI * clamp((t - c + 0.05) / 0.35)))
+  flashEl.style.opacity = (0.35 * Math.max(0, whip - 0.5) * 2).toFixed(3)
   sctx.globalCompositeOperation = 'source-over'
   sctx.clearRect(0, 0, W, H)
   sctx.filter = 'saturate(1.25) contrast(1.06)'
@@ -392,22 +460,50 @@ function composite(band) {
   sctx.fillStyle = g
   sctx.fillRect(0, 0, W, H)
   out.drawImage(sharp, 0, 0)
+  if (whip > 0.02) {
+    // Flou de mouvement : l'image répétée en décalé, comme un panoramique très rapide.
+    out.globalAlpha = 0.18 * whip
+    for (let k = 1; k <= 6; k++) out.drawImage(document.getElementById('out'), k * 26 * whip, 0)
+    out.globalAlpha = 1
+  }
 }
 
 // ------------------------------------------------------------- la caméra
 
 const WIDE = { pos: [-34, 50, 60], look: [-0.5, 0.6, 0] }
+// follow : la caméra garde la figurine dans le cadre (le regard glisse vers elle).
 const CAM = [
-  { t: 0, pos: [-8, 7.5, 6], look: [-4.8, 1.2, -4.6] },
-  { t: S('02') - 0.2, ...WIDE, dur: 0.9 },
-  { t: S('03') + 0.6, pos: [-11, 17, 15], look: [-4.2, 0.6, -3.4], dur: 1.2 },
-  { t: Wd('04', 'chaque') - 0.2, pos: [-10, 36, 44], look: [1.6, 0.6, -1.6], dur: 1.2 },
-  { t: S('05') - 0.1, pos: [-18, 22, 24], look: [-5.4, 0.6, -1.0], dur: 1.0 },
-  { t: S('06') - 0.15, pos: [-8.5, 12, 10], look: [-4.6, 0.8, -3.8], dur: 0.6 },
-  { t: S('07') - 0.1, pos: [16, 26, 28], look: [1.0, 0.6, 0.2], dur: 0.7 },
-  { t: S('08') - 0.1, pos: [-20, 20, 26], look: [-6.4, 0.6, 2.4], dur: 1.0 },
-  { t: S('09') - 0.1, pos: [30, 56, 58], look: [0, 0.4, 0], dur: 1.6 },
+  { t: 0, pos: [-7.2, 5.2, 3.2], look: [-4.8, 1.1, -4.6] },
+  { t: Wd('01', 'diamants') - 0.1, pos: [-6.2, 4.4, 1.2], look: [-4.8, 1.2, -4.6], dur: 1.2 },
+  { t: Wd('01', 'sans') - 0.1, pos: [-9.5, 6.5, 5.5], look: [-4.6, 1.0, -4.4], dur: 0.5 },
+  { t: S('02') - 0.15, ...WIDE, dur: 0.45 },
+  { t: S('03') + 0.05, pos: [-10.5, 15, 13], look: [-4.2, 0.6, -3.0], dur: 0.55, follow: 'expert' },
+  { t: Wd('03', 'costume') - 0.1, pos: [-8.5, 10, 9], look: [-4.2, 0.8, -3.2], dur: 0.4, follow: 'expert' },
+  { t: Wd('03', 'le') - 0.1, pos: [-12, 18, 12], look: [-4.4, 0.6, -4.2], dur: 0.6, follow: 'expert' },
+  { t: Wd('04', 'chaque') - 0.15, pos: [-10, 34, 42], look: [1.6, 0.6, -1.6], dur: 0.45 },
+  { t: Wd('04', 'banque') - 0.4, pos: [4, 16, 18], look: [5.5, 1.2, -2.6], dur: 0.7 },
+  { t: Wd('04', 'mallette') - 0.2, pos: [-8.5, 11, 10], look: [-4.4, 0.9, -4.2], dur: 0.45 },
+  { t: S('05') - 0.1, pos: [-16, 18, 20], look: [-5.4, 0.6, -0.4], dur: 0.5, follow: 'fake' },
+  { t: Wd('05', 'bon') - 0.1, pos: [-11, 12, 11], look: [-4.6, 0.8, -3.2], dur: 0.45, follow: 'fake' },
+  { t: S('06') - 0.15, pos: [-7.6, 7.5, 6.8], look: [-4.6, 1.0, -4.0], dur: 0.35 },
+  { t: S('07') - 0.08, pos: [14, 18, 20], look: [2.0, 0.6, 0.6], dur: 0.3, follow: 'real' },
+  { t: S('08') - 0.1, pos: [-18, 16, 22], look: [-6.4, 0.6, 2.4], dur: 0.45, follow: 'fake' },
+  { t: Wd('08', 'metro') - 0.15, pos: [-10.5, 6.5, 10], look: [-7.2, 0.4, 4.6], dur: 0.45 },
+  { t: S('09') - 0.1, pos: [30, 56, 58], look: [0, 0.4, 0], dur: 1.3 },
 ]
+// Zooms-chocs (resserrement bref de la focale) et secousses sur les mots clés.
+const PUNCH = [
+  [Wd('01', 'porte'), 0.16],
+  [S('02'), 0.1],
+  [Wd('03', 'tout'), 0.14],
+  [Wd('04', 'detail'), 0.1],
+  [Wd('05', 'parfait'), 0.12],
+  [Wd('06', 'lui-meme'), 0.18],
+  [Wd('07', 'vrai'), 0.2],
+  [Wd('09', 'jamais'), 0.12],
+]
+const FOLLOW = {}
+const tmpL = new THREE.Vector3()
 function camAt(t) {
   let i = 0
   while (i < CAM.length - 1 && t >= CAM[i + 1].t) i++
@@ -415,11 +511,35 @@ function camAt(t) {
   const prev = CAM[Math.max(0, i - 1)]
   const p = i === 0 ? 1 : ease.io3(clamp((t - cur.t) / cur.dur))
   const pos = cur.pos.map((v, k) => lerp(prev.pos[k], v, p))
-  const look = cur.look.map((v, k) => lerp(prev.look[k], v, p))
-  // Lente dérive et respiration de la caméra.
+  let look = cur.look.map((v, k) => lerp(prev.look[k], v, p))
+  if (cur.follow && FOLLOW[cur.follow]?.visible) {
+    FOLLOW[cur.follow].getWorldPosition(tmpL)
+    const k = 0.65 * p
+    look = [lerp(look[0], tmpL.x, k), lerp(look[1], tmpL.y + 1, k), lerp(look[2], tmpL.z, k)]
+    // La caméra accompagne aussi le déplacement.
+    pos[0] += (tmpL.x - cur.look[0]) * 0.35 * p
+    pos[2] += (tmpL.z - cur.look[2]) * 0.35 * p
+  }
+  let punch = 0
+  let shake = 0
+  for (const [t0, a] of PUNCH) {
+    if (t < t0 - 0.05 || t > t0 + 0.9) continue
+    const u = t - t0
+    punch += a * (u < 0.08 ? ease.out3(clamp((u + 0.05) / 0.13)) : Math.exp(-(u - 0.08) * 4))
+    shake += a * 2.2 * Math.exp(-Math.max(0, u) * 7)
+  }
+  camera.fov = 18 * (1 - punch)
+  camera.updateProjectionMatrix()
   const a = Math.sin(t * 0.18) * 0.08
-  camera.position.set(pos[0] * Math.cos(a) - pos[2] * Math.sin(a), pos[1], pos[0] * Math.sin(a) + pos[2] * Math.cos(a))
+  const d = Math.hypot(...pos) / 30
+  camera.position.set(
+    pos[0] * Math.cos(a) - pos[2] * Math.sin(a) + shake * d * Math.sin(t * 61),
+    pos[1] + shake * d * Math.sin(t * 47 + 1),
+    pos[0] * Math.sin(a) + pos[2] * Math.cos(a),
+  )
   camera.lookAt(...look)
+  // Petit tangage pendant les mouvements rapides (caméra « à la main »).
+  camera.rotateZ(0.02 * Math.sin(t * 1.3) + (1 - p) * 0.05 * Math.sin(t * 9) * (i > 0 ? 1 : 0))
 }
 
 // --------------------------------------------------------------- figurines
@@ -431,8 +551,16 @@ function walk(fig, path, t, t0, dur, { show = true } = {}) {
   const u = ease.io2(p)
   path.curve.getPointAt(u, tmpA)
   path.curve.getPointAt(Math.min(1, u + 0.01), tmpB)
-  fig.position.set(tmpA.x, Y0 + (p > 0 && p < 1 ? Math.abs(Math.sin(t * 15)) * 0.07 : 0), tmpA.z)
+  const moving = p > 0 && p < 1
+  fig.position.set(tmpA.x, Y0 + (moving ? Math.abs(Math.sin(t * 14)) * 0.12 : 0), tmpA.z)
   if (p < 1) fig.rotation.y = Math.atan2(tmpB.x - tmpA.x, tmpB.z - tmpA.z)
+  fig.rotation.z = moving ? Math.sin(t * 14) * 0.08 : 0
+  fig.rotation.x = moving ? 0.12 : 0
+  const [aL, aR] = fig.userData.arms ?? []
+  if (aL) {
+    aL.rotation.x = moving ? Math.sin(t * 14) * 0.7 : 0.05 * Math.sin(t * 2)
+    aR.rotation.x = moving ? -Math.sin(t * 14) * 0.7 : -0.05 * Math.sin(t * 2)
+  }
   path.line.visible = show && t >= t0
   path.line.geometry.setDrawRange(0, Math.max(2, Math.floor(121 * p)))
   return p
@@ -444,9 +572,10 @@ const park = (fig, x, z, ry = 0) => {
 
 function seek(t) {
   t = clamp(t, 0, DURATION - 1e-6)
-  camAt(t)
+  Object.assign(FOLLOW, { expert, fake, real })
   // Le jour baisse : l'accroche est de nuit, le récit en fin de journée, puis la nuit tombe.
-  const dusk = t < S('03') ? 1 : t < S('05') ? 0.2 : t < S('08') ? lerp(0.35, 0.7, prog(t, S('05'), 6)) : 1
+  const lapse = t >= S('03') - 0.1 && t < Wd('03', 'il') ? 0.5 + 0.5 * Math.sin((t - S('03')) * 14) : null
+  const dusk = lapse ?? (t < S('03') ? 1 : t < S('05') ? 0.2 : t < S('08') ? lerp(0.35, 0.7, prog(t, S('05'), 6)) : 1)
   hemi.intensity = lerp(1.05, 0.55, dusk)
   sun.intensity = lerp(1.4, 0.45, dusk)
   sun.color.set(dusk > 0.5 ? '#b8c8ff' : '#ffe2c0')
@@ -492,7 +621,7 @@ function seek(t) {
   } else {
     fake.getWorldPosition(tmpA)
     const k = clamp((t - handOff) / 0.35)
-    case1.position.set(lerp(-4.4, tmpA.x + 0.28, k), lerp(Y0 + 0.8, tmpA.y + 0.35, k), lerp(-4.4, tmpA.z, k))
+    case1.position.set(lerp(-4.4, tmpA.x + 0.4, k), lerp(Y0 + 0.8, tmpA.y + 0.45, k), lerp(-4.4, tmpA.z, k))
     case1.rotation.y = fake.rotation.y
   }
   case1.visible = !hero.visible && (t < handOff || fake.visible)
@@ -501,9 +630,37 @@ function seek(t) {
   if (real.visible) walk(real, realIn, t, S('07') - 0.1, 2.4)
   else realIn.line.visible = false
 
+  // Voitures et passants (boucles le long de la rue).
+  for (const c of traffic) {
+    const x = ((((t * c.speed + c.off) % 30) + 30) % 30) - 15
+    c.car.position.set(c.dir * x, 0.14, c.lane)
+    c.car.rotation.y = c.dir > 0 ? 0 : Math.PI
+  }
+  for (const ps of passers) {
+    const x = ((((t * ps.speed + ps.off) % 26) + 26) % 26) - 13
+    ps.fig.position.set(ps.dir * x, Y0 + Math.abs(Math.sin(t * 12 + ps.off)) * 0.08, ps.z)
+    ps.fig.rotation.y = ps.dir > 0 ? Math.PI / 2 : -Math.PI / 2
+    ps.fig.rotation.z = Math.sin(t * 12 + ps.off) * 0.07
+    const [aL, aR] = ps.fig.userData.arms
+    aL.rotation.x = Math.sin(t * 12 + ps.off) * 0.6
+    aR.rotation.x = -aL.rotation.x
+  }
+  // Étincelles autour de la mallette (accroche), puis autour de la mallette du coursier.
+  const sparkOn = hero.visible ? 1 : t >= Wd('04', 'mallette') - 0.2 && t < E('04') ? 1 : 0
+  const center = hero.visible ? tmpL.set(-4.8, Y0 + 1.2, -4.6) : case1.getWorldPosition(tmpL).add(tmpB.set(0, 0.3, 0))
+  for (const { sp, k } of sparks) {
+    const ph = (t * 1.3 + k * 0.37) % 1
+    const ang = k * 2.4 + t * 0.6
+    const r = hero.visible ? 0.4 + 0.5 * ((k * 0.61) % 1) : 0.25 + 0.3 * ((k * 0.61) % 1)
+    sp.position.set(center.x + Math.cos(ang) * r, center.y + 0.1 + ph * 0.5, center.z + Math.sin(ang) * r)
+    const sz = sparkOn * Math.sin(Math.PI * ph) * (hero.visible ? 0.35 : 0.22)
+    sp.scale.setScalar(Math.max(1e-4, sz))
+    sp.visible = sz > 0.01
+  }
+  camAt(t)
   renderer.render(scene, camera)
   const close = camera.position.length() < 22
-  composite(close ? [0.3, 0.7] : [0.36, 0.64])
+  composite(close ? [0.3, 0.7] : [0.36, 0.64], t)
   updateTags(t)
   updateCaptions(t)
 }

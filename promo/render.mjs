@@ -56,6 +56,7 @@ const ADS = {
   'proto-bd': { page: 'promo/prototypes/bd/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-bd', out: 'proto-bd.mp4' },
   'proto-noir': { page: 'promo/prototypes/noir/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-noir', out: 'proto-noir.mp4' },
   'proto-cartoon': { page: 'promo/prototypes/cartoon/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-cartoon', out: 'proto-cartoon.mp4' },
+  'proto-diorama': { page: 'promo/prototypes/diorama/index.html', audio: './affaire-05/audio.mjs', build: 'build/proto-diorama', out: 'proto-diorama.mp4' },
 }
 const AD = ADS[args.ad ?? '15s']
 if (!AD) throw new Error(`Pub inconnue : ${args.ad} (au choix : ${Object.keys(ADS).join(', ')})`)

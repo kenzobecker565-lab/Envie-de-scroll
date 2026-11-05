@@ -1,0 +1,91 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 6.77,
+ "lines": [
+  {
+   "id": "01-alarme",
+   "who": "narrateur",
+   "text": "23 h 16. L'alarme de la bijouterie sonne. Au même instant, le voisin descend… une batte à la main.",
+   "start": 0.5,
+   "dur": 5.27,
+   "words": [
+    {
+     "w": "23",
+     "t": 0.62
+    },
+    {
+     "w": "h",
+     "t": 0.948
+    },
+    {
+     "w": "16.",
+     "t": 1.276
+    },
+    {
+     "w": "L'alarme",
+     "t": 1.604
+    },
+    {
+     "w": "de",
+     "t": 1.932
+    },
+    {
+     "w": "la",
+     "t": 2.012
+    },
+    {
+     "w": "bijouterie",
+     "t": 2.112
+    },
+    {
+     "w": "sonne.",
+     "t": 2.512
+    },
+    {
+     "w": "Au",
+     "t": 3.172
+    },
+    {
+     "w": "même",
+     "t": 3.232
+    },
+    {
+     "w": "instant,",
+     "t": 3.372
+    },
+    {
+     "w": "le",
+     "t": 4.032
+    },
+    {
+     "w": "voisin",
+     "t": 4.092
+    },
+    {
+     "w": "descend…",
+     "t": 4.412
+    },
+    {
+     "w": "une",
+     "t": 4.692
+    },
+    {
+     "w": "batte",
+     "t": 5.032
+    },
+    {
+     "w": "à",
+     "t": 5.372
+    },
+    {
+     "w": "la",
+     "t": 5.372
+    },
+    {
+     "w": "main.",
+     "t": 5.432
+    }
+   ]
+  }
+ ]
+}

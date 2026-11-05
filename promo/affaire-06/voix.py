@@ -28,8 +28,8 @@ from voix import align, for_asr, read, tokens, write  # noqa: E402
 
 START = 0.6  # première réplique (après l'apparition du titre)
 TAIL = 4.5  # fin : écran de vote
-MAX_PAUSE = 0.3  # pause maximale gardée dans une réplique (secondes)
-TEMPO = 1.1  # Chatterbox parle posément : on accélère un peu, sans changer la hauteur de la voix
+MAX_PAUSE = 0.25  # pause maximale gardée dans une réplique (secondes)
+TEMPO = 1.18  # Chatterbox parle posément : on accélère un peu, sans changer la hauteur de la voix
 DEFAULT_GAP = 0.25
 
 

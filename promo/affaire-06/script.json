@@ -1,20 +1,85 @@
 {
-  "_doc": "Affaire n°6 : le faux chirurgien (affaire fictive), style motion design 2D. Texte des sous-titres, une entrée par réplique, dans l'ordre. « who » : narrateur, procureur, avocate. « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
-  "voices": {
-    "narrateur": { "name": "narrateur", "file": "media/narrateur.wav" },
-    "procureur": { "name": "procureur", "file": "media/procureur.wav" },
-    "avocate": { "name": "avocate", "file": "media/avocate.wav" }
+ "_doc": "Affaire n°6 : le faux chirurgien (affaire fictive), style motion design 2D. Texte des sous-titres, une entrée par réplique, dans l'ordre. « who » : narrateur, procureur, avocate. « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
   },
-  "lines": [
-    { "id": "01-carriere", "who": "narrateur", "text": "3 000 opérations. 22 ans de carrière. Pas un seul patient perdu.", "say": "Trois mille opérations. Vingt-deux ans de carrière. Pas un seul patient perdu." },
-    { "id": "02-detail", "who": "narrateur", "text": "Un détail : il n'a jamais été médecin.", "say": "Un détail. Il n'a jamais été médecin.", "gap": 0.35 },
-    { "id": "03-prison", "who": "narrateur", "text": "Ce matin, il risque 5 ans de prison.", "say": "Ce matin, il risque cinq ans de prison.", "gap": 0.3 },
-    { "id": "04-endormies", "who": "procureur", "text": "3 000 personnes se sont endormies sur sa table en croyant qu'un médecin veillait sur elles. Aucune ne savait la vérité.", "say": "Trois mille personnes se sont endormies sur sa table en croyant qu'un médecin veillait sur elles. Aucune ne savait la vérité.", "gap": 0.6 },
-    { "id": "05-plaindre", "who": "avocate", "text": "Et aucune ne s'est réveillée pour s'en plaindre.", "gap": 0.3 },
-    { "id": "06-chance", "who": "procureur", "text": "Vous appelez ça un don. J'appelle ça de la chance. Et on ne confie pas sa vie à la chance.", "gap": 0.35 },
-    { "id": "07-desespere", "who": "avocate", "text": "22 ans de chance ? Quand un cas était désespéré, c'est lui qu'on appelait. Pas les diplômés. Lui.", "say": "Vingt-deux ans de chance ? Quand un cas était désespéré, c'est lui qu'on appelait. Pas les diplômés. Lui.", "gap": 0.3 },
-    { "id": "08-blouse", "who": "procureur", "text": "Acquittez-le, et demain, n'importe qui pourra enfiler une blouse.", "gap": 0.35 },
-    { "id": "09-papier", "who": "avocate", "text": "Condamnez-le, et allez dire à 3 000 familles qu'un bout de papier valait plus que leur vie.", "say": "Condamnez-le, et allez dire à trois mille familles qu'un bout de papier valait plus que leur vie.", "gap": 0.3 },
-    { "id": "10-jury", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu l'aurais laissé t'opérer ?", "say": "Tu es le juré. Coupable, ou non coupable ? Et toi, tu l'aurais laissé t'opérer ?", "gap": 0.8 }
-  ]
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-carriere",
+   "who": "narrateur",
+   "text": "3 000 opérations. 22 ans de carrière. Pas un seul patient perdu.",
+   "say": "Trois mille opérations. Vingt-deux ans de carrière. Pas un seul patient perdu."
+  },
+  {
+   "id": "02-detail",
+   "who": "narrateur",
+   "text": "Un détail : il n'a jamais été médecin.",
+   "say": "Un détail. Il n'a jamais été médecin.",
+   "gap": 0.35
+  },
+  {
+   "id": "03-prison",
+   "who": "narrateur",
+   "text": "Ce matin, il risque 5 ans de prison.",
+   "say": "Ce matin, il risque cinq ans de prison.",
+   "gap": 0.3
+  },
+  {
+   "id": "04-endormies",
+   "who": "procureur",
+   "text": "3 000 personnes se sont endormies sur sa table en croyant qu'un médecin veillait sur elles. Aucune ne savait la vérité.",
+   "say": "Trois mille personnes se sont endormies sur sa table en croyant qu'un médecin veillait sur elles. Aucune ne savait la vérité.",
+   "gap": 0.45
+  },
+  {
+   "id": "05-plaindre",
+   "who": "avocate",
+   "text": "Et aucune ne s'est réveillée pour s'en plaindre.",
+   "gap": 0.3
+  },
+  {
+   "id": "06-chance",
+   "who": "procureur",
+   "text": "Vous appelez ça un don. J'appelle ça de la chance. Et on ne confie pas sa vie à la chance.",
+   "gap": 0.35
+  },
+  {
+   "id": "07-desespere",
+   "who": "avocate",
+   "text": "22 ans de chance ? Quand un cas était désespéré, c'est lui qu'on appelait. Pas les diplômés. Lui.",
+   "say": "Vingt-deux ans de chance ? Quand un cas était désespéré, c'est lui qu'on appelait. Pas les diplômés. Lui.",
+   "gap": 0.3
+  },
+  {
+   "id": "08-blouse",
+   "who": "procureur",
+   "text": "Acquittez-le, et demain, n'importe qui pourra enfiler une blouse.",
+   "gap": 0.35
+  },
+  {
+   "id": "09-papier",
+   "who": "avocate",
+   "text": "Condamnez-le, et allez dire à 3 000 familles qu'un bout de papier valait plus que leur vie.",
+   "say": "Condamnez-le, et allez dire à trois mille familles qu'un bout de papier valait plus que leur vie.",
+   "gap": 0.3
+  },
+  {
+   "id": "10-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu l'aurais laissé t'opérer ?",
+   "say": "Tu es le juré. Coupable, ou non coupable ? Et toi, tu l'aurais laissé t'opérer ?",
+   "gap": 0.6
+  }
+ ]
 }

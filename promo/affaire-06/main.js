@@ -297,7 +297,7 @@ tag('UN DON ?', 'pill yellow', { t0: Wd('06', 'don') - 0.1, t1: E('06'), y: 280,
 tag('DE LA CHANCE', 'pill red', { t0: Wd('06', 'chance') - 0.1, t1: E('06'), y: 400, rot: 2 })
 tag('22 ANS<br>DE CHANCE ?', 'big', { t0: Wd('07', '22') - 0.1, t1: Wd('07', 'quand') - 0.05, y: 380, from: 1.4 }).el.style.cssText += 'text-align:center;line-height:1'
 tag('LES CAS DÉSESPÉRÉS', 'pill red', { t0: Wd('07', 'desespere') - 0.1, t1: Wd('07', 'pas') - 0.1, y: 330, rot: -2 })
-tag('PAS LES DIPLÔMÉS.', 'slam white', { t0: Wd('07', 'pas') - 0.08, t1: E('07') + 0.15, y: 330, rot: -3, from: 2.2, dur: 0.2 })
+tag('PAS LES DIPLÔMÉS.', 'slam white', { t0: Wd('07', 'pas') - 0.08, t1: E('07') + 0.15, y: 330, rot: -3, from: 2.2, dur: 0.2 }).el.style.fontSize = '100px'
 tag('LUI.', 'slam yellow', { t0: Wd('07', 'lui', 1) - 0.06, t1: E('07') + 0.15, y: 520, rot: 3, from: 3, dur: 0.18 })
 tag('N’IMPORTE QUI', 'pill red', { t0: Wd('08', 'nimporte') - 0.1, t1: E('08'), y: 300, rot: -2 })
 tag('UN BOUT DE PAPIER', 'pill', { t0: Wd('09', 'papier') - 0.2, t1: E('09') + 0.2, y: 240, x: 330, rot: -3 })

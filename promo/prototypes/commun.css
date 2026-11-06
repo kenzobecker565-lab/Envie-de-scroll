@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Figtree Variable', sans-serif; }
+#stage > svg, #stage > canvas { position: absolute; inset: 0; }
+#ui { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.tag { position: absolute; left: 0; top: 0; white-space: nowrap; font-weight: 900; will-change: transform; }
+.caps { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
+.caps .line { display: flex; gap: 18px; font-weight: 900; font-size: 74px; color: #fff; -webkit-text-stroke: 14px #10121a; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(0, 0, 0, 0.35); }
+.caps .line span { display: inline-block; transform-origin: 50% 70%; }
+.caps .line span.on { color: #ffd166; }
+.meter { position: absolute; top: 70px; left: 60px; right: 60px; display: flex; align-items: center; gap: 18px; font-weight: 900; font-size: 30px; color: #fff; -webkit-text-stroke: 6px #10121a; paint-order: stroke fill; }
+.meter .bar { position: relative; flex: 1; height: 22px; border-radius: 11px; background: linear-gradient(90deg, #e5484d, #ffd166 50%, #4d8dff); box-shadow: 0 0 0 5px #10121a; }
+.meter .needle { position: absolute; top: -14px; width: 14px; height: 50px; margin-left: -7px; border-radius: 7px; background: #fff; box-shadow: 0 0 0 5px #10121a; }
+.who { font-size: 34px; letter-spacing: 0.06em; color: #fff; padding: 8px 20px; border-radius: 12px; background: #10121a; }
+.who.procureur { background: #c43a2f; }
+.who.avocate { background: #10121a; }

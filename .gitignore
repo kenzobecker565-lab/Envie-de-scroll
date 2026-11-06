@@ -1,0 +1,19 @@
+# Dépendances et builds
+node_modules
+dist
+dist-ssr
+*.local
+coverage
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Éditeurs
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.sw?

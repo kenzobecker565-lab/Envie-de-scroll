@@ -1,0 +1,145 @@
+{
+ "_doc": "PROVISOIRE (durées estimées, pour l'aperçu muet du hook). Remplacé par voix.py dès que les voix ElevenLabs arrivent.",
+ "duration": 12.0,
+ "lines": [
+  {
+   "id": "01-victoires",
+   "who": "narrateur",
+   "text": "47 procès. 47 victoires. Pas une seule défaite.",
+   "start": 0.3,
+   "dur": 3.7,
+   "words": [
+    {
+     "w": "47",
+     "t": 0.3
+    },
+    {
+     "w": "procès.",
+     "t": 0.9
+    },
+    {
+     "w": "47",
+     "t": 1.4
+    },
+    {
+     "w": "victoires.",
+     "t": 2.0
+    },
+    {
+     "w": "Pas",
+     "t": 2.7
+    },
+    {
+     "w": "une",
+     "t": 2.9
+    },
+    {
+     "w": "seule",
+     "t": 3.1
+    },
+    {
+     "w": "défaite.",
+     "t": 3.4
+    }
+   ]
+  },
+  {
+   "id": "02-detail",
+   "who": "narrateur",
+   "text": "Un détail : elle a raté l'examen d'avocate. Trois fois.",
+   "start": 4.3,
+   "dur": 3.3,
+   "words": [
+    {
+     "w": "Un",
+     "t": 4.3
+    },
+    {
+     "w": "détail :",
+     "t": 4.45
+    },
+    {
+     "w": "elle",
+     "t": 5.0
+    },
+    {
+     "w": "a",
+     "t": 5.15
+    },
+    {
+     "w": "raté",
+     "t": 5.25
+    },
+    {
+     "w": "l'examen",
+     "t": 5.5
+    },
+    {
+     "w": "d'avocate.",
+     "t": 5.95
+    },
+    {
+     "w": "Trois",
+     "t": 6.7
+    },
+    {
+     "w": "fois.",
+     "t": 7.0
+    }
+   ]
+  },
+  {
+   "id": "03-salle",
+   "who": "narrateur",
+   "text": "Aujourd'hui, elle est jugée… dans la salle même où elle plaidait.",
+   "start": 7.7,
+   "dur": 3.4,
+   "words": [
+    {
+     "w": "Aujourd'hui,",
+     "t": 7.7
+    },
+    {
+     "w": "elle",
+     "t": 8.3
+    },
+    {
+     "w": "est",
+     "t": 8.45
+    },
+    {
+     "w": "jugée…",
+     "t": 8.6
+    },
+    {
+     "w": "dans",
+     "t": 9.3
+    },
+    {
+     "w": "la",
+     "t": 9.45
+    },
+    {
+     "w": "salle",
+     "t": 9.6
+    },
+    {
+     "w": "même",
+     "t": 9.9
+    },
+    {
+     "w": "où",
+     "t": 10.2
+    },
+    {
+     "w": "elle",
+     "t": 10.3
+    },
+    {
+     "w": "plaidait.",
+     "t": 10.5
+    }
+   ]
+  }
+ ]
+}

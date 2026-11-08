@@ -1,5 +1,5 @@
 {
- "_doc": "Affaire n°7 : la fausse avocate (affaire fictive). Une entrée par réplique, dans l'ordre. Voix ElevenLabs enregistrées par le créateur du compte : media/elevenlabs/<id>.mp3. « avocate » = la défense.",
+ "_doc": "Affaire n°7 : la fausse avocate (affaire fictive). Une entrée par réplique, dans l'ordre. Voix ElevenLabs du créateur du compte (media/elevenlabs/<id>.mp3) : narrateur « Bass », procureur « Hugo », défense « Peter ». « avocate » = la défense (un avocat).",
  "voices": {
   "narrateur": {
    "name": "narrateur",
@@ -18,89 +18,67 @@
   {
    "id": "01-victoires",
    "who": "narrateur",
-   "text": "47 procès. 47 victoires. Pas une seule défaite.",
-   "say": "Quarante-sept procès. Quarante-sept victoires. Pas une seule défaite."
+   "text": "47 procès. 47 victoires. Des juges qui la citaient en exemple."
   },
   {
    "id": "02-detail",
    "who": "narrateur",
-   "text": "Un détail : elle a raté l'examen d'avocate. Trois fois.",
-   "gap": 0.25
+   "text": "Un détail : elle n'a jamais été avocate.",
+   "gap": 0.3
   },
   {
    "id": "03-salle",
    "who": "narrateur",
-   "text": "Aujourd'hui, elle est jugée… dans la salle même où elle plaidait.",
+   "text": "Aujourd'hui, c'est elle qui est jugée… dans la salle même où elle plaidait.",
    "gap": 0.25
   },
   {
-   "id": "04-tort",
+   "id": "04-honoraires",
    "who": "procureur",
-   "text": "Trois fois, la loi lui a dit non. Elle a simplement décidé que la loi avait tort.",
-   "gap": 0.25
+   "text": "Pendant 6 ans, elle a encaissé des honoraires d'avocate. 300 000 euros. Pour un titre qu'elle n'avait pas.",
+   "gap": 0.3
   },
   {
-   "id": "05-verite",
+   "id": "05-prison",
    "who": "avocate",
-   "text": "Trois échecs devant un examen. Quarante-sept victoires devant un juge. Lequel des deux dit la vérité sur elle ?",
-   "gap": 0.25
+   "text": "300 000 euros… et 47 personnes qui dorment chez elles au lieu de dormir en prison.",
+   "gap": 0.12
   },
   {
-   "id": "06-honoraires",
+   "id": "06-annule",
    "who": "procureur",
-   "text": "Celui qui ne ment pas. Six ans. 300 000 euros d'honoraires. Pour un titre qu'elle n'avait pas.",
-   "say": "Celui qui ne ment pas. Six ans. Trois cent mille euros d'honoraires. Pour un titre qu'elle n'avait pas.",
-   "gap": 0.25
+   "text": "Pour l'instant. Un procès plaidé par une fausse avocate peut être annulé. Ces 47 personnes vont devoir être rejugées.",
+   "gap": 0.1
   },
   {
-   "id": "07-triple",
+   "id": "07-papier",
    "who": "avocate",
-   "text": "300 000 euros… quand n'importe quel grand cabinet en aurait demandé le triple. Ses clients n'avaient pas le triple.",
-   "say": "Trois cent mille euros… quand n'importe quel grand cabinet en aurait demandé le triple. Ses clients n'avaient pas le triple.",
-   "gap": 0.25
+   "text": "Rejugées pour des faits dont elle les a fait innocenter. Le problème, ce n'est pas son travail. C'est un bout de papier.",
+   "gap": 0.1
   },
   {
-   "id": "08-rejuges",
+   "id": "08-savait",
    "who": "procureur",
-   "text": "Ses clients n'avaient pas non plus la vérité. Chaque procès qu'elle a plaidé peut être annulé. 47 personnes vont être rejugées. À cause d'elle.",
-   "say": "Ses clients n'avaient pas non plus la vérité. Chaque procès qu'elle a plaidé peut être annulé. Quarante-sept personnes vont être rejugées. À cause d'elle.",
-   "gap": 0.25
+   "text": "Non. Le problème, c'est qu'elle savait. Elle savait que tout s'effondrerait un jour. Et elle a laissé ses clients construire leur vie dessus.",
+   "gap": 0.1
   },
   {
-   "id": "09-cause",
+   "id": "09-diplome",
    "who": "avocate",
-   "text": "À cause d'elle, ils ont été acquittés. À cause de vous, ils seront rejugés.",
-   "gap": 0.15
+   "text": "Il y a trois ans, elle a battu le procureur ici présent. Lui… avait son diplôme.",
+   "gap": 0.2
   },
   {
-   "id": "10-savait",
+   "id": "10-mentir",
    "who": "procureur",
-   "text": "Non. À cause d'elle, ils ont bâti leur vie sur un mensonge. Et chaque matin, en enfilant cette robe… elle le savait.",
-   "gap": 0.15
+   "text": "Mon diplôme ne m'a pas empêché de perdre. Il m'interdit de mentir.",
+   "gap": 0.35
   },
   {
-   "id": "11-diplome",
-   "who": "avocate",
-   "text": "Il y a trois ans, elle vous a battu dans cette salle. Vous… vous aviez votre diplôme.",
-   "gap": 0.25
-  },
-  {
-   "id": "12-mentir",
-   "who": "procureur",
-   "text": "Oui. Et mon diplôme ne m'a pas empêché de perdre. Il m'interdit seulement de mentir.",
-   "gap": 0.25
-  },
-  {
-   "id": "13-denonce",
+   "id": "11-jury",
    "who": "narrateur",
-   "text": "Dernier détail : c'est elle qui s'est dénoncée… la veille du jour où un journaliste allait tout révéler.",
-   "gap": 0.25
-  },
-  {
-   "id": "14-jury",
-   "who": "narrateur",
-   "text": "Remords… ou calcul ? Tu es le juré. Coupable… ou non coupable ?",
-   "gap": 0.25
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu lui aurais confié ta défense ?",
+   "gap": 0.6
   }
  ]
 }

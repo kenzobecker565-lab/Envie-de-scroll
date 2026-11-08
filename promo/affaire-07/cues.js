@@ -31,10 +31,15 @@ export function makeCues(tl) {
   const cut = (id) => S(id) - 0.15
 
   // Les scènes. « cut » : transition d'entrée.
+  const debat = E('03') + 0.1
   const sections = [
     { id: 'plaide', t0: 0, t1: cut('02') },
-    { id: 'examen', t0: cut('02'), t1: cut('03'), cut: 'flash' },
-    { id: 'box', t0: cut('03'), t1: has('04') ? E('03') + 0.1 : tl.duration, cut: 'flash' },
+    { id: 'registre', t0: cut('02'), t1: cut('03'), cut: 'flash' },
+    { id: 'box', t0: cut('03'), t1: debat, cut: 'flash' },
+    { id: 'tribunal', t0: debat, t1: cut('11'), cut: 'wipe' },
+    { id: 'vote', t0: cut('11'), t1: tl.duration, cut: 'wipe' },
   ]
-  return { S, E, W, has, line, sections, duration: tl.duration, lines: tl.lines }
+  // Signature de la marque (proces/marque.mjs) : après « Coupable… ou non coupable ? ».
+  const signature = W('11', 'et') + 0.1
+  return { S, E, W, has, line, sections, signature, duration: tl.duration, lines: tl.lines }
 }

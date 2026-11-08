@@ -1,143 +1,795 @@
 {
- "_doc": "PROVISOIRE (durées estimées, pour l'aperçu muet du hook). Remplacé par voix.py dès que les voix ElevenLabs arrivent.",
- "duration": 12.0,
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 55.06,
  "lines": [
   {
    "id": "01-victoires",
    "who": "narrateur",
-   "text": "47 procès. 47 victoires. Pas une seule défaite.",
-   "start": 0.3,
-   "dur": 3.7,
+   "text": "47 procès. 47 victoires. Des juges qui la citaient en exemple.",
+   "start": 0.25,
+   "dur": 4.1,
    "words": [
     {
      "w": "47",
-     "t": 0.3
+     "t": 0.25
     },
     {
      "w": "procès.",
-     "t": 0.9
+     "t": 0.71
     },
     {
      "w": "47",
-     "t": 1.4
+     "t": 1.23
     },
     {
      "w": "victoires.",
-     "t": 2.0
+     "t": 1.69
     },
     {
-     "w": "Pas",
-     "t": 2.7
+     "w": "Des",
+     "t": 2.43
     },
     {
-     "w": "une",
-     "t": 2.9
+     "w": "juges",
+     "t": 2.93
     },
     {
-     "w": "seule",
-     "t": 3.1
+     "w": "qui",
+     "t": 3.155
     },
     {
-     "w": "défaite.",
-     "t": 3.4
+     "w": "la",
+     "t": 3.38
+    },
+    {
+     "w": "citaient",
+     "t": 3.605
+    },
+    {
+     "w": "en",
+     "t": 3.83
+    },
+    {
+     "w": "exemple.",
+     "t": 3.93
     }
    ]
   },
   {
    "id": "02-detail",
    "who": "narrateur",
-   "text": "Un détail : elle a raté l'examen d'avocate. Trois fois.",
-   "start": 4.3,
-   "dur": 3.3,
+   "text": "Un détail : elle n'a jamais été avocate.",
+   "start": 4.65,
+   "dur": 2.164,
    "words": [
     {
      "w": "Un",
-     "t": 4.3
+     "t": 4.65
     },
     {
-     "w": "détail :",
-     "t": 4.45
+     "w": "détail :",
+     "t": 5.01
     },
     {
      "w": "elle",
-     "t": 5.0
+     "t": 5.35
     },
     {
-     "w": "a",
-     "t": 5.15
+     "w": "n'a",
+     "t": 5.61
     },
     {
-     "w": "raté",
-     "t": 5.25
+     "w": "jamais",
+     "t": 5.87
     },
     {
-     "w": "l'examen",
-     "t": 5.5
+     "w": "été",
+     "t": 6.11
     },
     {
-     "w": "d'avocate.",
-     "t": 5.95
-    },
-    {
-     "w": "Trois",
-     "t": 6.7
-    },
-    {
-     "w": "fois.",
-     "t": 7.0
+     "w": "avocate.",
+     "t": 6.39
     }
    ]
   },
   {
    "id": "03-salle",
    "who": "narrateur",
-   "text": "Aujourd'hui, elle est jugée… dans la salle même où elle plaidait.",
-   "start": 7.7,
-   "dur": 3.4,
+   "text": "Aujourd'hui, c'est elle qui est jugée… dans la salle même où elle plaidait.",
+   "start": 7.063,
+   "dur": 3.697,
    "words": [
     {
      "w": "Aujourd'hui,",
-     "t": 7.7
+     "t": 7.187
+    },
+    {
+     "w": "c'est",
+     "t": 7.733
     },
     {
      "w": "elle",
-     "t": 8.3
+     "t": 8.28
+    },
+    {
+     "w": "qui",
+     "t": 8.48
     },
     {
      "w": "est",
-     "t": 8.45
+     "t": 8.64
     },
     {
      "w": "jugée…",
-     "t": 8.6
+     "t": 8.74
     },
     {
      "w": "dans",
-     "t": 9.3
+     "t": 9.08
     },
     {
      "w": "la",
-     "t": 9.45
+     "t": 9.4
     },
     {
      "w": "salle",
-     "t": 9.6
+     "t": 9.52
     },
     {
      "w": "même",
-     "t": 9.9
+     "t": 9.76
     },
     {
      "w": "où",
-     "t": 10.2
+     "t": 10.0
     },
     {
      "w": "elle",
-     "t": 10.3
+     "t": 10.24
     },
     {
      "w": "plaidait.",
-     "t": 10.5
+     "t": 10.36
+    }
+   ]
+  },
+  {
+   "id": "04-honoraires",
+   "who": "procureur",
+   "text": "Pendant 6 ans, elle a encaissé des honoraires d'avocate. 300 000 euros. Pour un titre qu'elle n'avait pas.",
+   "start": 11.06,
+   "dur": 5.07,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 11.06
+    },
+    {
+     "w": "6",
+     "t": 11.32
+    },
+    {
+     "w": "ans,",
+     "t": 11.58
+    },
+    {
+     "w": "elle",
+     "t": 12.0
+    },
+    {
+     "w": "a",
+     "t": 12.08
+    },
+    {
+     "w": "encaissé",
+     "t": 12.16
+    },
+    {
+     "w": "des",
+     "t": 12.5
+    },
+    {
+     "w": "honoraires",
+     "t": 12.64
+    },
+    {
+     "w": "d'avocate.",
+     "t": 13.14
+    },
+    {
+     "w": "300",
+     "t": 13.64
+    },
+    {
+     "w": "000",
+     "t": 14.08
+    },
+    {
+     "w": "euros.",
+     "t": 14.44
+    },
+    {
+     "w": "Pour",
+     "t": 14.84
+    },
+    {
+     "w": "un",
+     "t": 15.02
+    },
+    {
+     "w": "titre",
+     "t": 15.14
+    },
+    {
+     "w": "qu'elle",
+     "t": 15.36
+    },
+    {
+     "w": "n'avait",
+     "t": 15.58
+    },
+    {
+     "w": "pas.",
+     "t": 15.8
+    }
+   ]
+  },
+  {
+   "id": "05-prison",
+   "who": "avocate",
+   "text": "300 000 euros… et 47 personnes qui dorment chez elles au lieu de dormir en prison.",
+   "start": 16.25,
+   "dur": 4.44,
+   "words": [
+    {
+     "w": "300",
+     "t": 16.25
+    },
+    {
+     "w": "000",
+     "t": 16.55
+    },
+    {
+     "w": "euros…",
+     "t": 16.85
+    },
+    {
+     "w": "et",
+     "t": 17.49
+    },
+    {
+     "w": "47",
+     "t": 17.63
+    },
+    {
+     "w": "personnes",
+     "t": 18.05
+    },
+    {
+     "w": "qui",
+     "t": 18.59
+    },
+    {
+     "w": "dorment",
+     "t": 18.77
+    },
+    {
+     "w": "chez",
+     "t": 18.99
+    },
+    {
+     "w": "elles",
+     "t": 19.15
+    },
+    {
+     "w": "au",
+     "t": 19.45
+    },
+    {
+     "w": "lieu",
+     "t": 19.65
+    },
+    {
+     "w": "de",
+     "t": 19.77
+    },
+    {
+     "w": "dormir",
+     "t": 19.89
+    },
+    {
+     "w": "en",
+     "t": 20.13
+    },
+    {
+     "w": "prison.",
+     "t": 20.31
+    }
+   ]
+  },
+  {
+   "id": "06-annule",
+   "who": "procureur",
+   "text": "Pour l'instant. Un procès plaidé par une fausse avocate peut être annulé. Ces 47 personnes vont devoir être rejugées.",
+   "start": 20.79,
+   "dur": 5.86,
+   "words": [
+    {
+     "w": "Pour",
+     "t": 20.85
+    },
+    {
+     "w": "l'instant.",
+     "t": 21.19
+    },
+    {
+     "w": "Un",
+     "t": 21.53
+    },
+    {
+     "w": "procès",
+     "t": 21.65
+    },
+    {
+     "w": "plaidé",
+     "t": 21.97
+    },
+    {
+     "w": "par",
+     "t": 22.25
+    },
+    {
+     "w": "une",
+     "t": 22.37
+    },
+    {
+     "w": "fausse",
+     "t": 22.51
+    },
+    {
+     "w": "avocate",
+     "t": 22.79
+    },
+    {
+     "w": "peut",
+     "t": 23.09
+    },
+    {
+     "w": "être",
+     "t": 23.37
+    },
+    {
+     "w": "annulé.",
+     "t": 23.55
+    },
+    {
+     "w": "Ces",
+     "t": 24.31
+    },
+    {
+     "w": "47",
+     "t": 24.45
+    },
+    {
+     "w": "personnes",
+     "t": 24.75
+    },
+    {
+     "w": "vont",
+     "t": 25.29
+    },
+    {
+     "w": "devoir",
+     "t": 25.49
+    },
+    {
+     "w": "être",
+     "t": 25.71
+    },
+    {
+     "w": "rejugées.",
+     "t": 25.97
+    }
+   ]
+  },
+  {
+   "id": "07-papier",
+   "who": "avocate",
+   "text": "Rejugées pour des faits dont elle les a fait innocenter. Le problème, ce n'est pas son travail. C'est un bout de papier.",
+   "start": 26.75,
+   "dur": 5.44,
+   "words": [
+    {
+     "w": "Rejugées",
+     "t": 26.81
+    },
+    {
+     "w": "pour",
+     "t": 27.31
+    },
+    {
+     "w": "des",
+     "t": 27.47
+    },
+    {
+     "w": "faits",
+     "t": 27.61
+    },
+    {
+     "w": "dont",
+     "t": 28.01
+    },
+    {
+     "w": "elle",
+     "t": 28.01
+    },
+    {
+     "w": "les",
+     "t": 28.19
+    },
+    {
+     "w": "a",
+     "t": 28.33
+    },
+    {
+     "w": "fait",
+     "t": 28.47
+    },
+    {
+     "w": "innocenter.",
+     "t": 28.59
+    },
+    {
+     "w": "Le",
+     "t": 29.45
+    },
+    {
+     "w": "problème,",
+     "t": 29.55
+    },
+    {
+     "w": "ce",
+     "t": 30.23
+    },
+    {
+     "w": "n'est",
+     "t": 30.33
+    },
+    {
+     "w": "pas",
+     "t": 30.43
+    },
+    {
+     "w": "son",
+     "t": 30.53
+    },
+    {
+     "w": "travail.",
+     "t": 30.65
+    },
+    {
+     "w": "C'est",
+     "t": 31.04
+    },
+    {
+     "w": "un",
+     "t": 31.43
+    },
+    {
+     "w": "bout",
+     "t": 31.55
+    },
+    {
+     "w": "de",
+     "t": 31.71
+    },
+    {
+     "w": "papier.",
+     "t": 31.77
+    }
+   ]
+  },
+  {
+   "id": "08-savait",
+   "who": "procureur",
+   "text": "Non. Le problème, c'est qu'elle savait. Elle savait que tout s'effondrerait un jour. Et elle a laissé ses clients construire leur vie dessus.",
+   "start": 32.29,
+   "dur": 6.0,
+   "words": [
+    {
+     "w": "Non.",
+     "t": 32.35
+    },
+    {
+     "w": "Le",
+     "t": 32.87
+    },
+    {
+     "w": "problème,",
+     "t": 32.93
+    },
+    {
+     "w": "c'est",
+     "t": 33.23
+    },
+    {
+     "w": "qu'elle",
+     "t": 33.53
+    },
+    {
+     "w": "savait.",
+     "t": 33.83
+    },
+    {
+     "w": "Elle",
+     "t": 34.37
+    },
+    {
+     "w": "savait",
+     "t": 34.47
+    },
+    {
+     "w": "que",
+     "t": 34.87
+    },
+    {
+     "w": "tout",
+     "t": 34.99
+    },
+    {
+     "w": "s'effondrerait",
+     "t": 35.37
+    },
+    {
+     "w": "un",
+     "t": 35.75
+    },
+    {
+     "w": "jour.",
+     "t": 35.85
+    },
+    {
+     "w": "Et",
+     "t": 36.27
+    },
+    {
+     "w": "elle",
+     "t": 36.33
+    },
+    {
+     "w": "a",
+     "t": 36.45
+    },
+    {
+     "w": "laissé",
+     "t": 36.51
+    },
+    {
+     "w": "ses",
+     "t": 36.77
+    },
+    {
+     "w": "clients",
+     "t": 36.87
+    },
+    {
+     "w": "construire",
+     "t": 37.11
+    },
+    {
+     "w": "leur",
+     "t": 37.61
+    },
+    {
+     "w": "vie",
+     "t": 37.73
+    },
+    {
+     "w": "dessus.",
+     "t": 37.93
+    }
+   ]
+  },
+  {
+   "id": "09-diplome",
+   "who": "avocate",
+   "text": "Il y a trois ans, elle a battu le procureur ici présent. Lui… avait son diplôme.",
+   "start": 38.49,
+   "dur": 4.45,
+   "words": [
+    {
+     "w": "Il",
+     "t": 38.51
+    },
+    {
+     "w": "y",
+     "t": 38.61
+    },
+    {
+     "w": "a",
+     "t": 38.71
+    },
+    {
+     "w": "trois",
+     "t": 38.83
+    },
+    {
+     "w": "ans,",
+     "t": 38.95
+    },
+    {
+     "w": "elle",
+     "t": 39.37
+    },
+    {
+     "w": "a",
+     "t": 39.45
+    },
+    {
+     "w": "battu",
+     "t": 39.51
+    },
+    {
+     "w": "le",
+     "t": 39.77
+    },
+    {
+     "w": "procureur",
+     "t": 39.85
+    },
+    {
+     "w": "ici",
+     "t": 40.37
+    },
+    {
+     "w": "présent.",
+     "t": 40.53
+    },
+    {
+     "w": "Lui…",
+     "t": 41.17
+    },
+    {
+     "w": "avait",
+     "t": 41.89
+    },
+    {
+     "w": "son",
+     "t": 42.15
+    },
+    {
+     "w": "diplôme.",
+     "t": 42.33
+    }
+   ]
+  },
+  {
+   "id": "10-mentir",
+   "who": "procureur",
+   "text": "Mon diplôme ne m'a pas empêché de perdre. Il m'interdit de mentir.",
+   "start": 43.29,
+   "dur": 3.4,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 43.34
+    },
+    {
+     "w": "diplôme",
+     "t": 43.44
+    },
+    {
+     "w": "ne",
+     "t": 43.86
+    },
+    {
+     "w": "m'a",
+     "t": 43.97
+    },
+    {
+     "w": "pas",
+     "t": 44.08
+    },
+    {
+     "w": "empêché",
+     "t": 44.24
+    },
+    {
+     "w": "de",
+     "t": 44.56
+    },
+    {
+     "w": "perdre.",
+     "t": 44.68
+    },
+    {
+     "w": "Il",
+     "t": 45.3
+    },
+    {
+     "w": "m'interdit",
+     "t": 45.62
+    },
+    {
+     "w": "de",
+     "t": 45.94
+    },
+    {
+     "w": "mentir.",
+     "t": 46.04
+    }
+   ]
+  },
+  {
+   "id": "11-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu lui aurais confié ta défense ?",
+   "start": 47.29,
+   "dur": 4.27,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 47.29
+    },
+    {
+     "w": "es",
+     "t": 47.46
+    },
+    {
+     "w": "le",
+     "t": 47.56
+    },
+    {
+     "w": "juré.",
+     "t": 47.68
+    },
+    {
+     "w": "Coupable…",
+     "t": 48.08
+    },
+    {
+     "w": "ou",
+     "t": 48.58
+    },
+    {
+     "w": "non",
+     "t": 48.96
+    },
+    {
+     "w": "coupable ?",
+     "t": 49.1
+    },
+    {
+     "w": "Et",
+     "t": 49.54
+    },
+    {
+     "w": "toi,",
+     "t": 49.82
+    },
+    {
+     "w": "tu",
+     "t": 50.0
+    },
+    {
+     "w": "lui",
+     "t": 50.3
+    },
+    {
+     "w": "aurais",
+     "t": 50.42
+    },
+    {
+     "w": "confié",
+     "t": 50.6
+    },
+    {
+     "w": "ta",
+     "t": 50.9
+    },
+    {
+     "w": "défense ?",
+     "t": 51.0
     }
    ]
   }

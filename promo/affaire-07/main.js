@@ -208,8 +208,8 @@ const BOX = scene('box', (L) => {
   return { lawyer, accused, clipPoly, edge, bars, ledge, desk }
 })
 
-const PROC = { robe: '#c43a2f', hair: 'slick', hairColor: '#1d140e', skin: '#f2c4a0', iris: '#2b1d12' }
-const AVO = { robe: '#23262f', jabot: true, hair: 'short', hairColor: '#2a1a10', beard: true, skin: '#d9a07a', iris: '#2b1d12' }
+const PROC = { robe: '#b8282e', gown: true, epitoge: 'ermine', hair: 'slick', hairColor: '#1d140e', skin: '#f2c4a0', iris: '#2b1d12' }
+const AVO = { robe: '#17181f', gown: true, hair: 'short', hairColor: '#2a1a10', beard: true, skin: '#d9a07a', iris: '#2b1d12' }
 
 // 4 · Le procès : chaque réplique a son plan et son accessoire.
 const TRIB = scene('tribunal', (L) => {

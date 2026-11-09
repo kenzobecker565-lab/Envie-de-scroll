@@ -1,0 +1,1225 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 75.1,
+ "lines": [
+  {
+   "id": "01-coma",
+   "who": "narrateur",
+   "text": "Une nuit d'émeutes. Un vigile de 58 ans, piétiné devant un supermarché. Il est toujours dans le coma.",
+   "start": 0.25,
+   "dur": 4.76,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "nuit",
+     "t": 0.41
+    },
+    {
+     "w": "d'émeutes.",
+     "t": 0.85
+    },
+    {
+     "w": "Un",
+     "t": 1.29
+    },
+    {
+     "w": "vigile",
+     "t": 1.35
+    },
+    {
+     "w": "de",
+     "t": 1.65
+    },
+    {
+     "w": "58",
+     "t": 1.75
+    },
+    {
+     "w": "ans,",
+     "t": 2.13
+    },
+    {
+     "w": "piétiné",
+     "t": 2.61
+    },
+    {
+     "w": "devant",
+     "t": 3.03
+    },
+    {
+     "w": "un",
+     "t": 3.19
+    },
+    {
+     "w": "supermarché.",
+     "t": 3.33
+    },
+    {
+     "w": "Il",
+     "t": 4.15
+    },
+    {
+     "w": "est",
+     "t": 4.15
+    },
+    {
+     "w": "toujours",
+     "t": 4.25
+    },
+    {
+     "w": "dans",
+     "t": 4.47
+    },
+    {
+     "w": "le",
+     "t": 4.61
+    },
+    {
+     "w": "coma.",
+     "t": 4.71
+    }
+   ]
+  },
+  {
+   "id": "02-video",
+   "who": "narrateur",
+   "text": "Sur la vidéo, une jeune femme enjambe son corps. Dans les bras : des couches, du lait pour bébé… et une console de jeux.",
+   "start": 5.31,
+   "dur": 5.99,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 5.39
+    },
+    {
+     "w": "la",
+     "t": 5.51
+    },
+    {
+     "w": "vidéo,",
+     "t": 5.61
+    },
+    {
+     "w": "une",
+     "t": 6.17
+    },
+    {
+     "w": "jeune",
+     "t": 6.29
+    },
+    {
+     "w": "femme",
+     "t": 6.41
+    },
+    {
+     "w": "enjambe",
+     "t": 6.65
+    },
+    {
+     "w": "son",
+     "t": 7.09
+    },
+    {
+     "w": "corps.",
+     "t": 7.21
+    },
+    {
+     "w": "Dans",
+     "t": 7.77
+    },
+    {
+     "w": "les",
+     "t": 7.83
+    },
+    {
+     "w": "bras :",
+     "t": 7.95
+    },
+    {
+     "w": "des",
+     "t": 8.47
+    },
+    {
+     "w": "couches,",
+     "t": 8.57
+    },
+    {
+     "w": "du",
+     "t": 9.11
+    },
+    {
+     "w": "lait",
+     "t": 9.21
+    },
+    {
+     "w": "pour",
+     "t": 9.37
+    },
+    {
+     "w": "bébé…",
+     "t": 9.43
+    },
+    {
+     "w": "et",
+     "t": 9.83
+    },
+    {
+     "w": "une",
+     "t": 10.15
+    },
+    {
+     "w": "console",
+     "t": 10.51
+    },
+    {
+     "w": "de",
+     "t": 10.83
+    },
+    {
+     "w": "jeux.",
+     "t": 11.1
+    }
+   ]
+  },
+  {
+   "id": "03-ines",
+   "who": "narrateur",
+   "text": "Elle s'appelle Inès. 23 ans. Aide-soignante. Casier vierge. Aujourd'hui, c'est elle qu'on juge.",
+   "start": 11.55,
+   "dur": 4.95,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 11.57
+    },
+    {
+     "w": "s'appelle",
+     "t": 11.78
+    },
+    {
+     "w": "Inès.",
+     "t": 11.99
+    },
+    {
+     "w": "23",
+     "t": 12.65
+    },
+    {
+     "w": "ans.",
+     "t": 12.93
+    },
+    {
+     "w": "Aide-soignante.",
+     "t": 13.53
+    },
+    {
+     "w": "Casier",
+     "t": 14.13
+    },
+    {
+     "w": "vierge.",
+     "t": 14.47
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 14.91
+    },
+    {
+     "w": "c'est",
+     "t": 15.35
+    },
+    {
+     "w": "elle",
+     "t": 15.79
+    },
+    {
+     "w": "qu'on",
+     "t": 15.95
+    },
+    {
+     "w": "juge.",
+     "t": 16.11
+    }
+   ]
+  },
+  {
+   "id": "04-chaos",
+   "who": "procureur",
+   "text": "Elle n'a pas volé pour survivre. Elle a profité du chaos. Les couches… et la console.",
+   "start": 16.8,
+   "dur": 5.16,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 16.8
+    },
+    {
+     "w": "n'a",
+     "t": 16.93
+    },
+    {
+     "w": "pas",
+     "t": 17.06
+    },
+    {
+     "w": "volé",
+     "t": 17.28
+    },
+    {
+     "w": "pour",
+     "t": 17.58
+    },
+    {
+     "w": "survivre.",
+     "t": 17.74
+    },
+    {
+     "w": "Elle",
+     "t": 18.74
+    },
+    {
+     "w": "a",
+     "t": 18.82
+    },
+    {
+     "w": "profité",
+     "t": 18.88
+    },
+    {
+     "w": "du",
+     "t": 19.26
+    },
+    {
+     "w": "chaos.",
+     "t": 19.4
+    },
+    {
+     "w": "Les",
+     "t": 20.06
+    },
+    {
+     "w": "couches…",
+     "t": 20.22
+    },
+    {
+     "w": "et",
+     "t": 20.76
+    },
+    {
+     "w": "la",
+     "t": 21.12
+    },
+    {
+     "w": "console.",
+     "t": 21.3
+    }
+   ]
+  },
+  {
+   "id": "05-console",
+   "who": "avocate",
+   "text": "La console, c'était pour son fils de 6 ans. Le seul cadeau qu'il aurait eu cette année. Elle gagne 1300 euros par mois.",
+   "start": 22.08,
+   "dur": 6.18,
+   "words": [
+    {
+     "w": "La",
+     "t": 22.08
+    },
+    {
+     "w": "console,",
+     "t": 22.24
+    },
+    {
+     "w": "c'était",
+     "t": 22.71
+    },
+    {
+     "w": "pour",
+     "t": 23.18
+    },
+    {
+     "w": "son",
+     "t": 23.34
+    },
+    {
+     "w": "fils",
+     "t": 23.5
+    },
+    {
+     "w": "de",
+     "t": 23.68
+    },
+    {
+     "w": "6",
+     "t": 23.86
+    },
+    {
+     "w": "ans.",
+     "t": 24.04
+    },
+    {
+     "w": "Le",
+     "t": 24.38
+    },
+    {
+     "w": "seul",
+     "t": 24.48
+    },
+    {
+     "w": "cadeau",
+     "t": 24.68
+    },
+    {
+     "w": "qu'il",
+     "t": 25.01
+    },
+    {
+     "w": "aurait",
+     "t": 25.34
+    },
+    {
+     "w": "eu",
+     "t": 25.52
+    },
+    {
+     "w": "cette",
+     "t": 25.68
+    },
+    {
+     "w": "année.",
+     "t": 25.9
+    },
+    {
+     "w": "Elle",
+     "t": 26.4
+    },
+    {
+     "w": "gagne",
+     "t": 26.54
+    },
+    {
+     "w": "1300",
+     "t": 26.86
+    },
+    {
+     "w": "euros",
+     "t": 27.26
+    },
+    {
+     "w": "par",
+     "t": 27.72
+    },
+    {
+     "w": "mois.",
+     "t": 27.96
+    }
+   ]
+  },
+  {
+   "id": "06-millions",
+   "who": "procureur",
+   "text": "1300 euros… comme des millions de Français qui, cette nuit-là, sont restés chez eux.",
+   "start": 28.36,
+   "dur": 3.44,
+   "words": [
+    {
+     "w": "1300",
+     "t": 28.64
+    },
+    {
+     "w": "euros…",
+     "t": 28.96
+    },
+    {
+     "w": "comme",
+     "t": 29.44
+    },
+    {
+     "w": "des",
+     "t": 29.56
+    },
+    {
+     "w": "millions",
+     "t": 29.68
+    },
+    {
+     "w": "de",
+     "t": 29.88
+    },
+    {
+     "w": "Français",
+     "t": 29.98
+    },
+    {
+     "w": "qui,",
+     "t": 30.2
+    },
+    {
+     "w": "cette",
+     "t": 30.54
+    },
+    {
+     "w": "nuit-là,",
+     "t": 30.8
+    },
+    {
+     "w": "sont",
+     "t": 31.06
+    },
+    {
+     "w": "restés",
+     "t": 31.14
+    },
+    {
+     "w": "chez",
+     "t": 31.46
+    },
+    {
+     "w": "eux.",
+     "t": 31.56
+    }
+   ]
+  },
+  {
+   "id": "07-quartier",
+   "who": "avocate",
+   "text": "Des millions de Français n'ont pas vu leur quartier brûler sous leurs fenêtres. Elle, si. Cette nuit-là, il n'y avait plus de règles. Plus de police. Plus rien.",
+   "start": 31.9,
+   "dur": 6.63,
+   "words": [
+    {
+     "w": "Des",
+     "t": 32.0
+    },
+    {
+     "w": "millions",
+     "t": 32.08
+    },
+    {
+     "w": "de",
+     "t": 32.32
+    },
+    {
+     "w": "Français",
+     "t": 32.44
+    },
+    {
+     "w": "n'ont",
+     "t": 32.67
+    },
+    {
+     "w": "pas",
+     "t": 32.9
+    },
+    {
+     "w": "vu",
+     "t": 33.02
+    },
+    {
+     "w": "leur",
+     "t": 33.14
+    },
+    {
+     "w": "quartier",
+     "t": 33.28
+    },
+    {
+     "w": "brûler",
+     "t": 33.6
+    },
+    {
+     "w": "sous",
+     "t": 33.86
+    },
+    {
+     "w": "leurs",
+     "t": 34.02
+    },
+    {
+     "w": "fenêtres.",
+     "t": 34.16
+    },
+    {
+     "w": "Elle,",
+     "t": 34.76
+    },
+    {
+     "w": "si.",
+     "t": 35.18
+    },
+    {
+     "w": "Cette",
+     "t": 35.6
+    },
+    {
+     "w": "nuit-là,",
+     "t": 35.93
+    },
+    {
+     "w": "il",
+     "t": 36.26
+    },
+    {
+     "w": "n'y",
+     "t": 36.33
+    },
+    {
+     "w": "avait",
+     "t": 36.4
+    },
+    {
+     "w": "plus",
+     "t": 36.48
+    },
+    {
+     "w": "de",
+     "t": 36.66
+    },
+    {
+     "w": "règles.",
+     "t": 36.78
+    },
+    {
+     "w": "Plus",
+     "t": 37.18
+    },
+    {
+     "w": "de",
+     "t": 37.28
+    },
+    {
+     "w": "police.",
+     "t": 37.44
+    },
+    {
+     "w": "Plus",
+     "t": 38.02
+    },
+    {
+     "w": "rien.",
+     "t": 38.16
+    }
+   ]
+  },
+  {
+   "id": "08-enjambe",
+   "who": "procureur",
+   "text": "Il restait un homme. Un vigile, à terre, devant la grille. Elle l'a enjambé. Elle est soignante : elle savait exactement ce qu'elle voyait.",
+   "start": 38.65,
+   "dur": 5.23,
+   "words": [
+    {
+     "w": "Il",
+     "t": 38.68
+    },
+    {
+     "w": "restait",
+     "t": 38.76
+    },
+    {
+     "w": "un",
+     "t": 39.06
+    },
+    {
+     "w": "homme.",
+     "t": 39.18
+    },
+    {
+     "w": "Un",
+     "t": 39.52
+    },
+    {
+     "w": "vigile,",
+     "t": 39.62
+    },
+    {
+     "w": "à",
+     "t": 40.16
+    },
+    {
+     "w": "terre,",
+     "t": 40.2
+    },
+    {
+     "w": "devant",
+     "t": 40.4
+    },
+    {
+     "w": "la",
+     "t": 40.58
+    },
+    {
+     "w": "grille.",
+     "t": 40.74
+    },
+    {
+     "w": "Elle",
+     "t": 41.12
+    },
+    {
+     "w": "l'a",
+     "t": 41.22
+    },
+    {
+     "w": "enjambé.",
+     "t": 41.32
+    },
+    {
+     "w": "Elle",
+     "t": 41.88
+    },
+    {
+     "w": "est",
+     "t": 41.95
+    },
+    {
+     "w": "soignante :",
+     "t": 42.02
+    },
+    {
+     "w": "elle",
+     "t": 42.58
+    },
+    {
+     "w": "savait",
+     "t": 42.64
+    },
+    {
+     "w": "exactement",
+     "t": 42.86
+    },
+    {
+     "w": "ce",
+     "t": 43.18
+    },
+    {
+     "w": "qu'elle",
+     "t": 43.38
+    },
+    {
+     "w": "voyait.",
+     "t": 43.58
+    }
+   ]
+  },
+  {
+   "id": "09-samu",
+   "who": "avocate",
+   "text": "Elle savait. C'est pour ça que, onze minutes plus tard, un appel au SAMU est parti… de son téléphone.",
+   "start": 43.98,
+   "dur": 4.58,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 44.01
+    },
+    {
+     "w": "savait.",
+     "t": 44.13
+    },
+    {
+     "w": "C'est",
+     "t": 44.44
+    },
+    {
+     "w": "pour",
+     "t": 44.75
+    },
+    {
+     "w": "ça",
+     "t": 44.87
+    },
+    {
+     "w": "que,",
+     "t": 45.05
+    },
+    {
+     "w": "onze",
+     "t": 45.29
+    },
+    {
+     "w": "minutes",
+     "t": 45.53
+    },
+    {
+     "w": "plus",
+     "t": 45.73
+    },
+    {
+     "w": "tard,",
+     "t": 45.95
+    },
+    {
+     "w": "un",
+     "t": 46.41
+    },
+    {
+     "w": "appel",
+     "t": 46.51
+    },
+    {
+     "w": "au",
+     "t": 46.71
+    },
+    {
+     "w": "SAMU",
+     "t": 46.85
+    },
+    {
+     "w": "est",
+     "t": 47.13
+    },
+    {
+     "w": "parti…",
+     "t": 47.25
+    },
+    {
+     "w": "de",
+     "t": 47.57
+    },
+    {
+     "w": "son",
+     "t": 47.95
+    },
+    {
+     "w": "téléphone.",
+     "t": 48.11
+    }
+   ]
+  },
+  {
+   "id": "10-onze",
+   "who": "procureur",
+   "text": "11 minutes. Le temps de charger les couches dans sa voiture. 11 minutes… pour un homme qui ne respirait plus.",
+   "start": 48.66,
+   "dur": 4.18,
+   "words": [
+    {
+     "w": "11",
+     "t": 48.71
+    },
+    {
+     "w": "minutes.",
+     "t": 48.89
+    },
+    {
+     "w": "Le",
+     "t": 49.45
+    },
+    {
+     "w": "temps",
+     "t": 49.57
+    },
+    {
+     "w": "de",
+     "t": 49.69
+    },
+    {
+     "w": "charger",
+     "t": 49.77
+    },
+    {
+     "w": "les",
+     "t": 49.97
+    },
+    {
+     "w": "couches",
+     "t": 50.17
+    },
+    {
+     "w": "dans",
+     "t": 50.35
+    },
+    {
+     "w": "sa",
+     "t": 50.45
+    },
+    {
+     "w": "voiture.",
+     "t": 50.57
+    },
+    {
+     "w": "11",
+     "t": 51.09
+    },
+    {
+     "w": "minutes…",
+     "t": 51.25
+    },
+    {
+     "w": "pour",
+     "t": 51.55
+    },
+    {
+     "w": "un",
+     "t": 51.81
+    },
+    {
+     "w": "homme",
+     "t": 51.93
+    },
+    {
+     "w": "qui",
+     "t": 52.05
+    },
+    {
+     "w": "ne",
+     "t": 52.15
+    },
+    {
+     "w": "respirait",
+     "t": 52.25
+    },
+    {
+     "w": "plus.",
+     "t": 52.61
+    }
+   ]
+  },
+  {
+   "id": "11-seule",
+   "who": "avocate",
+   "text": "11 minutes, oui. Et cette nuit-là, sur 300 pilleurs, combien ont appelé les secours ? Une seule. Elle.",
+   "start": 52.94,
+   "dur": 4.78,
+   "words": [
+    {
+     "w": "11",
+     "t": 53.07
+    },
+    {
+     "w": "minutes,",
+     "t": 53.25
+    },
+    {
+     "w": "oui.",
+     "t": 53.61
+    },
+    {
+     "w": "Et",
+     "t": 53.97
+    },
+    {
+     "w": "cette",
+     "t": 54.03
+    },
+    {
+     "w": "nuit-là,",
+     "t": 54.37
+    },
+    {
+     "w": "sur",
+     "t": 54.71
+    },
+    {
+     "w": "300",
+     "t": 54.81
+    },
+    {
+     "w": "pilleurs,",
+     "t": 55.05
+    },
+    {
+     "w": "combien",
+     "t": 55.67
+    },
+    {
+     "w": "ont",
+     "t": 55.85
+    },
+    {
+     "w": "appelé",
+     "t": 56.03
+    },
+    {
+     "w": "les",
+     "t": 56.31
+    },
+    {
+     "w": "secours ?",
+     "t": 56.43
+    },
+    {
+     "w": "Une",
+     "t": 56.87
+    },
+    {
+     "w": "seule.",
+     "t": 57.01
+    },
+    {
+     "w": "Elle.",
+     "t": 57.47
+    }
+   ]
+  },
+  {
+   "id": "12-remords",
+   "who": "procureur",
+   "text": "Être la seule à appeler ne fait pas d'elle une héroïne. Juste la seule qui avait des remords.",
+   "start": 57.84,
+   "dur": 3.37,
+   "words": [
+    {
+     "w": "Être",
+     "t": 57.91
+    },
+    {
+     "w": "la",
+     "t": 58.07
+    },
+    {
+     "w": "seule",
+     "t": 58.21
+    },
+    {
+     "w": "à",
+     "t": 58.37
+    },
+    {
+     "w": "appeler",
+     "t": 58.47
+    },
+    {
+     "w": "ne",
+     "t": 58.65
+    },
+    {
+     "w": "fait",
+     "t": 58.75
+    },
+    {
+     "w": "pas",
+     "t": 58.85
+    },
+    {
+     "w": "d'elle",
+     "t": 58.96
+    },
+    {
+     "w": "une",
+     "t": 59.07
+    },
+    {
+     "w": "héroïne.",
+     "t": 59.19
+    },
+    {
+     "w": "Juste",
+     "t": 59.69
+    },
+    {
+     "w": "la",
+     "t": 59.93
+    },
+    {
+     "w": "seule",
+     "t": 60.13
+    },
+    {
+     "w": "qui",
+     "t": 60.37
+    },
+    {
+     "w": "avait",
+     "t": 60.49
+    },
+    {
+     "w": "des",
+     "t": 60.59
+    },
+    {
+     "w": "remords.",
+     "t": 60.73
+    }
+   ]
+  },
+  {
+   "id": "13-conscience",
+   "who": "avocate",
+   "text": "Des remords ? Le vrai mot, c'est conscience. Et cette nuit-là… elle était la seule à en avoir une.",
+   "start": 61.36,
+   "dur": 4.2,
+   "words": [
+    {
+     "w": "Des",
+     "t": 61.46
+    },
+    {
+     "w": "remords ?",
+     "t": 61.52
+    },
+    {
+     "w": "Le",
+     "t": 62.06
+    },
+    {
+     "w": "vrai",
+     "t": 62.18
+    },
+    {
+     "w": "mot,",
+     "t": 62.34
+    },
+    {
+     "w": "c'est",
+     "t": 62.52
+    },
+    {
+     "w": "conscience.",
+     "t": 62.7
+    },
+    {
+     "w": "Et",
+     "t": 63.34
+    },
+    {
+     "w": "cette",
+     "t": 63.42
+    },
+    {
+     "w": "nuit-là…",
+     "t": 63.78
+    },
+    {
+     "w": "elle",
+     "t": 64.14
+    },
+    {
+     "w": "était",
+     "t": 64.24
+    },
+    {
+     "w": "la",
+     "t": 64.4
+    },
+    {
+     "w": "seule",
+     "t": 64.56
+    },
+    {
+     "w": "à",
+     "t": 64.8
+    },
+    {
+     "w": "en",
+     "t": 64.9
+    },
+    {
+     "w": "avoir",
+     "t": 65.0
+    },
+    {
+     "w": "une.",
+     "t": 65.14
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 66.16,
+   "dur": 2.4,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 66.2
+    },
+    {
+     "w": "es",
+     "t": 66.32
+    },
+    {
+     "w": "le",
+     "t": 66.41
+    },
+    {
+     "w": "juré.",
+     "t": 66.5
+    },
+    {
+     "w": "Coupable…",
+     "t": 67.04
+    },
+    {
+     "w": "ou",
+     "t": 67.4
+    },
+    {
+     "w": "non",
+     "t": 67.74
+    },
+    {
+     "w": "coupable ?",
+     "t": 67.88
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 68.96,
+   "dur": 3.14,
+   "words": [
+    {
+     "w": "Le",
+     "t": 68.96
+    },
+    {
+     "w": "verdict",
+     "t": 69.02
+    },
+    {
+     "w": "tombe",
+     "t": 69.26
+    },
+    {
+     "w": "dans",
+     "t": 69.8
+    },
+    {
+     "w": "la",
+     "t": 69.96
+    },
+    {
+     "w": "prochaine",
+     "t": 70.06
+    },
+    {
+     "w": "vidéo.",
+     "t": 70.32
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 70.79
+    },
+    {
+     "w": "pour",
+     "t": 71.26
+    },
+    {
+     "w": "ne",
+     "t": 71.4
+    },
+    {
+     "w": "pas",
+     "t": 71.5
+    },
+    {
+     "w": "le",
+     "t": 71.64
+    },
+    {
+     "w": "rater.",
+     "t": 71.68
+    }
+   ]
+  }
+ ]
+}

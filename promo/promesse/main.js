@@ -157,7 +157,7 @@ function room(L, { warm = false } = {}) {
   svg('rect', { width: 380, height: 470, rx: 14, fill: 'none', stroke: warm ? '#8a6a48' : '#2a3a66', 'stroke-width': 16 }, win)
   svg('path', { d: 'M 190 0 L 190 470 M 0 235 L 380 235', stroke: warm ? '#8a6a48' : '#2a3a66', 'stroke-width': 10 }, win)
   // L'horloge numérique.
-  const clock = svg('g', { transform: 'translate(760 420)' }, L.far)
+  const clock = svg('g', { transform: 'translate(760 420)', display: warm ? 'none' : 'inline' }, L.far)
   svg('rect', { x: -170, y: -80, width: 340, height: 160, rx: 22, fill: '#05070d', stroke: '#2a3a66', 'stroke-width': 8 }, clock)
   const clockTxt = svg('text', { x: 0, y: 40, 'text-anchor': 'middle', 'font-family': 'DejaVu Sans Mono, monospace', 'font-weight': 700, 'font-size': 112, fill: '#ff3b4f' }, clock)
   clockTxt.textContent = '03:00'
@@ -358,6 +358,7 @@ const FILLE_S = scene('fille', (L) => {
   const fille = makePerson(fw, FILLE)
   for (const hf of halves) {
     hf.inner.append(hf.tint)
+    svg('rect', { x: -460, y: 260, width: 920, height: 70, fill: '#f7f1e3' }, hf.inner)
     svg('rect', { x: -430, y: -300, width: 860, height: 560, fill: 'none', stroke: '#f7f1e3', 'stroke-width': 10 }, hf.inner)
   }
   return { halves, pere, mere, fille, fw }
@@ -742,7 +743,7 @@ function seek(t) {
     for (const p of PROMESSE.pages) {
       const u = (k * 0.9 + p.ph) % 1
       show(p.g, !inLetter)
-      place(p.g, lerp(1250, -200, u), 1560 - 120 * Math.sin(Math.PI * u) + 60 * Math.sin(p.ph * 20), 0.9, -20 + u * 60 + 30 * Math.sin(p.ph * 9))
+      place(p.g, lerp(1250, -200, u), 1760 - 100 * Math.sin(Math.PI * u) + 50 * Math.sin(p.ph * 20), 0.9, -20 + u * 60 + 30 * Math.sin(p.ph * 9))
     }
     show(PROMESSE.letter, inLetter)
     if (inLetter) {

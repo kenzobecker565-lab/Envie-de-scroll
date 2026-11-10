@@ -29,7 +29,8 @@ from voix import align, for_asr, read, tokens, write  # noqa: E402
 START = 0.25  # la voix part presque tout de suite : le hook
 TAIL = 2.6  # fin : vote et abonnement
 MAX_PAUSE = 0.2  # rythme serré
-TEMPO = 1.1  # on resserre un peu, sans changer la hauteur des voix
+TEMPO = 1.2  # Chatterbox (procureur, avocate) parle posément : on resserre nettement, sans changer la hauteur
+TEMPO_NARRATEUR = 1.1  # la voix ElevenLabs du narrateur est déjà vive
 DEFAULT_GAP = 0.25
 
 
@@ -58,7 +59,7 @@ def main() -> None:
     for who, voice in script["voices"].items():
         mine = [l for l in script["lines"] if l["who"] == who]
         full = HERE / "voice" / f"{who}.wav"
-        tighten(str(HERE / voice["file"]), full, MAX_PAUSE, TEMPO)
+        tighten(str(HERE / voice["file"]), full, MAX_PAUSE, TEMPO_NARRATEUR if who == "narrateur" else TEMPO)
         x, sr = read(full)
         segs, _ = asr.transcribe(for_asr(full), language="fr", beam_size=5, word_timestamps=True)
         heard = [(w.word.strip(), w.start, w.end) for s in segs for w in s.words]

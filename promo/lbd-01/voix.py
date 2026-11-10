@@ -27,9 +27,10 @@ from narration import tighten  # noqa: E402
 from voix import align, for_asr, read, tokens, write  # noqa: E402
 
 START = 0.25  # la voix part presque tout de suite : le hook
-TAIL = 3.0  # fin : vote et abonnement
+TAIL = 3.6  # fin : vote et abonnement
 MAX_PAUSE = 0.18  # silences très courts dans une réplique
 TEMPO = 1.2  # rythme nerveux, sans changer la hauteur des voix
+TEMPO_NARRATEUR = 1.2
 DEFAULT_GAP = 0.25
 
 
@@ -57,8 +58,24 @@ def main() -> None:
     clips = {}
     for who, voice in script["voices"].items():
         mine = [l for l in script["lines"] if l["who"] == who]
+        tempo = TEMPO_NARRATEUR if who == "narrateur" else TEMPO
+        # Voix enregistrées une réplique par fichier (media/lignes/<id>.wav, voir choisir.py) :
+        # pas de découpage à deviner, on resserre et on aligne chaque réplique séparément.
+        if all((HERE / "media" / "lignes" / f"{l['id']}.wav").exists() for l in mine):
+            for line in mine:
+                tmp = HERE / "voice" / f"_{line['id']}.wav"
+                tighten(str(HERE / "media" / "lignes" / f"{line['id']}.wav"), tmp, MAX_PAUSE, tempo)
+                x, sr = read(tmp)
+                segs, _ = asr.transcribe(for_asr(tmp), language="fr", beam_size=5, word_timestamps=True)
+                heard = [(w.word.strip(), w.start, w.end) for s in segs for w in s.words]
+                words = align(line["text"], heard, len(x) / sr)
+                clip, lead = trim(x, sr)
+                write(HERE / "voice" / f"{line['id']}.wav", clip, sr)
+                clips[line["id"]] = {"dur": len(clip) / sr, "words": [{"w": w["w"], "t": w["t"] - lead} for w in words]}
+                tmp.unlink()
+            continue
         full = HERE / "voice" / f"{who}.wav"
-        tighten(str(HERE / voice["file"]), full, MAX_PAUSE, TEMPO)
+        tighten(str(HERE / voice["file"]), full, MAX_PAUSE, TEMPO_NARRATEUR if who == "narrateur" else TEMPO)
         x, sr = read(full)
         segs, _ = asr.transcribe(for_asr(full), language="fr", beam_size=5, word_timestamps=True)
         heard = [(w.word.strip(), w.start, w.end) for s in segs for w in s.words]

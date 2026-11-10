@@ -2,7 +2,8 @@
 Voix du procureur et de l'avocate de « La promesse » : Chatterbox (voir
 ../voix-libres), plusieurs prises par réplique. Ce script garde la meilleure
 prise de chaque réplique (transcrite par Whisper, comme ../voix-libres/choisir.py)
-et assemble un fichier par personnage, que voix.py découpe ensuite.
+et l'enregistre dans media/lignes/<id>.wav (une réplique par fichier, pour
+voix.py), plus un fichier par personnage pour l'écoute.
 
 Le narrateur n'est pas concerné : sa voix vient d'ElevenLabs
 (media/elevenlabs/narrateur.mp3 → media/narrateur.wav).
@@ -57,7 +58,15 @@ def main() -> None:
         if best is None:
             raise SystemExit(f"Aucune prise pour {line['id']}")
         print(f"{line['id']:16} {best[0]:5.2f}  {best[3]:22} → {best[2].strip()}")
-        parts.setdefault(line["who"], []).extend([best[1] / (np.abs(best[1]).max() + 1e-9) * 0.9, np.zeros(int(rate * 0.8), np.float32)])
+        take = best[1] / (np.abs(best[1]).max() + 1e-9) * 0.9
+        # Une réplique par fichier : voix.py n'a plus à deviner où couper.
+        (HERE / "media" / "lignes").mkdir(exist_ok=True)
+        with wave.open(str(HERE / "media" / "lignes" / f"{line['id']}.wav"), "wb") as w:
+            w.setnchannels(1)
+            w.setsampwidth(2)
+            w.setframerate(rate)
+            w.writeframes((np.clip(take, -1, 1) * 32767).astype(np.int16).tobytes())
+        parts.setdefault(line["who"], []).extend([take, np.zeros(int(rate * 0.8), np.float32)])
     for who, chunks in parts.items():
         y = np.concatenate(chunks)
         with wave.open(str(HERE / "media" / f"{who}.wav"), "wb") as w:

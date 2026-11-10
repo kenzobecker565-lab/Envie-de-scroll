@@ -50,6 +50,13 @@ function svg(tag, attrs = {}, parent = null) {
   if (parent) parent.append(el)
   return el
 }
+// Fonds peints (images) : chargés avant le premier rendu.
+const PHOTOS = []
+const paint = (href, parent, { x = -210, y = -45, w = 1500, h = 2010, opacity = 1 } = {}) => {
+  const el = svg('image', { x, y, width: w, height: h, preserveAspectRatio: 'xMidYMid slice', opacity }, parent)
+  PHOTOS.push([el, href])
+  return el
+}
 const txt = (parent, s, attrs) => {
   const el = svg('text', { 'text-anchor': 'middle', 'font-family': 'Figtree Variable', 'font-weight': 900, ...attrs }, parent)
   el.textContent = s
@@ -82,6 +89,7 @@ grad('aisle', [[0, '#26303f'], [1, '#0d1118']], { x1: 0, y1: 0, x2: 0, y2: 1 })
 grad('court', [[0, '#27305a'], [1, '#121733']], { x1: 0, y1: 0, x2: 0, y2: 1 })
 grad('courtRed', [[0, '#5a1f1a'], [1, '#1e0b08']], { x1: 0, y1: 0, x2: 0, y2: 1 })
 grad('courtDark', [[0, '#141a33'], [1, '#05070f']], { x1: 0, y1: 0, x2: 0, y2: 1 })
+grad('shade', [[0, '#0b0f1e', 0], [0.5, '#0b0f1e', 0.12], [1, '#0b0f1e', 0.72]], { cx: 0.5, cy: 0.42, r: 0.72 })
 grad('spot', [[0, '#bcd2ff', 0.38], [1, '#bcd2ff', 0]], { cx: 0.5, cy: 0.35, r: 0.55 })
 grad('beam', [[0, '#ffe7b0', 0.45], [1, '#ffe7b0', 0]], { x1: 0, y1: 0, x2: 0, y2: 1 })
 grad('desk', [[0, '#9a6542'], [1, '#6a3f26']], { x1: 0, y1: 0, x2: 0, y2: 1 })
@@ -405,10 +413,14 @@ const TRIB = scene('tribunal', (L) => {
   svg('path', { d: 'M 640 220 L 640 760 L 960 760 L 960 220 A 160 160 0 0 0 640 220 Z', fill: '#3b4a86' }, procBg)
   svg('path', { d: 'M 800 120 L 800 760 M 640 450 L 960 450', stroke: '#27305a', 'stroke-width': 18 }, procBg)
   svg('path', { d: 'M 640 260 L 960 260 L 700 1900 L -200 1900 Z', fill: 'url(#beam)', opacity: 0.5 }, procBg)
+  paint('../fonds/essai/fond-procureur.jpg', procBg)
+  svg('rect', { x: -210, y: -45, width: 1500, height: 2010, fill: 'url(#shade)' }, procBg)
   const avoBg = svg('g', {}, L.far)
   svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: 'url(#courtRed)' }, avoBg)
   const r = rng(9)
   for (let i = 0; i < 16; i++) svg('circle', { cx: r() * W, cy: 200 + r() * 1100, r: 30 + r() * 90, fill: '#ffb36b', opacity: 0.06 + r() * 0.08 }, avoBg)
+  paint('../fonds/essai/fond-defense.jpg', avoBg)
+  svg('rect', { x: -210, y: -45, width: 1500, height: 2010, fill: 'url(#shade)' }, avoBg)
   const hotBg = svg('g', {}, L.far)
   const hotFill = svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: '#b3232b' }, hotBg)
   svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: 'url(#dots)', opacity: 0.12 }, hotBg)
@@ -1129,6 +1141,11 @@ function updateGrain(t, a) {
 const ready = (async () => {
   await document.fonts.ready
   await document.fonts.load('900 80px "Figtree Variable"')
+  await Promise.all(PHOTOS.map(([el, href]) => new Promise((res) => {
+    el.addEventListener('load', res, { once: true })
+    el.addEventListener('error', res, { once: true })
+    el.setAttribute('href', href)
+  })))
   seek(0)
 })()
 window.__promo = { ready, seek, duration: C.duration, fps: FPS }

@@ -59,6 +59,7 @@ const ADS = {
   bijoutier: { page: 'promo/bijoutier/index.html', audio: './bijoutier/audio.mjs', build: 'build/bijoutier', out: 'bijoutier.mp4' },
   promesse: { page: 'promo/promesse/index.html', audio: './promesse/audio.mjs', build: 'build/promesse', out: 'promesse.mp4' },
   'lbd-01': { page: 'promo/lbd-01/index.html', audio: './lbd-01/audio.mjs', build: 'build/lbd-01', out: 'lbd-01.mp4' },
+  'lbd-02': { page: 'promo/lbd-02/index.html', audio: './lbd-02/audio.mjs', build: 'build/lbd-02', out: 'lbd-02.mp4' },
   'casse-01': { page: 'promo/casse-01/index.html', audio: './casse-01/audio.mjs', build: 'build/casse-01', out: 'casse-01.mp4' },
   'demo-v2': { page: 'promo/demo-v2/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v2', out: 'demo-v2.mp4' },
   'demo-v3': { page: 'promo/demo-v3/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v3', out: 'demo-v3.mp4' },

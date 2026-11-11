@@ -1,0 +1,929 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 64.81,
+ "lines": [
+  {
+   "id": "01-image",
+   "who": "narrateur",
+   "text": "Hier, tu as voté. Mais personne n'avait vu cette image. La caméra du policier, seconde par seconde.",
+   "start": 0.25,
+   "dur": 5.72,
+   "words": [
+    {
+     "w": "Hier,",
+     "t": 0.25
+    },
+    {
+     "w": "tu",
+     "t": 0.81
+    },
+    {
+     "w": "as",
+     "t": 0.97
+    },
+    {
+     "w": "voté.",
+     "t": 1.09
+    },
+    {
+     "w": "Mais",
+     "t": 1.63
+    },
+    {
+     "w": "personne",
+     "t": 1.69
+    },
+    {
+     "w": "n'avait",
+     "t": 2.03
+    },
+    {
+     "w": "vu",
+     "t": 2.37
+    },
+    {
+     "w": "cette",
+     "t": 2.55
+    },
+    {
+     "w": "image.",
+     "t": 2.75
+    },
+    {
+     "w": "La",
+     "t": 3.37
+    },
+    {
+     "w": "caméra",
+     "t": 3.45
+    },
+    {
+     "w": "du",
+     "t": 3.81
+    },
+    {
+     "w": "policier,",
+     "t": 3.93
+    },
+    {
+     "w": "seconde",
+     "t": 4.73
+    },
+    {
+     "w": "par",
+     "t": 5.17
+    },
+    {
+     "w": "seconde.",
+     "t": 5.31
+    }
+   ]
+  },
+  {
+   "id": "02-retombe",
+   "who": "narrateur",
+   "text": "Le pavé de Théo n'a touché personne. Il est retombé à 2 mètres de la ligne.",
+   "start": 6.27,
+   "dur": 4.07,
+   "words": [
+    {
+     "w": "Le",
+     "t": 6.27
+    },
+    {
+     "w": "pavé",
+     "t": 6.43
+    },
+    {
+     "w": "de",
+     "t": 6.75
+    },
+    {
+     "w": "Théo",
+     "t": 6.83
+    },
+    {
+     "w": "n'a",
+     "t": 7.09
+    },
+    {
+     "w": "touché",
+     "t": 7.35
+    },
+    {
+     "w": "personne.",
+     "t": 7.65
+    },
+    {
+     "w": "Il",
+     "t": 8.35
+    },
+    {
+     "w": "est",
+     "t": 8.45
+    },
+    {
+     "w": "retombé",
+     "t": 8.55
+    },
+    {
+     "w": "à",
+     "t": 8.99
+    },
+    {
+     "w": "2",
+     "t": 9.09
+    },
+    {
+     "w": "mètres",
+     "t": 9.33
+    },
+    {
+     "w": "de",
+     "t": 9.63
+    },
+    {
+     "w": "la",
+     "t": 9.77
+    },
+    {
+     "w": "ligne.",
+     "t": 9.89
+    }
+   ]
+  },
+  {
+   "id": "03-autre",
+   "who": "narrateur",
+   "text": "Le collègue du policier a été frappé par une autre pierre, venue de derrière. Lancée par quelqu'un qu'on n'a jamais identifié.",
+   "start": 10.64,
+   "dur": 6.11,
+   "words": [
+    {
+     "w": "Le",
+     "t": 10.64
+    },
+    {
+     "w": "collègue",
+     "t": 10.8
+    },
+    {
+     "w": "du",
+     "t": 11.12
+    },
+    {
+     "w": "policier",
+     "t": 11.2
+    },
+    {
+     "w": "a",
+     "t": 11.68
+    },
+    {
+     "w": "été",
+     "t": 11.78
+    },
+    {
+     "w": "frappé",
+     "t": 11.9
+    },
+    {
+     "w": "par",
+     "t": 12.3
+    },
+    {
+     "w": "une",
+     "t": 12.46
+    },
+    {
+     "w": "autre",
+     "t": 12.62
+    },
+    {
+     "w": "pierre,",
+     "t": 12.82
+    },
+    {
+     "w": "venue",
+     "t": 13.25
+    },
+    {
+     "w": "de",
+     "t": 13.68
+    },
+    {
+     "w": "derrière.",
+     "t": 13.76
+    },
+    {
+     "w": "Lancée",
+     "t": 14.26
+    },
+    {
+     "w": "par",
+     "t": 14.76
+    },
+    {
+     "w": "quelqu'un",
+     "t": 14.98
+    },
+    {
+     "w": "qu'on",
+     "t": 15.2
+    },
+    {
+     "w": "n'a",
+     "t": 15.42
+    },
+    {
+     "w": "jamais",
+     "t": 15.64
+    },
+    {
+     "w": "identifié.",
+     "t": 15.92
+    }
+   ]
+  },
+  {
+   "id": "04-cru",
+   "who": "avocate",
+   "text": "Mon client n'a pas vu le pavé retomber. Il a vu son ami s'effondrer. Et trois secondes après, un homme se baisser. À sa place, qu'auriez-vous cru ?",
+   "start": 17.1,
+   "dur": 6.26,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 17.1
+    },
+    {
+     "w": "client",
+     "t": 17.22
+    },
+    {
+     "w": "n'a",
+     "t": 17.43
+    },
+    {
+     "w": "pas",
+     "t": 17.64
+    },
+    {
+     "w": "vu",
+     "t": 17.78
+    },
+    {
+     "w": "le",
+     "t": 17.94
+    },
+    {
+     "w": "pavé",
+     "t": 18.02
+    },
+    {
+     "w": "retomber.",
+     "t": 18.26
+    },
+    {
+     "w": "Il",
+     "t": 18.8
+    },
+    {
+     "w": "a",
+     "t": 18.88
+    },
+    {
+     "w": "vu",
+     "t": 18.98
+    },
+    {
+     "w": "son",
+     "t": 19.06
+    },
+    {
+     "w": "ami",
+     "t": 19.2
+    },
+    {
+     "w": "s'effondrer.",
+     "t": 19.65
+    },
+    {
+     "w": "Et",
+     "t": 20.1
+    },
+    {
+     "w": "trois",
+     "t": 20.18
+    },
+    {
+     "w": "secondes",
+     "t": 20.38
+    },
+    {
+     "w": "après,",
+     "t": 20.68
+    },
+    {
+     "w": "un",
+     "t": 21.18
+    },
+    {
+     "w": "homme",
+     "t": 21.26
+    },
+    {
+     "w": "se",
+     "t": 21.44
+    },
+    {
+     "w": "baisser.",
+     "t": 21.74
+    },
+    {
+     "w": "À",
+     "t": 22.04
+    },
+    {
+     "w": "sa",
+     "t": 22.1
+    },
+    {
+     "w": "place,",
+     "t": 22.2
+    },
+    {
+     "w": "qu'auriez-vous",
+     "t": 22.6
+    },
+    {
+     "w": "cru ?",
+     "t": 23.0
+    }
+   ]
+  },
+  {
+   "id": "05-image",
+   "who": "procureur",
+   "text": "À sa place, j'aurais regardé. Il avait des images, des ordres, un chef à ses côtés. Et devant lui : un étudiant seul, à 6 mètres.",
+   "start": 23.66,
+   "dur": 7.0,
+   "words": [
+    {
+     "w": "À",
+     "t": 23.66
+    },
+    {
+     "w": "sa",
+     "t": 23.78
+    },
+    {
+     "w": "place,",
+     "t": 23.88
+    },
+    {
+     "w": "j'aurais",
+     "t": 24.25
+    },
+    {
+     "w": "regardé.",
+     "t": 24.62
+    },
+    {
+     "w": "Il",
+     "t": 25.28
+    },
+    {
+     "w": "avait",
+     "t": 25.32
+    },
+    {
+     "w": "des",
+     "t": 25.46
+    },
+    {
+     "w": "images,",
+     "t": 25.64
+    },
+    {
+     "w": "des",
+     "t": 26.26
+    },
+    {
+     "w": "ordres,",
+     "t": 26.34
+    },
+    {
+     "w": "un",
+     "t": 26.96
+    },
+    {
+     "w": "chef",
+     "t": 27.06
+    },
+    {
+     "w": "à",
+     "t": 27.3
+    },
+    {
+     "w": "ses",
+     "t": 27.46
+    },
+    {
+     "w": "côtés.",
+     "t": 27.56
+    },
+    {
+     "w": "Et",
+     "t": 28.08
+    },
+    {
+     "w": "devant",
+     "t": 28.12
+    },
+    {
+     "w": "lui :",
+     "t": 28.32
+    },
+    {
+     "w": "un",
+     "t": 28.74
+    },
+    {
+     "w": "étudiant",
+     "t": 28.88
+    },
+    {
+     "w": "seul,",
+     "t": 29.32
+    },
+    {
+     "w": "à",
+     "t": 29.92
+    },
+    {
+     "w": "6",
+     "t": 29.98
+    },
+    {
+     "w": "mètres.",
+     "t": 30.2
+    }
+   ]
+  },
+  {
+   "id": "06-pause",
+   "who": "narrateur",
+   "text": "Avant la fin : abonne-toi. Le verdict du tribunal tombe dans quelques secondes.",
+   "start": 31.01,
+   "dur": 4.02,
+   "words": [
+    {
+     "w": "Avant",
+     "t": 31.01
+    },
+    {
+     "w": "la",
+     "t": 31.22
+    },
+    {
+     "w": "fin :",
+     "t": 31.38
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 31.91
+    },
+    {
+     "w": "Le",
+     "t": 32.44
+    },
+    {
+     "w": "verdict",
+     "t": 32.52
+    },
+    {
+     "w": "du",
+     "t": 32.82
+    },
+    {
+     "w": "tribunal",
+     "t": 33.12
+    },
+    {
+     "w": "tombe",
+     "t": 33.56
+    },
+    {
+     "w": "dans",
+     "t": 33.94
+    },
+    {
+     "w": "quelques",
+     "t": 34.04
+    },
+    {
+     "w": "secondes.",
+     "t": 34.3
+    }
+   ]
+  },
+  {
+   "id": "07-theo",
+   "who": "theo",
+   "text": "Je ne lui en veux pas d'avoir eu peur. Je lui en veux de ne pas avoir regardé. J'ai lancé ce pavé. Je ne le nie pas. Mais je n'ai pas touché ce policier… et lui, il m'a pris un œil.",
+   "start": 35.53,
+   "dur": 8.89,
+   "words": [
+    {
+     "w": "Je",
+     "t": 35.53
+    },
+    {
+     "w": "ne",
+     "t": 35.69
+    },
+    {
+     "w": "lui",
+     "t": 35.81
+    },
+    {
+     "w": "en",
+     "t": 35.87
+    },
+    {
+     "w": "veux",
+     "t": 35.97
+    },
+    {
+     "w": "pas",
+     "t": 36.07
+    },
+    {
+     "w": "d'avoir",
+     "t": 36.27
+    },
+    {
+     "w": "eu",
+     "t": 36.47
+    },
+    {
+     "w": "peur.",
+     "t": 36.63
+    },
+    {
+     "w": "Je",
+     "t": 37.15
+    },
+    {
+     "w": "lui",
+     "t": 37.29
+    },
+    {
+     "w": "en",
+     "t": 37.43
+    },
+    {
+     "w": "veux",
+     "t": 37.55
+    },
+    {
+     "w": "de",
+     "t": 37.73
+    },
+    {
+     "w": "ne",
+     "t": 37.85
+    },
+    {
+     "w": "pas",
+     "t": 37.93
+    },
+    {
+     "w": "avoir",
+     "t": 38.09
+    },
+    {
+     "w": "regardé.",
+     "t": 38.35
+    },
+    {
+     "w": "J'ai",
+     "t": 38.82
+    },
+    {
+     "w": "lancé",
+     "t": 39.29
+    },
+    {
+     "w": "ce",
+     "t": 39.71
+    },
+    {
+     "w": "pavé.",
+     "t": 39.87
+    },
+    {
+     "w": "Je",
+     "t": 40.31
+    },
+    {
+     "w": "ne",
+     "t": 40.41
+    },
+    {
+     "w": "le",
+     "t": 40.53
+    },
+    {
+     "w": "nie",
+     "t": 40.59
+    },
+    {
+     "w": "pas.",
+     "t": 40.75
+    },
+    {
+     "w": "Mais",
+     "t": 41.17
+    },
+    {
+     "w": "je",
+     "t": 41.27
+    },
+    {
+     "w": "n'ai",
+     "t": 41.4
+    },
+    {
+     "w": "pas",
+     "t": 41.53
+    },
+    {
+     "w": "touché",
+     "t": 41.67
+    },
+    {
+     "w": "ce",
+     "t": 42.05
+    },
+    {
+     "w": "policier…",
+     "t": 42.19
+    },
+    {
+     "w": "et",
+     "t": 42.91
+    },
+    {
+     "w": "lui,",
+     "t": 42.99
+    },
+    {
+     "w": "il",
+     "t": 43.51
+    },
+    {
+     "w": "m'a",
+     "t": 43.64
+    },
+    {
+     "w": "pris",
+     "t": 43.77
+    },
+    {
+     "w": "un",
+     "t": 43.93
+    },
+    {
+     "w": "œil.",
+     "t": 44.05
+    }
+   ]
+  },
+  {
+   "id": "08-vidal",
+   "who": "policier",
+   "text": "Je le revois tous les soirs. Je pensais défendre mon ami. Je me suis trompé. Et je vivrai avec ça.",
+   "start": 45.02,
+   "dur": 5.71,
+   "words": [
+    {
+     "w": "Je",
+     "t": 45.02
+    },
+    {
+     "w": "le",
+     "t": 45.2
+    },
+    {
+     "w": "revois",
+     "t": 45.3
+    },
+    {
+     "w": "tous",
+     "t": 45.64
+    },
+    {
+     "w": "les",
+     "t": 45.8
+    },
+    {
+     "w": "soirs.",
+     "t": 45.96
+    },
+    {
+     "w": "Je",
+     "t": 46.82
+    },
+    {
+     "w": "pensais",
+     "t": 46.92
+    },
+    {
+     "w": "défendre",
+     "t": 47.18
+    },
+    {
+     "w": "mon",
+     "t": 47.6
+    },
+    {
+     "w": "ami.",
+     "t": 47.72
+    },
+    {
+     "w": "Je",
+     "t": 48.46
+    },
+    {
+     "w": "me",
+     "t": 48.54
+    },
+    {
+     "w": "suis",
+     "t": 48.62
+    },
+    {
+     "w": "trompé.",
+     "t": 48.74
+    },
+    {
+     "w": "Et",
+     "t": 49.6
+    },
+    {
+     "w": "je",
+     "t": 49.7
+    },
+    {
+     "w": "vivrai",
+     "t": 49.9
+    },
+    {
+     "w": "avec",
+     "t": 50.1
+    },
+    {
+     "w": "ça.",
+     "t": 50.26
+    }
+   ]
+  },
+  {
+   "id": "09-verdict",
+   "who": "narrateur",
+   "text": "Le tribunal le déclare coupable. 18 mois avec sursis. Interdiction d'exercer pendant 5 ans.",
+   "start": 51.43,
+   "dur": 5.25,
+   "words": [
+    {
+     "w": "Le",
+     "t": 51.43
+    },
+    {
+     "w": "tribunal",
+     "t": 51.59
+    },
+    {
+     "w": "le",
+     "t": 52.05
+    },
+    {
+     "w": "déclare",
+     "t": 52.21
+    },
+    {
+     "w": "coupable.",
+     "t": 52.55
+    },
+    {
+     "w": "18",
+     "t": 53.31
+    },
+    {
+     "w": "mois",
+     "t": 53.51
+    },
+    {
+     "w": "avec",
+     "t": 53.79
+    },
+    {
+     "w": "sursis.",
+     "t": 54.05
+    },
+    {
+     "w": "Interdiction",
+     "t": 54.67
+    },
+    {
+     "w": "d'exercer",
+     "t": 55.22
+    },
+    {
+     "w": "pendant",
+     "t": 55.77
+    },
+    {
+     "w": "5",
+     "t": 55.97
+    },
+    {
+     "w": "ans.",
+     "t": 56.33
+    }
+   ]
+  },
+  {
+   "id": "10-jury",
+   "who": "narrateur",
+   "text": "Toi, tu avais voté quoi ? Dis-le en commentaire.",
+   "start": 57.18,
+   "dur": 2.54,
+   "words": [
+    {
+     "w": "Toi,",
+     "t": 57.18
+    },
+    {
+     "w": "tu",
+     "t": 57.68
+    },
+    {
+     "w": "avais",
+     "t": 57.82
+    },
+    {
+     "w": "voté",
+     "t": 58.02
+    },
+    {
+     "w": "quoi ?",
+     "t": 58.26
+    },
+    {
+     "w": "Dis-le",
+     "t": 58.62
+    },
+    {
+     "w": "en",
+     "t": 58.98
+    },
+    {
+     "w": "commentaire.",
+     "t": 59.1
+    }
+   ]
+  },
+  {
+   "id": "11-abonne",
+   "who": "narrateur",
+   "text": "Abonne-toi pour la prochaine affaire.",
+   "start": 59.97,
+   "dur": 1.64,
+   "words": [
+    {
+     "w": "Abonne-toi",
+     "t": 60.18
+    },
+    {
+     "w": "pour",
+     "t": 60.46
+    },
+    {
+     "w": "la",
+     "t": 60.66
+    },
+    {
+     "w": "prochaine",
+     "t": 60.78
+    },
+    {
+     "w": "affaire.",
+     "t": 60.98
+    }
+   ]
+  }
+ ]
+}

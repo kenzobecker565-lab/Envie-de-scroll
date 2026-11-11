@@ -191,8 +191,9 @@ function fire(parent, x, y, s = 1, seed = 1) {
 const PROC = { robe: '#c43a2f', hair: 'slick', hairColor: '#1d140e', skin: '#f2c4a0', iris: '#2b1d12' }
 const AVO = { robe: '#23262f', jabot: true, hair: 'short', hairColor: '#2a1a10', beard: true, skin: '#d9a07a', iris: '#2b1d12' }
 const FLIC = { robe: '#1f2c4a', jabot: false, collar: '#9fb8de', hair: 'short', hairColor: '#3a2a1e', skin: '#e8bb98', iris: '#3b2a1a' }
+const THEO = { robe: '#3f5a7a', jabot: false, hair: 'messy', hairColor: '#4a2e1c', skin: '#f0c09a', iris: '#3b2a1a' }
 const INES = { robe: '#5fb3c9', jabot: false, vneck: '#4a98ad', hair: 'bob', hairColor: '#2a1810', female: true, skin: '#c98d68', iris: '#3b2a1a' }
-grad('streetGas', [[0, '#0b0f1c'], [0.6, '#16203a'], [1, '#232a3a']], { x1: 0, y1: 0, x2: 0, y2: 1 })
+grad('streetGas', [[0, '#1a2346'], [0.6, '#2a3766'], [1, '#3a4560']], { x1: 0, y1: 0, x2: 0, y2: 1 })
 grad('gas', [[0, '#c9d6c4', 0.55], [1, '#c9d6c4', 0]], { cx: 0.5, cy: 0.5, r: 0.5 })
 grad('flare', [[0, '#ff5a3d', 0.8], [0.4, '#ff3b1f', 0.3], [1, '#ff3b1f', 0]], { cx: 0.5, cy: 0.5, r: 0.5 })
 grad('skinEye', [[0, '#f3cdb0'], [1, '#d9a585']], { gradientUnits: 'userSpaceOnUse', x1: 0, y1: -700, x2: 0, y2: 1100 })
@@ -271,69 +272,70 @@ function thrower(parent, { rim = '#ffb347' } = {}) {
   return { g, update }
 }
 
-// 1 · Le tir : très gros plan sur l'œil, la balle arrive, impact.
+// 1 · Le tir, en pleine rue : la manifestation, le coup, Théo tombe ; puis tout s'étouffe.
+grad('impact', [[0, '#ffffff', 1], [0.35, '#ffd166', 0.8], [1, '#ff3b1f', 0]], { cx: 0.5, cy: 0.5, r: 0.5 })
+{
+  const f = svg('filter', { id: 'tin', x: '-10%', y: '-10%', width: '120%', height: '120%' }, defs)
+  svg('feColorMatrix', { type: 'saturate', values: '1' }, f)
+  svg('feGaussianBlur', { stdDeviation: '0' }, f)
+}
+const TIN = { sat: document.querySelector('#tin feColorMatrix'), blur: document.querySelector('#tin feGaussianBlur') }
 const TIR = scene('tir', (L) => {
-  bg(L, '#06080f')
-  // Reflets de gyrophares sur la peau, gaz en suspension.
-  const gyR = svg('ellipse', { cx: 120, cy: 600, rx: 900, ry: 900, fill: 'url(#glowRed)', opacity: 0.3 }, L.far)
-  const gyB = svg('ellipse', { cx: 960, cy: 600, rx: 900, ry: 900, fill: 'url(#glowBlue)', opacity: 0.3 }, L.far)
-  // Le visage, cadré serré sur l'œil gauche.
-  const face = svg('g', { transform: 'translate(540 860)' }, L.mid)
-  svg('rect', { x: -900, y: -900, width: 1800, height: 2200, fill: 'url(#skinEye)' }, face)
-  svg('path', { d: 'M -520 -330 Q -60 -470 470 -300', fill: 'none', stroke: '#3a2416', 'stroke-width': 70, 'stroke-linecap': 'round' }, face)
-  svg('path', { d: 'M -700 -720 L 700 -720 L 700 -470 Q 0 -620 -700 -520 Z', fill: '#2a1a10' }, face)
-  svg('path', { d: 'M 520 -120 Q 600 200 520 520', fill: 'none', stroke: '#c48f6e', 'stroke-width': 30, opacity: 0.6 }, face)
-  // L'œil.
-  const eyeClip = svg('clipPath', { id: 'eyeClip' }, defs)
-  const eyeShape = svg('path', { d: 'M -420 0 C -240 -280 240 -280 420 0 C 240 220 -240 220 -420 0 Z' }, eyeClip)
-  void eyeShape
-  const eyeG = svg('g', { 'clip-path': 'url(#eyeClip)' }, face)
-  svg('rect', { x: -440, y: -300, width: 880, height: 600, fill: '#fbf7f2' }, eyeG)
-  svg('path', { d: 'M -420 0 C -240 -280 240 -280 420 0', fill: 'none', stroke: '#e6c2b2', 'stroke-width': 40, opacity: 0.5 }, eyeG)
-  const iris = svg('g', {}, eyeG)
-  svg('circle', { r: 175, fill: 'url(#irisG)' }, iris)
-  for (let k = 0; k < 24; k++) {
-    const a = (k / 24) * Math.PI * 2
-    svg('path', { d: `M ${Math.cos(a) * 70} ${Math.sin(a) * 70} L ${Math.cos(a) * 165} ${Math.sin(a) * 165}`, stroke: '#9a6a40', 'stroke-width': 5, opacity: 0.45 }, iris)
+  bg(L, 'url(#streetGas)')
+  const r = rng(29)
+  for (let i = 0; i < 7; i++) {
+    const x = -120 + i * 190
+    const h = 520 + r() * 380
+    svg('rect', { x, y: 1180 - h, width: 180, height: h + 300, fill: '#141b33' }, L.far)
+    for (let j = 0; j < 7; j++) for (let k = 0; k < 3; k++) if (r() < 0.4) svg('rect', { x: x + 20 + k * 52, y: 1220 - h + j * 74, width: 28, height: 38, fill: '#ffcf7a', opacity: 0.5 }, L.far)
   }
-  const pupil = svg('circle', { r: 72, fill: '#07050a' }, iris)
-  const reflR = svg('rect', { x: 18, y: -66, width: 40, height: 26, rx: 8, fill: '#ff3b4f' }, iris)
-  const reflB = svg('rect', { x: -60, y: -56, width: 34, height: 22, rx: 8, fill: '#3b82f6' }, iris)
-  svg('circle', { cx: 46, cy: -40, r: 18, fill: '#ffffff', opacity: 0.9 }, iris)
-  // Le petit reflet de la balle qui arrive, dans la pupille.
-  const reflBall = svg('circle', { cx: -10, cy: 10, r: 4, fill: '#ffffff' }, iris)
-  // Paupière (descend après l'impact).
-  const lid = svg('path', { fill: 'url(#skinEye)' }, face)
-  const lidEdge = svg('path', { fill: 'none', stroke: '#2a1a10', 'stroke-width': 14, 'stroke-linecap': 'round' }, face)
-  svg('path', { d: 'M -420 0 C -240 -280 240 -280 420 0', fill: 'none', stroke: '#2a1a10', 'stroke-width': 16, 'stroke-linecap': 'round' }, face)
-  for (let k = 0; k < 9; k++) svg('path', { d: `M ${-300 + k * 75} ${-205 + Math.abs(k - 4) * 14} l ${-8 + k * 2} -60`, stroke: '#2a1a10', 'stroke-width': 8, 'stroke-linecap': 'round' }, face)
-  // La balle qui arrive face caméra.
-  const ball = svg('g', {}, L.fx)
-  svg('circle', { r: 60, fill: 'url(#ballG)', stroke: '#2a2f3a', 'stroke-width': 4 }, ball)
-  svg('path', { d: 'M -60 0 A 60 22 0 0 0 60 0', fill: 'none', stroke: '#8a92a6', 'stroke-width': 4 }, ball)
-  const trail = Array.from({ length: 6 }, () => svg('circle', { r: 60, fill: '#ffffff', opacity: 0 }, L.fx))
-  // Les fissures (comme un objectif brisé) et les ondes de choc.
-  const cracks = svg('g', { transform: 'translate(560 860)' }, L.fx)
-  const rc = rng(7)
-  for (let k = 0; k < 11; k++) {
-    let x = 0
-    let y = 0
-    let d = 'M 0 0'
-    const a0 = (k / 11) * Math.PI * 2 + rc() * 0.4
-    for (let s = 0; s < 6; s++) {
-      const a = a0 + (rc() - 0.5) * 0.7
-      x += Math.cos(a) * (70 + rc() * 120)
-      y += Math.sin(a) * (70 + rc() * 120)
-      d += ` L ${x.toFixed(0)} ${y.toFixed(0)}`
-    }
-    svg('path', { d, fill: 'none', stroke: '#ffffff', 'stroke-width': 6, 'stroke-linejoin': 'round', 'stroke-dasharray': 1400, 'stroke-dashoffset': 1400 }, cracks)
-  }
-  const rings = [0, 1, 2].map(() => svg('circle', { cx: 560, cy: 860, r: 0, fill: 'none', stroke: '#ffffff', 'stroke-width': 14, opacity: 0 }, L.fx))
-  // La moitié gauche de la vue qui s'éteint.
-  const dark = svg('rect', { x: -400, y: -400, width: 940, height: H + 800, fill: '#000000', opacity: 0 }, L.fx)
-  const darkEdge = svg('rect', { x: 500, y: -400, width: 120, height: H + 800, fill: '#000000', opacity: 0 }, L.fx)
-  return { gyR, gyB, face, iris, pupil, reflR, reflB, reflBall, lid, lidEdge, ball, trail, cracks, rings, dark, darkEdge }
+  svg('rect', { x: -400, y: 1180, width: W + 800, height: 1400, fill: '#2a3146' }, L.far)
+  for (let k = 0; k < 14; k++) svg('path', { d: `M ${-300 + k * 120} 1180 L ${-600 + k * 200} 2000`, stroke: '#343c52', 'stroke-width': 6 }, L.far)
+  svg('ellipse', { cx: 880, cy: 1150, rx: 560, ry: 420, fill: 'url(#flare)', opacity: 0.75 }, L.far)
+  svg('ellipse', { cx: 150, cy: 1150, rx: 520, ry: 420, fill: 'url(#spot)', opacity: 0.9 }, L.far)
+  const flares = [fire(L.mid, 1000, 1300, 0.45, 51), fire(L.mid, 640, 1320, 0.3, 52)]
+  // La foule qui court dans tous les sens.
+  const runners = Array.from({ length: 7 }, (_, k) => ({ w: walker(L.mid, { carry: 'none', hood: k % 2 === 0, dir: k % 3 ? -1 : 1, rim: '#ff8a3d' }), x0: 300 + k * 130, y: 1290 + (k % 3) * 20, s: 0.75 + (k % 2) * 0.1, v: (k % 3 ? -1 : 1) * (120 + 40 * (k % 4)), ph: r() * 6 }))
+  // La ligne de police à gauche, le tireur en avant.
+  const line = svg('g', {}, L.mid)
+  for (let k = 0; k < 3; k++) cop(line).g.setAttribute('transform', `translate(${-80 + k * 110} ${1360 + (k % 2) * 16}) scale(0.9)`)
+  const shooter = cop(L.actor, { armed: true })
+  // Théo, à droite : la tête part en arrière, il tombe.
+  const theoG = svg('g', {}, L.actor)
+  const theo = thrower(theoG)
+  const tracer = svg('path', { fill: 'none', stroke: '#fff2b0', 'stroke-width': 14, 'stroke-linecap': 'round', opacity: 0 }, L.fx)
+  const burst = svg('g', { opacity: 0 }, L.fx)
+  svg('circle', { r: 260, fill: 'url(#impact)' }, burst)
+  for (let k = 0; k < 12; k++) svg('path', { d: 'M 0 -40 L 18 -230 L -18 -230 Z', fill: '#ffffff', transform: `rotate(${k * 30})` }, burst)
+  // Gaz, gyrophares, éclats de grenades.
+  const gas = Array.from({ length: 6 }, () => ({ el: svg('circle', { r: 140 + r() * 140, fill: 'url(#gas)', opacity: 0.25 }, L.front), x: r() * W, y: 1000 + r() * 600, ph: r() }))
+  const booms = [0.08, 0.6].map((t0, k) => ({ t0, el: svg('circle', { cx: k ? 980 : 520, cy: k ? 1180 : 1240, r: 0, fill: 'url(#flashGlow)', opacity: 0 }, L.front) }))
+  const gyR = svg('ellipse', { cx: -100, cy: 1000, rx: 900, ry: 900, fill: 'url(#glowRed)', opacity: 0 }, L.front)
+  const gyB = svg('ellipse', { cx: 300, cy: 1000, rx: 900, ry: 900, fill: 'url(#glowBlue)', opacity: 0 }, L.front)
+  // Le sifflement d'oreille : la vue se voile.
+  const veil = svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: '#10121a', opacity: 0 }, L.fx)
+  // La carte d'étudiant de Théo.
+  const card = svg('g', { display: 'none' }, L.fx)
+  svg('rect', { x: -330, y: -230, width: 660, height: 460, rx: 30, fill: '#fbf7ef', stroke: '#10121a', 'stroke-width': 10 }, card)
+  svg('rect', { x: -330, y: -230, width: 660, height: 70, rx: 30, fill: '#3b82f6' }, card)
+  svg('rect', { x: -330, y: -190, width: 660, height: 30, fill: '#3b82f6' }, card)
+  txt(card, 'CARTE ÉTUDIANT', { y: -180, 'font-size': 38, fill: '#ffffff' })
+  svg('rect', { x: -300, y: -130, width: 250, height: 320, rx: 16, fill: '#cfe0f5' }, card)
+  const cc = svg('clipPath', { id: 'cardClip' }, defs)
+  svg('rect', { x: -300, y: -130, width: 250, height: 320, rx: 16 }, cc)
+  const photo = svg('g', { 'clip-path': 'url(#cardClip)' }, card)
+  const theoP = svg('g', { transform: 'translate(-175 150) scale(0.5)' }, photo)
+  makePerson(theoP, THEO).update(0.5, { mouth: 0.2, brows: 'neutral', armR: [0.1, 0.4], armL: [0.1, 0.4] })
+  txt(card, 'THÉO', { x: 150, y: -50, 'font-size': 76, fill: '#10121a' })
+  txt(card, '22 ANS', { x: 150, y: 40, 'font-size': 64, fill: '#e5484d' })
+  txt(card, 'PHOTOGRAPHIE', { x: 150, y: 120, 'font-size': 36, fill: '#6b7280' })
+  const cardX = svg('g', { opacity: 0 }, card)
+  svg('ellipse', { cx: -147, cy: 81, rx: 30, ry: 26, fill: '#16171d' }, cardX)
+  svg('path', { d: 'M -190 30 L -100 130 M -100 30 L -190 130', stroke: '#e5484d', 'stroke-width': 16, 'stroke-linecap': 'round' }, cardX)
+  return { flares, runners, shooter, theoG, theo, tracer, burst, gas, booms, gyR, gyB, veil, card, cardX }
 })
+// Le voile et la carte ne suivent pas la caméra.
+TIR.g.append(TIR.veil, TIR.card)
 
 // 2 · Trois secondes plus tôt : la ligne de police, le pavé, le tir.
 const PAVE = scene('pave', (L) => {
@@ -347,7 +349,7 @@ const PAVE = scene('pave', (L) => {
     for (let j = 0; j < 7; j++) for (let k = 0; k < 3; k++) if (r() < 0.4) svg('rect', { x: x + 20 + k * 52, y: 1220 - h + j * 74, width: 28, height: 38, fill: '#ffcf7a', opacity: 0.45 }, L.far)
   }
   // Le sol (pavés), les fumigènes.
-  svg('rect', { x: -400, y: 1180, width: W + 800, height: 1400, fill: '#1a1f2c' }, L.far)
+  svg('rect', { x: -400, y: 1180, width: W + 800, height: 1400, fill: '#2a3146' }, L.far)
   for (let k = 0; k < 14; k++) svg('path', { d: `M ${-300 + k * 120} 1180 L ${-600 + k * 200} 2000`, stroke: '#232a3a', 'stroke-width': 6 }, L.far)
   // Contre-jours : projecteurs bleutés derrière la police, lueur orange des fumigènes derrière la foule.
   svg('ellipse', { cx: 200, cy: 1150, rx: 520, ry: 420, fill: 'url(#spot)', opacity: 0.9 }, L.far)
@@ -413,14 +415,10 @@ const TRIB = scene('tribunal', (L) => {
   svg('path', { d: 'M 640 220 L 640 760 L 960 760 L 960 220 A 160 160 0 0 0 640 220 Z', fill: '#3b4a86' }, procBg)
   svg('path', { d: 'M 800 120 L 800 760 M 640 450 L 960 450', stroke: '#27305a', 'stroke-width': 18 }, procBg)
   svg('path', { d: 'M 640 260 L 960 260 L 700 1900 L -200 1900 Z', fill: 'url(#beam)', opacity: 0.5 }, procBg)
-  paint('../fonds/essai/fond-procureur.jpg', procBg)
-  svg('rect', { x: -210, y: -45, width: 1500, height: 2010, fill: 'url(#shade)' }, procBg)
   const avoBg = svg('g', {}, L.far)
   svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: 'url(#courtRed)' }, avoBg)
   const r = rng(9)
   for (let i = 0; i < 16; i++) svg('circle', { cx: r() * W, cy: 200 + r() * 1100, r: 30 + r() * 90, fill: '#ffb36b', opacity: 0.06 + r() * 0.08 }, avoBg)
-  paint('../fonds/essai/fond-defense.jpg', avoBg)
-  svg('rect', { x: -210, y: -45, width: 1500, height: 2010, fill: 'url(#shade)' }, avoBg)
   const hotBg = svg('g', {}, L.far)
   const hotFill = svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: '#b3232b' }, hotBg)
   svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: 'url(#dots)', opacity: 0.12 }, hotBg)
@@ -662,7 +660,9 @@ function counterTag(t0, t1, to, unit, { y = 420, x = 540, fmt = (v) => String(v)
 }
 
 // Les instants clés du hook.
-const T_HIT = Wd('01', 'tir') - 0.02 // la balle touche
+const T_MUZZLE = Wd('01', 'tir') - 0.12 // le coup part, face caméra
+const T_HIT = T_MUZZLE + 0.12 // la balle touche Théo
+const T_SLOW = Wd('01', 'seconde') + 0.1 // fin du ralenti : il tombe
 const T_DARK = Wd('01', 'perd') - 0.1 // la moitié gauche s'éteint
 const T_THROW = Wd('02', 'lancait') - 0.1 // le bras part
 const T_SHOT = Wd('02', 'tire') - 0.05 // le policier tire
@@ -671,7 +671,6 @@ const T_BOX = SEC.juge.t0
 // Le hook.
 tag('UN TIR DE LBD', 'pill red', { t0: T_HIT + 0.05, t1: SEC.tir.t1, y: 250, rot: -2 })
 tag('LBD = LANCEUR DE BALLES DE DÉFENSE', 'pill small', { t0: Wd('01', 'seconde') - 0.1, t1: SEC.tir.t1, y: 350 }).el.style.fontSize = '32px'
-tag('ÉTUDIANT · 22 ANS', 'pill yellow', { t0: Wd('01', '22') - 0.15, t1: SEC.tir.t1, y: 1210, x: 760, rot: 3 })
 fs(tag('ŒIL PERDU', 'stamp', { t0: Wd('01', 'gauche') - 0.05, t1: SEC.tir.t1, y: 1050, x: 300, rot: -8, from: 2.8, dur: 0.2 }), 96)
 tag('◀◀ 3 SECONDES PLUS TÔT', 'pill', { t0: S('02') - 0.05, t1: SEC.pave.t1, y: 240 })
 tag('PAVÉ', 'pill red', { t0: Wd('02', 'pave') - 0.1, t1: T_SHOT - 0.1, y: 430, x: 700, rot: 4 }).el.style.fontSize = '44px'
@@ -778,7 +777,9 @@ function updateCaptions(t) {
 // ------------------------------------------------------------------ l'instant t
 
 const IMPACTS = [
+  [T_MUZZLE, 12],
   [T_HIT, 26],
+  [Wd('01', 'son') - 0.1, 10],
   [Wd('01', 'gauche') - 0.05, 10],
   [T_SHOT, 18],
   [Wd('03', 'juge') - 0.05, 16],
@@ -843,52 +844,87 @@ function seek(t) {
   const cur = scenes.find((s) => t >= s.t0 && t < s.t1) ?? scenes.at(-1)
 
   if (cur === TIR) {
-    const hit = t >= T_HIT
-    const k = t - T_HIT
-    // Avant l'impact : l'œil regarde, les gyrophares se reflètent ; la balle grossit, face caméra.
-    cam(TIR, t, { zoom: hit ? 1.0 + 0.05 * Math.exp(-k * 3) : lerp(1.15, 1.25, clamp(t / T_HIT)), cx: 540, cy: 900, push: 0.02, from: T_HIT, hand: hit ? 3 : 1, flat: true })
-    const ph = (t * 2.6) % 1
-    TIR.gyR.setAttribute('opacity', ph < 0.5 ? 0.38 : 0.08)
-    TIR.gyB.setAttribute('opacity', ph < 0.5 ? 0.08 : 0.38)
-    TIR.reflR.setAttribute('opacity', ph < 0.5 ? 1 : 0.25)
-    TIR.reflB.setAttribute('opacity', ph < 0.5 ? 0.25 : 1)
-    const look = hit ? 0 : Math.sin(t * 4) * 12
-    TIR.iris.setAttribute('transform', `translate(${look} ${-6})`)
-    TIR.pupil.setAttribute('r', hit ? 40 : 72 - 20 * clamp(t / T_HIT))
-    const u = clamp((t + 0.05) / (T_HIT + 0.05))
-    show(TIR.ball, !hit)
-    TIR.reflBall.setAttribute('r', hit ? 0 : 3 + 16 * ease.in3(u))
-    if (!hit) TIR.ball.setAttribute('transform', `translate(${lerp(640, 560, u)} ${lerp(760, 860, u)}) scale(${(0.08 + 3.4 * ease.in3(u)).toFixed(3)})`)
-    TIR.trail.forEach((c, i) => {
-      const uu = clamp(u - (i + 1) * 0.06)
-      c.setAttribute('cx', lerp(640, 560, uu))
-      c.setAttribute('cy', lerp(760, 860, uu))
-      c.setAttribute('r', (60 * (0.08 + 3.4 * ease.in3(uu))).toFixed(1))
-      c.setAttribute('opacity', !hit && uu > 0 ? (0.12 * (1 - i / 6)).toFixed(2) : 0)
+    // Le temps de la scène : normal, ralenti à l'impact (« une seconde »), puis la chute.
+    const SLOWK = 0.08
+    const ts = t < T_HIT ? t : t < T_SLOW ? T_HIT + (t - T_HIT) * SLOWK : T_HIT + (T_SLOW - T_HIT) * SLOWK + (t - T_SLOW)
+    const hitK = prog(t, T_HIT, 0.25, ease.out3)
+    const fallK = ease.in2(clamp((ts - (T_HIT + (T_SLOW - T_HIT) * SLOWK)) / 0.55))
+    const tin = prog(t, T_SLOW, 0.5, ease.out3)
+    // Caméra : plan large à l'épaule, coup de zoom sur Théo à l'impact, tangage pendant le sifflement.
+    cam(TIR, t, {
+      zoom: lerp(1.12, 1.5, hitK) + 0.08 * tin,
+      cx: lerp(560, lerp(800, 640, fallK), hitK),
+      cy: lerp(1230, lerp(1150, 1360, fallK), hitK),
+      push: 0,
+      hand: t < T_HIT ? 6 : 3,
+      rot: 4 * tin * Math.sin(t * 1.3),
     })
-    // Impact : ondes, fissures ; la paupière tombe ; la moitié gauche de la vue s'éteint.
-    TIR.rings.forEach((rg, i) => {
-      const v = (k - i * 0.1) / 0.6
-      const on = v > 0 && v < 1
-      rg.setAttribute('r', on ? 60 + 700 * ease.out3(v) : 0)
-      rg.setAttribute('opacity', on ? (1 - v).toFixed(2) : 0)
+    for (const f of TIR.flares) f(ts)
+    TIR.runners.forEach((p) => {
+      const x = ((p.x0 + p.v * ts + 2400) % 1400) - 160
+      p.w.update(x, p.y, p.s, ts * 9 + p.ph, { stride: 1.2 })
     })
-    ;[...TIR.cracks.children].forEach((c, i) => c.setAttribute('stroke-dashoffset', 1400 * (1 - prog(t, T_HIT + i * 0.012, 0.25, ease.out3))))
-    const lidD = hit ? clamp(0.55 + 0.45 * prog(t, T_HIT + 0.05, 0.5, ease.out3)) : 0
-    const yl = lerp(-260, 200, lidD)
-    TIR.lid.setAttribute('d', `M -470 -330 L 470 -330 L 470 0 C 240 ${yl * 0.9} -240 ${yl * 0.9} -470 0 Z`)
-    TIR.lidEdge.setAttribute('d', hit ? `M -420 0 C -240 ${yl * 0.9} 240 ${yl * 0.9} 420 0` : '')
-    const dk = prog(t, T_DARK, 0.6, ease.io3)
-    TIR.dark.setAttribute('opacity', (0.92 * dk).toFixed(2))
-    TIR.darkEdge.setAttribute('opacity', (0.55 * dk).toFixed(2))
-    TIR.dark.setAttribute('x', lerp(-1400, -400, ease.out3(dk)))
+    TIR.shooter.g.setAttribute('transform', 'translate(250 1480) scale(1.45)')
+    TIR.shooter.flash.setAttribute('opacity', t >= T_MUZZLE && t < T_MUZZLE + 0.12 ? (1 - (t - T_MUZZLE) / 0.12).toFixed(2) : 0)
+    // Théo : debout, la tête part en arrière, il s'écroule.
+    TIR.theo.update(0.15)
+    TIR.theoG.setAttribute('transform', `translate(${820 - 40 * fallK} 1500) rotate(${(-6 + 14 * hitK * (1 - fallK) - 80 * fallK).toFixed(1)}) scale(1.5)`)
+    const tr = (t - T_MUZZLE) / (T_HIT - T_MUZZLE)
+    TIR.tracer.setAttribute('d', `M 450 1160 L ${lerp(450, 800, clamp(tr))} ${lerp(1160, 1070, clamp(tr))}`)
+    TIR.tracer.setAttribute('opacity', tr > 0 && tr < 2.5 ? clamp(2.5 - tr).toFixed(2) : 0)
+    const bu = t >= T_HIT ? clamp(1 - (t - T_HIT) / 0.6) : 0
+    TIR.burst.setAttribute('opacity', bu.toFixed(2))
+    TIR.burst.setAttribute('transform', `translate(800 1070) scale(${(0.6 + 0.6 * (1 - bu)).toFixed(2)}) rotate(${(t * 60).toFixed(1)})`)
+    for (const g of TIR.gas) {
+      const v = (ts * 0.06 + g.ph) % 1
+      g.el.setAttribute('cx', g.x + 120 * Math.sin(v * 6.28))
+      g.el.setAttribute('cy', g.y - 60 * v)
+    }
+    for (const b of TIR.booms) {
+      const v = (ts - b.t0) / 0.4
+      b.el.setAttribute('r', v > 0 && v < 1 ? (80 + 320 * ease.out3(v)).toFixed(0) : 0)
+      b.el.setAttribute('opacity', v > 0 && v < 1 ? (1 - v).toFixed(2) : 0)
+    }
+    const ph = (ts * 2.6) % 1
+    TIR.gyR.setAttribute('opacity', ph < 0.5 ? 0.4 : 0.06)
+    TIR.gyB.setAttribute('opacity', ph < 0.5 ? 0.06 : 0.4)
+    // Le sifflement : couleurs qui s'en vont, flou, voile qui bat comme un cœur.
+    const beat = Math.max(0, Math.sin(Math.PI * (((t - T_SLOW) * 1.25) % 1))) ** 8
+    TIN.sat.setAttribute('values', (1 - 0.85 * tin).toFixed(2))
+    TIN.blur.setAttribute('stdDeviation', (6 * tin + 4 * beat * tin).toFixed(1))
+    for (const k of ['far', 'mid']) TIR.L[k].setAttribute('filter', t > T_SLOW ? 'url(#tin)' : '')
+    TIR.veil.setAttribute('opacity', (0.25 * tin + 0.2 * beat * tin).toFixed(2))
+    // La carte d'étudiant ; « œil gauche » : bandeau et croix.
+    const c = popS(t, Wd('01', 'etudiant') - 0.15, Infinity, 0.35)
+    show(TIR.card, c > 0.01)
+    const slide = ease.out3(clamp((t - (Wd('01', 'etudiant') - 0.15)) / 0.3))
+    place(TIR.card, lerp(1300, 560, slide), 640 + 6 * Math.sin(t * 3), 0.95 * Math.min(1.1, c), lerp(14, -4, slide))
+    TIR.cardX.setAttribute('opacity', prog(t, Wd('01', 'son') - 0.1, 0.15, ease.out3).toFixed(2))
   }
   if (cur === PAVE) {
     // Plan large : on part sur Théo (à droite), on suit le pavé vers la ligne de police (à gauche).
     const u = prog(t, T_THROW + 0.15, T_SHOT - T_THROW - 0.25, ease.linear)
     const fol = ease.io2(prog(t, T_THROW, T_SHOT - T_THROW, ease.linear))
     const shotK = prog(t, T_SHOT, 0.3, ease.out3)
-    cam(PAVE, t, { zoom: lerp(1.3, 1.12, fol) + 0.12 * shotK, cx: lerp(760, 520, fol), cy: lerp(1260, 1240, fol), push: 0, hand: 4 })
+    void fol
+    {
+      // Plans enchaînés : Théo de près, on suit le pavé, panoramique sur le tireur, coup, recul.
+      const T_COP = Wd('02', 'policier') - 0.2
+      const [sx, sy] = stoneAt(Math.min(1, u))
+      let z, cx, cy
+      if (t < T_THROW) [z, cx, cy] = [lerp(2.1, 1.9, clamp((t - SEC.pave.t0) / 0.8)), 880, 1250]
+      else if (t < T_COP) {
+        const q = ease.io2(clamp((t - T_THROW) / 0.35))
+        ;[z, cx, cy] = [lerp(1.9, 1.55, q), lerp(880, sx, q), lerp(1250, sy + 180, q)]
+      } else if (t < T_SHOT) {
+        const q = ease.io3(clamp((t - T_COP) / 0.25))
+        ;[z, cx, cy] = [lerp(1.55, 2.1, q), lerp(sx, 330, q), lerp(sy + 180, 1170, q)]
+      } else {
+        const q = ease.io3(clamp((t - T_SHOT - 0.12) / 0.4))
+        ;[z, cx, cy] = [lerp(2.3, 1.2, q), lerp(330, 640, q), lerp(1170, 1250, q)]
+      }
+      cam(PAVE, t, { zoom: z + 0.15 * shotK * (1 - shotK), cx, cy, push: 0, hand: 5 })
+    }
     for (const f of PAVE.flares) f(t)
     PAVE.cops.forEach((c, i) => {
       const [x, y] = [-60 + i * 110, 1350 + (i % 2) * 16]

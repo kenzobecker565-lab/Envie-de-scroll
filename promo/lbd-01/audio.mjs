@@ -250,11 +250,33 @@ function score() {
     else flashHit(sec.t0)
   }
   // Le tir : la balle arrive (souffle qui monte), l'impact, puis un sifflement d'oreille.
-  const hit = W('01', 'tir') - 0.02
-  sweep(0, hit, { f0: 400, f1: 3000, q: 1.2, gain: 0.25 })
-  lbdShot(hit, 0.7)
-  boom(hit, 0.5, 60, 28, 1.2)
-  place([[B.sfx, 0.035]], hit + 0.1, 2.6, (i, t) => Math.sin(TAU * 4200 * t) * Math.min(1, t / 0.05) * Math.exp(-t * 0.9))
+  // Le hook : la rue en plein chaos, le coup, le ralenti, puis tout s'étouffe (sifflement, cœur).
+  const shot = W('01', 'tir') - 0.12
+  const hit = shot + 0.12
+  const slow = W('01', 'seconde') + 0.1
+  const end = SEC('pave').t0
+  crowd(0, hit + 0.05, 0.12)
+  siren(0, hit + 0.1, 0.035)
+  for (const t0 of [0, 0.2]) drum(t0, 0.25)
+  boom(0.08, 0.35, 90, 40, 0.5)
+  crash(0.09, 0.12)
+  lbdShot(shot, 0.8)
+  boom(hit, 0.65, 95, 30, 0.9)
+  tick(hit, 0.3, 700)
+  sweep(hit, slow - hit, { f0: 1600, f1: 120, q: 0.8, gain: 0.22 })
+  {
+    const lp = new Biquad('lowpass', 320, 0.7)
+    place([[B.sfx, 0.12]], hit, end - hit + 0.3, (i, t) => lp.process(noise()) * 3 * (0.7 + 0.3 * Math.sin(TAU * 1.3 * t)) * Math.min(1, t / 0.4) * Math.min(1, (end + 0.3 - hit - t) / 0.3))
+  }
+  place([[B.sfx, 0.05]], hit, end - hit, (i, t) => Math.sin(TAU * 4200 * t) * Math.min(1, t / 0.3) * Math.min(1, (end - hit - t) / 0.2))
+  for (let t0 = slow; t0 < end - 0.2; t0 += 0.8) {
+    boom(t0, 0.35, 55, 30, 0.25)
+    boom(t0 + 0.18, 0.22, 50, 28, 0.25)
+  }
+  boom(1.21, 0.2, 60, 30, 0.6)
+  sweep(W('01', 'etudiant') - 0.2, 0.3, { f0: 600, f1: 2600, gain: 0.12 })
+  pop(W('01', 'etudiant') - 0.05, 0.14, 1000, 500)
+  pop(W('01', 'son') - 0.1, 0.16, 600, 200)
   stamp(W('01', 'gauche') - 0.05, 0.3)
   // Trois secondes plus tôt : la foule, les grenades, le pavé, le tir.
   const pv = SEC('pave')

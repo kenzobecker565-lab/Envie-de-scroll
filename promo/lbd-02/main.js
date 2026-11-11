@@ -562,7 +562,7 @@ tag('UNE AUTRE PIERRE', 'pill red', { t0: Wd('03', 'autre') - 0.1, t1: Wd('03', 
 tag('VENUE DE DERRIÈRE', 'pill', { t0: Wd('03', 'venue') - 0.1, t1: Wd('03', 'lancee') - 0.1, y: 400, rot: 2 })
 fs(tag('JAMAIS IDENTIFIÉ', 'stamp', { t0: Wd('03', 'jamais') - 0.1, t1: SEC.cam.t1, y: 420, rot: -5, from: 2.8, dur: 0.2 }), 84)
 // Le procès.
-counterTag(Wd('04', 'trois') - 0.1, Wd('04', 'place') - 0.3, 3, 'SECONDES', { y: 250, dur: 0.4 })
+counterTag(Wd('04', 'trois') - 0.1, Wd('04', 'place') - 0.6, 3, 'SECONDES', { y: 250, dur: 0.4 })
 fs(tag('QU’AURIEZ-VOUS CRU ?', 'slam yellow', { t0: Wd('04', 'place') - 0.25, t1: E('04') + 0.1, y: 560, rot: -3, from: 2.6, dur: 0.2 }), 74)
 fs(tag('J’AURAIS REGARDÉ.', 'slam white', { t0: Wd('05', 'jaurais') - 0.15, t1: Wd('05', 'il') - 0.1, y: 560, rot: -2, from: 2.4, dur: 0.2 }), 96)
 tag('DES IMAGES', 'pill', { t0: Wd('05', 'images') - 0.15, t1: Wd('05', 'et') - 0.1, y: 420, rot: -3 })
@@ -589,8 +589,8 @@ fs(tag('TOI, TU AVAIS VOTÉ QUOI ?', 'big white', { t0: S('10') - 0.05, y: 260, 
 fs(tag('COUPABLE', 'vote red', { t0: Wd('10', 'vote') - 0.1, y: 470, rot: -3 }), 80)
 fs(tag('NON COUPABLE', 'vote blue', { t0: Wd('10', 'quoi') - 0.1, y: 620, rot: 3 }), 80)
 fs(tag('DIS-LE EN COMMENTAIRE ↓', 'pill yellow', { t0: Wd('10', 'commentaire') - 0.2, y: 780 }), 48)
-const sub2 = tag('<span class="plus">+</span> ABONNE-TOI', 'subscribe', { t0: Wd('11', 'abonnetoi') - 0.1, y: 950, from: 2.2, dur: 0.25 })
-fs(tag('LA PROCHAINE AFFAIRE ARRIVE', 'pill small', { t0: Wd('11', 'prochaine') - 0.1, y: 1085 }), 36)
+const sub2 = tag('<span class="plus">+</span> ABONNE-TOI', 'subscribe', { t0: Wd('11', 'abonnetoi') - 0.1, y: 1180, from: 2.2, dur: 0.25 })
+fs(tag('LA PROCHAINE AFFAIRE ARRIVE', 'pill small', { t0: Wd('11', 'prochaine') - 0.1, y: 1315 }), 36)
 for (const b of [sub1, sub2]) b.kick = (t) => 1 + 0.06 * Math.max(0, Math.sin((t - b.t0) * 9)) ** 4
 
 const who = document.createElement('div')
@@ -841,7 +841,7 @@ function seek(t) {
     }
     prop(TRIB.notSeen, Wd('04', 'pas') - 0.15, Wd('04', 'il') - 0.15, 540, 560, 0.85)
     prop(TRIB.friend, Wd('04', 'il') - 0.1, Wd('04', 'et') - 0.15, 540, 560, 0.85)
-    prop(TRIB.crouch, Wd('04', 'homme') - 0.2, Wd('04', 'place') - 0.3, 540, 560, 0.85)
+    prop(TRIB.crouch, Wd('04', 'homme') - 0.2, Wd('04', 'place') - 0.6, 540, 640, 0.85)
     prop(TRIB.alone, Wd('05', 'devant') - 0.2, E('05') + 0.05, 540, 600, 0.9)
   }
   if (cur === PAUSE) {
@@ -874,8 +874,8 @@ function seek(t) {
   }
   if (cur === FIN) {
     cam(FIN, t, { zoom: 1.0, cy: 1000, push: 0.012, hand: 1 })
-    FIN.theo.update(t, { x: 270, y: 1440, scale: 0.9, brows: 'sad', look: [0.3, 0.2], armR: [0.1, 0.5], armL: [0.1, 0.5], seed: 3.1 })
-    FIN.flic.update(t, { x: 810, y: 1440, scale: 0.9, brows: 'sad', look: [-0.3, 0.3], headNod: 0.1, armR: [0.1, 0.6], armL: [0.1, 0.6], seed: 0.7 })
+    FIN.theo.update(t, { x: 270, y: 1560, scale: 0.85, brows: 'sad', look: [0.3, 0.2], armR: [0.1, 0.5], armL: [0.1, 0.5], seed: 3.1 })
+    FIN.flic.update(t, { x: 810, y: 1560, scale: 0.85, brows: 'sad', look: [-0.3, 0.3], headNod: 0.1, armR: [0.1, 0.6], armL: [0.1, 0.6], seed: 0.7 })
   }
 
   // Transitions : flash, fondu au noir, pastilles, retour en arrière, panoramique filé.

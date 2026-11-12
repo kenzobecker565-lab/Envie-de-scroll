@@ -609,8 +609,7 @@ const T_BANG = Wd('01', 'sanglier') + 0.15 // le coup part
 const T_BOX = Wd('02', 'aujourdhui') - 0.1 // les barreaux tombent
 const BIPS = C.bips
 const isBip = (t) => BIPS.some((b) => t >= b.t0 - 0.1 && t < b.t1 + 0.5)
-// « bouffon » → « B*****N » : on garde la première et la dernière lettre.
-const mask = (w) => w.replace(/^(\p{L})(\p{L}+)(\p{L})/u, (_, a, b, c) => a + '*'.repeat(b.length) + c)
+const mask = (w) => w // pas de censure : les insultes s'entendent et s'affichent en entier
 
 // Le hook.
 fs(tag('UN SANGLIER ?', 'pill yellow', { t0: Wd('01', 'voir') - 0.1, t1: T_BANG - 0.05, y: 300, rot: -3 }), 64)
@@ -644,7 +643,7 @@ fs(tag('« JE NE SUIS PAS UN SANGLIER ! »', 'pill yellow', { t0: Wd('13', 'je')
 fs(tag('DÉCOR INSTAGRAM', 'pill', { t0: Wd('14', 'decor') - 0.15, t1: E('14') + 0.1, y: 300, rot: 3 }), 60)
 fs(tag('LUI, SI.', 'slam white', { t0: Wd('15', 'lui') - 0.1, t1: Wd('15', 'et') - 0.05, y: 360, rot: -3, from: 2.6, dur: 0.2 }), 170)
 // Les insultes : le mot, censuré, claque en rouge.
-const INSULT_TXT = { bouffon: 'ESPÈCE DE B*****N !', connard: 'CE C*****D', nud: 'TÊTE DE N**D', gueule: 'FERME TA G****E.', abruti: 'AB***I ?', tocard: 'T****D.' }
+const INSULT_TXT = { bouffon: 'ESPÈCE DE BOUFFON !', connard: 'CE CONNARD', nud: 'TÊTE DE NŒUD', gueule: 'FERME TA GUEULE.', abruti: 'ABRUTI ?', tocard: 'TOCARD.' }
 for (const b of BIPS) fs(tag(INSULT_TXT[b.word], 'slam red', { t0: b.t0 - 0.02, t1: b.t1 + 0.45, y: 560, rot: -5, from: 3, dur: 0.15 }), INSULT_TXT[b.word].length > 12 ? 78 : 104)
 // Le vote, puis l'abonnement.
 fs(tag('TU ES LE JURÉ', 'big white', { t0: S('16') - 0.05, y: 260, from: 1.4, dur: 0.4 }), 100)

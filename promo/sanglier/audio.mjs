@@ -301,7 +301,7 @@ function score() {
   // La blague du « bon chasseur » : rires dans la salle.
   sample('0490', W('07', 'chasseur', 1) + 0.35, 0.45, { len: 2.4, fade: 0.05 })
   boom(S('08') - 0.05, 0.3, 70, 34, 0.6)
-  // Les insultes : coup de scratch, le bip (dans voiceTrack), un choc.
+  // Les insultes (non censurées) : coup de scratch, un choc.
   for (const b of BIPS) {
     sweep(b.t0 - 0.08, 0.12, { f0: 2400, f1: 200, gain: 0.18 })
     boom(b.t0, 0.3, 120, 50, 0.25)
@@ -351,21 +351,6 @@ function voiceTrack() {
       B.voice[1][s0 + i] += y[i]
       B.room[0][s0 + i] += y[i] * room
       B.room[1][s0 + i] += y[i] * room
-    }
-  }
-  // Les insultes : la voix coupée, un bip à la place.
-  for (const b of BIPS) {
-    const a = Math.round(b.t0 * SR)
-    const z = Math.round(b.t1 * SR)
-    for (let i = a - 220; i < z + 220; i++) {
-      const g = i < a ? (a - i) / 220 : i > z ? (i - z) / 220 : 0
-      for (const bus of [B.voice, B.room]) for (const ch of bus) ch[i] *= g
-    }
-    for (let i = a; i < z; i++) {
-      const t = (i - a) / SR
-      const v = Math.sin(TAU * 1000 * t) * 0.32 * Math.min(1, t / 0.005, (z - i) / SR / 0.005)
-      B.voice[0][i] += v
-      B.voice[1][i] += v
     }
   }
   filterBus(B.voice, [['highpass', 80, 0.7], ['peaking', 250, 1, -2], ['peaking', 3200, 0.9, 2], ['highshelf', 8000, 0.7, -2]])

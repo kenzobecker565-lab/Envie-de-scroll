@@ -271,8 +271,8 @@ function score() {
   for (const sec of C.sections.slice(1)) sweep(sec.t0 - 0.24, 0.5, { f0: 300, f1: 3500, gain: 0.18 })
   const trib = SEC('tribunal').t0
   // A · Le parking la nuit, le direct : notifications, cœur qui cogne, il court.
-  sample('0621', 0, 0.5, { len: K.BURST, fade: 0.1 })
-  for (let k = 0; k < 8; k++) sample('2059', 0.1 + k * 0.48, 0.14)
+  sample('0621', 0, 0.35, { len: K.BURST, fade: 0.1 })
+  for (let k = 0; k < 8; k++) { const t0 = 0.1 + k * 0.48; sample('2059', t0, t0 > S('01') - 0.1 && t0 < E('01') ? 0.05 : 0.14) }
   for (let t = 0.3, k = 0; t < K.BURST - 0.1; k++) {
     boom(t, 0.22, 55, 30, 0.2)
     boom(t + 0.16, 0.15, 50, 28, 0.2)

@@ -18,3 +18,13 @@ Crédit facultatif : « Additional sounds: Joseph SARDIN - BigSoundBank.com ».
 | 1588.wav | Gavel, 1 blow |
 | 0490.wav | Laughter |
 | 0489.wav | Strident Laughter |
+| 1289.wav | Rain on concrete (30 s) |
+| 0740.wav | Rain and Thunder #2 (30 s) |
+| 0103.wav | Door Slamming #1 |
+| 1501.wav | Door Slamming #4 |
+| 0095.wav | Door Knock |
+| 2414.wav | Keys and lock #1 |
+| 0378.wav | Lock and big key |
+| 0184.wav | Drill (30 s) |
+| 0083.wav | Keys thrown on wood floors #1 |
+| 1320.wav | Open a Entrance Door with a Key |

@@ -324,7 +324,7 @@ function score() {
   boom(K.CRISIS, 0.45, 100, 40, 0.5)
   sample('0218', K.CRISIS, 0.6, { len: K.DEAD - K.CRISIS, fade: 0.05 })
   for (let k = 0; k < 10; k++) tick(W('03', 'quarante') - 0.1 + k * 0.06, 0.05, 2000 + k * 120)
-  sample('1309', K.DEAD, 0.5, { from: 13.75, len: K.TODAY - K.DEAD - 0.05, fade: 0.01 })
+  sample('1309', K.DEAD, 0.2, { from: 13.75, len: K.TODAY - K.DEAD - 0.05, lp: 2500, fade: 0.01 })
   // E · La photo de Lou, puis le marteau.
   sample('0448', K.TODAY - 0.3, 0.7, { len: 0.6 })
   boom(K.TODAY, 0.4, 120, 50, 0.4)

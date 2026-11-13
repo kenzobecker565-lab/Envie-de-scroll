@@ -1,0 +1,94 @@
+{
+ "_doc": "« La gifle » : un prof gifle un élève qui l'insultait en le filmant (affaire fictive). Voix ElevenLabs (Eleven v4) : élève « Hugo – Punchy French Creator », narrateur « Nicolas - Narrator », procureur « Paul K — Deep French Narrator », défense « Ilan ». « avocate » = la défense.",
+ "voices": {
+  "eleve": {
+   "name": "eleve",
+   "file": "media/eleve.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-eleve",
+   "who": "eleve",
+   "text": "Vas-y, frappe-moi ! T'oses pas, vieux con !"
+  },
+  {
+   "id": "02-cejour",
+   "who": "narrateur",
+   "text": "Ce jour-là, monsieur Garnier, 58 ans, se faisait insulter depuis dix minutes. Filmé. Devant toute la classe. Il a fini par craquer.",
+   "gap": 1.7
+  },
+  {
+   "id": "03-jugement",
+   "who": "narrateur",
+   "text": "La vidéo a fait 4 millions de vues. Aujourd'hui, c'est son jugement.",
+   "gap": 0.35
+  },
+  {
+   "id": "04-mineur",
+   "who": "procureur",
+   "text": "Un adulte a frappé un mineur. Dans une salle de classe. Le reste, c'est du bruit.",
+   "gap": 0.45
+  },
+  {
+   "id": "05-bruit",
+   "who": "avocate",
+   "text": "Du bruit ? 10 minutes d'insultes, téléphone au poing. Vous auriez tenu, vous ?",
+   "gap": 0.2
+  },
+  {
+   "id": "06-paie",
+   "who": "procureur",
+   "text": "Oui. C'est même pour ça qu'on le paie.",
+   "gap": 0.2
+  },
+  {
+   "id": "07-contenu",
+   "who": "avocate",
+   "text": "On le paie pour enseigner. Pas pour servir de contenu à un gamin de 16 ans.",
+   "gap": 0.2
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "T'es de quel côté ? Like si ça te fait réagir.",
+   "gap": 0.35
+  },
+  {
+   "id": "09-trente",
+   "who": "procureur",
+   "text": "30 ans de carrière. Et il choisit la seule réponse qu'on ne peut pas excuser.",
+   "gap": 0.35
+  },
+  {
+   "id": "10-craque",
+   "who": "avocate",
+   "text": "Trois conseils de discipline. Zéro sanction. L'école l'a laissé seul jusqu'à ce qu'il craque.",
+   "gap": 0.2
+  },
+  {
+   "id": "11-fatigue",
+   "who": "procureur",
+   "text": "Alors jugez l'école. Mais ne dites pas à ces gamins qu'un adulte a le droit de les frapper quand il est fatigué.",
+   "gap": 0.25
+  },
+  {
+   "id": "12-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "gap": 0.6
+  }
+ ]
+}

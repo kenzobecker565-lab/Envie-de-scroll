@@ -28,3 +28,11 @@ Crédit facultatif : « Additional sounds: Joseph SARDIN - BigSoundBank.com ».
 | 0184.wav | Drill (30 s) |
 | 0083.wav | Keys thrown on wood floors #1 |
 | 1320.wav | Open a Entrance Door with a Key |
+| 0597.wav | Slaps |
+| 0148.wav | Glass Burst |
+| 0771.wav | Broken glass |
+| 1111.wav | Message #1 (téléphone) |
+| 0448.wav | iPhone - Camera |
+| 2059.wav | Notification « LaSoMarie » #1 |
+| 1072.wav | School Playground, Football (20 s) |
+| 1035.wav | Mobile Vibrator in a Hand |

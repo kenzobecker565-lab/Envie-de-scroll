@@ -663,8 +663,8 @@ fs(tag('VENGEANCE PRIVÉE ?', 'vote red', { t0: Wd('15', 'vengeance') - 0.1, t1:
 fs(tag('COUPABLE', 'vote red', { t0: Wd('15', 'coupable') - 0.1, y: 470, rot: -3 }), 80)
 fs(tag('NON COUPABLE', 'vote blue', { t0: Wd('15', 'non') - 0.1, y: 620, rot: 3 }), 80)
 fs(tag('ÉCRIS TON VERDICT EN COMMENTAIRE ↓', 'pill yellow', { t0: Wd('16', 'ecris') - 0.1, y: 780 }), 42)
-const like2 = fs(tag(LIKE, 'subscribe like', { t0: Wd('16', 'like') - 0.1, y: 930, from: 2.2, dur: 0.25 }), 84)
-const sub2 = fs(tag('<span class="plus">+</span> ABONNE-TOI', 'subscribe', { t0: Wd('16', 'abonnement') - 0.1, y: 1100, from: 2.2, dur: 0.25 }), 84)
+const like2 = fs(tag(LIKE, 'subscribe like', { t0: Wd('16', 'like') - 0.1, x: 250, y: 1135, from: 2.2, dur: 0.25 }), 64)
+const sub2 = fs(tag('<span class="plus">+</span> ABONNE-TOI', 'subscribe', { t0: Wd('16', 'abonnement') - 0.1, x: 730, y: 1135, from: 2.2, dur: 0.25 }), 64)
 for (const b of [like1, sub1, like2, sub2]) b.kick = (t) => 1 + 0.06 * Math.max(0, Math.sin((t - b.t0) * 9)) ** 4
 
 const who = document.createElement('div')

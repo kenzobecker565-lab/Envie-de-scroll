@@ -903,8 +903,8 @@ function seek(t) {
   }
   if (cur === VOTE) {
     cam(VOTE, t, { zoom: 1.0, cy: 1000, push: 0.012, hand: 1 })
-    VOTE.b.update(t, { x: 270, y: 1560, scale: 0.85, brows: 'sad', look: [0.3, 0.1], armR: [0.1, 0.5], armL: [0.1, 0.5], seed: 3.1 })
-    VOTE.lea.update(t, { x: 800, y: 1600, scale: 0.7, brows: 'determined', look: [-0.3, 0], armR: [0.1, 0.5], armL: [0.1, 0.5], seed: 0.7 })
+    VOTE.b.update(t, { x: 270, y: 1480, scale: 0.92, brows: 'sad', look: [0.3, 0.1], armR: [0.1, 0.5], armL: [0.1, 0.5], seed: 3.1 })
+    VOTE.lea.update(t, { x: 805, y: 1530, scale: 0.8, brows: 'determined', look: [-0.3, 0], armR: [0.1, 0.5], armL: [0.1, 0.5], seed: 0.7 })
   }
 
   // Transitions : flash, pastilles, panoramique filé.

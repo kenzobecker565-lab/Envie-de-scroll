@@ -52,3 +52,5 @@ Crédit facultatif : « Additional sounds: Joseph SARDIN - BigSoundBank.com ».
 | 2363.wav | Applause #1 |
 | 1801.wav | Whoosh #8 |
 | 1045.wav | Ball Rebounds |
+| 0097.wav | Countryside (extrait de 30 s) |
+| 1660.wav | Laughter of Children |

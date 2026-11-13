@@ -1,0 +1,24 @@
+{
+ "_doc": "« Le permis » : Bernard, 87 ans, confond les pédales et renverse Léa, 7 ans, sur un passage piéton (affaire fictive). Voix ElevenLabs (Eleven v4) : conducteur « Olivier D », narrateur « Nicolas - Narrator », procureur « Paul K », défense « Ilan ». « avocate » = la défense.",
+ "voices": {
+  "conducteur": {"name": "conducteur", "file": "media/conducteur.wav"},
+  "narrateur": {"name": "narrateur", "file": "media/narrateur.wav"},
+  "procureur": {"name": "procureur", "file": "media/procureur.wav"},
+  "avocate": {"name": "avocate", "file": "media/avocate.wav"}
+ },
+ "lines": [
+  {"id": "01-vieux", "who": "conducteur", "text": "Mais je freine ! Je freine !"},
+  {"id": "02-pedales", "who": "narrateur", "text": "Bernard, 87 ans, a confondu les pédales. Sa famille lui avait demandé de rendre son permis. Trois accidents en deux ans. Il a refusé.", "gap": 2.4},
+  {"id": "03-lea", "who": "narrateur", "text": "Léa, 7 ans, réapprend à marcher. Aujourd'hui, c'est son jugement.", "gap": 0.35},
+  {"id": "04-savait", "who": "procureur", "text": "Il savait. Ses enfants savaient. Son médecin savait. Et il a repris le volant.", "gap": 0.45},
+  {"id": "05-loi", "who": "avocate", "text": "Parce que la loi le lui permettait. Jugez la loi, pas un vieil homme qui allait chercher son pain.", "gap": 0.2},
+  {"id": "06-pain", "who": "procureur", "text": "Son pain ? La boulangerie est à 200 mètres. Il pouvait marcher.", "gap": 0.2},
+  {"id": "07-hanches", "who": "avocate", "text": "Avec deux prothèses de hanche ? Vous l'auriez porté, peut-être ?", "gap": 0.2},
+  {"id": "08-like", "who": "narrateur", "text": "Il faut retirer le permis aux seniors ? Like si ça te fait réagir.", "gap": 0.4},
+  {"id": "09-village", "who": "avocate", "text": "Dans les villages, sans voiture, on ne vit plus. On attend la mort.", "gap": 0.4},
+  {"id": "10-age", "who": "avocate", "text": "Alors à quel âge on retire le droit de vivre normalement ? 75 ans ? 80 ? Vous fixerez la date, vous ?", "gap": 0.3},
+  {"id": "11-examen", "who": "procureur", "text": "Pas un âge. Un examen. Il a refusé de le passer. Trois fois.", "gap": 0.2},
+  {"id": "12-cher", "who": "procureur", "text": "Et une petite fille va réapprendre à marcher pour qu'un homme garde sa liberté. C'est cher payé, sa liberté.", "gap": 0.35},
+  {"id": "13-jure", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.", "gap": 0.6}
+ ]
+}

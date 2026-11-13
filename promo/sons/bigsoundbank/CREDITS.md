@@ -36,3 +36,19 @@ Crédit facultatif : « Additional sounds: Joseph SARDIN - BigSoundBank.com ».
 | 2059.wav | Notification « LaSoMarie » #1 |
 | 1072.wav | School Playground, Football (20 s) |
 | 1035.wav | Mobile Vibrator in a Hand |
+| 1463.wav | Ambulance, 3 Ton Siren |
+| 1464.wav | 2 Ton Siren |
+| 0258.wav | Recent Car Horn #2 |
+| 1080.wav | Parisian Ring Road #1 (extrait de 40 s) |
+| 1309.wav | Cardiac arrest, electrocardiogram #1 |
+| 0457.wav | Electrocardiogram 60 Hz |
+| 2368.wav, 2371.wav | Screeching Tires #1, #4 |
+| 0600.wav | Acceleration Aston Martin |
+| 0189.wav | Car, Starting and Departure |
+| 0218.wav | Heart Beat |
+| 3391.wav | Manifestation #14 (extrait de 40 s) |
+| 2390.wav | Paparazzi #2 |
+| 0621.wav | Night after rain (extrait de 40 s) |
+| 2363.wav | Applause #1 |
+| 1801.wav | Whoosh #8 |
+| 1045.wav | Ball Rebounds |

@@ -1,0 +1,851 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 63.21,
+ "lines": [
+  {
+   "id": "01-vieux",
+   "who": "conducteur",
+   "text": "Mais je freine ! Je freine !",
+   "start": 2.0,
+   "dur": 2.34,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 2.0
+    },
+    {
+     "w": "je",
+     "t": 2.22
+    },
+    {
+     "w": "freine !",
+     "t": 2.36
+    },
+    {
+     "w": "Je",
+     "t": 3.14
+    },
+    {
+     "w": "freine !",
+     "t": 3.38
+    }
+   ]
+  },
+  {
+   "id": "02-pedales",
+   "who": "narrateur",
+   "text": "Bernard, 87 ans, a confondu les pédales. Sa famille lui avait demandé de rendre son permis. Trois accidents en deux ans. Il a refusé.",
+   "start": 6.74,
+   "dur": 6.87,
+   "words": [
+    {
+     "w": "Bernard,",
+     "t": 6.74
+    },
+    {
+     "w": "87",
+     "t": 7.45
+    },
+    {
+     "w": "ans,",
+     "t": 7.89
+    },
+    {
+     "w": "a",
+     "t": 8.35
+    },
+    {
+     "w": "confondu",
+     "t": 8.39
+    },
+    {
+     "w": "les",
+     "t": 8.79
+    },
+    {
+     "w": "pédales.",
+     "t": 8.87
+    },
+    {
+     "w": "Sa",
+     "t": 9.43
+    },
+    {
+     "w": "famille",
+     "t": 9.53
+    },
+    {
+     "w": "lui",
+     "t": 9.77
+    },
+    {
+     "w": "avait",
+     "t": 9.91
+    },
+    {
+     "w": "demandé",
+     "t": 10.03
+    },
+    {
+     "w": "de",
+     "t": 10.29
+    },
+    {
+     "w": "rendre",
+     "t": 10.43
+    },
+    {
+     "w": "son",
+     "t": 10.59
+    },
+    {
+     "w": "permis.",
+     "t": 10.83
+    },
+    {
+     "w": "Trois",
+     "t": 11.33
+    },
+    {
+     "w": "accidents",
+     "t": 11.61
+    },
+    {
+     "w": "en",
+     "t": 11.89
+    },
+    {
+     "w": "deux",
+     "t": 12.19
+    },
+    {
+     "w": "ans.",
+     "t": 12.41
+    },
+    {
+     "w": "Il",
+     "t": 12.71
+    },
+    {
+     "w": "a",
+     "t": 12.79
+    },
+    {
+     "w": "refusé.",
+     "t": 12.91
+    }
+   ]
+  },
+  {
+   "id": "03-lea",
+   "who": "narrateur",
+   "text": "Léa, 7 ans, réapprend à marcher. Aujourd'hui, c'est son jugement.",
+   "start": 13.96,
+   "dur": 4.07,
+   "words": [
+    {
+     "w": "Léa,",
+     "t": 13.96
+    },
+    {
+     "w": "7",
+     "t": 14.54
+    },
+    {
+     "w": "ans,",
+     "t": 14.88
+    },
+    {
+     "w": "réapprend",
+     "t": 15.34
+    },
+    {
+     "w": "à",
+     "t": 15.78
+    },
+    {
+     "w": "marcher.",
+     "t": 15.86
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 16.36
+    },
+    {
+     "w": "c'est",
+     "t": 16.86
+    },
+    {
+     "w": "son",
+     "t": 17.36
+    },
+    {
+     "w": "jugement.",
+     "t": 17.48
+    }
+   ]
+  },
+  {
+   "id": "04-savait",
+   "who": "procureur",
+   "text": "Il savait. Ses enfants savaient. Son médecin savait. Et il a repris le volant.",
+   "start": 18.48,
+   "dur": 4.09,
+   "words": [
+    {
+     "w": "Il",
+     "t": 18.48
+    },
+    {
+     "w": "savait.",
+     "t": 18.62
+    },
+    {
+     "w": "Ses",
+     "t": 19.2
+    },
+    {
+     "w": "enfants",
+     "t": 19.34
+    },
+    {
+     "w": "savaient.",
+     "t": 19.68
+    },
+    {
+     "w": "Son",
+     "t": 20.3
+    },
+    {
+     "w": "médecin",
+     "t": 20.44
+    },
+    {
+     "w": "savait.",
+     "t": 20.9
+    },
+    {
+     "w": "Et",
+     "t": 21.42
+    },
+    {
+     "w": "il",
+     "t": 21.5
+    },
+    {
+     "w": "a",
+     "t": 21.62
+    },
+    {
+     "w": "repris",
+     "t": 21.74
+    },
+    {
+     "w": "le",
+     "t": 22.1
+    },
+    {
+     "w": "volant.",
+     "t": 22.16
+    }
+   ]
+  },
+  {
+   "id": "05-loi",
+   "who": "avocate",
+   "text": "Parce que la loi le lui permettait. Jugez la loi, pas un vieil homme qui allait chercher son pain.",
+   "start": 22.77,
+   "dur": 3.92,
+   "words": [
+    {
+     "w": "Parce",
+     "t": 22.77
+    },
+    {
+     "w": "que",
+     "t": 22.95
+    },
+    {
+     "w": "la",
+     "t": 23.07
+    },
+    {
+     "w": "loi",
+     "t": 23.17
+    },
+    {
+     "w": "le",
+     "t": 23.31
+    },
+    {
+     "w": "lui",
+     "t": 23.45
+    },
+    {
+     "w": "permettait.",
+     "t": 23.59
+    },
+    {
+     "w": "Jugez",
+     "t": 24.35
+    },
+    {
+     "w": "la",
+     "t": 24.63
+    },
+    {
+     "w": "loi,",
+     "t": 24.71
+    },
+    {
+     "w": "pas",
+     "t": 25.11
+    },
+    {
+     "w": "un",
+     "t": 25.25
+    },
+    {
+     "w": "vieil",
+     "t": 25.35
+    },
+    {
+     "w": "homme",
+     "t": 25.59
+    },
+    {
+     "w": "qui",
+     "t": 25.69
+    },
+    {
+     "w": "allait",
+     "t": 25.79
+    },
+    {
+     "w": "chercher",
+     "t": 25.99
+    },
+    {
+     "w": "son",
+     "t": 26.09
+    },
+    {
+     "w": "pain.",
+     "t": 26.33
+    }
+   ]
+  },
+  {
+   "id": "06-pain",
+   "who": "procureur",
+   "text": "Son pain ? La boulangerie est à 200 mètres. Il pouvait marcher.",
+   "start": 26.89,
+   "dur": 3.29,
+   "words": [
+    {
+     "w": "Son",
+     "t": 27.03
+    },
+    {
+     "w": "pain ?",
+     "t": 27.18
+    },
+    {
+     "w": "La",
+     "t": 27.74
+    },
+    {
+     "w": "boulangerie",
+     "t": 27.82
+    },
+    {
+     "w": "est",
+     "t": 28.32
+    },
+    {
+     "w": "à",
+     "t": 28.4
+    },
+    {
+     "w": "200",
+     "t": 28.48
+    },
+    {
+     "w": "mètres.",
+     "t": 28.72
+    },
+    {
+     "w": "Il",
+     "t": 29.38
+    },
+    {
+     "w": "pouvait",
+     "t": 29.42
+    },
+    {
+     "w": "marcher.",
+     "t": 29.62
+    }
+   ]
+  },
+  {
+   "id": "07-hanches",
+   "who": "avocate",
+   "text": "Avec deux prothèses de hanche ? Vous l'auriez porté, peut-être ?",
+   "start": 30.38,
+   "dur": 2.63,
+   "words": [
+    {
+     "w": "Avec",
+     "t": 30.38
+    },
+    {
+     "w": "deux",
+     "t": 30.69
+    },
+    {
+     "w": "prothèses",
+     "t": 30.89
+    },
+    {
+     "w": "de",
+     "t": 31.25
+    },
+    {
+     "w": "hanche ?",
+     "t": 31.54
+    },
+    {
+     "w": "Vous",
+     "t": 31.83
+    },
+    {
+     "w": "l'auriez",
+     "t": 31.99
+    },
+    {
+     "w": "porté,",
+     "t": 32.15
+    },
+    {
+     "w": "peut-être ?",
+     "t": 32.655
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Il faut retirer le permis aux seniors ? Like si ça te fait réagir.",
+   "start": 33.41,
+   "dur": 3.172,
+   "words": [
+    {
+     "w": "Il",
+     "t": 33.41
+    },
+    {
+     "w": "faut",
+     "t": 33.53
+    },
+    {
+     "w": "retirer",
+     "t": 33.69
+    },
+    {
+     "w": "le",
+     "t": 34.17
+    },
+    {
+     "w": "permis",
+     "t": 34.21
+    },
+    {
+     "w": "aux",
+     "t": 34.517
+    },
+    {
+     "w": "seniors ?",
+     "t": 34.823
+    },
+    {
+     "w": "Like",
+     "t": 35.13
+    },
+    {
+     "w": "si",
+     "t": 35.41
+    },
+    {
+     "w": "ça",
+     "t": 35.65
+    },
+    {
+     "w": "te",
+     "t": 35.79
+    },
+    {
+     "w": "fait",
+     "t": 35.85
+    },
+    {
+     "w": "réagir.",
+     "t": 35.95
+    }
+   ]
+  },
+  {
+   "id": "09-village",
+   "who": "avocate",
+   "text": "Dans les villages, sans voiture, on ne vit plus. On attend la mort.",
+   "start": 36.982,
+   "dur": 3.431,
+   "words": [
+    {
+     "w": "Dans",
+     "t": 36.982
+    },
+    {
+     "w": "les",
+     "t": 37.162
+    },
+    {
+     "w": "villages,",
+     "t": 37.282
+    },
+    {
+     "w": "sans",
+     "t": 37.822
+    },
+    {
+     "w": "voiture,",
+     "t": 38.002
+    },
+    {
+     "w": "on",
+     "t": 38.622
+    },
+    {
+     "w": "ne",
+     "t": 38.722
+    },
+    {
+     "w": "vit",
+     "t": 38.842
+    },
+    {
+     "w": "plus.",
+     "t": 38.942
+    },
+    {
+     "w": "On",
+     "t": 39.462
+    },
+    {
+     "w": "attend",
+     "t": 39.562
+    },
+    {
+     "w": "la",
+     "t": 39.782
+    },
+    {
+     "w": "mort.",
+     "t": 39.922
+    }
+   ]
+  },
+  {
+   "id": "10-age",
+   "who": "avocate",
+   "text": "Alors à quel âge on retire le droit de vivre normalement ? 75 ans ? 80 ? Vous fixerez la date, vous ?",
+   "start": 40.713,
+   "dur": 4.63,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 40.713
+    },
+    {
+     "w": "à",
+     "t": 40.873
+    },
+    {
+     "w": "quel",
+     "t": 41.013
+    },
+    {
+     "w": "âge",
+     "t": 41.173
+    },
+    {
+     "w": "on",
+     "t": 41.433
+    },
+    {
+     "w": "retire",
+     "t": 41.493
+    },
+    {
+     "w": "le",
+     "t": 41.713
+    },
+    {
+     "w": "droit",
+     "t": 41.833
+    },
+    {
+     "w": "de",
+     "t": 41.993
+    },
+    {
+     "w": "vivre",
+     "t": 42.073
+    },
+    {
+     "w": "normalement ?",
+     "t": 42.233
+    },
+    {
+     "w": "75",
+     "t": 42.893
+    },
+    {
+     "w": "ans ?",
+     "t": 43.153
+    },
+    {
+     "w": "80 ?",
+     "t": 43.653
+    },
+    {
+     "w": "Vous",
+     "t": 44.233
+    },
+    {
+     "w": "fixerez",
+     "t": 44.313
+    },
+    {
+     "w": "la",
+     "t": 44.693
+    },
+    {
+     "w": "date,",
+     "t": 44.793
+    },
+    {
+     "w": "vous ?",
+     "t": 45.053
+    }
+   ]
+  },
+  {
+   "id": "11-examen",
+   "who": "procureur",
+   "text": "Pas un âge. Un examen. Il a refusé de le passer. Trois fois.",
+   "start": 45.543,
+   "dur": 3.37,
+   "words": [
+    {
+     "w": "Pas",
+     "t": 45.543
+    },
+    {
+     "w": "un",
+     "t": 45.683
+    },
+    {
+     "w": "âge.",
+     "t": 45.863
+    },
+    {
+     "w": "Un",
+     "t": 46.323
+    },
+    {
+     "w": "examen.",
+     "t": 46.423
+    },
+    {
+     "w": "Il",
+     "t": 46.983
+    },
+    {
+     "w": "a",
+     "t": 47.083
+    },
+    {
+     "w": "refusé",
+     "t": 47.183
+    },
+    {
+     "w": "de",
+     "t": 47.683
+    },
+    {
+     "w": "le",
+     "t": 47.743
+    },
+    {
+     "w": "passer.",
+     "t": 47.823
+    },
+    {
+     "w": "Trois",
+     "t": 48.343
+    },
+    {
+     "w": "fois.",
+     "t": 48.623
+    }
+   ]
+  },
+  {
+   "id": "12-cher",
+   "who": "procureur",
+   "text": "Et une petite fille va réapprendre à marcher pour qu'un homme garde sa liberté. C'est cher payé, sa liberté.",
+   "start": 49.263,
+   "dur": 5.58,
+   "words": [
+    {
+     "w": "Et",
+     "t": 49.263
+    },
+    {
+     "w": "une",
+     "t": 49.393
+    },
+    {
+     "w": "petite",
+     "t": 49.533
+    },
+    {
+     "w": "fille",
+     "t": 49.793
+    },
+    {
+     "w": "va",
+     "t": 50.093
+    },
+    {
+     "w": "réapprendre",
+     "t": 50.293
+    },
+    {
+     "w": "à",
+     "t": 50.773
+    },
+    {
+     "w": "marcher",
+     "t": 51.033
+    },
+    {
+     "w": "pour",
+     "t": 51.293
+    },
+    {
+     "w": "qu'un",
+     "t": 51.513
+    },
+    {
+     "w": "homme",
+     "t": 51.733
+    },
+    {
+     "w": "garde",
+     "t": 51.953
+    },
+    {
+     "w": "sa",
+     "t": 52.213
+    },
+    {
+     "w": "liberté.",
+     "t": 52.453
+    },
+    {
+     "w": "C'est",
+     "t": 52.843
+    },
+    {
+     "w": "cher",
+     "t": 53.233
+    },
+    {
+     "w": "payé,",
+     "t": 53.413
+    },
+    {
+     "w": "sa",
+     "t": 53.933
+    },
+    {
+     "w": "liberté.",
+     "t": 54.213
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "start": 55.443,
+   "dur": 4.371,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 55.443
+    },
+    {
+     "w": "es",
+     "t": 55.623
+    },
+    {
+     "w": "le",
+     "t": 55.723
+    },
+    {
+     "w": "juré.",
+     "t": 55.823
+    },
+    {
+     "w": "Coupable…",
+     "t": 56.423
+    },
+    {
+     "w": "ou",
+     "t": 56.783
+    },
+    {
+     "w": "non",
+     "t": 57.183
+    },
+    {
+     "w": "coupable ?",
+     "t": 57.343
+    },
+    {
+     "w": "Écris-le",
+     "t": 57.843
+    },
+    {
+     "w": "en",
+     "t": 58.343
+    },
+    {
+     "w": "commentaire,",
+     "t": 58.443
+    },
+    {
+     "w": "et",
+     "t": 58.963
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 59.388
+    }
+   ]
+  }
+ ]
+}

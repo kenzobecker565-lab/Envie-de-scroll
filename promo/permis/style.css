@@ -1,0 +1,61 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Figtree Variable', sans-serif; }
+#stage > svg { position: absolute; inset: 0; }
+.grain { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: overlay; image-rendering: pixelated; pointer-events: none; }
+#ui { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.tag { position: absolute; left: 0; top: 0; white-space: nowrap; font-weight: 900; will-change: transform; }
+
+/* Étiquettes. */
+.pill { font-size: 58px; padding: 10px 34px 14px; border-radius: 22px; color: #fff; background: #10121a; box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+.pill.small { font-size: 40px; padding: 8px 24px 10px; }
+.pill.red { background: #e5484d; box-shadow: 0 10px 0 #8f1f24; }
+.pill.yellow { background: #ffd166; color: #10121a; box-shadow: 0 10px 0 #b8892a; }
+.stamp { font-size: 112px; color: #e5484d; padding: 4px 44px 14px; border: 16px solid #e5484d; border-radius: 34px; background: rgba(255, 255, 255, 0.92); }
+.stamp.green { color: #12a150; border-color: #12a150; font-size: 92px; }
+.counter { display: flex; flex-direction: column; align-items: center; color: #fff; -webkit-text-stroke: 18px #10121a; paint-order: stroke fill; text-shadow: 0 14px 0 rgba(0, 0, 0, 0.35); }
+.counter .num { font-size: 210px; line-height: 1; letter-spacing: 0.01em; }
+.counter .unit { font-size: 74px; color: #ffd166; margin-top: -6px; }
+.big { font-size: 130px; color: #fff; -webkit-text-stroke: 20px #10121a; paint-order: stroke fill; text-shadow: 0 14px 0 rgba(0, 0, 0, 0.35); }
+.big.white { font-size: 112px; }
+.slam { font-size: 128px; -webkit-text-stroke: 22px #10121a; paint-order: stroke fill; text-shadow: 0 14px 0 rgba(0, 0, 0, 0.35); }
+.slam.white { color: #fff; }
+.slam.yellow { color: #ffd166; font-size: 190px; }
+.quote { width: 920px; white-space: normal; text-align: center; font-size: 92px; line-height: 1.05; color: #ffd166; -webkit-text-stroke: 18px #10121a; paint-order: stroke fill; text-shadow: 0 12px 0 rgba(0, 0, 0, 0.35); }
+.vote { font-size: 104px; color: #fff; padding: 12px 50px 18px; border-radius: 30px; box-shadow: 0 14px 0 rgba(0, 0, 0, 0.4); }
+.vote.red { background: #e5484d; }
+.vote.blue { background: #3b82f6; }
+.who { font-size: 34px; letter-spacing: 0.06em; color: #fff; padding: 8px 22px; border-radius: 12px; background: #10121a; }
+.who.procureur { background: #c43a2f; }
+.who.avocate { background: #10121a; border: 4px solid #ffd166; }
+
+/* Gros sous-titres animés : le mot prononcé passe dans un bloc jaune. */
+.caps { position: absolute; left: 0; right: 0; top: 1390px; display: flex; justify-content: center; }
+.caps .line { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; max-width: 1000px; transform-origin: 50% 50%; }
+.caps .w { display: inline-block; font-size: 104px; font-weight: 900; color: #fff; -webkit-text-stroke: 18px #10121a; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0, 0, 0, 0.4); padding: 0 14px 6px; border-radius: 22px; transform-origin: 50% 80%; }
+.caps .w.on { color: #10121a; -webkit-text-stroke: 0; background: #ffd166; text-shadow: none; box-shadow: 0 10px 0 #b8892a; }
+.caps .line.procureur .w.on { background: #ff6b5e; box-shadow: 0 10px 0 #8f1f24; color: #fff; }
+
+/* Bouton « abonne-toi » de la fin. */
+.subscribe { font-size: 88px; color: #fff; background: #fe2c55; border-radius: 999px; padding: 18px 64px 24px 30px; box-shadow: 0 14px 0 #9b1030, 0 24px 40px rgba(0, 0, 0, 0.45); }
+.subscribe .plus { display: inline-block; width: 96px; height: 96px; margin-right: 24px; border-radius: 50%; background: #fff; color: #fe2c55; text-align: center; line-height: 92px; vertical-align: middle; }
+.who.avocate { border-color: #7fd1ff; }
+.stamp.blue { color: #3b82f6; border-color: #3b82f6; }
+.chat { width: 760px; white-space: normal; font-size: 56px; line-height: 1.12; color: #10121a; background: #fff; padding: 26px 34px 30px; border-radius: 40px 40px 40px 8px; box-shadow: 0 12px 0 rgba(0, 0, 0, 0.3); font-weight: 800; }
+.chat .from { display: block; font-size: 30px; color: #6b7280; margin-bottom: 8px; letter-spacing: 0.04em; }
+.hand { font-family: 'Figtree Variable'; }
+.who.theo { background: #3f5a7a; }
+.who.policier { background: #1f2c4a; border: 4px solid #9fb8de; }
+.slam.red { color: #ff3b3b; font-size: 120px; }
+.caps .w.bip { color: #ff3b3b; }
+.caps .w.bip.on { background: #ff3b3b; color: #fff; box-shadow: 0 10px 0 #8f1f24; }
+.who.avocate { border-color: #ffd166; }
+.subscribe.like { background: #ffffff; color: #fe2c55; box-shadow: 0 14px 0 #c9c9d2, 0 24px 40px rgba(0, 0, 0, 0.45); padding: 14px 60px 20px 34px; }
+.who.eleve { background: #fe2c55; }
+.caps .line.eleve .w.on { background: #fe2c55; box-shadow: 0 10px 0 #9b1030; color: #fff; }
+.pill.green { background: #12a150; box-shadow: 0 10px 0 #0a5a2c; }
+.who.automobiliste { background: #ff7a1a; }
+.caps .line.automobiliste .w.on { background: #ff7a1a; box-shadow: 0 10px 0 #8a3a0a; color: #fff; }
+.who.conducteur { background: #6a5a3a; }
+.caps .line.conducteur .w.on { background: #ff3b3b; box-shadow: 0 10px 0 #8f1f24; color: #fff; }
+.big { text-align: center; line-height: 1.02; }

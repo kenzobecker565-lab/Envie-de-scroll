@@ -59,3 +59,5 @@ html, body { margin: 0; background: #000; }
 .who.conducteur { background: #6a5a3a; }
 .caps .line.conducteur .w.on { background: #ff3b3b; box-shadow: 0 10px 0 #8f1f24; color: #fff; }
 .big { text-align: center; line-height: 1.02; }
+.who.pere { background: #3a6a4a; }
+.caps .line.pere .w.on { background: #e5484d; box-shadow: 0 10px 0 #8f1f24; color: #fff; }

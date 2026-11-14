@@ -1,0 +1,114 @@
+{
+ "_doc": "« Chez lui » : un propriétaire expulse lui-même des squatteurs (affaire fictive). Voix générées sur ElevenLabs (Eleven v4) : narrateur « Nicolas - Narrator », procureur « Paul K — Deep French Narrator », défense « Ilan ». « avocate » = la défense.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-cle",
+   "who": "narrateur",
+   "text": "Il a récupéré sa maison en une heure. La justice lui avait dit d'attendre deux ans."
+  },
+  {
+   "id": "02-marc",
+   "who": "narrateur",
+   "text": "Marc, 61 ans, a défoncé sa propre porte, changé les serrures, et jeté une famille de squatteurs dehors. Avec deux enfants. En plein mois de novembre. Aujourd'hui, c'est lui qui risque la prison.",
+   "gap": 0.25
+  },
+  {
+   "id": "03-loi",
+   "who": "procureur",
+   "text": "Deux enfants. Sur un trottoir. Sous la pluie. Et Monsieur appelle ça « rentrer chez lui ».",
+   "gap": 0.35
+  },
+  {
+   "id": "04-gendarmes",
+   "who": "avocate",
+   "text": "Vous voulez savoir ce que les gendarmes lui ont dit, quand il les a appelés ? Ha ! « Monsieur, vous n'avez pas le droit d'entrer chez lui. » Chez lui ! Dans la maison qu'il paie depuis 20 ans.",
+   "gap": 0.25
+  },
+  {
+   "id": "05-procedure",
+   "who": "procureur",
+   "text": "Il existait une procédure. Un préfet. Un juge. Mais Monsieur était pressé.",
+   "gap": 0.25
+  },
+  {
+   "id": "06-credit",
+   "who": "avocate",
+   "text": "Pressé ? 22 mois. 22 mensualités de crédit pour une maison où dormaient des inconnus. Vous, Monsieur le procureur, vous auriez attendu combien ? Un an ? Deux ? Ah non, c'est vrai : vous, vous êtes logé.",
+   "gap": 0.2
+  },
+  {
+   "id": "07-voleur",
+   "who": "procureur",
+   "text": "On ne répond pas à un vol par un autre crime. Sinon, demain, chacun règle ses comptes avec deux potes et une barre de fer.",
+   "gap": 0.25
+  },
+  {
+   "id": "08-pause",
+   "who": "narrateur",
+   "text": "Propriétaire ou délinquant ? Si cette affaire te révolte, like la vidéo et abonne-toi.",
+   "gap": 0.35
+  },
+  {
+   "id": "09-tete",
+   "who": "avocate",
+   "text": "On marche sur la tête ! Le squatteur change les serrures : c'est « un occupant ». Le propriétaire les rechange : c'est un criminel. Justice à deux vitesses !",
+   "gap": 0.35
+  },
+  {
+   "id": "10-abri",
+   "who": "procureur",
+   "text": "Ce « squatteur », c'est une mère seule, qui a dormi trois mois dans sa voiture avec ses enfants avant d'entrer dans une maison vide. Vide, Maître. Depuis deux ans.",
+   "gap": 0.25
+  },
+  {
+   "id": "11-riche",
+   "who": "avocate",
+   "text": "Vide ? Elle était en vente, pour payer l'Ehpad de sa mère. Propriétaire, ça ne veut pas dire riche, Monsieur le procureur. Ça veut dire 40 ans à se lever à 5 heures du matin.",
+   "gap": 0.2
+  },
+  {
+   "id": "12-violence",
+   "who": "procureur",
+   "text": "Et la petite de six ans, qui a vu deux hommes casser la porte en pleine nuit, elle se lève à quelle heure, pour oublier ça ?",
+   "gap": 0.3
+  },
+  {
+   "id": "13-maison",
+   "who": "avocate",
+   "text": "Alors relogez-la ! C'est le travail de l'État. Pas celui de mon client. Pas celui de sa maison.",
+   "gap": 0.2
+  },
+  {
+   "id": "14-etat",
+   "who": "procureur",
+   "text": "L'État, c'est justement ce que votre client a décidé de remplacer. Ce soir-là, il était juge, policier, et huissier. Et il a condamné une enfant.",
+   "gap": 0.25
+  },
+  {
+   "id": "15-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Légitime colère… ou vengeance privée ? Coupable… ou non coupable ?",
+   "gap": 0.7
+  },
+  {
+   "id": "16-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire. Un like, un abonnement, et on se retrouve pour la prochaine affaire.",
+   "gap": 0.3
+  }
+ ]
+}

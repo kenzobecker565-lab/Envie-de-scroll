@@ -1,0 +1,605 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 47.36,
+ "lines": [
+  {
+   "id": "01-harcelee",
+   "who": "narrateur",
+   "text": "Sa fille a été harcelée pendant un an.",
+   "start": 0.6,
+   "dur": 2.13,
+   "words": [
+    {
+     "w": "Sa",
+     "t": 0.6
+    },
+    {
+     "w": "fille",
+     "t": 0.78
+    },
+    {
+     "w": "a",
+     "t": 1.04
+    },
+    {
+     "w": "été",
+     "t": 1.2
+    },
+    {
+     "w": "harcelée",
+     "t": 1.34
+    },
+    {
+     "w": "pendant",
+     "t": 1.88
+    },
+    {
+     "w": "un",
+     "t": 2.02
+    },
+    {
+     "w": "an.",
+     "t": 2.36
+    }
+   ]
+  },
+  {
+   "id": "02-plaintes",
+   "who": "narrateur",
+   "text": "Trois plaintes. Trois fois classées sans suite.",
+   "start": 2.93,
+   "dur": 2.36,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 2.93
+    },
+    {
+     "w": "plaintes.",
+     "t": 3.13
+    },
+    {
+     "w": "Trois",
+     "t": 3.81
+    },
+    {
+     "w": "fois",
+     "t": 4.03
+    },
+    {
+     "w": "classées",
+     "t": 4.25
+    },
+    {
+     "w": "sans",
+     "t": 4.65
+    },
+    {
+     "w": "suite.",
+     "t": 4.79
+    }
+   ]
+  },
+  {
+   "id": "03-nez",
+   "who": "narrateur",
+   "text": "Alors cette mère a attendu le harceleur devant chez lui… et lui a cassé le nez.",
+   "start": 5.59,
+   "dur": 4.17,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 5.66
+    },
+    {
+     "w": "cette",
+     "t": 5.78
+    },
+    {
+     "w": "mère",
+     "t": 6.02
+    },
+    {
+     "w": "a",
+     "t": 6.36
+    },
+    {
+     "w": "attendu",
+     "t": 6.64
+    },
+    {
+     "w": "le",
+     "t": 7.02
+    },
+    {
+     "w": "harceleur",
+     "t": 7.12
+    },
+    {
+     "w": "devant",
+     "t": 7.6
+    },
+    {
+     "w": "chez",
+     "t": 7.76
+    },
+    {
+     "w": "lui…",
+     "t": 8.02
+    },
+    {
+     "w": "et",
+     "t": 8.22
+    },
+    {
+     "w": "lui",
+     "t": 8.7
+    },
+    {
+     "w": "a",
+     "t": 8.82
+    },
+    {
+     "w": "cassé",
+     "t": 8.94
+    },
+    {
+     "w": "le",
+     "t": 9.28
+    },
+    {
+     "w": "nez.",
+     "t": 9.38
+    }
+   ]
+  },
+  {
+   "id": "04-peine",
+   "who": "narrateur",
+   "text": "Elle risque cinq ans de prison.",
+   "start": 9.96,
+   "dur": 1.49,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 9.98
+    },
+    {
+     "w": "risque",
+     "t": 10.1
+    },
+    {
+     "w": "cinq",
+     "t": 10.38
+    },
+    {
+     "w": "ans",
+     "t": 10.72
+    },
+    {
+     "w": "de",
+     "t": 10.88
+    },
+    {
+     "w": "prison.",
+     "t": 10.96
+    }
+   ]
+  },
+  {
+   "id": "05-plusfort",
+   "who": "procureur",
+   "text": "Si chaque parent se fait justice lui-même, ce n'est plus la justice. C'est la loi du plus fort.",
+   "start": 12.15,
+   "dur": 4.71,
+   "words": [
+    {
+     "w": "Si",
+     "t": 12.15
+    },
+    {
+     "w": "chaque",
+     "t": 12.27
+    },
+    {
+     "w": "parent",
+     "t": 12.45
+    },
+    {
+     "w": "se",
+     "t": 12.69
+    },
+    {
+     "w": "fait",
+     "t": 12.87
+    },
+    {
+     "w": "justice",
+     "t": 13.01
+    },
+    {
+     "w": "lui-même,",
+     "t": 13.64
+    },
+    {
+     "w": "ce",
+     "t": 14.27
+    },
+    {
+     "w": "n'est",
+     "t": 14.44
+    },
+    {
+     "w": "plus",
+     "t": 14.61
+    },
+    {
+     "w": "la",
+     "t": 14.73
+    },
+    {
+     "w": "justice.",
+     "t": 14.87
+    },
+    {
+     "w": "C'est",
+     "t": 15.33
+    },
+    {
+     "w": "la",
+     "t": 15.79
+    },
+    {
+     "w": "loi",
+     "t": 15.91
+    },
+    {
+     "w": "du",
+     "t": 16.07
+    },
+    {
+     "w": "plus",
+     "t": 16.25
+    },
+    {
+     "w": "fort.",
+     "t": 16.41
+    }
+   ]
+  },
+  {
+   "id": "06-demandee",
+   "who": "avocate",
+   "text": "La justice, elle l'a demandée. Trois fois. Sa fille ne va plus en cours depuis six mois.",
+   "start": 17.16,
+   "dur": 5.02,
+   "words": [
+    {
+     "w": "La",
+     "t": 17.16
+    },
+    {
+     "w": "justice,",
+     "t": 17.32
+    },
+    {
+     "w": "elle",
+     "t": 18.08
+    },
+    {
+     "w": "l'a",
+     "t": 18.413
+    },
+    {
+     "w": "demandée.",
+     "t": 18.747
+    },
+    {
+     "w": "Trois",
+     "t": 19.08
+    },
+    {
+     "w": "fois.",
+     "t": 19.34
+    },
+    {
+     "w": "Sa",
+     "t": 20.06
+    },
+    {
+     "w": "fille",
+     "t": 20.24
+    },
+    {
+     "w": "ne",
+     "t": 20.48
+    },
+    {
+     "w": "va",
+     "t": 20.66
+    },
+    {
+     "w": "plus",
+     "t": 20.76
+    },
+    {
+     "w": "en",
+     "t": 20.94
+    },
+    {
+     "w": "cours",
+     "t": 21.1
+    },
+    {
+     "w": "depuis",
+     "t": 21.28
+    },
+    {
+     "w": "six",
+     "t": 21.5
+    },
+    {
+     "w": "mois.",
+     "t": 21.8
+    }
+   ]
+  },
+  {
+   "id": "07-dixsept",
+   "who": "procureur",
+   "text": "Ce garçon a 17 ans. Elle, 45. Elle l'a frappé seule, en pleine nuit.",
+   "start": 22.48,
+   "dur": 4.73,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 22.55
+    },
+    {
+     "w": "garçon",
+     "t": 22.65
+    },
+    {
+     "w": "a",
+     "t": 23.05
+    },
+    {
+     "w": "17",
+     "t": 23.17
+    },
+    {
+     "w": "ans.",
+     "t": 23.39
+    },
+    {
+     "w": "Elle,",
+     "t": 23.91
+    },
+    {
+     "w": "45.",
+     "t": 24.07
+    },
+    {
+     "w": "Elle",
+     "t": 25.09
+    },
+    {
+     "w": "l'a",
+     "t": 25.25
+    },
+    {
+     "w": "frappé",
+     "t": 25.41
+    },
+    {
+     "w": "seule,",
+     "t": 25.92
+    },
+    {
+     "w": "en",
+     "t": 26.43
+    },
+    {
+     "w": "pleine",
+     "t": 26.53
+    },
+    {
+     "w": "nuit.",
+     "t": 26.85
+    }
+   ]
+  },
+  {
+   "id": "08-messages",
+   "who": "avocate",
+   "text": "17 ans, et 400 messages d'insultes. Il savait exactement ce qu'il faisait.",
+   "start": 27.51,
+   "dur": 4.88,
+   "words": [
+    {
+     "w": "17",
+     "t": 27.58
+    },
+    {
+     "w": "ans,",
+     "t": 27.84
+    },
+    {
+     "w": "et",
+     "t": 28.2
+    },
+    {
+     "w": "400",
+     "t": 28.62
+    },
+    {
+     "w": "messages",
+     "t": 28.92
+    },
+    {
+     "w": "d'insultes.",
+     "t": 29.69
+    },
+    {
+     "w": "Il",
+     "t": 30.46
+    },
+    {
+     "w": "savait",
+     "t": 30.58
+    },
+    {
+     "w": "exactement",
+     "t": 31.0
+    },
+    {
+     "w": "ce",
+     "t": 31.36
+    },
+    {
+     "w": "qu'il",
+     "t": 31.63
+    },
+    {
+     "w": "faisait.",
+     "t": 31.9
+    }
+   ]
+  },
+  {
+   "id": "09-repare",
+   "who": "procureur",
+   "text": "La violence ne répare rien.",
+   "start": 32.74,
+   "dur": 1.73,
+   "words": [
+    {
+     "w": "La",
+     "t": 32.84
+    },
+    {
+     "w": "violence",
+     "t": 32.94
+    },
+    {
+     "w": "ne",
+     "t": 33.3
+    },
+    {
+     "w": "répare",
+     "t": 33.64
+    },
+    {
+     "w": "rien.",
+     "t": 33.98
+    }
+   ]
+  },
+  {
+   "id": "10-classee",
+   "who": "avocate",
+   "text": "Une plainte classée non plus.",
+   "start": 34.72,
+   "dur": 1.63,
+   "words": [
+    {
+     "w": "Une",
+     "t": 34.76
+    },
+    {
+     "w": "plainte",
+     "t": 34.92
+    },
+    {
+     "w": "classée",
+     "t": 35.28
+    },
+    {
+     "w": "non",
+     "t": 35.62
+    },
+    {
+     "w": "plus.",
+     "t": 35.7
+    }
+   ]
+  },
+  {
+   "id": "11-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, à sa place, tu aurais fait quoi ?",
+   "start": 37.15,
+   "dur": 5.208,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 37.15
+    },
+    {
+     "w": "es",
+     "t": 37.27
+    },
+    {
+     "w": "le",
+     "t": 37.37
+    },
+    {
+     "w": "juré.",
+     "t": 37.47
+    },
+    {
+     "w": "Coupable…",
+     "t": 38.11
+    },
+    {
+     "w": "ou",
+     "t": 38.59
+    },
+    {
+     "w": "non",
+     "t": 39.01
+    },
+    {
+     "w": "coupable ?",
+     "t": 39.15
+    },
+    {
+     "w": "Et",
+     "t": 40.05
+    },
+    {
+     "w": "toi,",
+     "t": 40.11
+    },
+    {
+     "w": "à",
+     "t": 40.65
+    },
+    {
+     "w": "sa",
+     "t": 40.71
+    },
+    {
+     "w": "place,",
+     "t": 40.83
+    },
+    {
+     "w": "tu",
+     "t": 41.55
+    },
+    {
+     "w": "aurais",
+     "t": 41.65
+    },
+    {
+     "w": "fait",
+     "t": 41.87
+    },
+    {
+     "w": "quoi ?",
+     "t": 41.97
+    }
+   ]
+  }
+ ]
+}

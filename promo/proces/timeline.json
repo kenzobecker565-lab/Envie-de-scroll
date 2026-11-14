@@ -1,0 +1,1456 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 119.84,
+ "lines": [
+  {
+   "id": "01-vole",
+   "who": "narrateur",
+   "text": "Cet homme a volé trois millions d'euros d'argent public.",
+   "start": 0.6,
+   "dur": 2.55,
+   "words": [
+    {
+     "w": "Cet",
+     "t": 0.6
+    },
+    {
+     "w": "homme",
+     "t": 0.84
+    },
+    {
+     "w": "a",
+     "t": 1.06
+    },
+    {
+     "w": "volé",
+     "t": 1.18
+    },
+    {
+     "w": "trois",
+     "t": 1.42
+    },
+    {
+     "w": "millions",
+     "t": 1.66
+    },
+    {
+     "w": "d'euros",
+     "t": 1.953
+    },
+    {
+     "w": "d'argent",
+     "t": 2.247
+    },
+    {
+     "w": "public.",
+     "t": 2.54
+    }
+   ]
+  },
+  {
+   "id": "02-ville",
+   "who": "narrateur",
+   "text": "Et toute sa ville est dans la rue pour le défendre.",
+   "start": 3.4,
+   "dur": 2.37,
+   "words": [
+    {
+     "w": "Et",
+     "t": 3.4
+    },
+    {
+     "w": "toute",
+     "t": 3.54
+    },
+    {
+     "w": "sa",
+     "t": 3.68
+    },
+    {
+     "w": "ville",
+     "t": 3.92
+    },
+    {
+     "w": "est",
+     "t": 4.18
+    },
+    {
+     "w": "dans",
+     "t": 4.36
+    },
+    {
+     "w": "la",
+     "t": 4.48
+    },
+    {
+     "w": "rue",
+     "t": 4.64
+    },
+    {
+     "w": "pour",
+     "t": 4.8
+    },
+    {
+     "w": "le",
+     "t": 4.96
+    },
+    {
+     "w": "défendre.",
+     "t": 5.08
+    }
+   ]
+  },
+  {
+   "id": "03-toi",
+   "who": "narrateur",
+   "text": "Dans deux minutes, c'est toi qui décides s'il va en prison.",
+   "start": 6.12,
+   "dur": 2.76,
+   "words": [
+    {
+     "w": "Dans",
+     "t": 6.18
+    },
+    {
+     "w": "deux",
+     "t": 6.35
+    },
+    {
+     "w": "minutes,",
+     "t": 6.52
+    },
+    {
+     "w": "c'est",
+     "t": 6.88
+    },
+    {
+     "w": "toi",
+     "t": 7.24
+    },
+    {
+     "w": "qui",
+     "t": 7.38
+    },
+    {
+     "w": "décides",
+     "t": 7.62
+    },
+    {
+     "w": "s'il",
+     "t": 7.86
+    },
+    {
+     "w": "va",
+     "t": 8.1
+    },
+    {
+     "w": "en",
+     "t": 8.24
+    },
+    {
+     "w": "prison.",
+     "t": 8.36
+    }
+   ]
+  },
+  {
+   "id": "04-maire",
+   "who": "narrateur",
+   "text": "Marc Delmas, maire depuis dix-huit ans.",
+   "start": 9.38,
+   "dur": 2.415,
+   "words": [
+    {
+     "w": "Marc",
+     "t": 9.45
+    },
+    {
+     "w": "Delmas,",
+     "t": 9.67
+    },
+    {
+     "w": "maire",
+     "t": 10.22
+    },
+    {
+     "w": "depuis",
+     "t": 10.77
+    },
+    {
+     "w": "dix-huit",
+     "t": 11.1
+    },
+    {
+     "w": "ans.",
+     "t": 11.43
+    }
+   ]
+  },
+  {
+   "id": "05-maternite",
+   "who": "narrateur",
+   "text": "L'État veut fermer la maternité de sa ville : la prochaine est à soixante-dix kilomètres.",
+   "start": 12.045,
+   "dur": 4.405,
+   "words": [
+    {
+     "w": "L'État",
+     "t": 12.045
+    },
+    {
+     "w": "veut",
+     "t": 12.34
+    },
+    {
+     "w": "fermer",
+     "t": 12.5
+    },
+    {
+     "w": "la",
+     "t": 12.82
+    },
+    {
+     "w": "maternité",
+     "t": 12.96
+    },
+    {
+     "w": "de",
+     "t": 13.44
+    },
+    {
+     "w": "sa",
+     "t": 13.58
+    },
+    {
+     "w": "ville :",
+     "t": 13.76
+    },
+    {
+     "w": "la",
+     "t": 14.4
+    },
+    {
+     "w": "prochaine",
+     "t": 14.5
+    },
+    {
+     "w": "est",
+     "t": 14.9
+    },
+    {
+     "w": "à",
+     "t": 15.28
+    },
+    {
+     "w": "soixante-dix",
+     "t": 15.793
+    },
+    {
+     "w": "kilomètres.",
+     "t": 16.307
+    }
+   ]
+  },
+  {
+   "id": "06-factures",
+   "who": "narrateur",
+   "text": "Alors pendant six ans, il fait passer de l'argent public dans de fausses factures.",
+   "start": 16.7,
+   "dur": 4.61,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 17.07
+    },
+    {
+     "w": "pendant",
+     "t": 17.25
+    },
+    {
+     "w": "six",
+     "t": 17.59
+    },
+    {
+     "w": "ans,",
+     "t": 17.93
+    },
+    {
+     "w": "il",
+     "t": 18.53
+    },
+    {
+     "w": "fait",
+     "t": 18.61
+    },
+    {
+     "w": "passer",
+     "t": 18.73
+    },
+    {
+     "w": "de",
+     "t": 19.01
+    },
+    {
+     "w": "l'argent",
+     "t": 19.19
+    },
+    {
+     "w": "public",
+     "t": 19.37
+    },
+    {
+     "w": "dans",
+     "t": 19.83
+    },
+    {
+     "w": "de",
+     "t": 20.17
+    },
+    {
+     "w": "fausses",
+     "t": 20.31
+    },
+    {
+     "w": "factures.",
+     "t": 20.59
+    }
+   ]
+  },
+  {
+   "id": "07-peine",
+   "who": "narrateur",
+   "text": "Accusation : détournement de fonds publics. Peine encourue : dix ans de prison.",
+   "start": 21.61,
+   "dur": 4.82,
+   "words": [
+    {
+     "w": "Accusation :",
+     "t": 21.77
+    },
+    {
+     "w": "détournement",
+     "t": 22.67
+    },
+    {
+     "w": "de",
+     "t": 23.13
+    },
+    {
+     "w": "fonds",
+     "t": 23.29
+    },
+    {
+     "w": "publics.",
+     "t": 23.55
+    },
+    {
+     "w": "Peine",
+     "t": 24.23
+    },
+    {
+     "w": "encourue :",
+     "t": 24.71
+    },
+    {
+     "w": "dix",
+     "t": 25.19
+    },
+    {
+     "w": "ans",
+     "t": 25.67
+    },
+    {
+     "w": "de",
+     "t": 25.81
+    },
+    {
+     "w": "prison.",
+     "t": 25.93
+    }
+   ]
+  },
+  {
+   "id": "08-ouverte",
+   "who": "juge",
+   "text": "L'audience est ouverte. Monsieur le procureur.",
+   "start": 27.03,
+   "dur": 3.39,
+   "words": [
+    {
+     "w": "L'audience",
+     "t": 27.15
+    },
+    {
+     "w": "est",
+     "t": 27.39
+    },
+    {
+     "w": "ouverte.",
+     "t": 27.85
+    },
+    {
+     "w": "Monsieur",
+     "t": 28.81
+    },
+    {
+     "w": "le",
+     "t": 29.29
+    },
+    {
+     "w": "procureur.",
+     "t": 29.47
+    }
+   ]
+  },
+  {
+   "id": "09-roi",
+   "who": "procureur",
+   "text": "Quarante-sept fausses factures. Six ans de mensonges au conseil municipal, aux contrôleurs, aux électeurs. Il n'a pas sauvé une maternité. Il s'est placé au-dessus de la loi. Quand un élu décide seul où va votre argent, ce n'est plus un maire. C'est un roi.",
+   "start": 30.67,
+   "dur": 16.31,
+   "words": [
+    {
+     "w": "Quarante-sept",
+     "t": 30.79
+    },
+    {
+     "w": "fausses",
+     "t": 31.02
+    },
+    {
+     "w": "factures.",
+     "t": 31.68
+    },
+    {
+     "w": "Six",
+     "t": 32.35
+    },
+    {
+     "w": "ans",
+     "t": 33.02
+    },
+    {
+     "w": "de",
+     "t": 33.24
+    },
+    {
+     "w": "mensonges",
+     "t": 33.63
+    },
+    {
+     "w": "au",
+     "t": 34.02
+    },
+    {
+     "w": "conseil",
+     "t": 34.16
+    },
+    {
+     "w": "municipal,",
+     "t": 34.56
+    },
+    {
+     "w": "aux",
+     "t": 35.327
+    },
+    {
+     "w": "contrôleurs,",
+     "t": 36.093
+    },
+    {
+     "w": "aux",
+     "t": 36.86
+    },
+    {
+     "w": "électeurs.",
+     "t": 37.06
+    },
+    {
+     "w": "Il",
+     "t": 38.08
+    },
+    {
+     "w": "n'a",
+     "t": 38.21
+    },
+    {
+     "w": "pas",
+     "t": 38.34
+    },
+    {
+     "w": "sauvé",
+     "t": 38.48
+    },
+    {
+     "w": "une",
+     "t": 38.8
+    },
+    {
+     "w": "maternité.",
+     "t": 38.94
+    },
+    {
+     "w": "Il",
+     "t": 39.94
+    },
+    {
+     "w": "s'est",
+     "t": 40.09
+    },
+    {
+     "w": "placé",
+     "t": 40.24
+    },
+    {
+     "w": "au-dessus",
+     "t": 40.73
+    },
+    {
+     "w": "de",
+     "t": 41.22
+    },
+    {
+     "w": "la",
+     "t": 41.36
+    },
+    {
+     "w": "loi.",
+     "t": 41.5
+    },
+    {
+     "w": "Quand",
+     "t": 42.08
+    },
+    {
+     "w": "un",
+     "t": 42.2
+    },
+    {
+     "w": "élu",
+     "t": 42.42
+    },
+    {
+     "w": "décide",
+     "t": 42.58
+    },
+    {
+     "w": "seul",
+     "t": 42.96
+    },
+    {
+     "w": "où",
+     "t": 43.28
+    },
+    {
+     "w": "va",
+     "t": 43.68
+    },
+    {
+     "w": "votre",
+     "t": 43.84
+    },
+    {
+     "w": "argent,",
+     "t": 44.08
+    },
+    {
+     "w": "ce",
+     "t": 44.84
+    },
+    {
+     "w": "n'est",
+     "t": 44.96
+    },
+    {
+     "w": "plus",
+     "t": 45.08
+    },
+    {
+     "w": "un",
+     "t": 45.24
+    },
+    {
+     "w": "maire.",
+     "t": 45.46
+    },
+    {
+     "w": "C'est",
+     "t": 45.89
+    },
+    {
+     "w": "un",
+     "t": 46.32
+    },
+    {
+     "w": "roi.",
+     "t": 46.52
+    }
+   ]
+  },
+  {
+   "id": "10-bebes",
+   "who": "avocate",
+   "text": "Trois cent douze bébés sont nés dans cette maternité depuis. Trois d'entre eux ne seraient pas nés vivants après une heure de route. Allez demander à leurs mères si c'était du vol.",
+   "start": 47.38,
+   "dur": 8.435,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 47.5
+    },
+    {
+     "w": "cent",
+     "t": 47.655
+    },
+    {
+     "w": "douze",
+     "t": 47.81
+    },
+    {
+     "w": "bébés",
+     "t": 47.965
+    },
+    {
+     "w": "sont",
+     "t": 48.405
+    },
+    {
+     "w": "nés",
+     "t": 48.605
+    },
+    {
+     "w": "dans",
+     "t": 48.785
+    },
+    {
+     "w": "cette",
+     "t": 48.905
+    },
+    {
+     "w": "maternité",
+     "t": 49.105
+    },
+    {
+     "w": "depuis.",
+     "t": 49.585
+    },
+    {
+     "w": "Trois",
+     "t": 50.345
+    },
+    {
+     "w": "d'entre",
+     "t": 50.595
+    },
+    {
+     "w": "eux",
+     "t": 50.845
+    },
+    {
+     "w": "ne",
+     "t": 51.025
+    },
+    {
+     "w": "seraient",
+     "t": 51.205
+    },
+    {
+     "w": "pas",
+     "t": 51.505
+    },
+    {
+     "w": "nés",
+     "t": 51.625
+    },
+    {
+     "w": "vivants",
+     "t": 51.785
+    },
+    {
+     "w": "après",
+     "t": 52.145
+    },
+    {
+     "w": "une",
+     "t": 52.385
+    },
+    {
+     "w": "heure",
+     "t": 52.705
+    },
+    {
+     "w": "de",
+     "t": 52.865
+    },
+    {
+     "w": "route.",
+     "t": 52.985
+    },
+    {
+     "w": "Allez",
+     "t": 53.725
+    },
+    {
+     "w": "demander",
+     "t": 53.925
+    },
+    {
+     "w": "à",
+     "t": 54.245
+    },
+    {
+     "w": "leurs",
+     "t": 54.412
+    },
+    {
+     "w": "mères",
+     "t": 54.578
+    },
+    {
+     "w": "si",
+     "t": 54.745
+    },
+    {
+     "w": "c'était",
+     "t": 54.965
+    },
+    {
+     "w": "du",
+     "t": 55.185
+    },
+    {
+     "w": "vol.",
+     "t": 55.345
+    }
+   ]
+  },
+  {
+   "id": "11-campagne",
+   "who": "procureur",
+   "text": "Parlons plutôt de ce que madame l'avocate oublie. Sur ces trois millions, trois cent mille euros ne sont jamais arrivés à l'hôpital. Ils ont payé sa campagne de réélection. Le sauveur de la maternité finançait aussi ses affiches.",
+   "start": 56.215,
+   "dur": 12.19,
+   "words": [
+    {
+     "w": "Parlons",
+     "t": 56.225
+    },
+    {
+     "w": "plutôt",
+     "t": 56.505
+    },
+    {
+     "w": "de",
+     "t": 56.785
+    },
+    {
+     "w": "ce",
+     "t": 56.985
+    },
+    {
+     "w": "que",
+     "t": 57.105
+    },
+    {
+     "w": "madame",
+     "t": 57.372
+    },
+    {
+     "w": "l'avocate",
+     "t": 57.638
+    },
+    {
+     "w": "oublie.",
+     "t": 57.905
+    },
+    {
+     "w": "Sur",
+     "t": 58.865
+    },
+    {
+     "w": "ces",
+     "t": 58.965
+    },
+    {
+     "w": "trois",
+     "t": 59.175
+    },
+    {
+     "w": "millions,",
+     "t": 59.385
+    },
+    {
+     "w": "trois",
+     "t": 59.73
+    },
+    {
+     "w": "cent",
+     "t": 60.075
+    },
+    {
+     "w": "mille",
+     "t": 60.42
+    },
+    {
+     "w": "euros",
+     "t": 60.765
+    },
+    {
+     "w": "ne",
+     "t": 61.025
+    },
+    {
+     "w": "sont",
+     "t": 61.245
+    },
+    {
+     "w": "jamais",
+     "t": 61.405
+    },
+    {
+     "w": "arrivés",
+     "t": 61.705
+    },
+    {
+     "w": "à",
+     "t": 62.165
+    },
+    {
+     "w": "l'hôpital.",
+     "t": 62.645
+    },
+    {
+     "w": "Ils",
+     "t": 63.125
+    },
+    {
+     "w": "ont",
+     "t": 63.305
+    },
+    {
+     "w": "payé",
+     "t": 63.465
+    },
+    {
+     "w": "sa",
+     "t": 63.725
+    },
+    {
+     "w": "campagne",
+     "t": 63.885
+    },
+    {
+     "w": "de",
+     "t": 64.285
+    },
+    {
+     "w": "réélection.",
+     "t": 64.465
+    },
+    {
+     "w": "Le",
+     "t": 65.405
+    },
+    {
+     "w": "sauveur",
+     "t": 65.505
+    },
+    {
+     "w": "de",
+     "t": 65.985
+    },
+    {
+     "w": "la",
+     "t": 66.125
+    },
+    {
+     "w": "maternité",
+     "t": 66.225
+    },
+    {
+     "w": "finançait",
+     "t": 66.745
+    },
+    {
+     "w": "aussi",
+     "t": 67.325
+    },
+    {
+     "w": "ses",
+     "t": 67.645
+    },
+    {
+     "w": "affiches.",
+     "t": 67.865
+    }
+   ]
+  },
+  {
+   "id": "12-salaire",
+   "who": "avocate",
+   "text": "Ses affiches… Pendant six ans, cet homme a reversé tout son salaire de maire à l'hôpital. Trois cent quatre-vingt mille euros, de sa poche. Faites le calcul, monsieur le procureur : dans cette histoire, le seul qui a perdu de l'argent, c'est lui.",
+   "start": 68.805,
+   "dur": 12.64,
+   "words": [
+    {
+     "w": "Ses",
+     "t": 68.865
+    },
+    {
+     "w": "affiches…",
+     "t": 69.005
+    },
+    {
+     "w": "Pendant",
+     "t": 69.865
+    },
+    {
+     "w": "six",
+     "t": 70.125
+    },
+    {
+     "w": "ans,",
+     "t": 70.385
+    },
+    {
+     "w": "cet",
+     "t": 70.845
+    },
+    {
+     "w": "homme",
+     "t": 70.905
+    },
+    {
+     "w": "a",
+     "t": 71.105
+    },
+    {
+     "w": "reversé",
+     "t": 71.205
+    },
+    {
+     "w": "tout",
+     "t": 71.665
+    },
+    {
+     "w": "son",
+     "t": 71.865
+    },
+    {
+     "w": "salaire",
+     "t": 72.045
+    },
+    {
+     "w": "de",
+     "t": 72.345
+    },
+    {
+     "w": "maire",
+     "t": 72.495
+    },
+    {
+     "w": "à",
+     "t": 72.645
+    },
+    {
+     "w": "l'hôpital.",
+     "t": 72.975
+    },
+    {
+     "w": "Trois",
+     "t": 73.305
+    },
+    {
+     "w": "cent",
+     "t": 73.635
+    },
+    {
+     "w": "quatre-vingt",
+     "t": 73.965
+    },
+    {
+     "w": "mille",
+     "t": 74.295
+    },
+    {
+     "w": "euros,",
+     "t": 74.625
+    },
+    {
+     "w": "de",
+     "t": 75.185
+    },
+    {
+     "w": "sa",
+     "t": 75.265
+    },
+    {
+     "w": "poche.",
+     "t": 75.425
+    },
+    {
+     "w": "Faites",
+     "t": 76.265
+    },
+    {
+     "w": "le",
+     "t": 76.425
+    },
+    {
+     "w": "calcul,",
+     "t": 76.505
+    },
+    {
+     "w": "monsieur",
+     "t": 77.005
+    },
+    {
+     "w": "le",
+     "t": 77.205
+    },
+    {
+     "w": "procureur :",
+     "t": 77.325
+    },
+    {
+     "w": "dans",
+     "t": 78.325
+    },
+    {
+     "w": "cette",
+     "t": 78.425
+    },
+    {
+     "w": "histoire,",
+     "t": 78.605
+    },
+    {
+     "w": "le",
+     "t": 79.365
+    },
+    {
+     "w": "seul",
+     "t": 79.445
+    },
+    {
+     "w": "qui",
+     "t": 79.705
+    },
+    {
+     "w": "a",
+     "t": 79.845
+    },
+    {
+     "w": "perdu",
+     "t": 79.945
+    },
+    {
+     "w": "de",
+     "t": 80.145
+    },
+    {
+     "w": "l'argent,",
+     "t": 80.465
+    },
+    {
+     "w": "c'est",
+     "t": 80.785
+    },
+    {
+     "w": "lui.",
+     "t": 81.105
+    }
+   ]
+  },
+  {
+   "id": "13-demain",
+   "who": "procureur",
+   "text": "Faire le bien avec l'argent des autres, c'est toujours prendre l'argent des autres. Aujourd'hui une maternité. Demain, qui décidera de ce qui mérite d'être sauvé ?",
+   "start": 81.845,
+   "dur": 8.89,
+   "words": [
+    {
+     "w": "Faire",
+     "t": 81.845
+    },
+    {
+     "w": "le",
+     "t": 82.105
+    },
+    {
+     "w": "bien",
+     "t": 82.225
+    },
+    {
+     "w": "avec",
+     "t": 82.445
+    },
+    {
+     "w": "l'argent",
+     "t": 82.725
+    },
+    {
+     "w": "des",
+     "t": 83.005
+    },
+    {
+     "w": "autres,",
+     "t": 83.185
+    },
+    {
+     "w": "c'est",
+     "t": 83.615
+    },
+    {
+     "w": "toujours",
+     "t": 84.045
+    },
+    {
+     "w": "prendre",
+     "t": 84.385
+    },
+    {
+     "w": "l'argent",
+     "t": 84.765
+    },
+    {
+     "w": "des",
+     "t": 85.145
+    },
+    {
+     "w": "autres.",
+     "t": 85.365
+    },
+    {
+     "w": "Aujourd'hui",
+     "t": 85.975
+    },
+    {
+     "w": "une",
+     "t": 86.585
+    },
+    {
+     "w": "maternité.",
+     "t": 86.605
+    },
+    {
+     "w": "Demain,",
+     "t": 87.605
+    },
+    {
+     "w": "qui",
+     "t": 88.365
+    },
+    {
+     "w": "décidera",
+     "t": 88.545
+    },
+    {
+     "w": "de",
+     "t": 89.085
+    },
+    {
+     "w": "ce",
+     "t": 89.205
+    },
+    {
+     "w": "qui",
+     "t": 89.345
+    },
+    {
+     "w": "mérite",
+     "t": 89.485
+    },
+    {
+     "w": "d'être",
+     "t": 89.785
+    },
+    {
+     "w": "sauvé ?",
+     "t": 90.085
+    }
+   ]
+  },
+  {
+   "id": "14-dehors",
+   "who": "avocate",
+   "text": "La loi existe pour protéger les citoyens. Regardez dehors : ce sont eux qui le défendent.",
+   "start": 91.135,
+   "dur": 4.92,
+   "words": [
+    {
+     "w": "La",
+     "t": 91.155
+    },
+    {
+     "w": "loi",
+     "t": 91.295
+    },
+    {
+     "w": "existe",
+     "t": 91.455
+    },
+    {
+     "w": "pour",
+     "t": 91.875
+    },
+    {
+     "w": "protéger",
+     "t": 92.155
+    },
+    {
+     "w": "les",
+     "t": 92.555
+    },
+    {
+     "w": "citoyens.",
+     "t": 92.735
+    },
+    {
+     "w": "Regardez",
+     "t": 93.635
+    },
+    {
+     "w": "dehors :",
+     "t": 94.015
+    },
+    {
+     "w": "ce",
+     "t": 94.755
+    },
+    {
+     "w": "sont",
+     "t": 94.875
+    },
+    {
+     "w": "eux",
+     "t": 95.075
+    },
+    {
+     "w": "qui",
+     "t": 95.215
+    },
+    {
+     "w": "le",
+     "t": 95.355
+    },
+    {
+     "w": "défendent.",
+     "t": 95.475
+    }
+   ]
+  },
+  {
+   "id": "15-voleur",
+   "who": "procureur",
+   "text": "Un voleur généreux reste un voleur.",
+   "start": 96.555,
+   "dur": 2.356,
+   "words": [
+    {
+     "w": "Un",
+     "t": 96.555
+    },
+    {
+     "w": "voleur",
+     "t": 96.695
+    },
+    {
+     "w": "généreux",
+     "t": 97.095
+    },
+    {
+     "w": "reste",
+     "t": 97.575
+    },
+    {
+     "w": "un",
+     "t": 98.115
+    },
+    {
+     "w": "voleur.",
+     "t": 98.415
+    }
+   ]
+  },
+  {
+   "id": "16-etat",
+   "who": "avocate",
+   "text": "Et un État qui ferme les maternités n'a pas de leçon de morale à donner.",
+   "start": 99.261,
+   "dur": 3.387,
+   "words": [
+    {
+     "w": "Et",
+     "t": 99.261
+    },
+    {
+     "w": "un",
+     "t": 99.371
+    },
+    {
+     "w": "État",
+     "t": 99.511
+    },
+    {
+     "w": "qui",
+     "t": 99.771
+    },
+    {
+     "w": "ferme",
+     "t": 99.911
+    },
+    {
+     "w": "les",
+     "t": 100.231
+    },
+    {
+     "w": "maternités",
+     "t": 100.311
+    },
+    {
+     "w": "n'a",
+     "t": 100.721
+    },
+    {
+     "w": "pas",
+     "t": 101.131
+    },
+    {
+     "w": "de",
+     "t": 101.311
+    },
+    {
+     "w": "leçon",
+     "t": 101.531
+    },
+    {
+     "w": "de",
+     "t": 101.751
+    },
+    {
+     "w": "morale",
+     "t": 101.851
+    },
+    {
+     "w": "à",
+     "t": 102.111
+    },
+    {
+     "w": "donner.",
+     "t": 102.231
+    }
+   ]
+  },
+  {
+   "id": "17-clos",
+   "who": "juge",
+   "text": "Les débats sont clos.",
+   "start": 103.548,
+   "dur": 1.37,
+   "words": [
+    {
+     "w": "Les",
+     "t": 103.668
+    },
+    {
+     "w": "débats",
+     "t": 103.788
+    },
+    {
+     "w": "sont",
+     "t": 104.268
+    },
+    {
+     "w": "clos.",
+     "t": 104.428
+    }
+   ]
+  },
+  {
+   "id": "18-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, à sa place, tu aurais laissé fermer la maternité ?",
+   "start": 106.118,
+   "dur": 6.22,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 106.138
+    },
+    {
+     "w": "es",
+     "t": 106.258
+    },
+    {
+     "w": "le",
+     "t": 106.378
+    },
+    {
+     "w": "juré.",
+     "t": 106.498
+    },
+    {
+     "w": "Coupable…",
+     "t": 107.258
+    },
+    {
+     "w": "ou",
+     "t": 107.598
+    },
+    {
+     "w": "non",
+     "t": 108.058
+    },
+    {
+     "w": "coupable ?",
+     "t": 108.178
+    },
+    {
+     "w": "Et",
+     "t": 109.038
+    },
+    {
+     "w": "toi,",
+     "t": 109.118
+    },
+    {
+     "w": "à",
+     "t": 109.738
+    },
+    {
+     "w": "sa",
+     "t": 109.778
+    },
+    {
+     "w": "place,",
+     "t": 109.898
+    },
+    {
+     "w": "tu",
+     "t": 110.678
+    },
+    {
+     "w": "aurais",
+     "t": 110.758
+    },
+    {
+     "w": "laissé",
+     "t": 110.998
+    },
+    {
+     "w": "fermer",
+     "t": 111.278
+    },
+    {
+     "w": "la",
+     "t": 111.558
+    },
+    {
+     "w": "maternité ?",
+     "t": 111.658
+    }
+   ]
+  }
+ ]
+}

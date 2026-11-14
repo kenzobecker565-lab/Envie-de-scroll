@@ -1,0 +1,15 @@
+{
+  "_doc": "« Le casse » n°1 : il n'a jamais forcé une seule porte (histoire inventée). Narrateur seul, voix ElevenLabs « Bass » enregistrée par le créateur du compte (media/elevenlabs/<id>.mp3).",
+  "voices": { "narrateur": { "name": "narrateur", "file": "media/narrateur.wav" } },
+  "lines": [
+    { "id": "01-accroche", "who": "narrateur", "text": "Il a volé 4 millions d'euros de diamants… sans jamais forcer une seule porte.", "say": "Il a volé quatre millions d'euros de diamants… sans jamais forcer une seule porte." },
+    { "id": "02-comment", "who": "narrateur", "text": "Voici comment.", "gap": 0.35 },
+    { "id": "03-expert", "who": "narrateur", "text": "Trois mois avant, il se présente à la bijouterie comme expert en assurances. Costume, badge, carte de visite. Le gérant lui fait visiter… tout.", "gap": 0.5 },
+    { "id": "04-detail", "who": "narrateur", "text": "Il observe, il note. Et il remarque un détail : chaque vendredi soir, les diamants partent au coffre de la banque… dans une simple mallette.", "gap": 0.4 },
+    { "id": "05-coursier", "who": "narrateur", "text": "Le vendredi suivant, à 17 h 55, un coursier en uniforme se présente. Le bon de livraison est parfait. La signature aussi.", "say": "Le vendredi suivant, à dix-sept heures cinquante-cinq, un coursier en uniforme se présente. Le bon de livraison est parfait. La signature aussi.", "gap": 0.45 },
+    { "id": "06-mallette", "who": "narrateur", "text": "Le gérant lui tend la mallette. Lui-même.", "gap": 0.3 },
+    { "id": "07-vrai", "who": "narrateur", "text": "À 18 h 10… le vrai coursier arrive.", "say": "À dix-huit heures dix… le vrai coursier arrive.", "gap": 0.45 },
+    { "id": "08-metro", "who": "narrateur", "text": "Le faux, lui, est déjà loin. Il a pris le métro, 4 millions sur les genoux.", "say": "Le faux, lui, est déjà loin. Il a pris le métro, quatre millions sur les genoux.", "gap": 0.35 },
+    { "id": "09-fin", "who": "narrateur", "text": "On ne l'a jamais retrouvé. Et toi… tu lui aurais donné la mallette ?", "gap": 0.5 }
+  ]
+}

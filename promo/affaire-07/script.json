@@ -1,0 +1,84 @@
+{
+ "_doc": "Affaire n°7 : la fausse avocate (affaire fictive). Une entrée par réplique, dans l'ordre. Voix ElevenLabs du créateur du compte (media/elevenlabs/<id>.mp3) : narrateur « Bass », procureur « Hugo », défense « Peter ». « avocate » = la défense (un avocat).",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-victoires",
+   "who": "narrateur",
+   "text": "47 procès. 47 victoires. Des juges qui la citaient en exemple."
+  },
+  {
+   "id": "02-detail",
+   "who": "narrateur",
+   "text": "Un détail : elle n'a jamais été avocate.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-salle",
+   "who": "narrateur",
+   "text": "Aujourd'hui, c'est elle qui est jugée… dans la salle même où elle plaidait.",
+   "gap": 0.25
+  },
+  {
+   "id": "04-honoraires",
+   "who": "procureur",
+   "text": "Pendant 6 ans, elle a encaissé des honoraires d'avocate. 300 000 euros. Pour un titre qu'elle n'avait pas.",
+   "gap": 0.3
+  },
+  {
+   "id": "05-prison",
+   "who": "avocate",
+   "text": "300 000 euros… et 47 personnes qui dorment chez elles au lieu de dormir en prison.",
+   "gap": 0.12
+  },
+  {
+   "id": "06-annule",
+   "who": "procureur",
+   "text": "Pour l'instant. Un procès plaidé par une fausse avocate peut être annulé. Ces 47 personnes vont devoir être rejugées.",
+   "gap": 0.1
+  },
+  {
+   "id": "07-papier",
+   "who": "avocate",
+   "text": "Rejugées pour des faits dont elle les a fait innocenter. Le problème, ce n'est pas son travail. C'est un bout de papier.",
+   "gap": 0.1
+  },
+  {
+   "id": "08-savait",
+   "who": "procureur",
+   "text": "Non. Le problème, c'est qu'elle savait. Elle savait que tout s'effondrerait un jour. Et elle a laissé ses clients construire leur vie dessus.",
+   "gap": 0.1
+  },
+  {
+   "id": "09-diplome",
+   "who": "avocate",
+   "text": "Il y a trois ans, elle a battu le procureur ici présent. Lui… avait son diplôme.",
+   "gap": 0.2
+  },
+  {
+   "id": "10-mentir",
+   "who": "procureur",
+   "text": "Mon diplôme ne m'a pas empêché de perdre. Il m'interdit de mentir.",
+   "gap": 0.35
+  },
+  {
+   "id": "11-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu lui aurais confié ta défense ?",
+   "gap": 0.6
+  }
+ ]
+}

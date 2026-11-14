@@ -1,0 +1,778 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 54.86,
+ "lines": [
+  {
+   "id": "01-eleve",
+   "who": "eleve",
+   "text": "Vas-y, frappe-moi ! T'oses pas, vieux con !",
+   "start": 0.9,
+   "dur": 3.28,
+   "words": [
+    {
+     "w": "Vas-y,",
+     "t": 1.455
+    },
+    {
+     "w": "frappe-moi !",
+     "t": 2.01
+    },
+    {
+     "w": "T'oses",
+     "t": 2.565
+    },
+    {
+     "w": "pas,",
+     "t": 3.12
+    },
+    {
+     "w": "vieux",
+     "t": 3.52
+    },
+    {
+     "w": "con !",
+     "t": 3.74
+    }
+   ]
+  },
+  {
+   "id": "02-cejour",
+   "who": "narrateur",
+   "text": "Ce jour-là, monsieur Garnier, 58 ans, se faisait insulter depuis dix minutes. Filmé. Devant toute la classe. Il a fini par craquer.",
+   "start": 5.88,
+   "dur": 6.6,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 5.88
+    },
+    {
+     "w": "jour-là,",
+     "t": 6.137
+    },
+    {
+     "w": "monsieur",
+     "t": 6.483
+    },
+    {
+     "w": "Garnier,",
+     "t": 6.83
+    },
+    {
+     "w": "58",
+     "t": 7.41
+    },
+    {
+     "w": "ans,",
+     "t": 7.77
+    },
+    {
+     "w": "se",
+     "t": 8.29
+    },
+    {
+     "w": "faisait",
+     "t": 8.37
+    },
+    {
+     "w": "insulter",
+     "t": 8.59
+    },
+    {
+     "w": "depuis",
+     "t": 8.97
+    },
+    {
+     "w": "dix",
+     "t": 9.2
+    },
+    {
+     "w": "minutes.",
+     "t": 9.43
+    },
+    {
+     "w": "Filmé.",
+     "t": 9.87
+    },
+    {
+     "w": "Devant",
+     "t": 10.33
+    },
+    {
+     "w": "toute",
+     "t": 10.57
+    },
+    {
+     "w": "la",
+     "t": 10.83
+    },
+    {
+     "w": "classe.",
+     "t": 10.99
+    },
+    {
+     "w": "Il",
+     "t": 11.45
+    },
+    {
+     "w": "a",
+     "t": 11.53
+    },
+    {
+     "w": "fini",
+     "t": 11.63
+    },
+    {
+     "w": "par",
+     "t": 11.79
+    },
+    {
+     "w": "craquer.",
+     "t": 11.97
+    }
+   ]
+  },
+  {
+   "id": "03-jugement",
+   "who": "narrateur",
+   "text": "La vidéo a fait 4 millions de vues. Aujourd'hui, c'est son jugement.",
+   "start": 12.83,
+   "dur": 3.76,
+   "words": [
+    {
+     "w": "La",
+     "t": 12.83
+    },
+    {
+     "w": "vidéo",
+     "t": 12.97
+    },
+    {
+     "w": "a",
+     "t": 13.31
+    },
+    {
+     "w": "fait",
+     "t": 13.55
+    },
+    {
+     "w": "4",
+     "t": 13.67
+    },
+    {
+     "w": "millions",
+     "t": 13.97
+    },
+    {
+     "w": "de",
+     "t": 14.27
+    },
+    {
+     "w": "vues.",
+     "t": 14.47
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 14.883
+    },
+    {
+     "w": "c'est",
+     "t": 15.297
+    },
+    {
+     "w": "son",
+     "t": 15.71
+    },
+    {
+     "w": "jugement.",
+     "t": 15.87
+    }
+   ]
+  },
+  {
+   "id": "04-mineur",
+   "who": "procureur",
+   "text": "Un adulte a frappé un mineur. Dans une salle de classe. Le reste, c'est du bruit.",
+   "start": 17.04,
+   "dur": 3.98,
+   "words": [
+    {
+     "w": "Un",
+     "t": 17.04
+    },
+    {
+     "w": "adulte",
+     "t": 17.18
+    },
+    {
+     "w": "a",
+     "t": 17.58
+    },
+    {
+     "w": "frappé",
+     "t": 17.62
+    },
+    {
+     "w": "un",
+     "t": 17.94
+    },
+    {
+     "w": "mineur.",
+     "t": 18.02
+    },
+    {
+     "w": "Dans",
+     "t": 18.44
+    },
+    {
+     "w": "une",
+     "t": 18.66
+    },
+    {
+     "w": "salle",
+     "t": 18.84
+    },
+    {
+     "w": "de",
+     "t": 19.04
+    },
+    {
+     "w": "classe.",
+     "t": 19.12
+    },
+    {
+     "w": "Le",
+     "t": 19.66
+    },
+    {
+     "w": "reste,",
+     "t": 19.76
+    },
+    {
+     "w": "c'est",
+     "t": 20.11
+    },
+    {
+     "w": "du",
+     "t": 20.46
+    },
+    {
+     "w": "bruit.",
+     "t": 20.58
+    }
+   ]
+  },
+  {
+   "id": "05-bruit",
+   "who": "avocate",
+   "text": "Du bruit ? 10 minutes d'insultes, téléphone au poing. Vous auriez tenu, vous ?",
+   "start": 21.22,
+   "dur": 3.46,
+   "words": [
+    {
+     "w": "Du",
+     "t": 21.22
+    },
+    {
+     "w": "bruit ?",
+     "t": 21.38
+    },
+    {
+     "w": "10",
+     "t": 21.84
+    },
+    {
+     "w": "minutes",
+     "t": 22.12
+    },
+    {
+     "w": "d'insultes,",
+     "t": 22.49
+    },
+    {
+     "w": "téléphone",
+     "t": 22.86
+    },
+    {
+     "w": "au",
+     "t": 23.16
+    },
+    {
+     "w": "poing.",
+     "t": 23.41
+    },
+    {
+     "w": "Vous",
+     "t": 23.66
+    },
+    {
+     "w": "auriez",
+     "t": 23.78
+    },
+    {
+     "w": "tenu,",
+     "t": 24.02
+    },
+    {
+     "w": "vous ?",
+     "t": 24.34
+    }
+   ]
+  },
+  {
+   "id": "06-paie",
+   "who": "procureur",
+   "text": "Oui. C'est même pour ça qu'on le paie.",
+   "start": 24.88,
+   "dur": 1.83,
+   "words": [
+    {
+     "w": "Oui.",
+     "t": 24.88
+    },
+    {
+     "w": "C'est",
+     "t": 25.22
+    },
+    {
+     "w": "même",
+     "t": 25.6
+    },
+    {
+     "w": "pour",
+     "t": 25.68
+    },
+    {
+     "w": "ça",
+     "t": 25.9
+    },
+    {
+     "w": "qu'on",
+     "t": 26.1
+    },
+    {
+     "w": "le",
+     "t": 26.3
+    },
+    {
+     "w": "paie.",
+     "t": 26.38
+    }
+   ]
+  },
+  {
+   "id": "07-contenu",
+   "who": "avocate",
+   "text": "On le paie pour enseigner. Pas pour servir de contenu à un gamin de 16 ans.",
+   "start": 26.91,
+   "dur": 3.23,
+   "words": [
+    {
+     "w": "On",
+     "t": 26.91
+    },
+    {
+     "w": "le",
+     "t": 27.03
+    },
+    {
+     "w": "paie",
+     "t": 27.17
+    },
+    {
+     "w": "pour",
+     "t": 27.37
+    },
+    {
+     "w": "enseigner.",
+     "t": 27.51
+    },
+    {
+     "w": "Pas",
+     "t": 28.13
+    },
+    {
+     "w": "pour",
+     "t": 28.23
+    },
+    {
+     "w": "servir",
+     "t": 28.41
+    },
+    {
+     "w": "de",
+     "t": 28.61
+    },
+    {
+     "w": "contenu",
+     "t": 28.79
+    },
+    {
+     "w": "à",
+     "t": 29.17
+    },
+    {
+     "w": "un",
+     "t": 29.25
+    },
+    {
+     "w": "gamin",
+     "t": 29.31
+    },
+    {
+     "w": "de",
+     "t": 29.53
+    },
+    {
+     "w": "16",
+     "t": 29.63
+    },
+    {
+     "w": "ans.",
+     "t": 29.85
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "T'es de quel côté ? Like si ça te fait réagir.",
+   "start": 30.49,
+   "dur": 2.14,
+   "words": [
+    {
+     "w": "T'es",
+     "t": 30.497
+    },
+    {
+     "w": "de",
+     "t": 30.563
+    },
+    {
+     "w": "quel",
+     "t": 30.63
+    },
+    {
+     "w": "côté ?",
+     "t": 30.77
+    },
+    {
+     "w": "Like",
+     "t": 31.37
+    },
+    {
+     "w": "si",
+     "t": 31.49
+    },
+    {
+     "w": "ça",
+     "t": 31.73
+    },
+    {
+     "w": "te",
+     "t": 31.87
+    },
+    {
+     "w": "fait",
+     "t": 31.91
+    },
+    {
+     "w": "réagir.",
+     "t": 32.03
+    }
+   ]
+  },
+  {
+   "id": "09-trente",
+   "who": "procureur",
+   "text": "30 ans de carrière. Et il choisit la seule réponse qu'on ne peut pas excuser.",
+   "start": 32.98,
+   "dur": 3.75,
+   "words": [
+    {
+     "w": "30",
+     "t": 32.98
+    },
+    {
+     "w": "ans",
+     "t": 33.24
+    },
+    {
+     "w": "de",
+     "t": 33.42
+    },
+    {
+     "w": "carrière.",
+     "t": 33.48
+    },
+    {
+     "w": "Et",
+     "t": 33.92
+    },
+    {
+     "w": "il",
+     "t": 34.14
+    },
+    {
+     "w": "choisit",
+     "t": 34.24
+    },
+    {
+     "w": "la",
+     "t": 34.62
+    },
+    {
+     "w": "seule",
+     "t": 34.72
+    },
+    {
+     "w": "réponse",
+     "t": 34.96
+    },
+    {
+     "w": "qu'on",
+     "t": 35.35
+    },
+    {
+     "w": "ne",
+     "t": 35.74
+    },
+    {
+     "w": "peut",
+     "t": 35.84
+    },
+    {
+     "w": "pas",
+     "t": 35.94
+    },
+    {
+     "w": "excuser.",
+     "t": 36.12
+    }
+   ]
+  },
+  {
+   "id": "10-craque",
+   "who": "avocate",
+   "text": "Trois conseils de discipline. Zéro sanction. L'école l'a laissé seul jusqu'à ce qu'il craque.",
+   "start": 36.93,
+   "dur": 4.38,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 36.93
+    },
+    {
+     "w": "conseils",
+     "t": 37.23
+    },
+    {
+     "w": "de",
+     "t": 37.55
+    },
+    {
+     "w": "discipline.",
+     "t": 37.61
+    },
+    {
+     "w": "Zéro",
+     "t": 38.27
+    },
+    {
+     "w": "sanction.",
+     "t": 38.63
+    },
+    {
+     "w": "L'école",
+     "t": 38.957
+    },
+    {
+     "w": "l'a",
+     "t": 39.283
+    },
+    {
+     "w": "laissé",
+     "t": 39.61
+    },
+    {
+     "w": "seul",
+     "t": 39.957
+    },
+    {
+     "w": "jusqu'à",
+     "t": 40.303
+    },
+    {
+     "w": "ce",
+     "t": 40.65
+    },
+    {
+     "w": "qu'il",
+     "t": 40.72
+    },
+    {
+     "w": "craque.",
+     "t": 40.79
+    }
+   ]
+  },
+  {
+   "id": "11-fatigue",
+   "who": "procureur",
+   "text": "Alors jugez l'école. Mais ne dites pas à ces gamins qu'un adulte a le droit de les frapper quand il est fatigué.",
+   "start": 41.56,
+   "dur": 5.12,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 41.56
+    },
+    {
+     "w": "jugez",
+     "t": 41.78
+    },
+    {
+     "w": "l'école.",
+     "t": 42.3
+    },
+    {
+     "w": "Mais",
+     "t": 42.82
+    },
+    {
+     "w": "ne",
+     "t": 42.9
+    },
+    {
+     "w": "dites",
+     "t": 43.0
+    },
+    {
+     "w": "pas",
+     "t": 43.16
+    },
+    {
+     "w": "à",
+     "t": 43.38
+    },
+    {
+     "w": "ces",
+     "t": 43.5
+    },
+    {
+     "w": "gamins",
+     "t": 43.56
+    },
+    {
+     "w": "qu'un",
+     "t": 43.81
+    },
+    {
+     "w": "adulte",
+     "t": 44.06
+    },
+    {
+     "w": "a",
+     "t": 44.44
+    },
+    {
+     "w": "le",
+     "t": 44.5
+    },
+    {
+     "w": "droit",
+     "t": 44.58
+    },
+    {
+     "w": "de",
+     "t": 44.8
+    },
+    {
+     "w": "les",
+     "t": 44.9
+    },
+    {
+     "w": "frapper",
+     "t": 44.98
+    },
+    {
+     "w": "quand",
+     "t": 45.36
+    },
+    {
+     "w": "il",
+     "t": 45.72
+    },
+    {
+     "w": "est",
+     "t": 45.96
+    },
+    {
+     "w": "fatigué.",
+     "t": 46.06
+    }
+   ]
+  },
+  {
+   "id": "12-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "start": 47.28,
+   "dur": 4.18,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 47.28
+    },
+    {
+     "w": "es",
+     "t": 47.44
+    },
+    {
+     "w": "le",
+     "t": 47.54
+    },
+    {
+     "w": "juré.",
+     "t": 47.64
+    },
+    {
+     "w": "Coupable…",
+     "t": 48.16
+    },
+    {
+     "w": "ou",
+     "t": 48.56
+    },
+    {
+     "w": "non",
+     "t": 48.88
+    },
+    {
+     "w": "coupable ?",
+     "t": 49.04
+    },
+    {
+     "w": "Écris-le",
+     "t": 49.53
+    },
+    {
+     "w": "en",
+     "t": 50.02
+    },
+    {
+     "w": "commentaire,",
+     "t": 50.08
+    },
+    {
+     "w": "et",
+     "t": 50.6
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 51.034
+    }
+   ]
+  }
+ ]
+}

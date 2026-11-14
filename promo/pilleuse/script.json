@@ -1,0 +1,108 @@
+{
+ "_doc": "La pilleuse (affaire fictive). Voix du créateur du compte : narrateur ElevenLabs « Nicolas Petit », procureur et défense clonés (KikiVoice), media/elevenlabs/<id>.mp3. « avocate » = la défense.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-coma",
+   "who": "narrateur",
+   "text": "Une nuit d'émeutes. Un vigile de 58 ans, piétiné devant un supermarché. Il est toujours dans le coma."
+  },
+  {
+   "id": "02-video",
+   "who": "narrateur",
+   "text": "Sur la vidéo, une jeune femme enjambe son corps. Dans les bras : des couches, du lait pour bébé… et une console de jeux.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-ines",
+   "who": "narrateur",
+   "text": "Elle s'appelle Inès. 23 ans. Aide-soignante. Casier vierge. Aujourd'hui, c'est elle qu'on juge.",
+   "gap": 0.25
+  },
+  {
+   "id": "04-chaos",
+   "who": "procureur",
+   "text": "Elle n'a pas volé pour survivre. Elle a profité du chaos. Les couches… et la console.",
+   "gap": 0.3
+  },
+  {
+   "id": "05-console",
+   "who": "avocate",
+   "text": "La console, c'était pour son fils de 6 ans. Le seul cadeau qu'il aurait eu cette année. Elle gagne 1300 euros par mois.",
+   "gap": 0.12
+  },
+  {
+   "id": "06-millions",
+   "who": "procureur",
+   "text": "1300 euros… comme des millions de Français qui, cette nuit-là, sont restés chez eux.",
+   "gap": 0.1
+  },
+  {
+   "id": "07-quartier",
+   "who": "avocate",
+   "text": "Des millions de Français n'ont pas vu leur quartier brûler sous leurs fenêtres. Elle, si. Cette nuit-là, il n'y avait plus de règles. Plus de police. Plus rien.",
+   "gap": 0.1
+  },
+  {
+   "id": "08-enjambe",
+   "who": "procureur",
+   "text": "Il restait un homme. Un vigile, à terre, devant la grille. Elle l'a enjambé. Elle est soignante : elle savait exactement ce qu'elle voyait.",
+   "gap": 0.12
+  },
+  {
+   "id": "09-samu",
+   "who": "avocate",
+   "text": "Elle savait. C'est pour ça que, onze minutes plus tard, un appel au SAMU est parti… de son téléphone.",
+   "gap": 0.1
+  },
+  {
+   "id": "10-onze",
+   "who": "procureur",
+   "text": "11 minutes. Le temps de charger les couches dans sa voiture. 11 minutes… pour un homme qui ne respirait plus.",
+   "gap": 0.1
+  },
+  {
+   "id": "11-seule",
+   "who": "avocate",
+   "text": "11 minutes, oui. Et cette nuit-là, sur 300 pilleurs, combien ont appelé les secours ? Une seule. Elle.",
+   "gap": 0.1
+  },
+  {
+   "id": "12-remords",
+   "who": "procureur",
+   "text": "Être la seule à appeler ne fait pas d'elle une héroïne. Juste la seule qui avait des remords.",
+   "gap": 0.12
+  },
+  {
+   "id": "13-conscience",
+   "who": "avocate",
+   "text": "Des remords ? Le vrai mot, c'est conscience. Et cette nuit-là… elle était la seule à en avoir une.",
+   "gap": 0.15
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "gap": 0.6
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "gap": 0.4
+  }
+ ]
+}

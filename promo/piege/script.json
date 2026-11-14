@@ -1,0 +1,23 @@
+{
+ "_doc": "« Le piège » : un streamer « chasseur de prédateurs » piège en direct un homme qui n'était pas le bon ; l'homme se suicide (affaire fictive). Voix ElevenLabs (Eleven v4) : youtubeur « Tony », narrateur « Nicolas - Narrator », procureur « Paul K », défense « Ilan ». « avocate » = la défense.",
+ "voices": {
+  "youtubeur": {"name": "youtubeur", "file": "media/youtubeur.wav"},
+  "narrateur": {"name": "narrateur", "file": "media/narrateur.wav"},
+  "procureur": {"name": "procureur", "file": "media/procureur.wav"},
+  "avocate": {"name": "avocate", "file": "media/avocate.wav"}
+ },
+ "lines": [
+  {"id": "01-piege", "who": "youtubeur", "text": "Elle a treize ans, mon gars ! Treize ans ! Regarde la caméra !"},
+  {"id": "02-live", "who": "narrateur", "text": "Yanis piégeait les prédateurs en direct. Onze arrestations. Mais ce soir-là, l'homme n'était pas celui qu'il croyait.", "gap": 1.9},
+  {"id": "03-suicide", "who": "narrateur", "text": "Il s'était trompé de rendez-vous. Trois jours plus tard, il s'est suicidé. Aujourd'hui, Yanis est jugé.", "gap": 0.35},
+  {"id": "04-justice", "who": "procureur", "text": "Il n'est ni policier, ni juge. Il est streamer. Et il a condamné un innocent devant 82 000 personnes.", "gap": 0.45},
+  {"id": "05-onze", "who": "avocate", "text": "Onze prédateurs derrière les barreaux. La police, combien cette année ?", "gap": 0.2},
+  {"id": "06-vues", "who": "procureur", "text": "Les arrestations, c'était le décor. Les abonnés, c'était le salaire.", "gap": 0.2},
+  {"id": "07-like", "who": "narrateur", "text": "Justicier ou bourreau ? Like si ça te fait réagir.", "gap": 0.4},
+  {"id": "08-avant", "who": "avocate", "text": "Vous attendez que les gamines se fassent piéger pour ouvrir une enquête. Lui, au moins, il arrive avant.", "gap": 0.4},
+  {"id": "09-erreur", "who": "avocate", "text": "Une erreur sur onze. La justice, elle, en fait combien… sans que personne ne filme ?", "gap": 0.3},
+  {"id": "10-merch", "who": "procureur", "text": "La justice se trompe, Maître. Mais elle ne vend pas de sweats à son nom avec ses erreurs.", "gap": 0.2},
+  {"id": "11-pouce", "who": "procureur", "text": "Un homme est mort parce qu'il ressemblait à un coupable. Sur internet, la justice, c'est ça ? Un pouce bleu… et une corde ?", "gap": 0.35},
+  {"id": "12-jure", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.", "gap": 0.6}
+ ]
+}

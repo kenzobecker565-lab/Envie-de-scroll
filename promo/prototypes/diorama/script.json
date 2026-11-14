@@ -1,0 +1,7 @@
+{
+  "_doc": "Extrait du prototype « La Reconstitution » (diorama 3D miniature) : une seule réplique du narrateur.",
+  "voices": { "narrateur": { "name": "narrateur", "file": "media/narrateur.wav" } },
+  "lines": [
+    { "id": "01-alarme", "who": "narrateur", "text": "23 h 16. L'alarme de la bijouterie sonne. Au même instant, le voisin descend… une batte à la main.", "say": "Vingt-trois heures seize. L'alarme de la bijouterie sonne. Au même instant, le voisin descend, une batte à la main." }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+ "_doc": "« Le Sanglier », version courte (sans la blague du bon chasseur) : un chasseur a tué un joggeur (affaire fictive). Voix ElevenLabs du créateur du compte, une prise par réplique (media/elevenlabs/<id>.mp3) : narrateur et défense « Ilan » (le narrateur est abaissé d'un ton pour s'en distinguer), procureur « Yann ». « avocate » = la défense.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-sanglier",
+   "who": "narrateur",
+   "text": "Il a cru voir un sanglier. C'était Thomas, 25 ans, en plein jogging."
+  },
+  {
+   "id": "02-gerard",
+   "who": "narrateur",
+   "text": "Gérard, 40 ans de chasse, a tiré dans un bois un dimanche matin. Thomas est mort sur le coup. Aujourd'hui, Gérard est jugé pour homicide.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-regle",
+   "who": "procureur",
+   "text": "Quand on ne voit pas ce qu'on vise, on ne tire pas. C'est la première règle de la chasse. Juste avant « on ne boit pas avant de tirer ».",
+   "gap": 0.35
+  },
+  {
+   "id": "04-brouillard",
+   "who": "avocate",
+   "text": "Mon client était à jeun, espèce de bouffon. Il y avait du brouillard, des fourrés, et un homme tout en noir qui traversait hors des chemins.",
+   "gap": 0.25
+  },
+  {
+   "id": "05-pastis",
+   "who": "procureur",
+   "text": "Pardon ? Vous m'avez traité de quoi, là ? Peu importe. À jeun, à 8 heures du matin, en battue ? On a retrouvé une thermos dans sa voiture. Et ce n'était pas de la verveine.",
+   "gap": 0.2
+  },
+  {
+   "id": "06-cafe",
+   "who": "avocate",
+   "text": "C'était du café, gros malin. Je sais qu'en ville vous buvez des lattes au lait d'avoine, mais à la campagne, le café existe encore.",
+   "gap": 0.25
+  },
+  {
+   "id": "09-pause",
+   "who": "narrateur",
+   "text": "Accident ou homicide ? Abonne-toi : le verdict tombe dans la prochaine vidéo.",
+   "gap": 0.35
+  },
+  {
+   "id": "10-sangliers",
+   "who": "avocate",
+   "text": "Pendant que vous riez, les sangliers ravagent les champs et causent 20 000 accidents par an. Qui les régule ? Pas vous. Vous, le seul sanglier que vous voyez, c'est dans votre assiette, au restaurant, tête de nœud.",
+   "gap": 0.35
+  },
+  {
+   "id": "11-gilet",
+   "who": "procureur",
+   "text": "Ferme ta gueule. Je retire. 40 ans qu'on régule la campagne à coups de fusil, et il reste autant de sangliers que de chasseurs bourrés le dimanche.",
+   "gap": 0.2
+  },
+  {
+   "id": "12-panneaux",
+   "who": "avocate",
+   "text": "La chasse était déclarée. Les panneaux étaient posés. La victime courait avec des écouteurs, en plein secteur interdit. Elle ne pouvait entendre ni les cris, ni les sifflets.",
+   "gap": 0.25
+  },
+  {
+   "id": "13-montre",
+   "who": "procureur",
+   "text": "Donc c'est sa faute ? Il aurait dû courir en gilet orange, avec un sifflet, en hurlant « je ne suis pas un sanglier » tous les 10 mètres, abruti ?",
+   "gap": 0.25
+  },
+  {
+   "id": "14-trottinette",
+   "who": "avocate",
+   "text": "Il aurait dû lire les panneaux, tocard. Mais je comprends : quand on vit entre la trottinette et la salle de sport, la forêt, c'est un décor Instagram.",
+   "gap": 0.25
+  },
+  {
+   "id": "15-gachette",
+   "who": "procureur",
+   "text": "Un panneau n'a jamais appuyé sur une gâchette, Maître. Lui, si. Et Thomas, lui, ne rentrera jamais chez lui.",
+   "gap": 0.4
+  },
+  {
+   "id": "16-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Accident de chasse… ou homicide ? Coupable… ou non coupable ?",
+   "gap": 0.7
+  },
+  {
+   "id": "17-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire. Abonne-toi : le verdict tombe dans la prochaine vidéo.",
+   "gap": 0.3
+  }
+ ]
+}

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <title>Affaire Classée ? · marque</title>
+    <link rel="stylesheet" href="../../node_modules/@fontsource-variable/figtree/index.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        background: transparent;
+        font-family: 'Figtree Variable', system-ui, sans-serif;
+      }
+      .view {
+        display: none;
+        position: relative;
+        overflow: hidden;
+      }
+      body[data-v='profil'] #profil,
+      body[data-v='bandeau'] #bandeau,
+      body[data-v='fin'] #fin {
+        display: block;
+      }
+
+      /* Le tampon « AFFAIRE CLASSÉE ? » */
+      .stamp {
+        display: inline-block;
+        color: #e5382b;
+        border: 0.12em solid #e5382b;
+        border-radius: 0.22em;
+        padding: 0.12em 0.32em 0.16em;
+        font-weight: 900;
+        line-height: 0.95;
+        text-align: center;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        transform: rotate(-8deg);
+        /* Encre irrégulière, comme un vrai tampon. */
+        -webkit-mask-image: radial-gradient(circle at 30% 40%, #000 55%, rgba(0, 0, 0, 0.82) 70%, #000 85%);
+        mask-image: radial-gradient(circle at 30% 40%, #000 55%, rgba(0, 0, 0, 0.82) 70%, #000 85%);
+      }
+      .stamp .q {
+        color: #fff;
+        background: #e5382b;
+        border-radius: 0.12em;
+        padding: 0 0.12em;
+        margin-left: 0.06em;
+      }
+
+      /* Photo de profil (1080 × 1080, lisible même en tout petit dans un rond). */
+      #profil {
+        width: 1080px;
+        height: 1080px;
+        background: radial-gradient(circle at 50% 42%, #3a2a20 0%, #120d0a 70%);
+      }
+      #profil .folder {
+        position: absolute;
+        left: 170px;
+        top: 250px;
+        width: 740px;
+        height: 560px;
+        background: #c9a46a;
+        border-radius: 26px;
+        transform: rotate(4deg);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      }
+      #profil .folder::before {
+        content: '';
+        position: absolute;
+        left: 40px;
+        top: -46px;
+        width: 260px;
+        height: 70px;
+        background: #c9a46a;
+        border-radius: 20px 20px 0 0;
+      }
+      #profil .folder::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 26px;
+        background: repeating-linear-gradient(0deg, transparent 0 58px, rgba(0, 0, 0, 0.05) 58px 60px);
+      }
+      #profil .center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #profil .stamp {
+        font-size: 150px;
+        background: rgba(255, 248, 236, 0.92);
+      }
+
+      /* Bandeau discret en haut de la vidéo (calque transparent 1080 × 1920). */
+      #bandeau,
+      #fin {
+        width: 1080px;
+        height: 1920px;
+      }
+      #bandeau .stamp {
+        position: absolute;
+        left: 50%;
+        top: 12px;
+        font-size: 30px;
+        background: rgba(255, 248, 236, 0.95);
+        transform: translateX(-50%) rotate(-3deg);
+        border-width: 4px;
+      }
+      #bandeau .stamp br {
+        display: none;
+      }
+
+      /* Signature de fin : le tampon en grand, et le pseudo. */
+      #fin .stamp {
+        position: absolute;
+        left: 50%;
+        top: 905px;
+        font-size: 52px;
+        background: rgba(255, 248, 236, 0.96);
+        transform: translateX(-50%) rotate(-6deg);
+      }
+      #fin .stamp br {
+        display: none;
+      }
+      #fin .handle {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1010px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 900;
+        color: #fff;
+        -webkit-text-stroke: 10px #1f2430;
+        paint-order: stroke fill;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="profil" class="view">
+      <div class="folder"></div>
+      <div class="center"><div class="stamp">AFFAIRE<br /> CLASSÉE <span class="q">?</span></div></div>
+    </div>
+    <div id="bandeau" class="view"><div class="stamp">AFFAIRE<br /> CLASSÉE <span class="q">?</span></div></div>
+    <div id="fin" class="view">
+      <div class="stamp">AFFAIRE<br /> CLASSÉE <span class="q">?</span></div>
+      <div class="handle">@affaireclassee0</div>
+    </div>
+    <script>
+      document.body.dataset.v = new URLSearchParams(location.search).get('v') || 'profil'
+    </script>
+  </body>
+</html>

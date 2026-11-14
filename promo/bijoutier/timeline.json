@@ -1,0 +1,1357 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 78.63,
+ "lines": [
+  {
+   "id": "01-coups",
+   "who": "narrateur",
+   "text": "Trois coups de feu. Dans le dos d'un garçon de 19 ans… qui s'enfuyait.",
+   "start": 0.25,
+   "dur": 2.776,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 0.36
+    },
+    {
+     "w": "coups",
+     "t": 0.47
+    },
+    {
+     "w": "de",
+     "t": 0.69
+    },
+    {
+     "w": "feu.",
+     "t": 0.69
+    },
+    {
+     "w": "Dans",
+     "t": 0.89
+    },
+    {
+     "w": "le",
+     "t": 1.17
+    },
+    {
+     "w": "dos",
+     "t": 1.27
+    },
+    {
+     "w": "d'un",
+     "t": 1.41
+    },
+    {
+     "w": "garçon",
+     "t": 1.55
+    },
+    {
+     "w": "de",
+     "t": 1.85
+    },
+    {
+     "w": "19",
+     "t": 1.97
+    },
+    {
+     "w": "ans…",
+     "t": 2.27
+    },
+    {
+     "w": "qui",
+     "t": 2.51
+    },
+    {
+     "w": "s'enfuyait.",
+     "t": 2.857
+    }
+   ]
+  },
+  {
+   "id": "02-braquage",
+   "who": "narrateur",
+   "text": "Deux minutes plus tôt, ce garçon braquait une bijouterie. Une arme pointée sur le front du bijoutier.",
+   "start": 3.326,
+   "dur": 4.529,
+   "words": [
+    {
+     "w": "Deux",
+     "t": 3.503
+    },
+    {
+     "w": "minutes",
+     "t": 3.85
+    },
+    {
+     "w": "plus",
+     "t": 3.97
+    },
+    {
+     "w": "tôt,",
+     "t": 4.19
+    },
+    {
+     "w": "ce",
+     "t": 4.69
+    },
+    {
+     "w": "garçon",
+     "t": 4.79
+    },
+    {
+     "w": "braquait",
+     "t": 5.09
+    },
+    {
+     "w": "une",
+     "t": 5.41
+    },
+    {
+     "w": "bijouterie.",
+     "t": 5.51
+    },
+    {
+     "w": "Une",
+     "t": 6.09
+    },
+    {
+     "w": "arme",
+     "t": 6.21
+    },
+    {
+     "w": "pointée",
+     "t": 6.45
+    },
+    {
+     "w": "sur",
+     "t": 6.83
+    },
+    {
+     "w": "le",
+     "t": 6.97
+    },
+    {
+     "w": "front",
+     "t": 7.07
+    },
+    {
+     "w": "du",
+     "t": 7.27
+    },
+    {
+     "w": "bijoutier.",
+     "t": 7.43
+    }
+   ]
+  },
+  {
+   "id": "03-jouet",
+   "who": "narrateur",
+   "text": "L'arme était un jouet. Le garçon est mort. Aujourd'hui, c'est le bijoutier qui est jugé pour meurtre.",
+   "start": 8.105,
+   "dur": 4.505,
+   "words": [
+    {
+     "w": "L'arme",
+     "t": 8.11
+    },
+    {
+     "w": "était",
+     "t": 8.54
+    },
+    {
+     "w": "un",
+     "t": 8.74
+    },
+    {
+     "w": "jouet.",
+     "t": 8.9
+    },
+    {
+     "w": "Le",
+     "t": 9.36
+    },
+    {
+     "w": "garçon",
+     "t": 9.44
+    },
+    {
+     "w": "est",
+     "t": 9.74
+    },
+    {
+     "w": "mort.",
+     "t": 9.86
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 10.253
+    },
+    {
+     "w": "c'est",
+     "t": 10.647
+    },
+    {
+     "w": "le",
+     "t": 11.04
+    },
+    {
+     "w": "bijoutier",
+     "t": 11.12
+    },
+    {
+     "w": "qui",
+     "t": 11.56
+    },
+    {
+     "w": "est",
+     "t": 11.68
+    },
+    {
+     "w": "jugé",
+     "t": 11.78
+    },
+    {
+     "w": "pour",
+     "t": 12.04
+    },
+    {
+     "w": "meurtre.",
+     "t": 12.18
+    }
+   ]
+  },
+  {
+   "id": "04-danger",
+   "who": "procureur",
+   "text": "Il ne se défendait plus. Le voleur s'enfuyait. Le danger était derrière lui… et il a tiré quand même.",
+   "start": 12.91,
+   "dur": 3.86,
+   "words": [
+    {
+     "w": "Il",
+     "t": 12.91
+    },
+    {
+     "w": "ne",
+     "t": 13.01
+    },
+    {
+     "w": "se",
+     "t": 13.13
+    },
+    {
+     "w": "défendait",
+     "t": 13.23
+    },
+    {
+     "w": "plus.",
+     "t": 13.57
+    },
+    {
+     "w": "Le",
+     "t": 13.87
+    },
+    {
+     "w": "voleur",
+     "t": 13.97
+    },
+    {
+     "w": "s'enfuyait.",
+     "t": 14.37
+    },
+    {
+     "w": "Le",
+     "t": 14.77
+    },
+    {
+     "w": "danger",
+     "t": 14.85
+    },
+    {
+     "w": "était",
+     "t": 15.07
+    },
+    {
+     "w": "derrière",
+     "t": 15.23
+    },
+    {
+     "w": "lui…",
+     "t": 15.43
+    },
+    {
+     "w": "et",
+     "t": 15.85
+    },
+    {
+     "w": "il",
+     "t": 15.93
+    },
+    {
+     "w": "a",
+     "t": 16.01
+    },
+    {
+     "w": "tiré",
+     "t": 16.09
+    },
+    {
+     "w": "quand",
+     "t": 16.35
+    },
+    {
+     "w": "même.",
+     "t": 16.49
+    }
+   ]
+  },
+  {
+   "id": "05-crosse",
+   "who": "avocate",
+   "text": "Le danger, derrière lui ? Il y a un an, deux hommes l'ont frappé à coups de crosse dans cette même boutique. Pour lui, le danger n'est jamais parti.",
+   "start": 16.87,
+   "dur": 6.59,
+   "words": [
+    {
+     "w": "Le",
+     "t": 16.87
+    },
+    {
+     "w": "danger,",
+     "t": 17.01
+    },
+    {
+     "w": "derrière",
+     "t": 17.53
+    },
+    {
+     "w": "lui ?",
+     "t": 17.73
+    },
+    {
+     "w": "Il",
+     "t": 18.13
+    },
+    {
+     "w": "y",
+     "t": 18.23
+    },
+    {
+     "w": "a",
+     "t": 18.35
+    },
+    {
+     "w": "un",
+     "t": 18.35
+    },
+    {
+     "w": "an,",
+     "t": 18.53
+    },
+    {
+     "w": "deux",
+     "t": 19.01
+    },
+    {
+     "w": "hommes",
+     "t": 19.17
+    },
+    {
+     "w": "l'ont",
+     "t": 19.32
+    },
+    {
+     "w": "frappé",
+     "t": 19.47
+    },
+    {
+     "w": "à",
+     "t": 19.79
+    },
+    {
+     "w": "coups",
+     "t": 19.91
+    },
+    {
+     "w": "de",
+     "t": 20.13
+    },
+    {
+     "w": "crosse",
+     "t": 20.15
+    },
+    {
+     "w": "dans",
+     "t": 20.49
+    },
+    {
+     "w": "cette",
+     "t": 20.61
+    },
+    {
+     "w": "même",
+     "t": 20.77
+    },
+    {
+     "w": "boutique.",
+     "t": 20.97
+    },
+    {
+     "w": "Pour",
+     "t": 21.61
+    },
+    {
+     "w": "lui,",
+     "t": 21.71
+    },
+    {
+     "w": "le",
+     "t": 22.29
+    },
+    {
+     "w": "danger",
+     "t": 22.37
+    },
+    {
+     "w": "n'est",
+     "t": 22.57
+    },
+    {
+     "w": "jamais",
+     "t": 22.77
+    },
+    {
+     "w": "parti.",
+     "t": 22.95
+    }
+   ]
+  },
+  {
+   "id": "06-fusil",
+   "who": "procureur",
+   "text": "Alors depuis un an, il cachait un fusil chargé sous son comptoir. Sans permis. Ce n'est plus de la peur. C'est une préparation.",
+   "start": 23.56,
+   "dur": 4.83,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 23.59
+    },
+    {
+     "w": "depuis",
+     "t": 23.73
+    },
+    {
+     "w": "un",
+     "t": 23.95
+    },
+    {
+     "w": "an,",
+     "t": 24.13
+    },
+    {
+     "w": "il",
+     "t": 24.41
+    },
+    {
+     "w": "cachait",
+     "t": 24.43
+    },
+    {
+     "w": "un",
+     "t": 24.71
+    },
+    {
+     "w": "fusil",
+     "t": 24.79
+    },
+    {
+     "w": "chargé",
+     "t": 25.05
+    },
+    {
+     "w": "sous",
+     "t": 25.37
+    },
+    {
+     "w": "son",
+     "t": 25.49
+    },
+    {
+     "w": "comptoir.",
+     "t": 25.63
+    },
+    {
+     "w": "Sans",
+     "t": 26.15
+    },
+    {
+     "w": "permis.",
+     "t": 26.29
+    },
+    {
+     "w": "Ce",
+     "t": 26.81
+    },
+    {
+     "w": "n'est",
+     "t": 26.9
+    },
+    {
+     "w": "plus",
+     "t": 26.99
+    },
+    {
+     "w": "de",
+     "t": 27.09
+    },
+    {
+     "w": "la",
+     "t": 27.13
+    },
+    {
+     "w": "peur.",
+     "t": 27.23
+    },
+    {
+     "w": "C'est",
+     "t": 27.51
+    },
+    {
+     "w": "une",
+     "t": 27.79
+    },
+    {
+     "w": "préparation.",
+     "t": 27.89
+    }
+   ]
+  },
+  {
+   "id": "07-quatorze",
+   "who": "avocate",
+   "text": "Une préparation ? Après son agression, il a appelé la police 14 fois. 14. On lui a conseillé… d'installer une alarme.",
+   "start": 28.49,
+   "dur": 6.53,
+   "words": [
+    {
+     "w": "Une",
+     "t": 28.51
+    },
+    {
+     "w": "préparation ?",
+     "t": 28.63
+    },
+    {
+     "w": "Après",
+     "t": 29.35
+    },
+    {
+     "w": "son",
+     "t": 29.51
+    },
+    {
+     "w": "agression,",
+     "t": 29.67
+    },
+    {
+     "w": "il",
+     "t": 30.53
+    },
+    {
+     "w": "a",
+     "t": 30.53
+    },
+    {
+     "w": "appelé",
+     "t": 30.63
+    },
+    {
+     "w": "la",
+     "t": 30.83
+    },
+    {
+     "w": "police",
+     "t": 30.95
+    },
+    {
+     "w": "14",
+     "t": 31.13
+    },
+    {
+     "w": "fois.",
+     "t": 31.63
+    },
+    {
+     "w": "14.",
+     "t": 32.15
+    },
+    {
+     "w": "On",
+     "t": 32.91
+    },
+    {
+     "w": "lui",
+     "t": 32.99
+    },
+    {
+     "w": "a",
+     "t": 33.09
+    },
+    {
+     "w": "conseillé…",
+     "t": 33.17
+    },
+    {
+     "w": "d'installer",
+     "t": 33.79
+    },
+    {
+     "w": "une",
+     "t": 34.41
+    },
+    {
+     "w": "alarme.",
+     "t": 34.59
+    }
+   ]
+  },
+  {
+   "id": "08-execution",
+   "who": "procureur",
+   "text": "Une alarme. Pas un fusil. Le garçon était à 12 mètres, de dos, en train de courir. Ce n'est pas de la légitime défense. C'est une exécution.",
+   "start": 35.12,
+   "dur": 5.17,
+   "words": [
+    {
+     "w": "Une",
+     "t": 35.17
+    },
+    {
+     "w": "alarme.",
+     "t": 35.27
+    },
+    {
+     "w": "Pas",
+     "t": 35.75
+    },
+    {
+     "w": "un",
+     "t": 35.87
+    },
+    {
+     "w": "fusil.",
+     "t": 35.99
+    },
+    {
+     "w": "Le",
+     "t": 36.43
+    },
+    {
+     "w": "garçon",
+     "t": 36.49
+    },
+    {
+     "w": "était",
+     "t": 36.73
+    },
+    {
+     "w": "à",
+     "t": 36.87
+    },
+    {
+     "w": "12",
+     "t": 36.95
+    },
+    {
+     "w": "mètres,",
+     "t": 37.09
+    },
+    {
+     "w": "de",
+     "t": 37.35
+    },
+    {
+     "w": "dos,",
+     "t": 37.53
+    },
+    {
+     "w": "en",
+     "t": 37.69
+    },
+    {
+     "w": "train",
+     "t": 37.85
+    },
+    {
+     "w": "de",
+     "t": 37.95
+    },
+    {
+     "w": "courir.",
+     "t": 38.05
+    },
+    {
+     "w": "Ce",
+     "t": 38.35
+    },
+    {
+     "w": "n'est",
+     "t": 38.44
+    },
+    {
+     "w": "pas",
+     "t": 38.53
+    },
+    {
+     "w": "de",
+     "t": 38.61
+    },
+    {
+     "w": "la",
+     "t": 38.67
+    },
+    {
+     "w": "légitime",
+     "t": 38.73
+    },
+    {
+     "w": "défense.",
+     "t": 39.03
+    },
+    {
+     "w": "C'est",
+     "t": 39.37
+    },
+    {
+     "w": "une",
+     "t": 39.71
+    },
+    {
+     "w": "exécution.",
+     "t": 39.83
+    }
+   ]
+  },
+  {
+   "id": "09-retourne",
+   "who": "avocate",
+   "text": "De dos… aux deux premiers tirs. Au troisième, il s'est retourné. Le bijoutier a vu une arme se lever vers lui. Un jouet, oui. Mais ça, il ne pouvait pas le savoir.",
+   "start": 40.39,
+   "dur": 8.04,
+   "words": [
+    {
+     "w": "De",
+     "t": 40.43
+    },
+    {
+     "w": "dos…",
+     "t": 40.61
+    },
+    {
+     "w": "aux",
+     "t": 40.738
+    },
+    {
+     "w": "deux",
+     "t": 40.866
+    },
+    {
+     "w": "premiers",
+     "t": 40.994
+    },
+    {
+     "w": "tirs.",
+     "t": 41.122
+    },
+    {
+     "w": "Au",
+     "t": 41.25
+    },
+    {
+     "w": "troisième,",
+     "t": 42.18
+    },
+    {
+     "w": "il",
+     "t": 43.11
+    },
+    {
+     "w": "s'est",
+     "t": 43.23
+    },
+    {
+     "w": "retourné.",
+     "t": 43.35
+    },
+    {
+     "w": "Le",
+     "t": 43.93
+    },
+    {
+     "w": "bijoutier",
+     "t": 44.01
+    },
+    {
+     "w": "a",
+     "t": 44.41
+    },
+    {
+     "w": "vu",
+     "t": 44.55
+    },
+    {
+     "w": "une",
+     "t": 44.67
+    },
+    {
+     "w": "arme",
+     "t": 44.81
+    },
+    {
+     "w": "se",
+     "t": 45.03
+    },
+    {
+     "w": "lever",
+     "t": 45.19
+    },
+    {
+     "w": "vers",
+     "t": 45.35
+    },
+    {
+     "w": "lui.",
+     "t": 45.59
+    },
+    {
+     "w": "Un",
+     "t": 45.91
+    },
+    {
+     "w": "jouet,",
+     "t": 46.07
+    },
+    {
+     "w": "oui.",
+     "t": 46.49
+    },
+    {
+     "w": "Mais",
+     "t": 46.85
+    },
+    {
+     "w": "ça,",
+     "t": 46.97
+    },
+    {
+     "w": "il",
+     "t": 47.45
+    },
+    {
+     "w": "ne",
+     "t": 47.55
+    },
+    {
+     "w": "pouvait",
+     "t": 47.65
+    },
+    {
+     "w": "pas",
+     "t": 47.81
+    },
+    {
+     "w": "le",
+     "t": 47.97
+    },
+    {
+     "w": "savoir.",
+     "t": 48.03
+    }
+   ]
+  },
+  {
+   "id": "10-balles",
+   "who": "procureur",
+   "text": "Il s'est retourné parce qu'on venait de lui tirer deux balles dans le dos. N'importe qui se serait retourné.",
+   "start": 48.53,
+   "dur": 3.93,
+   "words": [
+    {
+     "w": "Il",
+     "t": 48.55
+    },
+    {
+     "w": "s'est",
+     "t": 48.67
+    },
+    {
+     "w": "retourné",
+     "t": 48.79
+    },
+    {
+     "w": "parce",
+     "t": 49.19
+    },
+    {
+     "w": "qu'on",
+     "t": 49.39
+    },
+    {
+     "w": "venait",
+     "t": 49.59
+    },
+    {
+     "w": "de",
+     "t": 49.77
+    },
+    {
+     "w": "lui",
+     "t": 49.85
+    },
+    {
+     "w": "tirer",
+     "t": 49.95
+    },
+    {
+     "w": "deux",
+     "t": 50.14
+    },
+    {
+     "w": "balles",
+     "t": 50.33
+    },
+    {
+     "w": "dans",
+     "t": 50.53
+    },
+    {
+     "w": "le",
+     "t": 50.65
+    },
+    {
+     "w": "dos.",
+     "t": 50.73
+    },
+    {
+     "w": "N'importe",
+     "t": 51.0
+    },
+    {
+     "w": "qui",
+     "t": 51.27
+    },
+    {
+     "w": "se",
+     "t": 51.57
+    },
+    {
+     "w": "serait",
+     "t": 51.73
+    },
+    {
+     "w": "retourné.",
+     "t": 51.93
+    }
+   ]
+  },
+  {
+   "id": "11-importe",
+   "who": "avocate",
+   "text": "Et n'importe qui, avec une arme sur le front deux minutes plus tôt, aurait cru qu'il allait tirer.",
+   "start": 52.56,
+   "dur": 4.31,
+   "words": [
+    {
+     "w": "Et",
+     "t": 52.74
+    },
+    {
+     "w": "n'importe",
+     "t": 52.93
+    },
+    {
+     "w": "qui,",
+     "t": 53.12
+    },
+    {
+     "w": "avec",
+     "t": 53.72
+    },
+    {
+     "w": "une",
+     "t": 53.88
+    },
+    {
+     "w": "arme",
+     "t": 54.08
+    },
+    {
+     "w": "sur",
+     "t": 54.24
+    },
+    {
+     "w": "le",
+     "t": 54.4
+    },
+    {
+     "w": "front",
+     "t": 54.54
+    },
+    {
+     "w": "deux",
+     "t": 54.76
+    },
+    {
+     "w": "minutes",
+     "t": 54.98
+    },
+    {
+     "w": "plus",
+     "t": 55.12
+    },
+    {
+     "w": "tôt,",
+     "t": 55.34
+    },
+    {
+     "w": "aurait",
+     "t": 55.82
+    },
+    {
+     "w": "cru",
+     "t": 55.96
+    },
+    {
+     "w": "qu'il",
+     "t": 56.14
+    },
+    {
+     "w": "allait",
+     "t": 56.32
+    },
+    {
+     "w": "tirer.",
+     "t": 56.48
+    }
+   ]
+  },
+  {
+   "id": "12-premier",
+   "who": "procureur",
+   "text": "Ce garçon n'avait jamais été condamné. C'était son premier vol. Il méritait un procès… pas trois balles.",
+   "start": 56.97,
+   "dur": 3.92,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 57.03
+    },
+    {
+     "w": "garçon",
+     "t": 57.11
+    },
+    {
+     "w": "n'avait",
+     "t": 57.3
+    },
+    {
+     "w": "jamais",
+     "t": 57.49
+    },
+    {
+     "w": "été",
+     "t": 57.65
+    },
+    {
+     "w": "condamné.",
+     "t": 57.83
+    },
+    {
+     "w": "C'était",
+     "t": 58.18
+    },
+    {
+     "w": "son",
+     "t": 58.53
+    },
+    {
+     "w": "premier",
+     "t": 58.69
+    },
+    {
+     "w": "vol.",
+     "t": 58.89
+    },
+    {
+     "w": "Il",
+     "t": 59.31
+    },
+    {
+     "w": "méritait",
+     "t": 59.41
+    },
+    {
+     "w": "un",
+     "t": 59.71
+    },
+    {
+     "w": "procès…",
+     "t": 59.81
+    },
+    {
+     "w": "pas",
+     "t": 60.27
+    },
+    {
+     "w": "trois",
+     "t": 60.39
+    },
+    {
+     "w": "balles.",
+     "t": 60.51
+    }
+   ]
+  },
+  {
+   "id": "13-choisi",
+   "who": "avocate",
+   "text": "Ce garçon a choisi de coller une arme sur le front d'un homme. Ce soir-là, c'est lui qui a décidé que la vie d'un autre ne comptait pas.",
+   "start": 61.04,
+   "dur": 6.18,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 61.09
+    },
+    {
+     "w": "garçon",
+     "t": 61.27
+    },
+    {
+     "w": "a",
+     "t": 61.59
+    },
+    {
+     "w": "choisi",
+     "t": 61.73
+    },
+    {
+     "w": "de",
+     "t": 61.99
+    },
+    {
+     "w": "coller",
+     "t": 62.09
+    },
+    {
+     "w": "une",
+     "t": 62.33
+    },
+    {
+     "w": "arme",
+     "t": 62.51
+    },
+    {
+     "w": "sur",
+     "t": 62.77
+    },
+    {
+     "w": "le",
+     "t": 62.95
+    },
+    {
+     "w": "front",
+     "t": 63.09
+    },
+    {
+     "w": "d'un",
+     "t": 63.26
+    },
+    {
+     "w": "homme.",
+     "t": 63.43
+    },
+    {
+     "w": "Ce",
+     "t": 63.67
+    },
+    {
+     "w": "soir-là,",
+     "t": 64.037
+    },
+    {
+     "w": "c'est",
+     "t": 64.403
+    },
+    {
+     "w": "lui",
+     "t": 64.77
+    },
+    {
+     "w": "qui",
+     "t": 64.93
+    },
+    {
+     "w": "a",
+     "t": 65.21
+    },
+    {
+     "w": "décidé",
+     "t": 65.29
+    },
+    {
+     "w": "que",
+     "t": 65.55
+    },
+    {
+     "w": "la",
+     "t": 65.73
+    },
+    {
+     "w": "vie",
+     "t": 65.85
+    },
+    {
+     "w": "d'un",
+     "t": 65.98
+    },
+    {
+     "w": "autre",
+     "t": 66.11
+    },
+    {
+     "w": "ne",
+     "t": 66.37
+    },
+    {
+     "w": "comptait",
+     "t": 66.63
+    },
+    {
+     "w": "pas.",
+     "t": 66.91
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Légitime défense… ou meurtre ? Coupable… ou non coupable ?",
+   "start": 67.82,
+   "dur": 4.03,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 67.9
+    },
+    {
+     "w": "es",
+     "t": 67.98
+    },
+    {
+     "w": "le",
+     "t": 68.04
+    },
+    {
+     "w": "juré.",
+     "t": 68.16
+    },
+    {
+     "w": "Légitime",
+     "t": 68.7
+    },
+    {
+     "w": "défense…",
+     "t": 69.02
+    },
+    {
+     "w": "ou",
+     "t": 69.6
+    },
+    {
+     "w": "meurtre ?",
+     "t": 69.88
+    },
+    {
+     "w": "Coupable…",
+     "t": 70.44
+    },
+    {
+     "w": "ou",
+     "t": 70.84
+    },
+    {
+     "w": "non",
+     "t": 71.14
+    },
+    {
+     "w": "coupable ?",
+     "t": 71.3
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 72.25,
+   "dur": 3.38,
+   "words": [
+    {
+     "w": "Le",
+     "t": 72.36
+    },
+    {
+     "w": "verdict",
+     "t": 72.42
+    },
+    {
+     "w": "tombe",
+     "t": 72.66
+    },
+    {
+     "w": "dans",
+     "t": 73.22
+    },
+    {
+     "w": "la",
+     "t": 73.38
+    },
+    {
+     "w": "prochaine",
+     "t": 73.48
+    },
+    {
+     "w": "vidéo.",
+     "t": 73.74
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 74.25
+    },
+    {
+     "w": "pour",
+     "t": 74.76
+    },
+    {
+     "w": "ne",
+     "t": 74.94
+    },
+    {
+     "w": "pas",
+     "t": 75.02
+    },
+    {
+     "w": "le",
+     "t": 75.16
+    },
+    {
+     "w": "rater.",
+     "t": 75.2
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1003 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 73.45,
+ "lines": [
+  {
+   "id": "01-pere",
+   "who": "pere",
+   "text": "Lâche-le ! Lâche mon fils, sale bête !",
+   "start": 1.5,
+   "dur": 3.75,
+   "words": [
+    {
+     "w": "Lâche-le !",
+     "t": 1.5
+    },
+    {
+     "w": "Lâche",
+     "t": 1.5
+    },
+    {
+     "w": "mon",
+     "t": 3.72
+    },
+    {
+     "w": "fils,",
+     "t": 3.88
+    },
+    {
+     "w": "sale",
+     "t": 4.38
+    },
+    {
+     "w": "bête !",
+     "t": 4.56
+    }
+   ]
+  },
+  {
+   "id": "02-morsure",
+   "who": "narrateur",
+   "text": "Ce jour-là, Rocky, un american staff, mord Nathan, 6 ans, au bras. Son père attrape une pelle.",
+   "start": 7.15,
+   "dur": 5.67,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 7.15
+    },
+    {
+     "w": "jour-là,",
+     "t": 7.51
+    },
+    {
+     "w": "Rocky,",
+     "t": 7.89
+    },
+    {
+     "w": "un",
+     "t": 8.55
+    },
+    {
+     "w": "american",
+     "t": 8.67
+    },
+    {
+     "w": "staff,",
+     "t": 8.95
+    },
+    {
+     "w": "mord",
+     "t": 9.33
+    },
+    {
+     "w": "Nathan,",
+     "t": 9.71
+    },
+    {
+     "w": "6",
+     "t": 10.09
+    },
+    {
+     "w": "ans,",
+     "t": 10.47
+    },
+    {
+     "w": "au",
+     "t": 10.67
+    },
+    {
+     "w": "bras.",
+     "t": 10.91
+    },
+    {
+     "w": "Son",
+     "t": 11.37
+    },
+    {
+     "w": "père",
+     "t": 11.49
+    },
+    {
+     "w": "attrape",
+     "t": 11.75
+    },
+    {
+     "w": "une",
+     "t": 12.23
+    },
+    {
+     "w": "pelle.",
+     "t": 12.33
+    }
+   ]
+  },
+  {
+   "id": "03-onze",
+   "who": "narrateur",
+   "text": "Le chien avait lâché. Il s'enfuyait. Le père l'a frappé onze fois. Rocky est mort. Aujourd'hui, c'est le père qui est jugé.",
+   "start": 13.17,
+   "dur": 6.29,
+   "words": [
+    {
+     "w": "Le",
+     "t": 13.17
+    },
+    {
+     "w": "chien",
+     "t": 13.32
+    },
+    {
+     "w": "avait",
+     "t": 13.62
+    },
+    {
+     "w": "lâché.",
+     "t": 13.78
+    },
+    {
+     "w": "Il",
+     "t": 14.36
+    },
+    {
+     "w": "s'enfuyait.",
+     "t": 14.77
+    },
+    {
+     "w": "Le",
+     "t": 15.18
+    },
+    {
+     "w": "père",
+     "t": 15.28
+    },
+    {
+     "w": "l'a",
+     "t": 15.45
+    },
+    {
+     "w": "frappé",
+     "t": 15.62
+    },
+    {
+     "w": "onze",
+     "t": 15.9
+    },
+    {
+     "w": "fois.",
+     "t": 16.18
+    },
+    {
+     "w": "Rocky",
+     "t": 16.7
+    },
+    {
+     "w": "est",
+     "t": 16.92
+    },
+    {
+     "w": "mort.",
+     "t": 17.12
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 17.56
+    },
+    {
+     "w": "c'est",
+     "t": 18.0
+    },
+    {
+     "w": "le",
+     "t": 18.44
+    },
+    {
+     "w": "père",
+     "t": 18.52
+    },
+    {
+     "w": "qui",
+     "t": 18.76
+    },
+    {
+     "w": "est",
+     "t": 18.94
+    },
+    {
+     "w": "jugé.",
+     "t": 19.04
+    }
+   ]
+  },
+  {
+   "id": "04-rage",
+   "who": "procureur",
+   "text": "Défendre son fils, oui. Achever un animal qui fuit, non. Le premier coup, c'est un réflexe. Le onzième, c'est de la rage.",
+   "start": 19.91,
+   "dur": 6.577,
+   "words": [
+    {
+     "w": "Défendre",
+     "t": 19.91
+    },
+    {
+     "w": "son",
+     "t": 20.35
+    },
+    {
+     "w": "fils,",
+     "t": 20.51
+    },
+    {
+     "w": "oui.",
+     "t": 21.05
+    },
+    {
+     "w": "Achever",
+     "t": 21.43
+    },
+    {
+     "w": "un",
+     "t": 21.69
+    },
+    {
+     "w": "animal",
+     "t": 21.81
+    },
+    {
+     "w": "qui",
+     "t": 22.05
+    },
+    {
+     "w": "fuit,",
+     "t": 22.25
+    },
+    {
+     "w": "non.",
+     "t": 22.67
+    },
+    {
+     "w": "Le",
+     "t": 23.11
+    },
+    {
+     "w": "premier",
+     "t": 23.19
+    },
+    {
+     "w": "coup,",
+     "t": 23.43
+    },
+    {
+     "w": "c'est",
+     "t": 23.72
+    },
+    {
+     "w": "un",
+     "t": 24.01
+    },
+    {
+     "w": "réflexe.",
+     "t": 24.13
+    },
+    {
+     "w": "Le",
+     "t": 24.75
+    },
+    {
+     "w": "onzième,",
+     "t": 24.85
+    },
+    {
+     "w": "c'est",
+     "t": 25.33
+    },
+    {
+     "w": "de",
+     "t": 25.81
+    },
+    {
+     "w": "la",
+     "t": 25.87
+    },
+    {
+     "w": "rage.",
+     "t": 25.97
+    }
+   ]
+  },
+  {
+   "id": "05-points",
+   "who": "avocate",
+   "text": "De la rage ? Son fils a 14 points de suture au bras. Vous auriez compté les coups, vous, Maître ?",
+   "start": 26.687,
+   "dur": 4.15,
+   "words": [
+    {
+     "w": "De",
+     "t": 26.687
+    },
+    {
+     "w": "la",
+     "t": 26.847
+    },
+    {
+     "w": "rage ?",
+     "t": 26.967
+    },
+    {
+     "w": "Son",
+     "t": 27.427
+    },
+    {
+     "w": "fils",
+     "t": 27.647
+    },
+    {
+     "w": "a",
+     "t": 27.827
+    },
+    {
+     "w": "14",
+     "t": 27.967
+    },
+    {
+     "w": "points",
+     "t": 28.227
+    },
+    {
+     "w": "de",
+     "t": 28.427
+    },
+    {
+     "w": "suture",
+     "t": 28.547
+    },
+    {
+     "w": "au",
+     "t": 28.807
+    },
+    {
+     "w": "bras.",
+     "t": 28.867
+    },
+    {
+     "w": "Vous",
+     "t": 29.247
+    },
+    {
+     "w": "auriez",
+     "t": 29.327
+    },
+    {
+     "w": "compté",
+     "t": 29.587
+    },
+    {
+     "w": "les",
+     "t": 29.887
+    },
+    {
+     "w": "coups,",
+     "t": 29.967
+    },
+    {
+     "w": "vous,",
+     "t": 30.227
+    },
+    {
+     "w": "Maître ?",
+     "t": 30.387
+    }
+   ]
+  },
+  {
+   "id": "06-queue",
+   "who": "procureur",
+   "text": "Moi, j'aurais vu que le chien s'enfuyait. Avec la queue entre les pattes.",
+   "start": 31.037,
+   "dur": 3.457,
+   "words": [
+    {
+     "w": "Moi,",
+     "t": 31.037
+    },
+    {
+     "w": "j'aurais",
+     "t": 31.387
+    },
+    {
+     "w": "vu",
+     "t": 31.807
+    },
+    {
+     "w": "que",
+     "t": 31.967
+    },
+    {
+     "w": "le",
+     "t": 32.067
+    },
+    {
+     "w": "chien",
+     "t": 32.167
+    },
+    {
+     "w": "s'enfuyait.",
+     "t": 32.567
+    },
+    {
+     "w": "Avec",
+     "t": 32.967
+    },
+    {
+     "w": "la",
+     "t": 33.207
+    },
+    {
+     "w": "queue",
+     "t": 33.427
+    },
+    {
+     "w": "entre",
+     "t": 33.667
+    },
+    {
+     "w": "les",
+     "t": 33.867
+    },
+    {
+     "w": "pattes.",
+     "t": 34.027
+    }
+   ]
+  },
+  {
+   "id": "07-ecole",
+   "who": "avocate",
+   "text": "Il s'enfuyait… vers l'école maternelle, à 50 mètres. Vous préfériez qu'il finisse le travail là-bas ?",
+   "start": 34.694,
+   "dur": 4.59,
+   "words": [
+    {
+     "w": "Il",
+     "t": 34.694
+    },
+    {
+     "w": "s'enfuyait…",
+     "t": 35.114
+    },
+    {
+     "w": "vers",
+     "t": 35.654
+    },
+    {
+     "w": "l'école",
+     "t": 35.884
+    },
+    {
+     "w": "maternelle,",
+     "t": 36.114
+    },
+    {
+     "w": "à",
+     "t": 36.594
+    },
+    {
+     "w": "50",
+     "t": 36.874
+    },
+    {
+     "w": "mètres.",
+     "t": 37.134
+    },
+    {
+     "w": "Vous",
+     "t": 37.614
+    },
+    {
+     "w": "préfériez",
+     "t": 37.714
+    },
+    {
+     "w": "qu'il",
+     "t": 37.984
+    },
+    {
+     "w": "finisse",
+     "t": 38.254
+    },
+    {
+     "w": "le",
+     "t": 38.534
+    },
+    {
+     "w": "travail",
+     "t": 38.614
+    },
+    {
+     "w": "là-bas ?",
+     "t": 39.01
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Père héroïque ou bourreau ? Like si ça te fait réagir.",
+   "start": 39.684,
+   "dur": 3.14,
+   "words": [
+    {
+     "w": "Père",
+     "t": 39.684
+    },
+    {
+     "w": "héroïque",
+     "t": 39.944
+    },
+    {
+     "w": "ou",
+     "t": 40.524
+    },
+    {
+     "w": "bourreau ?",
+     "t": 40.804
+    },
+    {
+     "w": "Like",
+     "t": 41.404
+    },
+    {
+     "w": "si",
+     "t": 41.684
+    },
+    {
+     "w": "ça",
+     "t": 41.924
+    },
+    {
+     "w": "te",
+     "t": 42.044
+    },
+    {
+     "w": "fait",
+     "t": 42.084
+    },
+    {
+     "w": "réagir.",
+     "t": 42.204
+    }
+   ]
+  },
+  {
+   "id": "09-jamais",
+   "who": "procureur",
+   "text": "Ce chien n'avait jamais mordu personne. Sa propriétaire le promenait tous les jours. Il était vacciné, déclaré, assuré.",
+   "start": 43.224,
+   "dur": 5.68,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 43.224
+    },
+    {
+     "w": "chien",
+     "t": 43.414
+    },
+    {
+     "w": "n'avait",
+     "t": 43.624
+    },
+    {
+     "w": "jamais",
+     "t": 43.834
+    },
+    {
+     "w": "mordu",
+     "t": 44.134
+    },
+    {
+     "w": "personne.",
+     "t": 44.434
+    },
+    {
+     "w": "Sa",
+     "t": 44.994
+    },
+    {
+     "w": "propriétaire",
+     "t": 45.094
+    },
+    {
+     "w": "le",
+     "t": 45.614
+    },
+    {
+     "w": "promenait",
+     "t": 45.674
+    },
+    {
+     "w": "tous",
+     "t": 45.994
+    },
+    {
+     "w": "les",
+     "t": 46.134
+    },
+    {
+     "w": "jours.",
+     "t": 46.274
+    },
+    {
+     "w": "Il",
+     "t": 46.694
+    },
+    {
+     "w": "était",
+     "t": 46.774
+    },
+    {
+     "w": "vacciné,",
+     "t": 46.934
+    },
+    {
+     "w": "déclaré,",
+     "t": 47.694
+    },
+    {
+     "w": "assuré.",
+     "t": 48.374
+    }
+   ]
+  },
+  {
+   "id": "10-assure",
+   "who": "avocate",
+   "text": "Assuré ? Génial. L'assurance remboursera le bras du gamin. Ce chien est passé sous une clôture et a sauté sur un enfant de 6 ans.",
+   "start": 49.104,
+   "dur": 6.12,
+   "words": [
+    {
+     "w": "Assuré ?",
+     "t": 49.444
+    },
+    {
+     "w": "Génial.",
+     "t": 49.784
+    },
+    {
+     "w": "L'assurance",
+     "t": 50.354
+    },
+    {
+     "w": "remboursera",
+     "t": 50.924
+    },
+    {
+     "w": "le",
+     "t": 51.424
+    },
+    {
+     "w": "bras",
+     "t": 51.524
+    },
+    {
+     "w": "du",
+     "t": 51.664
+    },
+    {
+     "w": "gamin.",
+     "t": 51.784
+    },
+    {
+     "w": "Ce",
+     "t": 52.164
+    },
+    {
+     "w": "chien",
+     "t": 52.344
+    },
+    {
+     "w": "est",
+     "t": 52.644
+    },
+    {
+     "w": "passé",
+     "t": 52.744
+    },
+    {
+     "w": "sous",
+     "t": 52.964
+    },
+    {
+     "w": "une",
+     "t": 53.144
+    },
+    {
+     "w": "clôture",
+     "t": 53.284
+    },
+    {
+     "w": "et",
+     "t": 53.664
+    },
+    {
+     "w": "a",
+     "t": 53.804
+    },
+    {
+     "w": "sauté",
+     "t": 53.884
+    },
+    {
+     "w": "sur",
+     "t": 54.184
+    },
+    {
+     "w": "un",
+     "t": 54.304
+    },
+    {
+     "w": "enfant",
+     "t": 54.424
+    },
+    {
+     "w": "de",
+     "t": 54.604
+    },
+    {
+     "w": "6",
+     "t": 54.724
+    },
+    {
+     "w": "ans.",
+     "t": 54.944
+    }
+   ]
+  },
+  {
+   "id": "11-massacre",
+   "who": "procureur",
+   "text": "Et le père a fait d'un accident un massacre. Devant son fils. Qui va revoir ça toute sa vie.",
+   "start": 55.424,
+   "dur": 5.19,
+   "words": [
+    {
+     "w": "Et",
+     "t": 55.424
+    },
+    {
+     "w": "le",
+     "t": 55.534
+    },
+    {
+     "w": "père",
+     "t": 55.634
+    },
+    {
+     "w": "a",
+     "t": 55.854
+    },
+    {
+     "w": "fait",
+     "t": 56.034
+    },
+    {
+     "w": "d'un",
+     "t": 56.154
+    },
+    {
+     "w": "accident",
+     "t": 56.274
+    },
+    {
+     "w": "un",
+     "t": 56.974
+    },
+    {
+     "w": "massacre.",
+     "t": 57.054
+    },
+    {
+     "w": "Devant",
+     "t": 57.734
+    },
+    {
+     "w": "son",
+     "t": 57.994
+    },
+    {
+     "w": "fils.",
+     "t": 58.234
+    },
+    {
+     "w": "Qui",
+     "t": 58.714
+    },
+    {
+     "w": "va",
+     "t": 58.854
+    },
+    {
+     "w": "revoir",
+     "t": 58.994
+    },
+    {
+     "w": "ça",
+     "t": 59.334
+    },
+    {
+     "w": "toute",
+     "t": 59.614
+    },
+    {
+     "w": "sa",
+     "t": 60.074
+    },
+    {
+     "w": "vie.",
+     "t": 60.314
+    }
+   ]
+  },
+  {
+   "id": "12-venu",
+   "who": "avocate",
+   "text": "Ce qu'il va revoir toute sa vie, c'est un chien qui lui saute à la gorge. Et un père qui est venu.",
+   "start": 60.914,
+   "dur": 4.16,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 60.914
+    },
+    {
+     "w": "qu'il",
+     "t": 61.064
+    },
+    {
+     "w": "va",
+     "t": 61.214
+    },
+    {
+     "w": "revoir",
+     "t": 61.294
+    },
+    {
+     "w": "toute",
+     "t": 61.554
+    },
+    {
+     "w": "sa",
+     "t": 61.734
+    },
+    {
+     "w": "vie,",
+     "t": 61.954
+    },
+    {
+     "w": "c'est",
+     "t": 62.194
+    },
+    {
+     "w": "un",
+     "t": 62.434
+    },
+    {
+     "w": "chien",
+     "t": 62.554
+    },
+    {
+     "w": "qui",
+     "t": 62.834
+    },
+    {
+     "w": "lui",
+     "t": 62.934
+    },
+    {
+     "w": "saute",
+     "t": 63.074
+    },
+    {
+     "w": "à",
+     "t": 63.274
+    },
+    {
+     "w": "la",
+     "t": 63.414
+    },
+    {
+     "w": "gorge.",
+     "t": 63.434
+    },
+    {
+     "w": "Et",
+     "t": 63.914
+    },
+    {
+     "w": "un",
+     "t": 63.974
+    },
+    {
+     "w": "père",
+     "t": 64.074
+    },
+    {
+     "w": "qui",
+     "t": 64.354
+    },
+    {
+     "w": "est",
+     "t": 64.514
+    },
+    {
+     "w": "venu.",
+     "t": 64.594
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "start": 65.674,
+   "dur": 4.371,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 65.674
+    },
+    {
+     "w": "es",
+     "t": 65.854
+    },
+    {
+     "w": "le",
+     "t": 65.954
+    },
+    {
+     "w": "juré.",
+     "t": 66.054
+    },
+    {
+     "w": "Coupable…",
+     "t": 66.654
+    },
+    {
+     "w": "ou",
+     "t": 67.014
+    },
+    {
+     "w": "non",
+     "t": 67.414
+    },
+    {
+     "w": "coupable ?",
+     "t": 67.574
+    },
+    {
+     "w": "Écris-le",
+     "t": 68.074
+    },
+    {
+     "w": "en",
+     "t": 68.574
+    },
+    {
+     "w": "commentaire,",
+     "t": 68.674
+    },
+    {
+     "w": "et",
+     "t": 69.194
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 69.619
+    }
+   ]
+  }
+ ]
+}

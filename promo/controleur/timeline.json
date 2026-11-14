@@ -1,0 +1,1043 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 69.2,
+ "lines": [
+  {
+   "id": "01-controleur",
+   "who": "controleur",
+   "text": "Pas de billet, pas de train. Descends, j'ai dit !",
+   "start": 1.4,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Pas",
+     "t": 1.4
+    },
+    {
+     "w": "de",
+     "t": 1.55
+    },
+    {
+     "w": "billet,",
+     "t": 1.88
+    },
+    {
+     "w": "pas",
+     "t": 2.21
+    },
+    {
+     "w": "de",
+     "t": 2.29
+    },
+    {
+     "w": "train.",
+     "t": 2.67
+    },
+    {
+     "w": "Descends,",
+     "t": 3.05
+    },
+    {
+     "w": "j'ai",
+     "t": 3.31
+    },
+    {
+     "w": "dit !",
+     "t": 3.57
+    }
+   ]
+  },
+  {
+   "id": "02-gare",
+   "who": "narrateur",
+   "text": "23 h 10, une gare de campagne déserte. Manon, 15 ans, sans billet et sans batterie. Le contrôleur la fait descendre.",
+   "start": 5.91,
+   "dur": 6.45,
+   "words": [
+    {
+     "w": "23",
+     "t": 6.15
+    },
+    {
+     "w": "h",
+     "t": 6.43
+    },
+    {
+     "w": "10,",
+     "t": 6.71
+    },
+    {
+     "w": "une",
+     "t": 6.99
+    },
+    {
+     "w": "gare",
+     "t": 7.11
+    },
+    {
+     "w": "de",
+     "t": 7.23
+    },
+    {
+     "w": "campagne",
+     "t": 7.35
+    },
+    {
+     "w": "déserte.",
+     "t": 7.77
+    },
+    {
+     "w": "Manon,",
+     "t": 8.41
+    },
+    {
+     "w": "15",
+     "t": 8.91
+    },
+    {
+     "w": "ans,",
+     "t": 9.11
+    },
+    {
+     "w": "sans",
+     "t": 9.53
+    },
+    {
+     "w": "billet",
+     "t": 9.69
+    },
+    {
+     "w": "et",
+     "t": 10.09
+    },
+    {
+     "w": "sans",
+     "t": 10.25
+    },
+    {
+     "w": "batterie.",
+     "t": 10.37
+    },
+    {
+     "w": "Le",
+     "t": 10.85
+    },
+    {
+     "w": "contrôleur",
+     "t": 10.93
+    },
+    {
+     "w": "la",
+     "t": 11.26
+    },
+    {
+     "w": "fait",
+     "t": 11.59
+    },
+    {
+     "w": "descendre.",
+     "t": 11.71
+    }
+   ]
+  },
+  {
+   "id": "03-percutee",
+   "who": "narrateur",
+   "text": "Elle a marché sur la départementale. Une voiture l'a percutée. Trois mois d'hôpital. Aujourd'hui, le contrôleur est jugé.",
+   "start": 12.71,
+   "dur": 5.29,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 12.71
+    },
+    {
+     "w": "a",
+     "t": 12.83
+    },
+    {
+     "w": "marché",
+     "t": 12.91
+    },
+    {
+     "w": "sur",
+     "t": 13.17
+    },
+    {
+     "w": "la",
+     "t": 13.35
+    },
+    {
+     "w": "départementale.",
+     "t": 13.45
+    },
+    {
+     "w": "Une",
+     "t": 14.29
+    },
+    {
+     "w": "voiture",
+     "t": 14.43
+    },
+    {
+     "w": "l'a",
+     "t": 14.65
+    },
+    {
+     "w": "percutée.",
+     "t": 15.02
+    },
+    {
+     "w": "Trois",
+     "t": 15.39
+    },
+    {
+     "w": "mois",
+     "t": 15.59
+    },
+    {
+     "w": "d'hôpital.",
+     "t": 16.03
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 16.47
+    },
+    {
+     "w": "le",
+     "t": 16.91
+    },
+    {
+     "w": "contrôleur",
+     "t": 17.03
+    },
+    {
+     "w": "est",
+     "t": 17.45
+    },
+    {
+     "w": "jugé.",
+     "t": 17.55
+    }
+   ]
+  },
+  {
+   "id": "04-enfant",
+   "who": "procureur",
+   "text": "On ne laisse pas une enfant seule, la nuit, au milieu de nulle part. Il n'y a pas de règlement au-dessus de ça.",
+   "start": 18.45,
+   "dur": 4.35,
+   "words": [
+    {
+     "w": "On",
+     "t": 18.45
+    },
+    {
+     "w": "ne",
+     "t": 18.57
+    },
+    {
+     "w": "laisse",
+     "t": 18.63
+    },
+    {
+     "w": "pas",
+     "t": 18.75
+    },
+    {
+     "w": "une",
+     "t": 18.91
+    },
+    {
+     "w": "enfant",
+     "t": 19.03
+    },
+    {
+     "w": "seule,",
+     "t": 19.23
+    },
+    {
+     "w": "la",
+     "t": 19.77
+    },
+    {
+     "w": "nuit,",
+     "t": 19.91
+    },
+    {
+     "w": "au",
+     "t": 20.33
+    },
+    {
+     "w": "milieu",
+     "t": 20.39
+    },
+    {
+     "w": "de",
+     "t": 20.55
+    },
+    {
+     "w": "nulle",
+     "t": 20.69
+    },
+    {
+     "w": "part.",
+     "t": 20.89
+    },
+    {
+     "w": "Il",
+     "t": 21.29
+    },
+    {
+     "w": "n'y",
+     "t": 21.41
+    },
+    {
+     "w": "a",
+     "t": 21.53
+    },
+    {
+     "w": "pas",
+     "t": 21.55
+    },
+    {
+     "w": "de",
+     "t": 21.69
+    },
+    {
+     "w": "règlement",
+     "t": 21.81
+    },
+    {
+     "w": "au-dessus",
+     "t": 22.12
+    },
+    {
+     "w": "de",
+     "t": 22.43
+    },
+    {
+     "w": "ça.",
+     "t": 22.51
+    }
+   ]
+  },
+  {
+   "id": "05-fraude",
+   "who": "avocate",
+   "text": "Une enfant ? Troisième fraude du mois. Et ce soir-là, elle lui a craché au visage. Le règlement, il est là pour tout le monde.",
+   "start": 23.0,
+   "dur": 5.46,
+   "words": [
+    {
+     "w": "Une",
+     "t": 23.0
+    },
+    {
+     "w": "enfant ?",
+     "t": 23.21
+    },
+    {
+     "w": "Troisième",
+     "t": 23.69
+    },
+    {
+     "w": "fraude",
+     "t": 24.15
+    },
+    {
+     "w": "du",
+     "t": 24.41
+    },
+    {
+     "w": "mois.",
+     "t": 24.51
+    },
+    {
+     "w": "Et",
+     "t": 24.91
+    },
+    {
+     "w": "ce",
+     "t": 24.95
+    },
+    {
+     "w": "soir-là,",
+     "t": 25.27
+    },
+    {
+     "w": "elle",
+     "t": 25.59
+    },
+    {
+     "w": "lui",
+     "t": 25.69
+    },
+    {
+     "w": "a",
+     "t": 25.79
+    },
+    {
+     "w": "craché",
+     "t": 25.87
+    },
+    {
+     "w": "au",
+     "t": 26.27
+    },
+    {
+     "w": "visage.",
+     "t": 26.33
+    },
+    {
+     "w": "Le",
+     "t": 26.83
+    },
+    {
+     "w": "règlement,",
+     "t": 26.89
+    },
+    {
+     "w": "il",
+     "t": 27.45
+    },
+    {
+     "w": "est",
+     "t": 27.59
+    },
+    {
+     "w": "là",
+     "t": 27.67
+    },
+    {
+     "w": "pour",
+     "t": 27.75
+    },
+    {
+     "w": "tout",
+     "t": 27.89
+    },
+    {
+     "w": "le",
+     "t": 28.07
+    },
+    {
+     "w": "monde.",
+     "t": 28.13
+    }
+   ]
+  },
+  {
+   "id": "06-bareme",
+   "who": "procureur",
+   "text": "Un crachat contre une jambe cassée. C'est ça, votre barème, Maître ?",
+   "start": 28.66,
+   "dur": 3.31,
+   "words": [
+    {
+     "w": "Un",
+     "t": 28.66
+    },
+    {
+     "w": "crachat",
+     "t": 28.91
+    },
+    {
+     "w": "contre",
+     "t": 29.41
+    },
+    {
+     "w": "une",
+     "t": 29.61
+    },
+    {
+     "w": "jambe",
+     "t": 29.75
+    },
+    {
+     "w": "cassée.",
+     "t": 30.01
+    },
+    {
+     "w": "C'est",
+     "t": 30.36
+    },
+    {
+     "w": "ça,",
+     "t": 30.71
+    },
+    {
+     "w": "votre",
+     "t": 30.95
+    },
+    {
+     "w": "barème,",
+     "t": 31.05
+    },
+    {
+     "w": "Maître ?",
+     "t": 31.45
+    }
+   ]
+  },
+  {
+   "id": "07-metier",
+   "who": "avocate",
+   "text": "Mon barème, c'est le sien : 20 ans de métier, insulté tous les soirs, frappé deux fois. Et personne n'a jamais jugé ceux qui l'ont frappé.",
+   "start": 32.17,
+   "dur": 5.97,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 32.17
+    },
+    {
+     "w": "barème,",
+     "t": 32.31
+    },
+    {
+     "w": "c'est",
+     "t": 32.63
+    },
+    {
+     "w": "le",
+     "t": 32.95
+    },
+    {
+     "w": "sien :",
+     "t": 33.05
+    },
+    {
+     "w": "20",
+     "t": 33.49
+    },
+    {
+     "w": "ans",
+     "t": 33.65
+    },
+    {
+     "w": "de",
+     "t": 33.77
+    },
+    {
+     "w": "métier,",
+     "t": 33.79
+    },
+    {
+     "w": "insulté",
+     "t": 34.29
+    },
+    {
+     "w": "tous",
+     "t": 34.69
+    },
+    {
+     "w": "les",
+     "t": 34.83
+    },
+    {
+     "w": "soirs,",
+     "t": 34.95
+    },
+    {
+     "w": "frappé",
+     "t": 35.39
+    },
+    {
+     "w": "deux",
+     "t": 35.67
+    },
+    {
+     "w": "fois.",
+     "t": 35.83
+    },
+    {
+     "w": "Et",
+     "t": 36.25
+    },
+    {
+     "w": "personne",
+     "t": 36.29
+    },
+    {
+     "w": "n'a",
+     "t": 36.58
+    },
+    {
+     "w": "jamais",
+     "t": 36.87
+    },
+    {
+     "w": "jugé",
+     "t": 37.07
+    },
+    {
+     "w": "ceux",
+     "t": 37.41
+    },
+    {
+     "w": "qui",
+     "t": 37.51
+    },
+    {
+     "w": "l'ont",
+     "t": 37.61
+    },
+    {
+     "w": "frappé.",
+     "t": 37.71
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Il a fait son travail, ou il l'a abandonnée ? Like si ça te fait réagir.",
+   "start": 38.54,
+   "dur": 3.83,
+   "words": [
+    {
+     "w": "Il",
+     "t": 38.54
+    },
+    {
+     "w": "a",
+     "t": 38.66
+    },
+    {
+     "w": "fait",
+     "t": 38.78
+    },
+    {
+     "w": "son",
+     "t": 38.88
+    },
+    {
+     "w": "travail,",
+     "t": 38.98
+    },
+    {
+     "w": "ou",
+     "t": 39.6
+    },
+    {
+     "w": "il",
+     "t": 39.82
+    },
+    {
+     "w": "l'a",
+     "t": 40.2
+    },
+    {
+     "w": "abandonnée ?",
+     "t": 40.58
+    },
+    {
+     "w": "Like",
+     "t": 40.96
+    },
+    {
+     "w": "si",
+     "t": 41.24
+    },
+    {
+     "w": "ça",
+     "t": 41.44
+    },
+    {
+     "w": "te",
+     "t": 41.58
+    },
+    {
+     "w": "fait",
+     "t": 41.62
+    },
+    {
+     "w": "réagir.",
+     "t": 41.74
+    }
+   ]
+  },
+  {
+   "id": "09-porte",
+   "who": "procureur",
+   "text": "Il pouvait la verbaliser, prévenir les gendarmes, appeler ses parents. Il a choisi d'ouvrir la porte.",
+   "start": 42.77,
+   "dur": 4.72,
+   "words": [
+    {
+     "w": "Il",
+     "t": 42.77
+    },
+    {
+     "w": "pouvait",
+     "t": 42.9
+    },
+    {
+     "w": "la",
+     "t": 43.08
+    },
+    {
+     "w": "verbaliser,",
+     "t": 43.24
+    },
+    {
+     "w": "prévenir",
+     "t": 44.0
+    },
+    {
+     "w": "les",
+     "t": 44.28
+    },
+    {
+     "w": "gendarmes,",
+     "t": 44.44
+    },
+    {
+     "w": "appeler",
+     "t": 45.14
+    },
+    {
+     "w": "ses",
+     "t": 45.38
+    },
+    {
+     "w": "parents.",
+     "t": 45.52
+    },
+    {
+     "w": "Il",
+     "t": 45.92
+    },
+    {
+     "w": "a",
+     "t": 46.02
+    },
+    {
+     "w": "choisi",
+     "t": 46.12
+    },
+    {
+     "w": "d'ouvrir",
+     "t": 46.49
+    },
+    {
+     "w": "la",
+     "t": 46.86
+    },
+    {
+     "w": "porte.",
+     "t": 46.98
+    }
+   ]
+  },
+  {
+   "id": "10-parents",
+   "who": "avocate",
+   "text": "Et les parents, justement ? Où étaient-ils, à 23 heures, quand leur fille de 15 ans fraudait le train ?",
+   "start": 47.69,
+   "dur": 4.15,
+   "words": [
+    {
+     "w": "Et",
+     "t": 47.69
+    },
+    {
+     "w": "les",
+     "t": 47.8
+    },
+    {
+     "w": "parents,",
+     "t": 47.88
+    },
+    {
+     "w": "justement ?",
+     "t": 48.12
+    },
+    {
+     "w": "Où",
+     "t": 48.82
+    },
+    {
+     "w": "étaient-ils,",
+     "t": 49.07
+    },
+    {
+     "w": "à",
+     "t": 49.32
+    },
+    {
+     "w": "23",
+     "t": 49.607
+    },
+    {
+     "w": "heures,",
+     "t": 49.893
+    },
+    {
+     "w": "quand",
+     "t": 50.18
+    },
+    {
+     "w": "leur",
+     "t": 50.36
+    },
+    {
+     "w": "fille",
+     "t": 50.54
+    },
+    {
+     "w": "de",
+     "t": 50.72
+    },
+    {
+     "w": "15",
+     "t": 50.76
+    },
+    {
+     "w": "ans",
+     "t": 50.94
+    },
+    {
+     "w": "fraudait",
+     "t": 51.18
+    },
+    {
+     "w": "le",
+     "t": 51.42
+    },
+    {
+     "w": "train ?",
+     "t": 51.46
+    }
+   ]
+  },
+  {
+   "id": "11-nuit",
+   "who": "procureur",
+   "text": "Ah, maintenant c'est la faute des parents. Et demain, celle de la nuit, qui était trop noire ?",
+   "start": 52.04,
+   "dur": 4.36,
+   "words": [
+    {
+     "w": "Ah,",
+     "t": 52.04
+    },
+    {
+     "w": "maintenant",
+     "t": 52.58
+    },
+    {
+     "w": "c'est",
+     "t": 52.86
+    },
+    {
+     "w": "la",
+     "t": 53.14
+    },
+    {
+     "w": "faute",
+     "t": 53.24
+    },
+    {
+     "w": "des",
+     "t": 53.44
+    },
+    {
+     "w": "parents.",
+     "t": 53.56
+    },
+    {
+     "w": "Et",
+     "t": 54.02
+    },
+    {
+     "w": "demain,",
+     "t": 54.22
+    },
+    {
+     "w": "celle",
+     "t": 54.68
+    },
+    {
+     "w": "de",
+     "t": 54.84
+    },
+    {
+     "w": "la",
+     "t": 54.96
+    },
+    {
+     "w": "nuit,",
+     "t": 55.08
+    },
+    {
+     "w": "qui",
+     "t": 55.44
+    },
+    {
+     "w": "était",
+     "t": 55.54
+    },
+    {
+     "w": "trop",
+     "t": 55.68
+    },
+    {
+     "w": "noire ?",
+     "t": 55.88
+    }
+   ]
+  },
+  {
+   "id": "12-regles",
+   "who": "avocate",
+   "text": "Non. C'est la faute d'une gamine qui croit que les règles, c'est pour les autres. Lui, il les a appliquées.",
+   "start": 56.7,
+   "dur": 4.13,
+   "words": [
+    {
+     "w": "Non.",
+     "t": 56.7
+    },
+    {
+     "w": "C'est",
+     "t": 56.96
+    },
+    {
+     "w": "la",
+     "t": 57.24
+    },
+    {
+     "w": "faute",
+     "t": 57.3
+    },
+    {
+     "w": "d'une",
+     "t": 57.46
+    },
+    {
+     "w": "gamine",
+     "t": 57.62
+    },
+    {
+     "w": "qui",
+     "t": 57.94
+    },
+    {
+     "w": "croit",
+     "t": 58.08
+    },
+    {
+     "w": "que",
+     "t": 58.3
+    },
+    {
+     "w": "les",
+     "t": 58.36
+    },
+    {
+     "w": "règles,",
+     "t": 58.46
+    },
+    {
+     "w": "c'est",
+     "t": 58.7
+    },
+    {
+     "w": "pour",
+     "t": 58.94
+    },
+    {
+     "w": "les",
+     "t": 59.04
+    },
+    {
+     "w": "autres.",
+     "t": 59.16
+    },
+    {
+     "w": "Lui,",
+     "t": 59.62
+    },
+    {
+     "w": "il",
+     "t": 60.0
+    },
+    {
+     "w": "les",
+     "t": 60.08
+    },
+    {
+     "w": "a",
+     "t": 60.2
+    },
+    {
+     "w": "appliquées.",
+     "t": 60.599
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "start": 61.43,
+   "dur": 4.371,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 61.43
+    },
+    {
+     "w": "es",
+     "t": 61.61
+    },
+    {
+     "w": "le",
+     "t": 61.71
+    },
+    {
+     "w": "juré.",
+     "t": 61.81
+    },
+    {
+     "w": "Coupable…",
+     "t": 62.41
+    },
+    {
+     "w": "ou",
+     "t": 62.77
+    },
+    {
+     "w": "non",
+     "t": 63.17
+    },
+    {
+     "w": "coupable ?",
+     "t": 63.33
+    },
+    {
+     "w": "Écris-le",
+     "t": 63.83
+    },
+    {
+     "w": "en",
+     "t": 64.33
+    },
+    {
+     "w": "commentaire,",
+     "t": 64.43
+    },
+    {
+     "w": "et",
+     "t": 64.95
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 65.375
+    }
+   ]
+  }
+ ]
+}

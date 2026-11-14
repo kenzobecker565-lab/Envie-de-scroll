@@ -41,9 +41,10 @@ export function makeCues(tl) {
   // Le hook : la caméra de sonnette (le chien, l'enfant, le père, la pelle), l'allée vide
   // et les coups hors champ, le replay (Rocky, Nathan, le père), la fuite, onze coups, le collier.
   const hook = {
-    DOG: 0.35, // le chien passe sous la clôture
-    BITE: 1.15, // il saute sur l'enfant
-    DAD: 1.55, // le père surgit avec la pelle
+    GROWL: 0.5, // sous la clôture : deux yeux, un grognement
+    DOG: 1.0, // WOUF ! il bondit
+    BITE: 1.45, // la gueule sur le bras de Nathan
+    DAD: 2.4, // le père fonce, la pelle levée
     STRIKE: W('01', 'sale') - 0.05, // le premier coup
   }
   hook.FLEE = hook.STRIKE + 0.35 // le chien lâche et s'enfuit, le père le poursuit

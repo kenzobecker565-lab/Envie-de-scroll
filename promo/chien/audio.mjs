@@ -296,6 +296,11 @@ function score() {
   }
   sweep(K.DAD, K.STRIKE - K.DAD, { f0: 300, f1: 3800, q: 1.1, gain: 0.22 })
   shovelHit(K.STRIKE, 0.9)
+  // Les cases BD : grognement, coups de cadrage, la fuite.
+  for (let k = 0; k < 6; k++) sweep(K.GROWL + k * 0.08, 0.12, { f0: 90 + 20 * (k % 2), f1: 160, q: 3, gain: 0.32, send: 0.05 })
+  for (const t of [K.GROWL, K.DOG, K.BITE, K.DAD, K.STRIKE - 0.25, K.FLEE + 0.07, 5.25]) sample('1801', t - 0.06, 0.28, { len: 0.35, fade: 0.05 })
+  pop(K.BITE + 0.05, 0.22, 1400, 500)
+  sample('2954', K.STRIKE + 0.1, 0.55, { from: 2.5, len: 0.4 })
   crash(K.STRIKE + 0.01, 0.15)
   sample('2954', K.FLEE, 0.4, { from: 5.0, len: 0.5, lp: 2500, pan: 0.5 })
   // Hors champ : les coups qui continuent, étouffés.

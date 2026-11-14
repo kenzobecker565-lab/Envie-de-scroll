@@ -208,6 +208,127 @@ function dog(parent) {
   return { g, update }
 }
 
+grad('sunset', [[0, '#3a1030'], [0.5, '#c8322a'], [1, '#ff9a3a']], { x1: 0, y1: 0, x2: 0, y2: 1 })
+// ------------------------------------------------- Outils « motion comic » (cases de BD, onomatopées, ombres)
+{
+  const f = svg('filter', { id: 'sil', x: '-20%', y: '-20%', width: '140%', height: '140%' }, defs)
+  svg('feColorMatrix', { type: 'matrix', values: '0 0 0 0 0.04  0 0 0 0 0.03  0 0 0 0 0.05  0 0 0 1 0' }, f)
+  const p = svg('pattern', { id: 'dotsK', width: 18, height: 18, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(30)' }, defs)
+  svg('circle', { cx: 9, cy: 9, r: 3.4, fill: '#000000' }, p)
+}
+// Une onomatopée dans une explosion de BD.
+function burst(parent, text, { fill = '#ffd166', ink = '#e5484d', size = 150, r = 300, points = 14 } = {}) {
+  const g = svg('g', { opacity: 0 }, parent)
+  let d = ''
+  for (let k = 0; k < points * 2; k++) {
+    const a = (k / (points * 2)) * Math.PI * 2
+    const rr = k % 2 ? r * 0.62 : r * (0.92 + 0.16 * ((k * 7) % 3) / 2)
+    d += `${k ? 'L' : 'M'} ${(Math.cos(a) * rr * 1.3).toFixed(0)} ${(Math.sin(a) * rr).toFixed(0)} `
+  }
+  svg('path', { d: `${d}Z`, fill, stroke: '#10121a', 'stroke-width': 14, 'stroke-linejoin': 'round' }, g)
+  txt(g, text, { y: size * 0.35, 'font-size': size, fill: ink, stroke: '#10121a', 'stroke-width': 12, 'paint-order': 'stroke fill' })
+  return g
+}
+// Animation d'une onomatopée : surgit, tremble, disparaît.
+function burstAt(el, t, t0, t1, x, y, rot = -8, s = 1) {
+  const v = popS(t, t0, t1, 0.18)
+  el.setAttribute('opacity', v > 0.01 ? 1 : 0)
+  if (v > 0.01) el.setAttribute('transform', `translate(${x + 6 * Math.sin(t * 50)} ${y + 6 * Math.cos(t * 43)}) rotate(${rot + 3 * Math.sin(t * 30)}) scale(${(v * s).toFixed(3)})`)
+}
+// Lignes de vitesse (rayons depuis le centre).
+function speedLines(parent, n = 46, color = '#ffffff') {
+  const g = svg('g', { opacity: 0 }, parent)
+  const r = rng(77)
+  for (let k = 0; k < n; k++) {
+    const a = (k / n) * Math.PI * 2 + r() * 0.1
+    const w = 0.012 + r() * 0.02
+    const r0 = 380 + r() * 260
+    svg('path', { d: `M ${Math.cos(a) * r0} ${Math.sin(a) * r0} L ${Math.cos(a - w) * 2000} ${Math.sin(a - w) * 2000} L ${Math.cos(a + w) * 2000} ${Math.sin(a + w) * 2000} Z`, fill: color }, g)
+  }
+  return g
+}
+// Le cadre de la case de BD (bord noir épais, trame aux angles).
+function comicFrame(parent) {
+  const g = svg('g', {}, parent)
+  svg('rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#dotsK)', opacity: 0.12 }, g)
+  svg('rect', { x: 14, y: 14, width: W - 28, height: H - 28, rx: 10, fill: 'none', stroke: '#10121a', 'stroke-width': 28 }, g)
+  return g
+}
+// La main droite d'un personnage (repère local), d'après les angles du bras.
+function handOf(sh, el, side = 1) {
+  const sx = side * 200
+  const sy = 70
+  const a1 = Math.PI / 2 - side * sh
+  const ex = sx + Math.cos(a1) * 170
+  const ey = sy + Math.sin(a1) * 170
+  const a2 = Math.PI / 2 - side * (sh + el)
+  return [ex + Math.cos(a2) * 194, ey + Math.sin(a2) * 194, (a2 * 180) / Math.PI]
+}
+// Les angles (épaule, coude) qui amènent la main au plus près d'un point (repère local).
+function reach(tx, ty, side = 1) {
+  let best = [0, 0]
+  let bd = Infinity
+  for (let sh = -0.6; sh <= 3.2; sh += 0.05) {
+    for (let el = -0.2; el <= 2.2; el += 0.05) {
+      const [x, y] = handOf(sh, el, side)
+      const d = (x - tx) ** 2 + (y - ty) ** 2
+      if (d < bd) [bd, best] = [d, [sh, el]]
+    }
+  }
+  return best
+}
+// Rocky de face, en gros plan : gueule ouverte ou fermée, sourcils froncés.
+function dogHead(parent) {
+  const g = svg('g', {}, parent)
+  for (const sd of [-1, 1]) svg('path', { d: `M ${sd * 150} -170 L ${sd * 250} -260 L ${sd * 230} -90 Z`, fill: '#6a4a34', stroke: '#2a1a10', 'stroke-width': 8, 'stroke-linejoin': 'round' }, g)
+  svg('path', { d: 'M -220 -60 C -230 -220 -110 -250 0 -250 C 110 -250 230 -220 220 -60 C 214 60 150 150 0 160 C -150 150 -214 60 -220 -60 Z', fill: '#a0785a', stroke: '#2a1a10', 'stroke-width': 10 }, g)
+  svg('path', { d: 'M -40 -250 C -30 -160 -50 -60 -60 20 L 60 20 C 50 -60 30 -160 40 -250 Z', fill: '#f0e0cc', opacity: 0.9 }, g)
+  const eyes = [-1, 1].map((sd) => {
+    const e = svg('g', { transform: `translate(${sd * 95} -95)` }, g)
+    svg('ellipse', { rx: 44, ry: 36, fill: '#fff6d8', stroke: '#2a1a10', 'stroke-width': 7 }, e)
+    const pupil = svg('circle', { r: 20, fill: '#10121a' }, e)
+    svg('circle', { cx: -6, cy: -8, r: 6, fill: '#ffffff' }, e)
+    const lid = svg('rect', { x: -48, y: -40, width: 96, height: 0, fill: '#8a6448' }, e)
+    svg('path', { d: `M ${-sd * 56} -12 L ${-sd * 56} -44 L ${sd * 52} -44 L ${sd * 52} -40 Z`, fill: '#a0785a' }, e)
+    const brow = svg('path', { d: `M ${-sd * 62} -14 L ${sd * 54} -46`, stroke: '#2a1a10', 'stroke-width': 20, 'stroke-linecap': 'round' }, e)
+    const x = svg('path', { d: `M ${sd * 34} -26 L ${-sd * 24} 0 L ${sd * 34} 26`, fill: 'none', stroke: '#10121a', 'stroke-width': 14, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: 0 }, e)
+    return { e, pupil, lid, brow, x }
+  })
+  svg('ellipse', { cx: 0, cy: 70, rx: 130, ry: 96, fill: '#d8bfa0', stroke: '#2a1a10', 'stroke-width': 8 }, g)
+  const mouth = svg('g', {}, g)
+  const inside = svg('path', { fill: '#5a0a14', stroke: '#2a1a10', 'stroke-width': 8 }, mouth)
+  const teethT = svg('path', { fill: '#ffffff', stroke: '#2a1a10', 'stroke-width': 4 }, mouth)
+  const teethB = svg('path', { fill: '#ffffff', stroke: '#2a1a10', 'stroke-width': 4 }, mouth)
+  const tongue = svg('ellipse', { cx: 0, rx: 46, ry: 24, fill: '#e5484d' }, mouth)
+  for (const sd of [-1, 1]) svg('path', { d: `M ${sd * 30} -40 Q ${sd * 60} -20 ${sd * 50} 0 M ${sd * 70} -30 Q ${sd * 100} -10 ${sd * 90} 14`, fill: 'none', stroke: '#6a4a34', 'stroke-width': 7, 'stroke-linecap': 'round' }, g)
+  svg('path', { d: 'M -46 20 C -40 -10 40 -10 46 20 C 40 44 -40 44 -46 20 Z', fill: '#10121a' }, g)
+  svg('path', { d: 'M 0 44 L 0 80 M -50 80 Q 0 100 50 80', fill: 'none', stroke: '#2a1a10', 'stroke-width': 7 }, g)
+  // open : 0 fermée → 1 grande ouverte ; hurt : yeux plissés (le coup).
+  function update(t, { open = 0, look = [0, 0], hurt = 0 } = {}) {
+    const h = 20 + 150 * open
+    inside.setAttribute('d', `M -110 90 Q 0 ${90 - 10 * open} 110 90 L 90 ${90 + h} Q 0 ${110 + h} -90 ${90 + h} Z`)
+    let tt = 'M -100 92 '
+    let tb = `M -86 ${88 + h} `
+    for (let k = 0; k < 6; k++) {
+      const x = -100 + k * 40
+      tt += `L ${x + 20} ${92 + 26 + (k === 0 || k === 5 ? 20 : 0)} L ${x + 40} 92 `
+      tb += `L ${x + 34} ${88 + h - 22 - (k === 0 || k === 5 ? 16 : 0)} L ${x + 54} ${88 + h} `
+    }
+    teethT.setAttribute('d', `${tt}Z`)
+    teethB.setAttribute('d', `${tb}Z`)
+    teethB.setAttribute('opacity', open > 0.2 ? 1 : 0)
+    tongue.setAttribute('cy', (70 + h).toFixed(0))
+    tongue.setAttribute('opacity', open > 0.3 ? 1 : 0)
+    for (const e of eyes) {
+      e.pupil.setAttribute('transform', `translate(${look[0] * 14} ${look[1] * 12})`)
+      e.lid.setAttribute('height', (90 * hurt).toFixed(0))
+      e.x.setAttribute('opacity', hurt > 0.5 ? 1 : 0)
+      e.pupil.setAttribute('opacity', hurt > 0.5 ? 0 : 1)
+    }
+  }
+  return { g, update }
+}
+
 // ------------------------------------------------- 1 · Le hook
 const HOOK = scene('hook', (L) => {
   bg(L, '#020306')
@@ -297,8 +418,125 @@ const HOOK = scene('hook', (L) => {
   svg('rect', { x: -26, y: -20, width: 52, height: 360, rx: 16, fill: '#6a3f26' }, gavel)
   svg('rect', { x: -150, y: -110, width: 300, height: 120, rx: 34, fill: '#7a4a2c' }, gavel)
   for (const x of [-150, 110]) svg('rect', { x, y: -110, width: 40, height: 120, rx: 10, fill: '#d9a441' }, gavel)
+  // ===== Le hook en « motion comic » : des cases, de gros plans, des onomatopées.
+  const N = svg('g', {}, R)
+  const shovel = (parent, s = 1) => {
+    const g = svg('g', {}, parent)
+    svg('path', { d: `M 0 30 L 0 ${-420 * s}`, stroke: '#8a5a30', 'stroke-width': 26 * s, 'stroke-linecap': 'round' }, g)
+    svg('path', { d: `M ${-80 * s} ${-400 * s} L ${80 * s} ${-400 * s} L ${64 * s} ${-600 * s} Q 0 ${-650 * s} ${-64 * s} ${-600 * s} Z`, fill: '#b9c4d0', stroke: '#3a4250', 'stroke-width': 9 }, g)
+    svg('path', { d: `M ${-40 * s} ${-430 * s} L ${-30 * s} ${-580 * s}`, stroke: '#ffffff', 'stroke-width': 10, opacity: 0.6 }, g)
+    return g
+  }
+  // S1 · La sonnette : Nathan sur son vélo, il sourit.
+  const S1 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#daySky)' }, S1)
+  for (const [x, w, h, c] of [[-60, 420, 520, '#d8c4a0'], [420, 420, 440, '#e0ccaa'], [820, 400, 500, '#c9b08a']]) {
+    svg('rect', { x, y: 900 - h, width: w, height: h, fill: c, stroke: '#8a7458', 'stroke-width': 6 }, S1)
+    svg('path', { d: `M ${x - 20} ${900 - h} L ${x + w / 2} ${790 - h} L ${x + w + 20} ${900 - h} Z`, fill: '#a0522d' }, S1)
+  }
+  svg('rect', { x: -400, y: 880, width: W + 800, height: 1400, fill: 'url(#lawn)' }, S1)
+  const kidA = makePerson(S1, NATHAN)
+  const bars = svg('g', {}, S1)
+  svg('path', { d: 'M -260 0 Q 0 -60 260 0', fill: 'none', stroke: '#c8322a', 'stroke-width': 30, 'stroke-linecap': 'round' }, bars)
+  for (const sd of [-1, 1]) svg('rect', { x: sd * 260 - 30, y: -26, width: 60, height: 70, rx: 22, fill: '#10121a' }, bars)
+  svg('path', { d: 'M 0 -30 L 0 120', stroke: '#c8322a', 'stroke-width': 34 }, bars)
+  svg('circle', { cx: 0, cy: 260, r: 150, fill: 'none', stroke: '#10121a', 'stroke-width': 30 }, bars)
+  svg('circle', { cx: 0, cy: 260, r: 26, fill: '#9aa6b4' }, bars)
+  svg('circle', { cx: 150, cy: -46, r: 26, fill: '#ffd166', stroke: '#a67a10', 'stroke-width': 5 }, bars)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#lensV)' }, S1)
+  const s1ui = svg('g', {}, S1)
+  svg('rect', { x: 70, y: 190, width: 560, height: 96, fill: '#ffd166', stroke: '#10121a', 'stroke-width': 10 }, s1ui)
+  txt(s1ui, 'MERCREDI, 16 H 42', { x: 350, y: 256, 'font-size': 50, fill: '#10121a' })
+  // S2 · Sous la clôture : deux yeux, un grognement.
+  const S2 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#0c0a08' }, S2)
+  const head2 = dogHead(S2)
+  const shade2 = svg('ellipse', { rx: 330, ry: 300, fill: '#000', opacity: 0.6 }, head2.g)
+  const glow2 = svg('g', {}, head2.g)
+  for (const sd of [-1, 1]) svg('ellipse', { cx: sd * 95, cy: -95, rx: 26, ry: 16, fill: '#ffe066', transform: `rotate(${sd * 14} ${sd * 95} -95)` }, glow2)
+  for (let x = -60; x < W + 60; x += 110) svg('rect', { x, y: -200, width: 80, height: 1200, fill: '#7a828c', stroke: '#3a4048', 'stroke-width': 6 }, S2)
+  svg('rect', { x: -400, y: 1000, width: W + 800, height: 30, fill: '#5a626c' }, S2)
+  svg('rect', { x: -400, y: 1620, width: W + 800, height: 700, fill: '#3a6a32' }, S2)
+  const grr = burst(S2, 'GRRR…', { fill: '#ffd166', ink: '#10121a', size: 120, r: 240 })
+  // S3 · Il bondit sur la caméra : WOUF !
+  const S3 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#d42a2a' }, S3)
+  const sl3 = speedLines(S3, 50, '#ffb0a0')
+  const head3 = dogHead(S3)
+  const wouf = burst(S3, 'WOUF !', { fill: '#ffffff', ink: '#e5484d', size: 170, r: 280 })
+  // S4 · Nathan hurle : la gueule sur son bras.
+  const S4 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#2a4a7a' }, S4)
+  const sl4 = speedLines(S4, 40, '#3f62a0')
+  const kid4 = makePerson(S4, NATHAN)
+  const head4 = dogHead(S4)
+  const aie = burst(S4, 'AÏE !', { fill: '#ffd166', ink: '#e5484d', size: 130, r: 220 })
+  // S5 · Le père charge, la pelle levée.
+  const S5 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#e07a2a' }, S5)
+  const sl5 = speedLines(S5, 50, '#ffb36b')
+  const dad5 = makePerson(S5, PERE)
+  const sh5 = shovel(dad5.root)
+  // S6 · Case partagée : le père (en haut), la gueule sur le bras (en bas).
+  const S6 = svg('g', {}, N)
+  const c6a = svg('clipPath', { id: 'cut6a' }, defs)
+  svg('path', { d: 'M 0 0 L 1080 0 L 1080 640 L 0 900 Z' }, c6a)
+  const c6b = svg('clipPath', { id: 'cut6b' }, defs)
+  svg('path', { d: 'M 0 900 L 1080 640 L 1080 1920 L 0 1920 Z' }, c6b)
+  const top6 = svg('g', { 'clip-path': 'url(#cut6a)' }, S6)
+  svg('rect', { x: 0, y: 0, width: W, height: H, fill: '#c8322a' }, top6)
+  speedLines(top6, 40, '#e05a4a').setAttribute('opacity', 1)
+  const dad6 = makePerson(top6, PERE)
+  const sh6 = shovel(dad6.root)
+  const bot6 = svg('g', { 'clip-path': 'url(#cut6b)' }, S6)
+  svg('rect', { x: 0, y: 0, width: W, height: H, fill: '#1f2d55' }, bot6)
+  const arm6 = svg('g', {}, bot6)
+  svg('path', { d: 'M -200 1330 L 600 1250', stroke: '#3b82f6', 'stroke-width': 140, 'stroke-linecap': 'round' }, arm6)
+  svg('circle', { cx: 900, cy: 1222, r: 66, fill: '#f6d0b0' }, arm6)
+  svg('path', { d: 'M 640 1246 L 860 1226', stroke: '#f6d0b0', 'stroke-width': 100, 'stroke-linecap': 'round' }, arm6)
+  const head6 = dogHead(bot6)
+  svg('path', { d: 'M 0 900 L 1080 640', stroke: '#ffffff', 'stroke-width': 26 }, S6)
+  svg('path', { d: 'M 0 900 L 1080 640', stroke: '#10121a', 'stroke-width': 8 }, S6)
+  // S7 · Le coup : la pelle balaie l'écran, CLANG !
+  const S7 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#fff3c4' }, S7)
+  const sl7 = speedLines(S7, 56, '#ffd166')
+  const head7 = dogHead(S7)
+  const trail = svg('path', { fill: 'none', stroke: '#10121a', 'stroke-width': 16, 'stroke-dasharray': '50 34', opacity: 0 }, S7)
+  const ghosts = [0.25, 0.45].map((o) => { const gg = shovel(S7, 1.25); gg.setAttribute('opacity', o); return gg })
+  const sh7 = shovel(S7, 1.25)
+  const stars = svg('g', { opacity: 0 }, S7)
+  for (let k = 0; k < 5; k++) svg('path', { d: 'M 0 -34 L 10 -10 L 34 -10 L 14 6 L 22 32 L 0 16 L -22 32 L -14 6 L -34 -10 L -10 -10 Z', fill: '#ffd166', stroke: '#10121a', 'stroke-width': 5, transform: `rotate(${k * 72}) translate(0 -230)` }, stars)
+  const clang7 = burst(S7, 'CLANG !', { fill: '#ffffff', ink: '#10121a', size: 170, r: 300, points: 18 })
+  const kai = burst(S7, 'KAÏ !', { fill: '#ffd166', ink: '#e5484d', size: 90, r: 150 })
+  // S8 · Ombres chinoises : il s'enfuit, la queue basse ; le père le poursuit.
+  const S8 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#sunset)' }, S8)
+  svg('circle', { cx: 760, cy: 1100, r: 300, fill: '#ffd28a', opacity: 0.85 }, S8)
+  svg('rect', { x: -400, y: 1360, width: W + 800, height: 900, fill: '#10121a' }, S8)
+  const dog8 = dog(S8)
+  dog8.g.setAttribute('filter', 'url(#sil)')
+  const dad8 = makePerson(S8, PERE)
+  dad8.root.setAttribute('filter', 'url(#sil)')
+  const sh8 = shovel(dad8.root)
+  // S9 · Sur le mur du garage, son ombre frappe, encore et encore.
+  const S9 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#eadfc8' }, S9)
+  for (let y = 300; y < 1500; y += 90) svg('rect', { x: 120, y, width: 840, height: 80, fill: '#e2d4b8', stroke: '#c9b892', 'stroke-width': 5 }, S9)
+  svg('rect', { x: -400, y: 1500, width: W + 800, height: 800, fill: '#9a9488' }, S9)
+  const shadow = svg('g', { transform: 'skewX(-14)', opacity: 0.82 }, S9)
+  const dad9 = makePerson(shadow, PERE)
+  dad9.root.setAttribute('filter', 'url(#sil)')
+  const sh9 = shovel(dad9.root)
+  sh9.setAttribute('filter', 'url(#sil)')
+  const wheel = svg('g', { filter: 'url(#sil)' }, S9)
+  svg('circle', { r: 150, fill: 'none', stroke: '#000', 'stroke-width': 22 }, wheel)
+  for (let k = 0; k < 8; k++) svg('path', { d: `M 0 0 L ${Math.cos(k * 0.785) * 150} ${Math.sin(k * 0.785) * 150}`, stroke: '#000', 'stroke-width': 8 }, wheel)
+  const red9 = svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#e5484d', opacity: 0 }, S9)
+  const frameN = comicFrame(N)
+  const SN = { S1, S2, S3, S4, S5, S6, S7, S8, S9 }
   const rwBands = Array.from({ length: 8 }, () => svg('rect', { x: 0, width: W, height: 26, fill: '#ffffff', opacity: 0 }, L.hud))
-  return { A, Acam, bike, kid, rocky, dad, clang, clock, motion, hitRed, C1, rockyBig, C2, nathan, bandage, C3, pere, bigShovel, D, Dcam, rockyRun, dadRun, wall, dRed, D2, collar, Ev, pereE, eFlash, gavel, rwBands }
+  return { N, ...SN, kidA, bars, head2, grr, head3, sl3, wouf, kid4, head4, sl4, aie, dad5, sh5, sl5, dad6, sh6, head6, head7, trail, ghosts, stars, sh7, shade2, glow2, sl7, clang7, kai, dog8, dad8, sh8, dad9, sh9, wheel, red9, A, Acam, bike, kid, rocky, dad, clang, clock, motion, hitRed, C1, rockyBig, C2, nathan, bandage, C3, pere, bigShovel, D, Dcam, rockyRun, dadRun, wall, dRed, D2, collar, Ev, pereE, eFlash, gavel, rwBands }
 })
 
 // ------------------------------------------------- 2 · Le procès
@@ -602,41 +840,128 @@ function seek(t) {
 
   if (cur === HOOK) {
     const phase = t < K.REWIND ? 'A' : t < K.NATHAN ? 'C1' : t < K.PELLE ? 'C2' : t < K.CHASE ? 'C3' : t < K.DEAD ? 'D' : t < K.TODAY ? 'D2' : 'E'
-    for (const [k, el] of [['A', HOOK.A], ['C1', HOOK.C1], ['C2', HOOK.C2], ['C3', HOOK.C3], ['D', HOOK.D], ['D2', HOOK.D2], ['E', HOOK.Ev]]) show(el, phase === k)
+    show(HOOK.A, false)
+    for (const [k, el] of [['A', HOOK.N], ['C1', HOOK.C1], ['C2', HOOK.C2], ['C3', HOOK.C3], ['D', HOOK.D], ['D2', HOOK.D2], ['E', HOOK.Ev]]) show(el, phase === k)
     const [hx, hy] = shakeAt(t, 0)
     if (phase === 'A') {
-      // La sonnette : l'enfant à vélo, le chien qui charge, le père, la pelle ; puis l'allée vide.
-      HOOK.clock.textContent = `16:42:${pad2(7 + t)}`
-      HOOK.motion.setAttribute('opacity', t > K.DOG && t < K.OFF ? (Math.floor(t * 4) % 2 ? 1 : 0.4) : 0)
-      const kidX = lerp(760, 520, clamp(t / K.BITE))
-      const fall = ease.out3(clamp((t - K.BITE) / 0.3))
-      HOOK.kid.update(kidX - 60 * fall, 1000 + 40 * fall, 1, t * 6, { run: t < K.BITE ? 0.4 : 0, fallen: fall * 0.9, dir: -1 })
-      place(HOOK.bike, kidX + 40 * fall, 1060, 0.9, -70 * fall)
-      // Le chien : sous la clôture, la charge, la morsure, la fuite.
-      const out = ease.out2(clamp((t - K.DOG) / 0.35))
-      const charge = ease.in2(clamp((t - (K.DOG + 0.35)) / (K.BITE - K.DOG - 0.35)))
-      const flee = ease.in2(clamp((t - K.FLEE) / 0.8))
-      let dx = lerp(900, kidX + 60, charge)
-      let dy = lerp(860, 1030, out)
-      if (t > K.FLEE) dx = lerp(kidX + 60, 1500, flee)
-      const jump = t > K.BITE - 0.15 && t < K.BITE + 0.2 ? Math.sin(Math.PI * clamp((t - K.BITE + 0.15) / 0.35)) : 0
-      const onKid = t > K.BITE && t < K.FLEE
-      HOOK.rocky.update(dx + (onKid ? 8 * Math.sin(t * 40) : 0), dy, lerp(0.3, 0.55, out), t * 14, { run: onKid ? 0.2 : 1, flee: t > K.FLEE ? 1 : 0, dir: t > K.FLEE ? 1 : -1, jump })
-      HOOK.rocky.g.setAttribute('opacity', t < K.DOG ? 0 : 1)
-      // Le père : il surgit, lève la pelle, frappe, puis poursuit le chien hors champ.
-      const run = ease.io2(clamp((t - K.DAD) / (K.STRIKE - K.DAD - 0.2)))
-      const chase = ease.in2(clamp((t - K.FLEE - 0.1) / 0.9))
-      const raise = t < K.STRIKE - 0.25 ? 0.3 : t < K.STRIKE ? ease.out3(clamp((t - (K.STRIKE - 0.25)) / 0.2)) : 1 - ease.in3(clamp((t - K.STRIKE) / 0.08))
-      const px = t > K.FLEE ? lerp(kidX - 40, 1600, chase) : lerp(-200, kidX - 40, run)
-      HOOK.dad.update(px, 1120, 0.95, t * 12, { run: run < 1 || t > K.FLEE ? 1 : 0.2, raise: t > K.FLEE ? 0.8 : raise })
-      HOOK.dad.g.setAttribute('opacity', t < K.DAD ? 0 : 1)
-      const cl = clamp(1 - (t - K.STRIKE) / 0.15)
-      HOOK.clang.setAttribute('opacity', t > K.STRIKE && cl > 0 ? cl.toFixed(2) : 0)
-      HOOK.clang.setAttribute('transform', `translate(${kidX + 50} 960) scale(${(0.6 + 0.8 * (1 - cl)).toFixed(2)})`)
-      // Hors champ : les coups (flash rouge à chaque coup).
-      const hk = Math.max(...K.HITS.map((h) => (t >= h ? Math.exp(-(t - h) * 12) : 0)), 0)
-      HOOK.hitRed.setAttribute('opacity', (0.22 * hk).toFixed(2))
-      HOOK.Acam.setAttribute('transform', SHOT(lerp(640, 580, clamp(t / K.BITE)), 960, 1.7 + 0.02 * t + (t > K.OFF ? 0.1 : 0), 0, hx, hy))
+      // Le hook en cases : chaque plan, une seule action, en gros plan.
+      const shots = [['S1', 0.5], ['S2', 1.0], ['S3', 1.45], ['S4', 2.4], ['S5', 3.6], ['S6', K.STRIKE - 0.25], ['S7', K.STRIKE + 0.42], ['S8', 5.25], ['S9', K.REWIND]]
+      let si = shots.findIndex(([, t1]) => t < t1)
+      if (si < 0) si = shots.length - 1
+      const t0 = si ? shots[si - 1][1] : 0
+      const k = t - t0
+      for (const [id] of shots) show(HOOK[id], id === shots[si][0])
+      const cut = Math.exp(-k * 18)
+      const punch = 1 + 0.08 * cut
+      const set = (el, cx, cy, z, rot = 0) => el.setAttribute('transform', SHOT(cx, cy, z * punch, rot, hx + 14 * cut * Math.sin(t * 90), hy))
+      const grip = (sh, el, s = 1) => {
+        const [x, y, a] = handOf(sh, el)
+        return `translate(${x} ${y}) rotate(${a + 90}) scale(${s})`
+      }
+      const id = shots[si][0]
+      if (id === 'S1') {
+        const [la, le] = reach((280 - 540) / 1.05, (1630 - 1250) / 1.05, -1)
+        HOOK.kidA.update(t, { x: 540, y: 1250, scale: 1.05, mouth: 0.35, brows: 'neutral', look: [0, 0], armR: [2.5 + 0.3 * Math.sin(t * 14), 0.5], armL: [la, le], seed: 1.5 })
+        place(HOOK.bars, 540, 1640, 1, 0)
+        set(HOOK.S1, 540, 1000, 1.0 + 0.05 * k)
+      }
+      if (id === 'S2') {
+        HOOK.head2.update(t, { open: 0.15 + 0.1 * Math.sin(t * 30), look: [0, -0.2] })
+        place(HOOK.head2.g, 540, lerp(1500, 1340, ease.out3(clamp(k / 0.4))), 0.95, 0)
+        HOOK.glow2.setAttribute('opacity', 0.75 + 0.25 * Math.sin(t * 20))
+        burstAt(HOOK.grr, t, t0 + 0.12, 1.0, 560, 520, -6, 0.9)
+        set(HOOK.S2, 540, 1150, 1.0 + 0.12 * k)
+      }
+      if (id === 'S3') {
+        const z = ease.in2(clamp(k / 0.45))
+        HOOK.head3.update(t, { open: 1, look: [0, 0] })
+        place(HOOK.head3.g, 540, 1050, lerp(1.0, 2.1, z), 4 * Math.sin(t * 40))
+        HOOK.sl3.setAttribute('opacity', 1)
+        HOOK.sl3.setAttribute('transform', `translate(540 1050) rotate(${t * 40})`)
+        burstAt(HOOK.wouf, t, t0 + 0.05, 1.45, 540, 420, -10, 1)
+        set(HOOK.S3, 540, 960, 1.0)
+      }
+      if (id === 'S4') {
+        const shake = 12 * Math.sin(t * 42)
+        HOOK.kid4.update(t, { x: 330, y: 1150, scale: 1.0, mouth: 1, brows: 'surprised', look: [0.6, -0.1], armR: [1.5 + 0.04 * Math.sin(t * 40), 0], armL: [0.5, 1.2], tearT: k, headTilt: -0.2, seed: 1.5 })
+        HOOK.head4.update(t, { open: 0.35, look: [-0.8, 0.2] })
+        place(HOOK.head4.g, 730 + shake, 1120 + 0.6 * shake, 0.72, -8 + 0.5 * shake)
+        HOOK.sl4.setAttribute('opacity', 1)
+        HOOK.sl4.setAttribute('transform', `translate(700 1150) rotate(${-t * 20})`)
+        burstAt(HOOK.aie, t, t0 + 0.08, 2.4, 330, 380, 8, 1)
+        set(HOOK.S4, 540, 960, 1.0 + 0.05 * k)
+      }
+      if (id === 'S5') {
+        const run = Math.sin(t * 16)
+        HOOK.dad5.update(t, { x: 540 + 20 * run, y: 1180 + 18 * Math.abs(run), scale: lerp(1.0, 1.35, ease.in2(clamp(k / 1.2))), mouth: mouthOf('pere', t), brows: 'angry', look: [0, 0], armR: [2.7, 0.35], armL: [0.9 + 0.3 * run, 0.8], lean: 0.05 * run, seed: 0.4 })
+        HOOK.sh5.setAttribute('transform', grip(2.7, 0.35))
+        HOOK.sl5.setAttribute('opacity', 1)
+        HOOK.sl5.setAttribute('transform', `translate(540 800) rotate(${t * 25})`)
+        set(HOOK.S5, 540, 960, 1.0)
+      }
+      if (id === 'S6') {
+        HOOK.dad6.update(t, { x: 560, y: 720, scale: 0.9, mouth: mouthOf('pere', t), brows: 'angry', look: [-0.3, 0.3], armR: [2.9, 0.2], armL: [0.6, 0.8], seed: 0.4 })
+        HOOK.sh6.setAttribute('transform', grip(2.9, 0.2))
+        const shake = 10 * Math.sin(t * 40)
+        HOOK.head6.update(t, { open: 0.35, look: [-0.5, 0.2] })
+        place(HOOK.head6.g, 690 + shake, 1130 + 0.5 * shake, 0.8, -10 + 0.6 * shake)
+        set(HOOK.S6, 540, 960, 1.0)
+      }
+      if (id === 'S7') {
+        const sw = ease.in3(clamp((t - (K.STRIKE - 0.25)) / 0.25))
+        const after = t - K.STRIKE
+        const HX = 1050
+        const HY = 430
+        const RR = 656
+        const phi = (u) => lerp(250, 139, clamp(u))
+        const at = (deg) => [HX + RR * Math.cos((deg * Math.PI) / 180), HY + RR * Math.sin((deg * Math.PI) / 180)]
+        const rot = (deg) => `translate(${HX} ${HY}) rotate(${deg + 90}) translate(0 ${RR / 1.25 - 525}) `
+        HOOK.sh7.setAttribute('transform', `translate(${HX} ${HY}) rotate(${phi(sw) + 90})`)
+        HOOK.ghosts.forEach((gh, i) => {
+          gh.setAttribute('transform', `translate(${HX} ${HY}) rotate(${phi(sw - 0.12 * (i + 1)) + 90})`)
+          gh.setAttribute('display', after < 0.12 && sw > 0.2 ? 'inline' : 'none')
+        })
+        const [ax, ay] = at(250)
+        const [bx, by] = at(phi(sw))
+        HOOK.trail.setAttribute('d', `M ${ax.toFixed(0)} ${ay.toFixed(0)} A ${RR} ${RR} 0 0 0 ${bx.toFixed(0)} ${by.toFixed(0)}`)
+        HOOK.trail.setAttribute('opacity', sw > 0.1 && after < 0.2 ? 0.5 : 0)
+        const kb = after > 0 ? ease.out3(clamp(after / 0.18)) : 0
+        HOOK.head7.update(t, { open: after > 0 ? 0.55 : 0.3, look: [0, 0], hurt: after > 0 ? 1 : 0 })
+        place(HOOK.head7.g, 620 + 90 * kb, 1060 + 40 * kb, 1.0, 22 * kb)
+        HOOK.stars.setAttribute('opacity', after > 0.05 ? 1 : 0)
+        HOOK.stars.setAttribute('transform', `translate(${620 + 90 * kb} ${1000 + 40 * kb}) rotate(${t * 300}) scale(1 0.45)`)
+        HOOK.sl7.setAttribute('opacity', after > 0 ? 1 : 0)
+        HOOK.sl7.setAttribute('transform', 'translate(560 900)')
+        burstAt(HOOK.clang7, t, K.STRIKE, K.STRIKE + 0.42, 400, 380, -8, 1.0)
+        burstAt(HOOK.kai, t, K.STRIKE + 0.1, K.STRIKE + 0.42, 870, 760, 10, 1)
+        void rot
+        set(HOOK.S7, 540, 960, 1.0)
+      }
+      if (id === 'S8') {
+        HOOK.dog8.update(lerp(680, 1400, ease.in2(clamp(k / 0.5))), 1360, 1.7, t * 18, { run: 1, flee: 1, dir: 1 })
+        HOOK.dad8.update(t, { x: lerp(-260, 130, ease.out2(clamp(k / 0.4))), y: 1420, scale: 1.25, brows: 'angry', armR: [2.8, 0.3], armL: [0.8, 0.6], lean: 0.12, seed: 0.4 })
+        HOOK.sh8.setAttribute('transform', grip(2.8, 0.3))
+        set(HOOK.S8, 540, 960, 1.0)
+      }
+      if (id === 'S9') {
+        const prev = [...K.HITS].reverse().find((h) => t >= h)
+        const next = K.HITS.find((h) => t < h)
+        const dt = 0.14
+        let raise
+        if (prev === undefined) raise = 1 - ease.in2(clamp(1 - (next - t) / dt))
+        else {
+          const u = (t - prev) / ((next ?? prev + dt) - prev)
+          raise = u < 0.55 ? ease.out2(u / 0.55) : 1 - ease.in2((u - 0.55) / 0.45)
+        }
+        const hk = prev === undefined ? 0 : Math.exp(-(t - prev) * 14)
+        const sh = lerp(0.9, 3.0, raise)
+        const el = lerp(0.5, 0.1, raise)
+        HOOK.dad9.update(t, { x: 600, y: 1250, scale: 1.3, brows: 'angry', armR: [sh, el], armL: [0.6, 0.8], lean: 0.1 * (1 - raise), seed: 0.4 })
+        HOOK.sh9.setAttribute('transform', grip(sh, el))
+        HOOK.red9.setAttribute('opacity', (0.3 * hk).toFixed(2))
+        HOOK.wheel.setAttribute('transform', `translate(200 1640) rotate(${t * 200}) scale(1 0.9)`)
+        set(HOOK.S9, 540, 960, 1.0 + 0.04 * k + 0.02 * hk)
+      }
     }
     if (phase === 'C1') {
       const k = t - K.REWIND

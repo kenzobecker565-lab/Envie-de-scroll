@@ -284,6 +284,10 @@ function score() {
   sweep(K.STOP + 0.2, 0.35, { f0: 600, f1: 2500, gain: 0.12 })
   for (let k = 0; k < 4; k++) beep(K.CLOSE - 0.5 + k * 0.12, 0.08, 1800)
   boom(K.CLOSE, 0.6, 110, 40, 0.4)
+  // Les cases BD : coups de cadrage, le tampon, les coups sur la vitre.
+  for (const t of [1.35, K.STOP - 0.05, K.OUT - 0.07, K.CLOSE + 0.2, K.DEPART + 0.4]) sample('1801', t - 0.06, 0.25, { len: 0.35, fade: 0.05 })
+  stamp(1.7, 0.4)
+  sample('0095', K.CLOSE + 0.22, 0.7, { len: 0.45, fade: 0.05 })
   tick(K.CLOSE, 0.25, 1200)
   for (let t = 0.4, k = 0; t < K.CLOSE - 0.1; k++) {
     boom(t, 0.18, 55, 30, 0.2)

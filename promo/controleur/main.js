@@ -169,6 +169,74 @@ function phoneDead(parent) {
   return g
 }
 
+// ------------------------------------------------- Outils « motion comic » (cases de BD, onomatopées, ombres)
+{
+  const f = svg('filter', { id: 'sil', x: '-20%', y: '-20%', width: '140%', height: '140%' }, defs)
+  svg('feColorMatrix', { type: 'matrix', values: '0 0 0 0 0.04  0 0 0 0 0.03  0 0 0 0 0.05  0 0 0 1 0' }, f)
+  const p = svg('pattern', { id: 'dotsK', width: 18, height: 18, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(30)' }, defs)
+  svg('circle', { cx: 9, cy: 9, r: 3.4, fill: '#000000' }, p)
+}
+// Une onomatopée dans une explosion de BD.
+function burst(parent, text, { fill = '#ffd166', ink = '#e5484d', size = 150, r = 300, points = 14 } = {}) {
+  const g = svg('g', { opacity: 0 }, parent)
+  let d = ''
+  for (let k = 0; k < points * 2; k++) {
+    const a = (k / (points * 2)) * Math.PI * 2
+    const rr = k % 2 ? r * 0.62 : r * (0.92 + 0.16 * ((k * 7) % 3) / 2)
+    d += `${k ? 'L' : 'M'} ${(Math.cos(a) * rr * 1.3).toFixed(0)} ${(Math.sin(a) * rr).toFixed(0)} `
+  }
+  svg('path', { d: `${d}Z`, fill, stroke: '#10121a', 'stroke-width': 14, 'stroke-linejoin': 'round' }, g)
+  txt(g, text, { y: size * 0.35, 'font-size': size, fill: ink, stroke: '#10121a', 'stroke-width': 12, 'paint-order': 'stroke fill' })
+  return g
+}
+// Animation d'une onomatopée : surgit, tremble, disparaît.
+function burstAt(el, t, t0, t1, x, y, rot = -8, s = 1) {
+  const v = popS(t, t0, t1, 0.18)
+  el.setAttribute('opacity', v > 0.01 ? 1 : 0)
+  if (v > 0.01) el.setAttribute('transform', `translate(${x + 6 * Math.sin(t * 50)} ${y + 6 * Math.cos(t * 43)}) rotate(${rot + 3 * Math.sin(t * 30)}) scale(${(v * s).toFixed(3)})`)
+}
+// Lignes de vitesse (rayons depuis le centre).
+function speedLines(parent, n = 46, color = '#ffffff') {
+  const g = svg('g', { opacity: 0 }, parent)
+  const r = rng(77)
+  for (let k = 0; k < n; k++) {
+    const a = (k / n) * Math.PI * 2 + r() * 0.1
+    const w = 0.012 + r() * 0.02
+    const r0 = 380 + r() * 260
+    svg('path', { d: `M ${Math.cos(a) * r0} ${Math.sin(a) * r0} L ${Math.cos(a - w) * 2000} ${Math.sin(a - w) * 2000} L ${Math.cos(a + w) * 2000} ${Math.sin(a + w) * 2000} Z`, fill: color }, g)
+  }
+  return g
+}
+// Le cadre de la case de BD (bord noir épais, trame aux angles).
+function comicFrame(parent) {
+  const g = svg('g', {}, parent)
+  svg('rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#dotsK)', opacity: 0.12 }, g)
+  svg('rect', { x: 14, y: 14, width: W - 28, height: H - 28, rx: 10, fill: 'none', stroke: '#10121a', 'stroke-width': 28 }, g)
+  return g
+}
+// La main droite d'un personnage (repère local), d'après les angles du bras.
+function handOf(sh, el, side = 1) {
+  const sx = side * 200
+  const sy = 70
+  const a1 = Math.PI / 2 - side * sh
+  const ex = sx + Math.cos(a1) * 170
+  const ey = sy + Math.sin(a1) * 170
+  const a2 = Math.PI / 2 - side * (sh + el)
+  return [ex + Math.cos(a2) * 194, ey + Math.sin(a2) * 194, (a2 * 180) / Math.PI]
+}
+// Les angles (épaule, coude) qui amènent la main au plus près d'un point (repère local).
+function reach(tx, ty, side = 1) {
+  let best = [0, 0]
+  let bd = Infinity
+  for (let sh = -0.6; sh <= 3.2; sh += 0.05) {
+    for (let el = -0.2; el <= 2.2; el += 0.05) {
+      const [x, y] = handOf(sh, el, side)
+      const d = (x - tx) ** 2 + (y - ty) ** 2
+      if (d < bd) [bd, best] = [d, [sh, el]]
+    }
+  }
+  return best
+}
 // ------------------------------------------------- 1 · Le hook
 const HOOK = scene('hook', (L) => {
   bg(L, '#020306')
@@ -294,8 +362,128 @@ const HOOK = scene('hook', (L) => {
   svg('rect', { x: -26, y: -20, width: 52, height: 360, rx: 16, fill: '#6a3f26' }, gavel)
   svg('rect', { x: -150, y: -110, width: 300, height: 120, rx: 34, fill: '#7a4a2c' }, gavel)
   for (const x of [-150, 110]) svg('rect', { x, y: -110, width: 40, height: 120, rx: 10, fill: '#d9a441' }, gavel)
+  // ===== Le hook en « motion comic » : des cases, de gros plans, des onomatopées.
+  const N = svg('g', { display: 'none' }, R)
+  const box = (parent, text, x, y, w) => {
+    const g = svg('g', {}, parent)
+    svg('rect', { x, y, width: w, height: 96, fill: '#ffd166', stroke: '#10121a', 'stroke-width': 10 }, g)
+    txt(g, text, { x: x + w / 2, y: y + 66, 'font-size': 50, fill: '#10121a' })
+    return g
+  }
+  const nightWin = (parent, x, y, w, h, id) => {
+    const c = svg('clipPath', { id }, defs)
+    svg('rect', { x, y, width: w, height: h, rx: 36 }, c)
+    const g = svg('g', { 'clip-path': `url(#${id})` }, parent)
+    svg('rect', { x: x - 10, y: y - 10, width: w + 20, height: h + 20, fill: '#05070f' }, g)
+    const streaks = Array.from({ length: 12 }, (_, k) => svg('rect', { y: y + 40 + ((k * 97) % (h - 80)), width: 220 + (k % 3) * 120, height: 10 + (k % 2) * 8, rx: 6, fill: k % 3 ? '#ffd28a' : '#9fd0ff', opacity: 0.8 }, g))
+    svg('rect', { x, y, width: w, height: h, rx: 36, fill: 'none', stroke: '#5a6470', 'stroke-width': 18 }, parent)
+    svg('path', { d: `M ${x + 40} ${y + h - 40} L ${x + 160} ${y + 40}`, stroke: '#ffffff', 'stroke-width': 22, opacity: 0.08 }, parent)
+    return streaks
+  }
+  // S1 · Manon, en larmes, dans le dernier train ; son téléphone à 1 %.
+  const S1 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#trainIn)' }, S1)
+  const streaks1 = nightWin(S1, 120, 260, 840, 640, 'nw1')
+  svg('rect', { x: -400, y: 1180, width: W + 800, height: 1200, fill: '#1d4a70' }, S1)
+  const manon1 = makePerson(S1, MANON)
+  const phone1 = phoneDead(S1)
+  const box1 = box(S1, '23 H 10 · DERNIER TRAIN', 70, 120, 700)
+  // S2 · Le contrôleur crie et pointe du doigt ; tampon « SANS BILLET ».
+  const S2 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#7a1a1a' }, S2)
+  const sl2 = speedLines(S2, 50, '#a0302a')
+  const ctrl2 = agent(S2)
+  const stamp2 = svg('g', { opacity: 0 }, S2)
+  svg('rect', { x: -300, y: -70, width: 600, height: 140, rx: 14, fill: 'none', stroke: '#ff3b3b', 'stroke-width': 14 }, stamp2)
+  txt(stamp2, 'SANS BILLET', { y: 34, 'font-size': 92, fill: '#ff3b3b' })
+  // S3 · Freinage, les portes s'ouvrent sur la nuit ; son bras montre la sortie.
+  const S3 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#trainIn)' }, S3)
+  const out3 = svg('g', {}, S3)
+  svg('rect', { x: 140, y: 200, width: 800, height: 1500, fill: 'url(#nightF)' }, out3)
+  for (let k = 0; k < 30; k++) svg('circle', { cx: 160 + ((k * 197) % 760), cy: 240 + ((k * 89) % 400), r: 3, fill: '#ffffff', opacity: 0.6 }, out3)
+  svg('ellipse', { cx: 600, cy: 760, rx: 360, ry: 360, fill: 'url(#lampG)' }, out3)
+  svg('rect', { x: 592, y: 600, width: 16, height: 700, fill: '#5a5f70' }, out3)
+  svg('rect', { x: 140, y: 1290, width: 800, height: 420, fill: '#3a3e48' }, out3)
+  svg('rect', { x: 140, y: 1286, width: 800, height: 14, fill: '#ffd166' }, out3)
+  const sign3 = svg('g', { transform: 'translate(340 960)' }, out3)
+  svg('rect', { x: -170, y: -40, width: 340, height: 80, rx: 8, fill: '#1d3fa0', stroke: '#ffffff', 'stroke-width': 5 }, sign3)
+  txt(sign3, 'LES ESSARTS', { y: 18, 'font-size': 44, fill: '#ffffff' })
+  const door3L = svg('g', {}, S3)
+  const door3R = svg('g', {}, S3)
+  for (const [g, x] of [[door3L, 140], [door3R, 540]]) {
+    svg('rect', { x, y: 200, width: 400, height: 1500, fill: '#9aa6b4', stroke: '#3a4250', 'stroke-width': 10 }, g)
+    svg('rect', { x: x + 70, y: 320, width: 260, height: 520, rx: 30, fill: '#0a0e18', stroke: '#3a4250', 'stroke-width': 8 }, g)
+    svg('rect', { x: x + 40, y: 1000, width: 320, height: 40, rx: 10, fill: '#c8322a' }, g)
+  }
+  svg('rect', { x: 120, y: 180, width: 840, height: 1540, fill: 'none', stroke: '#2a3240', 'stroke-width': 40 }, S3)
+  const doorLed3 = svg('circle', { cx: 540, cy: 150, r: 26, fill: '#3bd16f' }, S3)
+  const arm3 = svg('g', {}, S3)
+  svg('path', { d: 'M -300 2100 L 300 1250', stroke: '#1f2d55', 'stroke-width': 190, 'stroke-linecap': 'round' }, arm3)
+  svg('circle', { cx: 300, cy: 1250, r: 66, fill: '#ffffff' }, arm3)
+  const hand3 = svg('g', { transform: 'translate(360 1170) rotate(35)' }, arm3)
+  svg('circle', { r: 70, fill: '#e2b08a' }, hand3)
+  svg('rect', { x: -20, y: -170, width: 40, height: 120, rx: 20, fill: '#e2b08a' }, hand3)
+  const krr = burst(S3, 'KRRRIII', { fill: '#ffffff', ink: '#10121a', size: 110, r: 230 })
+  const psch = burst(S3, 'PSCHHH', { fill: '#9fd0ff', ink: '#10121a', size: 120, r: 240 })
+  // S4 · Manon sur le quai ; les portes se referment devant elle : CLAC !
+  const S4 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#trainIn)' }, S4)
+  const out4 = svg('g', {}, S4)
+  svg('rect', { x: 140, y: 200, width: 800, height: 1500, fill: 'url(#nightF)' }, out4)
+  svg('ellipse', { cx: 540, cy: 620, rx: 420, ry: 420, fill: 'url(#lampG)' }, out4)
+  svg('rect', { x: 140, y: 1290, width: 800, height: 420, fill: '#3a3e48' }, out4)
+  const manon4 = makePerson(out4, MANON)
+  const door4L = svg('g', {}, S4)
+  const door4R = svg('g', {}, S4)
+  for (const [g, x] of [[door4L, 140], [door4R, 540]]) {
+    svg('rect', { x, y: 200, width: 400, height: 1500, fill: '#9aa6b4', stroke: '#3a4250', 'stroke-width': 10 }, g)
+    svg('rect', { x: x + 70, y: 320, width: 260, height: 520, rx: 30, fill: '#0a0e18', opacity: 0.55, stroke: '#3a4250', 'stroke-width': 8 }, g)
+    svg('rect', { x: x + 40, y: 1000, width: 320, height: 40, rx: 10, fill: '#c8322a' }, g)
+  }
+  svg('rect', { x: 120, y: 180, width: 840, height: 1540, fill: 'none', stroke: '#2a3240', 'stroke-width': 40 }, S4)
+  const doorLed4 = svg('circle', { cx: 540, cy: 150, r: 26, fill: '#ff3b3b' }, S4)
+  const clac = burst(S4, 'CLAC !', { fill: '#ffd166', ink: '#e5484d', size: 170, r: 280, points: 16 })
+  // S5 · Derrière la vitre, son visage ; le train démarre et l'emporte hors champ.
+  const S5 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: '#9aa6b4' }, S5)
+  const win5c = svg('clipPath', { id: 'win5' }, defs)
+  svg('rect', { x: 110, y: 260, width: 860, height: 1060, rx: 50 }, win5c)
+  const in5 = svg('g', { 'clip-path': 'url(#win5)' }, S5)
+  const pane5 = svg('g', {}, in5)
+  svg('rect', { x: -2000, y: 200, width: 5000, height: 1200, fill: 'url(#nightF)' }, pane5)
+  svg('ellipse', { cx: 700, cy: 520, rx: 380, ry: 380, fill: 'url(#lampG)' }, pane5)
+  const manon5 = makePerson(pane5, MANON)
+  const palm5 = svg('g', {}, pane5)
+  svg('ellipse', { rx: 80, ry: 96, fill: '#f6d0b0', stroke: '#c89878', 'stroke-width': 6 }, palm5)
+  for (let k = 0; k < 4; k++) svg('rect', { x: -66 + k * 36, y: -190, width: 30, height: 110, rx: 15, fill: '#f6d0b0', stroke: '#c89878', 'stroke-width': 5 }, palm5)
+  svg('path', { d: 'M 180 1300 L 520 300 M 300 1300 L 640 300', stroke: '#ffffff', 'stroke-width': 30, opacity: 0.1 }, in5)
+  svg('rect', { x: 110, y: 260, width: 860, height: 1060, rx: 50, fill: 'none', stroke: '#3a4250', 'stroke-width': 26 }, S5)
+  const sl5 = svg('g', { opacity: 0 }, S5)
+  for (let k = 0; k < 14; k++) svg('rect', { x: -400 + ((k * 211) % 1600), y: 180 + ((k * 137) % 1300), width: 500, height: 8, fill: '#ffffff', opacity: 0.5 }, sl5)
+  const bang = burst(S5, 'BAM ! BAM !', { fill: '#ffffff', ink: '#e5484d', size: 100, r: 250 })
+  // S6 · Plan large, en ombres : le train s'en va ; Manon, seule sous le lampadaire.
+  const S6 = svg('g', {}, N)
+  svg('rect', { x: -400, y: -400, width: W + 800, height: H + 800, fill: 'url(#nightF)' }, S6)
+  for (let k = 0; k < 70; k++) svg('circle', { cx: (k * 197) % W, cy: 60 + ((k * 89) % 900), r: 2 + (k % 3), fill: '#ffffff', opacity: 0.4 + 0.2 * (k % 3) }, S6)
+  svg('circle', { cx: 820, cy: 300, r: 70, fill: '#f4ecd0' }, S6)
+  svg('ellipse', { cx: 390, cy: 900, rx: 340, ry: 380, fill: 'url(#lampG)' }, S6)
+  const train6 = svg('g', {}, S6)
+  svg('rect', { x: 0, y: 960, width: 2600, height: 260, rx: 30, fill: '#0a0c12' }, train6)
+  for (let k = 0; k < 14; k++) svg('rect', { x: 40 + k * 180, y: 1000, width: 130, height: 90, rx: 12, fill: '#ffe7a0' }, train6)
+  svg('rect', { x: 2560, y: 1020, width: 40, height: 40, rx: 10, fill: '#ff3b3b' }, train6)
+  const sil6 = svg('g', { filter: 'url(#sil)' }, S6)
+  svg('rect', { x: -400, y: 1240, width: W + 800, height: 900, fill: '#000' }, sil6)
+  svg('rect', { x: 384, y: 700, width: 14, height: 550, fill: '#000' }, sil6)
+  svg('rect', { x: 340, y: 686, width: 104, height: 22, rx: 8, fill: '#000' }, sil6)
+  const legs6 = svg('g', {}, sil6)
+  for (const x of [-34, 34]) svg('rect', { x: x - 24, y: 0, width: 48, height: 190, rx: 16, fill: '#000' }, legs6)
+  const manon6 = makePerson(sil6, MANON)
+  const box6 = box(S6, '23 H 12 · PLUS AUCUN TRAIN', 60, 150, 760)
+  const frameN = comicFrame(N)
+  void frameN
   const rwBands = Array.from({ length: 8 }, () => svg('rect', { x: 0, width: W, height: 26, fill: '#ffffff', opacity: 0 }, L.hud))
-  return { A, Acam, lights, platform, neons, neonGlow, doorL, doorR, doorLight, manon, ctrl, recTxt, Bq, Bcam, quai, manonQ, C1, C1cam, trainLights, C2, manon2, ph, C3, ctrl3, D, Dcam, walker, lights2, dWhite, dBlack, D2, manonH, Ev, ctrlE, eFlash, gavel, rwBands }
+  return { legs6, N, S1, S2, S3, S4, S5, S6, streaks1, manon1, phone1, ctrl2, sl2, stamp2, door3L, door3R, doorLed3, arm3, krr, psch, manon4, door4L, door4R, doorLed4, clac, pane5, manon5, palm5, sl5, bang, train6, manon6, A, Acam, lights, platform, neons, neonGlow, doorL, doorR, doorLight, manon, ctrl, recTxt, Bq, Bcam, quai, manonQ, C1, C1cam, trainLights, C2, manon2, ph, C3, ctrl3, D, Dcam, walker, lights2, dWhite, dBlack, D2, manonH, Ev, ctrlE, eFlash, gavel, rwBands }
 })
 
 // ------------------------------------------------- 2 · Le procès
@@ -583,42 +771,82 @@ function seek(t) {
   const cur = scenes.find((s) => t >= s.t0 && t < s.t1) ?? scenes.at(-1)
 
   if (cur === HOOK) {
-    const phase = t < K.CLOSE ? 'A' : t < K.REWIND ? 'B' : t < K.MANON ? 'C1' : t < K.AGENT ? 'C2' : t < K.ROAD ? 'C3' : t < K.HOSP ? 'D' : t < K.TODAY ? 'D2' : 'E'
-    for (const [k, el] of [['A', HOOK.A], ['B', HOOK.Bq], ['C1', HOOK.C1], ['C2', HOOK.C2], ['C3', HOOK.C3], ['D', HOOK.D], ['D2', HOOK.D2], ['E', HOOK.Ev]]) show(el, phase === k)
+    const phase = t < K.REWIND ? 'A' : t < K.MANON ? 'C1' : t < K.AGENT ? 'C2' : t < K.ROAD ? 'C3' : t < K.HOSP ? 'D' : t < K.TODAY ? 'D2' : 'E'
+    show(HOOK.A, false)
+    show(HOOK.Bq, false)
+    for (const [k, el] of [['A', HOOK.N], ['C1', HOOK.C1], ['C2', HOOK.C2], ['C3', HOOK.C3], ['D', HOOK.D], ['D2', HOOK.D2], ['E', HOOK.Ev]]) show(el, phase === k)
     const [hx, hy] = shakeAt(t, 0)
     if (phase === 'A') {
-      // Le contrôleur la fait descendre ; le train s'arrête ; elle sort ; les portes se ferment.
+      // Le hook en cases : chaque plan, une seule action, en gros plan.
+      const shots = [['S1', 1.35], ['S2', K.STOP - 0.05], ['S3', K.OUT - 0.07], ['S4', K.CLOSE + 0.2], ['S5', K.DEPART + 0.4], ['S6', K.REWIND]]
+      let si = shots.findIndex(([, t1]) => t < t1)
+      if (si < 0) si = shots.length - 1
+      const t0 = si ? shots[si - 1][1] : 0
+      const k = t - t0
+      for (const [id] of shots) show(HOOK[id], id === shots[si][0])
+      const cut = Math.exp(-k * 18)
+      const punch = 1 + 0.08 * cut
+      const set = (el, cx, cy, z, rot = 0) => el.setAttribute('transform', SHOT(cx, cy, z * punch, rot, hx + 14 * cut * Math.sin(t * 90), hy))
+      const id = shots[si][0]
       const stop = ease.out3(clamp((t - K.STOP) / 0.5))
-      const out = ease.io2(clamp((t - K.OUT) / (K.CLOSE - K.OUT)))
-      const open = ease.out3(clamp((t - K.STOP - 0.2) / 0.3)) * (1 - ease.in3(clamp((t - (K.CLOSE - 0.18)) / 0.18)))
-      const speed = 1 - stop
-      HOOK.lights.forEach((l, k) => {
-        const x = 1200 - ((t * 1600 * Math.max(0.05, speed) + k * 260) % 1700)
-        l.setAttribute('x', x.toFixed(0))
-        l.setAttribute('opacity', (0.6 * speed).toFixed(2))
-      })
-      HOOK.platform.setAttribute('transform', `translate(${lerp(1600, 0, stop).toFixed(0)} 0)`)
-      const flick = t < 1.0 && Math.floor(t * 12) % 5 === 0 ? 0.3 : 1
-      HOOK.neons.forEach((n) => n.setAttribute('opacity', flick))
-      HOOK.neonGlow.setAttribute('opacity', (0.25 * flick).toFixed(2))
-      HOOK.doorL.setAttribute('x', (960 - 150 * open).toFixed(0))
-      HOOK.doorR.setAttribute('x', (1110 + 150 * open).toFixed(0))
-      HOOK.doorLight.setAttribute('opacity', t > K.CLOSE - 0.5 ? (Math.floor(t * 8) % 2 ? 1 : 0.2) : 0)
-      const m = mouthOf('controleur', t)
-      HOOK.ctrl.update(t, { x: 640, y: 1060, scale: 0.85, mouth: m, brows: 'angry', look: [0.4, 0.1], armR: [lerp(1.4, 1.7, stop), 0.15], armL: [0.3, 0.6], point: true, lean: 0.03, seed: 1 })
-      HOOK.manon.update(t, { x: lerp(300, 1110, out), y: lerp(1180, 1120, out), scale: lerp(0.85, 0.6, out), mouth: t < K.STOP ? 0.3 * Math.max(0, Math.sin(t * 9)) : 0.15, brows: 'sad', look: [0.4, 0.2], armR: [0.9, 2.0], armL: [0.3, 0.5], tearT: t - 0.2, seed: 2 })
-      HOOK.manon.root.setAttribute('opacity', (1 - clamp((out - 0.85) / 0.15)).toFixed(2))
-      const sway = 6 * Math.sin(t * 2.3) * speed
-      HOOK.Acam.setAttribute('transform', SHOT(540, 980, 1.02 + 0.02 * t, sway * 0.3, hx + 8 * Math.sin(t * 7) + 4 * speed * Math.sin(t * 31), hy + 5 * Math.sin(t * 11)))
-      HOOK.recTxt.textContent = `REC  23:10:${pad2(2 + t)}`
-    }
-    if (phase === 'B') {
-      // Le train repart : le quai glisse, Manon rétrécit, seule sous le lampadaire.
-      const k = t - K.CLOSE
-      const dep = ease.in2(clamp((t - K.DEPART) / (K.REWIND - K.DEPART)))
-      HOOK.manonQ.update(t, { x: 540, y: 1160, scale: 0.55, brows: 'sad', look: [0.4, 0], armR: [0.3, 0.6], armL: [0.3, 0.6], tearT: 0.5 + k, seed: 2 })
-      HOOK.quai.setAttribute('transform', `translate(${(-2600 * dep).toFixed(0)} 0)`)
-      HOOK.Bcam.setAttribute('transform', SHOT(540, 980, 1.0 + 0.3 * dep, 0, hx + 4 * Math.sin(t * 29), hy))
+      if (id === 'S1') {
+        HOOK.streaks1.forEach((s, j) => {
+          s.setAttribute('x', (1100 - ((t * 2600 + j * 330) % 1900)).toFixed(0))
+        })
+        const [a, b] = reach(150 / 1.15, (1330 - 1250) / 1.15, 1)
+        HOOK.manon1.update(t, { x: 520, y: 1250, scale: 1.15, mouth: 0.1, brows: 'sad', look: [0.5, 0.4], armR: [a, b], armL: [0.3, 0.5], tearT: 0.3 + t * 0.8, headTilt: 0.12, seed: 2 })
+        place(HOOK.phone1, 520 + 150, 1330 - 80, 0.85, -8 + 2 * Math.sin(t * 3))
+        set(HOOK.S1, 540, 980, 1.0 + 0.06 * k, 0)
+      }
+      if (id === 'S2') {
+        HOOK.ctrl2.update(t, { x: 560, y: 1240, scale: 1.2, mouth: mouthOf('controleur', t), brows: 'angry', look: [-0.6, 0.2], armR: [1.55 + 0.05 * Math.sin(t * 12), -0.05], armL: [0.3, 0.6], point: true, lean: -0.04, seed: 1 })
+        HOOK.sl2.setAttribute('opacity', 1)
+        HOOK.sl2.setAttribute('transform', `translate(540 900) rotate(${t * 20})`)
+        const sp = popS(t, 1.7, Infinity, 0.18)
+        HOOK.stamp2.setAttribute('opacity', sp > 0.01 ? 0.92 : 0)
+        HOOK.stamp2.setAttribute('transform', `translate(540 330) rotate(-12) scale(${(sp * (1 + 1.2 * Math.exp(-(t - 1.7) * 14))).toFixed(3)})`)
+        set(HOOK.S2, 540, 960, 1.0 + 0.05 * k)
+      }
+      if (id === 'S3') {
+        const open = ease.out3(clamp((t - (K.STOP + 0.2)) / 0.3))
+        HOOK.door3L.setAttribute('transform', `translate(${(-420 * open).toFixed(0)} 0)`)
+        HOOK.door3R.setAttribute('transform', `translate(${(420 * open).toFixed(0)} 0)`)
+        HOOK.doorLed3.setAttribute('fill', open > 0.1 ? '#3bd16f' : '#ffd166')
+        const pt = ease.out3(clamp((t - (K.STOP + 0.28)) / 0.2))
+        HOOK.arm3.setAttribute('transform', `translate(${lerp(-500, 0, pt)} ${lerp(400, 0, pt) + 10 * Math.sin(t * 20)})`)
+        burstAt(HOOK.krr, t, t0 + 0.02, K.STOP + 0.25, 540, 420, -6, 0.9)
+        burstAt(HOOK.psch, t, K.STOP + 0.25, K.OUT, 560, 400, 8, 0.85)
+        set(HOOK.S3, 540, 960, 1.0 + 0.03 * k, 0)
+      }
+      if (id === 'S4') {
+        const close = ease.in3(clamp((t - (K.CLOSE - 0.2)) / 0.2))
+        HOOK.door4L.setAttribute('transform', `translate(${(-420 * (1 - close)).toFixed(0)} 0)`)
+        HOOK.door4R.setAttribute('transform', `translate(${(420 * (1 - close)).toFixed(0)} 0)`)
+        const back = ease.out2(clamp(k / 0.35))
+        HOOK.manon4.update(t, { x: 540, y: lerp(1120, 1060, back), scale: lerp(1.0, 0.85, back), mouth: t > K.CLOSE - 0.35 ? 0.6 : 0.1, brows: 'sad', look: [0, 0.1], armR: [0.4, 0.7], armL: [0.4, 0.7], tearT: 1, seed: 2 })
+        HOOK.doorLed4.setAttribute('opacity', Math.floor(t * 8) % 2 ? 1 : 0.25)
+        burstAt(HOOK.clac, t, K.CLOSE, K.CLOSE + 0.2, 540, 960, -8, 1)
+        set(HOOK.S4, 540, 960, 1.0 + 0.04 * k, 0)
+      }
+      if (id === 'S5') {
+        const dep = ease.in2(clamp((t - K.DEPART) / 0.4))
+        HOOK.pane5.setAttribute('transform', `translate(${(-1300 * dep).toFixed(0)} 0)`)
+        const bangK = Math.abs(Math.sin((t - t0) * 22))
+        HOOK.manon5.update(t, { x: 560, y: 1150, scale: 1.05, mouth: 0.8, brows: 'surprised', look: [0, 0], armR: [0.4, 0.7], armL: [0.4, 0.7], tearT: 1, seed: 2 })
+        place(HOOK.palm5, 330, 760 + 14 * bangK * (1 - dep), 1.3, -10)
+        HOOK.sl5.setAttribute('opacity', dep > 0.2 ? 1 : 0)
+        HOOK.sl5.setAttribute('transform', `translate(${(-(t * 3000) % 600).toFixed(0)} 0)`)
+        burstAt(HOOK.bang, t, t0 + 0.02, K.DEPART + 0.05, 600, 300, 6, 0.95)
+        set(HOOK.S5, 540, 960, 1.0, 0)
+      }
+      if (id === 'S6') {
+        const go = ease.in2(clamp(k / 0.65))
+        HOOK.train6.setAttribute('transform', `translate(${(-600 - 2200 * go).toFixed(0)} 0)`)
+        place(HOOK.legs6, 640, 1075, 1, 0)
+        HOOK.manon6.update(t, { x: 640, y: 980, scale: 0.3, brows: 'sad', armR: [0.2, 0.3], armL: [0.2, 0.3], seed: 2 })
+        set(HOOK.S6, 540, 960, 1.0 + 0.04 * k, 0)
+      }
+      void stop
     }
     if (phase === 'C1') {
       const k = t - K.REWIND

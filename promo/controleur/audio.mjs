@@ -302,9 +302,9 @@ function score() {
   boom(K.AGENT, 0.35, 90, 40, 0.4)
   // D · La départementale : le vent, la voiture qui arrive, les pneus, le choc, le noir.
   wind(K.ROAD, K.HIT - K.ROAD, 0.07)
-  sample('0189', K.CAR - 0.3, 0.6, { from: 14, len: K.HIT - K.CAR + 0.3, fade: 0.05 })
-  sample('0258', K.HIT - 0.55, 0.5, { len: 0.4 })
-  sample('2368', K.HIT - 0.45, 0.8, { from: 0.05, len: 0.45, fade: 0.005 })
+  sample('0189', K.CAR - 0.3, 0.35, { from: 14, len: K.HIT - K.CAR + 0.3, lp: 1500, fade: 0.05 })
+  sample('0258', K.HIT - 0.55, 0.18, { len: 0.4, lp: 1500 })
+  sample('2368', K.HIT - 0.3, 0.3, { from: 0.05, len: 0.3, lp: 2500, fade: 0.005 })
   boom(K.HIT, 0.7, 80, 34, 0.5)
   // D2 · L'hôpital : les bips.
   for (let t = K.HOSP + 0.1; t < K.TODAY - 0.1; t += 0.7) beep(t, 0.07, 1050)

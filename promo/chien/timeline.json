@@ -1,6 +1,6 @@
 {
  "_doc": "Généré par voix.py : ne pas modifier à la main.",
- "duration": 73.45,
+ "duration": 76.91,
  "lines": [
   {
    "id": "01-pere",
@@ -524,49 +524,69 @@
   {
    "id": "08-like",
    "who": "narrateur",
-   "text": "Père héroïque ou bourreau ? Like si ça te fait réagir.",
+   "text": "Père héroïque… ou bourreau ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
    "start": 39.684,
-   "dur": 3.14,
+   "dur": 5.195,
    "words": [
     {
      "w": "Père",
      "t": 39.684
     },
     {
-     "w": "héroïque",
-     "t": 39.944
+     "w": "héroïque…",
+     "t": 39.954
     },
     {
      "w": "ou",
-     "t": 40.524
+     "t": 40.594
     },
     {
      "w": "bourreau ?",
-     "t": 40.804
+     "t": 40.994
     },
     {
-     "w": "Like",
-     "t": 41.404
+     "w": "Ici,",
+     "t": 41.694
     },
     {
-     "w": "si",
-     "t": 41.684
+     "w": "c'est",
+     "t": 42.014
     },
     {
-     "w": "ça",
-     "t": 41.924
+     "w": "toi",
+     "t": 42.334
     },
     {
-     "w": "te",
-     "t": 42.044
+     "w": "qui",
+     "t": 42.474
     },
     {
-     "w": "fait",
-     "t": 42.084
+     "w": "juges.",
+     "t": 42.841
     },
     {
-     "w": "réagir.",
-     "t": 42.204
+     "w": "Abonne-toi",
+     "t": 43.207
+    },
+    {
+     "w": "pour",
+     "t": 43.574
+    },
+    {
+     "w": "siéger",
+     "t": 43.734
+    },
+    {
+     "w": "au",
+     "t": 44.014
+    },
+    {
+     "w": "prochain",
+     "t": 44.134
+    },
+    {
+     "w": "procès.",
+     "t": 44.354
     }
    ]
   },
@@ -574,80 +594,80 @@
    "id": "09-jamais",
    "who": "procureur",
    "text": "Ce chien n'avait jamais mordu personne. Sa propriétaire le promenait tous les jours. Il était vacciné, déclaré, assuré.",
-   "start": 43.224,
+   "start": 45.279,
    "dur": 5.68,
    "words": [
     {
      "w": "Ce",
-     "t": 43.224
+     "t": 45.279
     },
     {
      "w": "chien",
-     "t": 43.414
+     "t": 45.469
     },
     {
      "w": "n'avait",
-     "t": 43.624
+     "t": 45.679
     },
     {
      "w": "jamais",
-     "t": 43.834
+     "t": 45.889
     },
     {
      "w": "mordu",
-     "t": 44.134
+     "t": 46.189
     },
     {
      "w": "personne.",
-     "t": 44.434
+     "t": 46.489
     },
     {
      "w": "Sa",
-     "t": 44.994
+     "t": 47.049
     },
     {
      "w": "propriétaire",
-     "t": 45.094
+     "t": 47.149
     },
     {
      "w": "le",
-     "t": 45.614
+     "t": 47.669
     },
     {
      "w": "promenait",
-     "t": 45.674
+     "t": 47.729
     },
     {
      "w": "tous",
-     "t": 45.994
+     "t": 48.049
     },
     {
      "w": "les",
-     "t": 46.134
+     "t": 48.189
     },
     {
      "w": "jours.",
-     "t": 46.274
+     "t": 48.329
     },
     {
      "w": "Il",
-     "t": 46.694
+     "t": 48.749
     },
     {
      "w": "était",
-     "t": 46.774
+     "t": 48.829
     },
     {
      "w": "vacciné,",
-     "t": 46.934
+     "t": 48.989
     },
     {
      "w": "déclaré,",
-     "t": 47.694
+     "t": 49.749
     },
     {
      "w": "assuré.",
-     "t": 48.374
+     "t": 50.429
     }
    ]
   },
@@ -655,104 +675,104 @@
    "id": "10-assure",
    "who": "avocate",
    "text": "Assuré ? Génial. L'assurance remboursera le bras du gamin. Ce chien est passé sous une clôture et a sauté sur un enfant de 6 ans.",
-   "start": 49.104,
+   "start": 51.159,
    "dur": 6.12,
    "words": [
     {
      "w": "Assuré ?",
-     "t": 49.444
+     "t": 51.499
     },
     {
      "w": "Génial.",
-     "t": 49.784
+     "t": 51.839
     },
     {
      "w": "L'assurance",
-     "t": 50.354
+     "t": 52.409
     },
     {
      "w": "remboursera",
-     "t": 50.924
+     "t": 52.979
     },
     {
      "w": "le",
-     "t": 51.424
+     "t": 53.479
     },
     {
      "w": "bras",
-     "t": 51.524
+     "t": 53.579
     },
     {
      "w": "du",
-     "t": 51.664
+     "t": 53.719
     },
     {
      "w": "gamin.",
-     "t": 51.784
+     "t": 53.839
     },
     {
      "w": "Ce",
-     "t": 52.164
+     "t": 54.219
     },
     {
      "w": "chien",
-     "t": 52.344
+     "t": 54.399
     },
     {
      "w": "est",
-     "t": 52.644
+     "t": 54.699
     },
     {
      "w": "passé",
-     "t": 52.744
+     "t": 54.799
     },
     {
      "w": "sous",
-     "t": 52.964
+     "t": 55.019
     },
     {
      "w": "une",
-     "t": 53.144
+     "t": 55.199
     },
     {
      "w": "clôture",
-     "t": 53.284
+     "t": 55.339
     },
     {
      "w": "et",
-     "t": 53.664
+     "t": 55.719
     },
     {
      "w": "a",
-     "t": 53.804
+     "t": 55.859
     },
     {
      "w": "sauté",
-     "t": 53.884
+     "t": 55.939
     },
     {
      "w": "sur",
-     "t": 54.184
+     "t": 56.239
     },
     {
      "w": "un",
-     "t": 54.304
+     "t": 56.359
     },
     {
      "w": "enfant",
-     "t": 54.424
+     "t": 56.479
     },
     {
      "w": "de",
-     "t": 54.604
+     "t": 56.659
     },
     {
      "w": "6",
-     "t": 54.724
+     "t": 56.779
     },
     {
      "w": "ans.",
-     "t": 54.944
+     "t": 56.999
     }
    ]
   },
@@ -760,84 +780,84 @@
    "id": "11-massacre",
    "who": "procureur",
    "text": "Et le père a fait d'un accident un massacre. Devant son fils. Qui va revoir ça toute sa vie.",
-   "start": 55.424,
+   "start": 57.479,
    "dur": 5.19,
    "words": [
     {
      "w": "Et",
-     "t": 55.424
+     "t": 57.479
     },
     {
      "w": "le",
-     "t": 55.534
+     "t": 57.589
     },
     {
      "w": "père",
-     "t": 55.634
+     "t": 57.689
     },
     {
      "w": "a",
-     "t": 55.854
+     "t": 57.909
     },
     {
      "w": "fait",
-     "t": 56.034
+     "t": 58.089
     },
     {
      "w": "d'un",
-     "t": 56.154
+     "t": 58.209
     },
     {
      "w": "accident",
-     "t": 56.274
+     "t": 58.329
     },
     {
      "w": "un",
-     "t": 56.974
+     "t": 59.029
     },
     {
      "w": "massacre.",
-     "t": 57.054
+     "t": 59.109
     },
     {
      "w": "Devant",
-     "t": 57.734
+     "t": 59.789
     },
     {
      "w": "son",
-     "t": 57.994
+     "t": 60.049
     },
     {
      "w": "fils.",
-     "t": 58.234
+     "t": 60.289
     },
     {
      "w": "Qui",
-     "t": 58.714
+     "t": 60.769
     },
     {
      "w": "va",
-     "t": 58.854
+     "t": 60.909
     },
     {
      "w": "revoir",
-     "t": 58.994
+     "t": 61.049
     },
     {
      "w": "ça",
-     "t": 59.334
+     "t": 61.389
     },
     {
      "w": "toute",
-     "t": 59.614
+     "t": 61.669
     },
     {
      "w": "sa",
-     "t": 60.074
+     "t": 62.129
     },
     {
      "w": "vie.",
-     "t": 60.314
+     "t": 62.369
     }
    ]
   },
@@ -845,157 +865,181 @@
    "id": "12-venu",
    "who": "avocate",
    "text": "Ce qu'il va revoir toute sa vie, c'est un chien qui lui saute à la gorge. Et un père qui est venu.",
-   "start": 60.914,
+   "start": 62.969,
    "dur": 4.16,
    "words": [
     {
      "w": "Ce",
-     "t": 60.914
+     "t": 62.969
     },
     {
      "w": "qu'il",
-     "t": 61.064
+     "t": 63.119
     },
     {
      "w": "va",
-     "t": 61.214
+     "t": 63.269
     },
     {
      "w": "revoir",
-     "t": 61.294
+     "t": 63.349
     },
     {
      "w": "toute",
-     "t": 61.554
+     "t": 63.609
     },
     {
      "w": "sa",
-     "t": 61.734
+     "t": 63.789
     },
     {
      "w": "vie,",
-     "t": 61.954
+     "t": 64.009
     },
     {
      "w": "c'est",
-     "t": 62.194
+     "t": 64.249
     },
     {
      "w": "un",
-     "t": 62.434
+     "t": 64.489
     },
     {
      "w": "chien",
-     "t": 62.554
+     "t": 64.609
     },
     {
      "w": "qui",
-     "t": 62.834
+     "t": 64.889
     },
     {
      "w": "lui",
-     "t": 62.934
+     "t": 64.989
     },
     {
      "w": "saute",
-     "t": 63.074
+     "t": 65.129
     },
     {
      "w": "à",
-     "t": 63.274
+     "t": 65.329
     },
     {
      "w": "la",
-     "t": 63.414
+     "t": 65.469
     },
     {
      "w": "gorge.",
-     "t": 63.434
+     "t": 65.489
     },
     {
      "w": "Et",
-     "t": 63.914
+     "t": 65.969
     },
     {
      "w": "un",
-     "t": 63.974
+     "t": 66.029
     },
     {
      "w": "père",
-     "t": 64.074
+     "t": 66.129
     },
     {
      "w": "qui",
-     "t": 64.354
+     "t": 66.409
     },
     {
      "w": "est",
-     "t": 64.514
+     "t": 66.569
     },
     {
      "w": "venu.",
-     "t": 64.594
+     "t": 66.649
     }
    ]
   },
   {
    "id": "13-jure",
    "who": "narrateur",
-   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
-   "start": 65.674,
-   "dur": 4.371,
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend.",
+   "start": 67.729,
+   "dur": 5.78,
    "words": [
     {
      "w": "Tu",
-     "t": 65.674
+     "t": 67.729
     },
     {
      "w": "es",
-     "t": 65.854
+     "t": 67.899
     },
     {
      "w": "le",
-     "t": 65.954
+     "t": 68.019
     },
     {
      "w": "juré.",
-     "t": 66.054
+     "t": 68.139
     },
     {
      "w": "Coupable…",
-     "t": 66.654
+     "t": 68.719
     },
     {
      "w": "ou",
-     "t": 67.014
+     "t": 69.099
     },
     {
      "w": "non",
-     "t": 67.414
+     "t": 69.439
     },
     {
      "w": "coupable ?",
-     "t": 67.574
+     "t": 69.599
     },
     {
-     "w": "Écris-le",
-     "t": 68.074
+     "w": "Écris",
+     "t": 70.279
+    },
+    {
+     "w": "ton",
+     "t": 70.499
+    },
+    {
+     "w": "verdict",
+     "t": 70.599
     },
     {
      "w": "en",
-     "t": 68.574
+     "t": 70.799
     },
     {
-     "w": "commentaire,",
-     "t": 68.674
+     "w": "commentaire.",
+     "t": 70.999
     },
     {
-     "w": "et",
-     "t": 69.194
+     "w": "Et",
+     "t": 71.679
     },
     {
-     "w": "abonne-toi.",
-     "t": 69.619
+     "w": "abonne-toi :",
+     "t": 72.019
+    },
+    {
+     "w": "le",
+     "t": 72.359
+    },
+    {
+     "w": "prochain",
+     "t": 72.399
+    },
+    {
+     "w": "procès",
+     "t": 72.739
+    },
+    {
+     "w": "t'attend.",
+     "t": 73.138
     }
    ]
   }

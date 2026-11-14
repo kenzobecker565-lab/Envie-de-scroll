@@ -63,7 +63,7 @@
   {
    "id": "08-like",
    "who": "narrateur",
-   "text": "Père héroïque ou bourreau ? Like si ça te fait réagir.",
+   "text": "Père héroïque… ou bourreau ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
    "gap": 0.4
   },
   {
@@ -93,7 +93,7 @@
   {
    "id": "13-jure",
    "who": "narrateur",
-   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend.",
    "gap": 0.6
   }
  ]

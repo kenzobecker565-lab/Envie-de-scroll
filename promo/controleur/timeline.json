@@ -1,6 +1,6 @@
 {
  "_doc": "Généré par voix.py : ne pas modifier à la main.",
- "duration": 69.2,
+ "duration": 72.69,
  "lines": [
   {
    "id": "01-controleur",
@@ -592,9 +592,9 @@
   {
    "id": "08-like",
    "who": "narrateur",
-   "text": "Il a fait son travail, ou il l'a abandonnée ? Like si ça te fait réagir.",
+   "text": "Il a fait son travail… ou il l'a abandonnée ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
    "start": 38.54,
-   "dur": 3.83,
+   "dur": 5.91,
    "words": [
     {
      "w": "Il",
@@ -602,59 +602,79 @@
     },
     {
      "w": "a",
-     "t": 38.66
+     "t": 38.67
     },
     {
      "w": "fait",
-     "t": 38.78
+     "t": 38.79
     },
     {
      "w": "son",
-     "t": 38.88
+     "t": 38.89
     },
     {
-     "w": "travail,",
-     "t": 38.98
+     "w": "travail…",
+     "t": 39.05
     },
     {
      "w": "ou",
-     "t": 39.6
+     "t": 39.83
     },
     {
      "w": "il",
-     "t": 39.82
+     "t": 40.09
     },
     {
      "w": "l'a",
-     "t": 40.2
+     "t": 40.51
     },
     {
      "w": "abandonnée ?",
-     "t": 40.58
+     "t": 40.93
     },
     {
-     "w": "Like",
-     "t": 40.96
+     "w": "Ici,",
+     "t": 41.35
     },
     {
-     "w": "si",
-     "t": 41.24
+     "w": "c'est",
+     "t": 41.67
     },
     {
-     "w": "ça",
-     "t": 41.44
+     "w": "toi",
+     "t": 41.99
     },
     {
-     "w": "te",
-     "t": 41.58
+     "w": "qui",
+     "t": 42.11
     },
     {
-     "w": "fait",
-     "t": 41.62
+     "w": "juges.",
+     "t": 42.457
     },
     {
-     "w": "réagir.",
-     "t": 41.74
+     "w": "Abonne-toi",
+     "t": 42.803
+    },
+    {
+     "w": "pour",
+     "t": 43.15
+    },
+    {
+     "w": "siéger",
+     "t": 43.31
+    },
+    {
+     "w": "au",
+     "t": 43.59
+    },
+    {
+     "w": "prochain",
+     "t": 43.71
+    },
+    {
+     "w": "procès.",
+     "t": 43.95
     }
    ]
   },
@@ -662,72 +682,72 @@
    "id": "09-porte",
    "who": "procureur",
    "text": "Il pouvait la verbaliser, prévenir les gendarmes, appeler ses parents. Il a choisi d'ouvrir la porte.",
-   "start": 42.77,
+   "start": 44.85,
    "dur": 4.72,
    "words": [
     {
      "w": "Il",
-     "t": 42.77
+     "t": 44.85
     },
     {
      "w": "pouvait",
-     "t": 42.9
+     "t": 44.98
     },
     {
      "w": "la",
-     "t": 43.08
+     "t": 45.16
     },
     {
      "w": "verbaliser,",
-     "t": 43.24
+     "t": 45.32
     },
     {
      "w": "prévenir",
-     "t": 44.0
+     "t": 46.08
     },
     {
      "w": "les",
-     "t": 44.28
+     "t": 46.36
     },
     {
      "w": "gendarmes,",
-     "t": 44.44
+     "t": 46.52
     },
     {
      "w": "appeler",
-     "t": 45.14
+     "t": 47.22
     },
     {
      "w": "ses",
-     "t": 45.38
+     "t": 47.46
     },
     {
      "w": "parents.",
-     "t": 45.52
+     "t": 47.6
     },
     {
      "w": "Il",
-     "t": 45.92
+     "t": 48.0
     },
     {
      "w": "a",
-     "t": 46.02
+     "t": 48.1
     },
     {
      "w": "choisi",
-     "t": 46.12
+     "t": 48.2
     },
     {
      "w": "d'ouvrir",
-     "t": 46.49
+     "t": 48.57
     },
     {
      "w": "la",
-     "t": 46.86
+     "t": 48.94
     },
     {
      "w": "porte.",
-     "t": 46.98
+     "t": 49.06
     }
    ]
   },
@@ -735,80 +755,80 @@
    "id": "10-parents",
    "who": "avocate",
    "text": "Et les parents, justement ? Où étaient-ils, à 23 heures, quand leur fille de 15 ans fraudait le train ?",
-   "start": 47.69,
+   "start": 49.77,
    "dur": 4.15,
    "words": [
     {
      "w": "Et",
-     "t": 47.69
+     "t": 49.77
     },
     {
      "w": "les",
-     "t": 47.8
+     "t": 49.88
     },
     {
      "w": "parents,",
-     "t": 47.88
+     "t": 49.96
     },
     {
      "w": "justement ?",
-     "t": 48.12
+     "t": 50.2
     },
     {
      "w": "Où",
-     "t": 48.82
+     "t": 50.9
     },
     {
      "w": "étaient-ils,",
-     "t": 49.07
+     "t": 51.15
     },
     {
      "w": "à",
-     "t": 49.32
+     "t": 51.4
     },
     {
      "w": "23",
-     "t": 49.607
+     "t": 51.687
     },
     {
      "w": "heures,",
-     "t": 49.893
+     "t": 51.973
     },
     {
      "w": "quand",
-     "t": 50.18
+     "t": 52.26
     },
     {
      "w": "leur",
-     "t": 50.36
+     "t": 52.44
     },
     {
      "w": "fille",
-     "t": 50.54
+     "t": 52.62
     },
     {
      "w": "de",
-     "t": 50.72
+     "t": 52.8
     },
     {
      "w": "15",
-     "t": 50.76
+     "t": 52.84
     },
     {
      "w": "ans",
-     "t": 50.94
+     "t": 53.02
     },
     {
      "w": "fraudait",
-     "t": 51.18
+     "t": 53.26
     },
     {
      "w": "le",
-     "t": 51.42
+     "t": 53.5
     },
     {
      "w": "train ?",
-     "t": 51.46
+     "t": 53.54
     }
    ]
   },
@@ -816,76 +836,76 @@
    "id": "11-nuit",
    "who": "procureur",
    "text": "Ah, maintenant c'est la faute des parents. Et demain, celle de la nuit, qui était trop noire ?",
-   "start": 52.04,
+   "start": 54.12,
    "dur": 4.36,
    "words": [
     {
      "w": "Ah,",
-     "t": 52.04
+     "t": 54.12
     },
     {
      "w": "maintenant",
-     "t": 52.58
+     "t": 54.66
     },
     {
      "w": "c'est",
-     "t": 52.86
+     "t": 54.94
     },
     {
      "w": "la",
-     "t": 53.14
+     "t": 55.22
     },
     {
      "w": "faute",
-     "t": 53.24
+     "t": 55.32
     },
     {
      "w": "des",
-     "t": 53.44
+     "t": 55.52
     },
     {
      "w": "parents.",
-     "t": 53.56
+     "t": 55.64
     },
     {
      "w": "Et",
-     "t": 54.02
+     "t": 56.1
     },
     {
      "w": "demain,",
-     "t": 54.22
+     "t": 56.3
     },
     {
      "w": "celle",
-     "t": 54.68
+     "t": 56.76
     },
     {
      "w": "de",
-     "t": 54.84
+     "t": 56.92
     },
     {
      "w": "la",
-     "t": 54.96
+     "t": 57.04
     },
     {
      "w": "nuit,",
-     "t": 55.08
+     "t": 57.16
     },
     {
      "w": "qui",
-     "t": 55.44
+     "t": 57.52
     },
     {
      "w": "était",
-     "t": 55.54
+     "t": 57.62
     },
     {
      "w": "trop",
-     "t": 55.68
+     "t": 57.76
     },
     {
      "w": "noire ?",
-     "t": 55.88
+     "t": 57.96
     }
    ]
   },
@@ -893,149 +913,173 @@
    "id": "12-regles",
    "who": "avocate",
    "text": "Non. C'est la faute d'une gamine qui croit que les règles, c'est pour les autres. Lui, il les a appliquées.",
-   "start": 56.7,
+   "start": 58.78,
    "dur": 4.13,
    "words": [
     {
      "w": "Non.",
-     "t": 56.7
+     "t": 58.78
     },
     {
      "w": "C'est",
-     "t": 56.96
-    },
-    {
-     "w": "la",
-     "t": 57.24
-    },
-    {
-     "w": "faute",
-     "t": 57.3
-    },
-    {
-     "w": "d'une",
-     "t": 57.46
-    },
-    {
-     "w": "gamine",
-     "t": 57.62
-    },
-    {
-     "w": "qui",
-     "t": 57.94
-    },
-    {
-     "w": "croit",
-     "t": 58.08
-    },
-    {
-     "w": "que",
-     "t": 58.3
-    },
-    {
-     "w": "les",
-     "t": 58.36
-    },
-    {
-     "w": "règles,",
-     "t": 58.46
-    },
-    {
-     "w": "c'est",
-     "t": 58.7
-    },
-    {
-     "w": "pour",
-     "t": 58.94
-    },
-    {
-     "w": "les",
      "t": 59.04
     },
     {
-     "w": "autres.",
-     "t": 59.16
+     "w": "la",
+     "t": 59.32
     },
     {
-     "w": "Lui,",
-     "t": 59.62
+     "w": "faute",
+     "t": 59.38
     },
     {
-     "w": "il",
-     "t": 60.0
+     "w": "d'une",
+     "t": 59.54
+    },
+    {
+     "w": "gamine",
+     "t": 59.7
+    },
+    {
+     "w": "qui",
+     "t": 60.02
+    },
+    {
+     "w": "croit",
+     "t": 60.16
+    },
+    {
+     "w": "que",
+     "t": 60.38
     },
     {
      "w": "les",
-     "t": 60.08
+     "t": 60.44
+    },
+    {
+     "w": "règles,",
+     "t": 60.54
+    },
+    {
+     "w": "c'est",
+     "t": 60.78
+    },
+    {
+     "w": "pour",
+     "t": 61.02
+    },
+    {
+     "w": "les",
+     "t": 61.12
+    },
+    {
+     "w": "autres.",
+     "t": 61.24
+    },
+    {
+     "w": "Lui,",
+     "t": 61.7
+    },
+    {
+     "w": "il",
+     "t": 62.08
+    },
+    {
+     "w": "les",
+     "t": 62.16
     },
     {
      "w": "a",
-     "t": 60.2
+     "t": 62.28
     },
     {
      "w": "appliquées.",
-     "t": 60.599
+     "t": 62.679
     }
    ]
   },
   {
    "id": "13-jure",
    "who": "narrateur",
-   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
-   "start": 61.43,
-   "dur": 4.371,
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend.",
+   "start": 63.51,
+   "dur": 5.78,
    "words": [
     {
      "w": "Tu",
-     "t": 61.43
+     "t": 63.51
     },
     {
      "w": "es",
-     "t": 61.61
+     "t": 63.68
     },
     {
      "w": "le",
-     "t": 61.71
+     "t": 63.8
     },
     {
      "w": "juré.",
-     "t": 61.81
+     "t": 63.92
     },
     {
      "w": "Coupable…",
-     "t": 62.41
+     "t": 64.5
     },
     {
      "w": "ou",
-     "t": 62.77
+     "t": 64.88
     },
     {
      "w": "non",
-     "t": 63.17
+     "t": 65.22
     },
     {
      "w": "coupable ?",
-     "t": 63.33
+     "t": 65.38
     },
     {
-     "w": "Écris-le",
-     "t": 63.83
+     "w": "Écris",
+     "t": 66.06
+    },
+    {
+     "w": "ton",
+     "t": 66.28
+    },
+    {
+     "w": "verdict",
+     "t": 66.38
     },
     {
      "w": "en",
-     "t": 64.33
+     "t": 66.58
     },
     {
-     "w": "commentaire,",
-     "t": 64.43
+     "w": "commentaire.",
+     "t": 66.78
     },
     {
-     "w": "et",
-     "t": 64.95
+     "w": "Et",
+     "t": 67.46
     },
     {
-     "w": "abonne-toi.",
-     "t": 65.375
+     "w": "abonne-toi :",
+     "t": 67.8
+    },
+    {
+     "w": "le",
+     "t": 68.14
+    },
+    {
+     "w": "prochain",
+     "t": 68.18
+    },
+    {
+     "w": "procès",
+     "t": 68.52
+    },
+    {
+     "w": "t'attend.",
+     "t": 68.919
     }
    ]
   }

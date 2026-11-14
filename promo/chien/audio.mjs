@@ -334,12 +334,13 @@ function score() {
     sweep(a - 0.08, 0.12, { f0: 2400, f1: 200, gain: 0.18 })
     boom(a, 0.4, 100, 40, 0.4)
   }
-  pop(W('08', 'like') - 0.1, 0.2, 1400, 700)
+  pop(W('08', 'abonnetoi') - 0.1, 0.2, 1200, 600)
+  pop(W('08', 'abonnetoi') + 0.05, 0.14, 1600, 900)
   boom(IMPACT, 0.45, 55, 28, 1.4)
   // Le vote.
   boom(W('13', 'jure') - 0.15, 0.4, 60, 30, 1.2)
   for (const w of ['coupable', 'non']) boom(W('13', w) - 0.1, 0.22, 90, 45, 0.5)
-  pop(W('13', 'ecrisle') - 0.1, 0.12, 900, 400)
+  pop(W('13', 'ecris') - 0.1, 0.12, 900, 400)
   pop(W('13', 'abonnetoi') - 0.1, 0.18, 1200, 600)
   pop(W('13', 'abonnetoi') + 0.05, 0.14, 1600, 900)
 }

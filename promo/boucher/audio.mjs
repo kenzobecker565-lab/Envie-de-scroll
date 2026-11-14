@@ -283,14 +283,14 @@ function score() {
   // A2 · Dedans : le groupe froid, les pas, la poussée, la porte qui claque, le cadenas.
   tick(K.CAM2, 0.2, 1800)
   hum(K.CAM2, K.SLAM - K.CAM2, 100, 0.05)
-  for (let t = K.MARC; t < K.PUSH; t += 0.35) boom(t, 0.18, 110, 50, 0.08)
+  for (let t = K.MARC; t < K.PUSH; t += 0.35) boom(t, 0.12, 110, 50, 0.08)
   for (let t = 0.6, k = 0; t < K.SLAM - 0.1; k++) {
-    boom(t, 0.2, 55, 30, 0.2)
-    boom(t + 0.16, 0.14, 50, 28, 0.2)
+    boom(t, 0.13, 55, 30, 0.2)
+    boom(t + 0.16, 0.09, 50, 28, 0.2)
     t += lerp(0.8, 0.38, Math.min(1, t / K.SLAM))
   }
-  sample('1801', K.PUSH - 0.28, 0.6)
-  sweep(K.PUSH, K.SLAM - K.PUSH, { f0: 300, f1: 3600, q: 1.1, gain: 0.22 })
+  sample('1801', K.PUSH - 0.28, 0.25)
+  sweep(K.PUSH, K.SLAM - K.PUSH, { f0: 300, f1: 3600, q: 1.1, gain: 0.08 })
   sample('1501', K.SLAM - 0.2, 1.0, { len: 0.9 })
   sample('0446', K.SLAM - 0.15, 0.7, { from: 0.1, len: 0.6 })
   boom(K.SLAM, 0.75, 100, 36, 0.8)

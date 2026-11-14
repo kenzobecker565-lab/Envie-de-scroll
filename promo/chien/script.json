@@ -1,0 +1,100 @@
+{
+ "_doc": "« Le chien » : un père tue à coups de pelle l'american staff qui a mordu son fils, alors que le chien s'enfuyait (affaire fictive). Voix ElevenLabs (Eleven v4) : père « Julien », narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "pere": {
+   "name": "pere",
+   "file": "media/pere.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-pere",
+   "who": "pere",
+   "text": "Lâche-le ! Lâche mon fils, sale bête !"
+  },
+  {
+   "id": "02-morsure",
+   "who": "narrateur",
+   "text": "Ce jour-là, Rocky, un american staff, mord Nathan, 6 ans, au bras. Son père attrape une pelle.",
+   "gap": 1.9
+  },
+  {
+   "id": "03-onze",
+   "who": "narrateur",
+   "text": "Le chien avait lâché. Il s'enfuyait. Le père l'a frappé onze fois. Rocky est mort. Aujourd'hui, c'est le père qui est jugé.",
+   "gap": 0.35
+  },
+  {
+   "id": "04-rage",
+   "who": "procureur",
+   "text": "Défendre son fils, oui. Achever un animal qui fuit, non. Le premier coup, c'est un réflexe. Le onzième, c'est de la rage.",
+   "gap": 0.45
+  },
+  {
+   "id": "05-points",
+   "who": "avocate",
+   "text": "De la rage ? Son fils a 14 points de suture au bras. Vous auriez compté les coups, vous, Maître ?",
+   "gap": 0.2
+  },
+  {
+   "id": "06-queue",
+   "who": "procureur",
+   "text": "Moi, j'aurais vu que le chien s'enfuyait. Avec la queue entre les pattes.",
+   "gap": 0.2
+  },
+  {
+   "id": "07-ecole",
+   "who": "avocate",
+   "text": "Il s'enfuyait… vers l'école maternelle, à 50 mètres. Vous préfériez qu'il finisse le travail là-bas ?",
+   "gap": 0.2
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Père héroïque ou bourreau ? Like si ça te fait réagir.",
+   "gap": 0.4
+  },
+  {
+   "id": "09-jamais",
+   "who": "procureur",
+   "text": "Ce chien n'avait jamais mordu personne. Sa propriétaire le promenait tous les jours. Il était vacciné, déclaré, assuré.",
+   "gap": 0.4
+  },
+  {
+   "id": "10-assure",
+   "who": "avocate",
+   "text": "Assuré ? Génial. L'assurance remboursera le bras du gamin. Ce chien est passé sous une clôture et a sauté sur un enfant de 6 ans.",
+   "gap": 0.2
+  },
+  {
+   "id": "11-massacre",
+   "who": "procureur",
+   "text": "Et le père a fait d'un accident un massacre. Devant son fils. Qui va revoir ça toute sa vie.",
+   "gap": 0.2
+  },
+  {
+   "id": "12-venu",
+   "who": "avocate",
+   "text": "Ce qu'il va revoir toute sa vie, c'est un chien qui lui saute à la gorge. Et un père qui est venu.",
+   "gap": 0.3
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "gap": 0.6
+  }
+ ]
+}

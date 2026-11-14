@@ -1,0 +1,915 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 63.99,
+ "lines": [
+  {
+   "id": "01-boucher",
+   "who": "boucher",
+   "text": "Vous aimez les animaux ? Allez donc leur dire bonjour.",
+   "start": 1.6,
+   "dur": 2.57,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 1.6
+    },
+    {
+     "w": "aimez",
+     "t": 1.8
+    },
+    {
+     "w": "les",
+     "t": 2.1
+    },
+    {
+     "w": "animaux ?",
+     "t": 2.2
+    },
+    {
+     "w": "Allez",
+     "t": 2.86
+    },
+    {
+     "w": "donc",
+     "t": 2.98
+    },
+    {
+     "w": "leur",
+     "t": 3.2
+    },
+    {
+     "w": "dire",
+     "t": 3.4
+    },
+    {
+     "w": "bonjour.",
+     "t": 3.54
+    }
+   ]
+  },
+  {
+   "id": "02-attaque",
+   "who": "narrateur",
+   "text": "Cinquième attaque en un an. Ce soir-là, Marc, boucher depuis 30 ans, attendait les militants. Il les a enfermés dans sa chambre froide.",
+   "start": 6.07,
+   "dur": 6.46,
+   "words": [
+    {
+     "w": "Cinquième",
+     "t": 6.07
+    },
+    {
+     "w": "attaque",
+     "t": 6.56
+    },
+    {
+     "w": "en",
+     "t": 6.84
+    },
+    {
+     "w": "un",
+     "t": 7.047
+    },
+    {
+     "w": "an.",
+     "t": 7.253
+    },
+    {
+     "w": "Ce",
+     "t": 7.46
+    },
+    {
+     "w": "soir-là,",
+     "t": 7.76
+    },
+    {
+     "w": "Marc,",
+     "t": 8.06
+    },
+    {
+     "w": "boucher",
+     "t": 8.47
+    },
+    {
+     "w": "depuis",
+     "t": 8.88
+    },
+    {
+     "w": "30",
+     "t": 9.02
+    },
+    {
+     "w": "ans,",
+     "t": 9.3
+    },
+    {
+     "w": "attendait",
+     "t": 9.68
+    },
+    {
+     "w": "les",
+     "t": 10.0
+    },
+    {
+     "w": "militants.",
+     "t": 10.06
+    },
+    {
+     "w": "Il",
+     "t": 10.64
+    },
+    {
+     "w": "les",
+     "t": 10.72
+    },
+    {
+     "w": "a",
+     "t": 10.86
+    },
+    {
+     "w": "enfermés",
+     "t": 11.02
+    },
+    {
+     "w": "dans",
+     "t": 11.44
+    },
+    {
+     "w": "sa",
+     "t": 11.56
+    },
+    {
+     "w": "chambre",
+     "t": 11.72
+    },
+    {
+     "w": "froide.",
+     "t": 11.94
+    }
+   ]
+  },
+  {
+   "id": "03-froid",
+   "who": "narrateur",
+   "text": "Quarante minutes à moins 18 degrés. Une étudiante a fini en hypothermie. Aujourd'hui, Marc est jugé.",
+   "start": 12.88,
+   "dur": 4.89,
+   "words": [
+    {
+     "w": "Quarante",
+     "t": 12.97
+    },
+    {
+     "w": "minutes",
+     "t": 13.15
+    },
+    {
+     "w": "à",
+     "t": 13.45
+    },
+    {
+     "w": "moins",
+     "t": 13.71
+    },
+    {
+     "w": "18",
+     "t": 13.87
+    },
+    {
+     "w": "degrés.",
+     "t": 14.15
+    },
+    {
+     "w": "Une",
+     "t": 14.73
+    },
+    {
+     "w": "étudiante",
+     "t": 14.81
+    },
+    {
+     "w": "a",
+     "t": 15.23
+    },
+    {
+     "w": "fini",
+     "t": 15.31
+    },
+    {
+     "w": "en",
+     "t": 15.49
+    },
+    {
+     "w": "hypothermie.",
+     "t": 15.63
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 16.3
+    },
+    {
+     "w": "Marc",
+     "t": 16.97
+    },
+    {
+     "w": "est",
+     "t": 17.15
+    },
+    {
+     "w": "jugé.",
+     "t": 17.31
+    }
+   ]
+  },
+  {
+   "id": "04-peinture",
+   "who": "procureur",
+   "text": "On ne répond pas à de la peinture… par une séquestration.",
+   "start": 18.22,
+   "dur": 2.73,
+   "words": [
+    {
+     "w": "On",
+     "t": 18.22
+    },
+    {
+     "w": "ne",
+     "t": 18.35
+    },
+    {
+     "w": "répond",
+     "t": 18.41
+    },
+    {
+     "w": "pas",
+     "t": 18.57
+    },
+    {
+     "w": "à",
+     "t": 18.85
+    },
+    {
+     "w": "de",
+     "t": 18.95
+    },
+    {
+     "w": "la",
+     "t": 18.97
+    },
+    {
+     "w": "peinture…",
+     "t": 19.07
+    },
+    {
+     "w": "par",
+     "t": 19.55
+    },
+    {
+     "w": "une",
+     "t": 19.85
+    },
+    {
+     "w": "séquestration.",
+     "t": 19.99
+    }
+   ]
+  },
+  {
+   "id": "05-vitrines",
+   "who": "avocate",
+   "text": "Cinq vitrines brisées. Des menaces de mort. Une plainte classée sans suite à chaque fois. À un moment, la peinture, ça devient du harcèlement.",
+   "start": 21.15,
+   "dur": 6.13,
+   "words": [
+    {
+     "w": "Cinq",
+     "t": 21.28
+    },
+    {
+     "w": "vitrines",
+     "t": 21.45
+    },
+    {
+     "w": "brisées.",
+     "t": 21.85
+    },
+    {
+     "w": "Des",
+     "t": 22.41
+    },
+    {
+     "w": "menaces",
+     "t": 22.53
+    },
+    {
+     "w": "de",
+     "t": 22.83
+    },
+    {
+     "w": "mort.",
+     "t": 22.93
+    },
+    {
+     "w": "Une",
+     "t": 23.37
+    },
+    {
+     "w": "plainte",
+     "t": 23.47
+    },
+    {
+     "w": "classée",
+     "t": 23.79
+    },
+    {
+     "w": "sans",
+     "t": 24.05
+    },
+    {
+     "w": "suite",
+     "t": 24.17
+    },
+    {
+     "w": "à",
+     "t": 24.33
+    },
+    {
+     "w": "chaque",
+     "t": 24.47
+    },
+    {
+     "w": "fois.",
+     "t": 24.61
+    },
+    {
+     "w": "À",
+     "t": 25.07
+    },
+    {
+     "w": "un",
+     "t": 25.13
+    },
+    {
+     "w": "moment,",
+     "t": 25.21
+    },
+    {
+     "w": "la",
+     "t": 25.63
+    },
+    {
+     "w": "peinture,",
+     "t": 25.69
+    },
+    {
+     "w": "ça",
+     "t": 26.15
+    },
+    {
+     "w": "devient",
+     "t": 26.31
+    },
+    {
+     "w": "du",
+     "t": 26.53
+    },
+    {
+     "w": "harcèlement.",
+     "t": 26.67
+    }
+   ]
+  },
+  {
+   "id": "06-pedagogie",
+   "who": "procureur",
+   "text": "Et l'hypothermie, ça devient quoi ? De la pédagogie ?",
+   "start": 27.48,
+   "dur": 2.73,
+   "words": [
+    {
+     "w": "Et",
+     "t": 27.48
+    },
+    {
+     "w": "l'hypothermie,",
+     "t": 27.9
+    },
+    {
+     "w": "ça",
+     "t": 28.32
+    },
+    {
+     "w": "devient",
+     "t": 28.54
+    },
+    {
+     "w": "quoi ?",
+     "t": 28.72
+    },
+    {
+     "w": "De",
+     "t": 29.22
+    },
+    {
+     "w": "la",
+     "t": 29.34
+    },
+    {
+     "w": "pédagogie ?",
+     "t": 29.46
+    }
+   ]
+  },
+  {
+   "id": "07-assassin",
+   "who": "avocate",
+   "text": "Ces gens traitent un artisan d'assassin… et viennent pleurer parce qu'ils ont eu froid. Ils voulaient sauver des animaux, ils ont vécu comme eux.",
+   "start": 30.41,
+   "dur": 5.63,
+   "words": [
+    {
+     "w": "Ces",
+     "t": 30.41
+    },
+    {
+     "w": "gens",
+     "t": 30.62
+    },
+    {
+     "w": "traitent",
+     "t": 30.8
+    },
+    {
+     "w": "un",
+     "t": 31.14
+    },
+    {
+     "w": "artisan",
+     "t": 31.16
+    },
+    {
+     "w": "d'assassin…",
+     "t": 31.65
+    },
+    {
+     "w": "et",
+     "t": 32.14
+    },
+    {
+     "w": "viennent",
+     "t": 32.4
+    },
+    {
+     "w": "pleurer",
+     "t": 32.54
+    },
+    {
+     "w": "parce",
+     "t": 32.94
+    },
+    {
+     "w": "qu'ils",
+     "t": 33.11
+    },
+    {
+     "w": "ont",
+     "t": 33.28
+    },
+    {
+     "w": "eu",
+     "t": 33.4
+    },
+    {
+     "w": "froid.",
+     "t": 33.44
+    },
+    {
+     "w": "Ils",
+     "t": 33.9
+    },
+    {
+     "w": "voulaient",
+     "t": 34.02
+    },
+    {
+     "w": "sauver",
+     "t": 34.3
+    },
+    {
+     "w": "des",
+     "t": 34.46
+    },
+    {
+     "w": "animaux,",
+     "t": 34.58
+    },
+    {
+     "w": "ils",
+     "t": 35.16
+    },
+    {
+     "w": "ont",
+     "t": 35.24
+    },
+    {
+     "w": "vécu",
+     "t": 35.36
+    },
+    {
+     "w": "comme",
+     "t": 35.62
+    },
+    {
+     "w": "eux.",
+     "t": 35.78
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Boucher à bout ou tortionnaire ? Like si ça te fait réagir.",
+   "start": 36.44,
+   "dur": 3.46,
+   "words": [
+    {
+     "w": "Boucher",
+     "t": 36.44
+    },
+    {
+     "w": "à",
+     "t": 36.88
+    },
+    {
+     "w": "bout",
+     "t": 36.98
+    },
+    {
+     "w": "ou",
+     "t": 37.14
+    },
+    {
+     "w": "tortionnaire ?",
+     "t": 37.74
+    },
+    {
+     "w": "Like",
+     "t": 38.34
+    },
+    {
+     "w": "si",
+     "t": 38.64
+    },
+    {
+     "w": "ça",
+     "t": 38.96
+    },
+    {
+     "w": "te",
+     "t": 39.1
+    },
+    {
+     "w": "fait",
+     "t": 39.16
+    },
+    {
+     "w": "réagir.",
+     "t": 39.28
+    }
+   ]
+  },
+  {
+   "id": "09-doigts",
+   "who": "procureur",
+   "text": "Une jeune femme de 20 ans a failli perdre deux doigts. Pour des tags.",
+   "start": 40.3,
+   "dur": 3.55,
+   "words": [
+    {
+     "w": "Une",
+     "t": 40.3
+    },
+    {
+     "w": "jeune",
+     "t": 40.47
+    },
+    {
+     "w": "femme",
+     "t": 40.63
+    },
+    {
+     "w": "de",
+     "t": 40.87
+    },
+    {
+     "w": "20",
+     "t": 41.01
+    },
+    {
+     "w": "ans",
+     "t": 41.23
+    },
+    {
+     "w": "a",
+     "t": 41.45
+    },
+    {
+     "w": "failli",
+     "t": 41.75
+    },
+    {
+     "w": "perdre",
+     "t": 41.97
+    },
+    {
+     "w": "deux",
+     "t": 42.25
+    },
+    {
+     "w": "doigts.",
+     "t": 42.57
+    },
+    {
+     "w": "Pour",
+     "t": 42.99
+    },
+    {
+     "w": "des",
+     "t": 43.13
+    },
+    {
+     "w": "tags.",
+     "t": 43.31
+    }
+   ]
+  },
+  {
+   "id": "10-tags",
+   "who": "avocate",
+   "text": "Des tags sur sa vie entière. Sa femme n'ose plus ouvrir la boutique le matin.",
+   "start": 44.05,
+   "dur": 3.88,
+   "words": [
+    {
+     "w": "Des",
+     "t": 44.05
+    },
+    {
+     "w": "tags",
+     "t": 44.21
+    },
+    {
+     "w": "sur",
+     "t": 44.47
+    },
+    {
+     "w": "sa",
+     "t": 44.69
+    },
+    {
+     "w": "vie",
+     "t": 44.85
+    },
+    {
+     "w": "entière.",
+     "t": 45.05
+    },
+    {
+     "w": "Sa",
+     "t": 45.75
+    },
+    {
+     "w": "femme",
+     "t": 45.93
+    },
+    {
+     "w": "n'ose",
+     "t": 46.22
+    },
+    {
+     "w": "plus",
+     "t": 46.51
+    },
+    {
+     "w": "ouvrir",
+     "t": 46.73
+    },
+    {
+     "w": "la",
+     "t": 47.01
+    },
+    {
+     "w": "boutique",
+     "t": 47.13
+    },
+    {
+     "w": "le",
+     "t": 47.39
+    },
+    {
+     "w": "matin.",
+     "t": 47.49
+    }
+   ]
+  },
+  {
+   "id": "11-cadenas",
+   "who": "procureur",
+   "text": "Alors qu'il porte plainte. Pas qu'il joue au bourreau avec un cadenas.",
+   "start": 48.13,
+   "dur": 2.96,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 48.13
+    },
+    {
+     "w": "qu'il",
+     "t": 48.32
+    },
+    {
+     "w": "porte",
+     "t": 48.57
+    },
+    {
+     "w": "plainte.",
+     "t": 48.79
+    },
+    {
+     "w": "Pas",
+     "t": 49.39
+    },
+    {
+     "w": "qu'il",
+     "t": 49.54
+    },
+    {
+     "w": "joue",
+     "t": 49.69
+    },
+    {
+     "w": "au",
+     "t": 49.85
+    },
+    {
+     "w": "bourreau",
+     "t": 49.95
+    },
+    {
+     "w": "avec",
+     "t": 50.29
+    },
+    {
+     "w": "un",
+     "t": 50.45
+    },
+    {
+     "w": "cadenas.",
+     "t": 50.59
+    }
+   ]
+  },
+  {
+   "id": "12-plainte",
+   "who": "avocate",
+   "text": "Il a porté plainte cinq fois. La justice n'a rien fait. Et aujourd'hui, c'est lui que vous jugez.",
+   "start": 51.39,
+   "dur": 4.23,
+   "words": [
+    {
+     "w": "Il",
+     "t": 51.39
+    },
+    {
+     "w": "a",
+     "t": 51.53
+    },
+    {
+     "w": "porté",
+     "t": 51.63
+    },
+    {
+     "w": "plainte",
+     "t": 51.89
+    },
+    {
+     "w": "cinq",
+     "t": 52.13
+    },
+    {
+     "w": "fois.",
+     "t": 52.33
+    },
+    {
+     "w": "La",
+     "t": 52.83
+    },
+    {
+     "w": "justice",
+     "t": 52.91
+    },
+    {
+     "w": "n'a",
+     "t": 53.15
+    },
+    {
+     "w": "rien",
+     "t": 53.39
+    },
+    {
+     "w": "fait.",
+     "t": 53.53
+    },
+    {
+     "w": "Et",
+     "t": 53.93
+    },
+    {
+     "w": "aujourd'hui,",
+     "t": 54.203
+    },
+    {
+     "w": "c'est",
+     "t": 54.477
+    },
+    {
+     "w": "lui",
+     "t": 54.75
+    },
+    {
+     "w": "que",
+     "t": 54.89
+    },
+    {
+     "w": "vous",
+     "t": 55.09
+    },
+    {
+     "w": "jugez.",
+     "t": 55.21
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "start": 56.22,
+   "dur": 4.371,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 56.22
+    },
+    {
+     "w": "es",
+     "t": 56.4
+    },
+    {
+     "w": "le",
+     "t": 56.5
+    },
+    {
+     "w": "juré.",
+     "t": 56.6
+    },
+    {
+     "w": "Coupable…",
+     "t": 57.2
+    },
+    {
+     "w": "ou",
+     "t": 57.56
+    },
+    {
+     "w": "non",
+     "t": 57.96
+    },
+    {
+     "w": "coupable ?",
+     "t": 58.12
+    },
+    {
+     "w": "Écris-le",
+     "t": 58.62
+    },
+    {
+     "w": "en",
+     "t": 59.12
+    },
+    {
+     "w": "commentaire,",
+     "t": 59.22
+    },
+    {
+     "w": "et",
+     "t": 59.74
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 60.165
+    }
+   ]
+  }
+ ]
+}

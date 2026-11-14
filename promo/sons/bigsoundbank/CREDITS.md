@@ -54,3 +54,13 @@ Crédit facultatif : « Additional sounds: Joseph SARDIN - BigSoundBank.com ».
 | 1045.wav | Ball Rebounds |
 | 0097.wav | Countryside (extrait de 30 s) |
 | 1660.wav | Laughter of Children |
+| 0044.wav, 0043.wav | Short spray, Long spray |
+| 1157.wav | Fridge |
+| 0446.wav | Freezer closure |
+| 2723.wav | Train in Station #1 (extrait de 40 s) |
+| 0564.wav | SNCF Jingle #2 |
+| 2954.wav, 0916.wav | Barking Dog #2, Barking dog #1 |
+| 1084.wav | Shot of shovel |
+| 1305.wav | Dig With a Shovel |
+| 3046.wav | Mechanical Entrance Doorbell #3 |
+| 0092.wav | Metro, Paris #2 (extrait de 40 s) |

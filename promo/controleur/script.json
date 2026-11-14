@@ -1,0 +1,100 @@
+{
+ "_doc": "« Le contrôleur » : un contrôleur fait descendre une ado de 15 ans sans billet, la nuit, dans une gare déserte (affaire fictive). Voix ElevenLabs (Eleven v4) : contrôleur « David », narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "controleur": {
+   "name": "controleur",
+   "file": "media/controleur.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-controleur",
+   "who": "controleur",
+   "text": "Pas de billet, pas de train. Descends, j'ai dit !"
+  },
+  {
+   "id": "02-gare",
+   "who": "narrateur",
+   "text": "23 h 10, une gare de campagne déserte. Manon, 15 ans, sans billet et sans batterie. Le contrôleur la fait descendre.",
+   "gap": 2.0
+  },
+  {
+   "id": "03-percutee",
+   "who": "narrateur",
+   "text": "Elle a marché sur la départementale. Une voiture l'a percutée. Trois mois d'hôpital. Aujourd'hui, le contrôleur est jugé.",
+   "gap": 0.35
+  },
+  {
+   "id": "04-enfant",
+   "who": "procureur",
+   "text": "On ne laisse pas une enfant seule, la nuit, au milieu de nulle part. Il n'y a pas de règlement au-dessus de ça.",
+   "gap": 0.45
+  },
+  {
+   "id": "05-fraude",
+   "who": "avocate",
+   "text": "Une enfant ? Troisième fraude du mois. Et ce soir-là, elle lui a craché au visage. Le règlement, il est là pour tout le monde.",
+   "gap": 0.2
+  },
+  {
+   "id": "06-bareme",
+   "who": "procureur",
+   "text": "Un crachat contre une jambe cassée. C'est ça, votre barème, Maître ?",
+   "gap": 0.2
+  },
+  {
+   "id": "07-metier",
+   "who": "avocate",
+   "text": "Mon barème, c'est le sien : 20 ans de métier, insulté tous les soirs, frappé deux fois. Et personne n'a jamais jugé ceux qui l'ont frappé.",
+   "gap": 0.2
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Il a fait son travail, ou il l'a abandonnée ? Like si ça te fait réagir.",
+   "gap": 0.4
+  },
+  {
+   "id": "09-porte",
+   "who": "procureur",
+   "text": "Il pouvait la verbaliser, prévenir les gendarmes, appeler ses parents. Il a choisi d'ouvrir la porte.",
+   "gap": 0.4
+  },
+  {
+   "id": "10-parents",
+   "who": "avocate",
+   "text": "Et les parents, justement ? Où étaient-ils, à 23 heures, quand leur fille de 15 ans fraudait le train ?",
+   "gap": 0.2
+  },
+  {
+   "id": "11-nuit",
+   "who": "procureur",
+   "text": "Ah, maintenant c'est la faute des parents. Et demain, celle de la nuit, qui était trop noire ?",
+   "gap": 0.2
+  },
+  {
+   "id": "12-regles",
+   "who": "avocate",
+   "text": "Non. C'est la faute d'une gamine qui croit que les règles, c'est pour les autres. Lui, il les a appliquées.",
+   "gap": 0.3
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "gap": 0.6
+  }
+ ]
+}

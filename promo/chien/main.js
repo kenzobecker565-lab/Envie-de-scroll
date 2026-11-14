@@ -656,7 +656,7 @@ function seek(t) {
       const k = t - K.CHASE
       const hide = t > K.ONZE - 0.2
       const x = k * 520
-      HOOK.rockyRun.update(900 + x, 1150, 1.0, t * 14, { run: 1, flee: 1, dir: 1 })
+      HOOK.rockyRun.update(hide ? 500 + x * 0.97 + 260 : 900 + x, hide ? 1420 : 1150, 1.0, t * 14, { run: hide ? 0 : 1, flee: 1, dir: 1 })
       HOOK.dadRun.update(500 + x * (hide ? 1 : 0.97), 1250, 1.3, t * 12, { run: hide ? 0 : 1, raise: hide ? 0.5 + 0.5 * Math.abs(Math.sin((t - K.ONZE) * 9)) : 0.8 })
       HOOK.wall.setAttribute('opacity', hide ? 1 : 0)
       const strikeK = hide ? Math.max(0, Math.sin((t - K.ONZE) * 9)) ** 6 : 0

@@ -260,12 +260,21 @@ export async function start(hook) {
   function seek(t) {
     t = clamp(t, 0, hook.DUR - 1e-6)
     const cur = hook.shots.find((s) => t < s.t1) ?? hook.shots.at(-1)
-    for (const s of hook.shots) show(s.wrap, s === cur)
+    const i = hook.shots.indexOf(cur)
+    const prev = hook.shots[i - 1]
     const k = t - cur.t0
-    const cut = Math.exp(-k * 18)
+    // Transition « story suivante » : l'ancienne case glisse à gauche, la nouvelle arrive de la droite.
+    const swipe = cur.enter === 'swipe' && prev && k < 0.22 ? ease.io2(clamp(k / 0.22)) : null
+    for (const s of hook.shots) show(s.wrap, s === cur || (swipe !== null && s === prev))
+    const cut = swipe !== null ? 0 : Math.exp(-k * 18)
     const [hx, hy] = shakeAt(t)
     const z = 1 + 0.08 * cut
-    cur.wrap.setAttribute('transform', `translate(${540 + hx + 14 * cut * Math.sin(t * 90)} ${960 + hy}) scale(${z}) translate(-540 -960)`)
+    const dx = swipe !== null ? (1 - swipe) * W : 0
+    cur.wrap.setAttribute('transform', `translate(${540 + dx + hx + 14 * cut * Math.sin(t * 90)} ${960 + hy}) scale(${z}) translate(-540 -960)`)
+    if (swipe !== null) {
+      prev.wrap.setAttribute('transform', `translate(${540 - swipe * W} 960) scale(${1 - 0.1 * swipe}) translate(-540 -960)`)
+      prev.draw(kit, prev.st, prev.t1 - 0.001, prev.t1 - prev.t0 - 0.001)
+    }
     cur.draw(kit, cur.st, t, k)
     const fl = Math.max(0, ...(hook.FLASHES ?? []).map((f) => (t >= f ? Math.exp(-(t - f) * 9) : 0)))
     flash.setAttribute('opacity', (0.85 * fl).toFixed(3))

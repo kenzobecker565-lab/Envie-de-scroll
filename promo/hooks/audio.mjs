@@ -154,6 +154,61 @@ export function writeHookAudio(name, file) {
       const hp = new Biquad('highpass', 1500, 0.7)
       place([[B.sfx, gain], [B.verb, gain * 0.2]], t0, 0.45, (i, t) => hp.process(noise()) * Math.exp(-t / 0.18) * Math.min(1, t / 0.01))
     },
+    // ----------------------------------------------------------- musique
+    /** Grosse caisse (808). */
+    kick(t0, gain = 0.6) {
+      let ph = 0
+      place([[B.music, gain]], t0, 0.5, (i, t) => {
+        ph += (TAU * expInterp(150, 45, clamp(t / 0.09))) / SR
+        return Math.sin(ph) * Math.exp(-t / 0.22) * Math.min(1, t / 0.002)
+      })
+    },
+    /** Clap (bruit filtré, trois petites attaques). */
+    clap(t0, gain = 0.35) {
+      const bp = new Biquad('bandpass', 1300, 0.9)
+      place([[B.music, gain], [B.verb, gain * 0.4]], t0, 0.3, (i, t) => {
+        const env = Math.exp(-((t % 0.011) / 0.004)) * (t < 0.03 ? 1 : 0) + Math.exp(-(t - 0.03) / 0.08) * (t >= 0.03 ? 1 : 0)
+        return bp.process(noise()) * 2.2 * env
+      })
+    },
+    /** Charleston. */
+    hat(t0, gain = 0.08, open = false) {
+      const hp = new Biquad('highpass', 7000, 0.7)
+      place([[B.music, gain]], t0, open ? 0.25 : 0.05, (i, t) => hp.process(noise()) * Math.exp(-t / (open ? 0.08 : 0.012)))
+    },
+    /** Basse 808 : sinus long avec un petit glissé. */
+    sub(t0, midi, len = 0.5, gain = 0.35) {
+      let ph = 0
+      const f = 440 * 2 ** ((midi - 69) / 12)
+      place([[B.music, gain]], t0, len, (i, t) => {
+        ph += (TAU * f * (1 + 0.5 * Math.exp(-t / 0.03))) / SR
+        return Math.tanh(1.6 * Math.sin(ph)) * Math.min(1, t / 0.005) * Math.min(1, (len - t) / 0.05)
+      })
+    },
+    /** Accord de piano (notes MIDI). */
+    chord(t0, midis, len = 1.2, gain = 0.06) {
+      for (const m of midis) {
+        const f = 440 * 2 ** ((m - 69) / 12)
+        place([[B.music, gain], [B.verb, gain * 0.8]], t0, len, (i, t) => (Math.sin(TAU * f * t) + 0.35 * Math.sin(TAU * 2 * f * t) + 0.12 * Math.sin(TAU * 3 * f * t)) * Math.exp(-t / 0.9) * Math.min(1, t / 0.004) * Math.min(1, (len - t) / 0.1))
+      }
+    },
+    /** Disque rayé : la musique s'arrête net. */
+    scratch(t0, gain = 0.25) {
+      const bp = new Biquad('bandpass', 1200, 2)
+      place([[B.sfx, gain]], t0, 0.35, (i, t) => {
+        if (i % 16 === 0) bp.set('bandpass', 400 + 2400 * Math.abs(Math.sin(t * 38)), 2)
+        return bp.process(noise()) * 2.5 * Math.min(1, t / 0.01) * Math.min(1, (0.35 - t) / 0.05)
+      })
+    },
+    /** Pièces / caisse enregistreuse (« ka-ching »). */
+    kaching(t0, gain = 0.15) {
+      place([[B.sfx, gain], [B.verb, gain * 0.5]], t0, 0.6, (i, t) => (Math.sin(TAU * 2637 * t) + 0.7 * Math.sin(TAU * 3520 * t) + 0.5 * Math.sin(TAU * 4186 * t)) * Math.exp(-t / 0.18) * (t > 0.05 ? 1 : Math.exp(-t / 0.01)))
+    },
+    /** Papier qu'on déchire. */
+    rip(t0, len = 0.3, gain = 0.4) {
+      const bp = new Biquad('bandpass', 2500, 0.8)
+      place([[B.sfx, gain]], t0, len, (i, t) => bp.process(noise()) * 2 * (0.5 + 0.5 * Math.abs(Math.sin(t * 160))) * Math.min(1, (len - t) / 0.05))
+    },
     /** Rembobinage : bande qui accélère à l'envers. */
     rewind(t0, len) {
       A.sweep(t0, len, { f0: 4000, f1: 300, gain: 0.3 })

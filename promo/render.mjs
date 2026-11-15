@@ -70,6 +70,7 @@ const ADS = {
   boucher: { page: 'promo/boucher/index.html', audio: './boucher/audio.mjs', build: 'build/boucher', out: 'boucher.mp4' },
   controleur: { page: 'promo/controleur/index.html', audio: './controleur/audio.mjs', build: 'build/controleur', out: 'controleur.mp4' },
   chien: { page: 'promo/chien/index.html', audio: './chien/audio.mjs', build: 'build/chien', out: 'chien.mp4' },
+  rer: { page: 'promo/rer/index.html', audio: './rer/audio.mjs', build: 'build/rer', out: 'rer.mp4' },
   'hook-rodeo': { page: 'promo/hooks/rodeo.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'rodeo.mp4' },
   'hook-prank': { page: 'promo/hooks/prank.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'prank.mp4' },
   'hook-rer': { page: 'promo/hooks/rer.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'rer.mp4' },

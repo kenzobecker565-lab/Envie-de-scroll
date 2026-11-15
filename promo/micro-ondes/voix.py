@@ -104,6 +104,7 @@ def align(text: str, heard: list[tuple[str, float, float]], dur: float) -> list[
     # Mots non reconnus (nombres écrits en chiffres…) : interpolés entre leurs voisins.
     known = [(k, t) for k, t in enumerate(times) if t is not None]
     if not known:
+        times[0] = 0.0  # rien de reconnu (un cri très court) : la réplique commence au début
         known = [(0, 0.0)]
     known = [(-1, 0.0)] + known + [(n, dur)]
     for (k0, t0), (k1, t1) in zip(known, known[1:]):

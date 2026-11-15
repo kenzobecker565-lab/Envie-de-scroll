@@ -68,14 +68,14 @@ function beat(a, t0, t1, root) {
 }
 
 export default {
-  DUR: 10.6,
-  REWIND: 10.1,
+  DUR: 11.15,
+  REWIND: 10.65,
   VOICES: [
     { clip: 'influ1c', who: 'influenceuse', label: 'MAËLYS · 412 K ABONNÉS', at: 0.0 },
-    { clip: 'gerard4', who: 'gerard', label: 'GÉRARD', at: 5.2 },
+    { clip: 'gerard4', who: 'gerard', label: 'GÉRARD', at: 5.75 },
   ],
-  FLASHES: [3.9, 8.35],
-  SHAKES: [[3.9, 16], [8.35, 26], [9.0, 18]],
+  FLASHES: [3.9, 5.0, 8.9],
+  SHAKES: [[3.9, 12], [4.23, 10], [4.65, 12], [5.0, 22], [8.9, 26], [9.55, 18]],
   shots: [
     {
       // S1 · Story, en larmes : « Il s'appelle Gérard… »
@@ -184,48 +184,74 @@ export default {
       },
     },
     {
-      // S6 · La cagnotte explose : 80 000 €.
-      t1: 4.65,
+      // S6 · La cagnotte s'emballe : compteur à rouleaux, fil des dons, objectif pulvérisé.
+      t1: 5.2,
       build(k, g) {
-        const { svg, txt, bg, speedLines, burst } = k
-        bg(g, '#0f3a24')
-        const lines = speedLines(g, 50, '#145a34')
-        const ph = svg('g', { transform: 'translate(540 860)' }, g)
-        svg('rect', { x: -380, y: -560, width: 760, height: 1120, rx: 60, fill: '#10121a' }, ph)
-        svg('rect', { x: -350, y: -530, width: 700, height: 1060, rx: 40, fill: '#ffffff' }, ph)
-        txt(ph, 'CAGNOTTE POUR GÉRARD', { y: -420, 'font-size': 44, fill: '#10121a' })
-        svg('path', { d: heartD, fill: '#fe2c55', transform: 'translate(0 -300) scale(1.4)' }, ph)
-        const amount = txt(ph, '0 €', { y: -80, 'font-size': 150, fill: '#12a150' })
-        svg('rect', { x: -290, y: 20, width: 580, height: 40, rx: 20, fill: '#e2e6ea' }, ph)
-        const bar = svg('rect', { x: -290, y: 20, width: 0, height: 40, rx: 20, fill: '#12a150' }, ph)
-        const donors = txt(ph, '', { y: 140, 'font-size': 40, fill: '#5a6270' })
-        const coins = Array.from({ length: 18 }, (_, i) => {
-          const c = svg('g', { opacity: 0 }, g)
-          svg('circle', { r: 40, fill: '#ffd166', stroke: '#a67a10', 'stroke-width': 8 }, c)
-          txt(c, '€', { y: 16, 'font-size': 46, fill: '#a67a10' })
-          return { c, x: 80 + ((i * 197) % 920), d: (i * 0.137) % 0.6 }
+        const { svg, txt, bg, speedLines, burst, defs } = k
+        bg(g, '#0b2a1a')
+        const lines = speedLines(g, 60, '#0f3a24')
+        txt(g, 'CAGNOTTE POUR GÉRARD', { x: 540, y: 250, 'font-size': 62, fill: '#ffffff' })
+        svg('path', { d: heartD, fill: '#fe2c55', transform: 'translate(540 330) scale(1.1)' }, g)
+        // Le compteur à rouleaux : 5 chiffres, chacun une bande 0-9 qui défile.
+        const cnt = svg('g', { transform: 'translate(540 640)' }, g)
+        svg('rect', { x: -470, y: -150, width: 940, height: 300, rx: 40, fill: '#06180e', stroke: '#12e070', 'stroke-width': 10 }, cnt)
+        const clip = svg('clipPath', { id: 'odo' }, defs)
+        svg('rect', { x: -450, y: -130, width: 900, height: 260 }, clip)
+        const reel = svg('g', { 'clip-path': 'url(#odo)' }, cnt)
+        const xs = [-380, -255, -55, 70, 195]
+        const strips = xs.map((x, p) => {
+          const st = svg('g', {}, reel)
+          for (let d = 0; d <= 10; d++) txt(st, String(d % 10), { x, y: 68 + d * 230, 'font-size': 200, fill: '#12e070' })
+          return { st, pow: 10 ** (4 - p) }
         })
-        const boom = burst(g, '80 000 € !', { fill: '#ffd166', ink: '#12a150', size: 120, r: 260 })
-        return { lines, ph, amount, bar, donors, coins, boom }
+        txt(cnt, '€', { x: 345, y: 68, 'font-size': 180, fill: '#12e070' })
+        svg('rect', { x: -470, y: -150, width: 940, height: 70, fill: '#06180e', opacity: 0.6 }, cnt)
+        svg('rect', { x: -470, y: 80, width: 940, height: 70, fill: '#06180e', opacity: 0.6 }, cnt)
+        // L'objectif : 5 000 €. La barre déborde.
+        txt(g, 'OBJECTIF : 5 000 €', { x: 120, y: 900, 'font-size': 44, fill: '#9fe0b0', 'text-anchor': 'start' })
+        svg('rect', { x: 120, y: 930, width: 840, height: 50, rx: 25, fill: '#173a26' }, g)
+        const bar = svg('rect', { x: 120, y: 930, width: 0, height: 50, rx: 25, fill: '#12e070' }, g)
+        const pct = txt(g, '', { x: 960, y: 900, 'font-size': 56, fill: '#ffd166', 'text-anchor': 'end' })
+        // Le fil des dons.
+        const names = ['Sarah · 20 €', 'Anonyme · 100 €', 'Yanis · 50 €', 'Mamie Jo · 10 €', 'Théo · 5 €', 'Inès · 200 €', 'Anonyme · 50 €', 'Karim · 30 €', 'Lucie · 20 €', 'Anonyme · 500 €', 'Max · 15 €', 'Nadia · 40 €', 'Paul · 100 €', 'Anonyme · 20 €']
+        const feed = names.map((n, i) => {
+          const c = svg('g', { opacity: 0 }, g)
+          svg('rect', { x: 0, y: -42, width: 560, height: 84, rx: 42, fill: '#ffffff' }, c)
+          svg('circle', { cx: 42, cy: 0, r: 26, fill: ['#fe2c55', '#3b82f6', '#ffd166', '#12a150'][i % 4] }, c)
+          txt(c, n, { x: 86, y: 14, 'font-size': 40, fill: '#10121a', 'text-anchor': 'start' })
+          return c
+        })
+        const marks = [['10 000 € !', 0.3], ['50 000 € !', 0.68], ['80 000 € !', 1.0]].map(([m, at]) => ({ b: burst(g, m, { fill: '#ffd166', ink: '#0b2a1a', size: 84, r: 240 }), at }))
+        return { lines, strips, bar, pct, feed, marks }
       },
       draw(k, s, t, l) {
-        const p = k.ease.out3(k.clamp(l / 0.4))
-        s.lines.setAttribute('transform', `translate(540 900) rotate(${t * 40})`)
-        k.place(s.ph, 540, 860, 1 + 0.06 * Math.exp(-l * 6) * Math.sin(l * 40), 0)
-        s.amount.textContent = `${Math.round(80000 * p).toLocaleString('fr-FR')} €`
-        s.bar.setAttribute('width', (580 * p).toFixed(0))
-        s.donors.textContent = `${Math.round(6412 * p).toLocaleString('fr-FR')} donateurs`
-        for (const c of s.coins) {
-          const u = ((l + c.d) % 0.6) / 0.6
-          c.c.setAttribute('opacity', 1)
-          k.place(c.c, c.x, -100 + u * 2200, 1, u * 500)
+        const D = 1.1
+        const u = k.clamp(l / D)
+        const v = 80000 * (u < 1 ? (Math.exp(3.2 * u) - 1) / (Math.exp(3.2) - 1) : 1)
+        s.lines.setAttribute('transform', `translate(540 640) rotate(${t * 60})`)
+        s.lines.setAttribute('opacity', (0.4 + 0.6 * u).toFixed(2))
+        for (const st of s.strips) {
+          const d = st.pow === 1 ? (v / st.pow) % 10 : Math.floor(v / st.pow) % 10 + Math.max(0, ((v % st.pow) / st.pow - 0.85) / 0.15)
+          st.st.setAttribute('transform', `translate(0 ${(-d * 230).toFixed(1)})`)
         }
-        k.burstAt(s.boom, t, 4.25, 4.65, 540, 1560, -8, 1.05)
+        s.bar.setAttribute('width', (840 * Math.min(1, v / 5000)).toFixed(0))
+        s.bar.setAttribute('fill', v > 5000 ? (Math.floor(t * 12) % 2 ? '#ffd166' : '#12e070') : '#12e070')
+        s.pct.textContent = `${Math.round((v / 5000) * 100).toLocaleString('fr-FR')} %`
+        // Le fil : le don le plus récent arrive en bas et pousse les autres vers le haut.
+        const shown = s.feed.filter((_, i) => l >= i * (D / s.feed.length)).length
+        s.feed.forEach((c, i) => {
+          const a = i * (D / s.feed.length)
+          const q = l - a
+          const row = shown - 1 - i
+          c.setAttribute('opacity', q > 0 && row < 5 ? (1 - row * 0.17).toFixed(2) : 0)
+          if (q > 0) k.place(c, 260, 1740 - row * 96 + 40 * Math.exp(-q * 20), 1, 0)
+        })
+        for (const m of s.marks) k.burstAt(m.b, t, 3.9 + m.at * D, m.at < 1 ? 3.9 + m.at * D + 0.3 : 5.2, 540 + (m.at < 1 ? (m.at < 0.5 ? -200 : 200) : 0), 1170, m.at < 0.5 ? -10 : 8, m.at < 1 ? 0.7 : 0.95)
       },
     },
     {
       // S7 · Story suivante (glissement) : « LA REMISE » : elle lui tend l'enveloppe, face caméra.
-      t1: 5.25,
+      t1: 5.8,
       enter: 'swipe',
       build(k, g) {
         const { svg, bg, txt } = k
@@ -249,13 +275,13 @@ export default {
         s.gp.update(t, { x: 790, y: 1080, scale: 0.9, brows: 'surprised', look: [-0.5, 0.3], armR: [0.4, 1.2], armL: [1.1, 0.6], seed: 4 })
         s.m.update(t, { x: 300, y: 1160, scale: 0.95, mouth: 0.5, brows: 'neutral', look: [0.2, 0], armR: [1.2, 0.2], armL: [2.5, 0.7], headTilt: 0.12, seed: 2 })
         k.place(s.env, k.lerp(540, 600, k.ease.out3(k.clamp(l / 0.4))), 1260, 1, -6)
-        drawHearts(k, s.hs, t, 4.65)
-        k.place(s.title, 540, 330, k.popS(t, 4.72, Infinity, 0.25), -3)
+        drawHearts(k, s.hs, t, 5.2)
+        k.place(s.title, 540, 330, k.popS(t, 5.27, Infinity, 0.25), -3)
       },
     },
     {
       // S8 · Gérard, bouleversé de joie : « Merci… merci mademoiselle… »
-      t1: 7.0,
+      t1: 7.55,
       build(k, g) {
         const { svg, bg } = k
         bg(g, '#d8d2c4')
@@ -268,12 +294,12 @@ export default {
       draw(k, s, t, l) {
         const z = 1.3 + 0.35 * k.ease.io2(k.clamp(l / 1.75))
         s.gp.update(t, { x: 540, y: 1180 + 180 * (z - 1.3), scale: z, mouth: k.mouth('gerard', t), brows: 'sad', look: [0.2, -0.1], armR: [0.9, 2.1], armL: [0.9, 2.1], tearT: 0.4 + l, headTilt: 0.1 * Math.sin(t * 2.5), seed: 4 })
-        drawHearts(k, s.hs, t, 5.25)
+        drawHearts(k, s.hs, t, 5.8)
       },
     },
     {
       // S9 · « Vous m'avez sauvé la vie. » Il serre l'enveloppe contre lui… et nous, on voit ce qu'il y a dedans.
-      t1: 8.35,
+      t1: 8.9,
       build(k, g) {
         const { svg, bg, txt } = k
         bg(g, '#d8d2c4')
@@ -295,7 +321,7 @@ export default {
     },
     {
       // S10 · Le calcul : 80 000 € collectés, 6 000 € donnés.
-      t1: 9.0,
+      t1: 9.55,
       build(k, g) {
         const { svg, txt, bg } = k
         bg(g, '#10121a')
@@ -316,7 +342,7 @@ export default {
     },
     {
       // S11 · « 74 000 € ? » Les commentaires s'enflamment, les abonnés fondent.
-      t1: 10.6,
+      t1: 11.15,
       build(k, g) {
         const { svg, txt, bg, speedLines } = k
         bg(g, '#7a1a1a')
@@ -335,13 +361,13 @@ export default {
       },
       draw(k, s, t, l) {
         s.lines.setAttribute('transform', `translate(540 760) rotate(${t * 30})`)
-        k.place(s.q, 540, 720, k.popS(t, 9.02, Infinity, 0.2) * (1 + 0.03 * Math.sin(t * 20)), -4)
+        k.place(s.q, 540, 720, k.popS(t, 9.57, Infinity, 0.2) * (1 + 0.03 * Math.sin(t * 20)), -4)
         s.msgs.forEach((b, i) => {
-          const a = 9.15 + i * 0.13
+          const a = 9.7 + i * 0.13
           b.setAttribute('opacity', t >= a ? 1 : 0)
           if (t >= a) k.place(b, 60 + (i % 2) * 120, 1600 - (t - a) * 520, 1, i % 2 ? 3 : -3)
         })
-        s.ui.subs.textContent = `${Math.max(361, Math.round(412 - Math.max(0, t - 9.1) * 50))} k abonnés`
+        s.ui.subs.textContent = `${Math.max(361, Math.round(412 - Math.max(0, t - 9.65) * 50))} k abonnés`
         s.ui.subs.setAttribute('fill', '#ff3b3b')
       },
     },
@@ -352,21 +378,26 @@ export default {
     a.riser(2.4, 1.5, 0.05)
     for (let t = 3.1; t < 3.9; t += BEAT / 4) a.clap(t, 0.12 + 0.2 * ((t - 3.1) / 0.8))
     a.notif([0.9, 1.15, 1.4, 2.45, 2.56, 2.67, 2.78, 2.89, 3.0])
-    // Le drop : la cagnotte explose.
-    beat(a, 3.9, 4.7, 45)
-    a.kaching(3.92, 0.18)
-    a.kaching(4.3, 0.15)
-    a.notif([4.0, 4.06, 4.12, 4.18, 4.24, 4.3, 4.36, 4.42, 4.5])
+    // Le drop : la cagnotte s'emballe (tic-tac des rouleaux qui accélère, ka-ching aux paliers).
+    beat(a, 3.9, 5.2, 45)
+    for (let k = 0, t = 3.9; t < 5.0; k++) {
+      a.notif([t])
+      t += Math.max(0.03, 0.16 * Math.exp(-k * 0.12))
+    }
+    a.kaching(4.23, 0.16)
+    a.kaching(4.65, 0.18)
+    a.kaching(5.0, 0.22)
+    a.boom(5.0, 0.5, 100, 40, 0.3)
     // La remise : piano tendre (faux happy end) sous les remerciements de Gérard.
-    a.whoosh([4.65])
-    for (const [i, c] of [[60, 64, 67], [57, 60, 64], [53, 57, 60, 65], [55, 59, 62, 67]].entries()) a.chord(4.68 + i * 0.92, c, 1.0, 0.045)
-    a.sample('2363', 4.7, 0.25, { len: 0.8 })
+    a.whoosh([5.2])
+    for (const [i, c] of [[60, 64, 67], [57, 60, 64], [53, 57, 60, 65], [55, 59, 62, 67]].entries()) a.chord(5.23 + i * 0.92, c, 1.0, 0.045)
+    a.sample('2363', 5.25, 0.25, { len: 0.8 })
     // Le calcul : disque rayé, le beat repart, sombre.
-    a.scratch(8.3, 0.3)
-    a.boom(8.35, 0.9, 70, 28, 1.0)
-    a.kick(9.0, 0.8)
-    beat(a, 9.0, 10.1, 41)
-    a.notif([9.15, 9.28, 9.41, 9.54, 9.67, 9.8, 9.93])
-    a.rewind(10.1, 0.5)
+    a.scratch(8.85, 0.3)
+    a.boom(8.9, 0.9, 70, 28, 1.0)
+    a.kick(9.55, 0.8)
+    beat(a, 9.55, 10.65, 41)
+    a.notif([9.7, 9.83, 9.96, 10.09, 10.22, 10.35, 10.48])
+    a.rewind(10.65, 0.5)
   },
 }

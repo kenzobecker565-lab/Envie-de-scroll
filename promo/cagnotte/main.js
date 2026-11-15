@@ -758,7 +758,7 @@ fs(tag('MAËLYS · 23 ANS', 'pill yellow', { t0: K.REPLAY, t1: K.GERARD_R - 0.06
 counterTag(Wd('02', '412') - 0.12, K.GERARD_R - 0.06, 412000, 'ABONNÉS', { y: 560, dur: 0.7, fmt: fr })
 fs(tag('GÉRARD · 61 ANS · SANS-ABRI', 'pill', { t0: K.GERARD_R, t1: K.EIGHTY - 0.06, y: 300, rot: 2 }), 52)
 fs(tag('EN 3 JOURS', 'slam white', { t0: K.EIGHTY, t1: K.SIX - 0.06, y: 425, rot: -3, from: 2.4, dur: 0.18 }), 90)
-fs(tag('6 000 €. EN LIQUIDE.', 'slam yellow', { t0: Wd('03', 'en') - 0.1, t1: K.HEART - 0.06, y: 330, rot: -3, from: 2.6, dur: 0.18 }), 96)
+fs(tag('6 000 €. EN LIQUIDE.', 'slam yellow', { t0: Wd('03', 'en') - 0.1, t1: K.HEART - 0.06, y: 330, rot: -3, from: 2.6, dur: 0.18 }), 70)
 fs(tag('ABUS DE CONFIANCE', 'pill red', { t0: Wd('03', 'abus') - 0.12, t1: SEC.hook.t1, y: 1560, rot: -2 }), 60)
 fs(tag('JUGÉE.', 'stamp', { t0: K.GAVEL + 0.12, t1: SEC.hook.t1 - 0.25, y: 400, rot: -8, from: 2.8, dur: 0.18 }), 170)
 // Le procès.

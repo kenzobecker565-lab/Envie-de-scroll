@@ -1,9 +1,9 @@
 /**
  * Hook prototype « La cagnotte » : une influenceuse pleure en story pour Gérard,
  * SDF de 61 ans : « Même deux euros, ça change sa vie ! ». La cagnotte explose :
- * 80 000 €. Gérard ouvre l'enveloppe : 6 000 €. « C'est… c'est tout ? » Story
- * suivante : une Rolex. « Petit cadeau pour moi… je l'ai bien mérité ! » Les
- * commentaires s'enflamment.
+ * 80 000 €. Story suivante : la remise de l'enveloppe ; Gérard, bouleversé : « Merci…
+ * merci mademoiselle. Vous m'avez sauvé la vie. » Lui ne sait pas. Nous, on voit :
+ * 6 000 € dans l'enveloppe, 80 000 € collectés. Où sont les 74 000 € ?
  */
 
 const MAELYS = { robe: '#ff9ab0', jabot: false, collar: '#ffe0ea', hair: 'bob', hairColor: '#e8c070', skin: '#f2c8a6', iris: '#3a6a8a', female: true }
@@ -29,9 +29,9 @@ function storyUi(k, g, { live = false } = {}) {
 }
 const heartD = 'M 0 30 C -36 6 -60 -14 -48 -38 C -38 -58 -12 -56 0 -36 C 12 -56 38 -58 48 -38 C 60 -14 36 6 0 30 Z'
 /** Des cœurs qui montent (réactions en direct). */
-function hearts(k, g, n = 14) {
+function hearts(k, g, n = 14, x0 = 760) {
   const r = k.rng(5)
-  return Array.from({ length: n }, () => ({ el: k.svg('path', { d: heartD, fill: ['#fe2c55', '#ff9ab0', '#ffd166'][Math.floor(r() * 3)], opacity: 0 }, g), x: 760 + r() * 260, d: r() * 1.2, s: 0.6 + r() * 0.8 }))
+  return Array.from({ length: n }, () => ({ el: k.svg('path', { d: heartD, fill: ['#fe2c55', '#ff9ab0', '#ffd166'][Math.floor(r() * 3)], opacity: 0 }, g), x: x0 + r() * (1040 - x0), d: r() * 1.2, s: 0.6 + r() * 0.8 }))
 }
 function drawHearts(k, hs, t, t0) {
   for (const h of hs) {
@@ -68,15 +68,14 @@ function beat(a, t0, t1, root) {
 }
 
 export default {
-  DUR: 11.35,
-  REWIND: 10.85,
+  DUR: 10.6,
+  REWIND: 10.1,
   VOICES: [
     { clip: 'influ1c', who: 'influenceuse', label: 'MAËLYS · 412 K ABONNÉS', at: 0.0 },
-    { clip: 'gerard2', who: 'gerard', label: 'GÉRARD', at: 5.4 },
-    { clip: 'influ2c', who: 'influenceuse2', label: 'MAËLYS · STORY SUIVANTE', at: 7.15 },
+    { clip: 'gerard4', who: 'gerard', label: 'GÉRARD', at: 5.2 },
   ],
-  FLASHES: [3.9, 5.0],
-  SHAKES: [[3.9, 16], [4.65, 10], [5.0, 26], [7.15, 8], [9.15, 18]],
+  FLASHES: [3.9, 8.35],
+  SHAKES: [[3.9, 16], [8.35, 26], [9.0, 18]],
   shots: [
     {
       // S1 · Story, en larmes : « Il s'appelle Gérard… »
@@ -225,143 +224,125 @@ export default {
       },
     },
     {
-      // S7 · Gros plan : les mains de Gérard déchirent l'enveloppe.
-      t1: 5.0,
-      build(k, g) {
-        const { svg, bg, burst } = k
-        bg(g, '#2a2e36')
-        const env = svg('g', { transform: 'translate(540 960)' }, g)
-        const left = svg('g', {}, env)
-        svg('rect', { x: -380, y: -230, width: 380, height: 460, fill: '#f2ead8', stroke: '#b8a888', 'stroke-width': 10 }, left)
-        const right = svg('g', {}, env)
-        svg('rect', { x: 0, y: -230, width: 380, height: 460, fill: '#f2ead8', stroke: '#b8a888', 'stroke-width': 10 }, right)
-        svg('path', { d: 'M 0 -230 L 30 -150 L -20 -60 L 25 40 L -15 130 L 0 230', fill: 'none', stroke: '#b8a888', 'stroke-width': 8 }, env)
-        for (const sd of [-1, 1]) {
-          const h = svg('g', {}, sd < 0 ? left : right)
-          svg('ellipse', { cx: sd * 360, cy: 60, rx: 120, ry: 150, fill: '#d6a07a', stroke: '#a6704a', 'stroke-width': 8 }, h)
-        }
-        const rip = burst(g, 'SCRITCH !', { fill: '#ffffff', ink: '#10121a', size: 110, r: 230 })
-        return { left, right, rip }
-      },
-      draw(k, s, t, l) {
-        const p = k.ease.out3(k.clamp(l / 0.25))
-        s.left.setAttribute('transform', `translate(${-90 * p} 0) rotate(${-8 * p})`)
-        s.right.setAttribute('transform', `translate(${90 * p} 0) rotate(${8 * p})`)
-        k.burstAt(s.rip, t, 4.68, 5.0, 540, 420, -6, 0.95)
-      },
-    },
-    {
-      // S8 · Le choc : 80 000 € barré, 6 000 € tamponné.
-      t1: 5.4,
-      build(k, g) {
-        const { svg, txt, bg } = k
-        bg(g, '#f2ead8')
-        const big = svg('g', { transform: 'translate(540 640)' }, g)
-        txt(big, '80 000 €', { y: 50, 'font-size': 190, fill: '#12a150' })
-        const strike = svg('path', { d: 'M -420 20 L 420 -10', stroke: '#e5484d', 'stroke-width': 30, 'stroke-linecap': 'round', 'stroke-dasharray': 860, 'stroke-dashoffset': 860 }, big)
-        const stamp = svg('g', { opacity: 0 }, g)
-        svg('rect', { x: -380, y: -130, width: 760, height: 260, rx: 30, fill: 'rgba(255,255,255,0.85)', stroke: '#e5484d', 'stroke-width': 22 }, stamp)
-        txt(stamp, '6 000 €', { y: 70, 'font-size': 200, fill: '#e5484d' })
-        const label = txt(g, 'POUR GÉRARD', { x: 540, y: 1300, 'font-size': 80, fill: '#10121a' })
-        return { strike, stamp, label }
-      },
-      draw(k, s, t, l) {
-        s.strike.setAttribute('stroke-dashoffset', (860 * (1 - k.ease.out3(k.clamp(l / 0.12)))).toFixed(0))
-        const v = k.clamp((l - 0.08) / 0.12)
-        s.stamp.setAttribute('opacity', v > 0 ? 1 : 0)
-        k.place(s.stamp, 540, 1000, k.lerp(2.4, 1, k.ease.out3(v)), -8)
-        s.label.setAttribute('opacity', l > 0.2 ? 1 : 0)
-      },
-    },
-    {
-      // S9 · Gérard, la pousse-avant sur son visage : « C'est… c'est tout ? »
-      t1: 7.15,
-      build(k, g) {
-        const { svg, bg, txt } = k
-        bg(g, '#2a2e36')
-        svg('ellipse', { cx: 540, cy: 760, rx: 600, ry: 700, fill: 'url(#lampG)', opacity: 0.45 }, g)
-        const gp = k.makePerson(g, GERARD)
-        const note = svg('g', {}, g)
-        svg('rect', { x: -170, y: -80, width: 340, height: 160, rx: 12, fill: '#d9a8c8', stroke: '#8a5a7a', 'stroke-width': 6 }, note)
-        txt(note, '6 000 €', { y: 28, 'font-size': 80, fill: '#4a2a3a' })
-        return { gp, note }
-      },
-      draw(k, s, t, l) {
-        const z = 1.2 + 0.5 * k.ease.io2(k.clamp(l / 1.7))
-        s.gp.update(t, { x: 540, y: 1150 + 200 * (z - 1.2), scale: z, mouth: k.mouth('gerard', t), brows: 'sad', look: [0, 0.4], armR: [0.6, 1.9], armL: [0.6, 1.9], headTilt: -0.1 + 0.05 * Math.sin(t * 2), seed: 4 })
-        k.place(s.note, 540, 1560 + 120 * (z - 1.2), 1, -4)
-      },
-    },
-    {
-      // S10 · Story suivante (glissement) : la Rolex. « Petit cadeau pour moi… »
-      t1: 9.15,
+      // S7 · Story suivante (glissement) : « LA REMISE » : elle lui tend l'enveloppe, face caméra.
+      t1: 5.25,
       enter: 'swipe',
       build(k, g) {
-        const { svg, bg } = k
-        bg(g, '#f2e6d8')
-        svg('rect', { x: -400, y: 1250, width: 1900, height: 900, fill: '#e2d2bc' }, g)
-        const arm = svg('g', {}, g)
-        svg('path', { d: 'M -300 1100 L 620 940', stroke: '#f2c8a6', 'stroke-width': 190, 'stroke-linecap': 'round' }, arm)
-        svg('ellipse', { cx: 700, cy: 925, rx: 120, ry: 100, fill: '#f2c8a6' }, arm)
-        const watch = svg('g', { transform: 'translate(420 980) rotate(-10)' }, arm)
-        svg('rect', { x: -70, y: -150, width: 140, height: 300, rx: 30, fill: '#d9a930', stroke: '#8a6a10', 'stroke-width': 8 }, watch)
-        svg('circle', { r: 95, fill: '#d9a930', stroke: '#8a6a10', 'stroke-width': 10 }, watch)
-        svg('circle', { r: 72, fill: '#0f3a24' }, watch)
-        for (let i = 0; i < 12; i++) svg('rect', { x: -4, y: -66, width: 8, height: 14, fill: '#ffd166', transform: `rotate(${i * 30})` }, watch)
-        const hands = svg('g', {}, watch)
-        svg('path', { d: 'M 0 0 L 0 -50 M 0 0 L 34 0', stroke: '#ffffff', 'stroke-width': 8, 'stroke-linecap': 'round' }, hands)
-        const sparks = [[300, 820], [560, 860], [360, 1150], [520, 1120], [240, 980]].map(([x, y]) => ({ el: svg('path', { d: star, fill: '#ffffff' }, g), x, y }))
+        const { svg, bg, txt } = k
+        bg(g, '#d8d2c4')
+        for (let y = 0; y < 1300; y += 70) for (let x = (y / 70) % 2 ? -60 : 0; x < 1100; x += 120) svg('rect', { x, y, width: 116, height: 66, fill: '#ece8de', stroke: '#c9c2b2', 'stroke-width': 4 }, g)
+        svg('rect', { x: -400, y: 1300, width: 1900, height: 900, fill: '#7a7468' }, g)
+        const gp = k.makePerson(g, GERARD)
+        const m = k.makePerson(g, MAELYS)
+        const env = svg('g', {}, g)
+        svg('rect', { x: -130, y: -80, width: 260, height: 160, rx: 10, fill: '#f2ead8', stroke: '#b8a888', 'stroke-width': 6 }, env)
+        svg('path', { d: 'M -130 -80 L 0 10 L 130 -80', fill: 'none', stroke: '#b8a888', 'stroke-width': 6 }, env)
+        svg('path', { d: heartD, fill: '#fe2c55', transform: 'translate(0 30) scale(0.6)' }, env)
+        const hs = hearts(k, g, 12, 940)
         const ui = storyUi(k, g)
-        const tag = svg('g', {}, g)
-        svg('rect', { x: -250, y: -50, width: 500, height: 100, rx: 50, fill: '#ffffff', opacity: 0.9 }, tag)
-        k.txt(tag, 'CADEAU POUR MOI', { y: 18, 'font-size': 46, fill: '#d9a930' })
-        const price = svg('g', {}, g)
-        svg('rect', { x: -200, y: -50, width: 400, height: 100, rx: 20, fill: '#10121a' }, price)
-        k.txt(price, '14 500 €', { y: 20, 'font-size': 60, fill: '#ffd166' })
-        return { arm, hands, sparks, ui, tag, price }
+        const title = svg('g', {}, g)
+        svg('rect', { x: -330, y: -55, width: 660, height: 110, rx: 55, fill: '#ffffff', opacity: 0.92 }, title)
+        txt(title, 'LA REMISE À GÉRARD', { y: 20, 'font-size': 56, fill: '#fe2c55' })
+        return { gp, m, env, hs, ui, title }
       },
       draw(k, s, t, l) {
-        const zoom = 1 + 0.12 * k.ease.out3(k.clamp(l / 0.4))
-        s.arm.setAttribute('transform', `translate(540 960) scale(${zoom}) rotate(${(-4 + 5 * Math.sin(t * 4)).toFixed(2)}) translate(-540 -960)`)
-        s.hands.setAttribute('transform', `rotate(${t * 60})`)
-        s.sparks.forEach((sp, i) => {
-          const u = Math.max(0, Math.sin(t * 8 + i * 1.7))
-          sp.el.setAttribute('opacity', u.toFixed(2))
-          k.place(sp.el, sp.x, sp.y, 0.6 + 0.9 * u, t * 120)
-        })
-        k.place(s.tag, 540, 420, k.popS(t, 7.4, Infinity, 0.25), -4)
-        k.place(s.price, 540, 1560, k.popS(t, 8.2, Infinity, 0.2), 3)
-        s.ui.bars.forEach((b, i) => b.setAttribute('width', i < 2 ? '310' : Math.min(310, l * 160).toFixed(0)))
+        s.gp.update(t, { x: 790, y: 1080, scale: 0.9, brows: 'surprised', look: [-0.5, 0.3], armR: [0.4, 1.2], armL: [1.1, 0.6], seed: 4 })
+        s.m.update(t, { x: 300, y: 1160, scale: 0.95, mouth: 0.5, brows: 'neutral', look: [0.2, 0], armR: [1.2, 0.2], armL: [2.5, 0.7], headTilt: 0.12, seed: 2 })
+        k.place(s.env, k.lerp(540, 600, k.ease.out3(k.clamp(l / 0.4))), 1260, 1, -6)
+        drawHearts(k, s.hs, t, 4.65)
+        k.place(s.title, 540, 330, k.popS(t, 4.72, Infinity, 0.25), -3)
       },
     },
     {
-      // S11 · « je l'ai bien mérité ! » ; les commentaires s'enflamment.
-      t1: 11.35,
+      // S8 · Gérard, bouleversé de joie : « Merci… merci mademoiselle… »
+      t1: 7.0,
       build(k, g) {
-        const { svg, txt } = k
-        k.bg(g, '#f2e6d8')
-        const m = k.makePerson(g, MAELYS)
-        const shades = svg('g', {}, m.head)
-        for (const sd of [-1, 1]) svg('rect', { x: sd * 56 - 50, y: -175, width: 100, height: 70, rx: 24, fill: '#10121a' }, shades)
-        svg('path', { d: 'M -10 -150 L 10 -150', stroke: '#10121a', 'stroke-width': 10 }, shades)
+        const { svg, bg } = k
+        bg(g, '#d8d2c4')
+        svg('ellipse', { cx: 540, cy: 760, rx: 640, ry: 760, fill: '#fff3c4', opacity: 0.6 }, g)
+        const gp = k.makePerson(g, GERARD)
+        const hs = hearts(k, g, 18)
         const ui = storyUi(k, g)
-        const msgs = ['ARNAQUEUSE', 'ET GÉRARD ???', 'RENDS L’ARGENT', 'OÙ SONT LES 74 000 € ?', 'SIGNALÉE', 'HONTE À TOI', '-50 K ABONNÉS'].map((m, i) => {
+        return { gp, hs, ui }
+      },
+      draw(k, s, t, l) {
+        const z = 1.3 + 0.35 * k.ease.io2(k.clamp(l / 1.75))
+        s.gp.update(t, { x: 540, y: 1180 + 180 * (z - 1.3), scale: z, mouth: k.mouth('gerard', t), brows: 'sad', look: [0.2, -0.1], armR: [0.9, 2.1], armL: [0.9, 2.1], tearT: 0.4 + l, headTilt: 0.1 * Math.sin(t * 2.5), seed: 4 })
+        drawHearts(k, s.hs, t, 5.25)
+      },
+    },
+    {
+      // S9 · « Vous m'avez sauvé la vie. » Il serre l'enveloppe contre lui… et nous, on voit ce qu'il y a dedans.
+      t1: 8.35,
+      build(k, g) {
+        const { svg, bg, txt } = k
+        bg(g, '#d8d2c4')
+        const gp = k.makePerson(g, GERARD)
+        const env = svg('g', {}, g)
+        svg('rect', { x: -230, y: -140, width: 460, height: 280, rx: 16, fill: '#f2ead8', stroke: '#b8a888', 'stroke-width': 8 }, env)
+        const note = svg('g', {}, env)
+        svg('rect', { x: -200, y: -260, width: 400, height: 170, rx: 12, fill: '#d9a8c8', stroke: '#8a5a7a', 'stroke-width': 6 }, note)
+        txt(note, '6 000 €', { y: -150, 'font-size': 92, fill: '#4a2a3a' })
+        const ring = svg('ellipse', { cx: 0, cy: -175, rx: 280, ry: 140, fill: 'none', stroke: '#e5484d', 'stroke-width': 14, 'stroke-dasharray': '50 26', opacity: 0 }, env)
+        return { gp, env, ring }
+      },
+      draw(k, s, t, l) {
+        s.gp.update(t, { x: 540, y: 900, scale: 1.1, mouth: k.mouth('gerard', t), brows: 'sad', look: [0, 0.3], armR: [0.6, 1.9], armL: [0.6, 1.9], tearT: 1.5 + l, seed: 4 })
+        k.place(s.env, 540, 1270, 1.0, -4)
+        s.ring.setAttribute('opacity', l > 0.5 ? 1 : 0)
+        s.ring.setAttribute('transform', `rotate(${t * 15} 0 -175)`)
+      },
+    },
+    {
+      // S10 · Le calcul : 80 000 € collectés, 6 000 € donnés.
+      t1: 9.0,
+      build(k, g) {
+        const { svg, txt, bg } = k
+        bg(g, '#10121a')
+        const top = svg('g', { transform: 'translate(540 560)' }, g)
+        txt(top, 'COLLECTÉ', { y: -110, 'font-size': 60, fill: '#9aa6b4' })
+        txt(top, '80 000 €', { y: 60, 'font-size': 190, fill: '#12e070' })
+        const bot = svg('g', { opacity: 0 }, g)
+        txt(bot, 'DONNÉ À GÉRARD', { y: -110, 'font-size': 60, fill: '#9aa6b4' })
+        svg('rect', { x: -380, y: -70, width: 760, height: 200, rx: 26, fill: 'none', stroke: '#e5484d', 'stroke-width': 18 }, bot)
+        txt(bot, '6 000 €', { y: 90, 'font-size': 170, fill: '#e5484d' })
+        return { bot }
+      },
+      draw(k, s, t, l) {
+        const v = k.clamp((l - 0.12) / 0.12)
+        s.bot.setAttribute('opacity', v > 0 ? 1 : 0)
+        k.place(s.bot, 540, 1060, k.lerp(2.2, 1, k.ease.out3(v)), -6)
+      },
+    },
+    {
+      // S11 · « 74 000 € ? » Les commentaires s'enflamment, les abonnés fondent.
+      t1: 10.6,
+      build(k, g) {
+        const { svg, txt, bg, speedLines } = k
+        bg(g, '#7a1a1a')
+        const lines = speedLines(g, 50, '#a0302a')
+        const q = svg('g', {}, g)
+        txt(q, '74 000 €', { y: 0, 'font-size': 210, fill: '#ffffff', stroke: '#10121a', 'stroke-width': 16, 'paint-order': 'stroke fill' })
+        txt(q, 'OÙ SONT-ILS ?', { y: 140, 'font-size': 100, fill: '#ffd166', stroke: '#10121a', 'stroke-width': 12, 'paint-order': 'stroke fill' })
+        const ui = storyUi(k, g)
+        const msgs = ['ARNAQUEUSE', 'ET LE RESTE ???', 'RENDS L’ARGENT', 'J’AI DONNÉ 50 € POUR ÇA', 'SIGNALÉE', 'HONTE À TOI', '-50 K ABONNÉS'].map((m, i) => {
           const b = svg('g', { opacity: 0 }, g)
           svg('rect', { x: -20, y: -44, width: 46 + 30 * m.length, height: 80, rx: 40, fill: '#10121a', opacity: 0.85 }, b)
           txt(b, m, { x: 8 + 15 * m.length, y: 12, 'font-size': 46, fill: i % 2 ? '#ffd166' : '#ff6b6b' })
           return b
         })
-        return { m, ui, msgs }
+        return { lines, q, ui, msgs }
       },
       draw(k, s, t, l) {
-        s.m.update(t, { x: 540, y: 1250, scale: 1.35 + 0.1 * l, mouth: k.mouth('influenceuse2', t), brows: 'neutral', look: [0.2, 0], armR: [2.4, 0.7], armL: [0.3, 0.5], headTilt: -0.12, seed: 2 })
+        s.lines.setAttribute('transform', `translate(540 760) rotate(${t * 30})`)
+        k.place(s.q, 540, 720, k.popS(t, 9.02, Infinity, 0.2) * (1 + 0.03 * Math.sin(t * 20)), -4)
         s.msgs.forEach((b, i) => {
-          const a = 9.3 + i * 0.18
+          const a = 9.15 + i * 0.13
           b.setAttribute('opacity', t >= a ? 1 : 0)
-          if (t >= a) k.place(b, 60 + (i % 2) * 120, 1260 - (t - a) * 420, 1, i % 2 ? 3 : -3)
+          if (t >= a) k.place(b, 60 + (i % 2) * 120, 1600 - (t - a) * 520, 1, i % 2 ? 3 : -3)
         })
-        s.ui.subs.textContent = `${Math.max(361, Math.round(412 - Math.max(0, t - 9.3) * 40))} k abonnés`
-        s.ui.subs.setAttribute('fill', t > 9.3 ? '#ff3b3b' : '#ffffff')
+        s.ui.subs.textContent = `${Math.max(361, Math.round(412 - Math.max(0, t - 9.1) * 50))} k abonnés`
+        s.ui.subs.setAttribute('fill', '#ff3b3b')
       },
     },
   ],
@@ -372,23 +353,20 @@ export default {
     for (let t = 3.1; t < 3.9; t += BEAT / 4) a.clap(t, 0.12 + 0.2 * ((t - 3.1) / 0.8))
     a.notif([0.9, 1.15, 1.4, 2.45, 2.56, 2.67, 2.78, 2.89, 3.0])
     // Le drop : la cagnotte explose.
-    beat(a, 3.9, 5.0, 45)
+    beat(a, 3.9, 4.7, 45)
     a.kaching(3.92, 0.18)
     a.kaching(4.3, 0.15)
     a.notif([4.0, 4.06, 4.12, 4.18, 4.24, 4.3, 4.36, 4.42, 4.5])
-    a.rip(4.66, 0.3, 0.45)
-    // Le choc : disque rayé, coupure, puis le silence de Gérard.
-    a.scratch(4.98, 0.3)
-    a.boom(5.0, 0.9, 70, 28, 1.2)
-    a.drone(5.4, 1.75, 0.06)
-    a.sample('0621', 5.4, 0.3, { from: 8, len: 1.75 })
-    // Story suivante : le beat revient, plus fier, avec la Rolex.
-    a.whoosh([7.15])
-    a.kaching(7.2, 0.2)
-    beat(a, 7.15, 10.85, 41)
-    a.sample('2390', 7.3, 0.2, { len: 1.5 })
-    a.notif([9.3, 9.48, 9.66, 9.84, 10.02, 10.2, 10.38])
-    a.boom(9.15, 0.4, 90, 40, 0.4)
-    a.rewind(10.85, 0.5)
+    // La remise : piano tendre (faux happy end) sous les remerciements de Gérard.
+    a.whoosh([4.65])
+    for (const [i, c] of [[60, 64, 67], [57, 60, 64], [53, 57, 60, 65], [55, 59, 62, 67]].entries()) a.chord(4.68 + i * 0.92, c, 1.0, 0.045)
+    a.sample('2363', 4.7, 0.25, { len: 0.8 })
+    // Le calcul : disque rayé, le beat repart, sombre.
+    a.scratch(8.3, 0.3)
+    a.boom(8.35, 0.9, 70, 28, 1.0)
+    a.kick(9.0, 0.8)
+    beat(a, 9.0, 10.1, 41)
+    a.notif([9.15, 9.28, 9.41, 9.54, 9.67, 9.8, 9.93])
+    a.rewind(10.1, 0.5)
   },
 }

@@ -64,3 +64,6 @@ Crédit facultatif : « Additional sounds: Joseph SARDIN - BigSoundBank.com ».
 | 1305.wav | Dig With a Shovel |
 | 3046.wav | Mechanical Entrance Doorbell #3 |
 | 0092.wav | Metro, Paris #2 (extrait de 40 s) |
+| 0888.wav | Motocross circuit |
+| 0603.wav | 75 cm3 Motorcycle Acceleration |
+| 0906.wav | 2 motorcycle passing 90km/h |

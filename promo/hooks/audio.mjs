@@ -103,8 +103,8 @@ export function writeHookAudio(name, file) {
       }, far ? 0.4 : 0)
     },
     /** Battements de cœur sourds. */
-    heart(t0, len, gain = 0.3) {
-      for (let t = t0; t < t0 + len; t += 0.75) {
+    heart(t0, len, gain = 0.3, every = 0.75) {
+      for (let t = t0; t < t0 + len; t += every) {
         A.boom(t, gain, 60, 38, 0.12)
         A.boom(t + 0.2, gain * 0.7, 55, 35, 0.12)
       }
@@ -113,6 +113,14 @@ export function writeHookAudio(name, file) {
     drone(t0, len, gain = 0.05) {
       const lp = new Biquad('lowpass', 700, 0.7)
       place([[B.music, gain]], t0, len, (i, t) => lp.process(Math.sin(TAU * 55 * t) + 0.7 * Math.sin(TAU * 58.3 * t) + 0.4 * Math.sin(TAU * 110.5 * t) + 0.2 * noise()) * Math.min(1, t / 0.6) * Math.min(1, (len - t) / 0.3))
+    },
+    /** Montée de tension : un sifflement qui monte et grossit. */
+    riser(t0, len, gain = 0.05) {
+      let ph = 0
+      place([[B.music, gain], [B.verb, gain * 0.5]], t0, len, (i, t) => {
+        ph += expInterp(220, 880, t / len) / SR
+        return (Math.sin(TAU * ph) + 0.5 * Math.sin(TAU * ph * 1.5)) * (t / len) ** 1.5
+      })
     },
     /** Sifflement d'oreilles après le choc. */
     tinnitus(t0, len, gain = 0.04) {

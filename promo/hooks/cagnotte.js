@@ -99,17 +99,17 @@ export default {
         const hearts = Array.from({ length: 10 }, (_, i) => ({ el: svg('path', { d: heartD, fill: ['#fe2c55', '#ff9ab0', '#ffd166'][i % 3], opacity: 0 }, ui), d: i * 0.13, x: 940 + (i % 3) * 30 }))
         const msgs = [
           ['@lea.b', 'trop émouvant', '#ffffff'],
-          ['@kz', 'merci maëlys', '#ffffff'],
-          ['@nono', 'attends… 6 000 ???', '#ffd166'],
-          ['@jojo', 'IL Y A QUE 6 000 €', '#ff6b6b'],
-          ['@sam', 'la cagnotte c’est 80 000', '#ffd166'],
+          ['@sam', 'la cagnotte c’est 80 000 €…', '#ffd166'],
+          ['@kz', 'elle est bien fine l’enveloppe', '#ffd166'],
+          ['@nono', 'attends… 6 000 ???', '#ff6b6b'],
+          ['@jojo', 'IL Y A QUE 6 000 € !!!', '#ff6b6b'],
           ['@yanis', 'OÙ SONT LES 74 000 € ?', '#ff6b6b'],
           ['@inès', 'ARNAQUEUSE', '#ff6b6b'],
           ['@paul', 'j’ai donné 50 € pour ça', '#ffd166'],
           ['@mamie.jo', 'RENDS L’ARGENT', '#ff6b6b'],
         ].map(([w, m2, c]) => {
           const b = svg('g', { opacity: 0 }, ui)
-          svg('rect', { x: 0, y: -40, width: 40 + 21 * (w.length + m2.length), height: 74, rx: 37, fill: '#000', opacity: 0.55 }, b)
+          svg('rect', { x: 0, y: -40, width: 40 + 21 * (w.length + m2.length), height: 74, rx: 37, fill: c === '#ff6b6b' ? '#7a1018' : '#000', opacity: c === '#ffffff' ? 0.55 : 0.85 }, b)
           const t = txt(b, '', { x: 24, y: 12, 'font-size': 36, 'text-anchor': 'start' })
           svg('tspan', { fill: '#9fd0ff', 'font-weight': 900 }, t).textContent = `${w} `
           svg('tspan', { fill: c }, t).textContent = m2
@@ -153,7 +153,7 @@ export default {
         s.count.setAttribute('opacity', t > T.COUNT ? 1 : 0)
         s.countT.textContent = `${(n * 500).toLocaleString('fr-FR')} €`
         s.countT.setAttribute('fill', t > T.COUNT_END ? '#ff6b6b' : '#ffffff')
-        k.place(s.count, ex, ey - 350, 1 + (t > T.COUNT_END ? 0.15 * Math.exp(-(t - T.COUNT_END) * 6) : 0), 0)
+        k.place(s.count, ex + 120, ey - 350, 1 + (t > T.COUNT_END ? 0.15 * Math.exp(-(t - T.COUNT_END) * 6) : 0), 0)
         s.ring.setAttribute('opacity', t > T.STICKER ? 1 : 0)
         s.ring.setAttribute('transform', `translate(${ex} ${ey - 90}) rotate(${t * 20})`)
         // La main sur l'objectif, puis la fin du live.
@@ -170,13 +170,13 @@ export default {
           h.el.setAttribute('opacity', t < T.CHAT ? (Math.sin(Math.PI * u) * 0.9).toFixed(2) : 0)
           k.place(h.el, h.x + 20 * Math.sin(u * 8 + h.d * 9), 1300 - u * 500, 0.7, 0)
         }
-        const times = [0.6, 1.4, T.CHAT, T.CHAT + 0.3, T.CHAT + 0.55, T.STICKER + 0.2, T.STICKER + 0.45, T.STICKER + 0.7, T.STICKER + 0.95]
+        const times = [0.6, T.GIVE + 0.1, T.TAKE + 0.1, T.COUNT + 0.6, T.COUNT_END - 0.15, T.COUNT_END + 0.4, T.CHAT + 0.3, T.STICKER + 0.2, T.STICKER + 0.6]
         const shown = times.filter((a) => t >= a).length
         s.msgs.forEach((b, i) => {
           const a = times[i]
           const row = shown - 1 - i
-          b.setAttribute('opacity', t >= a && row < 5 ? (1 - row * 0.15).toFixed(2) : 0)
-          if (t >= a) k.place(b, 30, 1240 - row * 74 + 30 * Math.exp(-(t - a) * 18), 0.82, 0)
+          b.setAttribute('opacity', t >= a && row < 4 ? (1 - row * 0.12).toFixed(2) : 0)
+          if (t >= a) k.place(b, 30, k.lerp(880, 700, k.ease.io2(k.clamp((t - T.STICKER) / 0.3))) - row * 82 + 30 * Math.exp(-(t - a) * 18), 0.98 + 0.15 * Math.exp(-(t - a) * 10), 0)
         })
         s.subs.textContent = `${Math.max(380, Math.round(412 - Math.max(0, t - T.STICKER) * 12))} k abonnés`
         s.subs.setAttribute('fill', t > T.STICKER ? '#ff6b6b' : '#ffffff')
@@ -196,7 +196,7 @@ export default {
     // Le chat comprend : le piano se tait, la tension monte.
     a.drone(T.CHAT - 0.1, T.END - T.CHAT, 0.07)
     a.riser(T.CHAT, T.PANIC - T.CHAT, 0.05)
-    a.notif([T.CHAT, T.CHAT + 0.3, T.CHAT + 0.55, T.STICKER + 0.2, T.STICKER + 0.45, T.STICKER + 0.7, T.STICKER + 0.95])
+    a.notif([T.GIVE + 0.1, T.TAKE + 0.1, T.COUNT + 0.6, T.COUNT_END - 0.15, T.COUNT_END + 0.4, T.CHAT + 0.3, T.STICKER + 0.2, T.STICKER + 0.6])
     a.boom(T.STICKER, 0.45, 80, 36, 0.5)
     for (let t = T.STICKER; t < T.END; t += 0.42) {
       a.boom(t, 0.3, 60, 38, 0.12)

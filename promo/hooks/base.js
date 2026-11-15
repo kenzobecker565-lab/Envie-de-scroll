@@ -186,6 +186,11 @@ export async function start(hook) {
     })
     CHUNKS.push(...mine)
   }
+  // Quand une autre voix coupe la parole, l'ancien sous-titre s'efface.
+  CHUNKS.sort((x, y) => x.t0 - y.t0)
+  CHUNKS.forEach((c, i) => {
+    if (CHUNKS[i + 1]) c.t1 = Math.min(c.t1, CHUNKS[i + 1].t0)
+  })
   for (const c of CHUNKS) {
     c.el = document.createElement('div')
     c.el.className = 'line'

@@ -69,3 +69,5 @@ html, body { margin: 0; background: #000; }
 .who.harceleur { background: #6a3a8a; }
 .who.passager { background: #12a150; }
 .rw { font-size: 120px; color: #fff; -webkit-text-stroke: 16px #10121a; paint-order: stroke fill; }
+.who.influenceuse, .who.influenceuse2 { background: #ff6fa0; }
+.who.gerard { background: #5a4a3a; }

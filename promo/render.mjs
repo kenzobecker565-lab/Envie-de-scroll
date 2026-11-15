@@ -74,6 +74,7 @@ const ADS = {
   'hook-rodeo': { page: 'promo/hooks/rodeo.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'rodeo.mp4' },
   'hook-prank': { page: 'promo/hooks/prank.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'prank.mp4' },
   'hook-rer': { page: 'promo/hooks/rer.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'rer.mp4' },
+  'hook-cagnotte': { page: 'promo/hooks/cagnotte.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'cagnotte.mp4' },
   'casse-01': { page: 'promo/casse-01/index.html', audio: './casse-01/audio.mjs', build: 'build/casse-01', out: 'casse-01.mp4' },
   'demo-v2': { page: 'promo/demo-v2/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v2', out: 'demo-v2.mp4' },
   'demo-v3': { page: 'promo/demo-v3/index.html', audio: './affaire-05/audio.mjs', build: 'build/demo-v3', out: 'demo-v3.mp4' },

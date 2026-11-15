@@ -10,11 +10,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Biquad, SR, TAU, clamp, compress, expInterp, filterBus, limit, loudness, readWav, resample, reverb, voiceEnvelope, writeWav } from '../dsp.mjs'
 
+import cagnotte from './cagnotte.js'
 import prank from './prank.js'
 import rer from './rer.js'
 import rodeo from './rodeo.js'
 
-const HOOKS = { rodeo, prank, rer }
+const HOOKS = { rodeo, prank, rer, cagnotte }
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SONS = path.join(HERE, '..', 'sons', 'bigsoundbank')
 

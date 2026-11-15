@@ -10,11 +10,16 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Biquad, SR, TAU, clamp, compress, expInterp, filterBus, limit, loudness, readWav, resample, reverb, voiceEnvelope, writeWav } from '../dsp.mjs'
 
+import prank from './prank.js'
+import rer from './rer.js'
+import rodeo from './rodeo.js'
+
+const HOOKS = { rodeo, prank, rer }
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SONS = path.join(HERE, '..', 'sons', 'bigsoundbank')
 
-export async function writeHookAudio(name, file) {
-  const hook = (await import(path.join(HERE, `${name}.js`))).default
+export function writeHookAudio(name, file) {
+  const hook = HOOKS[name]
   const DURATION = hook.DUR
   const N = Math.ceil(DURATION * SR)
   let seed = 0x51ce
@@ -195,11 +200,11 @@ export async function writeHookAudio(name, file) {
 }
 
 // Pour render.mjs (bande-son complète) : le hook est donné par HOOK.
-export async function writeAudio(file) {
-  await writeHookAudio(process.env.HOOK, file)
+export function writeAudio(file) {
+  writeHookAudio(process.env.HOOK, file)
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
-  await writeHookAudio(process.argv[2], process.argv[3])
+  writeHookAudio(process.argv[2], process.argv[3])
   console.log(process.argv[3])
 }

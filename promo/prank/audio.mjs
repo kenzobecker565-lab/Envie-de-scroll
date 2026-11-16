@@ -1,15 +1,15 @@
 /**
  * ============================================================================
- *  Bande-son de « La cagnotte » (sons réels : BigSoundBank, voir ../sons/bigsoundbank) : musique, bruitages, voix.
+ *  Bande-son du « Prank » (sons réels : BigSoundBank, voir ../sons/bigsoundbank) : musique, bruitages, voix.
  * ============================================================================
  *  - Musique : l'ambiance de thriller judiciaire de la série.
- *  - Bruitages calés sur cues.js : TER de nuit, jingle de gare, portes,
- *    train qui repart, vent, phares et pneus, bips d'hôpital, marteau.
+ *  - Bruitages calés sur cues.js : le vlog (petit beat), le cri, le poing, la
+ *    chute du téléphone, la sirène ; puis un son par plan de coupe du procès.
  *  - Voix : voice/<id>.wav (ElevenLabs), placées d'après timeline.json ; une
  *    légère réverbération de salle sur les avocats.
  *  Sonie : −14 LUFS.
  *
- *   node controleur/audio.mjs [sortie.wav]
+ *   node prank/audio.mjs [sortie.wav]
  */
 
 import fs from 'node:fs'
@@ -19,7 +19,7 @@ import { Biquad, SR, TAU, clamp, compress, expInterp, filterBus, limit, loudness
 import { makeCues } from './cues.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const BUILD = path.join(HERE, '..', 'build', 'controleur')
+const BUILD = path.join(HERE, '..', 'build', 'prank')
 const C = makeCues(JSON.parse(fs.readFileSync(path.join(HERE, 'timeline.json'), 'utf8')))
 const { S, E, W } = C
 const K = C.hook
@@ -191,35 +191,102 @@ const quiet = (tt) => HOT.some(([a, b]) => tt > a - 0.08 && tt < b) || (tt > IMP
 function music() {
   const trib = SEC('tribunal').t0
   const vote = SEC('vote').t0
-  // Le live : piano tendre (le faux happy end), qui se tait quand le chat comprend.
-  for (const [i, c] of [[60, 64, 67], [57, 60, 64], [53, 57, 60, 65], [55, 59, 62, 67], [60, 64, 67]].entries()) for (const m of c) piano(i * 0.97, m, 0.035, 0)
-  strings(K.CHAT - 0.1, K.END - K.CHAT, [37, 38, 45], 0.05, { attack: 0.3, cutoff: 900, release: 0.03 })
-  for (let t = K.STICKER, k = 0; t < K.END - 0.05; k++) {
-    pulse(t, 37 + 12 * (k % 2), k % 2 ? 0.06 : 0.09)
-    t += lerp(BEAT / 2, BEAT / 4, Math.min(1, (t - K.STICKER) / (K.END - K.STICKER)))
+  const hug = C.cuts.HUG
+  // Le vlog : un petit beat léger sous le selfie, coupé net quand il attrape l'enfant.
+  const VB = 60 / 124
+  for (let t = 0, n = 0; t < K.GRAB - 0.05; t += VB / 2, n++) {
+    if (n % 4 === 0) kick(t, 0.45)
+    if (n % 4 === 2) clap(t, 0.2)
+    hat(t, 0.04)
   }
-  // Le replay : Maëlys, Gérard, la cagnotte qui s'emballe ; les billets ; l'enveloppe ; le jugement.
-  strings(K.REPLAY, K.SIX - K.REPLAY, [38, 45, 50], 0.05, { attack: 0.8, cutoff: 900, release: 0.03 })
-  for (let t = K.REPLAY, k = 0; t < K.SIX - 0.1; t += BEAT / 2, k++) pulse(t, 38 + 12 * (k % 2), k % 2 ? 0.05 : 0.08)
-  for (const [k, m] of [[0, 74], [1, 69], [2, 65]]) piano(K.HEART + 0.1 + k * 0.45, m, 0.07, 0)
+  drone(K.GRAB, K.REWIND - K.GRAB, 0.07)
+  // Le replay : la tension (cordes, pulsation) ; Rachid et ses enfants ; le coup au ralenti ; le jugement.
+  strings(K.REPLAY, K.RACHID - K.REPLAY, [38, 45, 50], 0.05, { attack: 0.6, cutoff: 900, release: 0.03 })
+  for (let t = K.REPLAY, k = 0; t < K.RACHID - 0.1; t += BEAT / 2, k++) pulse(t, 38 + 12 * (k % 2), k % 2 ? 0.05 : 0.08)
+  for (const [k, m] of [[0, 62], [1, 66], [2, 69], [3, 74]]) piano(K.RACHID + 0.1 + k * 0.5, m, 0.06, 0)
+  strings(K.RACHID, K.COUP - K.RACHID, [38, 50, 54, 57], 0.045, { attack: 0.5, cutoff: 1100, release: 0.05 })
+  strings(K.COMA, K.TODAY - K.COMA, [37, 44, 49], 0.05, { attack: 0.1, cutoff: 700, release: 0.03 })
   strings(K.TODAY, trib - K.TODAY, [26, 38, 45], 0.06, { attack: 0.3, cutoff: 900 })
+  // Le procès : la boucle de la série, qui se tait sur la pique et laisse place à un piano tendre sur Timéo.
+  const soft = (tt) => tt > hug[0] - 0.1 && tt < hug[1]
   for (let bar = 0, t = trib - 0.1; t < IMPACT - 0.1; bar++, t += BAR) {
     const ch = CH[bar % 4]
     const len = Math.min(BAR, IMPACT - 0.1 - t)
-    strings(t, len, [ch[1], ch[2], ch[3]], 0.045, { cutoff: 1400 })
+    strings(t, len, [ch[1], ch[2], ch[3]], soft(t + len / 2) ? 0.03 : 0.045, { cutoff: 1400 })
     for (let k = 0; k < 8; k++) {
       const tt = t + k * (BEAT / 2)
       if (tt >= IMPACT - 0.1) break
-      if (quiet(tt)) continue
+      if (quiet(tt) || soft(tt)) continue
       pulse(tt, ch[0] + 12 * (k % 2), k % 2 ? 0.07 : 0.1)
     }
-    for (const b of [0, 2]) if (t + b * BEAT < IMPACT - 0.1 && !quiet(t + b * BEAT)) drum(t + b * BEAT, 0.2)
-    if (!quiet(t)) piano(t, ch[4] + 12, 0.05, 0.3)
+    for (const b of [0, 2]) if (t + b * BEAT < IMPACT - 0.1 && !quiet(t + b * BEAT) && !soft(t + b * BEAT)) drum(t + b * BEAT, 0.2)
+    if (!quiet(t) && !soft(t)) piano(t, ch[4] + 12, 0.05, 0.3)
   }
+  for (let k = 0, t = hug[0]; t < hug[1] - 0.3; k++, t += BEAT / 2) piano(t, [62, 66, 69, 74, 69, 66][k % 6] + (k >= 12 ? -2 : 0), 0.045, k % 2 ? 0.3 : -0.3)
   piano(IMPACT + 0.2, 69, 0.08, 0)
   strings(vote, DURATION - vote - 0.5, [26, 38, 45, 50], 0.08, { attack: 1.2, cutoff: 800 })
   for (let t = vote + 0.4; t < DURATION - 1; t += 1) clockTick(t, 0.06, Math.round(t) % 2 === 0)
   for (let t = vote + 0.5; t < DURATION - 1.5; t += 2) piano(t, 74, 0.05, 0.2)
+}
+
+// Petits instruments du vlog et sons du live (repris des prototypes de hooks).
+function kick(t0, gain = 0.6) {
+  let ph = 0
+  place([[B.music, gain]], t0, 0.5, (i, t) => {
+    ph += (TAU * expInterp(150, 45, clamp(t / 0.09))) / SR
+    return Math.sin(ph) * Math.exp(-t / 0.22) * Math.min(1, t / 0.002)
+  })
+}
+function clap(t0, gain = 0.35) {
+  const bp = new Biquad('bandpass', 1300, 0.9)
+  place([[B.music, gain], [B.verb, gain * 0.4]], t0, 0.3, (i, t) => {
+    const env = Math.exp(-((t % 0.011) / 0.004)) * (t < 0.03 ? 1 : 0) + Math.exp(-(t - 0.03) / 0.08) * (t >= 0.03 ? 1 : 0)
+    return bp.process(noise()) * 2.2 * env
+  })
+}
+function hat(t0, gain = 0.08) {
+  const hp = new Biquad('highpass', 7000, 0.7)
+  place([[B.music, gain]], t0, 0.05, (i, t) => hp.process(noise()) * Math.exp(-t / 0.012))
+}
+function drone(t0, len, gain = 0.05) {
+  const lp = new Biquad('lowpass', 700, 0.7)
+  place([[B.music, gain]], t0, len, (i, t) => lp.process(Math.sin(TAU * 55 * t) + 0.7 * Math.sin(TAU * 58.3 * t) + 0.4 * Math.sin(TAU * 110.5 * t) + 0.2 * noise()) * Math.min(1, t / 0.6) * Math.min(1, (len - t) / 0.3))
+}
+function notif(times) {
+  for (const t of times) place([[B.sfx, 0.08], [B.verb, 0.03]], t, 0.25, (i, x) => (Math.sin(TAU * 1568 * x) + 0.5 * Math.sin(TAU * 2349 * x)) * Math.exp(-x / 0.07) * Math.min(1, x / 0.003))
+}
+function whoosh(t, gain = 0.25) {
+  sample('1801', t - 0.07, gain, { len: 0.35, fade: 0.05 })
+}
+function steps(t0, len, gain = 0.18, every = 0.17) {
+  for (let t = t0; t < t0 + len; t += every) boom(t, gain, 140, 60, 0.05)
+}
+function scratch(t0, gain = 0.25) {
+  const bp = new Biquad('bandpass', 1200, 2)
+  place([[B.sfx, gain]], t0, 0.35, (i, t) => {
+    if (i % 16 === 0) bp.set('bandpass', 400 + 2400 * Math.abs(Math.sin(t * 38)), 2)
+    return bp.process(noise()) * 2.5 * Math.min(1, t / 0.01) * Math.min(1, (0.35 - t) / 0.05)
+  })
+}
+function tinnitus(t0, len, gain = 0.04) {
+  place([[B.sfx, gain]], t0, len, (i, t) => Math.sin(TAU * 4200 * t) * Math.min(1, t / 0.05) * Math.min(1, (len - t) / 0.3))
+}
+function rewind(t0, len) {
+  sweep(t0, len, { f0: 4000, f1: 300, gain: 0.3 })
+  let ph = 0
+  place([[B.sfx, 0.06]], t0, len, (i, t) => {
+    ph += expInterp(300, 1400, t / len) / SR
+    return Math.sign(Math.sin(TAU * ph)) * Math.min(1, t / 0.02) * Math.min(1, (len - t) / 0.05)
+  })
+}
+function kaching(t0, gain = 0.15) {
+  place([[B.sfx, gain], [B.verb, gain * 0.5]], t0, 0.6, (i, t) => (Math.sin(TAU * 2637 * t) + 0.7 * Math.sin(TAU * 3520 * t) + 0.5 * Math.sin(TAU * 4186 * t)) * Math.exp(-t / 0.18) * (t > 0.05 ? 1 : Math.exp(-t / 0.01)))
+}
+function heart(t0, len, gain = 0.3, every = 0.75) {
+  for (let t = t0; t < t0 + len; t += every) {
+    boom(t, gain, 60, 38, 0.12)
+    boom(t + 0.2, gain * 0.7, 55, 35, 0.12)
+  }
 }
 
 /** Tampon encreur. */
@@ -301,62 +368,96 @@ function riser(t0, len, gain = 0.05) {
 function score() {
   for (const sec of C.sections.slice(1)) sweep(sec.t0 - 0.24, 0.5, { f0: 300, f1: 3500, gain: 0.18 })
   const trib = SEC('tribunal').t0
-  // A · Le live : la rue, les applaudissements, l'enveloppe, le comptage, les notifications ;
-  // la main sur le micro, la coupure ; le rembobinage.
-  sample('0621', 0, 0.3, { len: K.END })
-  for (const t of [0.6, K.GIVE + 0.1, K.TAKE + 0.1, K.COUNT + 0.6, K.COUNT_END - 0.15, K.COUNT_END + 0.4, K.CHAT + 0.3, K.STICKER + 0.2, K.STICKER + 0.6]) pop(t, 0.1, 1568, 1400)
-  sample('2363', K.GIVE, 0.3, { len: 1.2 })
-  sweep(K.OPEN - 0.05, 0.25, { f0: 2500, f1: 1800, q: 0.8, gain: 0.2 })
-  for (let i = 0; i < 12; i++) tick(K.COUNT + i * ((K.COUNT_END - K.COUNT) / 12), 0.07, 2200)
-  boom(K.COUNT_END, 0.35, 90, 40, 0.4)
-  boom(K.STICKER, 0.45, 80, 36, 0.5)
-  for (let t = K.STICKER; t < K.END; t += 0.42) {
-    boom(t, 0.3, 60, 38, 0.12)
-    boom(t + 0.18, 0.2, 55, 35, 0.12)
-  }
-  sample('1035', K.HAND, 0.4, { len: 0.8 })
-  boom(K.END, 0.6, 50, 26, 0.6)
-  sweep(K.REWIND, K.REPLAY - K.REWIND, { f0: 4000, f1: 200, gain: 0.28 })
-  // C · Le replay : les abonnés qui défilent, la cagnotte qui s'emballe (tic-tac, ka-ching), les billets qui tombent.
+  const X = C.cuts
+  // A · Le live : le parc (rires d'enfants), le retournement de caméra, le cri, le poing, la chute.
+  sample('1660', 0, 0.3, { len: K.GRAB })
+  notif([0.5, 1.4, K.FLIP + 0.4, K.GRAB - 0.25])
+  whoosh(K.FLIP)
+  steps(K.FLIP, K.GRAB - K.FLIP, 0.12)
+  scratch(K.GRAB - 0.03, 0.25)
+  scream(K.GRAB + 0.05, 1.3, 0.45)
+  notif([K.GRAB + 0.35])
+  steps(K.PASS, K.PUNCH - K.PASS, 0.2)
+  sample('0597', K.PUNCH - 0.02, 1.0, { len: 0.35 })
+  boom(K.PUNCH, 0.9, 110, 34, 0.5)
+  crash(K.PUNCH + 0.01, 0.25)
+  whoosh(K.FALL + 0.05)
+  boom(K.GROUND, 0.7, 90, 30, 0.5)
+  sample('0771', K.GROUND, 0.45, { len: 0.7 })
+  tinnitus(K.GROUND, 1.4, 0.035)
+  notif([K.PUNCH + 0.25, K.GROUND + 0.2, K.GROUND + 0.55, K.GROUND + 0.9])
+  sample('1463', K.SIREN, 0.15, { len: K.REWIND - K.SIREN + 0.3, lp: 1800 })
+  rewind(K.REWIND, K.REPLAY - K.REWIND)
+  // C · Le replay : les abonnés qui défilent, le live, le billet, le coup au ralenti, le moniteur, le marteau.
   stamp(K.REPLAY + 0.05, 0.25)
-  for (let k = 0; k < 8; k++) tick(W('02', '412') - 0.1 + k * 0.08, 0.05, 1800 + k * 100)
-  boom(K.GERARD_R, 0.3, 90, 40, 0.3)
-  for (let k = 0, t = K.EIGHTY; t < K.SIX - 0.1; k++) {
-    tick(t, 0.07, 2400)
-    t += Math.max(0.03, 0.16 * Math.exp(-k * 0.1))
-  }
-  for (const f of [0.3, 0.68, 1.0]) pop(K.EIGHTY + f * 1.6, 0.2, 2600, 3500)
-  boom(K.EIGHTY + 1.6, 0.5, 100, 40, 0.3)
-  for (let i = 0; i < 12; i++) sweep(K.SIX + i * 0.11, 0.18, { f0: 1800, f1: 600, q: 1, gain: 0.06 })
-  boom(K.HEART, 0.4, 60, 36, 0.3)
-  for (let t = K.HEART + 0.2; t < K.TODAY - 0.1; t += 0.9) {
-    boom(t, 0.35, 60, 38, 0.12)
-    boom(t + 0.2, 0.25, 55, 35, 0.12)
-  }
-  // E · Le marteau.
+  for (let k = 0; k < 10; k++) tick(W('02', '2') - 0.25 + k * 0.08, 0.05, 1800 + k * 100)
+  boom(K.FAUX, 0.35, 90, 40, 0.3)
+  notif([K.FAUX + 0.2, K.FAUX + 0.5, K.FAUX + 0.8])
+  boom(K.TIMEO, 0.25, 90, 40, 0.3)
+  kaching(W('02', '50') - 0.25, 0.14)
+  boom(K.RACHID, 0.3, 80, 40, 0.4)
+  whoosh(K.COUP + 0.05, 0.35)
+  sample('0597', K.COUP + 0.3, 0.9, { len: 0.35, lp: 1400 })
+  boom(K.COUP + 0.3, 1.0, 80, 26, 1.0)
+  for (let t = K.COMA + 0.2; t < K.TODAY; t += 1 / 0.9) beep(t, 0.1, 980, 0.12)
+  boom(K.COMA, 0.4, 70, 34, 0.5)
   boom(K.TODAY, 0.35, 120, 50, 0.4)
   sweep(K.GAVEL - 0.25, 0.2, { f0: 600, f1: 2400, gain: 0.12 })
   sample('1588', K.GAVEL + 0.08, 1.0)
   boom(K.GAVEL + 0.1, 0.65, 60, 28, 1.2)
   stamp(K.GAVEL + 0.12, 0.35)
-  // Le procès.
-  // Le procès.
-  // Le procès.
+  // Le procès : les avocats, puis un son par plan de coupe.
   for (const l of C.lines.filter((x) => x.start > trib && x.start < SEC('vote').t0 && !x.id.startsWith('08') && !x.id.startsWith('09')).slice(1)) sweep(l.start - 0.2, 0.26, { f0: 500, f1: 3000, gain: 0.12 })
-  boom(W('04', 'commission') - 0.15, 0.35, 70, 34, 0.5)
-  for (const w of [['05', 'dixhuit'], ['05', 'un'], ['05', 'une']]) pop(W(...w) - 0.2, 0.1, 900, 400)
-  stamp(W('06', 'neuf') - 0.2, 0.3)
-  for (let k = 0; k < 6; k++) tick(W('06', 'soixante') - 0.1 + k * 0.08, 0.06, 2000 + k * 150)
-  boom(W('06', 'et') - 0.1, 0.35, 70, 34, 0.5)
-  for (let k = 0; k < 10; k++) tick(S('09') - 0.05 + k * 0.05, 0.05, 1800 + k * 100)
-  boom(W('12', 'ne') - 0.1, 0.4, 70, 34, 0.6)
+  for (const [a] of Object.values(X)) sweep(a - 0.12, 0.24, { f0: 900, f1: 5000, gain: 0.1, pan: -0.3 })
+  // Le chronomètre.
+  for (let k = 0; k <= 13; k++) clockTick(X.CHRONO[0] + 0.1 + k * 0.104, 0.08, k % 2 === 0)
+  sample('0597', X.CHRONO[0] + 1.45, 0.6, { len: 0.3 })
+  boom(X.CHRONO[0] + 1.45, 0.5, 90, 34, 0.4)
+  // La pellicule : le projecteur, un déclic par image.
+  for (let t = X.FILM[0]; t < X.FILM[1]; t += 1 / 24) tick(t, 0.025, 900)
+  for (let t = X.FILM[0]; t < X.FILM[1] - 0.1; t += 0.56) tick(t, 0.09, 2600)
+  // La camionnette : la portière qui coulisse, qui claque ; elle démarre.
+  sweep(X.VAN[0] + 1.4, 0.45, { f0: 700, f1: 2200, q: 0.9, gain: 0.25 })
+  boom(X.VAN[0] + 1.8, 0.8, 120, 40, 0.35)
+  crash(X.VAN[0] + 1.8, 0.12)
+  hum(X.VAN[0] + 2.1, 1.0, 45, 0.06)
+  sweep(X.VAN[0] + 2.2, 0.9, { f0: 300, f1: 1400, q: 0.8, gain: 0.2 })
+  // La balance ; la cagoule qui tombe ; l'étiquette.
+  pop(X.SCALE[0] + 0.1, 0.15, 2400, 3200)
+  boom(X.SCALE[0] + 0.45, 0.3, 90, 40, 0.3)
+  boom(W('06', 'cagoule') - 0.3 + 0.4, 0.45, 100, 40, 0.3)
+  stamp(W('06', 'neuf') - 0.25, 0.25)
+  // La vue de Rachid : le cœur qui cogne ; l'enfant qui hurle ; le parc figé.
+  heart(X.MASKED[0], X.MASKED[1] - X.MASKED[0], 0.45, 0.74)
+  scream(X.KIDCRY[0] + 0.02, X.KIDCRY[1] - X.KIDCRY[0], 0.3)
+  tinnitus(X.FROZEN[0], X.FROZEN[1] - X.FROZEN[0], 0.03)
+  boom(X.FROZEN[0], 0.4, 60, 30, 0.8)
+  // La radio : le balayage, l'impact.
+  hum(X.XRAY[0], X.XRAY[1] - X.XRAY[0], 60, 0.03)
+  boom(X.XRAY[0] + 0.5, 0.6, 70, 30, 0.6)
+  crash(X.XRAY[0] + 0.5, 0.08)
+  for (let t = X.XRAY[0] + 0.3; t < X.XRAY[1]; t += 0.6) beep(t, 0.05, 1320, 0.07)
+  // Vu du ciel : les pas de Rachid.
+  steps(X.BACK[0] + 0.1, X.BACK[1] - X.BACK[0] - 0.2, 0.1, 0.35)
+  // Le contre-jour : le vent, puis la sirène des secours.
+  wind(X.HUG[0], X.HUG[1] - X.HUG[0], 0.04)
+  sample('1463', W('10', 'secours') - 0.35, 0.18, { len: X.HUG[1] - W('10', 'secours') + 0.5, lp: 2400 })
+  // Les poings : la foule, un coup par poing.
+  crowd(X.FISTS[0], X.FISTS[1] - X.FISTS[0], 0.07)
+  for (const d of [0, 0.18, 0.3, 0.45, 0.55, 0.7, 0.8, 0.95, 1.05, 1.15]) boom(X.FISTS[0] + d + 0.12, 0.25, 100, 45, 0.15)
+  // Les téléphones : les bips d'enregistrement, les déclencheurs.
+  for (let k = 0; k < 16; k++) tick(X.PHONES[0] + 0.25 + ((k * 0.11) % 1.5), 0.08, 3200)
+  beep(X.PHONES[0] + 0.4, 0.08, 1800, 0.1)
   for (const [a] of HOT) {
     sweep(a - 0.08, 0.12, { f0: 2400, f1: 200, gain: 0.18 })
     boom(a, 0.4, 100, 40, 0.4)
   }
+  boom(W('05', 'heureusement') - 0.1, 0.35, 70, 34, 0.5)
+  boom(W('11', 'frappez') - 0.12, 0.4, 70, 34, 0.5)
   pop(W('08', 'abonnetoi') - 0.1, 0.2, 1200, 600)
   pop(W('08', 'abonnetoi') + 0.05, 0.14, 1600, 900)
   boom(IMPACT, 0.45, 55, 28, 1.4)
+  boom(W('12', 'filmez') - 0.12, 0.5, 60, 28, 1.0)
   // Le vote.
   boom(W('13', 'jure') - 0.15, 0.4, 60, 30, 1.2)
   for (const w of ['coupable', 'non']) boom(W('13', w) - 0.1, 0.22, 90, 45, 0.5)
@@ -387,7 +488,7 @@ function voiceTrack() {
     const y = sr === SR ? x : resample(x, sr, SR)
     const s0 = Math.round(line.start * SR)
     // Les avocats sonnent « dans la salle » : un peu de réverbération.
-    const room = ['narrateur', 'maelys', 'maelys2', 'gerard'].includes(line.who) ? 0 : 0.22
+    const room = ['narrateur', 'youtubeur', 'passant'].includes(line.who) ? 0 : 0.22
     for (let i = 0; i < y.length && s0 + i < N; i++) {
       B.voice[0][s0 + i] += y[i]
       B.voice[1][s0 + i] += y[i]

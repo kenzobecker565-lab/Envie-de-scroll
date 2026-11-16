@@ -428,8 +428,8 @@ const SHOTS = [
       },
       draw(k, s, t, l) {
         const p = k.ease.io2(k.clamp((t - K.INTRO_YT) / 0.5))
-        const z = 1.55 + 0.04 * l + 0.18 * p
-        const cx = k.lerp(610, 570, p)
+        const z = 1.55 + 0.04 * l + 0.12 * p
+        const cx = k.lerp(610, 600, p)
         s.world.setAttribute('transform', `translate(540 960) scale(${z.toFixed(4)}) translate(${-cx} -1140)`)
         const v = k.ease.out3(k.clamp((t - K.INTRO_YT) / 0.25))
         s.ring.setAttribute('opacity', v.toFixed(2))

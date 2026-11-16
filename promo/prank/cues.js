@@ -40,7 +40,9 @@ export function makeCues(tl) {
 
   // Le hook (un seul plan, filmé par le téléphone du youtubeur) : le selfie, la cagoule, la caméra
   // retournée, l'enfant attrapé, le passant, le poing, la chute du téléphone. Puis le replay.
-  const hook = { MASK: W('01', 'je') + 0.15, FLIP: W('01', 'et') + 0.04, GRAB: W('01', 'reagit') + 0.4 }
+  // L'ouverture « fait divers » (le narrateur pose l'affaire), puis le live commence.
+  const LIVE0 = S('01') - 0.05
+  const hook = { LIVE0, INTRO_YT: W('00', 'youtubeur') - 0.15, MASK: W('01', 'je') + 0.15, FLIP: W('01', 'et') + 0.04, GRAB: W('01', 'reagit') + 0.4 }
   hook.PASS = hook.GRAB + 0.3
   hook.PUNCH = S('01b') + 1.35
   hook.FALL = hook.PUNCH + 0.05

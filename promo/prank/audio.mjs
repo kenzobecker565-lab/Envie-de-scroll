@@ -194,12 +194,15 @@ function music() {
   const hug = C.cuts.HUG
   // Le vlog : un petit beat léger sous le selfie, coupé net quand il attrape l'enfant.
   const VB = 60 / 124
-  for (let t = 0, n = 0; t < K.GRAB - 0.05; t += VB / 2, n++) {
+  for (let t = K.LIVE0, n = 0; t < K.GRAB - 0.05; t += VB / 2, n++) {
     if (n % 4 === 0) kick(t, 0.45)
     if (n % 4 === 2) clap(t, 0.2)
     hat(t, 0.04)
   }
   drone(K.GRAB, K.REWIND - K.GRAB, 0.07)
+  // L'ouverture : nappe sombre, pulsation lente.
+  strings(0, K.LIVE0 - 0.2, [37, 44, 49], 0.06, { attack: 0.05, cutoff: 800, release: 0.03 })
+  for (let t = 0.05, k = 0; t < K.LIVE0 - 0.3; t += BEAT, k++) pulse(t, 37 + 12 * (k % 2), 0.09)
   // Le replay : la tension (cordes, pulsation) ; Rachid et ses enfants ; le coup au ralenti ; le jugement.
   strings(K.REPLAY, K.RACHID - K.REPLAY, [38, 45, 50], 0.05, { attack: 0.6, cutoff: 900, release: 0.03 })
   for (let t = K.REPLAY, k = 0; t < K.RACHID - 0.1; t += BEAT / 2, k++) pulse(t, 38 + 12 * (k % 2), k % 2 ? 0.05 : 0.08)
@@ -370,8 +373,14 @@ function score() {
   const trib = SEC('tribunal').t0
   const X = C.cuts
   // A · Le live : le parc (rires d'enfants), le retournement de caméra, le cri, le poing, la chute.
-  sample('1660', 0, 0.3, { len: K.GRAB })
-  notif([0.5, 1.4, K.FLIP + 0.4, K.GRAB - 0.25])
+  boom(0.05, 0.6, 70, 30, 0.9)
+  sample('0621', 0, 0.12, { len: K.LIVE0 - 0.2, lp: 2500 })
+  boom(K.INTRO_YT, 0.5, 90, 34, 0.5)
+  for (let t = K.INTRO_YT + 0.1; t < K.LIVE0 - 0.4; t += 0.55) beep(t, 0.07, 980, 0.12)
+  boom(W('00', 'coma') + 0.1, 0.45, 60, 28, 0.7)
+  rewind(K.LIVE0 - 0.4, 0.4)
+  sample('1660', K.LIVE0, 0.3, { len: K.GRAB - K.LIVE0 })
+  notif([K.LIVE0 + 0.5, K.LIVE0 + 1.4, K.FLIP + 0.4, K.GRAB - 0.25])
   whoosh(K.FLIP)
   steps(K.FLIP, K.GRAB - K.FLIP, 0.12)
   scratch(K.GRAB - 0.03, 0.25)

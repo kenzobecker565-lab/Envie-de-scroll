@@ -24,9 +24,15 @@
  },
  "lines": [
   {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "Il a cru sauver un enfant… Il a mis un youtubeur dans le coma."
+  },
+  {
    "id": "01-youtubeur",
    "who": "youtubeur",
-   "text": "Les gars… expérience sociale. Je fais semblant d'enlever un gosse… et on regarde qui réagit."
+   "text": "Les gars… expérience sociale. Je fais semblant d'enlever un gosse… et on regarde qui réagit.",
+   "gap": 0.5
   },
   {
    "id": "01b-passant",

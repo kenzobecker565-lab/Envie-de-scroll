@@ -395,6 +395,51 @@ const T = K
 // Le live (un seul plan), puis le replay raconté par le narrateur.
 const SHOTS = [
     {
+      // I · L'ouverture « fait divers » : la caméra du parc, juste après le coup. L'affaire en une image.
+      t1: K.LIVE0,
+      build(k, g) {
+        const { svg, txt, bg } = k
+        bg(g, '#0a0a0c')
+        const world = svg('g', {}, g)
+        const far = svg('g', { filter: 'url(#desat)' }, world)
+        park(k, far)
+        for (const [x, y, sc, ph] of [[330, 1085, 0.34, true], [410, 1070, 0.3, false], [640, 1065, 0.3, true], [700, 1080, 0.36, true], [930, 1095, 0.42, true], [300, 1230, 0.5, true]]) fig(far, { x, y, s: sc, fill: '#3a4048', head: '#454c55', armR: ph ? 150 : 8, phone: ph })
+        const who = svg('g', {}, world)
+        fig(who, { x: 560, y: 1185, s: 0.62, fill: '#a83a50', head: '#14161c', armR: 40, armL: 150, rot: -86 })
+        const ph = svg('g', { transform: 'translate(310 1250) rotate(-70) scale(0.8)' }, who)
+        svg('rect', { x: -26, y: -44, width: 52, height: 88, rx: 8, fill: '#10121a' }, ph)
+        svg('path', { d: 'M -10 -30 L 6 0 L -8 24 M 6 0 L 18 -10', stroke: '#ffffff', 'stroke-width': 3, fill: 'none' }, ph)
+        fig(who, { x: 780, y: 1200, s: 0.74, fill: '#2a3a5a', head: '#1a120c', armR: 120, armL: 70 })
+        fig(who, { x: 860, y: 1205, s: 0.44, fill: '#c89a2a', head: '#7a4a2a', armL: 150, armR: 30 })
+        const ring = svg('ellipse', { cx: 455, cy: 1172, rx: 175, ry: 62, fill: 'none', stroke: '#ff2a3d', 'stroke-width': 7, 'stroke-dasharray': '26 14', opacity: 0, filter: 'url(#glow)' }, world)
+        svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: '#0f2028', opacity: 0.62, style: 'mix-blend-mode:multiply' }, g)
+        svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: 'url(#vigCut)' }, g)
+        const scan = svg('pattern', { id: 'scanI', width: 8, height: 8, patternUnits: 'userSpaceOnUse' }, k.defs)
+        svg('rect', { width: 8, height: 3, fill: '#000', opacity: 0.25 }, scan)
+        svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: 'url(#scanI)' }, g)
+        svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: 'url(#vigCut)' }, g)
+        const hud = svg('g', {}, g)
+        for (const [x, y, sx, sy] of [[50, 190, 1, 1], [1030, 190, -1, 1], [50, 1870, 1, -1], [1030, 1870, -1, -1]]) svg('path', { d: `M ${x} ${y + sy * 60} L ${x} ${y} L ${x + sx * 60} ${y}`, stroke: '#ffffff', 'stroke-width': 7, fill: 'none', opacity: 0.8 }, hud)
+        const rec = svg('circle', { cx: 100, cy: 1820, r: 13, fill: '#ff2a3d' }, hud)
+        txt(hud, 'CAM 03 · PARC', { x: 125, y: 1832, 'font-size': 34, fill: '#ffffff', 'text-anchor': 'start', opacity: 0.85 })
+        const clock = txt(hud, '', { x: 1000, y: 1832, 'font-size': 34, fill: '#ffffff', 'text-anchor': 'end', opacity: 0.85 })
+        const fl = svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: '#ffffff', opacity: 0 }, g)
+        return { world, ring, rec, clock, fl }
+      },
+      draw(k, s, t, l) {
+        const p = k.ease.io2(k.clamp((t - K.INTRO_YT) / 0.5))
+        const z = 1.55 + 0.04 * l + 0.18 * p
+        const cx = k.lerp(610, 570, p)
+        s.world.setAttribute('transform', `translate(540 960) scale(${z.toFixed(4)}) translate(${-cx} -1140)`)
+        const v = k.ease.out3(k.clamp((t - K.INTRO_YT) / 0.25))
+        s.ring.setAttribute('opacity', v.toFixed(2))
+        s.ring.setAttribute('stroke-dashoffset', (-t * 60).toFixed(0))
+        s.rec.setAttribute('opacity', Math.floor(t * 2) % 2 ? 1 : 0.2)
+        s.clock.textContent = `14:32:${String(7 + Math.floor(t)).padStart(2, '0')}`
+        s.fl.setAttribute('opacity', 0)
+      },
+    },
+    {
       // Le live : du selfie à la chute du téléphone.
       t1: K.REWIND,
       build(k, g) {
@@ -526,7 +571,7 @@ const SHOTS = [
         const v = 12.4 + t * 0.4 + (t > T.GRAB ? (t - T.GRAB) * 3 : 0) + (t > T.PUNCH ? (t - T.PUNCH) * 14 : 0)
         s.views.textContent = `${v.toFixed(1).replace('.', ',')} k`
         k.place(s.title, 540, 250, t < T.FLIP ? 1 : 0, 0)
-        const times = [0.5, 1.4, T.FLIP + 0.4, T.GRAB - 0.25, T.GRAB + 0.35, T.PUNCH + 0.25, T.GROUND + 0.2, T.GROUND + 0.55, T.GROUND + 0.9]
+        const times = [T.LIVE0 + 0.5, T.LIVE0 + 1.4, T.FLIP + 0.4, T.GRAB - 0.25, T.GRAB + 0.35, T.PUNCH + 0.25, T.GROUND + 0.2, T.GROUND + 0.55, T.GROUND + 0.9]
         const shown = times.filter((a2) => t >= a2).length
         s.msgs.forEach((b, i) => {
           const a2 = times[i]
@@ -1404,6 +1449,11 @@ const hotAt = (t) => HOT.find(([a, b]) => t >= a && t < b)
 const LIKE = '<svg viewBox="0 0 24 24" width="84" height="84" style="vertical-align:middle;margin-right:20px"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="#fe2c55"/></svg>LIKE'
 const fr = (v) => Math.round(v).toLocaleString('fr-FR')
 const pad = (n) => String(Math.floor(n)).padStart(2, '0')
+// L'ouverture : l'affaire en une image.
+fs(tag('IL A CRU SAUVER UN ENFANT', 'pill yellow', { t0: 0, t1: K.LIVE0 - 0.1, y: 300, rot: -2 }), 60)
+fs(tag('UN YOUTUBEUR DANS LE COMA', 'pill red', { t0: K.INTRO_YT, t1: K.LIVE0 - 0.1, y: 420, rot: 2 }), 60)
+fs(tag('HÉROS OU COUPABLE ?', 'slam white', { t0: Wd('00', 'coma') + 0.1, t1: K.LIVE0 - 0.1, y: 590, rot: -3, from: 2.4, dur: 0.18 }), 92)
+fs(tag('LE LIVE · 2 MINUTES AVANT', 'pill', { t0: K.LIVE0 + 0.05, t1: K.LIVE0 + 1.6, y: 420, rot: -2 }), 46)
 // Le hook (replay).
 fs(tag('FAUX ENLÈVEMENT', 'slam white', { t0: K.FAUX, t1: K.TIMEO - 0.06, y: 580, rot: -3, from: 2.4, dur: 0.18 }), 76)
 fs(tag('TIMÉO · 8 ANS', 'pill yellow', { t0: K.TIMEO, t1: K.RACHID - 0.06, y: 300, rot: -2 }), 60)
@@ -1501,6 +1551,8 @@ function updateCaptions(t) {
 // ------------------------------------------------------------------ l'instant t
 
 const IMPACTS = [
+  [K.INTRO_YT, 12],
+  [K.LIVE0, 10],
   [K.GRAB, 10],
   [K.PUNCH, 26],
   [K.GROUND, 14],
@@ -1572,7 +1624,7 @@ function seek(t) {
     const [hx, hy] = shakeAt(t, 0)
     sh.wrap.setAttribute('transform', `translate(${540 + hx + 14 * cutK * Math.sin(t * 90)} ${960 + hy}) scale(${1 + 0.08 * cutK}) translate(-540 -960)`)
     sh.draw(kit, sh.st, t, k)
-    const rw = t >= K.REWIND && t < K.REPLAY
+    const rw = (t >= K.REWIND && t < K.REPLAY) || (t >= K.LIVE0 - 0.35 && t < K.LIVE0 + 0.05)
     HOOK.rwBands.forEach((b, i) => {
       const r = rng(Math.floor(t * 30) + i)
       b.setAttribute('y', r() * H)

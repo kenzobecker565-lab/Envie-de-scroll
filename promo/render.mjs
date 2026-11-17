@@ -75,6 +75,7 @@ const ADS = {
   prank: { page: 'promo/prank/index.html', audio: './prank/audio.mjs', build: 'build/prank', out: 'prank.mp4' },
   voiture: { page: 'promo/voiture/index.html', audio: './voiture/audio.mjs', build: 'build/voiture', out: 'voiture.mp4' },
   thiais: { page: 'promo/thiais/index.html', audio: './thiais/audio.mjs', build: 'build/thiais', out: 'thiais.mp4' },
+  piolet: { page: 'promo/piolet/index.html', audio: './piolet/audio.mjs', build: 'build/piolet', out: 'piolet.mp4' },
   'hook-rodeo': { page: 'promo/hooks/rodeo.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'rodeo.mp4' },
   'hook-prank': { page: 'promo/hooks/prank.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'prank.mp4' },
   'hook-rer': { page: 'promo/hooks/rer.html', audio: './hooks/audio.mjs', build: 'build/hooks', out: 'rer.mp4' },

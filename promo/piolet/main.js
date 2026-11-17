@@ -821,7 +821,7 @@ const fr = (v) => Math.round(v).toLocaleString('fr-FR')
 const pad = (n) => String(Math.floor(n)).padStart(2, '0')
 // L'ouverture : le verdict, l'écart, la source.
 fs(tag('AFFAIRE RÉELLE', 'pill red', { t0: 0, t1: SEC.hook.t1 - 0.1, y: 230, rot: -2 }), 50)
-fs(tag('LES CAMBRIOLEURS : 10 MOIS AVEC SURSIS', 'pill yellow', { t0: K.MOIS, t1: K.LIVE0 - 0.1, y: 850, rot: 2 }), 44)
+fs(tag('LES CAMBRIOLEURS : 10 MOIS AVEC SURSIS', 'pill yellow', { t0: K.MOIS, t1: K.LIVE0 - 0.1, y: 850, rot: 2 }), 36)
 fs(tag('D’APRÈS FRANCE 3 ET LE JDD', 'pill', { t0: 0, t1: SEC.hook.t1 - 0.1, y: 1700 }), 34)
 fs(tag('5 ANS PLUS TÔT', 'slam white', { t0: K.LIVE0, t1: K.LIVE0 + 1.3, y: 520, rot: -3, from: 2.4, dur: 0.18 }), 100)
 fs(tag('HAUTE-VIENNE · 2 H DU MATIN', 'pill yellow', { t0: K.SCENE, t1: K.HIT - 0.1, y: 345, rot: 2 }), 48)
@@ -833,7 +833,7 @@ fs(tag('LÉGITIME DÉFENSE ÉCARTÉE', 'stamp', { t0: K.GAVEL + 0.12, t1: SEC.ho
 // Le procès.
 fs(tag('PLAIDOIRIES RECONSTITUÉES D’APRÈS L’AUDIENCE', 'pill', { t0: S('04') - 0.05, t1: C.cuts.LAW[0] - 0.05, y: 300 }), 32)
 fs(tag('« CE N’EST PLUS DE LA PEUR. »', 'slam yellow', { t0: C.hot[0][0], t1: E('06') + 0.15, y: 340, rot: -4, from: 2.8, dur: 0.15 }), 56)
-fs(tag('« DES VOLEURS CHEZ LUI »', 'slam white', { t0: S('07') - 0.05, t1: C.cuts.SCALE[0] - 0.05, y: 330, rot: 3, from: 2.4, dur: 0.18 }), 76)
+fs(tag('« DES VOLEURS CHEZ LUI »', 'slam white', { t0: S('07') - 0.05, t1: C.cuts.SCALE[0] - 0.05, y: 330, rot: 3, from: 2.4, dur: 0.18 }), 64)
 fs(tag('LÉGITIME DÉFENSE<br>OU VENGEANCE ?', 'big white', { t0: S('08') - 0.05, t1: E('08') + 0.15, y: 470, from: 1.4, dur: 0.3 }), 84)
 fs(tag('ICI, C’EST TOI QUI JUGES', 'pill yellow', { t0: Wd('08', 'ici') - 0.1, t1: E('08') + 0.15, y: 760, rot: -2 }), 56)
 const like1 = fs(tag('<span class="plus">+</span> ABONNE-TOI', 'subscribe', { t0: Wd('08', 'abonnetoi') - 0.1, t1: E('08') + 0.15, y: 960, from: 2.2, dur: 0.25 }), 84)

@@ -1,0 +1,1085 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 72.78,
+ "lines": [
+  {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "On a voulu lui voler sa voiture, sous la menace d'un couteau. C'est lui qui a pris douze ans.",
+   "start": 0.05,
+   "dur": 3.88,
+   "words": [
+    {
+     "w": "On",
+     "t": 0.05
+    },
+    {
+     "w": "a",
+     "t": 0.17
+    },
+    {
+     "w": "voulu",
+     "t": 0.29
+    },
+    {
+     "w": "lui",
+     "t": 0.49
+    },
+    {
+     "w": "voler",
+     "t": 0.61
+    },
+    {
+     "w": "sa",
+     "t": 0.89
+    },
+    {
+     "w": "voiture,",
+     "t": 0.97
+    },
+    {
+     "w": "sous",
+     "t": 1.29
+    },
+    {
+     "w": "la",
+     "t": 1.73
+    },
+    {
+     "w": "menace",
+     "t": 1.83
+    },
+    {
+     "w": "d'un",
+     "t": 2.02
+    },
+    {
+     "w": "couteau.",
+     "t": 2.21
+    },
+    {
+     "w": "C'est",
+     "t": 2.54
+    },
+    {
+     "w": "lui",
+     "t": 2.87
+    },
+    {
+     "w": "qui",
+     "t": 2.99
+    },
+    {
+     "w": "a",
+     "t": 3.21
+    },
+    {
+     "w": "pris",
+     "t": 3.31
+    },
+    {
+     "w": "douze",
+     "t": 3.46
+    },
+    {
+     "w": "ans.",
+     "t": 3.61
+    }
+   ]
+  },
+  {
+   "id": "01-parking",
+   "who": "narrateur",
+   "text": "Thiais, octobre 2020. Pablo, vingt ans, attend dans sa voiture avec sa compagne. Deux jeunes arrivent, un couteau à la main. Ils veulent les clés.",
+   "start": 4.38,
+   "dur": 6.68,
+   "words": [
+    {
+     "w": "Thiais,",
+     "t": 4.61
+    },
+    {
+     "w": "octobre",
+     "t": 4.84
+    },
+    {
+     "w": "2020.",
+     "t": 5.26
+    },
+    {
+     "w": "Pablo,",
+     "t": 5.84
+    },
+    {
+     "w": "vingt",
+     "t": 6.21
+    },
+    {
+     "w": "ans,",
+     "t": 6.58
+    },
+    {
+     "w": "attend",
+     "t": 6.96
+    },
+    {
+     "w": "dans",
+     "t": 7.18
+    },
+    {
+     "w": "sa",
+     "t": 7.34
+    },
+    {
+     "w": "voiture",
+     "t": 7.46
+    },
+    {
+     "w": "avec",
+     "t": 7.7
+    },
+    {
+     "w": "sa",
+     "t": 7.9
+    },
+    {
+     "w": "compagne.",
+     "t": 8.04
+    },
+    {
+     "w": "Deux",
+     "t": 8.4
+    },
+    {
+     "w": "jeunes",
+     "t": 8.76
+    },
+    {
+     "w": "arrivent,",
+     "t": 8.94
+    },
+    {
+     "w": "un",
+     "t": 9.5
+    },
+    {
+     "w": "couteau",
+     "t": 9.6
+    },
+    {
+     "w": "à",
+     "t": 9.88
+    },
+    {
+     "w": "la",
+     "t": 9.92
+    },
+    {
+     "w": "main.",
+     "t": 9.98
+    },
+    {
+     "w": "Ils",
+     "t": 10.32
+    },
+    {
+     "w": "veulent",
+     "t": 10.4
+    },
+    {
+     "w": "les",
+     "t": 10.56
+    },
+    {
+     "w": "clés.",
+     "t": 10.7
+    }
+   ]
+  },
+  {
+   "id": "02-couteau",
+   "who": "narrateur",
+   "text": "Il est blessé à la main. Il arrache le couteau. La bagarre dure quelques secondes… et l'un des agresseurs ne se relève pas.",
+   "start": 11.36,
+   "dur": 5.63,
+   "words": [
+    {
+     "w": "Il",
+     "t": 11.36
+    },
+    {
+     "w": "est",
+     "t": 11.5
+    },
+    {
+     "w": "blessé",
+     "t": 11.58
+    },
+    {
+     "w": "à",
+     "t": 11.94
+    },
+    {
+     "w": "la",
+     "t": 12.02
+    },
+    {
+     "w": "main.",
+     "t": 12.08
+    },
+    {
+     "w": "Il",
+     "t": 12.46
+    },
+    {
+     "w": "arrache",
+     "t": 12.54
+    },
+    {
+     "w": "le",
+     "t": 12.84
+    },
+    {
+     "w": "couteau.",
+     "t": 12.96
+    },
+    {
+     "w": "La",
+     "t": 13.4
+    },
+    {
+     "w": "bagarre",
+     "t": 13.5
+    },
+    {
+     "w": "dure",
+     "t": 13.82
+    },
+    {
+     "w": "quelques",
+     "t": 14.02
+    },
+    {
+     "w": "secondes…",
+     "t": 14.24
+    },
+    {
+     "w": "et",
+     "t": 14.94
+    },
+    {
+     "w": "l'un",
+     "t": 15.17
+    },
+    {
+     "w": "des",
+     "t": 15.4
+    },
+    {
+     "w": "agresseurs",
+     "t": 15.52
+    },
+    {
+     "w": "ne",
+     "t": 16.1
+    },
+    {
+     "w": "se",
+     "t": 16.24
+    },
+    {
+     "w": "relève",
+     "t": 16.38
+    },
+    {
+     "w": "pas.",
+     "t": 16.68
+    }
+   ]
+  },
+  {
+   "id": "03-assises",
+   "who": "narrateur",
+   "text": "Février 2026, cour d'assises. La légitime défense est écartée. Voici pourquoi.",
+   "start": 17.69,
+   "dur": 4.44,
+   "words": [
+    {
+     "w": "Février",
+     "t": 17.69
+    },
+    {
+     "w": "2026,",
+     "t": 18.07
+    },
+    {
+     "w": "cour",
+     "t": 18.65
+    },
+    {
+     "w": "d'assises.",
+     "t": 19.23
+    },
+    {
+     "w": "La",
+     "t": 19.81
+    },
+    {
+     "w": "légitime",
+     "t": 19.93
+    },
+    {
+     "w": "défense",
+     "t": 20.27
+    },
+    {
+     "w": "est",
+     "t": 20.67
+    },
+    {
+     "w": "écartée.",
+     "t": 20.81
+    },
+    {
+     "w": "Voici",
+     "t": 21.41
+    },
+    {
+     "w": "pourquoi.",
+     "t": 21.63
+    }
+   ]
+  },
+  {
+   "id": "04-plaies",
+   "who": "procureur",
+   "text": "La légitime défense, c'est une riposte nécessaire et proportionnée. Ici, les médecins ont compté cinq plaies au thorax, deux à la tête. Ce n'est plus se défendre. C'est s'acharner.",
+   "start": 22.38,
+   "dur": 8.94,
+   "words": [
+    {
+     "w": "La",
+     "t": 22.38
+    },
+    {
+     "w": "légitime",
+     "t": 22.52
+    },
+    {
+     "w": "défense,",
+     "t": 22.9
+    },
+    {
+     "w": "c'est",
+     "t": 23.32
+    },
+    {
+     "w": "une",
+     "t": 23.74
+    },
+    {
+     "w": "riposte",
+     "t": 23.88
+    },
+    {
+     "w": "nécessaire",
+     "t": 24.38
+    },
+    {
+     "w": "et",
+     "t": 24.82
+    },
+    {
+     "w": "proportionnée.",
+     "t": 25.14
+    },
+    {
+     "w": "Ici,",
+     "t": 25.98
+    },
+    {
+     "w": "les",
+     "t": 26.48
+    },
+    {
+     "w": "médecins",
+     "t": 26.58
+    },
+    {
+     "w": "ont",
+     "t": 26.88
+    },
+    {
+     "w": "compté",
+     "t": 27.0
+    },
+    {
+     "w": "cinq",
+     "t": 27.28
+    },
+    {
+     "w": "plaies",
+     "t": 27.52
+    },
+    {
+     "w": "au",
+     "t": 27.82
+    },
+    {
+     "w": "thorax,",
+     "t": 27.94
+    },
+    {
+     "w": "deux",
+     "t": 28.5
+    },
+    {
+     "w": "à",
+     "t": 28.68
+    },
+    {
+     "w": "la",
+     "t": 28.82
+    },
+    {
+     "w": "tête.",
+     "t": 28.9
+    },
+    {
+     "w": "Ce",
+     "t": 29.36
+    },
+    {
+     "w": "n'est",
+     "t": 29.45
+    },
+    {
+     "w": "plus",
+     "t": 29.54
+    },
+    {
+     "w": "se",
+     "t": 29.68
+    },
+    {
+     "w": "défendre.",
+     "t": 29.86
+    },
+    {
+     "w": "C'est",
+     "t": 30.361
+    },
+    {
+     "w": "s'acharner.",
+     "t": 30.863
+    }
+   ]
+  },
+  {
+   "id": "05-noir",
+   "who": "avocate",
+   "text": "Il est blessé, sa compagne est attaquée juste à côté. Dans le noir, personne ne compte ses coups. On frappe jusqu'à ce que le danger s'arrête.",
+   "start": 31.57,
+   "dur": 6.0,
+   "words": [
+    {
+     "w": "Il",
+     "t": 31.57
+    },
+    {
+     "w": "est",
+     "t": 31.71
+    },
+    {
+     "w": "blessé,",
+     "t": 31.79
+    },
+    {
+     "w": "sa",
+     "t": 32.33
+    },
+    {
+     "w": "compagne",
+     "t": 32.47
+    },
+    {
+     "w": "est",
+     "t": 32.81
+    },
+    {
+     "w": "attaquée",
+     "t": 32.89
+    },
+    {
+     "w": "juste",
+     "t": 33.23
+    },
+    {
+     "w": "à",
+     "t": 33.41
+    },
+    {
+     "w": "côté.",
+     "t": 33.57
+    },
+    {
+     "w": "Dans",
+     "t": 33.99
+    },
+    {
+     "w": "le",
+     "t": 34.07
+    },
+    {
+     "w": "noir,",
+     "t": 34.17
+    },
+    {
+     "w": "personne",
+     "t": 34.59
+    },
+    {
+     "w": "ne",
+     "t": 34.87
+    },
+    {
+     "w": "compte",
+     "t": 35.09
+    },
+    {
+     "w": "ses",
+     "t": 35.25
+    },
+    {
+     "w": "coups.",
+     "t": 35.41
+    },
+    {
+     "w": "On",
+     "t": 35.73
+    },
+    {
+     "w": "frappe",
+     "t": 35.79
+    },
+    {
+     "w": "jusqu'à",
+     "t": 36.21
+    },
+    {
+     "w": "ce",
+     "t": 36.63
+    },
+    {
+     "w": "que",
+     "t": 36.69
+    },
+    {
+     "w": "le",
+     "t": 36.77
+    },
+    {
+     "w": "danger",
+     "t": 36.83
+    },
+    {
+     "w": "s'arrête.",
+     "t": 37.208
+    }
+   ]
+  },
+  {
+   "id": "06-camp",
+   "who": "procureur",
+   "text": "Le couteau, il l'avait arraché. Son agresseur n'avait plus d'arme. À cet instant précis, la menace avait changé de camp.",
+   "start": 37.82,
+   "dur": 5.73,
+   "words": [
+    {
+     "w": "Le",
+     "t": 37.82
+    },
+    {
+     "w": "couteau,",
+     "t": 37.96
+    },
+    {
+     "w": "il",
+     "t": 38.52
+    },
+    {
+     "w": "l'avait",
+     "t": 38.69
+    },
+    {
+     "w": "arraché.",
+     "t": 38.86
+    },
+    {
+     "w": "Son",
+     "t": 39.52
+    },
+    {
+     "w": "agresseur",
+     "t": 39.6
+    },
+    {
+     "w": "n'avait",
+     "t": 39.93
+    },
+    {
+     "w": "plus",
+     "t": 40.26
+    },
+    {
+     "w": "d'arme.",
+     "t": 40.59
+    },
+    {
+     "w": "À",
+     "t": 40.92
+    },
+    {
+     "w": "cet",
+     "t": 41.0
+    },
+    {
+     "w": "instant",
+     "t": 41.16
+    },
+    {
+     "w": "précis,",
+     "t": 41.44
+    },
+    {
+     "w": "la",
+     "t": 42.12
+    },
+    {
+     "w": "menace",
+     "t": 42.2
+    },
+    {
+     "w": "avait",
+     "t": 42.6
+    },
+    {
+     "w": "changé",
+     "t": 42.8
+    },
+    {
+     "w": "de",
+     "t": 43.18
+    },
+    {
+     "w": "camp.",
+     "t": 43.24
+    }
+   ]
+  },
+  {
+   "id": "07-deux",
+   "who": "avocate",
+   "text": "Changé de camp ? Ils étaient deux. Le second s'en prenait à sa compagne. Vous demandez à un garçon de vingt ans de faire le tri en trois secondes.",
+   "start": 43.8,
+   "dur": 5.82,
+   "words": [
+    {
+     "w": "Changé",
+     "t": 43.93
+    },
+    {
+     "w": "de",
+     "t": 44.06
+    },
+    {
+     "w": "camp ?",
+     "t": 44.16
+    },
+    {
+     "w": "Ils",
+     "t": 44.5
+    },
+    {
+     "w": "étaient",
+     "t": 44.58
+    },
+    {
+     "w": "deux.",
+     "t": 44.8
+    },
+    {
+     "w": "Le",
+     "t": 45.22
+    },
+    {
+     "w": "second",
+     "t": 45.28
+    },
+    {
+     "w": "s'en",
+     "t": 45.527
+    },
+    {
+     "w": "prenait",
+     "t": 45.773
+    },
+    {
+     "w": "à",
+     "t": 46.02
+    },
+    {
+     "w": "sa",
+     "t": 46.04
+    },
+    {
+     "w": "compagne.",
+     "t": 46.14
+    },
+    {
+     "w": "Vous",
+     "t": 46.72
+    },
+    {
+     "w": "demandez",
+     "t": 46.8
+    },
+    {
+     "w": "à",
+     "t": 47.18
+    },
+    {
+     "w": "un",
+     "t": 47.26
+    },
+    {
+     "w": "garçon",
+     "t": 47.32
+    },
+    {
+     "w": "de",
+     "t": 47.62
+    },
+    {
+     "w": "vingt",
+     "t": 47.79
+    },
+    {
+     "w": "ans",
+     "t": 47.96
+    },
+    {
+     "w": "de",
+     "t": 48.16
+    },
+    {
+     "w": "faire",
+     "t": 48.34
+    },
+    {
+     "w": "le",
+     "t": 48.5
+    },
+    {
+     "w": "tri",
+     "t": 48.6
+    },
+    {
+     "w": "en",
+     "t": 48.78
+    },
+    {
+     "w": "trois",
+     "t": 48.88
+    },
+    {
+     "w": "secondes.",
+     "t": 49.1
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Légitime défense… ou acharnement ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
+   "start": 49.87,
+   "dur": 5.41,
+   "words": [
+    {
+     "w": "Légitime",
+     "t": 49.87
+    },
+    {
+     "w": "défense…",
+     "t": 50.27
+    },
+    {
+     "w": "ou",
+     "t": 50.95
+    },
+    {
+     "w": "acharnement ?",
+     "t": 51.27
+    },
+    {
+     "w": "Ici,",
+     "t": 52.21
+    },
+    {
+     "w": "c'est",
+     "t": 52.53
+    },
+    {
+     "w": "toi",
+     "t": 52.85
+    },
+    {
+     "w": "qui",
+     "t": 52.97
+    },
+    {
+     "w": "juges.",
+     "t": 53.303
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 53.637
+    },
+    {
+     "w": "pour",
+     "t": 53.97
+    },
+    {
+     "w": "siéger",
+     "t": 54.13
+    },
+    {
+     "w": "au",
+     "t": 54.41
+    },
+    {
+     "w": "prochain",
+     "t": 54.53
+    },
+    {
+     "w": "procès.",
+     "t": 54.77
+    }
+   ]
+  },
+  {
+   "id": "09-verdict",
+   "who": "narrateur",
+   "text": "Verdict : douze ans de réclusion. Pas pour meurtre : la cour a estimé qu'il ne voulait pas tuer. Et l'agresseur qui a survécu ? Mineur à l'époque… cinq ans, dont trois avec sursis.",
+   "start": 55.78,
+   "dur": 8.14,
+   "words": [
+    {
+     "w": "Verdict :",
+     "t": 55.78
+    },
+    {
+     "w": "douze",
+     "t": 56.27
+    },
+    {
+     "w": "ans",
+     "t": 56.76
+    },
+    {
+     "w": "de",
+     "t": 56.9
+    },
+    {
+     "w": "réclusion.",
+     "t": 56.98
+    },
+    {
+     "w": "Pas",
+     "t": 57.6
+    },
+    {
+     "w": "pour",
+     "t": 57.7
+    },
+    {
+     "w": "meurtre :",
+     "t": 57.86
+    },
+    {
+     "w": "la",
+     "t": 58.38
+    },
+    {
+     "w": "cour",
+     "t": 58.44
+    },
+    {
+     "w": "a",
+     "t": 58.6
+    },
+    {
+     "w": "estimé",
+     "t": 58.72
+    },
+    {
+     "w": "qu'il",
+     "t": 58.95
+    },
+    {
+     "w": "ne",
+     "t": 59.18
+    },
+    {
+     "w": "voulait",
+     "t": 59.3
+    },
+    {
+     "w": "pas",
+     "t": 59.5
+    },
+    {
+     "w": "tuer.",
+     "t": 59.64
+    },
+    {
+     "w": "Et",
+     "t": 60.06
+    },
+    {
+     "w": "l'agresseur",
+     "t": 60.32
+    },
+    {
+     "w": "qui",
+     "t": 60.58
+    },
+    {
+     "w": "a",
+     "t": 60.66
+    },
+    {
+     "w": "survécu ?",
+     "t": 60.74
+    },
+    {
+     "w": "Mineur",
+     "t": 61.28
+    },
+    {
+     "w": "à",
+     "t": 61.66
+    },
+    {
+     "w": "l'époque…",
+     "t": 61.933
+    },
+    {
+     "w": "cinq",
+     "t": 62.207
+    },
+    {
+     "w": "ans,",
+     "t": 62.48
+    },
+    {
+     "w": "dont",
+     "t": 62.84
+    },
+    {
+     "w": "trois",
+     "t": 63.06
+    },
+    {
+     "w": "avec",
+     "t": 63.28
+    },
+    {
+     "w": "sursis.",
+     "t": 63.42
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Toi, tu lui aurais donné combien ? Écris un chiffre en commentaire. Et abonne-toi : demain, une nouvelle affaire réelle.",
+   "start": 64.17,
+   "dur": 5.213,
+   "words": [
+    {
+     "w": "Toi,",
+     "t": 64.17
+    },
+    {
+     "w": "tu",
+     "t": 64.64
+    },
+    {
+     "w": "lui",
+     "t": 64.74
+    },
+    {
+     "w": "aurais",
+     "t": 64.86
+    },
+    {
+     "w": "donné",
+     "t": 65.04
+    },
+    {
+     "w": "combien ?",
+     "t": 65.14
+    },
+    {
+     "w": "Écris",
+     "t": 65.78
+    },
+    {
+     "w": "un",
+     "t": 65.96
+    },
+    {
+     "w": "chiffre",
+     "t": 66.06
+    },
+    {
+     "w": "en",
+     "t": 66.34
+    },
+    {
+     "w": "commentaire.",
+     "t": 66.38
+    },
+    {
+     "w": "Et",
+     "t": 67.02
+    },
+    {
+     "w": "abonne-toi :",
+     "t": 67.39
+    },
+    {
+     "w": "demain,",
+     "t": 67.76
+    },
+    {
+     "w": "une",
+     "t": 68.24
+    },
+    {
+     "w": "nouvelle",
+     "t": 68.36
+    },
+    {
+     "w": "affaire",
+     "t": 68.58
+    },
+    {
+     "w": "réelle.",
+     "t": 68.88
+    }
+   ]
+  }
+ ]
+}

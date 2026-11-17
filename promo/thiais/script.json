@@ -18,13 +18,13 @@
   {
    "id": "00-intro",
    "who": "narrateur",
-   "text": "On a voulu lui voler sa voiture, sous la menace d'un couteau. C'est lui qui a pris douze ans."
+   "text": "Douze ans de prison. Pourtant… c'est lui qu'on a attaqué au couteau."
   },
   {
    "id": "01-parking",
    "who": "narrateur",
    "text": "Thiais, octobre 2020. Pablo, vingt ans, attend dans sa voiture avec sa compagne. Deux jeunes arrivent, un couteau à la main. Ils veulent les clés.",
-   "gap": 0.45
+   "gap": 0.3
   },
   {
    "id": "02-couteau",

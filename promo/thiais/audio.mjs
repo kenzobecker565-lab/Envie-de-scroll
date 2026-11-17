@@ -381,7 +381,10 @@ function score() {
   // L'ouverture : le choc, la caméra qui bourdonne.
   boom(0.05, 0.6, 70, 30, 0.9)
   hum(0, K.COURT, 50, 0.025)
-  boom(W('00', 'cest') - 0.12, 0.5, 90, 34, 0.5)
+  sample('1588', 0.1, 1.0)
+  boom(0.14, 0.75, 60, 26, 1.2)
+  stamp(0.16, 0.3)
+  boom(W('00', 'cest') - 0.12, 0.3, 90, 34, 0.5)
   rewind(K.LIVE0 - 0.4, 0.4)
   // La reconstitution : la ville la nuit, les pas, la lame, la bagarre, la chute, les sirènes.
   wind(K.SCENE, K.COURT - K.SCENE, 0.04)

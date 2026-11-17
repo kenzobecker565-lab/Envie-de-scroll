@@ -422,21 +422,51 @@ const figAt = (el, x, y, sc, rot = 0) => el.setAttribute('transform', `translate
 
 const SHOTS = [
     {
-      // I · L'ouverture : l'image de la caméra, figée au moment de la menace. L'affaire en une phrase.
+      // V · L'ouverture par la fin : le box des accusés, le marteau tombe, « 12 ANS », il baisse la tête.
       t1: K.LIVE0,
       build(k, g) {
-        const s = cctvParking(k, g, 'I')
-        s.ring = svg('ellipse', { cx: 560, cy: 1080, rx: 470, ry: 230, fill: 'none', stroke: '#ff2a3d', 'stroke-width': 10, 'stroke-dasharray': '30 16', filter: 'url(#glow)' }, s.world)
-        return s
+        const { svg, txt, bg } = k
+        bg(g, 'url(#judgeBg)')
+        const world = svg('g', {}, g)
+        svg('ellipse', { cx: 540, cy: 700, rx: 620, ry: 760, fill: 'url(#spot)' }, world)
+        svg('rect', { x: -400, y: 300, width: 1900, height: 40, fill: '#2a2030' }, world)
+        for (let i = 0; i < 5; i++) svg('rect', { x: 40 + i * 220, y: 340, width: 24, height: 700, fill: '#1c1824' }, world)
+        // Les deux policiers derrière lui.
+        for (const x of [230, 850]) {
+          const p = fig(world, { x, y: 1300, s: 1.15, fill: '#1a2238', head: '#c89a7a', armR: 8, armL: 8 })
+          svg('rect', { x: -48, y: -392, width: 96, height: 30, rx: 8, fill: '#10162a' }, p)
+        }
+        const pab = k.makePerson(world, PABLO)
+        // Le box en bois.
+        svg('rect', { x: 140, y: 1250, width: 800, height: 700, rx: 16, fill: 'url(#desk)' }, world)
+        svg('rect', { x: 140, y: 1236, width: 800, height: 30, rx: 10, fill: '#b07a52' }, world)
+        const big = txt(g, '12 ANS', { x: 540, y: 640, 'font-size': 250, fill: '#ff3a4a', stroke: '#10121a', 'stroke-width': 20, 'paint-order': 'stroke fill' })
+        const sub = txt(g, 'DE RÉCLUSION CRIMINELLE', { x: 540, y: 740, 'font-size': 48, fill: '#ffffff', 'letter-spacing': 3 })
+        const gavel = svg('g', {}, g)
+        svg('rect', { x: -26, y: -20, width: 52, height: 360, rx: 16, fill: '#6a3f26' }, gavel)
+        svg('rect', { x: -150, y: -110, width: 300, height: 120, rx: 34, fill: '#7a4a2c' }, gavel)
+        for (const x of [-150, 110]) svg('rect', { x, y: -110, width: 40, height: 120, rx: 10, fill: '#d9a441' }, gavel)
+        const fl = svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: '#ffffff', opacity: 0 }, g)
+        svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: 'url(#vigCut)' }, g)
+        return { world, pab, big, sub, gavel, fl }
       },
       draw(k, s, t, l) {
-        figAt(s.a1, 300, 1190, 0.55)
-        figAt(s.a2, 180, 1200, 0.55)
-        s.pab.setAttribute('opacity', 0)
-        s.knife.setAttribute('transform', `translate(${385} ${1035}) rotate(-20)`)
-        s.world.setAttribute('transform', `translate(540 1000) scale(${(1.35 + 0.05 * l).toFixed(4)}) translate(-480 -1080)`)
-        s.ring.setAttribute('stroke-dashoffset', (-t * 60).toFixed(0))
-        hud(s, t)
+        // Le marteau tombe dès la première image.
+        const G = 0.14
+        const gv = k.ease.in3(k.clamp(t / G))
+        const after = t - G
+        const out = k.ease.in2(k.clamp((t - 0.6) / 0.4))
+        s.gavel.setAttribute('transform', `translate(${k.lerp(980, 860, gv) + 500 * out} ${k.lerp(820, 1060, gv) - 300 * out}) rotate(${k.lerp(-60, -8, gv) + (after > 0 ? 6 * Math.exp(-after * 8) * Math.sin(after * 40) : 0)})`)
+        s.fl.setAttribute('opacity', (t > G ? 0.6 * Math.exp(-(t - G) * 10) : 0).toFixed(3))
+        const v = k.ease.back(2.2)(k.clamp((t - G) / 0.25))
+        s.big.setAttribute('opacity', t > G ? 1 : 0)
+        s.big.setAttribute('transform', `translate(540 560) scale(${Math.max(0.001, 1 + 0.6 * (1 - v)).toFixed(3)}) translate(-540 -560)`)
+        s.sub.setAttribute('opacity', t > G + 0.3 ? 1 : 0)
+        // Il baisse la tête ; la caméra pousse vers lui.
+        const d = k.ease.io2(k.clamp((t - 0.5) / 1.2))
+        s.pab.update(t, { x: 540, y: 1150, scale: 1.25, mouth: 0, brows: 'sad', look: [0, 0.2 + 0.6 * d], headNod: 0.9 * d, armR: [0.15, 0.3], armL: [0.15, 0.3], seed: 3.1 })
+        const z = 1 + 0.06 * l + 0.04 * Math.exp(-Math.max(0, t - G) * 8)
+        s.world.setAttribute('transform', `translate(540 1100) scale(${z.toFixed(4)}) translate(-540 -1100)`)
       },
     },
     {
@@ -447,13 +477,13 @@ const SHOTS = [
       },
       draw(k, s, t, l) {
         // Les deux agresseurs entrent par la gauche, jusqu'à la portière.
-        const w = k.ease.io2(k.clamp((t - T.ARRIVE) / (T.KEYS - T.ARRIVE)))
+        const w = k.ease.out2(k.clamp((t - T.SCENE) / 2.2))
         const out = t > T.HURT
         const fight = t > T.FIGHT && t < T.DOWN
         const jit = fight ? 14 * Math.sin(t * 37) : 0
         if (!out) {
-          figAt(s.a1, k.lerp(-200, 330, w), 1190, 0.55)
-          figAt(s.a2, k.lerp(-320, 220, w), 1200, 0.55)
+          figAt(s.a1, k.lerp(150, 330, w) + 4 * Math.sin(t * 9), 1190, 0.55)
+          figAt(s.a2, k.lerp(60, 220, w) + 4 * Math.sin(t * 9 + 1), 1200, 0.55)
           s.pab.setAttribute('opacity', 0)
         } else {
           s.pab.setAttribute('opacity', 1)
@@ -463,9 +493,9 @@ const SHOTS = [
           figAt(s.pab, 470 - jit * 0.8, 1200, 0.58)
         }
         // Le couteau : chez l'agresseur, puis arraché par Pablo.
-        const kn = t < T.KNIFE ? 0 : 1
+        const kn = t < T.SCENE + 0.6 ? 0 : 1
         s.knife.setAttribute('opacity', kn)
-        if (t < T.GRAB) s.knife.setAttribute('transform', `translate(${(k.lerp(-200, 330, w) + 90).toFixed(1)} 1035) rotate(-20)`)
+        if (t < T.GRAB) s.knife.setAttribute('transform', `translate(${(k.lerp(150, 330, w) + 90).toFixed(1)} 1035) rotate(-20)`)
         else {
           const g = k.ease.io2(k.clamp((t - T.GRAB) / 0.35))
           s.knife.setAttribute('transform', `translate(${k.lerp(450, 520, g).toFixed(1)} ${k.lerp(1035, 1060, g).toFixed(1)}) rotate(${k.lerp(-20, 160, g).toFixed(1)})`)
@@ -839,8 +869,8 @@ const fr = (v) => Math.round(v).toLocaleString('fr-FR')
 const pad = (n) => String(Math.floor(n)).padStart(2, '0')
 // L'ouverture : l'affaire en une phrase, la source.
 fs(tag('AFFAIRE RÉELLE', 'pill red', { t0: 0, t1: SEC.hook.t1 - 0.1, y: 230, rot: -2 }), 50)
-fs(tag('ON A VOULU LUI VOLER SA VOITURE', 'pill yellow', { t0: 0, t1: K.LIVE0 - 0.1, y: 345, rot: 2 }), 50)
-fs(tag('C’EST LUI QUI A PRIS 12 ANS', 'slam white', { t0: Wd('00', 'cest') - 0.12, t1: K.LIVE0 - 0.1, y: 520, rot: -3, from: 2.4, dur: 0.18 }), 74)
+fs(tag('LA VICTIME DU VOL, C’ÉTAIT LUI', 'pill yellow', { t0: Wd('00', 'cest') - 0.12, t1: K.LIVE0 - 0.1, y: 345, rot: 2 }), 44)
+fs(tag('5 ANS PLUS TÔT', 'slam white', { t0: K.LIVE0, t1: K.LIVE0 + 1.3, y: 520, rot: -3, from: 2.4, dur: 0.18 }), 100)
 fs(tag('D’APRÈS LE PARISIEN', 'pill', { t0: 0, t1: SEC.hook.t1 - 0.1, y: 1700 }), 34)
 fs(tag('THIAIS · 1ER OCTOBRE 2020', 'pill yellow', { t0: K.SCENE, t1: K.HURT - 0.1, y: 345, rot: 2 }), 48)
 fs(tag('PABLO · 20 ANS', 'pill', { t0: K.PABLO, t1: K.ARRIVE - 0.06, y: 460, rot: -2 }), 50)
@@ -925,7 +955,8 @@ function updateCaptions(t) {
 // ------------------------------------------------------------------ l'instant t
 
 const IMPACTS = [
-  [Wd('00', 'cest') - 0.12, 12],
+  [0.14, 26],
+  [Wd('00', 'cest') - 0.12, 8],
   [K.LIVE0, 10],
   [K.KNIFE, 10],
   [K.HURT, 12],

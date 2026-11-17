@@ -1,0 +1,1241 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 81.16,
+ "lines": [
+  {
+   "id": "01-coma",
+   "who": "narrateur",
+   "text": "Une nuit d'émeutes. Un ado de seize ans, frappé sur le parking d'un supermarché. Il est toujours dans le coma.",
+   "start": 0.25,
+   "dur": 4.98,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "nuit",
+     "t": 0.41
+    },
+    {
+     "w": "d'émeutes.",
+     "t": 0.88
+    },
+    {
+     "w": "Un",
+     "t": 1.35
+    },
+    {
+     "w": "ado",
+     "t": 1.47
+    },
+    {
+     "w": "de",
+     "t": 1.67
+    },
+    {
+     "w": "seize",
+     "t": 1.86
+    },
+    {
+     "w": "ans,",
+     "t": 2.05
+    },
+    {
+     "w": "frappé",
+     "t": 2.23
+    },
+    {
+     "w": "sur",
+     "t": 2.75
+    },
+    {
+     "w": "le",
+     "t": 2.89
+    },
+    {
+     "w": "parking",
+     "t": 2.97
+    },
+    {
+     "w": "d'un",
+     "t": 3.2
+    },
+    {
+     "w": "supermarché.",
+     "t": 3.43
+    },
+    {
+     "w": "Il",
+     "t": 4.19
+    },
+    {
+     "w": "est",
+     "t": 4.27
+    },
+    {
+     "w": "toujours",
+     "t": 4.35
+    },
+    {
+     "w": "dans",
+     "t": 4.59
+    },
+    {
+     "w": "le",
+     "t": 4.73
+    },
+    {
+     "w": "coma.",
+     "t": 4.79
+    }
+   ]
+  },
+  {
+   "id": "02-video",
+   "who": "narrateur",
+   "text": "Sur la vidéo, le vigile le rattrape. Un coup de matraque. Dans le sac de l'ado : des chips, un soda… et trois téléphones volés.",
+   "start": 5.48,
+   "dur": 6.83,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 5.48
+    },
+    {
+     "w": "la",
+     "t": 5.64
+    },
+    {
+     "w": "vidéo,",
+     "t": 5.76
+    },
+    {
+     "w": "le",
+     "t": 6.38
+    },
+    {
+     "w": "vigile",
+     "t": 6.44
+    },
+    {
+     "w": "le",
+     "t": 6.74
+    },
+    {
+     "w": "rattrape.",
+     "t": 6.84
+    },
+    {
+     "w": "Un",
+     "t": 7.46
+    },
+    {
+     "w": "coup",
+     "t": 7.54
+    },
+    {
+     "w": "de",
+     "t": 7.66
+    },
+    {
+     "w": "matraque.",
+     "t": 7.7
+    },
+    {
+     "w": "Dans",
+     "t": 8.28
+    },
+    {
+     "w": "le",
+     "t": 8.4
+    },
+    {
+     "w": "sac",
+     "t": 8.5
+    },
+    {
+     "w": "de",
+     "t": 8.66
+    },
+    {
+     "w": "l'ado :",
+     "t": 9.02
+    },
+    {
+     "w": "des",
+     "t": 9.38
+    },
+    {
+     "w": "chips,",
+     "t": 9.46
+    },
+    {
+     "w": "un",
+     "t": 10.06
+    },
+    {
+     "w": "soda…",
+     "t": 10.16
+    },
+    {
+     "w": "et",
+     "t": 10.42
+    },
+    {
+     "w": "trois",
+     "t": 10.96
+    },
+    {
+     "w": "téléphones",
+     "t": 11.42
+    },
+    {
+     "w": "volés.",
+     "t": 11.82
+    }
+   ]
+  },
+  {
+   "id": "03-didier",
+   "who": "narrateur",
+   "text": "Il s'appelle Didier. Cinquante-huit ans. Vigile depuis vingt-deux ans. Casier vierge. Aujourd'hui, c'est lui qu'on juge.",
+   "start": 12.56,
+   "dur": 5.53,
+   "words": [
+    {
+     "w": "Il",
+     "t": 12.56
+    },
+    {
+     "w": "s'appelle",
+     "t": 12.78
+    },
+    {
+     "w": "Didier.",
+     "t": 13.0
+    },
+    {
+     "w": "Cinquante-huit",
+     "t": 13.45
+    },
+    {
+     "w": "ans.",
+     "t": 13.9
+    },
+    {
+     "w": "Vigile",
+     "t": 14.36
+    },
+    {
+     "w": "depuis",
+     "t": 14.76
+    },
+    {
+     "w": "vingt-deux",
+     "t": 15.05
+    },
+    {
+     "w": "ans.",
+     "t": 15.34
+    },
+    {
+     "w": "Casier",
+     "t": 15.68
+    },
+    {
+     "w": "vierge.",
+     "t": 15.96
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 16.413
+    },
+    {
+     "w": "c'est",
+     "t": 16.867
+    },
+    {
+     "w": "lui",
+     "t": 17.32
+    },
+    {
+     "w": "qu'on",
+     "t": 17.49
+    },
+    {
+     "w": "juge.",
+     "t": 17.66
+    }
+   ]
+  },
+  {
+   "id": "04-punir",
+   "who": "procureur",
+   "text": "Il ne défendait plus le magasin. L'ado s'enfuyait. Il l'a rattrapé… pour le punir.",
+   "start": 18.34,
+   "dur": 4.2,
+   "words": [
+    {
+     "w": "Il",
+     "t": 18.34
+    },
+    {
+     "w": "ne",
+     "t": 18.48
+    },
+    {
+     "w": "défendait",
+     "t": 18.72
+    },
+    {
+     "w": "plus",
+     "t": 18.96
+    },
+    {
+     "w": "le",
+     "t": 19.1
+    },
+    {
+     "w": "magasin.",
+     "t": 19.24
+    },
+    {
+     "w": "L'ado",
+     "t": 19.78
+    },
+    {
+     "w": "s'enfuyait.",
+     "t": 20.32
+    },
+    {
+     "w": "Il",
+     "t": 20.86
+    },
+    {
+     "w": "l'a",
+     "t": 20.97
+    },
+    {
+     "w": "rattrapé…",
+     "t": 21.08
+    },
+    {
+     "w": "pour",
+     "t": 21.58
+    },
+    {
+     "w": "le",
+     "t": 21.82
+    },
+    {
+     "w": "punir.",
+     "t": 21.96
+    }
+   ]
+  },
+  {
+   "id": "05-seul",
+   "who": "avocate",
+   "text": "Ce magasin, c'était son poste depuis vingt-deux ans. Cette nuit-là, ses patrons dormaient chez eux. La police était introuvable. Il était seul face à quarante pilleurs.",
+   "start": 22.79,
+   "dur": 7.51,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 22.79
+    },
+    {
+     "w": "magasin,",
+     "t": 22.95
+    },
+    {
+     "w": "c'était",
+     "t": 23.35
+    },
+    {
+     "w": "son",
+     "t": 23.75
+    },
+    {
+     "w": "poste",
+     "t": 23.93
+    },
+    {
+     "w": "depuis",
+     "t": 24.25
+    },
+    {
+     "w": "vingt-deux",
+     "t": 24.53
+    },
+    {
+     "w": "ans.",
+     "t": 24.81
+    },
+    {
+     "w": "Cette",
+     "t": 25.15
+    },
+    {
+     "w": "nuit-là,",
+     "t": 25.51
+    },
+    {
+     "w": "ses",
+     "t": 25.87
+    },
+    {
+     "w": "patrons",
+     "t": 25.95
+    },
+    {
+     "w": "dormaient",
+     "t": 26.17
+    },
+    {
+     "w": "chez",
+     "t": 26.55
+    },
+    {
+     "w": "eux.",
+     "t": 26.65
+    },
+    {
+     "w": "La",
+     "t": 26.99
+    },
+    {
+     "w": "police",
+     "t": 27.09
+    },
+    {
+     "w": "était",
+     "t": 27.33
+    },
+    {
+     "w": "introuvable.",
+     "t": 27.61
+    },
+    {
+     "w": "Il",
+     "t": 28.41
+    },
+    {
+     "w": "était",
+     "t": 28.51
+    },
+    {
+     "w": "seul",
+     "t": 28.67
+    },
+    {
+     "w": "face",
+     "t": 28.97
+    },
+    {
+     "w": "à",
+     "t": 29.21
+    },
+    {
+     "w": "quarante",
+     "t": 29.45
+    },
+    {
+     "w": "pilleurs.",
+     "t": 29.69
+    }
+   ]
+  },
+  {
+   "id": "06-dos",
+   "who": "procureur",
+   "text": "Seul, oui. Mais cet ado lui tournait le dos. Il courait vers la sortie. Un dos, ce n'est pas une menace.",
+   "start": 30.55,
+   "dur": 5.21,
+   "words": [
+    {
+     "w": "Seul,",
+     "t": 30.55
+    },
+    {
+     "w": "oui.",
+     "t": 31.07
+    },
+    {
+     "w": "Mais",
+     "t": 31.47
+    },
+    {
+     "w": "cet",
+     "t": 31.57
+    },
+    {
+     "w": "ado",
+     "t": 31.73
+    },
+    {
+     "w": "lui",
+     "t": 31.95
+    },
+    {
+     "w": "tournait",
+     "t": 32.11
+    },
+    {
+     "w": "le",
+     "t": 32.51
+    },
+    {
+     "w": "dos.",
+     "t": 32.51
+    },
+    {
+     "w": "Il",
+     "t": 32.87
+    },
+    {
+     "w": "courait",
+     "t": 33.09
+    },
+    {
+     "w": "vers",
+     "t": 33.31
+    },
+    {
+     "w": "la",
+     "t": 33.45
+    },
+    {
+     "w": "sortie.",
+     "t": 33.53
+    },
+    {
+     "w": "Un",
+     "t": 34.01
+    },
+    {
+     "w": "dos,",
+     "t": 34.17
+    },
+    {
+     "w": "ce",
+     "t": 34.65
+    },
+    {
+     "w": "n'est",
+     "t": 34.78
+    },
+    {
+     "w": "pas",
+     "t": 34.91
+    },
+    {
+     "w": "une",
+     "t": 35.01
+    },
+    {
+     "w": "menace.",
+     "t": 35.17
+    }
+   ]
+  },
+  {
+   "id": "07-bouteille",
+   "who": "avocate",
+   "text": "Un dos ? Dix minutes plus tôt, ces mêmes pilleurs lui avaient jeté une bouteille au visage. Six points de suture. Il ne savait plus qui était dangereux.",
+   "start": 36.01,
+   "dur": 6.16,
+   "words": [
+    {
+     "w": "Un",
+     "t": 36.01
+    },
+    {
+     "w": "dos ?",
+     "t": 36.13
+    },
+    {
+     "w": "Dix",
+     "t": 36.49
+    },
+    {
+     "w": "minutes",
+     "t": 36.73
+    },
+    {
+     "w": "plus",
+     "t": 36.85
+    },
+    {
+     "w": "tôt,",
+     "t": 37.03
+    },
+    {
+     "w": "ces",
+     "t": 37.43
+    },
+    {
+     "w": "mêmes",
+     "t": 37.61
+    },
+    {
+     "w": "pilleurs",
+     "t": 37.81
+    },
+    {
+     "w": "lui",
+     "t": 38.17
+    },
+    {
+     "w": "avaient",
+     "t": 38.31
+    },
+    {
+     "w": "jeté",
+     "t": 38.45
+    },
+    {
+     "w": "une",
+     "t": 38.73
+    },
+    {
+     "w": "bouteille",
+     "t": 38.81
+    },
+    {
+     "w": "au",
+     "t": 39.15
+    },
+    {
+     "w": "visage.",
+     "t": 39.21
+    },
+    {
+     "w": "Six",
+     "t": 39.69
+    },
+    {
+     "w": "points",
+     "t": 39.93
+    },
+    {
+     "w": "de",
+     "t": 40.15
+    },
+    {
+     "w": "suture.",
+     "t": 40.23
+    },
+    {
+     "w": "Il",
+     "t": 40.71
+    },
+    {
+     "w": "ne",
+     "t": 40.83
+    },
+    {
+     "w": "savait",
+     "t": 40.93
+    },
+    {
+     "w": "plus",
+     "t": 41.17
+    },
+    {
+     "w": "qui",
+     "t": 41.31
+    },
+    {
+     "w": "était",
+     "t": 41.49
+    },
+    {
+     "w": "dangereux.",
+     "t": 41.65
+    }
+   ]
+  },
+  {
+   "id": "08-telephones",
+   "who": "procureur",
+   "text": "Alors il a frappé le premier qui passait. Un gamin de seize ans… pour trois téléphones.",
+   "start": 42.42,
+   "dur": 4.02,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 42.42
+    },
+    {
+     "w": "il",
+     "t": 42.6
+    },
+    {
+     "w": "a",
+     "t": 42.82
+    },
+    {
+     "w": "frappé",
+     "t": 42.92
+    },
+    {
+     "w": "le",
+     "t": 43.26
+    },
+    {
+     "w": "premier",
+     "t": 43.34
+    },
+    {
+     "w": "qui",
+     "t": 43.64
+    },
+    {
+     "w": "passait.",
+     "t": 43.8
+    },
+    {
+     "w": "Un",
+     "t": 44.32
+    },
+    {
+     "w": "gamin",
+     "t": 44.4
+    },
+    {
+     "w": "de",
+     "t": 44.66
+    },
+    {
+     "w": "seize",
+     "t": 44.86
+    },
+    {
+     "w": "ans…",
+     "t": 45.06
+    },
+    {
+     "w": "pour",
+     "t": 45.28
+    },
+    {
+     "w": "trois",
+     "t": 45.5
+    },
+    {
+     "w": "téléphones.",
+     "t": 45.8
+    }
+   ]
+  },
+  {
+   "id": "09-salaire",
+   "who": "avocate",
+   "text": "On lui demande le sang-froid d'un policier… pour mille cinq cents euros par mois. Sans renfort. Sans radio. Sans personne.",
+   "start": 46.69,
+   "dur": 5.3,
+   "words": [
+    {
+     "w": "On",
+     "t": 46.69
+    },
+    {
+     "w": "lui",
+     "t": 46.82
+    },
+    {
+     "w": "demande",
+     "t": 46.92
+    },
+    {
+     "w": "le",
+     "t": 47.14
+    },
+    {
+     "w": "sang-froid",
+     "t": 47.367
+    },
+    {
+     "w": "d'un",
+     "t": 47.593
+    },
+    {
+     "w": "policier…",
+     "t": 47.82
+    },
+    {
+     "w": "pour",
+     "t": 48.26
+    },
+    {
+     "w": "mille",
+     "t": 48.415
+    },
+    {
+     "w": "cinq",
+     "t": 48.57
+    },
+    {
+     "w": "cents",
+     "t": 48.725
+    },
+    {
+     "w": "euros",
+     "t": 48.88
+    },
+    {
+     "w": "par",
+     "t": 49.24
+    },
+    {
+     "w": "mois.",
+     "t": 49.44
+    },
+    {
+     "w": "Sans",
+     "t": 49.805
+    },
+    {
+     "w": "renfort.",
+     "t": 50.169
+    },
+    {
+     "w": "Sans",
+     "t": 50.534
+    },
+    {
+     "w": "radio.",
+     "t": 50.898
+    },
+    {
+     "w": "Sans",
+     "t": 51.263
+    },
+    {
+     "w": "personne.",
+     "t": 51.628
+    }
+   ]
+  },
+  {
+   "id": "10-enfant",
+   "who": "procureur",
+   "text": "On ne lui demande pas d'être un policier. On lui demande de ne pas frapper un enfant qui s'enfuit.",
+   "start": 52.24,
+   "dur": 4.17,
+   "words": [
+    {
+     "w": "On",
+     "t": 52.24
+    },
+    {
+     "w": "ne",
+     "t": 52.37
+    },
+    {
+     "w": "lui",
+     "t": 52.45
+    },
+    {
+     "w": "demande",
+     "t": 52.55
+    },
+    {
+     "w": "pas",
+     "t": 52.79
+    },
+    {
+     "w": "d'être",
+     "t": 53.01
+    },
+    {
+     "w": "un",
+     "t": 53.23
+    },
+    {
+     "w": "policier.",
+     "t": 53.35
+    },
+    {
+     "w": "On",
+     "t": 53.97
+    },
+    {
+     "w": "lui",
+     "t": 54.03
+    },
+    {
+     "w": "demande",
+     "t": 54.13
+    },
+    {
+     "w": "de",
+     "t": 54.49
+    },
+    {
+     "w": "ne",
+     "t": 54.65
+    },
+    {
+     "w": "pas",
+     "t": 54.75
+    },
+    {
+     "w": "frapper",
+     "t": 54.95
+    },
+    {
+     "w": "un",
+     "t": 55.29
+    },
+    {
+     "w": "enfant",
+     "t": 55.41
+    },
+    {
+     "w": "qui",
+     "t": 55.65
+    },
+    {
+     "w": "s'enfuit.",
+     "t": 56.055
+    }
+   ]
+  },
+  {
+   "id": "11-reste",
+   "who": "avocate",
+   "text": "Cette nuit-là, sur quarante pilleurs, combien ont été arrêtés ? Aucun. Le seul qui passe en justice… c'est celui qui est resté.",
+   "start": 56.66,
+   "dur": 5.71,
+   "words": [
+    {
+     "w": "Cette",
+     "t": 56.66
+    },
+    {
+     "w": "nuit-là,",
+     "t": 57.0
+    },
+    {
+     "w": "sur",
+     "t": 57.34
+    },
+    {
+     "w": "quarante",
+     "t": 57.6
+    },
+    {
+     "w": "pilleurs,",
+     "t": 57.86
+    },
+    {
+     "w": "combien",
+     "t": 58.44
+    },
+    {
+     "w": "ont",
+     "t": 58.62
+    },
+    {
+     "w": "été",
+     "t": 58.8
+    },
+    {
+     "w": "arrêtés ?",
+     "t": 58.92
+    },
+    {
+     "w": "Aucun.",
+     "t": 59.46
+    },
+    {
+     "w": "Le",
+     "t": 59.98
+    },
+    {
+     "w": "seul",
+     "t": 60.06
+    },
+    {
+     "w": "qui",
+     "t": 60.26
+    },
+    {
+     "w": "passe",
+     "t": 60.4
+    },
+    {
+     "w": "en",
+     "t": 60.56
+    },
+    {
+     "w": "justice…",
+     "t": 60.64
+    },
+    {
+     "w": "c'est",
+     "t": 61.08
+    },
+    {
+     "w": "celui",
+     "t": 61.52
+    },
+    {
+     "w": "qui",
+     "t": 61.7
+    },
+    {
+     "w": "est",
+     "t": 61.86
+    },
+    {
+     "w": "resté.",
+     "t": 61.96
+    }
+   ]
+  },
+  {
+   "id": "12-justicier",
+   "who": "procureur",
+   "text": "Rester ne donne pas tous les droits. Ce soir-là, il n'était plus vigile. Il était devenu justicier.",
+   "start": 62.62,
+   "dur": 4.9,
+   "words": [
+    {
+     "w": "Rester",
+     "t": 62.83
+    },
+    {
+     "w": "ne",
+     "t": 63.04
+    },
+    {
+     "w": "donne",
+     "t": 63.14
+    },
+    {
+     "w": "pas",
+     "t": 63.28
+    },
+    {
+     "w": "tous",
+     "t": 63.48
+    },
+    {
+     "w": "les",
+     "t": 63.62
+    },
+    {
+     "w": "droits.",
+     "t": 63.74
+    },
+    {
+     "w": "Ce",
+     "t": 64.18
+    },
+    {
+     "w": "soir-là,",
+     "t": 64.52
+    },
+    {
+     "w": "il",
+     "t": 64.86
+    },
+    {
+     "w": "n'était",
+     "t": 65.0
+    },
+    {
+     "w": "plus",
+     "t": 65.14
+    },
+    {
+     "w": "vigile.",
+     "t": 65.32
+    },
+    {
+     "w": "Il",
+     "t": 65.96
+    },
+    {
+     "w": "était",
+     "t": 66.02
+    },
+    {
+     "w": "devenu",
+     "t": 66.22
+    },
+    {
+     "w": "justicier.",
+     "t": 66.893
+    }
+   ]
+  },
+  {
+   "id": "13-travail",
+   "who": "avocate",
+   "text": "Justicier ? Non. Ce soir-là, il était juste le dernier à faire son travail.",
+   "start": 67.77,
+   "dur": 3.64,
+   "words": [
+    {
+     "w": "Justicier ?",
+     "t": 67.77
+    },
+    {
+     "w": "Non.",
+     "t": 68.45
+    },
+    {
+     "w": "Ce",
+     "t": 68.89
+    },
+    {
+     "w": "soir-là,",
+     "t": 69.21
+    },
+    {
+     "w": "il",
+     "t": 69.53
+    },
+    {
+     "w": "était",
+     "t": 69.61
+    },
+    {
+     "w": "juste",
+     "t": 69.77
+    },
+    {
+     "w": "le",
+     "t": 69.99
+    },
+    {
+     "w": "dernier",
+     "t": 70.21
+    },
+    {
+     "w": "à",
+     "t": 70.51
+    },
+    {
+     "w": "faire",
+     "t": 70.67
+    },
+    {
+     "w": "son",
+     "t": 70.79
+    },
+    {
+     "w": "travail.",
+     "t": 70.91
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 71.66,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 71.66
+    },
+    {
+     "w": "es",
+     "t": 71.8
+    },
+    {
+     "w": "le",
+     "t": 71.89
+    },
+    {
+     "w": "juré.",
+     "t": 71.98
+    },
+    {
+     "w": "Coupable…",
+     "t": 72.48
+    },
+    {
+     "w": "ou",
+     "t": 72.92
+    },
+    {
+     "w": "non",
+     "t": 73.34
+    },
+    {
+     "w": "coupable ?",
+     "t": 73.54
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 74.42,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 74.42
+    },
+    {
+     "w": "verdict",
+     "t": 74.54
+    },
+    {
+     "w": "tombe",
+     "t": 74.84
+    },
+    {
+     "w": "dans",
+     "t": 75.38
+    },
+    {
+     "w": "la",
+     "t": 75.54
+    },
+    {
+     "w": "prochaine",
+     "t": 75.66
+    },
+    {
+     "w": "vidéo.",
+     "t": 75.94
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 76.43
+    },
+    {
+     "w": "pour",
+     "t": 76.92
+    },
+    {
+     "w": "ne",
+     "t": 77.06
+    },
+    {
+     "w": "pas",
+     "t": 77.16
+    },
+    {
+     "w": "le",
+     "t": 77.3
+    },
+    {
+     "w": "rater.",
+     "t": 77.32
+    }
+   ]
+  }
+ ]
+}

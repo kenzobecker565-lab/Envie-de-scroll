@@ -850,9 +850,9 @@ fs(tag('FÉVRIER 2026', 'pill yellow', { t0: K.COURT, t1: SEC.hook.t1 - 0.1, y: 
 fs(tag('LÉGITIME DÉFENSE ÉCARTÉE', 'stamp', { t0: K.GAVEL + 0.12, t1: SEC.hook.t1 - 0.2, y: 1050, rot: -6, from: 2.6, dur: 0.18 }), 68)
 // Le procès.
 fs(tag('PLAIDOIRIES RECONSTITUÉES D’APRÈS LES MOTIFS DU JUGEMENT', 'pill', { t0: S('04') - 0.05, t1: C.cuts.LAW[0] - 0.05, y: 300 }), 30)
-fs(tag('« C’EST S’ACHARNER. »', 'slam yellow', { t0: Wd('04', 'sacharner') - 0.15, t1: E('04') + 0.15, y: 340, rot: -4, from: 2.8, dur: 0.15 }), 96)
+fs(tag('« C’EST S’ACHARNER. »', 'slam yellow', { t0: Wd('04', 'sacharner') - 0.15, t1: E('04') + 0.15, y: 340, rot: -4, from: 2.8, dur: 0.15 }), 78)
 fs(tag('SA COMPAGNE ATTAQUÉE À CÔTÉ', 'pill red', { t0: Wd('05', 'sa') - 0.1, t1: C.cuts.DARK[0] - 0.05, y: 300, rot: -2 }), 52)
-fs(tag('LA MENACE A CHANGÉ DE CAMP', 'slam yellow', { t0: Wd('06', 'menace') - 0.2, t1: E('06') + 0.15, y: 340, rot: 3, from: 2.6, dur: 0.18 }), 70)
+fs(tag('LA MENACE A CHANGÉ DE CAMP', 'slam yellow', { t0: Wd('06', 'menace') - 0.2, t1: E('06') + 0.15, y: 340, rot: 3, from: 2.6, dur: 0.18 }), 56)
 fs(tag('LÉGITIME DÉFENSE<br>OU ACHARNEMENT ?', 'big white', { t0: S('08') - 0.05, t1: E('08') + 0.15, y: 470, from: 1.4, dur: 0.3 }), 84)
 fs(tag('ICI, C’EST TOI QUI JUGES', 'pill yellow', { t0: Wd('08', 'ici') - 0.1, t1: E('08') + 0.15, y: 760, rot: -2 }), 56)
 const like1 = fs(tag('<span class="plus">+</span> ABONNE-TOI', 'subscribe', { t0: Wd('08', 'abonnetoi') - 0.1, t1: E('08') + 0.15, y: 960, from: 2.2, dur: 0.25 }), 84)

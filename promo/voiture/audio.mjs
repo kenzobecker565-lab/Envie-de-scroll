@@ -402,6 +402,44 @@ function newborn(t0, len, gain = 0.2) {
   })
 }
 
+/** Les sons des plans de coupe du procès. */
+function cutSounds() {
+  const X = C.cuts
+  // La télé allumée (grésillement), la rue (pas), le chrono des minutes.
+  hum(X.TV[0], X.TV[1] - X.TV[0], 120, 0.02)
+  steps(X.STREET[0] + 0.1, X.STREET[1] - X.STREET[0] - 0.2, 0.1, 0.32)
+  for (const d of [0, 0.55, 1.1]) pop(X.WAIT[0] + d, 0.15, 1200, 700)
+  for (let t = X.WAIT[0]; t < X.WAIT[1]; t += 0.25) clockTick(t, 0.06, Math.round(t * 4) % 2 === 0)
+  // Le monitoring : bips du cœur du bébé qui ralentissent, l'alarme.
+  for (let t = X.CORD[0] + 0.1, k = 0; t < X.CORD[1] - 0.1; k++) {
+    const slow = Math.min(1, Math.max(0, (t - X.CORD[0] - 1.2) / 1.5))
+    beep(t, 0.06, 1100 - 200 * slow, 0.06)
+    t += 0.38 + 0.3 * slow
+  }
+  for (let t = X.CORD[0] + 2.0; t < X.CORD[1] - 0.2; t += 0.5) beep(t, 0.05, 880, 0.2)
+  // Le camion : klaxon, phares.
+  place([[B.sfx, 0.12], [B.verb, 0.06]], X.TRUCK[0] + 0.3, 0.8, (i, t) => (Math.sign(Math.sin(TAU * 220 * t)) + Math.sign(Math.sin(TAU * 277 * t))) * 0.3 * Math.min(1, t / 0.02) * Math.min(1, (0.8 - t) / 0.1))
+  hum(X.TRUCK[0], X.TRUCK[1] - X.TRUCK[0], 40, 0.08)
+  // La balance des cœurs.
+  heart(X.LIVES[0], X.LIVES[1] - X.LIVES[0], 0.35, 0.7)
+  // Le Code pénal : pages, surligneur, puis la réserve en rouge.
+  sweep(X.CODE[0], 0.4, { f0: 1500, f1: 4000, q: 0.7, gain: 0.12 })
+  for (let k = 0; k < 6; k++) sweep(X.CODE[0] + 0.2 + k * 0.45, 0.25, { f0: 3000, f1: 2200, q: 2, gain: 0.04 })
+  boom(X.CODE[0] + 4.4, 0.35, 80, 36, 0.4)
+  // La voiture rendue (jauge), les amendes (enveloppes), la pluie et le bus.
+  for (let k = 0; k < 8; k++) tick(X.CHOCO[0] + 0.1 + k * 0.13, 0.05, 1800 + k * 120)
+  for (let i = 0; i < 6; i++) {
+    sweep(X.MAIL[0] + 0.1 + i * 0.35, 0.18, { f0: 1800, f1: 600, q: 1, gain: 0.08 })
+    tick(X.MAIL[0] + 0.25 + i * 0.35, 0.05, 1600)
+  }
+  wind(X.BUS[0], X.BUS[1] - X.BUS[0], 0.05)
+  // L'échéancier, les taxis.
+  for (let i = 0; i < 6; i++) pop(X.PAY[0] + 0.6 + i * 0.18, 0.12, 1000 + i * 120, 600)
+  for (let i = 0; i < 5; i++) pop(X.TAXI[0] + 1.6 + i * 0.22, 0.14, 1500, 2200)
+  // Inaya : le vent doux, un petit gazouillis.
+  wind(X.BABY[0], X.BABY[1] - X.BABY[0], 0.03)
+}
+
 function score() {
   for (const sec of C.sections.slice(1)) sweep(sec.t0 - 0.24, 0.5, { f0: 300, f1: 3500, gain: 0.18 })
   const trib = SEC('tribunal').t0

@@ -589,13 +589,181 @@ const SHOTS = [
       },
     },
     {
-      // Le replay (provisoire pour le prototype).
+      // R1 · Mehdi, 29 ans, livreur : son sac isotherme, son scooter, la rue de nuit.
+      t1: K.BERNARD,
+      build(k, g) {
+        const { svg, txt, bg } = k
+        bg(g, 'url(#blueNight)')
+        const bk = bokeh(g, 16, ['#ffcf80', '#ff9a50', '#9fd0ff'], 101, { op: 0.35, r0: 20, r1: 70, blur: 'blur14', vy: 6 })
+        svg('rect', { x: -400, y: 1250, width: 1900, height: 900, fill: '#14161c' }, g)
+        const bag = svg('g', {}, g)
+        svg('rect', { x: -170, y: -180, width: 340, height: 340, rx: 26, fill: '#12a37a', stroke: '#0a5a42', 'stroke-width': 10 }, bag)
+        txt(bag, 'LIVRAISON', { y: 10, 'font-size': 44, fill: '#ffffff' })
+        const m = k.makePerson(g, MEHDI)
+        return { bk, bag, m }
+      },
+      draw(k, s, t, l) {
+        s.bk.draw(t)
+        k.place(s.bag, 760, 900, 0.9, 6)
+        s.m.update(t, { x: 470, y: 1230, scale: 1.2 + 0.04 * l, mouth: 0.1, brows: 'neutral', look: [0.2, 0], armR: [0.4, 0.5], armL: [0.3, 0.6], headTilt: 0.05 * Math.sin(t * 1.5), seed: 6 })
+      },
+    },
+    {
+      // R2 · Bernard, 71 ans, à sa fenêtre, la lueur bleue de la télé.
+      t1: K.KEYS,
+      build(k, g) {
+        const { svg, bg } = k
+        bg(g, '#0a0e18')
+        svg('rect', { x: 60, y: 220, width: 960, height: 1500, fill: '#2a2620' }, g)
+        svg('rect', { x: 160, y: 360, width: 760, height: 900, rx: 8, fill: '#0c1424' }, g)
+        const tv = svg('ellipse', { cx: 540, cy: 900, rx: 520, ry: 520, fill: 'url(#glowBlue)' }, g)
+        const b = k.makePerson(g, BERNARD)
+        svg('path', { d: 'M 540 360 L 540 1260 M 160 800 L 920 800', stroke: '#2a2620', 'stroke-width': 26 }, g)
+        svg('rect', { x: 120, y: 1240, width: 840, height: 50, fill: '#3a342c' }, g)
+        return { tv, b }
+      },
+      draw(k, s, t, l) {
+        s.tv.setAttribute('opacity', (0.6 + 0.3 * Math.sin(t * 13) * Math.sin(t * 7.1)).toFixed(2))
+        s.b.update(t, { x: 540, y: 1130, scale: 0.95 + 0.03 * l, mouth: 0, brows: 'neutral', look: [0.1, 0.1], armR: [0.2, 0.4], armL: [0.2, 0.4], seed: 7 })
+      },
+    },
+    {
+      // R3 · Les clés sur le pare-soleil, comme toujours.
+      t1: K.INAYA,
+      build(k, g) {
+        const { svg, txt, bg } = k
+        bg(g, '#101218')
+        svg('path', { d: 'M -100 -100 L 1180 -100 L 1180 380 Q 540 300 -100 380 Z', fill: '#1c1e24' }, g)
+        svg('path', { d: 'M 120 420 Q 540 360 960 420 L 1000 1500 L 80 1500 Z', fill: '#0c1424' }, g)
+        bokeh(g, 10, ['#ffcf80', '#ff9a50'], 103, { op: 0.4, r0: 20, r1: 60, x0: 150, x1: 930, y0: 500, y1: 1300, vy: 0 })
+        const visor = svg('g', {}, g)
+        svg('rect', { x: -260, y: 0, width: 520, height: 200, rx: 30, fill: '#3a3c44', stroke: '#24262c', 'stroke-width': 8 }, visor)
+        svg('rect', { x: -60, y: 60, width: 120, height: 60, rx: 8, fill: '#2a2c32' }, visor)
+        const keys = svg('g', {}, g)
+        svg('circle', { r: 34, fill: 'none', stroke: '#e8ecf2', 'stroke-width': 10, filter: 'url(#glow)' }, keys)
+        svg('rect', { x: -22, y: 30, width: 44, height: 70, rx: 12, fill: '#14161c' }, keys)
+        svg('rect', { x: -10, y: 96, width: 22, height: 140, rx: 4, fill: '#d8dce2' }, keys)
+        for (const y of [170, 196, 222]) svg('rect', { x: 10, y, width: 16, height: 14, fill: '#d8dce2' }, keys)
+        txt(keys, 'B.', { y: 78, 'font-size': 28, fill: '#c8ccd2' })
+        return { visor, keys }
+      },
+      draw(k, s, t, l) {
+        k.place(s.visor, 540, 380, 1.4, 0)
+        const sw = 14 * Math.exp(-l * 1.5) * Math.sin(l * 6)
+        s.keys.setAttribute('transform', `translate(600 560) scale(3.2) rotate(${sw.toFixed(1)})`)
+      },
+    },
+    {
+      // R4 · Inaya, née sur le parking de la maternité, à l'aube.
+      t1: K.FINES,
+      build(k, g) {
+        const { svg, bg } = k
+        bg(g, 'url(#goldSky)')
+        svg('ellipse', { cx: 560, cy: 900, rx: 640, ry: 640, fill: 'url(#sunCore)' }, g)
+        const ry = rays(g, 28, '#fff0c0', 0.06)
+        svg('rect', { x: 620, y: 700, width: 520, height: 500, fill: '#3a2440' }, g)
+        svg('rect', { x: 700, y: 760, width: 300, height: 90, rx: 10, fill: '#1f5fd0', opacity: 0.8 }, g)
+        svg('use', { href: '#birthPair', filter: 'url(#rimGold)' }, g)
+        const pair = svg('g', { id: 'birthPair', filter: 'url(#backlit)' }, g)
+        const m = k.makePerson(pair, MEHDI)
+        const baby = svg('g', {}, pair)
+        svg('ellipse', { rx: 120, ry: 80, fill: '#fff4e8' }, baby)
+        svg('circle', { cx: -60, cy: -10, r: 46, fill: '#c89070' }, baby)
+        svg('path', { d: 'M -78 -8 Q -70 -2 -62 -8 M -52 -8 Q -44 -2 -36 -8', stroke: '#3a2a1a', 'stroke-width': 4, fill: 'none' }, baby)
+        svg('path', { d: 'M -200 1300 Q 540 1240 1300 1310 L 1300 2100 L -200 2100 Z', fill: '#1a0c16' }, g)
+        const dust = bokeh(g, 30, ['#fff0c0'], 104, { op: 0.8, r0: 3, r1: 8, blur: 'blur6', vy: 16, y0: 300, y1: 1300 })
+        return { ry, m, baby, dust }
+      },
+      draw(k, s, t, l) {
+        s.ry.setAttribute('transform', `translate(560 900) rotate(${(t * 4).toFixed(1)})`)
+        s.dust.draw(t)
+        s.m.update(t, { x: 480, y: 1130, scale: 1.1 + 0.03 * l, mouth: 0.15, brows: 'sad', look: [0.3, 0.5], armR: [1.0, 1.5], armL: [1.0, 1.5], headTilt: 0.2, seed: 6 })
+        s.baby.setAttribute('transform', `translate(500 ${(1260 + 4 * Math.sin(t * 2)).toFixed(1)}) rotate(-8)`)
+      },
+    },
+    {
+      // R5 · Trois semaines plus tard : six amendes dans la boîte aux lettres de Bernard.
+      t1: K.POINTS,
+      build(k, g) {
+        const { svg, txt, bg } = k
+        bg(g, '#d8d2c4')
+        svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill: 'url(#vigCut)', opacity: 0.6 }, g)
+        const box = svg('g', { transform: 'translate(540 980)' }, g)
+        svg('rect', { x: -300, y: -260, width: 600, height: 520, rx: 30, fill: '#2a5a8a' }, box)
+        svg('rect', { x: -220, y: -200, width: 440, height: 40, rx: 20, fill: '#10121a' }, box)
+        svg('rect', { x: -160, y: -40, width: 320, height: 70, rx: 8, fill: '#ffffff' }, box)
+        txt(box, 'B. MARCHAND', { y: 12, 'font-size': 40, fill: '#10121a' })
+        const letters = Array.from({ length: 6 }, (_, i) => {
+          const e = svg('g', { opacity: 0 }, g)
+          svg('rect', { x: -170, y: -100, width: 340, height: 200, rx: 10, fill: '#ffffff', stroke: '#c8c2b2', 'stroke-width': 4 }, e)
+          svg('rect', { x: -170, y: -100, width: 340, height: 40, fill: '#1f3a8a' }, e)
+          txt(e, 'AVIS DE CONTRAVENTION', { y: -70, 'font-size': 22, fill: '#ffffff' })
+          txt(e, 'FEU ROUGE · 135 €', { y: 20, 'font-size': 34, fill: '#c8102e' })
+          return e
+        })
+        const total = txt(g, '', { x: 540, y: 440, 'font-size': 150, fill: '#c8102e', stroke: '#10121a', 'stroke-width': 14, 'paint-order': 'stroke fill' })
+        return { letters, total }
+      },
+      draw(k, s, t, l) {
+        let n = 0
+        s.letters.forEach((e, i) => {
+          const a = 0.15 + i * 0.22
+          const u = k.clamp((l - a) / 0.3)
+          e.setAttribute('opacity', l > a ? 1 : 0)
+          if (l > a) {
+            n++
+            k.place(e, 540 + (i % 2 ? 30 : -30), k.lerp(-200, 760 + i * 8, k.ease.out3(u)), 1, (i % 2 ? 1 : -1) * (6 + 4 * (1 - u)))
+          }
+        })
+        s.total.textContent = `${n * 135} €`
+      },
+    },
+    {
+      // R6 · Son permis : zéro point.
+      t1: K.TODAY,
+      build(k, g) {
+        const { svg, txt, bg } = k
+        bg(g, '#1a0a10')
+        const ry = rays(g, 18, '#ff2a3d', 0.08)
+        const card = svg('g', {}, g)
+        svg('rect', { x: -380, y: -240, width: 760, height: 480, rx: 34, fill: '#f2b8c8', stroke: '#10121a', 'stroke-width': 10 }, card)
+        svg('rect', { x: -340, y: -190, width: 220, height: 280, rx: 14, fill: '#d8d2c4' }, card)
+        txt(card, 'PERMIS DE CONDUIRE', { x: 120, y: -140, 'font-size': 40, fill: '#10121a' })
+        txt(card, 'MARCHAND Bernard', { x: 120, y: -70, 'font-size': 34, fill: '#10121a' })
+        const pts = txt(card, '', { x: 120, y: 120, 'font-size': 170, fill: '#c8102e' })
+        txt(card, 'POINTS', { x: 120, y: 190, 'font-size': 40, fill: '#10121a' })
+        return { ry, card, pts }
+      },
+      draw(k, s, t, l) {
+        s.ry.setAttribute('transform', `translate(540 860) rotate(${(t * 10).toFixed(1)})`)
+        const v = Math.max(0, 12 - Math.floor(l / 0.08))
+        s.pts.textContent = String(v)
+        k.place(s.card, 540, 860, 1 + (v === 0 ? 0.08 * Math.exp(-(l - 0.96) * 8) : 0), -4)
+      },
+    },
+    {
+      // E · Mehdi sous le projecteur ; le marteau.
       t1: SEC_HOOK_END,
       build(k, g) {
-        k.bg(g, '#0a0a0c')
-        return {}
+        const { svg, bg } = k
+        bg(g, 'url(#judgeBg)')
+        svg('ellipse', { cx: 540, cy: 900, rx: 560, ry: 800, fill: 'url(#spot)' }, g)
+        const bk = bokeh(g, 10, ['#bcd2ff'], 51, { op: 0.15, r0: 6, r1: 16, blur: 'blur6', vy: 14, x0: 200, x1: 880 })
+        const r = k.makePerson(g, MEHDI)
+        const gavel = svg('g', {}, g)
+        svg('rect', { x: -26, y: -20, width: 52, height: 360, rx: 16, fill: '#6a3f26' }, gavel)
+        svg('rect', { x: -150, y: -110, width: 300, height: 120, rx: 34, fill: '#7a4a2c' }, gavel)
+        for (const x of [-150, 110]) svg('rect', { x, y: -110, width: 40, height: 120, rx: 10, fill: '#d9a441' }, gavel)
+        return { bk, r, gavel }
       },
-      draw() {},
+      draw(k, s, t, l) {
+        s.bk.draw(t)
+        s.r.update(t, { x: 540, y: 1080, scale: 1.15 + 0.03 * l, brows: 'sad', look: [0, 0.2], armR: [0.2, 0.4], armL: [0.2, 0.4], seed: 6 })
+        const g = k.ease.in3(k.clamp((t - (K.GAVEL - 0.35)) / 0.35))
+        const after = t - K.GAVEL
+        k.show(s.gavel, t > K.GAVEL - 0.4)
+        s.gavel.setAttribute('transform', `translate(${k.lerp(1000, 720, g)} ${k.lerp(200, 640, g)}) rotate(${k.lerp(-70, -10, g) + (after > 0 ? 6 * Math.exp(-after * 8) * Math.sin(after * 40) : 0)})`)
+      },
     },
 ]
 
@@ -655,7 +823,399 @@ const TRIB = scene('tribunal', (L) => {
 // ------------------------------------------------- 2 bis · Les plans de coupe du procès
 // Chaque argument devient une image plein écran, qui entre et sort par un volet en biais (toujours vers
 // la gauche : deux plans qui se suivent se poussent). Lumière, profondeur de champ, étalonnage par plan.
-const CUT_DEFS = {}
+const FULL = (g, fill) => svg('rect', { x: -400, y: -400, width: 1900, height: 2700, fill }, g)
+const heartP = (g, x, y, s, fill = '#ff2a3d') => svg('path', { d: heartD, fill, transform: `translate(${x} ${y}) scale(${s})` }, g)
+const CUT_DEFS = {
+  // « Sa télé était allumée, on la voyait depuis la rue » : la maison de Bernard, la nuit.
+  TV: {
+    build(g) {
+      FULL(g, 'url(#blueNight)')
+      const bk = bokeh(g, 10, ['#ffcf80', '#9fd0ff'], 111, { op: 0.3, r0: 20, r1: 60, vy: 0, y0: 200, y1: 900 })
+      svg('rect', { x: 120, y: 520, width: 840, height: 900, fill: '#1c2030' }, g)
+      svg('path', { d: 'M 80 540 L 540 260 L 1000 540 Z', fill: '#141824' }, g)
+      const win = svg('rect', { x: 340, y: 700, width: 400, height: 320, rx: 8, fill: '#3d7bff' }, g)
+      const glow = svg('ellipse', { cx: 540, cy: 860, rx: 420, ry: 360, fill: 'url(#glowBlue)' }, g)
+      fig(g, { x: 560, y: 1020, s: 0.62, fill: '#0a0e18' })
+      svg('path', { d: 'M 540 700 L 540 1020 M 340 860 L 740 860', stroke: '#1c2030', 'stroke-width': 16 }, g)
+      svg('rect', { x: 460, y: 1120, width: 160, height: 300, fill: '#2a2620' }, g)
+      svg('rect', { x: -400, y: 1420, width: 1900, height: 900, fill: '#0c0e14' }, g)
+      const clock = txt(g, '03:12', { x: 540, y: 400, 'font-size': 110, fill: '#9fd0ff', filter: 'url(#glow)' })
+      FULL(g, 'url(#vigCut)')
+      return { bk, win, glow, clock }
+    },
+    draw(s, t) {
+      const f = 0.65 + 0.35 * Math.sin(t * 11) * Math.sin(t * 6.3)
+      s.win.setAttribute('fill', f > 0.8 ? '#6a9bff' : '#3d7bff')
+      s.glow.setAttribute('opacity', f.toFixed(2))
+    },
+  },
+  // « Il suffisait de traverser et de frapper » : vu du ciel, les deux maisons, 20 mètres.
+  STREET: {
+    build(g) {
+      FULL(g, '#3a3c42')
+      svg('rect', { x: -400, y: 820, width: 1900, height: 300, fill: '#24262c' }, g)
+      for (let i = 0; i < 8; i++) svg('rect', { x: -60 + i * 160, y: 960, width: 90, height: 16, fill: '#d8d8d8' }, g)
+      const house = (x, y, c, name) => {
+        const h = svg('g', { transform: `translate(${x} ${y})` }, g)
+        svg('rect', { x: -170, y: -150, width: 340, height: 300, fill: c, stroke: '#10121a', 'stroke-width': 8 }, h)
+        svg('path', { d: 'M -170 -150 L 170 150 M 170 -150 L -170 150', stroke: '#10121a', 'stroke-width': 4, opacity: 0.3 }, h)
+        const l = label(h, name, { size: 40, fill: '#ffffff', ink: '#10121a' })
+        l.setAttribute('transform', 'translate(0 0)')
+        return h
+      }
+      house(300, 560, '#8a6a5a', 'MEHDI')
+      house(780, 1380, '#6a7a8a', 'BERNARD')
+      const path = svg('path', { d: 'M 300 720 C 320 900 760 960 780 1220', fill: 'none', stroke: '#ffd166', 'stroke-width': 14, 'stroke-dasharray': '30 20', 'stroke-linecap': 'round', filter: 'url(#glow)' }, g)
+      const len = 820
+      const tag = label(g, '20 MÈTRES · 15 SECONDES', { size: 46, fill: '#ffd166', ink: '#10121a' })
+      FULL(g, 'url(#vigCut)')
+      return { path, len, tag }
+    },
+    draw(s, t, l) {
+      const p = ease.io2(clamp(l / 1.2))
+      s.path.setAttribute('stroke-dasharray', `30 20`)
+      s.path.setAttribute('opacity', p.toFixed(2))
+      place(s.tag, 540, 300, ease.back(2)(clamp((l - 0.4) / 0.3)), -2)
+    },
+  },
+  // « Frapper, expliquer, attendre… » : les minutes qui s'additionnent.
+  WAIT: {
+    build(g) {
+      FULL(g, 'url(#studio)')
+      const ring = svg('g', { transform: 'translate(540 620)' }, g)
+      svg('circle', { r: 300, fill: '#000', opacity: 0.4 }, ring)
+      svg('circle', { r: 250, fill: 'none', stroke: '#2a2c34', 'stroke-width': 40 }, ring)
+      const C2 = 2 * Math.PI * 250
+      const arc = svg('circle', { r: 250, fill: 'none', stroke: '#ff2a3d', 'stroke-width': 40, 'stroke-dasharray': `0 ${C2}`, transform: 'rotate(-90)', filter: 'url(#glow)' }, ring)
+      const num = txt(ring, '', { y: 50, 'font-size': 150, fill: '#ffffff' })
+      txt(ring, 'MINUTES', { y: 120, 'font-size': 40, fill: '#ff9aa4', 'letter-spacing': 6 })
+      const steps = ['FRAPPER', 'EXPLIQUER', 'ATTENDRE…'].map((w, i) => {
+        const e = label(g, `${w}  +${[1, 2, 3][i]} MIN`, { size: 46, fill: i === 2 ? '#ff2a3d' : '#ffffff', ink: i === 2 ? '#ffffff' : '#10121a' })
+        e.setAttribute('opacity', 0)
+        return e
+      })
+      return { arc, num, steps, C2 }
+    },
+    draw(s, t, l) {
+      const ts = [0.0, 0.55, 1.1]
+      let m = 0
+      s.steps.forEach((e, i) => {
+        const v = ease.back(2)(clamp((l - ts[i]) / 0.25))
+        e.setAttribute('opacity', l > ts[i] ? 1 : 0)
+        place(e, 540, 1010 + i * 100, Math.max(0.001, v), i === 2 ? -2 : 0)
+        if (l > ts[i]) m += [1, 2, 3][i] * clamp((l - ts[i]) / 0.4)
+      })
+      s.arc.setAttribute('stroke-dasharray', `${((s.C2 * m) / 10).toFixed(1)} ${s.C2}`)
+      s.num.textContent = `+${Math.round(m)}`
+    },
+  },
+  // « …le cordon était enroulé autour du cou d'Inaya » : le monitoring qui s'emballe.
+  CORD: {
+    build(g) {
+      FULL(g, '#04100a')
+      FULL(g, 'url(#gridC)')
+      const scr = svg('g', {}, g)
+      svg('rect', { x: 80, y: 360, width: 920, height: 560, rx: 30, fill: '#030806', stroke: '#2a3a34', 'stroke-width': 10 }, scr)
+      txt(scr, 'RYTHME CARDIAQUE DU BÉBÉ', { x: 120, y: 420, 'font-size': 32, fill: '#33ff88', 'text-anchor': 'start' })
+      const curve = svg('path', { d: '', fill: 'none', stroke: '#33ff88', 'stroke-width': 7, filter: 'url(#glow)' }, scr)
+      const bpm = txt(scr, '', { x: 960, y: 420, 'font-size': 60, fill: '#33ff88', 'text-anchor': 'end' })
+      const alarm = svg('rect', { x: 80, y: 360, width: 920, height: 560, rx: 30, fill: '#ff2a3d', opacity: 0 }, scr)
+      const lab = label(g, 'CIRCULAIRE DU CORDON', { size: 50, fill: '#ff2a3d', ink: '#ffffff' })
+      FULL(g, 'url(#vigCut)')
+      return { curve, bpm, alarm, lab }
+    },
+    draw(s, t, l) {
+      const drop = clamp((l - 1.2) / 1.5)
+      let d = ''
+      for (let x = 0; x <= 860; x += 6) {
+        const tt = x / 860
+        const local = clamp((tt * 5 - (5 - l * 1.2)) / 1)
+        const base = 160 - 70 * drop * (tt > 0.6 ? 1 : 0)
+        const y = 860 - (base - 60) * 3.2 + 12 * Math.sin(x * 0.15 + t * 8)
+        d += `${x ? 'L' : 'M'} ${110 + x} ${y.toFixed(0)} `
+        void local
+      }
+      s.curve.setAttribute('d', d)
+      const v = Math.round(160 - 72 * drop + 3 * Math.sin(t * 5))
+      s.bpm.textContent = String(v)
+      s.curve.setAttribute('stroke', drop > 0.4 ? '#ff4a5a' : '#33ff88')
+      s.bpm.setAttribute('fill', drop > 0.4 ? '#ff4a5a' : '#33ff88')
+      s.alarm.setAttribute('opacity', drop > 0.4 && Math.floor(t * 4) % 2 ? 0.18 : 0)
+      place(s.lab, 540, 1080, ease.back(2)(clamp((t - (Wd('05', 'cordon') - 0.15)) / 0.25)) + 0.001, -2)
+    },
+  },
+  // « C'est l'heure des camions de livraison » : le carrefour, les phares qui surgissent.
+  TRUCK: {
+    build(g) {
+      FULL(g, 'url(#blueNight)')
+      svg('path', { d: 'M 540 760 L 1700 1700 L -620 1700 Z', fill: '#16181e' }, g)
+      svg('rect', { x: -400, y: 1000, width: 1900, height: 200, fill: '#1c1e24' }, g)
+      for (let i = 0; i < 9; i++) svg('rect', { x: -40 + i * 130, y: 1220, width: 70, height: 18, fill: '#d8d8d8', opacity: 0.8 }, g)
+      const fire = svg('g', { transform: 'translate(860 560)' }, g)
+      svg('rect', { x: -12, y: 120, width: 24, height: 700, fill: '#2a2c32' }, fire)
+      svg('rect', { x: -60, y: -160, width: 120, height: 290, rx: 22, fill: '#14161a' }, fire)
+      svg('circle', { cy: -90, r: 42, fill: '#ff2a3d', filter: 'url(#glow)' }, fire)
+      const truck = svg('g', {}, g)
+      svg('rect', { x: -420, y: -360, width: 840, height: 520, rx: 20, fill: '#e8ecf0' }, truck)
+      svg('rect', { x: 420, y: -200, width: 260, height: 360, rx: 26, fill: '#c8322a' }, truck)
+      svg('rect', { x: 470, y: -160, width: 170, height: 120, rx: 10, fill: '#1a2230' }, truck)
+      txt(truck, 'LIVRAISONS EXPRESS', { y: -80, 'font-size': 56, fill: '#1f3a8a' })
+      for (const x of [-260, 260, 560]) svg('circle', { cx: x, cy: 170, r: 70, fill: '#0c0d10' }, truck)
+      const hl = svg('ellipse', { cx: 700, cy: 80, rx: 260, ry: 160, fill: 'url(#headl)' }, truck)
+      const glare = svg('ellipse', { cx: 1000, cy: 1100, rx: 900, ry: 700, fill: 'url(#headl)', opacity: 0 }, g)
+      FULL(g, 'url(#vigCut)')
+      return { truck, glare, hl }
+    },
+    draw(s, t, l) {
+      const p = ease.io2(clamp(l / 1.5))
+      s.truck.setAttribute('transform', `translate(${lerp(1900, 380, p).toFixed(0)} 1000) scale(0.95)`)
+      s.glare.setAttribute('opacity', (0.8 * Math.exp(-Math.abs(l - 0.5) * 3)).toFixed(2))
+    },
+  },
+  // « …il jouait trois vies pour en sauver une » : la balance des cœurs.
+  LIVES: {
+    build(g) {
+      FULL(g, 'url(#redRoom)')
+      const ry = rays(g, 16, '#ff5060', 0.12)
+      const beam = svg('g', {}, g)
+      svg('rect', { x: -380, y: -14, width: 760, height: 28, rx: 14, fill: 'url(#gold)', filter: 'url(#glow)' }, beam)
+      svg('rect', { x: 524, y: 780, width: 32, height: 480, fill: 'url(#gold)' }, g)
+      const pan = (title, n, col) => {
+        const p = svg('g', {}, g)
+        svg('path', { d: 'M 0 0 L -130 230 M 0 0 L 130 230', stroke: '#e8b23a', 'stroke-width': 6 }, p)
+        svg('path', { d: 'M -170 230 Q 0 320 170 230 Z', fill: 'url(#gold)' }, p)
+        for (let i = 0; i < n; i++) heartP(p, (i - (n - 1) / 2) * 90, 200, 1.0, col)
+        txt(p, title, { y: 390, 'font-size': 38, fill: '#ffffff' })
+        return p
+      }
+      const left = pan('3 VIES EN JEU', 3, '#ff2a3d')
+      const right = pan('1 VIE À SAUVER', 1, '#ffd166')
+      return { ry, beam, left, right }
+    },
+    draw(s, t, l) {
+      s.ry.setAttribute('transform', `translate(540 700) rotate(${(t * 10).toFixed(1)})`)
+      const a = -12 * ease.back(2)(clamp(l / 0.6)) + 2 * Math.sin(t * 3)
+      const r = (a * Math.PI) / 180
+      s.beam.setAttribute('transform', `translate(540 780) rotate(${a.toFixed(2)})`)
+      place(s.left, 540 - 300 * Math.cos(r), 780 - 300 * Math.sin(r), 1, 0)
+      place(s.right, 540 + 300 * Math.cos(r), 780 + 300 * Math.sin(r), 1, 0)
+    },
+  },
+  // « C'est écrit dans le Code pénal, article 122-7 » : le livre rouge, l'article surligné.
+  CODE: {
+    build(g) {
+      FULL(g, 'url(#studio)')
+      svg('ellipse', { cx: 540, cy: 800, rx: 560, ry: 700, fill: 'url(#spot)' }, g)
+      const book = svg('g', { transform: 'translate(540 860)' }, g)
+      svg('rect', { x: -470, y: -560, width: 940, height: 1000, rx: 20, fill: '#9a1020' }, book)
+      svg('rect', { x: -440, y: -530, width: 880, height: 940, rx: 10, fill: '#f6f0e2' }, book)
+      svg('path', { d: 'M 0 -530 L 0 410', stroke: '#d8ceb8', 'stroke-width': 6 }, book)
+      txt(book, 'CODE PÉNAL', { y: -460, 'font-size': 44, fill: '#9a1020', 'letter-spacing': 6 })
+      txt(book, 'Article 122-7', { y: -380, 'font-size': 64, fill: '#10121a' })
+      const L = [
+        'N’est pas pénalement responsable',
+        'la personne qui, face à un danger',
+        'actuel ou imminent qui menace',
+        'elle-même, autrui ou un bien,',
+        'accomplit un acte nécessaire',
+        'à la sauvegarde de la personne,',
+        'sauf s’il y a disproportion',
+        'entre les moyens employés',
+        'et la gravité de la menace.',
+      ]
+      const lines = L.map((s2, i) => {
+        const hl = svg('rect', { x: -420, y: -320 + i * 72, width: 840, height: 56, rx: 8, fill: i >= 6 ? '#ff6a78' : '#ffd166', opacity: 0 }, book)
+        txt(book, s2, { y: -280 + i * 72, 'font-size': 40, fill: '#10121a', 'font-weight': 700 })
+        return hl
+      })
+      FULL(g, 'url(#vigCut)')
+      return { lines }
+    },
+    draw(s, t, l) {
+      s.lines.forEach((h, i) => {
+        const a = i < 6 ? 0.2 + i * 0.45 : 4.4 + (i - 6) * 0.35
+        h.setAttribute('opacity', (0.75 * clamp((l - a) / 0.25)).toFixed(2))
+      })
+    },
+  },
+  // « …il a rapporté la voiture, le plein fait, avec des chocolats ».
+  CHOCO: {
+    build(g) {
+      FULL(g, '#cfe0ee')
+      svg('rect', { x: -400, y: 1180, width: 1900, height: 900, fill: '#8a8c92' }, g)
+      svg('rect', { x: 0, y: 380, width: 1080, height: 800, fill: '#e8dcc8' }, g)
+      svg('rect', { x: 680, y: 640, width: 220, height: 540, fill: '#6a4a30' }, g)
+      const car = svg('g', { transform: 'translate(500 1260)' }, g)
+      svg('path', { d: 'M -420 0 L -400 -170 Q -380 -220 -320 -230 L -200 -360 Q -170 -390 -120 -390 L 160 -390 Q 220 -390 250 -350 L 360 -230 Q 420 -220 430 -170 L 440 0 Z', fill: '#c8ccd2', stroke: '#8a909a', 'stroke-width': 6 }, car)
+      svg('path', { d: 'M -180 -340 L 230 -340 L 320 -235 L -280 -235 Z', fill: '#2a3040' }, car)
+      for (const x of [-260, 270]) svg('circle', { cx: x, cy: 0, r: 80, fill: '#14161c' }, car)
+      const box = svg('g', { transform: 'translate(120 -255)' }, car)
+      svg('rect', { x: -110, y: -50, width: 220, height: 60, rx: 8, fill: '#7a3a1a' }, box)
+      svg('path', { d: 'M -110 -20 L 110 -20 M 0 -50 L 0 10', stroke: '#ffd166', 'stroke-width': 10 }, box)
+      const fuel = svg('g', { transform: 'translate(820 420)' }, g)
+      svg('circle', { r: 150, fill: '#10121a', stroke: '#3a3c44', 'stroke-width': 10 }, fuel)
+      txt(fuel, 'E', { x: -100, y: 60, 'font-size': 40, fill: '#ff6a78' })
+      txt(fuel, 'F', { x: 100, y: 60, 'font-size': 40, fill: '#33ff88' })
+      const needle = svg('path', { d: 'M 0 0 L 0 -120', stroke: '#ffd166', 'stroke-width': 10, 'stroke-linecap': 'round' }, fuel)
+      return { needle }
+    },
+    draw(s, t, l) {
+      const a = lerp(-70, 70, ease.out3(clamp(l / 1.2)))
+      s.needle.setAttribute('transform', `rotate(${a.toFixed(1)})`)
+    },
+  },
+  // « Les six amendes… dans la boîte aux lettres de Bernard ».
+  MAIL: {
+    build(g) {
+      FULL(g, '#d8d2c4')
+      FULL(g, 'url(#vigCut)')
+      const box = svg('g', { transform: 'translate(540 1040)' }, g)
+      svg('rect', { x: -300, y: -260, width: 600, height: 520, rx: 30, fill: '#2a5a8a' }, box)
+      svg('rect', { x: -220, y: -200, width: 440, height: 40, rx: 20, fill: '#10121a' }, box)
+      txt(box, 'B. MARCHAND', { y: 12, 'font-size': 40, fill: '#ffffff' })
+      const letters = Array.from({ length: 6 }, (_, i) => {
+        const e = svg('g', { opacity: 0 }, g)
+        svg('rect', { x: -170, y: -100, width: 340, height: 200, rx: 10, fill: '#ffffff', stroke: '#c8c2b2', 'stroke-width': 4 }, e)
+        svg('rect', { x: -170, y: -100, width: 340, height: 40, fill: '#1f3a8a' }, e)
+        txt(e, 'AVIS DE CONTRAVENTION', { y: -70, 'font-size': 22, fill: '#ffffff' })
+        txt(e, `${i + 1} / 6 · 135 €`, { y: 20, 'font-size': 36, fill: '#c8102e' })
+        return e
+      })
+      const total = txt(g, '', { x: 540, y: 420, 'font-size': 150, fill: '#c8102e', stroke: '#10121a', 'stroke-width': 14, 'paint-order': 'stroke fill' })
+      return { letters, total }
+    },
+    draw(s, t, l) {
+      let n = 0
+      s.letters.forEach((e, i) => {
+        const a = 0.1 + i * 0.35
+        const u = clamp((l - a) / 0.3)
+        e.setAttribute('opacity', l > a ? 1 : 0)
+        if (l > a) {
+          n++
+          place(e, 540 + (i % 2 ? 26 : -26), lerp(-200, 640 + i * 10, ease.out3(u)), 1, (i % 2 ? 1 : -1) * 6)
+        }
+      })
+      s.total.textContent = `${n * 135} €`
+    },
+  },
+  // « Bernard va chez son cardiologue en bus, avec deux changements ».
+  BUS: {
+    build(g) {
+      FULL(g, '#8a96a4')
+      const rain = svg('g', { opacity: 0.5 }, g)
+      const r = rng(121)
+      for (let i = 0; i < 90; i++) svg('path', { d: `M ${(r() * 1200 - 60).toFixed(0)} ${(r() * 2000).toFixed(0)} l -14 50`, stroke: '#e8f0f8', 'stroke-width': 3 }, rain)
+      svg('rect', { x: -400, y: 1250, width: 1900, height: 900, fill: '#5a6068' }, g)
+      const shelter = svg('g', {}, g)
+      svg('rect', { x: 140, y: 560, width: 800, height: 30, fill: '#3a4048' }, shelter)
+      svg('rect', { x: 160, y: 590, width: 760, height: 660, fill: '#cfe0ee', opacity: 0.25 }, shelter)
+      svg('rect', { x: 860, y: 500, width: 130, height: 130, rx: 20, fill: '#1f5fd0' }, shelter)
+      txt(shelter, 'BUS', { x: 925, y: 580, 'font-size': 44, fill: '#ffffff' })
+      const b = makePerson(g, BERNARD)
+      svg('rect', { x: 260, y: 1180, width: 560, height: 40, fill: '#3a4048' }, g)
+      const map = svg('g', { transform: 'translate(540 330)' }, g)
+      svg('rect', { x: -440, y: -110, width: 880, height: 220, rx: 24, fill: '#ffffff' }, map)
+      svg('path', { d: 'M -360 0 L -120 0 M -120 0 L 120 0 M 120 0 L 360 0', stroke: '#1f5fd0', 'stroke-width': 14 }, map)
+      for (const [x, c] of [[-360, '#10121a'], [-120, '#ff2a3d'], [120, '#ff2a3d'], [360, '#12a150']]) svg('circle', { cx: x, cy: 0, r: 26, fill: c, stroke: '#ffffff', 'stroke-width': 6 }, map)
+      txt(map, 'DOMICILE', { x: -360, y: -48, 'font-size': 26, fill: '#10121a' })
+      txt(map, 'CHANGEMENT', { x: -120, y: 66, 'font-size': 24, fill: '#ff2a3d' })
+      txt(map, 'CHANGEMENT', { x: 120, y: 66, 'font-size': 24, fill: '#ff2a3d' })
+      txt(map, 'CARDIOLOGUE', { x: 360, y: -48, 'font-size': 26, fill: '#12a150' })
+      txt(map, '1 H 10', { x: 0, y: -48, 'font-size': 34, fill: '#10121a' })
+      FULL(g, 'url(#vigCut)')
+      return { rain, b }
+    },
+    draw(s, t, l) {
+      s.rain.setAttribute('transform', `translate(${((-t * 140) % 50).toFixed(0)} ${((t * 900) % 50).toFixed(0)})`)
+      s.b.update(t, { x: 540, y: 1100, scale: 0.85, mouth: 0, brows: 'sad', look: [-0.2, 0.3], armR: [0.15, 0.3], armL: [0.15, 0.3], headTilt: -0.08, seed: 7 })
+    },
+  },
+  // « Il gagne 1 300 euros par mois, il a demandé un échéancier ».
+  PAY: {
+    build(g) {
+      FULL(g, '#e8e2d4')
+      const slip = svg('g', { transform: 'translate(540 520) rotate(-3)' }, g)
+      svg('rect', { x: -400, y: -230, width: 800, height: 460, rx: 14, fill: '#ffffff', stroke: '#c8c2b2', 'stroke-width': 4 }, slip)
+      txt(slip, 'BULLETIN DE SALAIRE', { y: -160, 'font-size': 40, fill: '#10121a', 'letter-spacing': 3 })
+      for (let i = 0; i < 4; i++) svg('rect', { x: -330, y: -110 + i * 50, width: 480 - i * 60, height: 18, rx: 9, fill: '#e2ddd0' }, slip)
+      txt(slip, 'NET À PAYER', { x: -200, y: 160, 'font-size': 38, fill: '#10121a' })
+      txt(slip, '1 300 €', { x: 220, y: 170, 'font-size': 84, fill: '#12a150' })
+      const cal = svg('g', { transform: 'translate(540 1080)' }, g)
+      txt(cal, 'ÉCHÉANCIER PROPOSÉ', { y: -170, 'font-size': 44, fill: '#10121a' })
+      const bars = Array.from({ length: 6 }, (_, i) => {
+        const b = svg('g', { transform: `translate(${-375 + i * 150} 0)` }, cal)
+        svg('rect', { x: -60, y: -110, width: 120, height: 200, rx: 14, fill: '#1f3a8a' }, b)
+        txt(b, ['JAN', 'FÉV', 'MAR', 'AVR', 'MAI', 'JUIN'][i], { y: -60, 'font-size': 30, fill: '#ffffff' })
+        txt(b, '135 €', { y: 30, 'font-size': 32, fill: '#ffd166' })
+        b.setAttribute('opacity', 0)
+        return b
+      })
+      return { bars }
+    },
+    draw(s, t, l) {
+      s.bars.forEach((b, i) => {
+        const v = ease.back(2)(clamp((l - 0.6 - i * 0.18) / 0.25))
+        b.setAttribute('opacity', v > 0.01 ? 1 : 0)
+        b.setAttribute('transform', `translate(${-375 + i * 150} 0) scale(${Math.max(0.001, v).toFixed(3)})`)
+      })
+    },
+  },
+  // « …chaque voiture garée devient un taxi ».
+  TAXI: {
+    build(g) {
+      FULL(g, 'url(#blueNight)')
+      svg('rect', { x: -400, y: 1100, width: 1900, height: 900, fill: '#1c1e24' }, g)
+      for (let i = 0; i < 6; i++) {
+        const x = -60 + i * 180
+        svg('rect', { x, y: 500, width: 170, height: 600, fill: '#141824' }, g)
+      }
+      const cars = Array.from({ length: 5 }, (_, i) => {
+        const c = svg('g', { transform: `translate(${120 + i * 210} ${1060 + (i % 2) * 140}) scale(0.62)` }, g)
+        svg('path', { d: 'M -170 0 L -160 -70 Q -150 -95 -120 -100 L -80 -150 Q -66 -165 -40 -165 L 60 -165 Q 90 -165 104 -150 L 150 -100 Q 175 -95 180 -70 L 185 0 Z', fill: ['#c8ccd2', '#c8322a', '#2a5a8a', '#e8e8e8', '#3a3c44'][i] }, c)
+        for (const x of [-100, 110]) svg('circle', { cx: x, cy: 0, r: 38, fill: '#0c0d10' }, c)
+        const sign = svg('g', { transform: 'translate(0 -185)', opacity: 0 }, c)
+        svg('rect', { x: -70, y: -30, width: 140, height: 50, rx: 10, fill: '#ffd166', stroke: '#10121a', 'stroke-width': 5, filter: 'url(#glow)' }, sign)
+        txt(sign, 'TAXI', { y: 10, 'font-size': 34, fill: '#10121a' })
+        return sign
+      })
+      FULL(g, 'url(#vigCut)')
+      return { cars }
+    },
+    draw(s, t, l) {
+      s.cars.forEach((sg, i) => {
+        const v = ease.back(2.4)(clamp((l - 1.6 - i * 0.22) / 0.25))
+        sg.setAttribute('opacity', v > 0.01 ? 1 : 0)
+        sg.setAttribute('transform', `translate(0 -185) scale(${Math.max(0.001, v).toFixed(3)})`)
+      })
+    },
+  },
+  // « Il ne s'excusera pas d'avoir fait naître sa fille » : Mehdi et Inaya, à contre-jour.
+  BABY: {
+    build(g) {
+      FULL(g, 'url(#goldSky)')
+      const sun = svg('g', { transform: 'translate(600 760)' }, g)
+      svg('ellipse', { rx: 700, ry: 700, fill: 'url(#sunCore)' }, sun)
+      const ry = rays(sun, 30, '#fff0c0', 0.06)
+      svg('use', { href: '#babyPair', filter: 'url(#rimGold)' }, g)
+      const pair = svg('g', { id: 'babyPair', filter: 'url(#backlit)' }, g)
+      const m = makePerson(pair, MEHDI)
+      const baby = svg('g', {}, pair)
+      svg('ellipse', { rx: 130, ry: 86, fill: '#fff4e8' }, baby)
+      svg('circle', { cx: -66, cy: -10, r: 50, fill: '#c89070' }, baby)
+      svg('path', { d: 'M -86 -8 Q -78 -2 -70 -8 M -58 -8 Q -50 -2 -42 -8', stroke: '#3a2a1a', 'stroke-width': 4, fill: 'none' }, baby)
+      svg('path', { d: 'M -200 1360 Q 540 1290 1300 1350 L 1300 2100 L -200 2100 Z', fill: '#1a0c16' }, g)
+      const dust = bokeh(g, 36, ['#fff0c0', '#ffd38a'], 131, { op: 0.8, r0: 3, r1: 9, blur: 'blur6', vy: 16, y0: 300, y1: 1400 })
+      FULL(g, 'url(#vigCut)').setAttribute('opacity', 0.5)
+      return { ry, m, baby, dust }
+    },
+    draw(s, t, l) {
+      s.ry.setAttribute('transform', `rotate(${(t * 4).toFixed(1)})`)
+      s.dust.draw(t)
+      s.m.update(t, { x: 500, y: 1080, scale: 1.15, mouth: 0.1, brows: 'sad', look: [0.3, 0.5], armR: [1.0, 1.5], armL: [1.0, 1.5], headTilt: 0.2, seed: 6 })
+      s.baby.setAttribute('transform', `translate(520 ${(1230 + 4 * Math.sin(t * 2)).toFixed(1)}) rotate(-8) scale(1.1)`)
+    },
+  },
+}
 const CUTS = Object.entries(C.cuts).filter(([id]) => CUT_DEFS[id]).map(([id, span], i) => {
   const D = CUT_DEFS[id]
   const wrap = svg('g', { display: 'none' }, TRIB.L.hud)
@@ -756,6 +1316,30 @@ fs(tag('IL A VOLÉ LA VOITURE DU VOISIN', 'pill red', { t0: K.INTRO_VOL, t1: K.L
 fs(tag('6 FEUX ROUGES', 'slam white', { t0: K.INTRO_FEUX, t1: K.LIVE0 - 0.1, y: 590, rot: -3, from: 2.4, dur: 0.18 }), 120)
 fs(tag('HÉROS OU COUPABLE ?', 'slam yellow', { t0: Wd('00', 'rouges') + 0.15, t1: K.LIVE0 - 0.1, y: 760, rot: 3, from: 2.6, dur: 0.18 }), 84)
 fs(tag('LA NUIT DU 14 MARS · 3 H 12', 'pill', { t0: K.LIVE0 + 0.05, t1: K.LIVE0 + 1.8, y: 620, rot: -2 }), 46)
+// Le replay.
+fs(tag('MEHDI · 29 ANS · LIVREUR', 'pill yellow', { t0: K.REPLAY, t1: K.BERNARD - 0.06, y: 300, rot: -2 }), 56)
+fs(tag('BERNARD · 71 ANS · LE VOISIN', 'pill', { t0: K.BERNARD, t1: K.KEYS - 0.06, y: 300, rot: 2 }), 54)
+fs(tag('LES CLÉS SUR LE PARE-SOLEIL', 'pill yellow', { t0: K.KEYS, t1: K.INAYA - 0.06, y: 1660, rot: -2 }), 54)
+fs(tag('INAYA · NÉE SUR LE PARKING', 'pill', { t0: K.INAYA, t1: K.FINES - 0.06, y: 300, rot: 2 }), 54)
+fs(tag('3 SEMAINES PLUS TARD', 'pill', { t0: K.FINES, t1: K.POINTS - 0.06, y: 1660, rot: -2 }), 50)
+fs(tag('PERMIS : 0 POINT', 'slam yellow', { t0: Wd('03', 'zero') - 0.1, t1: K.TODAY - 0.06, y: 1660, rot: -3, from: 2.6, dur: 0.18 }), 96)
+fs(tag('JUGÉ.', 'stamp', { t0: K.GAVEL + 0.12, t1: SEC.hook.t1 - 0.25, y: 400, rot: -8, from: 2.8, dur: 0.18 }), 170)
+// Le procès.
+fs(tag('VOL · MISE EN DANGER D’AUTRUI', 'pill red', { t0: S('04') + 0.05, t1: C.hot[0][0] - 0.05, y: 300, rot: -2 }), 52)
+fs(tag('« IL A CHOISI. »', 'slam yellow', { t0: Wd('04', 'choisi') - 0.15, t1: C.hot[0][1], y: 340, rot: -4, from: 2.8, dur: 0.15 }), 120)
+fs(tag('LA TÉLÉ ÉTAIT ALLUMÉE', 'pill yellow', { t0: Wd('04', 'tele') - 0.12, t1: C.cuts.TV[1] - 0.05, y: 1660, rot: -2 }), 56)
+fs(tag('« FRAPPER, EXPLIQUER… »', 'slam white', { t0: S('05') + 0.3, t1: C.cuts.WAIT[0] - 0.05, y: 330, rot: 3, from: 2.4, dur: 0.18 }), 76)
+fs(tag('6 FEUX ROUGES À 3 H', 'slam white', { t0: S('06') - 0.05, t1: C.cuts.TRUCK[0] - 0.05, y: 330, rot: -3, from: 2.4, dur: 0.18 }), 92)
+fs(tag('MISE EN DANGER D’AUTRUI', 'slam yellow', { t0: Wd('06', 'mise') - 0.15, t1: E('06') + 0.15, y: 340, rot: -4, from: 2.8, dur: 0.15 }), 80)
+fs(tag('L’ÉTAT DE NÉCESSITÉ', 'slam yellow', { t0: Wd('07', 'letat') - 0.15, t1: C.cuts.CODE[0] - 0.05, y: 340, rot: 3, from: 2.8, dur: 0.15 }), 96)
+fs(tag('UN PÈRE QUI SAUVE SA FILLE<br>OU UN VOLEUR ?', 'big white', { t0: S('08') - 0.05, t1: E('08') + 0.15, y: 470, from: 1.4, dur: 0.3 }), 74)
+fs(tag('ICI, C’EST TOI QUI JUGES', 'pill yellow', { t0: Wd('08', 'ici') - 0.1, t1: E('08') + 0.15, y: 760, rot: -2 }), 56)
+fs(tag('LE LENDEMAIN', 'pill', { t0: S('09') - 0.05, t1: C.cuts.CHOCO[1] - 0.05, y: 300, rot: -2 }), 54)
+fs(tag('2 CHANGEMENTS · 1 H 10', 'pill red', { t0: Wd('09', 'deux') - 0.12, t1: C.cuts.BUS[1] - 0.05, y: 1660, rot: 2 }), 52)
+fs(tag('« IL A PROPOSÉ DE TOUT PAYER »', 'slam white', { t0: S('10') - 0.05, t1: C.cuts.PAY[0] - 0.05, y: 330, rot: 3, from: 2.4, dur: 0.18 }), 64)
+fs(tag('BERNARD A PORTÉ PLAINTE.', 'slam yellow', { t0: Wd('10', 'bernard') - 0.1, t1: E('10') + 0.15, y: 340, rot: -3, from: 2.6, dur: 0.18 }), 76)
+fs(tag('« UNE URGENCE N’EFFACE PAS TOUT »', 'slam white', { t0: S('11') - 0.05, t1: C.cuts.TAXI[0] - 0.05, y: 330, rot: -3, from: 2.4, dur: 0.18 }), 58)
+fs(tag('« LE TEMPS DE DEMANDER. »', 'pill yellow', { t0: Wd('12', 'temps') - 0.12, t1: SEC.tribunal.t1, y: 300, rot: -2 }), 54)
 // Le vote.
 fs(tag('TU ES LE JURÉ', 'big white', { t0: S('13') - 0.05, y: 260, from: 1.4, dur: 0.4 }), 100)
 fs(tag('COUPABLE', 'vote red', { t0: Wd('13', 'coupable') - 0.1, y: 470, rot: -3 }), 80)
@@ -831,9 +1415,20 @@ const IMPACTS = [
   ...K.FLASHES.map((t) => [t, 12]),
   [K.ARRIVE - 0.4, 16],
   [K.REPLAY, 10],
+  [K.BERNARD, 8],
+  [K.INAYA, 8],
+  [K.FINES, 8],
+  [K.POINTS + 0.96, 14],
   [K.TODAY, 10],
   [K.GAVEL + 0.1, 26],
   ...HOT.map(([a]) => [a, 14]),
+  [C.cuts.TRUCK[0] + 0.45, 14],
+  [C.cuts.LIVES[0], 10],
+  [C.cuts.CODE[0] + 4.4, 8],
+  [C.cuts.TAXI[0] + 1.6, 8],
+  [Wd('06', 'mise') - 0.15, 12],
+  [Wd('07', 'letat') - 0.15, 10],
+  [Wd('10', 'bernard') - 0.1, 10],
   [C.impact, 10],
   [Wd('13', 'jure') - 0.15, 8],
 ]

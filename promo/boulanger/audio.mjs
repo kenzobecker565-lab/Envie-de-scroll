@@ -254,7 +254,7 @@ function score() {
   gavel(SEC('tribunal').t0 + 0.3)
   gavel(SEC('tribunal').t0 + 0.62, 0.45)
   // Le procès.
-  boom(W('04', 'inconnus') - 0.06, 0.3, 90, 45, 0.5)
+  boom(W('04', 'dinconnus') - 0.06, 0.3, 90, 45, 0.5)
   for (let k = 0; k < 6; k++) pop(W('05', 'six') - 0.1 + k * 0.1, 0.06, 1100, 600)
   boom(W('05', 'police') - 0.06, 0.3, 80, 40, 0.6)
   crowd(W('06', 'college') - 0.2, 1.4, 0.03)

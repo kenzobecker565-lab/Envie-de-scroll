@@ -1,0 +1,1269 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 77.13,
+ "lines": [
+  {
+   "id": "01-vitrine",
+   "who": "narrateur",
+   "text": "Un boulanger a affiché la photo d'un voleur sur sa vitrine. Puis sur Facebook. Deux millions de vues. Le voleur avait quatorze ans.",
+   "start": 0.25,
+   "dur": 6.23,
+   "words": [
+    {
+     "w": "Un",
+     "t": 0.25
+    },
+    {
+     "w": "boulanger",
+     "t": 0.4
+    },
+    {
+     "w": "a",
+     "t": 0.86
+    },
+    {
+     "w": "affiché",
+     "t": 1.14
+    },
+    {
+     "w": "la",
+     "t": 1.5
+    },
+    {
+     "w": "photo",
+     "t": 1.58
+    },
+    {
+     "w": "d'un",
+     "t": 1.77
+    },
+    {
+     "w": "voleur",
+     "t": 1.96
+    },
+    {
+     "w": "sur",
+     "t": 2.26
+    },
+    {
+     "w": "sa",
+     "t": 2.4
+    },
+    {
+     "w": "vitrine.",
+     "t": 2.54
+    },
+    {
+     "w": "Puis",
+     "t": 3.08
+    },
+    {
+     "w": "sur",
+     "t": 3.24
+    },
+    {
+     "w": "Facebook.",
+     "t": 3.48
+    },
+    {
+     "w": "Deux",
+     "t": 3.87
+    },
+    {
+     "w": "millions",
+     "t": 4.26
+    },
+    {
+     "w": "de",
+     "t": 4.44
+    },
+    {
+     "w": "vues.",
+     "t": 4.64
+    },
+    {
+     "w": "Le",
+     "t": 5.02
+    },
+    {
+     "w": "voleur",
+     "t": 5.14
+    },
+    {
+     "w": "avait",
+     "t": 5.46
+    },
+    {
+     "w": "quatorze",
+     "t": 5.78
+    },
+    {
+     "w": "ans.",
+     "t": 6.1
+    }
+   ]
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la vidéo de sa caméra, on voit l'ado entrer. Deux croissants… un sandwich… une canette. Douze euros. Et il repart en courant.",
+   "start": 6.73,
+   "dur": 6.33,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 6.73
+    },
+    {
+     "w": "la",
+     "t": 6.95
+    },
+    {
+     "w": "vidéo",
+     "t": 7.05
+    },
+    {
+     "w": "de",
+     "t": 7.37
+    },
+    {
+     "w": "sa",
+     "t": 7.51
+    },
+    {
+     "w": "caméra,",
+     "t": 7.61
+    },
+    {
+     "w": "on",
+     "t": 8.27
+    },
+    {
+     "w": "voit",
+     "t": 8.35
+    },
+    {
+     "w": "l'ado",
+     "t": 8.617
+    },
+    {
+     "w": "entrer.",
+     "t": 8.883
+    },
+    {
+     "w": "Deux",
+     "t": 9.15
+    },
+    {
+     "w": "croissants…",
+     "t": 9.33
+    },
+    {
+     "w": "un",
+     "t": 9.97
+    },
+    {
+     "w": "sandwich…",
+     "t": 10.05
+    },
+    {
+     "w": "une",
+     "t": 10.79
+    },
+    {
+     "w": "canette.",
+     "t": 10.89
+    },
+    {
+     "w": "Douze",
+     "t": 11.197
+    },
+    {
+     "w": "euros.",
+     "t": 11.503
+    },
+    {
+     "w": "Et",
+     "t": 11.81
+    },
+    {
+     "w": "il",
+     "t": 12.09
+    },
+    {
+     "w": "repart",
+     "t": 12.21
+    },
+    {
+     "w": "en",
+     "t": 12.53
+    },
+    {
+     "w": "courant.",
+     "t": 12.63
+    }
+   ]
+  },
+  {
+   "id": "03-karim",
+   "who": "narrateur",
+   "text": "Il s'appelle Karim. Cinquante et un ans. Boulanger depuis vingt ans. Volé quarante fois cette année. Aujourd'hui, le prévenu, c'est lui.",
+   "start": 13.31,
+   "dur": 6.52,
+   "words": [
+    {
+     "w": "Il",
+     "t": 13.31
+    },
+    {
+     "w": "s'appelle",
+     "t": 13.5
+    },
+    {
+     "w": "Karim.",
+     "t": 13.8
+    },
+    {
+     "w": "Cinquante",
+     "t": 14.055
+    },
+    {
+     "w": "et",
+     "t": 14.31
+    },
+    {
+     "w": "un",
+     "t": 14.565
+    },
+    {
+     "w": "ans.",
+     "t": 14.82
+    },
+    {
+     "w": "Boulanger",
+     "t": 15.36
+    },
+    {
+     "w": "depuis",
+     "t": 15.7
+    },
+    {
+     "w": "vingt",
+     "t": 15.95
+    },
+    {
+     "w": "ans.",
+     "t": 16.2
+    },
+    {
+     "w": "Volé",
+     "t": 16.54
+    },
+    {
+     "w": "quarante",
+     "t": 16.85
+    },
+    {
+     "w": "fois",
+     "t": 17.16
+    },
+    {
+     "w": "cette",
+     "t": 17.38
+    },
+    {
+     "w": "année.",
+     "t": 17.58
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 18.12
+    },
+    {
+     "w": "le",
+     "t": 18.66
+    },
+    {
+     "w": "prévenu,",
+     "t": 18.74
+    },
+    {
+     "w": "c'est",
+     "t": 19.15
+    },
+    {
+     "w": "lui.",
+     "t": 19.56
+    }
+   ]
+  },
+  {
+   "id": "04-visage",
+   "who": "procureur",
+   "text": "Douze euros. Et pour ça, il a livré le visage d'un enfant à deux millions d'inconnus.",
+   "start": 20.08,
+   "dur": 3.45,
+   "words": [
+    {
+     "w": "Douze",
+     "t": 20.14
+    },
+    {
+     "w": "euros.",
+     "t": 20.32
+    },
+    {
+     "w": "Et",
+     "t": 20.74
+    },
+    {
+     "w": "pour",
+     "t": 20.8
+    },
+    {
+     "w": "ça,",
+     "t": 20.96
+    },
+    {
+     "w": "il",
+     "t": 21.34
+    },
+    {
+     "w": "a",
+     "t": 21.44
+    },
+    {
+     "w": "livré",
+     "t": 21.5
+    },
+    {
+     "w": "le",
+     "t": 21.72
+    },
+    {
+     "w": "visage",
+     "t": 21.82
+    },
+    {
+     "w": "d'un",
+     "t": 22.05
+    },
+    {
+     "w": "enfant",
+     "t": 22.28
+    },
+    {
+     "w": "à",
+     "t": 22.54
+    },
+    {
+     "w": "deux",
+     "t": 22.68
+    },
+    {
+     "w": "millions",
+     "t": 22.82
+    },
+    {
+     "w": "d'inconnus.",
+     "t": 23.49
+    }
+   ]
+  },
+  {
+   "id": "05-plaintes",
+   "who": "avocate",
+   "text": "Douze euros, une fois. Quarante vols cette année, le même gamin sur ses caméras. Six plaintes. Six. La police n'est jamais venue.",
+   "start": 23.78,
+   "dur": 5.81,
+   "words": [
+    {
+     "w": "Douze",
+     "t": 23.85
+    },
+    {
+     "w": "euros,",
+     "t": 24.04
+    },
+    {
+     "w": "une",
+     "t": 24.44
+    },
+    {
+     "w": "fois.",
+     "t": 24.56
+    },
+    {
+     "w": "Quarante",
+     "t": 24.86
+    },
+    {
+     "w": "vols",
+     "t": 25.16
+    },
+    {
+     "w": "cette",
+     "t": 25.42
+    },
+    {
+     "w": "année,",
+     "t": 25.52
+    },
+    {
+     "w": "le",
+     "t": 25.96
+    },
+    {
+     "w": "même",
+     "t": 26.02
+    },
+    {
+     "w": "gamin",
+     "t": 26.16
+    },
+    {
+     "w": "sur",
+     "t": 26.42
+    },
+    {
+     "w": "ses",
+     "t": 26.58
+    },
+    {
+     "w": "caméras.",
+     "t": 26.72
+    },
+    {
+     "w": "Six",
+     "t": 27.03
+    },
+    {
+     "w": "plaintes.",
+     "t": 27.34
+    },
+    {
+     "w": "Six.",
+     "t": 27.89
+    },
+    {
+     "w": "La",
+     "t": 28.44
+    },
+    {
+     "w": "police",
+     "t": 28.52
+    },
+    {
+     "w": "n'est",
+     "t": 28.76
+    },
+    {
+     "w": "jamais",
+     "t": 29.0
+    },
+    {
+     "w": "venue.",
+     "t": 29.14
+    }
+   ]
+  },
+  {
+   "id": "06-college",
+   "who": "procureur",
+   "text": "Alors il a fait sa propre police. Le collège a vu la photo. Le quartier aussi. Cet ado n'ose plus sortir de chez lui.",
+   "start": 29.84,
+   "dur": 5.22,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 29.84
+    },
+    {
+     "w": "il",
+     "t": 30.02
+    },
+    {
+     "w": "a",
+     "t": 30.18
+    },
+    {
+     "w": "fait",
+     "t": 30.26
+    },
+    {
+     "w": "sa",
+     "t": 30.4
+    },
+    {
+     "w": "propre",
+     "t": 30.52
+    },
+    {
+     "w": "police.",
+     "t": 30.68
+    },
+    {
+     "w": "Le",
+     "t": 31.46
+    },
+    {
+     "w": "collège",
+     "t": 31.52
+    },
+    {
+     "w": "a",
+     "t": 31.82
+    },
+    {
+     "w": "vu",
+     "t": 31.9
+    },
+    {
+     "w": "la",
+     "t": 31.98
+    },
+    {
+     "w": "photo.",
+     "t": 32.1
+    },
+    {
+     "w": "Le",
+     "t": 32.6
+    },
+    {
+     "w": "quartier",
+     "t": 32.68
+    },
+    {
+     "w": "aussi.",
+     "t": 33.02
+    },
+    {
+     "w": "Cet",
+     "t": 33.275
+    },
+    {
+     "w": "ado",
+     "t": 33.53
+    },
+    {
+     "w": "n'ose",
+     "t": 33.785
+    },
+    {
+     "w": "plus",
+     "t": 34.04
+    },
+    {
+     "w": "sortir",
+     "t": 34.18
+    },
+    {
+     "w": "de",
+     "t": 34.46
+    },
+    {
+     "w": "chez",
+     "t": 34.62
+    },
+    {
+     "w": "lui.",
+     "t": 34.78
+    }
+   ]
+  },
+  {
+   "id": "07-camera",
+   "who": "avocate",
+   "text": "Il n'a rien inventé. Pas un mot. Il a montré ce que sa caméra a filmé. Rien de plus.",
+   "start": 35.31,
+   "dur": 3.97,
+   "words": [
+    {
+     "w": "Il",
+     "t": 35.31
+    },
+    {
+     "w": "n'a",
+     "t": 35.41
+    },
+    {
+     "w": "rien",
+     "t": 35.6
+    },
+    {
+     "w": "inventé.",
+     "t": 35.76
+    },
+    {
+     "w": "Pas",
+     "t": 36.3
+    },
+    {
+     "w": "un",
+     "t": 36.42
+    },
+    {
+     "w": "mot.",
+     "t": 36.52
+    },
+    {
+     "w": "Il",
+     "t": 36.86
+    },
+    {
+     "w": "a",
+     "t": 36.9
+    },
+    {
+     "w": "montré",
+     "t": 37.0
+    },
+    {
+     "w": "ce",
+     "t": 37.3
+    },
+    {
+     "w": "que",
+     "t": 37.4
+    },
+    {
+     "w": "sa",
+     "t": 37.5
+    },
+    {
+     "w": "caméra",
+     "t": 37.62
+    },
+    {
+     "w": "a",
+     "t": 37.94
+    },
+    {
+     "w": "filmé.",
+     "t": 38.06
+    },
+    {
+     "w": "Rien",
+     "t": 38.54
+    },
+    {
+     "w": "de",
+     "t": 38.66
+    },
+    {
+     "w": "plus.",
+     "t": 38.74
+    }
+   ]
+  },
+  {
+   "id": "08-chasse",
+   "who": "procureur",
+   "text": "Rien de plus ? Sous la photo, il a écrit : « Reconnaissez-le. » Ce n'était pas une alerte. C'était une chasse.",
+   "start": 39.53,
+   "dur": 5.08,
+   "words": [
+    {
+     "w": "Rien",
+     "t": 39.53
+    },
+    {
+     "w": "de",
+     "t": 39.74
+    },
+    {
+     "w": "plus ?",
+     "t": 39.82
+    },
+    {
+     "w": "Sous",
+     "t": 40.36
+    },
+    {
+     "w": "la",
+     "t": 40.48
+    },
+    {
+     "w": "photo,",
+     "t": 40.58
+    },
+    {
+     "w": "il",
+     "t": 41.14
+    },
+    {
+     "w": "a",
+     "t": 41.22
+    },
+    {
+     "w": "écrit : «",
+     "t": 41.3
+    },
+    {
+     "w": "Reconnaissez-le. »",
+     "t": 41.93
+    },
+    {
+     "w": "Ce",
+     "t": 42.56
+    },
+    {
+     "w": "n'était",
+     "t": 42.69
+    },
+    {
+     "w": "pas",
+     "t": 42.82
+    },
+    {
+     "w": "une",
+     "t": 43.0
+    },
+    {
+     "w": "alerte.",
+     "t": 43.16
+    },
+    {
+     "w": "C'était",
+     "t": 43.53
+    },
+    {
+     "w": "une",
+     "t": 43.9
+    },
+    {
+     "w": "chasse.",
+     "t": 44.08
+    }
+   ]
+  },
+  {
+   "id": "09-zero",
+   "who": "avocate",
+   "text": "Depuis la photo, les vols ont cessé. Zéro. En une semaine. Ce que six plaintes n'avaient pas réussi.",
+   "start": 44.86,
+   "dur": 4.52,
+   "words": [
+    {
+     "w": "Depuis",
+     "t": 44.86
+    },
+    {
+     "w": "la",
+     "t": 45.18
+    },
+    {
+     "w": "photo,",
+     "t": 45.3
+    },
+    {
+     "w": "les",
+     "t": 45.8
+    },
+    {
+     "w": "vols",
+     "t": 45.88
+    },
+    {
+     "w": "ont",
+     "t": 46.1
+    },
+    {
+     "w": "cessé.",
+     "t": 46.16
+    },
+    {
+     "w": "Zéro.",
+     "t": 46.52
+    },
+    {
+     "w": "En",
+     "t": 46.92
+    },
+    {
+     "w": "une",
+     "t": 47.14
+    },
+    {
+     "w": "semaine.",
+     "t": 47.3
+    },
+    {
+     "w": "Ce",
+     "t": 47.86
+    },
+    {
+     "w": "que",
+     "t": 47.94
+    },
+    {
+     "w": "six",
+     "t": 48.14
+    },
+    {
+     "w": "plaintes",
+     "t": 48.34
+    },
+    {
+     "w": "n'avaient",
+     "t": 48.54
+    },
+    {
+     "w": "pas",
+     "t": 48.74
+    },
+    {
+     "w": "réussi.",
+     "t": 48.9
+    }
+   ]
+  },
+  {
+   "id": "10-prix",
+   "who": "procureur",
+   "text": "Les vols ont cessé… et un gamin de quatorze ans a dû changer de collège. C'est ça, le prix ?",
+   "start": 49.63,
+   "dur": 4.01,
+   "words": [
+    {
+     "w": "Les",
+     "t": 49.63
+    },
+    {
+     "w": "vols",
+     "t": 49.77
+    },
+    {
+     "w": "ont",
+     "t": 49.95
+    },
+    {
+     "w": "cessé…",
+     "t": 50.03
+    },
+    {
+     "w": "et",
+     "t": 50.39
+    },
+    {
+     "w": "un",
+     "t": 50.61
+    },
+    {
+     "w": "gamin",
+     "t": 50.71
+    },
+    {
+     "w": "de",
+     "t": 50.93
+    },
+    {
+     "w": "quatorze",
+     "t": 51.12
+    },
+    {
+     "w": "ans",
+     "t": 51.31
+    },
+    {
+     "w": "a",
+     "t": 51.53
+    },
+    {
+     "w": "dû",
+     "t": 51.59
+    },
+    {
+     "w": "changer",
+     "t": 51.67
+    },
+    {
+     "w": "de",
+     "t": 51.89
+    },
+    {
+     "w": "collège.",
+     "t": 52.07
+    },
+    {
+     "w": "C'est",
+     "t": 52.45
+    },
+    {
+     "w": "ça,",
+     "t": 52.83
+    },
+    {
+     "w": "le",
+     "t": 53.19
+    },
+    {
+     "w": "prix ?",
+     "t": 53.29
+    }
+   ]
+  },
+  {
+   "id": "11-fermer",
+   "who": "avocate",
+   "text": "Le prix ? Karim a perdu huit mille euros en un an. Il a failli fermer. Personne ne lui a demandé ce que ça lui coûtait.",
+   "start": 53.89,
+   "dur": 4.8,
+   "words": [
+    {
+     "w": "Le",
+     "t": 53.89
+    },
+    {
+     "w": "prix ?",
+     "t": 54.05
+    },
+    {
+     "w": "Karim",
+     "t": 54.31
+    },
+    {
+     "w": "a",
+     "t": 54.57
+    },
+    {
+     "w": "perdu",
+     "t": 54.73
+    },
+    {
+     "w": "huit",
+     "t": 54.9
+    },
+    {
+     "w": "mille",
+     "t": 55.07
+    },
+    {
+     "w": "euros",
+     "t": 55.24
+    },
+    {
+     "w": "en",
+     "t": 55.41
+    },
+    {
+     "w": "un",
+     "t": 55.63
+    },
+    {
+     "w": "an.",
+     "t": 55.79
+    },
+    {
+     "w": "Il",
+     "t": 56.09
+    },
+    {
+     "w": "a",
+     "t": 56.13
+    },
+    {
+     "w": "failli",
+     "t": 56.25
+    },
+    {
+     "w": "fermer.",
+     "t": 56.45
+    },
+    {
+     "w": "Personne",
+     "t": 56.91
+    },
+    {
+     "w": "ne",
+     "t": 57.25
+    },
+    {
+     "w": "lui",
+     "t": 57.31
+    },
+    {
+     "w": "a",
+     "t": 57.39
+    },
+    {
+     "w": "demandé",
+     "t": 57.47
+    },
+    {
+     "w": "ce",
+     "t": 57.71
+    },
+    {
+     "w": "que",
+     "t": 57.93
+    },
+    {
+     "w": "ça",
+     "t": 58.03
+    },
+    {
+     "w": "lui",
+     "t": 58.17
+    },
+    {
+     "w": "coûtait.",
+     "t": 58.27
+    }
+   ]
+  },
+  {
+   "id": "12-efface",
+   "who": "procureur",
+   "text": "Une boulangerie, ça se relève. Un visage d'enfant sur Internet… ça ne s'efface jamais.",
+   "start": 58.94,
+   "dur": 3.96,
+   "words": [
+    {
+     "w": "Une",
+     "t": 58.94
+    },
+    {
+     "w": "boulangerie,",
+     "t": 59.09
+    },
+    {
+     "w": "ça",
+     "t": 59.73
+    },
+    {
+     "w": "se",
+     "t": 59.87
+    },
+    {
+     "w": "relève.",
+     "t": 60.01
+    },
+    {
+     "w": "Un",
+     "t": 60.41
+    },
+    {
+     "w": "visage",
+     "t": 60.51
+    },
+    {
+     "w": "d'enfant",
+     "t": 60.84
+    },
+    {
+     "w": "sur",
+     "t": 61.17
+    },
+    {
+     "w": "Internet…",
+     "t": 61.29
+    },
+    {
+     "w": "ça",
+     "t": 61.93
+    },
+    {
+     "w": "ne",
+     "t": 62.07
+    },
+    {
+     "w": "s'efface",
+     "t": 62.28
+    },
+    {
+     "w": "jamais.",
+     "t": 62.49
+    }
+   ]
+  },
+  {
+   "id": "13-boulanger",
+   "who": "avocate",
+   "text": "Jamais ? Quarante fois, il est revenu se servir. Et le seul qui a failli tout perdre… c'est le boulanger.",
+   "start": 63.15,
+   "dur": 4.23,
+   "words": [
+    {
+     "w": "Jamais ?",
+     "t": 63.15
+    },
+    {
+     "w": "Quarante",
+     "t": 63.62
+    },
+    {
+     "w": "fois,",
+     "t": 63.88
+    },
+    {
+     "w": "il",
+     "t": 64.3
+    },
+    {
+     "w": "est",
+     "t": 64.34
+    },
+    {
+     "w": "revenu",
+     "t": 64.42
+    },
+    {
+     "w": "se",
+     "t": 64.7
+    },
+    {
+     "w": "servir.",
+     "t": 64.82
+    },
+    {
+     "w": "Et",
+     "t": 65.28
+    },
+    {
+     "w": "le",
+     "t": 65.34
+    },
+    {
+     "w": "seul",
+     "t": 65.46
+    },
+    {
+     "w": "qui",
+     "t": 65.62
+    },
+    {
+     "w": "a",
+     "t": 65.8
+    },
+    {
+     "w": "failli",
+     "t": 65.88
+    },
+    {
+     "w": "tout",
+     "t": 66.06
+    },
+    {
+     "w": "perdre…",
+     "t": 66.18
+    },
+    {
+     "w": "c'est",
+     "t": 66.5
+    },
+    {
+     "w": "le",
+     "t": 66.82
+    },
+    {
+     "w": "boulanger.",
+     "t": 66.9
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 67.63,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 67.63
+    },
+    {
+     "w": "es",
+     "t": 67.77
+    },
+    {
+     "w": "le",
+     "t": 67.86
+    },
+    {
+     "w": "juré.",
+     "t": 67.95
+    },
+    {
+     "w": "Coupable…",
+     "t": 68.45
+    },
+    {
+     "w": "ou",
+     "t": 68.89
+    },
+    {
+     "w": "non",
+     "t": 69.31
+    },
+    {
+     "w": "coupable ?",
+     "t": 69.51
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 70.39,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 70.39
+    },
+    {
+     "w": "verdict",
+     "t": 70.51
+    },
+    {
+     "w": "tombe",
+     "t": 70.81
+    },
+    {
+     "w": "dans",
+     "t": 71.35
+    },
+    {
+     "w": "la",
+     "t": 71.51
+    },
+    {
+     "w": "prochaine",
+     "t": 71.63
+    },
+    {
+     "w": "vidéo.",
+     "t": 71.91
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 72.4
+    },
+    {
+     "w": "pour",
+     "t": 72.89
+    },
+    {
+     "w": "ne",
+     "t": 73.03
+    },
+    {
+     "w": "pas",
+     "t": 73.13
+    },
+    {
+     "w": "le",
+     "t": 73.27
+    },
+    {
+     "w": "rater.",
+     "t": 73.29
+    }
+   ]
+  }
+ ]
+}

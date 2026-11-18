@@ -297,7 +297,7 @@ const VIDEO = scene('video', (L) => {
   }
   svg('rect', { x: -400, y: 1240, width: W + 800, height: 1400, fill: '#3a3a40' }, L.far)
   // L'ado.
-  const teen = walker(L.actor, { carry: 'none', dir: -1, hood: true, color: '#20242f', rim: '#9fd0ff' })
+  const teen = walker(L.actor, { carry: 'none', dir: -1, hood: true, color: '#5a6480', rim: '#ffffff' })
   // La vitrine réfrigérée, au premier plan.
   const desk = svg('g', {}, L.front)
   svg('rect', { x: -200, y: 1520, width: W + 400, height: 600, fill: '#6a5040' }, desk)
@@ -483,9 +483,9 @@ function counterTag(t0, t1, to, unit, { y = 420, x = 540, fmt = (v) => String(v)
 }
 
 // Le hook.
-tag('SUR SA VITRINE', 'pill red', { t0: 0, t1: Wd('01', 'facebook') - 0.15, y: 250, rot: -2 })
+tag('SUR SA VITRINE', 'pill red', { t0: 0, t1: Wd('01', 'facebook') - 0.15, y: 1290, rot: -2 })
 const T_FB = Wd('01', 'facebook') - 0.15
-counterTag(Wd('01', 'deux') - 0.1, SEC.emeute.t1, 2000000, 'VUES', { fmt: (v) => v.toLocaleString('fr-FR').replace(/\s/g, ' '), y: 240, dur: 1.0 })
+counterTag(Wd('01', 'deux') - 0.1, SEC.emeute.t1, 2000000, 'VUES', { fmt: (v) => v.toLocaleString('fr-FR').replace(/\s/g, ' '), y: 200, dur: 1.0 }).el.querySelector('.num').style.fontSize = '140px'
 fs(tag('14 ANS', 'stamp', { t0: Wd('01', 'quatorze') - 0.05, t1: SEC.emeute.t1, y: 1150, rot: -8, from: 2.8, dur: 0.2 }), 170)
 const LOOT_T = { croissants: Wd('02', 'croissants') - 0.1, sandwich: Wd('02', 'sandwich') - 0.1, canette: Wd('02', 'canette') - 0.1 }
 const T_12 = Wd('02', 'douze') - 0.1
@@ -495,21 +495,21 @@ fs(tag('JUGÉ', 'stamp', { t0: Wd('03', 'lui') - 0.05, t1: SEC.fiche.t1, y: 1130
 fs(tag('12 €', 'slam white', { t0: S('04') - 0.05, t1: Wd('04', 'et') - 0.1, y: 260, rot: -3, from: 2.4, dur: 0.2 }), 130)
 tag('UN ENFANT · 2 M D’INCONNUS', 'pill red', { t0: Wd('04', 'enfant') - 0.1, t1: E('04') + 0.1, y: 230, rot: -2 }).el.style.fontSize = '40px'
 tag('40 VOLS', 'pill yellow', { t0: Wd('05', 'quarante') - 0.1, t1: E('05') + 0.1, y: 230, rot: -2 })
-fs(tag('POLICE : JAMAIS VENUE', 'slam white', { t0: Wd('05', 'police') - 0.06, t1: E('05') + 0.1, y: 860, rot: -2, from: 2.4, dur: 0.2 }), 76)
+fs(tag('POLICE : JAMAIS VENUE', 'slam white', { t0: Wd('05', 'police') - 0.06, t1: E('05') + 0.1, y: 720, rot: -2, from: 2.4, dur: 0.2 }), 76)
 tag('SA PROPRE POLICE', 'pill red', { t0: Wd('06', 'propre') - 0.1, t1: Wd('06', 'cet') - 0.1, y: 230, rot: -2 })
 fs(tag('ENFERMÉ CHEZ LUI', 'slam white', { t0: Wd('06', 'sortir') - 0.06, t1: E('06') + 0.1, y: 250, rot: -3, from: 2.4, dur: 0.2 }), 96)
 fs(tag('0 MOT INVENTÉ', 'slam yellow', { t0: Wd('07', 'invente') - 0.06, t1: Wd('07', 'il', 1) - 0.1, y: 250, rot: -3, from: 2.4, dur: 0.2 }), 100)
 tag('JUSTE SA CAMÉRA', 'pill', { t0: Wd('07', 'camera') - 0.1, t1: E('07') + 0.1, y: 250, rot: -2 })
 fs(tag('UNE CHASSE.', 'slam white', { t0: Wd('08', 'chasse') - 0.06, t1: E('08') + 0.1, y: 250, rot: -3, from: 2.6, dur: 0.2 }), 130)
 tag('EN 1 SEMAINE', 'pill yellow', { t0: Wd('09', 'semaine') - 0.1, t1: E('09') + 0.1, y: 230, rot: -2 })
-tag('6 PLAINTES : RIEN', 'pill', { t0: Wd('09', 'six') - 0.1, t1: E('09') + 0.1, y: 880, rot: 2 })
+tag('6 PLAINTES : RIEN', 'pill', { t0: Wd('09', 'six') - 0.1, t1: E('09') + 0.1, y: 720, rot: 2 })
 tag('14 ANS', 'pill red', { t0: Wd('10', 'gamin') - 0.1, t1: E('10') + 0.1, y: 230, rot: -2 })
-fs(tag('LE PRIX ?', 'slam white', { t0: Wd('10', 'prix') - 0.06, t1: E('10') + 0.1, y: 880, rot: -2, from: 2.4, dur: 0.2 }), 110)
+fs(tag('LE PRIX ?', 'slam white', { t0: Wd('10', 'prix') - 0.06, t1: E('10') + 0.1, y: 420, rot: -2, from: 2.4, dur: 0.2 }), 110)
 fs(tag('IL A FAILLI FERMER', 'slam white', { t0: Wd('11', 'fermer') - 0.06, t1: E('11') + 0.1, y: 250, rot: -3, from: 2.4, dur: 0.2 }), 92)
-tag('ÇA SE RELÈVE', 'pill', { t0: Wd('12', 'releve') - 0.1, t1: Wd('12', 'un') - 0.1, y: 300, rot: -2 })
+tag('ÇA SE RELÈVE', 'pill', { t0: Wd('12', 'releve') - 0.1, t1: Wd('12', 'visage') - 0.1, y: 300, rot: -2 })
 fs(tag('JAMAIS EFFACÉ.', 'slam white', { t0: Wd('12', 'jamais') - 0.06, t1: E('12') + 0.1, y: 380, rot: -2, from: 2.4, dur: 0.2 }), 120)
 fs(tag('40 FOIS.', 'slam yellow', { t0: Wd('13', 'quarante') - 0.06, t1: Wd('13', 'et') - 0.1, y: 360, rot: -3, from: 2.6, dur: 0.2 }), 150)
-fs(tag('LE BOULANGER.', 'slam yellow', { t0: Wd('13', 'boulanger') - 0.06, t1: E('13') + 0.15, y: 380, rot: -3, from: 3, dur: 0.2 }), 130)
+fs(tag('LE BOULANGER.', 'slam yellow', { t0: Wd('13', 'boulanger') - 0.06, t1: E('13') + 0.15, y: 380, rot: -3, from: 3, dur: 0.2 }), 100)
 // Le vote.
 fs(tag('TU ES LE JURÉ', 'big white', { t0: Wd('14', 'jure') - 0.15, y: 330, from: 1.4, dur: 0.5 }), 110)
 tag('COUPABLE', 'vote red', { t0: Wd('14', 'coupable') - 0.1, y: 540, rot: -3 })
@@ -576,7 +576,7 @@ const IMPACTS = [
   [Wd('01', 'quatorze') - 0.05, 16],
   [T_CONSOLE, 14],
   [Wd('03', 'lui') - 0.05, 16],
-  [Wd('04', 'inconnus') - 0.06, 10],
+  [Wd('04', 'dinconnus') - 0.06, 10],
   [Wd('05', 'police') - 0.06, 12],
   [Wd('06', 'sortir') - 0.06, 10],
   [Wd('08', 'chasse') - 0.06, 14],
@@ -632,7 +632,7 @@ function seek(t) {
     cam(EMEUTE, t, { zoom: lerp(1.15, 1.35, prog(t, 0, T_FB, ease.io3)), cx: 560, cy: lerp(1000, 1080, prog(t, 0, T_FB)), push: 0.02, hand: 3 })
     place(EMEUTE.poster, 640, 1060, 0.95, 4 + 2 * Math.sin(t * 2))
     show(EMEUTE.post.g, fb > 0.01)
-    place(EMEUTE.post.g, 540, lerp(1700, 1060, fb), 0.95 * fb + 0.01, lerp(12, -3, fb))
+    place(EMEUTE.post.g, 540, lerp(1700, 960, fb), 0.85 * fb + 0.01, lerp(12, -3, fb))
     const n = Math.round(2000000 * ease.in3(prog(t, Wd('01', 'deux') - 0.1, 1.0)))
     EMEUTE.post.views.textContent = `${n.toLocaleString('fr-FR').replace(/\s/g, ' ')} vues`
   }
@@ -709,21 +709,21 @@ function seek(t) {
       if (v > 0.01) place(el, x, y + 8 * Math.sin(t * 2), v * s, r)
       return v
     }
-    if (prop(TRIB.post, id === '04' || id === '08', id === '04' ? Wd('04', 'visage') - 0.15 : S('08') - 0.1, id === '04' ? E('04') + 0.05 : E('08') + 0.05, 540, 560, 0.5) > 0) {
+    if (prop(TRIB.post, id === '04' || id === '08', id === '04' ? Wd('04', 'visage') - 0.15 : S('08') - 0.1, id === '04' ? E('04') + 0.05 : E('08') + 0.05, 540, 520, 0.46) > 0) {
       TRIB.post.views.textContent = '2 000 000 vues'
       TRIB.post.cap.setAttribute('opacity', id === '08' && t > Wd('08', 'reconnaissez') - 0.1 ? 1 : 0)
     }
     if (prop(TRIB.plaintes, id === '05', Wd('05', 'six') - 0.15, E('05') + 0.05, 540, 520, 0.8) > 0) {
       TRIB.plaintes.sheets.forEach((s, k) => s.setAttribute('opacity', t > Wd('05', 'six') - 0.1 + k * 0.1 ? 1 : 0))
     }
-    prop(TRIB.college, id === '06', Wd('06', 'college') - 0.15, E('06') + 0.05, 540, 540, 0.75)
+    prop(TRIB.college, id === '06', Wd('06', 'college') - 0.15, E('06') + 0.05, 540, 620, 0.7)
     if (prop(TRIB.cam2, id === '07', Wd('07', 'montre') - 0.15, E('07') + 0.05, 540, 540, 0.85) > 0) TRIB.cam2.dot.setAttribute('opacity', Math.floor(t * 2) % 2 ? 0.2 : 1)
-    if (prop(TRIB.vols, id === '09', S('09') - 0.1, E('09') + 0.05, 540, 540, 0.8) > 0) {
+    if (prop(TRIB.vols, id === '09', S('09') - 0.1, E('09') + 0.05, 540, 500, 0.75) > 0) {
       const v = Math.round(40 * (1 - ease.io3(prog(t, Wd('09', 'cesse') - 0.2, Wd('09', 'zero') - Wd('09', 'cesse') + 0.2))))
       TRIB.volsTxt.textContent = String(v)
       TRIB.volsTxt.setAttribute('fill', v === 0 ? '#12a150' : '#e5484d')
     }
-    prop(TRIB.cartable, id === '10', Wd('10', 'college') - 0.2, E('10') + 0.05, lerp(540, 380, prog(t, Wd('10', 'college'), 1.2)), 540, 0.75)
+    prop(TRIB.cartable, id === '10', Wd('10', 'college') - 0.2, E('10') + 0.05, lerp(540, 380, prog(t, Wd('10', 'college'), 1.2)), 640, 0.7)
     if (prop(TRIB.compta, id === '11', Wd('11', 'huit') - 0.15, E('11') + 0.05, 540, 540, 0.75) > 0) void 0
   }
   if (cur === VOTE) {

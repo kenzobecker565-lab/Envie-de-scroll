@@ -467,12 +467,12 @@ counterTag(Wd('01', 'deux') - 0.1, SEC.emeute.t1, 2300, 'IMPAYÉS', { fmt: (v) =
 const LOOT_T = { chauffage: Wd('02', 'chauffage') - 0.1, frigo: Wd('02', 'frigo') - 0.1, veilleuse: Wd('02', 'veilleuse') - 0.1 }
 const T_ROOM = Wd('02', 'mais') - 0.12
 fs(tag('« COUPURE EFFECTUÉE »', 'slam white', { t0: Wd('02', 'coupure') - 0.06, t1: T_ROOM, y: 300, rot: -3, from: 2.4, dur: 0.2 }), 80)
-fs(tag('LA VEILLEUSE DES ENFANTS', 'slam yellow', { t0: LOOT_T.veilleuse, t1: SEC.video.t1, y: 330, rot: -3, from: 2.4, dur: 0.2 }), 76)
+fs(tag('LA VEILLEUSE DES ENFANTS', 'slam yellow', { t0: LOOT_T.veilleuse, t1: SEC.video.t1, y: 330, rot: -3, from: 2.4, dur: 0.2 }), 62)
 fs(tag('JUGÉ', 'stamp', { t0: Wd('03', 'faux') - 0.05, t1: SEC.fiche.t1, y: 1130, rot: -10, from: 2.8, dur: 0.2 }), 150)
 // Le procès.
 fs(tag('14 FAUX RAPPORTS', 'slam white', { t0: Wd('04', 'mensonge') - 0.06, t1: E('04') + 0.1, y: 260, rot: -3, from: 2.4, dur: 0.2 }), 96)
 fs(tag('3 MILLIARDS', 'slam yellow', { t0: Wd('05', 'trois') - 0.06, t1: Wd('05', 'deux') - 0.1, y: 260, rot: -3, from: 2.4, dur: 0.2 }), 110)
-tag('PAS MÊME UNE ERREUR D’ARRONDI', 'pill', { t0: Wd('05', 'arrondi') - 0.1, t1: E('05') + 0.1, y: 250, rot: -2 }).el.style.fontSize = '36px'
+tag('PAS MÊME UNE ERREUR D’ARRONDI', 'pill', { t0: Wd('05', 'darrondi') - 0.1, t1: E('05') + 0.1, y: 250, rot: -2 }).el.style.fontSize = '36px'
 tag('QUI MÉRITE LA LUMIÈRE ?', 'pill red', { t0: Wd('06', 'lumiere') - 0.1, t1: Wd('06', 'cent') - 0.1, y: 250, rot: -2 })
 tag('100', 'pill yellow', { t0: Wd('06', 'cent') - 0.1, t1: E('06') + 0.1, y: 250, x: 330, rot: -3 })
 tag('1 000', 'pill yellow', { t0: Wd('06', 'mille') - 0.1, t1: E('06') + 0.1, y: 250, x: 760, rot: 3 })
@@ -626,7 +626,7 @@ function seek(t) {
     const frozen = t >= T_CONSOLE && t < T_CONSOLE + 0.8
     const tt = frozen ? T_CONSOLE : t
     const room = prog(tt, T_ROOM, 0.5, ease.io3)
-    cam(VIDEO, tt, { zoom: frozen ? 1.25 : 1.05, cx: frozen ? 540 : 540, cy: frozen ? 1300 : lerp(960, 1150, room), push: 0.01, hand: frozen ? 0 : 3 })
+    cam(VIDEO, tt, { zoom: frozen ? 1.45 : lerp(1.05, 1.3, room), cx: 540, cy: frozen ? 1310 : lerp(960, 1240, room), push: 0.01, hand: frozen ? 0 : 3 })
     // Les rapports tombent un à un, puis glissent hors du cadre.
     VIDEO.reports.forEach((g, k) => {
       const a = popS(tt, Wd('02', 'rapports') - 0.1 + k * 0.22, Infinity, 0.25)

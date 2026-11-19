@@ -1,0 +1,1241 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 80.49,
+ "lines": [
+  {
+   "id": "01-hiver",
+   "who": "narrateur",
+   "text": "En plein hiver, un technicien devait couper l'électricité d'un père seul. Il ne l'a jamais fait. Quatorze mois. Deux mille trois cents euros de factures impayées.",
+   "start": 0.25,
+   "dur": 7.21,
+   "words": [
+    {
+     "w": "En",
+     "t": 0.25
+    },
+    {
+     "w": "plein",
+     "t": 0.39
+    },
+    {
+     "w": "hiver,",
+     "t": 0.53
+    },
+    {
+     "w": "un",
+     "t": 1.13
+    },
+    {
+     "w": "technicien",
+     "t": 1.27
+    },
+    {
+     "w": "devait",
+     "t": 1.75
+    },
+    {
+     "w": "couper",
+     "t": 1.99
+    },
+    {
+     "w": "l'électricité",
+     "t": 2.317
+    },
+    {
+     "w": "d'un",
+     "t": 2.643
+    },
+    {
+     "w": "père",
+     "t": 2.97
+    },
+    {
+     "w": "seul.",
+     "t": 3.13
+    },
+    {
+     "w": "Il",
+     "t": 3.69
+    },
+    {
+     "w": "ne",
+     "t": 3.77
+    },
+    {
+     "w": "l'a",
+     "t": 3.89
+    },
+    {
+     "w": "jamais",
+     "t": 4.01
+    },
+    {
+     "w": "fait.",
+     "t": 4.21
+    },
+    {
+     "w": "Quatorze",
+     "t": 4.59
+    },
+    {
+     "w": "mois.",
+     "t": 4.97
+    },
+    {
+     "w": "Deux",
+     "t": 5.238
+    },
+    {
+     "w": "mille",
+     "t": 5.506
+    },
+    {
+     "w": "trois",
+     "t": 5.774
+    },
+    {
+     "w": "cents",
+     "t": 6.042
+    },
+    {
+     "w": "euros",
+     "t": 6.31
+    },
+    {
+     "w": "de",
+     "t": 6.51
+    },
+    {
+     "w": "factures",
+     "t": 6.832
+    },
+    {
+     "w": "impayées.",
+     "t": 7.154
+    }
+   ]
+  },
+  {
+   "id": "02-rapports",
+   "who": "narrateur",
+   "text": "Sur ses rapports, toujours la même phrase : « Coupure effectuée. » Mais derrière la porte, le chauffage tournait… le frigo aussi… et la veilleuse des enfants.",
+   "start": 7.71,
+   "dur": 6.89,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.71
+    },
+    {
+     "w": "ses",
+     "t": 7.85
+    },
+    {
+     "w": "rapports,",
+     "t": 7.99
+    },
+    {
+     "w": "toujours",
+     "t": 8.53
+    },
+    {
+     "w": "la",
+     "t": 8.79
+    },
+    {
+     "w": "même",
+     "t": 8.93
+    },
+    {
+     "w": "phrase : «",
+     "t": 9.07
+    },
+    {
+     "w": "Coupure",
+     "t": 9.61
+    },
+    {
+     "w": "effectuée. »",
+     "t": 10.13
+    },
+    {
+     "w": "Mais",
+     "t": 10.77
+    },
+    {
+     "w": "derrière",
+     "t": 10.87
+    },
+    {
+     "w": "la",
+     "t": 11.13
+    },
+    {
+     "w": "porte,",
+     "t": 11.35
+    },
+    {
+     "w": "le",
+     "t": 11.91
+    },
+    {
+     "w": "chauffage",
+     "t": 11.97
+    },
+    {
+     "w": "tournait…",
+     "t": 12.27
+    },
+    {
+     "w": "le",
+     "t": 12.77
+    },
+    {
+     "w": "frigo",
+     "t": 12.87
+    },
+    {
+     "w": "aussi…",
+     "t": 13.13
+    },
+    {
+     "w": "et",
+     "t": 13.59
+    },
+    {
+     "w": "la",
+     "t": 13.65
+    },
+    {
+     "w": "veilleuse",
+     "t": 13.73
+    },
+    {
+     "w": "des",
+     "t": 14.01
+    },
+    {
+     "w": "enfants.",
+     "t": 14.13
+    }
+   ]
+  },
+  {
+   "id": "03-julien",
+   "who": "narrateur",
+   "text": "Il s'appelle Julien. Quarante et un ans. Technicien depuis quinze ans. Jamais un avertissement. Aujourd'hui, il est jugé pour faux.",
+   "start": 14.85,
+   "dur": 5.85,
+   "words": [
+    {
+     "w": "Il",
+     "t": 14.85
+    },
+    {
+     "w": "s'appelle",
+     "t": 15.07
+    },
+    {
+     "w": "Julien.",
+     "t": 15.29
+    },
+    {
+     "w": "Quarante",
+     "t": 15.505
+    },
+    {
+     "w": "et",
+     "t": 15.72
+    },
+    {
+     "w": "un",
+     "t": 15.935
+    },
+    {
+     "w": "ans.",
+     "t": 16.15
+    },
+    {
+     "w": "Technicien",
+     "t": 16.55
+    },
+    {
+     "w": "depuis",
+     "t": 17.01
+    },
+    {
+     "w": "quinze",
+     "t": 17.27
+    },
+    {
+     "w": "ans.",
+     "t": 17.53
+    },
+    {
+     "w": "Jamais",
+     "t": 17.83
+    },
+    {
+     "w": "un",
+     "t": 18.21
+    },
+    {
+     "w": "avertissement.",
+     "t": 18.41
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 19.1
+    },
+    {
+     "w": "il",
+     "t": 19.79
+    },
+    {
+     "w": "est",
+     "t": 19.87
+    },
+    {
+     "w": "jugé",
+     "t": 19.95
+    },
+    {
+     "w": "pour",
+     "t": 20.21
+    },
+    {
+     "w": "faux.",
+     "t": 20.35
+    }
+   ]
+  },
+  {
+   "id": "04-mensonge",
+   "who": "procureur",
+   "text": "Quatorze fois, il a signé un mensonge. Quatorze fois, il a décidé à la place de son entreprise.",
+   "start": 20.95,
+   "dur": 4.96,
+   "words": [
+    {
+     "w": "Quatorze",
+     "t": 21.07
+    },
+    {
+     "w": "fois,",
+     "t": 21.22
+    },
+    {
+     "w": "il",
+     "t": 21.84
+    },
+    {
+     "w": "a",
+     "t": 21.9
+    },
+    {
+     "w": "signé",
+     "t": 22.04
+    },
+    {
+     "w": "un",
+     "t": 22.32
+    },
+    {
+     "w": "mensonge.",
+     "t": 22.38
+    },
+    {
+     "w": "Quatorze",
+     "t": 22.81
+    },
+    {
+     "w": "fois,",
+     "t": 23.24
+    },
+    {
+     "w": "il",
+     "t": 23.9
+    },
+    {
+     "w": "a",
+     "t": 23.96
+    },
+    {
+     "w": "décidé",
+     "t": 24.06
+    },
+    {
+     "w": "à",
+     "t": 24.4
+    },
+    {
+     "w": "la",
+     "t": 24.62
+    },
+    {
+     "w": "place",
+     "t": 24.7
+    },
+    {
+     "w": "de",
+     "t": 24.9
+    },
+    {
+     "w": "son",
+     "t": 25.06
+    },
+    {
+     "w": "entreprise.",
+     "t": 25.18
+    }
+   ]
+  },
+  {
+   "id": "05-benefices",
+   "who": "avocate",
+   "text": "Son entreprise ? Elle a fait trois milliards de bénéfices l'an dernier. Deux mille trois cents euros, ce n'est même pas une erreur d'arrondi.",
+   "start": 26.16,
+   "dur": 5.41,
+   "words": [
+    {
+     "w": "Son",
+     "t": 26.16
+    },
+    {
+     "w": "entreprise ?",
+     "t": 26.32
+    },
+    {
+     "w": "Elle",
+     "t": 26.96
+    },
+    {
+     "w": "a",
+     "t": 27.1
+    },
+    {
+     "w": "fait",
+     "t": 27.18
+    },
+    {
+     "w": "trois",
+     "t": 27.39
+    },
+    {
+     "w": "milliards",
+     "t": 27.6
+    },
+    {
+     "w": "de",
+     "t": 27.88
+    },
+    {
+     "w": "bénéfices",
+     "t": 28.08
+    },
+    {
+     "w": "l'an",
+     "t": 28.36
+    },
+    {
+     "w": "dernier.",
+     "t": 28.64
+    },
+    {
+     "w": "Deux",
+     "t": 28.856
+    },
+    {
+     "w": "mille",
+     "t": 29.072
+    },
+    {
+     "w": "trois",
+     "t": 29.288
+    },
+    {
+     "w": "cents",
+     "t": 29.504
+    },
+    {
+     "w": "euros,",
+     "t": 29.72
+    },
+    {
+     "w": "ce",
+     "t": 30.08
+    },
+    {
+     "w": "n'est",
+     "t": 30.22
+    },
+    {
+     "w": "même",
+     "t": 30.36
+    },
+    {
+     "w": "pas",
+     "t": 30.52
+    },
+    {
+     "w": "une",
+     "t": 30.72
+    },
+    {
+     "w": "erreur",
+     "t": 30.82
+    },
+    {
+     "w": "d'arrondi.",
+     "t": 31.203
+    }
+   ]
+  },
+  {
+   "id": "06-lumiere",
+   "who": "procureur",
+   "text": "Alors chaque technicien choisit qui mérite la lumière ? Demain, ils seront cent à le faire. Puis mille. Et qui paiera ?",
+   "start": 31.82,
+   "dur": 6.082,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 31.82
+    },
+    {
+     "w": "chaque",
+     "t": 32.02
+    },
+    {
+     "w": "technicien",
+     "t": 32.46
+    },
+    {
+     "w": "choisit",
+     "t": 33.04
+    },
+    {
+     "w": "qui",
+     "t": 33.6
+    },
+    {
+     "w": "mérite",
+     "t": 33.76
+    },
+    {
+     "w": "la",
+     "t": 34.12
+    },
+    {
+     "w": "lumière ?",
+     "t": 34.22
+    },
+    {
+     "w": "Demain,",
+     "t": 34.72
+    },
+    {
+     "w": "ils",
+     "t": 35.22
+    },
+    {
+     "w": "seront",
+     "t": 35.3
+    },
+    {
+     "w": "cent",
+     "t": 35.58
+    },
+    {
+     "w": "à",
+     "t": 35.86
+    },
+    {
+     "w": "le",
+     "t": 36.02
+    },
+    {
+     "w": "faire.",
+     "t": 36.08
+    },
+    {
+     "w": "Puis",
+     "t": 36.52
+    },
+    {
+     "w": "mille.",
+     "t": 36.62
+    },
+    {
+     "w": "Et",
+     "t": 37.18
+    },
+    {
+     "w": "qui",
+     "t": 37.26
+    },
+    {
+     "w": "paiera ?",
+     "t": 37.38
+    }
+   ]
+  },
+  {
+   "id": "07-compteur",
+   "who": "avocate",
+   "text": "Cent ? Ce soir-là, il faisait moins quatre. Deux enfants, deux et six ans. Le père venait de perdre son emploi. Julien a regardé le compteur… et il est reparti.",
+   "start": 38.152,
+   "dur": 7.36,
+   "words": [
+    {
+     "w": "Cent ?",
+     "t": 38.372
+    },
+    {
+     "w": "Ce",
+     "t": 38.592
+    },
+    {
+     "w": "soir-là,",
+     "t": 38.912
+    },
+    {
+     "w": "il",
+     "t": 39.232
+    },
+    {
+     "w": "faisait",
+     "t": 39.352
+    },
+    {
+     "w": "moins",
+     "t": 39.592
+    },
+    {
+     "w": "quatre.",
+     "t": 39.752
+    },
+    {
+     "w": "Deux",
+     "t": 40.272
+    },
+    {
+     "w": "enfants,",
+     "t": 40.432
+    },
+    {
+     "w": "deux",
+     "t": 40.932
+    },
+    {
+     "w": "et",
+     "t": 41.152
+    },
+    {
+     "w": "six",
+     "t": 41.372
+    },
+    {
+     "w": "ans.",
+     "t": 41.532
+    },
+    {
+     "w": "Le",
+     "t": 41.852
+    },
+    {
+     "w": "père",
+     "t": 41.932
+    },
+    {
+     "w": "venait",
+     "t": 42.112
+    },
+    {
+     "w": "de",
+     "t": 42.372
+    },
+    {
+     "w": "perdre",
+     "t": 42.452
+    },
+    {
+     "w": "son",
+     "t": 42.632
+    },
+    {
+     "w": "emploi.",
+     "t": 42.852
+    },
+    {
+     "w": "Julien",
+     "t": 43.312
+    },
+    {
+     "w": "a",
+     "t": 43.612
+    },
+    {
+     "w": "regardé",
+     "t": 43.692
+    },
+    {
+     "w": "le",
+     "t": 44.032
+    },
+    {
+     "w": "compteur…",
+     "t": 44.072
+    },
+    {
+     "w": "et",
+     "t": 44.512
+    },
+    {
+     "w": "il",
+     "t": 44.792
+    },
+    {
+     "w": "est",
+     "t": 44.872
+    },
+    {
+     "w": "reparti.",
+     "t": 44.952
+    }
+   ]
+  },
+  {
+   "id": "08-faux",
+   "who": "procureur",
+   "text": "La compassion n'autorise pas à mentir. Un faux reste un faux.",
+   "start": 45.762,
+   "dur": 3.41,
+   "words": [
+    {
+     "w": "La",
+     "t": 45.762
+    },
+    {
+     "w": "compassion",
+     "t": 45.902
+    },
+    {
+     "w": "n'autorise",
+     "t": 46.382
+    },
+    {
+     "w": "pas",
+     "t": 46.862
+    },
+    {
+     "w": "à",
+     "t": 47.082
+    },
+    {
+     "w": "mentir.",
+     "t": 47.202
+    },
+    {
+     "w": "Un",
+     "t": 47.802
+    },
+    {
+     "w": "faux",
+     "t": 47.922
+    },
+    {
+     "w": "reste",
+     "t": 48.202
+    },
+    {
+     "w": "un",
+     "t": 48.562
+    },
+    {
+     "w": "faux.",
+     "t": 48.782
+    }
+   ]
+  },
+  {
+   "id": "09-chaud",
+   "who": "avocate",
+   "text": "Un faux ? Il n'a pas touché un euro. Pas une faveur. Il a juste laissé une famille au chaud.",
+   "start": 49.422,
+   "dur": 4.12,
+   "words": [
+    {
+     "w": "Un",
+     "t": 49.602
+    },
+    {
+     "w": "faux ?",
+     "t": 49.782
+    },
+    {
+     "w": "Il",
+     "t": 49.962
+    },
+    {
+     "w": "n'a",
+     "t": 50.082
+    },
+    {
+     "w": "pas",
+     "t": 50.202
+    },
+    {
+     "w": "touché",
+     "t": 50.282
+    },
+    {
+     "w": "un",
+     "t": 50.602
+    },
+    {
+     "w": "euro.",
+     "t": 50.762
+    },
+    {
+     "w": "Pas",
+     "t": 51.182
+    },
+    {
+     "w": "une",
+     "t": 51.322
+    },
+    {
+     "w": "faveur.",
+     "t": 51.482
+    },
+    {
+     "w": "Il",
+     "t": 52.062
+    },
+    {
+     "w": "a",
+     "t": 52.142
+    },
+    {
+     "w": "juste",
+     "t": 52.242
+    },
+    {
+     "w": "laissé",
+     "t": 52.422
+    },
+    {
+     "w": "une",
+     "t": 52.802
+    },
+    {
+     "w": "famille",
+     "t": 52.902
+    },
+    {
+     "w": "au",
+     "t": 53.082
+    },
+    {
+     "w": "chaud.",
+     "t": 53.242
+    }
+   ]
+  },
+  {
+   "id": "10-clients",
+   "who": "procureur",
+   "text": "Quatorze mois sans payer, c'est quatorze mois où les autres clients ont payé pour eux.",
+   "start": 53.792,
+   "dur": 4.15,
+   "words": [
+    {
+     "w": "Quatorze",
+     "t": 53.932
+    },
+    {
+     "w": "mois",
+     "t": 54.072
+    },
+    {
+     "w": "sans",
+     "t": 54.352
+    },
+    {
+     "w": "payer,",
+     "t": 54.572
+    },
+    {
+     "w": "c'est",
+     "t": 54.912
+    },
+    {
+     "w": "quatorze",
+     "t": 55.252
+    },
+    {
+     "w": "mois",
+     "t": 55.592
+    },
+    {
+     "w": "où",
+     "t": 55.992
+    },
+    {
+     "w": "les",
+     "t": 56.232
+    },
+    {
+     "w": "autres",
+     "t": 56.372
+    },
+    {
+     "w": "clients",
+     "t": 56.612
+    },
+    {
+     "w": "ont",
+     "t": 56.972
+    },
+    {
+     "w": "payé",
+     "t": 57.192
+    },
+    {
+     "w": "pour",
+     "t": 57.492
+    },
+    {
+     "w": "eux.",
+     "t": 57.692
+    }
+   ]
+  },
+  {
+   "id": "11-rembourse",
+   "who": "avocate",
+   "text": "Et grâce à ces quatorze mois, le père a retrouvé un travail. Aujourd'hui, il rembourse. Chaque mois.",
+   "start": 58.192,
+   "dur": 4.48,
+   "words": [
+    {
+     "w": "Et",
+     "t": 58.192
+    },
+    {
+     "w": "grâce",
+     "t": 58.312
+    },
+    {
+     "w": "à",
+     "t": 58.532
+    },
+    {
+     "w": "ces",
+     "t": 58.732
+    },
+    {
+     "w": "quatorze",
+     "t": 58.882
+    },
+    {
+     "w": "mois,",
+     "t": 59.032
+    },
+    {
+     "w": "le",
+     "t": 59.632
+    },
+    {
+     "w": "père",
+     "t": 59.692
+    },
+    {
+     "w": "a",
+     "t": 59.872
+    },
+    {
+     "w": "retrouvé",
+     "t": 59.972
+    },
+    {
+     "w": "un",
+     "t": 60.332
+    },
+    {
+     "w": "travail.",
+     "t": 60.392
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 60.932
+    },
+    {
+     "w": "il",
+     "t": 61.472
+    },
+    {
+     "w": "rembourse.",
+     "t": 61.532
+    },
+    {
+     "w": "Chaque",
+     "t": 62.092
+    },
+    {
+     "w": "mois.",
+     "t": 62.292
+    }
+   ]
+  },
+  {
+   "id": "12-loi",
+   "who": "procureur",
+   "text": "Tant mieux pour lui. Mais ce n'était pas à Julien de faire la loi.",
+   "start": 62.922,
+   "dur": 2.9,
+   "words": [
+    {
+     "w": "Tant",
+     "t": 62.922
+    },
+    {
+     "w": "mieux",
+     "t": 63.082
+    },
+    {
+     "w": "pour",
+     "t": 63.202
+    },
+    {
+     "w": "lui.",
+     "t": 63.382
+    },
+    {
+     "w": "Mais",
+     "t": 63.762
+    },
+    {
+     "w": "ce",
+     "t": 64.002
+    },
+    {
+     "w": "n'était",
+     "t": 64.182
+    },
+    {
+     "w": "pas",
+     "t": 64.362
+    },
+    {
+     "w": "à",
+     "t": 64.522
+    },
+    {
+     "w": "Julien",
+     "t": 64.702
+    },
+    {
+     "w": "de",
+     "t": 65.022
+    },
+    {
+     "w": "faire",
+     "t": 65.162
+    },
+    {
+     "w": "la",
+     "t": 65.342
+    },
+    {
+     "w": "loi.",
+     "t": 65.462
+    }
+   ]
+  },
+  {
+   "id": "13-crime",
+   "who": "avocate",
+   "text": "Faire la loi ? Il a refusé d'éteindre la lumière de deux enfants. Si c'est un crime… alors jugez-le.",
+   "start": 66.072,
+   "dur": 4.67,
+   "words": [
+    {
+     "w": "Faire",
+     "t": 66.072
+    },
+    {
+     "w": "la",
+     "t": 66.262
+    },
+    {
+     "w": "loi ?",
+     "t": 66.382
+    },
+    {
+     "w": "Il",
+     "t": 66.742
+    },
+    {
+     "w": "a",
+     "t": 66.842
+    },
+    {
+     "w": "refusé",
+     "t": 66.922
+    },
+    {
+     "w": "d'éteindre",
+     "t": 67.252
+    },
+    {
+     "w": "la",
+     "t": 67.582
+    },
+    {
+     "w": "lumière",
+     "t": 67.742
+    },
+    {
+     "w": "de",
+     "t": 67.922
+    },
+    {
+     "w": "deux",
+     "t": 68.142
+    },
+    {
+     "w": "enfants.",
+     "t": 68.342
+    },
+    {
+     "w": "Si",
+     "t": 68.782
+    },
+    {
+     "w": "c'est",
+     "t": 68.932
+    },
+    {
+     "w": "un",
+     "t": 69.082
+    },
+    {
+     "w": "crime…",
+     "t": 69.182
+    },
+    {
+     "w": "alors",
+     "t": 69.822
+    },
+    {
+     "w": "jugez-le.",
+     "t": 70.287
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 70.992,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 70.992
+    },
+    {
+     "w": "es",
+     "t": 71.132
+    },
+    {
+     "w": "le",
+     "t": 71.222
+    },
+    {
+     "w": "juré.",
+     "t": 71.312
+    },
+    {
+     "w": "Coupable…",
+     "t": 71.812
+    },
+    {
+     "w": "ou",
+     "t": 72.252
+    },
+    {
+     "w": "non",
+     "t": 72.672
+    },
+    {
+     "w": "coupable ?",
+     "t": 72.872
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 73.752,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 73.752
+    },
+    {
+     "w": "verdict",
+     "t": 73.872
+    },
+    {
+     "w": "tombe",
+     "t": 74.172
+    },
+    {
+     "w": "dans",
+     "t": 74.712
+    },
+    {
+     "w": "la",
+     "t": 74.872
+    },
+    {
+     "w": "prochaine",
+     "t": 74.992
+    },
+    {
+     "w": "vidéo.",
+     "t": 75.272
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 75.762
+    },
+    {
+     "w": "pour",
+     "t": 76.252
+    },
+    {
+     "w": "ne",
+     "t": 76.392
+    },
+    {
+     "w": "pas",
+     "t": 76.492
+    },
+    {
+     "w": "le",
+     "t": 76.632
+    },
+    {
+     "w": "rater.",
+     "t": 76.652
+    }
+   ]
+  }
+ ]
+}

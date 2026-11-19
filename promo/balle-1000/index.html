@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <title>1000 morceaux · la balle</title>
+    <link rel="stylesheet" href="../../node_modules/@fontsource-variable/figtree/index.css" />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: #000; }
+      #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Figtree Variable', sans-serif; }
+      canvas { position: absolute; inset: 0; }
+      #ui { position: absolute; inset: 0; pointer-events: none; }
+      .t { position: absolute; left: 50%; white-space: nowrap; font-weight: 900; color: #fff; -webkit-text-stroke: 18px #111; paint-order: stroke fill; text-shadow: 0 12px 0 rgba(0,0,0,0.35); transform-origin: 50% 50%; }
+      .count { top: 190px; font-size: 190px; line-height: 1; }
+      .label { top: 400px; font-size: 76px; color: #ffd166; }
+      .title { top: 230px; font-size: 92px; text-align: center; line-height: 1.05; }
+      .sub { top: 470px; font-size: 64px; color: #ffd166; }
+      .end1 { top: 260px; font-size: 84px; text-align: center; line-height: 1.08; }
+      .end2 { top: 1560px; font-size: 60px; color: #111; -webkit-text-stroke: 0; background: #ffd166; padding: 14px 40px 20px; border-radius: 999px; text-shadow: none; box-shadow: 0 10px 0 #b8892a; }
+    </style>
+  </head>
+  <body>
+    <div id="stage"><canvas id="c" width="1080" height="1920"></canvas><div id="ui"></div></div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

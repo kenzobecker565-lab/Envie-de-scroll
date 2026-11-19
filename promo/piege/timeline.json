@@ -1,0 +1,826 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 62.42,
+ "lines": [
+  {
+   "id": "01-piege",
+   "who": "youtubeur",
+   "text": "Elle a treize ans, mon gars ! Treize ans ! Regarde la caméra !",
+   "start": 1.1,
+   "dur": 3.36,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 1.1
+    },
+    {
+     "w": "a",
+     "t": 1.25
+    },
+    {
+     "w": "treize",
+     "t": 1.45
+    },
+    {
+     "w": "ans,",
+     "t": 1.65
+    },
+    {
+     "w": "mon",
+     "t": 1.91
+    },
+    {
+     "w": "gars !",
+     "t": 2.07
+    },
+    {
+     "w": "Treize",
+     "t": 2.39
+    },
+    {
+     "w": "ans !",
+     "t": 2.71
+    },
+    {
+     "w": "Regarde",
+     "t": 3.19
+    },
+    {
+     "w": "la",
+     "t": 3.63
+    },
+    {
+     "w": "caméra !",
+     "t": 3.75
+    }
+   ]
+  },
+  {
+   "id": "02-live",
+   "who": "narrateur",
+   "text": "Yanis piégeait les prédateurs en direct. Onze arrestations. Mais ce soir-là, l'homme n'était pas celui qu'il croyait.",
+   "start": 6.36,
+   "dur": 5.33,
+   "words": [
+    {
+     "w": "Yanis",
+     "t": 6.537
+    },
+    {
+     "w": "piégeait",
+     "t": 6.803
+    },
+    {
+     "w": "les",
+     "t": 7.07
+    },
+    {
+     "w": "prédateurs",
+     "t": 7.15
+    },
+    {
+     "w": "en",
+     "t": 7.57
+    },
+    {
+     "w": "direct.",
+     "t": 7.71
+    },
+    {
+     "w": "Onze",
+     "t": 8.08
+    },
+    {
+     "w": "arrestations.",
+     "t": 8.45
+    },
+    {
+     "w": "Mais",
+     "t": 9.17
+    },
+    {
+     "w": "ce",
+     "t": 9.27
+    },
+    {
+     "w": "soir-là,",
+     "t": 9.575
+    },
+    {
+     "w": "l'homme",
+     "t": 9.88
+    },
+    {
+     "w": "n'était",
+     "t": 10.185
+    },
+    {
+     "w": "pas",
+     "t": 10.49
+    },
+    {
+     "w": "celui",
+     "t": 10.71
+    },
+    {
+     "w": "qu'il",
+     "t": 10.94
+    },
+    {
+     "w": "croyait.",
+     "t": 11.17
+    }
+   ]
+  },
+  {
+   "id": "03-suicide",
+   "who": "narrateur",
+   "text": "Il s'était trompé de rendez-vous. Trois jours plus tard, il s'est suicidé. Aujourd'hui, Yanis est jugé.",
+   "start": 12.04,
+   "dur": 5.36,
+   "words": [
+    {
+     "w": "Il",
+     "t": 12.04
+    },
+    {
+     "w": "s'était",
+     "t": 12.19
+    },
+    {
+     "w": "trompé",
+     "t": 12.4
+    },
+    {
+     "w": "de",
+     "t": 12.84
+    },
+    {
+     "w": "rendez-vous.",
+     "t": 13.2
+    },
+    {
+     "w": "Trois",
+     "t": 13.56
+    },
+    {
+     "w": "jours",
+     "t": 13.8
+    },
+    {
+     "w": "plus",
+     "t": 13.88
+    },
+    {
+     "w": "tard,",
+     "t": 14.08
+    },
+    {
+     "w": "il",
+     "t": 14.78
+    },
+    {
+     "w": "s'est",
+     "t": 14.91
+    },
+    {
+     "w": "suicidé.",
+     "t": 15.04
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 15.64
+    },
+    {
+     "w": "Yanis",
+     "t": 16.24
+    },
+    {
+     "w": "est",
+     "t": 16.84
+    },
+    {
+     "w": "jugé.",
+     "t": 16.92
+    }
+   ]
+  },
+  {
+   "id": "04-justice",
+   "who": "procureur",
+   "text": "Il n'est ni policier, ni juge. Il est streamer. Et il a condamné un innocent devant 82 000 personnes.",
+   "start": 17.85,
+   "dur": 5.55,
+   "words": [
+    {
+     "w": "Il",
+     "t": 17.85
+    },
+    {
+     "w": "n'est",
+     "t": 17.99
+    },
+    {
+     "w": "ni",
+     "t": 18.17
+    },
+    {
+     "w": "policier,",
+     "t": 18.29
+    },
+    {
+     "w": "ni",
+     "t": 18.87
+    },
+    {
+     "w": "juge.",
+     "t": 19.09
+    },
+    {
+     "w": "Il",
+     "t": 19.73
+    },
+    {
+     "w": "est",
+     "t": 19.83
+    },
+    {
+     "w": "streamer.",
+     "t": 19.93
+    },
+    {
+     "w": "Et",
+     "t": 20.51
+    },
+    {
+     "w": "il",
+     "t": 20.75
+    },
+    {
+     "w": "a",
+     "t": 20.87
+    },
+    {
+     "w": "condamné",
+     "t": 20.95
+    },
+    {
+     "w": "un",
+     "t": 21.31
+    },
+    {
+     "w": "innocent",
+     "t": 21.41
+    },
+    {
+     "w": "devant",
+     "t": 21.77
+    },
+    {
+     "w": "82",
+     "t": 22.01
+    },
+    {
+     "w": "000",
+     "t": 22.49
+    },
+    {
+     "w": "personnes.",
+     "t": 22.75
+    }
+   ]
+  },
+  {
+   "id": "05-onze",
+   "who": "avocate",
+   "text": "Onze prédateurs derrière les barreaux. La police, combien cette année ?",
+   "start": 23.6,
+   "dur": 3.12,
+   "words": [
+    {
+     "w": "Onze",
+     "t": 23.68
+    },
+    {
+     "w": "prédateurs",
+     "t": 23.8
+    },
+    {
+     "w": "derrière",
+     "t": 24.32
+    },
+    {
+     "w": "les",
+     "t": 24.58
+    },
+    {
+     "w": "barreaux.",
+     "t": 24.8
+    },
+    {
+     "w": "La",
+     "t": 25.2
+    },
+    {
+     "w": "police,",
+     "t": 25.36
+    },
+    {
+     "w": "combien",
+     "t": 25.9
+    },
+    {
+     "w": "cette",
+     "t": 26.18
+    },
+    {
+     "w": "année ?",
+     "t": 26.34
+    }
+   ]
+  },
+  {
+   "id": "06-vues",
+   "who": "procureur",
+   "text": "Les arrestations, c'était le décor. Les abonnés, c'était le salaire.",
+   "start": 26.92,
+   "dur": 3.79,
+   "words": [
+    {
+     "w": "Les",
+     "t": 26.92
+    },
+    {
+     "w": "arrestations,",
+     "t": 27.07
+    },
+    {
+     "w": "c'était",
+     "t": 27.65
+    },
+    {
+     "w": "le",
+     "t": 28.23
+    },
+    {
+     "w": "décor.",
+     "t": 28.33
+    },
+    {
+     "w": "Les",
+     "t": 28.93
+    },
+    {
+     "w": "abonnés,",
+     "t": 29.07
+    },
+    {
+     "w": "c'était",
+     "t": 29.54
+    },
+    {
+     "w": "le",
+     "t": 30.01
+    },
+    {
+     "w": "salaire.",
+     "t": 30.11
+    }
+   ]
+  },
+  {
+   "id": "07-like",
+   "who": "narrateur",
+   "text": "Justicier ou bourreau ? Like si ça te fait réagir.",
+   "start": 31.11,
+   "dur": 3.06,
+   "words": [
+    {
+     "w": "Justicier",
+     "t": 31.52
+    },
+    {
+     "w": "ou",
+     "t": 31.93
+    },
+    {
+     "w": "bourreau ?",
+     "t": 32.33
+    },
+    {
+     "w": "Like",
+     "t": 32.73
+    },
+    {
+     "w": "si",
+     "t": 32.97
+    },
+    {
+     "w": "ça",
+     "t": 33.21
+    },
+    {
+     "w": "te",
+     "t": 33.35
+    },
+    {
+     "w": "fait",
+     "t": 33.39
+    },
+    {
+     "w": "réagir.",
+     "t": 33.51
+    }
+   ]
+  },
+  {
+   "id": "08-avant",
+   "who": "avocate",
+   "text": "Vous attendez que les gamines se fassent piéger pour ouvrir une enquête. Lui, au moins, il arrive avant.",
+   "start": 34.57,
+   "dur": 4.08,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 34.57
+    },
+    {
+     "w": "attendez",
+     "t": 34.71
+    },
+    {
+     "w": "que",
+     "t": 35.09
+    },
+    {
+     "w": "les",
+     "t": 35.19
+    },
+    {
+     "w": "gamines",
+     "t": 35.29
+    },
+    {
+     "w": "se",
+     "t": 35.55
+    },
+    {
+     "w": "fassent",
+     "t": 35.69
+    },
+    {
+     "w": "piéger",
+     "t": 35.91
+    },
+    {
+     "w": "pour",
+     "t": 36.21
+    },
+    {
+     "w": "ouvrir",
+     "t": 36.37
+    },
+    {
+     "w": "une",
+     "t": 36.61
+    },
+    {
+     "w": "enquête.",
+     "t": 36.73
+    },
+    {
+     "w": "Lui,",
+     "t": 37.25
+    },
+    {
+     "w": "au",
+     "t": 37.55
+    },
+    {
+     "w": "moins,",
+     "t": 37.63
+    },
+    {
+     "w": "il",
+     "t": 38.01
+    },
+    {
+     "w": "arrive",
+     "t": 38.07
+    },
+    {
+     "w": "avant.",
+     "t": 38.27
+    }
+   ]
+  },
+  {
+   "id": "09-erreur",
+   "who": "avocate",
+   "text": "Une erreur sur onze. La justice, elle, en fait combien… sans que personne ne filme ?",
+   "start": 38.95,
+   "dur": 4.12,
+   "words": [
+    {
+     "w": "Une",
+     "t": 38.95
+    },
+    {
+     "w": "erreur",
+     "t": 39.11
+    },
+    {
+     "w": "sur",
+     "t": 39.41
+    },
+    {
+     "w": "onze.",
+     "t": 39.51
+    },
+    {
+     "w": "La",
+     "t": 40.09
+    },
+    {
+     "w": "justice,",
+     "t": 40.23
+    },
+    {
+     "w": "elle,",
+     "t": 40.69
+    },
+    {
+     "w": "en",
+     "t": 41.15
+    },
+    {
+     "w": "fait",
+     "t": 41.23
+    },
+    {
+     "w": "combien…",
+     "t": 41.33
+    },
+    {
+     "w": "sans",
+     "t": 41.87
+    },
+    {
+     "w": "que",
+     "t": 42.09
+    },
+    {
+     "w": "personne",
+     "t": 42.21
+    },
+    {
+     "w": "ne",
+     "t": 42.47
+    },
+    {
+     "w": "filme ?",
+     "t": 42.67
+    }
+   ]
+  },
+  {
+   "id": "10-merch",
+   "who": "procureur",
+   "text": "La justice se trompe, Maître. Mais elle ne vend pas de sweats à son nom avec ses erreurs.",
+   "start": 43.27,
+   "dur": 4.163,
+   "words": [
+    {
+     "w": "La",
+     "t": 43.27
+    },
+    {
+     "w": "justice",
+     "t": 43.41
+    },
+    {
+     "w": "se",
+     "t": 43.69
+    },
+    {
+     "w": "trompe,",
+     "t": 43.99
+    },
+    {
+     "w": "Maître.",
+     "t": 44.47
+    },
+    {
+     "w": "Mais",
+     "t": 45.01
+    },
+    {
+     "w": "elle",
+     "t": 45.11
+    },
+    {
+     "w": "ne",
+     "t": 45.19
+    },
+    {
+     "w": "vend",
+     "t": 45.33
+    },
+    {
+     "w": "pas",
+     "t": 45.43
+    },
+    {
+     "w": "de",
+     "t": 45.65
+    },
+    {
+     "w": "sweats",
+     "t": 45.87
+    },
+    {
+     "w": "à",
+     "t": 46.09
+    },
+    {
+     "w": "son",
+     "t": 46.17
+    },
+    {
+     "w": "nom",
+     "t": 46.33
+    },
+    {
+     "w": "avec",
+     "t": 46.53
+    },
+    {
+     "w": "ses",
+     "t": 46.67
+    },
+    {
+     "w": "erreurs.",
+     "t": 46.87
+    }
+   ]
+  },
+  {
+   "id": "11-pouce",
+   "who": "procureur",
+   "text": "Un homme est mort parce qu'il ressemblait à un coupable. Sur internet, la justice, c'est ça ? Un pouce bleu… et une corde ?",
+   "start": 47.783,
+   "dur": 6.27,
+   "words": [
+    {
+     "w": "Un",
+     "t": 47.783
+    },
+    {
+     "w": "homme",
+     "t": 47.933
+    },
+    {
+     "w": "est",
+     "t": 48.153
+    },
+    {
+     "w": "mort",
+     "t": 48.253
+    },
+    {
+     "w": "parce",
+     "t": 48.513
+    },
+    {
+     "w": "qu'il",
+     "t": 48.773
+    },
+    {
+     "w": "ressemblait",
+     "t": 49.033
+    },
+    {
+     "w": "à",
+     "t": 49.343
+    },
+    {
+     "w": "un",
+     "t": 49.653
+    },
+    {
+     "w": "coupable.",
+     "t": 49.963
+    },
+    {
+     "w": "Sur",
+     "t": 50.273
+    },
+    {
+     "w": "internet,",
+     "t": 50.433
+    },
+    {
+     "w": "la",
+     "t": 51.193
+    },
+    {
+     "w": "justice,",
+     "t": 51.293
+    },
+    {
+     "w": "c'est",
+     "t": 51.683
+    },
+    {
+     "w": "ça ?",
+     "t": 52.073
+    },
+    {
+     "w": "Un",
+     "t": 52.413
+    },
+    {
+     "w": "pouce",
+     "t": 52.513
+    },
+    {
+     "w": "bleu…",
+     "t": 52.773
+    },
+    {
+     "w": "et",
+     "t": 53.253
+    },
+    {
+     "w": "une",
+     "t": 53.373
+    },
+    {
+     "w": "corde ?",
+     "t": 53.493
+    }
+   ]
+  },
+  {
+   "id": "12-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "start": 54.653,
+   "dur": 4.371,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 54.653
+    },
+    {
+     "w": "es",
+     "t": 54.833
+    },
+    {
+     "w": "le",
+     "t": 54.933
+    },
+    {
+     "w": "juré.",
+     "t": 55.033
+    },
+    {
+     "w": "Coupable…",
+     "t": 55.633
+    },
+    {
+     "w": "ou",
+     "t": 55.993
+    },
+    {
+     "w": "non",
+     "t": 56.393
+    },
+    {
+     "w": "coupable ?",
+     "t": 56.553
+    },
+    {
+     "w": "Écris-le",
+     "t": 57.053
+    },
+    {
+     "w": "en",
+     "t": 57.553
+    },
+    {
+     "w": "commentaire,",
+     "t": 57.653
+    },
+    {
+     "w": "et",
+     "t": 58.173
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 58.598
+    }
+   ]
+  }
+ ]
+}

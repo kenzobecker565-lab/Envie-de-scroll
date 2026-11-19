@@ -1,0 +1,1545 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 98.49,
+ "lines": [
+  {
+   "id": "01-sanglier",
+   "who": "narrateur",
+   "text": "Il a cru voir un sanglier. C'était Thomas, 25 ans, en plein jogging.",
+   "start": 0.25,
+   "dur": 3.89,
+   "words": [
+    {
+     "w": "Il",
+     "t": 0.25
+    },
+    {
+     "w": "a",
+     "t": 0.42
+    },
+    {
+     "w": "cru",
+     "t": 0.48
+    },
+    {
+     "w": "voir",
+     "t": 0.62
+    },
+    {
+     "w": "un",
+     "t": 0.84
+    },
+    {
+     "w": "sanglier.",
+     "t": 0.98
+    },
+    {
+     "w": "C'était",
+     "t": 1.44
+    },
+    {
+     "w": "Thomas,",
+     "t": 1.9
+    },
+    {
+     "w": "25",
+     "t": 2.48
+    },
+    {
+     "w": "ans,",
+     "t": 2.76
+    },
+    {
+     "w": "en",
+     "t": 3.34
+    },
+    {
+     "w": "plein",
+     "t": 3.42
+    },
+    {
+     "w": "jogging.",
+     "t": 3.6
+    }
+   ]
+  },
+  {
+   "id": "02-gerard",
+   "who": "narrateur",
+   "text": "Gérard, 40 ans de chasse, a tiré dans un bois un dimanche matin. Thomas est mort sur le coup. Aujourd'hui, Gérard est jugé pour homicide.",
+   "start": 4.44,
+   "dur": 7.08,
+   "words": [
+    {
+     "w": "Gérard,",
+     "t": 4.44
+    },
+    {
+     "w": "40",
+     "t": 5.1
+    },
+    {
+     "w": "ans",
+     "t": 5.38
+    },
+    {
+     "w": "de",
+     "t": 5.56
+    },
+    {
+     "w": "chasse,",
+     "t": 5.64
+    },
+    {
+     "w": "a",
+     "t": 6.16
+    },
+    {
+     "w": "tiré",
+     "t": 6.26
+    },
+    {
+     "w": "dans",
+     "t": 6.54
+    },
+    {
+     "w": "un",
+     "t": 6.64
+    },
+    {
+     "w": "bois",
+     "t": 6.82
+    },
+    {
+     "w": "un",
+     "t": 7.02
+    },
+    {
+     "w": "dimanche",
+     "t": 7.2
+    },
+    {
+     "w": "matin.",
+     "t": 7.52
+    },
+    {
+     "w": "Thomas",
+     "t": 8.02
+    },
+    {
+     "w": "est",
+     "t": 8.22
+    },
+    {
+     "w": "mort",
+     "t": 8.5
+    },
+    {
+     "w": "sur",
+     "t": 8.66
+    },
+    {
+     "w": "le",
+     "t": 8.86
+    },
+    {
+     "w": "coup.",
+     "t": 8.98
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 9.49
+    },
+    {
+     "w": "Gérard",
+     "t": 10.0
+    },
+    {
+     "w": "est",
+     "t": 10.4
+    },
+    {
+     "w": "jugé",
+     "t": 10.5
+    },
+    {
+     "w": "pour",
+     "t": 10.78
+    },
+    {
+     "w": "homicide.",
+     "t": 10.92
+    }
+   ]
+  },
+  {
+   "id": "03-regle",
+   "who": "procureur",
+   "text": "Quand on ne voit pas ce qu'on vise, on ne tire pas. C'est la première règle de la chasse. Juste avant « on ne boit pas avant de tirer ».",
+   "start": 11.87,
+   "dur": 5.76,
+   "words": [
+    {
+     "w": "Quand",
+     "t": 11.87
+    },
+    {
+     "w": "on",
+     "t": 11.99
+    },
+    {
+     "w": "ne",
+     "t": 12.13
+    },
+    {
+     "w": "voit",
+     "t": 12.23
+    },
+    {
+     "w": "pas",
+     "t": 12.35
+    },
+    {
+     "w": "ce",
+     "t": 12.49
+    },
+    {
+     "w": "qu'on",
+     "t": 12.61
+    },
+    {
+     "w": "vise,",
+     "t": 12.73
+    },
+    {
+     "w": "on",
+     "t": 13.21
+    },
+    {
+     "w": "ne",
+     "t": 13.31
+    },
+    {
+     "w": "tire",
+     "t": 13.41
+    },
+    {
+     "w": "pas.",
+     "t": 13.51
+    },
+    {
+     "w": "C'est",
+     "t": 13.8
+    },
+    {
+     "w": "la",
+     "t": 14.09
+    },
+    {
+     "w": "première",
+     "t": 14.17
+    },
+    {
+     "w": "règle",
+     "t": 14.45
+    },
+    {
+     "w": "de",
+     "t": 14.77
+    },
+    {
+     "w": "la",
+     "t": 14.89
+    },
+    {
+     "w": "chasse.",
+     "t": 14.99
+    },
+    {
+     "w": "Juste",
+     "t": 15.55
+    },
+    {
+     "w": "avant «",
+     "t": 15.79
+    },
+    {
+     "w": "on",
+     "t": 16.29
+    },
+    {
+     "w": "ne",
+     "t": 16.43
+    },
+    {
+     "w": "boit",
+     "t": 16.55
+    },
+    {
+     "w": "pas",
+     "t": 16.79
+    },
+    {
+     "w": "avant",
+     "t": 16.91
+    },
+    {
+     "w": "de",
+     "t": 17.15
+    },
+    {
+     "w": "tirer ».",
+     "t": 17.25
+    }
+   ]
+  },
+  {
+   "id": "04-brouillard",
+   "who": "avocate",
+   "text": "Mon client était à jeun, espèce de bouffon. Il y avait du brouillard, des fourrés, et un homme tout en noir qui traversait hors des chemins.",
+   "start": 17.88,
+   "dur": 6.21,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 17.88
+    },
+    {
+     "w": "client",
+     "t": 18.02
+    },
+    {
+     "w": "était",
+     "t": 18.22
+    },
+    {
+     "w": "à",
+     "t": 18.493
+    },
+    {
+     "w": "jeun,",
+     "t": 18.767
+    },
+    {
+     "w": "espèce",
+     "t": 19.04
+    },
+    {
+     "w": "de",
+     "t": 19.32
+    },
+    {
+     "w": "bouffon.",
+     "t": 19.44
+    },
+    {
+     "w": "Il",
+     "t": 20.04
+    },
+    {
+     "w": "y",
+     "t": 20.12
+    },
+    {
+     "w": "avait",
+     "t": 20.2
+    },
+    {
+     "w": "du",
+     "t": 20.32
+    },
+    {
+     "w": "brouillard,",
+     "t": 20.42
+    },
+    {
+     "w": "des",
+     "t": 21.1
+    },
+    {
+     "w": "fourrés,",
+     "t": 21.2
+    },
+    {
+     "w": "et",
+     "t": 21.56
+    },
+    {
+     "w": "un",
+     "t": 21.86
+    },
+    {
+     "w": "homme",
+     "t": 22.0
+    },
+    {
+     "w": "tout",
+     "t": 22.14
+    },
+    {
+     "w": "en",
+     "t": 22.3
+    },
+    {
+     "w": "noir",
+     "t": 22.46
+    },
+    {
+     "w": "qui",
+     "t": 22.68
+    },
+    {
+     "w": "traversait",
+     "t": 22.88
+    },
+    {
+     "w": "hors",
+     "t": 23.38
+    },
+    {
+     "w": "des",
+     "t": 23.54
+    },
+    {
+     "w": "chemins.",
+     "t": 23.68
+    }
+   ]
+  },
+  {
+   "id": "05-pastis",
+   "who": "procureur",
+   "text": "Pardon ? Vous m'avez traité de quoi, là ? Peu importe. À jeun, à 8 heures du matin, en battue ? On a retrouvé une thermos dans sa voiture. Et ce n'était pas de la verveine.",
+   "start": 24.29,
+   "dur": 7.34,
+   "words": [
+    {
+     "w": "Pardon ?",
+     "t": 24.29
+    },
+    {
+     "w": "Vous",
+     "t": 24.84
+    },
+    {
+     "w": "m'avez",
+     "t": 24.95
+    },
+    {
+     "w": "traité",
+     "t": 25.06
+    },
+    {
+     "w": "de",
+     "t": 25.28
+    },
+    {
+     "w": "quoi,",
+     "t": 25.38
+    },
+    {
+     "w": "là ?",
+     "t": 25.56
+    },
+    {
+     "w": "Peu",
+     "t": 25.96
+    },
+    {
+     "w": "importe.",
+     "t": 26.04
+    },
+    {
+     "w": "À",
+     "t": 26.54
+    },
+    {
+     "w": "jeun,",
+     "t": 26.89
+    },
+    {
+     "w": "à",
+     "t": 27.24
+    },
+    {
+     "w": "8",
+     "t": 27.373
+    },
+    {
+     "w": "heures",
+     "t": 27.507
+    },
+    {
+     "w": "du",
+     "t": 27.64
+    },
+    {
+     "w": "matin,",
+     "t": 27.72
+    },
+    {
+     "w": "en",
+     "t": 28.18
+    },
+    {
+     "w": "battue ?",
+     "t": 28.47
+    },
+    {
+     "w": "On",
+     "t": 28.76
+    },
+    {
+     "w": "a",
+     "t": 28.88
+    },
+    {
+     "w": "retrouvé",
+     "t": 28.96
+    },
+    {
+     "w": "une",
+     "t": 29.24
+    },
+    {
+     "w": "thermos",
+     "t": 29.47
+    },
+    {
+     "w": "dans",
+     "t": 29.7
+    },
+    {
+     "w": "sa",
+     "t": 29.78
+    },
+    {
+     "w": "voiture.",
+     "t": 29.9
+    },
+    {
+     "w": "Et",
+     "t": 30.46
+    },
+    {
+     "w": "ce",
+     "t": 30.54
+    },
+    {
+     "w": "n'était",
+     "t": 30.68
+    },
+    {
+     "w": "pas",
+     "t": 30.82
+    },
+    {
+     "w": "de",
+     "t": 31.0
+    },
+    {
+     "w": "la",
+     "t": 31.04
+    },
+    {
+     "w": "verveine.",
+     "t": 31.12
+    }
+   ]
+  },
+  {
+   "id": "06-cafe",
+   "who": "avocate",
+   "text": "C'était du café, gros malin. Je sais qu'en ville vous buvez des lattes au lait d'avoine, mais à la campagne, le café existe encore.",
+   "start": 31.88,
+   "dur": 5.69,
+   "words": [
+    {
+     "w": "C'était",
+     "t": 32.0
+    },
+    {
+     "w": "du",
+     "t": 32.13
+    },
+    {
+     "w": "café,",
+     "t": 32.29
+    },
+    {
+     "w": "gros",
+     "t": 32.57
+    },
+    {
+     "w": "malin.",
+     "t": 32.85
+    },
+    {
+     "w": "Je",
+     "t": 33.33
+    },
+    {
+     "w": "sais",
+     "t": 33.47
+    },
+    {
+     "w": "qu'en",
+     "t": 33.64
+    },
+    {
+     "w": "ville",
+     "t": 33.81
+    },
+    {
+     "w": "vous",
+     "t": 33.95
+    },
+    {
+     "w": "buvez",
+     "t": 34.11
+    },
+    {
+     "w": "des",
+     "t": 34.37
+    },
+    {
+     "w": "lattes",
+     "t": 34.47
+    },
+    {
+     "w": "au",
+     "t": 34.71
+    },
+    {
+     "w": "lait",
+     "t": 34.75
+    },
+    {
+     "w": "d'avoine,",
+     "t": 35.08
+    },
+    {
+     "w": "mais",
+     "t": 35.41
+    },
+    {
+     "w": "à",
+     "t": 35.55
+    },
+    {
+     "w": "la",
+     "t": 35.65
+    },
+    {
+     "w": "campagne,",
+     "t": 35.73
+    },
+    {
+     "w": "le",
+     "t": 36.29
+    },
+    {
+     "w": "café",
+     "t": 36.37
+    },
+    {
+     "w": "existe",
+     "t": 36.61
+    },
+    {
+     "w": "encore.",
+     "t": 37.03
+    }
+   ]
+  },
+  {
+   "id": "09-pause",
+   "who": "narrateur",
+   "text": "Accident ou homicide ? Abonne-toi : le verdict tombe dans la prochaine vidéo.",
+   "start": 37.92,
+   "dur": 4.28,
+   "words": [
+    {
+     "w": "Accident",
+     "t": 37.92
+    },
+    {
+     "w": "ou",
+     "t": 38.33
+    },
+    {
+     "w": "homicide ?",
+     "t": 38.71
+    },
+    {
+     "w": "Abonne-toi :",
+     "t": 39.49
+    },
+    {
+     "w": "le",
+     "t": 40.27
+    },
+    {
+     "w": "verdict",
+     "t": 40.31
+    },
+    {
+     "w": "tombe",
+     "t": 40.59
+    },
+    {
+     "w": "dans",
+     "t": 41.11
+    },
+    {
+     "w": "la",
+     "t": 41.27
+    },
+    {
+     "w": "prochaine",
+     "t": 41.39
+    },
+    {
+     "w": "vidéo.",
+     "t": 41.67
+    }
+   ]
+  },
+  {
+   "id": "10-sangliers",
+   "who": "avocate",
+   "text": "Pendant que vous riez, les sangliers ravagent les champs et causent 20 000 accidents par an. Qui les régule ? Pas vous. Vous, le seul sanglier que vous voyez, c'est dans votre assiette, au restaurant, tête de nœud.",
+   "start": 42.55,
+   "dur": 9.22,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 42.55
+    },
+    {
+     "w": "que",
+     "t": 42.8
+    },
+    {
+     "w": "vous",
+     "t": 42.88
+    },
+    {
+     "w": "riez,",
+     "t": 43.02
+    },
+    {
+     "w": "les",
+     "t": 43.58
+    },
+    {
+     "w": "sangliers",
+     "t": 43.84
+    },
+    {
+     "w": "ravagent",
+     "t": 44.1
+    },
+    {
+     "w": "les",
+     "t": 44.5
+    },
+    {
+     "w": "champs",
+     "t": 44.62
+    },
+    {
+     "w": "et",
+     "t": 44.94
+    },
+    {
+     "w": "causent",
+     "t": 45.0
+    },
+    {
+     "w": "20",
+     "t": 45.28
+    },
+    {
+     "w": "000",
+     "t": 45.44
+    },
+    {
+     "w": "accidents",
+     "t": 45.6
+    },
+    {
+     "w": "par",
+     "t": 45.86
+    },
+    {
+     "w": "an.",
+     "t": 46.16
+    },
+    {
+     "w": "Qui",
+     "t": 46.44
+    },
+    {
+     "w": "les",
+     "t": 46.56
+    },
+    {
+     "w": "régule ?",
+     "t": 46.68
+    },
+    {
+     "w": "Pas",
+     "t": 47.18
+    },
+    {
+     "w": "vous.",
+     "t": 47.32
+    },
+    {
+     "w": "Vous,",
+     "t": 47.74
+    },
+    {
+     "w": "le",
+     "t": 48.2
+    },
+    {
+     "w": "seul",
+     "t": 48.28
+    },
+    {
+     "w": "sanglier",
+     "t": 48.6
+    },
+    {
+     "w": "que",
+     "t": 48.92
+    },
+    {
+     "w": "vous",
+     "t": 49.0
+    },
+    {
+     "w": "voyez,",
+     "t": 49.12
+    },
+    {
+     "w": "c'est",
+     "t": 49.45
+    },
+    {
+     "w": "dans",
+     "t": 49.78
+    },
+    {
+     "w": "votre",
+     "t": 49.86
+    },
+    {
+     "w": "assiette,",
+     "t": 50.02
+    },
+    {
+     "w": "au",
+     "t": 50.56
+    },
+    {
+     "w": "restaurant,",
+     "t": 50.64
+    },
+    {
+     "w": "tête",
+     "t": 51.22
+    },
+    {
+     "w": "de",
+     "t": 51.34
+    },
+    {
+     "w": "nœud.",
+     "t": 51.593
+    }
+   ]
+  },
+  {
+   "id": "11-gilet",
+   "who": "procureur",
+   "text": "Ferme ta gueule. Je retire. 40 ans qu'on régule la campagne à coups de fusil, et il reste autant de sangliers que de chasseurs bourrés le dimanche.",
+   "start": 51.97,
+   "dur": 6.11,
+   "words": [
+    {
+     "w": "Ferme",
+     "t": 51.97
+    },
+    {
+     "w": "ta",
+     "t": 52.22
+    },
+    {
+     "w": "gueule.",
+     "t": 52.34
+    },
+    {
+     "w": "Je",
+     "t": 52.82
+    },
+    {
+     "w": "retire.",
+     "t": 52.96
+    },
+    {
+     "w": "40",
+     "t": 53.5
+    },
+    {
+     "w": "ans",
+     "t": 53.74
+    },
+    {
+     "w": "qu'on",
+     "t": 53.91
+    },
+    {
+     "w": "régule",
+     "t": 54.08
+    },
+    {
+     "w": "la",
+     "t": 54.3
+    },
+    {
+     "w": "campagne",
+     "t": 54.42
+    },
+    {
+     "w": "à",
+     "t": 54.78
+    },
+    {
+     "w": "coups",
+     "t": 54.86
+    },
+    {
+     "w": "de",
+     "t": 54.98
+    },
+    {
+     "w": "fusil,",
+     "t": 54.98
+    },
+    {
+     "w": "et",
+     "t": 55.54
+    },
+    {
+     "w": "il",
+     "t": 55.6
+    },
+    {
+     "w": "reste",
+     "t": 55.68
+    },
+    {
+     "w": "autant",
+     "t": 55.88
+    },
+    {
+     "w": "de",
+     "t": 56.2
+    },
+    {
+     "w": "sangliers",
+     "t": 56.28
+    },
+    {
+     "w": "que",
+     "t": 56.66
+    },
+    {
+     "w": "de",
+     "t": 56.82
+    },
+    {
+     "w": "chasseurs",
+     "t": 56.9
+    },
+    {
+     "w": "bourrés",
+     "t": 57.2
+    },
+    {
+     "w": "le",
+     "t": 57.48
+    },
+    {
+     "w": "dimanche.",
+     "t": 57.54
+    }
+   ]
+  },
+  {
+   "id": "12-panneaux",
+   "who": "avocate",
+   "text": "La chasse était déclarée. Les panneaux étaient posés. La victime courait avec des écouteurs, en plein secteur interdit. Elle ne pouvait entendre ni les cris, ni les sifflets.",
+   "start": 58.33,
+   "dur": 7.913,
+   "words": [
+    {
+     "w": "La",
+     "t": 58.33
+    },
+    {
+     "w": "chasse",
+     "t": 58.49
+    },
+    {
+     "w": "était",
+     "t": 58.81
+    },
+    {
+     "w": "déclarée.",
+     "t": 59.01
+    },
+    {
+     "w": "Les",
+     "t": 59.69
+    },
+    {
+     "w": "panneaux",
+     "t": 59.77
+    },
+    {
+     "w": "étaient",
+     "t": 60.13
+    },
+    {
+     "w": "posés.",
+     "t": 60.31
+    },
+    {
+     "w": "La",
+     "t": 60.93
+    },
+    {
+     "w": "victime",
+     "t": 61.01
+    },
+    {
+     "w": "courait",
+     "t": 61.33
+    },
+    {
+     "w": "avec",
+     "t": 61.63
+    },
+    {
+     "w": "des",
+     "t": 61.75
+    },
+    {
+     "w": "écouteurs,",
+     "t": 61.91
+    },
+    {
+     "w": "en",
+     "t": 62.59
+    },
+    {
+     "w": "plein",
+     "t": 62.67
+    },
+    {
+     "w": "secteur",
+     "t": 62.91
+    },
+    {
+     "w": "interdit.",
+     "t": 63.29
+    },
+    {
+     "w": "Elle",
+     "t": 63.79
+    },
+    {
+     "w": "ne",
+     "t": 63.89
+    },
+    {
+     "w": "pouvait",
+     "t": 64.01
+    },
+    {
+     "w": "entendre",
+     "t": 64.21
+    },
+    {
+     "w": "ni",
+     "t": 64.69
+    },
+    {
+     "w": "les",
+     "t": 64.87
+    },
+    {
+     "w": "cris,",
+     "t": 64.97
+    },
+    {
+     "w": "ni",
+     "t": 65.47
+    },
+    {
+     "w": "les",
+     "t": 65.57
+    },
+    {
+     "w": "sifflets.",
+     "t": 65.69
+    }
+   ]
+  },
+  {
+   "id": "13-montre",
+   "who": "procureur",
+   "text": "Donc c'est sa faute ? Il aurait dû courir en gilet orange, avec un sifflet, en hurlant « je ne suis pas un sanglier » tous les 10 mètres, abruti ?",
+   "start": 66.493,
+   "dur": 6.31,
+   "words": [
+    {
+     "w": "Donc",
+     "t": 66.493
+    },
+    {
+     "w": "c'est",
+     "t": 66.673
+    },
+    {
+     "w": "sa",
+     "t": 66.853
+    },
+    {
+     "w": "faute ?",
+     "t": 66.953
+    },
+    {
+     "w": "Il",
+     "t": 67.373
+    },
+    {
+     "w": "aurait",
+     "t": 67.473
+    },
+    {
+     "w": "dû",
+     "t": 67.593
+    },
+    {
+     "w": "courir",
+     "t": 67.713
+    },
+    {
+     "w": "en",
+     "t": 68.013
+    },
+    {
+     "w": "gilet",
+     "t": 68.113
+    },
+    {
+     "w": "orange,",
+     "t": 68.333
+    },
+    {
+     "w": "avec",
+     "t": 68.793
+    },
+    {
+     "w": "un",
+     "t": 68.953
+    },
+    {
+     "w": "sifflet,",
+     "t": 69.113
+    },
+    {
+     "w": "en",
+     "t": 69.593
+    },
+    {
+     "w": "hurlant «",
+     "t": 69.653
+    },
+    {
+     "w": "je",
+     "t": 70.173
+    },
+    {
+     "w": "ne",
+     "t": 70.273
+    },
+    {
+     "w": "suis",
+     "t": 70.353
+    },
+    {
+     "w": "pas",
+     "t": 70.513
+    },
+    {
+     "w": "un",
+     "t": 70.693
+    },
+    {
+     "w": "sanglier »",
+     "t": 70.873
+    },
+    {
+     "w": "tous",
+     "t": 71.433
+    },
+    {
+     "w": "les",
+     "t": 71.513
+    },
+    {
+     "w": "10",
+     "t": 71.683
+    },
+    {
+     "w": "mètres,",
+     "t": 71.853
+    },
+    {
+     "w": "abruti ?",
+     "t": 72.337
+    }
+   ]
+  },
+  {
+   "id": "14-trottinette",
+   "who": "avocate",
+   "text": "Il aurait dû lire les panneaux, tocard. Mais je comprends : quand on vit entre la trottinette et la salle de sport, la forêt, c'est un décor Instagram.",
+   "start": 73.053,
+   "dur": 6.24,
+   "words": [
+    {
+     "w": "Il",
+     "t": 73.053
+    },
+    {
+     "w": "aurait",
+     "t": 73.193
+    },
+    {
+     "w": "dû",
+     "t": 73.313
+    },
+    {
+     "w": "lire",
+     "t": 73.453
+    },
+    {
+     "w": "les",
+     "t": 73.653
+    },
+    {
+     "w": "panneaux,",
+     "t": 73.753
+    },
+    {
+     "w": "tocard.",
+     "t": 74.253
+    },
+    {
+     "w": "Mais",
+     "t": 74.753
+    },
+    {
+     "w": "je",
+     "t": 74.873
+    },
+    {
+     "w": "comprends :",
+     "t": 75.053
+    },
+    {
+     "w": "quand",
+     "t": 75.553
+    },
+    {
+     "w": "on",
+     "t": 75.673
+    },
+    {
+     "w": "vit",
+     "t": 75.813
+    },
+    {
+     "w": "entre",
+     "t": 75.933
+    },
+    {
+     "w": "la",
+     "t": 76.093
+    },
+    {
+     "w": "trottinette",
+     "t": 76.233
+    },
+    {
+     "w": "et",
+     "t": 76.673
+    },
+    {
+     "w": "la",
+     "t": 76.733
+    },
+    {
+     "w": "salle",
+     "t": 76.813
+    },
+    {
+     "w": "de",
+     "t": 76.973
+    },
+    {
+     "w": "sport,",
+     "t": 77.053
+    },
+    {
+     "w": "la",
+     "t": 77.633
+    },
+    {
+     "w": "forêt,",
+     "t": 77.713
+    },
+    {
+     "w": "c'est",
+     "t": 78.033
+    },
+    {
+     "w": "un",
+     "t": 78.353
+    },
+    {
+     "w": "décor",
+     "t": 78.453
+    },
+    {
+     "w": "Instagram.",
+     "t": 78.693
+    }
+   ]
+  },
+  {
+   "id": "15-gachette",
+   "who": "procureur",
+   "text": "Un panneau n'a jamais appuyé sur une gâchette, Maître. Lui, si. Et Thomas, lui, ne rentrera jamais chez lui.",
+   "start": 79.693,
+   "dur": 5.37,
+   "words": [
+    {
+     "w": "Un",
+     "t": 79.693
+    },
+    {
+     "w": "panneau",
+     "t": 79.833
+    },
+    {
+     "w": "n'a",
+     "t": 80.033
+    },
+    {
+     "w": "jamais",
+     "t": 80.233
+    },
+    {
+     "w": "appuyé",
+     "t": 80.453
+    },
+    {
+     "w": "sur",
+     "t": 80.893
+    },
+    {
+     "w": "une",
+     "t": 81.013
+    },
+    {
+     "w": "gâchette,",
+     "t": 81.133
+    },
+    {
+     "w": "Maître.",
+     "t": 81.453
+    },
+    {
+     "w": "Lui,",
+     "t": 81.973
+    },
+    {
+     "w": "si.",
+     "t": 82.453
+    },
+    {
+     "w": "Et",
+     "t": 82.933
+    },
+    {
+     "w": "Thomas,",
+     "t": 82.993
+    },
+    {
+     "w": "lui,",
+     "t": 83.433
+    },
+    {
+     "w": "ne",
+     "t": 83.853
+    },
+    {
+     "w": "rentrera",
+     "t": 83.993
+    },
+    {
+     "w": "jamais",
+     "t": 84.373
+    },
+    {
+     "w": "chez",
+     "t": 84.593
+    },
+    {
+     "w": "lui.",
+     "t": 84.813
+    }
+   ]
+  },
+  {
+   "id": "16-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Accident de chasse… ou homicide ? Coupable… ou non coupable ?",
+   "start": 85.763,
+   "dur": 4.66,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 85.763
+    },
+    {
+     "w": "es",
+     "t": 85.943
+    },
+    {
+     "w": "le",
+     "t": 86.023
+    },
+    {
+     "w": "juré.",
+     "t": 86.123
+    },
+    {
+     "w": "Accident",
+     "t": 86.643
+    },
+    {
+     "w": "de",
+     "t": 86.903
+    },
+    {
+     "w": "chasse…",
+     "t": 87.103
+    },
+    {
+     "w": "ou",
+     "t": 87.543
+    },
+    {
+     "w": "homicide ?",
+     "t": 88.003
+    },
+    {
+     "w": "Coupable…",
+     "t": 88.683
+    },
+    {
+     "w": "ou",
+     "t": 89.163
+    },
+    {
+     "w": "non",
+     "t": 89.603
+    },
+    {
+     "w": "coupable ?",
+     "t": 89.823
+    }
+   ]
+  },
+  {
+   "id": "17-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire. Abonne-toi : le verdict tombe dans la prochaine vidéo.",
+   "start": 90.723,
+   "dur": 4.37,
+   "words": [
+    {
+     "w": "Écris",
+     "t": 90.723
+    },
+    {
+     "w": "ton",
+     "t": 90.953
+    },
+    {
+     "w": "verdict",
+     "t": 91.183
+    },
+    {
+     "w": "en",
+     "t": 91.343
+    },
+    {
+     "w": "commentaire.",
+     "t": 91.583
+    },
+    {
+     "w": "Abonne-toi :",
+     "t": 92.303
+    },
+    {
+     "w": "le",
+     "t": 93.023
+    },
+    {
+     "w": "verdict",
+     "t": 93.103
+    },
+    {
+     "w": "tombe",
+     "t": 93.423
+    },
+    {
+     "w": "dans",
+     "t": 93.983
+    },
+    {
+     "w": "la",
+     "t": 94.123
+    },
+    {
+     "w": "prochaine",
+     "t": 94.243
+    },
+    {
+     "w": "vidéo.",
+     "t": 94.543
+    }
+   ]
+  }
+ ]
+}

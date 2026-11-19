@@ -1,0 +1,7 @@
+.serif { font-family: 'Fraunces Variable', serif; font-weight: 800; font-size: 120px; letter-spacing: 0.04em; text-shadow: 0 0 40px rgba(0, 0, 0, 0.9); }
+.serif.white { color: #f3efe8; }
+.serif.white em { font-style: italic; color: #ff3b3b; }
+.serif.red { color: #ff3b3b; text-shadow: 0 0 30px rgba(255, 40, 40, 0.65), 0 0 80px rgba(255, 40, 40, 0.35); }
+.serif.big { font-size: 124px; }
+.caps .line { -webkit-text-stroke: 0; text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95); font-size: 66px; letter-spacing: 0.01em; }
+.caps .line span.on { color: #ff5a5a; }

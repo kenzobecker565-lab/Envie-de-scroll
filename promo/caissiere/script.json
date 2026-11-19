@@ -1,0 +1,95 @@
+{
+ "_doc": "« La caissière » (affaire fictive), sur le modèle de « La pilleuse ». Voix ElevenLabs : narrateur Nicolas, procureur Paul K, défense Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-caisse",
+   "who": "narrateur",
+   "text": "Pendant deux ans, une caissière a laissé passer les courses d'une mère seule. Sans jamais les scanner. Total : quatre mille deux cents euros.",
+   "gap": 0
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la caméra du magasin, on voit tout. Le lait… les couches… les pâtes. Et à chaque fois, le même geste : elle fait semblant de biper."
+  },
+  {
+   "id": "03-lea",
+   "who": "narrateur",
+   "text": "Elle s'appelle Léa. Trente-quatre ans. Caissière depuis onze ans. Jamais un retard. Aujourd'hui, elle est jugée pour vol."
+  },
+  {
+   "id": "04-patron",
+   "who": "procureur",
+   "text": "Ce n'était pas son argent. Pendant deux ans, elle a offert ce qui appartenait à son patron."
+  },
+  {
+   "id": "05-benne",
+   "who": "avocate",
+   "text": "Son patron ? Un groupe qui jette chaque soir des tonnes de nourriture à la benne. Ce qu'elle a laissé passer… finissait souvent à la poubelle."
+  },
+  {
+   "id": "06-cousin",
+   "who": "procureur",
+   "text": "Alors c'est elle qui choisit qui mange et qui paie ? Demain, une autre caissière laisse partir son cousin. Puis ses amis."
+  },
+  {
+   "id": "07-lait",
+   "who": "avocate",
+   "text": "Son cousin ? Cette femme avait trois enfants et un frigo vide. Léa l'a vue reposer le lait, trois fois. La quatrième, elle n'a pas bipé."
+  },
+  {
+   "id": "08-pitie",
+   "who": "procureur",
+   "text": "La pitié, c'est beau. Mais la pitié avec l'argent des autres… ça porte un nom. Le vol."
+  },
+  {
+   "id": "09-six",
+   "who": "avocate",
+   "text": "Quatre mille deux cents euros en deux ans. Moins de six euros par jour. Pour nourrir trois enfants."
+  },
+  {
+   "id": "10-systeme",
+   "who": "procureur",
+   "text": "Six euros par jour, pendant sept cents jours. Ce n'est plus un geste. C'est un système."
+  },
+  {
+   "id": "11-centime",
+   "who": "avocate",
+   "text": "Un système ? Elle n'a pas gardé un centime pour elle. Pas un seul. Les enquêteurs ont tout fouillé : rien."
+  },
+  {
+   "id": "12-role",
+   "who": "procureur",
+   "text": "Elle n'a rien gardé… mais elle a décidé seule de ce qui était juste. Ce n'était pas son rôle."
+  },
+  {
+   "id": "13-ailleurs",
+   "who": "avocate",
+   "text": "Son rôle ? Ce jour-là, tout le monde a vu cette mère. Elle est la seule à ne pas avoir regardé ailleurs."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

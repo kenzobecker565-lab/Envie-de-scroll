@@ -1,0 +1,920 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 63.16,
+ "lines": [
+  {
+   "id": "01-harceleur",
+   "who": "harceleur",
+   "text": "Allez… fais pas ta timide. Souris un peu, ma belle.",
+   "start": 0.05,
+   "dur": 3.59,
+   "words": [
+    {
+     "w": "Allez…",
+     "t": 0.05
+    },
+    {
+     "w": "fais",
+     "t": 0.85
+    },
+    {
+     "w": "pas",
+     "t": 1.03
+    },
+    {
+     "w": "ta",
+     "t": 1.21
+    },
+    {
+     "w": "timide.",
+     "t": 1.31
+    },
+    {
+     "w": "Souris",
+     "t": 2.17
+    },
+    {
+     "w": "un",
+     "t": 2.63
+    },
+    {
+     "w": "peu,",
+     "t": 2.77
+    },
+    {
+     "w": "ma",
+     "t": 3.07
+    },
+    {
+     "w": "belle.",
+     "t": 3.19
+    }
+   ]
+  },
+  {
+   "id": "01b-moussa",
+   "who": "moussa",
+   "text": "Toi. Tu descends.",
+   "start": 3.36,
+   "dur": 1.4,
+   "words": [
+    {
+     "w": "Toi.",
+     "t": 3.36
+    },
+    {
+     "w": "Tu",
+     "t": 3.94
+    },
+    {
+     "w": "descends.",
+     "t": 4.24
+    }
+   ]
+  },
+  {
+   "id": "02-wagon",
+   "who": "narrateur",
+   "text": "RER B, 18 h 40. Depuis quatre stations, un homme colle Léa, 19 ans. Quarante passagers. Personne ne bouge. Sauf Moussa.",
+   "start": 6.11,
+   "dur": 6.75,
+   "words": [
+    {
+     "w": "RER",
+     "t": 6.363
+    },
+    {
+     "w": "B,",
+     "t": 6.657
+    },
+    {
+     "w": "18",
+     "t": 6.95
+    },
+    {
+     "w": "h",
+     "t": 7.243
+    },
+    {
+     "w": "40.",
+     "t": 7.537
+    },
+    {
+     "w": "Depuis",
+     "t": 7.83
+    },
+    {
+     "w": "quatre",
+     "t": 8.04
+    },
+    {
+     "w": "stations,",
+     "t": 8.25
+    },
+    {
+     "w": "un",
+     "t": 8.91
+    },
+    {
+     "w": "homme",
+     "t": 9.01
+    },
+    {
+     "w": "colle",
+     "t": 9.19
+    },
+    {
+     "w": "Léa,",
+     "t": 9.41
+    },
+    {
+     "w": "19",
+     "t": 9.85
+    },
+    {
+     "w": "ans.",
+     "t": 10.09
+    },
+    {
+     "w": "Quarante",
+     "t": 10.36
+    },
+    {
+     "w": "passagers.",
+     "t": 10.63
+    },
+    {
+     "w": "Personne",
+     "t": 11.21
+    },
+    {
+     "w": "ne",
+     "t": 11.45
+    },
+    {
+     "w": "bouge.",
+     "t": 11.67
+    },
+    {
+     "w": "Sauf",
+     "t": 12.11
+    },
+    {
+     "w": "Moussa.",
+     "t": 12.37
+    }
+   ]
+  },
+  {
+   "id": "03-quai",
+   "who": "narrateur",
+   "text": "Il l'a poussé hors du wagon. L'homme est tombé sur la tête : fracture du crâne. Aujourd'hui, Moussa est jugé.",
+   "start": 13.11,
+   "dur": 5.31,
+   "words": [
+    {
+     "w": "Il",
+     "t": 13.11
+    },
+    {
+     "w": "l'a",
+     "t": 13.21
+    },
+    {
+     "w": "poussé",
+     "t": 13.4
+    },
+    {
+     "w": "hors",
+     "t": 13.8
+    },
+    {
+     "w": "du",
+     "t": 14.0
+    },
+    {
+     "w": "wagon.",
+     "t": 14.16
+    },
+    {
+     "w": "L'homme",
+     "t": 14.48
+    },
+    {
+     "w": "est",
+     "t": 14.8
+    },
+    {
+     "w": "tombé",
+     "t": 14.88
+    },
+    {
+     "w": "sur",
+     "t": 15.12
+    },
+    {
+     "w": "la",
+     "t": 15.22
+    },
+    {
+     "w": "tête :",
+     "t": 15.34
+    },
+    {
+     "w": "fracture",
+     "t": 15.88
+    },
+    {
+     "w": "du",
+     "t": 16.18
+    },
+    {
+     "w": "crâne.",
+     "t": 16.28
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 16.8
+    },
+    {
+     "w": "Moussa",
+     "t": 17.32
+    },
+    {
+     "w": "est",
+     "t": 17.84
+    },
+    {
+     "w": "jugé.",
+     "t": 17.96
+    }
+   ]
+  },
+  {
+   "id": "04-main",
+   "who": "procureur",
+   "text": "Une main sur une main. Et vous répondez par une fracture du crâne.",
+   "start": 18.67,
+   "dur": 3.12,
+   "words": [
+    {
+     "w": "Une",
+     "t": 18.67
+    },
+    {
+     "w": "main",
+     "t": 18.87
+    },
+    {
+     "w": "sur",
+     "t": 19.13
+    },
+    {
+     "w": "une",
+     "t": 19.33
+    },
+    {
+     "w": "main.",
+     "t": 19.49
+    },
+    {
+     "w": "Et",
+     "t": 19.73
+    },
+    {
+     "w": "vous",
+     "t": 19.97
+    },
+    {
+     "w": "répondez",
+     "t": 20.07
+    },
+    {
+     "w": "par",
+     "t": 20.49
+    },
+    {
+     "w": "une",
+     "t": 20.63
+    },
+    {
+     "w": "fracture",
+     "t": 20.73
+    },
+    {
+     "w": "du",
+     "t": 21.05
+    },
+    {
+     "w": "crâne.",
+     "t": 21.29
+    }
+   ]
+  },
+  {
+   "id": "05-stations",
+   "who": "avocate",
+   "text": "Une main ? Quatre stations de mains, monsieur le procureur. Demandez à Léa.",
+   "start": 22.04,
+   "dur": 3.25,
+   "words": [
+    {
+     "w": "Une",
+     "t": 22.04
+    },
+    {
+     "w": "main ?",
+     "t": 22.22
+    },
+    {
+     "w": "Quatre",
+     "t": 22.6
+    },
+    {
+     "w": "stations",
+     "t": 22.84
+    },
+    {
+     "w": "de",
+     "t": 23.14
+    },
+    {
+     "w": "mains,",
+     "t": 23.32
+    },
+    {
+     "w": "monsieur",
+     "t": 23.62
+    },
+    {
+     "w": "le",
+     "t": 23.8
+    },
+    {
+     "w": "procureur.",
+     "t": 23.9
+    },
+    {
+     "w": "Demandez",
+     "t": 24.52
+    },
+    {
+     "w": "à",
+     "t": 24.84
+    },
+    {
+     "w": "Léa.",
+     "t": 24.96
+    }
+   ]
+  },
+  {
+   "id": "06-agent",
+   "who": "procureur",
+   "text": "Il suffisait de s'interposer. De parler. D'appeler un agent.",
+   "start": 25.54,
+   "dur": 3.38,
+   "words": [
+    {
+     "w": "Il",
+     "t": 25.54
+    },
+    {
+     "w": "suffisait",
+     "t": 25.7
+    },
+    {
+     "w": "de",
+     "t": 26.16
+    },
+    {
+     "w": "s'interposer.",
+     "t": 26.69
+    },
+    {
+     "w": "De",
+     "t": 27.22
+    },
+    {
+     "w": "parler.",
+     "t": 27.34
+    },
+    {
+     "w": "D'appeler",
+     "t": 27.82
+    },
+    {
+     "w": "un",
+     "t": 28.3
+    },
+    {
+     "w": "agent.",
+     "t": 28.42
+    }
+   ]
+  },
+  {
+   "id": "07-transports",
+   "who": "avocate",
+   "text": "Un agent ? Dans le RER B à 18 h 40 ? Vous prenez souvent les transports, vous ?",
+   "start": 29.17,
+   "dur": 4.26,
+   "words": [
+    {
+     "w": "Un",
+     "t": 29.17
+    },
+    {
+     "w": "agent ?",
+     "t": 29.33
+    },
+    {
+     "w": "Dans",
+     "t": 29.65
+    },
+    {
+     "w": "le",
+     "t": 30.03
+    },
+    {
+     "w": "RER",
+     "t": 30.27
+    },
+    {
+     "w": "B",
+     "t": 30.51
+    },
+    {
+     "w": "à",
+     "t": 30.75
+    },
+    {
+     "w": "18",
+     "t": 31.025
+    },
+    {
+     "w": "h",
+     "t": 31.3
+    },
+    {
+     "w": "40 ?",
+     "t": 31.575
+    },
+    {
+     "w": "Vous",
+     "t": 31.85
+    },
+    {
+     "w": "prenez",
+     "t": 32.17
+    },
+    {
+     "w": "souvent",
+     "t": 32.45
+    },
+    {
+     "w": "les",
+     "t": 32.63
+    },
+    {
+     "w": "transports,",
+     "t": 32.75
+    },
+    {
+     "w": "vous ?",
+     "t": 33.19
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Il l'a protégée… ou il est allé trop loin ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
+   "start": 33.68,
+   "dur": 6.13,
+   "words": [
+    {
+     "w": "Il",
+     "t": 33.68
+    },
+    {
+     "w": "l'a",
+     "t": 33.973
+    },
+    {
+     "w": "protégée…",
+     "t": 34.307
+    },
+    {
+     "w": "ou",
+     "t": 34.64
+    },
+    {
+     "w": "il",
+     "t": 35.16
+    },
+    {
+     "w": "est",
+     "t": 35.72
+    },
+    {
+     "w": "allé",
+     "t": 35.84
+    },
+    {
+     "w": "trop",
+     "t": 36.04
+    },
+    {
+     "w": "loin ?",
+     "t": 36.18
+    },
+    {
+     "w": "Ici,",
+     "t": 36.64
+    },
+    {
+     "w": "c'est",
+     "t": 36.95
+    },
+    {
+     "w": "toi",
+     "t": 37.26
+    },
+    {
+     "w": "qui",
+     "t": 37.38
+    },
+    {
+     "w": "juges.",
+     "t": 37.74
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 38.1
+    },
+    {
+     "w": "pour",
+     "t": 38.46
+    },
+    {
+     "w": "siéger",
+     "t": 38.66
+    },
+    {
+     "w": "au",
+     "t": 38.92
+    },
+    {
+     "w": "prochain",
+     "t": 39.06
+    },
+    {
+     "w": "procès.",
+     "t": 39.28
+    }
+   ]
+  },
+  {
+   "id": "09-jete",
+   "who": "procureur",
+   "text": "Il ne l'a pas fait descendre. Il l'a jeté. Le quai, il le voyait.",
+   "start": 40.06,
+   "dur": 3.37,
+   "words": [
+    {
+     "w": "Il",
+     "t": 40.06
+    },
+    {
+     "w": "ne",
+     "t": 40.2
+    },
+    {
+     "w": "l'a",
+     "t": 40.34
+    },
+    {
+     "w": "pas",
+     "t": 40.48
+    },
+    {
+     "w": "fait",
+     "t": 40.58
+    },
+    {
+     "w": "descendre.",
+     "t": 40.74
+    },
+    {
+     "w": "Il",
+     "t": 41.38
+    },
+    {
+     "w": "l'a",
+     "t": 41.5
+    },
+    {
+     "w": "jeté.",
+     "t": 41.62
+    },
+    {
+     "w": "Le",
+     "t": 42.22
+    },
+    {
+     "w": "quai,",
+     "t": 42.3
+    },
+    {
+     "w": "il",
+     "t": 42.66
+    },
+    {
+     "w": "le",
+     "t": 42.76
+    },
+    {
+     "w": "voyait.",
+     "t": 42.9
+    }
+   ]
+  },
+  {
+   "id": "10-gravite",
+   "who": "avocate",
+   "text": "Il l'a poussé. La gravité a fait le reste. Et cet homme avait déjà trois plaintes pour harcèlement.",
+   "start": 43.68,
+   "dur": 3.95,
+   "words": [
+    {
+     "w": "Il",
+     "t": 43.68
+    },
+    {
+     "w": "l'a",
+     "t": 43.79
+    },
+    {
+     "w": "poussé.",
+     "t": 43.95
+    },
+    {
+     "w": "La",
+     "t": 44.49
+    },
+    {
+     "w": "gravité",
+     "t": 44.57
+    },
+    {
+     "w": "a",
+     "t": 44.93
+    },
+    {
+     "w": "fait",
+     "t": 45.05
+    },
+    {
+     "w": "le",
+     "t": 45.15
+    },
+    {
+     "w": "reste.",
+     "t": 45.19
+    },
+    {
+     "w": "Et",
+     "t": 45.67
+    },
+    {
+     "w": "cet",
+     "t": 45.71
+    },
+    {
+     "w": "homme",
+     "t": 45.87
+    },
+    {
+     "w": "avait",
+     "t": 46.05
+    },
+    {
+     "w": "déjà",
+     "t": 46.21
+    },
+    {
+     "w": "trois",
+     "t": 46.39
+    },
+    {
+     "w": "plaintes",
+     "t": 46.63
+    },
+    {
+     "w": "pour",
+     "t": 46.97
+    },
+    {
+     "w": "harcèlement.",
+     "t": 47.11
+    }
+   ]
+  },
+  {
+   "id": "11-casier",
+   "who": "procureur",
+   "text": "Son casier ne fait pas de Moussa un juge.",
+   "start": 47.88,
+   "dur": 2.12,
+   "words": [
+    {
+     "w": "Son",
+     "t": 47.88
+    },
+    {
+     "w": "casier",
+     "t": 48.06
+    },
+    {
+     "w": "ne",
+     "t": 48.46
+    },
+    {
+     "w": "fait",
+     "t": 48.58
+    },
+    {
+     "w": "pas",
+     "t": 48.7
+    },
+    {
+     "w": "de",
+     "t": 48.86
+    },
+    {
+     "w": "Moussa",
+     "t": 49.1
+    },
+    {
+     "w": "un",
+     "t": 49.34
+    },
+    {
+     "w": "juge.",
+     "t": 49.46
+    }
+   ]
+  },
+  {
+   "id": "12-quarante",
+   "who": "avocate",
+   "text": "Quarante passagers dans ce wagon. Un seul homme. Et c'est lui que vous jugez.",
+   "start": 50.25,
+   "dur": 3.48,
+   "words": [
+    {
+     "w": "Quarante",
+     "t": 50.38
+    },
+    {
+     "w": "passagers",
+     "t": 50.58
+    },
+    {
+     "w": "dans",
+     "t": 51.12
+    },
+    {
+     "w": "ce",
+     "t": 51.26
+    },
+    {
+     "w": "wagon.",
+     "t": 51.42
+    },
+    {
+     "w": "Un",
+     "t": 51.8
+    },
+    {
+     "w": "seul",
+     "t": 51.92
+    },
+    {
+     "w": "homme.",
+     "t": 52.12
+    },
+    {
+     "w": "Et",
+     "t": 52.46
+    },
+    {
+     "w": "c'est",
+     "t": 52.59
+    },
+    {
+     "w": "lui",
+     "t": 52.72
+    },
+    {
+     "w": "que",
+     "t": 52.88
+    },
+    {
+     "w": "vous",
+     "t": 53.18
+    },
+    {
+     "w": "jugez.",
+     "t": 53.3
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend.",
+   "start": 53.98,
+   "dur": 5.78,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 53.98
+    },
+    {
+     "w": "es",
+     "t": 54.15
+    },
+    {
+     "w": "le",
+     "t": 54.27
+    },
+    {
+     "w": "juré.",
+     "t": 54.39
+    },
+    {
+     "w": "Coupable…",
+     "t": 54.97
+    },
+    {
+     "w": "ou",
+     "t": 55.35
+    },
+    {
+     "w": "non",
+     "t": 55.69
+    },
+    {
+     "w": "coupable ?",
+     "t": 55.85
+    },
+    {
+     "w": "Écris",
+     "t": 56.53
+    },
+    {
+     "w": "ton",
+     "t": 56.75
+    },
+    {
+     "w": "verdict",
+     "t": 56.85
+    },
+    {
+     "w": "en",
+     "t": 57.05
+    },
+    {
+     "w": "commentaire.",
+     "t": 57.25
+    },
+    {
+     "w": "Et",
+     "t": 57.93
+    },
+    {
+     "w": "abonne-toi :",
+     "t": 58.27
+    },
+    {
+     "w": "le",
+     "t": 58.61
+    },
+    {
+     "w": "prochain",
+     "t": 58.65
+    },
+    {
+     "w": "procès",
+     "t": 58.99
+    },
+    {
+     "w": "t'attend.",
+     "t": 59.389
+    }
+   ]
+  }
+ ]
+}

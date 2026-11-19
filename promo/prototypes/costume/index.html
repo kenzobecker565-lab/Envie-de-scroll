@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../node_modules/@fontsource-variable/figtree/index.css" />
+    <style>
+      html, body { margin: 0; background: #000; }
+      svg { display: block; }
+    </style>
+  </head>
+  <body>
+    <svg id="s" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+    <script type="module">
+      import { makePerson } from './personnage.js'
+      const NS = 'http://www.w3.org/2000/svg'
+      const svg = (tag, attrs = {}, parent = null) => {
+        const el = document.createElementNS(NS, tag)
+        for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v)
+        if (parent) parent.append(el)
+        return el
+      }
+      const root = document.getElementById('s')
+      const defs = svg('defs', {}, root)
+      const grad = (id, stops, attrs) => {
+        const g = svg(attrs.r ? 'radialGradient' : 'linearGradient', { id, ...attrs }, defs)
+        for (const [o, c, a = 1] of stops) svg('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, g)
+      }
+      grad('wall', [[0, '#2a3566'], [1, '#121733']], { x1: 0, y1: 0, x2: 0, y2: 1 })
+      grad('wood', [[0, '#7a4a2c'], [1, '#3e2414']], { x1: 0, y1: 0, x2: 0, y2: 1 })
+      grad('floor', [[0, '#2b1a10'], [1, '#120a06']], { x1: 0, y1: 0, x2: 0, y2: 1 })
+      grad('spot', [[0, '#ffe2b0', 0.4], [1, '#ffe2b0', 0]], { cx: 0.5, cy: 0.5, r: 0.5 })
+      const params = new URLSearchParams(location.search)
+      const mode = params.get('mode') ?? 'planche'
+
+      // Décor : boiseries, colonnes, sol.
+      svg('rect', { width: 1080, height: 1920, fill: 'url(#wall)' }, root)
+      for (let i = 0; i < 4; i++) {
+        const x = 40 + i * 260
+        svg('rect', { x, y: 260, width: 220, height: 700, rx: 8, fill: '#ffffff', opacity: 0.04 }, root)
+        svg('rect', { x: x + 20, y: 280, width: 180, height: 660, rx: 6, fill: 'none', stroke: '#ffffff', 'stroke-width': 3, opacity: 0.06 }, root)
+      }
+      svg('rect', { y: 1000, width: 1080, height: 520, fill: 'url(#wood)' }, root)
+      for (let i = 0; i < 5; i++) svg('rect', { x: 30 + i * 210, y: 1040, width: 180, height: 420, rx: 6, fill: 'none', stroke: '#2a160b', 'stroke-width': 6, opacity: 0.5 }, root)
+      svg('rect', { y: 990, width: 1080, height: 22, fill: '#b07a52' }, root)
+      svg('rect', { y: 1520, width: 1080, height: 400, fill: 'url(#floor)' }, root)
+      // Balance dorée.
+      const em = svg('g', { transform: 'translate(540 190)', opacity: 0.9 }, root)
+      svg('circle', { r: 92, fill: 'none', stroke: '#d9a441', 'stroke-width': 10 }, em)
+      svg('path', { d: 'M 0 -60 L 0 60 M -40 64 L 40 64 M -60 -30 L 60 -30 M -60 -30 L -80 20 M -60 -30 L -40 20 M 60 -30 L 40 20 M 60 -30 L 80 20 M -84 20 Q -60 44 -36 20 M 36 20 Q 60 44 84 20', fill: 'none', stroke: '#d9a441', 'stroke-width': 8, 'stroke-linecap': 'round' }, em)
+
+      const AVO = { suit: '#1f2d55', shirt: '#eef3fb', tie: '#d4a72c', tieStripe: '#1f2d55', pocket: '#eef3fb', hair: 'short', hairColor: '#2a1a10', beard: true, skin: '#d9a07a', iris: '#2b1d12', jabot: false }
+      const PROC = { suit: '#2b2d35', shirt: '#ffffff', tie: '#c8322a', pocket: '#c8322a', hair: 'slick', hairColor: '#1d140e', skin: '#f2c4a0', iris: '#2b1d12', jabot: false }
+      const label = (x, y, s, fill) => {
+        const g = svg('g', { transform: `translate(${x} ${y})` }, root)
+        const w = s.length * 30 + 60
+        svg('rect', { x: -w / 2, y: -46, width: w, height: 70, rx: 18, fill: '#10121a' }, g)
+        const t = svg('text', { 'text-anchor': 'middle', 'font-family': 'Figtree Variable', 'font-weight': 900, 'font-size': 44, fill }, g)
+        t.textContent = s
+      }
+      if (mode === 'planche') {
+        svg('ellipse', { cx: 300, cy: 1100, rx: 380, ry: 700, fill: 'url(#spot)' }, root)
+        svg('ellipse', { cx: 790, cy: 1100, rx: 380, ry: 700, fill: 'url(#spot)' }, root)
+        const avo = makePerson(root, AVO)
+        avo.update(0.4, { x: 275, y: 900, scale: 0.8, mouth: 0.45, brows: 'determined', look: [0.2, -0.3], armR: [2.5, 0.45], point: true, armL: [0.12, 0.3] })
+        const proc = makePerson(root, PROC)
+        proc.update(1.1, { x: 810, y: 900, scale: 0.8, mouth: 0, brows: 'angry', look: [-0.5, 0], armR: [0.14, 0.35], armL: [0.06, 0.2] })
+        label(290, 300 + 60, 'LA DÉFENSE', '#ffd166')
+        label(800, 300 + 60, 'LE PROCUREUR', '#ff6b5e')
+      } else {
+        // Plan tel qu'il apparaît dans la vidéo : la défense plaide, debout.
+        svg('ellipse', { cx: 540, cy: 1000, rx: 600, ry: 900, fill: 'url(#spot)' }, root)
+        const avo = makePerson(root, AVO)
+        avo.update(0.4, { x: 540, y: 900, scale: 1.12, mouth: 0.6, brows: 'determined', look: [0, 0.1], armR: [0.75, 1.0], armL: [0.3, 1.2], point: true })
+      }
+      window.done = true
+    </script>
+  </body>
+</html>

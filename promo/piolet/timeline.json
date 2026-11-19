@@ -1,0 +1,1053 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 70.75,
+ "lines": [
+  {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "Dix ans de prison pour lui. Dix mois avec sursis pour ceux qui étaient entrés chez lui.",
+   "start": 0.05,
+   "dur": 3.59,
+   "words": [
+    {
+     "w": "Dix",
+     "t": 0.05
+    },
+    {
+     "w": "ans",
+     "t": 0.33
+    },
+    {
+     "w": "de",
+     "t": 0.43
+    },
+    {
+     "w": "prison",
+     "t": 0.53
+    },
+    {
+     "w": "pour",
+     "t": 0.79
+    },
+    {
+     "w": "lui.",
+     "t": 1.01
+    },
+    {
+     "w": "Dix",
+     "t": 1.25
+    },
+    {
+     "w": "mois",
+     "t": 1.49
+    },
+    {
+     "w": "avec",
+     "t": 1.73
+    },
+    {
+     "w": "sursis",
+     "t": 1.87
+    },
+    {
+     "w": "pour",
+     "t": 2.27
+    },
+    {
+     "w": "ceux",
+     "t": 2.47
+    },
+    {
+     "w": "qui",
+     "t": 2.63
+    },
+    {
+     "w": "étaient",
+     "t": 2.75
+    },
+    {
+     "w": "entrés",
+     "t": 2.91
+    },
+    {
+     "w": "chez",
+     "t": 3.25
+    },
+    {
+     "w": "lui.",
+     "t": 3.29
+    }
+   ]
+  },
+  {
+   "id": "01-nuit",
+   "who": "narrateur",
+   "text": "Haute-Vienne, novembre 2021. Deux heures du matin. Gaël est réveillé par du bruit. Deux hommes sont sur son terrain.",
+   "start": 3.94,
+   "dur": 5.63,
+   "words": [
+    {
+     "w": "Haute-Vienne,",
+     "t": 4.31
+    },
+    {
+     "w": "novembre",
+     "t": 4.68
+    },
+    {
+     "w": "2021.",
+     "t": 5.12
+    },
+    {
+     "w": "Deux",
+     "t": 5.5
+    },
+    {
+     "w": "heures",
+     "t": 5.88
+    },
+    {
+     "w": "du",
+     "t": 6.26
+    },
+    {
+     "w": "matin.",
+     "t": 6.36
+    },
+    {
+     "w": "Gaël",
+     "t": 6.9
+    },
+    {
+     "w": "est",
+     "t": 7.14
+    },
+    {
+     "w": "réveillé",
+     "t": 7.22
+    },
+    {
+     "w": "par",
+     "t": 7.56
+    },
+    {
+     "w": "du",
+     "t": 7.68
+    },
+    {
+     "w": "bruit.",
+     "t": 7.82
+    },
+    {
+     "w": "Deux",
+     "t": 8.34
+    },
+    {
+     "w": "hommes",
+     "t": 8.54
+    },
+    {
+     "w": "sont",
+     "t": 8.7
+    },
+    {
+     "w": "sur",
+     "t": 8.86
+    },
+    {
+     "w": "son",
+     "t": 9.0
+    },
+    {
+     "w": "terrain.",
+     "t": 9.12
+    }
+   ]
+  },
+  {
+   "id": "02-piolet",
+   "who": "narrateur",
+   "text": "L'un s'enfuit dans les ronces. L'autre attend sur le chemin. Gaël a pris un piolet. Il frappe… douze fois.",
+   "start": 9.87,
+   "dur": 5.28,
+   "words": [
+    {
+     "w": "L'un",
+     "t": 10.063
+    },
+    {
+     "w": "s'enfuit",
+     "t": 10.257
+    },
+    {
+     "w": "dans",
+     "t": 10.45
+    },
+    {
+     "w": "les",
+     "t": 10.55
+    },
+    {
+     "w": "ronces.",
+     "t": 10.65
+    },
+    {
+     "w": "L'autre",
+     "t": 11.1
+    },
+    {
+     "w": "attend",
+     "t": 11.55
+    },
+    {
+     "w": "sur",
+     "t": 11.83
+    },
+    {
+     "w": "le",
+     "t": 12.03
+    },
+    {
+     "w": "chemin.",
+     "t": 12.13
+    },
+    {
+     "w": "Gaël",
+     "t": 12.63
+    },
+    {
+     "w": "a",
+     "t": 12.87
+    },
+    {
+     "w": "pris",
+     "t": 12.99
+    },
+    {
+     "w": "un",
+     "t": 13.11
+    },
+    {
+     "w": "piolet.",
+     "t": 13.21
+    },
+    {
+     "w": "Il",
+     "t": 13.73
+    },
+    {
+     "w": "frappe…",
+     "t": 13.83
+    },
+    {
+     "w": "douze",
+     "t": 14.23
+    },
+    {
+     "w": "fois.",
+     "t": 14.63
+    }
+   ]
+  },
+  {
+   "id": "03-assises",
+   "who": "narrateur",
+   "text": "Juin 2026, cour d'assises. Le cambrioleur garde une infirmité à vie. Et la légitime défense est écartée.",
+   "start": 15.75,
+   "dur": 6.05,
+   "words": [
+    {
+     "w": "Juin",
+     "t": 15.75
+    },
+    {
+     "w": "2026,",
+     "t": 16.03
+    },
+    {
+     "w": "cour",
+     "t": 16.637
+    },
+    {
+     "w": "d'assises.",
+     "t": 17.243
+    },
+    {
+     "w": "Le",
+     "t": 17.85
+    },
+    {
+     "w": "cambrioleur",
+     "t": 17.93
+    },
+    {
+     "w": "garde",
+     "t": 18.49
+    },
+    {
+     "w": "une",
+     "t": 18.71
+    },
+    {
+     "w": "infirmité",
+     "t": 18.87
+    },
+    {
+     "w": "à",
+     "t": 19.37
+    },
+    {
+     "w": "vie.",
+     "t": 19.57
+    },
+    {
+     "w": "Et",
+     "t": 19.81
+    },
+    {
+     "w": "la",
+     "t": 20.05
+    },
+    {
+     "w": "légitime",
+     "t": 20.17
+    },
+    {
+     "w": "défense",
+     "t": 20.51
+    },
+    {
+     "w": "est",
+     "t": 21.01
+    },
+    {
+     "w": "écartée.",
+     "t": 21.21
+    }
+   ]
+  },
+  {
+   "id": "04-fuite",
+   "who": "procureur",
+   "text": "La loi protège celui qui repousse un intrus, la nuit, chez lui. Mais ici, les voleurs fuyaient déjà. Ce n'est pas lui qu'on attaquait. C'est lui qui leur a couru après.",
+   "start": 22.05,
+   "dur": 8.01,
+   "words": [
+    {
+     "w": "La",
+     "t": 22.05
+    },
+    {
+     "w": "loi",
+     "t": 22.21
+    },
+    {
+     "w": "protège",
+     "t": 22.35
+    },
+    {
+     "w": "celui",
+     "t": 22.79
+    },
+    {
+     "w": "qui",
+     "t": 22.97
+    },
+    {
+     "w": "repousse",
+     "t": 23.19
+    },
+    {
+     "w": "un",
+     "t": 23.53
+    },
+    {
+     "w": "intrus,",
+     "t": 23.63
+    },
+    {
+     "w": "la",
+     "t": 24.21
+    },
+    {
+     "w": "nuit,",
+     "t": 24.35
+    },
+    {
+     "w": "chez",
+     "t": 24.69
+    },
+    {
+     "w": "lui.",
+     "t": 24.87
+    },
+    {
+     "w": "Mais",
+     "t": 25.25
+    },
+    {
+     "w": "ici,",
+     "t": 25.35
+    },
+    {
+     "w": "les",
+     "t": 25.87
+    },
+    {
+     "w": "voleurs",
+     "t": 25.97
+    },
+    {
+     "w": "fuyaient",
+     "t": 26.29
+    },
+    {
+     "w": "déjà.",
+     "t": 26.69
+    },
+    {
+     "w": "Ce",
+     "t": 27.17
+    },
+    {
+     "w": "n'est",
+     "t": 27.27
+    },
+    {
+     "w": "pas",
+     "t": 27.37
+    },
+    {
+     "w": "lui",
+     "t": 27.47
+    },
+    {
+     "w": "qu'on",
+     "t": 27.68
+    },
+    {
+     "w": "attaquait.",
+     "t": 27.89
+    },
+    {
+     "w": "C'est",
+     "t": 28.26
+    },
+    {
+     "w": "lui",
+     "t": 28.63
+    },
+    {
+     "w": "qui",
+     "t": 28.83
+    },
+    {
+     "w": "leur",
+     "t": 29.11
+    },
+    {
+     "w": "a",
+     "t": 29.25
+    },
+    {
+     "w": "couru",
+     "t": 29.35
+    },
+    {
+     "w": "après.",
+     "t": 29.63
+    }
+   ]
+  },
+  {
+   "id": "05-piege",
+   "who": "avocate",
+   "text": "Deux heures du matin, une maison isolée, et un deuxième homme quelque part dans le noir. Il ne savait pas où était l'autre. Il croyait tomber dans un piège.",
+   "start": 30.31,
+   "dur": 6.33,
+   "words": [
+    {
+     "w": "Deux",
+     "t": 30.31
+    },
+    {
+     "w": "heures",
+     "t": 30.55
+    },
+    {
+     "w": "du",
+     "t": 30.65
+    },
+    {
+     "w": "matin,",
+     "t": 30.75
+    },
+    {
+     "w": "une",
+     "t": 31.31
+    },
+    {
+     "w": "maison",
+     "t": 31.41
+    },
+    {
+     "w": "isolée,",
+     "t": 31.61
+    },
+    {
+     "w": "et",
+     "t": 32.27
+    },
+    {
+     "w": "un",
+     "t": 32.33
+    },
+    {
+     "w": "deuxième",
+     "t": 32.43
+    },
+    {
+     "w": "homme",
+     "t": 32.69
+    },
+    {
+     "w": "quelque",
+     "t": 32.91
+    },
+    {
+     "w": "part",
+     "t": 33.11
+    },
+    {
+     "w": "dans",
+     "t": 33.39
+    },
+    {
+     "w": "le",
+     "t": 33.51
+    },
+    {
+     "w": "noir.",
+     "t": 33.59
+    },
+    {
+     "w": "Il",
+     "t": 34.03
+    },
+    {
+     "w": "ne",
+     "t": 34.09
+    },
+    {
+     "w": "savait",
+     "t": 34.21
+    },
+    {
+     "w": "pas",
+     "t": 34.45
+    },
+    {
+     "w": "où",
+     "t": 34.55
+    },
+    {
+     "w": "était",
+     "t": 34.69
+    },
+    {
+     "w": "l'autre.",
+     "t": 34.97
+    },
+    {
+     "w": "Il",
+     "t": 35.25
+    },
+    {
+     "w": "croyait",
+     "t": 35.31
+    },
+    {
+     "w": "tomber",
+     "t": 35.65
+    },
+    {
+     "w": "dans",
+     "t": 35.91
+    },
+    {
+     "w": "un",
+     "t": 36.01
+    },
+    {
+     "w": "piège.",
+     "t": 36.13
+    }
+   ]
+  },
+  {
+   "id": "06-douze",
+   "who": "procureur",
+   "text": "Douze coups, à la tête. Même dans la panique, on s'arrête au deuxième. Au douzième, ce n'est plus de la peur.",
+   "start": 36.89,
+   "dur": 5.17,
+   "words": [
+    {
+     "w": "Douze",
+     "t": 37.0
+    },
+    {
+     "w": "coups,",
+     "t": 37.11
+    },
+    {
+     "w": "à",
+     "t": 37.59
+    },
+    {
+     "w": "la",
+     "t": 37.63
+    },
+    {
+     "w": "tête.",
+     "t": 37.73
+    },
+    {
+     "w": "Même",
+     "t": 38.17
+    },
+    {
+     "w": "dans",
+     "t": 38.35
+    },
+    {
+     "w": "la",
+     "t": 38.53
+    },
+    {
+     "w": "panique,",
+     "t": 38.61
+    },
+    {
+     "w": "on",
+     "t": 39.01
+    },
+    {
+     "w": "s'arrête",
+     "t": 39.29
+    },
+    {
+     "w": "au",
+     "t": 39.57
+    },
+    {
+     "w": "deuxième.",
+     "t": 39.65
+    },
+    {
+     "w": "Au",
+     "t": 40.27
+    },
+    {
+     "w": "douzième,",
+     "t": 40.35
+    },
+    {
+     "w": "ce",
+     "t": 40.81
+    },
+    {
+     "w": "n'est",
+     "t": 41.05
+    },
+    {
+     "w": "plus",
+     "t": 41.29
+    },
+    {
+     "w": "de",
+     "t": 41.43
+    },
+    {
+     "w": "la",
+     "t": 41.51
+    },
+    {
+     "w": "peur.",
+     "t": 41.61
+    }
+   ]
+  },
+  {
+   "id": "07-proportion",
+   "who": "avocate",
+   "text": "Ces deux hommes venaient voler chez lui. Ils repartent avec dix mois de sursis. Lui prend dix ans. Où est la proportion ?",
+   "start": 42.31,
+   "dur": 5.0,
+   "words": [
+    {
+     "w": "Ces",
+     "t": 42.31
+    },
+    {
+     "w": "deux",
+     "t": 42.47
+    },
+    {
+     "w": "hommes",
+     "t": 42.63
+    },
+    {
+     "w": "venaient",
+     "t": 42.83
+    },
+    {
+     "w": "voler",
+     "t": 43.09
+    },
+    {
+     "w": "chez",
+     "t": 43.31
+    },
+    {
+     "w": "lui.",
+     "t": 43.43
+    },
+    {
+     "w": "Ils",
+     "t": 43.79
+    },
+    {
+     "w": "repartent",
+     "t": 43.89
+    },
+    {
+     "w": "avec",
+     "t": 44.31
+    },
+    {
+     "w": "dix",
+     "t": 44.43
+    },
+    {
+     "w": "mois",
+     "t": 44.71
+    },
+    {
+     "w": "de",
+     "t": 44.81
+    },
+    {
+     "w": "sursis.",
+     "t": 44.93
+    },
+    {
+     "w": "Lui",
+     "t": 45.47
+    },
+    {
+     "w": "prend",
+     "t": 45.69
+    },
+    {
+     "w": "dix",
+     "t": 45.95
+    },
+    {
+     "w": "ans.",
+     "t": 46.21
+    },
+    {
+     "w": "Où",
+     "t": 46.49
+    },
+    {
+     "w": "est",
+     "t": 46.59
+    },
+    {
+     "w": "la",
+     "t": 46.63
+    },
+    {
+     "w": "proportion ?",
+     "t": 46.71
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Légitime défense… ou vengeance ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
+   "start": 47.56,
+   "dur": 5.46,
+   "words": [
+    {
+     "w": "Légitime",
+     "t": 47.56
+    },
+    {
+     "w": "défense…",
+     "t": 47.96
+    },
+    {
+     "w": "ou",
+     "t": 48.62
+    },
+    {
+     "w": "vengeance ?",
+     "t": 49.0
+    },
+    {
+     "w": "Ici,",
+     "t": 49.92
+    },
+    {
+     "w": "c'est",
+     "t": 50.23
+    },
+    {
+     "w": "toi",
+     "t": 50.54
+    },
+    {
+     "w": "qui",
+     "t": 50.66
+    },
+    {
+     "w": "juges.",
+     "t": 51.013
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 51.367
+    },
+    {
+     "w": "pour",
+     "t": 51.72
+    },
+    {
+     "w": "siéger",
+     "t": 51.88
+    },
+    {
+     "w": "au",
+     "t": 52.16
+    },
+    {
+     "w": "prochain",
+     "t": 52.3
+    },
+    {
+     "w": "procès.",
+     "t": 52.52
+    }
+   ]
+  },
+  {
+   "id": "09-verdict",
+   "who": "narrateur",
+   "text": "Verdict : dix ans de réclusion. Pas pour tentative de meurtre : pour violences ayant entraîné une infirmité. Un détail a pesé : il avait déjà été condamné pour violences, en 2020.",
+   "start": 53.52,
+   "dur": 8.48,
+   "words": [
+    {
+     "w": "Verdict :",
+     "t": 53.52
+    },
+    {
+     "w": "dix",
+     "t": 53.98
+    },
+    {
+     "w": "ans",
+     "t": 54.44
+    },
+    {
+     "w": "de",
+     "t": 54.6
+    },
+    {
+     "w": "réclusion.",
+     "t": 54.68
+    },
+    {
+     "w": "Pas",
+     "t": 55.32
+    },
+    {
+     "w": "pour",
+     "t": 55.42
+    },
+    {
+     "w": "tentative",
+     "t": 55.6
+    },
+    {
+     "w": "de",
+     "t": 55.98
+    },
+    {
+     "w": "meurtre :",
+     "t": 56.1
+    },
+    {
+     "w": "pour",
+     "t": 56.58
+    },
+    {
+     "w": "violences",
+     "t": 56.79
+    },
+    {
+     "w": "ayant",
+     "t": 57.0
+    },
+    {
+     "w": "entraîné",
+     "t": 57.38
+    },
+    {
+     "w": "une",
+     "t": 57.74
+    },
+    {
+     "w": "infirmité.",
+     "t": 57.88
+    },
+    {
+     "w": "Un",
+     "t": 58.56
+    },
+    {
+     "w": "détail",
+     "t": 58.64
+    },
+    {
+     "w": "a",
+     "t": 58.933
+    },
+    {
+     "w": "pesé :",
+     "t": 59.227
+    },
+    {
+     "w": "il",
+     "t": 59.52
+    },
+    {
+     "w": "avait",
+     "t": 59.62
+    },
+    {
+     "w": "déjà",
+     "t": 59.76
+    },
+    {
+     "w": "été",
+     "t": 60.0
+    },
+    {
+     "w": "condamné",
+     "t": 60.16
+    },
+    {
+     "w": "pour",
+     "t": 60.54
+    },
+    {
+     "w": "violences,",
+     "t": 60.78
+    },
+    {
+     "w": "en",
+     "t": 61.02
+    },
+    {
+     "w": "2020.",
+     "t": 61.4
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Toi, tu lui aurais donné combien ? Écris un chiffre en commentaire. Et abonne-toi : demain, une nouvelle affaire réelle.",
+   "start": 62.25,
+   "dur": 5.095,
+   "words": [
+    {
+     "w": "Toi,",
+     "t": 62.25
+    },
+    {
+     "w": "tu",
+     "t": 62.68
+    },
+    {
+     "w": "lui",
+     "t": 62.78
+    },
+    {
+     "w": "aurais",
+     "t": 62.9
+    },
+    {
+     "w": "donné",
+     "t": 63.06
+    },
+    {
+     "w": "combien ?",
+     "t": 63.18
+    },
+    {
+     "w": "Écris",
+     "t": 63.82
+    },
+    {
+     "w": "un",
+     "t": 64.0
+    },
+    {
+     "w": "chiffre",
+     "t": 64.1
+    },
+    {
+     "w": "en",
+     "t": 64.34
+    },
+    {
+     "w": "commentaire.",
+     "t": 64.38
+    },
+    {
+     "w": "Et",
+     "t": 64.98
+    },
+    {
+     "w": "abonne-toi :",
+     "t": 65.37
+    },
+    {
+     "w": "demain,",
+     "t": 65.76
+    },
+    {
+     "w": "une",
+     "t": 66.2
+    },
+    {
+     "w": "nouvelle",
+     "t": 66.3
+    },
+    {
+     "w": "affaire",
+     "t": 66.54
+    },
+    {
+     "w": "réelle.",
+     "t": 66.88
+    }
+   ]
+  }
+ ]
+}

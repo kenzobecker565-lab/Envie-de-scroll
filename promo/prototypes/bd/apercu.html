@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><style>body{margin:0;background:#f4ecd8;display:flex;flex-wrap:wrap;width:1080px}svg{width:180px;height:216px}div{font:12px sans-serif;width:180px;text-align:center}</style></head><body>
+<script type="module">
+import { peep } from './peeps.js'
+const lib = await (await fetch('peeps.json')).json()
+const q = new URLSearchParams(location.search)
+const kind = q.get('kind') || 'body'
+const names = Object.keys(lib.parts).filter((k) => k.startsWith(kind + '/')).map((k) => k.split('/')[1])
+for (const n of names) {
+  const d = document.createElement('div')
+  const o = kind === 'body' ? { body: n, head: 'ShortOne', face: 'Calm' } : kind === 'face' ? { body: 'Turtleneck', head: 'ShortOne', face: n } : { body: 'Turtleneck', head: n, face: 'Calm' }
+  d.innerHTML = peep(lib, { ...o, colors: { skinColor: '#f2c8a2', topColor: '#2aa198', hairColor: '#3b2416', blazerColor: '#22252e', jacketColor: '#c43a2f' } }).outerHTML + n
+  document.body.append(d)
+}
+window.__ready = true
+window.__shot = () => ''
+</script></body></html>

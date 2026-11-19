@@ -1,0 +1,109 @@
+{
+ "_doc": "« La cagnotte » : une influenceuse récolte 80 000 € pour un sans-abri et ne lui en remet que 6 000 (affaire fictive). Voix ElevenLabs (Eleven v4) : Maëlys « Alicia », Gérard « Voix grand père », narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "maelys": {
+   "name": "maelys",
+   "file": "media/maelys.wav"
+  },
+  "gerard": {
+   "name": "gerard",
+   "file": "media/gerard.wav"
+  },
+  "maelys2": {
+   "name": "maelys2",
+   "file": "media/maelys2.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-maelys",
+   "who": "maelys",
+   "text": "Les gars, grâce à vous… voilà l'enveloppe pour Gérard !"
+  },
+  {
+   "id": "01b-gerard",
+   "who": "gerard",
+   "text": "Merci… merci mademoiselle. Vous m'avez sauvé la vie.",
+   "gap": 0.57
+  },
+  {
+   "id": "01c-maelys",
+   "who": "maelys2",
+   "text": "Euh… on coupe, on coupe !",
+   "gap": -0.1
+  },
+  {
+   "id": "02-cagnotte",
+   "who": "narrateur",
+   "text": "Maëlys, 23 ans, 412 000 abonnés. En trois jours, sa cagnotte pour Gérard, 61 ans, sans-abri, récolte 80 000 euros.",
+   "gap": 0.6
+  },
+  {
+   "id": "03-enveloppe",
+   "who": "narrateur",
+   "text": "Gérard en a reçu 6 000. En liquide. Dans une enveloppe avec un cœur. Aujourd'hui, Maëlys est jugée pour abus de confiance."
+  },
+  {
+   "id": "04-commission",
+   "who": "procureur",
+   "text": "Six mille euros sur quatre-vingt mille. Vous appelez ça un don ? Moi, j'appelle ça une commission."
+  },
+  {
+   "id": "05-loyer",
+   "who": "avocate",
+   "text": "Dix-huit mois de loyer payés d'avance. Un dentiste. Une formation. Il n'a pas reçu une enveloppe. Il a reçu une vie."
+  },
+  {
+   "id": "06-recus",
+   "who": "procureur",
+   "text": "Les reçus, maître ? Neuf mille euros. Il en manque soixante-cinq mille. Et une voiture neuve, garée devant chez votre cliente."
+  },
+  {
+   "id": "07-story",
+   "who": "avocate",
+   "text": "Achetée avec ses partenariats. Elle gagne plus en une story que vous en un mois, monsieur le procureur."
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Bienfaitrice maladroite… ou arnaqueuse ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès."
+  },
+  {
+   "id": "09-donateurs",
+   "who": "procureur",
+   "text": "Six mille quatre cent douze personnes ont donné pour Gérard. Pas pour vos frais de gestion."
+  },
+  {
+   "id": "10-zero",
+   "who": "avocate",
+   "text": "Sans elle, Gérard n'aurait rien eu. Zéro. Ceux qui l'insultent aujourd'hui passaient devant lui sans le regarder."
+  },
+  {
+   "id": "11-filme",
+   "who": "procureur",
+   "text": "Elle l'a filmé pour faire pleurer. Elle a encaissé pour elle."
+  },
+  {
+   "id": "12-plainte",
+   "who": "avocate",
+   "text": "Gérard, lui, ne porte pas plainte. Il dit qu'elle lui a sauvé la vie."
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend."
+  }
+ ]
+}

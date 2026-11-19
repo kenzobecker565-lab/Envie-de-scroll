@@ -1,0 +1,1617 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 112.85,
+ "lines": [
+  {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "Sa femme accouchait. Il a volé la voiture du voisin… et grillé six feux rouges.",
+   "start": 0.05,
+   "dur": 3.85,
+   "words": [
+    {
+     "w": "Sa",
+     "t": 0.05
+    },
+    {
+     "w": "femme",
+     "t": 0.21
+    },
+    {
+     "w": "accouchait.",
+     "t": 0.66
+    },
+    {
+     "w": "Il",
+     "t": 1.11
+    },
+    {
+     "w": "a",
+     "t": 1.17
+    },
+    {
+     "w": "volé",
+     "t": 1.25
+    },
+    {
+     "w": "la",
+     "t": 1.45
+    },
+    {
+     "w": "voiture",
+     "t": 1.53
+    },
+    {
+     "w": "du",
+     "t": 1.71
+    },
+    {
+     "w": "voisin…",
+     "t": 1.87
+    },
+    {
+     "w": "et",
+     "t": 2.27
+    },
+    {
+     "w": "grillé",
+     "t": 2.59
+    },
+    {
+     "w": "six",
+     "t": 2.99
+    },
+    {
+     "w": "feux",
+     "t": 3.21
+    },
+    {
+     "w": "rouges.",
+     "t": 3.45
+    }
+   ]
+  },
+  {
+   "id": "01-mehdi",
+   "who": "mehdi",
+   "text": "Respire, Sarah, respire ! On y est dans dix minutes !",
+   "start": 4.4,
+   "dur": 3.78,
+   "words": [
+    {
+     "w": "Respire,",
+     "t": 4.4
+    },
+    {
+     "w": "Sarah,",
+     "t": 5.24
+    },
+    {
+     "w": "respire !",
+     "t": 5.96
+    },
+    {
+     "w": "On",
+     "t": 6.8
+    },
+    {
+     "w": "y",
+     "t": 6.96
+    },
+    {
+     "w": "est",
+     "t": 7.1
+    },
+    {
+     "w": "dans",
+     "t": 7.2
+    },
+    {
+     "w": "dix",
+     "t": 7.34
+    },
+    {
+     "w": "minutes !",
+     "t": 7.64
+    }
+   ]
+  },
+  {
+   "id": "01b-sarah",
+   "who": "sarah",
+   "text": "Mehdi… il arrive, je le sens !",
+   "start": 8.48,
+   "dur": 2.58,
+   "words": [
+    {
+     "w": "Mehdi…",
+     "t": 9.0
+    },
+    {
+     "w": "il",
+     "t": 9.54
+    },
+    {
+     "w": "arrive,",
+     "t": 9.68
+    },
+    {
+     "w": "je",
+     "t": 10.26
+    },
+    {
+     "w": "le",
+     "t": 10.46
+    },
+    {
+     "w": "sens !",
+     "t": 10.54
+    }
+   ]
+  },
+  {
+   "id": "02-mehdi",
+   "who": "narrateur",
+   "text": "Mehdi, 29 ans, livreur. La voiture appartient à Bernard, 71 ans, son voisin. Les clés étaient sur le pare-soleil, comme toujours.",
+   "start": 13.66,
+   "dur": 6.91,
+   "words": [
+    {
+     "w": "Mehdi,",
+     "t": 13.66
+    },
+    {
+     "w": "29",
+     "t": 14.28
+    },
+    {
+     "w": "ans,",
+     "t": 14.62
+    },
+    {
+     "w": "livreur.",
+     "t": 15.1
+    },
+    {
+     "w": "La",
+     "t": 15.72
+    },
+    {
+     "w": "voiture",
+     "t": 15.78
+    },
+    {
+     "w": "appartient",
+     "t": 15.98
+    },
+    {
+     "w": "à",
+     "t": 16.44
+    },
+    {
+     "w": "Bernard,",
+     "t": 16.5
+    },
+    {
+     "w": "71",
+     "t": 17.12
+    },
+    {
+     "w": "ans,",
+     "t": 17.4
+    },
+    {
+     "w": "son",
+     "t": 17.98
+    },
+    {
+     "w": "voisin.",
+     "t": 18.08
+    },
+    {
+     "w": "Les",
+     "t": 18.56
+    },
+    {
+     "w": "clés",
+     "t": 18.68
+    },
+    {
+     "w": "étaient",
+     "t": 18.88
+    },
+    {
+     "w": "sur",
+     "t": 19.0
+    },
+    {
+     "w": "le",
+     "t": 19.18
+    },
+    {
+     "w": "pare-soleil,",
+     "t": 19.57
+    },
+    {
+     "w": "comme",
+     "t": 19.96
+    },
+    {
+     "w": "toujours.",
+     "t": 20.04
+    }
+   ]
+  },
+  {
+   "id": "03-inaya",
+   "who": "narrateur",
+   "text": "Inaya est née sur le parking de la maternité. Trois semaines plus tard, Bernard reçoit six amendes. Son permis : zéro point. Aujourd'hui, c'est Mehdi qu'on juge.",
+   "start": 20.82,
+   "dur": 7.88,
+   "words": [
+    {
+     "w": "Inaya",
+     "t": 20.82
+    },
+    {
+     "w": "est",
+     "t": 21.2
+    },
+    {
+     "w": "née",
+     "t": 21.46
+    },
+    {
+     "w": "sur",
+     "t": 21.56
+    },
+    {
+     "w": "le",
+     "t": 21.7
+    },
+    {
+     "w": "parking",
+     "t": 21.8
+    },
+    {
+     "w": "de",
+     "t": 22.06
+    },
+    {
+     "w": "la",
+     "t": 22.24
+    },
+    {
+     "w": "maternité.",
+     "t": 22.32
+    },
+    {
+     "w": "Trois",
+     "t": 23.04
+    },
+    {
+     "w": "semaines",
+     "t": 23.24
+    },
+    {
+     "w": "plus",
+     "t": 23.32
+    },
+    {
+     "w": "tard,",
+     "t": 23.52
+    },
+    {
+     "w": "Bernard",
+     "t": 23.98
+    },
+    {
+     "w": "reçoit",
+     "t": 24.22
+    },
+    {
+     "w": "six",
+     "t": 24.76
+    },
+    {
+     "w": "amendes.",
+     "t": 24.96
+    },
+    {
+     "w": "Son",
+     "t": 25.6
+    },
+    {
+     "w": "permis :",
+     "t": 25.7
+    },
+    {
+     "w": "zéro",
+     "t": 26.32
+    },
+    {
+     "w": "point.",
+     "t": 26.56
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 26.888
+    },
+    {
+     "w": "c'est",
+     "t": 27.216
+    },
+    {
+     "w": "Mehdi",
+     "t": 27.544
+    },
+    {
+     "w": "qu'on",
+     "t": 27.872
+    },
+    {
+     "w": "juge.",
+     "t": 28.2
+    }
+   ]
+  },
+  {
+   "id": "04-tele",
+   "who": "procureur",
+   "text": "Personne ne reproche à cet homme d'avoir eu peur. On lui reproche d'avoir choisi. Bernard ne dormait pas ce soir-là. Sa télé était allumée, on la voyait depuis la rue. Il suffisait de traverser et de frapper.",
+   "start": 28.95,
+   "dur": 9.79,
+   "words": [
+    {
+     "w": "Personne",
+     "t": 28.95
+    },
+    {
+     "w": "ne",
+     "t": 29.37
+    },
+    {
+     "w": "reproche",
+     "t": 29.45
+    },
+    {
+     "w": "à",
+     "t": 29.81
+    },
+    {
+     "w": "cet",
+     "t": 29.91
+    },
+    {
+     "w": "homme",
+     "t": 30.01
+    },
+    {
+     "w": "d'avoir",
+     "t": 30.22
+    },
+    {
+     "w": "eu",
+     "t": 30.43
+    },
+    {
+     "w": "peur.",
+     "t": 30.59
+    },
+    {
+     "w": "On",
+     "t": 31.07
+    },
+    {
+     "w": "lui",
+     "t": 31.15
+    },
+    {
+     "w": "reproche",
+     "t": 31.27
+    },
+    {
+     "w": "d'avoir",
+     "t": 31.59
+    },
+    {
+     "w": "choisi.",
+     "t": 31.91
+    },
+    {
+     "w": "Bernard",
+     "t": 32.65
+    },
+    {
+     "w": "ne",
+     "t": 32.87
+    },
+    {
+     "w": "dormait",
+     "t": 33.15
+    },
+    {
+     "w": "pas",
+     "t": 33.47
+    },
+    {
+     "w": "ce",
+     "t": 33.63
+    },
+    {
+     "w": "soir-là.",
+     "t": 34.0
+    },
+    {
+     "w": "Sa",
+     "t": 34.37
+    },
+    {
+     "w": "télé",
+     "t": 34.47
+    },
+    {
+     "w": "était",
+     "t": 34.67
+    },
+    {
+     "w": "allumée,",
+     "t": 34.89
+    },
+    {
+     "w": "on",
+     "t": 35.61
+    },
+    {
+     "w": "la",
+     "t": 35.69
+    },
+    {
+     "w": "voyait",
+     "t": 35.77
+    },
+    {
+     "w": "depuis",
+     "t": 36.07
+    },
+    {
+     "w": "la",
+     "t": 36.21
+    },
+    {
+     "w": "rue.",
+     "t": 36.39
+    },
+    {
+     "w": "Il",
+     "t": 36.73
+    },
+    {
+     "w": "suffisait",
+     "t": 36.81
+    },
+    {
+     "w": "de",
+     "t": 37.27
+    },
+    {
+     "w": "traverser",
+     "t": 37.35
+    },
+    {
+     "w": "et",
+     "t": 37.95
+    },
+    {
+     "w": "de",
+     "t": 38.15
+    },
+    {
+     "w": "frapper.",
+     "t": 38.27
+    }
+   ]
+  },
+  {
+   "id": "05-cordon",
+   "who": "avocate",
+   "text": "Frapper, expliquer, attendre qu'un homme de 71 ans trouve ses chaussons… La sage-femme l'a écrit noir sur blanc : le cordon était enroulé autour du cou d'Inaya. Chaque minute comptait.",
+   "start": 38.99,
+   "dur": 8.888,
+   "words": [
+    {
+     "w": "Frapper,",
+     "t": 39.523
+    },
+    {
+     "w": "expliquer,",
+     "t": 40.057
+    },
+    {
+     "w": "attendre",
+     "t": 40.59
+    },
+    {
+     "w": "qu'un",
+     "t": 40.86
+    },
+    {
+     "w": "homme",
+     "t": 41.13
+    },
+    {
+     "w": "de",
+     "t": 41.27
+    },
+    {
+     "w": "71",
+     "t": 41.37
+    },
+    {
+     "w": "ans",
+     "t": 41.75
+    },
+    {
+     "w": "trouve",
+     "t": 42.07
+    },
+    {
+     "w": "ses",
+     "t": 42.25
+    },
+    {
+     "w": "chaussons…",
+     "t": 42.43
+    },
+    {
+     "w": "La",
+     "t": 43.05
+    },
+    {
+     "w": "sage-femme",
+     "t": 43.243
+    },
+    {
+     "w": "l'a",
+     "t": 43.437
+    },
+    {
+     "w": "écrit",
+     "t": 43.63
+    },
+    {
+     "w": "noir",
+     "t": 43.77
+    },
+    {
+     "w": "sur",
+     "t": 44.03
+    },
+    {
+     "w": "blanc :",
+     "t": 44.25
+    },
+    {
+     "w": "le",
+     "t": 44.61
+    },
+    {
+     "w": "cordon",
+     "t": 44.69
+    },
+    {
+     "w": "était",
+     "t": 45.09
+    },
+    {
+     "w": "enroulé",
+     "t": 45.27
+    },
+    {
+     "w": "autour",
+     "t": 45.77
+    },
+    {
+     "w": "du",
+     "t": 46.01
+    },
+    {
+     "w": "cou",
+     "t": 46.303
+    },
+    {
+     "w": "d'Inaya.",
+     "t": 46.597
+    },
+    {
+     "w": "Chaque",
+     "t": 46.89
+    },
+    {
+     "w": "minute",
+     "t": 47.17
+    },
+    {
+     "w": "comptait.",
+     "t": 47.37
+    }
+   ]
+  },
+  {
+   "id": "06-feux",
+   "who": "procureur",
+   "text": "Six feux rouges, à trois heures du matin. C'est l'heure des camions de livraison. À chaque carrefour, il jouait trois vies pour en sauver une. Et la loi a un nom pour ça : la mise en danger d'autrui.",
+   "start": 48.128,
+   "dur": 8.86,
+   "words": [
+    {
+     "w": "Six",
+     "t": 48.128
+    },
+    {
+     "w": "feux",
+     "t": 48.348
+    },
+    {
+     "w": "rouges,",
+     "t": 48.588
+    },
+    {
+     "w": "à",
+     "t": 49.028
+    },
+    {
+     "w": "trois",
+     "t": 49.108
+    },
+    {
+     "w": "heures",
+     "t": 49.348
+    },
+    {
+     "w": "du",
+     "t": 49.528
+    },
+    {
+     "w": "matin.",
+     "t": 49.628
+    },
+    {
+     "w": "C'est",
+     "t": 49.888
+    },
+    {
+     "w": "l'heure",
+     "t": 50.148
+    },
+    {
+     "w": "des",
+     "t": 50.408
+    },
+    {
+     "w": "camions",
+     "t": 50.548
+    },
+    {
+     "w": "de",
+     "t": 50.828
+    },
+    {
+     "w": "livraison.",
+     "t": 50.908
+    },
+    {
+     "w": "À",
+     "t": 51.488
+    },
+    {
+     "w": "chaque",
+     "t": 51.608
+    },
+    {
+     "w": "carrefour,",
+     "t": 51.828
+    },
+    {
+     "w": "il",
+     "t": 52.468
+    },
+    {
+     "w": "jouait",
+     "t": 52.568
+    },
+    {
+     "w": "trois",
+     "t": 52.808
+    },
+    {
+     "w": "vies",
+     "t": 53.028
+    },
+    {
+     "w": "pour",
+     "t": 53.268
+    },
+    {
+     "w": "en",
+     "t": 53.428
+    },
+    {
+     "w": "sauver",
+     "t": 53.528
+    },
+    {
+     "w": "une.",
+     "t": 53.788
+    },
+    {
+     "w": "Et",
+     "t": 54.248
+    },
+    {
+     "w": "la",
+     "t": 54.308
+    },
+    {
+     "w": "loi",
+     "t": 54.408
+    },
+    {
+     "w": "a",
+     "t": 54.568
+    },
+    {
+     "w": "un",
+     "t": 54.788
+    },
+    {
+     "w": "nom",
+     "t": 54.908
+    },
+    {
+     "w": "pour",
+     "t": 55.088
+    },
+    {
+     "w": "ça :",
+     "t": 55.288
+    },
+    {
+     "w": "la",
+     "t": 55.688
+    },
+    {
+     "w": "mise",
+     "t": 55.788
+    },
+    {
+     "w": "en",
+     "t": 56.008
+    },
+    {
+     "w": "danger",
+     "t": 56.168
+    },
+    {
+     "w": "d'autrui.",
+     "t": 56.615
+    }
+   ]
+  },
+  {
+   "id": "07-necessite",
+   "who": "avocate",
+   "text": "La loi a aussi un nom pour ce qu'il a fait : l'état de nécessité. Quand un danger réel menace quelqu'un, on a le droit de commettre une infraction pour l'éviter. C'est écrit dans le Code pénal, article 122-7.",
+   "start": 57.238,
+   "dur": 9.64,
+   "words": [
+    {
+     "w": "La",
+     "t": 57.238
+    },
+    {
+     "w": "loi",
+     "t": 57.378
+    },
+    {
+     "w": "a",
+     "t": 57.538
+    },
+    {
+     "w": "aussi",
+     "t": 57.778
+    },
+    {
+     "w": "un",
+     "t": 57.978
+    },
+    {
+     "w": "nom",
+     "t": 58.138
+    },
+    {
+     "w": "pour",
+     "t": 58.318
+    },
+    {
+     "w": "ce",
+     "t": 58.498
+    },
+    {
+     "w": "qu'il",
+     "t": 58.628
+    },
+    {
+     "w": "a",
+     "t": 58.758
+    },
+    {
+     "w": "fait :",
+     "t": 58.818
+    },
+    {
+     "w": "l'état",
+     "t": 59.148
+    },
+    {
+     "w": "de",
+     "t": 59.478
+    },
+    {
+     "w": "nécessité.",
+     "t": 59.598
+    },
+    {
+     "w": "Quand",
+     "t": 60.318
+    },
+    {
+     "w": "un",
+     "t": 60.418
+    },
+    {
+     "w": "danger",
+     "t": 60.558
+    },
+    {
+     "w": "réel",
+     "t": 60.798
+    },
+    {
+     "w": "menace",
+     "t": 61.218
+    },
+    {
+     "w": "quelqu'un,",
+     "t": 61.618
+    },
+    {
+     "w": "on",
+     "t": 62.018
+    },
+    {
+     "w": "a",
+     "t": 62.098
+    },
+    {
+     "w": "le",
+     "t": 62.198
+    },
+    {
+     "w": "droit",
+     "t": 62.278
+    },
+    {
+     "w": "de",
+     "t": 62.478
+    },
+    {
+     "w": "commettre",
+     "t": 62.598
+    },
+    {
+     "w": "une",
+     "t": 62.878
+    },
+    {
+     "w": "infraction",
+     "t": 62.998
+    },
+    {
+     "w": "pour",
+     "t": 63.358
+    },
+    {
+     "w": "l'éviter.",
+     "t": 63.638
+    },
+    {
+     "w": "C'est",
+     "t": 63.918
+    },
+    {
+     "w": "écrit",
+     "t": 64.198
+    },
+    {
+     "w": "dans",
+     "t": 64.398
+    },
+    {
+     "w": "le",
+     "t": 64.518
+    },
+    {
+     "w": "Code",
+     "t": 64.578
+    },
+    {
+     "w": "pénal,",
+     "t": 64.718
+    },
+    {
+     "w": "article",
+     "t": 65.258
+    },
+    {
+     "w": "122-7.",
+     "t": 66.088
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Un père qui sauve sa fille… ou un voleur qui ruine son voisin ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
+   "start": 67.128,
+   "dur": 6.51,
+   "words": [
+    {
+     "w": "Un",
+     "t": 67.128
+    },
+    {
+     "w": "père",
+     "t": 67.268
+    },
+    {
+     "w": "qui",
+     "t": 67.448
+    },
+    {
+     "w": "sauve",
+     "t": 67.588
+    },
+    {
+     "w": "sa",
+     "t": 67.848
+    },
+    {
+     "w": "fille…",
+     "t": 67.948
+    },
+    {
+     "w": "ou",
+     "t": 68.588
+    },
+    {
+     "w": "un",
+     "t": 68.908
+    },
+    {
+     "w": "voleur",
+     "t": 69.308
+    },
+    {
+     "w": "qui",
+     "t": 69.668
+    },
+    {
+     "w": "ruine",
+     "t": 69.768
+    },
+    {
+     "w": "son",
+     "t": 69.988
+    },
+    {
+     "w": "voisin ?",
+     "t": 70.108
+    },
+    {
+     "w": "Ici,",
+     "t": 70.608
+    },
+    {
+     "w": "c'est",
+     "t": 70.898
+    },
+    {
+     "w": "toi",
+     "t": 71.188
+    },
+    {
+     "w": "qui",
+     "t": 71.308
+    },
+    {
+     "w": "juges.",
+     "t": 71.641
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 71.975
+    },
+    {
+     "w": "pour",
+     "t": 72.308
+    },
+    {
+     "w": "siéger",
+     "t": 72.468
+    },
+    {
+     "w": "au",
+     "t": 72.748
+    },
+    {
+     "w": "prochain",
+     "t": 72.888
+    },
+    {
+     "w": "procès.",
+     "t": 73.128
+    }
+   ]
+  },
+  {
+   "id": "09-chocolats",
+   "who": "procureur",
+   "text": "Le lendemain, il a rapporté la voiture, le plein fait, avec des chocolats. Les six amendes, en revanche, il les a laissées dans la boîte aux lettres de Bernard. Aujourd'hui, Bernard va chez son cardiologue en bus, avec deux changements.",
+   "start": 73.888,
+   "dur": 10.54,
+   "words": [
+    {
+     "w": "Le",
+     "t": 73.888
+    },
+    {
+     "w": "lendemain,",
+     "t": 74.028
+    },
+    {
+     "w": "il",
+     "t": 74.588
+    },
+    {
+     "w": "a",
+     "t": 74.708
+    },
+    {
+     "w": "rapporté",
+     "t": 74.788
+    },
+    {
+     "w": "la",
+     "t": 75.148
+    },
+    {
+     "w": "voiture,",
+     "t": 75.228
+    },
+    {
+     "w": "le",
+     "t": 75.888
+    },
+    {
+     "w": "plein",
+     "t": 75.988
+    },
+    {
+     "w": "fait,",
+     "t": 76.188
+    },
+    {
+     "w": "avec",
+     "t": 76.468
+    },
+    {
+     "w": "des",
+     "t": 76.788
+    },
+    {
+     "w": "chocolats.",
+     "t": 76.988
+    },
+    {
+     "w": "Les",
+     "t": 77.588
+    },
+    {
+     "w": "six",
+     "t": 77.668
+    },
+    {
+     "w": "amendes,",
+     "t": 77.868
+    },
+    {
+     "w": "en",
+     "t": 78.288
+    },
+    {
+     "w": "revanche,",
+     "t": 78.328
+    },
+    {
+     "w": "il",
+     "t": 78.948
+    },
+    {
+     "w": "les",
+     "t": 79.048
+    },
+    {
+     "w": "a",
+     "t": 79.168
+    },
+    {
+     "w": "laissées",
+     "t": 79.368
+    },
+    {
+     "w": "dans",
+     "t": 79.568
+    },
+    {
+     "w": "la",
+     "t": 79.648
+    },
+    {
+     "w": "boîte",
+     "t": 79.748
+    },
+    {
+     "w": "aux",
+     "t": 80.008
+    },
+    {
+     "w": "lettres",
+     "t": 80.008
+    },
+    {
+     "w": "de",
+     "t": 80.268
+    },
+    {
+     "w": "Bernard.",
+     "t": 80.368
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 80.978
+    },
+    {
+     "w": "Bernard",
+     "t": 81.588
+    },
+    {
+     "w": "va",
+     "t": 81.828
+    },
+    {
+     "w": "chez",
+     "t": 82.088
+    },
+    {
+     "w": "son",
+     "t": 82.188
+    },
+    {
+     "w": "cardiologue",
+     "t": 82.348
+    },
+    {
+     "w": "en",
+     "t": 82.808
+    },
+    {
+     "w": "bus,",
+     "t": 82.928
+    },
+    {
+     "w": "avec",
+     "t": 83.408
+    },
+    {
+     "w": "deux",
+     "t": 83.608
+    },
+    {
+     "w": "changements.",
+     "t": 83.888
+    }
+   ]
+  },
+  {
+   "id": "10-echeancier",
+   "who": "avocate",
+   "text": "Mon client a proposé de tout payer. Il gagne 1 300 euros par mois, et il a demandé un échéancier. Bernard a préféré porter plainte.",
+   "start": 84.678,
+   "dur": 6.13,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 84.678
+    },
+    {
+     "w": "client",
+     "t": 84.818
+    },
+    {
+     "w": "a",
+     "t": 85.058
+    },
+    {
+     "w": "proposé",
+     "t": 85.218
+    },
+    {
+     "w": "de",
+     "t": 85.618
+    },
+    {
+     "w": "tout",
+     "t": 85.718
+    },
+    {
+     "w": "payer.",
+     "t": 85.878
+    },
+    {
+     "w": "Il",
+     "t": 86.358
+    },
+    {
+     "w": "gagne",
+     "t": 86.438
+    },
+    {
+     "w": "1",
+     "t": 86.625
+    },
+    {
+     "w": "300",
+     "t": 86.811
+    },
+    {
+     "w": "euros",
+     "t": 86.998
+    },
+    {
+     "w": "par",
+     "t": 87.358
+    },
+    {
+     "w": "mois,",
+     "t": 87.538
+    },
+    {
+     "w": "et",
+     "t": 87.998
+    },
+    {
+     "w": "il",
+     "t": 88.018
+    },
+    {
+     "w": "a",
+     "t": 88.178
+    },
+    {
+     "w": "demandé",
+     "t": 88.278
+    },
+    {
+     "w": "un",
+     "t": 88.538
+    },
+    {
+     "w": "échéancier.",
+     "t": 88.678
+    },
+    {
+     "w": "Bernard",
+     "t": 89.298
+    },
+    {
+     "w": "a",
+     "t": 89.538
+    },
+    {
+     "w": "préféré",
+     "t": 89.778
+    },
+    {
+     "w": "porter",
+     "t": 90.058
+    },
+    {
+     "w": "plainte.",
+     "t": 90.258
+    }
+   ]
+  },
+  {
+   "id": "11-urgence",
+   "who": "procureur",
+   "text": "Une urgence n'efface pas tout. Sinon, demain, chaque retard devient une urgence, et chaque voiture garée devient un taxi.",
+   "start": 91.058,
+   "dur": 6.23,
+   "words": [
+    {
+     "w": "Une",
+     "t": 91.058
+    },
+    {
+     "w": "urgence",
+     "t": 91.218
+    },
+    {
+     "w": "n'efface",
+     "t": 91.588
+    },
+    {
+     "w": "pas",
+     "t": 91.958
+    },
+    {
+     "w": "tout.",
+     "t": 92.118
+    },
+    {
+     "w": "Sinon,",
+     "t": 92.458
+    },
+    {
+     "w": "demain,",
+     "t": 92.718
+    },
+    {
+     "w": "chaque",
+     "t": 93.538
+    },
+    {
+     "w": "retard",
+     "t": 93.778
+    },
+    {
+     "w": "devient",
+     "t": 94.138
+    },
+    {
+     "w": "une",
+     "t": 94.438
+    },
+    {
+     "w": "urgence,",
+     "t": 94.638
+    },
+    {
+     "w": "et",
+     "t": 95.058
+    },
+    {
+     "w": "chaque",
+     "t": 95.338
+    },
+    {
+     "w": "voiture",
+     "t": 95.538
+    },
+    {
+     "w": "garée",
+     "t": 95.798
+    },
+    {
+     "w": "devient",
+     "t": 96.238
+    },
+    {
+     "w": "un",
+     "t": 96.618
+    },
+    {
+     "w": "taxi.",
+     "t": 96.798
+    }
+   ]
+  },
+  {
+   "id": "12-excuse",
+   "who": "avocate",
+   "text": "Regardez-le bien. Il ne s'excusera pas d'avoir fait naître sa fille. Il s'excuse seulement de ne pas avoir eu le temps de demander.",
+   "start": 97.538,
+   "dur": 5.51,
+   "words": [
+    {
+     "w": "Regardez-le",
+     "t": 97.788
+    },
+    {
+     "w": "bien.",
+     "t": 98.038
+    },
+    {
+     "w": "Il",
+     "t": 98.398
+    },
+    {
+     "w": "ne",
+     "t": 98.478
+    },
+    {
+     "w": "s'excusera",
+     "t": 98.758
+    },
+    {
+     "w": "pas",
+     "t": 99.038
+    },
+    {
+     "w": "d'avoir",
+     "t": 99.238
+    },
+    {
+     "w": "fait",
+     "t": 99.438
+    },
+    {
+     "w": "naître",
+     "t": 99.638
+    },
+    {
+     "w": "sa",
+     "t": 99.838
+    },
+    {
+     "w": "fille.",
+     "t": 99.998
+    },
+    {
+     "w": "Il",
+     "t": 100.418
+    },
+    {
+     "w": "s'excuse",
+     "t": 100.678
+    },
+    {
+     "w": "seulement",
+     "t": 100.938
+    },
+    {
+     "w": "de",
+     "t": 101.278
+    },
+    {
+     "w": "ne",
+     "t": 101.498
+    },
+    {
+     "w": "pas",
+     "t": 101.618
+    },
+    {
+     "w": "avoir",
+     "t": 101.758
+    },
+    {
+     "w": "eu",
+     "t": 101.998
+    },
+    {
+     "w": "le",
+     "t": 102.118
+    },
+    {
+     "w": "temps",
+     "t": 102.218
+    },
+    {
+     "w": "de",
+     "t": 102.398
+    },
+    {
+     "w": "demander.",
+     "t": 102.498
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend.",
+   "start": 103.298,
+   "dur": 6.15,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 103.298
+    },
+    {
+     "w": "es",
+     "t": 103.458
+    },
+    {
+     "w": "le",
+     "t": 103.528
+    },
+    {
+     "w": "juré.",
+     "t": 103.598
+    },
+    {
+     "w": "Coupable…",
+     "t": 104.138
+    },
+    {
+     "w": "ou",
+     "t": 104.578
+    },
+    {
+     "w": "non",
+     "t": 104.998
+    },
+    {
+     "w": "coupable ?",
+     "t": 105.218
+    },
+    {
+     "w": "Écris",
+     "t": 105.898
+    },
+    {
+     "w": "ton",
+     "t": 106.118
+    },
+    {
+     "w": "verdict",
+     "t": 106.238
+    },
+    {
+     "w": "en",
+     "t": 106.458
+    },
+    {
+     "w": "commentaire.",
+     "t": 106.658
+    },
+    {
+     "w": "Et",
+     "t": 107.398
+    },
+    {
+     "w": "abonne-toi :",
+     "t": 107.788
+    },
+    {
+     "w": "le",
+     "t": 108.178
+    },
+    {
+     "w": "prochain",
+     "t": 108.238
+    },
+    {
+     "w": "procès",
+     "t": 108.578
+    },
+    {
+     "w": "t'attend.",
+     "t": 109.013
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,607 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 49.96,
+ "lines": [
+  {
+   "id": "01-accroche",
+   "who": "narrateur",
+   "text": "Il a volé 4 millions d'euros de diamants… sans jamais forcer une seule porte.",
+   "start": 0.6,
+   "dur": 4.48,
+   "words": [
+    {
+     "w": "Il",
+     "t": 0.6
+    },
+    {
+     "w": "a",
+     "t": 0.72
+    },
+    {
+     "w": "volé",
+     "t": 0.82
+    },
+    {
+     "w": "4",
+     "t": 1.04
+    },
+    {
+     "w": "millions",
+     "t": 1.36
+    },
+    {
+     "w": "d'euros",
+     "t": 1.71
+    },
+    {
+     "w": "de",
+     "t": 2.06
+    },
+    {
+     "w": "diamants…",
+     "t": 2.22
+    },
+    {
+     "w": "sans",
+     "t": 2.88
+    },
+    {
+     "w": "jamais",
+     "t": 3.22
+    },
+    {
+     "w": "forcer",
+     "t": 3.64
+    },
+    {
+     "w": "une",
+     "t": 4.0
+    },
+    {
+     "w": "seule",
+     "t": 4.3
+    },
+    {
+     "w": "porte.",
+     "t": 4.48
+    }
+   ]
+  },
+  {
+   "id": "02-comment",
+   "who": "narrateur",
+   "text": "Voici comment.",
+   "start": 5.43,
+   "dur": 0.88,
+   "words": [
+    {
+     "w": "Voici",
+     "t": 5.48
+    },
+    {
+     "w": "comment.",
+     "t": 5.86
+    }
+   ]
+  },
+  {
+   "id": "03-expert",
+   "who": "narrateur",
+   "text": "Trois mois avant, il se présente à la bijouterie comme expert en assurances. Costume, badge, carte de visite. Le gérant lui fait visiter… tout.",
+   "start": 6.81,
+   "dur": 8.64,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 6.85
+    },
+    {
+     "w": "mois",
+     "t": 7.07
+    },
+    {
+     "w": "avant,",
+     "t": 7.19
+    },
+    {
+     "w": "il",
+     "t": 7.91
+    },
+    {
+     "w": "se",
+     "t": 7.99
+    },
+    {
+     "w": "présente",
+     "t": 8.13
+    },
+    {
+     "w": "à",
+     "t": 8.43
+    },
+    {
+     "w": "la",
+     "t": 8.53
+    },
+    {
+     "w": "bijouterie",
+     "t": 8.59
+    },
+    {
+     "w": "comme",
+     "t": 9.01
+    },
+    {
+     "w": "expert",
+     "t": 9.21
+    },
+    {
+     "w": "en",
+     "t": 9.65
+    },
+    {
+     "w": "assurances.",
+     "t": 10.29
+    },
+    {
+     "w": "Costume,",
+     "t": 10.93
+    },
+    {
+     "w": "badge,",
+     "t": 11.57
+    },
+    {
+     "w": "carte",
+     "t": 12.11
+    },
+    {
+     "w": "de",
+     "t": 12.21
+    },
+    {
+     "w": "visite.",
+     "t": 12.43
+    },
+    {
+     "w": "Le",
+     "t": 13.23
+    },
+    {
+     "w": "gérant",
+     "t": 13.35
+    },
+    {
+     "w": "lui",
+     "t": 13.57
+    },
+    {
+     "w": "fait",
+     "t": 13.73
+    },
+    {
+     "w": "visiter…",
+     "t": 13.89
+    },
+    {
+     "w": "tout.",
+     "t": 15.07
+    }
+   ]
+  },
+  {
+   "id": "04-detail",
+   "who": "narrateur",
+   "text": "Il observe, il note. Et il remarque un détail : chaque vendredi soir, les diamants partent au coffre de la banque… dans une simple mallette.",
+   "start": 15.85,
+   "dur": 8.36,
+   "words": [
+    {
+     "w": "Il",
+     "t": 15.88
+    },
+    {
+     "w": "observe,",
+     "t": 15.98
+    },
+    {
+     "w": "il",
+     "t": 17.06
+    },
+    {
+     "w": "note.",
+     "t": 17.14
+    },
+    {
+     "w": "Et",
+     "t": 17.96
+    },
+    {
+     "w": "il",
+     "t": 18.04
+    },
+    {
+     "w": "remarque",
+     "t": 18.12
+    },
+    {
+     "w": "un",
+     "t": 18.46
+    },
+    {
+     "w": "détail :",
+     "t": 18.56
+    },
+    {
+     "w": "chaque",
+     "t": 19.48
+    },
+    {
+     "w": "vendredi",
+     "t": 19.72
+    },
+    {
+     "w": "soir,",
+     "t": 20.02
+    },
+    {
+     "w": "les",
+     "t": 20.82
+    },
+    {
+     "w": "diamants",
+     "t": 20.9
+    },
+    {
+     "w": "partent",
+     "t": 21.18
+    },
+    {
+     "w": "au",
+     "t": 21.54
+    },
+    {
+     "w": "coffre",
+     "t": 21.6
+    },
+    {
+     "w": "de",
+     "t": 21.86
+    },
+    {
+     "w": "la",
+     "t": 21.98
+    },
+    {
+     "w": "banque…",
+     "t": 22.1
+    },
+    {
+     "w": "dans",
+     "t": 22.52
+    },
+    {
+     "w": "une",
+     "t": 23.0
+    },
+    {
+     "w": "simple",
+     "t": 23.22
+    },
+    {
+     "w": "mallette.",
+     "t": 23.54
+    }
+   ]
+  },
+  {
+   "id": "05-coursier",
+   "who": "narrateur",
+   "text": "Le vendredi suivant, à 17 h 55, un coursier en uniforme se présente. Le bon de livraison est parfait. La signature aussi.",
+   "start": 24.66,
+   "dur": 7.7,
+   "words": [
+    {
+     "w": "Le",
+     "t": 24.66
+    },
+    {
+     "w": "vendredi",
+     "t": 24.88
+    },
+    {
+     "w": "suivant,",
+     "t": 25.24
+    },
+    {
+     "w": "à",
+     "t": 25.94
+    },
+    {
+     "w": "17",
+     "t": 26.335
+    },
+    {
+     "w": "h",
+     "t": 26.73
+    },
+    {
+     "w": "55,",
+     "t": 27.125
+    },
+    {
+     "w": "un",
+     "t": 27.52
+    },
+    {
+     "w": "coursier",
+     "t": 27.76
+    },
+    {
+     "w": "en",
+     "t": 28.0
+    },
+    {
+     "w": "uniforme",
+     "t": 28.14
+    },
+    {
+     "w": "se",
+     "t": 28.64
+    },
+    {
+     "w": "présente.",
+     "t": 28.7
+    },
+    {
+     "w": "Le",
+     "t": 29.14
+    },
+    {
+     "w": "bon",
+     "t": 29.49
+    },
+    {
+     "w": "de",
+     "t": 29.84
+    },
+    {
+     "w": "livraison",
+     "t": 29.94
+    },
+    {
+     "w": "est",
+     "t": 30.34
+    },
+    {
+     "w": "parfait.",
+     "t": 30.52
+    },
+    {
+     "w": "La",
+     "t": 31.4
+    },
+    {
+     "w": "signature",
+     "t": 31.5
+    },
+    {
+     "w": "aussi.",
+     "t": 31.8
+    }
+   ]
+  },
+  {
+   "id": "06-mallette",
+   "who": "narrateur",
+   "text": "Le gérant lui tend la mallette. Lui-même.",
+   "start": 32.66,
+   "dur": 2.44,
+   "words": [
+    {
+     "w": "Le",
+     "t": 32.77
+    },
+    {
+     "w": "gérant",
+     "t": 32.83
+    },
+    {
+     "w": "lui",
+     "t": 33.17
+    },
+    {
+     "w": "tend",
+     "t": 33.31
+    },
+    {
+     "w": "la",
+     "t": 33.49
+    },
+    {
+     "w": "mallette.",
+     "t": 33.63
+    },
+    {
+     "w": "Lui-même.",
+     "t": 34.49
+    }
+   ]
+  },
+  {
+   "id": "07-vrai",
+   "who": "narrateur",
+   "text": "À 18 h 10… le vrai coursier arrive.",
+   "start": 35.55,
+   "dur": 3.11,
+   "words": [
+    {
+     "w": "À",
+     "t": 35.56
+    },
+    {
+     "w": "18",
+     "t": 35.96
+    },
+    {
+     "w": "h",
+     "t": 36.36
+    },
+    {
+     "w": "10…",
+     "t": 36.76
+    },
+    {
+     "w": "le",
+     "t": 37.16
+    },
+    {
+     "w": "vrai",
+     "t": 37.36
+    },
+    {
+     "w": "coursier",
+     "t": 37.69
+    },
+    {
+     "w": "arrive.",
+     "t": 38.02
+    }
+   ]
+  },
+  {
+   "id": "08-metro",
+   "who": "narrateur",
+   "text": "Le faux, lui, est déjà loin. Il a pris le métro, 4 millions sur les genoux.",
+   "start": 39.01,
+   "dur": 4.45,
+   "words": [
+    {
+     "w": "Le",
+     "t": 39.07
+    },
+    {
+     "w": "faux,",
+     "t": 39.21
+    },
+    {
+     "w": "lui,",
+     "t": 39.59
+    },
+    {
+     "w": "est",
+     "t": 40.13
+    },
+    {
+     "w": "déjà",
+     "t": 40.23
+    },
+    {
+     "w": "loin.",
+     "t": 40.41
+    },
+    {
+     "w": "Il",
+     "t": 41.13
+    },
+    {
+     "w": "a",
+     "t": 41.23
+    },
+    {
+     "w": "pris",
+     "t": 41.31
+    },
+    {
+     "w": "le",
+     "t": 41.45
+    },
+    {
+     "w": "métro,",
+     "t": 41.53
+    },
+    {
+     "w": "4",
+     "t": 42.15
+    },
+    {
+     "w": "millions",
+     "t": 42.33
+    },
+    {
+     "w": "sur",
+     "t": 42.73
+    },
+    {
+     "w": "les",
+     "t": 42.99
+    },
+    {
+     "w": "genoux.",
+     "t": 43.11
+    }
+   ]
+  },
+  {
+   "id": "09-fin",
+   "who": "narrateur",
+   "text": "On ne l'a jamais retrouvé. Et toi… tu lui aurais donné la mallette ?",
+   "start": 43.96,
+   "dur": 3.5,
+   "words": [
+    {
+     "w": "On",
+     "t": 43.96
+    },
+    {
+     "w": "ne",
+     "t": 44.09
+    },
+    {
+     "w": "l'a",
+     "t": 44.19
+    },
+    {
+     "w": "jamais",
+     "t": 44.29
+    },
+    {
+     "w": "retrouvé.",
+     "t": 44.55
+    },
+    {
+     "w": "Et",
+     "t": 45.45
+    },
+    {
+     "w": "toi…",
+     "t": 45.57
+    },
+    {
+     "w": "tu",
+     "t": 46.25
+    },
+    {
+     "w": "lui",
+     "t": 46.37
+    },
+    {
+     "w": "aurais",
+     "t": 46.49
+    },
+    {
+     "w": "donné",
+     "t": 46.67
+    },
+    {
+     "w": "la",
+     "t": 46.83
+    },
+    {
+     "w": "mallette ?",
+     "t": 46.99
+    }
+   ]
+  }
+ ]
+}

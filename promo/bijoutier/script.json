@@ -1,0 +1,108 @@
+{
+ "_doc": "Le bijoutier (affaire fictive). Voix du créateur du compte : narrateur ElevenLabs « Bellami », défense (une avocate) ElevenLabs « Victoria », procureur cloné (KikiVoice) ; media/elevenlabs/<id>.mp3.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-coups",
+   "who": "narrateur",
+   "text": "Trois coups de feu. Dans le dos d'un garçon de 19 ans… qui s'enfuyait."
+  },
+  {
+   "id": "02-braquage",
+   "who": "narrateur",
+   "text": "Deux minutes plus tôt, ce garçon braquait une bijouterie. Une arme pointée sur le front du bijoutier.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-jouet",
+   "who": "narrateur",
+   "text": "L'arme était un jouet. Le garçon est mort. Aujourd'hui, c'est le bijoutier qui est jugé pour meurtre.",
+   "gap": 0.25
+  },
+  {
+   "id": "04-danger",
+   "who": "procureur",
+   "text": "Il ne se défendait plus. Le voleur s'enfuyait. Le danger était derrière lui… et il a tiré quand même.",
+   "gap": 0.3
+  },
+  {
+   "id": "05-crosse",
+   "who": "avocate",
+   "text": "Le danger, derrière lui ? Il y a un an, deux hommes l'ont frappé à coups de crosse dans cette même boutique. Pour lui, le danger n'est jamais parti.",
+   "gap": 0.1
+  },
+  {
+   "id": "06-fusil",
+   "who": "procureur",
+   "text": "Alors depuis un an, il cachait un fusil chargé sous son comptoir. Sans permis. Ce n'est plus de la peur. C'est une préparation.",
+   "gap": 0.1
+  },
+  {
+   "id": "07-quatorze",
+   "who": "avocate",
+   "text": "Une préparation ? Après son agression, il a appelé la police 14 fois. 14. On lui a conseillé… d'installer une alarme.",
+   "gap": 0.1
+  },
+  {
+   "id": "08-execution",
+   "who": "procureur",
+   "text": "Une alarme. Pas un fusil. Le garçon était à 12 mètres, de dos, en train de courir. Ce n'est pas de la légitime défense. C'est une exécution.",
+   "gap": 0.1
+  },
+  {
+   "id": "09-retourne",
+   "who": "avocate",
+   "text": "De dos… aux deux premiers tirs. Au troisième, il s'est retourné. Le bijoutier a vu une arme se lever vers lui. Un jouet, oui. Mais ça, il ne pouvait pas le savoir.",
+   "gap": 0.1
+  },
+  {
+   "id": "10-balles",
+   "who": "procureur",
+   "text": "Il s'est retourné parce qu'on venait de lui tirer deux balles dans le dos. N'importe qui se serait retourné.",
+   "gap": 0.1
+  },
+  {
+   "id": "11-importe",
+   "who": "avocate",
+   "text": "Et n'importe qui, avec une arme sur le front deux minutes plus tôt, aurait cru qu'il allait tirer.",
+   "gap": 0.1
+  },
+  {
+   "id": "12-premier",
+   "who": "procureur",
+   "text": "Ce garçon n'avait jamais été condamné. C'était son premier vol. Il méritait un procès… pas trois balles.",
+   "gap": 0.1
+  },
+  {
+   "id": "13-choisi",
+   "who": "avocate",
+   "text": "Ce garçon a choisi de coller une arme sur le front d'un homme. Ce soir-là, c'est lui qui a décidé que la vie d'un autre ne comptait pas.",
+   "gap": 0.15
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Légitime défense… ou meurtre ? Coupable… ou non coupable ?",
+   "gap": 0.6
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "gap": 0.4
+  }
+ ]
+}

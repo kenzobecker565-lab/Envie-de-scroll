@@ -1,0 +1,95 @@
+{
+ "_doc": "« Le vigile » (affaire fictive), construit exactement sur le modèle de « La pilleuse » : nuit d'émeutes, le vigile jugé pour avoir frappé un ado de 16 ans qui s'enfuyait avec du butin. Voix ElevenLabs : narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-coma",
+   "who": "narrateur",
+   "text": "Une nuit d'émeutes. Un ado de seize ans, frappé sur le parking d'un supermarché. Il est toujours dans le coma.",
+   "gap": 0
+  },
+  {
+   "id": "02-video",
+   "who": "narrateur",
+   "text": "Sur la vidéo, le vigile le rattrape. Un coup de matraque. Dans le sac de l'ado : des chips, un soda… et trois téléphones volés."
+  },
+  {
+   "id": "03-didier",
+   "who": "narrateur",
+   "text": "Il s'appelle Didier. Cinquante-huit ans. Vigile depuis vingt-deux ans. Casier vierge. Aujourd'hui, c'est lui qu'on juge."
+  },
+  {
+   "id": "04-punir",
+   "who": "procureur",
+   "text": "Il ne défendait plus le magasin. L'ado s'enfuyait. Il l'a rattrapé… pour le punir."
+  },
+  {
+   "id": "05-seul",
+   "who": "avocate",
+   "text": "Ce magasin, c'était son poste depuis vingt-deux ans. Cette nuit-là, ses patrons dormaient chez eux. La police était introuvable. Il était seul face à quarante pilleurs."
+  },
+  {
+   "id": "06-dos",
+   "who": "procureur",
+   "text": "Seul, oui. Mais cet ado lui tournait le dos. Il courait vers la sortie. Un dos, ce n'est pas une menace."
+  },
+  {
+   "id": "07-bouteille",
+   "who": "avocate",
+   "text": "Un dos ? Dix minutes plus tôt, ces mêmes pilleurs lui avaient jeté une bouteille au visage. Six points de suture. Il ne savait plus qui était dangereux."
+  },
+  {
+   "id": "08-telephones",
+   "who": "procureur",
+   "text": "Alors il a frappé le premier qui passait. Un gamin de seize ans… pour trois téléphones."
+  },
+  {
+   "id": "09-salaire",
+   "who": "avocate",
+   "text": "On lui demande le sang-froid d'un policier… pour mille cinq cents euros par mois. Sans renfort. Sans radio. Sans personne."
+  },
+  {
+   "id": "10-enfant",
+   "who": "procureur",
+   "text": "On ne lui demande pas d'être un policier. On lui demande de ne pas frapper un enfant qui s'enfuit."
+  },
+  {
+   "id": "11-reste",
+   "who": "avocate",
+   "text": "Cette nuit-là, sur quarante pilleurs, combien ont été arrêtés ? Aucun. Le seul qui passe en justice… c'est celui qui est resté."
+  },
+  {
+   "id": "12-justicier",
+   "who": "procureur",
+   "text": "Rester ne donne pas tous les droits. Ce soir-là, il n'était plus vigile. Il était devenu justicier."
+  },
+  {
+   "id": "13-travail",
+   "who": "avocate",
+   "text": "Justicier ? Non. Ce soir-là, il était juste le dernier à faire son travail."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

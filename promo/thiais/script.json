@@ -1,0 +1,78 @@
+{
+ "_doc": "« Le vrai verdict : Thiais » : affaire réelle (Pablo, Thiais, 1er octobre 2020, jugé en février 2026 : 12 ans, légitime défense écartée), d'après Le Parisien relayé par Epoch Times. Les plaidoiries sont reconstituées à partir des motifs rapportés. Voix ElevenLabs : narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "Douze ans de prison. Pourtant… c'est lui qu'on a attaqué au couteau."
+  },
+  {
+   "id": "01-parking",
+   "who": "narrateur",
+   "text": "Thiais, octobre 2020. Pablo, vingt ans, attend dans sa voiture avec sa compagne. Deux jeunes arrivent, un couteau à la main. Ils veulent les clés.",
+   "gap": 0.3
+  },
+  {
+   "id": "02-couteau",
+   "who": "narrateur",
+   "text": "Il est blessé à la main. Il arrache le couteau. La bagarre dure quelques secondes… et l'un des agresseurs ne se relève pas.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-assises",
+   "who": "narrateur",
+   "text": "Février 2026, cour d'assises. La légitime défense est écartée. Voici pourquoi.",
+   "gap": 0.7
+  },
+  {
+   "id": "04-plaies",
+   "who": "procureur",
+   "text": "La légitime défense, c'est une riposte nécessaire et proportionnée. Ici, les médecins ont compté cinq plaies au thorax, deux à la tête. Ce n'est plus se défendre. C'est s'acharner."
+  },
+  {
+   "id": "05-noir",
+   "who": "avocate",
+   "text": "Il est blessé, sa compagne est attaquée juste à côté. Dans le noir, personne ne compte ses coups. On frappe jusqu'à ce que le danger s'arrête."
+  },
+  {
+   "id": "06-camp",
+   "who": "procureur",
+   "text": "Le couteau, il l'avait arraché. Son agresseur n'avait plus d'arme. À cet instant précis, la menace avait changé de camp."
+  },
+  {
+   "id": "07-deux",
+   "who": "avocate",
+   "text": "Changé de camp ? Ils étaient deux. Le second s'en prenait à sa compagne. Vous demandez à un garçon de vingt ans de faire le tri en trois secondes."
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Légitime défense… ou acharnement ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès."
+  },
+  {
+   "id": "09-verdict",
+   "who": "narrateur",
+   "text": "Verdict : douze ans de réclusion. Pas pour meurtre : la cour a estimé qu'il ne voulait pas tuer. Et l'agresseur qui a survécu ? Mineur à l'époque… cinq ans, dont trois avec sursis.",
+   "gap": 0.5
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Toi, tu lui aurais donné combien ? Écris un chiffre en commentaire. Et abonne-toi : demain, une nouvelle affaire réelle."
+  }
+ ]
+}

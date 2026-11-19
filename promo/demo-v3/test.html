@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,">
+<script type="importmap">{"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}</script>
+<style>body{margin:0;background:#2a1d16}canvas{display:block}</style></head><body>
+<script type="module">
+import * as THREE from 'three'
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
+import { loadLibrary, makeActor } from './acteurs.js'
+const W = 1080, H = 1920
+const r = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
+r.setSize(W, H); r.toneMapping = THREE.NeutralToneMapping; r.shadowMap.enabled = true
+document.body.append(r.domElement)
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#3a2a20')
+scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture
+scene.environmentIntensity = 0.5
+scene.add(new THREE.HemisphereLight(0xfff1e0, 0x2a1a10, 0.8))
+const key = new THREE.DirectionalLight(0xffe2c0, 2.2); key.position.set(3, 8, 6); key.castShadow = true; scene.add(key)
+const cam = new THREE.PerspectiveCamera(34, W / H, 0.05, 100)
+const lib = await loadLibrary('assets/')
+const a = makeActor(lib, { body: 'male', hair: 'Hair_SimpleParted', hairColor: '#2b1d14', outfit: { robe: '#8c1a14' } })
+a.g.position.set(-0.9, 0, 0); scene.add(a.g)
+const b = makeActor(lib, { body: 'female', hair: 'Hair_Buns', hairColor: '#4a2c1a', outfit: { sweater: '#2f7a8a' } })
+b.g.position.set(0.9, 0, 0); scene.add(b.g)
+window.__shot = (t, mode) => {
+  a.pose([{ clip: 'Idle_Talking_Loop', time: t }], { mouthOpen: 0.6 })
+  b.pose([{ clip: 'Idle_Loop', time: t }], { mouthOpen: 0.3 })
+  if (mode === 'face') { const p = a.bones.Head.getWorldPosition(new THREE.Vector3()); cam.position.set(p.x + 0.2, p.y + 0.1, p.z + 1.4); cam.lookAt(p.x, p.y + 0.05, p.z) }
+  else { cam.position.set(0, 2.0, 9); cam.lookAt(0, 1.7, 0) }
+  r.render(scene, cam)
+  const hp = a.bones.Head.getWorldPosition(new THREE.Vector3()); const hs = a.bones.Head.getWorldScale(new THREE.Vector3())
+  const bu = a.g.getObjectByName('bust'); const bb = bu ? new THREE.Box3().setFromObject(bu) : null
+  return JSON.stringify({ bust: bb && [bb.min.toArray().map(v=>+v.toFixed(2)), bb.max.toArray().map(v=>+v.toFixed(2))], vis: bu && bu.visible, head: hp.toArray().map(v=>+v.toFixed(3)), headScale: hs.x.toFixed(4) })
+}
+window.__ready = true
+</script></body></html>

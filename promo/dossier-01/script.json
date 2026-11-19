@@ -1,0 +1,14 @@
+{
+ "_doc": "Le Dossier n°1 : « Fermé de l'intérieur » (énigme fictive). Une entrée par réplique. Voix provisoires Chatterbox (narrateur) en attendant les prises ElevenLabs du créateur, à ranger dans media/elevenlabs/<id>.mp3. Solution : la secrétaire (un 14 décembre à 19 h, il fait nuit).",
+ "voices": { "narrateur": { "name": "narrateur", "file": "media/narrateur.wav" } },
+ "lines": [
+  { "id": "01-accroche", "who": "narrateur", "text": "Un homme mort. Une porte fermée à clé. De l'intérieur." },
+  { "id": "02-impossible", "who": "narrateur", "text": "Personne n'est entré. Personne n'est sorti. Et pourtant… quelqu'un l'a tué.", "say": "Personne n'est entré. Personne n'est sorti. Et pourtant... quelqu'un l'a tué.", "gap": 0.35 },
+  { "id": "03-date", "who": "narrateur", "text": "14 décembre. Trois suspects. Trois alibis. Un seul ment.", "say": "Quatorze décembre. Trois suspects. Trois alibis. Un seul ment.", "gap": 0.35 },
+  { "id": "04-femme", "who": "narrateur", "text": "Sa femme. « J'étais au cinéma. Séance de 21 h. Voici le ticket. »", "say": "Sa femme. J'étais au cinéma. Séance de vingt et une heures. Voici le ticket.", "gap": 0.4 },
+  { "id": "05-associe", "who": "narrateur", "text": "Son associé. « Je dormais. Cette nuit-là, l'orage était si fort que je n'ai rien entendu. »", "say": "Son associé. Je dormais. Cette nuit-là, l'orage était si fort que je n'ai rien entendu.", "gap": 0.35 },
+  { "id": "06-secretaire", "who": "narrateur", "text": "Sa secrétaire. « Je suis partie à 19 h. Il faisait encore jour. »", "say": "Sa secrétaire. Je suis partie à dix-neuf heures. Il faisait encore jour.", "gap": 0.35 },
+  { "id": "07-indice", "who": "narrateur", "text": "Un de ces trois alibis est impossible. Un seul. Et la réponse est sous tes yeux.", "gap": 0.45 },
+  { "id": "08-fin", "who": "narrateur", "text": "Alors… qui ment ? Écris-le en commentaire. Le dossier s'ouvre dans la prochaine vidéo.", "say": "Alors... qui ment ? Écris-le en commentaire. Le dossier s'ouvre dans la prochaine vidéo.", "gap": 0.45 }
+ ]
+}

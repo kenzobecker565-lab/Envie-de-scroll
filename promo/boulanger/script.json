@@ -1,0 +1,95 @@
+{
+ "_doc": "« Le boulanger » (affaire fictive), style « La pilleuse ». Voix Edge TTS (ElevenLabs en panne) : narrateur Rémy, procureur Henri, défense Gérard ; 14-15 reprises d'ElevenLabs (Nicolas).",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-vitrine",
+   "who": "narrateur",
+   "text": "Un boulanger a affiché la photo d'un voleur sur sa vitrine. Puis sur Facebook. Deux millions de vues. Le voleur avait quatorze ans.",
+   "gap": 0
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la vidéo de sa caméra, on voit l'ado entrer. Deux croissants… un sandwich… une canette. Douze euros. Et il repart en courant."
+  },
+  {
+   "id": "03-karim",
+   "who": "narrateur",
+   "text": "Il s'appelle Karim. Cinquante et un ans. Boulanger depuis vingt ans. Volé quarante fois cette année. Aujourd'hui, le prévenu, c'est lui."
+  },
+  {
+   "id": "04-visage",
+   "who": "procureur",
+   "text": "Douze euros. Et pour ça, il a livré le visage d'un enfant à deux millions d'inconnus."
+  },
+  {
+   "id": "05-plaintes",
+   "who": "avocate",
+   "text": "Douze euros, une fois. Quarante vols cette année, le même gamin sur ses caméras. Six plaintes. Six. La police n'est jamais venue."
+  },
+  {
+   "id": "06-college",
+   "who": "procureur",
+   "text": "Alors il a fait sa propre police. Le collège a vu la photo. Le quartier aussi. Cet ado n'ose plus sortir de chez lui."
+  },
+  {
+   "id": "07-camera",
+   "who": "avocate",
+   "text": "Il n'a rien inventé. Pas un mot. Il a montré ce que sa caméra a filmé. Rien de plus."
+  },
+  {
+   "id": "08-chasse",
+   "who": "procureur",
+   "text": "Rien de plus ? Sous la photo, il a écrit : « Reconnaissez-le. » Ce n'était pas une alerte. C'était une chasse."
+  },
+  {
+   "id": "09-zero",
+   "who": "avocate",
+   "text": "Depuis la photo, les vols ont cessé. Zéro. En une semaine. Ce que six plaintes n'avaient pas réussi."
+  },
+  {
+   "id": "10-prix",
+   "who": "procureur",
+   "text": "Les vols ont cessé… et un gamin de quatorze ans a dû changer de collège. C'est ça, le prix ?"
+  },
+  {
+   "id": "11-fermer",
+   "who": "avocate",
+   "text": "Le prix ? Karim a perdu huit mille euros en un an. Il a failli fermer. Personne ne lui a demandé ce que ça lui coûtait."
+  },
+  {
+   "id": "12-efface",
+   "who": "procureur",
+   "text": "Une boulangerie, ça se relève. Un visage d'enfant sur Internet… ça ne s'efface jamais."
+  },
+  {
+   "id": "13-boulanger",
+   "who": "avocate",
+   "text": "Jamais ? Quarante fois, il est revenu se servir. Et le seul qui a failli tout perdre… c'est le boulanger."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

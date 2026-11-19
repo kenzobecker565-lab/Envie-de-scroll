@@ -1,0 +1,1614 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 108.65,
+ "lines": [
+  {
+   "id": "01-cle",
+   "who": "narrateur",
+   "text": "Il a récupéré sa maison en une heure. La justice lui avait dit d'attendre deux ans.",
+   "start": 0.25,
+   "dur": 4.37,
+   "words": [
+    {
+     "w": "Il",
+     "t": 0.25
+    },
+    {
+     "w": "a",
+     "t": 0.39
+    },
+    {
+     "w": "récupéré",
+     "t": 0.47
+    },
+    {
+     "w": "sa",
+     "t": 0.87
+    },
+    {
+     "w": "maison",
+     "t": 1.03
+    },
+    {
+     "w": "en",
+     "t": 1.27
+    },
+    {
+     "w": "une",
+     "t": 1.77
+    },
+    {
+     "w": "heure.",
+     "t": 1.99
+    },
+    {
+     "w": "La",
+     "t": 2.45
+    },
+    {
+     "w": "justice",
+     "t": 2.55
+    },
+    {
+     "w": "lui",
+     "t": 2.81
+    },
+    {
+     "w": "avait",
+     "t": 3.07
+    },
+    {
+     "w": "dit",
+     "t": 3.21
+    },
+    {
+     "w": "d'attendre",
+     "t": 3.5
+    },
+    {
+     "w": "deux",
+     "t": 3.79
+    },
+    {
+     "w": "ans.",
+     "t": 4.27
+    }
+   ]
+  },
+  {
+   "id": "02-marc",
+   "who": "narrateur",
+   "text": "Marc, 61 ans, a défoncé sa propre porte, changé les serrures, et jeté une famille de squatteurs dehors. Avec deux enfants. En plein mois de novembre. Aujourd'hui, c'est lui qui risque la prison.",
+   "start": 4.87,
+   "dur": 10.68,
+   "words": [
+    {
+     "w": "Marc,",
+     "t": 4.87
+    },
+    {
+     "w": "61",
+     "t": 5.45
+    },
+    {
+     "w": "ans,",
+     "t": 5.85
+    },
+    {
+     "w": "a",
+     "t": 6.45
+    },
+    {
+     "w": "défoncé",
+     "t": 6.51
+    },
+    {
+     "w": "sa",
+     "t": 6.95
+    },
+    {
+     "w": "propre",
+     "t": 7.07
+    },
+    {
+     "w": "porte,",
+     "t": 7.27
+    },
+    {
+     "w": "changé",
+     "t": 7.91
+    },
+    {
+     "w": "les",
+     "t": 8.25
+    },
+    {
+     "w": "serrures,",
+     "t": 8.33
+    },
+    {
+     "w": "et",
+     "t": 8.75
+    },
+    {
+     "w": "jeté",
+     "t": 9.05
+    },
+    {
+     "w": "une",
+     "t": 9.31
+    },
+    {
+     "w": "famille",
+     "t": 9.41
+    },
+    {
+     "w": "de",
+     "t": 9.63
+    },
+    {
+     "w": "squatteurs",
+     "t": 9.75
+    },
+    {
+     "w": "dehors.",
+     "t": 10.15
+    },
+    {
+     "w": "Avec",
+     "t": 10.65
+    },
+    {
+     "w": "deux",
+     "t": 10.91
+    },
+    {
+     "w": "enfants.",
+     "t": 11.35
+    },
+    {
+     "w": "En",
+     "t": 11.97
+    },
+    {
+     "w": "plein",
+     "t": 12.07
+    },
+    {
+     "w": "mois",
+     "t": 12.35
+    },
+    {
+     "w": "de",
+     "t": 12.59
+    },
+    {
+     "w": "novembre.",
+     "t": 12.69
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 13.21
+    },
+    {
+     "w": "c'est",
+     "t": 13.73
+    },
+    {
+     "w": "lui",
+     "t": 14.25
+    },
+    {
+     "w": "qui",
+     "t": 14.37
+    },
+    {
+     "w": "risque",
+     "t": 14.73
+    },
+    {
+     "w": "la",
+     "t": 14.97
+    },
+    {
+     "w": "prison.",
+     "t": 15.13
+    }
+   ]
+  },
+  {
+   "id": "03-loi",
+   "who": "procureur",
+   "text": "Deux enfants. Sur un trottoir. Sous la pluie. Et Monsieur appelle ça « rentrer chez lui ».",
+   "start": 15.9,
+   "dur": 4.78,
+   "words": [
+    {
+     "w": "Deux",
+     "t": 15.9
+    },
+    {
+     "w": "enfants.",
+     "t": 16.21
+    },
+    {
+     "w": "Sur",
+     "t": 16.49
+    },
+    {
+     "w": "un",
+     "t": 16.91
+    },
+    {
+     "w": "trottoir.",
+     "t": 17.03
+    },
+    {
+     "w": "Sous",
+     "t": 17.51
+    },
+    {
+     "w": "la",
+     "t": 17.79
+    },
+    {
+     "w": "pluie.",
+     "t": 17.93
+    },
+    {
+     "w": "Et",
+     "t": 18.31
+    },
+    {
+     "w": "Monsieur",
+     "t": 18.53
+    },
+    {
+     "w": "appelle",
+     "t": 18.81
+    },
+    {
+     "w": "ça «",
+     "t": 19.07
+    },
+    {
+     "w": "rentrer",
+     "t": 19.39
+    },
+    {
+     "w": "chez",
+     "t": 20.07
+    },
+    {
+     "w": "lui ».",
+     "t": 20.25
+    }
+   ]
+  },
+  {
+   "id": "04-gendarmes",
+   "who": "avocate",
+   "text": "Vous voulez savoir ce que les gendarmes lui ont dit, quand il les a appelés ? Ha ! « Monsieur, vous n'avez pas le droit d'entrer chez lui. » Chez lui ! Dans la maison qu'il paie depuis 20 ans.",
+   "start": 20.93,
+   "dur": 7.91,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 20.93
+    },
+    {
+     "w": "voulez",
+     "t": 21.09
+    },
+    {
+     "w": "savoir",
+     "t": 21.27
+    },
+    {
+     "w": "ce",
+     "t": 21.51
+    },
+    {
+     "w": "que",
+     "t": 21.69
+    },
+    {
+     "w": "les",
+     "t": 21.81
+    },
+    {
+     "w": "gendarmes",
+     "t": 21.91
+    },
+    {
+     "w": "lui",
+     "t": 22.21
+    },
+    {
+     "w": "ont",
+     "t": 22.31
+    },
+    {
+     "w": "dit,",
+     "t": 22.37
+    },
+    {
+     "w": "quand",
+     "t": 22.53
+    },
+    {
+     "w": "il",
+     "t": 22.77
+    },
+    {
+     "w": "les",
+     "t": 22.91
+    },
+    {
+     "w": "a",
+     "t": 23.03
+    },
+    {
+     "w": "appelés ?",
+     "t": 23.15
+    },
+    {
+     "w": "Ha ! «",
+     "t": 23.61
+    },
+    {
+     "w": "Monsieur,",
+     "t": 24.07
+    },
+    {
+     "w": "vous",
+     "t": 24.69
+    },
+    {
+     "w": "n'avez",
+     "t": 24.81
+    },
+    {
+     "w": "pas",
+     "t": 24.93
+    },
+    {
+     "w": "le",
+     "t": 25.11
+    },
+    {
+     "w": "droit",
+     "t": 25.17
+    },
+    {
+     "w": "d'entrer",
+     "t": 25.43
+    },
+    {
+     "w": "chez",
+     "t": 25.69
+    },
+    {
+     "w": "lui. »",
+     "t": 26.13
+    },
+    {
+     "w": "Chez",
+     "t": 26.45
+    },
+    {
+     "w": "lui !",
+     "t": 26.77
+    },
+    {
+     "w": "Dans",
+     "t": 27.27
+    },
+    {
+     "w": "la",
+     "t": 27.35
+    },
+    {
+     "w": "maison",
+     "t": 27.45
+    },
+    {
+     "w": "qu'il",
+     "t": 27.65
+    },
+    {
+     "w": "paie",
+     "t": 27.85
+    },
+    {
+     "w": "depuis",
+     "t": 28.03
+    },
+    {
+     "w": "20",
+     "t": 28.21
+    },
+    {
+     "w": "ans.",
+     "t": 28.47
+    }
+   ]
+  },
+  {
+   "id": "05-procedure",
+   "who": "procureur",
+   "text": "Il existait une procédure. Un préfet. Un juge. Mais Monsieur était pressé.",
+   "start": 29.09,
+   "dur": 4.94,
+   "words": [
+    {
+     "w": "Il",
+     "t": 29.09
+    },
+    {
+     "w": "existait",
+     "t": 29.24
+    },
+    {
+     "w": "une",
+     "t": 29.68
+    },
+    {
+     "w": "procédure.",
+     "t": 29.82
+    },
+    {
+     "w": "Un",
+     "t": 30.72
+    },
+    {
+     "w": "préfet.",
+     "t": 30.8
+    },
+    {
+     "w": "Un",
+     "t": 31.36
+    },
+    {
+     "w": "juge.",
+     "t": 31.46
+    },
+    {
+     "w": "Mais",
+     "t": 32.04
+    },
+    {
+     "w": "Monsieur",
+     "t": 32.24
+    },
+    {
+     "w": "était",
+     "t": 32.76
+    },
+    {
+     "w": "pressé.",
+     "t": 33.1
+    }
+   ]
+  },
+  {
+   "id": "06-credit",
+   "who": "avocate",
+   "text": "Pressé ? 22 mois. 22 mensualités de crédit pour une maison où dormaient des inconnus. Vous, Monsieur le procureur, vous auriez attendu combien ? Un an ? Deux ? Ah non, c'est vrai : vous, vous êtes logé.",
+   "start": 34.23,
+   "dur": 9.38,
+   "words": [
+    {
+     "w": "Pressé ?",
+     "t": 34.23
+    },
+    {
+     "w": "22",
+     "t": 34.91
+    },
+    {
+     "w": "mois.",
+     "t": 35.13
+    },
+    {
+     "w": "22",
+     "t": 35.67
+    },
+    {
+     "w": "mensualités",
+     "t": 35.91
+    },
+    {
+     "w": "de",
+     "t": 36.45
+    },
+    {
+     "w": "crédit",
+     "t": 36.55
+    },
+    {
+     "w": "pour",
+     "t": 36.85
+    },
+    {
+     "w": "une",
+     "t": 36.97
+    },
+    {
+     "w": "maison",
+     "t": 37.07
+    },
+    {
+     "w": "où",
+     "t": 37.31
+    },
+    {
+     "w": "dormaient",
+     "t": 37.51
+    },
+    {
+     "w": "des",
+     "t": 37.71
+    },
+    {
+     "w": "inconnus.",
+     "t": 37.79
+    },
+    {
+     "w": "Vous,",
+     "t": 38.41
+    },
+    {
+     "w": "Monsieur",
+     "t": 38.65
+    },
+    {
+     "w": "le",
+     "t": 38.81
+    },
+    {
+     "w": "procureur,",
+     "t": 38.91
+    },
+    {
+     "w": "vous",
+     "t": 39.51
+    },
+    {
+     "w": "auriez",
+     "t": 39.61
+    },
+    {
+     "w": "attendu",
+     "t": 39.81
+    },
+    {
+     "w": "combien ?",
+     "t": 40.07
+    },
+    {
+     "w": "Un",
+     "t": 40.55
+    },
+    {
+     "w": "an ?",
+     "t": 40.73
+    },
+    {
+     "w": "Deux ?",
+     "t": 40.99
+    },
+    {
+     "w": "Ah",
+     "t": 41.43
+    },
+    {
+     "w": "non,",
+     "t": 41.53
+    },
+    {
+     "w": "c'est",
+     "t": 41.74
+    },
+    {
+     "w": "vrai :",
+     "t": 41.95
+    },
+    {
+     "w": "vous,",
+     "t": 42.43
+    },
+    {
+     "w": "vous",
+     "t": 42.77
+    },
+    {
+     "w": "êtes",
+     "t": 42.95
+    },
+    {
+     "w": "logé.",
+     "t": 43.293
+    }
+   ]
+  },
+  {
+   "id": "07-voleur",
+   "who": "procureur",
+   "text": "On ne répond pas à un vol par un autre crime. Sinon, demain, chacun règle ses comptes avec deux potes et une barre de fer.",
+   "start": 43.86,
+   "dur": 5.77,
+   "words": [
+    {
+     "w": "On",
+     "t": 43.86
+    },
+    {
+     "w": "ne",
+     "t": 44.0
+    },
+    {
+     "w": "répond",
+     "t": 44.08
+    },
+    {
+     "w": "pas",
+     "t": 44.28
+    },
+    {
+     "w": "à",
+     "t": 44.5
+    },
+    {
+     "w": "un",
+     "t": 44.58
+    },
+    {
+     "w": "vol",
+     "t": 44.68
+    },
+    {
+     "w": "par",
+     "t": 44.88
+    },
+    {
+     "w": "un",
+     "t": 45.08
+    },
+    {
+     "w": "autre",
+     "t": 45.2
+    },
+    {
+     "w": "crime.",
+     "t": 45.38
+    },
+    {
+     "w": "Sinon,",
+     "t": 45.9
+    },
+    {
+     "w": "demain,",
+     "t": 46.44
+    },
+    {
+     "w": "chacun",
+     "t": 46.86
+    },
+    {
+     "w": "règle",
+     "t": 47.08
+    },
+    {
+     "w": "ses",
+     "t": 47.38
+    },
+    {
+     "w": "comptes",
+     "t": 47.58
+    },
+    {
+     "w": "avec",
+     "t": 47.84
+    },
+    {
+     "w": "deux",
+     "t": 47.94
+    },
+    {
+     "w": "potes",
+     "t": 48.16
+    },
+    {
+     "w": "et",
+     "t": 48.64
+    },
+    {
+     "w": "une",
+     "t": 48.72
+    },
+    {
+     "w": "barre",
+     "t": 48.82
+    },
+    {
+     "w": "de",
+     "t": 49.04
+    },
+    {
+     "w": "fer.",
+     "t": 49.18
+    }
+   ]
+  },
+  {
+   "id": "08-pause",
+   "who": "narrateur",
+   "text": "Propriétaire ou délinquant ? Si cette affaire te révolte, like la vidéo et abonne-toi.",
+   "start": 49.98,
+   "dur": 4.67,
+   "words": [
+    {
+     "w": "Propriétaire",
+     "t": 49.98
+    },
+    {
+     "w": "ou",
+     "t": 50.84
+    },
+    {
+     "w": "délinquant ?",
+     "t": 51.02
+    },
+    {
+     "w": "Si",
+     "t": 51.82
+    },
+    {
+     "w": "cette",
+     "t": 51.9
+    },
+    {
+     "w": "affaire",
+     "t": 52.08
+    },
+    {
+     "w": "te",
+     "t": 52.32
+    },
+    {
+     "w": "révolte,",
+     "t": 52.4
+    },
+    {
+     "w": "like",
+     "t": 52.96
+    },
+    {
+     "w": "la",
+     "t": 53.18
+    },
+    {
+     "w": "vidéo",
+     "t": 53.4
+    },
+    {
+     "w": "et",
+     "t": 53.7
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 54.179
+    }
+   ]
+  },
+  {
+   "id": "09-tete",
+   "who": "avocate",
+   "text": "On marche sur la tête ! Le squatteur change les serrures : c'est « un occupant ». Le propriétaire les rechange : c'est un criminel. Justice à deux vitesses !",
+   "start": 55.0,
+   "dur": 6.89,
+   "words": [
+    {
+     "w": "On",
+     "t": 55.0
+    },
+    {
+     "w": "marche",
+     "t": 55.16
+    },
+    {
+     "w": "sur",
+     "t": 55.36
+    },
+    {
+     "w": "la",
+     "t": 55.52
+    },
+    {
+     "w": "tête !",
+     "t": 55.64
+    },
+    {
+     "w": "Le",
+     "t": 56.24
+    },
+    {
+     "w": "squatteur",
+     "t": 56.3
+    },
+    {
+     "w": "change",
+     "t": 56.68
+    },
+    {
+     "w": "les",
+     "t": 56.88
+    },
+    {
+     "w": "serrures :",
+     "t": 57.04
+    },
+    {
+     "w": "c'est «",
+     "t": 57.41
+    },
+    {
+     "w": "un",
+     "t": 57.78
+    },
+    {
+     "w": "occupant ».",
+     "t": 57.94
+    },
+    {
+     "w": "Le",
+     "t": 58.52
+    },
+    {
+     "w": "propriétaire",
+     "t": 58.62
+    },
+    {
+     "w": "les",
+     "t": 59.16
+    },
+    {
+     "w": "rechange :",
+     "t": 59.22
+    },
+    {
+     "w": "c'est",
+     "t": 59.59
+    },
+    {
+     "w": "un",
+     "t": 59.96
+    },
+    {
+     "w": "criminel.",
+     "t": 60.06
+    },
+    {
+     "w": "Justice",
+     "t": 60.72
+    },
+    {
+     "w": "à",
+     "t": 61.04
+    },
+    {
+     "w": "deux",
+     "t": 61.24
+    },
+    {
+     "w": "vitesses !",
+     "t": 61.36
+    }
+   ]
+  },
+  {
+   "id": "10-abri",
+   "who": "procureur",
+   "text": "Ce « squatteur », c'est une mère seule, qui a dormi trois mois dans sa voiture avec ses enfants avant d'entrer dans une maison vide. Vide, Maître. Depuis deux ans.",
+   "start": 62.14,
+   "dur": 7.29,
+   "words": [
+    {
+     "w": "Ce «",
+     "t": 62.14
+    },
+    {
+     "w": "squatteur »,",
+     "t": 62.397
+    },
+    {
+     "w": "c'est",
+     "t": 62.783
+    },
+    {
+     "w": "une",
+     "t": 63.17
+    },
+    {
+     "w": "mère",
+     "t": 63.31
+    },
+    {
+     "w": "seule,",
+     "t": 63.45
+    },
+    {
+     "w": "qui",
+     "t": 63.73
+    },
+    {
+     "w": "a",
+     "t": 64.03
+    },
+    {
+     "w": "dormi",
+     "t": 64.11
+    },
+    {
+     "w": "trois",
+     "t": 64.37
+    },
+    {
+     "w": "mois",
+     "t": 64.57
+    },
+    {
+     "w": "dans",
+     "t": 64.73
+    },
+    {
+     "w": "sa",
+     "t": 64.85
+    },
+    {
+     "w": "voiture",
+     "t": 65.01
+    },
+    {
+     "w": "avec",
+     "t": 65.27
+    },
+    {
+     "w": "ses",
+     "t": 65.47
+    },
+    {
+     "w": "enfants",
+     "t": 65.65
+    },
+    {
+     "w": "avant",
+     "t": 65.99
+    },
+    {
+     "w": "d'entrer",
+     "t": 66.33
+    },
+    {
+     "w": "dans",
+     "t": 66.67
+    },
+    {
+     "w": "une",
+     "t": 66.79
+    },
+    {
+     "w": "maison",
+     "t": 66.93
+    },
+    {
+     "w": "vide.",
+     "t": 67.15
+    },
+    {
+     "w": "Vide,",
+     "t": 67.61
+    },
+    {
+     "w": "Maître.",
+     "t": 68.11
+    },
+    {
+     "w": "Depuis",
+     "t": 68.63
+    },
+    {
+     "w": "deux",
+     "t": 68.81
+    },
+    {
+     "w": "ans.",
+     "t": 69.11
+    }
+   ]
+  },
+  {
+   "id": "11-riche",
+   "who": "avocate",
+   "text": "Vide ? Elle était en vente, pour payer l'Ehpad de sa mère. Propriétaire, ça ne veut pas dire riche, Monsieur le procureur. Ça veut dire 40 ans à se lever à 5 heures du matin.",
+   "start": 69.63,
+   "dur": 7.7,
+   "words": [
+    {
+     "w": "Vide ?",
+     "t": 69.63
+    },
+    {
+     "w": "Elle",
+     "t": 70.17
+    },
+    {
+     "w": "était",
+     "t": 70.27
+    },
+    {
+     "w": "en",
+     "t": 70.41
+    },
+    {
+     "w": "vente,",
+     "t": 70.57
+    },
+    {
+     "w": "pour",
+     "t": 70.89
+    },
+    {
+     "w": "payer",
+     "t": 71.15
+    },
+    {
+     "w": "l'Ehpad",
+     "t": 71.43
+    },
+    {
+     "w": "de",
+     "t": 71.71
+    },
+    {
+     "w": "sa",
+     "t": 71.77
+    },
+    {
+     "w": "mère.",
+     "t": 71.93
+    },
+    {
+     "w": "Propriétaire,",
+     "t": 72.69
+    },
+    {
+     "w": "ça",
+     "t": 73.15
+    },
+    {
+     "w": "ne",
+     "t": 73.33
+    },
+    {
+     "w": "veut",
+     "t": 73.41
+    },
+    {
+     "w": "pas",
+     "t": 73.49
+    },
+    {
+     "w": "dire",
+     "t": 73.63
+    },
+    {
+     "w": "riche,",
+     "t": 73.75
+    },
+    {
+     "w": "Monsieur",
+     "t": 74.17
+    },
+    {
+     "w": "le",
+     "t": 74.31
+    },
+    {
+     "w": "procureur.",
+     "t": 74.43
+    },
+    {
+     "w": "Ça",
+     "t": 75.05
+    },
+    {
+     "w": "veut",
+     "t": 75.15
+    },
+    {
+     "w": "dire",
+     "t": 75.25
+    },
+    {
+     "w": "40",
+     "t": 75.41
+    },
+    {
+     "w": "ans",
+     "t": 75.75
+    },
+    {
+     "w": "à",
+     "t": 76.01
+    },
+    {
+     "w": "se",
+     "t": 76.11
+    },
+    {
+     "w": "lever",
+     "t": 76.19
+    },
+    {
+     "w": "à",
+     "t": 76.37
+    },
+    {
+     "w": "5",
+     "t": 76.47
+    },
+    {
+     "w": "heures",
+     "t": 76.67
+    },
+    {
+     "w": "du",
+     "t": 76.81
+    },
+    {
+     "w": "matin.",
+     "t": 76.91
+    }
+   ]
+  },
+  {
+   "id": "12-violence",
+   "who": "procureur",
+   "text": "Et la petite de six ans, qui a vu deux hommes casser la porte en pleine nuit, elle se lève à quelle heure, pour oublier ça ?",
+   "start": 77.63,
+   "dur": 5.57,
+   "words": [
+    {
+     "w": "Et",
+     "t": 77.63
+    },
+    {
+     "w": "la",
+     "t": 77.75
+    },
+    {
+     "w": "petite",
+     "t": 77.85
+    },
+    {
+     "w": "de",
+     "t": 78.11
+    },
+    {
+     "w": "six",
+     "t": 78.37
+    },
+    {
+     "w": "ans,",
+     "t": 78.63
+    },
+    {
+     "w": "qui",
+     "t": 79.09
+    },
+    {
+     "w": "a",
+     "t": 79.17
+    },
+    {
+     "w": "vu",
+     "t": 79.29
+    },
+    {
+     "w": "deux",
+     "t": 79.41
+    },
+    {
+     "w": "hommes",
+     "t": 79.61
+    },
+    {
+     "w": "casser",
+     "t": 79.89
+    },
+    {
+     "w": "la",
+     "t": 80.23
+    },
+    {
+     "w": "porte",
+     "t": 80.33
+    },
+    {
+     "w": "en",
+     "t": 80.55
+    },
+    {
+     "w": "pleine",
+     "t": 80.71
+    },
+    {
+     "w": "nuit,",
+     "t": 80.97
+    },
+    {
+     "w": "elle",
+     "t": 81.43
+    },
+    {
+     "w": "se",
+     "t": 81.53
+    },
+    {
+     "w": "lève",
+     "t": 81.65
+    },
+    {
+     "w": "à",
+     "t": 81.83
+    },
+    {
+     "w": "quelle",
+     "t": 81.89
+    },
+    {
+     "w": "heure,",
+     "t": 82.05
+    },
+    {
+     "w": "pour",
+     "t": 82.31
+    },
+    {
+     "w": "oublier",
+     "t": 82.59
+    },
+    {
+     "w": "ça ?",
+     "t": 82.83
+    }
+   ]
+  },
+  {
+   "id": "13-maison",
+   "who": "avocate",
+   "text": "Alors relogez-la ! C'est le travail de l'État. Pas celui de mon client. Pas celui de sa maison.",
+   "start": 83.4,
+   "dur": 4.05,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 83.4
+    },
+    {
+     "w": "relogez-la !",
+     "t": 83.813
+    },
+    {
+     "w": "C'est",
+     "t": 84.227
+    },
+    {
+     "w": "le",
+     "t": 84.64
+    },
+    {
+     "w": "travail",
+     "t": 84.72
+    },
+    {
+     "w": "de",
+     "t": 85.0
+    },
+    {
+     "w": "l'État.",
+     "t": 85.31
+    },
+    {
+     "w": "Pas",
+     "t": 85.62
+    },
+    {
+     "w": "celui",
+     "t": 85.72
+    },
+    {
+     "w": "de",
+     "t": 85.92
+    },
+    {
+     "w": "mon",
+     "t": 86.04
+    },
+    {
+     "w": "client.",
+     "t": 86.1
+    },
+    {
+     "w": "Pas",
+     "t": 86.52
+    },
+    {
+     "w": "celui",
+     "t": 86.64
+    },
+    {
+     "w": "de",
+     "t": 86.86
+    },
+    {
+     "w": "sa",
+     "t": 86.98
+    },
+    {
+     "w": "maison.",
+     "t": 87.06
+    }
+   ]
+  },
+  {
+   "id": "14-etat",
+   "who": "procureur",
+   "text": "L'État, c'est justement ce que votre client a décidé de remplacer. Ce soir-là, il était juge, policier, et huissier. Et il a condamné une enfant.",
+   "start": 87.7,
+   "dur": 7.53,
+   "words": [
+    {
+     "w": "L'État,",
+     "t": 87.937
+    },
+    {
+     "w": "c'est",
+     "t": 88.243
+    },
+    {
+     "w": "justement",
+     "t": 88.55
+    },
+    {
+     "w": "ce",
+     "t": 88.93
+    },
+    {
+     "w": "que",
+     "t": 89.13
+    },
+    {
+     "w": "votre",
+     "t": 89.21
+    },
+    {
+     "w": "client",
+     "t": 89.31
+    },
+    {
+     "w": "a",
+     "t": 89.65
+    },
+    {
+     "w": "décidé",
+     "t": 89.77
+    },
+    {
+     "w": "de",
+     "t": 90.03
+    },
+    {
+     "w": "remplacer.",
+     "t": 90.19
+    },
+    {
+     "w": "Ce",
+     "t": 90.77
+    },
+    {
+     "w": "soir-là,",
+     "t": 91.11
+    },
+    {
+     "w": "il",
+     "t": 91.45
+    },
+    {
+     "w": "était",
+     "t": 91.53
+    },
+    {
+     "w": "juge,",
+     "t": 91.71
+    },
+    {
+     "w": "policier,",
+     "t": 92.33
+    },
+    {
+     "w": "et",
+     "t": 92.79
+    },
+    {
+     "w": "huissier.",
+     "t": 93.03
+    },
+    {
+     "w": "Et",
+     "t": 93.61
+    },
+    {
+     "w": "il",
+     "t": 93.69
+    },
+    {
+     "w": "a",
+     "t": 93.83
+    },
+    {
+     "w": "condamné",
+     "t": 93.93
+    },
+    {
+     "w": "une",
+     "t": 94.53
+    },
+    {
+     "w": "enfant.",
+     "t": 94.75
+    }
+   ]
+  },
+  {
+   "id": "15-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Légitime colère… ou vengeance privée ? Coupable… ou non coupable ?",
+   "start": 95.93,
+   "dur": 4.37,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 95.93
+    },
+    {
+     "w": "es",
+     "t": 96.1
+    },
+    {
+     "w": "le",
+     "t": 96.16
+    },
+    {
+     "w": "juré.",
+     "t": 96.26
+    },
+    {
+     "w": "Légitime",
+     "t": 96.8
+    },
+    {
+     "w": "colère…",
+     "t": 97.12
+    },
+    {
+     "w": "ou",
+     "t": 97.62
+    },
+    {
+     "w": "vengeance",
+     "t": 97.94
+    },
+    {
+     "w": "privée ?",
+     "t": 98.18
+    },
+    {
+     "w": "Coupable…",
+     "t": 98.76
+    },
+    {
+     "w": "ou",
+     "t": 99.16
+    },
+    {
+     "w": "non",
+     "t": 99.52
+    },
+    {
+     "w": "coupable ?",
+     "t": 99.68
+    }
+   ]
+  },
+  {
+   "id": "16-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire. Un like, un abonnement, et on se retrouve pour la prochaine affaire.",
+   "start": 100.6,
+   "dur": 4.65,
+   "words": [
+    {
+     "w": "Écris",
+     "t": 100.6
+    },
+    {
+     "w": "ton",
+     "t": 100.9
+    },
+    {
+     "w": "verdict",
+     "t": 100.98
+    },
+    {
+     "w": "en",
+     "t": 101.18
+    },
+    {
+     "w": "commentaire.",
+     "t": 101.38
+    },
+    {
+     "w": "Un",
+     "t": 102.14
+    },
+    {
+     "w": "like,",
+     "t": 102.24
+    },
+    {
+     "w": "un",
+     "t": 102.74
+    },
+    {
+     "w": "abonnement,",
+     "t": 102.8
+    },
+    {
+     "w": "et",
+     "t": 103.26
+    },
+    {
+     "w": "on",
+     "t": 103.64
+    },
+    {
+     "w": "se",
+     "t": 103.72
+    },
+    {
+     "w": "retrouve",
+     "t": 103.82
+    },
+    {
+     "w": "pour",
+     "t": 104.08
+    },
+    {
+     "w": "la",
+     "t": 104.24
+    },
+    {
+     "w": "prochaine",
+     "t": 104.32
+    },
+    {
+     "w": "affaire.",
+     "t": 104.62
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "_doc": "« Le blocage » : des militants pour le climat bloquent le périphérique ; une ambulance reste coincée, le patient meurt (affaire fictive). Voix ElevenLabs (Eleven v4) : automobiliste « Jean-Patrick », narrateur « Nicolas - Narrator », procureur « Paul K », défense « Ilan ». « avocate » = la défense.",
+ "voices": {
+  "automobiliste": {"name": "automobiliste", "file": "media/automobiliste.wav"},
+  "narrateur": {"name": "narrateur", "file": "media/narrateur.wav"},
+  "procureur": {"name": "procureur", "file": "media/procureur.wav"},
+  "avocate": {"name": "avocate", "file": "media/avocate.wav"}
+ },
+ "lines": [
+  {"id": "01-automobiliste", "who": "automobiliste", "text": "Bougez ! Il y a une ambulance, bande de malades ! Vous allez tuer quelqu'un !"},
+  {"id": "02-bloque", "who": "narrateur", "text": "Ce matin-là, Lou, 23 ans, et trois militants se collent les mains sur le périphérique. Deux heures de blocage. Diffusé en direct.", "gap": 1.9},
+  {"id": "03-infarctus", "who": "narrateur", "text": "Dans l'ambulance, Michel, 64 ans, fait un infarctus. Il arrive à l'hôpital avec quarante minutes de retard. Il ne se réveillera pas. Aujourd'hui, Lou est jugée.", "gap": 0.35},
+  {"id": "04-mort", "who": "procureur", "text": "Votre cause est peut-être juste. Mais un homme est mort dans un bouchon que vous avez fabriqué.", "gap": 0.45},
+  {"id": "05-bouchon", "who": "avocate", "text": "Un bouchon comme il y en a tous les matins sur ce périphérique. Personne ne juge les embouteillages de huit heures.", "gap": 0.2},
+  {"id": "06-hashtag", "who": "procureur", "text": "Les embouteillages de huit heures ne sont pas voulus. Le sien l'était. Filmé, diffusé… avec un hashtag.", "gap": 0.2},
+  {"id": "07-canicule", "who": "avocate", "text": "Pendant que vous comptez les minutes de retard, la canicule a tué des milliers de personnes l'été dernier. Ces morts-là, personne ne les juge.", "gap": 0.2},
+  {"id": "08-rengaine", "who": "procureur", "text": "Toujours la même rengaine. La fin du monde excuse tout.", "gap": 0.2},
+  {"id": "09-like", "who": "narrateur", "text": "Militante ou coupable ? Like si ça te fait réagir.", "gap": 0.4},
+  {"id": "10-voie", "who": "avocate", "text": "Elle avait laissé une voie libre pour les secours. C'est la police qui l'a fermée en arrivant.", "gap": 0.4},
+  {"id": "11-arret", "who": "procureur", "text": "Alors pourquoi l'ambulance était-elle à l'arrêt, Maître ? Pendant quarante minutes ?", "gap": 0.2},
+  {"id": "12-planete", "who": "avocate", "text": "Parce qu'on a construit un monde où une ambulance reste coincée tous les jours. Elle, au moins, elle a essayé de le changer.", "gap": 0.2},
+  {"id": "13-michel", "who": "procureur", "text": "Michel, lui, ne voulait pas changer le monde. Il voulait juste arriver à l'hôpital.", "gap": 0.3},
+  {"id": "14-jure", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.", "gap": 0.6}
+ ]
+}

@@ -1,0 +1,1189 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 77.49,
+ "lines": [
+  {
+   "id": "01-debranche",
+   "who": "narrateur",
+   "text": "3 heures du matin. Elle débranche la machine qui maintient son mari en vie.",
+   "start": 0.25,
+   "dur": 3.4,
+   "words": [
+    {
+     "w": "3",
+     "t": 0.37
+    },
+    {
+     "w": "heures",
+     "t": 0.53
+    },
+    {
+     "w": "du",
+     "t": 0.65
+    },
+    {
+     "w": "matin.",
+     "t": 0.79
+    },
+    {
+     "w": "Elle",
+     "t": 1.31
+    },
+    {
+     "w": "débranche",
+     "t": 1.41
+    },
+    {
+     "w": "la",
+     "t": 1.77
+    },
+    {
+     "w": "machine",
+     "t": 1.87
+    },
+    {
+     "w": "qui",
+     "t": 2.21
+    },
+    {
+     "w": "maintient",
+     "t": 2.39
+    },
+    {
+     "w": "son",
+     "t": 2.69
+    },
+    {
+     "w": "mari",
+     "t": 2.85
+    },
+    {
+     "w": "en",
+     "t": 3.07
+    },
+    {
+     "w": "vie.",
+     "t": 3.25
+    }
+   ]
+  },
+  {
+   "id": "02-promesse",
+   "who": "narrateur",
+   "text": "Il était dans le coma depuis 3 ans. Il lui avait fait promettre de ne jamais le laisser comme ça.",
+   "start": 3.95,
+   "dur": 3.99,
+   "words": [
+    {
+     "w": "Il",
+     "t": 3.95
+    },
+    {
+     "w": "était",
+     "t": 3.95
+    },
+    {
+     "w": "dans",
+     "t": 4.13
+    },
+    {
+     "w": "le",
+     "t": 4.27
+    },
+    {
+     "w": "coma",
+     "t": 4.35
+    },
+    {
+     "w": "depuis",
+     "t": 4.57
+    },
+    {
+     "w": "3",
+     "t": 4.86
+    },
+    {
+     "w": "ans.",
+     "t": 5.15
+    },
+    {
+     "w": "Il",
+     "t": 5.45
+    },
+    {
+     "w": "lui",
+     "t": 5.55
+    },
+    {
+     "w": "avait",
+     "t": 5.67
+    },
+    {
+     "w": "fait",
+     "t": 5.79
+    },
+    {
+     "w": "promettre",
+     "t": 5.97
+    },
+    {
+     "w": "de",
+     "t": 6.41
+    },
+    {
+     "w": "ne",
+     "t": 6.59
+    },
+    {
+     "w": "jamais",
+     "t": 6.65
+    },
+    {
+     "w": "le",
+     "t": 7.03
+    },
+    {
+     "w": "laisser",
+     "t": 7.23
+    },
+    {
+     "w": "comme",
+     "t": 7.45
+    },
+    {
+     "w": "ça.",
+     "t": 7.65
+    }
+   ]
+  },
+  {
+   "id": "03-fille",
+   "who": "narrateur",
+   "text": "Aujourd'hui, c'est leur propre fille qui l'accuse de meurtre.",
+   "start": 8.19,
+   "dur": 2.68,
+   "words": [
+    {
+     "w": "Aujourd'hui,",
+     "t": 8.26
+    },
+    {
+     "w": "c'est",
+     "t": 8.64
+    },
+    {
+     "w": "leur",
+     "t": 9.02
+    },
+    {
+     "w": "propre",
+     "t": 9.1
+    },
+    {
+     "w": "fille",
+     "t": 9.4
+    },
+    {
+     "w": "qui",
+     "t": 9.78
+    },
+    {
+     "w": "l'accuse",
+     "t": 10.06
+    },
+    {
+     "w": "de",
+     "t": 10.34
+    },
+    {
+     "w": "meurtre.",
+     "t": 10.42
+    }
+   ]
+  },
+  {
+   "id": "04-non",
+   "who": "procureur",
+   "text": "Elle n'a pas abrégé des souffrances. Elle a tué un homme qui ne pouvait plus dire non.",
+   "start": 11.17,
+   "dur": 4.705,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 11.17
+    },
+    {
+     "w": "n'a",
+     "t": 11.39
+    },
+    {
+     "w": "pas",
+     "t": 11.61
+    },
+    {
+     "w": "abrégé",
+     "t": 11.81
+    },
+    {
+     "w": "des",
+     "t": 12.45
+    },
+    {
+     "w": "souffrances.",
+     "t": 12.57
+    },
+    {
+     "w": "Elle",
+     "t": 13.31
+    },
+    {
+     "w": "a",
+     "t": 13.47
+    },
+    {
+     "w": "tué",
+     "t": 13.57
+    },
+    {
+     "w": "un",
+     "t": 13.87
+    },
+    {
+     "w": "homme",
+     "t": 14.05
+    },
+    {
+     "w": "qui",
+     "t": 14.29
+    },
+    {
+     "w": "ne",
+     "t": 14.55
+    },
+    {
+     "w": "pouvait",
+     "t": 14.67
+    },
+    {
+     "w": "plus",
+     "t": 14.91
+    },
+    {
+     "w": "dire",
+     "t": 15.13
+    },
+    {
+     "w": "non.",
+     "t": 15.43
+    }
+   ]
+  },
+  {
+   "id": "05-oui",
+   "who": "avocate",
+   "text": "Il avait dit oui. Par écrit. «Si un jour je ne suis plus qu'un corps, laisse-moi partir.» Elle a tenu sa promesse.",
+   "start": 15.975,
+   "dur": 5.332,
+   "words": [
+    {
+     "w": "Il",
+     "t": 15.975
+    },
+    {
+     "w": "avait",
+     "t": 16.075
+    },
+    {
+     "w": "dit",
+     "t": 16.195
+    },
+    {
+     "w": "oui.",
+     "t": 16.375
+    },
+    {
+     "w": "Par",
+     "t": 16.795
+    },
+    {
+     "w": "écrit.",
+     "t": 16.935
+    },
+    {
+     "w": "«Si",
+     "t": 17.475
+    },
+    {
+     "w": "un",
+     "t": 17.595
+    },
+    {
+     "w": "jour",
+     "t": 17.715
+    },
+    {
+     "w": "je",
+     "t": 17.895
+    },
+    {
+     "w": "ne",
+     "t": 18.035
+    },
+    {
+     "w": "suis",
+     "t": 18.095
+    },
+    {
+     "w": "plus",
+     "t": 18.235
+    },
+    {
+     "w": "qu'un",
+     "t": 18.425
+    },
+    {
+     "w": "corps,",
+     "t": 18.615
+    },
+    {
+     "w": "laisse-moi",
+     "t": 18.975
+    },
+    {
+     "w": "partir.»",
+     "t": 19.335
+    },
+    {
+     "w": "Elle",
+     "t": 20.055
+    },
+    {
+     "w": "a",
+     "t": 20.155
+    },
+    {
+     "w": "tenu",
+     "t": 20.255
+    },
+    {
+     "w": "sa",
+     "t": 20.515
+    },
+    {
+     "w": "promesse.",
+     "t": 20.615
+    }
+   ]
+  },
+  {
+   "id": "06-main",
+   "who": "procureur",
+   "text": "Une promesse vieille de 10 ans. Et 12 jours avant sa mort, cet homme a serré la main de sa fille.",
+   "start": 21.407,
+   "dur": 5.769,
+   "words": [
+    {
+     "w": "Une",
+     "t": 21.407
+    },
+    {
+     "w": "promesse",
+     "t": 21.587
+    },
+    {
+     "w": "vieille",
+     "t": 22.107
+    },
+    {
+     "w": "de",
+     "t": 22.507
+    },
+    {
+     "w": "10",
+     "t": 22.647
+    },
+    {
+     "w": "ans.",
+     "t": 22.907
+    },
+    {
+     "w": "Et",
+     "t": 23.207
+    },
+    {
+     "w": "12",
+     "t": 23.327
+    },
+    {
+     "w": "jours",
+     "t": 23.647
+    },
+    {
+     "w": "avant",
+     "t": 23.907
+    },
+    {
+     "w": "sa",
+     "t": 24.127
+    },
+    {
+     "w": "mort,",
+     "t": 24.387
+    },
+    {
+     "w": "cet",
+     "t": 24.947
+    },
+    {
+     "w": "homme",
+     "t": 25.067
+    },
+    {
+     "w": "a",
+     "t": 25.347
+    },
+    {
+     "w": "serré",
+     "t": 25.547
+    },
+    {
+     "w": "la",
+     "t": 26.007
+    },
+    {
+     "w": "main",
+     "t": 26.147
+    },
+    {
+     "w": "de",
+     "t": 26.307
+    },
+    {
+     "w": "sa",
+     "t": 26.447
+    },
+    {
+     "w": "fille.",
+     "t": 26.627
+    }
+   ]
+  },
+  {
+   "id": "07-reflexe",
+   "who": "avocate",
+   "text": "Un réflexe. Trois médecins l'ont écrit. Pendant 3 ans, elle est venue chaque jour. 1095 jours. Sa fille ? 11 fois.",
+   "start": 27.276,
+   "dur": 6.721,
+   "words": [
+    {
+     "w": "Un",
+     "t": 27.276
+    },
+    {
+     "w": "réflexe.",
+     "t": 27.416
+    },
+    {
+     "w": "Trois",
+     "t": 28.116
+    },
+    {
+     "w": "médecins",
+     "t": 28.336
+    },
+    {
+     "w": "l'ont",
+     "t": 28.546
+    },
+    {
+     "w": "écrit.",
+     "t": 28.756
+    },
+    {
+     "w": "Pendant",
+     "t": 29.296
+    },
+    {
+     "w": "3",
+     "t": 29.506
+    },
+    {
+     "w": "ans,",
+     "t": 29.716
+    },
+    {
+     "w": "elle",
+     "t": 30.236
+    },
+    {
+     "w": "est",
+     "t": 30.336
+    },
+    {
+     "w": "venue",
+     "t": 30.416
+    },
+    {
+     "w": "chaque",
+     "t": 30.616
+    },
+    {
+     "w": "jour.",
+     "t": 30.816
+    },
+    {
+     "w": "1095",
+     "t": 31.496
+    },
+    {
+     "w": "jours.",
+     "t": 32.176
+    },
+    {
+     "w": "Sa",
+     "t": 32.816
+    },
+    {
+     "w": "fille ?",
+     "t": 32.956
+    },
+    {
+     "w": "11",
+     "t": 33.303
+    },
+    {
+     "w": "fois.",
+     "t": 33.65
+    }
+   ]
+  },
+  {
+   "id": "08-pause",
+   "who": "narrateur",
+   "text": "Avant la suite : abonne-toi. Le verdict tombe dans la prochaine vidéo.",
+   "start": 34.298,
+   "dur": 3.26,
+   "words": [
+    {
+     "w": "Avant",
+     "t": 34.328
+    },
+    {
+     "w": "la",
+     "t": 34.488
+    },
+    {
+     "w": "suite :",
+     "t": 34.628
+    },
+    {
+     "w": "abonne-toi.",
+     "t": 35.238
+    },
+    {
+     "w": "Le",
+     "t": 35.848
+    },
+    {
+     "w": "verdict",
+     "t": 35.888
+    },
+    {
+     "w": "tombe",
+     "t": 36.148
+    },
+    {
+     "w": "dans",
+     "t": 36.608
+    },
+    {
+     "w": "la",
+     "t": 36.708
+    },
+    {
+     "w": "prochaine",
+     "t": 36.808
+    },
+    {
+     "w": "vidéo.",
+     "t": 37.068
+    }
+   ]
+  },
+  {
+   "id": "09-lendemain",
+   "who": "procureur",
+   "text": "1095 jours… et elle n'a pas pu en attendre un de plus ? Un nouveau traitement commençait le lendemain matin.",
+   "start": 37.858,
+   "dur": 7.334,
+   "words": [
+    {
+     "w": "1095",
+     "t": 38.518
+    },
+    {
+     "w": "jours…",
+     "t": 39.178
+    },
+    {
+     "w": "et",
+     "t": 39.658
+    },
+    {
+     "w": "elle",
+     "t": 40.078
+    },
+    {
+     "w": "n'a",
+     "t": 40.318
+    },
+    {
+     "w": "pas",
+     "t": 40.558
+    },
+    {
+     "w": "pu",
+     "t": 40.738
+    },
+    {
+     "w": "en",
+     "t": 40.958
+    },
+    {
+     "w": "attendre",
+     "t": 41.138
+    },
+    {
+     "w": "un",
+     "t": 41.698
+    },
+    {
+     "w": "de",
+     "t": 41.898
+    },
+    {
+     "w": "plus ?",
+     "t": 42.038
+    },
+    {
+     "w": "Un",
+     "t": 42.638
+    },
+    {
+     "w": "nouveau",
+     "t": 42.798
+    },
+    {
+     "w": "traitement",
+     "t": 43.038
+    },
+    {
+     "w": "commençait",
+     "t": 43.598
+    },
+    {
+     "w": "le",
+     "t": 44.218
+    },
+    {
+     "w": "lendemain",
+     "t": 44.298
+    },
+    {
+     "w": "matin.",
+     "t": 44.738
+    }
+   ]
+  },
+  {
+   "id": "10-quatrieme",
+   "who": "avocate",
+   "text": "Le quatrième. Les trois premiers avaient échoué. Combien d'essais faut-il infliger à un homme qui a demandé à partir ?",
+   "start": 45.292,
+   "dur": 5.185,
+   "words": [
+    {
+     "w": "Le",
+     "t": 45.292
+    },
+    {
+     "w": "quatrième.",
+     "t": 45.392
+    },
+    {
+     "w": "Les",
+     "t": 46.072
+    },
+    {
+     "w": "trois",
+     "t": 46.172
+    },
+    {
+     "w": "premiers",
+     "t": 46.372
+    },
+    {
+     "w": "avaient",
+     "t": 46.652
+    },
+    {
+     "w": "échoué.",
+     "t": 46.872
+    },
+    {
+     "w": "Combien",
+     "t": 47.452
+    },
+    {
+     "w": "d'essais",
+     "t": 47.765
+    },
+    {
+     "w": "faut-il",
+     "t": 48.079
+    },
+    {
+     "w": "infliger",
+     "t": 48.392
+    },
+    {
+     "w": "à",
+     "t": 48.602
+    },
+    {
+     "w": "un",
+     "t": 48.812
+    },
+    {
+     "w": "homme",
+     "t": 48.952
+    },
+    {
+     "w": "qui",
+     "t": 49.152
+    },
+    {
+     "w": "a",
+     "t": 49.292
+    },
+    {
+     "w": "demandé",
+     "t": 49.372
+    },
+    {
+     "w": "à",
+     "t": 49.652
+    },
+    {
+     "w": "partir ?",
+     "t": 49.792
+    }
+   ]
+  },
+  {
+   "id": "11-seule",
+   "who": "procureur",
+   "text": "Autant qu'il en faut, tant qu'il respire. Et ce n'était pas à elle d'en décider. Seule. La nuit. Sans prévenir personne.",
+   "start": 50.577,
+   "dur": 7.172,
+   "words": [
+    {
+     "w": "Autant",
+     "t": 50.577
+    },
+    {
+     "w": "qu'il",
+     "t": 50.887
+    },
+    {
+     "w": "en",
+     "t": 51.197
+    },
+    {
+     "w": "faut,",
+     "t": 51.297
+    },
+    {
+     "w": "tant",
+     "t": 51.757
+    },
+    {
+     "w": "qu'il",
+     "t": 51.907
+    },
+    {
+     "w": "respire.",
+     "t": 52.057
+    },
+    {
+     "w": "Et",
+     "t": 52.877
+    },
+    {
+     "w": "ce",
+     "t": 52.957
+    },
+    {
+     "w": "n'était",
+     "t": 53.147
+    },
+    {
+     "w": "pas",
+     "t": 53.337
+    },
+    {
+     "w": "à",
+     "t": 53.597
+    },
+    {
+     "w": "elle",
+     "t": 53.837
+    },
+    {
+     "w": "d'en",
+     "t": 54.137
+    },
+    {
+     "w": "décider.",
+     "t": 54.437
+    },
+    {
+     "w": "Seule.",
+     "t": 55.017
+    },
+    {
+     "w": "La",
+     "t": 55.817
+    },
+    {
+     "w": "nuit.",
+     "t": 55.937
+    },
+    {
+     "w": "Sans",
+     "t": 56.437
+    },
+    {
+     "w": "prévenir",
+     "t": 56.617
+    },
+    {
+     "w": "personne.",
+     "t": 56.997
+    }
+   ]
+  },
+  {
+   "id": "12-rendu",
+   "who": "avocate",
+   "text": "Seule, oui. Comme elle l'a été pendant 3 ans à son chevet. Elle ne lui a pas pris la vie. Elle lui a rendu sa mort.",
+   "start": 57.849,
+   "dur": 4.707,
+   "words": [
+    {
+     "w": "Seule,",
+     "t": 58.029
+    },
+    {
+     "w": "oui.",
+     "t": 58.209
+    },
+    {
+     "w": "Comme",
+     "t": 58.549
+    },
+    {
+     "w": "elle",
+     "t": 58.689
+    },
+    {
+     "w": "l'a",
+     "t": 58.819
+    },
+    {
+     "w": "été",
+     "t": 58.949
+    },
+    {
+     "w": "pendant",
+     "t": 59.069
+    },
+    {
+     "w": "3",
+     "t": 59.299
+    },
+    {
+     "w": "ans",
+     "t": 59.529
+    },
+    {
+     "w": "à",
+     "t": 59.689
+    },
+    {
+     "w": "son",
+     "t": 59.769
+    },
+    {
+     "w": "chevet.",
+     "t": 59.849
+    },
+    {
+     "w": "Elle",
+     "t": 60.349
+    },
+    {
+     "w": "ne",
+     "t": 60.429
+    },
+    {
+     "w": "lui",
+     "t": 60.549
+    },
+    {
+     "w": "a",
+     "t": 60.649
+    },
+    {
+     "w": "pas",
+     "t": 60.749
+    },
+    {
+     "w": "pris",
+     "t": 60.849
+    },
+    {
+     "w": "la",
+     "t": 61.029
+    },
+    {
+     "w": "vie.",
+     "t": 61.189
+    },
+    {
+     "w": "Elle",
+     "t": 61.549
+    },
+    {
+     "w": "lui",
+     "t": 61.569
+    },
+    {
+     "w": "a",
+     "t": 61.669
+    },
+    {
+     "w": "rendu",
+     "t": 61.729
+    },
+    {
+     "w": "sa",
+     "t": 62.009
+    },
+    {
+     "w": "mort.",
+     "t": 62.149
+    }
+   ]
+  },
+  {
+   "id": "13-donne",
+   "who": "procureur",
+   "text": "On ne rend pas la mort. On la donne. Et la loi a un mot pour ça.",
+   "start": 62.756,
+   "dur": 3.736,
+   "words": [
+    {
+     "w": "On",
+     "t": 62.756
+    },
+    {
+     "w": "ne",
+     "t": 62.916
+    },
+    {
+     "w": "rend",
+     "t": 63.036
+    },
+    {
+     "w": "pas",
+     "t": 63.136
+    },
+    {
+     "w": "la",
+     "t": 63.356
+    },
+    {
+     "w": "mort.",
+     "t": 63.476
+    },
+    {
+     "w": "On",
+     "t": 64.076
+    },
+    {
+     "w": "la",
+     "t": 64.176
+    },
+    {
+     "w": "donne.",
+     "t": 64.296
+    },
+    {
+     "w": "Et",
+     "t": 64.696
+    },
+    {
+     "w": "la",
+     "t": 65.076
+    },
+    {
+     "w": "loi",
+     "t": 65.196
+    },
+    {
+     "w": "a",
+     "t": 65.416
+    },
+    {
+     "w": "un",
+     "t": 65.676
+    },
+    {
+     "w": "mot",
+     "t": 65.776
+    },
+    {
+     "w": "pour",
+     "t": 65.916
+    },
+    {
+     "w": "ça.",
+     "t": 66.136
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Un geste d'amour… ou un meurtre ? Coupable… ou non coupable ?",
+   "start": 67.092,
+   "dur": 3.88,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 67.152
+    },
+    {
+     "w": "es",
+     "t": 67.272
+    },
+    {
+     "w": "le",
+     "t": 67.392
+    },
+    {
+     "w": "juré.",
+     "t": 67.472
+    },
+    {
+     "w": "Un",
+     "t": 67.952
+    },
+    {
+     "w": "geste",
+     "t": 68.032
+    },
+    {
+     "w": "d'amour…",
+     "t": 68.332
+    },
+    {
+     "w": "ou",
+     "t": 68.632
+    },
+    {
+     "w": "un",
+     "t": 68.952
+    },
+    {
+     "w": "meurtre ?",
+     "t": 69.162
+    },
+    {
+     "w": "Coupable…",
+     "t": 69.372
+    },
+    {
+     "w": "ou",
+     "t": 69.832
+    },
+    {
+     "w": "non",
+     "t": 70.172
+    },
+    {
+     "w": "coupable ?",
+     "t": 70.372
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire, et abonne-toi pour découvrir celui du tribunal.",
+   "start": 71.372,
+   "dur": 3.52,
+   "words": [
+    {
+     "w": "Écris",
+     "t": 71.372
+    },
+    {
+     "w": "ton",
+     "t": 71.592
+    },
+    {
+     "w": "verdict",
+     "t": 71.692
+    },
+    {
+     "w": "en",
+     "t": 71.952
+    },
+    {
+     "w": "commentaire,",
+     "t": 72.132
+    },
+    {
+     "w": "et",
+     "t": 72.692
+    },
+    {
+     "w": "abonne-toi",
+     "t": 73.012
+    },
+    {
+     "w": "pour",
+     "t": 73.332
+    },
+    {
+     "w": "découvrir",
+     "t": 73.472
+    },
+    {
+     "w": "celui",
+     "t": 73.852
+    },
+    {
+     "w": "du",
+     "t": 74.152
+    },
+    {
+     "w": "tribunal.",
+     "t": 74.332
+    }
+   ]
+  }
+ ]
+}

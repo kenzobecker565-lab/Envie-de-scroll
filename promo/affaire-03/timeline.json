@@ -1,0 +1,680 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 53.9,
+ "lines": [
+  {
+   "id": "01-trois-heures",
+   "who": "narrateur",
+   "text": "Trois heures du matin. Un cambrioleur entre dans sa boulangerie.",
+   "start": 0.6,
+   "dur": 2.99,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 0.72
+    },
+    {
+     "w": "heures",
+     "t": 0.84
+    },
+    {
+     "w": "du",
+     "t": 0.96
+    },
+    {
+     "w": "matin.",
+     "t": 1.12
+    },
+    {
+     "w": "Un",
+     "t": 1.72
+    },
+    {
+     "w": "cambrioleur",
+     "t": 1.84
+    },
+    {
+     "w": "entre",
+     "t": 2.42
+    },
+    {
+     "w": "dans",
+     "t": 2.62
+    },
+    {
+     "w": "sa",
+     "t": 2.82
+    },
+    {
+     "w": "boulangerie.",
+     "t": 3.0
+    }
+   ]
+  },
+  {
+   "id": "02-rouleau",
+   "who": "narrateur",
+   "text": "Le boulanger descend… avec son rouleau à pâtisserie. Deux côtes cassées.",
+   "start": 3.84,
+   "dur": 3.84,
+   "words": [
+    {
+     "w": "Le",
+     "t": 3.9
+    },
+    {
+     "w": "boulanger",
+     "t": 3.98
+    },
+    {
+     "w": "descend…",
+     "t": 4.3
+    },
+    {
+     "w": "avec",
+     "t": 4.68
+    },
+    {
+     "w": "son",
+     "t": 5.22
+    },
+    {
+     "w": "rouleau",
+     "t": 5.42
+    },
+    {
+     "w": "à",
+     "t": 5.72
+    },
+    {
+     "w": "pâtisserie.",
+     "t": 5.8
+    },
+    {
+     "w": "Deux",
+     "t": 6.62
+    },
+    {
+     "w": "côtes",
+     "t": 6.84
+    },
+    {
+     "w": "cassées.",
+     "t": 7.12
+    }
+   ]
+  },
+  {
+   "id": "03-plainte",
+   "who": "narrateur",
+   "text": "Le voleur porte plainte. Et c'est le boulanger qui risque cinq ans de prison.",
+   "start": 7.98,
+   "dur": 3.27,
+   "words": [
+    {
+     "w": "Le",
+     "t": 8.04
+    },
+    {
+     "w": "voleur",
+     "t": 8.12
+    },
+    {
+     "w": "porte",
+     "t": 8.34
+    },
+    {
+     "w": "plainte.",
+     "t": 8.52
+    },
+    {
+     "w": "Et",
+     "t": 9.08
+    },
+    {
+     "w": "c'est",
+     "t": 9.23
+    },
+    {
+     "w": "le",
+     "t": 9.38
+    },
+    {
+     "w": "boulanger",
+     "t": 9.46
+    },
+    {
+     "w": "qui",
+     "t": 9.84
+    },
+    {
+     "w": "risque",
+     "t": 10.06
+    },
+    {
+     "w": "cinq",
+     "t": 10.33
+    },
+    {
+     "w": "ans",
+     "t": 10.6
+    },
+    {
+     "w": "de",
+     "t": 10.74
+    },
+    {
+     "w": "prison.",
+     "t": 10.84
+    }
+   ]
+  },
+  {
+   "id": "04-dos",
+   "who": "procureur",
+   "text": "Quand il l'a frappé, le voleur s'enfuyait. Il était de dos. Ce n'est plus se défendre, c'est se venger.",
+   "start": 11.95,
+   "dur": 6.17,
+   "words": [
+    {
+     "w": "Quand",
+     "t": 11.95
+    },
+    {
+     "w": "il",
+     "t": 12.13
+    },
+    {
+     "w": "l'a",
+     "t": 12.41
+    },
+    {
+     "w": "frappé,",
+     "t": 12.69
+    },
+    {
+     "w": "le",
+     "t": 13.51
+    },
+    {
+     "w": "voleur",
+     "t": 13.63
+    },
+    {
+     "w": "s'enfuyait.",
+     "t": 14.36
+    },
+    {
+     "w": "Il",
+     "t": 15.09
+    },
+    {
+     "w": "était",
+     "t": 15.17
+    },
+    {
+     "w": "de",
+     "t": 15.37
+    },
+    {
+     "w": "dos.",
+     "t": 15.55
+    },
+    {
+     "w": "Ce",
+     "t": 16.13
+    },
+    {
+     "w": "n'est",
+     "t": 16.24
+    },
+    {
+     "w": "plus",
+     "t": 16.35
+    },
+    {
+     "w": "se",
+     "t": 16.45
+    },
+    {
+     "w": "défendre,",
+     "t": 16.63
+    },
+    {
+     "w": "c'est",
+     "t": 17.04
+    },
+    {
+     "w": "se",
+     "t": 17.45
+    },
+    {
+     "w": "venger.",
+     "t": 17.59
+    }
+   ]
+  },
+  {
+   "id": "05-nuit",
+   "who": "avocate",
+   "text": "Il était trois heures du matin. Dans le noir, il ne savait pas s'il était armé. La nuit, chez soi, la loi présume la légitime défense.",
+   "start": 18.42,
+   "dur": 7.48,
+   "words": [
+    {
+     "w": "Il",
+     "t": 18.42
+    },
+    {
+     "w": "était",
+     "t": 18.56
+    },
+    {
+     "w": "trois",
+     "t": 18.76
+    },
+    {
+     "w": "heures",
+     "t": 19.04
+    },
+    {
+     "w": "du",
+     "t": 19.26
+    },
+    {
+     "w": "matin.",
+     "t": 19.38
+    },
+    {
+     "w": "Dans",
+     "t": 19.92
+    },
+    {
+     "w": "le",
+     "t": 20.04
+    },
+    {
+     "w": "noir,",
+     "t": 20.16
+    },
+    {
+     "w": "il",
+     "t": 20.86
+    },
+    {
+     "w": "ne",
+     "t": 20.94
+    },
+    {
+     "w": "savait",
+     "t": 21.08
+    },
+    {
+     "w": "pas",
+     "t": 21.36
+    },
+    {
+     "w": "s'il",
+     "t": 21.53
+    },
+    {
+     "w": "était",
+     "t": 21.7
+    },
+    {
+     "w": "armé.",
+     "t": 21.88
+    },
+    {
+     "w": "La",
+     "t": 22.68
+    },
+    {
+     "w": "nuit,",
+     "t": 22.88
+    },
+    {
+     "w": "chez",
+     "t": 23.14
+    },
+    {
+     "w": "soi,",
+     "t": 23.4
+    },
+    {
+     "w": "la",
+     "t": 23.92
+    },
+    {
+     "w": "loi",
+     "t": 24.0
+    },
+    {
+     "w": "présume",
+     "t": 24.2
+    },
+    {
+     "w": "la",
+     "t": 24.66
+    },
+    {
+     "w": "légitime",
+     "t": 24.8
+    },
+    {
+     "w": "défense.",
+     "t": 25.2
+    }
+   ]
+  },
+  {
+   "id": "06-quatre",
+   "who": "procureur",
+   "text": "Il a frappé quatre fois. Une fois, c'est la peur. Quatre fois, c'est la colère.",
+   "start": 26.2,
+   "dur": 4.62,
+   "words": [
+    {
+     "w": "Il",
+     "t": 26.24
+    },
+    {
+     "w": "a",
+     "t": 26.58
+    },
+    {
+     "w": "frappé",
+     "t": 26.6
+    },
+    {
+     "w": "quatre",
+     "t": 27.26
+    },
+    {
+     "w": "fois.",
+     "t": 27.54
+    },
+    {
+     "w": "Une",
+     "t": 28.12
+    },
+    {
+     "w": "fois,",
+     "t": 28.24
+    },
+    {
+     "w": "c'est",
+     "t": 28.49
+    },
+    {
+     "w": "la",
+     "t": 28.74
+    },
+    {
+     "w": "peur.",
+     "t": 28.86
+    },
+    {
+     "w": "Quatre",
+     "t": 29.38
+    },
+    {
+     "w": "fois,",
+     "t": 29.58
+    },
+    {
+     "w": "c'est",
+     "t": 29.89
+    },
+    {
+     "w": "la",
+     "t": 30.2
+    },
+    {
+     "w": "colère.",
+     "t": 30.32
+    }
+   ]
+  },
+  {
+   "id": "07-onze",
+   "who": "avocate",
+   "text": "Ce cambrioleur avait déjà été condamné 11 fois. Le boulanger, jamais.",
+   "start": 31.12,
+   "dur": 4.53,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 31.18
+    },
+    {
+     "w": "cambrioleur",
+     "t": 31.36
+    },
+    {
+     "w": "avait",
+     "t": 32.04
+    },
+    {
+     "w": "déjà",
+     "t": 32.22
+    },
+    {
+     "w": "été",
+     "t": 32.54
+    },
+    {
+     "w": "condamné",
+     "t": 32.74
+    },
+    {
+     "w": "11",
+     "t": 33.12
+    },
+    {
+     "w": "fois.",
+     "t": 33.5
+    },
+    {
+     "w": "Le",
+     "t": 34.18
+    },
+    {
+     "w": "boulanger,",
+     "t": 34.26
+    },
+    {
+     "w": "jamais.",
+     "t": 34.72
+    }
+   ]
+  },
+  {
+   "id": "08-passe",
+   "who": "procureur",
+   "text": "On ne juge pas son passé. On juge ce qui s'est passé cette nuit-là.",
+   "start": 36.0,
+   "dur": 4.08,
+   "words": [
+    {
+     "w": "On",
+     "t": 36.05
+    },
+    {
+     "w": "ne",
+     "t": 36.13
+    },
+    {
+     "w": "juge",
+     "t": 36.31
+    },
+    {
+     "w": "pas",
+     "t": 36.65
+    },
+    {
+     "w": "son",
+     "t": 36.87
+    },
+    {
+     "w": "passé.",
+     "t": 37.09
+    },
+    {
+     "w": "On",
+     "t": 37.81
+    },
+    {
+     "w": "juge",
+     "t": 37.91
+    },
+    {
+     "w": "ce",
+     "t": 38.29
+    },
+    {
+     "w": "qui",
+     "t": 38.45
+    },
+    {
+     "w": "s'est",
+     "t": 38.62
+    },
+    {
+     "w": "passé",
+     "t": 38.79
+    },
+    {
+     "w": "cette",
+     "t": 39.27
+    },
+    {
+     "w": "nuit-là.",
+     "t": 40.014
+    }
+   ]
+  },
+  {
+   "id": "09-maison",
+   "who": "avocate",
+   "text": "Cette nuit-là, il a protégé sa maison.",
+   "start": 40.33,
+   "dur": 3.39,
+   "words": [
+    {
+     "w": "Cette",
+     "t": 40.8
+    },
+    {
+     "w": "nuit-là,",
+     "t": 41.16
+    },
+    {
+     "w": "il",
+     "t": 41.52
+    },
+    {
+     "w": "a",
+     "t": 41.6
+    },
+    {
+     "w": "protégé",
+     "t": 41.68
+    },
+    {
+     "w": "sa",
+     "t": 42.18
+    },
+    {
+     "w": "maison.",
+     "t": 42.3
+    }
+   ]
+  },
+  {
+   "id": "10-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, à trois heures du matin, tu aurais fait quoi ?",
+   "start": 44.52,
+   "dur": 4.88,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 44.52
+    },
+    {
+     "w": "es",
+     "t": 44.64
+    },
+    {
+     "w": "le",
+     "t": 44.74
+    },
+    {
+     "w": "juré.",
+     "t": 44.84
+    },
+    {
+     "w": "Coupable…",
+     "t": 45.3
+    },
+    {
+     "w": "ou",
+     "t": 45.9
+    },
+    {
+     "w": "non",
+     "t": 46.12
+    },
+    {
+     "w": "coupable ?",
+     "t": 46.26
+    },
+    {
+     "w": "Et",
+     "t": 46.76
+    },
+    {
+     "w": "toi,",
+     "t": 47.1
+    },
+    {
+     "w": "à",
+     "t": 47.28
+    },
+    {
+     "w": "trois",
+     "t": 47.513
+    },
+    {
+     "w": "heures",
+     "t": 47.747
+    },
+    {
+     "w": "du",
+     "t": 47.98
+    },
+    {
+     "w": "matin,",
+     "t": 48.1
+    },
+    {
+     "w": "tu",
+     "t": 48.36
+    },
+    {
+     "w": "aurais",
+     "t": 48.72
+    },
+    {
+     "w": "fait",
+     "t": 48.86
+    },
+    {
+     "w": "quoi ?",
+     "t": 48.96
+    }
+   ]
+  }
+ ]
+}

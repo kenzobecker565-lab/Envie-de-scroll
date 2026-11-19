@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plutôt Que Scroller · pub 15 s</title>
+    <!-- Polices de l'app (installées à la racine du dépôt par `npm install`). -->
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/fraunces/full.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/fraunces/full-italic.css" />
+    <link rel="stylesheet" href="../node_modules/@fontsource-variable/figtree/index.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="frame">
+      <div id="stage">
+        <!-- Filtres de flou de mouvement (vertical), pilotés par la vitesse du scroll. -->
+        <svg width="0" height="0" style="position: absolute">
+          <defs>
+            <filter id="mblur" x="-2%" y="-10%" width="104%" height="120%">
+              <feGaussianBlur id="mblurNode" stdDeviation="0 0" />
+            </filter>
+            <filter id="mblur2" x="-2%" y="-10%" width="104%" height="150%">
+              <feGaussianBlur id="mblurNode2" stdDeviation="0 0" />
+            </filter>
+            <filter id="paperShadow" x="-20%" y="-20%" width="140%" height="150%">
+              <feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#2a1f1a" flood-opacity="0.35" />
+            </filter>
+          </defs>
+        </svg>
+
+        <!-- A · le scroll sans fin (mesures 1-2) -->
+        <section id="A" class="layer" style="z-index: 1"></section>
+
+        <!-- B · les passions, puis la progression dans le téléphone (mesures 3-6) -->
+        <section id="B" class="layer" style="z-index: 3"></section>
+
+        <!-- D2 · la signature (mesure 8) -->
+        <section id="D2" class="layer dots" style="z-index: 4"></section>
+
+        <!-- D1 · le slogan (mesure 7) -->
+        <section id="D1" class="layer" style="z-index: 5"></section>
+
+        <!-- Effets par-dessus tout : confettis, grand crayon, étincelles -->
+        <section id="fx" class="layer" style="z-index: 6; pointer-events: none"></section>
+      </div>
+    </div>
+
+    <div id="controls">
+      <button id="play" type="button">Lecture</button>
+      <input id="scrub" type="range" min="0" max="15" step="0.001" value="0" />
+      <span id="clock">0,00 s</span>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

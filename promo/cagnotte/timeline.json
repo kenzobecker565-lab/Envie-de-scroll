@@ -1,0 +1,1065 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 79.24,
+ "lines": [
+  {
+   "id": "01-maelys",
+   "who": "maelys",
+   "text": "Les gars, grâce à vous… voilà l'enveloppe pour Gérard !",
+   "start": 0.05,
+   "dur": 3.54,
+   "words": [
+    {
+     "w": "Les",
+     "t": 0.05
+    },
+    {
+     "w": "gars,",
+     "t": 0.33
+    },
+    {
+     "w": "grâce",
+     "t": 0.81
+    },
+    {
+     "w": "à",
+     "t": 1.03
+    },
+    {
+     "w": "vous…",
+     "t": 1.23
+    },
+    {
+     "w": "voilà",
+     "t": 1.81
+    },
+    {
+     "w": "l'enveloppe",
+     "t": 2.25
+    },
+    {
+     "w": "pour",
+     "t": 2.69
+    },
+    {
+     "w": "Gérard !",
+     "t": 2.87
+    }
+   ]
+  },
+  {
+   "id": "01b-gerard",
+   "who": "gerard",
+   "text": "Merci… merci mademoiselle. Vous m'avez sauvé la vie.",
+   "start": 4.16,
+   "dur": 3.096,
+   "words": [
+    {
+     "w": "Merci…",
+     "t": 4.16
+    },
+    {
+     "w": "merci",
+     "t": 4.88
+    },
+    {
+     "w": "mademoiselle.",
+     "t": 5.18
+    },
+    {
+     "w": "Vous",
+     "t": 6.06
+    },
+    {
+     "w": "m'avez",
+     "t": 6.22
+    },
+    {
+     "w": "sauvé",
+     "t": 6.38
+    },
+    {
+     "w": "la",
+     "t": 6.78
+    },
+    {
+     "w": "vie.",
+     "t": 6.9
+    }
+   ]
+  },
+  {
+   "id": "01c-maelys",
+   "who": "maelys2",
+   "text": "Euh… on coupe, on coupe !",
+   "start": 7.156,
+   "dur": 2.17,
+   "words": [
+    {
+     "w": "Euh…",
+     "t": 7.606
+    },
+    {
+     "w": "on",
+     "t": 8.046
+    },
+    {
+     "w": "coupe,",
+     "t": 8.186
+    },
+    {
+     "w": "on",
+     "t": 8.666
+    },
+    {
+     "w": "coupe !",
+     "t": 8.786
+    }
+   ]
+  },
+  {
+   "id": "02-cagnotte",
+   "who": "narrateur",
+   "text": "Maëlys, 23 ans, 412 000 abonnés. En trois jours, sa cagnotte pour Gérard, 61 ans, sans-abri, récolte 80 000 euros.",
+   "start": 9.926,
+   "dur": 8.05,
+   "words": [
+    {
+     "w": "Maëlys,",
+     "t": 10.226
+    },
+    {
+     "w": "23",
+     "t": 10.666
+    },
+    {
+     "w": "ans,",
+     "t": 11.106
+    },
+    {
+     "w": "412",
+     "t": 11.726
+    },
+    {
+     "w": "000",
+     "t": 12.266
+    },
+    {
+     "w": "abonnés.",
+     "t": 12.586
+    },
+    {
+     "w": "En",
+     "t": 13.186
+    },
+    {
+     "w": "trois",
+     "t": 13.266
+    },
+    {
+     "w": "jours,",
+     "t": 13.466
+    },
+    {
+     "w": "sa",
+     "t": 13.906
+    },
+    {
+     "w": "cagnotte",
+     "t": 14.006
+    },
+    {
+     "w": "pour",
+     "t": 14.386
+    },
+    {
+     "w": "Gérard,",
+     "t": 14.506
+    },
+    {
+     "w": "61",
+     "t": 15.006
+    },
+    {
+     "w": "ans,",
+     "t": 15.326
+    },
+    {
+     "w": "sans-abri,",
+     "t": 15.936
+    },
+    {
+     "w": "récolte",
+     "t": 16.546
+    },
+    {
+     "w": "80",
+     "t": 16.926
+    },
+    {
+     "w": "000",
+     "t": 17.186
+    },
+    {
+     "w": "euros.",
+     "t": 17.566
+    }
+   ]
+  },
+  {
+   "id": "03-enveloppe",
+   "who": "narrateur",
+   "text": "Gérard en a reçu 6 000. En liquide. Dans une enveloppe avec un cœur. Aujourd'hui, Maëlys est jugée pour abus de confiance.",
+   "start": 18.226,
+   "dur": 7.14,
+   "words": [
+    {
+     "w": "Gérard",
+     "t": 18.226
+    },
+    {
+     "w": "en",
+     "t": 18.766
+    },
+    {
+     "w": "a",
+     "t": 18.966
+    },
+    {
+     "w": "reçu",
+     "t": 19.086
+    },
+    {
+     "w": "6",
+     "t": 19.406
+    },
+    {
+     "w": "000.",
+     "t": 19.726
+    },
+    {
+     "w": "En",
+     "t": 19.886
+    },
+    {
+     "w": "liquide.",
+     "t": 20.286
+    },
+    {
+     "w": "Dans",
+     "t": 20.906
+    },
+    {
+     "w": "une",
+     "t": 21.046
+    },
+    {
+     "w": "enveloppe",
+     "t": 21.206
+    },
+    {
+     "w": "avec",
+     "t": 21.746
+    },
+    {
+     "w": "un",
+     "t": 21.906
+    },
+    {
+     "w": "cœur.",
+     "t": 22.366
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 22.826
+    },
+    {
+     "w": "Maëlys",
+     "t": 23.286
+    },
+    {
+     "w": "est",
+     "t": 23.746
+    },
+    {
+     "w": "jugée",
+     "t": 23.806
+    },
+    {
+     "w": "pour",
+     "t": 24.126
+    },
+    {
+     "w": "abus",
+     "t": 24.366
+    },
+    {
+     "w": "de",
+     "t": 24.606
+    },
+    {
+     "w": "confiance.",
+     "t": 24.706
+    }
+   ]
+  },
+  {
+   "id": "04-commission",
+   "who": "procureur",
+   "text": "Six mille euros sur quatre-vingt mille. Vous appelez ça un don ? Moi, j'appelle ça une commission.",
+   "start": 25.616,
+   "dur": 4.36,
+   "words": [
+    {
+     "w": "Six",
+     "t": 25.699
+    },
+    {
+     "w": "mille",
+     "t": 25.853
+    },
+    {
+     "w": "euros",
+     "t": 26.006
+    },
+    {
+     "w": "sur",
+     "t": 26.286
+    },
+    {
+     "w": "quatre-vingt",
+     "t": 26.666
+    },
+    {
+     "w": "mille.",
+     "t": 27.046
+    },
+    {
+     "w": "Vous",
+     "t": 27.426
+    },
+    {
+     "w": "appelez",
+     "t": 27.526
+    },
+    {
+     "w": "ça",
+     "t": 27.806
+    },
+    {
+     "w": "un",
+     "t": 27.946
+    },
+    {
+     "w": "don ?",
+     "t": 28.026
+    },
+    {
+     "w": "Moi,",
+     "t": 28.426
+    },
+    {
+     "w": "j'appelle",
+     "t": 28.726
+    },
+    {
+     "w": "ça",
+     "t": 29.026
+    },
+    {
+     "w": "une",
+     "t": 29.266
+    },
+    {
+     "w": "commission.",
+     "t": 29.346
+    }
+   ]
+  },
+  {
+   "id": "05-loyer",
+   "who": "avocate",
+   "text": "Dix-huit mois de loyer payés d'avance. Un dentiste. Une formation. Il n'a pas reçu une enveloppe. Il a reçu une vie.",
+   "start": 30.226,
+   "dur": 5.28,
+   "words": [
+    {
+     "w": "Dix-huit",
+     "t": 30.396
+    },
+    {
+     "w": "mois",
+     "t": 30.566
+    },
+    {
+     "w": "de",
+     "t": 30.766
+    },
+    {
+     "w": "loyer",
+     "t": 30.866
+    },
+    {
+     "w": "payés",
+     "t": 31.218
+    },
+    {
+     "w": "d'avance.",
+     "t": 31.57
+    },
+    {
+     "w": "Un",
+     "t": 31.922
+    },
+    {
+     "w": "dentiste.",
+     "t": 32.274
+    },
+    {
+     "w": "Une",
+     "t": 32.626
+    },
+    {
+     "w": "formation.",
+     "t": 32.746
+    },
+    {
+     "w": "Il",
+     "t": 33.326
+    },
+    {
+     "w": "n'a",
+     "t": 33.446
+    },
+    {
+     "w": "pas",
+     "t": 33.566
+    },
+    {
+     "w": "reçu",
+     "t": 33.666
+    },
+    {
+     "w": "une",
+     "t": 33.926
+    },
+    {
+     "w": "enveloppe.",
+     "t": 34.026
+    },
+    {
+     "w": "Il",
+     "t": 34.546
+    },
+    {
+     "w": "a",
+     "t": 34.606
+    },
+    {
+     "w": "reçu",
+     "t": 34.706
+    },
+    {
+     "w": "une",
+     "t": 35.006
+    },
+    {
+     "w": "vie.",
+     "t": 35.126
+    }
+   ]
+  },
+  {
+   "id": "06-recus",
+   "who": "procureur",
+   "text": "Les reçus, maître ? Neuf mille euros. Il en manque soixante-cinq mille. Et une voiture neuve, garée devant chez votre cliente.",
+   "start": 35.756,
+   "dur": 5.72,
+   "words": [
+    {
+     "w": "Les",
+     "t": 35.756
+    },
+    {
+     "w": "reçus,",
+     "t": 35.906
+    },
+    {
+     "w": "maître ?",
+     "t": 36.306
+    },
+    {
+     "w": "Neuf",
+     "t": 36.599
+    },
+    {
+     "w": "mille",
+     "t": 36.893
+    },
+    {
+     "w": "euros.",
+     "t": 37.186
+    },
+    {
+     "w": "Il",
+     "t": 37.606
+    },
+    {
+     "w": "en",
+     "t": 37.686
+    },
+    {
+     "w": "manque",
+     "t": 37.766
+    },
+    {
+     "w": "soixante-cinq",
+     "t": 38.179
+    },
+    {
+     "w": "mille.",
+     "t": 38.593
+    },
+    {
+     "w": "Et",
+     "t": 39.006
+    },
+    {
+     "w": "une",
+     "t": 39.086
+    },
+    {
+     "w": "voiture",
+     "t": 39.206
+    },
+    {
+     "w": "neuve,",
+     "t": 39.446
+    },
+    {
+     "w": "garée",
+     "t": 40.066
+    },
+    {
+     "w": "devant",
+     "t": 40.366
+    },
+    {
+     "w": "chez",
+     "t": 40.566
+    },
+    {
+     "w": "votre",
+     "t": 40.706
+    },
+    {
+     "w": "cliente.",
+     "t": 41.104
+    }
+   ]
+  },
+  {
+   "id": "07-story",
+   "who": "avocate",
+   "text": "Achetée avec ses partenariats. Elle gagne plus en une story que vous en un mois, monsieur le procureur.",
+   "start": 41.726,
+   "dur": 4.319,
+   "words": [
+    {
+     "w": "Achetée",
+     "t": 41.906
+    },
+    {
+     "w": "avec",
+     "t": 42.086
+    },
+    {
+     "w": "ses",
+     "t": 42.206
+    },
+    {
+     "w": "partenariats.",
+     "t": 42.366
+    },
+    {
+     "w": "Elle",
+     "t": 43.146
+    },
+    {
+     "w": "gagne",
+     "t": 43.246
+    },
+    {
+     "w": "plus",
+     "t": 43.446
+    },
+    {
+     "w": "en",
+     "t": 43.606
+    },
+    {
+     "w": "une",
+     "t": 43.746
+    },
+    {
+     "w": "story",
+     "t": 43.926
+    },
+    {
+     "w": "que",
+     "t": 44.206
+    },
+    {
+     "w": "vous",
+     "t": 44.406
+    },
+    {
+     "w": "en",
+     "t": 44.546
+    },
+    {
+     "w": "un",
+     "t": 44.666
+    },
+    {
+     "w": "mois,",
+     "t": 44.846
+    },
+    {
+     "w": "monsieur",
+     "t": 45.186
+    },
+    {
+     "w": "le",
+     "t": 45.346
+    },
+    {
+     "w": "procureur.",
+     "t": 45.446
+    }
+   ]
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Bienfaitrice maladroite… ou arnaqueuse ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès.",
+   "start": 46.296,
+   "dur": 6.37,
+   "words": [
+    {
+     "w": "Bienfaitrice",
+     "t": 46.953
+    },
+    {
+     "w": "maladroite…",
+     "t": 47.619
+    },
+    {
+     "w": "ou",
+     "t": 48.286
+    },
+    {
+     "w": "arnaqueuse ?",
+     "t": 48.886
+    },
+    {
+     "w": "Ici,",
+     "t": 49.486
+    },
+    {
+     "w": "c'est",
+     "t": 49.826
+    },
+    {
+     "w": "toi",
+     "t": 50.166
+    },
+    {
+     "w": "qui",
+     "t": 50.306
+    },
+    {
+     "w": "juges.",
+     "t": 50.666
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 51.026
+    },
+    {
+     "w": "pour",
+     "t": 51.386
+    },
+    {
+     "w": "siéger",
+     "t": 51.546
+    },
+    {
+     "w": "au",
+     "t": 51.806
+    },
+    {
+     "w": "prochain",
+     "t": 51.946
+    },
+    {
+     "w": "procès.",
+     "t": 52.186
+    }
+   ]
+  },
+  {
+   "id": "09-donateurs",
+   "who": "procureur",
+   "text": "Six mille quatre cent douze personnes ont donné pour Gérard. Pas pour vos frais de gestion.",
+   "start": 52.916,
+   "dur": 3.91,
+   "words": [
+    {
+     "w": "Six",
+     "t": 53.096
+    },
+    {
+     "w": "mille",
+     "t": 53.276
+    },
+    {
+     "w": "quatre",
+     "t": 53.456
+    },
+    {
+     "w": "cent",
+     "t": 53.636
+    },
+    {
+     "w": "douze",
+     "t": 53.816
+    },
+    {
+     "w": "personnes",
+     "t": 53.996
+    },
+    {
+     "w": "ont",
+     "t": 54.436
+    },
+    {
+     "w": "donné",
+     "t": 54.696
+    },
+    {
+     "w": "pour",
+     "t": 54.916
+    },
+    {
+     "w": "Gérard.",
+     "t": 55.116
+    },
+    {
+     "w": "Pas",
+     "t": 55.596
+    },
+    {
+     "w": "pour",
+     "t": 55.716
+    },
+    {
+     "w": "vos",
+     "t": 55.896
+    },
+    {
+     "w": "frais",
+     "t": 56.036
+    },
+    {
+     "w": "de",
+     "t": 56.296
+    },
+    {
+     "w": "gestion.",
+     "t": 56.296
+    }
+   ]
+  },
+  {
+   "id": "10-zero",
+   "who": "avocate",
+   "text": "Sans elle, Gérard n'aurait rien eu. Zéro. Ceux qui l'insultent aujourd'hui passaient devant lui sans le regarder.",
+   "start": 57.076,
+   "dur": 5.19,
+   "words": [
+    {
+     "w": "Sans",
+     "t": 57.076
+    },
+    {
+     "w": "elle,",
+     "t": 57.446
+    },
+    {
+     "w": "Gérard",
+     "t": 57.816
+    },
+    {
+     "w": "n'aurait",
+     "t": 58.096
+    },
+    {
+     "w": "rien",
+     "t": 58.376
+    },
+    {
+     "w": "eu.",
+     "t": 58.556
+    },
+    {
+     "w": "Zéro.",
+     "t": 58.916
+    },
+    {
+     "w": "Ceux",
+     "t": 59.576
+    },
+    {
+     "w": "qui",
+     "t": 59.916
+    },
+    {
+     "w": "l'insultent",
+     "t": 60.209
+    },
+    {
+     "w": "aujourd'hui",
+     "t": 60.503
+    },
+    {
+     "w": "passaient",
+     "t": 60.796
+    },
+    {
+     "w": "devant",
+     "t": 61.116
+    },
+    {
+     "w": "lui",
+     "t": 61.256
+    },
+    {
+     "w": "sans",
+     "t": 61.436
+    },
+    {
+     "w": "le",
+     "t": 61.656
+    },
+    {
+     "w": "regarder.",
+     "t": 61.756
+    }
+   ]
+  },
+  {
+   "id": "11-filme",
+   "who": "procureur",
+   "text": "Elle l'a filmé pour faire pleurer. Elle a encaissé pour elle.",
+   "start": 62.516,
+   "dur": 2.85,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 62.516
+    },
+    {
+     "w": "l'a",
+     "t": 62.646
+    },
+    {
+     "w": "filmé",
+     "t": 62.816
+    },
+    {
+     "w": "pour",
+     "t": 63.216
+    },
+    {
+     "w": "faire",
+     "t": 63.356
+    },
+    {
+     "w": "pleurer.",
+     "t": 63.556
+    },
+    {
+     "w": "Elle",
+     "t": 64.176
+    },
+    {
+     "w": "a",
+     "t": 64.276
+    },
+    {
+     "w": "encaissé",
+     "t": 64.376
+    },
+    {
+     "w": "pour",
+     "t": 64.816
+    },
+    {
+     "w": "elle.",
+     "t": 64.976
+    }
+   ]
+  },
+  {
+   "id": "12-plainte",
+   "who": "avocate",
+   "text": "Gérard, lui, ne porte pas plainte. Il dit qu'elle lui a sauvé la vie.",
+   "start": 65.616,
+   "dur": 4.19,
+   "words": [
+    {
+     "w": "Gérard,",
+     "t": 66.076
+    },
+    {
+     "w": "lui,",
+     "t": 66.396
+    },
+    {
+     "w": "ne",
+     "t": 67.076
+    },
+    {
+     "w": "porte",
+     "t": 67.196
+    },
+    {
+     "w": "pas",
+     "t": 67.436
+    },
+    {
+     "w": "plainte.",
+     "t": 67.676
+    },
+    {
+     "w": "Il",
+     "t": 68.256
+    },
+    {
+     "w": "dit",
+     "t": 68.376
+    },
+    {
+     "w": "qu'elle",
+     "t": 68.596
+    },
+    {
+     "w": "lui",
+     "t": 68.816
+    },
+    {
+     "w": "a",
+     "t": 68.956
+    },
+    {
+     "w": "sauvé",
+     "t": 69.036
+    },
+    {
+     "w": "la",
+     "t": 69.376
+    },
+    {
+     "w": "vie.",
+     "t": 69.456
+    }
+   ]
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend.",
+   "start": 70.056,
+   "dur": 5.78,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 70.056
+    },
+    {
+     "w": "es",
+     "t": 70.226
+    },
+    {
+     "w": "le",
+     "t": 70.346
+    },
+    {
+     "w": "juré.",
+     "t": 70.466
+    },
+    {
+     "w": "Coupable…",
+     "t": 71.046
+    },
+    {
+     "w": "ou",
+     "t": 71.426
+    },
+    {
+     "w": "non",
+     "t": 71.766
+    },
+    {
+     "w": "coupable ?",
+     "t": 71.926
+    },
+    {
+     "w": "Écris",
+     "t": 72.606
+    },
+    {
+     "w": "ton",
+     "t": 72.826
+    },
+    {
+     "w": "verdict",
+     "t": 72.926
+    },
+    {
+     "w": "en",
+     "t": 73.126
+    },
+    {
+     "w": "commentaire.",
+     "t": 73.326
+    },
+    {
+     "w": "Et",
+     "t": 74.006
+    },
+    {
+     "w": "abonne-toi :",
+     "t": 74.346
+    },
+    {
+     "w": "le",
+     "t": 74.686
+    },
+    {
+     "w": "prochain",
+     "t": 74.726
+    },
+    {
+     "w": "procès",
+     "t": 75.066
+    },
+    {
+     "w": "t'attend.",
+     "t": 75.465
+    }
+   ]
+  }
+ ]
+}

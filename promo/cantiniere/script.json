@@ -1,0 +1,95 @@
+{
+ "_doc": "« La cantinière » (affaire fictive), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-cantine",
+   "who": "narrateur",
+   "text": "Pendant deux ans, une cantinière a nourri des enfants dont les parents ne payaient plus la cantine. Neuf enfants. Trois mille huit cents euros.",
+   "gap": 0
+  },
+  {
+   "id": "02-registre",
+   "who": "narrateur",
+   "text": "Sur le registre, elle cochait « absent ». Mais tous les midis, ils étaient là. Un plateau… une assiette pleine… et parfois, un deuxième dessert."
+  },
+  {
+   "id": "03-nadia",
+   "who": "narrateur",
+   "text": "Elle s'appelle Nadia. Cinquante-deux ans. Cantinière depuis dix-neuf ans. Adorée par les élèves. Aujourd'hui, elle est jugée pour détournement."
+  },
+  {
+   "id": "04-mairie",
+   "who": "procureur",
+   "text": "Ces repas étaient payés par la mairie. Avec l'argent public. Elle l'a distribué comme si c'était le sien."
+  },
+  {
+   "id": "05-ventre",
+   "who": "avocate",
+   "text": "Comme si c'était le sien ? Elle n'a jamais mangé un seul de ces repas. Ils ont fini dans le ventre d'enfants de sept ans."
+  },
+  {
+   "id": "06-parents",
+   "who": "procureur",
+   "text": "Et les parents qui, eux, payaient chaque mois ? Ils ont financé l'assiette des autres sans le savoir."
+  },
+  {
+   "id": "07-quarante",
+   "who": "avocate",
+   "text": "Ces parents-là, les enquêteurs les ont interrogés. Quarante sur quarante-deux ont répondu la même chose : « Elle a bien fait. »"
+  },
+  {
+   "id": "08-falsifie",
+   "who": "procureur",
+   "text": "La justice ne se vote pas à main levée. Un registre falsifié reste un registre falsifié."
+  },
+  {
+   "id": "09-affame",
+   "who": "avocate",
+   "text": "Falsifié ? Elle aurait dû écrire quoi ? « Enfant affamé, renvoyé à la porte » ?"
+  },
+  {
+   "id": "10-aides",
+   "who": "procureur",
+   "text": "Elle aurait dû prévenir la mairie. Il existe des aides. Des procédures."
+  },
+  {
+   "id": "11-courriers",
+   "who": "avocate",
+   "text": "Elle l'a fait. Trois courriers. Aucune réponse. Pendant ce temps, Yanis, sept ans, arrivait chaque matin le ventre vide."
+  },
+  {
+   "id": "12-coeur",
+   "who": "procureur",
+   "text": "Le cœur ne remplace pas la loi. Sinon, chacun rendrait sa propre justice."
+  },
+  {
+   "id": "13-juger",
+   "who": "avocate",
+   "text": "Sa justice ? C'était une assiette de pâtes. Dix-neuf ans qu'elle remplit des assiettes… et la seule fois qu'on la remarque, c'est pour la juger."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

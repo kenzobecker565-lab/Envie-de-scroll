@@ -1,0 +1,1185 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 77.77,
+ "lines": [
+  {
+   "id": "01-cantine",
+   "who": "narrateur",
+   "text": "Pendant deux ans, une cantinière a nourri des enfants dont les parents ne payaient plus la cantine. Neuf enfants. Trois mille huit cents euros.",
+   "start": 0.25,
+   "dur": 5.89,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 0.25
+    },
+    {
+     "w": "deux",
+     "t": 0.48
+    },
+    {
+     "w": "ans,",
+     "t": 0.73
+    },
+    {
+     "w": "une",
+     "t": 1.15
+    },
+    {
+     "w": "cantinière",
+     "t": 1.25
+    },
+    {
+     "w": "a",
+     "t": 1.79
+    },
+    {
+     "w": "nourri",
+     "t": 1.85
+    },
+    {
+     "w": "des",
+     "t": 2.11
+    },
+    {
+     "w": "enfants",
+     "t": 2.19
+    },
+    {
+     "w": "dont",
+     "t": 2.53
+    },
+    {
+     "w": "les",
+     "t": 2.73
+    },
+    {
+     "w": "parents",
+     "t": 2.85
+    },
+    {
+     "w": "ne",
+     "t": 3.05
+    },
+    {
+     "w": "payaient",
+     "t": 3.19
+    },
+    {
+     "w": "plus",
+     "t": 3.47
+    },
+    {
+     "w": "la",
+     "t": 3.61
+    },
+    {
+     "w": "cantine.",
+     "t": 3.75
+    },
+    {
+     "w": "Neuf",
+     "t": 4.18
+    },
+    {
+     "w": "enfants.",
+     "t": 4.61
+    },
+    {
+     "w": "Trois",
+     "t": 4.822
+    },
+    {
+     "w": "mille",
+     "t": 5.034
+    },
+    {
+     "w": "huit",
+     "t": 5.246
+    },
+    {
+     "w": "cents",
+     "t": 5.458
+    },
+    {
+     "w": "euros.",
+     "t": 5.67
+    }
+   ]
+  },
+  {
+   "id": "02-registre",
+   "who": "narrateur",
+   "text": "Sur le registre, elle cochait « absent ». Mais tous les midis, ils étaient là. Un plateau… une assiette pleine… et parfois, un deuxième dessert.",
+   "start": 6.39,
+   "dur": 7.1,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 6.39
+    },
+    {
+     "w": "le",
+     "t": 6.55
+    },
+    {
+     "w": "registre,",
+     "t": 6.67
+    },
+    {
+     "w": "elle",
+     "t": 7.25
+    },
+    {
+     "w": "cochait «",
+     "t": 7.35
+    },
+    {
+     "w": "absent ».",
+     "t": 7.75
+    },
+    {
+     "w": "Mais",
+     "t": 8.39
+    },
+    {
+     "w": "tous",
+     "t": 8.49
+    },
+    {
+     "w": "les",
+     "t": 8.69
+    },
+    {
+     "w": "midis,",
+     "t": 8.81
+    },
+    {
+     "w": "ils",
+     "t": 9.27
+    },
+    {
+     "w": "étaient",
+     "t": 9.37
+    },
+    {
+     "w": "là.",
+     "t": 9.57
+    },
+    {
+     "w": "Un",
+     "t": 9.95
+    },
+    {
+     "w": "plateau…",
+     "t": 10.05
+    },
+    {
+     "w": "une",
+     "t": 10.89
+    },
+    {
+     "w": "assiette",
+     "t": 11.01
+    },
+    {
+     "w": "pleine…",
+     "t": 11.33
+    },
+    {
+     "w": "et",
+     "t": 11.71
+    },
+    {
+     "w": "parfois,",
+     "t": 11.97
+    },
+    {
+     "w": "un",
+     "t": 12.21
+    },
+    {
+     "w": "deuxième",
+     "t": 12.63
+    },
+    {
+     "w": "dessert.",
+     "t": 12.87
+    }
+   ]
+  },
+  {
+   "id": "03-nadia",
+   "who": "narrateur",
+   "text": "Elle s'appelle Nadia. Cinquante-deux ans. Cantinière depuis dix-neuf ans. Adorée par les élèves. Aujourd'hui, elle est jugée pour détournement.",
+   "start": 13.74,
+   "dur": 6.45,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 13.74
+    },
+    {
+     "w": "s'appelle",
+     "t": 13.96
+    },
+    {
+     "w": "Nadia.",
+     "t": 14.18
+    },
+    {
+     "w": "Cinquante-deux",
+     "t": 14.64
+    },
+    {
+     "w": "ans.",
+     "t": 15.1
+    },
+    {
+     "w": "Cantinière",
+     "t": 15.58
+    },
+    {
+     "w": "depuis",
+     "t": 16.04
+    },
+    {
+     "w": "dix-neuf",
+     "t": 16.34
+    },
+    {
+     "w": "ans.",
+     "t": 16.64
+    },
+    {
+     "w": "Adorée",
+     "t": 16.98
+    },
+    {
+     "w": "par",
+     "t": 17.46
+    },
+    {
+     "w": "les",
+     "t": 17.58
+    },
+    {
+     "w": "élèves.",
+     "t": 17.74
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 18.31
+    },
+    {
+     "w": "elle",
+     "t": 18.88
+    },
+    {
+     "w": "est",
+     "t": 18.98
+    },
+    {
+     "w": "jugée",
+     "t": 19.06
+    },
+    {
+     "w": "pour",
+     "t": 19.34
+    },
+    {
+     "w": "détournement.",
+     "t": 19.48
+    }
+   ]
+  },
+  {
+   "id": "04-mairie",
+   "who": "procureur",
+   "text": "Ces repas étaient payés par la mairie. Avec l'argent public. Elle l'a distribué comme si c'était le sien.",
+   "start": 20.44,
+   "dur": 4.53,
+   "words": [
+    {
+     "w": "Ces",
+     "t": 20.44
+    },
+    {
+     "w": "repas",
+     "t": 20.6
+    },
+    {
+     "w": "étaient",
+     "t": 20.9
+    },
+    {
+     "w": "payés",
+     "t": 21.04
+    },
+    {
+     "w": "par",
+     "t": 21.4
+    },
+    {
+     "w": "la",
+     "t": 21.5
+    },
+    {
+     "w": "mairie.",
+     "t": 21.64
+    },
+    {
+     "w": "Avec",
+     "t": 21.92
+    },
+    {
+     "w": "l'argent",
+     "t": 22.21
+    },
+    {
+     "w": "public.",
+     "t": 22.5
+    },
+    {
+     "w": "Elle",
+     "t": 23.08
+    },
+    {
+     "w": "l'a",
+     "t": 23.21
+    },
+    {
+     "w": "distribué",
+     "t": 23.34
+    },
+    {
+     "w": "comme",
+     "t": 23.86
+    },
+    {
+     "w": "si",
+     "t": 24.12
+    },
+    {
+     "w": "c'était",
+     "t": 24.31
+    },
+    {
+     "w": "le",
+     "t": 24.5
+    },
+    {
+     "w": "sien.",
+     "t": 24.6
+    }
+   ]
+  },
+  {
+   "id": "05-ventre",
+   "who": "avocate",
+   "text": "Comme si c'était le sien ? Elle n'a jamais mangé un seul de ces repas. Ils ont fini dans le ventre d'enfants de sept ans.",
+   "start": 25.22,
+   "dur": 4.76,
+   "words": [
+    {
+     "w": "Comme",
+     "t": 25.22
+    },
+    {
+     "w": "si",
+     "t": 25.38
+    },
+    {
+     "w": "c'était",
+     "t": 25.55
+    },
+    {
+     "w": "le",
+     "t": 25.72
+    },
+    {
+     "w": "sien ?",
+     "t": 25.84
+    },
+    {
+     "w": "Elle",
+     "t": 26.18
+    },
+    {
+     "w": "n'a",
+     "t": 26.3
+    },
+    {
+     "w": "jamais",
+     "t": 26.42
+    },
+    {
+     "w": "mangé",
+     "t": 26.66
+    },
+    {
+     "w": "un",
+     "t": 27.08
+    },
+    {
+     "w": "seul",
+     "t": 27.24
+    },
+    {
+     "w": "de",
+     "t": 27.5
+    },
+    {
+     "w": "ces",
+     "t": 27.64
+    },
+    {
+     "w": "repas.",
+     "t": 27.78
+    },
+    {
+     "w": "Ils",
+     "t": 28.2
+    },
+    {
+     "w": "ont",
+     "t": 28.28
+    },
+    {
+     "w": "fini",
+     "t": 28.42
+    },
+    {
+     "w": "dans",
+     "t": 28.6
+    },
+    {
+     "w": "le",
+     "t": 28.76
+    },
+    {
+     "w": "ventre",
+     "t": 28.84
+    },
+    {
+     "w": "d'enfants",
+     "t": 29.14
+    },
+    {
+     "w": "de",
+     "t": 29.44
+    },
+    {
+     "w": "sept",
+     "t": 29.58
+    },
+    {
+     "w": "ans.",
+     "t": 29.72
+    }
+   ]
+  },
+  {
+   "id": "06-parents",
+   "who": "procureur",
+   "text": "Et les parents qui, eux, payaient chaque mois ? Ils ont financé l'assiette des autres sans le savoir.",
+   "start": 30.23,
+   "dur": 4.3,
+   "words": [
+    {
+     "w": "Et",
+     "t": 30.23
+    },
+    {
+     "w": "les",
+     "t": 30.38
+    },
+    {
+     "w": "parents",
+     "t": 30.44
+    },
+    {
+     "w": "qui,",
+     "t": 30.7
+    },
+    {
+     "w": "eux,",
+     "t": 31.12
+    },
+    {
+     "w": "payaient",
+     "t": 31.41
+    },
+    {
+     "w": "chaque",
+     "t": 31.7
+    },
+    {
+     "w": "mois ?",
+     "t": 31.8
+    },
+    {
+     "w": "Ils",
+     "t": 32.22
+    },
+    {
+     "w": "ont",
+     "t": 32.3
+    },
+    {
+     "w": "financé",
+     "t": 32.46
+    },
+    {
+     "w": "l'assiette",
+     "t": 32.84
+    },
+    {
+     "w": "des",
+     "t": 33.22
+    },
+    {
+     "w": "autres",
+     "t": 33.3
+    },
+    {
+     "w": "sans",
+     "t": 33.58
+    },
+    {
+     "w": "le",
+     "t": 33.86
+    },
+    {
+     "w": "savoir.",
+     "t": 33.96
+    }
+   ]
+  },
+  {
+   "id": "07-quarante",
+   "who": "avocate",
+   "text": "Ces parents-là, les enquêteurs les ont interrogés. Quarante sur quarante-deux ont répondu la même chose : « Elle a bien fait. »",
+   "start": 34.78,
+   "dur": 4.95,
+   "words": [
+    {
+     "w": "Ces",
+     "t": 34.78
+    },
+    {
+     "w": "parents-là,",
+     "t": 35.19
+    },
+    {
+     "w": "les",
+     "t": 35.6
+    },
+    {
+     "w": "enquêteurs",
+     "t": 35.7
+    },
+    {
+     "w": "les",
+     "t": 36.1
+    },
+    {
+     "w": "ont",
+     "t": 36.2
+    },
+    {
+     "w": "interrogés.",
+     "t": 36.32
+    },
+    {
+     "w": "Quarante",
+     "t": 36.72
+    },
+    {
+     "w": "sur",
+     "t": 37.12
+    },
+    {
+     "w": "quarante-deux",
+     "t": 37.42
+    },
+    {
+     "w": "ont",
+     "t": 37.72
+    },
+    {
+     "w": "répondu",
+     "t": 37.98
+    },
+    {
+     "w": "la",
+     "t": 38.32
+    },
+    {
+     "w": "même",
+     "t": 38.42
+    },
+    {
+     "w": "chose : «",
+     "t": 38.56
+    },
+    {
+     "w": "Elle",
+     "t": 39.02
+    },
+    {
+     "w": "a",
+     "t": 39.12
+    },
+    {
+     "w": "bien",
+     "t": 39.22
+    },
+    {
+     "w": "fait. »",
+     "t": 39.36
+    }
+   ]
+  },
+  {
+   "id": "08-falsifie",
+   "who": "procureur",
+   "text": "La justice ne se vote pas à main levée. Un registre falsifié reste un registre falsifié.",
+   "start": 39.98,
+   "dur": 4.68,
+   "words": [
+    {
+     "w": "La",
+     "t": 39.98
+    },
+    {
+     "w": "justice",
+     "t": 40.12
+    },
+    {
+     "w": "ne",
+     "t": 40.44
+    },
+    {
+     "w": "se",
+     "t": 40.72
+    },
+    {
+     "w": "vote",
+     "t": 40.84
+    },
+    {
+     "w": "pas",
+     "t": 40.98
+    },
+    {
+     "w": "à",
+     "t": 41.2
+    },
+    {
+     "w": "main",
+     "t": 41.32
+    },
+    {
+     "w": "levée.",
+     "t": 41.6
+    },
+    {
+     "w": "Un",
+     "t": 41.88
+    },
+    {
+     "w": "registre",
+     "t": 41.96
+    },
+    {
+     "w": "falsifié",
+     "t": 42.42
+    },
+    {
+     "w": "reste",
+     "t": 43.0
+    },
+    {
+     "w": "un",
+     "t": 43.32
+    },
+    {
+     "w": "registre",
+     "t": 43.54
+    },
+    {
+     "w": "falsifié.",
+     "t": 43.98
+    }
+   ]
+  },
+  {
+   "id": "09-affame",
+   "who": "avocate",
+   "text": "Falsifié ? Elle aurait dû écrire quoi ? « Enfant affamé, renvoyé à la porte » ?",
+   "start": 44.91,
+   "dur": 3.4,
+   "words": [
+    {
+     "w": "Falsifié ?",
+     "t": 44.91
+    },
+    {
+     "w": "Elle",
+     "t": 45.61
+    },
+    {
+     "w": "aurait",
+     "t": 45.67
+    },
+    {
+     "w": "dû",
+     "t": 45.81
+    },
+    {
+     "w": "écrire",
+     "t": 45.93
+    },
+    {
+     "w": "quoi ? «",
+     "t": 46.15
+    },
+    {
+     "w": "Enfant",
+     "t": 46.53
+    },
+    {
+     "w": "affamé,",
+     "t": 46.85
+    },
+    {
+     "w": "renvoyé",
+     "t": 47.43
+    },
+    {
+     "w": "à",
+     "t": 47.75
+    },
+    {
+     "w": "la",
+     "t": 47.77
+    },
+    {
+     "w": "porte » ?",
+     "t": 47.85
+    }
+   ]
+  },
+  {
+   "id": "10-aides",
+   "who": "procureur",
+   "text": "Elle aurait dû prévenir la mairie. Il existe des aides. Des procédures.",
+   "start": 48.56,
+   "dur": 3.5,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 48.56
+    },
+    {
+     "w": "aurait",
+     "t": 48.68
+    },
+    {
+     "w": "dû",
+     "t": 48.84
+    },
+    {
+     "w": "prévenir",
+     "t": 48.96
+    },
+    {
+     "w": "la",
+     "t": 49.28
+    },
+    {
+     "w": "mairie.",
+     "t": 49.42
+    },
+    {
+     "w": "Il",
+     "t": 49.94
+    },
+    {
+     "w": "existe",
+     "t": 50.02
+    },
+    {
+     "w": "des",
+     "t": 50.34
+    },
+    {
+     "w": "aides.",
+     "t": 50.56
+    },
+    {
+     "w": "Des",
+     "t": 51.14
+    },
+    {
+     "w": "procédures.",
+     "t": 51.24
+    }
+   ]
+  },
+  {
+   "id": "11-courriers",
+   "who": "avocate",
+   "text": "Elle l'a fait. Trois courriers. Aucune réponse. Pendant ce temps, Yanis, sept ans, arrivait chaque matin le ventre vide.",
+   "start": 52.31,
+   "dur": 5.6,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 52.31
+    },
+    {
+     "w": "l'a",
+     "t": 52.44
+    },
+    {
+     "w": "fait.",
+     "t": 52.57
+    },
+    {
+     "w": "Trois",
+     "t": 52.77
+    },
+    {
+     "w": "courriers.",
+     "t": 53.11
+    },
+    {
+     "w": "Aucune",
+     "t": 53.63
+    },
+    {
+     "w": "réponse.",
+     "t": 53.91
+    },
+    {
+     "w": "Pendant",
+     "t": 54.45
+    },
+    {
+     "w": "ce",
+     "t": 54.69
+    },
+    {
+     "w": "temps,",
+     "t": 54.77
+    },
+    {
+     "w": "Yanis,",
+     "t": 55.19
+    },
+    {
+     "w": "sept",
+     "t": 55.56
+    },
+    {
+     "w": "ans,",
+     "t": 55.93
+    },
+    {
+     "w": "arrivait",
+     "t": 56.27
+    },
+    {
+     "w": "chaque",
+     "t": 56.57
+    },
+    {
+     "w": "matin",
+     "t": 56.73
+    },
+    {
+     "w": "le",
+     "t": 57.09
+    },
+    {
+     "w": "ventre",
+     "t": 57.23
+    },
+    {
+     "w": "vide.",
+     "t": 57.49
+    }
+   ]
+  },
+  {
+   "id": "12-coeur",
+   "who": "procureur",
+   "text": "Le cœur ne remplace pas la loi. Sinon, chacun rendrait sa propre justice.",
+   "start": 58.16,
+   "dur": 3.94,
+   "words": [
+    {
+     "w": "Le",
+     "t": 58.16
+    },
+    {
+     "w": "cœur",
+     "t": 58.34
+    },
+    {
+     "w": "ne",
+     "t": 58.52
+    },
+    {
+     "w": "remplace",
+     "t": 58.72
+    },
+    {
+     "w": "pas",
+     "t": 59.02
+    },
+    {
+     "w": "la",
+     "t": 59.26
+    },
+    {
+     "w": "loi.",
+     "t": 59.36
+    },
+    {
+     "w": "Sinon,",
+     "t": 59.76
+    },
+    {
+     "w": "chacun",
+     "t": 60.24
+    },
+    {
+     "w": "rendrait",
+     "t": 60.54
+    },
+    {
+     "w": "sa",
+     "t": 61.02
+    },
+    {
+     "w": "propre",
+     "t": 61.14
+    },
+    {
+     "w": "justice.",
+     "t": 61.36
+    }
+   ]
+  },
+  {
+   "id": "13-juger",
+   "who": "avocate",
+   "text": "Sa justice ? C'était une assiette de pâtes. Dix-neuf ans qu'elle remplit des assiettes… et la seule fois qu'on la remarque, c'est pour la juger.",
+   "start": 62.35,
+   "dur": 5.67,
+   "words": [
+    {
+     "w": "Sa",
+     "t": 62.43
+    },
+    {
+     "w": "justice ?",
+     "t": 62.51
+    },
+    {
+     "w": "C'était",
+     "t": 62.94
+    },
+    {
+     "w": "une",
+     "t": 63.37
+    },
+    {
+     "w": "assiette",
+     "t": 63.55
+    },
+    {
+     "w": "de",
+     "t": 63.83
+    },
+    {
+     "w": "pâtes.",
+     "t": 63.91
+    },
+    {
+     "w": "Dix-neuf",
+     "t": 64.33
+    },
+    {
+     "w": "ans",
+     "t": 64.75
+    },
+    {
+     "w": "qu'elle",
+     "t": 64.94
+    },
+    {
+     "w": "remplit",
+     "t": 65.13
+    },
+    {
+     "w": "des",
+     "t": 65.41
+    },
+    {
+     "w": "assiettes…",
+     "t": 65.51
+    },
+    {
+     "w": "et",
+     "t": 66.07
+    },
+    {
+     "w": "la",
+     "t": 66.13
+    },
+    {
+     "w": "seule",
+     "t": 66.21
+    },
+    {
+     "w": "fois",
+     "t": 66.39
+    },
+    {
+     "w": "qu'on",
+     "t": 66.54
+    },
+    {
+     "w": "la",
+     "t": 66.69
+    },
+    {
+     "w": "remarque,",
+     "t": 66.77
+    },
+    {
+     "w": "c'est",
+     "t": 67.09
+    },
+    {
+     "w": "pour",
+     "t": 67.41
+    },
+    {
+     "w": "la",
+     "t": 67.51
+    },
+    {
+     "w": "juger.",
+     "t": 67.61
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 68.27,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 68.27
+    },
+    {
+     "w": "es",
+     "t": 68.41
+    },
+    {
+     "w": "le",
+     "t": 68.5
+    },
+    {
+     "w": "juré.",
+     "t": 68.59
+    },
+    {
+     "w": "Coupable…",
+     "t": 69.09
+    },
+    {
+     "w": "ou",
+     "t": 69.53
+    },
+    {
+     "w": "non",
+     "t": 69.95
+    },
+    {
+     "w": "coupable ?",
+     "t": 70.15
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 71.03,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 71.03
+    },
+    {
+     "w": "verdict",
+     "t": 71.15
+    },
+    {
+     "w": "tombe",
+     "t": 71.45
+    },
+    {
+     "w": "dans",
+     "t": 71.99
+    },
+    {
+     "w": "la",
+     "t": 72.15
+    },
+    {
+     "w": "prochaine",
+     "t": 72.27
+    },
+    {
+     "w": "vidéo.",
+     "t": 72.55
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 73.04
+    },
+    {
+     "w": "pour",
+     "t": 73.53
+    },
+    {
+     "w": "ne",
+     "t": 73.67
+    },
+    {
+     "w": "pas",
+     "t": 73.77
+    },
+    {
+     "w": "le",
+     "t": 73.91
+    },
+    {
+     "w": "rater.",
+     "t": 73.93
+    }
+   ]
+  }
+ ]
+}

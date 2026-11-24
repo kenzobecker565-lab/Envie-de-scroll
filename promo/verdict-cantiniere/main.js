@@ -675,7 +675,7 @@ function seek(t) {
     }
     const hit = id === '03' ? Wd('03', 'coupable') : id === '06' ? Wd('06', 'dispense') : 0
     const sw = hit ? (t < hit - 0.2 ? 0 : t < hit ? -40 * ease.out3((t - hit + 0.2) / 0.2) : -40 + 40 * ease.out3(clamp((t - hit) / 0.1))) : 0
-    prop(TRIB.gavel, id === '03' || id === '06', (hit || 0) - 0.6, E(id === '06' ? '06' : '03') + 0.05, 740, 700, 1.1, sw)
+    prop(TRIB.gavel, id === '03' || id === '06', (hit || 0) - 0.6, E(id === '06' ? '06' : '03') + 0.05, 900, 960, 1.0, sw)
   }
   if (cur === VOTE) {
     cam(VOTE, t, { zoom: 1.0, cy: 1000, push: 0.015 })

@@ -254,8 +254,8 @@ const EMEUTE = scene('emeute', (L) => {
   const meter = { textContent: '' }
   const key = svg('g', {}, L.front)
   keys(key, 1)
-  // La gardienne, son sac de courses.
-  const tech = walker(L.actor, { carry: 'bags', dir: 1, color: '#4a3060', rim: '#ffd166' })
+  // Martine, de face, au premier plan.
+  const tech = makePerson(L.actor, MARTINE)
   // Le thermomètre.
   const thermo = svg('g', { transform: 'translate(900 520)' }, L.actor)
   svg('rect', { x: -40, y: -170, width: 80, height: 300, rx: 40, fill: '#fbf8f0', stroke: '#10121a', 'stroke-width': 6 }, thermo)
@@ -274,14 +274,16 @@ const VIDEO = scene('video', (L) => {
   for (let k = 0; k < 9; k++) svg('rect', { x: 620 + k * 50, y: 1500 - k * 70, width: 400, height: 70, fill: '#5a6275', stroke: '#2a3040', 'stroke-width': 4 }, L.far)
   svg('rect', { x: -400, y: 1500, width: W + 800, height: 1000, fill: '#3a4250' }, L.far)
   svg('rect', { x: 120, y: 1050, width: 300, height: 450, fill: '#1d2a3a', stroke: '#c9ced8', 'stroke-width': 8 }, L.far)
-  const her = walker(L.actor, { carry: 'bags', dir: 1, color: '#4a3060', rim: '#ffffff' })
-  const back = walker(L.actor, { carry: 'none', dir: -1, color: '#4a3060', rim: '#ffffff' })
+  const her = makePerson(L.actor, MARTINE)
+  const bag = svg('g', {}, L.actor)
+  for (const [x, c] of [[-40, '#e5484d'], [20, '#3b82f6']]) svg('path', { d: `M ${x} -60 l 60 0 l 10 110 l -80 0 Z`, fill: c, stroke: '#111', 'stroke-width': 4 }, bag)
+  const back = { g: svg('g', {}, L.actor) }
   svg('rect', { x: -800, y: -800, width: W + 1600, height: H + 1600, fill: '#3f7a52', opacity: 0.2 }, L.fx)
   for (let y = -200; y < H + 200; y += 12) svg('rect', { x: -400, y, width: W + 800, height: 3, fill: '#000', opacity: 0.18 }, L.fx)
   // L'effet « œil de poisson » de l'interphone.
   svg('ellipse', { cx: 540, cy: 1100, rx: 900, ry: 1100, fill: 'none', stroke: '#000', 'stroke-width': 500, opacity: 0.5 }, L.fx)
   const ring = svg('circle', { r: 170, fill: 'none', stroke: '#e5484d', 'stroke-width': 12, 'stroke-dasharray': 1100, 'stroke-dashoffset': 1100 }, L.fx)
-  return { her, back, ring }
+  return { her, bag, back, ring }
 })
 
 // 3 · Sa fiche : la photo, les mentions, puis « JUGÉE ».
@@ -606,9 +608,9 @@ function seek(t) {
   if (cur === EMEUTE) {
     // L'immeuble ; la caméra monte vers la fenêtre allumée sur « caché ».
     const dive = prog(t, Wd('01', 'cache') - 0.3, 0.9, ease.io3)
-    cam(EMEUTE, t, { zoom: lerp(1.1, 1.45, dive), cx: lerp(540, 590, dive), cy: lerp(1150, 950, dive), push: 0.02, hand: 3 })
-    EMEUTE.tech.update(lerp(250, 400, clamp(t / 6)), 1640, 1.5, t * 6, { stride: 0.6 })
-    place(EMEUTE.key, 860, 1500 + 10 * Math.sin(t * 3), 0.9, 10 * Math.sin(t * 2))
+    cam(EMEUTE, t, { zoom: lerp(1.1, 1.3, dive), cx: lerp(500, 520, dive), cy: lerp(1150, 1080, dive), push: 0.02, hand: 3 })
+    EMEUTE.tech.update(t, { x: 340, y: 1460, scale: 1.2, brows: 'sad', look: [0.35, -0.25], armR: [0.55, 0.7], armL: [0.2, 1.0], seed: 1.3, headTilt: 0.03 * Math.sin(t * 1.2) })
+    place(EMEUTE.key, 640, 1320 + 8 * Math.sin(t * 3), 0.7, 10 * Math.sin(t * 2))
     for (const w of EMEUTE.wins) w.setAttribute('fill', t < Wd('01', 'cache') - 0.1 ? '#0f1526' : Math.floor(t * 3) % 9 === 0 ? '#ffe2a0' : '#ffcf70')
     for (const f of EMEUTE.flakes) {
       const u = (t * f.sp + f.ph) % 1
@@ -622,18 +624,18 @@ function seek(t) {
     const frozen = t >= T_CONSOLE && t < T_CONSOLE + 0.8
     const tt = frozen ? T_CONSOLE : t
     cam(VIDEO, tt, { zoom: frozen ? 1.3 : 1.15, cx: 540, cy: 1150, push: 0.005, hand: 0 })
-    const up = clamp((tt - LOOT_T.monte) / 1.4)
-    const goingUp = tt < LOOT_T.seule - 0.2
-    show(VIDEO.her.g, goingUp)
-    show(VIDEO.back.g, !goingUp)
-    if (goingUp) {
-      const x0 = lerp(260, 620, clamp((tt - LOOT_T.porte) / (LOOT_T.monte - LOOT_T.porte)))
-      VIDEO.her.update(lerp(x0, 1000, up), lerp(1640, 1100, up), 1.5, tt * 9)
-    } else {
-      const d = clamp((tt - LOOT_T.seule + 0.2) / 1.6)
-      VIDEO.back.update(lerp(1000, 640, d), lerp(1100, 1640, d), 1.5, tt * 9)
-      VIDEO.ring.setAttribute('transform', `translate(${lerp(1000, 640, d)} ${lerp(1100, 1640, d) - 160 * 1.5})`)
-    }
+    // Elle entre par la porte, monte avec le sac, redescend les mains vides.
+    const inn = ease.out3(clamp((tt - VIDEO.t0) / (LOOT_T.monte - VIDEO.t0)))
+    const up = ease.io3(clamp((tt - LOOT_T.monte) / 1.2))
+    const down = ease.io3(clamp((tt - LOOT_T.seule + 0.3) / 0.9))
+    const x = down > 0 ? lerp(900, 560, down) : lerp(lerp(250, 520, inn), 900, up)
+    const y = down > 0 ? lerp(1100, 1440, down) : lerp(1440, 1100, up)
+    const sc = down > 0 ? lerp(0.55, 0.95, down) : lerp(0.95, 0.55, up)
+    VIDEO.her.update(tt, { x, y, scale: sc, brows: 'neutral', look: [down > 0 ? 0 : 0.4, 0], armR: [0.5, 0.6], armL: [0.2, 1.0], seed: 1.3 })
+    const hasBag = tt < LOOT_T.seule - 0.3
+    show(VIDEO.bag, hasBag)
+    if (hasBag) place(VIDEO.bag, x + 170 * sc, y - 120 * sc, sc * 1.1, 0)
+    VIDEO.ring.setAttribute('transform', `translate(${x} ${y - 290 * sc})`)
     VIDEO.ring.setAttribute('stroke-dashoffset', 1100 * (1 - prog(t, T_CONSOLE + 0.05, 0.4, ease.out3)))
     freeze.setAttribute('display', frozen ? 'inline' : 'none')
     recDot.setAttribute('opacity', Math.floor(t * 2) % 2 ? 0.2 : 1)

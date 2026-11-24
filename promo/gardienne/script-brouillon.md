@@ -1,0 +1,15 @@
+# La gardienne — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : ShaW9vBLUTC9ZYlKl0iB
+01-hiver (narr) Tout un hiver, une gardienne d'immeuble a caché une mère et ses deux enfants dans un appartement vide. Quatre mois. Sans que le propriétaire le sache. [TÉLÉCHARGÉ]
+02-interphone (narr) Sur la caméra de l'interphone, on la voit chaque soir. Elle ouvre la porte… monte un sac de courses… et redescend seule. [TÉLÉCHARGÉ]
+03-martine (narr) Elle s'appelle Martine. Soixante et un ans. Gardienne depuis vingt-six ans. Jamais une plainte. Aujourd'hui, elle est jugée pour violation de domicile. [TÉLÉCHARGÉ]
+04-cles (proc) Cet appartement ne lui appartenait pas. Elle a donné les clés d'un bien privé à des inconnus. [TÉLÉCHARGÉ]
+05-douze (avo) Un bien privé ? Vide depuis trois ans. Le propriétaire en possède douze. Il ne savait même plus qu'il l'avait. [TÉLÉCHARGÉ]
+06-portes (proc) Vide ou pas, c'était chez lui. Si on ouvre les portes des autres par pitié, plus personne n'est chez soi. [TÉLÉCHARGÉ]
+07-poubelles (avo) Par pitié ? Elle les a trouvés en décembre, dans le local à poubelles. Moins deux degrés. Le petit avait quatre ans. [À FAIRE]
+08-115 (proc) Il existe le 115. Les foyers. Ce n'était pas à elle de jouer les services sociaux. [À FAIRE]
+09-onze (avo) Le 115 ? Elle l'a appelé onze fois. Onze. Réponse : « Plus de place ce soir. » [À FAIRE]
+10-incendie (proc) Et si un incendie s'était déclaré ? Une fuite d'eau ? Qui aurait été responsable ? [À FAIRE]
+11-propre (avo) Il n'y a eu ni incendie, ni dégât. Quand ils sont partis, l'appartement était plus propre qu'avant. [À FAIRE]
+12-loi (proc) Propre ou non, la loi ne se suspend pas pour un hiver. [À FAIRE]
+13-porte (avo) Un hiver ? Cet hiver-là, deux enfants dormaient à côté des poubelles. Martine, elle, leur a ouvert une porte. [À FAIRE]

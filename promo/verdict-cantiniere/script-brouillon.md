@@ -9,4 +9,4 @@ Flow ElevenLabs : II8vZhUupw49MCmfyGIb
 07-aucune (narr) Coupable. Mais aucune peine. Pas d'amende. Pas de prison. Nadia peut reprendre son travail.  [TÉLÉCHARGÉ]
 08-gratuite (narr) Et une semaine plus tard, la mairie a annoncé la cantine gratuite pour les familles en difficulté. Yanis mange à nouveau tous les midis.  [TÉLÉCHARGÉ]
 09-commentaire (narr) Alors, justice rendue ? Ou elle n'aurait jamais dû être jugée ? Dis-le en commentaire.  [TÉLÉCHARGÉ]
-10-abonne (narr) Demain, une nouvelle affaire. Abonne-toi pour être le juré.  [À FAIRE]
+10-abonne (narr) Demain, une nouvelle affaire. Abonne-toi pour être le juré.  [TÉLÉCHARGÉ]

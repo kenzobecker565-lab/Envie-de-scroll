@@ -253,7 +253,7 @@ function score() {
   stamp(W('06', 'coupable') - 0.05, 0.3)
   gavel(W('06', 'dispense') - 0.02, 0.7)
   boom(W('06', 'dispense') - 0.06, 0.55, 55, 28, 1.3)
-  for (const w of ['amende', 'prison']) pop(W('07', w) - 0.1, 0.12, 1200, 600)
+  for (const w of ['damende', 'prison']) pop(W('07', w) - 0.1, 0.12, 1200, 600)
   boom(W('07', 'travail') - 0.06, 0.3, 80, 40, 0.5)
   // Après.
   crowd(SEC('apres').t0, SEC('apres').t1 - SEC('apres').t0, 0.04)

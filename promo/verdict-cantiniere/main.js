@@ -474,12 +474,12 @@ tag('0 PROFIT', 'pill yellow', { t0: Wd('05', 'profit') - 0.1, t1: E('05') + 0.1
 tag('3 COURRIERS SANS RÉPONSE', 'pill red', { t0: Wd('05', 'courriers') - 0.1, t1: E('05') + 0.1, y: 330, x: 600, rot: 3 }).el.style.fontSize = '38px'
 fs(tag('COUPABLE…', 'stamp', { t0: Wd('06', 'coupable') - 0.05, t1: Wd('06', 'dispense') - 0.1, y: 300, rot: -8, from: 2.8, dur: 0.2 }), 130)
 fs(tag('DISPENSÉE DE PEINE', 'slam yellow', { t0: Wd('06', 'dispense') - 0.06, t1: E('06') + 0.15, y: 320, rot: -3, from: 3, dur: 0.2 }), 92)
-tag('PAS D’AMENDE', 'pill', { t0: Wd('07', 'amende') - 0.1, t1: E('07') + 0.1, y: 230, x: 300, rot: -3 })
-tag('PAS DE PRISON', 'pill', { t0: Wd('07', 'prison') - 0.1, t1: E('07') + 0.1, y: 230, x: 780, rot: 3 })
+tag('PAS D’AMENDE', 'pill', { t0: Wd('07', 'damende') - 0.1, t1: E('07') + 0.1, y: 230, x: 280, rot: -3 }).el.style.fontSize = '38px'
+tag('PAS DE PRISON', 'pill', { t0: Wd('07', 'prison') - 0.1, t1: E('07') + 0.1, y: 300, x: 790, rot: 3 }).el.style.fontSize = '38px'
 fs(tag('ELLE REPREND SON TRAVAIL', 'slam white', { t0: Wd('07', 'travail') - 0.06, t1: E('07') + 0.1, y: 380, rot: -2, from: 2.4, dur: 0.2 }), 76)
 // Après.
 tag('1 SEMAINE PLUS TARD', 'pill yellow', { t0: S('08') - 0.05, t1: Wd('08', 'yanis') - 0.1, y: 230, rot: -2 })
-fs(tag('YANIS MANGE À NOUVEAU', 'slam white', { t0: Wd('08', 'yanis') - 0.06, t1: SEC.apres.t1, y: 1180, rot: -2, from: 2.4, dur: 0.2 }), 80)
+fs(tag('YANIS MANGE À NOUVEAU', 'slam white', { t0: Wd('08', 'yanis') - 0.06, t1: SEC.apres.t1, y: 1180, rot: -2, from: 2.4, dur: 0.2 }), 68)
 // La question et l'abonnement.
 tag('✅ JUSTICE RENDUE', 'vote blue', { t0: Wd('09', 'justice') - 0.1, y: 520, rot: -3 })
 tag('❌ JAMAIS DÛ ÊTRE JUGÉE', 'vote red', { t0: Wd('09', 'jamais') - 0.1, y: 720, rot: 3 }).el.style.fontSize = '58px'
@@ -675,7 +675,7 @@ function seek(t) {
     }
     const hit = id === '03' ? Wd('03', 'coupable') : id === '06' ? Wd('06', 'dispense') : 0
     const sw = hit ? (t < hit - 0.2 ? 0 : t < hit ? -40 * ease.out3((t - hit + 0.2) / 0.2) : -40 + 40 * ease.out3(clamp((t - hit) / 0.1))) : 0
-    prop(TRIB.gavel, id === '03' || id === '06', (hit || 0) - 0.6, E(id === '06' ? '06' : '03') + 0.05, 800, 640, 0.9, sw)
+    prop(TRIB.gavel, id === '03' || id === '06', (hit || 0) - 0.6, E(id === '06' ? '06' : '03') + 0.05, 740, 700, 1.1, sw)
   }
   if (cur === VOTE) {
     cam(VOTE, t, { zoom: 1.0, cy: 1000, push: 0.015 })

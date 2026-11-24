@@ -9,7 +9,7 @@ Flow ElevenLabs : ShaW9vBLUTC9ZYlKl0iB
 07-poubelles (avo) Par pitié ? Elle les a trouvés en décembre, dans le local à poubelles. Moins deux degrés. Le petit avait quatre ans. [TÉLÉCHARGÉ]
 08-115 (proc) Il existe le 115. Les foyers. Ce n'était pas à elle de jouer les services sociaux. [TÉLÉCHARGÉ]
 09-onze (avo) Le 115 ? Elle l'a appelé onze fois. Onze. Réponse : « Plus de place ce soir. » [TÉLÉCHARGÉ]
-10-incendie (proc) Et si un incendie s'était déclaré ? Une fuite d'eau ? Qui aurait été responsable ? [À FAIRE]
+10-incendie (proc) Et si un incendie s'était déclaré ? Une fuite d'eau ? Qui aurait été responsable ? [TÉLÉCHARGÉ]
 11-propre (avo) Il n'y a eu ni incendie, ni dégât. Quand ils sont partis, l'appartement était plus propre qu'avant. [TÉLÉCHARGÉ]
 12-loi (proc) Propre ou non, la loi ne se suspend pas pour un hiver. [TÉLÉCHARGÉ]
 13-porte (avo) Un hiver ? Cet hiver-là, deux enfants dormaient à côté des poubelles. Martine, elle, leur a ouvert une porte. [TÉLÉCHARGÉ]

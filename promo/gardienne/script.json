@@ -1,0 +1,95 @@
+{
+ "_doc": "« La gardienne » (affaire fictive), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-hiver",
+   "who": "narrateur",
+   "text": "Tout un hiver, une gardienne d'immeuble a caché une mère et ses deux enfants dans un appartement vide. Quatre mois. Sans que le propriétaire le sache.",
+   "gap": 0
+  },
+  {
+   "id": "02-interphone",
+   "who": "narrateur",
+   "text": "Sur la caméra de l'interphone, on la voit chaque soir. Elle ouvre la porte… monte un sac de courses… et redescend seule."
+  },
+  {
+   "id": "03-martine",
+   "who": "narrateur",
+   "text": "Elle s'appelle Martine. Soixante et un ans. Gardienne depuis vingt-six ans. Jamais une plainte. Aujourd'hui, elle est jugée pour violation de domicile."
+  },
+  {
+   "id": "04-cles",
+   "who": "procureur",
+   "text": "Cet appartement ne lui appartenait pas. Elle a donné les clés d'un bien privé à des inconnus."
+  },
+  {
+   "id": "05-douze",
+   "who": "avocate",
+   "text": "Un bien privé ? Vide depuis trois ans. Le propriétaire en possède douze. Il ne savait même plus qu'il l'avait."
+  },
+  {
+   "id": "06-portes",
+   "who": "procureur",
+   "text": "Vide ou pas, c'était chez lui. Si on ouvre les portes des autres par pitié, plus personne n'est chez soi."
+  },
+  {
+   "id": "07-poubelles",
+   "who": "avocate",
+   "text": "Par pitié ? Elle les a trouvés en décembre, dans le local à poubelles. Moins deux degrés. Le petit avait quatre ans."
+  },
+  {
+   "id": "08-115",
+   "who": "procureur",
+   "text": "Il existe le 115. Les foyers. Ce n'était pas à elle de jouer les services sociaux."
+  },
+  {
+   "id": "09-onze",
+   "who": "avocate",
+   "text": "Le 115 ? Elle l'a appelé onze fois. Onze. Réponse : « Plus de place ce soir. »"
+  },
+  {
+   "id": "10-incendie",
+   "who": "procureur",
+   "text": "Et si un incendie s'était déclaré ? Une fuite d'eau ? Qui aurait été responsable ?"
+  },
+  {
+   "id": "11-propre",
+   "who": "avocate",
+   "text": "Il n'y a eu ni incendie, ni dégât. Quand ils sont partis, l'appartement était plus propre qu'avant."
+  },
+  {
+   "id": "12-loi",
+   "who": "procureur",
+   "text": "Propre ou non, la loi ne se suspend pas pour un hiver."
+  },
+  {
+   "id": "13-porte",
+   "who": "avocate",
+   "text": "Un hiver ? Cet hiver-là, deux enfants dormaient à côté des poubelles. Martine, elle, leur a ouvert une porte."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

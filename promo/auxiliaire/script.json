@@ -1,0 +1,95 @@
+{
+ "_doc": "« L'auxiliaire de vie » (affaire fictive). Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-mer",
+   "who": "narrateur",
+   "text": "Une auxiliaire de vie a emmené un vieil homme voir la mer. Sans prévenir sa famille. Six cents kilomètres. Il avait quatre-vingt-dix ans.",
+   "gap": 0
+  },
+  {
+   "id": "02-photo",
+   "who": "narrateur",
+   "text": "Sur la photo qu'elle a prise ce jour-là, on le voit pieds nus dans le sable. Une glace à la main… et il rit."
+  },
+  {
+   "id": "03-samia",
+   "who": "narrateur",
+   "text": "Elle s'appelle Samia. Quarante-quatre ans. Auxiliaire de vie depuis douze ans. Jamais un incident. Aujourd'hui, elle est jugée pour enlèvement."
+  },
+  {
+   "id": "04-tutelle",
+   "who": "procureur",
+   "text": "Cet homme est sous tutelle. Elle l'a fait monter dans sa voiture sans l'accord de personne."
+  },
+  {
+   "id": "05-jamais",
+   "who": "avocate",
+   "text": "L'accord de personne ? Il le lui demandait depuis deux ans. Chaque matin, la même phrase : « Je n'ai jamais vu la mer. »"
+  },
+  {
+   "id": "06-malaise",
+   "who": "procureur",
+   "text": "Six cents kilomètres d'autoroute, à quatre-vingt-dix ans. Et s'il avait fait un malaise en route ?"
+  },
+  {
+   "id": "07-carnet",
+   "who": "avocate",
+   "text": "Elle s'arrêtait toutes les heures. Médicaments, eau, couverture. Elle avait tout noté dans un carnet."
+  },
+  {
+   "id": "08-commissariat",
+   "who": "procureur",
+   "text": "Pendant ce temps, sa famille a passé la nuit au commissariat. Ils l'ont cherché partout."
+  },
+  {
+   "id": "09-deuxfois",
+   "who": "avocate",
+   "text": "Sa famille ? Elle venait le voir deux fois par an. Samia, elle, était là tous les jours."
+  },
+  {
+   "id": "10-employee",
+   "who": "procureur",
+   "text": "Être là tous les jours ne donne aucun droit. Elle n'était que son employée."
+  },
+  {
+   "id": "11-fils",
+   "who": "avocate",
+   "text": "Son employée ? Le soir même, il a appelé son fils. Il pleurait de joie. Il a dit : « Ne la punissez pas. »"
+  },
+  {
+   "id": "12-loi",
+   "who": "procureur",
+   "text": "La loi protège les personnes vulnérables. Même contre ceux qui les aiment."
+  },
+  {
+   "id": "13-enlevement",
+   "who": "avocate",
+   "text": "Contre ceux qui les aiment ? À quatre-vingt-dix ans, il a vu la mer pour la première fois. Et c'est ça qu'on appelle un enlèvement."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

@@ -458,18 +458,18 @@ fs(tag('ET IL RIT.', 'slam yellow', { t0: LOOT_T.rit, t1: SEC.video.t1, y: 260, 
 fs(tag('JUGÉE', 'stamp', { t0: Wd('03', 'enlevement') - 0.05, t1: SEC.fiche.t1, y: 1130, rot: -10, from: 2.8, dur: 0.2 }), 150)
 // Le procès.
 fs(tag('SOUS TUTELLE', 'slam white', { t0: Wd('04', 'tutelle') - 0.06, t1: Wd('04', 'elle') - 0.1, y: 260, rot: -3, from: 2.4, dur: 0.2 }), 110)
-tag('SANS L’ACCORD DE PERSONNE', 'pill red', { t0: Wd('04', 'accord') - 0.1, t1: E('04') + 0.1, y: 250, rot: -2 })
+tag('SANS L’ACCORD DE PERSONNE', 'pill red', { t0: Wd('04', 'laccord') - 0.1, t1: E('04') + 0.1, y: 250, rot: -2 })
 tag('DEPUIS 2 ANS', 'pill yellow', { t0: Wd('05', 'deux') - 0.1, t1: E('05') + 0.1, y: 230, rot: -2 })
 fs(tag('ET S’IL AVAIT FAIT UN MALAISE ?', 'slam white', { t0: Wd('06', 'malaise') - 0.06, t1: E('06') + 0.1, y: 260, rot: -2, from: 2.4, dur: 0.2 }), 66)
 tag('PAUSE TOUTES LES HEURES', 'pill yellow', { t0: Wd('07', 'heures') - 0.1, t1: E('07') + 0.1, y: 230, rot: -2 })
 fs(tag('UNE NUIT AU COMMISSARIAT', 'slam white', { t0: Wd('08', 'commissariat') - 0.06, t1: E('08') + 0.1, y: 260, rot: -2, from: 2.4, dur: 0.2 }), 72)
 fs(tag('TOUS LES JOURS.', 'slam yellow', { t0: Wd('09', 'tous') - 0.06, t1: E('09') + 0.1, y: 860, rot: -2, from: 2.4, dur: 0.2 }), 100)
-fs(tag('QUE SON EMPLOYÉE', 'slam white', { t0: Wd('10', 'employee') - 0.06, t1: E('10') + 0.1, y: 260, rot: -2, from: 2.4, dur: 0.2 }), 96)
+fs(tag('QUE SON EMPLOYÉE', 'slam white', { t0: Wd('10', 'employee') - 0.06, t1: E('10') + 0.1, y: 260, rot: -2, from: 2.4, dur: 0.2 }), 80)
 tag('IL PLEURAIT DE JOIE', 'pill yellow', { t0: Wd('11', 'pleurait') - 0.1, t1: Wd('11', 'il', 2) - 0.1, y: 230, rot: -2 })
 fs(tag('« NE LA PUNISSEZ PAS »', 'slam white', { t0: Wd('11', 'punissez') - 0.15, t1: E('11') + 0.1, y: 260, rot: -3, from: 2.4, dur: 0.2 }), 80)
-fs(tag('PERSONNES VULNÉRABLES', 'slam white', { t0: Wd('12', 'vulnerables') - 0.06, t1: E('12') + 0.1, y: 380, rot: -2, from: 2.4, dur: 0.2 }), 84)
+fs(tag('PERSONNES VULNÉRABLES', 'slam white', { t0: Wd('12', 'vulnerables') - 0.06, t1: E('12') + 0.1, y: 380, rot: -2, from: 2.4, dur: 0.2 }), 66)
 fs(tag('LA MER, À 90 ANS.', 'slam yellow', { t0: Wd('13', 'mer') - 0.06, t1: Wd('13', 'et') - 0.1, y: 380, rot: -3, from: 2.6, dur: 0.2 }), 110)
-fs(tag('UN ENLÈVEMENT ?', 'slam white', { t0: Wd('13', 'enlevement') - 0.06, t1: E('13') + 0.15, y: 380, rot: -3, from: 3, dur: 0.2 }), 120)
+fs(tag('UN ENLÈVEMENT ?', 'slam white', { t0: Wd('13', 'enlevement') - 0.06, t1: E('13') + 0.15, y: 380, rot: -3, from: 3, dur: 0.2 }), 96)
 // Le vote.
 fs(tag('TU ES LE JURÉ', 'big white', { t0: Wd('14', 'jure') - 0.15, y: 330, from: 1.4, dur: 0.5 }), 110)
 tag('COUPABLE', 'vote red', { t0: Wd('14', 'coupable') - 0.1, y: 540, rot: -3 })
@@ -604,11 +604,11 @@ function seek(t) {
     place(VIDEO.photo, 540, 960, a * 1.0, -4)
     sea(VIDEO, tt)
     const laugh = tt > LOOT_T.rit ? 0.6 + 0.2 * Math.sin(tt * 14) : 0.15
-    VIDEO.henri.update(tt, { x: 540, y: 1560, scale: 1.25, brows: 'neutral', look: [0, 0], mouth: laugh, armR: [0.8, 0.4], armL: [0.2, 1.0], seed: 0.4, headNod: tt > LOOT_T.rit ? 0.06 : 0 })
+    VIDEO.henri.update(tt, { x: 520, y: 1380, scale: 1.2, brows: 'neutral', look: [0, 0], mouth: laugh, armR: [0.8, 0.4], armL: [0.2, 1.0], seed: 0.4, headNod: tt > LOOT_T.rit ? 0.06 : 0 })
     const s = popS(tt, LOOT_T.glace, Infinity, 0.3)
     show(VIDEO.ice, s > 0.01)
-    place(VIDEO.ice, 760, 1300, s * 1.0, -12)
-    VIDEO.ring.setAttribute('transform', 'translate(540 1040)')
+    place(VIDEO.ice, 740, 1200, s * 1.0, -12)
+    VIDEO.ring.setAttribute('transform', 'translate(520 950)')
     VIDEO.ring.setAttribute('stroke-dashoffset', 1200 * (1 - prog(t, T_CONSOLE + 0.05, 0.4, ease.out3)))
     freeze.setAttribute('display', frozen ? 'inline' : 'none')
   }
@@ -660,7 +660,7 @@ function seek(t) {
       if (v > 0.01) place(el, x, y + 8 * Math.sin(t * 2), v * s, r)
       return v
     }
-    if (prop(TRIB.tutelle, id === '04', Wd('04', 'tutelle') - 0.15, E('04') + 0.05, 540, 540, 0.65) > 0) TRIB.tutelle.stamp.setAttribute('opacity', t > Wd('04', 'accord') - 0.1 ? 1 : 0)
+    if (prop(TRIB.tutelle, id === '04', Wd('04', 'tutelle') - 0.15, E('04') + 0.05, 540, 560, 0.5) > 0) TRIB.tutelle.stamp.setAttribute('opacity', t > Wd('04', 'laccord') - 0.1 ? 1 : 0)
     if (prop(TRIB.bulle, id === '05', Wd('05', 'phrase') - 0.2, E('05') + 0.05, 540, 540, 0.75) > 0) TRIB.bulle.count.textContent = ''
     if (prop(TRIB.route, id === '06', S('06') - 0.1, E('06') + 0.05, 540, 520, 0.8) > 0) {
       TRIB.route.heart.setAttribute('opacity', t > Wd('06', 'malaise') - 0.1 ? 1 : 0)

@@ -251,7 +251,7 @@ function score() {
   gavel(SEC('tribunal').t0 + 0.3)
   gavel(SEC('tribunal').t0 + 0.62, 0.45)
   // Le procès.
-  stamp(W('04', 'accord') - 0.1, 0.3)
+  stamp(W('04', 'laccord') - 0.1, 0.3)
   boom(W('04', 'tutelle') - 0.06, 0.3, 90, 45, 0.5)
   pop(W('05', 'phrase') - 0.1, 0.12, 900, 400)
   for (let k = 0; k < 4; k++) tick(W('06', 'malaise') + k * 0.3, 0.06, 500, 0)

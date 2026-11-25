@@ -1,0 +1,15 @@
+# L'auxiliaire de vie — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : xjv3kVc7as4DzNo2dnQI
+01-mer (narr) Une auxiliaire de vie a emmené un vieil homme voir la mer. Sans prévenir sa famille. Six cents kilomètres. Il avait quatre-vingt-dix ans. [TÉLÉCHARGÉ]
+02-photo (narr) Sur la photo qu'elle a prise ce jour-là, on le voit pieds nus dans le sable. Une glace à la main… et il rit. [TÉLÉCHARGÉ]
+03-samia (narr) Elle s'appelle Samia. Quarante-quatre ans. Auxiliaire de vie depuis douze ans. Jamais un incident. Aujourd'hui, elle est jugée pour enlèvement. [TÉLÉCHARGÉ]
+04-tutelle (proc) Cet homme est sous tutelle. Elle l'a fait monter dans sa voiture sans l'accord de personne. [TÉLÉCHARGÉ]
+05-jamais (avo) L'accord de personne ? Il le lui demandait depuis deux ans. Chaque matin, la même phrase : « Je n'ai jamais vu la mer. » [TÉLÉCHARGÉ]
+06-malaise (proc) Six cents kilomètres d'autoroute, à quatre-vingt-dix ans. Et s'il avait fait un malaise en route ? [TÉLÉCHARGÉ]
+07-carnet (avo) Elle s'arrêtait toutes les heures. Médicaments, eau, couverture. Elle avait tout noté dans un carnet. [TÉLÉCHARGÉ]
+08-commissariat (proc) Pendant ce temps, sa famille a passé la nuit au commissariat. Ils l'ont cherché partout. [TÉLÉCHARGÉ]
+09-deuxfois (avo) Sa famille ? Elle venait le voir deux fois par an. Samia, elle, était là tous les jours. [À FAIRE]
+10-employee (proc) Être là tous les jours ne donne aucun droit. Elle n'était que son employée. [TÉLÉCHARGÉ]
+11-fils (avo) Son employée ? Le soir même, il a appelé son fils. Il pleurait de joie. Il a dit : « Ne la punissez pas. » [À FAIRE]
+12-loi (proc) La loi protège les personnes vulnérables. Même contre ceux qui les aiment. [À FAIRE]
+13-enlevement (avo) Contre ceux qui les aiment ? À quatre-vingt-dix ans, il a vu la mer pour la première fois. Et c'est ça qu'on appelle un enlèvement. [À FAIRE]

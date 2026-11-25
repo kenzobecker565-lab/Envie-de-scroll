@@ -1,0 +1,1233 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 79.52,
+ "lines": [
+  {
+   "id": "01-serrures",
+   "who": "narrateur",
+   "text": "Une retraitée de soixante-quatorze ans a changé les serrures de son propre appartement. Ses locataires ne payaient plus depuis quatorze mois. Dix-huit mille euros.",
+   "start": 0.25,
+   "dur": 7.07,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "retraitée",
+     "t": 0.37
+    },
+    {
+     "w": "de",
+     "t": 0.81
+    },
+    {
+     "w": "soixante-quatorze",
+     "t": 1.08
+    },
+    {
+     "w": "ans",
+     "t": 1.35
+    },
+    {
+     "w": "a",
+     "t": 1.79
+    },
+    {
+     "w": "changé",
+     "t": 1.99
+    },
+    {
+     "w": "les",
+     "t": 2.31
+    },
+    {
+     "w": "serrures",
+     "t": 2.39
+    },
+    {
+     "w": "de",
+     "t": 2.73
+    },
+    {
+     "w": "son",
+     "t": 2.89
+    },
+    {
+     "w": "propre",
+     "t": 3.03
+    },
+    {
+     "w": "appartement.",
+     "t": 3.33
+    },
+    {
+     "w": "Ses",
+     "t": 3.73
+    },
+    {
+     "w": "locataires",
+     "t": 4.13
+    },
+    {
+     "w": "ne",
+     "t": 4.55
+    },
+    {
+     "w": "payaient",
+     "t": 4.67
+    },
+    {
+     "w": "plus",
+     "t": 4.95
+    },
+    {
+     "w": "depuis",
+     "t": 5.09
+    },
+    {
+     "w": "quatorze",
+     "t": 5.43
+    },
+    {
+     "w": "mois.",
+     "t": 5.77
+    },
+    {
+     "w": "Dix-huit",
+     "t": 6.143
+    },
+    {
+     "w": "mille",
+     "t": 6.517
+    },
+    {
+     "w": "euros.",
+     "t": 6.89
+    }
+   ]
+  },
+  {
+   "id": "02-voisin",
+   "who": "narrateur",
+   "text": "Sur la vidéo du voisin, on la voit avec un serrurier. Les affaires des locataires sur le palier… les jouets des enfants… et la porte qui se referme.",
+   "start": 7.57,
+   "dur": 7.19,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.57
+    },
+    {
+     "w": "la",
+     "t": 7.75
+    },
+    {
+     "w": "vidéo",
+     "t": 7.85
+    },
+    {
+     "w": "du",
+     "t": 8.09
+    },
+    {
+     "w": "voisin,",
+     "t": 8.23
+    },
+    {
+     "w": "on",
+     "t": 8.83
+    },
+    {
+     "w": "la",
+     "t": 8.93
+    },
+    {
+     "w": "voit",
+     "t": 9.05
+    },
+    {
+     "w": "avec",
+     "t": 9.17
+    },
+    {
+     "w": "un",
+     "t": 9.37
+    },
+    {
+     "w": "serrurier.",
+     "t": 9.8
+    },
+    {
+     "w": "Les",
+     "t": 10.23
+    },
+    {
+     "w": "affaires",
+     "t": 10.33
+    },
+    {
+     "w": "des",
+     "t": 10.61
+    },
+    {
+     "w": "locataires",
+     "t": 10.71
+    },
+    {
+     "w": "sur",
+     "t": 11.11
+    },
+    {
+     "w": "le",
+     "t": 11.23
+    },
+    {
+     "w": "palier…",
+     "t": 11.33
+    },
+    {
+     "w": "les",
+     "t": 12.17
+    },
+    {
+     "w": "jouets",
+     "t": 12.29
+    },
+    {
+     "w": "des",
+     "t": 12.51
+    },
+    {
+     "w": "enfants…",
+     "t": 12.63
+    },
+    {
+     "w": "et",
+     "t": 13.03
+    },
+    {
+     "w": "la",
+     "t": 13.49
+    },
+    {
+     "w": "porte",
+     "t": 13.69
+    },
+    {
+     "w": "qui",
+     "t": 13.93
+    },
+    {
+     "w": "se",
+     "t": 14.11
+    },
+    {
+     "w": "referme.",
+     "t": 14.21
+    }
+   ]
+  },
+  {
+   "id": "03-jeannine",
+   "who": "narrateur",
+   "text": "Elle s'appelle Jeannine. Veuve. Neuf cents euros de retraite. Ce loyer, c'était son seul complément. Aujourd'hui, c'est elle qu'on juge.",
+   "start": 15.01,
+   "dur": 6.5,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 15.01
+    },
+    {
+     "w": "s'appelle",
+     "t": 15.37
+    },
+    {
+     "w": "Jeannine.",
+     "t": 15.73
+    },
+    {
+     "w": "Veuve.",
+     "t": 16.09
+    },
+    {
+     "w": "Neuf",
+     "t": 16.39
+    },
+    {
+     "w": "cents",
+     "t": 16.69
+    },
+    {
+     "w": "euros",
+     "t": 16.99
+    },
+    {
+     "w": "de",
+     "t": 17.21
+    },
+    {
+     "w": "retraite.",
+     "t": 17.35
+    },
+    {
+     "w": "Ce",
+     "t": 17.91
+    },
+    {
+     "w": "loyer,",
+     "t": 18.03
+    },
+    {
+     "w": "c'était",
+     "t": 18.4
+    },
+    {
+     "w": "son",
+     "t": 18.77
+    },
+    {
+     "w": "seul",
+     "t": 18.95
+    },
+    {
+     "w": "complément.",
+     "t": 19.19
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 19.677
+    },
+    {
+     "w": "c'est",
+     "t": 20.163
+    },
+    {
+     "w": "elle",
+     "t": 20.65
+    },
+    {
+     "w": "qu'on",
+     "t": 20.86
+    },
+    {
+     "w": "juge.",
+     "t": 21.07
+    }
+   ]
+  },
+  {
+   "id": "04-loi",
+   "who": "procureur",
+   "text": "La loi est claire. On n'expulse pas soi-même. Même chez soi. Même quand on a raison.",
+   "start": 21.76,
+   "dur": 4.575,
+   "words": [
+    {
+     "w": "La",
+     "t": 21.76
+    },
+    {
+     "w": "loi",
+     "t": 21.9
+    },
+    {
+     "w": "est",
+     "t": 22.08
+    },
+    {
+     "w": "claire.",
+     "t": 22.28
+    },
+    {
+     "w": "On",
+     "t": 22.84
+    },
+    {
+     "w": "n'expulse",
+     "t": 23.1
+    },
+    {
+     "w": "pas",
+     "t": 23.36
+    },
+    {
+     "w": "soi-même.",
+     "t": 23.57
+    },
+    {
+     "w": "Même",
+     "t": 23.78
+    },
+    {
+     "w": "chez",
+     "t": 24.46
+    },
+    {
+     "w": "soi.",
+     "t": 24.7
+    },
+    {
+     "w": "Même",
+     "t": 25.16
+    },
+    {
+     "w": "quand",
+     "t": 25.36
+    },
+    {
+     "w": "on",
+     "t": 25.58
+    },
+    {
+     "w": "a",
+     "t": 25.72
+    },
+    {
+     "w": "raison.",
+     "t": 25.82
+    }
+   ]
+  },
+  {
+   "id": "05-procedure",
+   "who": "avocate",
+   "text": "La loi ? Elle a saisi la justice il y a deux ans. Procédure. Huissier. Jugement. L'expulsion n'est jamais venue.",
+   "start": 26.585,
+   "dur": 5.26,
+   "words": [
+    {
+     "w": "La",
+     "t": 26.585
+    },
+    {
+     "w": "loi ?",
+     "t": 26.745
+    },
+    {
+     "w": "Elle",
+     "t": 27.085
+    },
+    {
+     "w": "a",
+     "t": 27.232
+    },
+    {
+     "w": "saisi",
+     "t": 27.378
+    },
+    {
+     "w": "la",
+     "t": 27.525
+    },
+    {
+     "w": "justice",
+     "t": 27.605
+    },
+    {
+     "w": "il",
+     "t": 27.845
+    },
+    {
+     "w": "y",
+     "t": 28.125
+    },
+    {
+     "w": "a",
+     "t": 28.185
+    },
+    {
+     "w": "deux",
+     "t": 28.225
+    },
+    {
+     "w": "ans.",
+     "t": 28.385
+    },
+    {
+     "w": "Procédure.",
+     "t": 29.085
+    },
+    {
+     "w": "Huissier.",
+     "t": 29.445
+    },
+    {
+     "w": "Jugement.",
+     "t": 30.025
+    },
+    {
+     "w": "L'expulsion",
+     "t": 30.405
+    },
+    {
+     "w": "n'est",
+     "t": 30.785
+    },
+    {
+     "w": "jamais",
+     "t": 31.165
+    },
+    {
+     "w": "venue.",
+     "t": 31.365
+    }
+   ]
+  },
+  {
+   "id": "06-fevrier",
+   "who": "procureur",
+   "text": "Il y avait deux enfants dans cet appartement. Elle les a mis à la rue un soir de février.",
+   "start": 32.095,
+   "dur": 3.92,
+   "words": [
+    {
+     "w": "Il",
+     "t": 32.095
+    },
+    {
+     "w": "y",
+     "t": 32.235
+    },
+    {
+     "w": "avait",
+     "t": 32.335
+    },
+    {
+     "w": "deux",
+     "t": 32.435
+    },
+    {
+     "w": "enfants",
+     "t": 32.635
+    },
+    {
+     "w": "dans",
+     "t": 32.995
+    },
+    {
+     "w": "cet",
+     "t": 33.175
+    },
+    {
+     "w": "appartement.",
+     "t": 33.335
+    },
+    {
+     "w": "Elle",
+     "t": 33.995
+    },
+    {
+     "w": "les",
+     "t": 34.075
+    },
+    {
+     "w": "a",
+     "t": 34.215
+    },
+    {
+     "w": "mis",
+     "t": 34.375
+    },
+    {
+     "w": "à",
+     "t": 34.435
+    },
+    {
+     "w": "la",
+     "t": 34.555
+    },
+    {
+     "w": "rue",
+     "t": 34.615
+    },
+    {
+     "w": "un",
+     "t": 34.835
+    },
+    {
+     "w": "soir",
+     "t": 35.055
+    },
+    {
+     "w": "de",
+     "t": 35.275
+    },
+    {
+     "w": "février.",
+     "t": 35.415
+    }
+   ]
+  },
+  {
+   "id": "07-voiture",
+   "who": "avocate",
+   "text": "À la rue ? Le père roulait dans une voiture neuve. Il ne payait pas parce qu'il savait qu'on ne pouvait rien contre lui.",
+   "start": 36.265,
+   "dur": 4.62,
+   "words": [
+    {
+     "w": "À",
+     "t": 36.265
+    },
+    {
+     "w": "la",
+     "t": 36.345
+    },
+    {
+     "w": "rue ?",
+     "t": 36.445
+    },
+    {
+     "w": "Le",
+     "t": 36.785
+    },
+    {
+     "w": "père",
+     "t": 36.865
+    },
+    {
+     "w": "roulait",
+     "t": 37.045
+    },
+    {
+     "w": "dans",
+     "t": 37.345
+    },
+    {
+     "w": "une",
+     "t": 37.445
+    },
+    {
+     "w": "voiture",
+     "t": 37.585
+    },
+    {
+     "w": "neuve.",
+     "t": 37.805
+    },
+    {
+     "w": "Il",
+     "t": 38.325
+    },
+    {
+     "w": "ne",
+     "t": 38.405
+    },
+    {
+     "w": "payait",
+     "t": 38.525
+    },
+    {
+     "w": "pas",
+     "t": 38.785
+    },
+    {
+     "w": "parce",
+     "t": 38.925
+    },
+    {
+     "w": "qu'il",
+     "t": 39.155
+    },
+    {
+     "w": "savait",
+     "t": 39.385
+    },
+    {
+     "w": "qu'on",
+     "t": 39.615
+    },
+    {
+     "w": "ne",
+     "t": 39.845
+    },
+    {
+     "w": "pouvait",
+     "t": 39.905
+    },
+    {
+     "w": "rien",
+     "t": 40.065
+    },
+    {
+     "w": "contre",
+     "t": 40.325
+    },
+    {
+     "w": "lui.",
+     "t": 40.545
+    }
+   ]
+  },
+  {
+   "id": "08-violee",
+   "who": "procureur",
+   "text": "Sa voiture ne regarde pas ce tribunal. Ce qui compte, c'est la loi. Et elle l'a violée.",
+   "start": 41.135,
+   "dur": 4.21,
+   "words": [
+    {
+     "w": "Sa",
+     "t": 41.135
+    },
+    {
+     "w": "voiture",
+     "t": 41.275
+    },
+    {
+     "w": "ne",
+     "t": 41.535
+    },
+    {
+     "w": "regarde",
+     "t": 41.715
+    },
+    {
+     "w": "pas",
+     "t": 41.915
+    },
+    {
+     "w": "ce",
+     "t": 42.255
+    },
+    {
+     "w": "tribunal.",
+     "t": 42.395
+    },
+    {
+     "w": "Ce",
+     "t": 43.095
+    },
+    {
+     "w": "qui",
+     "t": 43.135
+    },
+    {
+     "w": "compte,",
+     "t": 43.295
+    },
+    {
+     "w": "c'est",
+     "t": 43.635
+    },
+    {
+     "w": "la",
+     "t": 43.975
+    },
+    {
+     "w": "loi.",
+     "t": 44.075
+    },
+    {
+     "w": "Et",
+     "t": 44.295
+    },
+    {
+     "w": "elle",
+     "t": 44.595
+    },
+    {
+     "w": "l'a",
+     "t": 44.725
+    },
+    {
+     "w": "violée.",
+     "t": 44.855
+    }
+   ]
+  },
+  {
+   "id": "09-alliance",
+   "who": "avocate",
+   "text": "Et elle ? Quatorze mois sans loyer. Elle a vendu son alliance pour payer les charges de cet appartement.",
+   "start": 45.595,
+   "dur": 4.23,
+   "words": [
+    {
+     "w": "Et",
+     "t": 45.595
+    },
+    {
+     "w": "elle ?",
+     "t": 45.735
+    },
+    {
+     "w": "Quatorze",
+     "t": 46.055
+    },
+    {
+     "w": "mois",
+     "t": 46.375
+    },
+    {
+     "w": "sans",
+     "t": 46.722
+    },
+    {
+     "w": "loyer.",
+     "t": 47.068
+    },
+    {
+     "w": "Elle",
+     "t": 47.415
+    },
+    {
+     "w": "a",
+     "t": 47.515
+    },
+    {
+     "w": "vendu",
+     "t": 47.575
+    },
+    {
+     "w": "son",
+     "t": 47.815
+    },
+    {
+     "w": "alliance",
+     "t": 47.915
+    },
+    {
+     "w": "pour",
+     "t": 48.175
+    },
+    {
+     "w": "payer",
+     "t": 48.415
+    },
+    {
+     "w": "les",
+     "t": 48.615
+    },
+    {
+     "w": "charges",
+     "t": 48.775
+    },
+    {
+     "w": "de",
+     "t": 48.975
+    },
+    {
+     "w": "cet",
+     "t": 49.155
+    },
+    {
+     "w": "appartement.",
+     "t": 49.275
+    }
+   ]
+  },
+  {
+   "id": "10-proteges",
+   "who": "procureur",
+   "text": "Sa détresse est réelle. Mais si chaque propriétaire se fait justice, plus aucun locataire n'est protégé.",
+   "start": 50.075,
+   "dur": 4.91,
+   "words": [
+    {
+     "w": "Sa",
+     "t": 50.175
+    },
+    {
+     "w": "détresse",
+     "t": 50.275
+    },
+    {
+     "w": "est",
+     "t": 50.505
+    },
+    {
+     "w": "réelle.",
+     "t": 50.735
+    },
+    {
+     "w": "Mais",
+     "t": 51.375
+    },
+    {
+     "w": "si",
+     "t": 51.455
+    },
+    {
+     "w": "chaque",
+     "t": 51.615
+    },
+    {
+     "w": "propriétaire",
+     "t": 51.815
+    },
+    {
+     "w": "se",
+     "t": 52.455
+    },
+    {
+     "w": "fait",
+     "t": 52.555
+    },
+    {
+     "w": "justice,",
+     "t": 52.695
+    },
+    {
+     "w": "plus",
+     "t": 53.335
+    },
+    {
+     "w": "aucun",
+     "t": 53.455
+    },
+    {
+     "w": "locataire",
+     "t": 53.815
+    },
+    {
+     "w": "n'est",
+     "t": 54.115
+    },
+    {
+     "w": "protégé.",
+     "t": 54.415
+    }
+   ]
+  },
+  {
+   "id": "11-seule",
+   "who": "avocate",
+   "text": "Protégé ? La seule qui n'a jamais été protégée ici, c'est elle. Soixante-quatorze ans. Seule face à la loi.",
+   "start": 55.235,
+   "dur": 5.15,
+   "words": [
+    {
+     "w": "Protégé ?",
+     "t": 55.525
+    },
+    {
+     "w": "La",
+     "t": 55.815
+    },
+    {
+     "w": "seule",
+     "t": 55.935
+    },
+    {
+     "w": "qui",
+     "t": 56.155
+    },
+    {
+     "w": "n'a",
+     "t": 56.285
+    },
+    {
+     "w": "jamais",
+     "t": 56.415
+    },
+    {
+     "w": "été",
+     "t": 56.635
+    },
+    {
+     "w": "protégée",
+     "t": 56.815
+    },
+    {
+     "w": "ici,",
+     "t": 57.235
+    },
+    {
+     "w": "c'est",
+     "t": 57.555
+    },
+    {
+     "w": "elle.",
+     "t": 57.875
+    },
+    {
+     "w": "Soixante-quatorze",
+     "t": 58.255
+    },
+    {
+     "w": "ans.",
+     "t": 58.635
+    },
+    {
+     "w": "Seule",
+     "t": 59.175
+    },
+    {
+     "w": "face",
+     "t": 59.495
+    },
+    {
+     "w": "à",
+     "t": 59.795
+    },
+    {
+     "w": "la",
+     "t": 59.975
+    },
+    {
+     "w": "loi.",
+     "t": 60.035
+    }
+   ]
+  },
+  {
+   "id": "12-prison",
+   "who": "procureur",
+   "text": "Elle risque trois ans de prison. Pour avoir fait ce que seul un juge pouvait faire.",
+   "start": 60.635,
+   "dur": 3.76,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 60.635
+    },
+    {
+     "w": "risque",
+     "t": 60.775
+    },
+    {
+     "w": "trois",
+     "t": 61.015
+    },
+    {
+     "w": "ans",
+     "t": 61.375
+    },
+    {
+     "w": "de",
+     "t": 61.575
+    },
+    {
+     "w": "prison.",
+     "t": 61.675
+    },
+    {
+     "w": "Pour",
+     "t": 61.975
+    },
+    {
+     "w": "avoir",
+     "t": 62.255
+    },
+    {
+     "w": "fait",
+     "t": 62.415
+    },
+    {
+     "w": "ce",
+     "t": 62.675
+    },
+    {
+     "w": "que",
+     "t": 62.815
+    },
+    {
+     "w": "seul",
+     "t": 62.915
+    },
+    {
+     "w": "un",
+     "t": 63.195
+    },
+    {
+     "w": "juge",
+     "t": 63.375
+    },
+    {
+     "w": "pouvait",
+     "t": 63.715
+    },
+    {
+     "w": "faire.",
+     "t": 63.915
+    }
+   ]
+  },
+  {
+   "id": "13-qui",
+   "who": "avocate",
+   "text": "Trois ans de prison… pour avoir récupéré sa propre maison. Si c'est ça, la justice… qui protège Jeannine ?",
+   "start": 64.645,
+   "dur": 5.13,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 64.775
+    },
+    {
+     "w": "ans",
+     "t": 64.905
+    },
+    {
+     "w": "de",
+     "t": 65.105
+    },
+    {
+     "w": "prison…",
+     "t": 65.185
+    },
+    {
+     "w": "pour",
+     "t": 65.505
+    },
+    {
+     "w": "avoir",
+     "t": 65.925
+    },
+    {
+     "w": "récupéré",
+     "t": 66.045
+    },
+    {
+     "w": "sa",
+     "t": 66.625
+    },
+    {
+     "w": "propre",
+     "t": 66.765
+    },
+    {
+     "w": "maison.",
+     "t": 67.025
+    },
+    {
+     "w": "Si",
+     "t": 67.545
+    },
+    {
+     "w": "c'est",
+     "t": 67.715
+    },
+    {
+     "w": "ça,",
+     "t": 67.885
+    },
+    {
+     "w": "la",
+     "t": 68.045
+    },
+    {
+     "w": "justice…",
+     "t": 68.125
+    },
+    {
+     "w": "qui",
+     "t": 68.725
+    },
+    {
+     "w": "protège",
+     "t": 68.905
+    },
+    {
+     "w": "Jeannine ?",
+     "t": 69.367
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 70.025,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 70.025
+    },
+    {
+     "w": "es",
+     "t": 70.165
+    },
+    {
+     "w": "le",
+     "t": 70.255
+    },
+    {
+     "w": "juré.",
+     "t": 70.345
+    },
+    {
+     "w": "Coupable…",
+     "t": 70.845
+    },
+    {
+     "w": "ou",
+     "t": 71.285
+    },
+    {
+     "w": "non",
+     "t": 71.705
+    },
+    {
+     "w": "coupable ?",
+     "t": 71.905
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 72.785,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 72.785
+    },
+    {
+     "w": "verdict",
+     "t": 72.905
+    },
+    {
+     "w": "tombe",
+     "t": 73.205
+    },
+    {
+     "w": "dans",
+     "t": 73.745
+    },
+    {
+     "w": "la",
+     "t": 73.905
+    },
+    {
+     "w": "prochaine",
+     "t": 74.025
+    },
+    {
+     "w": "vidéo.",
+     "t": 74.305
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 74.795
+    },
+    {
+     "w": "pour",
+     "t": 75.285
+    },
+    {
+     "w": "ne",
+     "t": 75.425
+    },
+    {
+     "w": "pas",
+     "t": 75.525
+    },
+    {
+     "w": "le",
+     "t": 75.665
+    },
+    {
+     "w": "rater.",
+     "t": 75.685
+    }
+   ]
+  }
+ ]
+}

@@ -1,10 +1,10 @@
 # La propriétaire — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
 Flow ElevenLabs : lwhKreerjmiwI9eZzTy7
-01-serrures (narr) Une retraitée de soixante-quatorze ans a changé les serrures de son propre appartement. Ses locataires ne payaient plus depuis quatorze mois. Dix-huit mille euros. [session EhFeFRU4xSCfRZTdC3nK]
-02-voisin (narr) Sur la vidéo du voisin, on la voit avec un serrurier. Les affaires des locataires sur le palier… les jouets des enfants… et la porte qui se referme. [session unLUARObQyvgtw4A34bm]
-03-jeannine (narr) Elle s'appelle Jeannine. Veuve. Neuf cents euros de retraite. Ce loyer, c'était son seul complément. Aujourd'hui, c'est elle qu'on juge. [session e9Imyb7BF5NHjRc6d8TI]
-04-loi (proc) La loi est claire. On n'expulse pas soi-même. Même chez soi. Même quand on a raison. [session qPx57e5qwyy4TUOzFjYQ]
-05-procedure (avo) La loi ? Elle a saisi la justice il y a deux ans. Procédure. Huissier. Jugement. L'expulsion n'est jamais venue. [À FAIRE]
+01-serrures (narr) Une retraitée de soixante-quatorze ans a changé les serrures de son propre appartement. Ses locataires ne payaient plus depuis quatorze mois. Dix-huit mille euros. [TÉLÉCHARGÉ]
+02-voisin (narr) Sur la vidéo du voisin, on la voit avec un serrurier. Les affaires des locataires sur le palier… les jouets des enfants… et la porte qui se referme. [TÉLÉCHARGÉ]
+03-jeannine (narr) Elle s'appelle Jeannine. Veuve. Neuf cents euros de retraite. Ce loyer, c'était son seul complément. Aujourd'hui, c'est elle qu'on juge. [TÉLÉCHARGÉ]
+04-loi (proc) La loi est claire. On n'expulse pas soi-même. Même chez soi. Même quand on a raison. [TÉLÉCHARGÉ]
+05-procedure (avo) La loi ? Elle a saisi la justice il y a deux ans. Procédure. Huissier. Jugement. L'expulsion n'est jamais venue. [TÉLÉCHARGÉ]
 06-fevrier (proc) Il y avait deux enfants dans cet appartement. Elle les a mis à la rue un soir de février. [À FAIRE]
 07-voiture (avo) À la rue ? Le père roulait dans une voiture neuve. Il ne payait pas parce qu'il savait qu'on ne pouvait rien contre lui. [À FAIRE]
 08-violee (proc) Sa voiture ne regarde pas ce tribunal. Ce qui compte, c'est la loi. Et elle l'a violée. [À FAIRE]

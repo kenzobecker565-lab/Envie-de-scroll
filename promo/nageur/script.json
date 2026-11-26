@@ -1,0 +1,95 @@
+{
+ "_doc": "« Le maître-nageur » (affaire fictive), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-piscine",
+   "who": "narrateur",
+   "text": "Pendant deux étés, un maître-nageur a laissé entrer gratuitement les enfants d'une cité à la piscine municipale. Tous les soirs. Neuf mille euros d'entrées.",
+   "gap": 0
+  },
+  {
+   "id": "02-porte",
+   "who": "narrateur",
+   "text": "Sur la caméra de l'entrée, on le voit chaque soir à dix-neuf heures. Il ouvre la porte de service… les enfants se faufilent… et il referme derrière eux."
+  },
+  {
+   "id": "03-karim",
+   "who": "narrateur",
+   "text": "Il s'appelle Karim. Trente-huit ans. Maître-nageur depuis quinze ans. Aucun accident sous sa surveillance. Aujourd'hui, il est jugé pour détournement de biens publics."
+  },
+  {
+   "id": "04-ville",
+   "who": "procureur",
+   "text": "Cette piscine appartient à la ville. Il en a ouvert les portes comme si c'était chez lui. Deux étés de suite."
+  },
+  {
+   "id": "05-chaleur",
+   "who": "avocate",
+   "text": "Chez lui ? Ces enfants vivent à huit cents mètres. Il faisait trente-six degrés. Et l'entrée coûte quatre euros. Par enfant. Par jour."
+  },
+  {
+   "id": "06-autres",
+   "who": "procureur",
+   "text": "Quatre euros, c'est le prix. D'autres familles l'ont payé. Pourquoi eux, et pas les autres ?"
+  },
+  {
+   "id": "07-canal",
+   "who": "avocate",
+   "text": "Les autres ? L'été d'avant, un gamin de la cité s'est noyé dans le canal. Il avait neuf ans."
+  },
+  {
+   "id": "08-drame",
+   "who": "procureur",
+   "text": "C'est un drame. Mais ce n'est pas à un maître-nageur de décider qui paie et qui ne paie pas."
+  },
+  {
+   "id": "09-nager",
+   "who": "avocate",
+   "text": "Il n'a pas choisi qui paie. Il a choisi qui ne se noie pas. En deux étés, il a appris à nager à quarante-trois enfants."
+  },
+  {
+   "id": "10-public",
+   "who": "procureur",
+   "text": "Neuf mille euros, c'est de l'argent public. L'argent de tous les habitants. Y compris ceux qui ont payé leur entrée."
+  },
+  {
+   "id": "11-impots",
+   "who": "avocate",
+   "text": "De l'argent public ? Ces enfants aussi, c'est la ville. Et leurs parents paient des impôts, comme tout le monde."
+  },
+  {
+   "id": "12-canicule",
+   "who": "procureur",
+   "text": "Il risque dix ans de prison. La loi ne connaît pas les canicules."
+  },
+  {
+   "id": "13-coupable",
+   "who": "avocate",
+   "text": "Dix ans… pour quarante-trois enfants qui savent nager. Si c'est ça, un crime… alors oui, il est coupable."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

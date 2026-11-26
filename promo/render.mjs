@@ -66,6 +66,7 @@ const ADS = {
   auxiliaire: { page: 'promo/auxiliaire/index.html', audio: './auxiliaire/audio.mjs', build: 'build/auxiliaire', out: 'auxiliaire.mp4' },
   proprietaire: { page: 'promo/proprietaire/index.html', audio: './proprietaire/audio.mjs', build: 'build/proprietaire', out: 'proprietaire.mp4' },
   preparatrice: { page: 'promo/preparatrice/index.html', audio: './preparatrice/audio.mjs', build: 'build/preparatrice', out: 'preparatrice.mp4' },
+  nageur: { page: 'promo/nageur/index.html', audio: './nageur/audio.mjs', build: 'build/nageur', out: 'nageur.mp4' },
   frere: { page: 'promo/frere/index.html', audio: './frere/audio.mjs', build: 'build/frere', out: 'sauf-moi.mp4' },
   'frere-hq': { page: 'promo/frere/hq.html', audio: './frere/audio.mjs', build: 'build/frere-hq', out: 'sauf-moi-hq.mp4' },
   bijoutier: { page: 'promo/bijoutier/index.html', audio: './bijoutier/audio.mjs', build: 'build/bijoutier', out: 'bijoutier.mp4' },

@@ -1,6 +1,6 @@
 {
  "_doc": "Généré par voix.py : ne pas modifier à la main.",
- "duration": 79.65,
+ "duration": 79.49,
  "lines": [
   {
    "id": "01-piscine",
@@ -229,11 +229,11 @@
    ]
   },
   {
-   "id": "03-karim",
+   "id": "03-julien",
    "who": "narrateur",
-   "text": "Il s'appelle Karim. Trente-huit ans. Maître-nageur depuis quinze ans. Aucun accident sous sa surveillance. Aujourd'hui, il est jugé pour détournement de biens publics.",
+   "text": "Il s'appelle Julien. Trente-huit ans. Maître-nageur depuis quinze ans. Aucun accident sous sa surveillance. Aujourd'hui, il est jugé pour détournement de biens publics.",
    "start": 14.84,
-   "dur": 7.47,
+   "dur": 7.31,
    "words": [
     {
      "w": "Il",
@@ -241,91 +241,91 @@
     },
     {
      "w": "s'appelle",
-     "t": 15.04
+     "t": 15.06
     },
     {
-     "w": "Karim.",
-     "t": 15.26
+     "w": "Julien.",
+     "t": 15.28
     },
     {
      "w": "Trente-huit",
-     "t": 15.72
+     "t": 15.68
     },
     {
      "w": "ans.",
-     "t": 16.18
+     "t": 16.08
     },
     {
      "w": "Maître-nageur",
-     "t": 16.66
+     "t": 16.55
     },
     {
      "w": "depuis",
-     "t": 17.14
+     "t": 17.02
     },
     {
      "w": "quinze",
-     "t": 17.38
+     "t": 17.25
     },
     {
      "w": "ans.",
-     "t": 17.62
+     "t": 17.48
     },
     {
      "w": "Aucun",
-     "t": 17.96
+     "t": 17.82
     },
     {
      "w": "accident",
-     "t": 18.16
+     "t": 18.06
     },
     {
      "w": "sous",
-     "t": 18.58
+     "t": 18.46
     },
     {
      "w": "sa",
-     "t": 18.78
+     "t": 18.66
     },
     {
      "w": "surveillance.",
-     "t": 18.92
+     "t": 18.8
     },
     {
      "w": "Aujourd'hui,",
-     "t": 19.58
+     "t": 19.47
     },
     {
      "w": "il",
-     "t": 20.24
+     "t": 20.14
     },
     {
      "w": "est",
-     "t": 20.34
+     "t": 20.24
     },
     {
      "w": "jugé",
-     "t": 20.44
+     "t": 20.32
     },
     {
      "w": "pour",
-     "t": 20.74
+     "t": 20.58
     },
     {
      "w": "détournement",
-     "t": 20.88
+     "t": 20.76
     },
     {
      "w": "de",
-     "t": 21.4
+     "t": 21.26
     },
     {
      "w": "biens",
-     "t": 21.54
+     "t": 21.4
     },
     {
      "w": "publics.",
-     "t": 21.7
+     "t": 21.56
     }
    ]
   },
@@ -333,92 +333,92 @@
    "id": "04-ville",
    "who": "procureur",
    "text": "Cette piscine appartient à la ville. Il en a ouvert les portes comme si c'était chez lui. Deux étés de suite.",
-   "start": 22.56,
+   "start": 22.4,
    "dur": 4.88,
    "words": [
     {
      "w": "Cette",
-     "t": 22.56
+     "t": 22.4
     },
     {
      "w": "piscine",
-     "t": 22.74
+     "t": 22.58
     },
     {
      "w": "appartient",
-     "t": 23.12
+     "t": 22.96
     },
     {
      "w": "à",
-     "t": 23.5
+     "t": 23.34
     },
     {
      "w": "la",
-     "t": 23.58
+     "t": 23.42
     },
     {
      "w": "ville.",
-     "t": 23.66
+     "t": 23.5
     },
     {
      "w": "Il",
-     "t": 24.14
+     "t": 23.98
     },
     {
      "w": "en",
-     "t": 24.2
+     "t": 24.04
     },
     {
      "w": "a",
-     "t": 24.3
+     "t": 24.14
     },
     {
      "w": "ouvert",
-     "t": 24.4
+     "t": 24.24
     },
     {
      "w": "les",
-     "t": 24.54
+     "t": 24.38
     },
     {
      "w": "portes",
-     "t": 24.76
+     "t": 24.6
     },
     {
      "w": "comme",
-     "t": 25.1
+     "t": 24.94
     },
     {
      "w": "si",
-     "t": 25.34
+     "t": 25.18
     },
     {
      "w": "c'était",
-     "t": 25.54
+     "t": 25.38
     },
     {
      "w": "chez",
-     "t": 25.74
+     "t": 25.58
     },
     {
      "w": "lui.",
-     "t": 25.9
+     "t": 25.74
     },
     {
      "w": "Deux",
-     "t": 26.34
+     "t": 26.18
     },
     {
      "w": "étés",
-     "t": 26.64
+     "t": 26.48
     },
     {
      "w": "de",
-     "t": 26.88
+     "t": 26.72
     },
     {
      "w": "suite.",
-     "t": 26.96
+     "t": 26.8
     }
    ]
   },
@@ -426,96 +426,96 @@
    "id": "05-chaleur",
    "who": "avocate",
    "text": "Chez lui ? Ces enfants vivent à huit cents mètres. Il faisait trente-six degrés. Et l'entrée coûte quatre euros. Par enfant. Par jour.",
-   "start": 27.69,
+   "start": 27.53,
    "dur": 5.63,
    "words": [
     {
      "w": "Chez",
-     "t": 27.69
+     "t": 27.53
     },
     {
      "w": "lui ?",
-     "t": 27.87
+     "t": 27.71
     },
     {
      "w": "Ces",
-     "t": 28.1
+     "t": 27.94
     },
     {
      "w": "enfants",
-     "t": 28.33
+     "t": 28.17
     },
     {
      "w": "vivent",
-     "t": 28.61
+     "t": 28.45
     },
     {
      "w": "à",
-     "t": 28.89
+     "t": 28.73
     },
     {
      "w": "huit",
-     "t": 28.97
+     "t": 28.81
     },
     {
      "w": "cents",
-     "t": 29.05
+     "t": 28.89
     },
     {
      "w": "mètres.",
-     "t": 29.13
+     "t": 28.97
     },
     {
      "w": "Il",
-     "t": 29.47
+     "t": 29.31
     },
     {
      "w": "faisait",
-     "t": 29.81
+     "t": 29.65
     },
     {
      "w": "trente-six",
-     "t": 30.15
+     "t": 29.99
     },
     {
      "w": "degrés.",
-     "t": 30.49
+     "t": 30.33
     },
     {
      "w": "Et",
-     "t": 30.89
+     "t": 30.73
     },
     {
      "w": "l'entrée",
-     "t": 31.13
+     "t": 30.97
     },
     {
      "w": "coûte",
-     "t": 31.37
+     "t": 31.21
     },
     {
      "w": "quatre",
-     "t": 31.58
+     "t": 31.42
     },
     {
      "w": "euros.",
-     "t": 31.79
+     "t": 31.63
     },
     {
      "w": "Par",
-     "t": 32.09
+     "t": 31.93
     },
     {
      "w": "enfant.",
-     "t": 32.35
+     "t": 32.19
     },
     {
      "w": "Par",
-     "t": 32.73
+     "t": 32.57
     },
     {
      "w": "jour.",
-     "t": 32.89
+     "t": 32.73
     }
    ]
   },
@@ -523,68 +523,68 @@
    "id": "06-autres",
    "who": "procureur",
    "text": "Quatre euros, c'est le prix. D'autres familles l'ont payé. Pourquoi eux, et pas les autres ?",
-   "start": 33.57,
+   "start": 33.41,
    "dur": 4.03,
    "words": [
     {
      "w": "Quatre",
-     "t": 33.64
+     "t": 33.48
     },
     {
      "w": "euros,",
-     "t": 33.75
+     "t": 33.59
     },
     {
      "w": "c'est",
-     "t": 34.09
+     "t": 33.93
     },
     {
      "w": "le",
-     "t": 34.43
+     "t": 34.27
     },
     {
      "w": "prix.",
-     "t": 34.47
+     "t": 34.31
     },
     {
      "w": "D'autres",
-     "t": 34.77
+     "t": 34.61
     },
     {
      "w": "familles",
-     "t": 35.07
+     "t": 34.91
     },
     {
      "w": "l'ont",
-     "t": 35.31
+     "t": 35.15
     },
     {
      "w": "payé.",
-     "t": 35.55
+     "t": 35.39
     },
     {
      "w": "Pourquoi",
-     "t": 36.05
+     "t": 35.89
     },
     {
      "w": "eux,",
-     "t": 36.27
+     "t": 36.11
     },
     {
      "w": "et",
-     "t": 36.59
+     "t": 36.43
     },
     {
      "w": "pas",
-     "t": 36.89
+     "t": 36.73
     },
     {
      "w": "les",
-     "t": 37.03
+     "t": 36.87
     },
     {
      "w": "autres ?",
-     "t": 37.19
+     "t": 37.03
     }
    ]
   },
@@ -592,80 +592,80 @@
    "id": "07-canal",
    "who": "avocate",
    "text": "Les autres ? L'été d'avant, un gamin de la cité s'est noyé dans le canal. Il avait neuf ans.",
-   "start": 37.85,
+   "start": 37.69,
    "dur": 3.99,
    "words": [
     {
      "w": "Les",
-     "t": 37.85
+     "t": 37.69
     },
     {
      "w": "autres ?",
-     "t": 38.01
+     "t": 37.85
     },
     {
      "w": "L'été",
-     "t": 38.423
+     "t": 38.263
     },
     {
      "w": "d'avant,",
-     "t": 38.837
+     "t": 38.677
     },
     {
      "w": "un",
-     "t": 39.25
+     "t": 39.09
     },
     {
      "w": "gamin",
-     "t": 39.37
+     "t": 39.21
     },
     {
      "w": "de",
-     "t": 39.61
+     "t": 39.45
     },
     {
      "w": "la",
-     "t": 39.67
+     "t": 39.51
     },
     {
      "w": "cité",
-     "t": 39.77
+     "t": 39.61
     },
     {
      "w": "s'est",
-     "t": 39.98
+     "t": 39.82
     },
     {
      "w": "noyé",
-     "t": 40.19
+     "t": 40.03
     },
     {
      "w": "dans",
-     "t": 40.49
+     "t": 40.33
     },
     {
      "w": "le",
-     "t": 40.59
+     "t": 40.43
     },
     {
      "w": "canal.",
-     "t": 40.65
+     "t": 40.49
     },
     {
      "w": "Il",
-     "t": 41.13
+     "t": 40.97
     },
     {
      "w": "avait",
-     "t": 41.21
+     "t": 41.05
     },
     {
      "w": "neuf",
-     "t": 41.39
+     "t": 41.23
     },
     {
      "w": "ans.",
-     "t": 41.57
+     "t": 41.41
     }
    ]
   },
@@ -673,84 +673,84 @@
    "id": "08-drame",
    "who": "procureur",
    "text": "C'est un drame. Mais ce n'est pas à un maître-nageur de décider qui paie et qui ne paie pas.",
-   "start": 42.09,
+   "start": 41.93,
    "dur": 4.15,
    "words": [
     {
      "w": "C'est",
-     "t": 42.2
+     "t": 42.04
     },
     {
      "w": "un",
-     "t": 42.31
+     "t": 42.15
     },
     {
      "w": "drame.",
-     "t": 42.41
+     "t": 42.25
     },
     {
      "w": "Mais",
-     "t": 42.99
+     "t": 42.83
     },
     {
      "w": "ce",
-     "t": 43.15
+     "t": 42.99
     },
     {
      "w": "n'est",
-     "t": 43.24
+     "t": 43.08
     },
     {
      "w": "pas",
-     "t": 43.33
+     "t": 43.17
     },
     {
      "w": "à",
-     "t": 43.4
+     "t": 43.24
     },
     {
      "w": "un",
-     "t": 43.47
+     "t": 43.31
     },
     {
      "w": "maître-nageur",
-     "t": 43.87
+     "t": 43.71
     },
     {
      "w": "de",
-     "t": 44.27
+     "t": 44.11
     },
     {
      "w": "décider",
-     "t": 44.39
+     "t": 44.23
     },
     {
      "w": "qui",
-     "t": 44.79
+     "t": 44.63
     },
     {
      "w": "paie",
-     "t": 45.11
+     "t": 44.95
     },
     {
      "w": "et",
-     "t": 45.43
+     "t": 45.27
     },
     {
      "w": "qui",
-     "t": 45.51
+     "t": 45.35
     },
     {
      "w": "ne",
-     "t": 45.63
+     "t": 45.47
     },
     {
      "w": "paie",
-     "t": 45.75
+     "t": 45.59
     },
     {
      "w": "pas.",
-     "t": 45.93
+     "t": 45.77
     }
    ]
   },
@@ -758,108 +758,108 @@
    "id": "09-nager",
    "who": "avocate",
    "text": "Il n'a pas choisi qui paie. Il a choisi qui ne se noie pas. En deux étés, il a appris à nager à quarante-trois enfants.",
-   "start": 46.49,
+   "start": 46.33,
    "dur": 5.26,
    "words": [
     {
      "w": "Il",
-     "t": 46.49
+     "t": 46.33
     },
     {
      "w": "n'a",
-     "t": 46.62
+     "t": 46.46
     },
     {
      "w": "pas",
-     "t": 46.75
+     "t": 46.59
     },
     {
      "w": "choisi",
-     "t": 46.85
+     "t": 46.69
     },
     {
      "w": "qui",
-     "t": 47.15
+     "t": 46.99
     },
     {
      "w": "paie.",
-     "t": 47.43
+     "t": 47.27
     },
     {
      "w": "Il",
-     "t": 47.71
+     "t": 47.55
     },
     {
      "w": "a",
-     "t": 47.79
+     "t": 47.63
     },
     {
      "w": "choisi",
-     "t": 47.89
+     "t": 47.73
     },
     {
      "w": "qui",
-     "t": 48.23
+     "t": 48.07
     },
     {
      "w": "ne",
-     "t": 48.41
+     "t": 48.25
     },
     {
      "w": "se",
-     "t": 48.57
+     "t": 48.41
     },
     {
      "w": "noie",
-     "t": 48.69
+     "t": 48.53
     },
     {
      "w": "pas.",
-     "t": 48.87
+     "t": 48.71
     },
     {
      "w": "En",
-     "t": 49.17
+     "t": 49.01
     },
     {
      "w": "deux",
-     "t": 49.29
+     "t": 49.13
     },
     {
      "w": "étés,",
-     "t": 49.41
+     "t": 49.25
     },
     {
      "w": "il",
-     "t": 49.87
+     "t": 49.71
     },
     {
      "w": "a",
-     "t": 50.01
+     "t": 49.85
     },
     {
      "w": "appris",
-     "t": 50.11
+     "t": 49.95
     },
     {
      "w": "à",
-     "t": 50.31
+     "t": 50.15
     },
     {
      "w": "nager",
-     "t": 50.41
+     "t": 50.25
     },
     {
      "w": "à",
-     "t": 50.65
+     "t": 50.49
     },
     {
      "w": "quarante-trois",
-     "t": 50.97
+     "t": 50.81
     },
     {
      "w": "enfants.",
-     "t": 51.29
+     "t": 51.13
     }
    ]
   },
@@ -867,88 +867,88 @@
    "id": "10-public",
    "who": "procureur",
    "text": "Neuf mille euros, c'est de l'argent public. L'argent de tous les habitants. Y compris ceux qui ont payé leur entrée.",
-   "start": 52.0,
+   "start": 51.84,
    "dur": 5.04,
    "words": [
     {
      "w": "Neuf",
-     "t": 52.147
+     "t": 51.987
     },
     {
      "w": "mille",
-     "t": 52.293
+     "t": 52.133
     },
     {
      "w": "euros,",
-     "t": 52.44
+     "t": 52.28
     },
     {
      "w": "c'est",
-     "t": 52.76
+     "t": 52.6
     },
     {
      "w": "de",
-     "t": 53.08
+     "t": 52.92
     },
     {
      "w": "l'argent",
-     "t": 53.21
+     "t": 53.05
     },
     {
      "w": "public.",
-     "t": 53.34
+     "t": 53.18
     },
     {
      "w": "L'argent",
-     "t": 53.81
+     "t": 53.65
     },
     {
      "w": "de",
-     "t": 54.28
+     "t": 54.12
     },
     {
      "w": "tous",
-     "t": 54.44
+     "t": 54.28
     },
     {
      "w": "les",
-     "t": 54.66
+     "t": 54.5
     },
     {
      "w": "habitants.",
-     "t": 54.8
+     "t": 54.64
     },
     {
      "w": "Y",
-     "t": 55.38
+     "t": 55.22
     },
     {
      "w": "compris",
-     "t": 55.44
+     "t": 55.28
     },
     {
      "w": "ceux",
-     "t": 55.74
+     "t": 55.58
     },
     {
      "w": "qui",
-     "t": 55.98
+     "t": 55.82
     },
     {
      "w": "ont",
-     "t": 56.14
+     "t": 55.98
     },
     {
      "w": "payé",
-     "t": 56.24
+     "t": 56.08
     },
     {
      "w": "leur",
-     "t": 56.5
+     "t": 56.34
     },
     {
      "w": "entrée.",
-     "t": 56.58
+     "t": 56.42
     }
    ]
   },
@@ -956,84 +956,84 @@
    "id": "11-impots",
    "who": "avocate",
    "text": "De l'argent public ? Ces enfants aussi, c'est la ville. Et leurs parents paient des impôts, comme tout le monde.",
-   "start": 57.29,
+   "start": 57.13,
    "dur": 4.23,
    "words": [
     {
      "w": "De",
-     "t": 57.29
+     "t": 57.13
     },
     {
      "w": "l'argent",
-     "t": 57.46
+     "t": 57.3
     },
     {
      "w": "public ?",
-     "t": 57.63
+     "t": 57.47
     },
     {
      "w": "Ces",
-     "t": 58.19
+     "t": 58.03
     },
     {
      "w": "enfants",
-     "t": 58.39
+     "t": 58.23
     },
     {
      "w": "aussi,",
-     "t": 58.63
+     "t": 58.47
     },
     {
      "w": "c'est",
-     "t": 58.91
+     "t": 58.75
     },
     {
      "w": "la",
-     "t": 59.19
+     "t": 59.03
     },
     {
      "w": "ville.",
-     "t": 59.29
+     "t": 59.13
     },
     {
      "w": "Et",
-     "t": 59.65
+     "t": 59.49
     },
     {
      "w": "leurs",
-     "t": 59.75
+     "t": 59.59
     },
     {
      "w": "parents",
-     "t": 59.85
+     "t": 59.69
     },
     {
      "w": "paient",
-     "t": 60.05
+     "t": 59.89
     },
     {
      "w": "des",
-     "t": 60.35
+     "t": 60.19
     },
     {
      "w": "impôts,",
-     "t": 60.43
+     "t": 60.27
     },
     {
      "w": "comme",
-     "t": 60.87
+     "t": 60.71
     },
     {
      "w": "tout",
-     "t": 61.01
+     "t": 60.85
     },
     {
      "w": "le",
-     "t": 61.13
+     "t": 60.97
     },
     {
      "w": "monde.",
-     "t": 61.19
+     "t": 61.03
     }
    ]
   },
@@ -1041,60 +1041,60 @@
    "id": "12-canicule",
    "who": "procureur",
    "text": "Il risque dix ans de prison. La loi ne connaît pas les canicules.",
-   "start": 61.77,
+   "start": 61.61,
    "dur": 3.11,
    "words": [
     {
      "w": "Il",
-     "t": 61.77
+     "t": 61.61
     },
     {
      "w": "risque",
-     "t": 61.91
+     "t": 61.75
     },
     {
      "w": "dix",
-     "t": 62.17
+     "t": 62.01
     },
     {
      "w": "ans",
-     "t": 62.53
+     "t": 62.37
     },
     {
      "w": "de",
-     "t": 62.65
+     "t": 62.49
     },
     {
      "w": "prison.",
-     "t": 62.73
+     "t": 62.57
     },
     {
      "w": "La",
-     "t": 63.19
+     "t": 63.03
     },
     {
      "w": "loi",
-     "t": 63.33
+     "t": 63.17
     },
     {
      "w": "ne",
-     "t": 63.49
+     "t": 63.33
     },
     {
      "w": "connaît",
-     "t": 63.65
+     "t": 63.49
     },
     {
      "w": "pas",
-     "t": 63.99
+     "t": 63.83
     },
     {
      "w": "les",
-     "t": 64.11
+     "t": 63.95
     },
     {
      "w": "canicules.",
-     "t": 64.23
+     "t": 64.07
     }
    ]
   },
@@ -1102,80 +1102,80 @@
    "id": "13-coupable",
    "who": "avocate",
    "text": "Dix ans… pour quarante-trois enfants qui savent nager. Si c'est ça, un crime… alors oui, il est coupable.",
-   "start": 65.13,
+   "start": 64.97,
    "dur": 4.77,
    "words": [
     {
      "w": "Dix",
-     "t": 65.13
+     "t": 64.97
     },
     {
      "w": "ans…",
-     "t": 65.45
+     "t": 65.29
     },
     {
      "w": "pour",
-     "t": 65.61
+     "t": 65.45
     },
     {
      "w": "quarante-trois",
-     "t": 66.01
+     "t": 65.85
     },
     {
      "w": "enfants",
-     "t": 66.41
+     "t": 66.25
     },
     {
      "w": "qui",
-     "t": 66.79
+     "t": 66.63
     },
     {
      "w": "savent",
-     "t": 66.91
+     "t": 66.75
     },
     {
      "w": "nager.",
-     "t": 67.13
+     "t": 66.97
     },
     {
      "w": "Si",
-     "t": 67.53
+     "t": 67.37
     },
     {
      "w": "c'est",
-     "t": 67.72
+     "t": 67.56
     },
     {
      "w": "ça,",
-     "t": 67.91
+     "t": 67.75
     },
     {
      "w": "un",
-     "t": 68.07
+     "t": 67.91
     },
     {
      "w": "crime…",
-     "t": 68.19
+     "t": 68.03
     },
     {
      "w": "alors",
-     "t": 68.71
+     "t": 68.55
     },
     {
      "w": "oui,",
-     "t": 68.85
+     "t": 68.69
     },
     {
      "w": "il",
-     "t": 69.07
+     "t": 68.91
     },
     {
      "w": "est",
-     "t": 69.35
+     "t": 69.19
     },
     {
      "w": "coupable.",
-     "t": 69.43
+     "t": 69.27
     }
    ]
   },
@@ -1183,40 +1183,40 @@
    "id": "14-jury",
    "who": "narrateur",
    "text": "Tu es le juré. Coupable… ou non coupable ?",
-   "start": 70.15,
+   "start": 69.99,
    "dur": 2.51,
    "words": [
     {
      "w": "Tu",
-     "t": 70.15
+     "t": 69.99
     },
     {
      "w": "es",
-     "t": 70.29
+     "t": 70.13
     },
     {
      "w": "le",
-     "t": 70.38
+     "t": 70.22
     },
     {
      "w": "juré.",
-     "t": 70.47
+     "t": 70.31
     },
     {
      "w": "Coupable…",
-     "t": 70.97
+     "t": 70.81
     },
     {
      "w": "ou",
-     "t": 71.41
+     "t": 71.25
     },
     {
      "w": "non",
-     "t": 71.83
+     "t": 71.67
     },
     {
      "w": "coupable ?",
-     "t": 72.03
+     "t": 71.87
     }
    ]
   },
@@ -1224,60 +1224,60 @@
    "id": "15-abonne",
    "who": "narrateur",
    "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
-   "start": 72.91,
+   "start": 72.75,
    "dur": 3.34,
    "words": [
     {
      "w": "Le",
-     "t": 72.91
+     "t": 72.75
     },
     {
      "w": "verdict",
-     "t": 73.03
+     "t": 72.87
     },
     {
      "w": "tombe",
-     "t": 73.33
+     "t": 73.17
     },
     {
      "w": "dans",
-     "t": 73.87
+     "t": 73.71
     },
     {
      "w": "la",
-     "t": 74.03
+     "t": 73.87
     },
     {
      "w": "prochaine",
-     "t": 74.15
+     "t": 73.99
     },
     {
      "w": "vidéo.",
-     "t": 74.43
+     "t": 74.27
     },
     {
      "w": "Abonne-toi",
-     "t": 74.92
+     "t": 74.76
     },
     {
      "w": "pour",
-     "t": 75.41
+     "t": 75.25
     },
     {
      "w": "ne",
-     "t": 75.55
+     "t": 75.39
     },
     {
      "w": "pas",
-     "t": 75.65
+     "t": 75.49
     },
     {
      "w": "le",
-     "t": 75.79
+     "t": 75.63
     },
     {
      "w": "rater.",
-     "t": 75.81
+     "t": 75.65
     }
    ]
   }

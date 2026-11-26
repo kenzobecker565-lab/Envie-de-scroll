@@ -249,7 +249,7 @@ function score() {
   stamp(W('02', 'referme') - 0.05, 0.38)
   boom(W('02', 'referme') - 0.05, 0.35, 80, 40, 0.6)
   // La fiche.
-  for (const w of ['karim', 'trente', 'maitre', 'aucun']) pop(W('03', w) - 0.1, 0.1, 1200, 600)
+  for (const w of ['julien', 'trente', 'maitre', 'aucun']) pop(W('03', w) - 0.1, 0.1, 1200, 600)
   stamp(W('03', 'juge') - 0.05, 0.4)
   boom(W('03', 'juge') - 0.05, 0.4, 70, 34, 0.8)
   gavel(SEC('tribunal').t0 + 0.3)

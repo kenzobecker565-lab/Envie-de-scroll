@@ -2,7 +2,7 @@
 Flow ElevenLabs : cbL3VZh8fluO35OGfCyN
 01-piscine (narr) Pendant deux étés, un maître-nageur a laissé entrer gratuitement les enfants d'une cité à la piscine municipale. Tous les soirs. Neuf mille euros d'entrées. [TÉLÉCHARGÉ]
 02-porte (narr) Sur la caméra de l'entrée, on le voit chaque soir à dix-neuf heures. Il ouvre la porte de service… les enfants se faufilent… et il referme derrière eux. [TÉLÉCHARGÉ]
-03-karim (narr) Il s'appelle Karim. Trente-huit ans. Maître-nageur depuis quinze ans. Aucun accident sous sa surveillance. Aujourd'hui, il est jugé pour détournement de biens publics. [TÉLÉCHARGÉ]
+03-julien (narr) Il s'appelle Julien. Trente-huit ans. Maître-nageur depuis quinze ans. Aucun accident sous sa surveillance. Aujourd'hui, il est jugé pour détournement de biens publics. [TÉLÉCHARGÉ]
 04-ville (proc) Cette piscine appartient à la ville. Il en a ouvert les portes comme si c'était chez lui. Deux étés de suite. [TÉLÉCHARGÉ]
 05-chaleur (avo) Chez lui ? Ces enfants vivent à huit cents mètres. Il faisait trente-six degrés. Et l'entrée coûte quatre euros. Par enfant. Par jour. [TÉLÉCHARGÉ]
 06-autres (proc) Quatre euros, c'est le prix. D'autres familles l'ont payé. Pourquoi eux, et pas les autres ? [TÉLÉCHARGÉ]

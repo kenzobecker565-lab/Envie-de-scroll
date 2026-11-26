@@ -189,12 +189,12 @@ function fire(parent, x, y, s = 1, seed = 1) {
 
 const PROC = { robe: '#c43a2f', hair: 'slick', hairColor: '#1d140e', skin: '#f2c4a0', iris: '#2b1d12' }
 const AVO = { robe: '#23262f', jabot: true, hair: 'short', hairColor: '#2a1a10', beard: true, skin: '#d9a07a', iris: '#2b1d12' }
-const KARIM = { robe: '#e0393e', jabot: false, collar: '#ffd43b', hair: 'short', hairColor: '#1d140e', beard: true, skin: '#c98e66', iris: '#2b1d12' }
+const KARIM = { robe: '#e0393e', jabot: false, collar: '#ffd43b', hair: 'short', hairColor: '#6a4228', beard: true, skin: '#f0c4a0', iris: '#3b5b8a' }
 const KARIM_BOX = { ...KARIM, robe: '#6b7280', collar: '#e5e7eb' }
 const KIDS = [
-  { robe: '#3b82f6', jabot: false, collar: '#9fd8ff', hair: 'short', hairColor: '#1d140e', skin: '#8a5636', iris: '#2b1d12' },
+  { robe: '#3b82f6', jabot: false, collar: '#9fd8ff', hair: 'short', hairColor: '#8a5a30', skin: '#f6d2b5', iris: '#3b5b8a' },
   { robe: '#f06a8a', jabot: false, collar: '#ffd1dc', hair: 'bob', hairColor: '#2a1a10', female: true, skin: '#d9a07a', iris: '#2b1d12' },
-  { robe: '#ffd43b', jabot: false, collar: '#fff3b0', hair: 'messy', hairColor: '#3a2416', skin: '#b97a52', iris: '#2b1d12' },
+  { robe: '#ffd43b', jabot: false, collar: '#fff3b0', hair: 'messy', hairColor: '#1d140e', skin: '#7a4a2e', iris: '#2b1d12' },
 ]
 
 // La bouée (réutilisée).
@@ -301,7 +301,7 @@ const FICHE = scene('fiche', (L) => {
   const clip = svg('clipPath', { id: 'photoClip' }, defs)
   svg('rect', { x: -170, y: -400, width: 340, height: 380, rx: 16 }, clip)
   const ines = makePerson(photo, KARIM)
-  const rows = ['KARIM', '38 ANS', 'MAÎTRE-NAGEUR · 15 ANS', '0 ACCIDENT'].map((s, k) => {
+  const rows = ['JULIEN', '38 ANS', 'MAÎTRE-NAGEUR · 15 ANS', '0 ACCIDENT'].map((s, k) => {
     const g = svg('g', {}, card)
     txt(g, s, { x: 0, y: 60 + k * 100, 'font-size': k === 0 ? 76 : 56, fill: k === 3 ? '#12a150' : '#1d2a5c' })
     return g
@@ -672,7 +672,7 @@ function seek(t) {
     const a = popS(t, FICHE.t0 + 0.05, Infinity, 0.45)
     place(FICHE.card, 540, 920, a * 0.95, -2)
     FICHE.ines.update(t, { x: 0, y: -120, scale: 0.62, brows: 'sad', look: [0.1, 0.1], armR: [0.1, 0.6], armL: [0.1, 0.6], seed: 0.8 })
-    const keys = ['karim', 'trente', 'maitre', 'aucun']
+    const keys = ['julien', 'trente', 'maitre', 'aucun']
     FICHE.rows.forEach((g, k) => {
       const s = popS(t, Wd('03', keys[k]) - 0.1, Infinity, 0.3)
       g.setAttribute('opacity', Math.min(1, s))

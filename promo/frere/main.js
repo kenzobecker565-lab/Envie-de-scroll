@@ -1558,7 +1558,7 @@ const SHOTS = {
     drawBigScreen('LIVE', 'CONCERT DE LA PLACE', 1)
     beams.forEach((b, i) => (b.rotation.z = Math.sin(t * 1.4 + i) * 0.5))
     const u = smooth(t, SHOT.concert.t0, SHOT.concert.t1 - SHOT.concert.t0)
-    lookCam(lerp(6, -4, u), lerp(14, 20, u), lerp(34, 40, u), 0, 4, -4)
+    lookCam(lerp(6, -4, u), lerp(13, 17, u), lerp(22, 23.5, u), 0, 4, -4)
     key.intensity = 0
   },
   // 16 · 22:04 : panne. Plus de réseau, plus de GPS, plus rien.

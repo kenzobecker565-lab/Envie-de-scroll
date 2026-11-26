@@ -1,0 +1,1532 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 110.66,
+ "lines": [
+  {
+   "id": "01-ville",
+   "who": "narrateur",
+   "text": "Dans cette ville, tout le monde a les yeux sur son téléphone. Sauf moi.",
+   "start": 0.25,
+   "dur": 3.24,
+   "words": [
+    {
+     "w": "Dans",
+     "t": 0.25
+    },
+    {
+     "w": "cette",
+     "t": 0.39
+    },
+    {
+     "w": "ville,",
+     "t": 0.57
+    },
+    {
+     "w": "tout",
+     "t": 1.15
+    },
+    {
+     "w": "le",
+     "t": 1.25
+    },
+    {
+     "w": "monde",
+     "t": 1.35
+    },
+    {
+     "w": "a",
+     "t": 1.51
+    },
+    {
+     "w": "les",
+     "t": 1.63
+    },
+    {
+     "w": "yeux",
+     "t": 1.77
+    },
+    {
+     "w": "sur",
+     "t": 1.91
+    },
+    {
+     "w": "son",
+     "t": 2.07
+    },
+    {
+     "w": "téléphone.",
+     "t": 2.19
+    },
+    {
+     "w": "Sauf",
+     "t": 2.83
+    },
+    {
+     "w": "moi.",
+     "t": 3.11
+    }
+   ]
+  },
+  {
+   "id": "02-filme",
+   "who": "narrateur",
+   "text": "Ici, on filme tout. Son petit-déjeuner. Son voisin. Un jour, un type a filmé un type qui filmait. Deux millions de vues.",
+   "start": 3.81,
+   "dur": 7.4,
+   "words": [
+    {
+     "w": "Ici,",
+     "t": 3.81
+    },
+    {
+     "w": "on",
+     "t": 4.31
+    },
+    {
+     "w": "filme",
+     "t": 4.43
+    },
+    {
+     "w": "tout.",
+     "t": 4.75
+    },
+    {
+     "w": "Son",
+     "t": 5.33
+    },
+    {
+     "w": "petit-déjeuner.",
+     "t": 5.92
+    },
+    {
+     "w": "Son",
+     "t": 6.51
+    },
+    {
+     "w": "voisin.",
+     "t": 6.63
+    },
+    {
+     "w": "Un",
+     "t": 7.43
+    },
+    {
+     "w": "jour,",
+     "t": 7.59
+    },
+    {
+     "w": "un",
+     "t": 8.07
+    },
+    {
+     "w": "type",
+     "t": 8.19
+    },
+    {
+     "w": "a",
+     "t": 8.39
+    },
+    {
+     "w": "filmé",
+     "t": 8.64
+    },
+    {
+     "w": "un",
+     "t": 8.89
+    },
+    {
+     "w": "type",
+     "t": 9.01
+    },
+    {
+     "w": "qui",
+     "t": 9.27
+    },
+    {
+     "w": "filmait.",
+     "t": 9.45
+    },
+    {
+     "w": "Deux",
+     "t": 9.89
+    },
+    {
+     "w": "millions",
+     "t": 10.33
+    },
+    {
+     "w": "de",
+     "t": 10.65
+    },
+    {
+     "w": "vues.",
+     "t": 10.83
+    }
+   ]
+  },
+  {
+   "id": "03-chien",
+   "who": "narrateur",
+   "text": "Le facteur livre en live. Le chien de la boulangère a quarante mille abonnés. Il ne sait pas lire. Ça ne le dérange pas.",
+   "start": 11.53,
+   "dur": 6.05,
+   "words": [
+    {
+     "w": "Le",
+     "t": 11.53
+    },
+    {
+     "w": "facteur",
+     "t": 11.67
+    },
+    {
+     "w": "livre",
+     "t": 12.19
+    },
+    {
+     "w": "en",
+     "t": 12.55
+    },
+    {
+     "w": "live.",
+     "t": 12.71
+    },
+    {
+     "w": "Le",
+     "t": 13.31
+    },
+    {
+     "w": "chien",
+     "t": 13.41
+    },
+    {
+     "w": "de",
+     "t": 13.63
+    },
+    {
+     "w": "la",
+     "t": 13.71
+    },
+    {
+     "w": "boulangère",
+     "t": 13.81
+    },
+    {
+     "w": "a",
+     "t": 14.31
+    },
+    {
+     "w": "quarante",
+     "t": 14.57
+    },
+    {
+     "w": "mille",
+     "t": 14.83
+    },
+    {
+     "w": "abonnés.",
+     "t": 15.09
+    },
+    {
+     "w": "Il",
+     "t": 15.65
+    },
+    {
+     "w": "ne",
+     "t": 15.75
+    },
+    {
+     "w": "sait",
+     "t": 15.91
+    },
+    {
+     "w": "pas",
+     "t": 16.05
+    },
+    {
+     "w": "lire.",
+     "t": 16.21
+    },
+    {
+     "w": "Ça",
+     "t": 16.63
+    },
+    {
+     "w": "ne",
+     "t": 16.77
+    },
+    {
+     "w": "le",
+     "t": 16.87
+    },
+    {
+     "w": "dérange",
+     "t": 16.95
+    },
+    {
+     "w": "pas.",
+     "t": 17.19
+    }
+   ]
+  },
+  {
+   "id": "04-regarde",
+   "who": "narrateur",
+   "text": "Et pendant qu'ils regardent leurs écrans… moi, je regarde la ville.",
+   "start": 18.08,
+   "dur": 3.53,
+   "words": [
+    {
+     "w": "Et",
+     "t": 18.08
+    },
+    {
+     "w": "pendant",
+     "t": 18.2
+    },
+    {
+     "w": "qu'ils",
+     "t": 18.42
+    },
+    {
+     "w": "regardent",
+     "t": 18.64
+    },
+    {
+     "w": "leurs",
+     "t": 19.0
+    },
+    {
+     "w": "écrans…",
+     "t": 19.14
+    },
+    {
+     "w": "moi,",
+     "t": 20.06
+    },
+    {
+     "w": "je",
+     "t": 20.64
+    },
+    {
+     "w": "regarde",
+     "t": 20.72
+    },
+    {
+     "w": "la",
+     "t": 20.98
+    },
+    {
+     "w": "ville.",
+     "t": 21.18
+    }
+   ]
+  },
+  {
+   "id": "05-guide",
+   "who": "narrateur",
+   "text": "Mon rêve, c'est de devenir guide. Le guide officiel de la ville. Alors je m'entraîne.",
+   "start": 22.16,
+   "dur": 4.62,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 22.16
+    },
+    {
+     "w": "rêve,",
+     "t": 22.32
+    },
+    {
+     "w": "c'est",
+     "t": 22.71
+    },
+    {
+     "w": "de",
+     "t": 23.1
+    },
+    {
+     "w": "devenir",
+     "t": 23.16
+    },
+    {
+     "w": "guide.",
+     "t": 23.46
+    },
+    {
+     "w": "Le",
+     "t": 24.12
+    },
+    {
+     "w": "guide",
+     "t": 24.22
+    },
+    {
+     "w": "officiel",
+     "t": 24.5
+    },
+    {
+     "w": "de",
+     "t": 25.14
+    },
+    {
+     "w": "la",
+     "t": 25.24
+    },
+    {
+     "w": "ville.",
+     "t": 25.38
+    },
+    {
+     "w": "Alors",
+     "t": 25.82
+    },
+    {
+     "w": "je",
+     "t": 25.98
+    },
+    {
+     "w": "m'entraîne.",
+     "t": 26.407
+    }
+   ]
+  },
+  {
+   "id": "06-six",
+   "who": "narrateur",
+   "text": "Six heures du matin. Je marche. Chaque rue. Chaque ruelle. Chaque raccourci.",
+   "start": 27.1,
+   "dur": 4.42,
+   "words": [
+    {
+     "w": "Six",
+     "t": 27.1
+    },
+    {
+     "w": "heures",
+     "t": 27.32
+    },
+    {
+     "w": "du",
+     "t": 27.5
+    },
+    {
+     "w": "matin.",
+     "t": 27.62
+    },
+    {
+     "w": "Je",
+     "t": 28.16
+    },
+    {
+     "w": "marche.",
+     "t": 28.28
+    },
+    {
+     "w": "Chaque",
+     "t": 28.88
+    },
+    {
+     "w": "rue.",
+     "t": 29.3
+    },
+    {
+     "w": "Chaque",
+     "t": 29.66
+    },
+    {
+     "w": "ruelle.",
+     "t": 30.04
+    },
+    {
+     "w": "Chaque",
+     "t": 30.74
+    },
+    {
+     "w": "raccourci.",
+     "t": 30.94
+    }
+   ]
+  },
+  {
+   "id": "07-rues",
+   "who": "narrateur",
+   "text": "Trois cent douze rues. Mille quatre cents lampadaires. Je les connais tous par leur prénom.",
+   "start": 31.84,
+   "dur": 4.42,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 32.005
+    },
+    {
+     "w": "cent",
+     "t": 32.17
+    },
+    {
+     "w": "douze",
+     "t": 32.335
+    },
+    {
+     "w": "rues.",
+     "t": 32.5
+    },
+    {
+     "w": "Mille",
+     "t": 32.77
+    },
+    {
+     "w": "quatre",
+     "t": 33.04
+    },
+    {
+     "w": "cents",
+     "t": 33.31
+    },
+    {
+     "w": "lampadaires.",
+     "t": 33.58
+    },
+    {
+     "w": "Je",
+     "t": 34.62
+    },
+    {
+     "w": "les",
+     "t": 34.78
+    },
+    {
+     "w": "connais",
+     "t": 34.9
+    },
+    {
+     "w": "tous",
+     "t": 35.06
+    },
+    {
+     "w": "par",
+     "t": 35.4
+    },
+    {
+     "w": "leur",
+     "t": 35.66
+    },
+    {
+     "w": "prénom.",
+     "t": 35.78
+    }
+   ]
+  },
+  {
+   "id": "08-pigeon",
+   "who": "narrateur",
+   "text": "Je ne sais pas où est le Wi-Fi. Mais je sais où dort chaque pigeon.",
+   "start": 36.58,
+   "dur": 3.18,
+   "words": [
+    {
+     "w": "Je",
+     "t": 36.58
+    },
+    {
+     "w": "ne",
+     "t": 36.74
+    },
+    {
+     "w": "sais",
+     "t": 36.86
+    },
+    {
+     "w": "pas",
+     "t": 36.98
+    },
+    {
+     "w": "où",
+     "t": 37.18
+    },
+    {
+     "w": "est",
+     "t": 37.3
+    },
+    {
+     "w": "le",
+     "t": 37.4
+    },
+    {
+     "w": "Wi-Fi.",
+     "t": 37.75
+    },
+    {
+     "w": "Mais",
+     "t": 38.1
+    },
+    {
+     "w": "je",
+     "t": 38.38
+    },
+    {
+     "w": "sais",
+     "t": 38.56
+    },
+    {
+     "w": "où",
+     "t": 38.78
+    },
+    {
+     "w": "dort",
+     "t": 38.92
+    },
+    {
+     "w": "chaque",
+     "t": 39.04
+    },
+    {
+     "w": "pigeon.",
+     "t": 39.24
+    }
+   ]
+  },
+  {
+   "id": "09-yeux",
+   "who": "narrateur",
+   "text": "Je m'entraîne les yeux fermés. Je me cogne. Je recommence. Gauche. Droite. Fontaine. Boulangerie.",
+   "start": 40.08,
+   "dur": 6.36,
+   "words": [
+    {
+     "w": "Je",
+     "t": 40.08
+    },
+    {
+     "w": "m'entraîne",
+     "t": 40.37
+    },
+    {
+     "w": "les",
+     "t": 40.66
+    },
+    {
+     "w": "yeux",
+     "t": 40.78
+    },
+    {
+     "w": "fermés.",
+     "t": 41.02
+    },
+    {
+     "w": "Je",
+     "t": 41.68
+    },
+    {
+     "w": "me",
+     "t": 41.8
+    },
+    {
+     "w": "cogne.",
+     "t": 41.94
+    },
+    {
+     "w": "Je",
+     "t": 42.54
+    },
+    {
+     "w": "recommence.",
+     "t": 42.68
+    },
+    {
+     "w": "Gauche.",
+     "t": 43.44
+    },
+    {
+     "w": "Droite.",
+     "t": 44.24
+    },
+    {
+     "w": "Fontaine.",
+     "t": 44.96
+    },
+    {
+     "w": "Boulangerie.",
+     "t": 45.7
+    }
+   ]
+  },
+  {
+   "id": "10-voisin",
+   "who": "narrateur",
+   "text": "Mon voisin me filme. « T'es en retard sur ton époque », il me dit. Je ne suis pas en retard. Je suis à pied.",
+   "start": 46.76,
+   "dur": 4.98,
+   "words": [
+    {
+     "w": "Mon",
+     "t": 46.76
+    },
+    {
+     "w": "voisin",
+     "t": 46.9
+    },
+    {
+     "w": "me",
+     "t": 47.24
+    },
+    {
+     "w": "filme. «",
+     "t": 47.34
+    },
+    {
+     "w": "T'es",
+     "t": 47.71
+    },
+    {
+     "w": "en",
+     "t": 48.08
+    },
+    {
+     "w": "retard",
+     "t": 48.18
+    },
+    {
+     "w": "sur",
+     "t": 48.34
+    },
+    {
+     "w": "ton",
+     "t": 48.54
+    },
+    {
+     "w": "époque »,",
+     "t": 48.68
+    },
+    {
+     "w": "il",
+     "t": 49.22
+    },
+    {
+     "w": "me",
+     "t": 49.32
+    },
+    {
+     "w": "dit.",
+     "t": 49.44
+    },
+    {
+     "w": "Je",
+     "t": 49.84
+    },
+    {
+     "w": "ne",
+     "t": 49.96
+    },
+    {
+     "w": "suis",
+     "t": 50.06
+    },
+    {
+     "w": "pas",
+     "t": 50.22
+    },
+    {
+     "w": "en",
+     "t": 50.34
+    },
+    {
+     "w": "retard.",
+     "t": 50.44
+    },
+    {
+     "w": "Je",
+     "t": 51.02
+    },
+    {
+     "w": "suis",
+     "t": 51.1
+    },
+    {
+     "w": "à",
+     "t": 51.24
+    },
+    {
+     "w": "pied.",
+     "t": 51.38
+    }
+   ]
+  },
+  {
+   "id": "11-audition",
+   "who": "narrateur",
+   "text": "Le jour de l'audition, je suis arrivé à l'office du tourisme. Pile à l'heure. Sans GPS.",
+   "start": 52.24,
+   "dur": 4.552,
+   "words": [
+    {
+     "w": "Le",
+     "t": 52.24
+    },
+    {
+     "w": "jour",
+     "t": 52.4
+    },
+    {
+     "w": "de",
+     "t": 52.58
+    },
+    {
+     "w": "l'audition,",
+     "t": 53.02
+    },
+    {
+     "w": "je",
+     "t": 53.46
+    },
+    {
+     "w": "suis",
+     "t": 53.58
+    },
+    {
+     "w": "arrivé",
+     "t": 53.74
+    },
+    {
+     "w": "à",
+     "t": 54.04
+    },
+    {
+     "w": "l'office",
+     "t": 54.25
+    },
+    {
+     "w": "du",
+     "t": 54.46
+    },
+    {
+     "w": "tourisme.",
+     "t": 54.56
+    },
+    {
+     "w": "Pile",
+     "t": 55.16
+    },
+    {
+     "w": "à",
+     "t": 55.3
+    },
+    {
+     "w": "l'heure.",
+     "t": 55.58
+    },
+    {
+     "w": "Sans",
+     "t": 55.86
+    },
+    {
+     "w": "GPS.",
+     "t": 56.04
+    }
+   ]
+  },
+  {
+   "id": "12-appli",
+   "who": "narrateur",
+   "text": "La directrice m'a regardé. « Montre-moi ton appli. » Je n'ai pas d'appli. J'ai des jambes.",
+   "start": 57.112,
+   "dur": 4.22,
+   "words": [
+    {
+     "w": "La",
+     "t": 57.112
+    },
+    {
+     "w": "directrice",
+     "t": 57.252
+    },
+    {
+     "w": "m'a",
+     "t": 57.572
+    },
+    {
+     "w": "regardé. «",
+     "t": 57.892
+    },
+    {
+     "w": "Montre-moi",
+     "t": 58.412
+    },
+    {
+     "w": "ton",
+     "t": 58.932
+    },
+    {
+     "w": "appli. »",
+     "t": 59.052
+    },
+    {
+     "w": "Je",
+     "t": 59.612
+    },
+    {
+     "w": "n'ai",
+     "t": 59.762
+    },
+    {
+     "w": "pas",
+     "t": 59.912
+    },
+    {
+     "w": "d'appli.",
+     "t": 60.192
+    },
+    {
+     "w": "J'ai",
+     "t": 60.472
+    },
+    {
+     "w": "des",
+     "t": 60.752
+    },
+    {
+     "w": "jambes.",
+     "t": 60.872
+    }
+   ]
+  },
+  {
+   "id": "13-guidou",
+   "who": "narrateur",
+   "text": "Je n'ai pas eu le poste. Le poste a été donné à une appli. Elle s'appelle Guidou. Elle a quatre étoiles.",
+   "start": 61.652,
+   "dur": 5.09,
+   "words": [
+    {
+     "w": "Je",
+     "t": 61.652
+    },
+    {
+     "w": "n'ai",
+     "t": 61.802
+    },
+    {
+     "w": "pas",
+     "t": 61.952
+    },
+    {
+     "w": "eu",
+     "t": 62.092
+    },
+    {
+     "w": "le",
+     "t": 62.192
+    },
+    {
+     "w": "poste.",
+     "t": 62.292
+    },
+    {
+     "w": "Le",
+     "t": 62.992
+    },
+    {
+     "w": "poste",
+     "t": 63.132
+    },
+    {
+     "w": "a",
+     "t": 63.492
+    },
+    {
+     "w": "été",
+     "t": 63.552
+    },
+    {
+     "w": "donné",
+     "t": 63.692
+    },
+    {
+     "w": "à",
+     "t": 63.952
+    },
+    {
+     "w": "une",
+     "t": 64.092
+    },
+    {
+     "w": "appli.",
+     "t": 64.212
+    },
+    {
+     "w": "Elle",
+     "t": 64.872
+    },
+    {
+     "w": "s'appelle",
+     "t": 65.072
+    },
+    {
+     "w": "Guidou.",
+     "t": 65.272
+    },
+    {
+     "w": "Elle",
+     "t": 65.872
+    },
+    {
+     "w": "a",
+     "t": 65.972
+    },
+    {
+     "w": "quatre",
+     "t": 66.112
+    },
+    {
+     "w": "étoiles.",
+     "t": 66.252
+    }
+   ]
+  },
+  {
+   "id": "14-marcher",
+   "who": "narrateur",
+   "text": "Alors je suis retourné marcher.",
+   "start": 67.192,
+   "dur": 1.86,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 67.192
+    },
+    {
+     "w": "je",
+     "t": 67.712
+    },
+    {
+     "w": "suis",
+     "t": 67.912
+    },
+    {
+     "w": "retourné",
+     "t": 68.072
+    },
+    {
+     "w": "marcher.",
+     "t": 68.492
+    }
+   ]
+  },
+  {
+   "id": "15-concert",
+   "who": "narrateur",
+   "text": "Puis il y a eu le soir du grand concert. Trois mille personnes sur la place. Trois mille écrans levés.",
+   "start": 69.952,
+   "dur": 5.33,
+   "words": [
+    {
+     "w": "Puis",
+     "t": 69.952
+    },
+    {
+     "w": "il",
+     "t": 70.312
+    },
+    {
+     "w": "y",
+     "t": 70.452
+    },
+    {
+     "w": "a",
+     "t": 70.572
+    },
+    {
+     "w": "eu",
+     "t": 70.592
+    },
+    {
+     "w": "le",
+     "t": 70.672
+    },
+    {
+     "w": "soir",
+     "t": 70.772
+    },
+    {
+     "w": "du",
+     "t": 71.032
+    },
+    {
+     "w": "grand",
+     "t": 71.232
+    },
+    {
+     "w": "concert.",
+     "t": 71.472
+    },
+    {
+     "w": "Trois",
+     "t": 71.872
+    },
+    {
+     "w": "mille",
+     "t": 72.272
+    },
+    {
+     "w": "personnes",
+     "t": 72.672
+    },
+    {
+     "w": "sur",
+     "t": 73.012
+    },
+    {
+     "w": "la",
+     "t": 73.292
+    },
+    {
+     "w": "place.",
+     "t": 73.412
+    },
+    {
+     "w": "Trois",
+     "t": 73.772
+    },
+    {
+     "w": "mille",
+     "t": 74.132
+    },
+    {
+     "w": "écrans",
+     "t": 74.492
+    },
+    {
+     "w": "levés.",
+     "t": 74.812
+    }
+   ]
+  },
+  {
+   "id": "16-panne",
+   "who": "narrateur",
+   "text": "À vingt-deux heures quatre… panne. Plus de réseau. Plus de GPS. Plus rien.",
+   "start": 75.632,
+   "dur": 4.25,
+   "words": [
+    {
+     "w": "À",
+     "t": 75.632
+    },
+    {
+     "w": "vingt-deux",
+     "t": 75.932
+    },
+    {
+     "w": "heures",
+     "t": 76.252
+    },
+    {
+     "w": "quatre…",
+     "t": 76.572
+    },
+    {
+     "w": "panne.",
+     "t": 76.892
+    },
+    {
+     "w": "Plus",
+     "t": 77.672
+    },
+    {
+     "w": "de",
+     "t": 77.752
+    },
+    {
+     "w": "réseau.",
+     "t": 77.872
+    },
+    {
+     "w": "Plus",
+     "t": 78.412
+    },
+    {
+     "w": "de",
+     "t": 78.472
+    },
+    {
+     "w": "GPS.",
+     "t": 78.532
+    },
+    {
+     "w": "Plus",
+     "t": 79.372
+    },
+    {
+     "w": "rien.",
+     "t": 79.492
+    }
+   ]
+  },
+  {
+   "id": "17-noir",
+   "who": "narrateur",
+   "text": "Trois mille personnes dans le noir. Le maire a ouvert Guidou. Guidou tournait en rond.",
+   "start": 80.202,
+   "dur": 4.8,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 80.309
+    },
+    {
+     "w": "mille",
+     "t": 80.415
+    },
+    {
+     "w": "personnes",
+     "t": 80.522
+    },
+    {
+     "w": "dans",
+     "t": 80.962
+    },
+    {
+     "w": "le",
+     "t": 81.282
+    },
+    {
+     "w": "noir.",
+     "t": 81.382
+    },
+    {
+     "w": "Le",
+     "t": 81.982
+    },
+    {
+     "w": "maire",
+     "t": 82.162
+    },
+    {
+     "w": "a",
+     "t": 82.542
+    },
+    {
+     "w": "ouvert",
+     "t": 82.702
+    },
+    {
+     "w": "Guidou.",
+     "t": 82.962
+    },
+    {
+     "w": "Guidou",
+     "t": 83.582
+    },
+    {
+     "w": "tournait",
+     "t": 84.062
+    },
+    {
+     "w": "en",
+     "t": 84.602
+    },
+    {
+     "w": "rond.",
+     "t": 84.702
+    }
+   ]
+  },
+  {
+   "id": "18-suivez",
+   "who": "narrateur",
+   "text": "J'ai allumé ma lampe torche. « Suivez-moi. »",
+   "start": 85.502,
+   "dur": 2.14,
+   "words": [
+    {
+     "w": "J'ai",
+     "t": 85.612
+    },
+    {
+     "w": "allumé",
+     "t": 85.722
+    },
+    {
+     "w": "ma",
+     "t": 86.102
+    },
+    {
+     "w": "lampe",
+     "t": 86.182
+    },
+    {
+     "w": "torche. «",
+     "t": 86.422
+    },
+    {
+     "w": "Suivez-moi. »",
+     "t": 87.065
+    }
+   ]
+  },
+  {
+   "id": "19-gauche",
+   "who": "narrateur",
+   "text": "Gauche. Droite. Fontaine. Boulangerie. Trois cent douze rues. Vingt minutes. Personne de perdu.",
+   "start": 88.092,
+   "dur": 5.93,
+   "words": [
+    {
+     "w": "Gauche.",
+     "t": 88.092
+    },
+    {
+     "w": "Droite.",
+     "t": 88.772
+    },
+    {
+     "w": "Fontaine.",
+     "t": 89.552
+    },
+    {
+     "w": "Boulangerie.",
+     "t": 90.352
+    },
+    {
+     "w": "Trois",
+     "t": 90.642
+    },
+    {
+     "w": "cent",
+     "t": 90.932
+    },
+    {
+     "w": "douze",
+     "t": 91.222
+    },
+    {
+     "w": "rues.",
+     "t": 91.512
+    },
+    {
+     "w": "Vingt",
+     "t": 91.932
+    },
+    {
+     "w": "minutes.",
+     "t": 92.352
+    },
+    {
+     "w": "Personne",
+     "t": 93.012
+    },
+    {
+     "w": "de",
+     "t": 93.252
+    },
+    {
+     "w": "perdu.",
+     "t": 93.492
+    }
+   ]
+  },
+  {
+   "id": "20-chien2",
+   "who": "narrateur",
+   "text": "Le chien de la boulangère est rentré aussi. Lui aussi connaissait le chemin.",
+   "start": 94.342,
+   "dur": 3.45,
+   "words": [
+    {
+     "w": "Le",
+     "t": 94.342
+    },
+    {
+     "w": "chien",
+     "t": 94.482
+    },
+    {
+     "w": "de",
+     "t": 94.722
+    },
+    {
+     "w": "la",
+     "t": 94.822
+    },
+    {
+     "w": "boulangère",
+     "t": 94.922
+    },
+    {
+     "w": "est",
+     "t": 95.322
+    },
+    {
+     "w": "rentré",
+     "t": 95.442
+    },
+    {
+     "w": "aussi.",
+     "t": 95.802
+    },
+    {
+     "w": "Lui",
+     "t": 96.462
+    },
+    {
+     "w": "aussi",
+     "t": 96.582
+    },
+    {
+     "w": "connaissait",
+     "t": 96.862
+    },
+    {
+     "w": "le",
+     "t": 97.362
+    },
+    {
+     "w": "chemin.",
+     "t": 97.362
+    }
+   ]
+  },
+  {
+   "id": "21-badge",
+   "who": "narrateur",
+   "text": "Le lendemain, le maire m'a tendu un badge. Guide officiel de la ville. « Comment tu connais tout ça ? »",
+   "start": 98.392,
+   "dur": 4.96,
+   "words": [
+    {
+     "w": "Le",
+     "t": 98.392
+    },
+    {
+     "w": "lendemain,",
+     "t": 98.552
+    },
+    {
+     "w": "le",
+     "t": 99.212
+    },
+    {
+     "w": "maire",
+     "t": 99.392
+    },
+    {
+     "w": "m'a",
+     "t": 99.582
+    },
+    {
+     "w": "tendu",
+     "t": 99.772
+    },
+    {
+     "w": "un",
+     "t": 100.052
+    },
+    {
+     "w": "badge.",
+     "t": 100.172
+    },
+    {
+     "w": "Guide",
+     "t": 100.672
+    },
+    {
+     "w": "officiel",
+     "t": 100.972
+    },
+    {
+     "w": "de",
+     "t": 101.572
+    },
+    {
+     "w": "la",
+     "t": 101.672
+    },
+    {
+     "w": "ville. «",
+     "t": 101.812
+    },
+    {
+     "w": "Comment",
+     "t": 102.232
+    },
+    {
+     "w": "tu",
+     "t": 102.412
+    },
+    {
+     "w": "connais",
+     "t": 102.592
+    },
+    {
+     "w": "tout",
+     "t": 102.792
+    },
+    {
+     "w": "ça ? »",
+     "t": 102.952
+    }
+   ]
+  },
+  {
+   "id": "22-fin",
+   "who": "narrateur",
+   "text": "Pendant que vous regardiez vos écrans, j'ai dit… moi, je regardais la ville.",
+   "start": 103.952,
+   "dur": 4.11,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 103.952
+    },
+    {
+     "w": "que",
+     "t": 104.232
+    },
+    {
+     "w": "vous",
+     "t": 104.352
+    },
+    {
+     "w": "regardiez",
+     "t": 104.472
+    },
+    {
+     "w": "vos",
+     "t": 104.892
+    },
+    {
+     "w": "écrans,",
+     "t": 105.012
+    },
+    {
+     "w": "j'ai",
+     "t": 105.432
+    },
+    {
+     "w": "dit…",
+     "t": 105.852
+    },
+    {
+     "w": "moi,",
+     "t": 106.452
+    },
+    {
+     "w": "je",
+     "t": 106.712
+    },
+    {
+     "w": "regardais",
+     "t": 107.132
+    },
+    {
+     "w": "la",
+     "t": 107.572
+    },
+    {
+     "w": "ville.",
+     "t": 107.672
+    }
+   ]
+  }
+ ]
+}

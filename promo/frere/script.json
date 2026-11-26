@@ -1,0 +1,132 @@
+{
+ "_doc": "« Sauf moi » — projet séparé (vidéo pour le frère). Voix ElevenLabs Hugo.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-ville",
+   "who": "narrateur",
+   "text": "Dans cette ville, tout le monde a les yeux sur son téléphone. Sauf moi.",
+   "gap": 0
+  },
+  {
+   "id": "02-filme",
+   "who": "narrateur",
+   "text": "Ici, on filme tout. Son petit-déjeuner. Son voisin. Un jour, un type a filmé un type qui filmait. Deux millions de vues."
+  },
+  {
+   "id": "03-chien",
+   "who": "narrateur",
+   "text": "Le facteur livre en live. Le chien de la boulangère a quarante mille abonnés. Il ne sait pas lire. Ça ne le dérange pas."
+  },
+  {
+   "id": "04-regarde",
+   "who": "narrateur",
+   "text": "Et pendant qu'ils regardent leurs écrans… moi, je regarde la ville.",
+   "gap": 0.5
+  },
+  {
+   "id": "05-guide",
+   "who": "narrateur",
+   "text": "Mon rêve, c'est de devenir guide. Le guide officiel de la ville. Alors je m'entraîne.",
+   "gap": 0.55
+  },
+  {
+   "id": "06-six",
+   "who": "narrateur",
+   "text": "Six heures du matin. Je marche. Chaque rue. Chaque ruelle. Chaque raccourci."
+  },
+  {
+   "id": "07-rues",
+   "who": "narrateur",
+   "text": "Trois cent douze rues. Mille quatre cents lampadaires. Je les connais tous par leur prénom."
+  },
+  {
+   "id": "08-pigeon",
+   "who": "narrateur",
+   "text": "Je ne sais pas où est le Wi-Fi. Mais je sais où dort chaque pigeon."
+  },
+  {
+   "id": "09-yeux",
+   "who": "narrateur",
+   "text": "Je m'entraîne les yeux fermés. Je me cogne. Je recommence. Gauche. Droite. Fontaine. Boulangerie."
+  },
+  {
+   "id": "10-voisin",
+   "who": "narrateur",
+   "text": "Mon voisin me filme. « T'es en retard sur ton époque », il me dit. Je ne suis pas en retard. Je suis à pied."
+  },
+  {
+   "id": "11-audition",
+   "who": "narrateur",
+   "text": "Le jour de l'audition, je suis arrivé à l'office du tourisme. Pile à l'heure. Sans GPS.",
+   "gap": 0.5
+  },
+  {
+   "id": "12-appli",
+   "who": "narrateur",
+   "text": "La directrice m'a regardé. « Montre-moi ton appli. » Je n'ai pas d'appli. J'ai des jambes."
+  },
+  {
+   "id": "13-guidou",
+   "who": "narrateur",
+   "text": "Je n'ai pas eu le poste. Le poste a été donné à une appli. Elle s'appelle Guidou. Elle a quatre étoiles."
+  },
+  {
+   "id": "14-marcher",
+   "who": "narrateur",
+   "text": "Alors je suis retourné marcher.",
+   "gap": 0.45
+  },
+  {
+   "id": "15-concert",
+   "who": "narrateur",
+   "text": "Puis il y a eu le soir du grand concert. Trois mille personnes sur la place. Trois mille écrans levés.",
+   "gap": 0.9
+  },
+  {
+   "id": "16-panne",
+   "who": "narrateur",
+   "text": "À vingt-deux heures quatre… panne. Plus de réseau. Plus de GPS. Plus rien.",
+   "gap": 0.35
+  },
+  {
+   "id": "17-noir",
+   "who": "narrateur",
+   "text": "Trois mille personnes dans le noir. Le maire a ouvert Guidou. Guidou tournait en rond."
+  },
+  {
+   "id": "18-suivez",
+   "who": "narrateur",
+   "text": "J'ai allumé ma lampe torche. « Suivez-moi. »",
+   "gap": 0.5
+  },
+  {
+   "id": "19-gauche",
+   "who": "narrateur",
+   "text": "Gauche. Droite. Fontaine. Boulangerie. Trois cent douze rues. Vingt minutes. Personne de perdu.",
+   "gap": 0.45
+  },
+  {
+   "id": "20-chien2",
+   "who": "narrateur",
+   "text": "Le chien de la boulangère est rentré aussi. Lui aussi connaissait le chemin."
+  },
+  {
+   "id": "21-badge",
+   "who": "narrateur",
+   "text": "Le lendemain, le maire m'a tendu un badge. Guide officiel de la ville. « Comment tu connais tout ça ? »",
+   "gap": 0.6
+  },
+  {
+   "id": "22-fin",
+   "who": "narrateur",
+   "text": "Pendant que vous regardiez vos écrans, j'ai dit… moi, je regardais la ville.",
+   "gap": 0.6
+  }
+ ]
+}

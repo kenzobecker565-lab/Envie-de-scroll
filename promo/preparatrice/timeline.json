@@ -1,0 +1,1333 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 85.93,
+ "lines": [
+  {
+   "id": "01-insuline",
+   "who": "narrateur",
+   "text": "Pendant dix-huit mois, une préparatrice en pharmacie a donné l'insuline d'une petite fille… sans jamais la faire payer. Six mille euros de médicaments.",
+   "start": 0.25,
+   "dur": 6.69,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 0.25
+    },
+    {
+     "w": "dix-huit",
+     "t": 0.52
+    },
+    {
+     "w": "mois,",
+     "t": 0.81
+    },
+    {
+     "w": "une",
+     "t": 1.31
+    },
+    {
+     "w": "préparatrice",
+     "t": 1.41
+    },
+    {
+     "w": "en",
+     "t": 1.97
+    },
+    {
+     "w": "pharmacie",
+     "t": 2.07
+    },
+    {
+     "w": "a",
+     "t": 2.55
+    },
+    {
+     "w": "donné",
+     "t": 2.77
+    },
+    {
+     "w": "l'insuline",
+     "t": 3.03
+    },
+    {
+     "w": "d'une",
+     "t": 3.29
+    },
+    {
+     "w": "petite",
+     "t": 3.55
+    },
+    {
+     "w": "fille…",
+     "t": 3.75
+    },
+    {
+     "w": "sans",
+     "t": 4.05
+    },
+    {
+     "w": "jamais",
+     "t": 4.49
+    },
+    {
+     "w": "la",
+     "t": 4.83
+    },
+    {
+     "w": "faire",
+     "t": 4.95
+    },
+    {
+     "w": "payer.",
+     "t": 5.09
+    },
+    {
+     "w": "Six",
+     "t": 5.39
+    },
+    {
+     "w": "mille",
+     "t": 5.69
+    },
+    {
+     "w": "euros",
+     "t": 5.99
+    },
+    {
+     "w": "de",
+     "t": 6.19
+    },
+    {
+     "w": "médicaments.",
+     "t": 6.33
+    }
+   ]
+  },
+  {
+   "id": "02-frigo",
+   "who": "narrateur",
+   "text": "Sur la caméra de la pharmacie, on la voit chaque mois. Elle ouvre le frigo… glisse les boîtes dans un sac… et annule la vente.",
+   "start": 7.19,
+   "dur": 6.2,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.19
+    },
+    {
+     "w": "la",
+     "t": 7.35
+    },
+    {
+     "w": "caméra",
+     "t": 7.45
+    },
+    {
+     "w": "de",
+     "t": 7.75
+    },
+    {
+     "w": "la",
+     "t": 7.81
+    },
+    {
+     "w": "pharmacie,",
+     "t": 7.89
+    },
+    {
+     "w": "on",
+     "t": 8.57
+    },
+    {
+     "w": "la",
+     "t": 8.69
+    },
+    {
+     "w": "voit",
+     "t": 8.79
+    },
+    {
+     "w": "chaque",
+     "t": 8.89
+    },
+    {
+     "w": "mois.",
+     "t": 9.09
+    },
+    {
+     "w": "Elle",
+     "t": 9.53
+    },
+    {
+     "w": "ouvre",
+     "t": 9.65
+    },
+    {
+     "w": "le",
+     "t": 9.85
+    },
+    {
+     "w": "frigo…",
+     "t": 9.93
+    },
+    {
+     "w": "glisse",
+     "t": 10.63
+    },
+    {
+     "w": "les",
+     "t": 11.03
+    },
+    {
+     "w": "boîtes",
+     "t": 11.17
+    },
+    {
+     "w": "dans",
+     "t": 11.37
+    },
+    {
+     "w": "un",
+     "t": 11.49
+    },
+    {
+     "w": "sac…",
+     "t": 11.67
+    },
+    {
+     "w": "et",
+     "t": 11.99
+    },
+    {
+     "w": "annule",
+     "t": 12.41
+    },
+    {
+     "w": "la",
+     "t": 12.85
+    },
+    {
+     "w": "vente.",
+     "t": 12.95
+    }
+   ]
+  },
+  {
+   "id": "03-sophie",
+   "who": "narrateur",
+   "text": "Elle s'appelle Sophie. Quarante-six ans. Préparatrice depuis vingt ans. Jamais une erreur de caisse. Aujourd'hui, elle est jugée pour abus de confiance.",
+   "start": 13.64,
+   "dur": 6.9,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 13.64
+    },
+    {
+     "w": "s'appelle",
+     "t": 13.84
+    },
+    {
+     "w": "Sophie.",
+     "t": 14.04
+    },
+    {
+     "w": "Quarante-six",
+     "t": 14.54
+    },
+    {
+     "w": "ans.",
+     "t": 15.04
+    },
+    {
+     "w": "Préparatrice",
+     "t": 15.34
+    },
+    {
+     "w": "depuis",
+     "t": 15.9
+    },
+    {
+     "w": "vingt",
+     "t": 16.17
+    },
+    {
+     "w": "ans.",
+     "t": 16.44
+    },
+    {
+     "w": "Jamais",
+     "t": 16.88
+    },
+    {
+     "w": "une",
+     "t": 17.26
+    },
+    {
+     "w": "erreur",
+     "t": 17.42
+    },
+    {
+     "w": "de",
+     "t": 17.7
+    },
+    {
+     "w": "caisse.",
+     "t": 17.74
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 18.3
+    },
+    {
+     "w": "elle",
+     "t": 18.86
+    },
+    {
+     "w": "est",
+     "t": 19.0
+    },
+    {
+     "w": "jugée",
+     "t": 19.08
+    },
+    {
+     "w": "pour",
+     "t": 19.36
+    },
+    {
+     "w": "abus",
+     "t": 19.5
+    },
+    {
+     "w": "de",
+     "t": 19.76
+    },
+    {
+     "w": "confiance.",
+     "t": 19.86
+    }
+   ]
+  },
+  {
+   "id": "04-dos",
+   "who": "procureur",
+   "text": "Ces médicaments appartenaient à la pharmacie. Elle les a donnés dans le dos de son patron. Mois après mois.",
+   "start": 20.79,
+   "dur": 4.89,
+   "words": [
+    {
+     "w": "Ces",
+     "t": 20.79
+    },
+    {
+     "w": "médicaments",
+     "t": 20.93
+    },
+    {
+     "w": "appartenaient",
+     "t": 21.41
+    },
+    {
+     "w": "à",
+     "t": 21.93
+    },
+    {
+     "w": "la",
+     "t": 22.01
+    },
+    {
+     "w": "pharmacie.",
+     "t": 22.07
+    },
+    {
+     "w": "Elle",
+     "t": 22.71
+    },
+    {
+     "w": "les",
+     "t": 22.81
+    },
+    {
+     "w": "a",
+     "t": 22.95
+    },
+    {
+     "w": "donnés",
+     "t": 23.12
+    },
+    {
+     "w": "dans",
+     "t": 23.29
+    },
+    {
+     "w": "le",
+     "t": 23.47
+    },
+    {
+     "w": "dos",
+     "t": 23.59
+    },
+    {
+     "w": "de",
+     "t": 23.81
+    },
+    {
+     "w": "son",
+     "t": 23.93
+    },
+    {
+     "w": "patron.",
+     "t": 24.07
+    },
+    {
+     "w": "Mois",
+     "t": 24.59
+    },
+    {
+     "w": "après",
+     "t": 24.87
+    },
+    {
+     "w": "mois.",
+     "t": 25.25
+    }
+   ]
+  },
+  {
+   "id": "05-ines",
+   "who": "avocate",
+   "text": "Dans son dos ? Cette petite s'appelle Inès. Huit ans. Diabétique. Sans insuline, c'est l'hôpital en quelques jours.",
+   "start": 25.93,
+   "dur": 5.08,
+   "words": [
+    {
+     "w": "Dans",
+     "t": 25.93
+    },
+    {
+     "w": "son",
+     "t": 26.09
+    },
+    {
+     "w": "dos ?",
+     "t": 26.25
+    },
+    {
+     "w": "Cette",
+     "t": 26.53
+    },
+    {
+     "w": "petite",
+     "t": 26.69
+    },
+    {
+     "w": "s'appelle",
+     "t": 26.97
+    },
+    {
+     "w": "Inès.",
+     "t": 27.25
+    },
+    {
+     "w": "Huit",
+     "t": 27.63
+    },
+    {
+     "w": "ans.",
+     "t": 28.01
+    },
+    {
+     "w": "Diabétique.",
+     "t": 28.37
+    },
+    {
+     "w": "Sans",
+     "t": 28.99
+    },
+    {
+     "w": "insuline,",
+     "t": 29.19
+    },
+    {
+     "w": "c'est",
+     "t": 29.57
+    },
+    {
+     "w": "l'hôpital",
+     "t": 29.95
+    },
+    {
+     "w": "en",
+     "t": 30.33
+    },
+    {
+     "w": "quelques",
+     "t": 30.41
+    },
+    {
+     "w": "jours.",
+     "t": 30.55
+    }
+   ]
+  },
+  {
+   "id": "06-assistante",
+   "who": "procureur",
+   "text": "Alors il fallait appeler un médecin. Une assistante sociale. Pas se servir dans le frigo de son employeur.",
+   "start": 31.26,
+   "dur": 4.66,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 31.26
+    },
+    {
+     "w": "il",
+     "t": 31.45
+    },
+    {
+     "w": "fallait",
+     "t": 31.65
+    },
+    {
+     "w": "appeler",
+     "t": 31.85
+    },
+    {
+     "w": "un",
+     "t": 32.17
+    },
+    {
+     "w": "médecin.",
+     "t": 32.23
+    },
+    {
+     "w": "Une",
+     "t": 32.73
+    },
+    {
+     "w": "assistante",
+     "t": 32.85
+    },
+    {
+     "w": "sociale.",
+     "t": 33.21
+    },
+    {
+     "w": "Pas",
+     "t": 33.81
+    },
+    {
+     "w": "se",
+     "t": 33.91
+    },
+    {
+     "w": "servir",
+     "t": 34.07
+    },
+    {
+     "w": "dans",
+     "t": 34.37
+    },
+    {
+     "w": "le",
+     "t": 34.55
+    },
+    {
+     "w": "frigo",
+     "t": 34.63
+    },
+    {
+     "w": "de",
+     "t": 34.95
+    },
+    {
+     "w": "son",
+     "t": 35.09
+    },
+    {
+     "w": "employeur.",
+     "t": 35.21
+    }
+   ]
+  },
+  {
+   "id": "07-secu",
+   "who": "avocate",
+   "text": "Le père les a tous appelés. Ses droits à la Sécu avaient été coupés par erreur. Dix-huit mois pour les rétablir. Inès, elle, ne pouvait pas attendre.",
+   "start": 36.17,
+   "dur": 6.47,
+   "words": [
+    {
+     "w": "Le",
+     "t": 36.17
+    },
+    {
+     "w": "père",
+     "t": 36.31
+    },
+    {
+     "w": "les",
+     "t": 36.49
+    },
+    {
+     "w": "a",
+     "t": 36.63
+    },
+    {
+     "w": "tous",
+     "t": 36.77
+    },
+    {
+     "w": "appelés.",
+     "t": 36.91
+    },
+    {
+     "w": "Ses",
+     "t": 37.22
+    },
+    {
+     "w": "droits",
+     "t": 37.53
+    },
+    {
+     "w": "à",
+     "t": 37.75
+    },
+    {
+     "w": "la",
+     "t": 37.81
+    },
+    {
+     "w": "Sécu",
+     "t": 37.85
+    },
+    {
+     "w": "avaient",
+     "t": 38.15
+    },
+    {
+     "w": "été",
+     "t": 38.29
+    },
+    {
+     "w": "coupés",
+     "t": 38.49
+    },
+    {
+     "w": "par",
+     "t": 38.81
+    },
+    {
+     "w": "erreur.",
+     "t": 38.95
+    },
+    {
+     "w": "Dix-huit",
+     "t": 39.35
+    },
+    {
+     "w": "mois",
+     "t": 39.75
+    },
+    {
+     "w": "pour",
+     "t": 39.99
+    },
+    {
+     "w": "les",
+     "t": 40.13
+    },
+    {
+     "w": "rétablir.",
+     "t": 40.25
+    },
+    {
+     "w": "Inès,",
+     "t": 40.81
+    },
+    {
+     "w": "elle,",
+     "t": 41.21
+    },
+    {
+     "w": "ne",
+     "t": 41.71
+    },
+    {
+     "w": "pouvait",
+     "t": 41.79
+    },
+    {
+     "w": "pas",
+     "t": 41.97
+    },
+    {
+     "w": "attendre.",
+     "t": 42.13
+    }
+   ]
+  },
+  {
+   "id": "08-employe",
+   "who": "procureur",
+   "text": "Une erreur administrative ne donne le droit de voler à personne. Si on l'excuse, demain chaque employé choisira qui il soigne gratuitement.",
+   "start": 42.89,
+   "dur": 6.71,
+   "words": [
+    {
+     "w": "Une",
+     "t": 42.89
+    },
+    {
+     "w": "erreur",
+     "t": 43.05
+    },
+    {
+     "w": "administrative",
+     "t": 43.31
+    },
+    {
+     "w": "ne",
+     "t": 43.89
+    },
+    {
+     "w": "donne",
+     "t": 44.15
+    },
+    {
+     "w": "le",
+     "t": 44.29
+    },
+    {
+     "w": "droit",
+     "t": 44.43
+    },
+    {
+     "w": "de",
+     "t": 44.59
+    },
+    {
+     "w": "voler",
+     "t": 44.73
+    },
+    {
+     "w": "à",
+     "t": 44.99
+    },
+    {
+     "w": "personne.",
+     "t": 45.09
+    },
+    {
+     "w": "Si",
+     "t": 45.75
+    },
+    {
+     "w": "on",
+     "t": 45.93
+    },
+    {
+     "w": "l'excuse,",
+     "t": 46.37
+    },
+    {
+     "w": "demain",
+     "t": 46.81
+    },
+    {
+     "w": "chaque",
+     "t": 47.23
+    },
+    {
+     "w": "employé",
+     "t": 47.35
+    },
+    {
+     "w": "choisira",
+     "t": 47.85
+    },
+    {
+     "w": "qui",
+     "t": 48.29
+    },
+    {
+     "w": "il",
+     "t": 48.51
+    },
+    {
+     "w": "soigne",
+     "t": 48.65
+    },
+    {
+     "w": "gratuitement.",
+     "t": 48.93
+    }
+   ]
+  },
+  {
+   "id": "09-salaire",
+   "who": "avocate",
+   "text": "Voler ? Chaque mois, elle a remis cent euros de son propre salaire dans la caisse. Jusqu'au jour où on l'a découverte.",
+   "start": 49.85,
+   "dur": 5.02,
+   "words": [
+    {
+     "w": "Voler ?",
+     "t": 50.09
+    },
+    {
+     "w": "Chaque",
+     "t": 50.33
+    },
+    {
+     "w": "mois,",
+     "t": 50.51
+    },
+    {
+     "w": "elle",
+     "t": 50.95
+    },
+    {
+     "w": "a",
+     "t": 51.03
+    },
+    {
+     "w": "remis",
+     "t": 51.11
+    },
+    {
+     "w": "cent",
+     "t": 51.33
+    },
+    {
+     "w": "euros",
+     "t": 51.55
+    },
+    {
+     "w": "de",
+     "t": 51.71
+    },
+    {
+     "w": "son",
+     "t": 51.87
+    },
+    {
+     "w": "propre",
+     "t": 52.01
+    },
+    {
+     "w": "salaire",
+     "t": 52.23
+    },
+    {
+     "w": "dans",
+     "t": 52.65
+    },
+    {
+     "w": "la",
+     "t": 52.73
+    },
+    {
+     "w": "caisse.",
+     "t": 52.83
+    },
+    {
+     "w": "Jusqu'au",
+     "t": 53.23
+    },
+    {
+     "w": "jour",
+     "t": 53.63
+    },
+    {
+     "w": "où",
+     "t": 53.79
+    },
+    {
+     "w": "on",
+     "t": 54.05
+    },
+    {
+     "w": "l'a",
+     "t": 54.15
+    },
+    {
+     "w": "découverte.",
+     "t": 54.25
+    }
+   ]
+  },
+  {
+   "id": "10-savait",
+   "who": "procureur",
+   "text": "Rembourser en cachette, c'est avouer qu'elle savait. Elle savait que c'était interdit. Et elle a continué.",
+   "start": 55.12,
+   "dur": 4.8,
+   "words": [
+    {
+     "w": "Rembourser",
+     "t": 55.37
+    },
+    {
+     "w": "en",
+     "t": 55.62
+    },
+    {
+     "w": "cachette,",
+     "t": 55.7
+    },
+    {
+     "w": "c'est",
+     "t": 56.035
+    },
+    {
+     "w": "avouer",
+     "t": 56.37
+    },
+    {
+     "w": "qu'elle",
+     "t": 56.705
+    },
+    {
+     "w": "savait.",
+     "t": 57.04
+    },
+    {
+     "w": "Elle",
+     "t": 57.5
+    },
+    {
+     "w": "savait",
+     "t": 57.62
+    },
+    {
+     "w": "que",
+     "t": 58.06
+    },
+    {
+     "w": "c'était",
+     "t": 58.22
+    },
+    {
+     "w": "interdit.",
+     "t": 58.38
+    },
+    {
+     "w": "Et",
+     "t": 58.86
+    },
+    {
+     "w": "elle",
+     "t": 59.1
+    },
+    {
+     "w": "a",
+     "t": 59.22
+    },
+    {
+     "w": "continué.",
+     "t": 59.28
+    }
+   ]
+  },
+  {
+   "id": "11-choisi",
+   "who": "avocate",
+   "text": "Bien sûr qu'elle savait. Elle savait aussi ce qui arrive à une enfant de huit ans sans insuline. Et elle a choisi.",
+   "start": 60.17,
+   "dur": 4.829,
+   "words": [
+    {
+     "w": "Bien",
+     "t": 60.17
+    },
+    {
+     "w": "sûr",
+     "t": 60.35
+    },
+    {
+     "w": "qu'elle",
+     "t": 60.54
+    },
+    {
+     "w": "savait.",
+     "t": 60.73
+    },
+    {
+     "w": "Elle",
+     "t": 61.15
+    },
+    {
+     "w": "savait",
+     "t": 61.27
+    },
+    {
+     "w": "aussi",
+     "t": 61.53
+    },
+    {
+     "w": "ce",
+     "t": 61.69
+    },
+    {
+     "w": "qui",
+     "t": 61.87
+    },
+    {
+     "w": "arrive",
+     "t": 62.01
+    },
+    {
+     "w": "à",
+     "t": 62.19
+    },
+    {
+     "w": "une",
+     "t": 62.31
+    },
+    {
+     "w": "enfant",
+     "t": 62.41
+    },
+    {
+     "w": "de",
+     "t": 62.61
+    },
+    {
+     "w": "huit",
+     "t": 62.78
+    },
+    {
+     "w": "ans",
+     "t": 62.95
+    },
+    {
+     "w": "sans",
+     "t": 63.09
+    },
+    {
+     "w": "insuline.",
+     "t": 63.31
+    },
+    {
+     "w": "Et",
+     "t": 63.93
+    },
+    {
+     "w": "elle",
+     "t": 64.13
+    },
+    {
+     "w": "a",
+     "t": 64.45
+    },
+    {
+     "w": "choisi.",
+     "t": 64.51
+    }
+   ]
+  },
+  {
+   "id": "12-cinq",
+   "who": "procureur",
+   "text": "Son patron a perdu six mille euros. Elle risque cinq ans de prison. La loi ne fait pas d'exception pour les bons sentiments.",
+   "start": 65.249,
+   "dur": 5.48,
+   "words": [
+    {
+     "w": "Son",
+     "t": 65.249
+    },
+    {
+     "w": "patron",
+     "t": 65.409
+    },
+    {
+     "w": "a",
+     "t": 65.709
+    },
+    {
+     "w": "perdu",
+     "t": 65.889
+    },
+    {
+     "w": "six",
+     "t": 66.109
+    },
+    {
+     "w": "mille",
+     "t": 66.329
+    },
+    {
+     "w": "euros.",
+     "t": 66.549
+    },
+    {
+     "w": "Elle",
+     "t": 67.069
+    },
+    {
+     "w": "risque",
+     "t": 67.129
+    },
+    {
+     "w": "cinq",
+     "t": 67.393
+    },
+    {
+     "w": "ans",
+     "t": 67.657
+    },
+    {
+     "w": "de",
+     "t": 67.921
+    },
+    {
+     "w": "prison.",
+     "t": 68.185
+    },
+    {
+     "w": "La",
+     "t": 68.449
+    },
+    {
+     "w": "loi",
+     "t": 68.549
+    },
+    {
+     "w": "ne",
+     "t": 68.689
+    },
+    {
+     "w": "fait",
+     "t": 68.869
+    },
+    {
+     "w": "pas",
+     "t": 69.009
+    },
+    {
+     "w": "d'exception",
+     "t": 69.349
+    },
+    {
+     "w": "pour",
+     "t": 69.689
+    },
+    {
+     "w": "les",
+     "t": 69.889
+    },
+    {
+     "w": "bons",
+     "t": 70.009
+    },
+    {
+     "w": "sentiments.",
+     "t": 70.149
+    }
+   ]
+  },
+  {
+   "id": "13-banc",
+   "who": "avocate",
+   "text": "Aujourd'hui, Inès va à l'école tous les matins. Et la seule personne qui l'a protégée… est assise sur le banc des accusés.",
+   "start": 70.979,
+   "dur": 5.2,
+   "words": [
+    {
+     "w": "Aujourd'hui,",
+     "t": 71.279
+    },
+    {
+     "w": "Inès",
+     "t": 71.579
+    },
+    {
+     "w": "va",
+     "t": 71.839
+    },
+    {
+     "w": "à",
+     "t": 71.979
+    },
+    {
+     "w": "l'école",
+     "t": 72.109
+    },
+    {
+     "w": "tous",
+     "t": 72.239
+    },
+    {
+     "w": "les",
+     "t": 72.499
+    },
+    {
+     "w": "matins.",
+     "t": 72.619
+    },
+    {
+     "w": "Et",
+     "t": 72.879
+    },
+    {
+     "w": "la",
+     "t": 73.099
+    },
+    {
+     "w": "seule",
+     "t": 73.219
+    },
+    {
+     "w": "personne",
+     "t": 73.419
+    },
+    {
+     "w": "qui",
+     "t": 73.739
+    },
+    {
+     "w": "l'a",
+     "t": 73.999
+    },
+    {
+     "w": "protégée…",
+     "t": 74.259
+    },
+    {
+     "w": "est",
+     "t": 74.519
+    },
+    {
+     "w": "assise",
+     "t": 74.839
+    },
+    {
+     "w": "sur",
+     "t": 75.139
+    },
+    {
+     "w": "le",
+     "t": 75.299
+    },
+    {
+     "w": "banc",
+     "t": 75.419
+    },
+    {
+     "w": "des",
+     "t": 75.539
+    },
+    {
+     "w": "accusés.",
+     "t": 75.639
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 76.429,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 76.429
+    },
+    {
+     "w": "es",
+     "t": 76.569
+    },
+    {
+     "w": "le",
+     "t": 76.659
+    },
+    {
+     "w": "juré.",
+     "t": 76.749
+    },
+    {
+     "w": "Coupable…",
+     "t": 77.249
+    },
+    {
+     "w": "ou",
+     "t": 77.689
+    },
+    {
+     "w": "non",
+     "t": 78.109
+    },
+    {
+     "w": "coupable ?",
+     "t": 78.309
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 79.189,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 79.189
+    },
+    {
+     "w": "verdict",
+     "t": 79.309
+    },
+    {
+     "w": "tombe",
+     "t": 79.609
+    },
+    {
+     "w": "dans",
+     "t": 80.149
+    },
+    {
+     "w": "la",
+     "t": 80.309
+    },
+    {
+     "w": "prochaine",
+     "t": 80.429
+    },
+    {
+     "w": "vidéo.",
+     "t": 80.709
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 81.199
+    },
+    {
+     "w": "pour",
+     "t": 81.689
+    },
+    {
+     "w": "ne",
+     "t": 81.829
+    },
+    {
+     "w": "pas",
+     "t": 81.929
+    },
+    {
+     "w": "le",
+     "t": 82.069
+    },
+    {
+     "w": "rater.",
+     "t": 82.089
+    }
+   ]
+  }
+ ]
+}

@@ -162,7 +162,7 @@ function faceTex(o = {}) {
   const t = canvasTex(256, 256, (g) => {
     const ink = '#22160f'
     const ex = [84, 172]
-    const ey = 120 + look[1] * 14
+    const ey = (HQ ? 138 : 120) + look[1] * 14
     if (blush) {
       g.fillStyle = 'rgba(255,120,110,0.35)'
       for (const x of [60, 196]) {
@@ -230,7 +230,7 @@ function faceTex(o = {}) {
     g.fillStyle = '#5a1f1a'
     g.lineWidth = 9
     g.beginPath()
-    const my = mustache ? 200 : 192
+    const my = (mustache ? 200 : 192) + (HQ ? 12 : 0)
     if (mouth === 'smile') g.arc(128, my - 18, 24, 0.2 * Math.PI, 0.8 * Math.PI)
     else if (mouth === 'grin') {
       g.moveTo(98, my - 6)
@@ -279,25 +279,30 @@ function makeBlocky(o = {}) {
   const root = new THREE.Group()
   const body = new THREE.Group()
   root.add(body)
-  const legs = [-0.2, 0.2].map((x) => {
+  // Proportions « gros blocs » en HQ : membres épais, grosse tête.
+  const K = HQ ? { lx: 0.31, lw: 0.6, lh: 1.0, ld: 0.62, tw: 1.26, th: 1.1, td: 0.66, ax: 0.94, aw: 0.6, ah: 0.8, ad: 0.62, sh: 2.02, nk: 2.1, hs: 1.38 } : { lx: 0.2, lw: 0.36, lh: 0.9, ld: 0.4, tw: 0.98, th: 0.84, td: 0.52, ax: 0.64, aw: 0.3, ah: 0.74, ad: 0.32, sh: 1.62, nk: 1.72, hs: 1 }
+  const legs = [-K.lx, K.lx].map((x) => {
     const p = new THREE.Group()
-    p.position.set(x, 0.9, 0)
-    box(0.36, 0.86, 0.4, mat(pants), p, 0, -0.43, 0)
-    box(0.4, 0.14, 0.5, mat('#2a2220'), p, 0, -0.84, 0.05)
+    p.position.set(x, K.lh, 0)
+    if (HQ) rbox(K.lw, K.lh - 0.1, K.ld, 0.08, mat(pants), p, 0, -(K.lh - 0.1) / 2, 0)
+    else box(0.36, 0.86, 0.4, mat(pants), p, 0, -0.43, 0)
+    box(K.lw + 0.04, 0.14, K.ld + 0.1, mat('#2a2220'), p, 0, -K.lh + 0.06, 0.05)
     body.add(p)
     return p
   })
-  rbox(0.98, 0.84, 0.52, 0.08, mat(shirt), body, 0, 1.3, 0)
-  const arms = [-0.64, 0.64].map((x) => {
+  rbox(K.tw, K.th, K.td, HQ ? 0.12 : 0.08, mat(shirt), body, 0, K.lh + K.th / 2 - 0.05, 0)
+  const arms = [-K.ax, K.ax].map((x) => {
     const p = new THREE.Group()
-    p.position.set(x, 1.62, 0)
-    rbox(0.3, 0.74, 0.32, 0.06, mat(shirt), p, 0, -0.34, 0)
-    box(0.26, 0.2, 0.28, mat(skin), p, 0, -0.78, 0)
+    p.position.set(x, K.sh, 0)
+    rbox(K.aw, K.ah, K.ad, HQ ? 0.1 : 0.06, mat(shirt), p, 0, -K.ah / 2 + 0.06, 0)
+    if (HQ) rbox(K.aw - 0.04, 0.32, K.ad - 0.04, 0.1, mat(skin), p, 0, -K.ah - 0.1, 0)
+    else box(0.26, 0.2, 0.28, mat(skin), p, 0, -0.78, 0)
     body.add(p)
     return p
   })
   const neck = new THREE.Group()
-  neck.position.set(0, 1.72, 0)
+  neck.position.set(0, K.nk, 0)
+  neck.scale.setScalar(K.hs)
   body.add(neck)
   const head = rbox(0.92, 0.86, 0.82, HQ ? 0.3 : 0.2, mat(skin), neck, 0, 0.44, 0)
   const faceMat = HQ ? new THREE.MeshStandardMaterial({ map: faceTex({}), transparent: true, roughness: 0.38 }) : new THREE.MeshLambertMaterial({ map: faceTex({}), transparent: true })
@@ -435,6 +440,12 @@ function makeBlocky(o = {}) {
     } else {
       setArm(arms[0], armL, aa[0], -1)
       setArm(arms[1], armR, aa[1], 1)
+    }
+    if (HQ) {
+      for (const g of [phone, lamp]) {
+        g.position.multiplyScalar(1.28)
+        g.scale.setScalar(1.3)
+      }
     }
     neck.rotation.set(headPitch, headYaw, headRoll)
     // Clignement : un battement de 0,12 s toutes les ~3 s.
@@ -1390,7 +1401,8 @@ const SHOTS = {
     walkers(t, [16.4, 23.6, 17, 23, 15.8, 24.2])
     HERO.update(t, { x: 20, z: 22, ry: 0, face: t > W('01', 'sauf') ? { brows: 'up', mouth: 'flat' } : {}, armR: [0, 0.1], armL: [0, 0.1], headYaw: 0.05 * Math.sin(t) })
     const push = smooth(t, W('01', 'sauf') - 0.3, 0.7)
-    lookCam(20 + Math.sin(t * 0.4) * 0.3, lerp(3.1, 2.6, push), lerp(29.5, 26.3, push), 20, lerp(2.7, 2.35, push), 18)
+    if (HQ) lookCam(20 + Math.sin(t * 0.4) * 0.25, lerp(3.4, 3.1, push), lerp(29.5, 26.6, push), 20, lerp(3.1, 2.95, push), 18)
+    else lookCam(20 + Math.sin(t * 0.4) * 0.3, lerp(3.1, 2.6, push), lerp(29.5, 26.3, push), 20, lerp(2.7, 2.35, push), 18)
     key.position.set(21.5, 4, 26)
     key.intensity = 18
   },

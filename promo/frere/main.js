@@ -13,6 +13,12 @@
 
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js'
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
 import { clamp, ease, lerp, prog, rng } from '../engine.js'
 import { FPS, HEIGHT, WIDTH, makeCues, norm } from './cues.js'
 
@@ -34,6 +40,26 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping
 renderer.toneMappingExposure = 1.05
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(42, WIDTH / HEIGHT, 0.1, 600)
+// Rendu « haute qualité » (hq.html) : matières plastiques brillantes, ombres
+// douces, halo des lumières, profondeur de champ.
+const HQ = !!window.__HQ
+let composer = null
+let bokeh = null
+if (HQ) {
+  renderer.shadowMap.enabled = true
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap
+  const pmrem = new THREE.PMREMGenerator(renderer)
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
+  scene.environmentIntensity = 0.28
+  composer = new EffectComposer(renderer)
+  composer.setPixelRatio(1)
+  composer.setSize(WIDTH, HEIGHT)
+  composer.addPass(new RenderPass(scene, camera))
+  bokeh = new BokehPass(scene, camera, { focus: 8, aperture: 0.006, maxblur: 0.014 })
+  composer.addPass(bokeh)
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(WIDTH / 2, HEIGHT / 2), 0.8, 0.5, 0.93))
+  composer.addPass(new OutputPass())
+}
 
 // Ciels (fond fixe) : nuit étoilée, aube, jour, noir.
 function skyTex(stops, stars = 0) {
@@ -68,25 +94,38 @@ moon.position.set(-40, 80, 30)
 const key = new THREE.PointLight(0xffb36b, 0, 30, 1.6)
 const fillL = new THREE.PointLight(0x9fd0ff, 0, 18, 1.6)
 const torch = new THREE.SpotLight(0xfff0c0, 0, 70, 0.42, 0.45, 1.1)
-scene.add(hemi, moon, key, fillL, torch, torch.target)
+scene.add(hemi, moon, key, fillL, torch, torch.target, moon.target)
+if (HQ) {
+  key.castShadow = true
+  key.shadow.mapSize.set(1024, 1024)
+  key.shadow.bias = -0.002
+  key.shadow.radius = 6
+  moon.castShadow = true
+  moon.shadow.mapSize.set(2048, 2048)
+  Object.assign(moon.shadow.camera, { left: -18, right: 18, top: 18, bottom: -18, near: 1, far: 220 })
+  moon.shadow.bias = -0.0015
+  moon.shadow.radius = 4
+}
 
 // ============================================================ matières
 
 const LAMB = new Map()
 const mat = (color, o = {}) => {
   const k = color + JSON.stringify(o)
-  if (!LAMB.has(k)) LAMB.set(k, new THREE.MeshLambertMaterial({ color, ...o }))
+  if (!LAMB.has(k)) LAMB.set(k, HQ ? new THREE.MeshStandardMaterial({ color, roughness: 0.38, metalness: 0, ...o }) : new THREE.MeshLambertMaterial({ color, ...o }))
   return LAMB.get(k)
 }
 const box = (w, h, d, m, parent, x = 0, y = 0, z = 0) => {
   const me = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m)
   me.position.set(x, y, z)
+  me.castShadow = me.receiveShadow = HQ
   if (parent) parent.add(me)
   return me
 }
 const rbox = (w, h, d, r, m, parent, x = 0, y = 0, z = 0) => {
-  const me = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 3, r), m)
+  const me = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, HQ ? 5 : 3, r), m)
   me.position.set(x, y, z)
+  me.castShadow = me.receiveShadow = HQ
   if (parent) parent.add(me)
   return me
 }
@@ -146,11 +185,12 @@ function faceTex(o = {}) {
         const big = eyes === 'wide' ? 1.25 : eyes === 'half' ? 0.6 : 1
         g.fillStyle = ink
         g.beginPath()
-        g.ellipse(x, ey, 17 * (eyes === 'wide' ? 1.15 : 1), 23 * big, 0, 0, Math.PI * 2)
+        const E = HQ ? 1.3 : 1
+        g.ellipse(x, ey, 17 * E * (eyes === 'wide' ? 1.15 : 1), 23 * E * big, 0, 0, Math.PI * 2)
         g.fill()
         g.fillStyle = '#fff'
         g.beginPath()
-        g.arc(x - 5, ey - 8 * big, 6, 0, Math.PI * 2)
+        g.arc(x - 6 * E, ey - 9 * big * E, 7 * E, 0, Math.PI * 2)
         g.fill()
         if (eyes === 'half') {
           g.fillStyle = 'rgba(0,0,0,0)'
@@ -259,8 +299,8 @@ function makeBlocky(o = {}) {
   const neck = new THREE.Group()
   neck.position.set(0, 1.72, 0)
   body.add(neck)
-  const head = rbox(0.92, 0.86, 0.82, 0.2, mat(skin), neck, 0, 0.44, 0)
-  const faceMat = new THREE.MeshLambertMaterial({ map: faceTex({}), transparent: true })
+  const head = rbox(0.92, 0.86, 0.82, HQ ? 0.3 : 0.2, mat(skin), neck, 0, 0.44, 0)
+  const faceMat = HQ ? new THREE.MeshStandardMaterial({ map: faceTex({}), transparent: true, roughness: 0.38 }) : new THREE.MeshLambertMaterial({ map: faceTex({}), transparent: true })
   const face = new THREE.Mesh(new THREE.PlaneGeometry(0.88, 0.82), faceMat)
   face.position.set(0, 0.42, 0.415)
   neck.add(face)
@@ -272,6 +312,14 @@ function makeBlocky(o = {}) {
     const pom = new THREE.Mesh(new THREE.SphereGeometry(0.16, 12, 10), mat('#f4f1ea'))
     pom.position.set(0, 1.14, 0)
     neck.add(pom)
+    // Mèches qui dépassent sous le bonnet.
+    if (HQ) for (let k = 0; k < 9; k++) {
+      const a = -1.15 + (k / 8) * 2.3
+      const c = new THREE.Mesh(new THREE.SphereGeometry(0.11, 10, 8), mat(o.hairColor ?? '#5a3420'))
+      c.position.set(Math.sin(a) * 0.47, 0.66 - Math.abs(Math.sin(a)) * 0.06, Math.cos(a) * 0.4)
+      c.castShadow = true
+      neck.add(c)
+    }
   } else if (o.hat === 'cap') {
     rbox(0.96, 0.26, 0.86, 0.1, mat(o.hatColor ?? '#2f5fa8'), neck, 0, 0.92, 0)
     box(0.7, 0.06, 0.36, mat(o.hatColor ?? '#2f5fa8'), neck, 0, 0.82, 0.55)
@@ -499,7 +547,7 @@ const facadeEmit = canvasTex(512, 512, (g) => {
 })
 for (const t of [facadeMap, facadeEmit]) t.wrapS = t.wrapT = THREE.RepeatWrapping
 const FACADE_COLORS = ['#f3e3c8', '#e8b89a', '#c9d6e3', '#f2c6c2', '#d8e6c8', '#f4d58d', '#b9a7d6', '#e6a173']
-const facadeMats = FACADE_COLORS.map((c) => new THREE.MeshLambertMaterial({ color: c, map: facadeMap, emissive: 0xffffff, emissiveMap: facadeEmit, emissiveIntensity: 1 }))
+const facadeMats = FACADE_COLORS.map((c) => HQ ? new THREE.MeshStandardMaterial({ color: c, map: facadeMap, emissive: 0xffffff, emissiveMap: facadeEmit, emissiveIntensity: 1, roughness: 0.75 }) : new THREE.MeshLambertMaterial({ color: c, map: facadeMap, emissive: 0xffffff, emissiveMap: facadeEmit, emissiveIntensity: 1 }))
 const roofMat = mat('#5a4a5e')
 
 function building(x, z, w, d, h, ci) {
@@ -515,6 +563,7 @@ function building(x, z, w, d, h, ci) {
     }
   const m = new THREE.Mesh(geo, facadeMats[ci % facadeMats.length])
   m.position.set(x, h / 2, z)
+  m.receiveShadow = HQ
   city.add(m)
   box(w + 0.6, 0.5, d + 0.6, roofMat, city, x, h + 0.25, z)
   return m
@@ -523,6 +572,24 @@ function building(x, z, w, d, h, ci) {
 // Le sol : bitume, trottoirs, place pavée.
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(800, 800), mat('#34303c'))
 ground.rotation.x = -Math.PI / 2
+ground.receiveShadow = HQ
+if (HQ) {
+  const pav = canvasTex(256, 256, (g) => {
+    g.fillStyle = '#3a3542'
+    g.fillRect(0, 0, 256, 256)
+    const r = rng(12)
+    for (let j = 0; j < 8; j++)
+      for (let i = 0; i < 8; i++) {
+        const v = 70 + Math.floor(r() * 22)
+        g.fillStyle = `rgb(${v},${v - 6},${v + 8})`
+        roundRect(g, i * 32 + (j % 2) * 16 + 2, j * 32 + 2, 28, 28, 7)
+        g.fill()
+      }
+  })
+  pav.wrapS = pav.wrapT = THREE.RepeatWrapping
+  pav.repeat.set(220, 220)
+  ground.material = new THREE.MeshStandardMaterial({ map: pav, roughness: 0.55 })
+}
 city.add(ground)
 const blocks = []
 for (let bx = -3; bx <= 3; bx++)
@@ -1256,6 +1323,10 @@ function mood(kind) {
   ;[GLOW.windows, GLOW.lamps, GLOW.garland, GLOW.screens] = M.glow
 }
 function applyGlow(t) {
+  if (HQ) {
+    hemi.intensity *= 0.6
+    key.intensity *= 0.75
+  }
   for (const m of facadeMats) m.emissiveIntensity = GLOW.windows
   lampMat.color.setRGB(1 * GLOW.lamps + 0.12, 0.82 * GLOW.lamps + 0.12, 0.54 * GLOW.lamps + 0.14)
   const tw = 0.85 + 0.15 * Math.sin(t * 6)
@@ -1744,7 +1815,15 @@ function seek(t) {
   fadeEl.style.opacity = String(t > tp && t < tp + 0.35 ? 0.85 * (1 - (t - tp) / 0.35) : 0)
   const ta = W('18', 'allume') - 0.05
   flashEl.style.opacity = String(t > ta && t < ta + 0.2 ? 0.6 * (1 - (t - ta) / 0.2) : 0)
-  renderer.render(scene, camera)
+  if (HQ) {
+    // La lune suit la caméra (ombres nettes autour du sujet) ; mise au point sur le héros.
+    const tgt = camera.position.clone().add(camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(10))
+    moon.target.position.copy(tgt)
+    moon.position.copy(tgt).add(V3(-30, 60, 25))
+    const fp = HERO.root.visible ? HERO.root.position.clone().add(V3(0, 2.2 * HERO.root.scale.x, 0)) : tgt
+    bokeh.uniforms.focus.value = camera.position.distanceTo(fp)
+    composer.render()
+  } else renderer.render(scene, camera)
   updateTags(t)
   updateWord(t)
 }

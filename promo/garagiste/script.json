@@ -1,0 +1,95 @@
+{
+ "_doc": "« Le garagiste » (affaire fictive), sur le modèle de « Le videur ». Voix ElevenLabs : Nicolas, Paul K, Ilan. Nouvel appel à l'abonnement (14 et 15).",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-fusible",
+   "who": "narrateur",
+   "text": "Un garagiste a saboté la voiture d'un client. Exprès. Pendant que l'homme payait, il a retiré un fusible. Et aujourd'hui, c'est le garagiste qu'on juge.",
+   "gap": 0
+  },
+  {
+   "id": "02-atelier",
+   "who": "narrateur",
+   "text": "Sur la caméra de l'atelier, on voit l'homme arriver en titubant. Ses deux enfants à l'arrière. Les clés dans une main… une canette dans l'autre."
+  },
+  {
+   "id": "03-samir",
+   "who": "narrateur",
+   "text": "Il s'appelle Samir. Quarante-neuf ans. Garagiste depuis vingt-cinq ans. Jamais un litige. Aujourd'hui, il est jugé pour dégradation volontaire."
+  },
+  {
+   "id": "04-sabotee",
+   "who": "procureur",
+   "text": "Cette voiture ne lui appartenait pas. Il l'a sabotée sans prévenir personne. Il s'est fait justice lui-même."
+  },
+  {
+   "id": "05-cles",
+   "who": "avocate",
+   "text": "Sans prévenir ? Il a d'abord demandé les clés. Poliment. Le client l'a insulté et a démarré."
+  },
+  {
+   "id": "06-police",
+   "who": "procureur",
+   "text": "Il fallait appeler la police. C'est leur métier. Pas celui d'un garagiste."
+  },
+  {
+   "id": "07-minutes",
+   "who": "avocate",
+   "text": "Il l'a appelée. Temps d'arrivée : quarante minutes. La route de l'école, elle, était à deux minutes."
+  },
+  {
+   "id": "08-route",
+   "who": "procureur",
+   "text": "Peu importe. Un fusible retiré, c'est une voiture en panne sur le bord de la route. Avec deux enfants dedans."
+  },
+  {
+   "id": "09-parking",
+   "who": "avocate",
+   "text": "En panne ? Elle n'a jamais quitté le parking. Elle n'a pas démarré. C'était tout le but."
+  },
+  {
+   "id": "10-confiance",
+   "who": "procureur",
+   "text": "Si chaque garagiste décide qui peut conduire, plus aucun client ne lui confiera sa voiture."
+  },
+  {
+   "id": "11-alcool",
+   "who": "avocate",
+   "text": "Le taux d'alcool du client, une heure plus tard : un gramme huit. Plus de trois fois la limite."
+  },
+  {
+   "id": "12-deuxans",
+   "who": "procureur",
+   "text": "Il risque deux ans de prison. Pour une voiture qui n'était pas la sienne."
+  },
+  {
+   "id": "13-vivants",
+   "who": "avocate",
+   "text": "Deux ans… pour un fusible. Deux enfants sont rentrés vivants ce soir-là. Et c'est lui qu'on juge ?"
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire."
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais."
+  }
+ ]
+}

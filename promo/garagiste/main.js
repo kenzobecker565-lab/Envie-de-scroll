@@ -454,8 +454,8 @@ const VOTE = scene('vote', (L) => {
   svg('circle', { cx: -270, cy: 30, r: 78, fill: '#10121a' }, jure)
   const avatar2 = svg('image', { x: -340, y: -40, width: 140, height: 140, 'clip-path': 'url(#jClip)', preserveAspectRatio: 'xMidYMid slice' }, jure)
   txt(jure, 'CARTE DE', { x: -170, y: -2, 'font-size': 40, fill: '#1d2a5c', 'text-anchor': 'start' })
-  txt(jure, 'JURÉ OFFICIEL', { x: -170, y: 66, 'font-size': 62, fill: '#10121a', 'text-anchor': 'start' })
-  const valide = svg('g', { transform: 'translate(250 70) rotate(-14)' }, jure)
+  txt(jure, 'JURÉ OFFICIEL', { x: -170, y: 66, 'font-size': 58, fill: '#10121a', 'text-anchor': 'start' })
+  const valide = svg('g', { transform: 'translate(292 -66) rotate(-12)' }, jure)
   svg('rect', { x: -130, y: -44, width: 260, height: 88, rx: 14, fill: 'rgba(255,255,255,0.85)', stroke: '#12a150', 'stroke-width': 9 }, valide)
   txt(valide, 'VALIDÉ', { x: 0, y: 20, 'font-size': 56, fill: '#12a150' })
   return { actor, cta, dim, card, avatar, avatar2, ripple, plus, plusDisc, plusSign, plusCheck, btnBg, btnOn, btnDone, confetti, finger, jure, valide }
@@ -866,7 +866,7 @@ function seek(t) {
     show(VOTE.jure, j > 0.01)
     place(VOTE.jure, 540, lerp(2100, 1330, j), 0.92, lerp(8, -3, j))
     const v = popS(t, Wd('15', 'officiel') - 0.05, Infinity, 0.22)
-    VOTE.valide.setAttribute('transform', `translate(250 70) rotate(-14) scale(${Math.max(0.001, lerp(2.4, 1, Math.min(1, v)) * (v > 0.01 ? 1 : 0))})`)
+    VOTE.valide.setAttribute('transform', `translate(292 -66) rotate(-12) scale(${Math.max(0.001, lerp(2.4, 0.72, Math.min(1, v)) * (v > 0.01 ? 1 : 0))})`)
     VOTE.valide.setAttribute('opacity', v > 0.01 ? 1 : 0)
   }
 

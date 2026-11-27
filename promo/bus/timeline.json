@@ -1,0 +1,1105 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 72.01,
+ "lines": [
+  {
+   "id": "01-portes",
+   "who": "narrateur",
+   "text": "Une chauffeuse de bus a verrouillé les portes. Avec quinze passagers à bord. Et elle a roulé jusqu'au commissariat sans s'arrêter. Aujourd'hui, c'est elle qu'on juge.",
+   "start": 0.25,
+   "dur": 7.063,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "chauffeuse",
+     "t": 0.39
+    },
+    {
+     "w": "de",
+     "t": 0.73
+    },
+    {
+     "w": "bus",
+     "t": 0.83
+    },
+    {
+     "w": "a",
+     "t": 0.99
+    },
+    {
+     "w": "verrouillé",
+     "t": 1.19
+    },
+    {
+     "w": "les",
+     "t": 1.53
+    },
+    {
+     "w": "portes.",
+     "t": 1.61
+    },
+    {
+     "w": "Avec",
+     "t": 2.07
+    },
+    {
+     "w": "quinze",
+     "t": 2.34
+    },
+    {
+     "w": "passagers",
+     "t": 2.61
+    },
+    {
+     "w": "à",
+     "t": 3.03
+    },
+    {
+     "w": "bord.",
+     "t": 3.13
+    },
+    {
+     "w": "Et",
+     "t": 3.33
+    },
+    {
+     "w": "elle",
+     "t": 3.63
+    },
+    {
+     "w": "a",
+     "t": 3.73
+    },
+    {
+     "w": "roulé",
+     "t": 3.75
+    },
+    {
+     "w": "jusqu'au",
+     "t": 4.02
+    },
+    {
+     "w": "commissariat",
+     "t": 4.29
+    },
+    {
+     "w": "sans",
+     "t": 4.79
+    },
+    {
+     "w": "s'arrêter.",
+     "t": 5.215
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 5.64
+    },
+    {
+     "w": "c'est",
+     "t": 6.065
+    },
+    {
+     "w": "elle",
+     "t": 6.49
+    },
+    {
+     "w": "qu'on",
+     "t": 6.68
+    },
+    {
+     "w": "juge.",
+     "t": 6.87
+    }
+   ]
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la caméra du bus, on voit un homme coller une jeune femme depuis six arrêts. Sa main sur sa cuisse. Elle tremble. Personne ne bouge.",
+   "start": 7.563,
+   "dur": 6.4,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.563
+    },
+    {
+     "w": "la",
+     "t": 7.723
+    },
+    {
+     "w": "caméra",
+     "t": 7.823
+    },
+    {
+     "w": "du",
+     "t": 8.103
+    },
+    {
+     "w": "bus,",
+     "t": 8.223
+    },
+    {
+     "w": "on",
+     "t": 8.763
+    },
+    {
+     "w": "voit",
+     "t": 8.863
+    },
+    {
+     "w": "un",
+     "t": 9.003
+    },
+    {
+     "w": "homme",
+     "t": 9.163
+    },
+    {
+     "w": "coller",
+     "t": 9.363
+    },
+    {
+     "w": "une",
+     "t": 9.663
+    },
+    {
+     "w": "jeune",
+     "t": 9.763
+    },
+    {
+     "w": "femme",
+     "t": 9.903
+    },
+    {
+     "w": "depuis",
+     "t": 10.183
+    },
+    {
+     "w": "six",
+     "t": 10.403
+    },
+    {
+     "w": "arrêts.",
+     "t": 10.703
+    },
+    {
+     "w": "Sa",
+     "t": 11.243
+    },
+    {
+     "w": "main",
+     "t": 11.343
+    },
+    {
+     "w": "sur",
+     "t": 11.483
+    },
+    {
+     "w": "sa",
+     "t": 11.663
+    },
+    {
+     "w": "cuisse.",
+     "t": 11.803
+    },
+    {
+     "w": "Elle",
+     "t": 12.303
+    },
+    {
+     "w": "tremble.",
+     "t": 12.383
+    },
+    {
+     "w": "Personne",
+     "t": 13.103
+    },
+    {
+     "w": "ne",
+     "t": 13.423
+    },
+    {
+     "w": "bouge.",
+     "t": 13.483
+    }
+   ]
+  },
+  {
+   "id": "03-nadia",
+   "who": "narrateur",
+   "text": "Elle s'appelle Nadia. Quarante et un ans. Chauffeuse depuis quinze ans. Jamais un accident. Aujourd'hui, elle est jugée pour séquestration.",
+   "start": 14.213,
+   "dur": 6.02,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 14.213
+    },
+    {
+     "w": "s'appelle",
+     "t": 14.413
+    },
+    {
+     "w": "Nadia.",
+     "t": 14.613
+    },
+    {
+     "w": "Quarante",
+     "t": 14.838
+    },
+    {
+     "w": "et",
+     "t": 15.063
+    },
+    {
+     "w": "un",
+     "t": 15.288
+    },
+    {
+     "w": "ans.",
+     "t": 15.513
+    },
+    {
+     "w": "Chauffeuse",
+     "t": 15.993
+    },
+    {
+     "w": "depuis",
+     "t": 16.373
+    },
+    {
+     "w": "quinze",
+     "t": 16.613
+    },
+    {
+     "w": "ans.",
+     "t": 16.853
+    },
+    {
+     "w": "Jamais",
+     "t": 17.193
+    },
+    {
+     "w": "un",
+     "t": 17.493
+    },
+    {
+     "w": "accident.",
+     "t": 17.653
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 18.253
+    },
+    {
+     "w": "elle",
+     "t": 18.853
+    },
+    {
+     "w": "est",
+     "t": 18.933
+    },
+    {
+     "w": "jugée",
+     "t": 19.033
+    },
+    {
+     "w": "pour",
+     "t": 19.313
+    },
+    {
+     "w": "séquestration.",
+     "t": 19.453
+    }
+   ]
+  },
+  {
+   "id": "04-enfermes",
+   "who": "procureur",
+   "text": "Quinze personnes enfermées contre leur volonté. Certains ont tapé sur les portes. Une femme a fait une crise de panique.",
+   "start": 20.483,
+   "dur": 5.66,
+   "words": [
+    {
+     "w": "Quinze",
+     "t": 20.563
+    },
+    {
+     "w": "personnes",
+     "t": 20.683
+    },
+    {
+     "w": "enfermées",
+     "t": 21.163
+    },
+    {
+     "w": "contre",
+     "t": 21.883
+    },
+    {
+     "w": "leur",
+     "t": 22.163
+    },
+    {
+     "w": "volonté.",
+     "t": 22.343
+    },
+    {
+     "w": "Certains",
+     "t": 22.983
+    },
+    {
+     "w": "ont",
+     "t": 23.383
+    },
+    {
+     "w": "tapé",
+     "t": 23.403
+    },
+    {
+     "w": "sur",
+     "t": 23.723
+    },
+    {
+     "w": "les",
+     "t": 23.863
+    },
+    {
+     "w": "portes.",
+     "t": 23.963
+    },
+    {
+     "w": "Une",
+     "t": 24.423
+    },
+    {
+     "w": "femme",
+     "t": 24.583
+    },
+    {
+     "w": "a",
+     "t": 24.843
+    },
+    {
+     "w": "fait",
+     "t": 25.063
+    },
+    {
+     "w": "une",
+     "t": 25.203
+    },
+    {
+     "w": "crise",
+     "t": 25.283
+    },
+    {
+     "w": "de",
+     "t": 25.483
+    },
+    {
+     "w": "panique.",
+     "t": 25.623
+    }
+   ]
+  },
+  {
+   "id": "05-vitre",
+   "who": "avocate",
+   "text": "Et la jeune femme, elle, faisait quoi ? Elle était coincée contre la vitre depuis vingt minutes.",
+   "start": 26.393,
+   "dur": 3.87,
+   "words": [
+    {
+     "w": "Et",
+     "t": 26.393
+    },
+    {
+     "w": "la",
+     "t": 26.513
+    },
+    {
+     "w": "jeune",
+     "t": 26.613
+    },
+    {
+     "w": "femme,",
+     "t": 26.733
+    },
+    {
+     "w": "elle,",
+     "t": 27.133
+    },
+    {
+     "w": "faisait",
+     "t": 27.513
+    },
+    {
+     "w": "quoi ?",
+     "t": 27.653
+    },
+    {
+     "w": "Elle",
+     "t": 28.053
+    },
+    {
+     "w": "était",
+     "t": 28.173
+    },
+    {
+     "w": "coincée",
+     "t": 28.293
+    },
+    {
+     "w": "contre",
+     "t": 28.713
+    },
+    {
+     "w": "la",
+     "t": 28.873
+    },
+    {
+     "w": "vitre",
+     "t": 29.033
+    },
+    {
+     "w": "depuis",
+     "t": 29.273
+    },
+    {
+     "w": "vingt",
+     "t": 29.523
+    },
+    {
+     "w": "minutes.",
+     "t": 29.773
+    }
+   ]
+  },
+  {
+   "id": "06-arret",
+   "who": "procureur",
+   "text": "Il suffisait d'appeler la police et d'ouvrir les portes au prochain arrêt.",
+   "start": 30.513,
+   "dur": 3.05,
+   "words": [
+    {
+     "w": "Il",
+     "t": 30.513
+    },
+    {
+     "w": "suffisait",
+     "t": 30.653
+    },
+    {
+     "w": "d'appeler",
+     "t": 30.983
+    },
+    {
+     "w": "la",
+     "t": 31.313
+    },
+    {
+     "w": "police",
+     "t": 31.433
+    },
+    {
+     "w": "et",
+     "t": 31.733
+    },
+    {
+     "w": "d'ouvrir",
+     "t": 32.073
+    },
+    {
+     "w": "les",
+     "t": 32.413
+    },
+    {
+     "w": "portes",
+     "t": 32.553
+    },
+    {
+     "w": "au",
+     "t": 32.873
+    },
+    {
+     "w": "prochain",
+     "t": 32.873
+    },
+    {
+     "w": "arrêt.",
+     "t": 33.113
+    }
+   ]
+  },
+  {
+   "id": "07-descendait",
+   "who": "avocate",
+   "text": "Au prochain arrêt, il descendait. Et la police n'aurait trouvé personne.",
+   "start": 33.813,
+   "dur": 3.01,
+   "words": [
+    {
+     "w": "Au",
+     "t": 33.813
+    },
+    {
+     "w": "prochain",
+     "t": 33.913
+    },
+    {
+     "w": "arrêt,",
+     "t": 34.153
+    },
+    {
+     "w": "il",
+     "t": 34.693
+    },
+    {
+     "w": "descendait.",
+     "t": 34.773
+    },
+    {
+     "w": "Et",
+     "t": 35.233
+    },
+    {
+     "w": "la",
+     "t": 35.413
+    },
+    {
+     "w": "police",
+     "t": 35.533
+    },
+    {
+     "w": "n'aurait",
+     "t": 35.783
+    },
+    {
+     "w": "trouvé",
+     "t": 36.033
+    },
+    {
+     "w": "personne.",
+     "t": 36.193
+    }
+   ]
+  },
+  {
+   "id": "08-decider",
+   "who": "procureur",
+   "text": "Ce n'est pas à une chauffeuse de bus de décider qui est coupable.",
+   "start": 37.073,
+   "dur": 2.9,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 37.073
+    },
+    {
+     "w": "n'est",
+     "t": 37.213
+    },
+    {
+     "w": "pas",
+     "t": 37.363
+    },
+    {
+     "w": "à",
+     "t": 37.423
+    },
+    {
+     "w": "une",
+     "t": 37.483
+    },
+    {
+     "w": "chauffeuse",
+     "t": 37.663
+    },
+    {
+     "w": "de",
+     "t": 38.043
+    },
+    {
+     "w": "bus",
+     "t": 38.183
+    },
+    {
+     "w": "de",
+     "t": 38.403
+    },
+    {
+     "w": "décider",
+     "t": 38.623
+    },
+    {
+     "w": "qui",
+     "t": 39.023
+    },
+    {
+     "w": "est",
+     "t": 39.243
+    },
+    {
+     "w": "coupable.",
+     "t": 39.363
+    }
+   ]
+  },
+  {
+   "id": "09-devant",
+   "who": "avocate",
+   "text": "Elle n'a rien décidé. Elle a amené tout le monde devant ceux qui décident.",
+   "start": 40.223,
+   "dur": 3.03,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 40.223
+    },
+    {
+     "w": "n'a",
+     "t": 40.353
+    },
+    {
+     "w": "rien",
+     "t": 40.483
+    },
+    {
+     "w": "décidé.",
+     "t": 40.643
+    },
+    {
+     "w": "Elle",
+     "t": 41.223
+    },
+    {
+     "w": "a",
+     "t": 41.303
+    },
+    {
+     "w": "amené",
+     "t": 41.403
+    },
+    {
+     "w": "tout",
+     "t": 41.663
+    },
+    {
+     "w": "le",
+     "t": 41.803
+    },
+    {
+     "w": "monde",
+     "t": 41.883
+    },
+    {
+     "w": "devant",
+     "t": 42.083
+    },
+    {
+     "w": "ceux",
+     "t": 42.382
+    },
+    {
+     "w": "qui",
+     "t": 42.681
+    },
+    {
+     "w": "décident.",
+     "t": 42.979
+    }
+   ]
+  },
+  {
+   "id": "10-retard",
+   "who": "procureur",
+   "text": "Quarante minutes de retard, une ligne entière paralysée. Pour un simple soupçon.",
+   "start": 43.503,
+   "dur": 4.07,
+   "words": [
+    {
+     "w": "Quarante",
+     "t": 43.643
+    },
+    {
+     "w": "minutes",
+     "t": 43.783
+    },
+    {
+     "w": "de",
+     "t": 44.023
+    },
+    {
+     "w": "retard,",
+     "t": 44.203
+    },
+    {
+     "w": "une",
+     "t": 44.823
+    },
+    {
+     "w": "ligne",
+     "t": 44.923
+    },
+    {
+     "w": "entière",
+     "t": 45.163
+    },
+    {
+     "w": "paralysée.",
+     "t": 45.663
+    },
+    {
+     "w": "Pour",
+     "t": 46.403
+    },
+    {
+     "w": "un",
+     "t": 46.523
+    },
+    {
+     "w": "simple",
+     "t": 46.623
+    },
+    {
+     "w": "soupçon.",
+     "t": 46.943
+    }
+   ]
+  },
+  {
+   "id": "11-fiche",
+   "who": "avocate",
+   "text": "Un soupçon ? L'homme était déjà connu pour trois agressions dans les transports.",
+   "start": 47.823,
+   "dur": 3.06,
+   "words": [
+    {
+     "w": "Un",
+     "t": 47.823
+    },
+    {
+     "w": "soupçon ?",
+     "t": 47.943
+    },
+    {
+     "w": "L'homme",
+     "t": 48.323
+    },
+    {
+     "w": "était",
+     "t": 48.703
+    },
+    {
+     "w": "déjà",
+     "t": 48.823
+    },
+    {
+     "w": "connu",
+     "t": 49.063
+    },
+    {
+     "w": "pour",
+     "t": 49.323
+    },
+    {
+     "w": "trois",
+     "t": 49.463
+    },
+    {
+     "w": "agressions",
+     "t": 49.703
+    },
+    {
+     "w": "dans",
+     "t": 50.143
+    },
+    {
+     "w": "les",
+     "t": 50.243
+    },
+    {
+     "w": "transports.",
+     "t": 50.323
+    }
+   ]
+  },
+  {
+   "id": "12-cinqans",
+   "who": "procureur",
+   "text": "Elle risque cinq ans de prison. Pour avoir enfermé quinze innocents.",
+   "start": 51.133,
+   "dur": 3.18,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 51.133
+    },
+    {
+     "w": "risque",
+     "t": 51.293
+    },
+    {
+     "w": "cinq",
+     "t": 51.583
+    },
+    {
+     "w": "ans",
+     "t": 51.873
+    },
+    {
+     "w": "de",
+     "t": 52.033
+    },
+    {
+     "w": "prison.",
+     "t": 52.133
+    },
+    {
+     "w": "Pour",
+     "t": 52.453
+    },
+    {
+     "w": "avoir",
+     "t": 52.733
+    },
+    {
+     "w": "enfermé",
+     "t": 52.893
+    },
+    {
+     "w": "quinze",
+     "t": 53.283
+    },
+    {
+     "w": "innocents.",
+     "t": 53.673
+    }
+   ]
+  },
+  {
+   "id": "13-arrivee",
+   "who": "avocate",
+   "text": "Quinze passagers arrivés en retard. Une jeune femme arrivée tout court. C'est ça qu'on punit ?",
+   "start": 54.563,
+   "dur": 3.93,
+   "words": [
+    {
+     "w": "Quinze",
+     "t": 54.653
+    },
+    {
+     "w": "passagers",
+     "t": 54.743
+    },
+    {
+     "w": "arrivés",
+     "t": 55.203
+    },
+    {
+     "w": "en",
+     "t": 55.583
+    },
+    {
+     "w": "retard.",
+     "t": 55.663
+    },
+    {
+     "w": "Une",
+     "t": 56.123
+    },
+    {
+     "w": "jeune",
+     "t": 56.243
+    },
+    {
+     "w": "femme",
+     "t": 56.383
+    },
+    {
+     "w": "arrivée",
+     "t": 56.623
+    },
+    {
+     "w": "tout",
+     "t": 57.083
+    },
+    {
+     "w": "court.",
+     "t": 57.183
+    },
+    {
+     "w": "C'est",
+     "t": 57.493
+    },
+    {
+     "w": "ça",
+     "t": 57.803
+    },
+    {
+     "w": "qu'on",
+     "t": 57.953
+    },
+    {
+     "w": "punit ?",
+     "t": 58.103
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire.",
+   "start": 58.743,
+   "dur": 3.76,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 58.743
+    },
+    {
+     "w": "es",
+     "t": 58.883
+    },
+    {
+     "w": "le",
+     "t": 58.963
+    },
+    {
+     "w": "juré.",
+     "t": 59.063
+    },
+    {
+     "w": "Coupable…",
+     "t": 59.563
+    },
+    {
+     "w": "ou",
+     "t": 59.923
+    },
+    {
+     "w": "non",
+     "t": 60.323
+    },
+    {
+     "w": "coupable ?",
+     "t": 60.463
+    },
+    {
+     "w": "Écris",
+     "t": 61.103
+    },
+    {
+     "w": "ton",
+     "t": 61.323
+    },
+    {
+     "w": "verdict",
+     "t": 61.423
+    },
+    {
+     "w": "en",
+     "t": 61.643
+    },
+    {
+     "w": "commentaire.",
+     "t": 61.863
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais.",
+   "start": 62.753,
+   "dur": 5.856,
+   "words": [
+    {
+     "w": "Le",
+     "t": 62.753
+    },
+    {
+     "w": "verdict",
+     "t": 62.893
+    },
+    {
+     "w": "tombe",
+     "t": 63.173
+    },
+    {
+     "w": "dans",
+     "t": 63.733
+    },
+    {
+     "w": "la",
+     "t": 63.893
+    },
+    {
+     "w": "prochaine",
+     "t": 64.013
+    },
+    {
+     "w": "vidéo.",
+     "t": 64.293
+    },
+    {
+     "w": "Appuie",
+     "t": 64.833
+    },
+    {
+     "w": "sur",
+     "t": 65.093
+    },
+    {
+     "w": "le",
+     "t": 65.173
+    },
+    {
+     "w": "plus",
+     "t": 65.273
+    },
+    {
+     "w": "pour",
+     "t": 65.493
+    },
+    {
+     "w": "devenir",
+     "t": 65.733
+    },
+    {
+     "w": "juré",
+     "t": 66.013
+    },
+    {
+     "w": "officiel…",
+     "t": 66.433
+    },
+    {
+     "w": "sinon,",
+     "t": 67.153
+    },
+    {
+     "w": "tu",
+     "t": 67.393
+    },
+    {
+     "w": "ne",
+     "t": 67.813
+    },
+    {
+     "w": "sauras",
+     "t": 67.993
+    },
+    {
+     "w": "jamais.",
+     "t": 68.173
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,893 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 58.85,
+ "lines": [
+  {
+   "id": "01-jures",
+   "who": "narrateur",
+   "text": "Vous avez été plus de quarante mille à juger Sophie. La préparatrice qui a donné l'insuline d'Inès sans la faire payer. Et vous avez presque tous répondu la même chose : non coupable.",
+   "start": 0.25,
+   "dur": 8.03,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 0.25
+    },
+    {
+     "w": "avez",
+     "t": 0.39
+    },
+    {
+     "w": "été",
+     "t": 0.57
+    },
+    {
+     "w": "plus",
+     "t": 0.75
+    },
+    {
+     "w": "de",
+     "t": 0.91
+    },
+    {
+     "w": "quarante",
+     "t": 1.163
+    },
+    {
+     "w": "mille",
+     "t": 1.417
+    },
+    {
+     "w": "à",
+     "t": 1.67
+    },
+    {
+     "w": "juger",
+     "t": 1.83
+    },
+    {
+     "w": "Sophie.",
+     "t": 2.07
+    },
+    {
+     "w": "La",
+     "t": 2.55
+    },
+    {
+     "w": "préparatrice",
+     "t": 2.63
+    },
+    {
+     "w": "qui",
+     "t": 3.21
+    },
+    {
+     "w": "a",
+     "t": 3.35
+    },
+    {
+     "w": "donné",
+     "t": 3.43
+    },
+    {
+     "w": "l'insuline",
+     "t": 3.757
+    },
+    {
+     "w": "d'Inès",
+     "t": 4.083
+    },
+    {
+     "w": "sans",
+     "t": 4.41
+    },
+    {
+     "w": "la",
+     "t": 4.69
+    },
+    {
+     "w": "faire",
+     "t": 4.81
+    },
+    {
+     "w": "payer.",
+     "t": 4.95
+    },
+    {
+     "w": "Et",
+     "t": 5.41
+    },
+    {
+     "w": "vous",
+     "t": 5.47
+    },
+    {
+     "w": "avez",
+     "t": 5.57
+    },
+    {
+     "w": "presque",
+     "t": 5.75
+    },
+    {
+     "w": "tous",
+     "t": 5.99
+    },
+    {
+     "w": "répondu",
+     "t": 6.35
+    },
+    {
+     "w": "la",
+     "t": 6.75
+    },
+    {
+     "w": "même",
+     "t": 6.83
+    },
+    {
+     "w": "chose :",
+     "t": 6.95
+    },
+    {
+     "w": "non",
+     "t": 7.47
+    },
+    {
+     "w": "coupable.",
+     "t": 7.67
+    }
+   ]
+  },
+  {
+   "id": "02-rappel",
+   "who": "narrateur",
+   "text": "Rappel des faits. Dix-huit mois. Six mille euros de médicaments. Et cent euros de son propre salaire remis chaque mois dans la caisse.",
+   "start": 8.53,
+   "dur": 6.223,
+   "words": [
+    {
+     "w": "Rappel",
+     "t": 8.53
+    },
+    {
+     "w": "des",
+     "t": 8.89
+    },
+    {
+     "w": "faits.",
+     "t": 9.03
+    },
+    {
+     "w": "Dix-huit",
+     "t": 9.4
+    },
+    {
+     "w": "mois.",
+     "t": 9.77
+    },
+    {
+     "w": "Six",
+     "t": 10.017
+    },
+    {
+     "w": "mille",
+     "t": 10.263
+    },
+    {
+     "w": "euros",
+     "t": 10.51
+    },
+    {
+     "w": "de",
+     "t": 10.71
+    },
+    {
+     "w": "médicaments.",
+     "t": 10.87
+    },
+    {
+     "w": "Et",
+     "t": 11.37
+    },
+    {
+     "w": "cent",
+     "t": 11.62
+    },
+    {
+     "w": "euros",
+     "t": 11.87
+    },
+    {
+     "w": "de",
+     "t": 12.11
+    },
+    {
+     "w": "son",
+     "t": 12.27
+    },
+    {
+     "w": "propre",
+     "t": 12.43
+    },
+    {
+     "w": "salaire",
+     "t": 12.65
+    },
+    {
+     "w": "remis",
+     "t": 13.19
+    },
+    {
+     "w": "chaque",
+     "t": 13.61
+    },
+    {
+     "w": "mois",
+     "t": 13.77
+    },
+    {
+     "w": "dans",
+     "t": 13.99
+    },
+    {
+     "w": "la",
+     "t": 14.13
+    },
+    {
+     "w": "caisse.",
+     "t": 14.23
+    }
+   ]
+  },
+  {
+   "id": "03-requis",
+   "who": "narrateur",
+   "text": "Le procureur a requis six mois de prison avec sursis. Le juge prend la parole.",
+   "start": 15.003,
+   "dur": 3.91,
+   "words": [
+    {
+     "w": "Le",
+     "t": 15.003
+    },
+    {
+     "w": "procureur",
+     "t": 15.143
+    },
+    {
+     "w": "a",
+     "t": 15.723
+    },
+    {
+     "w": "requis",
+     "t": 15.843
+    },
+    {
+     "w": "six",
+     "t": 16.123
+    },
+    {
+     "w": "mois",
+     "t": 16.403
+    },
+    {
+     "w": "de",
+     "t": 16.523
+    },
+    {
+     "w": "prison",
+     "t": 16.623
+    },
+    {
+     "w": "avec",
+     "t": 16.883
+    },
+    {
+     "w": "sursis.",
+     "t": 17.083
+    },
+    {
+     "w": "Le",
+     "t": 17.703
+    },
+    {
+     "w": "juge",
+     "t": 17.803
+    },
+    {
+     "w": "prend",
+     "t": 18.123
+    },
+    {
+     "w": "la",
+     "t": 18.283
+    },
+    {
+     "w": "parole.",
+     "t": 18.383
+    }
+   ]
+  },
+  {
+   "id": "04-faits",
+   "who": "juge",
+   "text": "Madame, vous avez pris des médicaments qui ne vous appartenaient pas. Les faits sont établis.",
+   "start": 19.163,
+   "dur": 4.11,
+   "words": [
+    {
+     "w": "Madame,",
+     "t": 19.163
+    },
+    {
+     "w": "vous",
+     "t": 19.803
+    },
+    {
+     "w": "avez",
+     "t": 19.903
+    },
+    {
+     "w": "pris",
+     "t": 20.103
+    },
+    {
+     "w": "des",
+     "t": 20.283
+    },
+    {
+     "w": "médicaments",
+     "t": 20.423
+    },
+    {
+     "w": "qui",
+     "t": 20.903
+    },
+    {
+     "w": "ne",
+     "t": 21.063
+    },
+    {
+     "w": "vous",
+     "t": 21.203
+    },
+    {
+     "w": "appartenaient",
+     "t": 21.323
+    },
+    {
+     "w": "pas.",
+     "t": 21.883
+    },
+    {
+     "w": "Les",
+     "t": 22.203
+    },
+    {
+     "w": "faits",
+     "t": 22.343
+    },
+    {
+     "w": "sont",
+     "t": 22.643
+    },
+    {
+     "w": "établis.",
+     "t": 22.743
+    }
+   ]
+  },
+  {
+   "id": "05-souffle",
+   "who": "narrateur",
+   "text": "Sophie ferme les yeux. Au fond de la salle, le père d'Inès retient son souffle.",
+   "start": 23.773,
+   "dur": 3.84,
+   "words": [
+    {
+     "w": "Sophie",
+     "t": 23.773
+    },
+    {
+     "w": "ferme",
+     "t": 24.053
+    },
+    {
+     "w": "les",
+     "t": 24.493
+    },
+    {
+     "w": "yeux.",
+     "t": 24.613
+    },
+    {
+     "w": "Au",
+     "t": 25.053
+    },
+    {
+     "w": "fond",
+     "t": 25.113
+    },
+    {
+     "w": "de",
+     "t": 25.273
+    },
+    {
+     "w": "la",
+     "t": 25.373
+    },
+    {
+     "w": "salle,",
+     "t": 25.453
+    },
+    {
+     "w": "le",
+     "t": 25.953
+    },
+    {
+     "w": "père",
+     "t": 26.033
+    },
+    {
+     "w": "d'Inès",
+     "t": 26.313
+    },
+    {
+     "w": "retient",
+     "t": 26.593
+    },
+    {
+     "w": "son",
+     "t": 26.953
+    },
+    {
+     "w": "souffle.",
+     "t": 27.073
+    }
+   ]
+  },
+  {
+   "id": "06-necessite",
+   "who": "juge",
+   "text": "Mais la loi prévoit une exception. Quand on agit pour protéger la vie d'un enfant, face à un danger immédiat, ce n'est pas un vol. C'est l'état de nécessité.",
+   "start": 27.863,
+   "dur": 7.63,
+   "words": [
+    {
+     "w": "Mais",
+     "t": 27.863
+    },
+    {
+     "w": "la",
+     "t": 28.003
+    },
+    {
+     "w": "loi",
+     "t": 28.123
+    },
+    {
+     "w": "prévoit",
+     "t": 28.243
+    },
+    {
+     "w": "une",
+     "t": 28.623
+    },
+    {
+     "w": "exception.",
+     "t": 28.723
+    },
+    {
+     "w": "Quand",
+     "t": 29.363
+    },
+    {
+     "w": "on",
+     "t": 29.423
+    },
+    {
+     "w": "agit",
+     "t": 29.603
+    },
+    {
+     "w": "pour",
+     "t": 29.903
+    },
+    {
+     "w": "protéger",
+     "t": 30.043
+    },
+    {
+     "w": "la",
+     "t": 30.523
+    },
+    {
+     "w": "vie",
+     "t": 30.663
+    },
+    {
+     "w": "d'un",
+     "t": 30.803
+    },
+    {
+     "w": "enfant,",
+     "t": 30.943
+    },
+    {
+     "w": "face",
+     "t": 31.323
+    },
+    {
+     "w": "à",
+     "t": 31.723
+    },
+    {
+     "w": "un",
+     "t": 31.903
+    },
+    {
+     "w": "danger",
+     "t": 31.963
+    },
+    {
+     "w": "immédiat,",
+     "t": 32.243
+    },
+    {
+     "w": "ce",
+     "t": 33.123
+    },
+    {
+     "w": "n'est",
+     "t": 33.223
+    },
+    {
+     "w": "pas",
+     "t": 33.323
+    },
+    {
+     "w": "un",
+     "t": 33.463
+    },
+    {
+     "w": "vol.",
+     "t": 33.643
+    },
+    {
+     "w": "C'est",
+     "t": 33.963
+    },
+    {
+     "w": "l'état",
+     "t": 34.283
+    },
+    {
+     "w": "de",
+     "t": 34.603
+    },
+    {
+     "w": "nécessité.",
+     "t": 34.743
+    }
+   ]
+  },
+  {
+   "id": "07-relaxe",
+   "who": "juge",
+   "text": "Le tribunal vous relaxe. Vous êtes libre, madame.",
+   "start": 35.743,
+   "dur": 2.32,
+   "words": [
+    {
+     "w": "Le",
+     "t": 35.743
+    },
+    {
+     "w": "tribunal",
+     "t": 35.853
+    },
+    {
+     "w": "vous",
+     "t": 36.293
+    },
+    {
+     "w": "relaxe.",
+     "t": 36.453
+    },
+    {
+     "w": "Vous",
+     "t": 37.093
+    },
+    {
+     "w": "êtes",
+     "t": 37.153
+    },
+    {
+     "w": "libre,",
+     "t": 37.393
+    },
+    {
+     "w": "madame.",
+     "t": 37.633
+    }
+   ]
+  },
+  {
+   "id": "08-applaudit",
+   "who": "narrateur",
+   "text": "Non coupable. Exactement comme vous l'aviez dit. Et toute la salle s'est levée pour applaudir.",
+   "start": 38.563,
+   "dur": 4.345,
+   "words": [
+    {
+     "w": "Non",
+     "t": 38.563
+    },
+    {
+     "w": "coupable.",
+     "t": 38.743
+    },
+    {
+     "w": "Exactement",
+     "t": 39.443
+    },
+    {
+     "w": "comme",
+     "t": 39.783
+    },
+    {
+     "w": "vous",
+     "t": 40.163
+    },
+    {
+     "w": "l'aviez",
+     "t": 40.333
+    },
+    {
+     "w": "dit.",
+     "t": 40.503
+    },
+    {
+     "w": "Et",
+     "t": 40.903
+    },
+    {
+     "w": "toute",
+     "t": 40.963
+    },
+    {
+     "w": "la",
+     "t": 41.143
+    },
+    {
+     "w": "salle",
+     "t": 41.323
+    },
+    {
+     "w": "s'est",
+     "t": 41.543
+    },
+    {
+     "w": "levée",
+     "t": 41.763
+    },
+    {
+     "w": "pour",
+     "t": 42.103
+    },
+    {
+     "w": "applaudir.",
+     "t": 42.243
+    }
+   ]
+  },
+  {
+   "id": "09-apres",
+   "who": "narrateur",
+   "text": "Trois semaines plus tard, les droits d'Inès à la Sécu ont été rétablis. Et son patron a repris Sophie à la pharmacie.",
+   "start": 43.158,
+   "dur": 5.4,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 43.158
+    },
+    {
+     "w": "semaines",
+     "t": 43.398
+    },
+    {
+     "w": "plus",
+     "t": 43.518
+    },
+    {
+     "w": "tard,",
+     "t": 43.718
+    },
+    {
+     "w": "les",
+     "t": 44.218
+    },
+    {
+     "w": "droits",
+     "t": 44.358
+    },
+    {
+     "w": "d'Inès",
+     "t": 44.608
+    },
+    {
+     "w": "à",
+     "t": 44.858
+    },
+    {
+     "w": "la",
+     "t": 44.938
+    },
+    {
+     "w": "Sécu",
+     "t": 45.018
+    },
+    {
+     "w": "ont",
+     "t": 45.338
+    },
+    {
+     "w": "été",
+     "t": 45.538
+    },
+    {
+     "w": "rétablis.",
+     "t": 45.698
+    },
+    {
+     "w": "Et",
+     "t": 46.398
+    },
+    {
+     "w": "son",
+     "t": 46.478
+    },
+    {
+     "w": "patron",
+     "t": 46.598
+    },
+    {
+     "w": "a",
+     "t": 46.878
+    },
+    {
+     "w": "repris",
+     "t": 47.138
+    },
+    {
+     "w": "Sophie",
+     "t": 47.518
+    },
+    {
+     "w": "à",
+     "t": 47.718
+    },
+    {
+     "w": "la",
+     "t": 47.898
+    },
+    {
+     "w": "pharmacie.",
+     "t": 47.958
+    }
+   ]
+  },
+  {
+   "id": "10-commentaire",
+   "who": "narrateur",
+   "text": "Alors, justice est faite ? Et toi, tu aurais fait comme elle ? Dis-le en commentaire.",
+   "start": 48.808,
+   "dur": 3.62,
+   "words": [
+    {
+     "w": "Alors,",
+     "t": 48.808
+    },
+    {
+     "w": "justice",
+     "t": 49.288
+    },
+    {
+     "w": "est",
+     "t": 49.568
+    },
+    {
+     "w": "faite ?",
+     "t": 49.788
+    },
+    {
+     "w": "Et",
+     "t": 50.208
+    },
+    {
+     "w": "toi,",
+     "t": 50.248
+    },
+    {
+     "w": "tu",
+     "t": 50.628
+    },
+    {
+     "w": "aurais",
+     "t": 50.748
+    },
+    {
+     "w": "fait",
+     "t": 50.908
+    },
+    {
+     "w": "comme",
+     "t": 50.948
+    },
+    {
+     "w": "elle ?",
+     "t": 51.128
+    },
+    {
+     "w": "Dis-le",
+     "t": 51.428
+    },
+    {
+     "w": "en",
+     "t": 51.728
+    },
+    {
+     "w": "commentaire.",
+     "t": 51.808
+    }
+   ]
+  },
+  {
+   "id": "11-abonne",
+   "who": "narrateur",
+   "text": "Demain, une nouvelle affaire. Abonne-toi pour être le juré.",
+   "start": 52.678,
+   "dur": 2.772,
+   "words": [
+    {
+     "w": "Demain,",
+     "t": 52.678
+    },
+    {
+     "w": "une",
+     "t": 53.218
+    },
+    {
+     "w": "nouvelle",
+     "t": 53.318
+    },
+    {
+     "w": "affaire.",
+     "t": 53.518
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 54.028
+    },
+    {
+     "w": "pour",
+     "t": 54.538
+    },
+    {
+     "w": "être",
+     "t": 54.758
+    },
+    {
+     "w": "le",
+     "t": 54.878
+    },
+    {
+     "w": "juré.",
+     "t": 55.038
+    }
+   ]
+  }
+ ]
+}

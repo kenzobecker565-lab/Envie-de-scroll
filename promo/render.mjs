@@ -62,6 +62,7 @@ const ADS = {
   technicien: { page: 'promo/technicien/index.html', audio: './technicien/audio.mjs', build: 'build/technicien', out: 'technicien.mp4' },
   cantiniere: { page: 'promo/cantiniere/index.html', audio: './cantiniere/audio.mjs', build: 'build/cantiniere', out: 'cantiniere.mp4' },
   'verdict-cantiniere': { page: 'promo/verdict-cantiniere/index.html', audio: './verdict-cantiniere/audio.mjs', build: 'build/verdict-cantiniere', out: 'verdict-cantiniere.mp4' },
+  'verdict-sophie': { page: 'promo/verdict-sophie/index.html', audio: './verdict-sophie/audio.mjs', build: 'build/verdict-sophie', out: 'verdict-sophie.mp4' },
   gardienne: { page: 'promo/gardienne/index.html', audio: './gardienne/audio.mjs', build: 'build/gardienne', out: 'gardienne.mp4' },
   auxiliaire: { page: 'promo/auxiliaire/index.html', audio: './auxiliaire/audio.mjs', build: 'build/auxiliaire', out: 'auxiliaire.mp4' },
   proprietaire: { page: 'promo/proprietaire/index.html', audio: './proprietaire/audio.mjs', build: 'build/proprietaire', out: 'proprietaire.mp4' },

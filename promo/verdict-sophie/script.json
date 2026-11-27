@@ -1,0 +1,73 @@
+{
+ "_doc": "« Le verdict de Sophie » (épisode 2 de « La préparatrice »).",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "juge": {
+   "name": "juge",
+   "file": "media/juge.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-jures",
+   "who": "narrateur",
+   "text": "Vous avez été plus de quarante mille à juger Sophie. La préparatrice qui a donné l'insuline d'Inès sans la faire payer. Et vous avez presque tous répondu la même chose : non coupable.",
+   "gap": 0
+  },
+  {
+   "id": "02-rappel",
+   "who": "narrateur",
+   "text": "Rappel des faits. Dix-huit mois. Six mille euros de médicaments. Et cent euros de son propre salaire remis chaque mois dans la caisse."
+  },
+  {
+   "id": "03-requis",
+   "who": "narrateur",
+   "text": "Le procureur a requis six mois de prison avec sursis. Le juge prend la parole."
+  },
+  {
+   "id": "04-faits",
+   "who": "juge",
+   "text": "Madame, vous avez pris des médicaments qui ne vous appartenaient pas. Les faits sont établis."
+  },
+  {
+   "id": "05-souffle",
+   "who": "narrateur",
+   "text": "Sophie ferme les yeux. Au fond de la salle, le père d'Inès retient son souffle.",
+   "gap": 0.5
+  },
+  {
+   "id": "06-necessite",
+   "who": "juge",
+   "text": "Mais la loi prévoit une exception. Quand on agit pour protéger la vie d'un enfant, face à un danger immédiat, ce n'est pas un vol. C'est l'état de nécessité."
+  },
+  {
+   "id": "07-relaxe",
+   "who": "juge",
+   "text": "Le tribunal vous relaxe. Vous êtes libre, madame."
+  },
+  {
+   "id": "08-applaudit",
+   "who": "narrateur",
+   "text": "Non coupable. Exactement comme vous l'aviez dit. Et toute la salle s'est levée pour applaudir.",
+   "gap": 0.5
+  },
+  {
+   "id": "09-apres",
+   "who": "narrateur",
+   "text": "Trois semaines plus tard, les droits d'Inès à la Sécu ont été rétablis. Et son patron a repris Sophie à la pharmacie."
+  },
+  {
+   "id": "10-commentaire",
+   "who": "narrateur",
+   "text": "Alors, justice est faite ? Et toi, tu aurais fait comme elle ? Dis-le en commentaire."
+  },
+  {
+   "id": "11-abonne",
+   "who": "narrateur",
+   "text": "Demain, une nouvelle affaire. Abonne-toi pour être le juré."
+  }
+ ]
+}

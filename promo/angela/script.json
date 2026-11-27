@@ -1,0 +1,95 @@
+{
+ "_doc": "« Le videur » (affaire fictive, code Angela), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-angela",
+   "who": "narrateur",
+   "text": "Une femme s'approche du bar et prononce un seul mot : « Angela ». Le videur comprend. Trente secondes plus tard, un homme est plaqué au sol. Et aujourd'hui, c'est le videur qu'on juge.",
+   "gap": 0
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la caméra de la boîte, on voit tout. L'homme qui la suit depuis une heure… sa main au-dessus de son verre… et le videur qui fond sur lui."
+  },
+  {
+   "id": "03-thomas",
+   "who": "narrateur",
+   "text": "Il s'appelle Thomas. Trente et un ans. Videur depuis huit ans. Jamais une bagarre. Aujourd'hui, il est jugé pour violences volontaires."
+  },
+  {
+   "id": "04-cotes",
+   "who": "procureur",
+   "text": "Cet homme n'avait frappé personne. Il buvait un verre. Il est reparti avec deux côtes cassées."
+  },
+  {
+   "id": "05-verre",
+   "who": "avocate",
+   "text": "Un verre ? Ce n'était pas le sien. C'était celui de la jeune femme. Et il avait la main juste au-dessus."
+  },
+  {
+   "id": "06-rien",
+   "who": "procureur",
+   "text": "Une main au-dessus d'un verre, ce n'est pas un crime. Personne n'a rien vu tomber dedans."
+  },
+  {
+   "id": "07-fiole",
+   "who": "avocate",
+   "text": "Personne ? La police a fouillé ses poches. Elle a trouvé une petite fiole. Le labo a confirmé : du GHB."
+  },
+  {
+   "id": "08-police",
+   "who": "procureur",
+   "text": "Peut-être. Mais ce n'est pas au videur de faire la police. Il pouvait l'escorter dehors. Pas le plaquer au sol."
+  },
+  {
+   "id": "09-parking",
+   "who": "avocate",
+   "text": "L'escorter dehors ? Pour qu'il attende la jeune femme sur le parking ? Thomas l'a gardé là. Jusqu'à l'arrivée de la police."
+  },
+  {
+   "id": "10-genou",
+   "who": "procureur",
+   "text": "Vingt minutes au sol. Un genou dans le dos. La loi appelle ça des violences. Point."
+  },
+  {
+   "id": "11-seul",
+   "who": "avocate",
+   "text": "Les bars ont créé le code « Angela » pour que quelqu'un réagisse. Ce soir-là, il a été le seul à le faire."
+  },
+  {
+   "id": "12-colere",
+   "who": "procureur",
+   "text": "Il risque trois ans de prison. Parce que la colère, même juste, ne donne aucun droit."
+  },
+  {
+   "id": "13-oser",
+   "who": "avocate",
+   "text": "Trois ans de prison… pour avoir cru une femme qui a dit « Angela ». Alors la prochaine fois qu'une femme dira ce mot… qui osera bouger ?"
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

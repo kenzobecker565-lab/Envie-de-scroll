@@ -1,0 +1,1305 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 79.68,
+ "lines": [
+  {
+   "id": "01-angela",
+   "who": "narrateur",
+   "text": "Une femme s'approche du bar et prononce un seul mot : « Angela ». Le videur comprend. Trente secondes plus tard, un homme est plaqué au sol. Et aujourd'hui, c'est le videur qu'on juge.",
+   "start": 0.25,
+   "dur": 8.35,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "femme",
+     "t": 0.37
+    },
+    {
+     "w": "s'approche",
+     "t": 0.68
+    },
+    {
+     "w": "du",
+     "t": 0.99
+    },
+    {
+     "w": "bar",
+     "t": 1.07
+    },
+    {
+     "w": "et",
+     "t": 1.31
+    },
+    {
+     "w": "prononce",
+     "t": 1.64
+    },
+    {
+     "w": "un",
+     "t": 1.97
+    },
+    {
+     "w": "seul",
+     "t": 2.19
+    },
+    {
+     "w": "mot : «",
+     "t": 2.35
+    },
+    {
+     "w": "Angela ».",
+     "t": 2.71
+    },
+    {
+     "w": "Le",
+     "t": 3.33
+    },
+    {
+     "w": "videur",
+     "t": 3.39
+    },
+    {
+     "w": "comprend.",
+     "t": 3.67
+    },
+    {
+     "w": "Trente",
+     "t": 4.01
+    },
+    {
+     "w": "secondes",
+     "t": 4.35
+    },
+    {
+     "w": "plus",
+     "t": 4.65
+    },
+    {
+     "w": "tard,",
+     "t": 4.73
+    },
+    {
+     "w": "un",
+     "t": 5.31
+    },
+    {
+     "w": "homme",
+     "t": 5.41
+    },
+    {
+     "w": "est",
+     "t": 5.59
+    },
+    {
+     "w": "plaqué",
+     "t": 5.67
+    },
+    {
+     "w": "au",
+     "t": 5.97
+    },
+    {
+     "w": "sol.",
+     "t": 6.09
+    },
+    {
+     "w": "Et",
+     "t": 6.51
+    },
+    {
+     "w": "aujourd'hui,",
+     "t": 6.83
+    },
+    {
+     "w": "c'est",
+     "t": 7.15
+    },
+    {
+     "w": "le",
+     "t": 7.47
+    },
+    {
+     "w": "videur",
+     "t": 7.53
+    },
+    {
+     "w": "qu'on",
+     "t": 7.81
+    },
+    {
+     "w": "juge.",
+     "t": 8.09
+    }
+   ]
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la caméra de la boîte, on voit tout. L'homme qui la suit depuis une heure… sa main au-dessus de son verre… et le videur qui fond sur lui.",
+   "start": 8.85,
+   "dur": 6.44,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 8.85
+    },
+    {
+     "w": "la",
+     "t": 9.01
+    },
+    {
+     "w": "caméra",
+     "t": 9.11
+    },
+    {
+     "w": "de",
+     "t": 9.43
+    },
+    {
+     "w": "la",
+     "t": 9.49
+    },
+    {
+     "w": "boîte,",
+     "t": 9.59
+    },
+    {
+     "w": "on",
+     "t": 10.07
+    },
+    {
+     "w": "voit",
+     "t": 10.15
+    },
+    {
+     "w": "tout.",
+     "t": 10.31
+    },
+    {
+     "w": "L'homme",
+     "t": 10.66
+    },
+    {
+     "w": "qui",
+     "t": 11.01
+    },
+    {
+     "w": "la",
+     "t": 11.13
+    },
+    {
+     "w": "suit",
+     "t": 11.23
+    },
+    {
+     "w": "depuis",
+     "t": 11.41
+    },
+    {
+     "w": "une",
+     "t": 11.59
+    },
+    {
+     "w": "heure…",
+     "t": 11.81
+    },
+    {
+     "w": "sa",
+     "t": 12.31
+    },
+    {
+     "w": "main",
+     "t": 12.51
+    },
+    {
+     "w": "au-dessus",
+     "t": 12.78
+    },
+    {
+     "w": "de",
+     "t": 13.05
+    },
+    {
+     "w": "son",
+     "t": 13.15
+    },
+    {
+     "w": "verre…",
+     "t": 13.25
+    },
+    {
+     "w": "et",
+     "t": 13.79
+    },
+    {
+     "w": "le",
+     "t": 13.89
+    },
+    {
+     "w": "videur",
+     "t": 13.97
+    },
+    {
+     "w": "qui",
+     "t": 14.39
+    },
+    {
+     "w": "fond",
+     "t": 14.57
+    },
+    {
+     "w": "sur",
+     "t": 14.75
+    },
+    {
+     "w": "lui.",
+     "t": 14.93
+    }
+   ]
+  },
+  {
+   "id": "03-thomas",
+   "who": "narrateur",
+   "text": "Il s'appelle Thomas. Trente et un ans. Videur depuis huit ans. Jamais une bagarre. Aujourd'hui, il est jugé pour violences volontaires.",
+   "start": 15.54,
+   "dur": 6.15,
+   "words": [
+    {
+     "w": "Il",
+     "t": 15.54
+    },
+    {
+     "w": "s'appelle",
+     "t": 15.75
+    },
+    {
+     "w": "Thomas.",
+     "t": 15.96
+    },
+    {
+     "w": "Trente",
+     "t": 16.15
+    },
+    {
+     "w": "et",
+     "t": 16.34
+    },
+    {
+     "w": "un",
+     "t": 16.53
+    },
+    {
+     "w": "ans.",
+     "t": 16.72
+    },
+    {
+     "w": "Videur",
+     "t": 17.22
+    },
+    {
+     "w": "depuis",
+     "t": 17.56
+    },
+    {
+     "w": "huit",
+     "t": 17.82
+    },
+    {
+     "w": "ans.",
+     "t": 18.08
+    },
+    {
+     "w": "Jamais",
+     "t": 18.44
+    },
+    {
+     "w": "une",
+     "t": 18.72
+    },
+    {
+     "w": "bagarre.",
+     "t": 18.88
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 19.49
+    },
+    {
+     "w": "il",
+     "t": 20.1
+    },
+    {
+     "w": "est",
+     "t": 20.2
+    },
+    {
+     "w": "jugé",
+     "t": 20.3
+    },
+    {
+     "w": "pour",
+     "t": 20.56
+    },
+    {
+     "w": "violences",
+     "t": 20.948
+    },
+    {
+     "w": "volontaires.",
+     "t": 21.335
+    }
+   ]
+  },
+  {
+   "id": "04-cotes",
+   "who": "procureur",
+   "text": "Cet homme n'avait frappé personne. Il buvait un verre. Il est reparti avec deux côtes cassées.",
+   "start": 21.94,
+   "dur": 4.43,
+   "words": [
+    {
+     "w": "Cet",
+     "t": 21.94
+    },
+    {
+     "w": "homme",
+     "t": 22.16
+    },
+    {
+     "w": "n'avait",
+     "t": 22.34
+    },
+    {
+     "w": "frappé",
+     "t": 22.52
+    },
+    {
+     "w": "personne.",
+     "t": 22.84
+    },
+    {
+     "w": "Il",
+     "t": 23.52
+    },
+    {
+     "w": "buvait",
+     "t": 23.6
+    },
+    {
+     "w": "un",
+     "t": 23.88
+    },
+    {
+     "w": "verre.",
+     "t": 24.02
+    },
+    {
+     "w": "Il",
+     "t": 24.5
+    },
+    {
+     "w": "est",
+     "t": 24.58
+    },
+    {
+     "w": "reparti",
+     "t": 24.66
+    },
+    {
+     "w": "avec",
+     "t": 25.1
+    },
+    {
+     "w": "deux",
+     "t": 25.28
+    },
+    {
+     "w": "côtes",
+     "t": 25.58
+    },
+    {
+     "w": "cassées.",
+     "t": 25.86
+    }
+   ]
+  },
+  {
+   "id": "05-verre",
+   "who": "avocate",
+   "text": "Un verre ? Ce n'était pas le sien. C'était celui de la jeune femme. Et il avait la main juste au-dessus.",
+   "start": 26.62,
+   "dur": 4.05,
+   "words": [
+    {
+     "w": "Un",
+     "t": 26.807
+    },
+    {
+     "w": "verre ?",
+     "t": 26.993
+    },
+    {
+     "w": "Ce",
+     "t": 27.18
+    },
+    {
+     "w": "n'était",
+     "t": 27.3
+    },
+    {
+     "w": "pas",
+     "t": 27.42
+    },
+    {
+     "w": "le",
+     "t": 27.56
+    },
+    {
+     "w": "sien.",
+     "t": 27.62
+    },
+    {
+     "w": "C'était",
+     "t": 27.92
+    },
+    {
+     "w": "celui",
+     "t": 28.22
+    },
+    {
+     "w": "de",
+     "t": 28.44
+    },
+    {
+     "w": "la",
+     "t": 28.56
+    },
+    {
+     "w": "jeune",
+     "t": 28.66
+    },
+    {
+     "w": "femme.",
+     "t": 28.78
+    },
+    {
+     "w": "Et",
+     "t": 29.26
+    },
+    {
+     "w": "il",
+     "t": 29.34
+    },
+    {
+     "w": "avait",
+     "t": 29.44
+    },
+    {
+     "w": "la",
+     "t": 29.58
+    },
+    {
+     "w": "main",
+     "t": 29.7
+    },
+    {
+     "w": "juste",
+     "t": 29.84
+    },
+    {
+     "w": "au-dessus.",
+     "t": 30.277
+    }
+   ]
+  },
+  {
+   "id": "06-rien",
+   "who": "procureur",
+   "text": "Une main au-dessus d'un verre, ce n'est pas un crime. Personne n'a rien vu tomber dedans.",
+   "start": 30.92,
+   "dur": 3.9,
+   "words": [
+    {
+     "w": "Une",
+     "t": 30.92
+    },
+    {
+     "w": "main",
+     "t": 31.1
+    },
+    {
+     "w": "au-dessus",
+     "t": 31.34
+    },
+    {
+     "w": "d'un",
+     "t": 31.58
+    },
+    {
+     "w": "verre,",
+     "t": 31.82
+    },
+    {
+     "w": "ce",
+     "t": 32.38
+    },
+    {
+     "w": "n'est",
+     "t": 32.47
+    },
+    {
+     "w": "pas",
+     "t": 32.56
+    },
+    {
+     "w": "un",
+     "t": 32.66
+    },
+    {
+     "w": "crime.",
+     "t": 32.84
+    },
+    {
+     "w": "Personne",
+     "t": 33.38
+    },
+    {
+     "w": "n'a",
+     "t": 33.58
+    },
+    {
+     "w": "rien",
+     "t": 33.78
+    },
+    {
+     "w": "vu",
+     "t": 33.94
+    },
+    {
+     "w": "tomber",
+     "t": 34.08
+    },
+    {
+     "w": "dedans.",
+     "t": 34.36
+    }
+   ]
+  },
+  {
+   "id": "07-fiole",
+   "who": "avocate",
+   "text": "Personne ? La police a fouillé ses poches. Elle a trouvé une petite fiole. Le labo a confirmé : du GHB.",
+   "start": 35.07,
+   "dur": 5.04,
+   "words": [
+    {
+     "w": "Personne ?",
+     "t": 35.07
+    },
+    {
+     "w": "La",
+     "t": 35.63
+    },
+    {
+     "w": "police",
+     "t": 35.75
+    },
+    {
+     "w": "a",
+     "t": 35.97
+    },
+    {
+     "w": "fouillé",
+     "t": 36.13
+    },
+    {
+     "w": "ses",
+     "t": 36.37
+    },
+    {
+     "w": "poches.",
+     "t": 36.47
+    },
+    {
+     "w": "Elle",
+     "t": 36.95
+    },
+    {
+     "w": "a",
+     "t": 37.03
+    },
+    {
+     "w": "trouvé",
+     "t": 37.11
+    },
+    {
+     "w": "une",
+     "t": 37.31
+    },
+    {
+     "w": "petite",
+     "t": 37.47
+    },
+    {
+     "w": "fiole.",
+     "t": 37.8
+    },
+    {
+     "w": "Le",
+     "t": 38.13
+    },
+    {
+     "w": "labo",
+     "t": 38.25
+    },
+    {
+     "w": "a",
+     "t": 38.51
+    },
+    {
+     "w": "confirmé :",
+     "t": 38.57
+    },
+    {
+     "w": "du",
+     "t": 39.19
+    },
+    {
+     "w": "GHB.",
+     "t": 39.33
+    }
+   ]
+  },
+  {
+   "id": "08-police",
+   "who": "procureur",
+   "text": "Peut-être. Mais ce n'est pas au videur de faire la police. Il pouvait l'escorter dehors. Pas le plaquer au sol.",
+   "start": 40.36,
+   "dur": 4.84,
+   "words": [
+    {
+     "w": "Peut-être.",
+     "t": 40.66
+    },
+    {
+     "w": "Mais",
+     "t": 40.99
+    },
+    {
+     "w": "ce",
+     "t": 41.19
+    },
+    {
+     "w": "n'est",
+     "t": 41.32
+    },
+    {
+     "w": "pas",
+     "t": 41.45
+    },
+    {
+     "w": "au",
+     "t": 41.53
+    },
+    {
+     "w": "videur",
+     "t": 41.69
+    },
+    {
+     "w": "de",
+     "t": 42.01
+    },
+    {
+     "w": "faire",
+     "t": 42.09
+    },
+    {
+     "w": "la",
+     "t": 42.25
+    },
+    {
+     "w": "police.",
+     "t": 42.37
+    },
+    {
+     "w": "Il",
+     "t": 42.89
+    },
+    {
+     "w": "pouvait",
+     "t": 42.97
+    },
+    {
+     "w": "l'escorter",
+     "t": 43.27
+    },
+    {
+     "w": "dehors.",
+     "t": 43.57
+    },
+    {
+     "w": "Pas",
+     "t": 44.09
+    },
+    {
+     "w": "le",
+     "t": 44.23
+    },
+    {
+     "w": "plaquer",
+     "t": 44.35
+    },
+    {
+     "w": "au",
+     "t": 44.65
+    },
+    {
+     "w": "sol.",
+     "t": 44.75
+    }
+   ]
+  },
+  {
+   "id": "09-parking",
+   "who": "avocate",
+   "text": "L'escorter dehors ? Pour qu'il attende la jeune femme sur le parking ? Thomas l'a gardé là. Jusqu'à l'arrivée de la police.",
+   "start": 45.45,
+   "dur": 4.448,
+   "words": [
+    {
+     "w": "L'escorter",
+     "t": 45.68
+    },
+    {
+     "w": "dehors ?",
+     "t": 45.91
+    },
+    {
+     "w": "Pour",
+     "t": 46.29
+    },
+    {
+     "w": "qu'il",
+     "t": 46.4
+    },
+    {
+     "w": "attende",
+     "t": 46.51
+    },
+    {
+     "w": "la",
+     "t": 46.77
+    },
+    {
+     "w": "jeune",
+     "t": 46.83
+    },
+    {
+     "w": "femme",
+     "t": 46.95
+    },
+    {
+     "w": "sur",
+     "t": 47.13
+    },
+    {
+     "w": "le",
+     "t": 47.27
+    },
+    {
+     "w": "parking ?",
+     "t": 47.33
+    },
+    {
+     "w": "Thomas",
+     "t": 47.81
+    },
+    {
+     "w": "l'a",
+     "t": 47.99
+    },
+    {
+     "w": "gardé",
+     "t": 48.2
+    },
+    {
+     "w": "là.",
+     "t": 48.41
+    },
+    {
+     "w": "Jusqu'à",
+     "t": 48.703
+    },
+    {
+     "w": "l'arrivée",
+     "t": 48.997
+    },
+    {
+     "w": "de",
+     "t": 49.29
+    },
+    {
+     "w": "la",
+     "t": 49.33
+    },
+    {
+     "w": "police.",
+     "t": 49.41
+    }
+   ]
+  },
+  {
+   "id": "10-genou",
+   "who": "procureur",
+   "text": "Vingt minutes au sol. Un genou dans le dos. La loi appelle ça des violences. Point.",
+   "start": 50.148,
+   "dur": 3.94,
+   "words": [
+    {
+     "w": "Vingt",
+     "t": 50.36
+    },
+    {
+     "w": "minutes",
+     "t": 50.572
+    },
+    {
+     "w": "au",
+     "t": 50.784
+    },
+    {
+     "w": "sol.",
+     "t": 50.996
+    },
+    {
+     "w": "Un",
+     "t": 51.208
+    },
+    {
+     "w": "genou",
+     "t": 51.348
+    },
+    {
+     "w": "dans",
+     "t": 51.568
+    },
+    {
+     "w": "le",
+     "t": 51.688
+    },
+    {
+     "w": "dos.",
+     "t": 51.768
+    },
+    {
+     "w": "La",
+     "t": 52.068
+    },
+    {
+     "w": "loi",
+     "t": 52.188
+    },
+    {
+     "w": "appelle",
+     "t": 52.348
+    },
+    {
+     "w": "ça",
+     "t": 52.608
+    },
+    {
+     "w": "des",
+     "t": 52.868
+    },
+    {
+     "w": "violences.",
+     "t": 53.028
+    },
+    {
+     "w": "Point.",
+     "t": 53.581
+    }
+   ]
+  },
+  {
+   "id": "11-seul",
+   "who": "avocate",
+   "text": "Les bars ont créé le code « Angela » pour que quelqu'un réagisse. Ce soir-là, il a été le seul à le faire.",
+   "start": 54.338,
+   "dur": 4.667,
+   "words": [
+    {
+     "w": "Les",
+     "t": 54.338
+    },
+    {
+     "w": "bars",
+     "t": 54.498
+    },
+    {
+     "w": "ont",
+     "t": 54.678
+    },
+    {
+     "w": "créé",
+     "t": 54.838
+    },
+    {
+     "w": "le",
+     "t": 55.078
+    },
+    {
+     "w": "code «",
+     "t": 55.158
+    },
+    {
+     "w": "Angela »",
+     "t": 55.358
+    },
+    {
+     "w": "pour",
+     "t": 55.818
+    },
+    {
+     "w": "que",
+     "t": 56.118
+    },
+    {
+     "w": "quelqu'un",
+     "t": 56.328
+    },
+    {
+     "w": "réagisse.",
+     "t": 56.538
+    },
+    {
+     "w": "Ce",
+     "t": 57.098
+    },
+    {
+     "w": "soir-là,",
+     "t": 57.448
+    },
+    {
+     "w": "il",
+     "t": 57.798
+    },
+    {
+     "w": "a",
+     "t": 57.898
+    },
+    {
+     "w": "été",
+     "t": 57.978
+    },
+    {
+     "w": "le",
+     "t": 58.098
+    },
+    {
+     "w": "seul",
+     "t": 58.218
+    },
+    {
+     "w": "à",
+     "t": 58.458
+    },
+    {
+     "w": "le",
+     "t": 58.618
+    },
+    {
+     "w": "faire.",
+     "t": 58.618
+    }
+   ]
+  },
+  {
+   "id": "12-colere",
+   "who": "procureur",
+   "text": "Il risque trois ans de prison. Parce que la colère, même juste, ne donne aucun droit.",
+   "start": 59.255,
+   "dur": 4.41,
+   "words": [
+    {
+     "w": "Il",
+     "t": 59.255
+    },
+    {
+     "w": "risque",
+     "t": 59.375
+    },
+    {
+     "w": "trois",
+     "t": 59.655
+    },
+    {
+     "w": "ans",
+     "t": 59.995
+    },
+    {
+     "w": "de",
+     "t": 60.175
+    },
+    {
+     "w": "prison.",
+     "t": 60.275
+    },
+    {
+     "w": "Parce",
+     "t": 60.575
+    },
+    {
+     "w": "que",
+     "t": 60.895
+    },
+    {
+     "w": "la",
+     "t": 60.995
+    },
+    {
+     "w": "colère,",
+     "t": 61.095
+    },
+    {
+     "w": "même",
+     "t": 61.655
+    },
+    {
+     "w": "juste,",
+     "t": 61.895
+    },
+    {
+     "w": "ne",
+     "t": 62.475
+    },
+    {
+     "w": "donne",
+     "t": 62.635
+    },
+    {
+     "w": "aucun",
+     "t": 62.815
+    },
+    {
+     "w": "droit.",
+     "t": 63.195
+    }
+   ]
+  },
+  {
+   "id": "13-oser",
+   "who": "avocate",
+   "text": "Trois ans de prison… pour avoir cru une femme qui a dit « Angela ». Alors la prochaine fois qu'une femme dira ce mot… qui osera bouger ?",
+   "start": 63.915,
+   "dur": 6.02,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 63.915
+    },
+    {
+     "w": "ans",
+     "t": 64.155
+    },
+    {
+     "w": "de",
+     "t": 64.355
+    },
+    {
+     "w": "prison…",
+     "t": 64.435
+    },
+    {
+     "w": "pour",
+     "t": 64.795
+    },
+    {
+     "w": "avoir",
+     "t": 65.215
+    },
+    {
+     "w": "cru",
+     "t": 65.375
+    },
+    {
+     "w": "une",
+     "t": 65.615
+    },
+    {
+     "w": "femme",
+     "t": 65.735
+    },
+    {
+     "w": "qui",
+     "t": 65.955
+    },
+    {
+     "w": "a",
+     "t": 66.135
+    },
+    {
+     "w": "dit «",
+     "t": 66.255
+    },
+    {
+     "w": "Angela ».",
+     "t": 66.395
+    },
+    {
+     "w": "Alors",
+     "t": 67.155
+    },
+    {
+     "w": "la",
+     "t": 67.255
+    },
+    {
+     "w": "prochaine",
+     "t": 67.395
+    },
+    {
+     "w": "fois",
+     "t": 67.615
+    },
+    {
+     "w": "qu'une",
+     "t": 67.835
+    },
+    {
+     "w": "femme",
+     "t": 68.055
+    },
+    {
+     "w": "dira",
+     "t": 68.255
+    },
+    {
+     "w": "ce",
+     "t": 68.475
+    },
+    {
+     "w": "mot…",
+     "t": 68.655
+    },
+    {
+     "w": "qui",
+     "t": 69.115
+    },
+    {
+     "w": "osera",
+     "t": 69.195
+    },
+    {
+     "w": "bouger ?",
+     "t": 69.475
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 70.185,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 70.185
+    },
+    {
+     "w": "es",
+     "t": 70.325
+    },
+    {
+     "w": "le",
+     "t": 70.415
+    },
+    {
+     "w": "juré.",
+     "t": 70.505
+    },
+    {
+     "w": "Coupable…",
+     "t": 71.005
+    },
+    {
+     "w": "ou",
+     "t": 71.445
+    },
+    {
+     "w": "non",
+     "t": 71.865
+    },
+    {
+     "w": "coupable ?",
+     "t": 72.065
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 72.945,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 72.945
+    },
+    {
+     "w": "verdict",
+     "t": 73.065
+    },
+    {
+     "w": "tombe",
+     "t": 73.365
+    },
+    {
+     "w": "dans",
+     "t": 73.905
+    },
+    {
+     "w": "la",
+     "t": 74.065
+    },
+    {
+     "w": "prochaine",
+     "t": 74.185
+    },
+    {
+     "w": "vidéo.",
+     "t": 74.465
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 74.955
+    },
+    {
+     "w": "pour",
+     "t": 75.445
+    },
+    {
+     "w": "ne",
+     "t": 75.585
+    },
+    {
+     "w": "pas",
+     "t": 75.685
+    },
+    {
+     "w": "le",
+     "t": 75.825
+    },
+    {
+     "w": "rater.",
+     "t": 75.845
+    }
+   ]
+  }
+ ]
+}

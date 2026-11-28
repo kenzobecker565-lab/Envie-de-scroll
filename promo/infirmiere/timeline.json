@@ -1,0 +1,1149 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 75.66,
+ "lines": [
+  {
+   "id": "01-vole",
+   "who": "narrateur",
+   "text": "Pendant quatorze mois, une infirmière a volé son hôpital. Chaque soir, elle repartait avec des pansements plein les poches. Aujourd'hui, elle est sur le banc des accusés.",
+   "start": 0.25,
+   "dur": 7.34,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 0.25
+    },
+    {
+     "w": "quatorze",
+     "t": 0.51
+    },
+    {
+     "w": "mois,",
+     "t": 0.77
+    },
+    {
+     "w": "une",
+     "t": 1.33
+    },
+    {
+     "w": "infirmière",
+     "t": 1.45
+    },
+    {
+     "w": "a",
+     "t": 1.93
+    },
+    {
+     "w": "volé",
+     "t": 2.01
+    },
+    {
+     "w": "son",
+     "t": 2.29
+    },
+    {
+     "w": "hôpital.",
+     "t": 2.41
+    },
+    {
+     "w": "Chaque",
+     "t": 3.05
+    },
+    {
+     "w": "soir,",
+     "t": 3.31
+    },
+    {
+     "w": "elle",
+     "t": 3.73
+    },
+    {
+     "w": "repartait",
+     "t": 3.83
+    },
+    {
+     "w": "avec",
+     "t": 4.29
+    },
+    {
+     "w": "des",
+     "t": 4.39
+    },
+    {
+     "w": "pansements",
+     "t": 4.65
+    },
+    {
+     "w": "plein",
+     "t": 4.91
+    },
+    {
+     "w": "les",
+     "t": 5.11
+    },
+    {
+     "w": "poches.",
+     "t": 5.25
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 5.82
+    },
+    {
+     "w": "elle",
+     "t": 6.39
+    },
+    {
+     "w": "est",
+     "t": 6.47
+    },
+    {
+     "w": "sur",
+     "t": 6.57
+    },
+    {
+     "w": "le",
+     "t": 6.67
+    },
+    {
+     "w": "banc",
+     "t": 6.79
+    },
+    {
+     "w": "des",
+     "t": 6.91
+    },
+    {
+     "w": "accusés.",
+     "t": 7.03
+    }
+   ]
+  },
+  {
+   "id": "02-parking",
+   "who": "narrateur",
+   "text": "La caméra du parking la filme. Elle ne rentre pas chez elle. Elle s'agenouille devant un homme assis sur un carton… et elle défait le bandage de sa jambe.",
+   "start": 7.84,
+   "dur": 7.09,
+   "words": [
+    {
+     "w": "La",
+     "t": 7.84
+    },
+    {
+     "w": "caméra",
+     "t": 7.98
+    },
+    {
+     "w": "du",
+     "t": 8.3
+    },
+    {
+     "w": "parking",
+     "t": 8.42
+    },
+    {
+     "w": "la",
+     "t": 8.66
+    },
+    {
+     "w": "filme.",
+     "t": 8.88
+    },
+    {
+     "w": "Elle",
+     "t": 9.46
+    },
+    {
+     "w": "ne",
+     "t": 9.56
+    },
+    {
+     "w": "rentre",
+     "t": 9.66
+    },
+    {
+     "w": "pas",
+     "t": 9.88
+    },
+    {
+     "w": "chez",
+     "t": 10.02
+    },
+    {
+     "w": "elle.",
+     "t": 10.16
+    },
+    {
+     "w": "Elle",
+     "t": 10.6
+    },
+    {
+     "w": "s'agenouille",
+     "t": 10.89
+    },
+    {
+     "w": "devant",
+     "t": 11.18
+    },
+    {
+     "w": "un",
+     "t": 11.36
+    },
+    {
+     "w": "homme",
+     "t": 11.56
+    },
+    {
+     "w": "assis",
+     "t": 11.76
+    },
+    {
+     "w": "sur",
+     "t": 12.12
+    },
+    {
+     "w": "un",
+     "t": 12.26
+    },
+    {
+     "w": "carton…",
+     "t": 12.36
+    },
+    {
+     "w": "et",
+     "t": 12.78
+    },
+    {
+     "w": "elle",
+     "t": 13.12
+    },
+    {
+     "w": "défait",
+     "t": 13.51
+    },
+    {
+     "w": "le",
+     "t": 13.9
+    },
+    {
+     "w": "bandage",
+     "t": 13.94
+    },
+    {
+     "w": "de",
+     "t": 14.24
+    },
+    {
+     "w": "sa",
+     "t": 14.34
+    },
+    {
+     "w": "jambe.",
+     "t": 14.46
+    }
+   ]
+  },
+  {
+   "id": "03-camille",
+   "who": "narrateur",
+   "text": "Elle s'appelle Camille. Trente-quatre ans. Infirmière depuis douze ans. Jamais un reproche. Aujourd'hui, elle est jugée pour vol.",
+   "start": 15.18,
+   "dur": 5.74,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 15.18
+    },
+    {
+     "w": "s'appelle",
+     "t": 15.37
+    },
+    {
+     "w": "Camille.",
+     "t": 15.56
+    },
+    {
+     "w": "Trente-quatre",
+     "t": 15.99
+    },
+    {
+     "w": "ans.",
+     "t": 16.42
+    },
+    {
+     "w": "Infirmière",
+     "t": 16.84
+    },
+    {
+     "w": "depuis",
+     "t": 17.32
+    },
+    {
+     "w": "douze",
+     "t": 17.55
+    },
+    {
+     "w": "ans.",
+     "t": 17.78
+    },
+    {
+     "w": "Jamais",
+     "t": 18.1
+    },
+    {
+     "w": "un",
+     "t": 18.4
+    },
+    {
+     "w": "reproche.",
+     "t": 18.6
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 19.19
+    },
+    {
+     "w": "elle",
+     "t": 19.78
+    },
+    {
+     "w": "est",
+     "t": 19.96
+    },
+    {
+     "w": "jugée",
+     "t": 20.04
+    },
+    {
+     "w": "pour",
+     "t": 20.3
+    },
+    {
+     "w": "vol.",
+     "t": 20.46
+    }
+   ]
+  },
+  {
+   "id": "04-payes",
+   "who": "procureur",
+   "text": "Quatorze mois de vol. Du matériel payé par l'hôpital, par les patients, par nous tous.",
+   "start": 21.17,
+   "dur": 4.64,
+   "words": [
+    {
+     "w": "Quatorze",
+     "t": 21.33
+    },
+    {
+     "w": "mois",
+     "t": 21.49
+    },
+    {
+     "w": "de",
+     "t": 21.83
+    },
+    {
+     "w": "vol.",
+     "t": 21.97
+    },
+    {
+     "w": "Du",
+     "t": 22.19
+    },
+    {
+     "w": "matériel",
+     "t": 22.57
+    },
+    {
+     "w": "payé",
+     "t": 23.03
+    },
+    {
+     "w": "par",
+     "t": 23.31
+    },
+    {
+     "w": "l'hôpital,",
+     "t": 23.71
+    },
+    {
+     "w": "par",
+     "t": 24.11
+    },
+    {
+     "w": "les",
+     "t": 24.31
+    },
+    {
+     "w": "patients,",
+     "t": 24.43
+    },
+    {
+     "w": "par",
+     "t": 25.05
+    },
+    {
+     "w": "nous",
+     "t": 25.15
+    },
+    {
+     "w": "tous.",
+     "t": 25.29
+    }
+   ]
+  },
+  {
+   "id": "05-jambe",
+   "who": "avocate",
+   "text": "Des pansements à deux euros. Contre une jambe qu'il allait perdre.",
+   "start": 26.06,
+   "dur": 2.674,
+   "words": [
+    {
+     "w": "Des",
+     "t": 26.247
+    },
+    {
+     "w": "pansements",
+     "t": 26.433
+    },
+    {
+     "w": "à",
+     "t": 26.62
+    },
+    {
+     "w": "deux",
+     "t": 26.8
+    },
+    {
+     "w": "euros.",
+     "t": 26.98
+    },
+    {
+     "w": "Contre",
+     "t": 27.16
+    },
+    {
+     "w": "une",
+     "t": 27.48
+    },
+    {
+     "w": "jambe",
+     "t": 27.66
+    },
+    {
+     "w": "qu'il",
+     "t": 27.87
+    },
+    {
+     "w": "allait",
+     "t": 28.08
+    },
+    {
+     "w": "perdre.",
+     "t": 28.24
+    }
+   ]
+  },
+  {
+   "id": "06-cadre",
+   "who": "procureur",
+   "text": "Elle n'avait pas le droit de soigner dehors. Sans médecin, sans ordonnance, sans aucun cadre.",
+   "start": 28.984,
+   "dur": 4.546,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 28.984
+    },
+    {
+     "w": "n'avait",
+     "t": 29.144
+    },
+    {
+     "w": "pas",
+     "t": 29.304
+    },
+    {
+     "w": "le",
+     "t": 29.444
+    },
+    {
+     "w": "droit",
+     "t": 29.544
+    },
+    {
+     "w": "de",
+     "t": 29.744
+    },
+    {
+     "w": "soigner",
+     "t": 29.884
+    },
+    {
+     "w": "dehors.",
+     "t": 30.184
+    },
+    {
+     "w": "Sans",
+     "t": 30.704
+    },
+    {
+     "w": "médecin,",
+     "t": 31.104
+    },
+    {
+     "w": "sans",
+     "t": 31.504
+    },
+    {
+     "w": "ordonnance,",
+     "t": 31.624
+    },
+    {
+     "w": "sans",
+     "t": 32.404
+    },
+    {
+     "w": "aucun",
+     "t": 32.544
+    },
+    {
+     "w": "cadre.",
+     "t": 32.884
+    }
+   ]
+  },
+  {
+   "id": "07-urgences",
+   "who": "avocate",
+   "text": "Il avait essayé le cadre. Trois fois aux urgences. Six heures d'attente, et on le renvoyait dehors.",
+   "start": 33.78,
+   "dur": 4.18,
+   "words": [
+    {
+     "w": "Il",
+     "t": 33.78
+    },
+    {
+     "w": "avait",
+     "t": 33.9
+    },
+    {
+     "w": "essayé",
+     "t": 34.06
+    },
+    {
+     "w": "le",
+     "t": 34.42
+    },
+    {
+     "w": "cadre.",
+     "t": 34.48
+    },
+    {
+     "w": "Trois",
+     "t": 34.96
+    },
+    {
+     "w": "fois",
+     "t": 35.16
+    },
+    {
+     "w": "aux",
+     "t": 35.34
+    },
+    {
+     "w": "urgences.",
+     "t": 35.48
+    },
+    {
+     "w": "Six",
+     "t": 36.06
+    },
+    {
+     "w": "heures",
+     "t": 36.26
+    },
+    {
+     "w": "d'attente,",
+     "t": 36.53
+    },
+    {
+     "w": "et",
+     "t": 36.8
+    },
+    {
+     "w": "on",
+     "t": 37.08
+    },
+    {
+     "w": "le",
+     "t": 37.16
+    },
+    {
+     "w": "renvoyait",
+     "t": 37.22
+    },
+    {
+     "w": "dehors.",
+     "t": 37.54
+    }
+   ]
+  },
+  {
+   "id": "08-placards",
+   "who": "procureur",
+   "text": "Si chaque infirmière se sert dans les placards pour ses bonnes causes, l'hôpital ne tient pas un mois.",
+   "start": 38.21,
+   "dur": 4.43,
+   "words": [
+    {
+     "w": "Si",
+     "t": 38.21
+    },
+    {
+     "w": "chaque",
+     "t": 38.37
+    },
+    {
+     "w": "infirmière",
+     "t": 38.61
+    },
+    {
+     "w": "se",
+     "t": 39.09
+    },
+    {
+     "w": "sert",
+     "t": 39.25
+    },
+    {
+     "w": "dans",
+     "t": 39.47
+    },
+    {
+     "w": "les",
+     "t": 39.59
+    },
+    {
+     "w": "placards",
+     "t": 39.71
+    },
+    {
+     "w": "pour",
+     "t": 40.07
+    },
+    {
+     "w": "ses",
+     "t": 40.21
+    },
+    {
+     "w": "bonnes",
+     "t": 40.39
+    },
+    {
+     "w": "causes,",
+     "t": 40.61
+    },
+    {
+     "w": "l'hôpital",
+     "t": 41.06
+    },
+    {
+     "w": "ne",
+     "t": 41.51
+    },
+    {
+     "w": "tient",
+     "t": 41.67
+    },
+    {
+     "w": "pas",
+     "t": 41.89
+    },
+    {
+     "w": "un",
+     "t": 42.03
+    },
+    {
+     "w": "mois.",
+     "t": 42.23
+    }
+   ]
+  },
+  {
+   "id": "09-poubelle",
+   "who": "avocate",
+   "text": "Elle ne s'est pas servie. Elle a pris ce qui partait à la poubelle : des boîtes entamées, périmées dans la semaine.",
+   "start": 42.89,
+   "dur": 4.33,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 42.89
+    },
+    {
+     "w": "ne",
+     "t": 43.01
+    },
+    {
+     "w": "s'est",
+     "t": 43.13
+    },
+    {
+     "w": "pas",
+     "t": 43.25
+    },
+    {
+     "w": "servie.",
+     "t": 43.55
+    },
+    {
+     "w": "Elle",
+     "t": 43.85
+    },
+    {
+     "w": "a",
+     "t": 43.95
+    },
+    {
+     "w": "pris",
+     "t": 44.09
+    },
+    {
+     "w": "ce",
+     "t": 44.19
+    },
+    {
+     "w": "qui",
+     "t": 44.31
+    },
+    {
+     "w": "partait",
+     "t": 44.41
+    },
+    {
+     "w": "à",
+     "t": 44.67
+    },
+    {
+     "w": "la",
+     "t": 44.73
+    },
+    {
+     "w": "poubelle :",
+     "t": 44.79
+    },
+    {
+     "w": "des",
+     "t": 45.25
+    },
+    {
+     "w": "boîtes",
+     "t": 45.41
+    },
+    {
+     "w": "entamées,",
+     "t": 45.82
+    },
+    {
+     "w": "périmées",
+     "t": 46.23
+    },
+    {
+     "w": "dans",
+     "t": 46.59
+    },
+    {
+     "w": "la",
+     "t": 46.69
+    },
+    {
+     "w": "semaine.",
+     "t": 46.79
+    }
+   ]
+  },
+  {
+   "id": "10-vol",
+   "who": "procureur",
+   "text": "Peu importe. Ce n'était pas à elle. Un vol reste un vol.",
+   "start": 47.47,
+   "dur": 3.03,
+   "words": [
+    {
+     "w": "Peu",
+     "t": 47.47
+    },
+    {
+     "w": "importe.",
+     "t": 47.61
+    },
+    {
+     "w": "Ce",
+     "t": 48.23
+    },
+    {
+     "w": "n'était",
+     "t": 48.36
+    },
+    {
+     "w": "pas",
+     "t": 48.49
+    },
+    {
+     "w": "à",
+     "t": 48.65
+    },
+    {
+     "w": "elle.",
+     "t": 48.85
+    },
+    {
+     "w": "Un",
+     "t": 49.17
+    },
+    {
+     "w": "vol",
+     "t": 49.29
+    },
+    {
+     "w": "reste",
+     "t": 49.55
+    },
+    {
+     "w": "un",
+     "t": 49.89
+    },
+    {
+     "w": "vol.",
+     "t": 50.09
+    }
+   ]
+  },
+  {
+   "id": "11-marche",
+   "who": "avocate",
+   "text": "Le chirurgien l'a confirmé : sans ces soins, l'amputation était inévitable. Aujourd'hui, il marche.",
+   "start": 50.75,
+   "dur": 4.59,
+   "words": [
+    {
+     "w": "Le",
+     "t": 50.75
+    },
+    {
+     "w": "chirurgien",
+     "t": 50.89
+    },
+    {
+     "w": "l'a",
+     "t": 51.16
+    },
+    {
+     "w": "confirmé :",
+     "t": 51.43
+    },
+    {
+     "w": "sans",
+     "t": 52.05
+    },
+    {
+     "w": "ces",
+     "t": 52.2
+    },
+    {
+     "w": "soins,",
+     "t": 52.35
+    },
+    {
+     "w": "l'amputation",
+     "t": 52.77
+    },
+    {
+     "w": "était",
+     "t": 53.19
+    },
+    {
+     "w": "inévitable.",
+     "t": 53.41
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 54.1
+    },
+    {
+     "w": "il",
+     "t": 54.79
+    },
+    {
+     "w": "marche.",
+     "t": 54.85
+    }
+   ]
+  },
+  {
+   "id": "12-troisans",
+   "who": "procureur",
+   "text": "Elle risque trois ans de prison. Et l'interdiction d'exercer.",
+   "start": 55.59,
+   "dur": 2.9,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 55.59
+    },
+    {
+     "w": "risque",
+     "t": 55.73
+    },
+    {
+     "w": "trois",
+     "t": 55.97
+    },
+    {
+     "w": "ans",
+     "t": 56.33
+    },
+    {
+     "w": "de",
+     "t": 56.55
+    },
+    {
+     "w": "prison.",
+     "t": 56.63
+    },
+    {
+     "w": "Et",
+     "t": 56.91
+    },
+    {
+     "w": "l'interdiction",
+     "t": 57.449
+    },
+    {
+     "w": "d'exercer.",
+     "t": 57.988
+    }
+   ]
+  },
+  {
+   "id": "13-sauvee",
+   "who": "avocate",
+   "text": "Trois ans… pour des pansements qui finissaient à la poubelle. Et une jambe sauvée.",
+   "start": 58.74,
+   "dur": 3.4,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 58.74
+    },
+    {
+     "w": "ans…",
+     "t": 59.04
+    },
+    {
+     "w": "pour",
+     "t": 59.16
+    },
+    {
+     "w": "des",
+     "t": 59.5
+    },
+    {
+     "w": "pansements",
+     "t": 59.76
+    },
+    {
+     "w": "qui",
+     "t": 60.02
+    },
+    {
+     "w": "finissaient",
+     "t": 60.14
+    },
+    {
+     "w": "à",
+     "t": 60.56
+    },
+    {
+     "w": "la",
+     "t": 60.62
+    },
+    {
+     "w": "poubelle.",
+     "t": 60.66
+    },
+    {
+     "w": "Et",
+     "t": 61.02
+    },
+    {
+     "w": "une",
+     "t": 61.24
+    },
+    {
+     "w": "jambe",
+     "t": 61.38
+    },
+    {
+     "w": "sauvée.",
+     "t": 61.64
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire.",
+   "start": 62.39,
+   "dur": 3.76,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 62.39
+    },
+    {
+     "w": "es",
+     "t": 62.53
+    },
+    {
+     "w": "le",
+     "t": 62.61
+    },
+    {
+     "w": "juré.",
+     "t": 62.71
+    },
+    {
+     "w": "Coupable…",
+     "t": 63.21
+    },
+    {
+     "w": "ou",
+     "t": 63.57
+    },
+    {
+     "w": "non",
+     "t": 63.97
+    },
+    {
+     "w": "coupable ?",
+     "t": 64.11
+    },
+    {
+     "w": "Écris",
+     "t": 64.75
+    },
+    {
+     "w": "ton",
+     "t": 64.97
+    },
+    {
+     "w": "verdict",
+     "t": 65.07
+    },
+    {
+     "w": "en",
+     "t": 65.29
+    },
+    {
+     "w": "commentaire.",
+     "t": 65.51
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais.",
+   "start": 66.4,
+   "dur": 5.856,
+   "words": [
+    {
+     "w": "Le",
+     "t": 66.4
+    },
+    {
+     "w": "verdict",
+     "t": 66.54
+    },
+    {
+     "w": "tombe",
+     "t": 66.82
+    },
+    {
+     "w": "dans",
+     "t": 67.38
+    },
+    {
+     "w": "la",
+     "t": 67.54
+    },
+    {
+     "w": "prochaine",
+     "t": 67.66
+    },
+    {
+     "w": "vidéo.",
+     "t": 67.94
+    },
+    {
+     "w": "Appuie",
+     "t": 68.48
+    },
+    {
+     "w": "sur",
+     "t": 68.74
+    },
+    {
+     "w": "le",
+     "t": 68.82
+    },
+    {
+     "w": "plus",
+     "t": 68.92
+    },
+    {
+     "w": "pour",
+     "t": 69.14
+    },
+    {
+     "w": "devenir",
+     "t": 69.38
+    },
+    {
+     "w": "juré",
+     "t": 69.66
+    },
+    {
+     "w": "officiel…",
+     "t": 70.08
+    },
+    {
+     "w": "sinon,",
+     "t": 70.8
+    },
+    {
+     "w": "tu",
+     "t": 71.04
+    },
+    {
+     "w": "ne",
+     "t": 71.46
+    },
+    {
+     "w": "sauras",
+     "t": 71.64
+    },
+    {
+     "w": "jamais.",
+     "t": 71.82
+    }
+   ]
+  }
+ ]
+}

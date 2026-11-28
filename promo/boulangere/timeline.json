@@ -1,0 +1,1261 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 81.66,
+ "lines": [
+  {
+   "id": "01-jete",
+   "who": "narrateur",
+   "text": "Pendant deux ans, une vendeuse a volé sa boulangerie. Chaque soir, un sac de pain. Sur la feuille des invendus, elle écrivait : « jeté ». Aujourd'hui, c'est elle qu'on juge.",
+   "start": 0.25,
+   "dur": 7.985,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 0.25
+    },
+    {
+     "w": "deux",
+     "t": 0.51
+    },
+    {
+     "w": "ans,",
+     "t": 0.73
+    },
+    {
+     "w": "une",
+     "t": 1.11
+    },
+    {
+     "w": "vendeuse",
+     "t": 1.23
+    },
+    {
+     "w": "a",
+     "t": 1.61
+    },
+    {
+     "w": "volé",
+     "t": 1.73
+    },
+    {
+     "w": "sa",
+     "t": 1.93
+    },
+    {
+     "w": "boulangerie.",
+     "t": 2.03
+    },
+    {
+     "w": "Chaque",
+     "t": 2.69
+    },
+    {
+     "w": "soir,",
+     "t": 2.87
+    },
+    {
+     "w": "un",
+     "t": 3.39
+    },
+    {
+     "w": "sac",
+     "t": 3.49
+    },
+    {
+     "w": "de",
+     "t": 3.69
+    },
+    {
+     "w": "pain.",
+     "t": 3.85
+    },
+    {
+     "w": "Sur",
+     "t": 4.27
+    },
+    {
+     "w": "la",
+     "t": 4.33
+    },
+    {
+     "w": "feuille",
+     "t": 4.45
+    },
+    {
+     "w": "des",
+     "t": 4.63
+    },
+    {
+     "w": "invendus,",
+     "t": 4.71
+    },
+    {
+     "w": "elle",
+     "t": 5.31
+    },
+    {
+     "w": "écrivait : «",
+     "t": 5.41
+    },
+    {
+     "w": "jeté ».",
+     "t": 5.905
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 6.4
+    },
+    {
+     "w": "c'est",
+     "t": 6.895
+    },
+    {
+     "w": "elle",
+     "t": 7.39
+    },
+    {
+     "w": "qu'on",
+     "t": 7.58
+    },
+    {
+     "w": "juge.",
+     "t": 7.77
+    }
+   ]
+  },
+  {
+   "id": "02-poubelles",
+   "who": "narrateur",
+   "text": "La caméra de l'arrière-boutique montre où il partait vraiment. Une petite fille de six ans, accroupie près des poubelles… et son père qui fait le guet.",
+   "start": 8.485,
+   "dur": 6.75,
+   "words": [
+    {
+     "w": "La",
+     "t": 8.485
+    },
+    {
+     "w": "caméra",
+     "t": 8.625
+    },
+    {
+     "w": "de",
+     "t": 8.925
+    },
+    {
+     "w": "l'arrière-boutique",
+     "t": 9.335
+    },
+    {
+     "w": "montre",
+     "t": 9.745
+    },
+    {
+     "w": "où",
+     "t": 10.045
+    },
+    {
+     "w": "il",
+     "t": 10.265
+    },
+    {
+     "w": "partait",
+     "t": 10.365
+    },
+    {
+     "w": "vraiment.",
+     "t": 10.665
+    },
+    {
+     "w": "Une",
+     "t": 11.185
+    },
+    {
+     "w": "petite",
+     "t": 11.285
+    },
+    {
+     "w": "fille",
+     "t": 11.485
+    },
+    {
+     "w": "de",
+     "t": 11.685
+    },
+    {
+     "w": "six",
+     "t": 11.875
+    },
+    {
+     "w": "ans,",
+     "t": 12.065
+    },
+    {
+     "w": "accroupie",
+     "t": 12.525
+    },
+    {
+     "w": "près",
+     "t": 12.905
+    },
+    {
+     "w": "des",
+     "t": 13.025
+    },
+    {
+     "w": "poubelles…",
+     "t": 13.165
+    },
+    {
+     "w": "et",
+     "t": 13.785
+    },
+    {
+     "w": "son",
+     "t": 13.905
+    },
+    {
+     "w": "père",
+     "t": 14.045
+    },
+    {
+     "w": "qui",
+     "t": 14.325
+    },
+    {
+     "w": "fait",
+     "t": 14.605
+    },
+    {
+     "w": "le",
+     "t": 14.745
+    },
+    {
+     "w": "guet.",
+     "t": 14.865
+    }
+   ]
+  },
+  {
+   "id": "03-leila",
+   "who": "narrateur",
+   "text": "Elle s'appelle Leïla. Vingt-six ans. Vendeuse depuis six ans. Jamais une erreur de caisse. Aujourd'hui, elle est jugée pour vol.",
+   "start": 15.485,
+   "dur": 6.25,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 15.485
+    },
+    {
+     "w": "s'appelle",
+     "t": 15.715
+    },
+    {
+     "w": "Leïla.",
+     "t": 15.945
+    },
+    {
+     "w": "Vingt-six",
+     "t": 16.475
+    },
+    {
+     "w": "ans.",
+     "t": 17.005
+    },
+    {
+     "w": "Vendeuse",
+     "t": 17.405
+    },
+    {
+     "w": "depuis",
+     "t": 17.765
+    },
+    {
+     "w": "six",
+     "t": 18.025
+    },
+    {
+     "w": "ans.",
+     "t": 18.285
+    },
+    {
+     "w": "Jamais",
+     "t": 18.685
+    },
+    {
+     "w": "une",
+     "t": 19.045
+    },
+    {
+     "w": "erreur",
+     "t": 19.185
+    },
+    {
+     "w": "de",
+     "t": 19.445
+    },
+    {
+     "w": "caisse.",
+     "t": 19.485
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 20.085
+    },
+    {
+     "w": "elle",
+     "t": 20.685
+    },
+    {
+     "w": "est",
+     "t": 20.785
+    },
+    {
+     "w": "jugée",
+     "t": 20.845
+    },
+    {
+     "w": "pour",
+     "t": 21.125
+    },
+    {
+     "w": "vol.",
+     "t": 21.265
+    }
+   ]
+  },
+  {
+   "id": "04-systeme",
+   "who": "procureur",
+   "text": "Deux ans. Plus de quatre mille baguettes. Ce n'est plus un geste, c'est un système.",
+   "start": 21.985,
+   "dur": 4.05,
+   "words": [
+    {
+     "w": "Deux",
+     "t": 21.985
+    },
+    {
+     "w": "ans.",
+     "t": 22.325
+    },
+    {
+     "w": "Plus",
+     "t": 22.585
+    },
+    {
+     "w": "de",
+     "t": 22.705
+    },
+    {
+     "w": "quatre",
+     "t": 22.905
+    },
+    {
+     "w": "mille",
+     "t": 23.105
+    },
+    {
+     "w": "baguettes.",
+     "t": 23.305
+    },
+    {
+     "w": "Ce",
+     "t": 24.065
+    },
+    {
+     "w": "n'est",
+     "t": 24.145
+    },
+    {
+     "w": "plus",
+     "t": 24.225
+    },
+    {
+     "w": "un",
+     "t": 24.345
+    },
+    {
+     "w": "geste,",
+     "t": 24.525
+    },
+    {
+     "w": "c'est",
+     "t": 24.875
+    },
+    {
+     "w": "un",
+     "t": 25.225
+    },
+    {
+     "w": "système.",
+     "t": 25.345
+    }
+   ]
+  },
+  {
+   "id": "05-poubelle",
+   "who": "avocate",
+   "text": "Un système ? C'était le pain que son patron jetait le soir. Elle l'a juste posé à côté de la poubelle.",
+   "start": 26.285,
+   "dur": 4.232,
+   "words": [
+    {
+     "w": "Un",
+     "t": 26.285
+    },
+    {
+     "w": "système ?",
+     "t": 26.425
+    },
+    {
+     "w": "C'était",
+     "t": 26.825
+    },
+    {
+     "w": "le",
+     "t": 27.225
+    },
+    {
+     "w": "pain",
+     "t": 27.345
+    },
+    {
+     "w": "que",
+     "t": 27.505
+    },
+    {
+     "w": "son",
+     "t": 27.645
+    },
+    {
+     "w": "patron",
+     "t": 27.765
+    },
+    {
+     "w": "jetait",
+     "t": 28.005
+    },
+    {
+     "w": "le",
+     "t": 28.345
+    },
+    {
+     "w": "soir.",
+     "t": 28.385
+    },
+    {
+     "w": "Elle",
+     "t": 28.845
+    },
+    {
+     "w": "l'a",
+     "t": 28.965
+    },
+    {
+     "w": "juste",
+     "t": 29.085
+    },
+    {
+     "w": "posé",
+     "t": 29.265
+    },
+    {
+     "w": "à",
+     "t": 29.685
+    },
+    {
+     "w": "côté",
+     "t": 29.745
+    },
+    {
+     "w": "de",
+     "t": 29.885
+    },
+    {
+     "w": "la",
+     "t": 29.985
+    },
+    {
+     "w": "poubelle.",
+     "t": 30.065
+    }
+   ]
+  },
+  {
+   "id": "06-revendu",
+   "who": "procureur",
+   "text": "Faux. Ce pain n'était pas jeté. Le lendemain matin, il était revendu à moitié prix. Elle a volé de la marchandise.",
+   "start": 30.767,
+   "dur": 5.58,
+   "words": [
+    {
+     "w": "Faux.",
+     "t": 30.767
+    },
+    {
+     "w": "Ce",
+     "t": 31.287
+    },
+    {
+     "w": "pain",
+     "t": 31.387
+    },
+    {
+     "w": "n'était",
+     "t": 31.577
+    },
+    {
+     "w": "pas",
+     "t": 31.767
+    },
+    {
+     "w": "jeté.",
+     "t": 31.987
+    },
+    {
+     "w": "Le",
+     "t": 32.507
+    },
+    {
+     "w": "lendemain",
+     "t": 32.587
+    },
+    {
+     "w": "matin,",
+     "t": 32.867
+    },
+    {
+     "w": "il",
+     "t": 33.347
+    },
+    {
+     "w": "était",
+     "t": 33.487
+    },
+    {
+     "w": "revendu",
+     "t": 33.647
+    },
+    {
+     "w": "à",
+     "t": 34.087
+    },
+    {
+     "w": "moitié",
+     "t": 34.167
+    },
+    {
+     "w": "prix.",
+     "t": 34.527
+    },
+    {
+     "w": "Elle",
+     "t": 34.887
+    },
+    {
+     "w": "a",
+     "t": 34.967
+    },
+    {
+     "w": "volé",
+     "t": 35.067
+    },
+    {
+     "w": "de",
+     "t": 35.407
+    },
+    {
+     "w": "la",
+     "t": 35.507
+    },
+    {
+     "w": "marchandise.",
+     "t": 35.607
+    }
+   ]
+  },
+  {
+   "id": "07-centimes",
+   "who": "avocate",
+   "text": "À moitié prix… cinquante centimes. Et cette petite fille, elle les avait, les cinquante centimes ?",
+   "start": 36.597,
+   "dur": 4.183,
+   "words": [
+    {
+     "w": "À",
+     "t": 36.597
+    },
+    {
+     "w": "moitié",
+     "t": 36.697
+    },
+    {
+     "w": "prix…",
+     "t": 36.977
+    },
+    {
+     "w": "cinquante",
+     "t": 37.437
+    },
+    {
+     "w": "centimes.",
+     "t": 37.897
+    },
+    {
+     "w": "Et",
+     "t": 38.537
+    },
+    {
+     "w": "cette",
+     "t": 38.637
+    },
+    {
+     "w": "petite",
+     "t": 38.837
+    },
+    {
+     "w": "fille,",
+     "t": 39.017
+    },
+    {
+     "w": "elle",
+     "t": 39.497
+    },
+    {
+     "w": "les",
+     "t": 39.637
+    },
+    {
+     "w": "avait,",
+     "t": 39.737
+    },
+    {
+     "w": "les",
+     "t": 40.037
+    },
+    {
+     "w": "cinquante",
+     "t": 40.157
+    },
+    {
+     "w": "centimes ?",
+     "t": 40.277
+    }
+   ]
+  },
+  {
+   "id": "08-demander",
+   "who": "procureur",
+   "text": "Alors elle n'avait qu'à demander. Son patron aurait peut-être dit oui.",
+   "start": 41.03,
+   "dur": 3.07,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 41.03
+    },
+    {
+     "w": "elle",
+     "t": 41.24
+    },
+    {
+     "w": "n'avait",
+     "t": 41.453
+    },
+    {
+     "w": "qu'à",
+     "t": 41.667
+    },
+    {
+     "w": "demander.",
+     "t": 41.88
+    },
+    {
+     "w": "Son",
+     "t": 42.44
+    },
+    {
+     "w": "patron",
+     "t": 42.58
+    },
+    {
+     "w": "aurait",
+     "t": 42.86
+    },
+    {
+     "w": "peut-être",
+     "t": 43.19
+    },
+    {
+     "w": "dit",
+     "t": 43.52
+    },
+    {
+     "w": "oui.",
+     "t": 43.72
+    }
+   ]
+  },
+  {
+   "id": "09-dix",
+   "who": "avocate",
+   "text": "Elle a demandé. Il a répondu : « Si je donne une fois, demain ils seront dix. »",
+   "start": 44.35,
+   "dur": 3.84,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 44.35
+    },
+    {
+     "w": "a",
+     "t": 44.47
+    },
+    {
+     "w": "demandé.",
+     "t": 44.55
+    },
+    {
+     "w": "Il",
+     "t": 45.13
+    },
+    {
+     "w": "a",
+     "t": 45.17
+    },
+    {
+     "w": "répondu : «",
+     "t": 45.27
+    },
+    {
+     "w": "Si",
+     "t": 45.91
+    },
+    {
+     "w": "je",
+     "t": 46.01
+    },
+    {
+     "w": "donne",
+     "t": 46.13
+    },
+    {
+     "w": "une",
+     "t": 46.27
+    },
+    {
+     "w": "fois,",
+     "t": 46.39
+    },
+    {
+     "w": "demain",
+     "t": 46.89
+    },
+    {
+     "w": "ils",
+     "t": 47.15
+    },
+    {
+     "w": "seront",
+     "t": 47.41
+    },
+    {
+     "w": "dix. »",
+     "t": 47.61
+    }
+   ]
+  },
+  {
+   "id": "10-familles",
+   "who": "procureur",
+   "text": "Et il avait raison. Le mois dernier, ils étaient sept familles derrière cette boulangerie. Elle a créé une file d'attente.",
+   "start": 48.44,
+   "dur": 5.42,
+   "words": [
+    {
+     "w": "Et",
+     "t": 48.44
+    },
+    {
+     "w": "il",
+     "t": 48.58
+    },
+    {
+     "w": "avait",
+     "t": 48.7
+    },
+    {
+     "w": "raison.",
+     "t": 48.84
+    },
+    {
+     "w": "Le",
+     "t": 49.42
+    },
+    {
+     "w": "mois",
+     "t": 49.5
+    },
+    {
+     "w": "dernier,",
+     "t": 49.62
+    },
+    {
+     "w": "ils",
+     "t": 49.932
+    },
+    {
+     "w": "étaient",
+     "t": 50.244
+    },
+    {
+     "w": "sept",
+     "t": 50.556
+    },
+    {
+     "w": "familles",
+     "t": 50.868
+    },
+    {
+     "w": "derrière",
+     "t": 51.18
+    },
+    {
+     "w": "cette",
+     "t": 51.42
+    },
+    {
+     "w": "boulangerie.",
+     "t": 51.68
+    },
+    {
+     "w": "Elle",
+     "t": 52.32
+    },
+    {
+     "w": "a",
+     "t": 52.4
+    },
+    {
+     "w": "créé",
+     "t": 52.5
+    },
+    {
+     "w": "une",
+     "t": 52.84
+    },
+    {
+     "w": "file",
+     "t": 52.96
+    },
+    {
+     "w": "d'attente.",
+     "t": 53.42
+    }
+   ]
+  },
+  {
+   "id": "11-nourries",
+   "who": "avocate",
+   "text": "Sept familles qui avaient faim. Elle ne les a pas créées. Elle les a nourries.",
+   "start": 54.11,
+   "dur": 3.21,
+   "words": [
+    {
+     "w": "Sept",
+     "t": 54.297
+    },
+    {
+     "w": "familles",
+     "t": 54.483
+    },
+    {
+     "w": "qui",
+     "t": 54.67
+    },
+    {
+     "w": "avaient",
+     "t": 54.86
+    },
+    {
+     "w": "faim.",
+     "t": 55.05
+    },
+    {
+     "w": "Elle",
+     "t": 55.41
+    },
+    {
+     "w": "ne",
+     "t": 55.53
+    },
+    {
+     "w": "les",
+     "t": 55.63
+    },
+    {
+     "w": "a",
+     "t": 55.73
+    },
+    {
+     "w": "pas",
+     "t": 55.87
+    },
+    {
+     "w": "créées.",
+     "t": 55.97
+    },
+    {
+     "w": "Elle",
+     "t": 56.47
+    },
+    {
+     "w": "les",
+     "t": 56.57
+    },
+    {
+     "w": "a",
+     "t": 56.69
+    },
+    {
+     "w": "nourries.",
+     "t": 57.012
+    }
+   ]
+  },
+  {
+   "id": "12-licenciee",
+   "who": "procureur",
+   "text": "Elle risque trois ans de prison. Et elle a déjà perdu son travail.",
+   "start": 57.57,
+   "dur": 3.05,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 57.57
+    },
+    {
+     "w": "risque",
+     "t": 57.71
+    },
+    {
+     "w": "trois",
+     "t": 57.95
+    },
+    {
+     "w": "ans",
+     "t": 58.31
+    },
+    {
+     "w": "de",
+     "t": 58.51
+    },
+    {
+     "w": "prison.",
+     "t": 58.61
+    },
+    {
+     "w": "Et",
+     "t": 58.89
+    },
+    {
+     "w": "elle",
+     "t": 59.23
+    },
+    {
+     "w": "a",
+     "t": 59.33
+    },
+    {
+     "w": "déjà",
+     "t": 59.39
+    },
+    {
+     "w": "perdu",
+     "t": 59.61
+    },
+    {
+     "w": "son",
+     "t": 59.87
+    },
+    {
+     "w": "travail.",
+     "t": 60.07
+    }
+   ]
+  },
+  {
+   "id": "13-tonnes",
+   "who": "avocate",
+   "text": "Trois ans… pour du pain de la veille. Ce pays jette dix millions de tonnes de nourriture par an. Et c'est elle qu'on juge ?",
+   "start": 60.87,
+   "dur": 5.224,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 61.0
+    },
+    {
+     "w": "ans…",
+     "t": 61.13
+    },
+    {
+     "w": "pour",
+     "t": 61.33
+    },
+    {
+     "w": "du",
+     "t": 61.71
+    },
+    {
+     "w": "pain",
+     "t": 61.87
+    },
+    {
+     "w": "de",
+     "t": 62.09
+    },
+    {
+     "w": "la",
+     "t": 62.17
+    },
+    {
+     "w": "veille.",
+     "t": 62.27
+    },
+    {
+     "w": "Ce",
+     "t": 62.69
+    },
+    {
+     "w": "pays",
+     "t": 62.83
+    },
+    {
+     "w": "jette",
+     "t": 63.05
+    },
+    {
+     "w": "dix",
+     "t": 63.31
+    },
+    {
+     "w": "millions",
+     "t": 63.57
+    },
+    {
+     "w": "de",
+     "t": 63.79
+    },
+    {
+     "w": "tonnes",
+     "t": 63.95
+    },
+    {
+     "w": "de",
+     "t": 64.13
+    },
+    {
+     "w": "nourriture",
+     "t": 64.27
+    },
+    {
+     "w": "par",
+     "t": 64.63
+    },
+    {
+     "w": "an.",
+     "t": 64.79
+    },
+    {
+     "w": "Et",
+     "t": 65.03
+    },
+    {
+     "w": "c'est",
+     "t": 65.16
+    },
+    {
+     "w": "elle",
+     "t": 65.29
+    },
+    {
+     "w": "qu'on",
+     "t": 65.46
+    },
+    {
+     "w": "juge ?",
+     "t": 65.63
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Un : relaxe. Deux : coupable, sans prison. Trois : prison. Écris ton chiffre en commentaire.",
+   "start": 66.344,
+   "dur": 5.81,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 66.344
+    },
+    {
+     "w": "es",
+     "t": 66.504
+    },
+    {
+     "w": "le",
+     "t": 66.574
+    },
+    {
+     "w": "juré.",
+     "t": 66.644
+    },
+    {
+     "w": "Un :",
+     "t": 67.134
+    },
+    {
+     "w": "relaxe.",
+     "t": 67.624
+    },
+    {
+     "w": "Deux :",
+     "t": 68.114
+    },
+    {
+     "w": "coupable,",
+     "t": 68.604
+    },
+    {
+     "w": "sans",
+     "t": 68.984
+    },
+    {
+     "w": "prison.",
+     "t": 69.384
+    },
+    {
+     "w": "Trois :",
+     "t": 69.904
+    },
+    {
+     "w": "prison.",
+     "t": 70.424
+    },
+    {
+     "w": "Écris",
+     "t": 70.804
+    },
+    {
+     "w": "ton",
+     "t": 71.084
+    },
+    {
+     "w": "chiffre",
+     "t": 71.164
+    },
+    {
+     "w": "en",
+     "t": 71.484
+    },
+    {
+     "w": "commentaire.",
+     "t": 71.504
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais.",
+   "start": 72.404,
+   "dur": 5.856,
+   "words": [
+    {
+     "w": "Le",
+     "t": 72.404
+    },
+    {
+     "w": "verdict",
+     "t": 72.544
+    },
+    {
+     "w": "tombe",
+     "t": 72.824
+    },
+    {
+     "w": "dans",
+     "t": 73.384
+    },
+    {
+     "w": "la",
+     "t": 73.544
+    },
+    {
+     "w": "prochaine",
+     "t": 73.664
+    },
+    {
+     "w": "vidéo.",
+     "t": 73.944
+    },
+    {
+     "w": "Appuie",
+     "t": 74.484
+    },
+    {
+     "w": "sur",
+     "t": 74.744
+    },
+    {
+     "w": "le",
+     "t": 74.824
+    },
+    {
+     "w": "plus",
+     "t": 74.924
+    },
+    {
+     "w": "pour",
+     "t": 75.144
+    },
+    {
+     "w": "devenir",
+     "t": 75.384
+    },
+    {
+     "w": "juré",
+     "t": 75.664
+    },
+    {
+     "w": "officiel…",
+     "t": 76.084
+    },
+    {
+     "w": "sinon,",
+     "t": 76.804
+    },
+    {
+     "w": "tu",
+     "t": 77.044
+    },
+    {
+     "w": "ne",
+     "t": 77.464
+    },
+    {
+     "w": "sauras",
+     "t": 77.644
+    },
+    {
+     "w": "jamais.",
+     "t": 77.824
+    }
+   ]
+  }
+ ]
+}

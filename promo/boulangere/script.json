@@ -1,0 +1,95 @@
+{
+ "_doc": "« La boulangère » (affaire fictive, recette v2). Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-jete",
+   "who": "narrateur",
+   "text": "Pendant deux ans, une vendeuse a volé sa boulangerie. Chaque soir, un sac de pain. Sur la feuille des invendus, elle écrivait : « jeté ». Aujourd'hui, c'est elle qu'on juge.",
+   "gap": 0
+  },
+  {
+   "id": "02-poubelles",
+   "who": "narrateur",
+   "text": "La caméra de l'arrière-boutique montre où il partait vraiment. Une petite fille de six ans, accroupie près des poubelles… et son père qui fait le guet."
+  },
+  {
+   "id": "03-leila",
+   "who": "narrateur",
+   "text": "Elle s'appelle Leïla. Vingt-six ans. Vendeuse depuis six ans. Jamais une erreur de caisse. Aujourd'hui, elle est jugée pour vol."
+  },
+  {
+   "id": "04-systeme",
+   "who": "procureur",
+   "text": "Deux ans. Plus de quatre mille baguettes. Ce n'est plus un geste, c'est un système."
+  },
+  {
+   "id": "05-poubelle",
+   "who": "avocate",
+   "text": "Un système ? C'était le pain que son patron jetait le soir. Elle l'a juste posé à côté de la poubelle."
+  },
+  {
+   "id": "06-revendu",
+   "who": "procureur",
+   "text": "Faux. Ce pain n'était pas jeté. Le lendemain matin, il était revendu à moitié prix. Elle a volé de la marchandise."
+  },
+  {
+   "id": "07-centimes",
+   "who": "avocate",
+   "text": "À moitié prix… cinquante centimes. Et cette petite fille, elle les avait, les cinquante centimes ?"
+  },
+  {
+   "id": "08-demander",
+   "who": "procureur",
+   "text": "Alors elle n'avait qu'à demander. Son patron aurait peut-être dit oui."
+  },
+  {
+   "id": "09-dix",
+   "who": "avocate",
+   "text": "Elle a demandé. Il a répondu : « Si je donne une fois, demain ils seront dix. »"
+  },
+  {
+   "id": "10-familles",
+   "who": "procureur",
+   "text": "Et il avait raison. Le mois dernier, ils étaient sept familles derrière cette boulangerie. Elle a créé une file d'attente."
+  },
+  {
+   "id": "11-nourries",
+   "who": "avocate",
+   "text": "Sept familles qui avaient faim. Elle ne les a pas créées. Elle les a nourries."
+  },
+  {
+   "id": "12-licenciee",
+   "who": "procureur",
+   "text": "Elle risque trois ans de prison. Et elle a déjà perdu son travail."
+  },
+  {
+   "id": "13-tonnes",
+   "who": "avocate",
+   "text": "Trois ans… pour du pain de la veille. Ce pays jette dix millions de tonnes de nourriture par an. Et c'est elle qu'on juge ?"
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Un : relaxe. Deux : coupable, sans prison. Trois : prison. Écris ton chiffre en commentaire."
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais."
+  }
+ ]
+}

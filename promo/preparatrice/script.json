@@ -1,0 +1,95 @@
+{
+ "_doc": "« La préparatrice » (affaire fictive), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-insuline",
+   "who": "narrateur",
+   "text": "Pendant dix-huit mois, une préparatrice en pharmacie a donné l'insuline d'une petite fille… sans jamais la faire payer. Six mille euros de médicaments.",
+   "gap": 0
+  },
+  {
+   "id": "02-frigo",
+   "who": "narrateur",
+   "text": "Sur la caméra de la pharmacie, on la voit chaque mois. Elle ouvre le frigo… glisse les boîtes dans un sac… et annule la vente."
+  },
+  {
+   "id": "03-sophie",
+   "who": "narrateur",
+   "text": "Elle s'appelle Sophie. Quarante-six ans. Préparatrice depuis vingt ans. Jamais une erreur de caisse. Aujourd'hui, elle est jugée pour abus de confiance."
+  },
+  {
+   "id": "04-dos",
+   "who": "procureur",
+   "text": "Ces médicaments appartenaient à la pharmacie. Elle les a donnés dans le dos de son patron. Mois après mois."
+  },
+  {
+   "id": "05-ines",
+   "who": "avocate",
+   "text": "Dans son dos ? Cette petite s'appelle Inès. Huit ans. Diabétique. Sans insuline, c'est l'hôpital en quelques jours."
+  },
+  {
+   "id": "06-assistante",
+   "who": "procureur",
+   "text": "Alors il fallait appeler un médecin. Une assistante sociale. Pas se servir dans le frigo de son employeur."
+  },
+  {
+   "id": "07-secu",
+   "who": "avocate",
+   "text": "Le père les a tous appelés. Ses droits à la Sécu avaient été coupés par erreur. Dix-huit mois pour les rétablir. Inès, elle, ne pouvait pas attendre."
+  },
+  {
+   "id": "08-employe",
+   "who": "procureur",
+   "text": "Une erreur administrative ne donne le droit de voler à personne. Si on l'excuse, demain chaque employé choisira qui il soigne gratuitement."
+  },
+  {
+   "id": "09-salaire",
+   "who": "avocate",
+   "text": "Voler ? Chaque mois, elle a remis cent euros de son propre salaire dans la caisse. Jusqu'au jour où on l'a découverte."
+  },
+  {
+   "id": "10-savait",
+   "who": "procureur",
+   "text": "Rembourser en cachette, c'est avouer qu'elle savait. Elle savait que c'était interdit. Et elle a continué."
+  },
+  {
+   "id": "11-choisi",
+   "who": "avocate",
+   "text": "Bien sûr qu'elle savait. Elle savait aussi ce qui arrive à une enfant de huit ans sans insuline. Et elle a choisi."
+  },
+  {
+   "id": "12-cinq",
+   "who": "procureur",
+   "text": "Son patron a perdu six mille euros. Elle risque cinq ans de prison. La loi ne fait pas d'exception pour les bons sentiments."
+  },
+  {
+   "id": "13-banc",
+   "who": "avocate",
+   "text": "Aujourd'hui, Inès va à l'école tous les matins. Et la seule personne qui l'a protégée… est assise sur le banc des accusés."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+* { box-sizing: border-box; margin: 0; }
+html, body { background: #000; font-family: 'Figtree Variable', system-ui, sans-serif; }
+#frame { width: 1080px; height: 1920px; overflow: hidden; position: relative; }
+#stage, .layer, #gl { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+.layer { pointer-events: none; }
+
+/* Sous-titre : un mot à la fois, blanc, gros contour sombre. */
+.word {
+  position: absolute; left: 540px; top: 1190px;
+  font-weight: 900; font-size: 92px; color: #fff; white-space: nowrap;
+  -webkit-text-stroke: 14px #1b1410; paint-order: stroke fill;
+  text-shadow: 0 8px 0 rgba(0, 0, 0, 0.35);
+  transform-origin: 50% 50%;
+}
+
+/* Compteur : pastille sombre, bord vert lumineux. */
+.tag { position: absolute; left: 0; top: 0; white-space: nowrap; font-weight: 900; transform-origin: 50% 50%; }
+.counter {
+  font-size: 96px; color: #fff; padding: 10px 44px 16px; border-radius: 999px;
+  background: rgba(16, 22, 30, 0.78); border: 8px solid #3ee08f;
+  box-shadow: 0 0 40px rgba(62, 224, 143, 0.45), 0 12px 0 rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 4px #10161e; paint-order: stroke fill;
+}
+.counter.red { border-color: #ff4d5a; box-shadow: 0 0 40px rgba(255, 77, 90, 0.5), 0 12px 0 rgba(0, 0, 0, 0.3); }
+.counter.gold { border-color: #ffcc33; box-shadow: 0 0 40px rgba(255, 204, 51, 0.5), 0 12px 0 rgba(0, 0, 0, 0.3); }
+.counter small { font-size: 0.55em; margin-left: 14px; color: #d8ffe9; }
+.label {
+  font-size: 50px; color: #1b1410; background: #fff; padding: 8px 26px 12px; border-radius: 18px;
+  border: 6px solid #1b1410; box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35);
+}
+.label.yellow { background: #ffd43b; }
+.label.red { background: #ff4d5a; color: #fff; }
+.label.dark { background: #1b1410; color: #fff; border-color: #fff; }
+.stamp {
+  font-size: 140px; color: #ff3b47; border: 14px solid #ff3b47; border-radius: 26px; padding: 0 40px 10px;
+  background: rgba(255, 255, 255, 0.85); letter-spacing: 0.04em;
+}
+.zzz { font-size: 90px; color: #fff; -webkit-text-stroke: 8px #1b1410; paint-order: stroke fill; }
+.title {
+  font-size: 170px; color: #fff; -webkit-text-stroke: 20px #1b1410; paint-order: stroke fill; letter-spacing: 0.02em;
+  text-shadow: 0 14px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Écran du téléphone du voisin (vue « filmée »). */
+#rec { position: absolute; inset: 70px 60px 260px; border: 10px solid rgba(255,255,255,0.85); border-radius: 60px; display: none; }
+#rec .dot { position: absolute; left: 50px; top: 46px; width: 34px; height: 34px; border-radius: 50%; background: #ff3b30; }
+#rec .txt { position: absolute; left: 100px; top: 32px; font-size: 48px; font-weight: 900; color: #fff; -webkit-text-stroke: 6px #000; paint-order: stroke fill; }
+#rec .time { position: absolute; right: 50px; top: 32px; font-size: 48px; font-weight: 900; color: #fff; -webkit-text-stroke: 6px #000; paint-order: stroke fill; }
+
+#fade { position: absolute; inset: 0; background: #000; opacity: 0; }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,0.45) 100%); }

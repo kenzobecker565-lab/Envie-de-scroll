@@ -1,0 +1,1285 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 80.01,
+ "lines": [
+  {
+   "id": "01-caisse",
+   "who": "narrateur",
+   "text": "Pendant deux ans, une caissière a laissé passer les courses d'une mère seule. Sans jamais les scanner. Total : quatre mille deux cents euros.",
+   "start": 0.25,
+   "dur": 6.05,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 0.25
+    },
+    {
+     "w": "deux",
+     "t": 0.52
+    },
+    {
+     "w": "ans,",
+     "t": 0.72
+    },
+    {
+     "w": "une",
+     "t": 1.16
+    },
+    {
+     "w": "caissière",
+     "t": 1.26
+    },
+    {
+     "w": "a",
+     "t": 1.66
+    },
+    {
+     "w": "laissé",
+     "t": 1.76
+    },
+    {
+     "w": "passer",
+     "t": 1.96
+    },
+    {
+     "w": "les",
+     "t": 2.12
+    },
+    {
+     "w": "courses",
+     "t": 2.3
+    },
+    {
+     "w": "d'une",
+     "t": 2.507
+    },
+    {
+     "w": "mère",
+     "t": 2.713
+    },
+    {
+     "w": "seule.",
+     "t": 2.92
+    },
+    {
+     "w": "Sans",
+     "t": 3.46
+    },
+    {
+     "w": "jamais",
+     "t": 3.64
+    },
+    {
+     "w": "les",
+     "t": 3.96
+    },
+    {
+     "w": "scanner.",
+     "t": 4.28
+    },
+    {
+     "w": "Total :",
+     "t": 4.6
+    },
+    {
+     "w": "quatre",
+     "t": 4.836
+    },
+    {
+     "w": "mille",
+     "t": 5.072
+    },
+    {
+     "w": "deux",
+     "t": 5.308
+    },
+    {
+     "w": "cents",
+     "t": 5.544
+    },
+    {
+     "w": "euros.",
+     "t": 5.78
+    }
+   ]
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la caméra du magasin, on voit tout. Le lait… les couches… les pâtes. Et à chaque fois, le même geste : elle fait semblant de biper.",
+   "start": 6.55,
+   "dur": 6.92,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 6.55
+    },
+    {
+     "w": "la",
+     "t": 6.71
+    },
+    {
+     "w": "caméra",
+     "t": 6.81
+    },
+    {
+     "w": "du",
+     "t": 7.13
+    },
+    {
+     "w": "magasin,",
+     "t": 7.21
+    },
+    {
+     "w": "on",
+     "t": 7.83
+    },
+    {
+     "w": "voit",
+     "t": 7.91
+    },
+    {
+     "w": "tout.",
+     "t": 8.07
+    },
+    {
+     "w": "Le",
+     "t": 8.47
+    },
+    {
+     "w": "lait…",
+     "t": 8.65
+    },
+    {
+     "w": "les",
+     "t": 9.31
+    },
+    {
+     "w": "couches…",
+     "t": 9.41
+    },
+    {
+     "w": "les",
+     "t": 10.15
+    },
+    {
+     "w": "pâtes.",
+     "t": 10.47
+    },
+    {
+     "w": "Et",
+     "t": 10.79
+    },
+    {
+     "w": "à",
+     "t": 10.81
+    },
+    {
+     "w": "chaque",
+     "t": 10.89
+    },
+    {
+     "w": "fois,",
+     "t": 11.03
+    },
+    {
+     "w": "le",
+     "t": 11.49
+    },
+    {
+     "w": "même",
+     "t": 11.57
+    },
+    {
+     "w": "geste :",
+     "t": 11.75
+    },
+    {
+     "w": "elle",
+     "t": 12.27
+    },
+    {
+     "w": "fait",
+     "t": 12.39
+    },
+    {
+     "w": "semblant",
+     "t": 12.55
+    },
+    {
+     "w": "de",
+     "t": 12.91
+    },
+    {
+     "w": "biper.",
+     "t": 13.21
+    }
+   ]
+  },
+  {
+   "id": "03-lea",
+   "who": "narrateur",
+   "text": "Elle s'appelle Léa. Trente-quatre ans. Caissière depuis onze ans. Jamais un retard. Aujourd'hui, elle est jugée pour vol.",
+   "start": 13.72,
+   "dur": 5.74,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 13.72
+    },
+    {
+     "w": "s'appelle",
+     "t": 13.94
+    },
+    {
+     "w": "Léa.",
+     "t": 14.16
+    },
+    {
+     "w": "Trente-quatre",
+     "t": 14.62
+    },
+    {
+     "w": "ans.",
+     "t": 15.08
+    },
+    {
+     "w": "Caissière",
+     "t": 15.5
+    },
+    {
+     "w": "depuis",
+     "t": 15.82
+    },
+    {
+     "w": "onze",
+     "t": 16.1
+    },
+    {
+     "w": "ans.",
+     "t": 16.38
+    },
+    {
+     "w": "Jamais",
+     "t": 16.66
+    },
+    {
+     "w": "un",
+     "t": 17.0
+    },
+    {
+     "w": "retard.",
+     "t": 17.2
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 17.79
+    },
+    {
+     "w": "elle",
+     "t": 18.38
+    },
+    {
+     "w": "est",
+     "t": 18.48
+    },
+    {
+     "w": "jugée",
+     "t": 18.58
+    },
+    {
+     "w": "pour",
+     "t": 18.84
+    },
+    {
+     "w": "vol.",
+     "t": 19.0
+    }
+   ]
+  },
+  {
+   "id": "04-patron",
+   "who": "procureur",
+   "text": "Ce n'était pas son argent. Pendant deux ans, elle a offert ce qui appartenait à son patron.",
+   "start": 19.71,
+   "dur": 3.97,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 19.71
+    },
+    {
+     "w": "n'était",
+     "t": 19.87
+    },
+    {
+     "w": "pas",
+     "t": 20.03
+    },
+    {
+     "w": "son",
+     "t": 20.21
+    },
+    {
+     "w": "argent.",
+     "t": 20.35
+    },
+    {
+     "w": "Pendant",
+     "t": 20.85
+    },
+    {
+     "w": "deux",
+     "t": 21.01
+    },
+    {
+     "w": "ans,",
+     "t": 21.35
+    },
+    {
+     "w": "elle",
+     "t": 21.75
+    },
+    {
+     "w": "a",
+     "t": 21.89
+    },
+    {
+     "w": "offert",
+     "t": 21.97
+    },
+    {
+     "w": "ce",
+     "t": 22.33
+    },
+    {
+     "w": "qui",
+     "t": 22.41
+    },
+    {
+     "w": "appartenait",
+     "t": 22.53
+    },
+    {
+     "w": "à",
+     "t": 23.03
+    },
+    {
+     "w": "son",
+     "t": 23.07
+    },
+    {
+     "w": "patron.",
+     "t": 23.19
+    }
+   ]
+  },
+  {
+   "id": "05-benne",
+   "who": "avocate",
+   "text": "Son patron ? Un groupe qui jette chaque soir des tonnes de nourriture à la benne. Ce qu'elle a laissé passer… finissait souvent à la poubelle.",
+   "start": 23.93,
+   "dur": 5.8,
+   "words": [
+    {
+     "w": "Son",
+     "t": 23.93
+    },
+    {
+     "w": "patron ?",
+     "t": 24.07
+    },
+    {
+     "w": "Un",
+     "t": 24.55
+    },
+    {
+     "w": "groupe",
+     "t": 24.65
+    },
+    {
+     "w": "qui",
+     "t": 24.85
+    },
+    {
+     "w": "jette",
+     "t": 24.99
+    },
+    {
+     "w": "chaque",
+     "t": 25.21
+    },
+    {
+     "w": "soir",
+     "t": 25.37
+    },
+    {
+     "w": "des",
+     "t": 25.61
+    },
+    {
+     "w": "tonnes",
+     "t": 25.81
+    },
+    {
+     "w": "de",
+     "t": 26.09
+    },
+    {
+     "w": "nourriture",
+     "t": 26.21
+    },
+    {
+     "w": "à",
+     "t": 26.59
+    },
+    {
+     "w": "la",
+     "t": 26.65
+    },
+    {
+     "w": "benne.",
+     "t": 26.71
+    },
+    {
+     "w": "Ce",
+     "t": 27.05
+    },
+    {
+     "w": "qu'elle",
+     "t": 27.24
+    },
+    {
+     "w": "a",
+     "t": 27.43
+    },
+    {
+     "w": "laissé",
+     "t": 27.49
+    },
+    {
+     "w": "passer…",
+     "t": 27.73
+    },
+    {
+     "w": "finissait",
+     "t": 27.99
+    },
+    {
+     "w": "souvent",
+     "t": 28.79
+    },
+    {
+     "w": "à",
+     "t": 28.99
+    },
+    {
+     "w": "la",
+     "t": 29.21
+    },
+    {
+     "w": "poubelle.",
+     "t": 29.25
+    }
+   ]
+  },
+  {
+   "id": "06-cousin",
+   "who": "procureur",
+   "text": "Alors c'est elle qui choisit qui mange et qui paie ? Demain, une autre caissière laisse partir son cousin. Puis ses amis.",
+   "start": 29.98,
+   "dur": 5.61,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 29.98
+    },
+    {
+     "w": "c'est",
+     "t": 30.23
+    },
+    {
+     "w": "elle",
+     "t": 30.48
+    },
+    {
+     "w": "qui",
+     "t": 30.68
+    },
+    {
+     "w": "choisit",
+     "t": 30.84
+    },
+    {
+     "w": "qui",
+     "t": 31.18
+    },
+    {
+     "w": "mange",
+     "t": 31.34
+    },
+    {
+     "w": "et",
+     "t": 31.62
+    },
+    {
+     "w": "qui",
+     "t": 31.84
+    },
+    {
+     "w": "paie ?",
+     "t": 32.1
+    },
+    {
+     "w": "Demain,",
+     "t": 32.36
+    },
+    {
+     "w": "une",
+     "t": 32.86
+    },
+    {
+     "w": "autre",
+     "t": 33.0
+    },
+    {
+     "w": "caissière",
+     "t": 33.14
+    },
+    {
+     "w": "laisse",
+     "t": 33.64
+    },
+    {
+     "w": "partir",
+     "t": 33.82
+    },
+    {
+     "w": "son",
+     "t": 34.16
+    },
+    {
+     "w": "cousin.",
+     "t": 34.32
+    },
+    {
+     "w": "Puis",
+     "t": 34.84
+    },
+    {
+     "w": "ses",
+     "t": 34.96
+    },
+    {
+     "w": "amis.",
+     "t": 35.16
+    }
+   ]
+  },
+  {
+   "id": "07-lait",
+   "who": "avocate",
+   "text": "Son cousin ? Cette femme avait trois enfants et un frigo vide. Léa l'a vue reposer le lait, trois fois. La quatrième, elle n'a pas bipé.",
+   "start": 35.84,
+   "dur": 6.02,
+   "words": [
+    {
+     "w": "Son",
+     "t": 35.84
+    },
+    {
+     "w": "cousin ?",
+     "t": 36.0
+    },
+    {
+     "w": "Cette",
+     "t": 36.4
+    },
+    {
+     "w": "femme",
+     "t": 36.62
+    },
+    {
+     "w": "avait",
+     "t": 36.82
+    },
+    {
+     "w": "trois",
+     "t": 37.0
+    },
+    {
+     "w": "enfants",
+     "t": 37.24
+    },
+    {
+     "w": "et",
+     "t": 37.58
+    },
+    {
+     "w": "un",
+     "t": 37.82
+    },
+    {
+     "w": "frigo",
+     "t": 37.92
+    },
+    {
+     "w": "vide.",
+     "t": 38.16
+    },
+    {
+     "w": "Léa",
+     "t": 38.56
+    },
+    {
+     "w": "l'a",
+     "t": 38.727
+    },
+    {
+     "w": "vue",
+     "t": 38.893
+    },
+    {
+     "w": "reposer",
+     "t": 39.06
+    },
+    {
+     "w": "le",
+     "t": 39.4
+    },
+    {
+     "w": "lait,",
+     "t": 39.52
+    },
+    {
+     "w": "trois",
+     "t": 39.74
+    },
+    {
+     "w": "fois.",
+     "t": 39.96
+    },
+    {
+     "w": "La",
+     "t": 40.38
+    },
+    {
+     "w": "quatrième,",
+     "t": 40.46
+    },
+    {
+     "w": "elle",
+     "t": 41.12
+    },
+    {
+     "w": "n'a",
+     "t": 41.22
+    },
+    {
+     "w": "pas",
+     "t": 41.32
+    },
+    {
+     "w": "bipé.",
+     "t": 41.44
+    }
+   ]
+  },
+  {
+   "id": "08-pitie",
+   "who": "procureur",
+   "text": "La pitié, c'est beau. Mais la pitié avec l'argent des autres… ça porte un nom. Le vol.",
+   "start": 42.11,
+   "dur": 4.62,
+   "words": [
+    {
+     "w": "La",
+     "t": 42.365
+    },
+    {
+     "w": "pitié,",
+     "t": 42.62
+    },
+    {
+     "w": "c'est",
+     "t": 42.875
+    },
+    {
+     "w": "beau.",
+     "t": 43.13
+    },
+    {
+     "w": "Mais",
+     "t": 43.55
+    },
+    {
+     "w": "la",
+     "t": 43.71
+    },
+    {
+     "w": "pitié",
+     "t": 43.87
+    },
+    {
+     "w": "avec",
+     "t": 44.03
+    },
+    {
+     "w": "l'argent",
+     "t": 44.27
+    },
+    {
+     "w": "des",
+     "t": 44.51
+    },
+    {
+     "w": "autres…",
+     "t": 44.67
+    },
+    {
+     "w": "ça",
+     "t": 45.19
+    },
+    {
+     "w": "porte",
+     "t": 45.39
+    },
+    {
+     "w": "un",
+     "t": 45.61
+    },
+    {
+     "w": "nom.",
+     "t": 45.77
+    },
+    {
+     "w": "Le",
+     "t": 46.11
+    },
+    {
+     "w": "vol.",
+     "t": 46.21
+    }
+   ]
+  },
+  {
+   "id": "09-six",
+   "who": "avocate",
+   "text": "Quatre mille deux cents euros en deux ans. Moins de six euros par jour. Pour nourrir trois enfants.",
+   "start": 46.98,
+   "dur": 3.98,
+   "words": [
+    {
+     "w": "Quatre",
+     "t": 47.076
+    },
+    {
+     "w": "mille",
+     "t": 47.172
+    },
+    {
+     "w": "deux",
+     "t": 47.268
+    },
+    {
+     "w": "cents",
+     "t": 47.364
+    },
+    {
+     "w": "euros",
+     "t": 47.46
+    },
+    {
+     "w": "en",
+     "t": 47.84
+    },
+    {
+     "w": "deux",
+     "t": 48.07
+    },
+    {
+     "w": "ans.",
+     "t": 48.3
+    },
+    {
+     "w": "Moins",
+     "t": 48.56
+    },
+    {
+     "w": "de",
+     "t": 48.74
+    },
+    {
+     "w": "six",
+     "t": 48.94
+    },
+    {
+     "w": "euros",
+     "t": 49.14
+    },
+    {
+     "w": "par",
+     "t": 49.32
+    },
+    {
+     "w": "jour.",
+     "t": 49.48
+    },
+    {
+     "w": "Pour",
+     "t": 49.88
+    },
+    {
+     "w": "nourrir",
+     "t": 49.96
+    },
+    {
+     "w": "trois",
+     "t": 50.24
+    },
+    {
+     "w": "enfants.",
+     "t": 50.52
+    }
+   ]
+  },
+  {
+   "id": "10-systeme",
+   "who": "procureur",
+   "text": "Six euros par jour, pendant sept cents jours. Ce n'est plus un geste. C'est un système.",
+   "start": 51.21,
+   "dur": 4.42,
+   "words": [
+    {
+     "w": "Six",
+     "t": 51.35
+    },
+    {
+     "w": "euros",
+     "t": 51.49
+    },
+    {
+     "w": "par",
+     "t": 51.67
+    },
+    {
+     "w": "jour,",
+     "t": 51.87
+    },
+    {
+     "w": "pendant",
+     "t": 52.17
+    },
+    {
+     "w": "sept",
+     "t": 52.417
+    },
+    {
+     "w": "cents",
+     "t": 52.663
+    },
+    {
+     "w": "jours.",
+     "t": 52.91
+    },
+    {
+     "w": "Ce",
+     "t": 53.63
+    },
+    {
+     "w": "n'est",
+     "t": 53.72
+    },
+    {
+     "w": "plus",
+     "t": 53.81
+    },
+    {
+     "w": "un",
+     "t": 53.93
+    },
+    {
+     "w": "geste.",
+     "t": 54.13
+    },
+    {
+     "w": "C'est",
+     "t": 54.47
+    },
+    {
+     "w": "un",
+     "t": 54.81
+    },
+    {
+     "w": "système.",
+     "t": 54.93
+    }
+   ]
+  },
+  {
+   "id": "11-centime",
+   "who": "avocate",
+   "text": "Un système ? Elle n'a pas gardé un centime pour elle. Pas un seul. Les enquêteurs ont tout fouillé : rien.",
+   "start": 55.88,
+   "dur": 5.02,
+   "words": [
+    {
+     "w": "Un",
+     "t": 55.88
+    },
+    {
+     "w": "système ?",
+     "t": 56.02
+    },
+    {
+     "w": "Elle",
+     "t": 56.62
+    },
+    {
+     "w": "n'a",
+     "t": 56.73
+    },
+    {
+     "w": "pas",
+     "t": 56.84
+    },
+    {
+     "w": "gardé",
+     "t": 56.98
+    },
+    {
+     "w": "un",
+     "t": 57.36
+    },
+    {
+     "w": "centime",
+     "t": 57.54
+    },
+    {
+     "w": "pour",
+     "t": 57.9
+    },
+    {
+     "w": "elle.",
+     "t": 58.06
+    },
+    {
+     "w": "Pas",
+     "t": 58.36
+    },
+    {
+     "w": "un",
+     "t": 58.46
+    },
+    {
+     "w": "seul.",
+     "t": 58.74
+    },
+    {
+     "w": "Les",
+     "t": 59.16
+    },
+    {
+     "w": "enquêteurs",
+     "t": 59.26
+    },
+    {
+     "w": "ont",
+     "t": 59.66
+    },
+    {
+     "w": "tout",
+     "t": 59.78
+    },
+    {
+     "w": "fouillé :",
+     "t": 60.0
+    },
+    {
+     "w": "rien.",
+     "t": 60.5
+    }
+   ]
+  },
+  {
+   "id": "12-role",
+   "who": "procureur",
+   "text": "Elle n'a rien gardé… mais elle a décidé seule de ce qui était juste. Ce n'était pas son rôle.",
+   "start": 61.15,
+   "dur": 4.36,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 61.15
+    },
+    {
+     "w": "n'a",
+     "t": 61.3
+    },
+    {
+     "w": "rien",
+     "t": 61.45
+    },
+    {
+     "w": "gardé…",
+     "t": 61.59
+    },
+    {
+     "w": "mais",
+     "t": 62.23
+    },
+    {
+     "w": "elle",
+     "t": 62.31
+    },
+    {
+     "w": "a",
+     "t": 62.47
+    },
+    {
+     "w": "décidé",
+     "t": 62.55
+    },
+    {
+     "w": "seule",
+     "t": 62.89
+    },
+    {
+     "w": "de",
+     "t": 63.23
+    },
+    {
+     "w": "ce",
+     "t": 63.45
+    },
+    {
+     "w": "qui",
+     "t": 63.55
+    },
+    {
+     "w": "était",
+     "t": 63.69
+    },
+    {
+     "w": "juste.",
+     "t": 63.85
+    },
+    {
+     "w": "Ce",
+     "t": 64.43
+    },
+    {
+     "w": "n'était",
+     "t": 64.57
+    },
+    {
+     "w": "pas",
+     "t": 64.71
+    },
+    {
+     "w": "son",
+     "t": 64.91
+    },
+    {
+     "w": "rôle.",
+     "t": 65.09
+    }
+   ]
+  },
+  {
+   "id": "13-ailleurs",
+   "who": "avocate",
+   "text": "Son rôle ? Ce jour-là, tout le monde a vu cette mère. Elle est la seule à ne pas avoir regardé ailleurs.",
+   "start": 65.76,
+   "dur": 4.5,
+   "words": [
+    {
+     "w": "Son",
+     "t": 65.76
+    },
+    {
+     "w": "rôle ?",
+     "t": 65.94
+    },
+    {
+     "w": "Ce",
+     "t": 66.38
+    },
+    {
+     "w": "jour-là,",
+     "t": 66.7
+    },
+    {
+     "w": "tout",
+     "t": 67.02
+    },
+    {
+     "w": "le",
+     "t": 67.16
+    },
+    {
+     "w": "monde",
+     "t": 67.26
+    },
+    {
+     "w": "a",
+     "t": 67.4
+    },
+    {
+     "w": "vu",
+     "t": 67.5
+    },
+    {
+     "w": "cette",
+     "t": 67.6
+    },
+    {
+     "w": "mère.",
+     "t": 67.76
+    },
+    {
+     "w": "Elle",
+     "t": 68.16
+    },
+    {
+     "w": "est",
+     "t": 68.26
+    },
+    {
+     "w": "la",
+     "t": 68.32
+    },
+    {
+     "w": "seule",
+     "t": 68.44
+    },
+    {
+     "w": "à",
+     "t": 68.68
+    },
+    {
+     "w": "ne",
+     "t": 68.88
+    },
+    {
+     "w": "pas",
+     "t": 68.98
+    },
+    {
+     "w": "avoir",
+     "t": 69.12
+    },
+    {
+     "w": "regardé",
+     "t": 69.34
+    },
+    {
+     "w": "ailleurs.",
+     "t": 69.82
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 70.51,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 70.51
+    },
+    {
+     "w": "es",
+     "t": 70.65
+    },
+    {
+     "w": "le",
+     "t": 70.74
+    },
+    {
+     "w": "juré.",
+     "t": 70.83
+    },
+    {
+     "w": "Coupable…",
+     "t": 71.33
+    },
+    {
+     "w": "ou",
+     "t": 71.77
+    },
+    {
+     "w": "non",
+     "t": 72.19
+    },
+    {
+     "w": "coupable ?",
+     "t": 72.39
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 73.27,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 73.27
+    },
+    {
+     "w": "verdict",
+     "t": 73.39
+    },
+    {
+     "w": "tombe",
+     "t": 73.69
+    },
+    {
+     "w": "dans",
+     "t": 74.23
+    },
+    {
+     "w": "la",
+     "t": 74.39
+    },
+    {
+     "w": "prochaine",
+     "t": 74.51
+    },
+    {
+     "w": "vidéo.",
+     "t": 74.79
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 75.28
+    },
+    {
+     "w": "pour",
+     "t": 75.77
+    },
+    {
+     "w": "ne",
+     "t": 75.91
+    },
+    {
+     "w": "pas",
+     "t": 76.01
+    },
+    {
+     "w": "le",
+     "t": 76.15
+    },
+    {
+     "w": "rater.",
+     "t": 76.17
+    }
+   ]
+  }
+ ]
+}

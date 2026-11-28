@@ -1,0 +1,628 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 48.53,
+ "lines": [
+  {
+   "id": "01-carriere",
+   "who": "narrateur",
+   "text": "3 000 opérations. 22 ans de carrière. Pas un seul patient perdu.",
+   "start": 0.6,
+   "dur": 3.85,
+   "words": [
+    {
+     "w": "3",
+     "t": 0.693
+    },
+    {
+     "w": "000",
+     "t": 0.787
+    },
+    {
+     "w": "opérations.",
+     "t": 0.88
+    },
+    {
+     "w": "22",
+     "t": 1.68
+    },
+    {
+     "w": "ans",
+     "t": 2.0
+    },
+    {
+     "w": "de",
+     "t": 2.26
+    },
+    {
+     "w": "carrière.",
+     "t": 2.36
+    },
+    {
+     "w": "Pas",
+     "t": 3.1
+    },
+    {
+     "w": "un",
+     "t": 3.22
+    },
+    {
+     "w": "seul",
+     "t": 3.4
+    },
+    {
+     "w": "patient",
+     "t": 3.58
+    },
+    {
+     "w": "perdu.",
+     "t": 3.86
+    }
+   ]
+  },
+  {
+   "id": "02-detail",
+   "who": "narrateur",
+   "text": "Un détail : il n'a jamais été médecin.",
+   "start": 4.8,
+   "dur": 2.49,
+   "words": [
+    {
+     "w": "Un",
+     "t": 4.81
+    },
+    {
+     "w": "détail :",
+     "t": 4.97
+    },
+    {
+     "w": "il",
+     "t": 5.71
+    },
+    {
+     "w": "n'a",
+     "t": 5.85
+    },
+    {
+     "w": "jamais",
+     "t": 5.99
+    },
+    {
+     "w": "été",
+     "t": 6.27
+    },
+    {
+     "w": "médecin.",
+     "t": 6.69
+    }
+   ]
+  },
+  {
+   "id": "03-prison",
+   "who": "narrateur",
+   "text": "Ce matin, il risque 5 ans de prison.",
+   "start": 7.59,
+   "dur": 2.21,
+   "words": [
+    {
+     "w": "Ce",
+     "t": 7.69
+    },
+    {
+     "w": "matin,",
+     "t": 7.75
+    },
+    {
+     "w": "il",
+     "t": 8.37
+    },
+    {
+     "w": "risque",
+     "t": 8.49
+    },
+    {
+     "w": "5",
+     "t": 8.77
+    },
+    {
+     "w": "ans",
+     "t": 9.11
+    },
+    {
+     "w": "de",
+     "t": 9.29
+    },
+    {
+     "w": "prison.",
+     "t": 9.35
+    }
+   ]
+  },
+  {
+   "id": "04-endormies",
+   "who": "procureur",
+   "text": "3 000 personnes se sont endormies sur sa table en croyant qu'un médecin veillait sur elles. Aucune ne savait la vérité.",
+   "start": 10.25,
+   "dur": 7.11,
+   "words": [
+    {
+     "w": "3",
+     "t": 10.37
+    },
+    {
+     "w": "000",
+     "t": 10.51
+    },
+    {
+     "w": "personnes",
+     "t": 10.65
+    },
+    {
+     "w": "se",
+     "t": 11.27
+    },
+    {
+     "w": "sont",
+     "t": 11.71
+    },
+    {
+     "w": "endormies",
+     "t": 11.95
+    },
+    {
+     "w": "sur",
+     "t": 12.41
+    },
+    {
+     "w": "sa",
+     "t": 12.59
+    },
+    {
+     "w": "table",
+     "t": 12.75
+    },
+    {
+     "w": "en",
+     "t": 13.11
+    },
+    {
+     "w": "croyant",
+     "t": 13.41
+    },
+    {
+     "w": "qu'un",
+     "t": 13.75
+    },
+    {
+     "w": "médecin",
+     "t": 14.09
+    },
+    {
+     "w": "veillait",
+     "t": 14.51
+    },
+    {
+     "w": "sur",
+     "t": 14.91
+    },
+    {
+     "w": "elles.",
+     "t": 15.32
+    },
+    {
+     "w": "Aucune",
+     "t": 15.73
+    },
+    {
+     "w": "ne",
+     "t": 16.13
+    },
+    {
+     "w": "savait",
+     "t": 16.27
+    },
+    {
+     "w": "la",
+     "t": 16.59
+    },
+    {
+     "w": "vérité.",
+     "t": 16.71
+    }
+   ]
+  },
+  {
+   "id": "05-plaindre",
+   "who": "avocate",
+   "text": "Et aucune ne s'est réveillée pour s'en plaindre.",
+   "start": 17.66,
+   "dur": 2.22,
+   "words": [
+    {
+     "w": "Et",
+     "t": 17.66
+    },
+    {
+     "w": "aucune",
+     "t": 17.78
+    },
+    {
+     "w": "ne",
+     "t": 18.08
+    },
+    {
+     "w": "s'est",
+     "t": 18.28
+    },
+    {
+     "w": "réveillée",
+     "t": 18.48
+    },
+    {
+     "w": "pour",
+     "t": 18.82
+    },
+    {
+     "w": "s'en",
+     "t": 18.99
+    },
+    {
+     "w": "plaindre.",
+     "t": 19.16
+    }
+   ]
+  },
+  {
+   "id": "06-chance",
+   "who": "procureur",
+   "text": "Vous appelez ça un don. J'appelle ça de la chance. Et on ne confie pas sa vie à la chance.",
+   "start": 20.23,
+   "dur": 5.305,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 20.29
+    },
+    {
+     "w": "appelez",
+     "t": 20.39
+    },
+    {
+     "w": "ça",
+     "t": 20.75
+    },
+    {
+     "w": "un",
+     "t": 20.95
+    },
+    {
+     "w": "don.",
+     "t": 21.25
+    },
+    {
+     "w": "J'appelle",
+     "t": 21.66
+    },
+    {
+     "w": "ça",
+     "t": 22.07
+    },
+    {
+     "w": "de",
+     "t": 22.45
+    },
+    {
+     "w": "la",
+     "t": 22.71
+    },
+    {
+     "w": "chance.",
+     "t": 22.85
+    },
+    {
+     "w": "Et",
+     "t": 23.15
+    },
+    {
+     "w": "on",
+     "t": 23.61
+    },
+    {
+     "w": "ne",
+     "t": 23.71
+    },
+    {
+     "w": "confie",
+     "t": 23.89
+    },
+    {
+     "w": "pas",
+     "t": 24.19
+    },
+    {
+     "w": "sa",
+     "t": 24.35
+    },
+    {
+     "w": "vie",
+     "t": 24.57
+    },
+    {
+     "w": "à",
+     "t": 24.79
+    },
+    {
+     "w": "la",
+     "t": 24.97
+    },
+    {
+     "w": "chance.",
+     "t": 25.07
+    }
+   ]
+  },
+  {
+   "id": "07-desespere",
+   "who": "avocate",
+   "text": "22 ans de chance ? Quand un cas était désespéré, c'est lui qu'on appelait. Pas les diplômés. Lui.",
+   "start": 25.835,
+   "dur": 4.74,
+   "words": [
+    {
+     "w": "22",
+     "t": 26.075
+    },
+    {
+     "w": "ans",
+     "t": 26.395
+    },
+    {
+     "w": "de",
+     "t": 26.635
+    },
+    {
+     "w": "chance ?",
+     "t": 26.735
+    },
+    {
+     "w": "Quand",
+     "t": 27.395
+    },
+    {
+     "w": "un",
+     "t": 27.435
+    },
+    {
+     "w": "cas",
+     "t": 27.575
+    },
+    {
+     "w": "était",
+     "t": 27.695
+    },
+    {
+     "w": "désespéré,",
+     "t": 27.835
+    },
+    {
+     "w": "c'est",
+     "t": 28.225
+    },
+    {
+     "w": "lui",
+     "t": 28.615
+    },
+    {
+     "w": "qu'on",
+     "t": 28.735
+    },
+    {
+     "w": "appelait.",
+     "t": 28.855
+    },
+    {
+     "w": "Pas",
+     "t": 29.355
+    },
+    {
+     "w": "les",
+     "t": 29.435
+    },
+    {
+     "w": "diplômés.",
+     "t": 29.535
+    },
+    {
+     "w": "Lui.",
+     "t": 30.175
+    }
+   ]
+  },
+  {
+   "id": "08-blouse",
+   "who": "procureur",
+   "text": "Acquittez-le, et demain, n'importe qui pourra enfiler une blouse.",
+   "start": 30.925,
+   "dur": 4.21,
+   "words": [
+    {
+     "w": "Acquittez-le,",
+     "t": 31.05
+    },
+    {
+     "w": "et",
+     "t": 31.64
+    },
+    {
+     "w": "demain,",
+     "t": 31.96
+    },
+    {
+     "w": "n'importe",
+     "t": 32.48
+    },
+    {
+     "w": "qui",
+     "t": 33.0
+    },
+    {
+     "w": "pourra",
+     "t": 33.34
+    },
+    {
+     "w": "enfiler",
+     "t": 33.64
+    },
+    {
+     "w": "une",
+     "t": 34.2
+    },
+    {
+     "w": "blouse.",
+     "t": 34.48
+    }
+   ]
+  },
+  {
+   "id": "09-papier",
+   "who": "avocate",
+   "text": "Condamnez-le, et allez dire à 3 000 familles qu'un bout de papier valait plus que leur vie.",
+   "start": 35.435,
+   "dur": 4.26,
+   "words": [
+    {
+     "w": "Condamnez-le,",
+     "t": 35.645
+    },
+    {
+     "w": "et",
+     "t": 36.345
+    },
+    {
+     "w": "allez",
+     "t": 36.405
+    },
+    {
+     "w": "dire",
+     "t": 36.545
+    },
+    {
+     "w": "à",
+     "t": 36.825
+    },
+    {
+     "w": "3",
+     "t": 37.045
+    },
+    {
+     "w": "000",
+     "t": 37.245
+    },
+    {
+     "w": "familles",
+     "t": 37.365
+    },
+    {
+     "w": "qu'un",
+     "t": 37.675
+    },
+    {
+     "w": "bout",
+     "t": 37.985
+    },
+    {
+     "w": "de",
+     "t": 38.145
+    },
+    {
+     "w": "papier",
+     "t": 38.265
+    },
+    {
+     "w": "valait",
+     "t": 38.565
+    },
+    {
+     "w": "plus",
+     "t": 38.885
+    },
+    {
+     "w": "que",
+     "t": 39.045
+    },
+    {
+     "w": "leur",
+     "t": 39.245
+    },
+    {
+     "w": "vie.",
+     "t": 39.365
+    }
+   ]
+  },
+  {
+   "id": "10-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu l'aurais laissé t'opérer ?",
+   "start": 40.295,
+   "dur": 3.74,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 40.345
+    },
+    {
+     "w": "es",
+     "t": 40.445
+    },
+    {
+     "w": "le",
+     "t": 40.525
+    },
+    {
+     "w": "juré.",
+     "t": 40.645
+    },
+    {
+     "w": "Coupable…",
+     "t": 41.165
+    },
+    {
+     "w": "ou",
+     "t": 41.585
+    },
+    {
+     "w": "non",
+     "t": 41.725
+    },
+    {
+     "w": "coupable ?",
+     "t": 41.865
+    },
+    {
+     "w": "Et",
+     "t": 42.625
+    },
+    {
+     "w": "toi,",
+     "t": 42.665
+    },
+    {
+     "w": "tu",
+     "t": 42.825
+    },
+    {
+     "w": "l'aurais",
+     "t": 42.995
+    },
+    {
+     "w": "laissé",
+     "t": 43.165
+    },
+    {
+     "w": "t'opérer ?",
+     "t": 43.918
+    }
+   ]
+  }
+ ]
+}

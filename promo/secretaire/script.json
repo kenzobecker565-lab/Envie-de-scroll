@@ -1,0 +1,95 @@
+{
+ "_doc": "« La secrétaire de mairie » (affaire fictive), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-date",
+   "who": "narrateur",
+   "text": "Une secrétaire de mairie a changé une date sur un formulaire. Trois jours. Juste trois jours. Et aujourd'hui, elle risque quinze ans de prison.",
+   "gap": 0
+  },
+  {
+   "id": "02-ordinateur",
+   "who": "narrateur",
+   "text": "Sur l'ordinateur de la mairie, on retrouve la trace. Le dossier est arrivé le trois janvier. Elle a écrit trente et un décembre. Et la famille est passée devant la commission."
+  },
+  {
+   "id": "03-isabelle",
+   "who": "narrateur",
+   "text": "Elle s'appelle Isabelle. Cinquante-quatre ans. Secrétaire de mairie depuis vingt-deux ans. Jamais une faute. Aujourd'hui, elle est jugée pour faux en écriture publique."
+  },
+  {
+   "id": "04-officiel",
+   "who": "procureur",
+   "text": "Un document officiel, c'est la confiance de tout un pays. Elle l'a falsifié. Volontairement."
+  },
+  {
+   "id": "05-hopital",
+   "who": "avocate",
+   "text": "Falsifié ? Trois jours. La mère avait été hospitalisée la veille de la date limite. Elle a déposé le dossier en sortant de l'hôpital."
+  },
+  {
+   "id": "06-attente",
+   "who": "procureur",
+   "text": "D'autres familles attendaient aussi. Elles ont respecté la date. Celle-ci leur est passée devant."
+  },
+  {
+   "id": "07-voiture",
+   "who": "avocate",
+   "text": "Passée devant ? Cette famille dormait dans une voiture. Trois enfants. En plein mois de janvier."
+  },
+  {
+   "id": "08-choisir",
+   "who": "procureur",
+   "text": "La loi ne demande pas à une secrétaire de choisir qui mérite un logement. Elle lui demande de respecter les dates."
+  },
+  {
+   "id": "09-commission",
+   "who": "avocate",
+   "text": "Elle n'a rien choisi. C'est la commission qui a validé le dossier. Elle a juste refusé qu'un séjour à l'hôpital mette trois enfants à la rue."
+  },
+  {
+   "id": "10-valeur",
+   "who": "procureur",
+   "text": "Si chaque agent corrige les dates qui l'arrangent, plus aucun document public n'a de valeur."
+  },
+  {
+   "id": "11-dessin",
+   "who": "avocate",
+   "text": "Elle n'y a gagné qu'une chose. Le dessin que les enfants lui ont envoyé. Il est toujours accroché au-dessus de son bureau."
+  },
+  {
+   "id": "12-reclusion",
+   "who": "procureur",
+   "text": "Elle risque quinze ans de réclusion criminelle. Parce qu'un document public, ça ne se touche pas."
+  },
+  {
+   "id": "13-crime",
+   "who": "avocate",
+   "text": "Quinze ans… pour trois jours. Trois enfants au chaud, contre trois jours sur un formulaire. Alors dites-moi… qui a vraiment commis un crime ?"
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+  "_doc": "Affaire n°4 : mamie cannabis (affaire fictive). Texte des sous-titres, une entrée par réplique, dans l'ordre. « who » : narrateur, procureur, avocate (voir media/ et le README). « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
+  "voices": {
+    "narrateur": { "name": "narrateur", "file": "media/narrateur.wav" },
+    "procureur": { "name": "procureur", "file": "media/procureur.wav" },
+    "avocate": { "name": "avocate", "file": "media/avocate.wav" }
+  },
+  "lines": [
+    { "id": "01-plants", "who": "narrateur", "text": "Elle a 78 ans. Les gendarmes ont trouvé 12 plants de cannabis dans son jardin.", "say": "Elle a soixante-dix-huit ans. Les gendarmes ont trouvé douze plants de cannabis dans son jardin." },
+    { "id": "02-vingt", "who": "narrateur", "text": "Elle risque jusqu'à 20 ans de prison.", "say": "Elle risque jusqu'à vingt ans de prison.", "gap": 0.25 },
+    { "id": "03-mari", "who": "narrateur", "text": "Son mari a la maladie de Parkinson. Elle dit que c'était pour calmer ses douleurs.", "gap": 0.3 },
+    { "id": "04-meme", "who": "procureur", "text": "La loi est la même pour tout le monde. À vingt ans ou à soixante-dix-huit ans, cultiver de la drogue, c'est cultiver de la drogue.", "gap": 0.7 },
+    { "id": "05-sommeil", "who": "avocate", "text": "Son mari ne dormait plus. Les médicaments ne suffisaient plus. Avec ses tisanes, il a retrouvé le sommeil.", "gap": 0.3 },
+    { "id": "06-vendu", "who": "procureur", "text": "Des tisanes qu'elle a aussi vendues. À trois voisins. Pour 2 000 euros.", "say": "Des tisanes qu'elle a aussi vendues. À trois voisins. Pour deux mille euros.", "gap": 0.3 },
+    { "id": "07-attente", "who": "avocate", "text": "Trois voisins malades, à prix coûtant. Elle n'a pas fait de bénéfice. Elle a fait une liste d'attente.", "gap": 0.3 },
+    { "id": "08-dealer", "who": "procureur", "text": "Si on l'acquitte, chaque dealer viendra dire qu'il soigne ses clients.", "gap": 0.35 },
+    { "id": "09-tremble", "who": "avocate", "text": "Aucun dealer n'a 78 ans et un mari qui tremble.", "say": "Aucun dealer n'a soixante-dix-huit ans et un mari qui tremble.", "gap": 0.25 },
+    { "id": "10-jury", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, tu l'aurais dénoncée ?", "gap": 0.8 }
+  ]
+}

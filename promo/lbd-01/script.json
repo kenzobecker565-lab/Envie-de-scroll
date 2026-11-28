@@ -1,0 +1,108 @@
+{
+ "_doc": "Le tir (LBD), épisode 1/2 (affaire fictive). Voix ElevenLabs du créateur du compte, une prise par réplique (media/elevenlabs/<id>.mp3) : narrateur « Nicolas », procureur « Paul K », défense (un avocat) « Peter ». « avocate » = la défense.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-tir",
+   "who": "narrateur",
+   "text": "Un tir. Une seconde. Et un étudiant de 22 ans perd son œil gauche."
+  },
+  {
+   "id": "02-pave",
+   "who": "narrateur",
+   "text": "Trois secondes plus tôt, il lançait un pavé sur la ligne de police. Le policier a tiré au LBD.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-juge",
+   "who": "narrateur",
+   "text": "Aujourd'hui, c'est le policier qui est jugé. Pour violences volontaires. Avec mutilation.",
+   "gap": 0.25
+  },
+  {
+   "id": "04-visage",
+   "who": "procureur",
+   "text": "Le règlement est clair : on ne vise jamais la tête. Il a tiré à 6 mètres. En plein visage.",
+   "gap": 0.3
+  },
+  {
+   "id": "05-six",
+   "who": "avocate",
+   "text": "6 mètres. Un pavé. Son collègue s'effondre à côté de lui, le casque fendu. Et vous lui demandez de viser… avec précision ?",
+   "gap": 0.1
+  },
+  {
+   "id": "06-photo",
+   "who": "procureur",
+   "text": "Viser, c'est son métier. 100 heures de formation. Et il a visé la tête. Théo voulait devenir photographe. Il ne verra plus jamais de l'œil gauche.",
+   "gap": 0.1
+  },
+  {
+   "id": "07-appareil",
+   "who": "avocate",
+   "text": "Photographe… Ce photographe tenait un pavé de 10 kilos. Pas un appareil. Un pavé. Contre des hommes à qui on interdisait de reculer.",
+   "gap": 0.1
+  },
+  {
+   "id": "08-pause",
+   "who": "narrateur",
+   "text": "Avant la suite : tu as jugé Inès, la mère qui avait pillé le supermarché. Et la majorité d'entre vous l'a déclarée coupable. Merci d'avoir voté. Abonne-toi : le verdict d'aujourd'hui tombe dans la prochaine vidéo.",
+   "gap": 0.35
+  },
+  {
+   "id": "09-prouve",
+   "who": "procureur",
+   "text": "Rien ne prouve que son pavé a touché quelqu'un. Ce qui est prouvé, c'est le tir. À 6 mètres. Sans une seule sommation.",
+   "gap": 0.3
+  },
+  {
+   "id": "10-seconde",
+   "who": "avocate",
+   "text": "Une sommation ? Dans le bruit des grenades, au milieu de 300 manifestants ? Il a eu une seconde pour choisir… entre son collègue à terre, et un homme qui se baissait pour ramasser un deuxième pavé.",
+   "gap": 0.1
+  },
+  {
+   "id": "11-baisser",
+   "who": "procureur",
+   "text": "Se baisser n'est pas un crime. Il ne savait pas ce que Théo allait faire. Et il n'a pas attendu de le savoir.",
+   "gap": 0.1
+  },
+  {
+   "id": "12-attendre",
+   "who": "avocate",
+   "text": "Attendre. C'est ce qu'a fait son collègue, quand la première pierre est arrivée. Il est toujours à l'hôpital.",
+   "gap": 0.1
+  },
+  {
+   "id": "13-uniforme",
+   "who": "procureur",
+   "text": "Alors il y a deux victimes dans cette salle. Mais une seule a été touchée par quelqu'un dont le métier est de protéger.",
+   "gap": 0.15
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Légitime défense… ou violence policière ? Coupable… ou non coupable ?",
+   "gap": 0.6
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire, et abonne-toi : le verdict tombe dans la prochaine vidéo.",
+   "gap": 0.4
+  }
+ ]
+}

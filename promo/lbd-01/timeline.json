@@ -1,0 +1,1413 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 91.13,
+ "lines": [
+  {
+   "id": "01-tir",
+   "who": "narrateur",
+   "text": "Un tir. Une seconde. Et un étudiant de 22 ans perd son œil gauche.",
+   "start": 0.25,
+   "dur": 3.49,
+   "words": [
+    {
+     "w": "Un",
+     "t": 0.25
+    },
+    {
+     "w": "tir.",
+     "t": 0.41
+    },
+    {
+     "w": "Une",
+     "t": 0.87
+    },
+    {
+     "w": "seconde.",
+     "t": 0.97
+    },
+    {
+     "w": "Et",
+     "t": 1.57
+    },
+    {
+     "w": "un",
+     "t": 1.63
+    },
+    {
+     "w": "étudiant",
+     "t": 1.71
+    },
+    {
+     "w": "de",
+     "t": 2.07
+    },
+    {
+     "w": "22",
+     "t": 2.17
+    },
+    {
+     "w": "ans",
+     "t": 2.43
+    },
+    {
+     "w": "perd",
+     "t": 2.71
+    },
+    {
+     "w": "son",
+     "t": 2.93
+    },
+    {
+     "w": "œil",
+     "t": 3.13
+    },
+    {
+     "w": "gauche.",
+     "t": 3.33
+    }
+   ]
+  },
+  {
+   "id": "02-pave",
+   "who": "narrateur",
+   "text": "Trois secondes plus tôt, il lançait un pavé sur la ligne de police. Le policier a tiré au LBD.",
+   "start": 4.04,
+   "dur": 4.49,
+   "words": [
+    {
+     "w": "Trois",
+     "t": 4.04
+    },
+    {
+     "w": "secondes",
+     "t": 4.29
+    },
+    {
+     "w": "plus",
+     "t": 4.53
+    },
+    {
+     "w": "tôt,",
+     "t": 4.65
+    },
+    {
+     "w": "il",
+     "t": 5.07
+    },
+    {
+     "w": "lançait",
+     "t": 5.17
+    },
+    {
+     "w": "un",
+     "t": 5.47
+    },
+    {
+     "w": "pavé",
+     "t": 5.57
+    },
+    {
+     "w": "sur",
+     "t": 5.87
+    },
+    {
+     "w": "la",
+     "t": 6.01
+    },
+    {
+     "w": "ligne",
+     "t": 6.11
+    },
+    {
+     "w": "de",
+     "t": 6.23
+    },
+    {
+     "w": "police.",
+     "t": 6.33
+    },
+    {
+     "w": "Le",
+     "t": 6.85
+    },
+    {
+     "w": "policier",
+     "t": 6.93
+    },
+    {
+     "w": "a",
+     "t": 7.37
+    },
+    {
+     "w": "tiré",
+     "t": 7.53
+    },
+    {
+     "w": "au",
+     "t": 7.81
+    },
+    {
+     "w": "LBD.",
+     "t": 7.89
+    }
+   ]
+  },
+  {
+   "id": "03-juge",
+   "who": "narrateur",
+   "text": "Aujourd'hui, c'est le policier qui est jugé. Pour violences volontaires. Avec mutilation.",
+   "start": 8.78,
+   "dur": 4.0,
+   "words": [
+    {
+     "w": "Aujourd'hui,",
+     "t": 9.053
+    },
+    {
+     "w": "c'est",
+     "t": 9.327
+    },
+    {
+     "w": "le",
+     "t": 9.6
+    },
+    {
+     "w": "policier",
+     "t": 9.66
+    },
+    {
+     "w": "qui",
+     "t": 10.08
+    },
+    {
+     "w": "est",
+     "t": 10.2
+    },
+    {
+     "w": "jugé.",
+     "t": 10.28
+    },
+    {
+     "w": "Pour",
+     "t": 10.58
+    },
+    {
+     "w": "violences",
+     "t": 10.967
+    },
+    {
+     "w": "volontaires.",
+     "t": 11.353
+    },
+    {
+     "w": "Avec",
+     "t": 11.74
+    },
+    {
+     "w": "mutilation.",
+     "t": 11.96
+    }
+   ]
+  },
+  {
+   "id": "04-visage",
+   "who": "procureur",
+   "text": "Le règlement est clair : on ne vise jamais la tête. Il a tiré à 6 mètres. En plein visage.",
+   "start": 13.08,
+   "dur": 5.15,
+   "words": [
+    {
+     "w": "Le",
+     "t": 13.08
+    },
+    {
+     "w": "règlement",
+     "t": 13.22
+    },
+    {
+     "w": "est",
+     "t": 13.62
+    },
+    {
+     "w": "clair :",
+     "t": 13.8
+    },
+    {
+     "w": "on",
+     "t": 14.34
+    },
+    {
+     "w": "ne",
+     "t": 14.42
+    },
+    {
+     "w": "vise",
+     "t": 14.56
+    },
+    {
+     "w": "jamais",
+     "t": 14.84
+    },
+    {
+     "w": "la",
+     "t": 15.18
+    },
+    {
+     "w": "tête.",
+     "t": 15.42
+    },
+    {
+     "w": "Il",
+     "t": 15.86
+    },
+    {
+     "w": "a",
+     "t": 15.96
+    },
+    {
+     "w": "tiré",
+     "t": 16.06
+    },
+    {
+     "w": "à",
+     "t": 16.38
+    },
+    {
+     "w": "6",
+     "t": 16.5
+    },
+    {
+     "w": "mètres.",
+     "t": 16.74
+    },
+    {
+     "w": "En",
+     "t": 17.22
+    },
+    {
+     "w": "plein",
+     "t": 17.28
+    },
+    {
+     "w": "visage.",
+     "t": 17.54
+    }
+   ]
+  },
+  {
+   "id": "05-six",
+   "who": "avocate",
+   "text": "6 mètres. Un pavé. Son collègue s'effondre à côté de lui, le casque fendu. Et vous lui demandez de viser… avec précision ?",
+   "start": 18.33,
+   "dur": 5.77,
+   "words": [
+    {
+     "w": "6",
+     "t": 18.33
+    },
+    {
+     "w": "mètres.",
+     "t": 18.59
+    },
+    {
+     "w": "Un",
+     "t": 19.05
+    },
+    {
+     "w": "pavé.",
+     "t": 19.11
+    },
+    {
+     "w": "Son",
+     "t": 19.63
+    },
+    {
+     "w": "collègue",
+     "t": 19.71
+    },
+    {
+     "w": "s'effondre",
+     "t": 20.07
+    },
+    {
+     "w": "à",
+     "t": 20.43
+    },
+    {
+     "w": "côté",
+     "t": 20.49
+    },
+    {
+     "w": "de",
+     "t": 20.63
+    },
+    {
+     "w": "lui,",
+     "t": 20.77
+    },
+    {
+     "w": "le",
+     "t": 21.09
+    },
+    {
+     "w": "casque",
+     "t": 21.17
+    },
+    {
+     "w": "fendu.",
+     "t": 21.45
+    },
+    {
+     "w": "Et",
+     "t": 21.99
+    },
+    {
+     "w": "vous",
+     "t": 22.05
+    },
+    {
+     "w": "lui",
+     "t": 22.15
+    },
+    {
+     "w": "demandez",
+     "t": 22.25
+    },
+    {
+     "w": "de",
+     "t": 22.55
+    },
+    {
+     "w": "viser…",
+     "t": 22.59
+    },
+    {
+     "w": "avec",
+     "t": 23.03
+    },
+    {
+     "w": "précision ?",
+     "t": 23.41
+    }
+   ]
+  },
+  {
+   "id": "06-photo",
+   "who": "procureur",
+   "text": "Viser, c'est son métier. 100 heures de formation. Et il a visé la tête. Théo voulait devenir photographe. Il ne verra plus jamais de l'œil gauche.",
+   "start": 24.2,
+   "dur": 7.18,
+   "words": [
+    {
+     "w": "Viser,",
+     "t": 24.48
+    },
+    {
+     "w": "c'est",
+     "t": 24.76
+    },
+    {
+     "w": "son",
+     "t": 25.04
+    },
+    {
+     "w": "métier.",
+     "t": 25.18
+    },
+    {
+     "w": "100",
+     "t": 25.527
+    },
+    {
+     "w": "heures",
+     "t": 25.873
+    },
+    {
+     "w": "de",
+     "t": 26.22
+    },
+    {
+     "w": "formation.",
+     "t": 26.3
+    },
+    {
+     "w": "Et",
+     "t": 27.0
+    },
+    {
+     "w": "il",
+     "t": 27.06
+    },
+    {
+     "w": "a",
+     "t": 27.18
+    },
+    {
+     "w": "visé",
+     "t": 27.28
+    },
+    {
+     "w": "la",
+     "t": 27.54
+    },
+    {
+     "w": "tête.",
+     "t": 27.64
+    },
+    {
+     "w": "Théo",
+     "t": 28.12
+    },
+    {
+     "w": "voulait",
+     "t": 28.3
+    },
+    {
+     "w": "devenir",
+     "t": 28.58
+    },
+    {
+     "w": "photographe.",
+     "t": 28.78
+    },
+    {
+     "w": "Il",
+     "t": 29.62
+    },
+    {
+     "w": "ne",
+     "t": 29.68
+    },
+    {
+     "w": "verra",
+     "t": 29.8
+    },
+    {
+     "w": "plus",
+     "t": 30.04
+    },
+    {
+     "w": "jamais",
+     "t": 30.2
+    },
+    {
+     "w": "de",
+     "t": 30.48
+    },
+    {
+     "w": "l'œil",
+     "t": 30.69
+    },
+    {
+     "w": "gauche.",
+     "t": 30.9
+    }
+   ]
+  },
+  {
+   "id": "07-appareil",
+   "who": "avocate",
+   "text": "Photographe… Ce photographe tenait un pavé de 10 kilos. Pas un appareil. Un pavé. Contre des hommes à qui on interdisait de reculer.",
+   "start": 31.48,
+   "dur": 6.7,
+   "words": [
+    {
+     "w": "Photographe…",
+     "t": 31.93
+    },
+    {
+     "w": "Ce",
+     "t": 32.41
+    },
+    {
+     "w": "photographe",
+     "t": 32.61
+    },
+    {
+     "w": "tenait",
+     "t": 33.15
+    },
+    {
+     "w": "un",
+     "t": 33.37
+    },
+    {
+     "w": "pavé",
+     "t": 33.45
+    },
+    {
+     "w": "de",
+     "t": 33.77
+    },
+    {
+     "w": "10",
+     "t": 33.89
+    },
+    {
+     "w": "kilos.",
+     "t": 34.13
+    },
+    {
+     "w": "Pas",
+     "t": 34.51
+    },
+    {
+     "w": "un",
+     "t": 34.61
+    },
+    {
+     "w": "appareil.",
+     "t": 34.71
+    },
+    {
+     "w": "Un",
+     "t": 35.29
+    },
+    {
+     "w": "pavé.",
+     "t": 35.37
+    },
+    {
+     "w": "Contre",
+     "t": 36.03
+    },
+    {
+     "w": "des",
+     "t": 36.21
+    },
+    {
+     "w": "hommes",
+     "t": 36.43
+    },
+    {
+     "w": "à",
+     "t": 36.65
+    },
+    {
+     "w": "qui",
+     "t": 36.83
+    },
+    {
+     "w": "on",
+     "t": 36.95
+    },
+    {
+     "w": "interdisait",
+     "t": 37.05
+    },
+    {
+     "w": "de",
+     "t": 37.61
+    },
+    {
+     "w": "reculer.",
+     "t": 37.69
+    }
+   ]
+  },
+  {
+   "id": "08-pause",
+   "who": "narrateur",
+   "text": "Avant la suite : tu as jugé Inès, la mère qui avait pillé le supermarché. Et la majorité d'entre vous l'a déclarée coupable. Merci d'avoir voté. Abonne-toi : le verdict d'aujourd'hui tombe dans la prochaine vidéo.",
+   "start": 38.53,
+   "dur": 9.34,
+   "words": [
+    {
+     "w": "Avant",
+     "t": 38.53
+    },
+    {
+     "w": "la",
+     "t": 38.71
+    },
+    {
+     "w": "suite :",
+     "t": 38.83
+    },
+    {
+     "w": "tu",
+     "t": 39.35
+    },
+    {
+     "w": "as",
+     "t": 39.43
+    },
+    {
+     "w": "jugé",
+     "t": 39.53
+    },
+    {
+     "w": "Inès,",
+     "t": 39.81
+    },
+    {
+     "w": "la",
+     "t": 40.43
+    },
+    {
+     "w": "mère",
+     "t": 40.53
+    },
+    {
+     "w": "qui",
+     "t": 40.69
+    },
+    {
+     "w": "avait",
+     "t": 40.85
+    },
+    {
+     "w": "pillé",
+     "t": 40.99
+    },
+    {
+     "w": "le",
+     "t": 41.27
+    },
+    {
+     "w": "supermarché.",
+     "t": 41.31
+    },
+    {
+     "w": "Et",
+     "t": 42.01
+    },
+    {
+     "w": "la",
+     "t": 42.07
+    },
+    {
+     "w": "majorité",
+     "t": 42.17
+    },
+    {
+     "w": "d'entre",
+     "t": 42.47
+    },
+    {
+     "w": "vous",
+     "t": 42.77
+    },
+    {
+     "w": "l'a",
+     "t": 43.03
+    },
+    {
+     "w": "déclarée",
+     "t": 43.29
+    },
+    {
+     "w": "coupable.",
+     "t": 43.55
+    },
+    {
+     "w": "Merci",
+     "t": 44.15
+    },
+    {
+     "w": "d'avoir",
+     "t": 44.35
+    },
+    {
+     "w": "voté.",
+     "t": 44.55
+    },
+    {
+     "w": "Abonne-toi :",
+     "t": 45.1
+    },
+    {
+     "w": "le",
+     "t": 45.65
+    },
+    {
+     "w": "verdict",
+     "t": 45.69
+    },
+    {
+     "w": "d'aujourd'hui",
+     "t": 46.11
+    },
+    {
+     "w": "tombe",
+     "t": 46.53
+    },
+    {
+     "w": "dans",
+     "t": 46.89
+    },
+    {
+     "w": "la",
+     "t": 46.97
+    },
+    {
+     "w": "prochaine",
+     "t": 47.07
+    },
+    {
+     "w": "vidéo.",
+     "t": 47.31
+    }
+   ]
+  },
+  {
+   "id": "09-prouve",
+   "who": "procureur",
+   "text": "Rien ne prouve que son pavé a touché quelqu'un. Ce qui est prouvé, c'est le tir. À 6 mètres. Sans une seule sommation.",
+   "start": 48.17,
+   "dur": 6.0,
+   "words": [
+    {
+     "w": "Rien",
+     "t": 48.17
+    },
+    {
+     "w": "ne",
+     "t": 48.49
+    },
+    {
+     "w": "prouve",
+     "t": 48.61
+    },
+    {
+     "w": "que",
+     "t": 48.89
+    },
+    {
+     "w": "son",
+     "t": 48.99
+    },
+    {
+     "w": "pavé",
+     "t": 49.13
+    },
+    {
+     "w": "a",
+     "t": 49.45
+    },
+    {
+     "w": "touché",
+     "t": 49.53
+    },
+    {
+     "w": "quelqu'un.",
+     "t": 49.94
+    },
+    {
+     "w": "Ce",
+     "t": 50.35
+    },
+    {
+     "w": "qui",
+     "t": 50.41
+    },
+    {
+     "w": "est",
+     "t": 50.55
+    },
+    {
+     "w": "prouvé,",
+     "t": 50.63
+    },
+    {
+     "w": "c'est",
+     "t": 51.0
+    },
+    {
+     "w": "le",
+     "t": 51.37
+    },
+    {
+     "w": "tir.",
+     "t": 51.43
+    },
+    {
+     "w": "À",
+     "t": 51.95
+    },
+    {
+     "w": "6",
+     "t": 52.05
+    },
+    {
+     "w": "mètres.",
+     "t": 52.29
+    },
+    {
+     "w": "Sans",
+     "t": 52.77
+    },
+    {
+     "w": "une",
+     "t": 52.95
+    },
+    {
+     "w": "seule",
+     "t": 53.27
+    },
+    {
+     "w": "sommation.",
+     "t": 53.49
+    }
+   ]
+  },
+  {
+   "id": "10-seconde",
+   "who": "avocate",
+   "text": "Une sommation ? Dans le bruit des grenades, au milieu de 300 manifestants ? Il a eu une seconde pour choisir… entre son collègue à terre, et un homme qui se baissait pour ramasser un deuxième pavé.",
+   "start": 54.27,
+   "dur": 8.27,
+   "words": [
+    {
+     "w": "Une",
+     "t": 54.27
+    },
+    {
+     "w": "sommation ?",
+     "t": 54.42
+    },
+    {
+     "w": "Dans",
+     "t": 55.04
+    },
+    {
+     "w": "le",
+     "t": 55.16
+    },
+    {
+     "w": "bruit",
+     "t": 55.26
+    },
+    {
+     "w": "des",
+     "t": 55.5
+    },
+    {
+     "w": "grenades,",
+     "t": 55.56
+    },
+    {
+     "w": "au",
+     "t": 56.12
+    },
+    {
+     "w": "milieu",
+     "t": 56.16
+    },
+    {
+     "w": "de",
+     "t": 56.34
+    },
+    {
+     "w": "300",
+     "t": 56.48
+    },
+    {
+     "w": "manifestants ?",
+     "t": 56.78
+    },
+    {
+     "w": "Il",
+     "t": 57.52
+    },
+    {
+     "w": "a",
+     "t": 57.6
+    },
+    {
+     "w": "eu",
+     "t": 57.7
+    },
+    {
+     "w": "une",
+     "t": 57.8
+    },
+    {
+     "w": "seconde",
+     "t": 58.0
+    },
+    {
+     "w": "pour",
+     "t": 58.4
+    },
+    {
+     "w": "choisir…",
+     "t": 58.5
+    },
+    {
+     "w": "entre",
+     "t": 59.1
+    },
+    {
+     "w": "son",
+     "t": 59.24
+    },
+    {
+     "w": "collègue",
+     "t": 59.46
+    },
+    {
+     "w": "à",
+     "t": 59.68
+    },
+    {
+     "w": "terre,",
+     "t": 59.9
+    },
+    {
+     "w": "et",
+     "t": 60.12
+    },
+    {
+     "w": "un",
+     "t": 60.36
+    },
+    {
+     "w": "homme",
+     "t": 60.5
+    },
+    {
+     "w": "qui",
+     "t": 60.64
+    },
+    {
+     "w": "se",
+     "t": 60.76
+    },
+    {
+     "w": "baissait",
+     "t": 60.86
+    },
+    {
+     "w": "pour",
+     "t": 61.2
+    },
+    {
+     "w": "ramasser",
+     "t": 61.34
+    },
+    {
+     "w": "un",
+     "t": 61.68
+    },
+    {
+     "w": "deuxième",
+     "t": 61.76
+    },
+    {
+     "w": "pavé.",
+     "t": 62.04
+    }
+   ]
+  },
+  {
+   "id": "11-baisser",
+   "who": "procureur",
+   "text": "Se baisser n'est pas un crime. Il ne savait pas ce que Théo allait faire. Et il n'a pas attendu de le savoir.",
+   "start": 62.64,
+   "dur": 5.071,
+   "words": [
+    {
+     "w": "Se",
+     "t": 62.73
+    },
+    {
+     "w": "baisser",
+     "t": 62.83
+    },
+    {
+     "w": "n'est",
+     "t": 63.1
+    },
+    {
+     "w": "pas",
+     "t": 63.37
+    },
+    {
+     "w": "un",
+     "t": 63.49
+    },
+    {
+     "w": "crime.",
+     "t": 63.67
+    },
+    {
+     "w": "Il",
+     "t": 64.19
+    },
+    {
+     "w": "ne",
+     "t": 64.25
+    },
+    {
+     "w": "savait",
+     "t": 64.39
+    },
+    {
+     "w": "pas",
+     "t": 64.67
+    },
+    {
+     "w": "ce",
+     "t": 64.81
+    },
+    {
+     "w": "que",
+     "t": 64.97
+    },
+    {
+     "w": "Théo",
+     "t": 65.09
+    },
+    {
+     "w": "allait",
+     "t": 65.35
+    },
+    {
+     "w": "faire.",
+     "t": 65.61
+    },
+    {
+     "w": "Et",
+     "t": 65.81
+    },
+    {
+     "w": "il",
+     "t": 66.07
+    },
+    {
+     "w": "n'a",
+     "t": 66.21
+    },
+    {
+     "w": "pas",
+     "t": 66.35
+    },
+    {
+     "w": "attendu",
+     "t": 66.49
+    },
+    {
+     "w": "de",
+     "t": 66.93
+    },
+    {
+     "w": "le",
+     "t": 67.01
+    },
+    {
+     "w": "savoir.",
+     "t": 67.11
+    }
+   ]
+  },
+  {
+   "id": "12-attendre",
+   "who": "avocate",
+   "text": "Attendre. C'est ce qu'a fait son collègue, quand la première pierre est arrivée. Il est toujours à l'hôpital.",
+   "start": 67.811,
+   "dur": 4.1,
+   "words": [
+    {
+     "w": "Attendre.",
+     "t": 67.811
+    },
+    {
+     "w": "C'est",
+     "t": 68.231
+    },
+    {
+     "w": "ce",
+     "t": 68.651
+    },
+    {
+     "w": "qu'a",
+     "t": 68.711
+    },
+    {
+     "w": "fait",
+     "t": 68.771
+    },
+    {
+     "w": "son",
+     "t": 68.871
+    },
+    {
+     "w": "collègue,",
+     "t": 68.971
+    },
+    {
+     "w": "quand",
+     "t": 69.391
+    },
+    {
+     "w": "la",
+     "t": 69.631
+    },
+    {
+     "w": "première",
+     "t": 69.731
+    },
+    {
+     "w": "pierre",
+     "t": 69.951
+    },
+    {
+     "w": "est",
+     "t": 70.311
+    },
+    {
+     "w": "arrivée.",
+     "t": 70.351
+    },
+    {
+     "w": "Il",
+     "t": 70.851
+    },
+    {
+     "w": "est",
+     "t": 70.931
+    },
+    {
+     "w": "toujours",
+     "t": 71.011
+    },
+    {
+     "w": "à",
+     "t": 71.231
+    },
+    {
+     "w": "l'hôpital.",
+     "t": 71.582
+    }
+   ]
+  },
+  {
+   "id": "13-uniforme",
+   "who": "procureur",
+   "text": "Alors il y a deux victimes dans cette salle. Mais une seule a été touchée par quelqu'un dont le métier est de protéger.",
+   "start": 72.061,
+   "dur": 5.53,
+   "words": [
+    {
+     "w": "Alors",
+     "t": 72.061
+    },
+    {
+     "w": "il",
+     "t": 72.541
+    },
+    {
+     "w": "y",
+     "t": 72.661
+    },
+    {
+     "w": "a",
+     "t": 72.761
+    },
+    {
+     "w": "deux",
+     "t": 72.841
+    },
+    {
+     "w": "victimes",
+     "t": 73.021
+    },
+    {
+     "w": "dans",
+     "t": 73.461
+    },
+    {
+     "w": "cette",
+     "t": 73.601
+    },
+    {
+     "w": "salle.",
+     "t": 73.781
+    },
+    {
+     "w": "Mais",
+     "t": 74.261
+    },
+    {
+     "w": "une",
+     "t": 74.341
+    },
+    {
+     "w": "seule",
+     "t": 74.581
+    },
+    {
+     "w": "a",
+     "t": 74.861
+    },
+    {
+     "w": "été",
+     "t": 74.981
+    },
+    {
+     "w": "touchée",
+     "t": 75.101
+    },
+    {
+     "w": "par",
+     "t": 75.481
+    },
+    {
+     "w": "quelqu'un",
+     "t": 75.751
+    },
+    {
+     "w": "dont",
+     "t": 76.021
+    },
+    {
+     "w": "le",
+     "t": 76.141
+    },
+    {
+     "w": "métier",
+     "t": 76.261
+    },
+    {
+     "w": "est",
+     "t": 76.721
+    },
+    {
+     "w": "de",
+     "t": 76.841
+    },
+    {
+     "w": "protéger.",
+     "t": 76.941
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Légitime défense… ou violence policière ? Coupable… ou non coupable ?",
+   "start": 78.191,
+   "dur": 4.88,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 78.191
+    },
+    {
+     "w": "es",
+     "t": 78.351
+    },
+    {
+     "w": "le",
+     "t": 78.421
+    },
+    {
+     "w": "juré.",
+     "t": 78.491
+    },
+    {
+     "w": "Légitime",
+     "t": 78.991
+    },
+    {
+     "w": "défense…",
+     "t": 79.371
+    },
+    {
+     "w": "ou",
+     "t": 79.971
+    },
+    {
+     "w": "violence",
+     "t": 80.311
+    },
+    {
+     "w": "policière ?",
+     "t": 80.651
+    },
+    {
+     "w": "Coupable…",
+     "t": 81.371
+    },
+    {
+     "w": "ou",
+     "t": 81.811
+    },
+    {
+     "w": "non",
+     "t": 82.191
+    },
+    {
+     "w": "coupable ?",
+     "t": 82.451
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire, et abonne-toi : le verdict tombe dans la prochaine vidéo.",
+   "start": 83.471,
+   "dur": 4.06,
+   "words": [
+    {
+     "w": "Écris",
+     "t": 83.471
+    },
+    {
+     "w": "ton",
+     "t": 83.761
+    },
+    {
+     "w": "verdict",
+     "t": 83.861
+    },
+    {
+     "w": "en",
+     "t": 84.081
+    },
+    {
+     "w": "commentaire,",
+     "t": 84.281
+    },
+    {
+     "w": "et",
+     "t": 84.821
+    },
+    {
+     "w": "abonne-toi :",
+     "t": 85.251
+    },
+    {
+     "w": "le",
+     "t": 85.681
+    },
+    {
+     "w": "verdict",
+     "t": 85.741
+    },
+    {
+     "w": "tombe",
+     "t": 86.221
+    },
+    {
+     "w": "dans",
+     "t": 86.441
+    },
+    {
+     "w": "la",
+     "t": 86.541
+    },
+    {
+     "w": "prochaine",
+     "t": 86.641
+    },
+    {
+     "w": "vidéo.",
+     "t": 86.921
+    }
+   ]
+  }
+ ]
+}

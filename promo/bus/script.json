@@ -1,0 +1,95 @@
+{
+ "_doc": "« La chauffeuse de bus » (affaire fictive). Voix ElevenLabs : Nicolas, Paul K, Ilan. Appel à l'abonnement repris du garagiste.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-portes",
+   "who": "narrateur",
+   "text": "Une chauffeuse de bus a verrouillé les portes. Avec quinze passagers à bord. Et elle a roulé jusqu'au commissariat sans s'arrêter. Aujourd'hui, c'est elle qu'on juge.",
+   "gap": 0
+  },
+  {
+   "id": "02-camera",
+   "who": "narrateur",
+   "text": "Sur la caméra du bus, on voit un homme coller une jeune femme depuis six arrêts. Sa main sur sa cuisse. Elle tremble. Personne ne bouge."
+  },
+  {
+   "id": "03-nadia",
+   "who": "narrateur",
+   "text": "Elle s'appelle Nadia. Quarante et un ans. Chauffeuse depuis quinze ans. Jamais un accident. Aujourd'hui, elle est jugée pour séquestration."
+  },
+  {
+   "id": "04-enfermes",
+   "who": "procureur",
+   "text": "Quinze personnes enfermées contre leur volonté. Certains ont tapé sur les portes. Une femme a fait une crise de panique."
+  },
+  {
+   "id": "05-vitre",
+   "who": "avocate",
+   "text": "Et la jeune femme, elle, faisait quoi ? Elle était coincée contre la vitre depuis vingt minutes."
+  },
+  {
+   "id": "06-arret",
+   "who": "procureur",
+   "text": "Il suffisait d'appeler la police et d'ouvrir les portes au prochain arrêt."
+  },
+  {
+   "id": "07-descendait",
+   "who": "avocate",
+   "text": "Au prochain arrêt, il descendait. Et la police n'aurait trouvé personne."
+  },
+  {
+   "id": "08-decider",
+   "who": "procureur",
+   "text": "Ce n'est pas à une chauffeuse de bus de décider qui est coupable."
+  },
+  {
+   "id": "09-devant",
+   "who": "avocate",
+   "text": "Elle n'a rien décidé. Elle a amené tout le monde devant ceux qui décident."
+  },
+  {
+   "id": "10-retard",
+   "who": "procureur",
+   "text": "Quarante minutes de retard, une ligne entière paralysée. Pour un simple soupçon."
+  },
+  {
+   "id": "11-fiche",
+   "who": "avocate",
+   "text": "Un soupçon ? L'homme était déjà connu pour trois agressions dans les transports."
+  },
+  {
+   "id": "12-cinqans",
+   "who": "procureur",
+   "text": "Elle risque cinq ans de prison. Pour avoir enfermé quinze innocents."
+  },
+  {
+   "id": "13-arrivee",
+   "who": "avocate",
+   "text": "Quinze passagers arrivés en retard. Une jeune femme arrivée tout court. C'est ça qu'on punit ?"
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire."
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais."
+  }
+ ]
+}

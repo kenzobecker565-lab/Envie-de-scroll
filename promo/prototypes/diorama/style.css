@@ -1,0 +1,17 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Figtree Variable', sans-serif; background: radial-gradient(ellipse at 50% 40%, #2b2f55, #0b0c1a 75%); }
+#gl { position: absolute; inset: 0; visibility: hidden; }
+#out { position: absolute; inset: 0; }
+#ui { position: absolute; inset: 0; pointer-events: none; }
+.tag { position: absolute; left: 0; top: 0; white-space: nowrap; font-weight: 900; }
+.clock { font-variant-numeric: tabular-nums; font-size: 150px; color: #fff; padding: 10px 40px 18px; border-radius: 34px; background: rgba(12, 14, 30, 0.82); border: 6px solid #ff5a5a; box-shadow: 0 0 60px rgba(255, 70, 70, 0.45); }
+.clock .s { color: #ff7a7a; font-size: 110px; }
+.pin { font-size: 46px; padding: 8px 24px 12px; border-radius: 18px; color: #fff; box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+.pin::after { content: ''; position: absolute; left: 50%; bottom: -18px; margin-left: -12px; border: 12px solid transparent; border-top-color: inherit; }
+.pin.red { background: #e5484d; border-color: #e5484d; }
+.pin.dark { background: #1d1f27; border-color: #1d1f27; }
+.pin.blue { background: #3b82f6; border-color: #3b82f6; }
+.pin.yellow { background: #ffd166; color: #10121a; border-color: #ffd166; }
+.caps .w { display: inline-block; margin: 0 11px; font-size: 100px; font-weight: 900; color: #fff; -webkit-text-stroke: 18px #10121a; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0, 0, 0, 0.4); padding: 0 14px 6px; border-radius: 22px; }
+.caps .w.on { color: #10121a; -webkit-text-stroke: 0; background: #ffd166; text-shadow: none; box-shadow: 0 10px 0 #b8892a; }

@@ -1,0 +1,20 @@
+{
+  "_doc": "Affaire n°3 : le boulanger (affaire fictive). Texte des sous-titres, une entrée par réplique, dans l'ordre. « who » : narrateur, procureur, avocate (voir media/ et le README). « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
+  "voices": {
+    "narrateur": { "name": "narrateur", "file": "media/narrateur.wav" },
+    "procureur": { "name": "procureur", "file": "media/procureur.wav" },
+    "avocate": { "name": "avocate", "file": "media/avocate.wav" }
+  },
+  "lines": [
+    { "id": "01-trois-heures", "who": "narrateur", "text": "Trois heures du matin. Un cambrioleur entre dans sa boulangerie." },
+    { "id": "02-rouleau", "who": "narrateur", "text": "Le boulanger descend… avec son rouleau à pâtisserie. Deux côtes cassées.", "gap": 0.25 },
+    { "id": "03-plainte", "who": "narrateur", "text": "Le voleur porte plainte. Et c'est le boulanger qui risque cinq ans de prison.", "gap": 0.3 },
+    { "id": "04-dos", "who": "procureur", "text": "Quand il l'a frappé, le voleur s'enfuyait. Il était de dos. Ce n'est plus se défendre, c'est se venger.", "gap": 0.7 },
+    { "id": "05-nuit", "who": "avocate", "text": "Il était trois heures du matin. Dans le noir, il ne savait pas s'il était armé. La nuit, chez soi, la loi présume la légitime défense.", "gap": 0.3 },
+    { "id": "06-quatre", "who": "procureur", "text": "Il a frappé quatre fois. Une fois, c'est la peur. Quatre fois, c'est la colère.", "gap": 0.3 },
+    { "id": "07-onze", "who": "avocate", "text": "Ce cambrioleur avait déjà été condamné 11 fois. Le boulanger, jamais.", "say": "Ce cambrioleur avait déjà été condamné onze fois. Le boulanger, jamais.", "gap": 0.3 },
+    { "id": "08-passe", "who": "procureur", "text": "On ne juge pas son passé. On juge ce qui s'est passé cette nuit-là.", "gap": 0.35 },
+    { "id": "09-maison", "who": "avocate", "text": "Cette nuit-là, il a protégé sa maison.", "gap": 0.25 },
+    { "id": "10-jury", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, à trois heures du matin, tu aurais fait quoi ?", "gap": 0.8 }
+  ]
+}

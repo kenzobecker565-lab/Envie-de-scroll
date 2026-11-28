@@ -1,0 +1,95 @@
+{
+ "_doc": "« Le technicien » (affaire fictive), inspirée de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-hiver",
+   "who": "narrateur",
+   "text": "En plein hiver, un technicien devait couper l'électricité d'un père seul. Il ne l'a jamais fait. Quatorze mois. Deux mille trois cents euros de factures impayées.",
+   "gap": 0
+  },
+  {
+   "id": "02-rapports",
+   "who": "narrateur",
+   "text": "Sur ses rapports, toujours la même phrase : « Coupure effectuée. » Mais derrière la porte, le chauffage tournait… le frigo aussi… et la veilleuse des enfants."
+  },
+  {
+   "id": "03-julien",
+   "who": "narrateur",
+   "text": "Il s'appelle Julien. Quarante et un ans. Technicien depuis quinze ans. Jamais un avertissement. Aujourd'hui, il est jugé pour faux."
+  },
+  {
+   "id": "04-mensonge",
+   "who": "procureur",
+   "text": "Quatorze fois, il a signé un mensonge. Quatorze fois, il a décidé à la place de son entreprise."
+  },
+  {
+   "id": "05-benefices",
+   "who": "avocate",
+   "text": "Son entreprise ? Elle a fait trois milliards de bénéfices l'an dernier. Deux mille trois cents euros, ce n'est même pas une erreur d'arrondi."
+  },
+  {
+   "id": "06-lumiere",
+   "who": "procureur",
+   "text": "Alors chaque technicien choisit qui mérite la lumière ? Demain, ils seront cent à le faire. Puis mille. Et qui paiera ?"
+  },
+  {
+   "id": "07-compteur",
+   "who": "avocate",
+   "text": "Cent ? Ce soir-là, il faisait moins quatre. Deux enfants, deux et six ans. Le père venait de perdre son emploi. Julien a regardé le compteur… et il est reparti."
+  },
+  {
+   "id": "08-faux",
+   "who": "procureur",
+   "text": "La compassion n'autorise pas à mentir. Un faux reste un faux."
+  },
+  {
+   "id": "09-chaud",
+   "who": "avocate",
+   "text": "Un faux ? Il n'a pas touché un euro. Pas une faveur. Il a juste laissé une famille au chaud."
+  },
+  {
+   "id": "10-clients",
+   "who": "procureur",
+   "text": "Quatorze mois sans payer, c'est quatorze mois où les autres clients ont payé pour eux."
+  },
+  {
+   "id": "11-rembourse",
+   "who": "avocate",
+   "text": "Et grâce à ces quatorze mois, le père a retrouvé un travail. Aujourd'hui, il rembourse. Chaque mois."
+  },
+  {
+   "id": "12-loi",
+   "who": "procureur",
+   "text": "Tant mieux pour lui. Mais ce n'était pas à Julien de faire la loi."
+  },
+  {
+   "id": "13-crime",
+   "who": "avocate",
+   "text": "Faire la loi ? Il a refusé d'éteindre la lumière de deux enfants. Si c'est un crime… alors jugez-le."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

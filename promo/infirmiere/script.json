@@ -1,0 +1,95 @@
+{
+ "_doc": "« L'infirmière » (affaire fictive). Voix ElevenLabs : Nicolas, Paul K, Ilan. Appel à l'abonnement repris du garagiste.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-vole",
+   "who": "narrateur",
+   "text": "Pendant quatorze mois, une infirmière a volé son hôpital. Chaque soir, elle repartait avec des pansements plein les poches. Aujourd'hui, elle est sur le banc des accusés.",
+   "gap": 0
+  },
+  {
+   "id": "02-parking",
+   "who": "narrateur",
+   "text": "La caméra du parking la filme. Elle ne rentre pas chez elle. Elle s'agenouille devant un homme assis sur un carton… et elle défait le bandage de sa jambe."
+  },
+  {
+   "id": "03-camille",
+   "who": "narrateur",
+   "text": "Elle s'appelle Camille. Trente-quatre ans. Infirmière depuis douze ans. Jamais un reproche. Aujourd'hui, elle est jugée pour vol."
+  },
+  {
+   "id": "04-payes",
+   "who": "procureur",
+   "text": "Quatorze mois de vol. Du matériel payé par l'hôpital, par les patients, par nous tous."
+  },
+  {
+   "id": "05-jambe",
+   "who": "avocate",
+   "text": "Des pansements à deux euros. Contre une jambe qu'il allait perdre."
+  },
+  {
+   "id": "06-cadre",
+   "who": "procureur",
+   "text": "Elle n'avait pas le droit de soigner dehors. Sans médecin, sans ordonnance, sans aucun cadre."
+  },
+  {
+   "id": "07-urgences",
+   "who": "avocate",
+   "text": "Il avait essayé le cadre. Trois fois aux urgences. Six heures d'attente, et on le renvoyait dehors."
+  },
+  {
+   "id": "08-placards",
+   "who": "procureur",
+   "text": "Si chaque infirmière se sert dans les placards pour ses bonnes causes, l'hôpital ne tient pas un mois."
+  },
+  {
+   "id": "09-poubelle",
+   "who": "avocate",
+   "text": "Elle ne s'est pas servie. Elle a pris ce qui partait à la poubelle : des boîtes entamées, périmées dans la semaine."
+  },
+  {
+   "id": "10-vol",
+   "who": "procureur",
+   "text": "Peu importe. Ce n'était pas à elle. Un vol reste un vol."
+  },
+  {
+   "id": "11-marche",
+   "who": "avocate",
+   "text": "Le chirurgien l'a confirmé : sans ces soins, l'amputation était inévitable. Aujourd'hui, il marche."
+  },
+  {
+   "id": "12-troisans",
+   "who": "procureur",
+   "text": "Elle risque trois ans de prison. Et l'interdiction d'exercer."
+  },
+  {
+   "id": "13-sauvee",
+   "who": "avocate",
+   "text": "Trois ans… pour des pansements qui finissaient à la poubelle. Et une jambe sauvée."
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire."
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais."
+  }
+ ]
+}

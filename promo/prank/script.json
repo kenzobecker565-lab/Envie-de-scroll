@@ -1,0 +1,105 @@
+{
+ "_doc": "« Le prank » : un youtubeur simule en direct l'enlèvement d'un enfant ; un passant, qui n'était pas au courant, le frappe : trois semaines de coma (affaire fictive). Voix ElevenLabs (Eleven v4) : youtubeur « Hugo – Punchy French Creator », passant « Jean-Patrick », narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "youtubeur": {
+   "name": "youtubeur",
+   "file": "media/youtubeur.wav"
+  },
+  "passant": {
+   "name": "passant",
+   "file": "media/passant.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "Il a cru sauver un enfant… Il a mis un youtubeur dans le coma."
+  },
+  {
+   "id": "01-youtubeur",
+   "who": "youtubeur",
+   "text": "Les gars… expérience sociale. Je fais semblant d'enlever un gosse… et on regarde qui réagit.",
+   "gap": 0.5
+  },
+  {
+   "id": "01b-passant",
+   "who": "passant",
+   "text": "Lâche-le !",
+   "gap": 0.35
+  },
+  {
+   "id": "02-kevin",
+   "who": "narrateur",
+   "text": "Kevin, 2 millions d'abonnés. Un faux enlèvement, en direct. Timéo, 8 ans, était payé 50 euros pour jouer le rôle.",
+   "gap": 2.95
+  },
+  {
+   "id": "03-rachid",
+   "who": "narrateur",
+   "text": "Rachid, père de deux enfants, n'était pas au courant. Un seul coup de poing. Trois semaines de coma. Aujourd'hui, c'est Rachid qu'on juge."
+  },
+  {
+   "id": "04-seconde",
+   "who": "procureur",
+   "text": "Une seconde huit. C'est le temps entre son cri et son poing. J'ai regardé ce live image par image : pas une question, pas un geste pour les séparer. Il a frappé pour faire mal."
+  },
+  {
+   "id": "05-voiture",
+   "who": "avocate",
+   "text": "Une seconde huit, c'est exactement le temps qu'il faut pour qu'un enfant disparaisse dans une voiture. Mon client n'a pas réfléchi. Heureusement."
+  },
+  {
+   "id": "06-cagoule",
+   "who": "procureur",
+   "text": "La légitime défense d'autrui existe, je ne la conteste pas. Mais elle doit être proportionnée. Kevin n'avait pas d'arme. Il avait une cagoule à neuf euros."
+  },
+  {
+   "id": "07-savoir",
+   "who": "avocate",
+   "text": "Et comment Rachid pouvait le savoir ? Il voit un homme masqué, un gamin qui hurle… et personne d'autre ne bouge dans ce parc."
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Un réflexe de père… ou un coup de trop ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès."
+  },
+  {
+   "id": "09-medecin",
+   "who": "procureur",
+   "text": "Le médecin est formel : c'est sa tête sur le trottoir qui l'a plongé dans le coma. Et pendant ce temps, Rachid lui tournait le dos."
+  },
+  {
+   "id": "10-console",
+   "who": "avocate",
+   "text": "Il lui tournait le dos parce qu'il consolait Timéo. Pour lui, la victime, c'était l'enfant. Il le pensait encore quand les secours sont arrivés."
+  },
+  {
+   "id": "11-frappez",
+   "who": "procureur",
+   "text": "Si vous l'acquittez, vous dites à tout le monde : dans le doute, frappez d'abord."
+  },
+  {
+   "id": "12-filmez",
+   "who": "avocate",
+   "text": "Et si vous le condamnez, vous leur direz : dans le doute… filmez."
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend."
+  }
+ ]
+}

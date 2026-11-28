@@ -1,0 +1,100 @@
+{
+ "_doc": "« La chambre froide » : un boucher enferme des militants végans dans sa chambre froide (affaire fictive). Voix ElevenLabs (Eleven v4) : boucher « Jean-Patrick », narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "boucher": {
+   "name": "boucher",
+   "file": "media/boucher.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-boucher",
+   "who": "boucher",
+   "text": "Vous aimez les animaux ? Allez donc leur dire bonjour."
+  },
+  {
+   "id": "02-attaque",
+   "who": "narrateur",
+   "text": "Cinquième attaque en un an. Ce soir-là, Marc, boucher depuis 30 ans, attendait les militants. Il les a enfermés dans sa chambre froide.",
+   "gap": 1.9
+  },
+  {
+   "id": "03-froid",
+   "who": "narrateur",
+   "text": "Quarante minutes à moins 18 degrés. Une étudiante a fini en hypothermie. Aujourd'hui, Marc est jugé.",
+   "gap": 0.35
+  },
+  {
+   "id": "04-peinture",
+   "who": "procureur",
+   "text": "On ne répond pas à de la peinture… par une séquestration.",
+   "gap": 0.45
+  },
+  {
+   "id": "05-vitrines",
+   "who": "avocate",
+   "text": "Cinq vitrines brisées. Des menaces de mort. Une plainte classée sans suite à chaque fois. À un moment, la peinture, ça devient du harcèlement.",
+   "gap": 0.2
+  },
+  {
+   "id": "06-pedagogie",
+   "who": "procureur",
+   "text": "Et l'hypothermie, ça devient quoi ? De la pédagogie ?",
+   "gap": 0.2
+  },
+  {
+   "id": "07-assassin",
+   "who": "avocate",
+   "text": "Ces gens traitent un artisan d'assassin… et viennent pleurer parce qu'ils ont eu froid. Ils voulaient sauver des animaux, ils ont vécu comme eux.",
+   "gap": 0.2
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Boucher à bout ou tortionnaire ? Like si ça te fait réagir.",
+   "gap": 0.4
+  },
+  {
+   "id": "09-doigts",
+   "who": "procureur",
+   "text": "Une jeune femme de 20 ans a failli perdre deux doigts. Pour des tags.",
+   "gap": 0.4
+  },
+  {
+   "id": "10-tags",
+   "who": "avocate",
+   "text": "Des tags sur sa vie entière. Sa femme n'ose plus ouvrir la boutique le matin.",
+   "gap": 0.2
+  },
+  {
+   "id": "11-cadenas",
+   "who": "procureur",
+   "text": "Alors qu'il porte plainte. Pas qu'il joue au bourreau avec un cadenas.",
+   "gap": 0.2
+  },
+  {
+   "id": "12-plainte",
+   "who": "avocate",
+   "text": "Il a porté plainte cinq fois. La justice n'a rien fait. Et aujourd'hui, c'est lui que vous jugez.",
+   "gap": 0.3
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris-le en commentaire, et abonne-toi.",
+   "gap": 0.6
+  }
+ ]
+}

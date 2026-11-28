@@ -1,0 +1,15 @@
+# La secrétaire de mairie — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : cbL3VZh8fluO35OGfCyN
+01-date (narr) Une secrétaire de mairie a changé une date sur un formulaire. Trois jours. Juste trois jours. Et aujourd'hui, elle risque quinze ans de prison. [TÉLÉCHARGÉ]
+02-ordinateur (narr) Sur l'ordinateur de la mairie, on retrouve la trace. Le dossier est arrivé le trois janvier. Elle a écrit trente et un décembre. Et la famille est passée devant la commission. [TÉLÉCHARGÉ]
+03-isabelle (narr) Elle s'appelle Isabelle. Cinquante-quatre ans. Secrétaire de mairie depuis vingt-deux ans. Jamais une faute. Aujourd'hui, elle est jugée pour faux en écriture publique. [TÉLÉCHARGÉ]
+04-officiel (proc) Un document officiel, c'est la confiance de tout un pays. Elle l'a falsifié. Volontairement. [TÉLÉCHARGÉ]
+05-hopital (avo) Falsifié ? Trois jours. La mère avait été hospitalisée la veille de la date limite. Elle a déposé le dossier en sortant de l'hôpital. [TÉLÉCHARGÉ]
+06-attente (proc) D'autres familles attendaient aussi. Elles ont respecté la date. Celle-ci leur est passée devant. [TÉLÉCHARGÉ]
+07-voiture (avo) Passée devant ? Cette famille dormait dans une voiture. Trois enfants. En plein mois de janvier. [TÉLÉCHARGÉ]
+08-choisir (proc) La loi ne demande pas à une secrétaire de choisir qui mérite un logement. Elle lui demande de respecter les dates. [TÉLÉCHARGÉ]
+09-commission (avo) Elle n'a rien choisi. C'est la commission qui a validé le dossier. Elle a juste refusé qu'un séjour à l'hôpital mette trois enfants à la rue. [TÉLÉCHARGÉ]
+10-valeur (proc) Si chaque agent corrige les dates qui l'arrangent, plus aucun document public n'a de valeur. [TÉLÉCHARGÉ]
+11-dessin (avo) Elle n'y a gagné qu'une chose. Le dessin que les enfants lui ont envoyé. Il est toujours accroché au-dessus de son bureau. [TÉLÉCHARGÉ]
+12-reclusion (proc) Elle risque quinze ans de réclusion criminelle. Parce qu'un document public, ça ne se touche pas. [TÉLÉCHARGÉ]
+13-crime (avo) Quinze ans… pour trois jours. Trois enfants au chaud, contre trois jours sur un formulaire. Alors dites-moi… qui a vraiment commis un crime ? [TÉLÉCHARGÉ]

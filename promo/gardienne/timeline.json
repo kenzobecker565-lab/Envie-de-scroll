@@ -1,0 +1,1173 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 75.08,
+ "lines": [
+  {
+   "id": "01-hiver",
+   "who": "narrateur",
+   "text": "Tout un hiver, une gardienne d'immeuble a caché une mère et ses deux enfants dans un appartement vide. Quatre mois. Sans que le propriétaire le sache.",
+   "start": 0.25,
+   "dur": 6.69,
+   "words": [
+    {
+     "w": "Tout",
+     "t": 0.25
+    },
+    {
+     "w": "un",
+     "t": 0.39
+    },
+    {
+     "w": "hiver,",
+     "t": 0.53
+    },
+    {
+     "w": "une",
+     "t": 1.13
+    },
+    {
+     "w": "gardienne",
+     "t": 1.27
+    },
+    {
+     "w": "d'immeuble",
+     "t": 1.63
+    },
+    {
+     "w": "a",
+     "t": 1.99
+    },
+    {
+     "w": "caché",
+     "t": 2.07
+    },
+    {
+     "w": "une",
+     "t": 2.37
+    },
+    {
+     "w": "mère",
+     "t": 2.49
+    },
+    {
+     "w": "et",
+     "t": 2.67
+    },
+    {
+     "w": "ses",
+     "t": 2.81
+    },
+    {
+     "w": "deux",
+     "t": 2.93
+    },
+    {
+     "w": "enfants",
+     "t": 3.11
+    },
+    {
+     "w": "dans",
+     "t": 3.43
+    },
+    {
+     "w": "un",
+     "t": 3.61
+    },
+    {
+     "w": "appartement",
+     "t": 3.73
+    },
+    {
+     "w": "vide.",
+     "t": 4.17
+    },
+    {
+     "w": "Quatre",
+     "t": 4.51
+    },
+    {
+     "w": "mois.",
+     "t": 4.85
+    },
+    {
+     "w": "Sans",
+     "t": 5.39
+    },
+    {
+     "w": "que",
+     "t": 5.61
+    },
+    {
+     "w": "le",
+     "t": 5.73
+    },
+    {
+     "w": "propriétaire",
+     "t": 5.83
+    },
+    {
+     "w": "le",
+     "t": 6.37
+    },
+    {
+     "w": "sache.",
+     "t": 6.45
+    }
+   ]
+  },
+  {
+   "id": "02-interphone",
+   "who": "narrateur",
+   "text": "Sur la caméra de l'interphone, on la voit chaque soir. Elle ouvre la porte… monte un sac de courses… et redescend seule.",
+   "start": 7.19,
+   "dur": 5.79,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.19
+    },
+    {
+     "w": "la",
+     "t": 7.35
+    },
+    {
+     "w": "caméra",
+     "t": 7.45
+    },
+    {
+     "w": "de",
+     "t": 7.77
+    },
+    {
+     "w": "l'interphone,",
+     "t": 8.14
+    },
+    {
+     "w": "on",
+     "t": 8.51
+    },
+    {
+     "w": "la",
+     "t": 8.61
+    },
+    {
+     "w": "voit",
+     "t": 8.71
+    },
+    {
+     "w": "chaque",
+     "t": 8.83
+    },
+    {
+     "w": "soir.",
+     "t": 9.01
+    },
+    {
+     "w": "Elle",
+     "t": 9.67
+    },
+    {
+     "w": "ouvre",
+     "t": 9.75
+    },
+    {
+     "w": "la",
+     "t": 9.95
+    },
+    {
+     "w": "porte…",
+     "t": 10.05
+    },
+    {
+     "w": "monte",
+     "t": 10.81
+    },
+    {
+     "w": "un",
+     "t": 10.97
+    },
+    {
+     "w": "sac",
+     "t": 11.11
+    },
+    {
+     "w": "de",
+     "t": 11.27
+    },
+    {
+     "w": "courses…",
+     "t": 11.48
+    },
+    {
+     "w": "et",
+     "t": 11.69
+    },
+    {
+     "w": "redescend",
+     "t": 12.132
+    },
+    {
+     "w": "seule.",
+     "t": 12.574
+    }
+   ]
+  },
+  {
+   "id": "03-martine",
+   "who": "narrateur",
+   "text": "Elle s'appelle Martine. Soixante et un ans. Gardienne depuis vingt-six ans. Jamais une plainte. Aujourd'hui, elle est jugée pour violation de domicile.",
+   "start": 13.23,
+   "dur": 6.77,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 13.23
+    },
+    {
+     "w": "s'appelle",
+     "t": 13.43
+    },
+    {
+     "w": "Martine.",
+     "t": 13.63
+    },
+    {
+     "w": "Soixante",
+     "t": 13.9
+    },
+    {
+     "w": "et",
+     "t": 14.17
+    },
+    {
+     "w": "un",
+     "t": 14.44
+    },
+    {
+     "w": "ans.",
+     "t": 14.71
+    },
+    {
+     "w": "Gardienne",
+     "t": 15.19
+    },
+    {
+     "w": "depuis",
+     "t": 15.59
+    },
+    {
+     "w": "vingt-six",
+     "t": 15.94
+    },
+    {
+     "w": "ans.",
+     "t": 16.29
+    },
+    {
+     "w": "Jamais",
+     "t": 16.63
+    },
+    {
+     "w": "une",
+     "t": 16.95
+    },
+    {
+     "w": "plainte.",
+     "t": 17.15
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 17.69
+    },
+    {
+     "w": "elle",
+     "t": 18.23
+    },
+    {
+     "w": "est",
+     "t": 18.39
+    },
+    {
+     "w": "jugée",
+     "t": 18.47
+    },
+    {
+     "w": "pour",
+     "t": 18.73
+    },
+    {
+     "w": "violation",
+     "t": 18.85
+    },
+    {
+     "w": "de",
+     "t": 19.15
+    },
+    {
+     "w": "domicile.",
+     "t": 19.37
+    }
+   ]
+  },
+  {
+   "id": "04-cles",
+   "who": "procureur",
+   "text": "Cet appartement ne lui appartenait pas. Elle a donné les clés d'un bien privé à des inconnus.",
+   "start": 20.25,
+   "dur": 4.14,
+   "words": [
+    {
+     "w": "Cet",
+     "t": 20.33
+    },
+    {
+     "w": "appartement",
+     "t": 20.43
+    },
+    {
+     "w": "ne",
+     "t": 20.89
+    },
+    {
+     "w": "lui",
+     "t": 21.03
+    },
+    {
+     "w": "appartenait",
+     "t": 21.15
+    },
+    {
+     "w": "pas.",
+     "t": 21.65
+    },
+    {
+     "w": "Elle",
+     "t": 22.03
+    },
+    {
+     "w": "a",
+     "t": 22.09
+    },
+    {
+     "w": "donné",
+     "t": 22.17
+    },
+    {
+     "w": "les",
+     "t": 22.33
+    },
+    {
+     "w": "clés",
+     "t": 22.51
+    },
+    {
+     "w": "d'un",
+     "t": 22.7
+    },
+    {
+     "w": "bien",
+     "t": 22.89
+    },
+    {
+     "w": "privé",
+     "t": 23.05
+    },
+    {
+     "w": "à",
+     "t": 23.53
+    },
+    {
+     "w": "des",
+     "t": 23.65
+    },
+    {
+     "w": "inconnus.",
+     "t": 23.79
+    }
+   ]
+  },
+  {
+   "id": "05-douze",
+   "who": "avocate",
+   "text": "Un bien privé ? Vide depuis trois ans. Le propriétaire en possède douze. Il ne savait même plus qu'il l'avait.",
+   "start": 24.64,
+   "dur": 4.69,
+   "words": [
+    {
+     "w": "Un",
+     "t": 24.64
+    },
+    {
+     "w": "bien",
+     "t": 24.79
+    },
+    {
+     "w": "privé ?",
+     "t": 24.91
+    },
+    {
+     "w": "Vide",
+     "t": 25.41
+    },
+    {
+     "w": "depuis",
+     "t": 25.65
+    },
+    {
+     "w": "trois",
+     "t": 25.89
+    },
+    {
+     "w": "ans.",
+     "t": 26.15
+    },
+    {
+     "w": "Le",
+     "t": 26.49
+    },
+    {
+     "w": "propriétaire",
+     "t": 26.55
+    },
+    {
+     "w": "en",
+     "t": 27.07
+    },
+    {
+     "w": "possède",
+     "t": 27.17
+    },
+    {
+     "w": "douze.",
+     "t": 27.55
+    },
+    {
+     "w": "Il",
+     "t": 27.93
+    },
+    {
+     "w": "ne",
+     "t": 28.03
+    },
+    {
+     "w": "savait",
+     "t": 28.17
+    },
+    {
+     "w": "même",
+     "t": 28.41
+    },
+    {
+     "w": "plus",
+     "t": 28.53
+    },
+    {
+     "w": "qu'il",
+     "t": 28.821
+    },
+    {
+     "w": "l'avait.",
+     "t": 29.111
+    }
+   ]
+  },
+  {
+   "id": "06-portes",
+   "who": "procureur",
+   "text": "Vide ou pas, c'était chez lui. Si on ouvre les portes des autres par pitié, plus personne n'est chez soi.",
+   "start": 29.58,
+   "dur": 4.88,
+   "words": [
+    {
+     "w": "Vide",
+     "t": 29.73
+    },
+    {
+     "w": "ou",
+     "t": 29.88
+    },
+    {
+     "w": "pas,",
+     "t": 29.94
+    },
+    {
+     "w": "c'était",
+     "t": 30.27
+    },
+    {
+     "w": "chez",
+     "t": 30.6
+    },
+    {
+     "w": "lui.",
+     "t": 30.8
+    },
+    {
+     "w": "Si",
+     "t": 31.2
+    },
+    {
+     "w": "on",
+     "t": 31.3
+    },
+    {
+     "w": "ouvre",
+     "t": 31.38
+    },
+    {
+     "w": "les",
+     "t": 31.64
+    },
+    {
+     "w": "portes",
+     "t": 31.74
+    },
+    {
+     "w": "des",
+     "t": 32.06
+    },
+    {
+     "w": "autres",
+     "t": 32.18
+    },
+    {
+     "w": "par",
+     "t": 32.44
+    },
+    {
+     "w": "pitié,",
+     "t": 32.64
+    },
+    {
+     "w": "plus",
+     "t": 33.22
+    },
+    {
+     "w": "personne",
+     "t": 33.36
+    },
+    {
+     "w": "n'est",
+     "t": 33.68
+    },
+    {
+     "w": "chez",
+     "t": 34.0
+    },
+    {
+     "w": "soi.",
+     "t": 34.08
+    }
+   ]
+  },
+  {
+   "id": "07-poubelles",
+   "who": "avocate",
+   "text": "Par pitié ? Elle les a trouvés en décembre, dans le local à poubelles. Moins deux degrés. Le petit avait quatre ans.",
+   "start": 34.71,
+   "dur": 4.84,
+   "words": [
+    {
+     "w": "Par",
+     "t": 34.71
+    },
+    {
+     "w": "pitié ?",
+     "t": 34.83
+    },
+    {
+     "w": "Elle",
+     "t": 35.39
+    },
+    {
+     "w": "les",
+     "t": 35.49
+    },
+    {
+     "w": "a",
+     "t": 35.61
+    },
+    {
+     "w": "trouvés",
+     "t": 35.79
+    },
+    {
+     "w": "en",
+     "t": 35.97
+    },
+    {
+     "w": "décembre,",
+     "t": 36.03
+    },
+    {
+     "w": "dans",
+     "t": 36.45
+    },
+    {
+     "w": "le",
+     "t": 36.75
+    },
+    {
+     "w": "local",
+     "t": 36.83
+    },
+    {
+     "w": "à",
+     "t": 37.03
+    },
+    {
+     "w": "poubelles.",
+     "t": 37.32
+    },
+    {
+     "w": "Moins",
+     "t": 37.61
+    },
+    {
+     "w": "deux",
+     "t": 37.86
+    },
+    {
+     "w": "degrés.",
+     "t": 38.11
+    },
+    {
+     "w": "Le",
+     "t": 38.61
+    },
+    {
+     "w": "petit",
+     "t": 38.69
+    },
+    {
+     "w": "avait",
+     "t": 38.91
+    },
+    {
+     "w": "quatre",
+     "t": 39.11
+    },
+    {
+     "w": "ans.",
+     "t": 39.31
+    }
+   ]
+  },
+  {
+   "id": "08-115",
+   "who": "procureur",
+   "text": "Il existe le 115. Les foyers. Ce n'était pas à elle de jouer les services sociaux.",
+   "start": 39.8,
+   "dur": 4.26,
+   "words": [
+    {
+     "w": "Il",
+     "t": 39.8
+    },
+    {
+     "w": "existe",
+     "t": 39.94
+    },
+    {
+     "w": "le",
+     "t": 40.28
+    },
+    {
+     "w": "115.",
+     "t": 40.44
+    },
+    {
+     "w": "Les",
+     "t": 41.26
+    },
+    {
+     "w": "foyers.",
+     "t": 41.32
+    },
+    {
+     "w": "Ce",
+     "t": 41.9
+    },
+    {
+     "w": "n'était",
+     "t": 42.03
+    },
+    {
+     "w": "pas",
+     "t": 42.16
+    },
+    {
+     "w": "à",
+     "t": 42.3
+    },
+    {
+     "w": "elle",
+     "t": 42.52
+    },
+    {
+     "w": "de",
+     "t": 42.74
+    },
+    {
+     "w": "jouer",
+     "t": 42.92
+    },
+    {
+     "w": "les",
+     "t": 43.08
+    },
+    {
+     "w": "services",
+     "t": 43.22
+    },
+    {
+     "w": "sociaux.",
+     "t": 43.48
+    }
+   ]
+  },
+  {
+   "id": "09-onze",
+   "who": "avocate",
+   "text": "Le 115 ? Elle l'a appelé onze fois. Onze. Réponse : « Plus de place ce soir. »",
+   "start": 44.31,
+   "dur": 4.13,
+   "words": [
+    {
+     "w": "Le",
+     "t": 44.31
+    },
+    {
+     "w": "115 ?",
+     "t": 44.43
+    },
+    {
+     "w": "Elle",
+     "t": 44.99
+    },
+    {
+     "w": "l'a",
+     "t": 45.16
+    },
+    {
+     "w": "appelé",
+     "t": 45.33
+    },
+    {
+     "w": "onze",
+     "t": 45.58
+    },
+    {
+     "w": "fois.",
+     "t": 45.83
+    },
+    {
+     "w": "Onze.",
+     "t": 46.34
+    },
+    {
+     "w": "Réponse : «",
+     "t": 46.85
+    },
+    {
+     "w": "Plus",
+     "t": 47.43
+    },
+    {
+     "w": "de",
+     "t": 47.53
+    },
+    {
+     "w": "place",
+     "t": 47.65
+    },
+    {
+     "w": "ce",
+     "t": 47.83
+    },
+    {
+     "w": "soir. »",
+     "t": 47.99
+    }
+   ]
+  },
+  {
+   "id": "10-incendie",
+   "who": "procureur",
+   "text": "Et si un incendie s'était déclaré ? Une fuite d'eau ? Qui aurait été responsable ?",
+   "start": 48.69,
+   "dur": 3.72,
+   "words": [
+    {
+     "w": "Et",
+     "t": 48.69
+    },
+    {
+     "w": "si",
+     "t": 48.83
+    },
+    {
+     "w": "un",
+     "t": 49.01
+    },
+    {
+     "w": "incendie",
+     "t": 49.13
+    },
+    {
+     "w": "s'était",
+     "t": 49.44
+    },
+    {
+     "w": "déclaré ?",
+     "t": 49.75
+    },
+    {
+     "w": "Une",
+     "t": 50.39
+    },
+    {
+     "w": "fuite",
+     "t": 50.49
+    },
+    {
+     "w": "d'eau ?",
+     "t": 50.69
+    },
+    {
+     "w": "Qui",
+     "t": 50.89
+    },
+    {
+     "w": "aurait",
+     "t": 51.19
+    },
+    {
+     "w": "été",
+     "t": 51.37
+    },
+    {
+     "w": "responsable ?",
+     "t": 51.55
+    }
+   ]
+  },
+  {
+   "id": "11-propre",
+   "who": "avocate",
+   "text": "Il n'y a eu ni incendie, ni dégât. Quand ils sont partis, l'appartement était plus propre qu'avant.",
+   "start": 52.66,
+   "dur": 4.204,
+   "words": [
+    {
+     "w": "Il",
+     "t": 52.66
+    },
+    {
+     "w": "n'y",
+     "t": 52.8
+    },
+    {
+     "w": "a",
+     "t": 52.94
+    },
+    {
+     "w": "eu",
+     "t": 52.96
+    },
+    {
+     "w": "ni",
+     "t": 53.06
+    },
+    {
+     "w": "incendie,",
+     "t": 53.22
+    },
+    {
+     "w": "ni",
+     "t": 53.74
+    },
+    {
+     "w": "dégât.",
+     "t": 54.1
+    },
+    {
+     "w": "Quand",
+     "t": 54.46
+    },
+    {
+     "w": "ils",
+     "t": 54.52
+    },
+    {
+     "w": "sont",
+     "t": 54.66
+    },
+    {
+     "w": "partis,",
+     "t": 54.78
+    },
+    {
+     "w": "l'appartement",
+     "t": 55.27
+    },
+    {
+     "w": "était",
+     "t": 55.76
+    },
+    {
+     "w": "plus",
+     "t": 55.9
+    },
+    {
+     "w": "propre",
+     "t": 56.1
+    },
+    {
+     "w": "qu'avant.",
+     "t": 56.482
+    }
+   ]
+  },
+  {
+   "id": "12-loi",
+   "who": "procureur",
+   "text": "Propre ou non, la loi ne se suspend pas pour un hiver.",
+   "start": 57.114,
+   "dur": 2.9,
+   "words": [
+    {
+     "w": "Propre",
+     "t": 57.114
+    },
+    {
+     "w": "ou",
+     "t": 57.374
+    },
+    {
+     "w": "non,",
+     "t": 57.634
+    },
+    {
+     "w": "la",
+     "t": 58.094
+    },
+    {
+     "w": "loi",
+     "t": 58.194
+    },
+    {
+     "w": "ne",
+     "t": 58.334
+    },
+    {
+     "w": "se",
+     "t": 58.514
+    },
+    {
+     "w": "suspend",
+     "t": 58.784
+    },
+    {
+     "w": "pas",
+     "t": 59.054
+    },
+    {
+     "w": "pour",
+     "t": 59.214
+    },
+    {
+     "w": "un",
+     "t": 59.497
+    },
+    {
+     "w": "hiver.",
+     "t": 59.781
+    }
+   ]
+  },
+  {
+   "id": "13-porte",
+   "who": "avocate",
+   "text": "Un hiver ? Cet hiver-là, deux enfants dormaient à côté des poubelles. Martine, elle, leur a ouvert une porte.",
+   "start": 60.264,
+   "dur": 5.07,
+   "words": [
+    {
+     "w": "Un",
+     "t": 60.264
+    },
+    {
+     "w": "hiver ?",
+     "t": 60.384
+    },
+    {
+     "w": "Cet",
+     "t": 60.844
+    },
+    {
+     "w": "hiver-là,",
+     "t": 61.254
+    },
+    {
+     "w": "deux",
+     "t": 61.664
+    },
+    {
+     "w": "enfants",
+     "t": 61.884
+    },
+    {
+     "w": "dormaient",
+     "t": 62.184
+    },
+    {
+     "w": "à",
+     "t": 62.504
+    },
+    {
+     "w": "côté",
+     "t": 62.584
+    },
+    {
+     "w": "des",
+     "t": 62.704
+    },
+    {
+     "w": "poubelles.",
+     "t": 62.884
+    },
+    {
+     "w": "Martine,",
+     "t": 63.324
+    },
+    {
+     "w": "elle,",
+     "t": 63.924
+    },
+    {
+     "w": "leur",
+     "t": 64.364
+    },
+    {
+     "w": "a",
+     "t": 64.464
+    },
+    {
+     "w": "ouvert",
+     "t": 64.564
+    },
+    {
+     "w": "une",
+     "t": 64.724
+    },
+    {
+     "w": "porte.",
+     "t": 64.884
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 65.584,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 65.584
+    },
+    {
+     "w": "es",
+     "t": 65.724
+    },
+    {
+     "w": "le",
+     "t": 65.814
+    },
+    {
+     "w": "juré.",
+     "t": 65.904
+    },
+    {
+     "w": "Coupable…",
+     "t": 66.404
+    },
+    {
+     "w": "ou",
+     "t": 66.844
+    },
+    {
+     "w": "non",
+     "t": 67.264
+    },
+    {
+     "w": "coupable ?",
+     "t": 67.464
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 68.344,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 68.344
+    },
+    {
+     "w": "verdict",
+     "t": 68.464
+    },
+    {
+     "w": "tombe",
+     "t": 68.764
+    },
+    {
+     "w": "dans",
+     "t": 69.304
+    },
+    {
+     "w": "la",
+     "t": 69.464
+    },
+    {
+     "w": "prochaine",
+     "t": 69.584
+    },
+    {
+     "w": "vidéo.",
+     "t": 69.864
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 70.354
+    },
+    {
+     "w": "pour",
+     "t": 70.844
+    },
+    {
+     "w": "ne",
+     "t": 70.984
+    },
+    {
+     "w": "pas",
+     "t": 71.084
+    },
+    {
+     "w": "le",
+     "t": 71.224
+    },
+    {
+     "w": "rater.",
+     "t": 71.244
+    }
+   ]
+  }
+ ]
+}

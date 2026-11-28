@@ -1,0 +1,115 @@
+{
+ "_doc": "La promesse (affaire fictive : elle a débranché son mari dans le coma). Voix ElevenLabs générées par Claude via le connecteur (un fichier par personnage, media/elevenlabs/<personnage>.mp3) : narrateur « Bellami », procureur « Hugo », défense « Victoria ». « avocate » = la défense.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-debranche",
+   "who": "narrateur",
+   "text": "3 heures du matin. Elle débranche la machine qui maintient son mari en vie.",
+   "say": "Trois heures du matin. Elle débranche la machine qui maintient son mari en vie."
+  },
+  {
+   "id": "02-promesse",
+   "who": "narrateur",
+   "text": "Il était dans le coma depuis 3 ans. Il lui avait fait promettre de ne jamais le laisser comme ça.",
+   "say": "Il était dans le coma depuis trois ans. Il lui avait fait promettre de ne jamais le laisser comme ça.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-fille",
+   "who": "narrateur",
+   "text": "Aujourd'hui, c'est leur propre fille qui l'accuse de meurtre.",
+   "gap": 0.25
+  },
+  {
+   "id": "04-non",
+   "who": "procureur",
+   "text": "Elle n'a pas abrégé des souffrances. Elle a tué un homme qui ne pouvait plus dire non.",
+   "gap": 0.3
+  },
+  {
+   "id": "05-oui",
+   "who": "avocate",
+   "text": "Il avait dit oui. Par écrit. «Si un jour je ne suis plus qu'un corps, laisse-moi partir.» Elle a tenu sa promesse.",
+   "say": "Il avait dit oui. Par écrit. Si un jour je ne suis plus qu'un corps, laisse-moi partir. Elle a tenu sa promesse.",
+   "gap": 0.1
+  },
+  {
+   "id": "06-main",
+   "who": "procureur",
+   "text": "Une promesse vieille de 10 ans. Et 12 jours avant sa mort, cet homme a serré la main de sa fille.",
+   "say": "Une promesse vieille de dix ans. Et douze jours avant sa mort, cet homme a serré la main de sa fille.",
+   "gap": 0.1
+  },
+  {
+   "id": "07-reflexe",
+   "who": "avocate",
+   "text": "Un réflexe. Trois médecins l'ont écrit. Pendant 3 ans, elle est venue chaque jour. 1095 jours. Sa fille ? 11 fois.",
+   "say": "Un réflexe. Trois médecins l'ont écrit. Pendant trois ans, elle est venue chaque jour. Mille quatre-vingt-quinze jours. Sa fille ? Onze fois.",
+   "gap": 0.1
+  },
+  {
+   "id": "08-pause",
+   "who": "narrateur",
+   "text": "Avant la suite : abonne-toi. Le verdict tombe dans la prochaine vidéo.",
+   "gap": 0.3
+  },
+  {
+   "id": "09-lendemain",
+   "who": "procureur",
+   "text": "1095 jours… et elle n'a pas pu en attendre un de plus ? Un nouveau traitement commençait le lendemain matin.",
+   "say": "Mille quatre-vingt-quinze jours… et elle n'a pas pu en attendre un de plus ? Un nouveau traitement commençait le lendemain matin.",
+   "gap": 0.3
+  },
+  {
+   "id": "10-quatrieme",
+   "who": "avocate",
+   "text": "Le quatrième. Les trois premiers avaient échoué. Combien d'essais faut-il infliger à un homme qui a demandé à partir ?",
+   "gap": 0.1
+  },
+  {
+   "id": "11-seule",
+   "who": "procureur",
+   "text": "Autant qu'il en faut, tant qu'il respire. Et ce n'était pas à elle d'en décider. Seule. La nuit. Sans prévenir personne.",
+   "gap": 0.1
+  },
+  {
+   "id": "12-rendu",
+   "who": "avocate",
+   "text": "Seule, oui. Comme elle l'a été pendant 3 ans à son chevet. Elle ne lui a pas pris la vie. Elle lui a rendu sa mort.",
+   "say": "Seule, oui. Comme elle l'a été pendant trois ans à son chevet. Elle ne lui a pas pris la vie. Elle lui a rendu sa mort.",
+   "gap": 0.1
+  },
+  {
+   "id": "13-donne",
+   "who": "procureur",
+   "text": "On ne rend pas la mort. On la donne. Et la loi a un mot pour ça.",
+   "gap": 0.2
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Un geste d'amour… ou un meurtre ? Coupable… ou non coupable ?",
+   "gap": 0.6
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Écris ton verdict en commentaire, et abonne-toi pour découvrir celui du tribunal.",
+   "gap": 0.4
+  }
+ ]
+}

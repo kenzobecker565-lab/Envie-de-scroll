@@ -1,0 +1,1293 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 82.21,
+ "lines": [
+  {
+   "id": "01-date",
+   "who": "narrateur",
+   "text": "Une secrétaire de mairie a changé une date sur un formulaire. Trois jours. Juste trois jours. Et aujourd'hui, elle risque quinze ans de prison.",
+   "start": 0.25,
+   "dur": 6.5,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "secrétaire",
+     "t": 0.38
+    },
+    {
+     "w": "de",
+     "t": 0.82
+    },
+    {
+     "w": "mairie",
+     "t": 0.88
+    },
+    {
+     "w": "a",
+     "t": 1.14
+    },
+    {
+     "w": "changé",
+     "t": 1.26
+    },
+    {
+     "w": "une",
+     "t": 1.58
+    },
+    {
+     "w": "date",
+     "t": 1.66
+    },
+    {
+     "w": "sur",
+     "t": 1.86
+    },
+    {
+     "w": "un",
+     "t": 2.04
+    },
+    {
+     "w": "formulaire.",
+     "t": 2.16
+    },
+    {
+     "w": "Trois",
+     "t": 2.74
+    },
+    {
+     "w": "jours.",
+     "t": 3.0
+    },
+    {
+     "w": "Juste",
+     "t": 3.46
+    },
+    {
+     "w": "trois",
+     "t": 3.86
+    },
+    {
+     "w": "jours.",
+     "t": 4.1
+    },
+    {
+     "w": "Et",
+     "t": 4.6
+    },
+    {
+     "w": "aujourd'hui,",
+     "t": 4.99
+    },
+    {
+     "w": "elle",
+     "t": 5.38
+    },
+    {
+     "w": "risque",
+     "t": 5.46
+    },
+    {
+     "w": "quinze",
+     "t": 5.77
+    },
+    {
+     "w": "ans",
+     "t": 6.08
+    },
+    {
+     "w": "de",
+     "t": 6.22
+    },
+    {
+     "w": "prison.",
+     "t": 6.3
+    }
+   ]
+  },
+  {
+   "id": "02-ordinateur",
+   "who": "narrateur",
+   "text": "Sur l'ordinateur de la mairie, on retrouve la trace. Le dossier est arrivé le trois janvier. Elle a écrit trente et un décembre. Et la famille est passée devant la commission.",
+   "start": 7.0,
+   "dur": 7.15,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.0
+    },
+    {
+     "w": "l'ordinateur",
+     "t": 7.3
+    },
+    {
+     "w": "de",
+     "t": 7.6
+    },
+    {
+     "w": "la",
+     "t": 7.7
+    },
+    {
+     "w": "mairie,",
+     "t": 7.8
+    },
+    {
+     "w": "on",
+     "t": 8.32
+    },
+    {
+     "w": "retrouve",
+     "t": 8.4
+    },
+    {
+     "w": "la",
+     "t": 8.66
+    },
+    {
+     "w": "trace.",
+     "t": 8.78
+    },
+    {
+     "w": "Le",
+     "t": 9.38
+    },
+    {
+     "w": "dossier",
+     "t": 9.44
+    },
+    {
+     "w": "est",
+     "t": 9.8
+    },
+    {
+     "w": "arrivé",
+     "t": 9.9
+    },
+    {
+     "w": "le",
+     "t": 10.14
+    },
+    {
+     "w": "trois",
+     "t": 10.32
+    },
+    {
+     "w": "janvier.",
+     "t": 10.5
+    },
+    {
+     "w": "Elle",
+     "t": 11.06
+    },
+    {
+     "w": "a",
+     "t": 11.14
+    },
+    {
+     "w": "écrit",
+     "t": 11.26
+    },
+    {
+     "w": "trente",
+     "t": 11.415
+    },
+    {
+     "w": "et",
+     "t": 11.57
+    },
+    {
+     "w": "un",
+     "t": 11.725
+    },
+    {
+     "w": "décembre.",
+     "t": 11.88
+    },
+    {
+     "w": "Et",
+     "t": 12.58
+    },
+    {
+     "w": "la",
+     "t": 12.64
+    },
+    {
+     "w": "famille",
+     "t": 12.74
+    },
+    {
+     "w": "est",
+     "t": 12.96
+    },
+    {
+     "w": "passée",
+     "t": 13.1
+    },
+    {
+     "w": "devant",
+     "t": 13.36
+    },
+    {
+     "w": "la",
+     "t": 13.48
+    },
+    {
+     "w": "commission.",
+     "t": 13.6
+    }
+   ]
+  },
+  {
+   "id": "03-isabelle",
+   "who": "narrateur",
+   "text": "Elle s'appelle Isabelle. Cinquante-quatre ans. Secrétaire de mairie depuis vingt-deux ans. Jamais une faute. Aujourd'hui, elle est jugée pour faux en écriture publique.",
+   "start": 14.4,
+   "dur": 7.51,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 14.4
+    },
+    {
+     "w": "s'appelle",
+     "t": 14.62
+    },
+    {
+     "w": "Isabelle.",
+     "t": 14.84
+    },
+    {
+     "w": "Cinquante-quatre",
+     "t": 15.4
+    },
+    {
+     "w": "ans.",
+     "t": 15.96
+    },
+    {
+     "w": "Secrétaire",
+     "t": 16.5
+    },
+    {
+     "w": "de",
+     "t": 16.9
+    },
+    {
+     "w": "mairie",
+     "t": 16.98
+    },
+    {
+     "w": "depuis",
+     "t": 17.24
+    },
+    {
+     "w": "vingt-deux",
+     "t": 17.53
+    },
+    {
+     "w": "ans.",
+     "t": 17.82
+    },
+    {
+     "w": "Jamais",
+     "t": 18.26
+    },
+    {
+     "w": "une",
+     "t": 18.58
+    },
+    {
+     "w": "faute.",
+     "t": 18.74
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 19.31
+    },
+    {
+     "w": "elle",
+     "t": 19.88
+    },
+    {
+     "w": "est",
+     "t": 19.96
+    },
+    {
+     "w": "jugée",
+     "t": 20.06
+    },
+    {
+     "w": "pour",
+     "t": 20.3
+    },
+    {
+     "w": "faux",
+     "t": 20.46
+    },
+    {
+     "w": "en",
+     "t": 20.76
+    },
+    {
+     "w": "écriture",
+     "t": 20.96
+    },
+    {
+     "w": "publique.",
+     "t": 21.32
+    }
+   ]
+  },
+  {
+   "id": "04-officiel",
+   "who": "procureur",
+   "text": "Un document officiel, c'est la confiance de tout un pays. Elle l'a falsifié. Volontairement.",
+   "start": 22.16,
+   "dur": 4.83,
+   "words": [
+    {
+     "w": "Un",
+     "t": 22.16
+    },
+    {
+     "w": "document",
+     "t": 22.28
+    },
+    {
+     "w": "officiel,",
+     "t": 22.6
+    },
+    {
+     "w": "c'est",
+     "t": 23.1
+    },
+    {
+     "w": "la",
+     "t": 23.6
+    },
+    {
+     "w": "confiance",
+     "t": 23.7
+    },
+    {
+     "w": "de",
+     "t": 24.02
+    },
+    {
+     "w": "tout",
+     "t": 24.28
+    },
+    {
+     "w": "un",
+     "t": 24.48
+    },
+    {
+     "w": "pays.",
+     "t": 24.66
+    },
+    {
+     "w": "Elle",
+     "t": 25.12
+    },
+    {
+     "w": "l'a",
+     "t": 25.25
+    },
+    {
+     "w": "falsifié.",
+     "t": 25.38
+    },
+    {
+     "w": "Volontairement.",
+     "t": 26.14
+    }
+   ]
+  },
+  {
+   "id": "05-hopital",
+   "who": "avocate",
+   "text": "Falsifié ? Trois jours. La mère avait été hospitalisée la veille de la date limite. Elle a déposé le dossier en sortant de l'hôpital.",
+   "start": 27.24,
+   "dur": 5.56,
+   "words": [
+    {
+     "w": "Falsifié ?",
+     "t": 27.24
+    },
+    {
+     "w": "Trois",
+     "t": 27.62
+    },
+    {
+     "w": "jours.",
+     "t": 28.02
+    },
+    {
+     "w": "La",
+     "t": 28.48
+    },
+    {
+     "w": "mère",
+     "t": 28.58
+    },
+    {
+     "w": "avait",
+     "t": 28.74
+    },
+    {
+     "w": "été",
+     "t": 28.9
+    },
+    {
+     "w": "hospitalisée",
+     "t": 29.08
+    },
+    {
+     "w": "la",
+     "t": 29.68
+    },
+    {
+     "w": "veille",
+     "t": 29.8
+    },
+    {
+     "w": "de",
+     "t": 30.02
+    },
+    {
+     "w": "la",
+     "t": 30.12
+    },
+    {
+     "w": "date",
+     "t": 30.22
+    },
+    {
+     "w": "limite.",
+     "t": 30.32
+    },
+    {
+     "w": "Elle",
+     "t": 30.82
+    },
+    {
+     "w": "a",
+     "t": 30.96
+    },
+    {
+     "w": "déposé",
+     "t": 31.02
+    },
+    {
+     "w": "le",
+     "t": 31.36
+    },
+    {
+     "w": "dossier",
+     "t": 31.44
+    },
+    {
+     "w": "en",
+     "t": 31.76
+    },
+    {
+     "w": "sortant",
+     "t": 31.86
+    },
+    {
+     "w": "de",
+     "t": 32.18
+    },
+    {
+     "w": "l'hôpital.",
+     "t": 32.521
+    }
+   ]
+  },
+  {
+   "id": "06-attente",
+   "who": "procureur",
+   "text": "D'autres familles attendaient aussi. Elles ont respecté la date. Celle-ci leur est passée devant.",
+   "start": 33.05,
+   "dur": 4.15,
+   "words": [
+    {
+     "w": "D'autres",
+     "t": 33.18
+    },
+    {
+     "w": "familles",
+     "t": 33.31
+    },
+    {
+     "w": "attendaient",
+     "t": 33.69
+    },
+    {
+     "w": "aussi.",
+     "t": 34.05
+    },
+    {
+     "w": "Elles",
+     "t": 34.51
+    },
+    {
+     "w": "ont",
+     "t": 34.67
+    },
+    {
+     "w": "respecté",
+     "t": 34.75
+    },
+    {
+     "w": "la",
+     "t": 35.23
+    },
+    {
+     "w": "date.",
+     "t": 35.31
+    },
+    {
+     "w": "Celle-ci",
+     "t": 35.73
+    },
+    {
+     "w": "leur",
+     "t": 36.15
+    },
+    {
+     "w": "est",
+     "t": 36.41
+    },
+    {
+     "w": "passée",
+     "t": 36.51
+    },
+    {
+     "w": "devant.",
+     "t": 36.81
+    }
+   ]
+  },
+  {
+   "id": "07-voiture",
+   "who": "avocate",
+   "text": "Passée devant ? Cette famille dormait dans une voiture. Trois enfants. En plein mois de janvier.",
+   "start": 37.45,
+   "dur": 3.86,
+   "words": [
+    {
+     "w": "Passée",
+     "t": 37.58
+    },
+    {
+     "w": "devant ?",
+     "t": 37.73
+    },
+    {
+     "w": "Cette",
+     "t": 38.13
+    },
+    {
+     "w": "famille",
+     "t": 38.27
+    },
+    {
+     "w": "dormait",
+     "t": 38.57
+    },
+    {
+     "w": "dans",
+     "t": 38.93
+    },
+    {
+     "w": "une",
+     "t": 39.01
+    },
+    {
+     "w": "voiture.",
+     "t": 39.15
+    },
+    {
+     "w": "Trois",
+     "t": 39.65
+    },
+    {
+     "w": "enfants.",
+     "t": 39.87
+    },
+    {
+     "w": "En",
+     "t": 40.35
+    },
+    {
+     "w": "plein",
+     "t": 40.43
+    },
+    {
+     "w": "mois",
+     "t": 40.61
+    },
+    {
+     "w": "de",
+     "t": 40.79
+    },
+    {
+     "w": "janvier.",
+     "t": 40.87
+    }
+   ]
+  },
+  {
+   "id": "08-choisir",
+   "who": "procureur",
+   "text": "La loi ne demande pas à une secrétaire de choisir qui mérite un logement. Elle lui demande de respecter les dates.",
+   "start": 41.56,
+   "dur": 5.01,
+   "words": [
+    {
+     "w": "La",
+     "t": 41.56
+    },
+    {
+     "w": "loi",
+     "t": 41.72
+    },
+    {
+     "w": "ne",
+     "t": 41.86
+    },
+    {
+     "w": "demande",
+     "t": 42.02
+    },
+    {
+     "w": "pas",
+     "t": 42.24
+    },
+    {
+     "w": "à",
+     "t": 42.46
+    },
+    {
+     "w": "une",
+     "t": 42.56
+    },
+    {
+     "w": "secrétaire",
+     "t": 42.62
+    },
+    {
+     "w": "de",
+     "t": 43.16
+    },
+    {
+     "w": "choisir",
+     "t": 43.24
+    },
+    {
+     "w": "qui",
+     "t": 43.68
+    },
+    {
+     "w": "mérite",
+     "t": 43.86
+    },
+    {
+     "w": "un",
+     "t": 44.2
+    },
+    {
+     "w": "logement.",
+     "t": 44.26
+    },
+    {
+     "w": "Elle",
+     "t": 44.78
+    },
+    {
+     "w": "lui",
+     "t": 44.88
+    },
+    {
+     "w": "demande",
+     "t": 45.0
+    },
+    {
+     "w": "de",
+     "t": 45.32
+    },
+    {
+     "w": "respecter",
+     "t": 45.52
+    },
+    {
+     "w": "les",
+     "t": 46.04
+    },
+    {
+     "w": "dates.",
+     "t": 46.16
+    }
+   ]
+  },
+  {
+   "id": "09-commission",
+   "who": "avocate",
+   "text": "Elle n'a rien choisi. C'est la commission qui a validé le dossier. Elle a juste refusé qu'un séjour à l'hôpital mette trois enfants à la rue.",
+   "start": 46.82,
+   "dur": 5.624,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 46.82
+    },
+    {
+     "w": "n'a",
+     "t": 46.94
+    },
+    {
+     "w": "rien",
+     "t": 47.06
+    },
+    {
+     "w": "choisi.",
+     "t": 47.2
+    },
+    {
+     "w": "C'est",
+     "t": 47.56
+    },
+    {
+     "w": "la",
+     "t": 47.92
+    },
+    {
+     "w": "commission",
+     "t": 48.0
+    },
+    {
+     "w": "qui",
+     "t": 48.34
+    },
+    {
+     "w": "a",
+     "t": 48.54
+    },
+    {
+     "w": "validé",
+     "t": 48.62
+    },
+    {
+     "w": "le",
+     "t": 48.94
+    },
+    {
+     "w": "dossier.",
+     "t": 48.96
+    },
+    {
+     "w": "Elle",
+     "t": 49.4
+    },
+    {
+     "w": "a",
+     "t": 49.5
+    },
+    {
+     "w": "juste",
+     "t": 49.6
+    },
+    {
+     "w": "refusé",
+     "t": 49.74
+    },
+    {
+     "w": "qu'un",
+     "t": 50.1
+    },
+    {
+     "w": "séjour",
+     "t": 50.46
+    },
+    {
+     "w": "à",
+     "t": 50.72
+    },
+    {
+     "w": "l'hôpital",
+     "t": 50.95
+    },
+    {
+     "w": "mette",
+     "t": 51.18
+    },
+    {
+     "w": "trois",
+     "t": 51.46
+    },
+    {
+     "w": "enfants",
+     "t": 51.66
+    },
+    {
+     "w": "à",
+     "t": 51.94
+    },
+    {
+     "w": "la",
+     "t": 52.06
+    },
+    {
+     "w": "rue.",
+     "t": 52.12
+    }
+   ]
+  },
+  {
+   "id": "10-valeur",
+   "who": "procureur",
+   "text": "Si chaque agent corrige les dates qui l'arrangent, plus aucun document public n'a de valeur.",
+   "start": 52.694,
+   "dur": 4.1,
+   "words": [
+    {
+     "w": "Si",
+     "t": 52.694
+    },
+    {
+     "w": "chaque",
+     "t": 52.874
+    },
+    {
+     "w": "agent",
+     "t": 53.114
+    },
+    {
+     "w": "corrige",
+     "t": 53.354
+    },
+    {
+     "w": "les",
+     "t": 53.734
+    },
+    {
+     "w": "dates",
+     "t": 53.874
+    },
+    {
+     "w": "qui",
+     "t": 54.054
+    },
+    {
+     "w": "l'arrangent,",
+     "t": 54.444
+    },
+    {
+     "w": "plus",
+     "t": 54.834
+    },
+    {
+     "w": "aucun",
+     "t": 54.934
+    },
+    {
+     "w": "document",
+     "t": 55.354
+    },
+    {
+     "w": "public",
+     "t": 55.674
+    },
+    {
+     "w": "n'a",
+     "t": 55.963
+    },
+    {
+     "w": "de",
+     "t": 56.253
+    },
+    {
+     "w": "valeur.",
+     "t": 56.542
+    }
+   ]
+  },
+  {
+   "id": "11-dessin",
+   "who": "avocate",
+   "text": "Elle n'y a gagné qu'une chose. Le dessin que les enfants lui ont envoyé. Il est toujours accroché au-dessus de son bureau.",
+   "start": 57.044,
+   "dur": 4.66,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 57.044
+    },
+    {
+     "w": "n'y",
+     "t": 57.174
+    },
+    {
+     "w": "a",
+     "t": 57.304
+    },
+    {
+     "w": "gagné",
+     "t": 57.344
+    },
+    {
+     "w": "qu'une",
+     "t": 57.574
+    },
+    {
+     "w": "chose.",
+     "t": 57.804
+    },
+    {
+     "w": "Le",
+     "t": 58.324
+    },
+    {
+     "w": "dessin",
+     "t": 58.404
+    },
+    {
+     "w": "que",
+     "t": 58.744
+    },
+    {
+     "w": "les",
+     "t": 58.824
+    },
+    {
+     "w": "enfants",
+     "t": 58.944
+    },
+    {
+     "w": "lui",
+     "t": 59.204
+    },
+    {
+     "w": "ont",
+     "t": 59.324
+    },
+    {
+     "w": "envoyé.",
+     "t": 59.444
+    },
+    {
+     "w": "Il",
+     "t": 59.944
+    },
+    {
+     "w": "est",
+     "t": 60.044
+    },
+    {
+     "w": "toujours",
+     "t": 60.124
+    },
+    {
+     "w": "accroché",
+     "t": 60.344
+    },
+    {
+     "w": "au-dessus",
+     "t": 60.724
+    },
+    {
+     "w": "de",
+     "t": 61.104
+    },
+    {
+     "w": "son",
+     "t": 61.204
+    },
+    {
+     "w": "bureau.",
+     "t": 61.324
+    }
+   ]
+  },
+  {
+   "id": "12-reclusion",
+   "who": "procureur",
+   "text": "Elle risque quinze ans de réclusion criminelle. Parce qu'un document public, ça ne se touche pas.",
+   "start": 61.954,
+   "dur": 4.25,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 61.954
+    },
+    {
+     "w": "risque",
+     "t": 62.104
+    },
+    {
+     "w": "quinze",
+     "t": 62.414
+    },
+    {
+     "w": "ans",
+     "t": 62.724
+    },
+    {
+     "w": "de",
+     "t": 62.924
+    },
+    {
+     "w": "réclusion",
+     "t": 63.024
+    },
+    {
+     "w": "criminelle.",
+     "t": 63.424
+    },
+    {
+     "w": "Parce",
+     "t": 64.004
+    },
+    {
+     "w": "qu'un",
+     "t": 64.224
+    },
+    {
+     "w": "document",
+     "t": 64.444
+    },
+    {
+     "w": "public,",
+     "t": 64.744
+    },
+    {
+     "w": "ça",
+     "t": 65.104
+    },
+    {
+     "w": "ne",
+     "t": 65.464
+    },
+    {
+     "w": "se",
+     "t": 65.564
+    },
+    {
+     "w": "touche",
+     "t": 65.664
+    },
+    {
+     "w": "pas.",
+     "t": 65.904
+    }
+   ]
+  },
+  {
+   "id": "13-crime",
+   "who": "avocate",
+   "text": "Quinze ans… pour trois jours. Trois enfants au chaud, contre trois jours sur un formulaire. Alors dites-moi… qui a vraiment commis un crime ?",
+   "start": 66.454,
+   "dur": 6.01,
+   "words": [
+    {
+     "w": "Quinze",
+     "t": 66.554
+    },
+    {
+     "w": "ans…",
+     "t": 66.654
+    },
+    {
+     "w": "pour",
+     "t": 66.874
+    },
+    {
+     "w": "trois",
+     "t": 67.184
+    },
+    {
+     "w": "jours.",
+     "t": 67.494
+    },
+    {
+     "w": "Trois",
+     "t": 67.814
+    },
+    {
+     "w": "enfants",
+     "t": 68.134
+    },
+    {
+     "w": "au",
+     "t": 68.414
+    },
+    {
+     "w": "chaud,",
+     "t": 68.554
+    },
+    {
+     "w": "contre",
+     "t": 68.734
+    },
+    {
+     "w": "trois",
+     "t": 69.094
+    },
+    {
+     "w": "jours",
+     "t": 69.454
+    },
+    {
+     "w": "sur",
+     "t": 69.614
+    },
+    {
+     "w": "un",
+     "t": 69.814
+    },
+    {
+     "w": "formulaire.",
+     "t": 69.934
+    },
+    {
+     "w": "Alors",
+     "t": 70.494
+    },
+    {
+     "w": "dites-moi…",
+     "t": 70.824
+    },
+    {
+     "w": "qui",
+     "t": 71.154
+    },
+    {
+     "w": "a",
+     "t": 71.274
+    },
+    {
+     "w": "vraiment",
+     "t": 71.414
+    },
+    {
+     "w": "commis",
+     "t": 71.634
+    },
+    {
+     "w": "un",
+     "t": 71.974
+    },
+    {
+     "w": "crime ?",
+     "t": 72.034
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 72.714,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 72.714
+    },
+    {
+     "w": "es",
+     "t": 72.854
+    },
+    {
+     "w": "le",
+     "t": 72.944
+    },
+    {
+     "w": "juré.",
+     "t": 73.034
+    },
+    {
+     "w": "Coupable…",
+     "t": 73.534
+    },
+    {
+     "w": "ou",
+     "t": 73.974
+    },
+    {
+     "w": "non",
+     "t": 74.394
+    },
+    {
+     "w": "coupable ?",
+     "t": 74.594
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 75.474,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 75.474
+    },
+    {
+     "w": "verdict",
+     "t": 75.594
+    },
+    {
+     "w": "tombe",
+     "t": 75.894
+    },
+    {
+     "w": "dans",
+     "t": 76.434
+    },
+    {
+     "w": "la",
+     "t": 76.594
+    },
+    {
+     "w": "prochaine",
+     "t": 76.714
+    },
+    {
+     "w": "vidéo.",
+     "t": 76.994
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 77.484
+    },
+    {
+     "w": "pour",
+     "t": 77.974
+    },
+    {
+     "w": "ne",
+     "t": 78.114
+    },
+    {
+     "w": "pas",
+     "t": 78.214
+    },
+    {
+     "w": "le",
+     "t": 78.354
+    },
+    {
+     "w": "rater.",
+     "t": 78.374
+    }
+   ]
+  }
+ ]
+}

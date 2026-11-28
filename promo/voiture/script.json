@@ -1,0 +1,105 @@
+{
+ "_doc": "« La voiture du voisin » : Mehdi vole la voiture de son voisin Bernard pour emmener sa femme qui accouche, grille six feux rouges ; Bernard reçoit les amendes et porte plainte (affaire fictive). Voix ElevenLabs (Eleven v4) : Mehdi « François Louis », Sarah « Alicia », narrateur « Nicolas », procureur « Paul K », défense « Ilan ».",
+ "voices": {
+  "mehdi": {
+   "name": "mehdi",
+   "file": "media/mehdi.wav"
+  },
+  "sarah": {
+   "name": "sarah",
+   "file": "media/sarah.wav"
+  },
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "00-intro",
+   "who": "narrateur",
+   "text": "Sa femme accouchait. Il a volé la voiture du voisin… et grillé six feux rouges."
+  },
+  {
+   "id": "01-mehdi",
+   "who": "mehdi",
+   "text": "Respire, Sarah, respire ! On y est dans dix minutes !",
+   "gap": 0.5
+  },
+  {
+   "id": "01b-sarah",
+   "who": "sarah",
+   "text": "Mehdi… il arrive, je le sens !",
+   "gap": 0.3
+  },
+  {
+   "id": "02-mehdi",
+   "who": "narrateur",
+   "text": "Mehdi, 29 ans, livreur. La voiture appartient à Bernard, 71 ans, son voisin. Les clés étaient sur le pare-soleil, comme toujours.",
+   "gap": 2.6
+  },
+  {
+   "id": "03-inaya",
+   "who": "narrateur",
+   "text": "Inaya est née sur le parking de la maternité. Trois semaines plus tard, Bernard reçoit six amendes. Son permis : zéro point. Aujourd'hui, c'est Mehdi qu'on juge."
+  },
+  {
+   "id": "04-tele",
+   "who": "procureur",
+   "text": "Personne ne reproche à cet homme d'avoir eu peur. On lui reproche d'avoir choisi. Bernard ne dormait pas ce soir-là. Sa télé était allumée, on la voyait depuis la rue. Il suffisait de traverser et de frapper."
+  },
+  {
+   "id": "05-cordon",
+   "who": "avocate",
+   "text": "Frapper, expliquer, attendre qu'un homme de 71 ans trouve ses chaussons… La sage-femme l'a écrit noir sur blanc : le cordon était enroulé autour du cou d'Inaya. Chaque minute comptait."
+  },
+  {
+   "id": "06-feux",
+   "who": "procureur",
+   "text": "Six feux rouges, à trois heures du matin. C'est l'heure des camions de livraison. À chaque carrefour, il jouait trois vies pour en sauver une. Et la loi a un nom pour ça : la mise en danger d'autrui."
+  },
+  {
+   "id": "07-necessite",
+   "who": "avocate",
+   "text": "La loi a aussi un nom pour ce qu'il a fait : l'état de nécessité. Quand un danger réel menace quelqu'un, on a le droit de commettre une infraction pour l'éviter. C'est écrit dans le Code pénal, article 122-7."
+  },
+  {
+   "id": "08-like",
+   "who": "narrateur",
+   "text": "Un père qui sauve sa fille… ou un voleur qui ruine son voisin ? Ici, c'est toi qui juges. Abonne-toi pour siéger au prochain procès."
+  },
+  {
+   "id": "09-chocolats",
+   "who": "procureur",
+   "text": "Le lendemain, il a rapporté la voiture, le plein fait, avec des chocolats. Les six amendes, en revanche, il les a laissées dans la boîte aux lettres de Bernard. Aujourd'hui, Bernard va chez son cardiologue en bus, avec deux changements."
+  },
+  {
+   "id": "10-echeancier",
+   "who": "avocate",
+   "text": "Mon client a proposé de tout payer. Il gagne 1 300 euros par mois, et il a demandé un échéancier. Bernard a préféré porter plainte."
+  },
+  {
+   "id": "11-urgence",
+   "who": "procureur",
+   "text": "Une urgence n'efface pas tout. Sinon, demain, chaque retard devient une urgence, et chaque voiture garée devient un taxi."
+  },
+  {
+   "id": "12-excuse",
+   "who": "avocate",
+   "text": "Regardez-le bien. Il ne s'excusera pas d'avoir fait naître sa fille. Il s'excuse seulement de ne pas avoir eu le temps de demander."
+  },
+  {
+   "id": "13-jure",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. Et abonne-toi : le prochain procès t'attend."
+  }
+ ]
+}

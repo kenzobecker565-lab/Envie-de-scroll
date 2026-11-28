@@ -1,0 +1,92 @@
+{
+ "_doc": "Le tir (LBD), épisode 2/2 « Le verdict » (affaire fictive). Voix ElevenLabs du créateur du compte, une prise par réplique (media/elevenlabs/<id>.mp3) : narrateur « Nicolas », procureur « Paul K », défense « Peter », Théo « Anthony Sirius », le policier « Thierry ». « avocate » = la défense.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "theo": {
+   "name": "theo",
+   "file": "media/theo.wav"
+  },
+  "policier": {
+   "name": "policier",
+   "file": "media/policier.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-image",
+   "who": "narrateur",
+   "text": "Hier, tu as voté. Mais personne n'avait vu cette image. La caméra du policier, seconde par seconde."
+  },
+  {
+   "id": "02-retombe",
+   "who": "narrateur",
+   "text": "Le pavé de Théo n'a touché personne. Il est retombé à 2 mètres de la ligne.",
+   "gap": 0.3
+  },
+  {
+   "id": "03-autre",
+   "who": "narrateur",
+   "text": "Le collègue du policier a été frappé par une autre pierre, venue de derrière. Lancée par quelqu'un qu'on n'a jamais identifié.",
+   "gap": 0.3
+  },
+  {
+   "id": "04-cru",
+   "who": "avocate",
+   "text": "Mon client n'a pas vu le pavé retomber. Il a vu son ami s'effondrer. Et trois secondes après, un homme se baisser. À sa place, qu'auriez-vous cru ?",
+   "gap": 0.35
+  },
+  {
+   "id": "05-image",
+   "who": "procureur",
+   "text": "À sa place, j'aurais regardé. Il avait des images, des ordres, un chef à ses côtés. Et devant lui : un étudiant seul, à 6 mètres.",
+   "gap": 0.3
+  },
+  {
+   "id": "06-pause",
+   "who": "narrateur",
+   "text": "Avant la fin : abonne-toi. Le verdict du tribunal tombe dans quelques secondes.",
+   "gap": 0.35
+  },
+  {
+   "id": "07-theo",
+   "who": "theo",
+   "text": "Je ne lui en veux pas d'avoir eu peur. Je lui en veux de ne pas avoir regardé. J'ai lancé ce pavé. Je ne le nie pas. Mais je n'ai pas touché ce policier… et lui, il m'a pris un œil.",
+   "gap": 0.5
+  },
+  {
+   "id": "08-vidal",
+   "who": "policier",
+   "text": "Je le revois tous les soirs. Je pensais défendre mon ami. Je me suis trompé. Et je vivrai avec ça.",
+   "gap": 0.6
+  },
+  {
+   "id": "09-verdict",
+   "who": "narrateur",
+   "text": "Le tribunal le déclare coupable. 18 mois avec sursis. Interdiction d'exercer pendant 5 ans.",
+   "gap": 0.7
+  },
+  {
+   "id": "10-jury",
+   "who": "narrateur",
+   "text": "Toi, tu avais voté quoi ? Dis-le en commentaire.",
+   "gap": 0.5
+  },
+  {
+   "id": "11-abonne",
+   "who": "narrateur",
+   "text": "Abonne-toi pour la prochaine affaire.",
+   "gap": 0.25
+  }
+ ]
+}

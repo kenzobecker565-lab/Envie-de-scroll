@@ -1,0 +1,15 @@
+# La propriétaire — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : lwhKreerjmiwI9eZzTy7
+01-serrures (narr) Une retraitée de soixante-quatorze ans a changé les serrures de son propre appartement. Ses locataires ne payaient plus depuis quatorze mois. Dix-huit mille euros. [TÉLÉCHARGÉ]
+02-voisin (narr) Sur la vidéo du voisin, on la voit avec un serrurier. Les affaires des locataires sur le palier… les jouets des enfants… et la porte qui se referme. [TÉLÉCHARGÉ]
+03-jeannine (narr) Elle s'appelle Jeannine. Veuve. Neuf cents euros de retraite. Ce loyer, c'était son seul complément. Aujourd'hui, c'est elle qu'on juge. [TÉLÉCHARGÉ]
+04-loi (proc) La loi est claire. On n'expulse pas soi-même. Même chez soi. Même quand on a raison. [TÉLÉCHARGÉ]
+05-procedure (avo) La loi ? Elle a saisi la justice il y a deux ans. Procédure. Huissier. Jugement. L'expulsion n'est jamais venue. [TÉLÉCHARGÉ]
+06-fevrier (proc) Il y avait deux enfants dans cet appartement. Elle les a mis à la rue un soir de février. [TÉLÉCHARGÉ]
+07-voiture (avo) À la rue ? Le père roulait dans une voiture neuve. Il ne payait pas parce qu'il savait qu'on ne pouvait rien contre lui. [TÉLÉCHARGÉ]
+08-violee (proc) Sa voiture ne regarde pas ce tribunal. Ce qui compte, c'est la loi. Et elle l'a violée. [TÉLÉCHARGÉ]
+09-alliance (avo) Et elle ? Quatorze mois sans loyer. Elle a vendu son alliance pour payer les charges de cet appartement. [TÉLÉCHARGÉ]
+10-proteges (proc) Sa détresse est réelle. Mais si chaque propriétaire se fait justice, plus aucun locataire n'est protégé. [TÉLÉCHARGÉ]
+11-seule (avo) Protégé ? La seule qui n'a jamais été protégée ici, c'est elle. Soixante-quatorze ans. Seule face à la loi. [TÉLÉCHARGÉ]
+12-prison (proc) Elle risque trois ans de prison. Pour avoir fait ce que seul un juge pouvait faire. [TÉLÉCHARGÉ]
+13-qui (avo) Trois ans de prison… pour avoir récupéré sa propre maison. Si c'est ça, la justice… qui protège Jeannine ? [TÉLÉCHARGÉ]

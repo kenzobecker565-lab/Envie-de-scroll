@@ -1,0 +1,15 @@
+# Le maître-nageur — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : cbL3VZh8fluO35OGfCyN
+01-piscine (narr) Pendant deux étés, un maître-nageur a laissé entrer gratuitement les enfants d'une cité à la piscine municipale. Tous les soirs. Neuf mille euros d'entrées. [TÉLÉCHARGÉ]
+02-porte (narr) Sur la caméra de l'entrée, on le voit chaque soir à dix-neuf heures. Il ouvre la porte de service… les enfants se faufilent… et il referme derrière eux. [TÉLÉCHARGÉ]
+03-julien (narr) Il s'appelle Julien. Trente-huit ans. Maître-nageur depuis quinze ans. Aucun accident sous sa surveillance. Aujourd'hui, il est jugé pour détournement de biens publics. [TÉLÉCHARGÉ]
+04-ville (proc) Cette piscine appartient à la ville. Il en a ouvert les portes comme si c'était chez lui. Deux étés de suite. [TÉLÉCHARGÉ]
+05-chaleur (avo) Chez lui ? Ces enfants vivent à huit cents mètres. Il faisait trente-six degrés. Et l'entrée coûte quatre euros. Par enfant. Par jour. [TÉLÉCHARGÉ]
+06-autres (proc) Quatre euros, c'est le prix. D'autres familles l'ont payé. Pourquoi eux, et pas les autres ? [TÉLÉCHARGÉ]
+07-canal (avo) Les autres ? L'été d'avant, un gamin de la cité s'est noyé dans le canal. Il avait neuf ans. [TÉLÉCHARGÉ]
+08-drame (proc) C'est un drame. Mais ce n'est pas à un maître-nageur de décider qui paie et qui ne paie pas. [TÉLÉCHARGÉ]
+09-nager (avo) Il n'a pas choisi qui paie. Il a choisi qui ne se noie pas. En deux étés, il a appris à nager à quarante-trois enfants. [TÉLÉCHARGÉ]
+10-public (proc) Neuf mille euros, c'est de l'argent public. L'argent de tous les habitants. Y compris ceux qui ont payé leur entrée. [TÉLÉCHARGÉ]
+11-impots (avo) De l'argent public ? Ces enfants aussi, c'est la ville. Et leurs parents paient des impôts, comme tout le monde. [TÉLÉCHARGÉ]
+12-canicule (proc) Il risque dix ans de prison. La loi ne connaît pas les canicules. [TÉLÉCHARGÉ]
+13-coupable (avo) Dix ans… pour quarante-trois enfants qui savent nager. Si c'est ça, un crime… alors oui, il est coupable. [TÉLÉCHARGÉ]

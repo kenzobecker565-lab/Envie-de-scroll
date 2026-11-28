@@ -1,0 +1,21 @@
+{
+  "_doc": "Affaire n°2 : la mère justicière (affaire fictive). Texte des sous-titres, une entrée par réplique, dans l'ordre. « who » : narrateur, procureur, avocate (narrateur : voix ElevenLabs « George » via vidIQ ; procureur et avocate : voix gratuites Piper ; voir media/ et voix.py). « say » : texte lu quand il diffère des sous-titres. « gap » : silence avant la réplique (secondes, 0,25 par défaut).",
+  "voices": {
+    "narrateur": { "name": "George", "file": "media/narrateur.mp3" },
+    "procureur": { "name": "Pierre (Piper, fr_FR-upmc-medium)", "file": "media/procureur.wav" },
+    "avocate": { "name": "Siwis (Piper, fr_FR-siwis-medium)", "file": "media/avocate.wav" }
+  },
+  "lines": [
+    { "id": "01-harcelee", "who": "narrateur", "text": "Sa fille a été harcelée pendant un an." },
+    { "id": "02-plaintes", "who": "narrateur", "text": "Trois plaintes. Trois fois classées sans suite.", "gap": 0.2 },
+    { "id": "03-nez", "who": "narrateur", "text": "Alors cette mère a attendu le harceleur devant chez lui… et lui a cassé le nez.", "gap": 0.3 },
+    { "id": "04-peine", "who": "narrateur", "text": "Elle risque cinq ans de prison.", "gap": 0.2 },
+    { "id": "05-plusfort", "who": "procureur", "text": "Si chaque parent se fait justice lui-même, ce n'est plus la justice. C'est la loi du plus fort.", "gap": 0.7 },
+    { "id": "06-demandee", "who": "avocate", "text": "La justice, elle l'a demandée. Trois fois. Sa fille ne va plus en cours depuis six mois.", "gap": 0.3 },
+    { "id": "07-dixsept", "who": "procureur", "text": "Ce garçon a 17 ans. Elle, 45. Elle l'a frappé seule, en pleine nuit.", "say": "Ce garçon a dix-sept ans. Elle, quarante-cinq. Elle l'a frappé seule, en pleine nuit.", "gap": 0.3 },
+    { "id": "08-messages", "who": "avocate", "text": "17 ans, et 400 messages d'insultes. Il savait exactement ce qu'il faisait.", "say": "Dix-sept ans, et quatre cents messages d'insultes. Il savait exactement ce qu'il faisait.", "gap": 0.3 },
+    { "id": "09-repare", "who": "procureur", "text": "La violence ne répare rien.", "gap": 0.35 },
+    { "id": "10-classee", "who": "avocate", "text": "Une plainte classée non plus.", "gap": 0.25 },
+    { "id": "11-jury", "who": "narrateur", "text": "Tu es le juré. Coupable… ou non coupable ? Et toi, à sa place, tu aurais fait quoi ?", "gap": 0.8 }
+  ]
+}

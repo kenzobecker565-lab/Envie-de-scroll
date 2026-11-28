@@ -1,0 +1,95 @@
+{
+ "_doc": "« La propriétaire » (affaire fictive), sur le modèle de « La caissière ». Voix ElevenLabs : Nicolas, Paul K, Ilan.",
+ "voices": {
+  "narrateur": {
+   "name": "narrateur",
+   "file": "media/narrateur.wav"
+  },
+  "procureur": {
+   "name": "procureur",
+   "file": "media/procureur.wav"
+  },
+  "avocate": {
+   "name": "avocate",
+   "file": "media/avocate.wav"
+  }
+ },
+ "lines": [
+  {
+   "id": "01-serrures",
+   "who": "narrateur",
+   "text": "Une retraitée de soixante-quatorze ans a changé les serrures de son propre appartement. Ses locataires ne payaient plus depuis quatorze mois. Dix-huit mille euros.",
+   "gap": 0
+  },
+  {
+   "id": "02-voisin",
+   "who": "narrateur",
+   "text": "Sur la vidéo du voisin, on la voit avec un serrurier. Les affaires des locataires sur le palier… les jouets des enfants… et la porte qui se referme."
+  },
+  {
+   "id": "03-jeannine",
+   "who": "narrateur",
+   "text": "Elle s'appelle Jeannine. Veuve. Neuf cents euros de retraite. Ce loyer, c'était son seul complément. Aujourd'hui, c'est elle qu'on juge."
+  },
+  {
+   "id": "04-loi",
+   "who": "procureur",
+   "text": "La loi est claire. On n'expulse pas soi-même. Même chez soi. Même quand on a raison."
+  },
+  {
+   "id": "05-procedure",
+   "who": "avocate",
+   "text": "La loi ? Elle a saisi la justice il y a deux ans. Procédure. Huissier. Jugement. L'expulsion n'est jamais venue."
+  },
+  {
+   "id": "06-fevrier",
+   "who": "procureur",
+   "text": "Il y avait deux enfants dans cet appartement. Elle les a mis à la rue un soir de février."
+  },
+  {
+   "id": "07-voiture",
+   "who": "avocate",
+   "text": "À la rue ? Le père roulait dans une voiture neuve. Il ne payait pas parce qu'il savait qu'on ne pouvait rien contre lui."
+  },
+  {
+   "id": "08-violee",
+   "who": "procureur",
+   "text": "Sa voiture ne regarde pas ce tribunal. Ce qui compte, c'est la loi. Et elle l'a violée."
+  },
+  {
+   "id": "09-alliance",
+   "who": "avocate",
+   "text": "Et elle ? Quatorze mois sans loyer. Elle a vendu son alliance pour payer les charges de cet appartement."
+  },
+  {
+   "id": "10-proteges",
+   "who": "procureur",
+   "text": "Sa détresse est réelle. Mais si chaque propriétaire se fait justice, plus aucun locataire n'est protégé."
+  },
+  {
+   "id": "11-seule",
+   "who": "avocate",
+   "text": "Protégé ? La seule qui n'a jamais été protégée ici, c'est elle. Soixante-quatorze ans. Seule face à la loi."
+  },
+  {
+   "id": "12-prison",
+   "who": "procureur",
+   "text": "Elle risque trois ans de prison. Pour avoir fait ce que seul un juge pouvait faire."
+  },
+  {
+   "id": "13-qui",
+   "who": "avocate",
+   "text": "Trois ans de prison… pour avoir récupéré sa propre maison. Si c'est ça, la justice… qui protège Jeannine ?"
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?"
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater."
+  }
+ ]
+}

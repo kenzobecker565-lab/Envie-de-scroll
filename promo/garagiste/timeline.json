@@ -1,0 +1,1193 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 79.35,
+ "lines": [
+  {
+   "id": "01-fusible",
+   "who": "narrateur",
+   "text": "Un garagiste a saboté la voiture d'un client. Exprès. Pendant que l'homme payait, il a retiré un fusible. Et aujourd'hui, c'est le garagiste qu'on juge.",
+   "start": 0.25,
+   "dur": 7.0,
+   "words": [
+    {
+     "w": "Un",
+     "t": 0.25
+    },
+    {
+     "w": "garagiste",
+     "t": 0.37
+    },
+    {
+     "w": "a",
+     "t": 0.87
+    },
+    {
+     "w": "saboté",
+     "t": 1.14
+    },
+    {
+     "w": "la",
+     "t": 1.41
+    },
+    {
+     "w": "voiture",
+     "t": 1.49
+    },
+    {
+     "w": "d'un",
+     "t": 1.7
+    },
+    {
+     "w": "client.",
+     "t": 1.91
+    },
+    {
+     "w": "Exprès.",
+     "t": 2.17
+    },
+    {
+     "w": "Pendant",
+     "t": 2.77
+    },
+    {
+     "w": "que",
+     "t": 3.05
+    },
+    {
+     "w": "l'homme",
+     "t": 3.24
+    },
+    {
+     "w": "payait,",
+     "t": 3.43
+    },
+    {
+     "w": "il",
+     "t": 3.85
+    },
+    {
+     "w": "a",
+     "t": 4.05
+    },
+    {
+     "w": "retiré",
+     "t": 4.15
+    },
+    {
+     "w": "un",
+     "t": 4.49
+    },
+    {
+     "w": "fusible.",
+     "t": 4.55
+    },
+    {
+     "w": "Et",
+     "t": 5.03
+    },
+    {
+     "w": "aujourd'hui,",
+     "t": 5.363
+    },
+    {
+     "w": "c'est",
+     "t": 5.697
+    },
+    {
+     "w": "le",
+     "t": 6.03
+    },
+    {
+     "w": "garagiste",
+     "t": 6.09
+    },
+    {
+     "w": "qu'on",
+     "t": 6.45
+    },
+    {
+     "w": "juge.",
+     "t": 6.81
+    }
+   ]
+  },
+  {
+   "id": "02-atelier",
+   "who": "narrateur",
+   "text": "Sur la caméra de l'atelier, on voit l'homme arriver en titubant. Ses deux enfants à l'arrière. Les clés dans une main… une canette dans l'autre.",
+   "start": 7.5,
+   "dur": 6.46,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 7.5
+    },
+    {
+     "w": "la",
+     "t": 7.66
+    },
+    {
+     "w": "caméra",
+     "t": 7.76
+    },
+    {
+     "w": "de",
+     "t": 8.06
+    },
+    {
+     "w": "l'atelier,",
+     "t": 8.46
+    },
+    {
+     "w": "on",
+     "t": 8.86
+    },
+    {
+     "w": "voit",
+     "t": 8.92
+    },
+    {
+     "w": "l'homme",
+     "t": 9.11
+    },
+    {
+     "w": "arriver",
+     "t": 9.3
+    },
+    {
+     "w": "en",
+     "t": 9.56
+    },
+    {
+     "w": "titubant.",
+     "t": 9.78
+    },
+    {
+     "w": "Ses",
+     "t": 10.17
+    },
+    {
+     "w": "deux",
+     "t": 10.56
+    },
+    {
+     "w": "enfants",
+     "t": 10.7
+    },
+    {
+     "w": "à",
+     "t": 10.98
+    },
+    {
+     "w": "l'arrière.",
+     "t": 11.35
+    },
+    {
+     "w": "Les",
+     "t": 11.72
+    },
+    {
+     "w": "clés",
+     "t": 11.78
+    },
+    {
+     "w": "dans",
+     "t": 12.0
+    },
+    {
+     "w": "une",
+     "t": 12.1
+    },
+    {
+     "w": "main…",
+     "t": 12.26
+    },
+    {
+     "w": "une",
+     "t": 12.86
+    },
+    {
+     "w": "canette",
+     "t": 12.96
+    },
+    {
+     "w": "dans",
+     "t": 13.34
+    },
+    {
+     "w": "l'autre.",
+     "t": 13.682
+    }
+   ]
+  },
+  {
+   "id": "03-samir",
+   "who": "narrateur",
+   "text": "Il s'appelle Samir. Quarante-neuf ans. Garagiste depuis vingt-cinq ans. Jamais un litige. Aujourd'hui, il est jugé pour dégradation volontaire.",
+   "start": 14.21,
+   "dur": 6.86,
+   "words": [
+    {
+     "w": "Il",
+     "t": 14.21
+    },
+    {
+     "w": "s'appelle",
+     "t": 14.44
+    },
+    {
+     "w": "Samir.",
+     "t": 14.67
+    },
+    {
+     "w": "Quarante-neuf",
+     "t": 15.17
+    },
+    {
+     "w": "ans.",
+     "t": 15.67
+    },
+    {
+     "w": "Garagiste",
+     "t": 16.13
+    },
+    {
+     "w": "depuis",
+     "t": 16.59
+    },
+    {
+     "w": "vingt-cinq",
+     "t": 16.88
+    },
+    {
+     "w": "ans.",
+     "t": 17.17
+    },
+    {
+     "w": "Jamais",
+     "t": 17.55
+    },
+    {
+     "w": "un",
+     "t": 17.87
+    },
+    {
+     "w": "litige.",
+     "t": 18.03
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 18.64
+    },
+    {
+     "w": "il",
+     "t": 19.25
+    },
+    {
+     "w": "est",
+     "t": 19.33
+    },
+    {
+     "w": "jugé",
+     "t": 19.41
+    },
+    {
+     "w": "pour",
+     "t": 19.69
+    },
+    {
+     "w": "dégradation",
+     "t": 19.85
+    },
+    {
+     "w": "volontaire.",
+     "t": 20.39
+    }
+   ]
+  },
+  {
+   "id": "04-sabotee",
+   "who": "procureur",
+   "text": "Cette voiture ne lui appartenait pas. Il l'a sabotée sans prévenir personne. Il s'est fait justice lui-même.",
+   "start": 21.32,
+   "dur": 5.03,
+   "words": [
+    {
+     "w": "Cette",
+     "t": 21.32
+    },
+    {
+     "w": "voiture",
+     "t": 21.48
+    },
+    {
+     "w": "ne",
+     "t": 21.8
+    },
+    {
+     "w": "lui",
+     "t": 22.0
+    },
+    {
+     "w": "appartenait",
+     "t": 22.1
+    },
+    {
+     "w": "pas.",
+     "t": 22.6
+    },
+    {
+     "w": "Il",
+     "t": 22.92
+    },
+    {
+     "w": "l'a",
+     "t": 23.153
+    },
+    {
+     "w": "sabotée",
+     "t": 23.387
+    },
+    {
+     "w": "sans",
+     "t": 23.62
+    },
+    {
+     "w": "prévenir",
+     "t": 23.82
+    },
+    {
+     "w": "personne.",
+     "t": 24.16
+    },
+    {
+     "w": "Il",
+     "t": 24.86
+    },
+    {
+     "w": "s'est",
+     "t": 24.99
+    },
+    {
+     "w": "fait",
+     "t": 25.12
+    },
+    {
+     "w": "justice",
+     "t": 25.24
+    },
+    {
+     "w": "lui-même.",
+     "t": 25.833
+    }
+   ]
+  },
+  {
+   "id": "05-cles",
+   "who": "avocate",
+   "text": "Sans prévenir ? Il a d'abord demandé les clés. Poliment. Le client l'a insulté et a démarré.",
+   "start": 26.6,
+   "dur": 4.25,
+   "words": [
+    {
+     "w": "Sans",
+     "t": 26.6
+    },
+    {
+     "w": "prévenir ?",
+     "t": 26.8
+    },
+    {
+     "w": "Il",
+     "t": 27.48
+    },
+    {
+     "w": "a",
+     "t": 27.48
+    },
+    {
+     "w": "d'abord",
+     "t": 27.63
+    },
+    {
+     "w": "demandé",
+     "t": 27.78
+    },
+    {
+     "w": "les",
+     "t": 28.1
+    },
+    {
+     "w": "clés.",
+     "t": 28.26
+    },
+    {
+     "w": "Poliment.",
+     "t": 28.56
+    },
+    {
+     "w": "Le",
+     "t": 29.08
+    },
+    {
+     "w": "client",
+     "t": 29.18
+    },
+    {
+     "w": "l'a",
+     "t": 29.39
+    },
+    {
+     "w": "insulté",
+     "t": 29.6
+    },
+    {
+     "w": "et",
+     "t": 30.08
+    },
+    {
+     "w": "a",
+     "t": 30.28
+    },
+    {
+     "w": "démarré.",
+     "t": 30.34
+    }
+   ]
+  },
+  {
+   "id": "06-police",
+   "who": "procureur",
+   "text": "Il fallait appeler la police. C'est leur métier. Pas celui d'un garagiste.",
+   "start": 31.1,
+   "dur": 3.29,
+   "words": [
+    {
+     "w": "Il",
+     "t": 31.1
+    },
+    {
+     "w": "fallait",
+     "t": 31.22
+    },
+    {
+     "w": "appeler",
+     "t": 31.44
+    },
+    {
+     "w": "la",
+     "t": 31.74
+    },
+    {
+     "w": "police.",
+     "t": 31.84
+    },
+    {
+     "w": "C'est",
+     "t": 32.17
+    },
+    {
+     "w": "leur",
+     "t": 32.5
+    },
+    {
+     "w": "métier.",
+     "t": 32.6
+    },
+    {
+     "w": "Pas",
+     "t": 32.93
+    },
+    {
+     "w": "celui",
+     "t": 33.26
+    },
+    {
+     "w": "d'un",
+     "t": 33.46
+    },
+    {
+     "w": "garagiste.",
+     "t": 33.66
+    }
+   ]
+  },
+  {
+   "id": "07-minutes",
+   "who": "avocate",
+   "text": "Il l'a appelée. Temps d'arrivée : quarante minutes. La route de l'école, elle, était à deux minutes.",
+   "start": 34.64,
+   "dur": 4.27,
+   "words": [
+    {
+     "w": "Il",
+     "t": 34.64
+    },
+    {
+     "w": "l'a",
+     "t": 34.873
+    },
+    {
+     "w": "appelée.",
+     "t": 35.107
+    },
+    {
+     "w": "Temps",
+     "t": 35.34
+    },
+    {
+     "w": "d'arrivée :",
+     "t": 35.627
+    },
+    {
+     "w": "quarante",
+     "t": 35.913
+    },
+    {
+     "w": "minutes.",
+     "t": 36.2
+    },
+    {
+     "w": "La",
+     "t": 36.7
+    },
+    {
+     "w": "route",
+     "t": 36.86
+    },
+    {
+     "w": "de",
+     "t": 37.0
+    },
+    {
+     "w": "l'école,",
+     "t": 37.24
+    },
+    {
+     "w": "elle,",
+     "t": 37.48
+    },
+    {
+     "w": "était",
+     "t": 37.94
+    },
+    {
+     "w": "à",
+     "t": 38.1
+    },
+    {
+     "w": "deux",
+     "t": 38.27
+    },
+    {
+     "w": "minutes.",
+     "t": 38.44
+    }
+   ]
+  },
+  {
+   "id": "08-route",
+   "who": "procureur",
+   "text": "Peu importe. Un fusible retiré, c'est une voiture en panne sur le bord de la route. Avec deux enfants dedans.",
+   "start": 39.16,
+   "dur": 5.17,
+   "words": [
+    {
+     "w": "Peu",
+     "t": 39.16
+    },
+    {
+     "w": "importe.",
+     "t": 39.3
+    },
+    {
+     "w": "Un",
+     "t": 39.9
+    },
+    {
+     "w": "fusible",
+     "t": 40.0
+    },
+    {
+     "w": "retiré,",
+     "t": 40.34
+    },
+    {
+     "w": "c'est",
+     "t": 40.77
+    },
+    {
+     "w": "une",
+     "t": 41.2
+    },
+    {
+     "w": "voiture",
+     "t": 41.32
+    },
+    {
+     "w": "en",
+     "t": 41.56
+    },
+    {
+     "w": "panne",
+     "t": 41.74
+    },
+    {
+     "w": "sur",
+     "t": 42.04
+    },
+    {
+     "w": "le",
+     "t": 42.12
+    },
+    {
+     "w": "bord",
+     "t": 42.22
+    },
+    {
+     "w": "de",
+     "t": 42.36
+    },
+    {
+     "w": "la",
+     "t": 42.48
+    },
+    {
+     "w": "route.",
+     "t": 42.56
+    },
+    {
+     "w": "Avec",
+     "t": 42.94
+    },
+    {
+     "w": "deux",
+     "t": 43.16
+    },
+    {
+     "w": "enfants",
+     "t": 43.48
+    },
+    {
+     "w": "dedans.",
+     "t": 43.84
+    }
+   ]
+  },
+  {
+   "id": "09-parking",
+   "who": "avocate",
+   "text": "En panne ? Elle n'a jamais quitté le parking. Elle n'a pas démarré. C'était tout le but.",
+   "start": 44.58,
+   "dur": 3.65,
+   "words": [
+    {
+     "w": "En",
+     "t": 44.58
+    },
+    {
+     "w": "panne ?",
+     "t": 44.68
+    },
+    {
+     "w": "Elle",
+     "t": 45.14
+    },
+    {
+     "w": "n'a",
+     "t": 45.26
+    },
+    {
+     "w": "jamais",
+     "t": 45.38
+    },
+    {
+     "w": "quitté",
+     "t": 45.58
+    },
+    {
+     "w": "le",
+     "t": 45.96
+    },
+    {
+     "w": "parking.",
+     "t": 46.0
+    },
+    {
+     "w": "Elle",
+     "t": 46.54
+    },
+    {
+     "w": "n'a",
+     "t": 46.65
+    },
+    {
+     "w": "pas",
+     "t": 46.76
+    },
+    {
+     "w": "démarré.",
+     "t": 46.84
+    },
+    {
+     "w": "C'était",
+     "t": 47.22
+    },
+    {
+     "w": "tout",
+     "t": 47.6
+    },
+    {
+     "w": "le",
+     "t": 47.78
+    },
+    {
+     "w": "but.",
+     "t": 47.84
+    }
+   ]
+  },
+  {
+   "id": "10-confiance",
+   "who": "procureur",
+   "text": "Si chaque garagiste décide qui peut conduire, plus aucun client ne lui confiera sa voiture.",
+   "start": 48.48,
+   "dur": 4.65,
+   "words": [
+    {
+     "w": "Si",
+     "t": 48.48
+    },
+    {
+     "w": "chaque",
+     "t": 48.66
+    },
+    {
+     "w": "garagiste",
+     "t": 48.9
+    },
+    {
+     "w": "décide",
+     "t": 49.42
+    },
+    {
+     "w": "qui",
+     "t": 49.88
+    },
+    {
+     "w": "peut",
+     "t": 50.06
+    },
+    {
+     "w": "conduire,",
+     "t": 50.2
+    },
+    {
+     "w": "plus",
+     "t": 50.9
+    },
+    {
+     "w": "aucun",
+     "t": 51.0
+    },
+    {
+     "w": "client",
+     "t": 51.38
+    },
+    {
+     "w": "ne",
+     "t": 51.68
+    },
+    {
+     "w": "lui",
+     "t": 51.88
+    },
+    {
+     "w": "confiera",
+     "t": 52.0
+    },
+    {
+     "w": "sa",
+     "t": 52.38
+    },
+    {
+     "w": "voiture.",
+     "t": 52.52
+    }
+   ]
+  },
+  {
+   "id": "11-alcool",
+   "who": "avocate",
+   "text": "Le taux d'alcool du client, une heure plus tard : un gramme huit. Plus de trois fois la limite.",
+   "start": 53.38,
+   "dur": 4.16,
+   "words": [
+    {
+     "w": "Le",
+     "t": 53.38
+    },
+    {
+     "w": "taux",
+     "t": 53.52
+    },
+    {
+     "w": "d'alcool",
+     "t": 53.73
+    },
+    {
+     "w": "du",
+     "t": 53.94
+    },
+    {
+     "w": "client,",
+     "t": 54.08
+    },
+    {
+     "w": "une",
+     "t": 54.6
+    },
+    {
+     "w": "heure",
+     "t": 54.76
+    },
+    {
+     "w": "plus",
+     "t": 54.86
+    },
+    {
+     "w": "tard :",
+     "t": 55.0
+    },
+    {
+     "w": "un",
+     "t": 55.44
+    },
+    {
+     "w": "gramme",
+     "t": 55.667
+    },
+    {
+     "w": "huit.",
+     "t": 55.893
+    },
+    {
+     "w": "Plus",
+     "t": 56.12
+    },
+    {
+     "w": "de",
+     "t": 56.3
+    },
+    {
+     "w": "trois",
+     "t": 56.44
+    },
+    {
+     "w": "fois",
+     "t": 56.72
+    },
+    {
+     "w": "la",
+     "t": 56.92
+    },
+    {
+     "w": "limite.",
+     "t": 57.04
+    }
+   ]
+  },
+  {
+   "id": "12-deuxans",
+   "who": "procureur",
+   "text": "Il risque deux ans de prison. Pour une voiture qui n'était pas la sienne.",
+   "start": 57.79,
+   "dur": 3.181,
+   "words": [
+    {
+     "w": "Il",
+     "t": 57.79
+    },
+    {
+     "w": "risque",
+     "t": 57.95
+    },
+    {
+     "w": "deux",
+     "t": 58.21
+    },
+    {
+     "w": "ans",
+     "t": 58.51
+    },
+    {
+     "w": "de",
+     "t": 58.71
+    },
+    {
+     "w": "prison.",
+     "t": 58.79
+    },
+    {
+     "w": "Pour",
+     "t": 59.09
+    },
+    {
+     "w": "une",
+     "t": 59.39
+    },
+    {
+     "w": "voiture",
+     "t": 59.53
+    },
+    {
+     "w": "qui",
+     "t": 59.85
+    },
+    {
+     "w": "n'était",
+     "t": 60.02
+    },
+    {
+     "w": "pas",
+     "t": 60.19
+    },
+    {
+     "w": "la",
+     "t": 60.35
+    },
+    {
+     "w": "sienne.",
+     "t": 60.47
+    }
+   ]
+  },
+  {
+   "id": "13-vivants",
+   "who": "avocate",
+   "text": "Deux ans… pour un fusible. Deux enfants sont rentrés vivants ce soir-là. Et c'est lui qu'on juge ?",
+   "start": 61.22,
+   "dur": 4.61,
+   "words": [
+    {
+     "w": "Deux",
+     "t": 61.22
+    },
+    {
+     "w": "ans…",
+     "t": 61.54
+    },
+    {
+     "w": "pour",
+     "t": 61.68
+    },
+    {
+     "w": "un",
+     "t": 62.06
+    },
+    {
+     "w": "fusible.",
+     "t": 62.2
+    },
+    {
+     "w": "Deux",
+     "t": 62.86
+    },
+    {
+     "w": "enfants",
+     "t": 63.18
+    },
+    {
+     "w": "sont",
+     "t": 63.4
+    },
+    {
+     "w": "rentrés",
+     "t": 63.56
+    },
+    {
+     "w": "vivants",
+     "t": 63.86
+    },
+    {
+     "w": "ce",
+     "t": 64.22
+    },
+    {
+     "w": "soir-là.",
+     "t": 64.53
+    },
+    {
+     "w": "Et",
+     "t": 64.84
+    },
+    {
+     "w": "c'est",
+     "t": 64.94
+    },
+    {
+     "w": "lui",
+     "t": 65.04
+    },
+    {
+     "w": "qu'on",
+     "t": 65.22
+    },
+    {
+     "w": "juge ?",
+     "t": 65.4
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire.",
+   "start": 66.08,
+   "dur": 3.76,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 66.08
+    },
+    {
+     "w": "es",
+     "t": 66.22
+    },
+    {
+     "w": "le",
+     "t": 66.3
+    },
+    {
+     "w": "juré.",
+     "t": 66.4
+    },
+    {
+     "w": "Coupable…",
+     "t": 66.9
+    },
+    {
+     "w": "ou",
+     "t": 67.26
+    },
+    {
+     "w": "non",
+     "t": 67.66
+    },
+    {
+     "w": "coupable ?",
+     "t": 67.8
+    },
+    {
+     "w": "Écris",
+     "t": 68.44
+    },
+    {
+     "w": "ton",
+     "t": 68.66
+    },
+    {
+     "w": "verdict",
+     "t": 68.76
+    },
+    {
+     "w": "en",
+     "t": 68.98
+    },
+    {
+     "w": "commentaire.",
+     "t": 69.2
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais.",
+   "start": 70.09,
+   "dur": 5.856,
+   "words": [
+    {
+     "w": "Le",
+     "t": 70.09
+    },
+    {
+     "w": "verdict",
+     "t": 70.23
+    },
+    {
+     "w": "tombe",
+     "t": 70.51
+    },
+    {
+     "w": "dans",
+     "t": 71.07
+    },
+    {
+     "w": "la",
+     "t": 71.23
+    },
+    {
+     "w": "prochaine",
+     "t": 71.35
+    },
+    {
+     "w": "vidéo.",
+     "t": 71.63
+    },
+    {
+     "w": "Appuie",
+     "t": 72.17
+    },
+    {
+     "w": "sur",
+     "t": 72.43
+    },
+    {
+     "w": "le",
+     "t": 72.51
+    },
+    {
+     "w": "plus",
+     "t": 72.61
+    },
+    {
+     "w": "pour",
+     "t": 72.83
+    },
+    {
+     "w": "devenir",
+     "t": 73.07
+    },
+    {
+     "w": "juré",
+     "t": 73.35
+    },
+    {
+     "w": "officiel…",
+     "t": 73.77
+    },
+    {
+     "w": "sinon,",
+     "t": 74.49
+    },
+    {
+     "w": "tu",
+     "t": 74.73
+    },
+    {
+     "w": "ne",
+     "t": 75.15
+    },
+    {
+     "w": "sauras",
+     "t": 75.33
+    },
+    {
+     "w": "jamais.",
+     "t": 75.51
+    }
+   ]
+  }
+ ]
+}

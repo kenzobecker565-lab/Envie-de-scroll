@@ -1,0 +1,1173 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 72.86,
+ "lines": [
+  {
+   "id": "01-mer",
+   "who": "narrateur",
+   "text": "Une auxiliaire de vie a emmené un vieil homme voir la mer. Sans prévenir sa famille. Six cents kilomètres. Il avait quatre-vingt-dix ans.",
+   "start": 0.25,
+   "dur": 6.16,
+   "words": [
+    {
+     "w": "Une",
+     "t": 0.25
+    },
+    {
+     "w": "auxiliaire",
+     "t": 0.37
+    },
+    {
+     "w": "de",
+     "t": 0.77
+    },
+    {
+     "w": "vie",
+     "t": 0.87
+    },
+    {
+     "w": "a",
+     "t": 1.07
+    },
+    {
+     "w": "emmené",
+     "t": 1.31
+    },
+    {
+     "w": "un",
+     "t": 1.63
+    },
+    {
+     "w": "vieil",
+     "t": 1.71
+    },
+    {
+     "w": "homme",
+     "t": 1.95
+    },
+    {
+     "w": "voir",
+     "t": 2.09
+    },
+    {
+     "w": "la",
+     "t": 2.23
+    },
+    {
+     "w": "mer.",
+     "t": 2.39
+    },
+    {
+     "w": "Sans",
+     "t": 2.83
+    },
+    {
+     "w": "prévenir",
+     "t": 3.01
+    },
+    {
+     "w": "sa",
+     "t": 3.29
+    },
+    {
+     "w": "famille.",
+     "t": 3.47
+    },
+    {
+     "w": "Six",
+     "t": 3.777
+    },
+    {
+     "w": "cents",
+     "t": 4.083
+    },
+    {
+     "w": "kilomètres.",
+     "t": 4.39
+    },
+    {
+     "w": "Il",
+     "t": 5.21
+    },
+    {
+     "w": "avait",
+     "t": 5.27
+    },
+    {
+     "w": "quatre-vingt-dix",
+     "t": 5.55
+    },
+    {
+     "w": "ans.",
+     "t": 5.83
+    }
+   ]
+  },
+  {
+   "id": "02-photo",
+   "who": "narrateur",
+   "text": "Sur la photo qu'elle a prise ce jour-là, on le voit pieds nus dans le sable. Une glace à la main… et il rit.",
+   "start": 6.66,
+   "dur": 4.938,
+   "words": [
+    {
+     "w": "Sur",
+     "t": 6.66
+    },
+    {
+     "w": "la",
+     "t": 6.8
+    },
+    {
+     "w": "photo",
+     "t": 6.92
+    },
+    {
+     "w": "qu'elle",
+     "t": 7.12
+    },
+    {
+     "w": "a",
+     "t": 7.32
+    },
+    {
+     "w": "prise",
+     "t": 7.4
+    },
+    {
+     "w": "ce",
+     "t": 7.52
+    },
+    {
+     "w": "jour-là,",
+     "t": 7.93
+    },
+    {
+     "w": "on",
+     "t": 8.34
+    },
+    {
+     "w": "le",
+     "t": 8.38
+    },
+    {
+     "w": "voit",
+     "t": 8.48
+    },
+    {
+     "w": "pieds",
+     "t": 8.687
+    },
+    {
+     "w": "nus",
+     "t": 8.893
+    },
+    {
+     "w": "dans",
+     "t": 9.1
+    },
+    {
+     "w": "le",
+     "t": 9.26
+    },
+    {
+     "w": "sable.",
+     "t": 9.32
+    },
+    {
+     "w": "Une",
+     "t": 9.86
+    },
+    {
+     "w": "glace",
+     "t": 9.96
+    },
+    {
+     "w": "à",
+     "t": 10.26
+    },
+    {
+     "w": "la",
+     "t": 10.34
+    },
+    {
+     "w": "main…",
+     "t": 10.42
+    },
+    {
+     "w": "et",
+     "t": 10.66
+    },
+    {
+     "w": "il",
+     "t": 11.02
+    },
+    {
+     "w": "rit.",
+     "t": 11.18
+    }
+   ]
+  },
+  {
+   "id": "03-samia",
+   "who": "narrateur",
+   "text": "Elle s'appelle Samia. Quarante-quatre ans. Auxiliaire de vie depuis douze ans. Jamais un incident. Aujourd'hui, elle est jugée pour enlèvement.",
+   "start": 11.848,
+   "dur": 6.03,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 11.848
+    },
+    {
+     "w": "s'appelle",
+     "t": 12.048
+    },
+    {
+     "w": "Samia.",
+     "t": 12.248
+    },
+    {
+     "w": "Quarante-quatre",
+     "t": 12.688
+    },
+    {
+     "w": "ans.",
+     "t": 13.128
+    },
+    {
+     "w": "Auxiliaire",
+     "t": 13.548
+    },
+    {
+     "w": "de",
+     "t": 13.968
+    },
+    {
+     "w": "vie",
+     "t": 14.068
+    },
+    {
+     "w": "depuis",
+     "t": 14.208
+    },
+    {
+     "w": "douze",
+     "t": 14.458
+    },
+    {
+     "w": "ans.",
+     "t": 14.708
+    },
+    {
+     "w": "Jamais",
+     "t": 15.028
+    },
+    {
+     "w": "un",
+     "t": 15.388
+    },
+    {
+     "w": "incident.",
+     "t": 15.568
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 16.158
+    },
+    {
+     "w": "elle",
+     "t": 16.748
+    },
+    {
+     "w": "est",
+     "t": 16.848
+    },
+    {
+     "w": "jugée",
+     "t": 16.928
+    },
+    {
+     "w": "pour",
+     "t": 17.188
+    },
+    {
+     "w": "enlèvement.",
+     "t": 17.328
+    }
+   ]
+  },
+  {
+   "id": "04-tutelle",
+   "who": "procureur",
+   "text": "Cet homme est sous tutelle. Elle l'a fait monter dans sa voiture sans l'accord de personne.",
+   "start": 18.128,
+   "dur": 3.81,
+   "words": [
+    {
+     "w": "Cet",
+     "t": 18.228
+    },
+    {
+     "w": "homme",
+     "t": 18.328
+    },
+    {
+     "w": "est",
+     "t": 18.528
+    },
+    {
+     "w": "sous",
+     "t": 18.628
+    },
+    {
+     "w": "tutelle.",
+     "t": 18.768
+    },
+    {
+     "w": "Elle",
+     "t": 19.428
+    },
+    {
+     "w": "l'a",
+     "t": 19.538
+    },
+    {
+     "w": "fait",
+     "t": 19.648
+    },
+    {
+     "w": "monter",
+     "t": 19.768
+    },
+    {
+     "w": "dans",
+     "t": 19.968
+    },
+    {
+     "w": "sa",
+     "t": 20.108
+    },
+    {
+     "w": "voiture",
+     "t": 20.248
+    },
+    {
+     "w": "sans",
+     "t": 20.568
+    },
+    {
+     "w": "l'accord",
+     "t": 20.858
+    },
+    {
+     "w": "de",
+     "t": 21.148
+    },
+    {
+     "w": "personne.",
+     "t": 21.288
+    }
+   ]
+  },
+  {
+   "id": "05-jamais",
+   "who": "avocate",
+   "text": "L'accord de personne ? Il le lui demandait depuis deux ans. Chaque matin, la même phrase : « Je n'ai jamais vu la mer. »",
+   "start": 22.188,
+   "dur": 5.3,
+   "words": [
+    {
+     "w": "L'accord",
+     "t": 22.318
+    },
+    {
+     "w": "de",
+     "t": 22.448
+    },
+    {
+     "w": "personne ?",
+     "t": 22.608
+    },
+    {
+     "w": "Il",
+     "t": 23.168
+    },
+    {
+     "w": "le",
+     "t": 23.308
+    },
+    {
+     "w": "lui",
+     "t": 23.428
+    },
+    {
+     "w": "demandait",
+     "t": 23.528
+    },
+    {
+     "w": "depuis",
+     "t": 23.888
+    },
+    {
+     "w": "deux",
+     "t": 24.028
+    },
+    {
+     "w": "ans.",
+     "t": 24.348
+    },
+    {
+     "w": "Chaque",
+     "t": 24.668
+    },
+    {
+     "w": "matin,",
+     "t": 24.968
+    },
+    {
+     "w": "la",
+     "t": 25.488
+    },
+    {
+     "w": "même",
+     "t": 25.588
+    },
+    {
+     "w": "phrase : «",
+     "t": 25.768
+    },
+    {
+     "w": "Je",
+     "t": 26.288
+    },
+    {
+     "w": "n'ai",
+     "t": 26.408
+    },
+    {
+     "w": "jamais",
+     "t": 26.528
+    },
+    {
+     "w": "vu",
+     "t": 26.748
+    },
+    {
+     "w": "la",
+     "t": 26.988
+    },
+    {
+     "w": "mer. »",
+     "t": 27.088
+    }
+   ]
+  },
+  {
+   "id": "06-malaise",
+   "who": "procureur",
+   "text": "Six cents kilomètres d'autoroute, à quatre-vingt-dix ans. Et s'il avait fait un malaise en route ?",
+   "start": 27.738,
+   "dur": 4.2,
+   "words": [
+    {
+     "w": "Six",
+     "t": 28.018
+    },
+    {
+     "w": "cents",
+     "t": 28.298
+    },
+    {
+     "w": "kilomètres",
+     "t": 28.578
+    },
+    {
+     "w": "d'autoroute,",
+     "t": 28.858
+    },
+    {
+     "w": "à",
+     "t": 29.138
+    },
+    {
+     "w": "quatre-vingt-dix",
+     "t": 29.538
+    },
+    {
+     "w": "ans.",
+     "t": 29.938
+    },
+    {
+     "w": "Et",
+     "t": 30.478
+    },
+    {
+     "w": "s'il",
+     "t": 30.598
+    },
+    {
+     "w": "avait",
+     "t": 30.718
+    },
+    {
+     "w": "fait",
+     "t": 30.878
+    },
+    {
+     "w": "un",
+     "t": 31.038
+    },
+    {
+     "w": "malaise",
+     "t": 31.118
+    },
+    {
+     "w": "en",
+     "t": 31.438
+    },
+    {
+     "w": "route ?",
+     "t": 31.538
+    }
+   ]
+  },
+  {
+   "id": "07-carnet",
+   "who": "avocate",
+   "text": "Elle s'arrêtait toutes les heures. Médicaments, eau, couverture. Elle avait tout noté dans un carnet.",
+   "start": 32.188,
+   "dur": 4.7,
+   "words": [
+    {
+     "w": "Elle",
+     "t": 32.188
+    },
+    {
+     "w": "s'arrêtait",
+     "t": 32.458
+    },
+    {
+     "w": "toutes",
+     "t": 32.728
+    },
+    {
+     "w": "les",
+     "t": 32.908
+    },
+    {
+     "w": "heures.",
+     "t": 33.108
+    },
+    {
+     "w": "Médicaments,",
+     "t": 33.508
+    },
+    {
+     "w": "eau,",
+     "t": 34.188
+    },
+    {
+     "w": "couverture.",
+     "t": 34.868
+    },
+    {
+     "w": "Elle",
+     "t": 35.548
+    },
+    {
+     "w": "avait",
+     "t": 35.608
+    },
+    {
+     "w": "tout",
+     "t": 35.788
+    },
+    {
+     "w": "noté",
+     "t": 35.988
+    },
+    {
+     "w": "dans",
+     "t": 36.248
+    },
+    {
+     "w": "un",
+     "t": 36.328
+    },
+    {
+     "w": "carnet.",
+     "t": 36.488
+    }
+   ]
+  },
+  {
+   "id": "08-commissariat",
+   "who": "procureur",
+   "text": "Pendant ce temps, sa famille a passé la nuit au commissariat. Ils l'ont cherché partout.",
+   "start": 37.138,
+   "dur": 3.96,
+   "words": [
+    {
+     "w": "Pendant",
+     "t": 37.248
+    },
+    {
+     "w": "ce",
+     "t": 37.398
+    },
+    {
+     "w": "temps,",
+     "t": 37.518
+    },
+    {
+     "w": "sa",
+     "t": 37.938
+    },
+    {
+     "w": "famille",
+     "t": 38.118
+    },
+    {
+     "w": "a",
+     "t": 38.358
+    },
+    {
+     "w": "passé",
+     "t": 38.498
+    },
+    {
+     "w": "la",
+     "t": 38.678
+    },
+    {
+     "w": "nuit",
+     "t": 38.838
+    },
+    {
+     "w": "au",
+     "t": 38.978
+    },
+    {
+     "w": "commissariat.",
+     "t": 39.118
+    },
+    {
+     "w": "Ils",
+     "t": 39.858
+    },
+    {
+     "w": "l'ont",
+     "t": 39.968
+    },
+    {
+     "w": "cherché",
+     "t": 40.078
+    },
+    {
+     "w": "partout.",
+     "t": 40.478
+    }
+   ]
+  },
+  {
+   "id": "09-deuxfois",
+   "who": "avocate",
+   "text": "Sa famille ? Elle venait le voir deux fois par an. Samia, elle, était là tous les jours.",
+   "start": 41.348,
+   "dur": 3.879,
+   "words": [
+    {
+     "w": "Sa",
+     "t": 41.348
+    },
+    {
+     "w": "famille ?",
+     "t": 41.508
+    },
+    {
+     "w": "Elle",
+     "t": 41.948
+    },
+    {
+     "w": "venait",
+     "t": 42.068
+    },
+    {
+     "w": "le",
+     "t": 42.308
+    },
+    {
+     "w": "voir",
+     "t": 42.348
+    },
+    {
+     "w": "deux",
+     "t": 42.488
+    },
+    {
+     "w": "fois",
+     "t": 42.708
+    },
+    {
+     "w": "par",
+     "t": 42.848
+    },
+    {
+     "w": "an.",
+     "t": 43.028
+    },
+    {
+     "w": "Samia,",
+     "t": 43.328
+    },
+    {
+     "w": "elle,",
+     "t": 43.748
+    },
+    {
+     "w": "était",
+     "t": 44.208
+    },
+    {
+     "w": "là",
+     "t": 44.368
+    },
+    {
+     "w": "tous",
+     "t": 44.508
+    },
+    {
+     "w": "les",
+     "t": 44.688
+    },
+    {
+     "w": "jours.",
+     "t": 44.828
+    }
+   ]
+  },
+  {
+   "id": "10-employee",
+   "who": "procureur",
+   "text": "Être là tous les jours ne donne aucun droit. Elle n'était que son employée.",
+   "start": 45.478,
+   "dur": 3.38,
+   "words": [
+    {
+     "w": "Être",
+     "t": 45.478
+    },
+    {
+     "w": "là",
+     "t": 45.758
+    },
+    {
+     "w": "tous",
+     "t": 45.918
+    },
+    {
+     "w": "les",
+     "t": 46.078
+    },
+    {
+     "w": "jours",
+     "t": 46.238
+    },
+    {
+     "w": "ne",
+     "t": 46.458
+    },
+    {
+     "w": "donne",
+     "t": 46.658
+    },
+    {
+     "w": "aucun",
+     "t": 46.798
+    },
+    {
+     "w": "droit.",
+     "t": 47.178
+    },
+    {
+     "w": "Elle",
+     "t": 47.658
+    },
+    {
+     "w": "n'était",
+     "t": 47.798
+    },
+    {
+     "w": "que",
+     "t": 47.938
+    },
+    {
+     "w": "son",
+     "t": 48.078
+    },
+    {
+     "w": "employée.",
+     "t": 48.497
+    }
+   ]
+  },
+  {
+   "id": "11-fils",
+   "who": "avocate",
+   "text": "Son employée ? Le soir même, il a appelé son fils. Il pleurait de joie. Il a dit : « Ne la punissez pas. »",
+   "start": 49.108,
+   "dur": 4.95,
+   "words": [
+    {
+     "w": "Son",
+     "t": 49.108
+    },
+    {
+     "w": "employée ?",
+     "t": 49.468
+    },
+    {
+     "w": "Le",
+     "t": 49.828
+    },
+    {
+     "w": "soir",
+     "t": 49.928
+    },
+    {
+     "w": "même,",
+     "t": 50.108
+    },
+    {
+     "w": "il",
+     "t": 50.548
+    },
+    {
+     "w": "a",
+     "t": 50.688
+    },
+    {
+     "w": "appelé",
+     "t": 50.768
+    },
+    {
+     "w": "son",
+     "t": 50.988
+    },
+    {
+     "w": "fils.",
+     "t": 51.088
+    },
+    {
+     "w": "Il",
+     "t": 51.548
+    },
+    {
+     "w": "pleurait",
+     "t": 51.668
+    },
+    {
+     "w": "de",
+     "t": 52.128
+    },
+    {
+     "w": "joie.",
+     "t": 52.228
+    },
+    {
+     "w": "Il",
+     "t": 52.568
+    },
+    {
+     "w": "a",
+     "t": 52.688
+    },
+    {
+     "w": "dit : «",
+     "t": 52.788
+    },
+    {
+     "w": "Ne",
+     "t": 53.148
+    },
+    {
+     "w": "la",
+     "t": 53.328
+    },
+    {
+     "w": "punissez",
+     "t": 53.508
+    },
+    {
+     "w": "pas. »",
+     "t": 53.688
+    }
+   ]
+  },
+  {
+   "id": "12-loi",
+   "who": "procureur",
+   "text": "La loi protège les personnes vulnérables. Même contre ceux qui les aiment.",
+   "start": 54.308,
+   "dur": 3.516,
+   "words": [
+    {
+     "w": "La",
+     "t": 54.308
+    },
+    {
+     "w": "loi",
+     "t": 54.468
+    },
+    {
+     "w": "protège",
+     "t": 54.608
+    },
+    {
+     "w": "les",
+     "t": 55.108
+    },
+    {
+     "w": "personnes",
+     "t": 55.228
+    },
+    {
+     "w": "vulnérables.",
+     "t": 55.508
+    },
+    {
+     "w": "Même",
+     "t": 56.288
+    },
+    {
+     "w": "contre",
+     "t": 56.528
+    },
+    {
+     "w": "ceux",
+     "t": 56.848
+    },
+    {
+     "w": "qui",
+     "t": 57.108
+    },
+    {
+     "w": "les",
+     "t": 57.248
+    },
+    {
+     "w": "aiment.",
+     "t": 57.388
+    }
+   ]
+  },
+  {
+   "id": "13-enlevement",
+   "who": "avocate",
+   "text": "Contre ceux qui les aiment ? À quatre-vingt-dix ans, il a vu la mer pour la première fois. Et c'est ça qu'on appelle un enlèvement.",
+   "start": 58.074,
+   "dur": 5.04,
+   "words": [
+    {
+     "w": "Contre",
+     "t": 58.074
+    },
+    {
+     "w": "ceux",
+     "t": 58.374
+    },
+    {
+     "w": "qui",
+     "t": 58.534
+    },
+    {
+     "w": "les",
+     "t": 58.674
+    },
+    {
+     "w": "aiment ?",
+     "t": 58.794
+    },
+    {
+     "w": "À",
+     "t": 59.154
+    },
+    {
+     "w": "quatre-vingt-dix",
+     "t": 59.384
+    },
+    {
+     "w": "ans,",
+     "t": 59.614
+    },
+    {
+     "w": "il",
+     "t": 60.114
+    },
+    {
+     "w": "a",
+     "t": 60.194
+    },
+    {
+     "w": "vu",
+     "t": 60.294
+    },
+    {
+     "w": "la",
+     "t": 60.374
+    },
+    {
+     "w": "mer",
+     "t": 60.494
+    },
+    {
+     "w": "pour",
+     "t": 60.634
+    },
+    {
+     "w": "la",
+     "t": 60.814
+    },
+    {
+     "w": "première",
+     "t": 60.914
+    },
+    {
+     "w": "fois.",
+     "t": 61.214
+    },
+    {
+     "w": "Et",
+     "t": 61.674
+    },
+    {
+     "w": "c'est",
+     "t": 61.794
+    },
+    {
+     "w": "ça",
+     "t": 61.914
+    },
+    {
+     "w": "qu'on",
+     "t": 62.084
+    },
+    {
+     "w": "appelle",
+     "t": 62.254
+    },
+    {
+     "w": "un",
+     "t": 62.434
+    },
+    {
+     "w": "enlèvement.",
+     "t": 62.574
+    }
+   ]
+  },
+  {
+   "id": "14-jury",
+   "who": "narrateur",
+   "text": "Tu es le juré. Coupable… ou non coupable ?",
+   "start": 63.364,
+   "dur": 2.51,
+   "words": [
+    {
+     "w": "Tu",
+     "t": 63.364
+    },
+    {
+     "w": "es",
+     "t": 63.504
+    },
+    {
+     "w": "le",
+     "t": 63.594
+    },
+    {
+     "w": "juré.",
+     "t": 63.684
+    },
+    {
+     "w": "Coupable…",
+     "t": 64.184
+    },
+    {
+     "w": "ou",
+     "t": 64.624
+    },
+    {
+     "w": "non",
+     "t": 65.044
+    },
+    {
+     "w": "coupable ?",
+     "t": 65.244
+    }
+   ]
+  },
+  {
+   "id": "15-abonne",
+   "who": "narrateur",
+   "text": "Le verdict tombe dans la prochaine vidéo. Abonne-toi pour ne pas le rater.",
+   "start": 66.124,
+   "dur": 3.34,
+   "words": [
+    {
+     "w": "Le",
+     "t": 66.124
+    },
+    {
+     "w": "verdict",
+     "t": 66.244
+    },
+    {
+     "w": "tombe",
+     "t": 66.544
+    },
+    {
+     "w": "dans",
+     "t": 67.084
+    },
+    {
+     "w": "la",
+     "t": 67.244
+    },
+    {
+     "w": "prochaine",
+     "t": 67.364
+    },
+    {
+     "w": "vidéo.",
+     "t": 67.644
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 68.134
+    },
+    {
+     "w": "pour",
+     "t": 68.624
+    },
+    {
+     "w": "ne",
+     "t": 68.764
+    },
+    {
+     "w": "pas",
+     "t": 68.864
+    },
+    {
+     "w": "le",
+     "t": 69.004
+    },
+    {
+     "w": "rater.",
+     "t": 69.024
+    }
+   ]
+  }
+ ]
+}

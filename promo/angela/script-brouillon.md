@@ -1,0 +1,15 @@
+# Le videur (Angela) — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : cbL3VZh8fluO35OGfCyN
+01-angela (narr) Une femme s'approche du bar et prononce un seul mot : « Angela ». Le videur comprend. Trente secondes plus tard, un homme est plaqué au sol. Et aujourd'hui, c'est le videur qu'on juge. [TÉLÉCHARGÉ]
+02-camera (narr) Sur la caméra de la boîte, on voit tout. L'homme qui la suit depuis une heure… sa main au-dessus de son verre… et le videur qui fond sur lui. [TÉLÉCHARGÉ]
+03-thomas (narr) Il s'appelle Thomas. Trente et un ans. Videur depuis huit ans. Jamais une bagarre. Aujourd'hui, il est jugé pour violences volontaires. [TÉLÉCHARGÉ]
+04-cotes (proc) Cet homme n'avait frappé personne. Il buvait un verre. Il est reparti avec deux côtes cassées. [TÉLÉCHARGÉ]
+05-verre (avo) Un verre ? Ce n'était pas le sien. C'était celui de la jeune femme. Et il avait la main juste au-dessus. [TÉLÉCHARGÉ]
+06-rien (proc) Une main au-dessus d'un verre, ce n'est pas un crime. Personne n'a rien vu tomber dedans. [TÉLÉCHARGÉ]
+07-fiole (avo) Personne ? La police a fouillé ses poches. Elle a trouvé une petite fiole. Le labo a confirmé : du GHB. [TÉLÉCHARGÉ]
+08-police (proc) Peut-être. Mais ce n'est pas au videur de faire la police. Il pouvait l'escorter dehors. Pas le plaquer au sol. [TÉLÉCHARGÉ]
+09-parking (avo) L'escorter dehors ? Pour qu'il attende la jeune femme sur le parking ? Thomas l'a gardé là. Jusqu'à l'arrivée de la police. [TÉLÉCHARGÉ]
+10-genou (proc) Vingt minutes au sol. Un genou dans le dos. La loi appelle ça des violences. Point. [TÉLÉCHARGÉ]
+11-seul (avo) Les bars ont créé le code « Angela » pour que quelqu'un réagisse. Ce soir-là, il a été le seul à le faire. [TÉLÉCHARGÉ]
+12-colere (proc) Il risque trois ans de prison. Parce que la colère, même juste, ne donne aucun droit. [TÉLÉCHARGÉ]
+13-oser (avo) Trois ans de prison… pour avoir cru une femme qui a dit « Angela ». Alors la prochaine fois qu'une femme dira ce mot… qui osera bouger ? [TÉLÉCHARGÉ]

@@ -1,0 +1,740 @@
+{
+ "_doc": "Généré par voix.py : ne pas modifier à la main.",
+ "duration": 50.71,
+ "lines": [
+  {
+   "id": "01-milliers",
+   "who": "narrateur",
+   "text": "Vous avez été des milliers à juger Nadia. La cantinière qui a nourri neuf enfants en cachette. Aujourd'hui, le tribunal a rendu son verdict.",
+   "start": 0.25,
+   "dur": 6.625,
+   "words": [
+    {
+     "w": "Vous",
+     "t": 0.25
+    },
+    {
+     "w": "avez",
+     "t": 0.37
+    },
+    {
+     "w": "été",
+     "t": 0.59
+    },
+    {
+     "w": "des",
+     "t": 0.79
+    },
+    {
+     "w": "milliers",
+     "t": 0.95
+    },
+    {
+     "w": "à",
+     "t": 1.49
+    },
+    {
+     "w": "juger",
+     "t": 1.65
+    },
+    {
+     "w": "Nadia.",
+     "t": 1.89
+    },
+    {
+     "w": "La",
+     "t": 2.39
+    },
+    {
+     "w": "cantinière",
+     "t": 2.47
+    },
+    {
+     "w": "qui",
+     "t": 3.01
+    },
+    {
+     "w": "a",
+     "t": 3.13
+    },
+    {
+     "w": "nourri",
+     "t": 3.23
+    },
+    {
+     "w": "neuf",
+     "t": 3.49
+    },
+    {
+     "w": "enfants",
+     "t": 3.75
+    },
+    {
+     "w": "en",
+     "t": 4.09
+    },
+    {
+     "w": "cachette.",
+     "t": 4.21
+    },
+    {
+     "w": "Aujourd'hui,",
+     "t": 4.84
+    },
+    {
+     "w": "le",
+     "t": 5.47
+    },
+    {
+     "w": "tribunal",
+     "t": 5.53
+    },
+    {
+     "w": "a",
+     "t": 5.89
+    },
+    {
+     "w": "rendu",
+     "t": 5.97
+    },
+    {
+     "w": "son",
+     "t": 6.23
+    },
+    {
+     "w": "verdict.",
+     "t": 6.33
+    }
+   ]
+  },
+  {
+   "id": "02-rappel",
+   "who": "narrateur",
+   "text": "Rappel des faits. Deux ans de faux registres. Trois mille huit cents euros de repas. Et pas un centime pour elle.",
+   "start": 7.125,
+   "dur": 5.18,
+   "words": [
+    {
+     "w": "Rappel",
+     "t": 7.315
+    },
+    {
+     "w": "des",
+     "t": 7.505
+    },
+    {
+     "w": "faits.",
+     "t": 7.625
+    },
+    {
+     "w": "Deux",
+     "t": 7.955
+    },
+    {
+     "w": "ans",
+     "t": 8.285
+    },
+    {
+     "w": "de",
+     "t": 8.445
+    },
+    {
+     "w": "faux",
+     "t": 8.545
+    },
+    {
+     "w": "registres.",
+     "t": 8.768
+    },
+    {
+     "w": "Trois",
+     "t": 8.992
+    },
+    {
+     "w": "mille",
+     "t": 9.215
+    },
+    {
+     "w": "huit",
+     "t": 9.438
+    },
+    {
+     "w": "cents",
+     "t": 9.662
+    },
+    {
+     "w": "euros",
+     "t": 9.885
+    },
+    {
+     "w": "de",
+     "t": 10.185
+    },
+    {
+     "w": "repas.",
+     "t": 10.325
+    },
+    {
+     "w": "Et",
+     "t": 10.725
+    },
+    {
+     "w": "pas",
+     "t": 10.905
+    },
+    {
+     "w": "un",
+     "t": 11.145
+    },
+    {
+     "w": "centime",
+     "t": 11.385
+    },
+    {
+     "w": "pour",
+     "t": 11.765
+    },
+    {
+     "w": "elle.",
+     "t": 11.965
+    }
+   ]
+  },
+  {
+   "id": "03-coupable",
+   "who": "juge",
+   "text": "Madame, vous avez falsifié un registre public. La loi est claire. Vous êtes coupable.",
+   "start": 12.555,
+   "dur": 4.31,
+   "words": [
+    {
+     "w": "Madame,",
+     "t": 12.555
+    },
+    {
+     "w": "vous",
+     "t": 13.175
+    },
+    {
+     "w": "avez",
+     "t": 13.255
+    },
+    {
+     "w": "falsifié",
+     "t": 13.455
+    },
+    {
+     "w": "un",
+     "t": 14.055
+    },
+    {
+     "w": "registre",
+     "t": 14.135
+    },
+    {
+     "w": "public.",
+     "t": 14.555
+    },
+    {
+     "w": "La",
+     "t": 15.115
+    },
+    {
+     "w": "loi",
+     "t": 15.235
+    },
+    {
+     "w": "est",
+     "t": 15.375
+    },
+    {
+     "w": "claire.",
+     "t": 15.535
+    },
+    {
+     "w": "Vous",
+     "t": 16.035
+    },
+    {
+     "w": "êtes",
+     "t": 16.095
+    },
+    {
+     "w": "coupable.",
+     "t": 16.235
+    }
+   ]
+  },
+  {
+   "id": "04-silence",
+   "who": "narrateur",
+   "text": "Silence dans la salle. Nadia baisse les yeux. Mais le juge n'a pas fini.",
+   "start": 17.115,
+   "dur": 3.38,
+   "words": [
+    {
+     "w": "Silence",
+     "t": 17.115
+    },
+    {
+     "w": "dans",
+     "t": 17.455
+    },
+    {
+     "w": "la",
+     "t": 17.655
+    },
+    {
+     "w": "salle.",
+     "t": 17.775
+    },
+    {
+     "w": "Nadia",
+     "t": 18.255
+    },
+    {
+     "w": "baisse",
+     "t": 18.595
+    },
+    {
+     "w": "les",
+     "t": 18.875
+    },
+    {
+     "w": "yeux.",
+     "t": 18.995
+    },
+    {
+     "w": "Mais",
+     "t": 19.355
+    },
+    {
+     "w": "le",
+     "t": 19.475
+    },
+    {
+     "w": "juge",
+     "t": 19.575
+    },
+    {
+     "w": "n'a",
+     "t": 19.765
+    },
+    {
+     "w": "pas",
+     "t": 19.955
+    },
+    {
+     "w": "fini.",
+     "t": 20.075
+    }
+   ]
+  },
+  {
+   "id": "05-cependant",
+   "who": "juge",
+   "text": "Cependant… vous n'en avez tiré aucun profit. Et la mairie n'a jamais répondu à vos trois courriers.",
+   "start": 20.745,
+   "dur": 5.084,
+   "words": [
+    {
+     "w": "Cependant…",
+     "t": 21.145
+    },
+    {
+     "w": "vous",
+     "t": 21.625
+    },
+    {
+     "w": "n'en",
+     "t": 21.815
+    },
+    {
+     "w": "avez",
+     "t": 22.005
+    },
+    {
+     "w": "tiré",
+     "t": 22.185
+    },
+    {
+     "w": "aucun",
+     "t": 22.625
+    },
+    {
+     "w": "profit.",
+     "t": 22.885
+    },
+    {
+     "w": "Et",
+     "t": 23.305
+    },
+    {
+     "w": "la",
+     "t": 23.545
+    },
+    {
+     "w": "mairie",
+     "t": 23.665
+    },
+    {
+     "w": "n'a",
+     "t": 23.885
+    },
+    {
+     "w": "jamais",
+     "t": 24.105
+    },
+    {
+     "w": "répondu",
+     "t": 24.385
+    },
+    {
+     "w": "à",
+     "t": 24.925
+    },
+    {
+     "w": "vos",
+     "t": 25.005
+    },
+    {
+     "w": "trois",
+     "t": 25.105
+    },
+    {
+     "w": "courriers.",
+     "t": 25.285
+    }
+   ]
+  },
+  {
+   "id": "06-dispense",
+   "who": "juge",
+   "text": "Le tribunal vous déclare coupable… et vous dispense de toute peine.",
+   "start": 26.08,
+   "dur": 3.24,
+   "words": [
+    {
+     "w": "Le",
+     "t": 26.08
+    },
+    {
+     "w": "tribunal",
+     "t": 26.2
+    },
+    {
+     "w": "vous",
+     "t": 26.66
+    },
+    {
+     "w": "déclare",
+     "t": 26.8
+    },
+    {
+     "w": "coupable…",
+     "t": 27.14
+    },
+    {
+     "w": "et",
+     "t": 27.6
+    },
+    {
+     "w": "vous",
+     "t": 27.9
+    },
+    {
+     "w": "dispense",
+     "t": 28.04
+    },
+    {
+     "w": "de",
+     "t": 28.52
+    },
+    {
+     "w": "toute",
+     "t": 28.66
+    },
+    {
+     "w": "peine.",
+     "t": 28.84
+    }
+   ]
+  },
+  {
+   "id": "07-aucune",
+   "who": "narrateur",
+   "text": "Coupable. Mais aucune peine. Pas d'amende. Pas de prison. Nadia peut reprendre son travail.",
+   "start": 29.57,
+   "dur": 4.31,
+   "words": [
+    {
+     "w": "Coupable.",
+     "t": 29.57
+    },
+    {
+     "w": "Mais",
+     "t": 30.29
+    },
+    {
+     "w": "aucune",
+     "t": 30.41
+    },
+    {
+     "w": "peine.",
+     "t": 30.71
+    },
+    {
+     "w": "Pas",
+     "t": 31.23
+    },
+    {
+     "w": "d'amende.",
+     "t": 31.54
+    },
+    {
+     "w": "Pas",
+     "t": 31.85
+    },
+    {
+     "w": "de",
+     "t": 31.93
+    },
+    {
+     "w": "prison.",
+     "t": 32.01
+    },
+    {
+     "w": "Nadia",
+     "t": 32.41
+    },
+    {
+     "w": "peut",
+     "t": 32.73
+    },
+    {
+     "w": "reprendre",
+     "t": 32.87
+    },
+    {
+     "w": "son",
+     "t": 33.21
+    },
+    {
+     "w": "travail.",
+     "t": 33.39
+    }
+   ]
+  },
+  {
+   "id": "08-gratuite",
+   "who": "narrateur",
+   "text": "Et une semaine plus tard, la mairie a annoncé la cantine gratuite pour les familles en difficulté. Yanis mange à nouveau tous les midis.",
+   "start": 34.13,
+   "dur": 5.791,
+   "words": [
+    {
+     "w": "Et",
+     "t": 34.13
+    },
+    {
+     "w": "une",
+     "t": 34.25
+    },
+    {
+     "w": "semaine",
+     "t": 34.45
+    },
+    {
+     "w": "plus",
+     "t": 34.65
+    },
+    {
+     "w": "tard,",
+     "t": 34.85
+    },
+    {
+     "w": "la",
+     "t": 35.31
+    },
+    {
+     "w": "mairie",
+     "t": 35.45
+    },
+    {
+     "w": "a",
+     "t": 35.71
+    },
+    {
+     "w": "annoncé",
+     "t": 35.83
+    },
+    {
+     "w": "la",
+     "t": 36.15
+    },
+    {
+     "w": "cantine",
+     "t": 36.27
+    },
+    {
+     "w": "gratuite",
+     "t": 36.57
+    },
+    {
+     "w": "pour",
+     "t": 36.97
+    },
+    {
+     "w": "les",
+     "t": 37.15
+    },
+    {
+     "w": "familles",
+     "t": 37.25
+    },
+    {
+     "w": "en",
+     "t": 37.51
+    },
+    {
+     "w": "difficulté.",
+     "t": 37.59
+    },
+    {
+     "w": "Yanis",
+     "t": 38.12
+    },
+    {
+     "w": "mange",
+     "t": 38.65
+    },
+    {
+     "w": "à",
+     "t": 38.85
+    },
+    {
+     "w": "nouveau",
+     "t": 38.99
+    },
+    {
+     "w": "tous",
+     "t": 39.15
+    },
+    {
+     "w": "les",
+     "t": 39.39
+    },
+    {
+     "w": "midis.",
+     "t": 39.51
+    }
+   ]
+  },
+  {
+   "id": "09-commentaire",
+   "who": "narrateur",
+   "text": "Alors, justice rendue ? Ou elle n'aurait jamais dû être jugée ? Dis-le en commentaire.",
+   "start": 40.171,
+   "dur": 4.119,
+   "words": [
+    {
+     "w": "Alors,",
+     "t": 40.171
+    },
+    {
+     "w": "justice",
+     "t": 40.691
+    },
+    {
+     "w": "rendue ?",
+     "t": 40.931
+    },
+    {
+     "w": "Ou",
+     "t": 41.551
+    },
+    {
+     "w": "elle",
+     "t": 41.651
+    },
+    {
+     "w": "n'aurait",
+     "t": 41.901
+    },
+    {
+     "w": "jamais",
+     "t": 42.151
+    },
+    {
+     "w": "dû",
+     "t": 42.311
+    },
+    {
+     "w": "être",
+     "t": 42.551
+    },
+    {
+     "w": "jugée ?",
+     "t": 42.711
+    },
+    {
+     "w": "Dis-le",
+     "t": 43.141
+    },
+    {
+     "w": "en",
+     "t": 43.571
+    },
+    {
+     "w": "commentaire.",
+     "t": 43.651
+    }
+   ]
+  },
+  {
+   "id": "10-abonne",
+   "who": "narrateur",
+   "text": "Demain, une nouvelle affaire. Abonne-toi pour être le juré.",
+   "start": 44.54,
+   "dur": 2.772,
+   "words": [
+    {
+     "w": "Demain,",
+     "t": 44.54
+    },
+    {
+     "w": "une",
+     "t": 45.08
+    },
+    {
+     "w": "nouvelle",
+     "t": 45.18
+    },
+    {
+     "w": "affaire.",
+     "t": 45.38
+    },
+    {
+     "w": "Abonne-toi",
+     "t": 45.89
+    },
+    {
+     "w": "pour",
+     "t": 46.4
+    },
+    {
+     "w": "être",
+     "t": 46.62
+    },
+    {
+     "w": "le",
+     "t": 46.74
+    },
+    {
+     "w": "juré.",
+     "t": 46.9
+    }
+   ]
+  }
+ ]
+}

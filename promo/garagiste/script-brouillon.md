@@ -1,0 +1,17 @@
+# Le garagiste — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : cbL3VZh8fluO35OGfCyN — nouvel appel à l'abonnement (14 et 15 refaits)
+01-fusible (narr) Un garagiste a saboté la voiture d'un client. Exprès. Pendant que l'homme payait, il a retiré un fusible. Et aujourd'hui, c'est le garagiste qu'on juge. [TÉLÉCHARGÉ]
+02-atelier (narr) Sur la caméra de l'atelier, on voit l'homme arriver en titubant. Ses deux enfants à l'arrière. Les clés dans une main… une canette dans l'autre. [TÉLÉCHARGÉ]
+03-samir (narr) Il s'appelle Samir. Quarante-neuf ans. Garagiste depuis vingt-cinq ans. Jamais un litige. Aujourd'hui, il est jugé pour dégradation volontaire. [TÉLÉCHARGÉ]
+04-sabotee (proc) Cette voiture ne lui appartenait pas. Il l'a sabotée sans prévenir personne. Il s'est fait justice lui-même. [TÉLÉCHARGÉ]
+05-cles (avo) Sans prévenir ? Il a d'abord demandé les clés. Poliment. Le client l'a insulté et a démarré. [TÉLÉCHARGÉ]
+06-police (proc) Il fallait appeler la police. C'est leur métier. Pas celui d'un garagiste. [TÉLÉCHARGÉ]
+07-minutes (avo) Il l'a appelée. Temps d'arrivée : quarante minutes. La route de l'école, elle, était à deux minutes. [TÉLÉCHARGÉ]
+08-route (proc) Peu importe. Un fusible retiré, c'est une voiture en panne sur le bord de la route. Avec deux enfants dedans. [TÉLÉCHARGÉ]
+09-parking (avo) En panne ? Elle n'a jamais quitté le parking. Elle n'a pas démarré. C'était tout le but. [TÉLÉCHARGÉ]
+10-confiance (proc) Si chaque garagiste décide qui peut conduire, plus aucun client ne lui confiera sa voiture. [TÉLÉCHARGÉ]
+11-alcool (avo) Le taux d'alcool du client, une heure plus tard : un gramme huit. Plus de trois fois la limite. [TÉLÉCHARGÉ]
+12-deuxans (proc) Il risque deux ans de prison. Pour une voiture qui n'était pas la sienne. [TÉLÉCHARGÉ]
+13-vivants (avo) Deux ans… pour un fusible. Deux enfants sont rentrés vivants ce soir-là. Et c'est lui qu'on juge ? [TÉLÉCHARGÉ]
+14-jury (narr) Tu es le juré. Coupable… ou non coupable ? Écris ton verdict en commentaire. [TÉLÉCHARGÉ]
+15-abonne (narr) Le verdict tombe dans la prochaine vidéo. Appuie sur le plus pour devenir juré officiel… sinon, tu ne sauras jamais. [TÉLÉCHARGÉ]

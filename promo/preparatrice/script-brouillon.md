@@ -1,0 +1,15 @@
+# La préparatrice — voix (narrateur Nicolas aQROLel5sQbj1vuIVi6B, procureur Paul K 5l4ttmr4SKNgi0HnOelT, défense Ilan ozVFcYMzEYF561D1IKA0)
+Flow ElevenLabs : cbL3VZh8fluO35OGfCyN
+01-insuline (narr) Pendant dix-huit mois, une préparatrice en pharmacie a donné l'insuline d'une petite fille… sans jamais la faire payer. Six mille euros de médicaments. [TÉLÉCHARGÉ]
+02-frigo (narr) Sur la caméra de la pharmacie, on la voit chaque mois. Elle ouvre le frigo… glisse les boîtes dans un sac… et annule la vente. [TÉLÉCHARGÉ]
+03-sophie (narr) Elle s'appelle Sophie. Quarante-six ans. Préparatrice depuis vingt ans. Jamais une erreur de caisse. Aujourd'hui, elle est jugée pour abus de confiance. [TÉLÉCHARGÉ]
+04-dos (proc) Ces médicaments appartenaient à la pharmacie. Elle les a donnés dans le dos de son patron. Mois après mois. [TÉLÉCHARGÉ]
+05-ines (avo) Dans son dos ? Cette petite s'appelle Inès. Huit ans. Diabétique. Sans insuline, c'est l'hôpital en quelques jours. [TÉLÉCHARGÉ]
+06-assistante (proc) Alors il fallait appeler un médecin. Une assistante sociale. Pas se servir dans le frigo de son employeur. [TÉLÉCHARGÉ]
+07-secu (avo) Le père les a tous appelés. Ses droits à la Sécu avaient été coupés par erreur. Dix-huit mois pour les rétablir. Inès, elle, ne pouvait pas attendre. [TÉLÉCHARGÉ]
+08-employe (proc) Une erreur administrative ne donne le droit de voler à personne. Si on l'excuse, demain chaque employé choisira qui il soigne gratuitement. [TÉLÉCHARGÉ]
+09-salaire (avo) Voler ? Chaque mois, elle a remis cent euros de son propre salaire dans la caisse. Jusqu'au jour où on l'a découverte. [TÉLÉCHARGÉ]
+10-savait (proc) Rembourser en cachette, c'est avouer qu'elle savait. Elle savait que c'était interdit. Et elle a continué. [TÉLÉCHARGÉ]
+11-choisi (avo) Bien sûr qu'elle savait. Elle savait aussi ce qui arrive à une enfant de huit ans sans insuline. Et elle a choisi. [TÉLÉCHARGÉ]
+12-cinq (proc) Son patron a perdu six mille euros. Elle risque cinq ans de prison. La loi ne fait pas d'exception pour les bons sentiments. [TÉLÉCHARGÉ]
+13-banc (avo) Aujourd'hui, Inès va à l'école tous les matins. Et la seule personne qui l'a protégée… est assise sur le banc des accusés. [TÉLÉCHARGÉ]

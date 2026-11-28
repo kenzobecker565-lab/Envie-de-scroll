@@ -1,0 +1,28 @@
+{
+  "_doc": "Texte de la voix off de « Pourquoi ça chauffe ? Le micro-ondes » (sous-titres), une entrée par réplique. narration.py retrouve ces répliques dans la narration lue d’une traite ; voix.py peut aussi les synthétiser une par une avec Piper (voice/<id>.wav) ; « say » = texte envoyé à la synthèse quand il diffère des sous-titres ; « pause » = silence ajouté après la réplique (secondes). Les départs des répliques et les temps de chaque mot (sous-titres), mesurés par Whisper, sont écrits dans timeline.json par narration.py (ou voix.py).",
+  "voice": "fr_FR-tom-medium",
+  "lengthScale": 0.8,
+  "noiseScale": 0.4,
+  "noiseW": 0.6,
+  "lines": [
+    { "id": "01-feu", "text": "Si tu poses ton plat sur le feu, il chauffe." },
+    { "id": "02-brule", "text": "Mais le dessous brûle, et le milieu reste froid. La chaleur entre par l'extérieur, très lentement.", "pause": 0.35 },
+    { "id": "03-eau", "text": "Alors tu chauffes ce qu'il y a dedans : l'eau." },
+    { "id": "04-molecule", "text": "Une molécule d'eau, c'est un petit aimant électrique : un côté plus, un côté moins." },
+    { "id": "05-champ", "text": "Si tu fais basculer un champ électrique, elle se retourne pour le suivre." },
+    { "id": "06-milliards", "text": "Fais-le deux milliards et demi de fois par seconde : les molécules s'agitent, se frottent, et chauffent." },
+    { "id": "07-nom-onde", "text": "Ça s'appelle une micro-onde.", "pause": 0.45 },
+    { "id": "08-magnetron", "text": "Pour la fabriquer, il te faut un tube spécial. Ça s'appelle un magnétron.", "say": "Pour la fabriquer, il te faut un tube spécial. Ça s'appelle un magnétrone." },
+    { "id": "09-chocolat", "text": "En 1945, un ingénieur a remarqué qu'il faisait fondre la barre chocolatée dans sa poche.", "say": "En dix-neuf cent quarante-cinq, un ingénieur a remarqué qu'il faisait fondre la barre chocolatée dans sa poche.", "pause": 0.35 },
+    { "id": "10-partout", "text": "Mais les ondes partent dans tous les sens. Et toi aussi, tu es plein d'eau." },
+    { "id": "11-boite", "text": "Alors tu enfermes tout dans une boîte en métal. Le métal renvoie les ondes, comme un miroir." },
+    { "id": "12-faraday", "text": "Ça s'appelle une cage de Faraday.", "pause": 0.35 },
+    { "id": "13-vitre", "text": "Mais tu ne vois plus ton plat. Alors tu mets une vitre, avec une grille percée de petits trous." },
+    { "id": "14-12cm", "text": "Cette onde mesure 12 centimètres : trop grosse pour passer. La lumière, elle, passe sans problème.", "say": "Cette onde mesure douze centimètres : trop grosse pour passer. La lumière, elle, passe sans problème.", "pause": 0.35 },
+    { "id": "15-rebond", "text": "Mais les ondes rebondissent et se superposent. Certains endroits chauffent fort, d'autres pas du tout." },
+    { "id": "16-plateau", "text": "Alors tu fais tourner le plat. Ça s'appelle un plateau tournant.", "pause": 0.35 },
+    { "id": "17-porte", "text": "Mais si quelqu'un ouvre la porte en pleine marche ? Alors tu caches des interrupteurs dans la porte. Dès qu'elle s'ouvre, tout s'arrête.", "pause": 0.35 },
+    { "id": "18-puissance", "text": "Et à moitié de puissance, le magnétron ne chauffe pas moins fort. Il s'allume, s'éteint, et se rallume. C'est pour ça que le bruit change.", "say": "Et à moitié de puissance, le magnétrone ne chauffe pas moins fort. Il s'allume, s'éteint, et se rallume. C'est pour ça que le bruit change.", "pause": 0.4 },
+    { "id": "19-bravo", "text": "Félicitations, tu as construit un micro-ondes." }
+  ]
+}
